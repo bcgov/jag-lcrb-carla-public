@@ -1,0 +1,12 @@
+<div class="sidebar-container">
+
+  <h3>{{title}}</h3>
+
+  <ul class="links">
+    <li *ngFor="let link of links" [class]="link.active ? 'active' : ''" (click)="changePage(link.index)">
+      <div class="link-icon fa fa-angle-right"></div>
+      <div class="link-label">{{link.title}}</div>
+    </li>
+  </ul>
+
+</div>
