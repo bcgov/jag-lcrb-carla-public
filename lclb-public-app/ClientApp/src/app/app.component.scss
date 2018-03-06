@@ -1,0 +1,31 @@
+$bootstrap-sass-asset-helper: true;
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+.app-outer {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100%;
+}
+
+.app-content {
+  display: flex;
+  flex: 1 0 auto;
+  flex-flow: row nowrap;
+  max-width: 100%;
+}
+
+.app-main {
+  flex: auto;
+  padding-bottom: 80px;
+}
+
+.sidebar-left, .sidebar-right {
+  display: block;
+  flex: none;
+  position: relative;
+  transition: width 0.2s linear;
+  width: 280px;
+  &.insert-hidden {
+    width: 0;
+  }
+}
