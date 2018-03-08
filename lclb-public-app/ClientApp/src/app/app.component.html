@@ -1,0 +1,39 @@
+<div class="app-outer">
+  <header class="app-header">
+    <div class="container">
+      <a href="http://www2.gov.bc.ca/" tabindex="-1">
+        <img class="header-logo"
+             tabindex="-1" alt="B.C. Government Logo"
+             src="assets/bc-logo.svg">
+      </a>
+      <span class="title" role="banner">LCLB CLLC</span>
+    </div>
+  </header>
+
+  <main class="app-content">
+    <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
+
+    <div class="app-main">
+      <breadcrumb></breadcrumb>
+
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
+  </main>
+
+  <footer class="app-footer">
+    <nav class="navbar navbar-default navbar-footer navbar-static-bottom">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a href="http://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank">Disclaimer</a></li>
+          <li><a href="http://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a></li>
+          <li><a href="http://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank">Accessibility</a></li>
+          <li><a href="http://www2.gov.bc.ca/gov/content/home/copyright" target="_blank">Copyright</a></li>
+          <li><a href="http://www2.gov.bc.ca/gov/content/home/contact-us"
+                 target="_blank">Contact Us</a></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+</div>

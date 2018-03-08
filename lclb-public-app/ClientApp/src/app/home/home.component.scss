@@ -1,0 +1,94 @@
+.home-content {
+  padding-bottom: 20px;
+  padding-top: 8rem;
+  max-width: 840px;
+}
+
+h1, h2 {
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+h1, h2, h3, h4 {
+  color: #fff;
+}
+
+.intro {
+  color: #f6f6f6;
+  font-size: 24px;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: 3rem auto 4rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.steps {
+  .step {
+    background-color: rgba(#000, 0.35);
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px 10px 5px;
+  }
+  h3 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-top: 0;
+  }
+}
+
+.step-info {
+  color: #f6f6f6;
+  font-size: 18px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.ordinal {
+  baseline-shift: -.2em;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  height: 1.75em;
+  line-height: 1.2;
+  margin-right: 0.25em;
+  padding: 0.3em;
+  text-align: center;
+  width: 1.75em;
+}
+
+.survey-button {
+  border: 2px solid rgba(#f8fcff, 0.3);
+  margin-top: 2.5rem;
+  &:active {
+    border: 2px solid rgba(#fff, 0.8);
+  }
+}
+
+.login-button {
+  background-color: #fcba19;
+  border: 2px solid rgba(#f8fcff, 0.4);
+  color: #38598a;
+  margin-top: 2.5rem;
+  &:hover, &:focus {
+    background-color: darken(#fcba19, 8%);
+    color: #222;
+  }
+  &:active {
+    border: 2px solid rgba(#fff, 0.8);
+  }
+}
+
+.returning {
+  color: #fff;
+  margin-top: 2rem;
+  p {
+    margin-bottom: 0.4rem;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover, &:active, &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
