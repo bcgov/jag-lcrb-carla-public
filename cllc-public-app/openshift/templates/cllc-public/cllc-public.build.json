@@ -92,14 +92,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "lclb-public"
+      "value": "cllc-public"
     },
     {
       "name": "GIT_REPO_URL",
       "displayName": "Git Repo URL",
       "description": "The URL to your GIT repo.",
       "required": true,
-      "value": "https://github.com/GeorgeWalker/ag-lclb-public.git"
+      "value": "https://github.com/bcgov/ag-lclb-cllc-public.git"
     },
     {
       "name": "GIT_REF",
