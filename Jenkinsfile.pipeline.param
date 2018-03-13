@@ -5,11 +5,7 @@
 #=========================================================
 NAME=development
 # GITHUB_WEBHOOK_SECRET=[a-zA-Z0-9]{40}
-<<<<<<< HEAD
 SOURCE_REPOSITORY_URL=https://github.com/bcgov/ag-lclb-cllc-public.git
-=======
-SOURCE_REPOSITORY_URL=https://github.com/bcgov/gcpe-news-archive.git
->>>>>>> BC-31 - pipeline setup
 SOURCE_REPOSITORY_REF=master
 CONTEXT_DIR=/
 JENKINSFILE_PATH=Jenkinsfile
