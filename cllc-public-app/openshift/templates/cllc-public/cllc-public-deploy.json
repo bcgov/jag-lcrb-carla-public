@@ -252,7 +252,7 @@
       "displayName": "AspNetCore Environment",
       "description": "The ASP Net Core deployment environment setting.",
       "required": true,
-      "value": "Development"
+      "value": "Production"
     },
     {
       "name": "CPU_LIMIT",
