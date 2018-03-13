@@ -82,18 +82,12 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         public void PostResults(string postId, string resultJson)
-        {
-            
-
+        {            
             // create a new result.
-
             PostSurveyResult psr = new PostSurveyResult();
             psr.postId = postId;
             psr.surveyResult = resultJson;
-            _db.GetCollection<Models.PostSurveyResult>(RESULT_COLLECTION).InsertOne(psr);
-            
-
-
+            _db.GetCollection<Models.PostSurveyResult>(RESULT_COLLECTION).InsertOne(psr);           
         }
 
         /// <summary>
