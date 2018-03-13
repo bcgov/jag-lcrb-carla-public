@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace lclb_public_app
+namespace Gov.Lclb.Cllb.Public
 {
     public class Program
     {

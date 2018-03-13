@@ -1,10 +1,11 @@
+using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace lclb_public_app
+namespace Gov.Lclb.Cllb.Public
 {
     public class Startup
     {
@@ -14,6 +15,52 @@ namespace lclb_public_app
         }
 
         public IConfiguration Configuration { get; }
+
+
+        /// <summary>
+        /// Logic required to generate a connection string.  If no environment variables exists, defaults to a local mongo instance.
+        /// </summary>
+        /// <returns></returns>
+        private string GetConnectionString()
+        {
+            string result = "mongodb://";
+            if (!string.IsNullOrEmpty(Configuration["MONGODB_USER"]) && !string.IsNullOrEmpty(Configuration["MONGODB_PASSWORD"]))
+            {
+                result += Configuration["MONGODB_USER"] + ":" + Configuration["MONGODB_PASSWORD"] + "@";
+            }
+
+            if (!string.IsNullOrEmpty(Configuration["DATABASE_SERVICE_NAME"]))
+            {
+                result += Configuration["DATABASE_SERVICE_NAME"];
+            }
+            else // default to a local connection.
+            {
+                result += "127.0.0.1";
+            }
+
+            result += ":27017";
+
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the name of the database, as set in the environment.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDatabaseName()
+        {
+            string result = "";
+            if (!string.IsNullOrEmpty(Configuration["MONGODB_DATABASE"]))
+            {
+                result += Configuration["MONGODB_DATABASE"];
+            }
+            else // default to a local connection.
+            {
+                result += "Surveys";
+            }
+
+            return result;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -25,6 +72,15 @@ namespace lclb_public_app
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+
+            // add a singleton for data access.
+
+            string connectionString = GetConnectionString();
+            string databaseName = GetDatabaseName();
+
+            services.AddSingleton<DataAccess>(new DataAccess(connectionString, databaseName));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
