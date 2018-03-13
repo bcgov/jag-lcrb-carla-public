@@ -141,7 +141,7 @@
       "displayName": "DotNet Startup Project",
       "description": "The path to the startup project for the .Net application.",
       "required": true,
-      "value": "lclb-public-app"
+      "value": "cllc-public-app"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",
