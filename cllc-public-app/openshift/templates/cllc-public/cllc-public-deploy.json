@@ -283,7 +283,7 @@
       "description": "The name of the image to use for this resource.",
       "required": true,
       "value": "cllc-public"
-    },
+	},
     {
       "name": "IMAGE_NAMESPACE",
       "displayName": "Image Namespace",
