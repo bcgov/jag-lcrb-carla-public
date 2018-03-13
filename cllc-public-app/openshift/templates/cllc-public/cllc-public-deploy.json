@@ -123,7 +123,49 @@
 					{
 						"name": "ASPNETCORE_ENVIRONMENT",
 						"value": "${ASPNETCORE_ENVIRONMENT}"
+					},
+					{
+						"name": "MONGODB_USER",
+						"valueFrom": {
+							"secretKeyRef": {
+								"key": "database-user",
+								"name": "${DATABASE_SERVICE_NAME}"
+							}
+						}
+					},
+					{
+						"name": "MONGODB_PASSWORD",
+						"valueFrom": {
+							"secretKeyRef": {
+								"key": "database-password",
+								"name": "${DATABASE_SERVICE_NAME}"
+							}
+						}
+					},
+					{
+						"name": "MONGODB_ADMIN_PASSWORD",
+						"valueFrom": {
+							"secretKeyRef": {
+								"key": "database-admin-password",
+								"name": "${DATABASE_SERVICE_NAME}"
+							}
+						}
+					},
+					{
+						"name": "MONGODB_DATABASE",
+						"valueFrom": {
+							"secretKeyRef": {
+								"key": "database-name",
+								"name": "${DATABASE_SERVICE_NAME}"
+							}
+						}
+					},
+					{
+						"name": "DATABASE_SERVICE_NAME",
+						"value": "${DATABASE_SERVICE_NAME}"
 					}
+					
+					
 					
 				],
                 "resources":
@@ -176,14 +218,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "lclb-public"
+      "value": "cllc-public"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the image to use for this resource.",
       "required": true,
-      "value": "lclb-public"
+      "value": "cllc-public"
     },
     {
       "name": "APPLICATION_DOMAIN",
@@ -196,7 +238,7 @@
       "displayName": "Image Namespace",
       "description": "The namespace of the OpenShift project containing the imagestream for the application.",
       "required": true,
-      "value": "gcpe-news-tools"
+      "value": "lclb-cllc-tools"
     },
     {
       "name": "TAG_NAME",
@@ -235,7 +277,12 @@
       "displayName": "Memory Request",
       "description": "Starting amount of memory the container can use.",
       "value": "2Gi"
+    },
+	{
+      "name": "DATABASE_SERVICE_NAME",
+      "displayName": "Database service name",
+      "description": "Database service name",
+      "value": "mongodb"
     }
-	
   ]
 }
