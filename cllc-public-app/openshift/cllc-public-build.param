@@ -5,7 +5,7 @@
 #=========================================================
 NAME=cllc-public
 OUTPUT_IMAGE_TAG=latest
-GIT_REPO_URL=https://github.com/GeorgeWalker/ag-lclb-public.git
+GIT_REPO_URL=https://github.com/bcgov/ag-lclb-cllc-public.git
 GIT_REF=master
 #SOURCE_CONTEXT_DIR=fpo-web
 #SOURCE_IMAGE_NAMESPACE=openshift
