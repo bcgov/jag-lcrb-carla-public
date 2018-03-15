@@ -1,5 +1,7 @@
 #=========================================================
 # OpenShift template parameters for:
 # Component: cllc-public
-# JSON Template File: templates/angular-on-nginx/angular-on-nginx-deploy.json
 #=========================================================
+APPLICATION_DOMAIN=lclb-cllc-test.pathfinder.gov.bc.ca
+SITEMINDER_APPLICATION_DOMAIN=cannabis-licensing-test.pathfinder.bcgov
+TAG_NAME=test
