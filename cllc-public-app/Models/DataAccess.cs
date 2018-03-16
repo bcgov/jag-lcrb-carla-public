@@ -14,6 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         const string SURVEY_COLLECTION = "Surveys";
         const string RESULT_COLLECTION = "Results";
+        const string USER_COLLECTION = "Users";
 
         public DataAccess(string connectionString, string databaseName)
         {
@@ -105,5 +106,25 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             return result;
         }
+
+        public User GetUserBySmUserId(string SmUserId)
+        {
+            User result =_db.GetCollection<Models.User>(USER_COLLECTION).Find(e => e.SmUserId == SmUserId).FirstOrDefault();
+            return result;
+        }
+
+        public User GetUserByGuid(string Guid)
+        {
+            User result = _db.GetCollection<Models.User>(USER_COLLECTION).Find(e => e.Guid == Guid).FirstOrDefault();
+            return result;
+        }
+
+
+        public void SaveUser(User user)
+        {
+            _db.GetCollection<Models.User>(USER_COLLECTION).ReplaceOne(e => e.Id == user.Id, user);
+        }
+
+
     }
 }
