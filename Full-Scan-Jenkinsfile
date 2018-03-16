@@ -2,13 +2,13 @@ node('master') {
 
     stage('Build Image') {
         echo "Building..."
-        openshiftBuild bldCfg: 'news-webapp-develop', showBuildLogs: 'true'
-        openshiftTag destStream: 'news-webapp', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'news-webapp', srcTag: 'latest'
+        openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
+        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
     }
 	
     stage('Deploy on Dev') {
         echo "Deploying to dev..."
-        openshiftTag destStream: 'news-webapp', verbose: 'true', destTag: 'dev', srcStream: 'news-webapp', srcTag: '$BUILD_ID'
+        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
 	//Sleeping for a while to wait deployment completes
 	sh 'sleep 1m'
     }
@@ -62,7 +62,7 @@ node('bddstack') {
 stage('Deploy on Test') {
     input "Deploy to test?"
     node('master') {
-        openshiftTag destStream: 'news-webapp', verbose: 'true', destTag: 'test', srcStream: 'news-webapp', srcTag: '$BUILD_ID'
+        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'test', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
 	sh 'sleep 3m'
     }
 }
