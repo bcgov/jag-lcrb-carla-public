@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NWebsec.AspNetCore.Mvc;
+using NWebsec.AspNetCore.Mvc.Csp;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -65,7 +67,23 @@ namespace Gov.Lclb.Cllb.Public
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            // for security reasons, the following headers are set.
+            services.AddMvc(opts =>
+            {
+                opts.Filters.Add(typeof(NoCacheHttpHeadersAttribute));
+                opts.Filters.Add(new XRobotsTagAttribute() { NoIndex = true, NoFollow = true });
+                opts.Filters.Add(typeof(XContentTypeOptionsAttribute));
+                opts.Filters.Add(typeof(XDownloadOptionsAttribute));
+                opts.Filters.Add(typeof(XFrameOptionsAttribute));
+                opts.Filters.Add(typeof(XXssProtectionAttribute));
+                //CSP
+                opts.Filters.Add(typeof(CspAttribute));
+                opts.Filters.Add(new CspDefaultSrcAttribute { Self = true });
+                opts.Filters.Add(new CspScriptSrcAttribute { Self = true });
+                //CSPReportOnly
+                opts.Filters.Add(typeof(CspReportOnlyAttribute));
+                opts.Filters.Add(new CspScriptSrcReportOnlyAttribute { None = true });
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
