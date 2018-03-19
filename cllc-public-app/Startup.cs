@@ -1,6 +1,9 @@
+using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Authorization;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -98,6 +101,26 @@ namespace Gov.Lclb.Cllb.Public
             string databaseName = GetDatabaseName();
 
             services.AddSingleton<DataAccess>(new DataAccess(connectionString, databaseName));
+
+            // setup siteminder authentication (core 2.0)
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = SiteMinderAuthOptions.AuthenticationSchemeName;
+                options.DefaultChallengeScheme = SiteMinderAuthOptions.AuthenticationSchemeName;
+            }).AddSiteminderAuth(options =>
+            {
+
+            });
+
+            // setup authorization
+            services.AddAuthorization();
+            services.RegisterPermissionHandler();
+
+            // allow for large files to be uploaded
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 1073741824; // 1 GB
+            });
 
         }
 
