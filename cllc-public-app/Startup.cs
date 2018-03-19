@@ -112,10 +112,11 @@ namespace Gov.Lclb.Cllb.Public
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            
+            app.UseXContentTypeOptions();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseXfo(xfo => xfo.Deny());
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
