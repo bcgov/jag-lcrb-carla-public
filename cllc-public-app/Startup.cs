@@ -137,9 +137,10 @@ namespace Gov.Lclb.Cllb.Public
             }
             
             app.UseXContentTypeOptions();
+            app.UseXfo(xfo => xfo.Deny());
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseXfo(xfo => xfo.Deny());
+            app.UseNoCacheHttpHeaders();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -159,6 +160,8 @@ namespace Gov.Lclb.Cllb.Public
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            
         }
     }
 }
