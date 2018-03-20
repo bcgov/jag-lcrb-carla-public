@@ -44,9 +44,18 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         /// <summary>
-        /// Get all results for all surveys
+        /// Returns a specific jurisdiction
         /// </summary>
-        /// <returns></returns>
+        /// <param name="name">The name of the jurisdiction</param>
+        /// <returns>The jurisdiction, or null if it does not exist.</returns>
+        public Jurisdiction GetJurisdictionByName(string name)
+        {
+            Jurisdiction jurisdiction = _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).Find(x => x.Name == name).FirstOrDefault();
+            return jurisdiction;
+        }
+
+
+
         public Dictionary<string, List<string>> GetResults()
         {
             // create the result object
