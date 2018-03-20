@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
-        public string ToString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 
@@ -98,7 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(object obj)
+        public override bool Equals(object obj)
         {
             if (obj is null) { return false; }
             if (ReferenceEquals(this, obj)) { return true; }
@@ -136,7 +136,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
-        public int GetHashCode()
+        public override int GetHashCode()
         {
             // credit: http://stackoverflow.com/a/263416/677735
             unchecked // Overflow is fine, just wrap
