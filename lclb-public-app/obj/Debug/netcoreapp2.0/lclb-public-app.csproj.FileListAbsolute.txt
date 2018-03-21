@@ -1,0 +1,10 @@
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\bin\Debug\netcoreapp2.0\lclb-public-app.deps.json
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\bin\Debug\netcoreapp2.0\lclb-public-app.runtimeconfig.json
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\bin\Debug\netcoreapp2.0\lclb-public-app.runtimeconfig.dev.json
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\bin\Debug\netcoreapp2.0\lclb-public-app.dll
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\bin\Debug\netcoreapp2.0\lclb-public-app.pdb
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\obj\Debug\netcoreapp2.0\lclb-public-app.csproj.CoreCompileInputs.cache
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\obj\Debug\netcoreapp2.0\lclb-public-app.AssemblyInfoInputs.cache
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\obj\Debug\netcoreapp2.0\lclb-public-app.AssemblyInfo.cs
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\obj\Debug\netcoreapp2.0\lclb-public-app.dll
+C:\GitRepo\rafaelp\ag-lclb-cllc-public\lclb-public-app\obj\Debug\netcoreapp2.0\lclb-public-app.pdb

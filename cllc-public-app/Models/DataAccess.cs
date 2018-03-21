@@ -36,21 +36,28 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
+        /// <summary>
+        /// Get all results for all surveys
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, List<string>> GetResults()
         {
+            // create the result object
             Dictionary<string, List<string>> results = new Dictionary<string, List<string>>();
 
-            List<ChangeSurvey> surveys = _db.GetCollection<Models.ChangeSurvey>(SURVEY_COLLECTION).Find(new BsonDocument()).ToList();
+            // get a list of all survey identifiers
+            var filter = new BsonDocument();
+            var postIds = _db.GetCollection<Models.PostSurveyResult>(RESULT_COLLECTION).Distinct<string>("postId", filter).ToList();
 
-            foreach (ChangeSurvey survey in surveys)
+            foreach (string postId in postIds)
             {
                 List<string> surveyResults = new List<string>();
-                List<PostSurveyResult> items = _db.GetCollection<Models.PostSurveyResult>(RESULT_COLLECTION).Find(x => x.surveyId == survey.Id).ToList();
+                List<PostSurveyResult> items = _db.GetCollection<Models.PostSurveyResult>(RESULT_COLLECTION).Find(x => x.postId == postId).ToList();
                 foreach (PostSurveyResult item in items)
                 {
                     surveyResults.Add(item.surveyResult);
                 }
-                results.Add(survey.Name, surveyResults);
+                results.Add(postId, surveyResults);
             }
 
             return results;
