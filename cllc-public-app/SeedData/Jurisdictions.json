@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Name": "Sample Jurisdiction 1",
+    "SelectMessage": "Jurisdiction allowing sales"
+  },
+  {
+    "Name": "Sample Jurisdiction 2",
+    "SelectMessage": "Jurisdiction not allowing sales"
+  },
+  {
+    "Name": "Other",
+    "SelectMessage": "Other juridiction"
+  }
+]
