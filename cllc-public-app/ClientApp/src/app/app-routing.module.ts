@@ -13,17 +13,17 @@ const routes: Routes = [
     //children: []
     component: HomeComponent
   },
-  {
-    path: 'qualify',
-    component: SurveyPrimaryComponent,
-    resolve: {
-      survey: SurveyResolver,
-    },
-    data: {
-      breadcrumb: 'Prequalification Survey',
-      survey_path: 'assets/survey-qualify.json',
-    }
-  },
+  //{
+  //  path: 'qualify',
+  //  component: SurveyPrimaryComponent,
+  //  resolve: {
+  //    survey: SurveyResolver,
+  //  },
+  //  data: {
+  //    breadcrumb: 'Prequalification Survey',
+  //    survey_path: 'assets/survey-qualify.json',
+  //  }
+  //},
   {
     path: 'prv',
     redirectTo: 'prv/survey'
@@ -35,7 +35,7 @@ const routes: Routes = [
       survey: SurveyResolver,
     },
     data: {
-      breadcrumb: 'Provincial Family Test',
+      breadcrumb: 'Potential Applicant Survey', //Provincial Family Test
       survey_path: 'assets/survey-primary.json',
     }
   },
