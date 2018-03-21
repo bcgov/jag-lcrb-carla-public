@@ -15,11 +15,18 @@ namespace Gov.Lclb.Cllb.Public.Models
         const string SURVEY_COLLECTION = "Surveys";
         const string RESULT_COLLECTION = "Results";
         const string USER_COLLECTION = "Users";
+        const string JURISDICTION_COLLECTION = "Jurisdiction";
 
         public DataAccess(string connectionString, string databaseName)
         {
             _client = new MongoClient(connectionString);
             _db = _client.GetDatabase(databaseName);
+        }
+
+        public void AddJurisdiction(Jurisdiction jurisdiction)
+        {
+            // create a new jurisdiction.           
+            _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).InsertOne(jurisdiction);
         }
 
         public Dictionary<string, string> GetSurveys()
@@ -35,6 +42,19 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             return result;
         }
+
+        /// <summary>
+        /// Returns a specific jurisdiction
+        /// </summary>
+        /// <param name="name">The name of the jurisdiction</param>
+        /// <returns>The jurisdiction, or null if it does not exist.</returns>
+        public Jurisdiction GetJurisdictionByName(string name)
+        {
+            Jurisdiction jurisdiction = _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).Find(x => x.Name == name).FirstOrDefault();
+            return jurisdiction;
+        }
+
+
 
         public Dictionary<string, List<string>> GetResults()
         {
@@ -119,12 +139,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
-
         public void SaveUser(User user)
         {
             _db.GetCollection<Models.User>(USER_COLLECTION).ReplaceOne(e => e.Id == user.Id, user);
         }
 
+        public void UpdateJurisdiction(Jurisdiction jurisdiction)
+        {
+            _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).ReplaceOne(e => e.Id == jurisdiction.Id, jurisdiction);
 
+        }
     }
 }
