@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
+using System;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -125,7 +128,7 @@ namespace Gov.Lclb.Cllb.Public
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -161,7 +164,31 @@ namespace Gov.Lclb.Cllb.Public
                 }
             });
 
-            
+            ILogger log = loggerFactory.CreateLogger(typeof(Startup));
+
+            try
+            {                              
+                using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    log.LogInformation("Fetching the application's database context ...");
+                    DataAccess context = serviceScope.ServiceProvider.GetService<DataAccess>();
+                    // run the database seeders
+                    log.LogInformation("Adding/Updating seed data ...");
+                    Seeders.SeedFactory<DataAccess> seederFactory = new Seeders.SeedFactory<DataAccess>(Configuration, env, loggerFactory);
+                    seederFactory.Seed((DataAccess)context);
+                    log.LogInformation("Seeding operations are complete.");
+                }
+            }
+            catch (Exception e)
+            {
+                StringBuilder msg = new StringBuilder();
+                msg.AppendLine("The database migration failed!");
+                msg.AppendLine("The database may not be available and the application will not function as expected.");
+                msg.AppendLine("Please ensure a database is available and the connection string is correct.");
+                msg.AppendLine("If you are running in a development environment, ensure your test database and server configuraiotn match the project's default connection string.");
+                log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
+            }
+
         }
     }
 }

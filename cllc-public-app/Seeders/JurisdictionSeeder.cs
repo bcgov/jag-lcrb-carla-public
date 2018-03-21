@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using Gov.Lclb.Cllb.Public.Models;
+using System;
+using System.IO;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -36,7 +38,13 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private void AddInitialJurisdictions(DataAccess context)
         {
-            context.AddInitialJurisdictionsFromFile(Configuration["JurisdictionInitializationFile"]);
+            string jurisdictionInitializationFile = Configuration["JurisdictionInitializationFile"];
+            if (string.IsNullOrEmpty(jurisdictionInitializationFile))
+            {
+                // default to sample data, which is stored in the "SeedData" directory.
+                jurisdictionInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "Jurisdictions.json"); 
+            }
+            context.AddInitialJurisdictionsFromFile(jurisdictionInitializationFile);
         }
 
         private List<Jurisdiction> GetSeedJurisdictions()
