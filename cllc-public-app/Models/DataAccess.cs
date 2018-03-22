@@ -147,7 +147,23 @@ namespace Gov.Lclb.Cllb.Public.Models
         public void UpdateJurisdiction(Jurisdiction jurisdiction)
         {
             _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).ReplaceOne(e => e.Id == jurisdiction.Id, jurisdiction);
+        }
 
+        public List<Jurisdiction> GetJurisdictions()
+        {
+            List<Models.Jurisdiction> items = _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).Find(new BsonDocument()).ToList();
+            return items;
+        }
+
+        public List<string> GetJurisdictionNames()
+        {
+            List<string> result = new List<string>();
+            List<Models.Jurisdiction> items = _db.GetCollection<Models.Jurisdiction>(RESULT_COLLECTION).Find(new BsonDocument()).ToList();
+            foreach (var item in items)
+            {
+                result.Add(item.Name);
+            }
+            return result;
         }
     }
 }
