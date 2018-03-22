@@ -46,7 +46,9 @@ namespace Gov.Lclb.Cllb.Public
                 result += "127.0.0.1";
             }
 
-            result += ":27017";
+            result += ":27017/";
+
+            result += GetDatabaseName();
 
             return result;
         }
