@@ -53,8 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             Jurisdiction jurisdiction = _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).Find(x => x.Name == name).FirstOrDefault();
             return jurisdiction;
         }
-
-
+        
 
         public Dictionary<string, List<string>> GetResults()
         {

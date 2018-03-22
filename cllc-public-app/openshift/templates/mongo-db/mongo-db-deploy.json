@@ -270,7 +270,7 @@
             "name": "MONGODB_DATABASE",
             "displayName": "MongoDB Database Name",
             "description": "Name of the MongoDB database accessed.",
-            "value": "archives",
+            "value": "surveys",
             "required": true
         },
         {
