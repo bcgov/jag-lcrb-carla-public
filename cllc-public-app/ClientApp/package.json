@@ -13,7 +13,9 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^5.2.0",
+    "@angular/material": "5.2.4",
+    "@angular/cdk": "5.2.4",
+    "@angular/animations": "^5.2.4",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
     "@angular/core": "^5.2.0",
@@ -32,7 +34,9 @@
     "rxjs": "^5.5.6",
     "survey-angular": "1.0.6",
     "surveyjs-editor": "1.0.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19",
+    "hammerjs": "^2.0.8",
+    "web-animations-js": "^2.3.1"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.0",
