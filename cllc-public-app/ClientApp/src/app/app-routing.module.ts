@@ -1,28 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from 'app/home/home.component';
-import { ResultComponent } from 'app/result/result.component';
-import { SurveyPrimaryComponent } from 'app/survey/primary.component';
-import { SurveyTestComponent } from 'app/survey/test.component';
-import { SurveyResolver }   from 'app/survey/survey-resolver.service';
-import { SurveyEditorComponent } from 'app/survey/editor.component';
+import { HomeComponent } from './home/home.component';
+import { ResultComponent } from './result/result.component';
+import { SurveyPrimaryComponent } from './survey/primary.component';
+import { SurveyTestComponent } from './survey/test.component';
+import { SurveyResolver }   from './survey/survey-resolver.service';
+import { SurveyEditorComponent } from './survey/editor.component';
 
 const routes: Routes = [
   {
     path: '',
     //children: []
     component: HomeComponent
-  },
-  {
-    path: 'qualify',
-    component: SurveyPrimaryComponent,
-    resolve: {
-      survey: SurveyResolver,
-    },
-    data: {
-      breadcrumb: 'Prequalification Survey',
-      survey_path: 'assets/survey-qualify.json',
-    }
   },
   {
     path: 'prv',
@@ -35,7 +24,7 @@ const routes: Routes = [
       survey: SurveyResolver,
     },
     data: {
-      breadcrumb: 'Provincial Family Test',
+      breadcrumb: 'Potential Applicant Survey', //Provincial Family Test
       survey_path: 'assets/survey-primary.json',
     }
   },

@@ -5,7 +5,7 @@ import {
 
 import { AppComponent } from './app.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { SurveyComponent } from './survey.component';
+import { SurveyComponent } from './survey/survey.component';
 //import { SurveyEditorComponent } from './survey.editor.component';
 
 describe('AppComponent', () => {
