@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
+@import '~@angular/material/theming';
+@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+
+@include mat-core();
+
+$primary: mat-palette($mat-lime, 500);
+$accent: mat-palette($mat-lime, 500, A200, A400);
+$warn: mat-palette($mat-red, 500);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
 
 body {
   background: #fff;

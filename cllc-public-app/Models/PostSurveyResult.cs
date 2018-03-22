@@ -13,8 +13,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         public ObjectId Id { get; set; }
         public string postId { get; set; }
 
-        public ObjectId surveyId { get; set; }
-
         public string surveyResult { get; set; }
     }
 }

@@ -38,7 +38,8 @@ export class SurveyComponent  {
     Survey.defaultBootstrapCss.paneldynamic.root = "sv_p_dynamic"; // not used?
     Survey.dxSurveyService.serviceUrl = "/api/survey";
     surveyModel.onComplete.add((sender, options) => {
-      surveyModel.sendResult("12345");
+      //postId?: string
+      surveyModel.sendResult("PotentialApplicantResult");
       if(this.onComplete) this.onComplete(sender.data)
     });
     surveyModel.onCurrentPageChanged.add((sender, options) => {
