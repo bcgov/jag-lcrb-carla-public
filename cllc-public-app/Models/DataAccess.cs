@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public List<string> GetJurisdictionNames()
         {
             List<string> result = new List<string>();
-            List<Models.Jurisdiction> items = _db.GetCollection<Models.Jurisdiction>(RESULT_COLLECTION).Find(new BsonDocument()).ToList();
+            List<Models.Jurisdiction> items = _db.GetCollection<Models.Jurisdiction>(JURISDICTION_COLLECTION).Find(new BsonDocument()).ToList();
             foreach (var item in items)
             {
                 result.Add(item.Name);
