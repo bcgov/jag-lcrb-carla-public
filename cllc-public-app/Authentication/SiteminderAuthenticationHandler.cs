@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Contexts;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {    
@@ -169,7 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 ClaimsPrincipal principal;
 
                 HttpContext context = Request.HttpContext;
-                DataAccess dataAccess = (DataAccess)context.RequestServices.GetService(typeof(DataAccess));
+                AppDbContext dataAccess = (AppDbContext)context.RequestServices.GetService(typeof(AppDbContext));
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
                 
                 UserSettings userSettings = new UserSettings();

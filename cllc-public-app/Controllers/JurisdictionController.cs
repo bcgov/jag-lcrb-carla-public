@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,8 +12,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class JurisdictionController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly DataAccess db;
-        public JurisdictionController(DataAccess db, IConfiguration configuration)
+        private readonly AppDbContext db;
+        public JurisdictionController(AppDbContext db, IConfiguration configuration)
         {
             Configuration = configuration;
             this.db = db;
@@ -23,11 +24,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             return Json(db.GetJurisdictions());
         }
-
-        [HttpGet("names")]
-        public JsonResult GetNames()
-        {
-            return Json(db.GetJurisdictionNames());
-        }
+        
     }
 }

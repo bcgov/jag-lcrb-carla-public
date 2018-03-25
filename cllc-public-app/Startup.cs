@@ -1,10 +1,12 @@
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
+using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,16 +28,12 @@ namespace Gov.Lclb.Cllb.Public
 
 
         /// <summary>
-        /// Logic required to generate a connection string.  If no environment variables exists, defaults to a local mongo instance.
+        /// Logic required to generate a connection string.  If no environment variables exists, defaults to a local sql instance.
         /// </summary>
         /// <returns></returns>
         private string GetConnectionString()
         {
-            string result = "mongodb://";
-            if (!string.IsNullOrEmpty(Configuration["MONGODB_USER"]) && !string.IsNullOrEmpty(Configuration["MONGODB_PASSWORD"]))
-            {
-                result += Configuration["MONGODB_USER"] + ":" + Configuration["MONGODB_PASSWORD"] + "@";
-            }
+            string result = "Server=";
 
             if (!string.IsNullOrEmpty(Configuration["DATABASE_SERVICE_NAME"]))
             {
@@ -46,10 +44,15 @@ namespace Gov.Lclb.Cllb.Public
                 result += "127.0.0.1";
             }
 
-            result += ":27017/";
+            result += ";Database=";
 
             result += GetDatabaseName();
 
+            if (!string.IsNullOrEmpty(Configuration["DB_USER"]) && !string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
+            {
+                result += ";User Id=" + Configuration["DB_USER"] + ";Password=" + Configuration["DB_PASSWORD"] + ";";
+            }
+           
             return result;
         }
 
@@ -60,9 +63,9 @@ namespace Gov.Lclb.Cllb.Public
         public string GetDatabaseName()
         {
             string result = "";
-            if (!string.IsNullOrEmpty(Configuration["MONGODB_DATABASE"]))
+            if (!string.IsNullOrEmpty(Configuration["DB_DATABASE"]))
             {
-                result += Configuration["MONGODB_DATABASE"];
+                result += Configuration["DB_DATABASE"];
             }
             else // default to a local connection.
             {
@@ -105,8 +108,9 @@ namespace Gov.Lclb.Cllb.Public
             string connectionString = GetConnectionString();
             string databaseName = GetDatabaseName();
 
-            services.AddSingleton<DataAccess>(new DataAccess(connectionString, databaseName));
-
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(connectionString));
+            
             // setup siteminder authentication (core 2.0)
             services.AddAuthentication(options =>
             {
@@ -173,11 +177,11 @@ namespace Gov.Lclb.Cllb.Public
                 using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Fetching the application's database context ...");
-                    DataAccess context = serviceScope.ServiceProvider.GetService<DataAccess>();
+                    AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                     // run the database seeders
                     log.LogInformation("Adding/Updating seed data ...");
-                    Seeders.SeedFactory<DataAccess> seederFactory = new Seeders.SeedFactory<DataAccess>(Configuration, env, loggerFactory);
-                    seederFactory.Seed((DataAccess)context);
+                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory);
+                    seederFactory.Seed((AppDbContext)context);
                     log.LogInformation("Seeding operations are complete.");
                 }
             }
