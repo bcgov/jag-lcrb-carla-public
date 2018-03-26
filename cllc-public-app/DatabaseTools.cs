@@ -84,9 +84,14 @@ namespace Gov.Lclb.Cllb.Public
                     using (SqlConnection conn = new SqlConnection(saConnectionString))
                     {
                         conn.Open();
-                        string sql = "IF NOT EXISTS (SELECT name FROM master.sys.server_principals    WHERE name = '" + username + "') BEGIN\n CREATE LOGIN " + username + " WITH PASSWORD = '" + password + "';\nEND";
-
+                        // fix for OpenShift bug where the pod reports the number of sockets / logical processors in the host computer rather than the amount available.
+                        string sql = "EXEC sp_configure 'show advanced options', 1; GO\n RECONFIGURE WITH OVERRIDE; GO\n EXEC sp_configure 'max degree of parallelism', 2; \n GO \n RECONFIGURE WITH OVERRIDE;";
                         SqlCommand cmd = new SqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+
+                        // create the login if it does not exist.
+                        sql = "IF NOT EXISTS (SELECT name FROM master.sys.server_principals    WHERE name = '" + username + "') BEGIN\n CREATE LOGIN " + username + " WITH PASSWORD = '" + password + "';\nEND";
+                        cmd = new SqlCommand(sql, conn);
                         cmd.ExecuteNonQuery();
 
                         sql = "IF  NOT EXISTS(SELECT name FROM sys.databases WHERE name = N'" + database + "')\nBEGIN\nCREATE DATABASE[" + database + "]; ALTER AUTHORIZATION ON DATABASE::[" + database + "] TO " + username + "\nEND";
