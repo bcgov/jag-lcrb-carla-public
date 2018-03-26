@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="effectiveDate">The date on which the user was given the related role. (required).</param>
         /// <param name="expiryDate">The date on which a role previously assigned to a user was removed from that user..</param>
         /// <param name="role">A foreign key reference to the system-generated unique identifier for a Role.</param>
-        public UserRole(ObjectId id, DateTime effectiveDate, DateTime? expiryDate = null, Role role = null)
+        public UserRole(Guid id, DateTime effectiveDate, DateTime? expiryDate = null, Role role = null)
         {   
             Id = id;
             EffectiveDate = effectiveDate;
@@ -29,13 +29,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             Role = role;
         }
 
+        public UserRole()
+        {
+
+        }
+
         /// <summary>
         /// A system-generated unique identifier for a UserRole
         /// </summary>
         /// <value>A system-generated unique identifier for a UserRole</value>
-        [Key]
-        public ObjectId Id { get; set; }
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
+
         /// <summary>
         /// The date on which the user was given the related role.
         /// </summary>
@@ -59,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>   
         [ForeignKey("Role")]
 		[JsonIgnore]
-        public int? RoleId { get; set; }
+        public Guid? RoleId { get; set; }
         
         /// <summary>
         /// Returns the string presentation of the object

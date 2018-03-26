@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 		/// <param name="smAuthorizationDirectory">The user directory service used by Siteminder to authenticate the user - usually IDIR or BCeID..</param>
 		/// <param name="userRoles">UserRoles.</param>
 		/// <param name="district">The District that the User belongs to.</param>
-		public User(ObjectId id, string givenName, string surname, bool active, string initials = null, string email = null, 
+		public User(Guid id, string givenName, string surname, bool active, string initials = null, string email = null, 
 		    string smUserId = null, string guid = null, string smAuthorizationDirectory = null, List<UserRole> userRoles = null)
 		{
 			Id = id;
@@ -48,12 +48,17 @@ namespace Gov.Lclb.Cllb.Public.Models
 			UserRoles = userRoles;
 		}
 
+        public User()
+        {
+
+        }
+
         /// <summary>
         /// A system-generated unique identifier for a User
         /// </summary>
         /// <value>A system-generated unique identifier for a User</value>
-        [Key]
-        public ObjectId Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Given name of the user.

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
 using System;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace Gov.Lclb.Cllb.Public
@@ -27,53 +28,7 @@ namespace Gov.Lclb.Cllb.Public
         public IConfiguration Configuration { get; }
 
 
-        /// <summary>
-        /// Logic required to generate a connection string.  If no environment variables exists, defaults to a local sql instance.
-        /// </summary>
-        /// <returns></returns>
-        private string GetConnectionString()
-        {
-            string result = "Server=";
-
-            if (!string.IsNullOrEmpty(Configuration["DATABASE_SERVICE_NAME"]))
-            {
-                result += Configuration["DATABASE_SERVICE_NAME"];
-            }
-            else // default to a local connection.
-            {
-                result += "127.0.0.1";
-            }
-
-            result += ";Database=";
-
-            result += GetDatabaseName();
-
-            if (!string.IsNullOrEmpty(Configuration["DB_USER"]) && !string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
-            {
-                result += ";User Id=" + Configuration["DB_USER"] + ";Password=" + Configuration["DB_PASSWORD"] + ";";
-            }
-           
-            return result;
-        }
-
-        /// <summary>
-        /// Returns the name of the database, as set in the environment.
-        /// </summary>
-        /// <returns></returns>
-        public string GetDatabaseName()
-        {
-            string result = "";
-            if (!string.IsNullOrEmpty(Configuration["DB_DATABASE"]))
-            {
-                result += Configuration["DB_DATABASE"];
-            }
-            else // default to a local connection.
-            {
-                result += "Surveys";
-            }
-
-            return result;
-        }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -105,8 +60,10 @@ namespace Gov.Lclb.Cllb.Public
 
             // add a singleton for data access.
 
-            string connectionString = GetConnectionString();
-            string databaseName = GetDatabaseName();
+            string connectionString = DatabaseTools.GetConnectionString(Configuration);
+            string databaseName = DatabaseTools.GetDatabaseName(Configuration);
+
+            DatabaseTools.CreateDatabaseIfNotExists(Configuration);
 
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(connectionString));
@@ -131,6 +88,8 @@ namespace Gov.Lclb.Cllb.Public
                 options.MultipartBodyLengthLimit = 1073741824; // 1 GB
             });
 
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -150,6 +109,8 @@ namespace Gov.Lclb.Cllb.Public
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseNoCacheHttpHeaders();
+            // IMPORTANT: This session call MUST go before UseMvc()
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -169,31 +130,7 @@ namespace Gov.Lclb.Cllb.Public
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-            ILogger log = loggerFactory.CreateLogger(typeof(Startup));
-
-            try
-            {                              
-                using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    log.LogInformation("Fetching the application's database context ...");
-                    AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                    // run the database seeders
-                    log.LogInformation("Adding/Updating seed data ...");
-                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory);
-                    seederFactory.Seed((AppDbContext)context);
-                    log.LogInformation("Seeding operations are complete.");
-                }
-            }
-            catch (Exception e)
-            {
-                StringBuilder msg = new StringBuilder();
-                msg.AppendLine("The database migration failed!");
-                msg.AppendLine("The database may not be available and the application will not function as expected.");
-                msg.AppendLine("Please ensure a database is available and the connection string is correct.");
-                msg.AppendLine("If you are running in a development environment, ensure your test database and server configuraiotn match the project's default connection string.");
-                log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
-            }
+            
 
         }
     }

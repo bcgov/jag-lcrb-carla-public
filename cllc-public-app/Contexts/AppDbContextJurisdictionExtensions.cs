@@ -15,6 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         {
             // create a new jurisdiction.           
             context.Jurisdictions.Add(jurisdiction);
+            context.SaveChanges();
         }
 
         public static void UpdateJurisdiction(this AppDbContext context, Jurisdiction jurisdiction)
