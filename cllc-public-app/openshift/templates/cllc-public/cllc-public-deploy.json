@@ -82,7 +82,7 @@
 						"value": "${ASPNETCORE_ENVIRONMENT}"
 					},
 					{
-						"name": "MONGODB_USER",
+						"name": "DB_USER",
 						"valueFrom": {
 							"secretKeyRef": {
 								"key": "database-user",
@@ -91,7 +91,7 @@
 						}
 					},
 					{
-						"name": "MONGODB_PASSWORD",
+						"name": "DB_PASSWORD",
 						"valueFrom": {
 							"secretKeyRef": {
 								"key": "database-password",
@@ -100,7 +100,7 @@
 						}
 					},
 					{
-						"name": "MONGODB_ADMIN_PASSWORD",
+						"name": "DB_ADMIN_PASSWORD",
 						"valueFrom": {
 							"secretKeyRef": {
 								"key": "database-admin-password",
@@ -109,7 +109,7 @@
 						}
 					},
 					{
-						"name": "MONGODB_DATABASE",
+						"name": "DB_DATABASE",
 						"valueFrom": {
 							"secretKeyRef": {
 								"key": "database-name",
