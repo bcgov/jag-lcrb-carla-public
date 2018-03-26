@@ -1,14 +1,654 @@
 ﻿[
+ {
+   "Name": "100 Mile House",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Abbotsford",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Alert Bay",
+   "Message": "Jurisdiction Message"
+ },
   {
-    "Name": "Sample Jurisdiction 1",
-    "SelectMessage": "Jurisdiction allowing sales"
+    "Name": "Anmore",
+    "Message": "Jurisdiction Message"
   },
-  {
-    "Name": "Sample Jurisdiction 2",
-    "SelectMessage": "Jurisdiction not allowing sales"
-  },
-  {
-    "Name": "Other",
-    "SelectMessage": "Other juridiction"
-  }
+ {
+   "Name": "Armstrong",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Ashcroft",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Barriere",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Belcarra",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Bowen Island",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Burnaby",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Burns Lake",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Cache Creek",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Campbell River",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Canal Flats",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Castlegar",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Central Saanich",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Chase",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Chetwynd",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Chilliwack",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Clearwater",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Clinton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Coldstream",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Colwood",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Comox",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Coquitlam",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Courtenay",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Cranbrook",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Creston",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Cumberland",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Dawson Creek",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Delta",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Duncan",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Elkford",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Enderby",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Esquimalt",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Fernie",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Fort St. James",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Fort St. John",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Fraser Lake",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Fruitvale",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Gibsons",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Gold River",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Golden",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Grand Forks",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Granisle",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Greenwood",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Harrison Hot Springs",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Hazelton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Highlands",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Hope",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Houston",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Hudson's Hope",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Invermere",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Islands Trust",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Jumbo Glacier",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Kamloops",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Kaslo",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Kelowna",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Kent",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Keremeos",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Kimberley",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Kitimat",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Ladysmith",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Lake Country",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Lake Cowichan",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Langford",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Langley",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Langley",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Lantzville",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Lillooet",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Lions Bay",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Logan Lake",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Lumby",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Lytton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Mackenzie",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Maple Ridge",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Masset",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "McBride",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Merritt",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Metchosin",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Midway",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Mission",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Montrose",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Nakusp",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Nanaimo",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Nelson",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "New Denver",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "New Hazelton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "New Westminster",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "North Cowichan",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "North Saanich",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "North Vancouver",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "North Vancouver",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Northern Rockies",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Oak Bay",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Oliver",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Osoyoos",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Parksville",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Peachland",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Pemberton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Penticton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Pitt Meadows",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port Alberni",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port Alice",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port Clements",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port Coquitlam",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port Edward",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port Hardy",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port McNeill",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Port Moody",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Pouce Coupe",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Powell River",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Prince George",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Prince Rupert",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Princeton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Qualicum Beach",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Queen Charlotte",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Quesnel",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Radium Hot Springs",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Revelstoke",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Richmond",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Rossland",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Saanich",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Salmo",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Salmon Arm",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sayward",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sechelt",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sechelt Indian Government District",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sicamous",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sidney",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Silverton",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Slocan",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Smithers",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sooke",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Spallumcheen",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sparwood",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Squamish",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Stewart",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Summerland",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Sun Peaks",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Surrey",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Tahsis",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Taylor",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Telkwa",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Terrace",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Tofino",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Trail",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Tumbler Ridge",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Ucluelet",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Valemount",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Vancouver",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Vanderhoof",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Vernon",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Victoria",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "View Royal",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Warfield",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Wells",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "West Kelowna",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "West Vancouver",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Whistler",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "White Rock",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Williams Lake",
+   "Message": "Jurisdiction Message"
+ },
+ {
+   "Name": "Zeballos",
+   "Message": "Jurisdiction Message"
+ }
 ]
