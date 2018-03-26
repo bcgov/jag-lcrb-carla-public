@@ -89,6 +89,7 @@ namespace Gov.Lclb.Cllb.Public
                 options.MultipartBodyLengthLimit = 1073741824; // 1 GB
             });
 
+
             // health checks
             services.AddHealthChecks(checks =>
             {
@@ -125,6 +126,8 @@ namespace Gov.Lclb.Cllb.Public
                     template: "{controller}/{action=Index}/{id?}");
             });
 
+            var log = loggerFactory.CreateLogger("Startup");
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -137,6 +140,35 @@ namespace Gov.Lclb.Cllb.Public
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            try
+            {
+                using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    log.LogInformation("Fetching the application's database context ...");
+                    AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+
+                    log.LogInformation("Migrating the database ...");
+                    context.Database.Migrate();
+                    log.LogInformation("The database migration complete.");
+
+                    // run the database seeders
+                    log.LogInformation("Adding/Updating seed data ...");
+
+                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory);
+                    seederFactory.Seed((AppDbContext)context);
+                    log.LogInformation("Seeding operations are complete.");
+                }
+            }
+            catch (Exception e)
+            {
+                StringBuilder msg = new StringBuilder();
+                msg.AppendLine("The database migration failed!");
+                msg.AppendLine("The database may not be available and the application will not function as expected.");
+                msg.AppendLine("Please ensure a database is available and the connection string is correct.");
+                msg.AppendLine("If you are running in a development environment, ensure your test database and server configuraiotn match the project's default connection string.");
+                log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
+            }
             
 
         }
