@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
@@ -86,6 +87,12 @@ namespace Gov.Lclb.Cllb.Public
             services.Configure<FormOptions>(options =>
             {
                 options.MultipartBodyLengthLimit = 1073741824; // 1 GB
+            });
+
+            // health checks
+            services.AddHealthChecks(checks =>
+            {
+                checks.AddSqlCheck(DatabaseTools.GetDatabaseName(Configuration), DatabaseTools.GetConnectionString(Configuration));
             });
 
             services.AddSession();

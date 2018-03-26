@@ -17,9 +17,7 @@ namespace Gov.Lclb.Cllb.Public
     public class Program
     {
         public static void Main(string[] args)
-        {
-            
-
+        {            
             var host = CreateWebHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
@@ -62,6 +60,7 @@ namespace Gov.Lclb.Cllb.Public
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseHealthChecks("/hc")
                 .UseStartup<Startup>();
     }
 }
