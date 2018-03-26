@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public
                     msg.AppendLine("The database may not be available and the application will not function as expected.");
                     msg.AppendLine("Please ensure a database is available and the connection string is correct.");
                     msg.AppendLine("If you are running in a development environment, ensure your test database and server configuraiotn match the project's default connection string.");
-                    log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
+                    log.LogCritical(new EventId(-1, "Database Migration Failed"), ex, msg.ToString());
                 }
             }
 
