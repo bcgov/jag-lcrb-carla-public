@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
-    public abstract class Seeder<T> where T : DataAccess
+    public abstract class Seeder<T> where T : AppDbContext
     {
         public const string AllProfiles = "all";
 

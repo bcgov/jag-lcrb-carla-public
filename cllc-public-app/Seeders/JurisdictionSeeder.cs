@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
+using Gov.Lclb.Cllb.Public.Contexts;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
-    public class JurisdictionSeeder : Seeder<DataAccess>
+    public class JurisdictionSeeder : Seeder<AppDbContext>
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
@@ -18,13 +19,13 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected override IEnumerable<string> TriggerProfiles => _profileTriggers;
 
-        protected override void Invoke(DataAccess context)
+        protected override void Invoke(AppDbContext context)
         {
             UpdateJurisdictions(context);
             
         }
 
-        private void UpdateJurisdictions(DataAccess context)
+        private void UpdateJurisdictions(AppDbContext context)
         {
             List<Jurisdiction> seedJurisdictions = GetSeedJurisdictions();
 
@@ -36,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             AddInitialJurisdictions(context);            
         }
 
-        private void AddInitialJurisdictions(DataAccess context)
+        private void AddInitialJurisdictions(AppDbContext context)
         {
             string jurisdictionInitializationFile = Configuration["JurisdictionInitializationFile"];
             if (string.IsNullOrEmpty(jurisdictionInitializationFile))

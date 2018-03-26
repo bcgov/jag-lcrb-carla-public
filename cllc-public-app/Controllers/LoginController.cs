@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +13,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LoginController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly DataAccess db;
-        public LoginController(DataAccess db, IConfiguration configuration)
+        private readonly AppDbContext db;
+        public LoginController(AppDbContext db, IConfiguration configuration)
         {
             Configuration = configuration;
             this.db = db;

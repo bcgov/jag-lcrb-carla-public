@@ -3,6 +3,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -20,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="code">The name of the permission referenced in the software of the application. (required).</param>
         /// <param name="name">The &amp;#39;user friendly&amp;#39; name of the permission exposed to the user selecting the permissions to be included in a Role. (required).</param>
         /// <param name="description">A description of the purpose of the permission and exposed to the user selecting the permissions to be included in a Role..</param>
-        public Permission(ObjectId id, string code, string name, string description = null)
+        public Permission(Guid id, string code, string name, string description = null)
         {   
             Id = id;
             Code = code;
@@ -43,8 +44,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// A system-generated unique identifier for a Permission
         /// </summary>
         /// <value>A system-generated unique identifier for a Permission</value>
-        [Key]
-        public ObjectId Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The name of the permission referenced in the software of the application.

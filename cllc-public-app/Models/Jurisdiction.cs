@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -22,19 +23,24 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="description">A description of the role as set by the user creating&amp;#x2F;updating the role. (required).</param>
         /// <param name="rolePermissions">RolePermissions.</param>
         /// <param name="userRoles">UserRoles.</param>
-        public Jurisdiction(ObjectId id, string name, string selectMessage)
+        public Jurisdiction(Guid id, string name, string selectMessage)
         {   
             Id = id;
             Name = name;
             SelectMessage = selectMessage;            
         }
 
+        public Jurisdiction()
+        {
+
+        }
+
         /// <summary>
         /// A system-generated unique identifier for a Role
         /// </summary>
         /// <value>A system-generated unique identifier for a Role</value>
-        [Key]
-        public ObjectId Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The name of the Role, as established by the user creating the role.
