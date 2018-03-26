@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a RolePermission (required).</param>
         /// <param name="role">Role (required).</param>
         /// <param name="permission">A foreign key reference to the system-generated unique identifier for a Permission (required).</param>
-        public RolePermission(ObjectId id, Role role, Permission permission)
+        public RolePermission(Guid id, Role role, Permission permission)
         {   
             Id = id;
             Role = role;
@@ -39,8 +39,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// A system-generated unique identifier for a RolePermission
         /// </summary>
         /// <value>A system-generated unique identifier for a RolePermission</value>
-        [Key]
-        public ObjectId Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Role
@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>   
         [ForeignKey("Role")]
 		[JsonIgnore]		
-        public int? RoleId { get; set; }
+        public Guid? RoleId { get; set; }
         
         /// <summary>
         /// A foreign key reference to the system-generated unique identifier for a Permission
@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>   
         [ForeignKey("Permission")]
 		[JsonIgnore]
-        public int? PermissionId { get; set; }
+        public Guid? PermissionId { get; set; }
         
         /// <summary>
         /// Returns the string presentation of the object

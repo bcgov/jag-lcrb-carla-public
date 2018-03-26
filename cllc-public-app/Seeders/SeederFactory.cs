@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     /// This class automattically loades all seeder classes defined in this assembly,
     /// and provides a simple interface for seeding the application and database with data.
     /// </summary>
-    public class SeedFactory<T> where T : DataAccess
+    public class SeedFactory<T> where T : AppDbContext
     {
         private readonly IHostingEnvironment _env;
         private readonly ILoggerFactory _loggerFactory;
@@ -66,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             });
         }
 
-        private class SeederComparer<TY> : Comparer<Seeder<TY>> where TY : DataAccess
+        private class SeederComparer<TY> : Comparer<Seeder<TY>> where TY : AppDbContext
         {            
             public override int Compare(Seeder<TY> x, Seeder<TY> y)
             {
