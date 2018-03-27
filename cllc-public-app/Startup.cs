@@ -141,6 +141,7 @@ namespace Gov.Lclb.Cllb.Public
                 }
             });
 
+            string connectionString = "unknown.";
             try
             {
                 using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -148,7 +149,7 @@ namespace Gov.Lclb.Cllb.Public
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
-                    log.LogCritical("Connection string:" + context.Database.GetDbConnection().ConnectionString);
+                    connectionString = context.Database.GetDbConnection().ConnectionString;
 
                     log.LogInformation("Migrating the database ...");
                     context.Database.Migrate();
@@ -168,11 +169,10 @@ namespace Gov.Lclb.Cllb.Public
                 msg.AppendLine("The database migration failed!");
                 msg.AppendLine("The database may not be available and the application will not function as expected.");
                 msg.AppendLine("Please ensure a database is available and the connection string is correct.");
-                msg.AppendLine("If you are running in a development environment, ensure your test database and server configuraiotn match the project's default connection string.");
+                msg.AppendLine("If you are running in a development environment, ensure your test database and server configuration match the project's default connection string.");
+                msg.AppendLine("Which is: " + connectionString);
                 log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
-            }
-            
-
+            }            
         }
     }
 }
