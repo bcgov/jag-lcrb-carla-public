@@ -85,9 +85,22 @@ namespace Gov.Lclb.Cllb.Public
                     {
                         conn.Open();
                         // fix for OpenShift bug where the pod reports the number of sockets / logical processors in the host computer rather than the amount available.
-                        string sql = "EXEC sp_configure 'show advanced options', 1; GO\n RECONFIGURE WITH OVERRIDE; GO\n EXEC sp_configure 'max degree of parallelism', 2; \n GO \n RECONFIGURE WITH OVERRIDE;";
+                        string sql = "EXEC sp_configure 'show advanced options', 1;";
                         SqlCommand cmd = new SqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();                       
+
+                        sql = "RECONFIGURE WITH OVERRIDE;";
+                        cmd = new SqlCommand(sql, conn);
                         cmd.ExecuteNonQuery();
+
+                        sql = "EXEC sp_configure 'max degree of parallelism', 2;";
+                        cmd = new SqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+
+                        sql = "RECONFIGURE WITH OVERRIDE;";
+                        cmd = new SqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+
 
                         // create the login if it does not exist.
                         sql = "IF NOT EXISTS (SELECT name FROM master.sys.server_principals    WHERE name = '" + username + "') BEGIN\n CREATE LOGIN " + username + " WITH PASSWORD = '" + password + "';\nEND";
