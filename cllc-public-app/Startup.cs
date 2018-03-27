@@ -148,6 +148,8 @@ namespace Gov.Lclb.Cllb.Public
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
+                    log.LogCritical("Connection string:" + context.Database.GetDbConnection().ConnectionString);
+
                     log.LogInformation("Migrating the database ...");
                     context.Database.Migrate();
                     log.LogInformation("The database migration complete.");
