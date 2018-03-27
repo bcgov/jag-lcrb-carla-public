@@ -19,42 +19,7 @@ namespace Gov.Lclb.Cllb.Public
         public static void Main(string[] args)
         {            
             var host = CreateWebHostBuilder(args).Build();
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var log = services.GetRequiredService<ILogger<Program>>();
-                try
-                {
-                    log.LogInformation("Fetching the application's database context ...");
-                    AppDbContext context = services.GetService<AppDbContext>();
-
-                    log.LogInformation("Migrating the database ...");
-                    context.Database.Migrate();
-                    log.LogInformation("The database migration complete.");
-
-                    // run the database seeders
-                    log.LogInformation("Adding/Updating seed data ...");
-
-                    IConfiguration Configuration = host.Services.GetService<IConfiguration>();
-                    IHostingEnvironment hostingEnvironment = host.Services.GetService<IHostingEnvironment>();
-                    ILoggerFactory loggerFactory = host.Services.GetService<ILoggerFactory>();
-
-                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, hostingEnvironment, loggerFactory);
-                    seederFactory.Seed((AppDbContext)context);
-                    log.LogInformation("Seeding operations are complete.");
-                }
-                catch (Exception ex)
-                {
-                    StringBuilder msg = new StringBuilder();
-                    msg.AppendLine("The database migration failed!");
-                    msg.AppendLine("The database may not be available and the application will not function as expected.");
-                    msg.AppendLine("Please ensure a database is available and the connection string is correct.");
-                    msg.AppendLine("If you are running in a development environment, ensure your test database and server configuraiotn match the project's default connection string.");
-                    log.LogCritical(new EventId(-1, "Database Migration Failed"), ex, msg.ToString());
-                }
-            }
-
+            
             host.Run();
         }
 

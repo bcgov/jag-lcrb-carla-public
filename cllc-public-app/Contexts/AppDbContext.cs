@@ -78,6 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 IConfigurationRoot configuration = new ConfigurationBuilder()
                    .SetBasePath(Directory.GetCurrentDirectory())
                    .AddJsonFile("appsettings.json")
+                   .AddEnvironmentVariables()
                    .Build();
                 string connectionString = DatabaseTools.GetConnectionString(configuration);
                 optionsBuilder.UseSqlServer(connectionString);
