@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("changeJson")]
-        public string ChangeJson([FromBody]ViewModels.ChangeSurvey model)
+        public string ChangeJson([FromBody]ViewModels.Survey model)
         {
             db.StoreSurvey(model.Id, model.Json);
             return db.GetSurvey(model.Id);
