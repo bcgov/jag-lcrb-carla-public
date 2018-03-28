@@ -1,0 +1,21 @@
+﻿[
+  {
+    "title": "Help us prepare for demand",
+    "question": "Do you plan on submitting an application for a cannabis retail licence?",
+    "slug": "initialNumberInterested",
+    "options": [
+      {
+        "displayOrder": 0,
+        "option": "Yes"
+      },
+      {
+        "displayOrder": 1,
+        "option": "No"
+      },
+      {
+        "displayOrder": 2,
+        "option": "Maybe"
+      }
+    ]
+  }
+]

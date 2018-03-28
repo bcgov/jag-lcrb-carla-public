@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -58,7 +59,8 @@ import { SurveyEditorComponent } from './survey/editor.component';
 import { SurveySidebarComponent } from './survey/sidebar.component';
 import { ResultComponent } from './result/result.component';
 import { AccordionComponent } from './accordion/accordion.component';
-
+import { VoteComponent } from './vote/vote.component';
+import { VoteDataService } from "./vote/vote-data.service";
 
 @NgModule({
   declarations: [
@@ -75,10 +77,12 @@ import { AccordionComponent } from './accordion/accordion.component';
     SurveySidebarComponent,
     StaticComponent,
     AccordionComponent,
+    VoteComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     NgbModule,
@@ -120,6 +124,7 @@ import { AccordionComponent } from './accordion/accordion.component';
   exports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     NgbModule,
@@ -158,7 +163,7 @@ import { AccordionComponent } from './accordion/accordion.component';
     MatToolbarModule,
     MatTooltipModule
   ],
-  providers: [GeneralDataService, InsertService],
+  providers: [GeneralDataService, InsertService, CookieService, VoteDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
