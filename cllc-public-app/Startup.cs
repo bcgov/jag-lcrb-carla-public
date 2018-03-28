@@ -140,6 +140,7 @@ namespace Gov.Lclb.Cllb.Public
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+            
 
             string connectionString = "unknown.";
             try
