@@ -2,49 +2,36 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <h1>
-        LCLB CLLC Home Page
+        Find out what you need to apply for a licence
       </h1>
 
-      <p class="intro">
-        Home page intro text.
-      </p>
+      <h3>
+        Answer questions about your business to receive a customized to-do list to prepare an application.
+      </h3>
 
-      <h2>How it Works</h2>
-    </div>
-  </div>
-  <div class="row steps">
-    <div class="col-md-6 step-outer">
-      <div class="step">
-        <h3><span class="ordinal">1</span> Answer Questions</h3>
-        <p class="step-info">
-          Our completely free and secure online questionnaire will save your work so you
-          can proceed at your own pace.
-        </p>
+      <div class="row">
+        <h1>Vote Feature</h1>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="intro">
+              <app-vote [slug]="'initialNumberInterested'"></app-vote>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+          <p class="intro">
+            <app-accordion></app-accordion>
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-6 step-outer">
-      <div class="step">
-        <h3><span class="ordinal">2</span> Next Step</h3>
-        <p class="step-info">Once you're done with the questions, you'll complete the next step here</p>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <a class="btn btn-default btn-md login-button" routerLink="prv" tabindex="1">
+            <strong>Potential Applicant Survey</strong><br>
+          </a>
+        </div>
       </div>
+      
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <p class="intro">
-        <app-accordion></app-accordion>
-      </p>
-    </div>
-  </div>
-
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <a class="btn btn-default btn-md login-button" routerLink="prv" tabindex="1">
-          <strong>Potential Applicant Survey</strong><br>
-        </a>
-      </div>
-    </div>
-
-  </div>
