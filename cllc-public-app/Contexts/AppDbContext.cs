@@ -97,7 +97,12 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserRole> UserRoles { get; set; }               
+        public DbSet<UserRole> UserRoles { get; set; } 
+        
+        public DbSet<VoteOption> VoteOptions { get; set; }
+
+        public DbSet<VoteQuestion> VoteQuestions { get; set; }
+
 
     }
 }
