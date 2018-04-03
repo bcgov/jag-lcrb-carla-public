@@ -113,6 +113,12 @@
                         "persistentVolumeClaim": {
                             "claimName": "${DATABASE_SERVICE_NAME}"
                         }
+                    },
+					{  
+                        "name":"log",
+                        "emptyDir":{  
+
+                        }
                     }
                 ],
                 "containers": [
@@ -141,17 +147,38 @@
 								}
 							}                            
                         ],
-                        "resources": {
-                                    "limits": {
-                                        "memory": "${MEMORY_LIMIT}"
-                                    }
-                                },
+                        "resources":
+						{
+						"limits": {
+                                "cpu": "${CPU_LIMIT}",
+                                "memory": "${MEMORY_LIMIT}"
+                            },
+                            "requests": {
+                                "cpu": "${CPU_REQUEST}",
+                                "memory": "${MEMORY_REQUEST}"
+                            }                  
+						},
                         "volumeMounts": [
                             {
                                 "name": "mssql-data",
                                 "mountPath": "/var/opt/mssql/data",
 								"subPath":"data"
+                            },
+							{
+                                "name": "mssql-data",
+                                "mountPath": "/var/opt/mssql/secrets",
+								"subPath":"secrets"
+                            },
+							{
+                                "name": "mssql-data",
+                                "mountPath": "/var/opt/mssql/FTdata",
+								"subPath":"FTData"
+                            },
+							{
+                                "name": "log",
+                                "mountPath": "/var/opt/mssql/log"
                             }
+							
                         ],
 						"livenessProbe": {
 							"initialDelaySeconds": 120,
@@ -232,7 +259,28 @@
 		"required": true
 	},
     {
+		"name": "CPU_LIMIT",
+		"displayName": "CPU Limit",
+		"description": "CPU Limit",
+		"value": "2",
+		"required": true
+	},
+	{
+		"name": "CPU_REQUEST",
+		"displayName": "CPU REQUEST",
+		"description": "CPU Request",
+		"value": "100m",
+		"required": true
+	},
+    {
 		"name": "MEMORY_LIMIT",
+		"displayName": "Memory Limit",
+		"description": "Maximum amount of memory the container can use.",
+		"value": "4Gi",
+		"required": true
+	},
+	{
+		"name": "MEMORY_REQUEST",
 		"displayName": "Memory Limit",
 		"description": "Maximum amount of memory the container can use.",
 		"value": "4Gi",
@@ -292,7 +340,7 @@
 		"displayName": "DB Connection Password",
 		"description": "Password for the SQL Server connection user.",
 		"generate": "expression",
-		"from": "[a-zA-Z0-9]{16}",
+		"from": "[a-zA-Z0-9]{15}[0-9]{1}",
 		"required": true
 	},
 	{
