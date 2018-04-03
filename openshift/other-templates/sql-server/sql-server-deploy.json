@@ -149,7 +149,8 @@
                         "volumeMounts": [
                             {
                                 "name": "mssql-data",
-                                "mountPath": "/var/opt/mssql"
+                                "mountPath": "/var/opt/mssql/data",
+								"subPath":"data"
                             }
                         ],
 						"livenessProbe": {
