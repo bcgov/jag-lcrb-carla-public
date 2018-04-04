@@ -1,15 +1,9 @@
 <h2>{{title}}</h2>
 <p>{{description}}</p>
-<form name="signupForm" [formGroup]="signupForm" novalidate ng-submit="signup()" >
+<form>
   <div class="form-group">
     <label class="control-label">Email</label>
-    <input formControlName="newsletterSignupEmail" id="newsletterSignupEmail" class="form-control" required ng-model="email" type="email">
-    <span style="color:red" ng-show="signupForm.newsletterSignupEmail.$dirty && signupForm.newsletterSignupEmail.$touched && signupForm.newsletterSignupEmail.$invalid">
-      <span ng-show="signupForm.newsletterSignupEmail.$error.required">Email is required.</span>
-      <span ng-show="signupForm.newsletterSignupEmail.$error.email">Invalid email address.</span>
-    </span>
-    <input type="submit" value="Subscribe"
-           ng-disabled="signupForm.newsletterSignupEmail.$dirty && signupForm.newsletterSignupEmail.$invalid ||
-  signupForm.newsletterSignupEmail.$dirty && signupForm.newsletterSignupEmail.$invalid">    
+    <input id="inputEmail" name="newsletterSignupEmail" required email [(ngModel)]="email" #newsletterSignupEmail="ngModel">
+    <button type="button" class="btn btn-primary" (click)="signup()" [disabled]="!newsletterSignupEmail.valid">Submit</button>
   </div>
 </form>
