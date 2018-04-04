@@ -103,6 +103,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
         public DbSet<VoteQuestion> VoteQuestions { get; set; }
 
+        public DbSet<Newsletter> Newsletters { get; set; }
 
+        public DbSet<Subscriber> Subscribers { get; set; }
     }
 }

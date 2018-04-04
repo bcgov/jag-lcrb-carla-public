@@ -35,21 +35,28 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\NewFolder\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\NewFolder\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+  
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ClientApp\src\app\NewFolder\**" />
+    <None Remove="ClientApp\src\app\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="SeedData\Newsletters.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="SeedData\VoteQuestions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="SeedData\Jurisdictions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\NewFolder\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
-    public static class AppDbContextVoteQuestionExtensions
+    public static class VoteQuestionExtensions
     {
         public static void AddVoteQuestion(this AppDbContext context, VoteQuestion voteQuestion)
         {

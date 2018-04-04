@@ -2,52 +2,49 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { VoteOption } from "./vote-option.model";
-import { VoteQuestion } from "./vote-question.model";
+import { Newsletter } from "./newsletter.model";
+
 @Injectable()
-export class VoteDataService {
+export class NewsletterDataService {
    constructor(private http: Http) { }
 
-
-   getQuestion(slug: any) {
+   getNewsletter(slug: any) {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("/api/voteQuestion/" + slug, {
+     return this.http.get("/api/newsletter/" + slug, {
        headers: headers
      })
        .toPromise()
        .then((res: Response) => {
          let data = res.json();
-         let voteQuestion = new VoteQuestion();
-         voteQuestion.id = data.id;
-         voteQuestion.options = data.options;
-         voteQuestion.question = data.question;
-         voteQuestion.title = data.title;
-         return voteQuestion;
+         let newsletter = new Newsletter();
+         newsletter.id = data.id;
+         newsletter.description = data.description;
+         newsletter.slug = data.slug;
+         newsletter.title = data.title;
+         return newsletter;
        })
        .catch(this.handleError);
    }
 
-   postVote(slug: any, option: any) {
+
+   signup(slug: any, email: any) {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.post("/api/voteQuestion/" + slug + "/vote?option=" + option, {
+     return this.http.post("/api/newsletter/" + slug + "/subscribe?email=" + email, {
        headers: headers
      })
        .toPromise()
        .then((res: Response) => {
-         let data = res.json();
-         let voteQuestion = new VoteQuestion();
-         voteQuestion.id = data.id;
-         voteQuestion.options = data.options;
-         voteQuestion.question = data.question;
-         voteQuestion.title = data.title;
-         return voteQuestion;
+         // do nothing
        })
        .catch(this.handleError);
    }
+
+
+
 
      private handleError(error: Response | any) {
      let errMsg: string;

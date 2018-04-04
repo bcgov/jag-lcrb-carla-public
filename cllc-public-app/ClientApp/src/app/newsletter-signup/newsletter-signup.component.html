@@ -1,0 +1,9 @@
+<h2>{{title}}</h2>
+<p>{{description}}</p>
+<form>
+  <div class="form-group">
+    <label class="control-label">Email</label>
+    <input id="inputEmail" name="newsletterSignupEmail" required email [(ngModel)]="email" #newsletterSignupEmail="ngModel">
+    <button type="button" class="btn btn-primary" (click)="signup()" [disabled]="!newsletterSignupEmail.valid">Submit</button>
+  </div>
+</form>

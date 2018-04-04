@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
-    public static class AppDbContextAuthExtensions
+    public static class AuthExtensions
     {
 
 

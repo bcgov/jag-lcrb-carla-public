@@ -4,7 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AppRoutingModule } from './app-routing.module';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -61,6 +63,8 @@ import { ResultComponent } from './result/result.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { VoteComponent } from './vote/vote.component';
 import { VoteDataService } from "./vote/vote-data.service";
+import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup.component';
+import { NewsletterDataService } from "./newsletter-signup/newsletter-data.service";
 
 @NgModule({
   declarations: [
@@ -77,7 +81,8 @@ import { VoteDataService } from "./vote/vote-data.service";
     SurveySidebarComponent,
     StaticComponent,
     AccordionComponent,
-    VoteComponent
+    VoteComponent,
+    NewsletterSignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,7 +124,8 @@ import { VoteDataService } from "./vote/vote-data.service";
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ToastModule.forRoot()
   ],
   exports: [
     BrowserModule,
@@ -163,7 +169,7 @@ import { VoteDataService } from "./vote/vote-data.service";
     MatToolbarModule,
     MatTooltipModule
   ],
-  providers: [GeneralDataService, InsertService, CookieService, VoteDataService ],
+  providers: [GeneralDataService, InsertService, CookieService, VoteDataService, NewsletterDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

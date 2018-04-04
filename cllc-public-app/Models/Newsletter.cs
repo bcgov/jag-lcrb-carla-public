@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// Role Database Model
     /// </summary>
-        public sealed partial class VoteQuestion :  IEquatable<VoteQuestion>
+        public sealed partial class Newsletter :  IEquatable<Newsletter>
     {
 
         /// <summary>
@@ -21,14 +21,12 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a VoteQuestion (required).</param>
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
-        public VoteQuestion(Guid id, string question, string slug, string title, ViewModels.VoteOption [] options)
+        public Newsletter(Guid id,  string slug, string title, string description)
         {   
-            Id = id;
-            Question = question;
+            Id = id;            
             Slug = slug;
             Title = title;
-
-            AddOptions(options);
+            Description = description;
         }
 
         /// <summary>
@@ -37,45 +35,29 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a VoteQuestion (required).</param>
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
-        public VoteQuestion(string question, string slug, string title, ViewModels.VoteOption[] options)
-        {
-            Question = question;
+        public Newsletter(string slug, string title, string description)
+        {            
             Slug = slug;
             Title = title;
-            AddOptions(options);
+            Description = description;
+        }
+
+
+        public Newsletter()
+        {
+
         }
         
 
-        public VoteQuestion()
-        {
-
-        }
-
-        private void AddOptions(ViewModels.VoteOption[] options)
-        {
-            if (Options == null)
-            {
-                Options = new List<VoteOption>();
-            }
-            foreach (ViewModels.VoteOption option in options)
-            {
-                VoteOption voteOption = new VoteOption();
-                voteOption.Option = option.option;
-                voteOption.TotalVotes = option.totalVotes;
-                voteOption.DisplayOrder = option.displayOrder;
-                Options.Add(voteOption);
-            }
-        }
-
         /// <summary>
-        /// A system-generated unique identifier for a Role
+        /// A system-generated unique identifier for a Newsletter
         /// </summary>
         /// <value>A system-generated unique identifier for a Role</value>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; }        
 
-        [MaxLength(512)]        
-        public string Question { get; set; }
+        [MaxLength(512)]
+        public string Description { get; set; }
 
         [MaxLength(256)]
         public string Title { get; set; }
@@ -83,8 +65,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         // string used to query the database to get a given question data.
         public string Slug { get; set; }
 
-        public List<VoteOption> Options { get; set; }
-
+        public List<Subscriber> Subscribers { get; set; }
+        
         /// <summary>
         /// <summary>
         /// Returns the string presentation of the object
@@ -96,7 +78,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             sb.Append("class VoteQuestion {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Question: ").Append(Question).Append("\n");
+            sb.Append("  Title: ").Append(Title).Append("\n");
+            sb.Append("  Description: ").Append(Title).Append("\n");
             sb.Append("  Slug: ").Append(Slug).Append("\n");
             sb.Append("}\n");
 
@@ -121,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             if (obj is null) { return false; }
             if (ReferenceEquals(this, obj)) { return true; }
-            return obj.GetType() == GetType() && Equals((VoteQuestion)obj);
+            return obj.GetType() == GetType() && Equals((Newsletter)obj);
         }
 
         /// <summary>
@@ -129,7 +112,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="other">Instance of Role to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VoteQuestion other)
+        public bool Equals(Newsletter other)
         {
             if (other is null) { return false; }
             if (ReferenceEquals(this, other)) { return true; }
@@ -140,9 +123,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                     Id.Equals(other.Id)
                 ) &&
                 (
-                    Question == other.Question ||
-                    Question != null &&
-                    Question.Equals(other.Question)
+                    Title == other.Title ||
+                    Title != null &&
+                    Title.Equals(other.Title)
                 ) &&
                 (
                     Slug == other.Slug ||
@@ -165,9 +148,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // Suitable nullity checks                                   
                 hash = hash * 59 + Id.GetHashCode();
 
-                if (Question != null)
+                if (Title != null)
                 {
-                    hash = hash * 59 + Question.GetHashCode();
+                    hash = hash * 59 + Title.GetHashCode();
                 }
 
                 if (Slug != null)
@@ -187,7 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(VoteQuestion left, VoteQuestion right)
+        public static bool operator ==(Newsletter left, Newsletter right)
         {
             return Equals(left, right);
         }
@@ -198,7 +181,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(VoteQuestion left, VoteQuestion right)
+        public static bool operator !=(Newsletter left, Newsletter right)
         {
             return !Equals(left, right);
         }
