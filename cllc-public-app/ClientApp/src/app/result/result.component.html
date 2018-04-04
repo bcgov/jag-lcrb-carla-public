@@ -6,14 +6,106 @@
       </h1>
 
       <p class="intro">
-        Here are the survey results.
+        Here are your survey results:
       </p>
-      <div *ngIf="data && data.age19 == 'No'">
-        Not 19
-      </div>
-      
-      
 
+      <!-- age19 -->
+      <div *ngIf="data && data.age19 == 'No'">
+        <h4>Because you responded age19 = {{data.age19}}</h4>
+        <ul class="detail-step">
+          <li><h4>You are not eligible to apply</h4></li>
+          <li><h4>Additional messages</h4></li>
+        </ul>
+      </div>
+
+      <!-- registeredBusiness -->
+      <div *ngIf="data && data.registeredBusiness == 'No'">
+        <h4>Because you responded registeredBusiness = {{data.registeredBusiness}}</h4>
+        <ul class="detail-step">
+          <li><h4>You must register a business to apply</h4></li>
+          <li><h4>Additional messages</h4></li>
+        </ul>
+      </div>
+
+      <!-- businessType -->
+      <div *ngIf="data && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">
+        <h4>Because you responded businessType = {{data.businessType}}</h4>
+        <ul class="detail-step">
+          <li><h4>This is the {{data.businessType}} info</h4></li>
+          <li><h4>Additional messages</h4></li>
+        </ul>
+      </div>
+
+      <!-- bceidAccount -->
+      <div *ngIf="data && data.bceidAccount == 'No'">
+        <h4>Because you responded bceidAccount = {{data.bceidAccount}}</h4>
+        <ul class="detail-step">
+          <li><h4>You must sign up for a business BCeID account</h4></li>
+          <li><h4>Additional messages</h4></li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.bceidAccount == 'doNotknow'">
+        <h4>Because you responded bceidAccount = {{data.bceidAccount}}</h4>
+        <ul class="detail-step">
+          <li><h4>Here is how you can check if you have a business BCeID account</h4></li>
+          <li><h4>Additional messages</h4></li>
+        </ul>
+      </div>
+
+      <!-- storelocation -->
+      <div *ngIf="data.storelocation">
+        <h4>Because you responded storelocation = {{data.storelocation}}</h4>
+        <ul class="detail-step">
+          <li><h4>This is the {{data.storelocation}} info</h4></li>
+          <li><h4>Additional messages</h4></li>
+        </ul>
+      </div>
+
+      <!-- locationOwnedLeased -->
+      <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
+        <h4>Because you responded locationOwnedLeased = {{data.locationOwnedLeased}}</h4>
+        <ul class="detail-step">
+          <li><h4>You will need to submit a floor plan plus photos</h4></li>
+          <li><h4>Additional requirements</h4></li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.locationOwnedLeased == 'No'">
+        <h4>Because you responded locationOwnedLeased = {{data.locationOwnedLeased}}</h4>
+        <ul class="detail-step">
+          <li><h4>Info on different proofs of valid interest</h4></li>
+          <li><h4>Additional requirements</h4></li>
+        </ul>
+      </div>
+
+      <!-- contactLgFn -->
+      <div *ngIf="data && data.contactLgFn == 'No'">
+        <h4>Because you responded contactLgFn = {{data.contactLgFn}}</h4>
+        <ul class="detail-step">
+          <li><h4>You must go to your municipality for business license and zoning</h4></li>
+          <li><h4>You can still start your application</h4></li>
+          <li><h4>Additional requirements</h4></li>
+        </ul>
+      </div>
+
+      <!-- localBusinessLicenseCannabis -->
+      <div *ngIf="data && data.localBusinessLicenseCannabis == 'No'">
+        <h4>Because you responded localBusinessLicenseCannabis = {{data.localBusinessLicenseCannabis}}</h4>
+        <ul class="detail-step">
+          <li><h4>You need to get a local business license for cannabis sales, which might require rezoning</h4></li>
+          <li><h4>You can still start your application</h4></li>
+          <li><h4>Additional requirements</h4></li>
+        </ul>
+      </div>
+
+      <!-- connectionToProducerCultivator -->
+      <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
+        <h4>Because you responded connectionToProducerCultivator = {{data.connectionToProducerCultivator}}</h4>
+        <ul class="detail-step">
+          <li><h4>Info re: business structures</h4></li>
+          <li><h4>Changes needed to avoid tied house</h4></li>
+          <li><h4>Additional requirements</h4></li>
+        </ul>
+      </div>
 
     </div>
   </div>
