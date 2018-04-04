@@ -35,7 +35,7 @@ export class SurveySidebarComponent  {
   }
 
   changePage(pageNo: number) {
-    this.survey.changePage(pageNo);
+    //this.survey.changePage(pageNo);
   }
 
 }

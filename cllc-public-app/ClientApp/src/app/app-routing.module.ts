@@ -29,7 +29,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'result/:state',
+    path: 'result/:data',
     component: ResultComponent,
     data: {
       breadcrumb: 'Survey Results'
