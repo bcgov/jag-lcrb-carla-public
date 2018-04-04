@@ -1,55 +1,175 @@
 {
-  "title": "LCLB Test",
-  "pages": [
+ "title": "Quiz",
+ "pages": [
+  {
+   "name": "q1",
+   "elements": [
     {
-      "name": "Applicant",
-      "elements": [
-        {
-          "type": "yesno",
-          "name": "YesNo1",
-          "title": "Yes / no question?"
-        },
-        {
-          "type": "dropdown",
-          "name": "country",
-          "title": "Select the Jurisdiction...",
-          "isRequired": true,
-          "choicesByUrl": {
-            "url": "/api/jurisdiction",
-            "valueName": "name"
-          }
-        },
-        {
-          "type": "panel",
-          "name": "ApplicantContactPanel",
-          "elements": [
-            {
-              "type": "text",
-              "name": "ApplicantEmail",
-              "title": "Email"
-            },
-            {
-              "type": "text",
-              "name": "ApplicantPhone",
-              "startWithNewLine": false,
-              "title": "Phone Number",
-              "inputType": "tel"
-            },
-            {
-              "type": "text",
-              "name": "ApplicantFax",
-              "startWithNewLine": false,
-              "title": "Fax Number (Optional)",
-              "inputType": "tel"
-            }
-          ],
-          "visible": true
-        }
-      ],
-      "title": "Applicant"
+     "type": "radiogroup",
+     "name": "age19",
+     "title": "Are you 19 years old or over?",
+     "isRequired": true,
+     "choices": [
+      "Yes",
+      "No"
+     ]
     }
-  ],
-  "showQuestionNumbers": "on",
-  "showCompletedPage": "false",
-  "completedHtml": "<p><h4>Thank you for sharing this information with us.</h4></p>"
+   ]
+  },
+  {
+   "name": "q2",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "registeredBusiness",
+     "title": "Do you have a registered business?",
+     "isRequired": true,
+     "choices": [
+      "Yes",
+      "No"
+     ]
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{age19} = 'Yes'"
+  },
+  {
+    "name": "q3",
+    "elements": [
+      {
+        "type": "radiogroup",
+        "name": "businessType",
+        "title": "What business type will be applying for the license",
+        "isRequired": true,
+        "choices": [
+          {
+            "value": "corporation",
+            "text": "Corporation"
+          },
+          {
+            "value": "soleProprietorship",
+            "text": "Sole - Proprietorship"
+          },
+          {
+            "value": "partnership",
+            "text": "Partnership"
+          },
+          {
+            "value": "society",
+            "text": "Society"
+          }
+        ]
+      }
+    ],
+    "visible": false,
+    "visibleIf": "{age19} = 'Yes' and {registeredBusiness} = \"Yes\""
+  },
+  {
+   "name": "q4",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "bceidAccount",
+     "title": "Do you have a business BCeID account?",
+     "isRequired": true,
+     "choices": [
+      "Yes",
+      "No",
+      {
+       "value": "doNotknow",
+       "text": "I don't know"
+      }
+     ]
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{age19} = 'Yes' and {registeredBusiness} = \"Yes\""
+  },
+  {
+   "name": "q5",
+   "elements": [
+    {
+     "type": "dropdown",
+     "name": "storelocation",
+     "title": "Where do you plan on operating the store(s)?",
+     "isRequired": true,
+      "choicesByUrl": {
+        "url": "/api/jurisdiction",
+        "valueName": "name"
+      }
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{age19} = 'Yes'"
+  },
+  {
+   "name": "q6",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "locationOwnedLeased",
+     "title": "Do you have a location currently owned or leased?",
+     "isRequired": true,
+     "choices": [
+      "Yes",
+      "No"
+     ]
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{age19} = 'Yes'"
+  },
+  {
+   "name": "q7",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "contactLgFn",
+     "title": "Have you contacted your local government or first nation about opening a cannabis store?",
+     "isRequired": true,
+     "choices": [
+      "Yes",
+      "No"
+     ]
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{age19} = 'Yes'"
+  },
+  {
+   "name": "q8",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "localBusinessLicenseCannabis",
+     "title": "Do you have a local business license for cannabis sales?",
+     "isRequired": true,
+     "choices": [
+      "Yes",
+      "No"
+     ]
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{contactLgFn} = 'Yes'"
+  },
+  {
+   "name": "q9",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "connectionToProducerCultivator",
+     "title": "Does your business have any formal connections to a licensed producer or cultivator planning to get licensed?",
+     "isRequired": true,
+     "choices": [
+      "Yes",
+      "No"
+     ]
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{age19} = 'Yes'"
+  }
+ ],
+ "goNextPageAutomatic": false
 }

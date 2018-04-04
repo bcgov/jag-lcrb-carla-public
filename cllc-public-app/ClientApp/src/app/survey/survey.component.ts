@@ -38,6 +38,7 @@ export class SurveyComponent  {
     Survey.defaultBootstrapCss.paneldynamic.button = "btn btn-default";
     Survey.defaultBootstrapCss.paneldynamic.root = "sv_p_dynamic"; // not used?
     Survey.dxSurveyService.serviceUrl = "/api/survey";
+
     surveyModel.onComplete.add((sender, options) => {
       //postId?: string
       surveyModel.sendResult("PotentialApplicantResult");
@@ -47,20 +48,22 @@ export class SurveyComponent  {
         this._router.navigate(['/'])
       }
     });
+
     surveyModel.onCurrentPageChanged.add((sender, options) => {
       this.onPageUpdate.next(sender)
     });
+
     Survey.SurveyNG.render('surveyElement', { model: surveyModel });
     this.surveyModel = surveyModel;
 
-    this.insertService.updateInsert('sidebar-left',
-      {type: 'survey-sidebar', inputs: {survey: this}});
-    this.onPageUpdate.next(surveyModel);
-  }
+  //  this.insertService.updateInsert('sidebar-left',
+  //    {type: 'survey-sidebar', inputs: {survey: this}});
+  //  this.onPageUpdate.next(surveyModel);
+  //}
 
-  changePage(pageNo: number) {
-    this.surveyModel.currentPageNo = pageNo;
-  }
+  //changePage(pageNo: number) {
+  //  this.surveyModel.currentPageNo = pageNo;
+  //}
 
 }
 
