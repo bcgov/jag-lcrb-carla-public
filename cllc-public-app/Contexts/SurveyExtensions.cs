@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
     public static class AppDbContextSurveyExtenstions
@@ -55,11 +56,12 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             //var survey = _db.GetCollection<Models.ChangeSurvey>(SURVEY_COLLECTION).DeleteOne(x => x.Name == surveyId);
         }
 
-        public static void PostResults(this AppDbContext context, string postId, string resultJson)
+        public static void PostResults(this AppDbContext context, string postId, string clientId, string resultJson)
         {
             // create a new result.
             PostSurveyResult psr = new PostSurveyResult();
             psr.postId = postId;
+            psr.clientId = clientId;
             psr.surveyResult = resultJson;
             context.PostSurveyResults.Add(psr);
             context.SaveChanges();            
@@ -80,6 +82,20 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
             return result;
         }
-        
+
+
+        /// <summary>
+        /// Get survey results for a given survey
+        /// </summary>
+        /// <param name="postId">The name of a survey</param>
+        /// <returns></returns>
+        public static string GetSurveyResultByClientId(this AppDbContext context, string clientId)
+        {
+            string result = "";
+            Models.PostSurveyResult item = context.PostSurveyResults.FirstOrDefault(x => x.clientId == clientId);
+            // add error handling
+            result = item.surveyResult;
+            return result;
+        }
     }
 }
