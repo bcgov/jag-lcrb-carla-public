@@ -10,13 +10,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   template: `<div class="survey-container contentcontainer codecontainer"><div id="surveyElement"></div></div>`,
   styleUrls: ['./survey.component.scss']
 })
-export class SurveyComponent  {
+export class SurveyComponent {
   @Input() jsonData: any;
   @Input() onComplete: Function;
   public surveyModel: Survey.SurveyModel;
   public onPageUpdate: BehaviorSubject<Survey.SurveyModel> = new BehaviorSubject<Survey.SurveyModel>(null);
-
-  constructor(private insertService: InsertService, private _router:Router) {}
+  private clientId: string;
+  constructor(private insertService: InsertService, private _router: Router) { }
 
   ngOnInit() {
     addQuestionTypes(Survey);
@@ -40,15 +40,24 @@ export class SurveyComponent  {
     Survey.dxSurveyService.serviceUrl = "/api/survey";
 
     surveyModel.onComplete.add((sender, options) => {
-      //postId?: string
-      surveyModel.sendResult("PotentialApplicantResult");
+      // generate a client identifier.  replace this with a hashed value.
+      let date = new Date();
+      this.clientId = date.getTime() + "-survey";
+
+      surveyModel.sendResult("PotentialApplicantResult", this.clientId);
       if (this.onComplete) {
-        this.onComplete(sender.data);
-        // redirect to results page, for now simply home
-        this._router.navigate(['/'])
+        this.onComplete(sender.data);        
       }
     });
 
+    // redirect the user after the send to database is finished.
+    surveyModel.onSendResult.add((sender, options) => {
+      // redirect to results page
+      var data = JSON.stringify(sender.data);
+      // redirect to the results page.
+      this._router.navigate(['result', this.clientId])
+    });
+    
     surveyModel.onCurrentPageChanged.add((sender, options) => {
       this.onPageUpdate.next(sender)
     });
@@ -56,14 +65,15 @@ export class SurveyComponent  {
     Survey.SurveyNG.render('surveyElement', { model: surveyModel });
     this.surveyModel = surveyModel;
 
-  //  this.insertService.updateInsert('sidebar-left',
-  //    {type: 'survey-sidebar', inputs: {survey: this}});
-  //  this.onPageUpdate.next(surveyModel);
-  //}
+    //  this.insertService.updateInsert('sidebar-left',
+    //    {type: 'survey-sidebar', inputs: {survey: this}});
+    //  this.onPageUpdate.next(surveyModel);
+    //}
 
-  //changePage(pageNo: number) {
-  //  this.surveyModel.currentPageNo = pageNo;
-  //}
+    //changePage(pageNo: number) {
+    //  this.surveyModel.currentPageNo = pageNo;
+    //}
+
+  }
 
 }
-
