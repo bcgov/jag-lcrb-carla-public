@@ -103,6 +103,11 @@ namespace Gov.Lclb.Cllb.Public
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            string pathBase = Configuration["PathBase"];
+            if (! string.IsNullOrEmpty(pathBase))
+            {
+                app.UsePathBase(pathBase);
+            }            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
