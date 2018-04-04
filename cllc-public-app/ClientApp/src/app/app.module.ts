@@ -59,12 +59,14 @@ import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyEditorComponent } from './survey/editor.component';
 import { SurveySidebarComponent } from './survey/sidebar.component';
+import { SurveyDataService } from "./survey/survey-data.service";
 import { ResultComponent } from './result/result.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { VoteComponent } from './vote/vote.component';
 import { VoteDataService } from "./vote/vote-data.service";
 import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup.component';
 import { NewsletterDataService } from "./newsletter-signup/newsletter-data.service";
+
 
 @NgModule({
   declarations: [
@@ -169,7 +171,7 @@ import { NewsletterDataService } from "./newsletter-signup/newsletter-data.servi
     MatToolbarModule,
     MatTooltipModule
   ],
-  providers: [GeneralDataService, InsertService, CookieService, VoteDataService, NewsletterDataService ],
+  providers: [GeneralDataService, InsertService, CookieService, VoteDataService, NewsletterDataService, SurveyDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

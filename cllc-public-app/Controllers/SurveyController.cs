@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("post")]
         public JsonResult PostResult([FromBody]ViewModels.PostSurveyResult model)
         {
-            db.PostResults(model.postId, model.surveyResult);
+            db.PostResults(model.postId, model.clientId, model.surveyResult);
             return Json("Ok");
         }
 
@@ -70,6 +70,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetResults(string postId)
         {
             return Json(db.GetResults(postId));
+        }
+
+        [HttpGet("getResultByClient/{clientId}")]
+        public JsonResult GetResultByClient(string clientId)
+        {
+            string result = db.GetSurveyResultByClientId(clientId);
+            return Json(result);
         }
     }
 }

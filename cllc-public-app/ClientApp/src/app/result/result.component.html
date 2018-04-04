@@ -1,29 +1,19 @@
 <div class="container result-content">
-  <div class="row" *ngIf="state==='qualified'">
+  <div class="row">
     <div class="col-md-12">
       <h1>
-        Family Protection Orders
+        Survey Result
       </h1>
 
       <p class="intro">
-        You have qualified for the survey. Please click below to begin.
+        Here are the survey results.
       </p>
+      <div *ngIf="data && data.age19 == 'No'">
+        Not 19
+      </div>
+      
+      
 
-      <a class="btn btn-primary btn-lg survey-button mrgn-tp-lg" routerLink="/prv">Take the Survey</a>
-
-    </div>
-  </div>
-  <div class="row" *ngIf="state==='unqualified'">
-    <div class="col-md-12">
-      <h1>
-        Family Protection Orders
-      </h1>
-
-      <p class="intro">
-        You have not qualified for the survey.
-      </p>
-
-      <a class="btn btn-primary btn-lg survey-button mrgn-tp-lg" routerLink="/qualify">Retake Survey</a>
 
     </div>
   </div>
