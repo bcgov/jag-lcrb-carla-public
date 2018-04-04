@@ -333,7 +333,7 @@
       "name": "DATABASE_SERVICE_NAME",
       "displayName": "Database service name",
       "description": "Database service name",
-      "value": "mongodb"
+      "value": "mssql"
     },
 	{
       "description": "OpenShift cluster private IP range in CIDR notation, used by Nginx ngx_http_realip_module.",

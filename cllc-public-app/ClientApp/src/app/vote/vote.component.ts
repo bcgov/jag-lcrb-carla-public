@@ -20,8 +20,8 @@ export class VoteComponent implements OnInit {
   public question: string;
   public title: string;
   private id: string;
-  private alreadyVoted: boolean = false;
-  private showVoteResults: boolean = false;
+  public alreadyVoted: boolean = false;
+  public showVoteResults: boolean = false;
 
     /** vote constructor */
   constructor(private cookieService: CookieService, private voteDataService: VoteDataService) {     
