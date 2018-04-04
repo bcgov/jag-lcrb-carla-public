@@ -9,7 +9,6 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 {
     public static class AppDbContextSurveyExtenstions
     {
-
         public static Dictionary<string, string> GetSurveys(this AppDbContext context)
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
