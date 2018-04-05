@@ -1,6 +1,8 @@
 package pages.app
 
 import geb.Page
+import geb.module.TextInput
+
 import pages.app.SurveyPage
 
 class HomePage extends Page {
@@ -9,6 +11,12 @@ class HomePage extends Page {
     static url = "/"
 
     static content = {
-    	startSurvey(to: SurveyPage) { $("a", 0, id: "start_button") }
+    	startSurvey(to: SurveyPage) { $("a", id: "surveyStartButton") }
+    	emailSignupForm { $("form", id: "emailSignupForm") }
+    	inputEmail(wait: true) { $("input", name: "newsletterSignupEmail").module(TextInput) } // id: "inputEmail") }
+    	inputEmailButton { $("button", id: "inputEmailButton") }
+    	showVoteResultsButton { $("a", id: "showVoteResultsButton") }
+    	hideVoteResultsButton { $("a", id: "hideVoteResultsButton") }
+    	voteResultsTable { $("table", id: "voteResultsTable") }
     }
 }
