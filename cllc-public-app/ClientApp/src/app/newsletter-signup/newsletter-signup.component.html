@@ -2,8 +2,10 @@
 <p>{{description}}</p>
 <form>
   <div class="form-group">
-    <label class="control-label">Email</label>
-    <input id="inputEmail" name="newsletterSignupEmail" required email [(ngModel)]="email" #newsletterSignupEmail="ngModel">
-    <button type="button" class="btn btn-primary" (click)="signup()" [disabled]="!newsletterSignupEmail.valid">Submit</button>
+    <p>
+      <label class="control-label">Email</label>
+      <input id="inputEmail" class="form-control" name="newsletterSignupEmail" required email [(ngModel)]="email" #newsletterSignupEmail="ngModel">
+    </p>
+    <a href="#" class="btn btn-default" (click)="signup()">Subscribe</a>
   </div>
 </form>
