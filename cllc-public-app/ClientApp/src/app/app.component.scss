@@ -50,9 +50,10 @@ $bootstrap-sass-asset-helper: true;
     }
   }
 
-  h1, h2, h3, h4, h5 {
-    color: #494949;
-  }
+h1, h2, h3, h4, h5 {
+  color: #494949;
+  font-weight: 600
+}
 
 .jumbotron {
   background-color: rgba(248, 186, 50, 0.13);
@@ -64,3 +65,6 @@ $bootstrap-sass-asset-helper: true;
     font-weight: 600;
   }
 }
+
+
+
