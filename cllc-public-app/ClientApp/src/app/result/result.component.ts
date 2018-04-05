@@ -9,7 +9,7 @@ import { SurveyDataService } from '../survey/survey-data.service';
 })
 export class ResultComponent implements OnInit {
   public clientId: string;
-  public data: string;
+  public data: any;
 
   constructor(private route: ActivatedRoute, private surveyDataService: SurveyDataService) { }
 
