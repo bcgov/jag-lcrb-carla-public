@@ -1,0 +1,47 @@
+.ordinal {
+  baseline-shift: -.2em;
+  border: 2px solid #494949;
+  border-radius: 50%;
+  display: inline-block;
+  height: 1.85em;
+  line-height: 1.2;
+  margin-right: 0.75em;
+  background: #ffffff;
+  padding: 0.3em;
+  text-align: center;
+  width: 1.85em;
+  color: #494949;
+}
+
+
+.mat-expansion-panel-header {
+  font-family: Myriad-Pro, Calibri, Arial, "sans serif";
+  font-size: 18px;
+}
+
+.mat-panel-title {
+  font-family: Myriad-Pro, Calibri, Arial, "sans serif";
+  font-size: 18px;
+}
+
+.mat-panel-description {
+  font-size: 14px;
+}
+
+.label-info {
+  background-color: #fff;
+  border: 1px solid #3c763d;
+}
+
+.label {
+  display: inline;
+  padding:  0.35em .6em .1em 0.35em;
+  font-size: 95%;
+  font-weight: 700;
+  height: 28px;
+  color: #3c763d;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
