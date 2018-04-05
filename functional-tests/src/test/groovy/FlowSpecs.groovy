@@ -21,7 +21,8 @@ class FlowSpecs extends GebReportingSpec {
 	def "Smoke Test Survey"(){
 	    given: "I am a public user"			
 		when: "I go to the survey page"
-			to SurveyPage
+			to HomePage
+			page.startSurvey.click()
         then: "I am on the survey page"
 			at SurveyPage	
 	}

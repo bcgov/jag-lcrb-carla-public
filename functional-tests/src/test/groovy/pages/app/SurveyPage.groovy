@@ -5,5 +5,5 @@ import geb.Page
 class SurveyPage extends Page {
 
     static at = { title=="LCLB" }
-    static url = "/prv/survey"
+    static url = "/prv"
 }
