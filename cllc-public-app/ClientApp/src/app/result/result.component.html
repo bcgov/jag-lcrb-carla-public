@@ -1,13 +1,113 @@
 <div class="container result-content">
   <div class="row">
     <div class="col-md-12">
-      <h1>
-        Survey Result
-      </h1>
+      <h1>Here's What You Told Us</h1>
+      <h2>Review your answers</h2>
 
-      <p class="intro">
-        Here are your survey results:
-      </p>
+      <!-- *********************** ANSWERS ********************************* -->
+      <!-- age19 -->
+      <div *ngIf="data && data.age19 == 'Yes'; else elseAge">
+        <ul class="detail-step">
+          <li><h4>You are 19 years old or over</h4></li>
+        </ul>
+      </div>
+      <ng-template #elseAge>
+        <ul class="detail-step">
+          <li><h4>You are not 19 years old or over</h4></li>
+        </ul>
+      </ng-template>
+
+      <!-- registeredBusiness -->
+      <div *ngIf="data && data.registeredBusiness == 'Yes'; else elseRegisteredBusiness">
+        <ul class="detail-step">
+          <li><h4>You have a registered business in British Columbia that will be applying for a license</h4></li>
+        </ul>
+      </div>
+      <ng-template #elseRegisteredBusiness>
+        <ul class="detail-step">
+          <li><h4>You don't have a registered business in British Columbia that will be applying for a license</h4></li>
+        </ul>
+      </ng-template>
+
+      <!-- businessType -->
+      <div *ngIf="data.businessType">
+        <ul class="detail-step">
+          <li><h4>The type of business that will be applying for the licence is {{data.businessType}}</h4></li>
+        </ul>
+      </div>
+
+      <!-- bceidAccount -->
+      <div *ngIf="data && data.bceidAccount == 'Yes'; else elseBceidAccount">
+        <ul class="detail-step">
+          <li><h4>You have a 'Business BCeID' account</h4></li>
+        </ul>
+      </div>
+      <ng-template #elseBceidAccount>
+        <ul class="detail-step">
+          <li><h4>You don't have a 'Business BCeID' account</h4></li>
+        </ul>
+      </ng-template>
+
+      <!-- storelocation -->
+      <div *ngIf="data.storelocation">
+        <ul class="detail-step">
+          <li><h4>{{data.storelocation}} is where you plan on opening a store</h4></li>
+        </ul>
+      </div>
+
+      <!-- locationOwnedLeased -->
+      <div *ngIf="data && data.locationOwnedLeased == 'Yes'; else elseLocationOwnedLeased">
+        <ul class="detail-step">
+          <li><h4>You have a store location currently owned or leased</h4></li>
+        </ul>
+      </div>
+      <ng-template #elseLocationOwnedLeased>
+        <ul class="detail-step">
+          <li><h4>You don't have a store location currently owned or leased</h4></li>
+        </ul>
+      </ng-template>
+
+      <!-- contactLgFn -->
+      <div *ngIf="data && data.contactLgFn == 'Yes'; else elseContactLgFn">
+        <ul class="detail-step">
+          <li><h4>You have contacted your local government or First Nation about opening a cannabis store</h4></li>
+        </ul>
+      </div>
+      <ng-template #elseContactLgFn>
+        <ul class="detail-step">
+          <li><h4>You haven't contacted your local government or First Nation about opening a cannabis store</h4></li>
+        </ul>
+      </ng-template>
+
+      <!-- localBusinessLicenseCannabis -->
+      <div *ngIf="data && data.localBusinessLicenseCannabis == 'Yes'; else elseLocalBusinessLicenseCannabis">
+        <ul class="detail-step">
+          <li><h4>You have a local business licence for cannabis sales</h4></li>
+        </ul>
+      </div>
+      <ng-template #elseLocalBusinessLicenseCannabis>
+        <ul class="detail-step">
+          <li><h4>You don't have a local business licence for cannabis sales</h4></li>
+        </ul>
+      </ng-template>
+
+      <!-- connectionToProducerCultivator -->
+      <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'; else elseConnectionToProducerCultivator">
+        <ul class="detail-step">
+          <li><h4>You have a financial or business connection to a licensed producer or a cultivator planning to become a licensed producer</h4></li>
+        </ul>
+      </div>
+      <ng-template #elseConnectionToProducerCultivator>
+        <ul class="detail-step">
+          <li><h4>You don't have a financial or business connection to a licensed producer or a cultivator planning to become a licensed producer</h4></li>
+        </ul>
+      </ng-template>
+
+      <hr />
+
+      <!-- *********************** RESULTS ********************************* -->
+
+      <h2>What you need to prepare</h2>
 
       <!-- age19 -->
       <div *ngIf="data && data.age19 == 'No'">
@@ -108,5 +208,5 @@
       </div>
 
     </div>
-  </div>
+    </div>
 </div>
