@@ -9,12 +9,12 @@
   </div>
 </div>
 <p *ngIf="showVoteResults==false">
-  <a (click)="setShowVoteResults(true)">Show Vote Results</a>
+  <a id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Vote Results</a>
 </p>
 <p *ngIf="showVoteResults==true">
-  <a (click)="setShowVoteResults(false)">Hide Vote Results</a>
+  <a id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
 </p>
-<table width="200" *ngIf="showVoteResults">
+<table id="voteResultsTable" width="200" *ngIf="showVoteResults">
   <tr>
     <th *ngFor="let option of options; let i = index">{{option.option}}</th>
   </tr>
