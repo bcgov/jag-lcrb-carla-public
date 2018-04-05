@@ -72,6 +72,17 @@ h1, h2 {
   }
 }
 
+.jumbotron {
+  background-color: rgba(248, 186, 50, 0.13);
+  border-left-color: rgb(248,186,50);
+  border-left-width: 7px;
+  border-left-style: solid;
+  h1 {
+    font-size: 45px;
+    font-weight: 600;
+  }
+}
+
 .returning {
   color: #fff;
   margin-top: 2rem;
