@@ -36,8 +36,9 @@ class FlowSpecs extends GebReportingSpec {
 	    given: "I am a public user"			
 		when: "I register for email notifications"
 			to HomePage
-			// inputEmail << DataUtils.randomEmail()
-			emailSignupForm.newsletterSignupEmail = DataUtils.randomEmail()
+			//waitFor { inputEmail.value(DataUtils.randomEmail()) }
+			waitFor { inputEmail.singleElement().sendKeys(DataUtils.randomEmail()) }
+			// emailSignupForm.newsletterSignupEmail = DataUtils.randomEmail()
 			inputEmailButton.click()
         then: "I am registered for email notifications"
 			at HomePage
