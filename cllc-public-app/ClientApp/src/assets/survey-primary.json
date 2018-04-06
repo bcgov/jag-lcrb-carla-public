@@ -43,27 +43,27 @@
           "isRequired": true,
           "choices": [
             {
-              "value": "corporation",
+              "value": "Corporation",
               "text": "Corporation"
             },
             {
-              "value": "partnership",
+              "value": "Partnership",
               "text": "Partnership"
             },
             {
-              "value": "soleProprietorship",
+              "value": "Sole-Proprietorship",
               "text": "Sole-Proprietorship"
             },
             {
-              "value": "society",
+              "value": "Society",
               "text": "Society"
             },
             {
-              "value": "coOperative",
+              "value": "Co-operative",
               "text": "Co-operative"
             },
             {
-              "value": "LgFn",
+              "value": "Local Government or First Nation",
               "text": "Local Government or First Nation"
             }
           ]
