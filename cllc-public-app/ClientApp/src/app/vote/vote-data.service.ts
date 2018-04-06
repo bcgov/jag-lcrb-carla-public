@@ -13,7 +13,7 @@ export class VoteDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("/api/voteQuestion/" + slug, {
+     return this.http.get("api/voteQuestion/" + slug, {
        headers: headers
      })
        .toPromise()
@@ -33,7 +33,7 @@ export class VoteDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.post("/api/voteQuestion/" + slug + "/vote?option=" + option, {
+     return this.http.post("api/voteQuestion/" + slug + "/vote?option=" + option, {
        headers: headers
      })
        .toPromise()

@@ -12,7 +12,7 @@ export class NewsletterDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("/api/newsletter/" + slug, {
+     return this.http.get("api/newsletter/" + slug, {
        headers: headers
      })
        .toPromise()
@@ -33,7 +33,7 @@ export class NewsletterDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.post("/api/newsletter/" + slug + "/subscribe?email=" + email, {
+     return this.http.post("api/newsletter/" + slug + "/subscribe?email=" + email, {
        headers: headers
      })
        .toPromise()

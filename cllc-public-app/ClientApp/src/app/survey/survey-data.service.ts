@@ -10,7 +10,7 @@ export class SurveyDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("/api/survey/getResultByClient/" + clientId, {
+     return this.http.get("api/survey/getResultByClient/" + clientId, {
        headers: headers
      })
        .toPromise()

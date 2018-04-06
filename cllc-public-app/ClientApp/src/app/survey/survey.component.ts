@@ -37,7 +37,7 @@ export class SurveyComponent {
     Survey.defaultBootstrapCss.matrixdynamic.button = "btn btn-default";
     Survey.defaultBootstrapCss.paneldynamic.button = "btn btn-default";
     Survey.defaultBootstrapCss.paneldynamic.root = "sv_p_dynamic"; // not used?
-    Survey.dxSurveyService.serviceUrl = "/api/survey";
+    Survey.dxSurveyService.serviceUrl = "api/survey";
 
     surveyModel.onComplete.add((sender, options) => {
       // generate a client identifier.  replace this with a hashed value.
