@@ -39,15 +39,25 @@ describe('App Home Page', () => {
 
     it('should accept email registration', () => {
         page.navigateTo();
-        page.inputEmail().sendKeys("some.random@email.com");
+        page.inputEmail().sendKeys("some.random@email.com");   // TODO clever random email function
         browser.waitForAngular();
         page.inputEmailButton().click();
         browser.waitForAngular();
-        browser.sleep(2000);
+
+        // wait for toast to appear
+        browser.wait(function () {
+            return element(by.css('#toast-container .toast-message')).isPresent();
+        }, 10000);
+        expect(element(by.css('#toast-container .toast-message')).isPresent()).toBe(true);
+
+        // wait for toast to disappear
         browser.wait(function () {
             return element(by.css('#toast-container .toast-message')).isPresent().then(function (toastPresent) {
                 return !toastPresent;
             });
         }, 10000);
+        expect(element(by.css('#toast-container .toast-message')).isPresent()).toBe(false);
+
+        // TODO check the database to ensure the email was saved
     })
 });
