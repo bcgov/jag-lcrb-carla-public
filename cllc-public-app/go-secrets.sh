@@ -4,5 +4,6 @@ export DB_USER=test
 export DB_PASSWORD=Test4321
 export DB_DATABASE=cllc
 export ASPNETCORE_ENVIRONMENT=Development
+export PathBase=/cannabislicensing
 dotnet run
 

@@ -1,0 +1,21 @@
+@startuml
+
+database "SQL Server" {
+}
+folder "Microsoft Dynamics" {
+  node "LCLB CLLC"
+  node "Minicipalities"
+  node "Inspections"
+}
+folder "Dynamics SDK" {
+
+}
+folder "Dynamics Portal" {
+}
+folder "Public Access" {
+  node "Angular"
+  node ".NET Core C#"
+}
+database "MongoDB" {
+}
+@enduml
