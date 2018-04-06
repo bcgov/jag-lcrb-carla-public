@@ -102,7 +102,7 @@
           "title": "Where do you plan on opening a store?",
           "isRequired": true,
           "choicesByUrl": {
-            "url": "/api/jurisdiction",
+            "url": "api/jurisdiction",
             "valueName": "name"
           }
         }
