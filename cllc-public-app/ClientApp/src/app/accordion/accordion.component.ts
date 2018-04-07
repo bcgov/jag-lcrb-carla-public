@@ -15,5 +15,18 @@ export class AccordionComponent implements OnInit {
   }
 
   panelOpenState: boolean = false;
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
 
 }
