@@ -24,16 +24,27 @@ export class AppSurveyPage {
         expect("Error no question found for ").toEqual(q);
     }
 
-    surveyPageButton(selectedButton) {
-        return element(by.className("btn btn-primary sv_" + selectedButton + "_btn"));
-    }
-
     surveyPageInputField(currentPage, i) {
         var fieldName = currentPage.elements[0].name + "_sq_" + (100+i);
-        return element(by.name(fieldName));
+        return element.all(by.name(fieldName));
     }
 
     surveySetQValue(currentPage, currentElement, toValue) {
+        if (currentPage.elements[0].type == "radiogroup") {
+            // click on the button that matches our "value"
+            var selectedElement = currentElement.all(by.xpath('//input[@value="' + toValue + '"]'));
+            expect(selectedElement.isPresent()).toBe(true);
+            selectedElement.click();
+        } else if (currentPage.elements[0].type == "dropdown") {
+            // select the selected "value"
+            var selectedElement = currentElement.all(by.cssContainingText('option', toValue));
+            expect(selectedElement.isPresent()).toBe(true);
+            selectedElement.click();
+        }
+    }
+
+    surveyPageButton(selectedButton) {
+        return element(by.className("btn btn-primary sv_" + selectedButton + "_btn"));
     }
 
     executeSurvey(navPath, surveyConfig) {
@@ -54,9 +65,12 @@ export class AppSurveyPage {
             // 2. set question response (value == myR)
             var currentQInput = this.surveyPageInputField(currentSurveyP, i);
             this.surveySetQValue(currentSurveyP, currentQInput, myR);
+            browser.waitForAngular();
 
             // 3. click on selected button (class "btn btn-primary sv_<<myButton>>_btn")
-            this.surveyPageButton(myButton).click();
+            var currentPageButton = this.surveyPageButton(myButton);
+            expect(currentPageButton.isDisplayed()).toBe(true);
+            currentPageButton.click();
             browser.waitForAngular();
         }
 
