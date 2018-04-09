@@ -20,6 +20,8 @@ describe('App Survey Page', () => {
         var resp_json = httpGet("http://localhost:5000/cannabislicensing/assets/survey-primary.json");
         expect(resp_json).toContain('"title": "Find out what you need to apply for a licence",');
         surveyConfig = JSON.parse(resp_json);
+
+        // TODO also load survey results text
     });
 
     beforeEach(() => {
@@ -41,6 +43,8 @@ describe('App Survey Page', () => {
         expect(surveyConfig.pages[0].elements[0].type).toEqual('radiogroup');
         expect(surveyConfig.pages[0].elements[0].name).toEqual('age19');
         expect(surveyConfig.pages[0].elements[0].title).toEqual('Are you 19 years old or over?');
+
+        // TODO verify survey results text has loaded
     });
 
     it('should not allow under 19 years old to apply', () => {
@@ -48,7 +52,7 @@ describe('App Survey Page', () => {
 
         page.navigateTo();
         browser.waitForAngular();
-        //page.executeSurvey(navPath, surveyConfig);
+        page.executeSurvey(navPath, surveyConfig);
 
         // TODO expect we are on result page
     });
@@ -66,7 +70,7 @@ describe('App Survey Page', () => {
         
         page.navigateTo();
         browser.waitForAngular();
-        //page.executeSurvey(navPath, surveyConfig);
+        page.executeSurvey(navPath, surveyConfig);
 
         // TODO expect we are on result page
     });
@@ -86,7 +90,7 @@ describe('App Survey Page', () => {
         
         page.navigateTo();
         browser.waitForAngular();
-        //page.executeSurvey(navPath, surveyConfig);
+        page.executeSurvey(navPath, surveyConfig);
 
         // TODO expect we are on result page
     });
