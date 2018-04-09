@@ -3,9 +3,9 @@
 <p *ngIf="alreadyVoted">
   You've already voted on this poll.
 </p>
-<div *ngIf="alreadyVoted==false">
+<div *ngIf="alreadyVoted==false" id="voteOptionButtons_{{slug}}">
   <div class="btn-group" *ngFor="let option of options; let i = index">
-    <button id="vote_{{i}}" class="btn btn-default" (click)="sendVote(option.id)">{{option.option}}</button>
+    <button id="vote_{{slug}}_{{i}}" class="btn btn-default" (click)="sendVote(option.id)">{{option.option}}</button>
   </div>
 </div>
 <p *ngIf="showVoteResults==false">
