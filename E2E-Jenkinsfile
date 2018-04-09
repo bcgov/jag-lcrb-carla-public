@@ -1,4 +1,4 @@
-node('bddstack') {
+node('nodejs') {
 	stage('FT on Dev') {
 		//the checkout is mandatory, otherwise functional test would fail
         echo "checking out source"
