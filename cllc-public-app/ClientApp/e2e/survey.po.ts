@@ -10,20 +10,30 @@ export class AppSurveyPage {
     }
 
     surveyPageTitle() {
-        return element(by.class("sv_q_title"));
-    }
-
-    surveyPageButton(selectedButton) {
-        return element(by.class("btn btn-primary sv_" + selectedButton + "_btn"));
+        return element(by.className('sv_q_title')).getText();
     }
 
     getSurveyQuestion(surveyConfig, q) {
-        for (var p in surveyConfig["pages"]) {
-            if (p["name"] == q) {
+        var len = surveyConfig.pages.length;
+        for (var i = 0; i < len; i++) {
+            var p = surveyConfig.pages[i];
+            if (p.name == q) {
                 return p;
             }
         }
-        expect("Error no page found for").isEqual(q);
+        expect("Error no question found for ").toEqual(q);
+    }
+
+    surveyPageButton(selectedButton) {
+        return element(by.className("btn btn-primary sv_" + selectedButton + "_btn"));
+    }
+
+    surveyPageInputField(currentPage, i) {
+        var fieldName = currentPage.elements[0].name + "_sq_" + (100+i);
+        return element(by.name(fieldName));
+    }
+
+    surveySetQValue(currentPage, currentElement, toValue) {
     }
 
     executeSurvey(navPath, surveyConfig) {
@@ -35,16 +45,18 @@ export class AppSurveyPage {
             var myR = myNav['r'];
             var myButton = myNav['button'];
 
-            var currentSurveyp = getSurveyQuestion(surveyConfig, myQ);
+            var currentSurveyP = this.getSurveyQuestion(surveyConfig, myQ);
 
             // 1. confirm page title
-            var currentPageTitle = surveyPageTitle();
-            expect(currentPageTitle).toEqual(currentSurveyQ['elements'][0]['title']);
+            var currentPageTitle = this.surveyPageTitle();
+            expect(currentPageTitle).toEqual("* " + currentSurveyP.elements[0].title);
 
             // 2. set question response (value == myR)
+            var currentQInput = this.surveyPageInputField(currentSurveyP, i);
+            this.surveySetQValue(currentSurveyP, currentQInput, myR);
 
             // 3. click on selected button (class "btn btn-primary sv_<<myButton>>_btn")
-            surveyPageButton(myButton).click();
+            this.surveyPageButton(myButton).click();
             browser.waitForAngular();
         }
 
