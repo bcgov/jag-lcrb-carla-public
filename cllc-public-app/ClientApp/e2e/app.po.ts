@@ -16,6 +16,12 @@ export class AppHomePage {
         return element(by.id("inputEmailButton"));
     }
 
+
+    inputVoteButton(slug, number) {
+      return element(by.id("vote_" + slug + "_" + number));
+    }
+
+
     hasEmailRegistration() {
         return this.inputEmail().isPresent() && this.inputEmailButton().isPresent();
     }
@@ -30,6 +36,10 @@ export class AppHomePage {
 
     hasVotingWidgets() {
         return element(by.id("showVoteResultsButton")).isPresent() || element(by.id("hideVoteResultsButton")).isPresent();
+    }
+
+    isVotingButtonsPresent(slug) {            
+      return element(by.id("voteOptionButtons_" + slug)).isPresent();
     }
 }
 
