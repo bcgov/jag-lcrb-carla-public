@@ -39,7 +39,7 @@ describe('App Home Page', () => {
 
     it('should accept email registration', () => {
         page.navigateTo();
-        page.inputEmail().sendKeys("some.random@email.com");   // TODO clever random email function
+        page.inputEmail().sendKeys("some.random" + Math.random() +"@email.com");   
         browser.waitForAngular();
         page.inputEmailButton().click();
         browser.waitForAngular();
