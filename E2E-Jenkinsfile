@@ -7,7 +7,7 @@ node('nodejs') {
         dir('cllc-public-app/ClientApp') {
 	    try {
 				sh 'npm install'
-                sh 'ng e2e --no-serve --base-href=http://lclb-cllc-dev.pathfinder.gov.bc.ca'
+                sh './node_modules/angular-cli/bin/ng e2e --no-serve --base-href=http://lclb-cllc-dev.pathfinder.gov.bc.ca'
 	    } finally {
 		        archiveArtifacts allowEmptyArchive: true, artifacts: 'e2e-reports/**/*'                
                 junit 'junitresults.xml'
