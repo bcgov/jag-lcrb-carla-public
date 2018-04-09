@@ -1,0 +1,50 @@
+node('master') {
+
+    stage('Build Image') {
+        echo "Building..."
+        openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
+        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
+    }
+	
+    stage('Deploy on Dev') {
+        echo "Deploying to dev..."
+        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
+	//Sleeping for a while to wait deployment completes
+	sh 'sleep 1m'
+    }
+}
+
+node('bddstack') {
+	stage('FT on Dev') {
+		//the checkout is mandatory, otherwise functional test would fail
+        echo "checking out source"
+        echo "Build: ${BUILD_ID}"
+        checkout scm
+        dir('cllc-public-app/ClientApp') {
+	    try {
+				sh 'npm install'
+                sh 'ng e2e --no-serve --base-href=http://lclb-cllc-dev.pathfinder.gov.bc.ca'
+	    } finally {
+		        archiveArtifacts allowEmptyArchive: true, artifacts: 'e2e-reports/**/*'                
+                junit 'junitresults.xml'
+                publishHTML (target: [
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: true,
+                            reportDir: 'e2e-reports',
+                            reportFiles: 'chrome-test-report.html',
+                            reportName: "E2E Report"
+                        ])                    
+	    }
+        }
+    }
+}
+
+stage('Deploy on Test') {
+    input "Deploy to test?"
+    node('master') {
+        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'test', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
+	sh 'sleep 3m'
+    }
+}
+
