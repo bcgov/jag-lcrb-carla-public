@@ -1,11 +1,11 @@
 <h2>{{title}}</h2>
 <p>{{description}}</p>
-<form>
+<form id="emailSignupForm">
   <div class="form-group">
     <p>
       <label class="control-label">Email</label>
       <input id="inputEmail" class="form-control" name="newsletterSignupEmail" required email [(ngModel)]="email" #newsletterSignupEmail="ngModel">
     </p>
-    <a href="#" class="btn btn-default" (click)="signup()">Subscribe</a>
+    <a id="inputEmailButton" href="#" class="btn btn-default" (click)="signup()">Subscribe</a>
   </div>
 </form>
