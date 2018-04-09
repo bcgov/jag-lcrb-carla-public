@@ -1,14 +1,15 @@
 <h1>Selling Cannabis Step-by-Step</h1>
+<p>&nbsp;</p>
 
 <mat-accordion>
 
-  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1);panel1OpenState=true" (closed)="panel1OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">1</span> Register a Business
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel1OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <ul class="detail-step">
@@ -21,13 +22,13 @@
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2);panel2OpenState=true" (closed)="panel2OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">2</span> Create a Business BCeID Account
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel2OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <ul class="detail-step">
@@ -41,13 +42,13 @@
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3);panel3OpenState=true" (closed)="panel3OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">3</span> Contact Your Local Government or First Nation
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel3OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <ul class="detail-step">
@@ -62,13 +63,13 @@
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4);panel4OpenState=true" (closed)="panel4OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">4</span> Submit a Licence Application &nbsp; <span class="label label-info">Starting June 22</span>
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel4OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <ul class="detail-step">
@@ -90,96 +91,155 @@
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5);panel5OpenState=true" (closed)="panel5OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">5</span>
+        <span class="ordinal">5</span> Public Consultation
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel5OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    Expansion
+    <ul class="detail-step">
+      <li>All cannabis stores, including stores run by the province, require a public consultation.</li>
+      <li>Local governments and First Nations decide the area around the store to consult.</li>
+      <li>These governments decide specific restrictions on stores such as:</li>
+      <ul>
+        <li>Distance from schools and community centres</li>
+        <li>Distance from other cannabis stores</li>
+        <li>Hours of operations</li>
+        <li>Any specific conditions the store must adhere to</li>
+      </ul>
+      <li>A public consultation may be used by these governments to provide local business licence and proper zoning for cannabis sales. Check with your local government about what they require.</li>
+    </ul>
+    <p>Read more about <a href="lg-fn.html">the public consultation process</a></p>
+
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
       <button mat-button color="primary" (click)="nextStep()">Next</button>
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6);panel6OpenState=true" (closed)="panel6OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">6</span>
+        <span class="ordinal">6</span> Receive Background Checks
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel6OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    Expansion
+    <ul class="detail-step">
+      <li>A background check is a review of a person's history. It can include an examination of their criminal, police, financial and other records.</li>
+      <li>The type of business applying for a license will determine who requires a background check.</li>
+      <li>You will authorize a background check to be conducted as part of your application.</li>
+      <li>A $xxxx deposit will be required to cover the cost of checks. You will be refunded any unused amounts.</li>
+    </ul>
+    <p>Read more about <a href="background-checks.html">background checks</a></p>
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
       <button mat-button color="primary" (click)="nextStep()">Next</button>
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7);panel7OpenState=true" (closed)="panel7OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">7</span>
+        <span class="ordinal">7</span> Inspection of Store Location
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel7OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    Expansion
+    <ul class="detail-step">
+      <li>A store inspection is required before you are issued a licence.</li>
+      <li>An inspection is done to ensure the information about your store matches the information provided during the application.</li>
+      <li>If you currently operate a cannabis store, you must not have any cannabis at the location at the time of inspection.</li>
+    </ul>
+    <p>Read more about <a href="inspections.html">getting an inspection</a></p>
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
       <button mat-button color="primary" (click)="nextStep()">Next</button>
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8);panel8OpenState=true" (closed)="panel8OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">8</span>
+        <span class="ordinal">8</span> Receive a Licence  &nbsp; <span class="label label-info">Expected September 2018</span>
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel8OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    Expansion
+    <ul class="detail-step">
+      <li>A licence will be emailed to you after an inspection is completed and you have completed all the required local government or First Nation requirements.</li>
+    </ul>
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
       <button mat-button color="primary" (click)="nextStep()">Next</button>
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 9" (opened)="setStep(9)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 9" (opened)="setStep(9);panel9OpenState=true" (closed)="panel9OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">9</span>
+        <span class="ordinal">9</span> Order Cannabis Product
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel9OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    Expansion
+    <ul class="detail-step">
+      <li>You can order cannabis products from the provincial distributor after you receive a licence.</li>
+      <li>Only products ordered from the provincial distributor can be sold.</li>
+    </ul>
+    <p>Read more about <a href="#">ordering cannabis products</a></p>
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
       <button mat-button color="primary" (click)="nextStep()">Next</button>
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 10" (opened)="setStep(10)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 10" (opened)="setStep(10);panel10OpenState=true" (closed)="panel10OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">10</span>
+        <span class="ordinal">10</span> Train Employees
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand
+        {{panel10OpenState ? 'Click to close' : 'Click to expand'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    Expansion
+    <ul class="detail-step">
+      <li>Staff must complete the Selling it Right training before selling cannabis.</li>
+      <li>Selling it Right is a program that helps staff of cannabis stores sell cannabis responsibly</li>
+    </ul>
+    <p>Read more about <a href="#">Selling it Right training</a></p>
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 11" (opened)="setStep(11);panel11OpenState=true" (closed)="panel11OpenState=false" hideToggle="false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="ordinal">11</span> Report Sales
+      </mat-panel-title>
+      <mat-panel-description>
+        {{panel11OpenState ? 'Click to close' : 'Click to expand'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul class="detail-step">
+      <li>All cannabis sales must be reported to the province on a xxxx basis.</li>
+      <li>
+        You must report:
+        <ul>
+          <li>TBD</li>
+        </ul>
+      </li>
+    </ul>
+    <p>Read more about <a href="#">reporting your sales to the province</a></p>
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
       <button mat-button color="primary" (click)="nextStep()">End</button>
@@ -187,51 +247,3 @@
   </mat-expansion-panel>
 
 </mat-accordion>
-
-<!--<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      This is the expansion 1 title
-    </mat-expansion-panel-header>
-    This the expansion 1 content
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      This is the expansion 2 title
-    </mat-expansion-panel-header>
-    This the expansion 2 content
-  </mat-expansion-panel>
-</mat-accordion>-->
-<!--<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Personal data
-      </mat-panel-title>
-      <mat-panel-description>
-        Type your name and age
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Age">
-    </mat-form-field>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Self aware panel
-      </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel>
-</mat-accordion>-->
