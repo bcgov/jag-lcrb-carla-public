@@ -2,13 +2,13 @@
 
 <mat-accordion>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">1</span> Register a Business
       </mat-panel-title>
       <mat-panel-description>
-        Click to expand 
+        Click to expand
       </mat-panel-description>
     </mat-expansion-panel-header>
     <ul class="detail-step">
@@ -16,9 +16,12 @@
       <li>The province will review and approve the name of your business. It can not contain words like pharmacy, apothecary, or dispensary to suggest your business sells medical cannabis.</li>
     </ul>
     <p>Read more about &nbsp;<a href="business-types.html">registering a business for cannabis</a></p>
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">2</span> Create a Business BCeID Account
@@ -32,9 +35,13 @@
       <li>It takes about 15 minutes to complete the 5 step registration process. To begin, visit <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx">Register for a Business BCeID</a></li>
       <p>Read more about &nbsp;<a href="bceid.html">Business BCeID</a></p>
     </ul>
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">3</span> Contact Your Local Government or First Nation
@@ -49,9 +56,13 @@
       <li>Local government or First Nation support does not mean your business has a local business licence or that it has been zoned for cannabis sales. Check with your local authority about what to do next.</li>
       <p>Read more about <a href="lg-fn.html">local government and First Nation involvement</a></p>
     </ul>
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">4</span> Submit a Licence Application &nbsp; <span class="label label-info">Starting June 22</span>
@@ -73,9 +84,13 @@
       <li>$xxx background check deposit</li>
       <li>$xxx yearly licence fee (Paid after approval)</li>
     </ul>
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">5</span>
@@ -85,9 +100,13 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     Expansion
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">6</span>
@@ -97,9 +116,13 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     Expansion
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">7</span>
@@ -109,9 +132,13 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     Expansion
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">8</span>
@@ -121,9 +148,13 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     Expansion
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 9" (opened)="setStep(9)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">9</span>
@@ -133,9 +164,13 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     Expansion
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="step === 10" (opened)="setStep(10)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">10</span>
@@ -145,6 +180,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     Expansion
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">End</button>
+    </mat-action-row>
   </mat-expansion-panel>
 
 </mat-accordion>

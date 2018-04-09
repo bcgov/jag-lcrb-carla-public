@@ -19,6 +19,16 @@
   font-size: 18px;
 }
 
+.mat-expansion-panel-header-title {
+  align-items: center;
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: flex-end;
+  font-size: 12px;
+  align-items: flex-end;
+}
+
 .mat-panel-title {
   font-family: Myriad-Pro, Calibri, Arial, "sans serif";
   font-size: 18px;
