@@ -21,22 +21,27 @@ describe('App Survey Page', () => {
         expect(resp_json).toContain('"title": "Find out what you need to apply for a licence",');
         surveyConfig = JSON.parse(resp_json);
 
-        // TODO also load survey results text
+        // TODO load survey results text ?
     });
 
     beforeEach(() => {
         page = new AppSurveyPage();
     });
 
-    it('should display a title', () => {
-        page.navigateTo();
-        browser.waitForAngular();
+    afterEach(function() {
+        browser.manage().logs().get('browser').then(function(browserLog) {
+          if(browserLog.length > 0)
+            console.log('log: ' + JSON.parse(JSON.stringify(browserLog))[0].message);
+        });
+    });
+
+    it('should display a title', async () => {
+        await page.navigateTo();
         expect(page.getMainHeading()).toEqual('Find out what you need to apply for a licence');
     });
 
-    it('should load the survey configuration file', () => {
-        page.navigateTo();
-        browser.waitForAngular();
+    it('should load the survey configuration file', async () => {
+        await page.navigateTo();
         expect(surveyConfig.title).toEqual('Find out what you need to apply for a licence');
         expect(page.getMainHeading()).toEqual(surveyConfig.title);
         expect(surveyConfig.pages[0].name).toEqual('q1');
@@ -47,17 +52,16 @@ describe('App Survey Page', () => {
         // TODO verify survey results text has loaded
     });
 
-    it('should not allow under 19 years old to apply', () => {
+    it('should not allow under 19 years old to apply', async () => {
         var navPath = [{'q':'q1', 'r':'No', 'button':'complete'}];
 
-        page.navigateTo();
-        browser.waitForAngular();
-        page.executeSurvey(navPath, surveyConfig);
+        await page.navigateTo();
+        await page.executeSurvey(navPath, surveyConfig);
 
         // TODO expect we are on result page
     });
 
-    it('should allow over 19 years old to apply and capture all information', () => {
+    it('should allow over 19 years old to apply and capture all information', async () => {
         var navPath = [{'q':'q1', 'r':'Yes', 'button':'next'},
                        {'q':'q2', 'r':'Yes', 'button':'next'},
                        {'q':'q3', 'r':'Corporation', 'button':'next'},
@@ -68,14 +72,13 @@ describe('App Survey Page', () => {
                        {'q':'q8', 'r':'Yes', 'button':'next'},
                        {'q':'q9', 'r':'Yes', 'button':'complete'}];
         
-        page.navigateTo();
-        browser.waitForAngular();
-        page.executeSurvey(navPath, surveyConfig);
+        await page.navigateTo();
+        await page.executeSurvey(navPath, surveyConfig);
 
         // TODO expect we are on result page
     });
 
-    it('should allow backtrack to update previously entered information', () => {
+    it('should allow backtrack to update previously entered information', async () => {
         var navPath = [{'q':'q1', 'r':'Yes', 'button':'next'},
                        {'q':'q2', 'r':'Yes', 'button':'next'},
                        {'q':'q3', 'r':'Corporation', 'button':'next'},
@@ -88,9 +91,8 @@ describe('App Survey Page', () => {
                        {'q':'q8', 'r':'Yes', 'button':'next'},
                        {'q':'q9', 'r':'Yes', 'button':'complete'}];
         
-        page.navigateTo();
-        browser.waitForAngular();
-        page.executeSurvey(navPath, surveyConfig);
+        await page.navigateTo();
+        await page.executeSurvey(navPath, surveyConfig);
 
         // TODO expect we are on result page
     });
