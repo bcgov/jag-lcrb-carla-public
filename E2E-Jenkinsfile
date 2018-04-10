@@ -6,7 +6,7 @@ node('nodejs') {
         checkout scm
         dir('cllc-public-app/ClientApp') {
 	    try {
-				sh 'Xvfb :1 -screen 0 1024x768x24'
+				sh 'Xvfb :1 -screen 0 1024x768x24 &'
 				sh 'export DISPLAY=:1'
 				sh 'npm install -g @angular/cli'
 				sh 'npm install'
