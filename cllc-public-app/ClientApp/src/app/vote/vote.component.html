@@ -1,3 +1,4 @@
+<mat-divider></mat-divider>
 <h2>{{title}}</h2>
 <p>{{question}}</p>
 <p *ngIf="alreadyVoted">
@@ -5,14 +6,16 @@
 </p>
 <div *ngIf="alreadyVoted==false" id="voteOptionButtons_{{slug}}">
   <div class="btn-group" *ngFor="let option of options; let i = index">
-    <button id="vote_{{slug}}_{{i}}" class="btn btn-default" (click)="sendVote(option.id)">{{option.option}}</button>
+    <!--<button id="vote_{{slug}}_{{i}}" class="btn btn-default" (click)="sendVote(option.id)">{{option.option}}</button>-->
+    <button id="vote_{{slug}}_{{i}}" mat-raised-button color="primary" (click)="sendVote(option.id)">{{option.option}}</button>
   </div>
 </div>
+<p></p>
 <p *ngIf="showVoteResults==false">
-  <a id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Vote Results</a>
+    <a mat-button color="accent" id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Vote Results</a>
 </p>
 <p *ngIf="showVoteResults==true">
-  <a id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
+  <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
 </p>
 <table id="voteResultsTable" width="200" *ngIf="showVoteResults">
   <tr>
