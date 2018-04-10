@@ -8,20 +8,17 @@ describe('App Survey Page', () => {
     function httpGet(theUrl)
     {
         var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-        var xhr = new XMLHttpRequest();
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
         xmlHttp.send( null );
         return xmlHttp.responseText;
     }
 
-    beforeAll(() => {
-        // load survey json from resources
-        var resp_json = httpGet("http://localhost:5000/cannabislicensing/assets/survey-primary.json");
-        expect(resp_json).toContain('"title": "Find out what you need to apply for a licence",');
-        surveyConfig = JSON.parse(resp_json);
-
-        // TODO load survey results text ?
+    beforeAll(async () => {
+      // load survey json from resources
+      
+      var resp_json = httpGet(browser.baseUrl + '/assets/survey-primary.json');
+      surveyConfig = JSON.parse(resp_json);
     });
 
     beforeEach(() => {
@@ -41,7 +38,8 @@ describe('App Survey Page', () => {
     });
 
     it('should load the survey configuration file', async () => {
-        await page.navigateTo();
+      await page.navigateTo();
+      console.log('surveyConfig title is ' + surveyConfig.title);
         expect(surveyConfig.title).toEqual('Find out what you need to apply for a licence');
         expect(page.getMainHeading()).toEqual(surveyConfig.title);
         expect(surveyConfig.pages[0].name).toEqual('q1');

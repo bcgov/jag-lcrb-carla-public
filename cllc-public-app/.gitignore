@@ -33,10 +33,7 @@ Obj/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-# protractor test results
-junitresults.xml
-**/e2-reports/screenshots
-**/e2-reports/*
+
 
 # NUNIT
 *.VisualState.xml
@@ -237,3 +234,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+
