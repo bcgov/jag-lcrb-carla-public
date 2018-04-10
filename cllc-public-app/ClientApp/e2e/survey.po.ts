@@ -10,6 +10,9 @@ export class AppSurveyPage {
     }
 
     surveyPageTitle() {
+        browser.wait(function () {
+            return element(by.className('sv_q_title')).isPresent();
+        }, 10000);
         return element(by.className('sv_q_title')).getText();
     }
 
@@ -18,36 +21,53 @@ export class AppSurveyPage {
         for (var i = 0; i < len; i++) {
             var p = surveyConfig.pages[i];
             if (p.name == q) {
-                return p;
+                return [i, p];
             }
         }
         expect("Error no question found for ").toEqual(q);
     }
 
-    surveyPageInputField(currentPage, i) {
-        var fieldName = currentPage.elements[0].name + "_sq_" + (100+i);
-        return element.all(by.name(fieldName));
-    }
-
-    surveySetQValue(currentPage, currentElement, toValue) {
+    async surveySetQValue(currentPage, i, toValue) {
         if (currentPage.elements[0].type == "radiogroup") {
+            console.log(currentPage.elements[0].name + "_sq_" + (100+i));
+            var fieldName = currentPage.elements[0].name + "_sq_" + (100+i);
+            browser.wait(function () {
+                return element(by.name(fieldName)).isPresent();
+            }, 10000);
+            var currentElement = element.all(by.name(fieldName));
+
             // click on the button that matches our "value"
+            console.log('//input[@value="' + toValue + '"]');
             var selectedElement = currentElement.all(by.xpath('//input[@value="' + toValue + '"]'));
             expect(selectedElement.isPresent()).toBe(true);
-            selectedElement.click();
+            await selectedElement.click();
         } else if (currentPage.elements[0].type == "dropdown") {
+            console.log("sq_" + (100+i) + "i");
+            var fieldName = "sq_" + (100+i) + "i";
+            browser.wait(function () {
+                return element(by.id(fieldName)).isPresent();
+            }, 10000);
+            var currentElement = element.all(by.id(fieldName));
+
             // select the selected "value"
+            console.log('option ' + toValue);
             var selectedElement = currentElement.all(by.cssContainingText('option', toValue));
             expect(selectedElement.isPresent()).toBe(true);
-            selectedElement.click();
+            await selectedElement.click();
         }
     }
 
     surveyPageButton(selectedButton) {
-        return element(by.className("btn btn-primary sv_" + selectedButton + "_btn"));
+    var buttonName = "btn btn-primary sv_" + selectedButton + "_btn";
+        browser.wait(function () {
+            return element(by.className(buttonName)).isPresent();
+        }, 10000);
+        return element(by.className(buttonName));
     }
 
-    executeSurvey(navPath, surveyConfig) {
+    async executeSurvey(navPath, surveyConfig) {
+        console.log('>>> Enter executeSurvey()');
+
         // execute each step of the survey navigation
         var len = navPath.length;
         for (var i = 0; i < len; i++) {
@@ -55,26 +75,33 @@ export class AppSurveyPage {
             var myQ = myNav['q'];
             var myR = myNav['r'];
             var myButton = myNav['button'];
+            console.log('    ' + myQ + ',' + myR + ',' + myButton);
 
-            var currentSurveyP = this.getSurveyQuestion(surveyConfig, myQ);
+            var tempP = this.getSurveyQuestion(surveyConfig, myQ);
+            var currentSurveyIdx = tempP[0];
+            var currentSurveyP = tempP[1];
 
             // 1. confirm page title
             var currentPageTitle = this.surveyPageTitle();
             expect(currentPageTitle).toEqual("* " + currentSurveyP.elements[0].title);
+            browser.waitForAngular();
+            await browser.driver.sleep(400);
 
             // 2. set question response (value == myR)
-            var currentQInput = this.surveyPageInputField(currentSurveyP, i);
-            this.surveySetQValue(currentSurveyP, currentQInput, myR);
+            this.surveySetQValue(currentSurveyP, currentSurveyIdx, myR);
             browser.waitForAngular();
+            await browser.driver.sleep(400);
 
             // 3. click on selected button (class "btn btn-primary sv_<<myButton>>_btn")
             var currentPageButton = this.surveyPageButton(myButton);
-            expect(currentPageButton.isDisplayed()).toBe(true);
-            currentPageButton.click();
+            expect(currentPageButton.isPresent()).toBe(true);
+            await currentPageButton.click();
             browser.waitForAngular();
+            await browser.driver.sleep(400);
         }
 
         // TODO return the final result page
 
+        console.log('<<< Exit executeSurvey()');
     }
 }
