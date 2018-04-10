@@ -1,0 +1,25 @@
+﻿{
+  "title": "Find out what you need to apply for a licence",
+  "responses": [
+    {
+      "name": "q1",
+      "choice": "Yes",
+      "response": "You are 19 years old or over"
+    },
+    {
+      "name": "q1",
+      "choice": "No",
+      "response": "You are not 19 years old or over"
+    },
+    {
+      "name": "q2",
+      "choice": "Yes",
+      "response": "You have a registered business in British Columbia that will be applying for a license"
+    },
+    {
+      "name": "q2",
+      "choice": "No",
+      "response": "You don't have a registered business in British Columbia that will be applying for a license"
+    }
+  ]
+}
