@@ -4,7 +4,8 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  SELENIUM_PROMISE_MANAGER: false,
+  allScriptsTimeout: 30000,
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: [
     './e2e/**/*.e2e-spec.ts'
@@ -13,6 +14,11 @@ exports.config = {
     'browserName': 'chrome',
 	 chromeOptions: {
       args: [ "--headless", "--disable-gpu", "--window-size=1024x768" ]
+	 },
+    'loggingPrefs': {
+      'driver': 'INFO',
+      'server': 'INFO',
+      'browser': 'INFO'
     }
   },
   directConnect: true,
