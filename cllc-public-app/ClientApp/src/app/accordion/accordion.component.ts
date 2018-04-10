@@ -24,7 +24,7 @@ export class AccordionComponent implements OnInit {
   panel7OpenState: boolean = false;
   panel8OpenState: boolean = false;
   panel9OpenState: boolean = false;
-  panel1OpenState: boolean = false;
+  panel10OpenState: boolean = false;
   step = 0;
 
   setStep(index: number) {
