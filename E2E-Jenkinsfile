@@ -6,8 +6,8 @@ node('nodejs') {
         checkout scm
         dir('cllc-public-app/ClientApp') {
 	    try {
-				sh 'Xvfb :1 -screen 0 1024x768x24 &'
-				sh 'export DISPLAY=:1'
+				// sh 'Xvfb :1 -screen 0 1024x768x24 &'
+				// sh 'export DISPLAY=:1'
 				sh 'npm install -g @angular/cli'
 				sh 'npm install'
                 sh 'ng e2e --no-serve --base-href=http://lclb-cllc-dev.pathfinder.gov.bc.ca'
