@@ -28,6 +28,7 @@ describe('App Home Page', () => {
         page.linkToSurvey().click();
         browser.waitForAngular();
         expect(browser.getCurrentUrl()).toContain("/prv/survey");
+
         /* TODO this doesn't work yet
         var pageSource = function () {
             return browser.getPageSource();
