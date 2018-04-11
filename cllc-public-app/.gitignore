@@ -33,6 +33,8 @@ Obj/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+
+
 # NUNIT
 *.VisualState.xml
 TestResult.xml
@@ -232,3 +234,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+

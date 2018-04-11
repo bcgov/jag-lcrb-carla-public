@@ -15,6 +15,7 @@ import { VoteDataService } from "./vote-data.service"
 /** vote component*/
 export class VoteComponent implements OnInit {
   @Input('slug') slug: string;
+  @Input('vote_value') vote_value: string;
 
   public options;
   public question: string;
