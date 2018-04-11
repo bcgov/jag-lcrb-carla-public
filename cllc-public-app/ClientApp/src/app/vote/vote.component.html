@@ -15,18 +15,24 @@
     </mat-radio-button>
   </mat-radio-group>
 
-  <p>
-    <!--<input type="button" (click)="sendVote(vote_value)" value="Vote" />-->
-    <a id="voteButton" mat-raised-button color="primary" (click)="sendVote(vote_value)">Vote</a>
-  </p>
+  <div class="text-center">
+    <p>
+      <!--<input type="button" (click)="sendVote(vote_value)" value="Vote" />-->
+      <a id="voteButton" mat-raised-button color="primary" (click)="sendVote(vote_value)">Vote</a>
+    </p>
+  </div>
+
 </div>
 <p></p>
-<p *ngIf="showVoteResults==false">
+<div class="text-center">
+  <p *ngIf="showVoteResults==false">
     <a mat-button color="accent" id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Vote Results</a>
-</p>
-<p *ngIf="showVoteResults==true">
-  <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
-</p>
+  </p>
+  <p *ngIf="showVoteResults==true">
+    <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
+  </p>
+</div>
+
 <table id="voteResultsTable" width="200" *ngIf="showVoteResults">
   <tr>
     <th *ngFor="let option of options; let i = index">{{option.option}}</th>
@@ -36,5 +42,4 @@
   </tr>
 </table>
 
-
-
+  <mat-divider></mat-divider>
