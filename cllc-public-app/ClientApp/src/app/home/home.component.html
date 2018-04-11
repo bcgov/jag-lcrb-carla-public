@@ -1,6 +1,7 @@
 <div class="container test1234">
   <div class="row">
     <div class="col-md-8">
+      <!-- What you need message and survey button -->
       <div class="jumbotron">
         <h1>
           Find out what you need to apply for a licence
@@ -8,28 +9,30 @@
         <h3>
           Answer questions about your business to receive a customized to-do list to prepare an application.
         </h3>
-
         <div class="row">
           <div class="col-md-12 text-center">
-            <!--<a id="surveyStartButton" class="btn btn-primary" routerLink="prv" tabindex="1">
-    <strong>Start</strong><br>
-  </a>-->
+            <!--<a id="surveyStartButton" class="btn btn-primary" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>-->
             <a id="surveyStartButton" mat-raised-button color="accent" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>
           </div>
         </div>
       </div>
+
+      <!-- Accordion -->
+      <app-accordion></app-accordion>
     </div>
 
+    <!-- Newsletter -->
     <div class="col-md-4">
       <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
     </div>
+
+    <!-- Vote Question(s) -->
     <div class="col-md-4">
       <app-vote [slug]="'initialNumberInterested'"></app-vote>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">      
-        <app-accordion></app-accordion>      
+    <div class="col-md-4">
+      <app-vote [slug]="'qustionOption2'"></app-vote>
     </div>
+
   </div>
 </div>
