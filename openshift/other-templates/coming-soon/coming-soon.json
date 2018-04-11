@@ -1,0 +1,55 @@
+
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "coming-soon",
+    "creationTimestamp": null,
+    "labels": {
+      "name": "coming-soon"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "coming-soon",
+        "image": "openshift/hello-openshift",
+		"env": [
+          { "name": "RESPONSE",
+            "value": "Cannabis Licensing is coming soon."
+          }
+        ],
+        "ports": [
+          {
+            "containerPort": 8080,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name":"tmp",
+            "mountPath":"/tmp"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "imagePullPolicy": "IfNotPresent",
+        "capabilities": {},
+        "securityContext": {
+          "capabilities": {},
+          "privileged": false
+        }
+      }
+    ],
+    "volumes": [
+      {
+        "name":"tmp",
+        "emptyDir": {}
+      }
+    ],
+    "restartPolicy": "Always",
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccount": ""
+  },
+  "status": {}
+}

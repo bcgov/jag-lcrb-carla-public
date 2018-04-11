@@ -7,8 +7,9 @@
 <div *ngIf="alreadyVoted==false" id="voteOptionButtons_{{slug}}">
   <div class="btn-group" *ngFor="let option of options; let i = index">
     <!--<button id="vote_{{slug}}_{{i}}" class="btn btn-default" (click)="sendVote(option.id)">{{option.option}}</button>-->
-    <button id="vote_{{slug}}_{{i}}" mat-raised-button color="primary" (click)="sendVote(option.id)">{{option.option}}</button>
+    <input type="radio" [(ngModel)]="vote_value" name="vote_{{slug}}" value="{{option.id}}" id="vote_{{slug}}_{{i}}" mat-raised-button color="primary" />{{option.option}}
   </div>
+  <input type="button" (click)="sendVote(vote_value)" value="Vote" />
 </div>
 <p></p>
 <p *ngIf="showVoteResults==false">
