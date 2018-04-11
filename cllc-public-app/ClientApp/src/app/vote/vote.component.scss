@@ -80,3 +80,16 @@
   background-color: #e6e6e6;
   border-color: #adadad;
   }
+
+.radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.radio-button {
+  margin: 5px;
+}
+
+.selected-value {
+  margin: 15px 0;
+}
