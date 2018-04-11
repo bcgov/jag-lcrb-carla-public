@@ -101,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
         private static void AddInitialVoteQuestions(this AppDbContext context, List<ViewModels.VoteQuestion> voteQuestions)
         {
-            voteQuestions.ForEach(context.AddInitialVoteQuestion);
+            voteQuestions.ForEach(context.UpdateSeedVoteQuestionInfo);
         }
 
         /// <summary>
@@ -125,24 +125,59 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
             context.AddVoteQuestion(voteQuestion);
         }
-
-
+        
         /// <summary>
         /// Update region
         /// </summary>
         /// <param name="context"></param>
         /// <param name="regionInfo"></param>
-        public static void UpdateSeedVoteQuestionInfo(this AppDbContext context, Models.VoteQuestion voteQuestionInfo)
+        public static void UpdateSeedVoteQuestionInfo(this AppDbContext context, ViewModels.VoteQuestion voteQuestionInfo)
         {
-            VoteQuestion voteQuestion = context.GetVoteQuestionBySlug(voteQuestionInfo.Slug);
+            VoteQuestion voteQuestion = context.GetVoteQuestionBySlug(voteQuestionInfo.slug);
             if (voteQuestion == null)
             {
-                context.AddInitialVoteQuestion(voteQuestionInfo.ToViewModel());
+                context.AddInitialVoteQuestion(voteQuestionInfo);
             }
             else
             {
-                voteQuestion.Question = voteQuestionInfo.Question;
-                voteQuestion.Title = voteQuestionInfo.Title;
+                voteQuestion.Question = voteQuestionInfo.question;
+                voteQuestion.Title = voteQuestionInfo.title;
+                // update the options.
+                if (voteQuestion.Options != null)
+                {
+                    // first pass to add new items.
+                    foreach (var option in voteQuestionInfo.options)
+                    {
+                        VoteOption voteOption = voteQuestion.Options.FirstOrDefault(x => x != null && x.Option.Equals(option.option));
+                        if (voteOption == null)
+                        {
+                            voteQuestion.Options.Add(option.ToModel());
+                        }
+                        else
+                        {
+                            voteOption.DisplayOrder = option.displayOrder;
+                        }
+
+                    }
+                    List<VoteOption> itemsToRemove = new List<VoteOption>();
+                    // second pass to identify items that are no longer present.
+                    foreach (var option in voteQuestion.Options)
+                    {  
+                        if (option != null)
+                        {
+                            if (voteQuestionInfo.options.FirstOrDefault(x => x != null && x.option.Equals(option.Option)) == null)
+                            {
+                                itemsToRemove.Add(option);
+                            }
+                        }
+                        
+                    }
+                    // third pass to remove the items.
+                    foreach (var option in itemsToRemove)
+                    {
+                        voteQuestion.Options.Remove(option);
+                    }
+                }
                 context.VoteQuestions.Update(voteQuestion);
                 context.SaveChanges();
             }
