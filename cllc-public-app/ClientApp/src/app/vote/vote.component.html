@@ -1,9 +1,18 @@
 <mat-divider></mat-divider>
 <h2>{{title}}</h2>
 <p>{{question}}</p>
-<p *ngIf="alreadyVoted==true">
-  Thanks for voting on this poll!
-</p>
+
+<!-- Do not display vote question if vote has been submitted -->
+<div class="text-center">
+  <p *ngIf="alreadyVoted==true">
+    <mat-card>
+      Thanks for voting on this poll! <i class="material-icons md-18">check_circle</i>
+    </mat-card>
+  </p>
+</div>
+
+
+<!-- Display vote question if vote hasn't been submitted -->
 <div *ngIf="alreadyVoted==false" id="voteOptionButtons_{{slug}}">
   <mat-radio-group class="radio-group" [(ngModel)]="vote_value">
     <mat-radio-button class="radio-button" *ngFor="let option of options; let i = index" name="vote_{{slug}}" value="{{option.id}}" id="vote_{{slug}}_{{i}}">
@@ -11,18 +20,26 @@
     </mat-radio-button>
   </mat-radio-group>
 
-  <p>
-    <a id="voteButton" mat-raised-button color="primary" (click)="sendVote(vote_value)">Vote</a>
+  <div class="text-center">
+    <p>
+      <a id="voteButton" mat-raised-button color="primary" (click)="sendVote(vote_value)">Vote</a>
+    </p>
+  </div>
+</div>
+
+<p></p>
+
+<!-- Show or Hide vote results -->
+<div class="text-center">
+  <p *ngIf="showVoteResults==false">
+    <a mat-button color="accent" id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Vote Results</a>
+  </p>
+  <p *ngIf="showVoteResults==true">
+    <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
   </p>
 </div>
-<p></p>
-<p *ngIf="showVoteResults==false">
-    <a mat-button color="accent" id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Vote Results</a>
-</p>
-<p *ngIf="showVoteResults==true">
-  <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
-</p>
-<table id="voteResultsTable" width="200" *ngIf="showVoteResults">
+<!-- Results table -->
+<table id="voteResultsTable" width="300" *ngIf="showVoteResults">
   <tr>
     <th *ngFor="let option of options; let i = index">{{option.option}}</th>
   </tr>
@@ -31,5 +48,4 @@
   </tr>
 </table>
 
-
-
+<mat-divider></mat-divider>
