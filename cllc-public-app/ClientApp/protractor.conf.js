@@ -13,7 +13,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
 	 chromeOptions: {
-      args: [ "--headless", "--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768" ]
+      args: [ "--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768" ]
 	 },
     'loggingPrefs': {
       'driver': 'INFO',
