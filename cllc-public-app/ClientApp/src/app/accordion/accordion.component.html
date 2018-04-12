@@ -34,8 +34,8 @@
     <ul class="detail-step">
       <li>A Business BCeID account is required to login to the application. </li>
       <li>It takes about 15 minutes to complete the 5 step registration process. To begin, visit <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx">Register for a Business BCeID</a></li>
-      <p>Read more about &nbsp;<a href="bceid.html">Business BCeID</a></p>
     </ul>
+    <p>Read more about &nbsp;<a href="bceid.html">Business BCeID</a></p>
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
       <button mat-button color="accent" (click)="nextStep()">Next</button>
@@ -66,7 +66,7 @@
   <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4);panel4OpenState=true" (closed)="panel4OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">4</span> Submit a Licence Application &nbsp; <span class="label label-info">Starting June 22</span>
+        <span class="ordinal">4</span> Submit a Licence Application &nbsp; <app-status-badge [status]="'Starting June 22'"></app-status-badge>
       </mat-panel-title>
       <mat-panel-description>
         {{panel4OpenState ? 'Click to close' : 'Click to expand'}}
@@ -166,7 +166,7 @@
   <mat-expansion-panel [expanded]="step === 8" (opened)="setStep(8);panel8OpenState=true" (closed)="panel8OpenState=false" hideToggle="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span class="ordinal">8</span> Receive a Licence  &nbsp; <span class="label label-info">Expected September 2018</span>
+        <span class="ordinal">8</span> Receive a Licence  &nbsp; <app-status-badge [status]="'Expected September 2018'"></app-status-badge>
       </mat-panel-title>
       <mat-panel-description>
         {{panel8OpenState ? 'Click to close' : 'Click to expand'}}
