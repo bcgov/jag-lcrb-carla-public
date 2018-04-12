@@ -53,7 +53,7 @@ import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
 import { StaticComponent } from './static/static.component';
 import { HomeComponent } from './home/home.component';
-
+import { StatusBadgeComponent } from './status-badge/status-badge.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
@@ -76,6 +76,7 @@ import { NewsletterDataService } from "./newsletter-signup/newsletter-data.servi
     ResultComponent,
     BreadcrumbComponent,
     InsertComponent,
+    StatusBadgeComponent,
     SurveyComponent,
     SurveyPrimaryComponent,
     SurveyTestComponent,
@@ -84,7 +85,7 @@ import { NewsletterDataService } from "./newsletter-signup/newsletter-data.servi
     StaticComponent,
     AccordionComponent,
     VoteComponent,
-    NewsletterSignupComponent,
+    NewsletterSignupComponent
   ],
   imports: [
     BrowserModule,
