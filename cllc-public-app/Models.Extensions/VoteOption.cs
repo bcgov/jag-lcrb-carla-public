@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -19,6 +20,25 @@ namespace Gov.Lclb.Cllb.Public.Models
             result.option = voteOption.Option;
             result.displayOrder = voteOption.DisplayOrder;
             return result;
-        }        
+        }
+
+        /// <summary>
+        /// Covert a view model into a model
+        /// </summary>
+        /// <param name="voteOption"></param>
+        /// <returns></returns>
+        public static Models.VoteOption ToModel(this ViewModels.VoteOption voteOption)
+        {
+            var result = new Models.VoteOption();
+            if (voteOption != null)
+            {
+                if (!string.IsNullOrEmpty(voteOption.id))
+                    result.Id = new Guid(voteOption.id);
+                    result.TotalVotes = voteOption.totalVotes;
+                    result.Option = voteOption.option;
+                    result.DisplayOrder = voteOption.displayOrder;
+            }            
+            return result;
+        }
     }
 }
