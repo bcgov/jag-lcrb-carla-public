@@ -41,6 +41,13 @@ export class AppHomePage {
     isVotingButtonsPresent(slug) {            
       return element(by.id("voteOptionButtons_" + slug)).isPresent();
     }
+
+  //accordion functions
+  getAccordionHeading() {
+
+    return element(by.id('accordion_heading')).getText();
+  }
+
 }
 
 /*
