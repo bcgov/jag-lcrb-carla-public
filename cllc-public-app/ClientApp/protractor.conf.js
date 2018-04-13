@@ -3,16 +3,17 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+
 exports.config = {
   SELENIUM_PROMISE_MANAGER: false,
-  allScriptsTimeout: 30000,
+  allScriptsTimeout: 45000,
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome',
-	 chromeOptions: {
+    chromeOptions: {
        args: [ "--headless", "--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768" ]
 	 },
     'loggingPrefs': {
@@ -23,10 +24,11 @@ exports.config = {
   },
   directConnect: true,
   baseUrl: 'http://localhost:5000/cannabislicensing/',
+  noGlobals: true,
   framework: 'jasmine',
   jasmineNodeOpts: {
-    showColors: true,
-    defaultTimeoutInterval: 30000,
+    showColors: false,
+    defaultTimeoutInterval: 45000,
     print: function() {}
   },
   onPrepare() {
@@ -66,6 +68,8 @@ exports.config = {
   },
   onComplete: function () {
     var browserName, browserVersion;
+    var globals = require('protractor');
+    var browser = globals.browser;
     var capsPromise = browser.getCapabilities();
 
     capsPromise.then(function (caps) {
