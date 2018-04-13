@@ -17,11 +17,10 @@ describe('Accordion component test', () => {
   //  expect(accordionHeading).toEqual('Selling Cannabis Step-by-Step XXXX');
   //  });
 
-  it('displays the accordion heading', () => {
-    var expectedHeading = 'Selling Cannabis Step-by-StepXXX';
-    page.navigateTo();
-    browser.waitForAngular();
-    expect(page.getAccordionHeading()).toEqual(expectedHeading);
+  it('should display a title', async () => {
+    await page.navigateTo();
+    let heading = await page.getAccordionHeading();
+    expect(heading).toEqual('Selling Cannabis Step-by-Step');
   });
 
 
