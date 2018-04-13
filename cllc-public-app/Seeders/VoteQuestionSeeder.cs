@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
             foreach (VoteQuestion voteQuestion in seedVoteQuestions)
             {
-                context.UpdateSeedVoteQuestionInfo(voteQuestion);                
+                context.UpdateSeedVoteQuestionInfo(voteQuestion.ToViewModel());                
             }
 
             AddInitialVoteQuestions(context);            
