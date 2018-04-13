@@ -15,10 +15,9 @@ describe('App Survey Page', () => {
     }
 
     beforeAll(async () => {
-      // load survey json from resources
-      
+      // load survey json from resources      
       var resp_json = httpGet(browser.baseUrl + '/assets/survey-primary.json');
-      surveyConfig = JSON.parse(resp_json);
+      surveyConfig = JSON.parse(resp_json);      
     });
 
     beforeEach(() => {
@@ -33,12 +32,13 @@ describe('App Survey Page', () => {
     });
 
     it('should display a title', async () => {
-        await page.navigateTo();
-        expect(page.getMainHeading()).toEqual('Find out what you need to apply for a licence');
+      await page.navigateTo();
+      let heading = await page.getMainHeading();
+      console.log("Survey title is: " + heading);
+      expect(heading).toEqual('Find out what you need to apply for a licence');
     });
 
     it('should load the survey configuration file', async () => {
-      await page.navigateTo();
       console.log('surveyConfig title is ' + surveyConfig.title);
         expect(surveyConfig.title).toEqual('Find out what you need to apply for a licence');
         expect(page.getMainHeading()).toEqual(surveyConfig.title);
@@ -51,11 +51,12 @@ describe('App Survey Page', () => {
     });
 
     it('should not allow under 19 years old to apply', async () => {
-        var navPath = [{'q':'q1', 'r':'No', 'button':'complete'}];
+      var navPath = [{ 'q': 'q1', 'r': 'No', 'button': 'complete' }];
 
         await page.navigateTo();
         await page.executeSurvey(navPath, surveyConfig);
 
+        
         // TODO expect we are on result page
     });
 

@@ -3,11 +3,11 @@ import { protractor } from 'protractor/built/ptor';
 
 export class AppSurveyPage {
     navigateTo() {
-        return browser.get('/cannabislicensing/prv/');
+        return browser.get('/prv/survey');
     }
 
     getMainHeading() {
-        return element(by.css('app-root h3')).getText();
+      return element(by.xpath('//*[@id="surveyElement"]/div/div[2]/div[1]/h3/span')).getText();
     }
 
     surveyPageTitle() {
@@ -41,10 +41,10 @@ export class AppSurveyPage {
             console.log('//input[@value="' + toValue + '"]');
             var selectedElement = currentElement.all(by.xpath('//input[@value="' + toValue + '"]'));            
             // move the virtual mouse to the button.
-            browser.actions().mouseMove(selectedElement).perform();
+            await browser.actions().mouseMove(selectedElement).perform();
             expect(selectedElement.isPresent()).toBe(true);
-            selectedElement.click();
-            browser.waitForAngular();
+            await selectedElement.click();
+            await browser.waitForAngular();
         } else if (currentPage.elements[0].type == "dropdown") {
             console.log("sq_" + (100+i) + "i");
             var fieldName = "sq_" + (100+i) + "i";
@@ -56,10 +56,10 @@ export class AppSurveyPage {
             // select the selected "value"
             console.log('option ' + toValue);
             var selectedElement = currentElement.all(by.cssContainingText('option', toValue));
-            browser.actions().mouseMove(selectedElement).perform();
+            await browser.actions().mouseMove(selectedElement).perform();
             expect(selectedElement.isPresent()).toBe(true);
-            selectedElement.click();
-            browser.waitForAngular();
+            await selectedElement.click();
+            await browser.waitForAngular();
         }
     }
 
