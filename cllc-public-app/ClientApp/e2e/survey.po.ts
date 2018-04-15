@@ -1,12 +1,13 @@
 import { browser, by, element } from 'protractor';
+import { protractor } from 'protractor/built/ptor';
 
 export class AppSurveyPage {
     navigateTo() {
-        return browser.get('/cannabislicensing/prv/');
+        return browser.get('/prv/survey');
     }
 
     getMainHeading() {
-        return element(by.css('app-root h3')).getText();
+      return element(by.xpath('//*[@id="surveyElement"]/div/div[2]/div[1]/h3/span')).getText();
     }
 
     surveyPageTitle() {
@@ -27,7 +28,7 @@ export class AppSurveyPage {
         expect("Error no question found for ").toEqual(q);
     }
 
-    async surveySetQValue(currentPage, i, toValue) {
+    async surveySetQValue(currentPage, i, toValue) {        
         if (currentPage.elements[0].type == "radiogroup") {
             console.log(currentPage.elements[0].name + "_sq_" + (100+i));
             var fieldName = currentPage.elements[0].name + "_sq_" + (100+i);
@@ -38,9 +39,12 @@ export class AppSurveyPage {
 
             // click on the button that matches our "value"
             console.log('//input[@value="' + toValue + '"]');
-            var selectedElement = currentElement.all(by.xpath('//input[@value="' + toValue + '"]'));
+            var selectedElement = currentElement.all(by.xpath('//input[@value="' + toValue + '"]'));            
+            // move the virtual mouse to the button.
+            await browser.actions().mouseMove(selectedElement).perform();
             expect(selectedElement.isPresent()).toBe(true);
             await selectedElement.click();
+            await browser.waitForAngular();
         } else if (currentPage.elements[0].type == "dropdown") {
             console.log("sq_" + (100+i) + "i");
             var fieldName = "sq_" + (100+i) + "i";
@@ -52,8 +56,10 @@ export class AppSurveyPage {
             // select the selected "value"
             console.log('option ' + toValue);
             var selectedElement = currentElement.all(by.cssContainingText('option', toValue));
+            await browser.actions().mouseMove(selectedElement).perform();
             expect(selectedElement.isPresent()).toBe(true);
             await selectedElement.click();
+            await browser.waitForAngular();
         }
     }
 
@@ -79,25 +85,30 @@ export class AppSurveyPage {
 
             var tempP = this.getSurveyQuestion(surveyConfig, myQ);
             var currentSurveyIdx = tempP[0];
-            var currentSurveyP = tempP[1];
+            var currentSurveyP = tempP[1];            
 
             // 1. confirm page title
             var currentPageTitle = this.surveyPageTitle();
             expect(currentPageTitle).toEqual("* " + currentSurveyP.elements[0].title);
-            browser.waitForAngular();
-            await browser.driver.sleep(400);
+            
+            
 
             // 2. set question response (value == myR)
             this.surveySetQValue(currentSurveyP, currentSurveyIdx, myR);
-            browser.waitForAngular();
-            await browser.driver.sleep(400);
+            //browser.waitForAngular();
+            //await browser.driver.sleep(400);
 
             // 3. click on selected button (class "btn btn-primary sv_<<myButton>>_btn")
             var currentPageButton = this.surveyPageButton(myButton);
-            expect(currentPageButton.isPresent()).toBe(true);
-            await currentPageButton.click();
-            browser.waitForAngular();
-            await browser.driver.sleep(400);
+            // wait for the button to appear.
+            var until = protractor.ExpectedConditions;
+            browser.wait(until.presenceOf(currentPageButton), 5000, 'Can\'t find the survey page button.');
+            // move the virtual mouse to the button.
+            browser.actions().mouseMove(currentPageButton).perform();
+            //expect(currentPageButton.isPresent()).toBe(true);
+            currentPageButton.click();
+            //await browser.driver.sleep(400);
+            browser.waitForAngular();            
         }
 
         // TODO return the final result page

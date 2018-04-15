@@ -10,13 +10,11 @@ describe('App Home Page', () => {
 
     it('should display a title', () => {
         page.navigateTo();
-        browser.waitForAngular();
         expect(page.getMainHeading()).toEqual('Find out what you need to apply for a licence');
     });
 
     it('should have appropriate content', () => {
         page.navigateTo();
-        browser.waitForAngular();
         expect(page.getMainHeading()).toEqual('Find out what you need to apply for a licence');
         expect(page.hasEmailRegistration()).toBe(true);
         expect(page.hasLinkToSurvey()).toBe(true);
@@ -26,7 +24,6 @@ describe('App Home Page', () => {
     it('should link to the Survey page', () => {
         page.navigateTo();
         page.linkToSurvey().click();
-        browser.waitForAngular();
         expect(browser.getCurrentUrl()).toContain("/prv/survey");
 
         /* TODO this doesn't work yet
@@ -40,10 +37,8 @@ describe('App Home Page', () => {
 
     it('should accept email registration', () => {
         page.navigateTo();
-        page.inputEmail().sendKeys("some.random" + Math.random() +"@email.com");   
-        browser.waitForAngular();
-        page.inputEmailButton().click();
-        browser.waitForAngular();
+        page.inputEmail().sendKeys("some.random" + Math.random() +"@email.com");           
+        page.inputEmailButton().click();        
 
         // wait for toast to appear
         browser.wait(function () {

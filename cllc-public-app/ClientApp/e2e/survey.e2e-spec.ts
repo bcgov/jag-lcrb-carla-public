@@ -8,20 +8,16 @@ describe('App Survey Page', () => {
     function httpGet(theUrl)
     {
         var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-        var xhr = new XMLHttpRequest();
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
         xmlHttp.send( null );
         return xmlHttp.responseText;
     }
 
-    beforeAll(() => {
-        // load survey json from resources
-        var resp_json = httpGet("http://localhost:5000/cannabislicensing/assets/survey-primary.json");
-        expect(resp_json).toContain('"title": "Find out what you need to apply for a licence",');
-        surveyConfig = JSON.parse(resp_json);
-
-        // TODO load survey results text ?
+    beforeAll(async () => {
+      // load survey json from resources      
+      var resp_json = httpGet(browser.baseUrl + '/assets/survey-primary.json');
+      surveyConfig = JSON.parse(resp_json);      
     });
 
     beforeEach(() => {
@@ -36,12 +32,14 @@ describe('App Survey Page', () => {
     });
 
     it('should display a title', async () => {
-        await page.navigateTo();
-        expect(page.getMainHeading()).toEqual('Find out what you need to apply for a licence');
+      await page.navigateTo();
+      let heading = await page.getMainHeading();
+      console.log("Survey title is: " + heading);
+      expect(heading).toEqual('Find out what you need to apply for a licence');
     });
 
     it('should load the survey configuration file', async () => {
-        await page.navigateTo();
+      console.log('surveyConfig title is ' + surveyConfig.title);
         expect(surveyConfig.title).toEqual('Find out what you need to apply for a licence');
         expect(page.getMainHeading()).toEqual(surveyConfig.title);
         expect(surveyConfig.pages[0].name).toEqual('q1');
@@ -53,11 +51,12 @@ describe('App Survey Page', () => {
     });
 
     it('should not allow under 19 years old to apply', async () => {
-        var navPath = [{'q':'q1', 'r':'No', 'button':'complete'}];
+      var navPath = [{ 'q': 'q1', 'r': 'No', 'button': 'complete' }];
 
         await page.navigateTo();
         await page.executeSurvey(navPath, surveyConfig);
 
+        
         // TODO expect we are on result page
     });
 
