@@ -17,6 +17,10 @@
 .mat-expansion-panel-header {
   font-family: Myriad-Pro, Calibri, Arial, "sans serif";
   font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px 0 0;
 }
 
 .mat-expansion-panel-header-title {
@@ -39,6 +43,14 @@
 .mat-panel-description {
   font-size: 14px;
 }
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  padding-bottom: 20px;
+}
+
 
 .label-info {
   background-color: #fff;
