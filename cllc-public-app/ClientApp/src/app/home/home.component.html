@@ -10,9 +10,9 @@
           Answer questions about your business to receive a customized to-do list to prepare an application.
         </h3>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 text-left">
             <!--<a id="surveyStartButton" class="btn btn-primary" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>-->
-            <a id="surveyStartButton" mat-raised-button color="accent" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>
+            <a class="surveyStartButton" mat-raised-button color="accent" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Newsletter -->
-    <div class="col-md-4">
+    <div class="col-md-4 newsletter">
       <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
     </div>
 
