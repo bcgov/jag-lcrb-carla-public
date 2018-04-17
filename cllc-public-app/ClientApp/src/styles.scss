@@ -20,8 +20,9 @@ body {
   font-family: Myriad-Pro, Calibri, Arial, "sans serif";
 }
 body, h5, .h5, .btn {
-  font-size: 16px;
-  //line-height: 24px;
+    font-size: 18px;
+    color: #494949;
+      //line-height: 24px;
 }
 
 .ctx-home {
@@ -279,5 +280,8 @@ $indicator-thickness: 0.2em;
     border: 1px solid #e9e0e0;
   }
 }
+
+
+
 
 
