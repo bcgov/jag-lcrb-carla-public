@@ -14,4 +14,14 @@ export class AccordionComponent implements OnInit {
   ngOnInit() {
   }
 
+  isExpandAll = false;
+
+  showAll() {
+    this.isExpandAll = true;
+  }
+
+  collapseAll() {
+    this.isExpandAll = false;
+  }
+
 }
