@@ -1,9 +1,15 @@
 <h1 id="accordion_heading">Selling Cannabis Step-by-Step</h1>
 <p>&nbsp;</p>
 
-<mat-accordion id="selling_cannabis_steps">
+<div class="accordion-btn body">
+  <button mat-button color="accent" (click)="showAll()">Show all</button>
+  &nbsp;|&nbsp;
+  <button mat-button color="accent" (click)="collapseAll()">Collapse all</button>
+</div>
 
-  <mat-expansion-panel>
+<mat-accordion id="selling_cannabis_steps" multi="true">
+
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">1</span> Register a Business
@@ -18,7 +24,7 @@
     <p>Read more about &nbsp;<a href="business-types.html">registering a business for cannabis</a></p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">2</span> Create a Business BCeID Account
@@ -33,7 +39,7 @@
     <p>Read more about &nbsp;<a href="bceid.html">Business BCeID</a></p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">3</span> Contact Your Local Government or First Nation
@@ -49,7 +55,7 @@
     </ul>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">4</span> Submit a Licence Application
@@ -72,7 +78,7 @@
     </ul>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">5</span> Public Consultation
@@ -96,7 +102,7 @@
 
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">6</span> Receive Background Checks
@@ -113,7 +119,7 @@
     <p>Read more about <a href="background-checks.html">background checks</a></p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">7</span> Inspection of Store Location
@@ -129,7 +135,7 @@
     <p>Read more about <a href="inspections.html">getting an inspection</a></p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">8</span> Receive a Licence
@@ -142,7 +148,7 @@
     </ul>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">9</span> Order Cannabis Product
@@ -157,7 +163,7 @@
     <p>Read more about <a href="#">ordering cannabis products</a></p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">10</span> Train Employees
@@ -172,7 +178,7 @@
     <p>Read more about <a href="#">Selling it Right training</a></p>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandAll">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="ordinal">11</span> Report Sales
