@@ -99,28 +99,25 @@ h1, h2 {
 }
 
 
-.surveyStartButton {
+.globalButton.mat-raised-button {
     background-color: #003366;
     border: #003366 1px solid;
     color: #ffffff;
     min-width: 120px;
-    font-size: 16px
+    font-size: 16px;
+    box-shadow: 0px 0px 0px 0px;
+
 }
 
-
-.surveyStartButton:hover {
-    background-color: #2f567b;
-    text-color: #ffffff;
+.globalButton.mat-raised-button:hover {
+    background-color: #2f567b !important;
+    color: #ffffff;
     border-color: #204d74;
     text-decoration: none;
+    box-shadow: 0px 0px 0px 0px
 }
-
-.surveyStartButton:hover {
-    text-color: #333;
-    background-color: #afafaf;
-    border-color: #88929a
-    }
 
 .newsletter {
-    margin-top: 80px;
-}
+        margin-top: 50px
+    }
+
