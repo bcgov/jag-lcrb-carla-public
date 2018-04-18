@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { PolicyDocumentComponent } from './policy-document/policy-document.component';
 import { ResultComponent } from './result/result.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
-import { SurveyResolver }   from './survey/survey-resolver.service';
+import { SurveyResolver }   from './services/survey-resolver.service';
 import { SurveyEditorComponent } from './survey/editor.component';
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: '',
     //children: []
     component: HomeComponent
+  },
+  {
+    path: 'policy-document/:slug',
+    component: PolicyDocumentComponent
   },
   {
     path: 'prv',
@@ -24,7 +29,7 @@ const routes: Routes = [
       survey: SurveyResolver,
     },
     data: {
-      breadcrumb: 'Potential Applicant Survey', //Provincial Family Test
+      breadcrumb: 'Potential Applicant Survey', 
       survey_path: 'assets/survey-primary.json',
     }
   },
