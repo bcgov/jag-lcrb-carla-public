@@ -5,22 +5,28 @@
   display: inline-block;
   height: 1.85em;
   line-height: 1.2;
-  margin-right: 0.75em;
+  margin-right: 0.72em;
   background: #ffffff;
-  padding: 0.3em;
+  padding: 0.4em;
   text-align: center;
   width: 1.85em;
   color: #494949;
+ 
 }
 
 
+.mat-expansion-panel {
+    padding: 5px 5px 5px 5px;
+   }
+
 .mat-expansion-panel-header {
-  font-family: Myriad-Pro, Calibri, Arial, "sans serif";
-  font-size: 18px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 24px 0 0;
+    font-family: Myriad-Pro, Calibri, Arial, "sans serif";
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px 0 0
+
 }
 
 .mat-expansion-panel-header-title {
@@ -69,3 +75,4 @@
   vertical-align: baseline;
   border-radius: .25em;
 }
+
