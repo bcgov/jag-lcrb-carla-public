@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { VoteOption } from "./vote-option.model";
-import { VoteQuestion } from "./vote-question.model";
+import { VoteOption } from "../models/vote-option.model";
+import { VoteQuestion } from "../models/vote-question.model";
 @Injectable()
 export class VoteDataService {
    constructor(private http: Http) { }
-
 
    getQuestion(slug: any) {
      let headers = new Headers();

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { Newsletter } from "./newsletter.model";
+import { Newsletter } from "../models/newsletter.model";
 
 @Injectable()
 export class NewsletterDataService {

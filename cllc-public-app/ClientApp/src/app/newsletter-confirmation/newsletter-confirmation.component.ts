@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NewsletterDataService } from "../newsletter-signup/newsletter-data.service"
+import { NewsletterDataService } from "../services/newsletter-data.service"
 
 @Component({
     selector: 'app-newsletter-confirmation',

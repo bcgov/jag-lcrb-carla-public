@@ -25,6 +25,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.displayOrder = policyDocument.DisplayOrder;
             }            
             return result;
-        }        
+        }
+
+        public static ViewModels.PolicyDocumentSummary ToSummaryViewModel(this Models.PolicyDocument policyDocument)
+        {
+            ViewModels.PolicyDocumentSummary result = null;
+            if (policyDocument != null)
+            {
+                result = new ViewModels.PolicyDocumentSummary();
+                result.slug = policyDocument.Slug;
+                result.title = policyDocument.Title;                
+            }
+            return result;
+        }
     }
 }
