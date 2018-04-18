@@ -14,4 +14,21 @@ export class AccordionComponent implements OnInit {
   ngOnInit() {
   }
 
+  isExpandAll = false;
+
+  showAll() {
+      this.isExpandAll = false;
+
+      // inform angular to run a change detection cycle
+      setTimeout(() => this.isExpandAll = true, 0);
+  }
+
+  collapseAll() {
+
+      this.isExpandAll = true;
+
+      // inform angular to run a change detection cycle
+      setTimeout(() => this.isExpandAll = false, 0);
+  }
+
 }
