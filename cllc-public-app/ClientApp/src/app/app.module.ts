@@ -52,20 +52,23 @@ import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
 import { StaticComponent } from './static/static.component';
 import { HomeComponent } from './home/home.component';
+import { PolicyDocumentComponent } from './policy-document/policy-document.component';
+import { PolicyDocumentDataService } from './services/policy-document-data.service';
+import { PolicyDocumentSidebarComponent } from './policy-document-sidebar/policy-document-sidebar.component';
 import { StatusBadgeComponent } from './status-badge/status-badge.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyEditorComponent } from './survey/editor.component';
 import { SurveySidebarComponent } from './survey/sidebar.component';
-import { SurveyDataService } from "./survey/survey-data.service";
+import { SurveyDataService } from "./services/survey-data.service";
 import { ResultComponent } from './result/result.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { VoteComponent } from './vote/vote.component';
-import { VoteDataService } from "./vote/vote-data.service";
+import { VoteDataService } from "./services/vote-data.service";
 import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
-import { NewsletterDataService } from "./newsletter-signup/newsletter-data.service";
+import { NewsletterDataService } from "./services/newsletter-data.service";
 
 
 @NgModule({
@@ -76,6 +79,8 @@ import { NewsletterDataService } from "./newsletter-signup/newsletter-data.servi
     ResultComponent,
     BreadcrumbComponent,
     InsertComponent,
+    PolicyDocumentComponent,
+    PolicyDocumentSidebarComponent,
     StatusBadgeComponent,
     SurveyComponent,
     SurveyPrimaryComponent,
@@ -172,7 +177,7 @@ import { NewsletterDataService } from "./newsletter-signup/newsletter-data.servi
     MatToolbarModule,
     MatTooltipModule
   ],
-  providers: [GeneralDataService, InsertService, CookieService, VoteDataService, NewsletterDataService, SurveyDataService ],
+  providers: [GeneralDataService, InsertService, CookieService, VoteDataService, NewsletterDataService, SurveyDataService, PolicyDocumentDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
