@@ -1,0 +1,9 @@
+﻿[
+  {
+    "title": "Policy Title",
+    "slug": "testRecord",
+    "intro": "Intro Text",
+    "body": "Policy document body.",
+    "displayOrder": 0
+  }
+]
