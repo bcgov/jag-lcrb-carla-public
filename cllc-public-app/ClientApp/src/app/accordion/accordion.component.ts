@@ -17,11 +17,18 @@ export class AccordionComponent implements OnInit {
   isExpandAll = false;
 
   showAll() {
-    this.isExpandAll = true;
+      this.isExpandAll = false;
+
+      // inform angular to run a change detection cycle
+      setTimeout(() => this.isExpandAll = true, 0);
   }
 
   collapseAll() {
-    this.isExpandAll = false;
+
+      this.isExpandAll = true;
+
+      // inform angular to run a change detection cycle
+      setTimeout(() => this.isExpandAll = false, 0);
   }
 
 }
