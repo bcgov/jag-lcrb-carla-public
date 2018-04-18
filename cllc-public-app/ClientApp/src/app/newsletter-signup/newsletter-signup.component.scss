@@ -1,9 +1,10 @@
 @import "../../../node_modules/ng2-toastr/bundles/ng2-toastr.min.css";
 
-.inputEmailButton {
-    background-color: rgb(209,209,209);
+.globalButton {
+    background-color: #003366;
     margin-left: 0;
     margin-right: 0;
+    color: #ffffff;
     font-size: 14px;
     display: inline-block;
     padding: 10px 24px;
@@ -23,15 +24,22 @@
     background-image: none;
     border: 1px solid transparent;
     border-radius: 0px;
+    box-shadow: 0px 0px 0px 0px
 
 }
 
-.inputEmailButton:hover {
-    background-color: rgb(209,209,209);
+.globalButton:hover {
+    background-color: #2f567b;
     text-color: #ffffff;
     border-color: #204d74;
     text-decoration: none;
+    box-shadow: 0px 0px 0px 0p
 
+}
+
+
+.emailSignupForm {
+    padding-right: 30px
 }
 
 
