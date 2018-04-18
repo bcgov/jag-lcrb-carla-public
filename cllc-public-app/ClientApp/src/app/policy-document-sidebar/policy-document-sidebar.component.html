@@ -1,0 +1,6 @@
+<div *ngIf="policyDocumentSummaries">
+  <div *ngFor="let policyDocumentSummary of policyDocumentSummaries">
+    <a href="policy-document/{{ policyDocumentSummary.slug }}">{{ policyDocumentSummary.title }}</a>
+    <br />
+  </div>
+</div>

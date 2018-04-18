@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
-import { NewsletterDataService } from "./newsletter-data.service"
+import { NewsletterDataService } from "../services/newsletter-data.service"
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators, EmailValidator } from '@angular/forms';
 
