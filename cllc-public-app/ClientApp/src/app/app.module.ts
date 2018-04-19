@@ -90,6 +90,7 @@ import { NewsletterDataService } from "./services/newsletter-data.service";
     StaticComponent,
     AccordionComponent,
     VoteComponent,
+    NewsletterConfirmationComponent,
     NewsletterSignupComponent
   ],
   imports: [
