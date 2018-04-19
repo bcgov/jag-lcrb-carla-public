@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/theming';
-@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+
 @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
 
 @include mat-core();
@@ -12,6 +12,11 @@ $warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 
+@font-face {
+    font-family: 'Myriad-Pro';
+    src: url('./assets/MyriadWebPro.ttf')
+}
+
 body {
   background: #fff;
   -webkit-font-smoothing: antialiased;
@@ -19,13 +24,16 @@ body {
   color: #494949;
   font-family: Myriad-Pro, Calibri, Arial, "sans serif";
 }
+
 body, h5, .h5, .btn {
-  font-size: 16px;
-  //line-height: 24px;
+    font-size: 18px;
+    color: #494949;
+      //line-height: 24px;
 }
 
 .ctx-home {
-  background: #2e4a72;
+  background: #f2f2f2;
+
   .app-content {
     background: #999999;
   }
@@ -68,6 +76,7 @@ h3, .h3 {
   font-size: 2rem;
   letter-spacing: 0.05em;
 }
+
 
 .btn-group > .btn {
   // mygovbc CSS adds extra margin to buttons
@@ -159,13 +168,12 @@ $indicator-thickness: 0.2em;
     margin: 1em 0;
   }
   .sv_page > .sv_row > .sv_qstn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
     padding-top: 1em;
   }
   .sv_q_title {
-    color: #556077;
-    font-size: 20px;
+    color: #494949;
+    font-size: 24px;
     margin-bottom: 0.5em;
     margin-top: 5px;
   }
@@ -273,10 +281,43 @@ $indicator-thickness: 0.2em;
   .panel-heading {
     color: #5a5555;
   }
+
   .panel-body {
     background: #fff;
     border: 1px solid #e9e0e0;
   }
 }
 
+.btn.btn-primary {
+    background-color: #003366;
+    border: #003366 1px solid;
+    color: #ffffff;
+    min-width: 120px;
+    font-size: 16px;
+    border-radius: 0px;
+}
 
+.btn-primary:hover {
+    background-color: #2f567b !important;
+    color: #ffffff;
+    border-color: #204d74;
+    border-radius: 0px;
+}
+
+.btn.btn-primary.sv_prev_btn {
+    background-color: #ccc;
+    border: #ccc 1px solid;
+    color: #000;
+    min-width: 120px;
+    font-size: 16px;
+    border-radius: 0px
+
+}
+
+.btn.btn-primary.sv_prev_btn:hover {
+    background-color: #2f567b !important;
+    color: #ffffff;
+    border-color: #204d74;
+    border-radius: 0px
+
+}
