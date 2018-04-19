@@ -2,7 +2,7 @@
   <app-policy-document-sidebar></app-policy-document-sidebar>
   <div *ngIf="!policyDocument">Loading...</div>
   <div *ngIf="policyDocument"></div>
-  <h2>{{title}}</h2>
-  <p>{{intro}}</p>
-  <div>{{body}}</div>
+  <div id="title" [innerHTML]="title" class="h1"></div>
+  <div id="intro" [innerHTML]="intro" class="intro"></div>
+  <div id="body" [innerHTML]="body" class="body"></div>
 </div>
