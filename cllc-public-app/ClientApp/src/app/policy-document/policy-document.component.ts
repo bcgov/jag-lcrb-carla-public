@@ -10,10 +10,10 @@ import { PolicyDocumentDataService } from "../services/policy-document-data.serv
 })
 /** PolicyDocument component*/
 export class PolicyDocumentComponent {
-  private policyDocument: PolicyDocument;
-  private title: string;
-  private intro: string;
-  private body: string;
+  public policyDocument: PolicyDocument;
+  public title: string;
+  public intro: string;
+  public body: string;
 
   /** PolicyDocument ctor */
   constructor(private policyDocumentDataService: PolicyDocumentDataService, private route: ActivatedRoute) {
