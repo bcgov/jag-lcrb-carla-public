@@ -1,6 +1,7 @@
 $bootstrap-sass-asset-helper: true;
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+
 .title {
   font-size: 30px;
 }
@@ -19,8 +20,10 @@ $bootstrap-sass-asset-helper: true;
   }
 
 .body {
-  background: #f1f1f1;
-  color: #494949;
+    font-size: 18px;
+    background: #f1f1f1;
+    color: #494949
+
 }
 .app-content {
   background: #fff;
@@ -66,5 +69,14 @@ h1, h2, h3, h4, h5 {
   }
 }
 
+.navbar-footer {
+    background-color: #003366
+
+}
+
+div.c1 li.c2 a {
+    color: #fff;
+    
+}
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SurveyDataService } from '../survey/survey-data.service';
+import { SurveyDataService } from '../services/survey-data.service';
 
 @Component({
   selector: 'app-result',

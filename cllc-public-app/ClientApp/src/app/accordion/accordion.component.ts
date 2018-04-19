@@ -14,30 +14,21 @@ export class AccordionComponent implements OnInit {
   ngOnInit() {
   }
 
-  panelOpenState: boolean = false;
-  panel1OpenState: boolean = false;
-  panel2OpenState: boolean = false;
-  panel3OpenState: boolean = false;
-  panel4OpenState: boolean = false;
-  panel5OpenState: boolean = false;
-  panel6OpenState: boolean = false;
-  panel7OpenState: boolean = false;
-  panel8OpenState: boolean = false;
-  panel9OpenState: boolean = false;
-  panel10OpenState: boolean = false;
-  panel11OpenState: boolean = false;
-  step = 0;
+  isExpandAll = false;
 
-  setStep(index: number) {
-    this.step = index;
+  showAll() {
+      this.isExpandAll = false;
+
+      // inform angular to run a change detection cycle
+      setTimeout(() => this.isExpandAll = true, 0);
   }
 
-  nextStep() {
-    this.step++;
-  }
+  collapseAll() {
 
-  prevStep() {
-    this.step--;
+      this.isExpandAll = true;
+
+      // inform angular to run a change detection cycle
+      setTimeout(() => this.isExpandAll = false, 0);
   }
 
 }

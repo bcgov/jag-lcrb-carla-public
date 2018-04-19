@@ -1,4 +1,4 @@
-<div class="container test1234">
+<div class="container">
   <div class="row">
     <div class="col-md-8">
       <!-- What you need message and survey button -->
@@ -10,9 +10,8 @@
           Answer questions about your business to receive a customized to-do list to prepare an application.
         </h3>
         <div class="row">
-          <div class="col-md-12 text-center">
-            <!--<a id="surveyStartButton" class="btn btn-primary" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>-->
-            <a id="surveyStartButton" mat-raised-button color="accent" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>
+          <div class="col-md-12 text-left">
+            <a class="globalButton" mat-raised-button color="accent" routerLink="prv" tabindex="1"><strong>Start</strong><br></a>
           </div>
         </div>
       </div>
@@ -22,16 +21,8 @@
     </div>
 
     <!-- Newsletter -->
-    <div class="col-md-4">
+    <div class="col-md-4 newsletter">
       <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
-    </div>
-
-    <!-- Vote Question(s) -->
-    <div class="col-md-4">
-      <app-vote [slug]="'initialNumberInterested'"></app-vote>
-    </div>
-    <div class="col-md-4">
-      <app-vote [slug]="'initialNumberInterestedSimple'"></app-vote>
     </div>
 
   </div>

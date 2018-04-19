@@ -1,9 +1,10 @@
 import { browser, by, element } from 'protractor';
 import { AppSurveyPage } from './survey.po';
+import { SurveyConfig } from '../src/app/models/survey-config.model';
 
 describe('App Survey Page', () => {
     let page: AppSurveyPage;
-    let surveyConfig: {};
+    let surveyConfig: SurveyConfig;
 
     function httpGet(theUrl)
     {
