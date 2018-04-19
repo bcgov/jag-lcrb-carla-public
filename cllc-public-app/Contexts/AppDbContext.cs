@@ -106,5 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         public DbSet<Newsletter> Newsletters { get; set; }
 
         public DbSet<Subscriber> Subscribers { get; set; }
+
+        public DbSet<PolicyDocument> PolicyDocuments { get; set; }
     }
 }
