@@ -1,9 +1,86 @@
 ﻿[
   {
-    "title": "Policy Title",
-    "slug": "testRecord",
-    "intro": "Intro Text",
-    "body": "Policy document body.",
+    "title": "Background Checks",
+    "slug": "backgroundCheck",
+    "intro": "<p>A background check is a review of a person's history. It can include an examination of their criminal, police, financial and other records. Checks help prevent organized crime from getting cannabis retail licences.</p>",
+    "body": "<h2>Who needs to be checked</h2>\n                  <p>The type of business you operate will determine who in your organization requires a background check.</p>\n<h2>Previous criminal activity</h2>\n<p>You won't necessarily be denied a licence if your check shows a criminal record. It will be assessed against your application and the recentness of the offence. Low risk criminal activity may not prevent you from being licensed, but associating with organized crime will.</p>\n<h2>Illegal cannabis dispensaries</h2>\n<p>Operating an illegal cannabis dispensary will not necessarily deny you a licence, but it will also not earn you preferential treatment.</p>\n<p>All applicants will be assessed by the same standards, including background checks and local government support.</p>\n<h2>Cost</h2>\n<p>You must deposit $X,000 to cover the cost of checks. Extra costs may be added. You will be refunded any unused amounts.</p>",
     "displayOrder": 0
+  },
+  {
+    "title": "Business BCeID",
+    "slug": "businessBCeID",
+    "intro": "<p>A Business BCeID account is required to login to the application.</p>",
+    "body": "<p>Business BCeID provides businesses with secure access to many online government services with just one ID and password. </p>\n<p>It takes about 15 minutes to complete the five step registration process. To begin, visit <a href=\"https://www.bceid.ca/register/business/getting_started/getting_started.aspx\">Register for a Business BCeID.</a></p>\n  <p>You can check if your business or organization is already registered with a Business BCeID by checking the <a href=\"https://www.bceid.ca/directories/whitepages/\">Business Directory</a>\n  </p>\n<p>There is no cost to register a Business BCeID</p>",
+    "displayOrder": 1
+  },
+  {
+    "title": "Business Types &amp; Other Legal Entities",
+    "slug": "businessTypes",
+    "intro": "<p>You must have a registered business or another legal entity to apply for a cannabis retail licence</p>",
+    "body": "<h2>Business Registrations</h2>\n<p>The type of business or entity you apply as for a licence will determine what information needs to be provided in the application as well as who is required to undergo <a href=\"background-checks.html\">background checks.</a></p>\n<h3>Public Corporations</h3>\n<p>Corporations will need to provide:\n  <ul>\n    <li>List of owners, directors, and officers</li>\n    <li>List of voting shareholders</li>\n    <li>TBD</li>\n  </ul>\n</p>\n<h3>Sole Proprietorship</h3>\n<p>Sole Proprietorships will need to provide:\n  <ul>\n    <li>Name of the owner</li>\n    <li>TBD</li>\n  </ul>\n</p>\n<h2>Business Names</h2>\n<p>The province will review and approve the name of your business. Your business name cannot suggest you are selling a medical product. It cannot contain words like:\n  <ul>\n    <li>Dispensary</li>\n    <li>Pharmacy</li>\n    <li>Apothecary</li>\n  </ul>\n</p>",
+    "displayOrder": 2
+  },
+  {
+    "title": "Eligibility Requirements",
+    "slug": "eligibilityRequirements",
+    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
+    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "displayOrder": 3
+  },
+  {
+    "title": "Fees",
+    "slug": "fees",
+    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
+    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "displayOrder": 4
+  },
+  {
+    "title": "Store Inspections",
+    "slug": "storeInspections",
+    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
+    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "displayOrder": 5
+  },
+  {
+    "title": "Location Requirements",
+    "slug": "locationRequirements",
+    "intro": "<p>You will need to submit information about your proposed location to ensure it meets all government requirements.</p>",
+    "body": "<h2>Owning or leasing a location</h2>\n<p>You will need to provide proof of ownership, or a copy of a fully executed lease that does not expire for at least 12 months from the date of licence approval</p>\n<p>A parcel identifier (PID) is required to identify the location.</p>\n<p>You can  find a property’s PID on the:\n<ul>\n  <li>Tax assessment notice from BC Assessment or through <a href=\"#\">BC Assessment’s e-valueBC</a> website</li>\n  <li>Municipal tax notice</li>\n</ul></p>\n<h2>Distance from schools and other retailers</h2>\n<p>The Province will not impose distance requirements for non-medical cannabis retailers. However, local\ngovernments will have the authority to impose additional requirements. Therefore, you should inquire\nwith your local government about local requirements before committing to a location.</p>\n<h2>Floorplans</h2>\n<p>Floor plans are used to indicate what part of your store is for customer sales, and which part is restricted to employees.</p>\n<p>The plans you submit will be used during your inspection. What the inspector sees must match the plans you submitted.</p>",
+    "displayOrder": 6
+  },
+  {
+    "title": "Local Government &amp; First Nation Support",
+    "slug": "lgfn",
+    "intro": "<p>It's up to local governments and First Nations to decide if they'll allow cannabis retail stores. The province will not issue a cannabis retail licence in a community that doesn't support it. Be sure to check with your local authority before applying.</p>",
+    "body": "<h2>Public Consultation</h2>\n                  <p>Local governments and First Nations will ask people near your proposed store about how it might affect them. It's up to these governments to decide the area around the store to consult.</p>\n                  <p>After the public consultation they will:\n<ul>\n  <li>Decide if they support your proposal</li>\n  <li>Inform the province of their decision</li>\n  <li>Determine any conditions placed on your specific store</li>\n</ul>\n                  </p>\n                  <p>Cannabis stores operated by the province must also undergo a public consultation.</p>\n                  <h2>Local Business Licence & Zoning</h2>\n                  <p>Your local government or First Nation may also require you to apply for a local cannabis business licence and rezoning.</p>\n                  <p>Check with your local government or First Nation about local licencing and zoning. </p>",
+    "displayOrder": 7
+  },
+  {
+    "title": "Public Consultations",
+    "slug": "publicConsultations",
+    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
+    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "displayOrder": 8
+  },
+  {
+    "title": "Ordering Product",
+    "slug": "orderingProduct",
+    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
+    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "displayOrder": 9
+  },
+  {
+    "title": "Employee Training - Serving it Right",
+    "slug": "employeeTraining",
+    "intro": "<p>Selling it Right is a program that helps staff of licensed retail cannabis stores sell cannabis responsibly.</p>",
+    "body": "<p>Your staff must complete the Selling it Right training to sell cannabis legally. For more information, see the <a href=\"#\">Selling it Right</a> website.\n</p>",
+    "displayOrder": 10
+  },
+  {
+    "title": "Approval in Principle",
+    "slug": "approvalInPrinciple",
+    "intro": "<p>&ldquo;Approval in principle&rdquo; is a conditional approval from the province letting you know that you will receive your licence after passing a final inspection.</p>",
+    "body": "<p>Conditional approval is granted when the province determines that:</p>\n<ul>\n<li>You are eligible for the licence</li>\n<li>You successfully met the requirements in the application</li>\n<li>Your application is supported by the local government or Indigenous Nation</li>\n</ul>\n<p>Once you have conditional approval, you can:</p>\n<ul>\n<li>Buy, lease or finalize any alternative arrangements for your <a routerLink=\"policy-document/locationRequirements\">store location</a></li>\n<li>Make renovations to ensure your store&rsquo;s layout and exterior matches the information you submitted in your application</li>\n</ul>\n<p>When your store is ready, contact the province to schedule your <a routerLink=\"policy-document/locationRequirements\">final inspection</a>.</p>",
+    "displayOrder": 11
   }
 ]
