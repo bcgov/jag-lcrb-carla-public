@@ -1,6 +1,31 @@
 <div *ngIf="policyDocumentSummaries">
-  <div *ngFor="let policyDocumentSummary of policyDocumentSummaries">
-    <a href="policy-document/{{ policyDocumentSummary.slug }}">{{ policyDocumentSummary.title }}</a>
-    <br />
-  </div>
-</div>
+
+    <!-- SITE SECONDARY NAVIGATION -->
+   
+        <!-- googleoff:all -->
+        <a id="navigation-anchor"></a>
+        <div class="contentPageLeftNavigation col-md-4">
+            <div id="topicLeftNav" class="navbar" role="navigation" aria-label="secondary">
+                <div class="navbar-header">
+                    <button class="navbar-toggle topic-menu-trigger " aria-expanded="true" type="button" data-toggle="collapse" data-target="#topicLeftNav .navbar-collapse">
+                        Section Navigation
+                    </button>
+                </div>
+                <div class="row navbar-collapse collapse">
+                    <div class="col-xs-12">
+                        <ul class="leftNav nav navbar-nav">
+                            <li class="open" *ngFor="let policyDocumentSummary of policyDocumentSummaries">
+                                <div class="leftNav-item-wrapper">
+                                    <a href="policy-document/{{ policyDocumentSummary.slug }}">{{ policyDocumentSummary.title }}</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SITE SECONDARY NAVIGATION -->
+
+    
+
+
