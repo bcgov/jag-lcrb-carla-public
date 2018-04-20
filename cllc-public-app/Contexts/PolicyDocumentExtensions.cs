@@ -81,7 +81,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             (                
                 initialPolicyDocument.slug,
                 initialPolicyDocument.title,
-                initialPolicyDocument.intro,
+                initialPolicyDocument.menuText,
+                initialPolicyDocument.category,
                 initialPolicyDocument.body,
                 initialPolicyDocument.displayOrder
             );
@@ -106,7 +107,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             {
                 PolicyDocument.Body = PolicyDocumentInfo.Body;
                 PolicyDocument.Title = PolicyDocumentInfo.Title;
-                PolicyDocument.Intro = PolicyDocumentInfo.Intro;
+                PolicyDocument.Category = PolicyDocumentInfo.Category;
+                PolicyDocument.MenuText = PolicyDocumentInfo.MenuText;
                 PolicyDocument.DisplayOrder = PolicyDocumentInfo.DisplayOrder;
                 context.PolicyDocuments.Update(PolicyDocument);
                 context.SaveChanges();
