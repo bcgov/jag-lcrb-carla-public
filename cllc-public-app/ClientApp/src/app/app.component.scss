@@ -79,4 +79,55 @@ div.c1 li.c2 a {
     
 }
 
+/*-----main nav-----*/
+.navigationRibbon {
+    /* -webkit-box-shadow: 0px 3px 3px 1px rgba(51, 51, 51, 0.5);
+    -moz-box-shadow: 0px 3px 3px 1px rgba(51, 51, 51, 0.5);
+    box-shadow: 0px 3px 3px 1px rgba(51, 51, 51, 0.5); */
+    border-top: 1px solid #fcba19;
+    width: 100%;
+}
+
+.navigationRibbon a {
+    color: #fff;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding: 15px 20px;
+    position: relative
+}
+
+.navigationRibbon a.active {
+    border-bottom: 3px solid #FFBA00
+}
+
+.navigationRibbon a + a:after {
+    /* content: "";
+    background: #748bad;
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+    height: 50%;
+    width: 1px; */
+}
+
+.navigationRibbon a.current {
+    text-decoration: underline;
+    font-weight: bold
+}
+
+.navigationRibbon .level2Navigation a.current {
+    /*background-image: url("../images/nav-ribbon-arrow.png");*/
+    background-position: center bottom;
+    background-repeat: no-repeat
+}
+
+.navigationRibbon .level2Navigation {
+    background-color: #38598a
+}
+
+.navigationRibbon .level3Navigation {
+    background-color: #5475a7
+
+}
 
