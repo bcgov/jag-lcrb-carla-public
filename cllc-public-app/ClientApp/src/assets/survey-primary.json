@@ -77,7 +77,7 @@
               "text": "Limited Liability Corporation"
             },
             {
-              "value": "Limited Liability Corporation",
+              "value": "Unlimited Liability Corporation",
               "text": "Unlimited Liability Corporation"
             }
           ]
@@ -154,15 +154,21 @@
             "Yes",
             "No"
           ]
-        },
+        }
+      ],
+      "visible": false,
+      "visibleIf": "{age19} = 'Yes' "
+    },
+    {
+      "name": "p6",
+      "elements": [
         {
           "type": "text",
           "name": "indigenousNationsLand",
           "visible": false,
           "visibleIf": "{isIndigenousNationsLand} = 'Yes'",
           "width": "50%",
-          "title": "Which Indigenous Nation will the proposed location be operating in?",
-          "isRequired": true
+          "title": "Which Indigenous Nation will the proposed location be operating in?"
         },
         {
           "type": "radiogroup",
@@ -170,7 +176,6 @@
           "visible": false,
           "visibleIf": "{isIndigenousNationsLand} = 'Yes'",
           "title": "Have you contacted the First Nation about opening a cannabis store?",
-          "isRequired": true,
           "choices": [
             "Yes",
             "No"
@@ -181,7 +186,7 @@
       "visibleIf": "{age19} = 'Yes' "
     },
     {
-      "name": "p6",
+      "name": "p7",
       "elements": [
         {
           "type": "dropdown",
@@ -199,7 +204,7 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "p7",
+      "name": "p8",
       "elements": [
         {
           "type": "radiogroup",
@@ -216,7 +221,7 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "p8",
+      "name": "p9",
       "elements": [
         {
           "type": "radiogroup",
@@ -233,7 +238,7 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "p9",
+      "name": "p10",
       "elements": [
         {
           "type": "radiogroup",
