@@ -53,22 +53,22 @@
         </ul>
       </div>
 
-      <!-- isIndigenousNationsLand -->
-      <div *ngIf="data && data.isIndigenousNationsLand == 'Yes'">
+      <!-- isFirstNationsLand -->
+      <div *ngIf="data && data.isFirstNationsLand == 'Yes'">
         <ul class="detail-step">
-          <li>Your proposed location will be located on Indigenous Nations land</li>
+          <li>Your proposed location will be located on First Nations land</li>
         </ul>
       </div>
-      <div *ngIf="data && data.isIndigenousNationsLand == 'No'">
+      <div *ngIf="data && data.isFirstNationsLand == 'No'">
         <ul class="detail-step">
-          <li>Your proposed location will not be located on Indigenous Nations land</li>
+          <li>Your proposed location will not be located on First Nations land</li>
         </ul>
       </div>
 
-      <!-- indigenousNationsLand -->
-      <div *ngIf="data && data.indigenousNationsLand">
+      <!-- firstNationsLand -->
+      <div *ngIf="data && data.firstNationsLand">
         <ul class="detail-step">
-          <li>Indigenous Nation location proposed: {{data.indigenousNationsLand}}</li>
+          <li>First Nation location proposed: {{data.firstNationsLand}}</li>
         </ul>
       </div>
 
@@ -465,8 +465,8 @@
           <p>The local government will also go through a financial integrity check</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Indigenous Nation'">
-          <p>As an Indigenous Nation, you must submit your Indigenous Nation's:</p>
+        <div *ngIf="data.businessType == 'First Nation'">
+          <p>As a First Nation, you must submit your First Nation's:</p>
           <ul>
             <li>Full name</li>
             <li>
@@ -478,8 +478,8 @@
             </li>
             <li>Business Number (9 digit number issued by Revenue Canada).</li>
           </ul>
-          <p>The appointed delegate in your Indigenous Nation will go through a security clearance check during the application process</p>
-          <p>The Indigenous Nation will also go through a financial integrity check</p>
+          <p>The appointed delegate in your First Nation will go through a security clearance check during the application process</p>
+          <p>The First Nation will also go through a financial integrity check</p>
         </div>
 
         <div *ngIf="data.otherType == 'School/University'">
@@ -586,10 +586,10 @@
         <hr />
       </div>
 
-      <!--indigenousNationsLand-->
-      <div *ngIf="data.indigenousNationsLand">
-        <h3>Indigenous Nations Land</h3>
-        <p>If the Indigenous Nation has a population of less than 2500 people and your proposed location is at least 10km from any other retail cannabis application, you may qualify for a rural cannabis retail licence.</p>
+      <!--firstNationsLand-->
+      <div *ngIf="data.firstNationsLand">
+        <h3>First Nations Land</h3>
+        <p>If the First Nation has a population of less than 2500 people and your proposed location is at least 10km from any other retail cannabis application, you may qualify for a rural cannabis retail licence.</p>
         <hr />
       </div>
 
@@ -597,10 +597,10 @@
       <div *ngIf="data.contactedFirstNation">
         <h3>First Nation</h3>
         <div *ngIf="data.contactedFirstNation == 'Yes'">
-          <p>Keep communicating with the Indigenous Nation about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the Indigenous Nation to sell cannabis.</p>
+          <p>Keep communicating with the First Nation about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the First Nation to sell cannabis.</p>
         </div>
         <div *ngIf="data.contactedFirstNation == 'No'">
-          <p>The Indigenous Nation must approve your cannabis store application. Contact the First Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements. Indigenous Nations may choose to follow the local government approval process, or one of their own. You may be required to get a local business licence and zoning approval from the Indigenous Nation to sell cannabis.</p>
+          <p>The First Nation must approve your cannabis store application. Contact the First Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements. First Nations may choose to follow the local government approval process, or one of their own. You may be required to get a local business licence and zoning approval from the First Nation to sell cannabis.</p>
         </div>
         <hr />
       </div>
