@@ -12,17 +12,14 @@ $warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 
-@font-face {
-    font-family: 'Myriad-Pro';
-    src: url('./assets/MyriadWebPro.ttf')
-}
+
 
 body {
   background: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #494949;
-  font-family: Myriad-Pro, Calibri, Arial, "sans serif";
+  font-family: MyriadWebPro, Calibri, Arial, "sans serif";
 }
 
 body, h5, .h5, .btn {
