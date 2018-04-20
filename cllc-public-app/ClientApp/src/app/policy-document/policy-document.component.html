@@ -1,8 +1,9 @@
-<div class="col-md-8 main">
-  <app-policy-document-sidebar></app-policy-document-sidebar>
-  <div *ngIf="!policyDocument">Loading...</div>
-  <div *ngIf="policyDocument"></div>
-  <div id="title" [innerHTML]="title" class="h1"></div>
-  <div id="intro" [innerHTML]="intro" class="intro"></div>
-  <div id="body" [innerHTML]="body" class="body"></div>
+<div class="container" *ngIf="policyDocument">
+  <div class="row">
+    <app-policy-document-sidebar></app-policy-document-sidebar>    
+    <div class="col-md-8">
+      <div id="title" [innerHTML]="title" class="h1"></div>
+      <div id="body" [innerHTML]="body" class="body"></div>
+    </div>
+  </div>
 </div>
