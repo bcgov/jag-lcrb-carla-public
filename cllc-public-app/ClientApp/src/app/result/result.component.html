@@ -29,203 +29,239 @@
         </ul>
       </div>
 
-        <!-- businessType -->
-        <div *ngIf="data.businessType">
-          <ul class="detail-step">
-            <li>The type of business that will be applying for the licence is {{data.businessType}}</li>
-          </ul>
-        </div>
+      <!-- businessType -->
+      <div *ngIf="data.businessType">
+        <ul class="detail-step">
+          <li>
+            The type of business that will be applying for the licence is {{data.businessType}}
+            <div *ngIf="data.corporationType"> - {{data.corporationType}}</div>
+            <div *ngIf="data.partnershipType"> - {{data.partnershipType}}</div>
+            <div *ngIf="data.otherType"> - {{data.otherType}}</div>
+          </li>
+        </ul>
+      </div>
 
-        <!-- bceidAccount -->
-        <div *ngIf="data && data.bceidAccount == 'Yes'">
-          <ul class="detail-step">
-            <li>You have a 'Business BCeID' account</li>
-          </ul>
-        </div>
-        <div *ngIf="data && data.bceidAccount == 'No'">
-          <ul class="detail-step">
-            <li>You don't have a 'Business BCeID' account</li>
-          </ul>
-        </div>
+      <!-- bceidAccount -->
+      <div *ngIf="data && data.bceidAccount == 'Yes'">
+        <ul class="detail-step">
+          <li>You have a 'Business BCeID' account</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.bceidAccount == 'No'">
+        <ul class="detail-step">
+          <li>You don't have a 'Business BCeID' account</li>
+        </ul>
+      </div>
 
-        <!-- storelocation -->
-        <div *ngIf="data.storelocation">
-          <ul class="detail-step">
-            <li>{{data.storelocation}} is where you plan on opening a store</li>
-          </ul>
-        </div>
+      <!-- isIndigenousNationsLand -->
+      <div *ngIf="data && data.isIndigenousNationsLand == 'Yes'">
+        <ul class="detail-step">
+          <li>Your proposed location will be located on Indigenous Nations land</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.isIndigenousNationsLand == 'No'">
+        <ul class="detail-step">
+          <li>Your proposed location will not be located on Indigenous Nations land</li>
+        </ul>
+      </div>
 
-        <!-- locationOwnedLeased -->
+      <!-- indigenousNationsLand -->
+      <div *ngIf="data && data.isIndigenousNationsLand == 'Yes'">
+        <ul class="detail-step">
+          <li>Indigenous Nation location proposed is: {{data.isIndigenousNationsLand}}</li>
+        </ul>
+      </div>
+
+      <!-- contactedFirstNation -->
+      <div *ngIf="data && data.contactedFirstNation == 'Yes'">
+        <ul class="detail-step">
+          <li>You have contacted the First Nation about opening a cannabis store</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.contactedFirstNation == 'No'">
+        <ul class="detail-step">
+          <li>You have not contacted the First Nation about opening a cannabis store</li>
+        </ul>
+      </div>
+
+      <!-- storelocation -->
+      <div *ngIf="data.storelocation">
+        <ul class="detail-step">
+          <li>{{data.storelocation}} is where you plan on opening a store</li>
+        </ul>
+      </div>
+
+      <!-- locationOwnedLeased -->
+      <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
+        <ul class="detail-step">
+          <li>You have a store location currently owned or leased</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.locationOwnedLeased == 'No'">
+        <ul class="detail-step">
+          <li>You don't have a store location currently owned or leased</li>
+        </ul>
+      </div>
+
+      <!-- contactLgFn -->
+      <div *ngIf="data && data.contactLgFn == 'Yes'">
+        <ul class="detail-step">
+          <li>You have contacted your local government or First Nation about opening a cannabis store</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.contactLgFn == 'No'">
+        <ul class="detail-step">
+          <li>You haven't contacted your local government or First Nation about opening a cannabis store</li>
+        </ul>
+      </div>
+
+      <!-- localBusinessLicenseCannabis -->
+      <div *ngIf="data && data.localBusinessLicenseCannabis == 'Yes'">
+        <ul class="detail-step">
+          <li>You have a local business licence for cannabis sales</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.localBusinessLicenseCannabis == 'No'">
+        <ul class="detail-step">
+          <li>You don't have a local business licence for cannabis sales</li>
+        </ul>
+      </div>
+
+      <!-- connectionToProducerCultivator -->
+      <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
+        <ul class="detail-step">
+          <li>You have a financial or business connection to a licensed producer or a cultivator planning to become a licensed producer</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.connectionToProducerCultivator == 'No'">
+        <ul class="detail-step">
+          <li>You don't have a financial or business connection to a licensed producer or a cultivator planning to become a licensed producer</li>
+        </ul>
+      </div>
+
+      <hr />
+
+      <!-- *********************** RESULTS ********************************* -->
+
+      <h2>What you need to prepare</h2>
+
+      <!-- age19 -->
+      <div *ngIf="data && data.age19 == 'No'">
+        <h3>Age Eligibility</h3>
+        <ul class="detail-step">
+          <li>You are not eligible to apply</li>
+          <li>Additional info</li>
+        </ul>
+      </div>
+
+      <!-- registeredBusiness -->
+      <div *ngIf="data && data.registeredBusiness == 'No'">
+        <h3>Register for a business in British Columbia</h3>
+        <ul class="detail-step">
+          <li>You must register for a business in BC</li>
+          <li>Additional info</li>
+        </ul>
+        <hr />
+      </div>
+
+      <!-- businessType -->
+      <!--<div *ngIf="data. && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">-->
+      <div *ngIf="data.businessType">
+        <h3>Applying as {{data.businessType}}</h3>
+        <p>As {{data.businessType}} you must submit:</p>
+        <ul class="detail-step">
+          <li>Registered business address</li>
+          <li>Notice of articles</li>
+          <li>A list of all owners, directors, and officers</li>
+          <li>A list of all shareholders with 10% or more of voting shares</li>
+        </ul>
+        <p>Background Checks for {{data.businessType}}</p>
+        <p>Background checks will be required for all owners, directors, officers, and shareholders with 10% or more of voting shares. You will authorize the province to conduct these checks during the application process.</p>
+        <hr />
+      </div>
+
+      <!-- bceidAccount -->
+      <div *ngIf="data && data.bceidAccount == 'No'">
+        <h3>Register for a Business BCeID</h3>
+        <p>A Business BCeID provides secure access for businesses to access online services.</p>
+        <p>You can have multiple Business BCeIDs associated to your business. The person submitting the licence application must have their own unique BCeID and be authorized by the business to submit the application.</p>
+        <p>To begin, visit <a href="https://www.bceid.ca/register/">Register for a Business BCeID</a></p>
+        <hr />
+      </div>
+      <div *ngIf="data && data.bceidAccount == 'doNotknow'">
+        <h3>Find out about a Business BCeID</h3>
+        <ul class="detail-step">
+          <li>Here is how you can check if you have a business BCeID account</li>
+          <li>Additional info</li>
+        </ul>
+      </div>
+
+      <!-- storelocation -->
+      <div *ngIf="data.storelocation">
+        <h3>{{data.storelocation}} Store</h3>
+        <ul class="detail-step">
+          <li>Info related to the store located on {{data.storelocation}}</li>
+          <li>Additional info</li>
+        </ul>
+        <hr />
+      </div>
+
+      <!-- locationOwnedLeased -->
+      <div *ngIf="data.locationOwnedLeased">
+        <h3>Information about your store</h3>
         <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
+          <p>You must submit:</p>
           <ul class="detail-step">
-            <li>You have a store location currently owned or leased</li>
+            <li>The parcel identification number (PID) of the location</li>
+            <li>Proof of ownership or a copy of a fully executed lease that does not expire for at least 12 months from the date of an expected licence approval</li>
+            <li>A floorplan</li>
           </ul>
+          <p>Floorplans are used to identity the sales area versus the back area.</p>
+          <p>The floor plan you submit will be used during the final inspection to ensure what you told us about your store matches the real layout. Any renovations or modifications of the layout should be done before submitting the floorplan, as these must match exactly as described.</p>
         </div>
         <div *ngIf="data && data.locationOwnedLeased == 'No'">
+          <p>You must submit:</p>
           <ul class="detail-step">
-            <li>You don't have a store location currently owned or leased</li>
+            <li>Info on different proofs of valid interest</li>
+            <li>Additional requirements</li>
           </ul>
         </div>
-
-        <!-- contactLgFn -->
-        <div *ngIf="data && data.contactLgFn == 'Yes'">
-          <ul class="detail-step">
-            <li>You have contacted your local government or First Nation about opening a cannabis store</li>
-          </ul>
-        </div>
-        <div *ngIf="data && data.contactLgFn == 'No'">
-          <ul class="detail-step">
-            <li>You haven't contacted your local government or First Nation about opening a cannabis store</li>
-          </ul>
-        </div>
-
-        <!-- localBusinessLicenseCannabis -->
-        <div *ngIf="data && data.localBusinessLicenseCannabis == 'Yes'">
-          <ul class="detail-step">
-            <li>You have a local business licence for cannabis sales</li>
-          </ul>
-        </div>
-        <div *ngIf="data && data.localBusinessLicenseCannabis == 'No'">
-          <ul class="detail-step">
-            <li>You don't have a local business licence for cannabis sales</li>
-          </ul>
-        </div>
-
-        <!-- connectionToProducerCultivator -->
-        <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
-          <ul class="detail-step">
-            <li>You have a financial or business connection to a licensed producer or a cultivator planning to become a licensed producer</li>
-          </ul>
-        </div>
-        <div *ngIf="data && data.connectionToProducerCultivator == 'No'">
-          <ul class="detail-step">
-            <li>You don't have a financial or business connection to a licensed producer or a cultivator planning to become a licensed producer</li>
-          </ul>
-        </div>
-
         <hr />
-
-        <!-- *********************** RESULTS ********************************* -->
-
-        <h2>What you need to prepare</h2>
-
-        <!-- age19 -->
-        <div *ngIf="data && data.age19 == 'No'">
-          <h3>Age Eligibility</h3>
-          <ul class="detail-step">
-            <li>You are not eligible to apply</li>
-            <li>Additional info</li>
-          </ul>
-        </div>
-
-        <!-- registeredBusiness -->
-        <div *ngIf="data && data.registeredBusiness == 'No'">
-          <h3>Register for a business in British Columbia</h3>
-          <ul class="detail-step">
-            <li>You must register for a business in BC</li>
-            <li>Additional info</li>
-          </ul>
-          <hr />
-        </div>
-
-        <!-- businessType -->
-        <!--<div *ngIf="data. && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">-->
-        <div *ngIf="data.businessType">
-          <h3>Applying as {{data.businessType}}</h3>
-          <p>As {{data.businessType}} you must submit:</p>
-          <ul class="detail-step">
-            <li>Registered business address</li>
-            <li>Notice of articles</li>
-            <li>A list of all owners, directors, and officers</li>
-            <li>A list of all shareholders with 10% or more of voting shares</li>
-          </ul>
-          <p>Background Checks for {{data.businessType}}</p>
-          <p>Background checks will be required for all owners, directors, officers, and shareholders with 10% or more of voting shares. You will authorize the province to conduct these checks during the application process.</p>
-          <hr />
-        </div>
-
-        <!-- bceidAccount -->
-        <div *ngIf="data && data.bceidAccount == 'No'">
-          <h3>Register for a Business BCeID</h3>
-          <p>A Business BCeID provides secure access for businesses to access online services.</p>
-          <p>You can have multiple Business BCeIDs associated to your business. The person submitting the licence application must have their own unique BCeID and be authorized by the business to submit the application.</p>
-          <p>To begin, visit <a href="https://www.bceid.ca/register/">Register for a Business BCeID</a></p>
-          <hr />
-        </div>
-        <div *ngIf="data && data.bceidAccount == 'doNotknow'">
-          <h3>Find out about a Business BCeID</h3>
-          <ul class="detail-step">
-            <li>Here is how you can check if you have a business BCeID account</li>
-            <li>Additional info</li>
-          </ul>
-        </div>
-
-        <!-- storelocation -->
-        <div *ngIf="data.storelocation">
-          <h3>{{data.storelocation}} Store</h3>
-          <ul class="detail-step">
-            <li>Info related to the store located on {{data.storelocation}}</li>
-            <li>Additional info</li>
-          </ul>
-          <hr />
-        </div>
-
-        <!-- locationOwnedLeased -->
-        <div *ngIf="data.locationOwnedLeased">
-          <h3>Information about your store</h3>
-          <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
-            <p>You must submit:</p>
-            <ul class="detail-step">
-              <li>The parcel identification number (PID) of the location</li>
-              <li>Proof of ownership or a copy of a fully executed lease that does not expire for at least 12 months from the date of an expected licence approval</li>
-              <li>A floorplan</li>
-            </ul>
-            <p>Floorplans are used to identity the sales area versus the back area.</p>
-            <p>The floor plan you submit will be used during the final inspection to ensure what you told us about your store matches the real layout. Any renovations or modifications of the layout should be done before submitting the floorplan, as these must match exactly as described.</p>
-          </div>
-          <div *ngIf="data && data.locationOwnedLeased == 'No'">
-            <p>You must submit:</p>
-            <ul class="detail-step">
-              <li>Info on different proofs of valid interest</li>
-              <li>Additional requirements</li>
-            </ul>
-          </div>
-          <hr />
-        </div>
-
-        <!-- contactLgFn -->
-        <div *ngIf="data && data.contactLgFn == 'No'">
-          <h3>Contact your local government or First Nation</h3>
-          <ul class="detail-step">
-            <li>You must go to your municipality for business license and zoning</li>
-            <li>You can still start your application</li>
-            <li>Additional requirements</li>
-          </ul>
-          <hr />
-        </div>
-
-        <!-- localBusinessLicenseCannabis -->
-        <div *ngIf="data && data.localBusinessLicenseCannabis == 'No'">
-          <h3>Obtain a local business license for cannabis sales</h3>
-          <ul class="detail-step">
-            <li>You need to get a local business license for cannabis sales, which might require rezoning</li>
-            <li>You can still start your application</li>
-            <li>Additional requirements</li>
-          </ul>
-          <hr />
-        </div>
-
-        <!-- connectionToProducerCultivator -->
-        <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
-          <h3>Connection to Licensed Producer or Cultivator</h3>
-          <ul class="detail-step">
-            <li>Info re: business structures</li>
-            <li>Changes needed to avoid tied house</li>
-            <li>Additional requirements</li>
-          </ul>
-        </div>
-
-        <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
       </div>
+
+      <!-- contactLgFn -->
+      <div *ngIf="data && data.contactLgFn == 'No'">
+        <h3>Contact your local government or First Nation</h3>
+        <ul class="detail-step">
+          <li>You must go to your municipality for business license and zoning</li>
+          <li>You can still start your application</li>
+          <li>Additional requirements</li>
+        </ul>
+        <hr />
+      </div>
+
+      <!-- localBusinessLicenseCannabis -->
+      <div *ngIf="data && data.localBusinessLicenseCannabis == 'No'">
+        <h3>Obtain a local business license for cannabis sales</h3>
+        <ul class="detail-step">
+          <li>You need to get a local business license for cannabis sales, which might require rezoning</li>
+          <li>You can still start your application</li>
+          <li>Additional requirements</li>
+        </ul>
+        <hr />
+      </div>
+
+      <!-- connectionToProducerCultivator -->
+      <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
+        <h3>Connection to Licensed Producer or Cultivator</h3>
+        <ul class="detail-step">
+          <li>Info re: business structures</li>
+          <li>Changes needed to avoid tied house</li>
+          <li>Additional requirements</li>
+        </ul>
+      </div>
+
+      <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
+    </div>
     </div>
 </div>
