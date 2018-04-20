@@ -20,7 +20,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.id = policyDocument.Id.ToString();                
                 result.slug = policyDocument.Slug;
                 result.title = policyDocument.Title;
-                result.intro = policyDocument.Intro;
+                result.category = policyDocument.Category;
+                result.menuText = policyDocument.MenuText;
                 result.body = policyDocument.Body;
                 result.displayOrder = policyDocument.DisplayOrder;
             }            
@@ -34,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result = new ViewModels.PolicyDocumentSummary();
                 result.slug = policyDocument.Slug;
-                result.title = policyDocument.Title;                
+                result.menuText = policyDocument.MenuText;                
             }
             return result;
         }
