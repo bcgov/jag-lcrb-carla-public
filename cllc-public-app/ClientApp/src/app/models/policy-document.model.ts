@@ -2,7 +2,8 @@ export class PolicyDocument {
   id: string;
   title: string;
   slug: string;
-  intro: string;
+  menuText: string;
+  category: string;
   body: string;
   displayOrder: any;
   constructor() { }
