@@ -11,9 +11,10 @@ using System;
 namespace Gov.Lclb.Cllb.Public.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180420224348_feature-policy-documents-changes")]
+    partial class featurepolicydocumentschanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

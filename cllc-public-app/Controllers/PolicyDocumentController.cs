@@ -27,12 +27,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet()]
-        public JsonResult GetPolicyDocuments()
+        public JsonResult GetPolicyDocuments(string category)
         {
-            List<ViewModels.PolicyDocumentSummary> PolicyDocuments = db.PolicyDocuments
+            List<ViewModels.PolicyDocumentSummary> PolicyDocuments = null;
+            if (string.IsNullOrEmpty(category))
+            {
+                PolicyDocuments = db.PolicyDocuments                
                 .OrderBy(x => x.DisplayOrder)
                 .Select(x => x.ToSummaryViewModel())
-                .ToList(); 
+                .ToList();
+            }
+            else
+            {
+                PolicyDocuments = db.PolicyDocuments
+                .Where(x => x.Category == category)
+                .OrderBy(x => x.DisplayOrder)
+                .Select(x => x.ToSummaryViewModel())
+                .ToList();
+            }
             
             return Json(PolicyDocuments);
         }
