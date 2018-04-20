@@ -1,86 +1,93 @@
 ﻿[
   {
     "title": "Background Checks",
-    "slug": "backgroundCheck",
+    "slug": "background-checks",
     "intro": "<p>A background check is a review of a person's history. It can include an examination of their criminal, police, financial and other records. Checks help prevent organized crime from getting cannabis retail licences.</p>",
     "body": "<h2>Who needs to be checked</h2>\n                  <p>The type of business you operate will determine who in your organization requires a background check.</p>\n<h2>Previous criminal activity</h2>\n<p>You won't necessarily be denied a licence if your check shows a criminal record. It will be assessed against your application and the recentness of the offence. Low risk criminal activity may not prevent you from being licensed, but associating with organized crime will.</p>\n<h2>Illegal cannabis dispensaries</h2>\n<p>Operating an illegal cannabis dispensary will not necessarily deny you a licence, but it will also not earn you preferential treatment.</p>\n<p>All applicants will be assessed by the same standards, including background checks and local government support.</p>\n<h2>Cost</h2>\n<p>You must deposit $X,000 to cover the cost of checks. Extra costs may be added. You will be refunded any unused amounts.</p>",
     "displayOrder": 0
   },
   {
     "title": "Business BCeID",
-    "slug": "businessBCeID",
+    "slug": "business-bceid",
     "intro": "<p>A Business BCeID account is required to login to the application.</p>",
     "body": "<p>Business BCeID provides businesses with secure access to many online government services with just one ID and password. </p>\n<p>It takes about 15 minutes to complete the five step registration process. To begin, visit <a href=\"https://www.bceid.ca/register/business/getting_started/getting_started.aspx\">Register for a Business BCeID.</a></p>\n  <p>You can check if your business or organization is already registered with a Business BCeID by checking the <a href=\"https://www.bceid.ca/directories/whitepages/\">Business Directory</a>\n  </p>\n<p>There is no cost to register a Business BCeID</p>",
     "displayOrder": 1
   },
   {
-    "title": "Business Types &amp; Other Legal Entities",
-    "slug": "businessTypes",
-    "intro": "<p>You must have a registered business or another legal entity to apply for a cannabis retail licence</p>",
-    "body": "<h2>Business Registrations</h2>\n<p>The type of business or entity you apply as for a licence will determine what information needs to be provided in the application as well as who is required to undergo <a href=\"background-checks.html\">background checks.</a></p>\n<h3>Public Corporations</h3>\n<p>Corporations will need to provide:\n  <ul>\n    <li>List of owners, directors, and officers</li>\n    <li>List of voting shareholders</li>\n    <li>TBD</li>\n  </ul>\n</p>\n<h3>Sole Proprietorship</h3>\n<p>Sole Proprietorships will need to provide:\n  <ul>\n    <li>Name of the owner</li>\n    <li>TBD</li>\n  </ul>\n</p>\n<h2>Business Names</h2>\n<p>The province will review and approve the name of your business. Your business name cannot suggest you are selling a medical product. It cannot contain words like:\n  <ul>\n    <li>Dispensary</li>\n    <li>Pharmacy</li>\n    <li>Apothecary</li>\n  </ul>\n</p>",
+    "title": "Businesses and Other Legal Entities",
+    "slug": "businesses-and-other-legal-entities",
+    "intro": "",
+    "body": "<p>Any business or legal entity that is registered in B.C. can apply for a cannabis retail licence. Your application requirements depend on the type of business or legal entity you operate.</p><h2>Registering a Business or Other Legal Entity</h2><p>Only registered businesses or other legal entities can apply for a cannabis retail licence. Learn about registering or incorporating your organization by visiting <a href='https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/bc-registries-online-services'>BC Registry Services</a>.</p><p>You must also <a href='https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/pst/register'>register to collect PST</a> so that you can order cannabis from the provincial distributor.</p><h2>Businesses outside B.C.</h2><p>If you have a business that is incorporated outside of B.C., you can register as an <a href = 'https://www2.gov.bc.ca/gov/content/employment-business/business/managing-a-business/permits-licences/businesses-incorporated-companies/incorporated-companies/incorporate-extraprovincial'>extraprovincial company in B.C.</a> You may want to get legal advice to make sure your business is able to operate in B.C.</p><h2>Application Requirements by Business Type</h2><p>You need to submit the following information about your business:</p><h3>Private Corporation</h3><ul><li>Name</li><li>Incorporation number</li><li>Date of incorporation.</li><li>Central Securities Register (shareholder register) listing all shareholders by:<ul><li>Full legal name</li><li>Address</li><li>Date of birth</li><li>Class of shares</li><li>Number of voting and non-voting shares</li><li>Date shares issued/transferred/cancelled</li></ul> <li>Business Number (9 digit number issued by Revenue Canada).</li><li>Register of of all current directors and officers by: <ul><li>Full legal name</li><li>Position</li><li>Date of appointment</li></ul></li><li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all documents for that legal entity type. </li><ul><h3>Public Corporation</h3><li>Name</li><li>Incorporation number</li><li>Date of incorporation.</li><li>Register of of all current directors and officers by: </li><ul><li>Full legal name</li> <li>Position</li> <li>Date of appointment</li></ul></li><li>Business Number (9 digit number issued by Revenue Canada).</li></ul><h3>Sole proprietor</h3><ul><li>Full legal name</li><li>Address</li> <li>Date of birth. </li><li>Business Number (9 digit number issued by Revenue Canada).</li></ul><h3>Partnership</h3><ul><li>Name of the partnership.</li><li>Partnership Agreement identifying each partner by their</li><ul><li>Full legal name,</li><li>Address</li><li>Date of birth.</li></ul></li><li>Business Number (9 digit number issued by Revenue Canada).</li><li>If one of the partners is a private corporation, public corporation or society you must submit all documents for that legal entity type.</li></ul><h3>Society / Non-Profit Corporation</h3> <ul><li>Name</li><li>Society number</li><li>Date of formation</li><li>Business Number (9 digit number issued by Revenue Canada).</li></ul><h3>Other</h3><ul><li>Includes entities incorporated through Federal or Provincial legislation, such as a local government, First Nation, college or university</li><li>Full name of entity or organization applying for the licence.</li><li>Identify one or more representatives by<ul><li>Full legal name</li><li>Business contact information</li></ul></li><li>Business Number (9 digit number issued by Revenue Canada).</li></ul>",
     "displayOrder": 2
   },
   {
-    "title": "Eligibility Requirements",
-    "slug": "eligibilityRequirements",
-    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
-    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "title": "Eligibility",
+    "slug": "eligibility",
+    "intro": "",
+    "body": "<p>Applicants for a cannabis retail licence must:<ul><li>Be at least 19 years old</li><li>Apply as a <a href='policy-document/businesses-and-other-legal-entities'>registered business or other legal entity</a></li></p><p>Applicants do not have to be a citizen or resident of B.C. or Canada.</p>",
     "displayOrder": 3
   },
   {
     "title": "Fees",
     "slug": "fees",
-    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
-    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "intro": "",
+    "body": "<p>Fees are currently under development and will be available in the coming months. You can expect:<ul><li>An application fee</li><li>A security clearance deposit (unused amount will be refunded)</li><li>A financial integrity assessment fee or deposit</li><ul></p><p>Once your licence is approved, you must pay a fee to receive it. There is also an annual licence renewal fee.</p>",
     "displayOrder": 4
   },
   {
     "title": "Store Inspections",
-    "slug": "storeInspections",
+    "slug": "store-inspections",
     "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
     "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
     "displayOrder": 5
   },
   {
     "title": "Location Requirements",
-    "slug": "locationRequirements",
+    "slug": "location-requirements",
     "intro": "<p>You will need to submit information about your proposed location to ensure it meets all government requirements.</p>",
     "body": "<h2>Owning or leasing a location</h2>\n<p>You will need to provide proof of ownership, or a copy of a fully executed lease that does not expire for at least 12 months from the date of licence approval</p>\n<p>A parcel identifier (PID) is required to identify the location.</p>\n<p>You can  find a property’s PID on the:\n<ul>\n  <li>Tax assessment notice from BC Assessment or through <a href=\"#\">BC Assessment’s e-valueBC</a> website</li>\n  <li>Municipal tax notice</li>\n</ul></p>\n<h2>Distance from schools and other retailers</h2>\n<p>The Province will not impose distance requirements for non-medical cannabis retailers. However, local\ngovernments will have the authority to impose additional requirements. Therefore, you should inquire\nwith your local government about local requirements before committing to a location.</p>\n<h2>Floorplans</h2>\n<p>Floor plans are used to indicate what part of your store is for customer sales, and which part is restricted to employees.</p>\n<p>The plans you submit will be used during your inspection. What the inspector sees must match the plans you submitted.</p>",
     "displayOrder": 6
   },
   {
-    "title": "Local Government &amp; First Nation Support",
-    "slug": "lgfn",
-    "intro": "<p>It's up to local governments and First Nations to decide if they'll allow cannabis retail stores. The province will not issue a cannabis retail licence in a community that doesn't support it. Be sure to check with your local authority before applying.</p>",
-    "body": "<h2>Public Consultation</h2>\n                  <p>Local governments and First Nations will ask people near your proposed store about how it might affect them. It's up to these governments to decide the area around the store to consult.</p>\n                  <p>After the public consultation they will:\n<ul>\n  <li>Decide if they support your proposal</li>\n  <li>Inform the province of their decision</li>\n  <li>Determine any conditions placed on your specific store</li>\n</ul>\n                  </p>\n                  <p>Cannabis stores operated by the province must also undergo a public consultation.</p>\n                  <h2>Local Business Licence & Zoning</h2>\n                  <p>Your local government or First Nation may also require you to apply for a local cannabis business licence and rezoning.</p>\n                  <p>Check with your local government or First Nation about local licencing and zoning. </p>",
+    "title": "Local Governments",
+    "slug": "local-governments",
+    "intro": "",
+    "body": "<p>Cannabis stores in B.C. must have approval from the local government where the store is located.</p><p>Local governments can:<ul><li>Choose not to accept applications for cannabis retail store licences</li><li>Set a cap on how many cannabis retail stores can operate in their community</li><li>Impose restrictions on where <a href='policy-document/location-requirements'>cannabis stores can be located</a></li><li><a href='#'>Limit the hours</a> that cannabis stores can operate</li><li>Ask the province to place restrictions on licences they approve</li><li>Decide not to approve an application, for any reason</li><ul></p><p>You should contact the local government as soon as possible to ask if they are accepting applications and to check for local requirements.<p>If the local government does not approve your proposed store, your application will be cancelled. <h2>Public Consultations<h2><p>The local government must hold a public consultation to determine how your cannabis store would affect the surrounding community.</p><p>You should ask the local government about their process and what you need to do to initiate the public consultation.</p><h2>Local licences and zoning</h2><p>In addition to a provincial cannabis retail licence, your store may need zoning approval and a business permit or licence from the local government to sell cannabis. </p><p>Every municipality in B.C. issues their own business licences, permits and zoning. </p><p>Ask the local government about applying for a business licence and getting zoning approval.</p>",
     "displayOrder": 7
   },
   {
     "title": "Public Consultations",
-    "slug": "publicConsultations",
+    "slug": "public-consultations",
     "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
     "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
     "displayOrder": 8
   },
   {
-    "title": "Ordering Product",
-    "slug": "orderingProduct",
-    "intro": "<p>Insert your introductory content here. Ensure your content meets the stylistic and formatting standards for writing consistent and high quality content for B.C. government websites.</p>",
-    "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
+    "title": "Ordering Cannabis",
+    "slug": "ordering-cannabis",
+    "intro": "",
+    "body": "\"<h2>Cannabis Source</h2><p>You must order cannabis for your retail store from B.C.’s provincial distributor. You are not allowed to get cannabis from any other source. If you operate an illegal dispensary, you must remove all cannabis from your store before receiving your licence.</p><p>Some dispensary owners are concerned that the provincial distributor will not have a large enough cannabis inventory after legalization. The province is working hard to make sure inventory meets retailers’ needs</p><h2>Agreements with cannabis producers</h2><p>You must not purchase cannabis directly from a producer. In addition, you must not:<ul><li>Pay a producer to have guaranteed access to their product</li><li>Accept payment from a producer in return for benefits, such as preferential shelf space</li><li>Accept payment from a producer for agreeing not to sell a competitor’s product</li><li>Make agreements that give you exclusive access to a producer’s product or product line</li></ul></p><h2>Ordering Cannabis<h2><p>You can order product once you receive your licence. Your licence number is required to place an order.</p><p>You cannot pre-order cannabis before receiving your licence.</p><p>Once you receive your licence, you can create an account with the distributor to view the product catalog, which lists wholesale prices and product specs (e.g. package sizes).</p><p>Learn more about <a href='http://www.bcldb.com/cannabis'>ordering cannabis</p>. If you have questions, please email <a href='mailto:cannabis@bcldb.com'>cannabis@bcldb.com</a>.",
     "displayOrder": 9
   },
   {
-    "title": "Employee Training - Serving it Right",
-    "slug": "employeeTraining",
-    "intro": "<p>Selling it Right is a program that helps staff of licensed retail cannabis stores sell cannabis responsibly.</p>",
-    "body": "<p>Your staff must complete the Selling it Right training to sell cannabis legally. For more information, see the <a href=\"#\">Selling it Right</a> website.\n</p>",
+    "title": "Employee Registration & Training",
+    "slug": "employee-registration-training",
+    "intro": "",
+    "body": "<p>Cannabis retail store employees must be registered with the province and successfully pass a training course for the responsible sale of cannabis.</p><h2>Employee Registration</h2><p>As a licensee, you must:<ul><li>Ensure your employees are registered</li><li>Keep a record of employee registration numbers and the dates the numbers expire</li><li>Have the records available for inspection at all times</li></ul></p><p>Employees must pass a security clearance as part of the provincial registration process.<p><h2>Employee Training</h2><p>In collaboration with the cannabis industry, the province is developing a mandatory training course for employees of cannabis retail stores. Once the program is ready, employees of cannabis stores will be required to successfully pass the training.</p><p>More information about the program will be available in the coming months. The province will notify licensees once the program is developed.</p>",
     "displayOrder": 10
   },
   {
+    "title": "Employee Training - Selling it Right",
+    "slug": "employee-training-selling-it-right",
+    "intro": "<p>Selling it Right is a program that helps staff of licensed retail cannabis stores sell cannabis responsibly.</p>",
+    "body": "<p>Your staff must complete the Selling it Right training to sell cannabis legally. For more information, see the <a href=\"#\">Selling it Right</a> website.\n</p>",
+    "displayOrder": 11
+  },
+  {
     "title": "Approval in Principle",
-    "slug": "approvalInPrinciple",
+    "slug": "approval-in-principle",
     "intro": "<p>&ldquo;Approval in principle&rdquo; is a conditional approval from the province letting you know that you will receive your licence after passing a final inspection.</p>",
     "body": "<p>Conditional approval is granted when the province determines that:</p>\n<ul>\n<li>You are eligible for the licence</li>\n<li>You successfully met the requirements in the application</li>\n<li>Your application is supported by the local government or Indigenous Nation</li>\n</ul>\n<p>Once you have conditional approval, you can:</p>\n<ul>\n<li>Buy, lease or finalize any alternative arrangements for your <a routerLink=\"policy-document/locationRequirements\">store location</a></li>\n<li>Make renovations to ensure your store&rsquo;s layout and exterior matches the information you submitted in your application</li>\n</ul>\n<p>When your store is ready, contact the province to schedule your <a routerLink=\"policy-document/locationRequirements\">final inspection</a>.</p>",
-    "displayOrder": 11
+    "displayOrder": 12
   }
 ]
