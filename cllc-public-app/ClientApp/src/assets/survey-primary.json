@@ -52,7 +52,7 @@
             "Trust",
             "Estate",
             "Local Government",
-            "Indigenous Nation",
+            "First Nation",
             "Other"
           ]
         },
@@ -147,8 +147,8 @@
       "elements": [
         {
           "type": "radiogroup",
-          "name": "isIndigenousNationsLand",
-          "title": "Will your proposed location be located on Indigenous Nations land?",
+          "name": "isFirstNationsLand",
+          "title": "Will your proposed location be located on First Nations land?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -164,17 +164,17 @@
       "elements": [
         {
           "type": "text",
-          "name": "indigenousNationsLand",
+          "name": "firstNationsLand",
           "visible": false,
-          "visibleIf": "{isIndigenousNationsLand} = 'Yes'",
+          "visibleIf": "{isFirstNationsLand} = 'Yes'",
           "width": "50%",
-          "title": "Which Indigenous Nation will the proposed location be operating in?"
+          "title": "Which First Nation will the proposed location be operating in?"
         },
         {
           "type": "radiogroup",
           "name": "contactedFirstNation",
           "visible": false,
-          "visibleIf": "{isIndigenousNationsLand} = 'Yes'",
+          "visibleIf": "{isFirstNationsLand} = 'Yes'",
           "title": "Have you contacted the First Nation about opening a cannabis store?",
           "choices": [
             "Yes",
