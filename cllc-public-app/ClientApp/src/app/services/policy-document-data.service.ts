@@ -24,34 +24,35 @@ export class PolicyDocumentDataService {
          policyDocument.slug = data.slug;
          policyDocument.title = data.title;
          policyDocument.body = data.body;
-         policyDocument.intro = data.intro;
+         policyDocument.category = data.category;
+         policyDocument.menuText = data.menuText;
          policyDocument.displayOrder = data.displayOrder;
          return policyDocument;
        })
        .catch(this.handleError);
    }
 
-   getPolicyDocuments() {
-     let headers = new Headers();
-     headers.append("Content-Type", "application/json");
+   getPolicyDocuments(category: string) {     
+       let headers = new Headers();
+       headers.append("Content-Type", "application/json");
 
-     return this.http.get("api/policydocument", {
-       headers: headers
-     })
-       .toPromise()
-       .then((res: Response) => {
-         let data = res.json();
-         let allPolicyDocuments = [];
-
-         data.forEach((entry) => {
-           let policyDocumentSummary = new PolicyDocumentSummary();
-           policyDocumentSummary.slug = entry.slug;
-           policyDocumentSummary.title = entry.title;
-           allPolicyDocuments.push(policyDocumentSummary);
-         });
-         return allPolicyDocuments;
+       return this.http.get("api/policydocument?category=" + category, {
+         headers: headers
        })
-       .catch(this.handleError);
+         .toPromise()
+         .then((res: Response) => {
+           let data = res.json();
+           let allPolicyDocuments = [];
+
+           data.forEach((entry) => {
+             let policyDocumentSummary = new PolicyDocumentSummary();
+             policyDocumentSummary.slug = entry.slug;
+             policyDocumentSummary.menuText = entry.menuText;
+             allPolicyDocuments.push(policyDocumentSummary);
+           });
+           return allPolicyDocuments;
+         })
+         .catch(this.handleError);
    }
   
      private handleError(error: Response | any) {
