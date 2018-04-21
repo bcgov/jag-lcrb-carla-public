@@ -12,7 +12,7 @@ import { PolicyDocumentDataService } from "../services/policy-document-data.serv
 export class PolicyDocumentComponent {
   public policyDocument: PolicyDocument;
   public title: string;
-  public intro: string;
+  public category: string;
   public body: string;
 
   /** PolicyDocument ctor */
@@ -27,7 +27,7 @@ export class PolicyDocumentComponent {
         this.policyDocument = data;
         this.title = this.policyDocument.title;
         this.body = this.policyDocument.body;
-        this.intro = this.policyDocument.intro;
+        this.category = this.policyDocument.category;
       });
   }
 
