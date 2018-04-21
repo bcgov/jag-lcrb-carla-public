@@ -1,5 +1,5 @@
 export class PolicyDocumentSummary {
-  title: string;
+  menuText: string;
   slug: string;
   constructor() { }
 }

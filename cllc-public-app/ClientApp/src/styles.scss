@@ -14,18 +14,15 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
 
 
-body {
-  background: #fff;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #494949;
-  font-family: MyriadWebPro, Calibri, Arial, "sans serif";
-}
-
 body, h5, .h5, .btn {
     font-size: 18px;
     color: #494949;
-      //line-height: 24px;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #494949;
+    font-family: MyriadWebPro, Calibri, Arial, "sans serif";
+    //line-height: 24px;
 }
 
 .ctx-home {
