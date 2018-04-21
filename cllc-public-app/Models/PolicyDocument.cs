@@ -21,12 +21,13 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a VoteQuestion (required).</param>
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
-        public PolicyDocument(Guid id,  string slug, string title, string intro, string body, int displayOrder)
+        public PolicyDocument(Guid id,  string slug, string title, string menuText, string category, string body, int displayOrder)
         {   
             Id = id;            
             Slug = slug;
             Title = title;
-            Intro = intro;
+            MenuText = menuText;
+            Category = category;
             Body = body;
             DisplayOrder = displayOrder;
         }
@@ -37,11 +38,12 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a VoteQuestion (required).</param>
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
-        public PolicyDocument(string slug, string title, string intro, string body, int displayOrder)
+        public PolicyDocument(string slug, string title, string menuText, string category, string body, int displayOrder)
         {            
             Slug = slug;
             Title = title;
-            Intro = intro;
+            MenuText = menuText;
+            Category = category;
             Body = body;
             DisplayOrder = displayOrder;
         }
@@ -60,7 +62,10 @@ namespace Gov.Lclb.Cllb.Public.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }        
         
-        public string Intro { get; set; }
+        public string MenuText { get; set; }
+
+        // category is used to build the side nav.
+        public string Category { get; set; }
 
         public string Body { get; set; }
 
