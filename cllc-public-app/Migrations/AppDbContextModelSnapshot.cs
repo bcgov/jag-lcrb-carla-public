@@ -73,6 +73,29 @@ namespace Gov.Lclb.Cllb.Public.Migrations
                     b.ToTable("Permissions");
                 });
 
+            modelBuilder.Entity("Gov.Lclb.Cllb.Public.Models.PolicyDocument", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<string>("Category");
+
+                    b.Property<int>("DisplayOrder");
+
+                    b.Property<string>("MenuText");
+
+                    b.Property<string>("Slug");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PolicyDocuments");
+                });
+
             modelBuilder.Entity("Gov.Lclb.Cllb.Public.Models.PostSurveyResult", b =>
                 {
                     b.Property<Guid>("Id")
