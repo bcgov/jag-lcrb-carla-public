@@ -6,7 +6,6 @@
 
 h1, h2 {
   font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .intro {
@@ -34,7 +33,6 @@ h1, h2 {
 .step-info {
   color: #f6f6f6;
   font-size: 18px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .ordinal {
@@ -77,6 +75,8 @@ h1, h2 {
   border-left-color: rgb(248,186,50);
   border-left-width: 7px;
   border-left-style: solid;
+  border-radius:0;
+  margin-top: 15px;
   h1 {
     font-size: 45px;
     font-weight: 600;
@@ -97,4 +97,27 @@ h1, h2 {
     }
   }
 }
+
+
+.globalButton.mat-raised-button {
+    background-color: #003366;
+    border: #003366 1px solid;
+    color: #ffffff;
+    min-width: 120px;
+    font-size: 16px;
+    box-shadow: 0px 0px 0px 0px;
+
+}
+
+.globalButton.mat-raised-button:hover {
+    background-color: #2f567b !important;
+    color: #ffffff;
+    border-color: #204d74;
+    text-decoration: none;
+    box-shadow: 0px 0px 0px 0px
+}
+
+.newsletter {
+        margin-top: 30px
+    }
 

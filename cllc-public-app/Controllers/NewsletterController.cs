@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -13,10 +19,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly AppDbContext db;
+        private string encryptionKey;
+
         public NewsletterController(AppDbContext db, IConfiguration configuration)
         {
             Configuration = configuration;
             this.db = db;
+            this.encryptionKey = Configuration["ENCRYPTION_KEY"];
         }
         [HttpGet("{slug}")]
         public JsonResult Subscribe(string slug)
@@ -28,8 +37,65 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{slug}/subscribe")]
         public JsonResult Subscribe(string slug, [FromQuery] string email)
         {
-            db.AddNewsletterSubscriber(slug, email);
+            string confirmationEmailLink = GetConfirmationLink(slug, email);
+            /* send the user an email confirmation. */
+            string body = "Thank you for your interest in BC Government Cannabis Licensing.\n\n"
+                + "Click the following link to confirm your email address:\n"
+                + confirmationEmailLink;
+
+            // send the email.
+            SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
+
+            // Specify the message content.
+            MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
+            message.Subject = "BC LCLB Cannabis Licensing Newsletter Subscription Confirmation";
+            message.Body = body;
+            client.Send(message);
+
             return Json("Ok");
+        }
+
+        private string GetConfirmationLink(string slug, string email)
+        {
+            string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
+            result += "newsletter-confirm/" + slug + "?code="; 
+
+
+            // create a newsletter confirmation object.
+
+            ViewModels.NewsletterConfirmation newsletterConfirmation = new ViewModels.NewsletterConfirmation();
+            newsletterConfirmation.email = email;
+            newsletterConfirmation.slug = slug;
+
+            // convert it to a json string.
+            string json = JsonConvert.SerializeObject(newsletterConfirmation);
+
+            // encrypt that using two way encryption.
+
+            result += System.Net.WebUtility.UrlEncode(EncryptString(json, encryptionKey));
+
+            return result;
+        }
+
+        [HttpGet("{slug}/verifycode")]
+        public JsonResult Verify(string slug, string code)
+        {
+            string result = "Error";
+            // validate the code.
+            
+            string decrypted = DecryptString(code, encryptionKey);
+            if (decrypted != null)
+            {
+                // convert the json back to an object.
+                ViewModels.NewsletterConfirmation newsletterConfirmation = JsonConvert.DeserializeObject<ViewModels.NewsletterConfirmation>(decrypted);
+                // check that the slugs match.
+                if (slug.Equals (newsletterConfirmation.slug))
+                {
+                    db.AddNewsletterSubscriber(slug, newsletterConfirmation.email);
+                    result = "Ok";
+                }                                
+            }
+            return Json(result);
         }
 
         [HttpPost("{slug}/unsubscribe")]
@@ -39,6 +105,74 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json("Ok");
         }
 
+        /// <summary>
+        /// Encrypt a string using AES
+        /// </summary>
+        /// <param name="text">The string to encrypt</param>
+        /// <param name="keyString">The secret key</param>
+        /// <returns></returns>
+        private string EncryptString(string text, string keyString)
+        {
+            string result = null;
+            byte[] key = Encoding.UTF8.GetBytes(keyString);
 
+            using (Aes aes = Aes.Create())
+            {
+                using (var encryptor = aes.CreateEncryptor(key, aes.IV))
+                {
+                    using (var msEncrypt = new MemoryStream())
+                    {
+                        using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                        using (var swEncrypt = new StreamWriter(csEncrypt))
+                        {
+                            swEncrypt.Write(text);
+                        }
+
+                        var iv = aes.IV;
+
+                        var decryptedContent = msEncrypt.ToArray();
+
+                        byte[] byteResult = new byte[iv.Length + decryptedContent.Length];
+
+                        Buffer.BlockCopy(iv, 0, byteResult, 0, iv.Length);
+                        Buffer.BlockCopy(decryptedContent, 0, byteResult, iv.Length, decryptedContent.Length);
+
+                        result =  Convert.ToBase64String(byteResult);
+                    }
+                }
+            }
+            return result;
+        }
+
+        private string DecryptString(string cipherText, string keyString)
+        {
+            string result = null;
+            var fullCipher = Convert.FromBase64String(cipherText);
+
+            var iv = new byte[16];
+            var cipher = new byte[16];
+
+            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
+            var key = Encoding.UTF8.GetBytes(keyString);
+
+            using (var aesAlg = Aes.Create())
+            {
+                using (var decryptor = aesAlg.CreateDecryptor(key, iv))
+                {
+                    using (var msDecrypt = new MemoryStream(cipher))
+                    {
+                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            {
+                                result = srDecrypt.ReadToEnd();
+                            }
+                        }
+                    }                    
+                }
+            }
+            return result;
+        }
     }
 }

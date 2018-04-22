@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { Newsletter } from "./newsletter.model";
+import { Newsletter } from "../models/newsletter.model";
 
 @Injectable()
 export class NewsletterDataService {
@@ -28,7 +28,6 @@ export class NewsletterDataService {
        .catch(this.handleError);
    }
 
-
    signup(slug: any, email: any) {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
@@ -43,8 +42,20 @@ export class NewsletterDataService {
        .catch(this.handleError);
    }
 
+  verifyCode(slug: any, code: any) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
 
-
+    return this.http.get("api/newsletter/" + slug + "/verifycode?code=" + code, {
+      headers: headers
+    })
+      .toPromise()
+      .then((res: Response) => {
+        let data = res.json();        
+        return data;
+      })
+      .catch(this.handleError);
+  }  
 
      private handleError(error: Response | any) {
      let errMsg: string;
