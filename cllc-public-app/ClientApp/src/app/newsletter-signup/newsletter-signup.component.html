@@ -1,13 +1,12 @@
 
 <form class="emailSignupForm">
-    <h2>{{title}}</h2>
-    <p>{{description}}</p>
+  <h2>{{title}}</h2>
+  <p>{{description}}</p>
   <div class="form-group">
     <p>
       <label class="control-label">Email</label>
       <input id="inputEmail" class="form-control" name="newsletterSignupEmail" required email [(ngModel)]="email" #newsletterSignupEmail="ngModel">
     </p>
-    <!--<a id="inputEmailButton" href="#" class="btn btn-default" (click)="signup()">Subscribe</a>-->
     <a class="globalButton" href="#" mat-raised-button color="primary" (click)="signup()">Subscribe</a>
   </div>
 </form>
