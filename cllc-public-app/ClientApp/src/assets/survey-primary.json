@@ -2,12 +2,12 @@
   "title": "Find out what you need to apply for a licence",
   "pages": [
     {
-      "name": "q1",
+      "name": "p1",
       "elements": [
         {
           "type": "radiogroup",
           "name": "age19",
-          "title": "Are you 19 years old or over?",
+          "title": "Are you 19 years old or older?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -17,12 +17,12 @@
       ]
     },
     {
-      "name": "q2",
+      "name": "p2",
       "elements": [
         {
           "type": "radiogroup",
           "name": "registeredBusiness",
-          "title": "Do you have a registered business in British Columbia that will be applying for a license?",
+          "title": "Do you have a registered business or organization?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -34,38 +34,88 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "q3",
+      "name": "p3",
       "elements": [
         {
           "type": "radiogroup",
           "name": "businessType",
-          "title": "What type of business will be applying for the licence?",
+          "title": "What type of business or organization is applying for the licence?",
+          "isRequired": true,
+          "choices": [
+            "Corporation",
+            "Partnership",
+            "Sole-Proprietorship",
+            {
+              "value": "Society",
+              "text": "Society or similar (Legion, Fraternal Organization etc.)"
+            },
+            "Trust",
+            "Estate",
+            "Local Government",
+            "First Nation",
+            "Other"
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "corporationType",
+          "visible": false,
+          "visibleIf": "{businessType} = 'Corporation'",
+          "title": "Corporation Type",
           "isRequired": true,
           "choices": [
             {
-              "value": "Corporation",
-              "text": "Corporation"
+              "value": "Public Corporation",
+              "text": "Public Corporation"
             },
             {
-              "value": "Partnership",
-              "text": "Partnership"
+              "value": "Private Corporation",
+              "text": "Private Corporation"
             },
             {
-              "value": "Sole-Proprietorship",
-              "text": "Sole-Proprietorship"
+              "value": "Limited Liability Corporation",
+              "text": "Limited Liability Corporation"
             },
             {
-              "value": "Society",
-              "text": "Society"
-            },
-            {
-              "value": "Co-operative",
-              "text": "Co-operative"
-            },
-            {
-              "value": "Local Government or First Nation",
-              "text": "Local Government or First Nation"
+              "value": "Unlimited Liability Corporation",
+              "text": "Unlimited Liability Corporation"
             }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "partnershipType",
+          "visible": false,
+          "visibleIf": "{businessType} = 'Partnership'",
+          "title": "Partnership Type",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "General Partnership",
+              "text": "General Partnership"
+            },
+            {
+              "value": "Limited Partnership",
+              "text": "Limited Partnership"
+            },
+            {
+              "value": "Limited Liability Partnership",
+              "text": "Limited Liability Partnership"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "otherType",
+          "visible": false,
+          "visibleIf": "{businessType} = 'Other'",
+          "title": "OtherType",
+          "isRequired": true,
+          "choices": [
+            "School/University",
+            "Co-op",
+            "Strata Council",
+            "Church"
           ]
         }
       ],
@@ -73,13 +123,12 @@
       "visibleIf": "{age19} = 'Yes' and {registeredBusiness} = \"Yes\""
     },
     {
-      "name": "q4",
+      "name": "p4",
       "elements": [
         {
           "type": "radiogroup",
           "name": "bceidAccount",
-          "title": "Do you have a 'Business BCeID' account?",
-          "isRequired": true,
+          "title": "Do you have a Business BCeID account?",
           "choices": [
             "Yes",
             "No",
@@ -94,12 +143,56 @@
       "visibleIf": "{age19} = 'Yes' and {registeredBusiness} = \"Yes\""
     },
     {
-      "name": "q5",
+      "name": "p5",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "isFirstNationsLand",
+          "title": "Will your proposed location be located on First Nations land?",
+          "isRequired": true,
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        }
+      ],
+      "visible": false,
+      "visibleIf": "{age19} = 'Yes' "
+    },
+    {
+      "name": "p6",
+      "elements": [
+        {
+          "type": "text",
+          "name": "firstNationsLand",
+          "visible": false,
+          "visibleIf": "{isFirstNationsLand} = 'Yes'",
+          "width": "50%",
+          "title": "Which First Nation will the proposed location be operating in?"
+        },
+        {
+          "type": "radiogroup",
+          "name": "contactedFirstNation",
+          "visible": false,
+          "visibleIf": "{isFirstNationsLand} = 'Yes'",
+          "title": "Have you contacted the First Nation about opening a cannabis store?",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        }
+      ],
+      "visible": false,
+      "visibleIf": "{age19} = 'Yes' "
+    },
+    {
+      "name": "p7",
       "elements": [
         {
           "type": "dropdown",
           "name": "storelocation",
-          "title": "Where do you plan on opening a store?",
+          "width": "50%",
+          "title": "Which city will the proposed location be operating in?",
           "isRequired": true,
           "choicesByUrl": {
             "url": "api/jurisdiction",
@@ -111,12 +204,29 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "q6",
+      "name": "p8",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "contactLg",
+          "title": "Have you contacted the local government about opening a cannabis store?",
+          "isRequired": true,
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        }
+      ],
+      "visible": false,
+      "visibleIf": "{age19} = 'Yes'"
+    },
+    {
+      "name": "p9",
       "elements": [
         {
           "type": "radiogroup",
           "name": "locationOwnedLeased",
-          "title": "Do you have a store location currently owned or leased?",
+          "title": "Do you have a location currently owned or leased?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -128,46 +238,12 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "q7",
-      "elements": [
-        {
-          "type": "radiogroup",
-          "name": "contactLgFn",
-          "title": "Have you contacted your local government or First Nation about opening a cannabis store?",
-          "isRequired": true,
-          "choices": [
-            "Yes",
-            "No"
-          ]
-        }
-      ],
-      "visible": false,
-      "visibleIf": "{age19} = 'Yes'"
-    },
-    {
-      "name": "q8",
-      "elements": [
-        {
-          "type": "radiogroup",
-          "name": "localBusinessLicenseCannabis",
-          "title": "Do you have a local business licence for cannabis sales?",
-          "isRequired": true,
-          "choices": [
-            "Yes",
-            "No"
-          ]
-        }
-      ],
-      "visible": false,
-      "visibleIf": "{contactLgFn} = 'Yes'"
-    },
-    {
-      "name": "q9",
+      "name": "p10",
       "elements": [
         {
           "type": "radiogroup",
           "name": "connectionToProducerCultivator",
-          "title": "Do you have a financial or business connection to a licensed producer or a cultivator planning to become a licensed producer?",
+          "title": "Does your business or yourself have any business, financial or family connections to licensed producers or processors of cannabis?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -179,5 +255,6 @@
       "visibleIf": "{age19} = 'Yes'"
     }
   ],
-  "goNextPageAutomatic": false
+  "showQuestionNumbers": "off",
+  "requiredText": ""
 }
