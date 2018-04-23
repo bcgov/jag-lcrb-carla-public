@@ -9,5 +9,5 @@ export ASPNETCORE_ENVIRONMENT=Development
 export PathBase=/cannabislicensing
 
 # e.g. dotnet run, dotnet test, etc.
-dotnet "$@"
+dotnet "$@" --urls http://*:5000
 

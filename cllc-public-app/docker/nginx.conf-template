@@ -1,0 +1,7 @@
+server {
+    location / {
+        allow all;
+        proxy_pass http://DOCKERHOST:9000/;
+    }
+}
+
