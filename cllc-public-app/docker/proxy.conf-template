@@ -1,0 +1,2 @@
+ProxyPass /indy http://DOCKERHOST:9000/
+
