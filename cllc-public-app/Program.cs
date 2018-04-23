@@ -18,7 +18,19 @@ namespace Gov.Lclb.Cllb.Public
     {
         public static void Main(string[] args)
         {            
-            var host = CreateWebHostBuilder(args).Build();
+            // use this to allow command line parameters in the config
+            var configuration = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+            
+            var host = CreateWebHostBuilder(args)
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://*:5000")
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .UseConfiguration(configuration)
+                .Build();
             
             host.Run();
         }
