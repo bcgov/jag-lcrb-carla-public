@@ -7,6 +7,7 @@ import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
 import { SurveyEditorComponent } from './survey/editor.component';
+import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'policy-document/:slug',
     component: PolicyDocumentComponent
+  },
+  {
+    path: 'newsletter-confirm/:slug',
+    component: NewsletterConfirmationComponent
   },
   {
     path: 'prv',
