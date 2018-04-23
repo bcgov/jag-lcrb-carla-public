@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --extract-css",
+    "start": "ng serve --sourcemaps ",
     "build": "ng build --extract-css --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
