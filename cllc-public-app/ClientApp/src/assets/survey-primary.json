@@ -169,7 +169,14 @@
           "visibleIf": "{isFirstNationsLand} = 'Yes'",
           "width": "50%",
           "title": "Which First Nation will the proposed location be operating in?"
-        },
+        }
+      ],
+      "visible": false,
+      "visibleIf": "{age19} = 'Yes' "
+    },
+    {
+      "name": "p7",
+      "elements": [
         {
           "type": "radiogroup",
           "name": "contactedFirstNation",
@@ -186,11 +193,13 @@
       "visibleIf": "{age19} = 'Yes' "
     },
     {
-      "name": "p7",
+      "name": "p8",
       "elements": [
         {
           "type": "dropdown",
           "name": "storelocation",
+          "visible": false,
+          "visibleIf": "{isFirstNationsLand} = 'No'",
           "width": "50%",
           "title": "Which city will the proposed location be operating in?",
           "isRequired": true,
@@ -204,7 +213,7 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "p8",
+      "name": "p9",
       "elements": [
         {
           "type": "radiogroup",
@@ -221,7 +230,7 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "p9",
+      "name": "p10",
       "elements": [
         {
           "type": "radiogroup",
@@ -238,12 +247,12 @@
       "visibleIf": "{age19} = 'Yes'"
     },
     {
-      "name": "p10",
+      "name": "p11",
       "elements": [
         {
           "type": "radiogroup",
           "name": "connectionToProducerCultivator",
-          "title": "Does your business or yourself have any business, financial or family connections to licensed producers or processors of cannabis?",
+          "title": "Does your business or you have any business, financial or family connections to licensed producers of cannabis?",
           "isRequired": true,
           "choices": [
             "Yes",
