@@ -218,6 +218,7 @@
         {
           "type": "radiogroup",
           "name": "contactLg",
+          "visibleIf": "{isFirstNationsLand} = 'No'",
           "title": "Have you contacted the local government about opening a cannabis store?",
           "isRequired": true,
           "choices": [
