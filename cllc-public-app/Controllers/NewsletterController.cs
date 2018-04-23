@@ -114,10 +114,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string EncryptString(string text, string keyString)
         {
             string result = null;
-            byte[] key = Encoding.UTF8.GetBytes(keyString);
 
             using (Aes aes = Aes.Create())
             {
+                byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, aes.Key.Length));
+
                 using (var encryptor = aes.CreateEncryptor(key, aes.IV))
                 {
                     using (var msEncrypt = new MemoryStream())
@@ -154,10 +155,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
             Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
-            var key = Encoding.UTF8.GetBytes(keyString);
-
+            
             using (var aesAlg = Aes.Create())
             {
+                var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
                 using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                 {
                     using (var msDecrypt = new MemoryStream(cipher))
