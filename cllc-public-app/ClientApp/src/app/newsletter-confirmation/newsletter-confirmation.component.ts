@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NewsletterDataService } from "../services/newsletter-data.service"
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class NewsletterConfirmationComponent {
   public title: string;
   public email: string;
   public code: string;
-  public validEmail: any;
+  public success: any;
 
     /** newsletter-confirmation ctor */
   constructor(private newsletterDataService: NewsletterDataService, private route: ActivatedRoute,
