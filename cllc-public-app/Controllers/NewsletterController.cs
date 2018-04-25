@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult Subscribe(string slug, [FromQuery] string email)
         {
             string confirmationEmailLink = GetConfirmationLink(slug, email);
-            string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "assets/bc-logo.svg";
+            string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
             /* send the user an email confirmation. */
             string body = "<img src=" + bclogo + "/><br><h2>Confirm your email address</h2><p>Thank you for signing up to receive updates about cannabis stores in B.C. We’ll send you updates as new rules and regulations are released about selling cannabis.</p>"
                 + "<p>To confirm your request and begin receiving updates by email, click here:</p>"
@@ -60,8 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetConfirmationLink(string slug, string email)
         {
             string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
-            result += "newsletter-confirm/" + slug + "?code="; 
-
+            result += "/newsletter-confirm/" + slug + "?code="; 
 
             // create a newsletter confirmation object.
 

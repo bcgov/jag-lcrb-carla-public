@@ -34,7 +34,8 @@ const routes: Routes = [
       survey: SurveyResolver,
     },
     data: {
-      breadcrumb: 'Potential Applicant Survey', 
+      // do not show breadcrumb
+      //breadcrumb: 'Potential Applicant Survey', 
       survey_path: 'assets/survey-primary.json',
     }
   },
@@ -42,7 +43,8 @@ const routes: Routes = [
     path: 'result/:data',
     component: ResultComponent,
     data: {
-      breadcrumb: 'Survey Results'
+      // do not show breadcrumb
+      //breadcrumb: 'Survey Results'
     }
   },
   {
