@@ -36,6 +36,7 @@
 a:link {
     color: #003366;
     font-weight:500;
+    text-decoration: none;
 }
 
 /* visited link */
@@ -46,9 +47,11 @@ a:visited {
 /* mouse over link */
 a:hover {
     color: #0062d0;
+    text-decoration: underline;
 }
 
 /* selected link */
 a:active {
-    color: #003366;
+    color: #003366;
+    text-decoration:underline;
 }
