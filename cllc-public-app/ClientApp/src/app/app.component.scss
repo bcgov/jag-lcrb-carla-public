@@ -89,45 +89,53 @@ div.c1 li.c2 a {
 }
 
 .navigationRibbon a {
-    color: #fff;
     display: table-cell;
     text-align: left;
     vertical-align: middle;
     padding: 15px 20px;
-    position: relative
-}
-
-.navigationRibbon a.active {
-    border-bottom: 3px solid #FFBA00
-}
-
-.navigationRibbon a + a:after {
-    /* content: "";
-    background: #748bad;
-    position: absolute;
-    bottom: 25%;
-    left: 0;
-    height: 50%;
-    width: 1px; */
-}
-
-.navigationRibbon a.current {
-    text-decoration: underline;
-    font-weight: bold
-}
-
-.navigationRibbon .level2Navigation a.current {
-    /*background-image: url("../images/nav-ribbon-arrow.png");*/
-    background-position: center bottom;
-    background-repeat: no-repeat
+    position: relative;
 }
 
 .navigationRibbon .level2Navigation {
-    background-color: #38598a
+    background-color: #38598a;
 }
 
 .navigationRibbon .level3Navigation {
     background-color: #5475a7
 
 }
+
+/* unvisited link */
+a:link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* visited link */
+a:visited {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600
+}
+
+/* mouse over link */
+a:hover {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 600
+}
+
+/* selected link */
+a:active {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 900;
+}
+
+
+
+
+
+
 
