@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 /** newsletter-confirmation component*/
 export class NewsletterConfirmationComponent {
-  @Input('slug') slug: string;
 
+  public slug: string;
   public description: string;
   public title: string;
   public email: string;
@@ -20,27 +20,22 @@ export class NewsletterConfirmationComponent {
     /** newsletter-confirmation ctor */
   constructor(private newsletterDataService: NewsletterDataService, private route: ActivatedRoute,
     private router: Router) {
-
+    this.slug = this.route.snapshot.params["slug"];
     this.route.queryParams.subscribe(params => {
       this.code = params['code'];
     });
   }
   
   ngOnInit(): void {
-
-    if (this.slug != null) {
-      
+    if (this.slug != null) {      
       // validate the code.
       this.newsletterDataService.verifyCode(this.slug, this.code)
         .then((verificationResult) => {
-          alert(verificationResult); 
+          //alert(verificationResult);
+          this.success = true;
         });
 
-      this.newsletterDataService.getNewsletter(this.slug)
-        .then((newsletter) => {
-          this.description = newsletter.description;
-          this.title = newsletter.title;
-        });
+      
     }    
   }
 }

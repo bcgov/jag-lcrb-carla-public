@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -149,30 +150,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string DecryptString(string cipherText, string keyString)
         {
             string result = null;
-            var fullCipher = Convert.FromBase64String(cipherText);
-
-            var iv = new byte[16];
-            var cipher = new byte[16];
-
-            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
-            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
-            
-            using (var aesAlg = Aes.Create())
+            try
             {
-                var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
-                using (var decryptor = aesAlg.CreateDecryptor(key, iv))
+                cipherText = HttpUtility.UrlDecode(cipherText);
+                var fullCipher = Convert.FromBase64String(cipherText);
+
+                var iv = new byte[16];
+                var cipher = new byte[fullCipher.Length - iv.Length];
+
+                Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+                Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, fullCipher.Length - iv.Length);
+
+                using (var aesAlg = Aes.Create())
                 {
-                    using (var msDecrypt = new MemoryStream(cipher))
+                    var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
+                    using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                     {
-                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        using (var msDecrypt = new MemoryStream(cipher))
                         {
-                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                             {
-                                result = srDecrypt.ReadToEnd();
+                                using (var srDecrypt = new StreamReader(csDecrypt))
+                                {
+                                    result = srDecrypt.ReadToEnd();
+                                }
                             }
                         }
-                    }                    
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                // invalid code. Return a null value 
+                result = null;
             }
             return result;
         }
