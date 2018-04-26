@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
@@ -119,11 +120,18 @@ namespace Gov.Lclb.Cllb.Public
 
         private void SetupDynamics(IServiceCollection services)
         {
+            string redisServer = Configuration["REDIS_SERVER"];
+
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
             string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];
             string serverAppIdUri = Configuration["DYNAMICS_SERVER_APP_ID_URI"];
             string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
             string clientId = Configuration["DYNAMICS_CLIENT_ID"];
+
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = redisServer;
+            });
 
             var authenticationContext = new AuthenticationContext(
                "https://login.windows.net/" + aadTenantId);
@@ -135,7 +143,7 @@ namespace Gov.Lclb.Cllb.Public
             Contexts.Microsoft.Dynamics.CRM.System context = new Contexts.Microsoft.Dynamics.CRM.System (new Uri("https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"));
 
             context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-            "Authorization", authenticationResult.CreateAuthorizationHeader());
+            "Authorization", authenticationResult.CreateAuthorizationHeader());            
 
             services.AddSingleton<Contexts.Microsoft.Dynamics.CRM.System>(context);
         }
@@ -195,6 +203,9 @@ namespace Gov.Lclb.Cllb.Public
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
+                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>(); 
+                    Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System>(); 
+                    
                     connectionString = context.Database.GetDbConnection().ConnectionString;
 
                     log.LogInformation("Migrating the database ...");
@@ -204,7 +215,7 @@ namespace Gov.Lclb.Cllb.Public
                     // run the database seeders
                     log.LogInformation("Adding/Updating seed data ...");
 
-                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory);
+                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, system, distributedCache);
                     seederFactory.Seed((AppDbContext)context);
                     log.LogInformation("Seeding operations are complete.");
                 }

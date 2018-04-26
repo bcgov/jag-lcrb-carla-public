@@ -10,6 +10,7 @@ using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -19,35 +20,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class FormsController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System context;
-        private string encryptionKey;
+        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly IDistributedCache _distributedCache;
 
-        public FormsController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration)
+        public FormsController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
         {
             Configuration = configuration;
-            this.context = context;            
+            this._system = context;
+            this._distributedCache = distributedCache;
         }
         [HttpGet()]
         public async Task<JsonResult> GetForms()
         {
-            var systemForms = await context.Systemforms.ExecuteAsync();
-            Dictionary<string, string> fields = new Dictionary<string, string>();
-
-            foreach (var item in systemForms)
-            {
-                if (item.Formid != null)
-                {
-                    if (!fields.ContainsKey(item.Objecttypecode))
-                    {
-                        fields.Add(item.Objecttypecode, item.Formxml);
-                    }
-                    
-                }
-                
-            }
+            
             
             // get all of the forms.
-            var adxForms = await context.Adx_entityforms.ExecuteAsync();
+            var adxForms = await _system.Adx_entityforms.ExecuteAsync();
             List<ViewModels.Form> forms = new List<ViewModels.Form>();
 
             foreach (var adxForm in adxForms)
@@ -57,12 +45,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 form.id = adxForm.Adx_entityformid == null ? "" : adxForm.Adx_entityformid.ToString();
                 form.displayname = adxForm.Adx_formname;
                 form.entity = adxForm.Adx_entityname;
-
-                // get the form fields.              
-                if (adxForm.Adx_entityformid != null && fields.ContainsKey(form.entity))
-                {
-                    form.formxml = fields[form.entity];
-                }
+                // get the form fields.  
+                string key = "SystemForm_FormXML_" + form.entity;
+                form.formxml = await _distributedCache.GetStringAsync(key);
+                
                 
                 forms.Add(form);
             }
