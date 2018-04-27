@@ -15,6 +15,7 @@ export class NewsletterSignupComponent implements OnInit {
   public description: string;
   public title: string;
   public email: string;
+  public signupSuccess = false;
 
     /** newsletter-signup ctor */
   constructor(private newsletterDataService: NewsletterDataService, public toastr: ToastsManager, vcr: ViewContainerRef) {
@@ -36,6 +37,7 @@ export class NewsletterSignupComponent implements OnInit {
       // subscribe to the newsletter.
       this.newsletterDataService.signup(this.slug, this.email).then((results) => {
         this.toastr.success('Thanks for signing up!', 'Success!');
+        this.signupSuccess = true;
       });
     }
 }
