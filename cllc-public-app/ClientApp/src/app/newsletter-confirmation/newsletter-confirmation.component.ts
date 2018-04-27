@@ -29,13 +29,11 @@ export class NewsletterConfirmationComponent {
   ngOnInit(): void {
     if (this.slug != null) {      
       // validate the code.
-      console.log('*********** before verifyCode ***************');
       this.newsletterDataService.verifyCode(this.slug, this.code)
         .then((verificationResult) => {
           //alert(verificationResult);
           this.verificationResult = verificationResult;
         });
-      console.log('*********** after verifyCode ***************');
 
       
     }    
