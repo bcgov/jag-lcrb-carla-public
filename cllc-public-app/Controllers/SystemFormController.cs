@@ -20,13 +20,13 @@ using Newtonsoft.Json;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class SystemFormsController : Controller
+    public class SystemFormController : Controller
     {
         private readonly IConfiguration Configuration;
         private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
 
-        public SystemFormsController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        public SystemFormController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
         {
             Configuration = configuration;
             this._system = context;
@@ -59,13 +59,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(forms);
         }
 
+
         [HttpGet("{id}")]
         public async Task<JsonResult> GetSystemForm(string id)
         {
-            string key = "SystemForm_" + id + "_FormXML";
-            string formXml = await _distributedCache.GetStringAsync(key);
+            string entityKey = "SystemForm_" + id + "_Entity";
+            string nameKey = "SystemForm_" + id + "_Name";
+            string xmlKey = "SystemForm_" + id + "_FormXML";
+            string formXml = await _distributedCache.GetStringAsync(xmlKey);
             ViewModels.Form form = new ViewModels.Form();
             form.id = id;
+            form.entity = await _distributedCache.GetStringAsync(entityKey);
+            form.name = await _distributedCache.GetStringAsync(nameKey);
             form.formxml = formXml;
             form.tabs = new List<ViewModels.FormTab>();
 
@@ -76,10 +81,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var tabLabel = tab.XPathSelectElement("labels/label");
                     string description = tabLabel.Attribute("description").Value;
-                    string tabId = tabLabel.Attribute("id").Value;
+                    string tabId = tabLabel.Attribute("id") == null ? "" : tabLabel.Attribute("id").Value;
                     FormTab formTab = new FormTab();
                     formTab.name = description;
                     formTab.id = tabId;
+                    formTab.sections = new List<FormSection>();
                     
 
                     // get the sections
@@ -87,17 +93,42 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var section in sections)
                     {
                         FormSection formSection = new FormSection();
-                        formSection.name = section.Attribute("name").Value;
+                        formSection.id = section.Attribute("id").Value;
+                        formSection.fields = new List<FormField>();
 
                         // get the fields.
-                        var labels = tab.XPathSelectElements("labels");
+                        var sectionLabels = section.XPathSelectElements("labels/label");
 
-                        foreach (var label in labels)
+                        // the section label is the section name.
+                        foreach (var sectionLabel in sectionLabels)
+                        {
+                            formSection.name = sectionLabel.Attribute("description").Value;                            
+                        }
+                        // get the cells.
+                        var cells = section.XPathSelectElements("rows/row/cell");
+                        
+                        foreach (var cell in cells)
                         {
                             FormField formField = new FormField();
-                            formField.name = label.Attribute("description").Value;
-                            formSection.fields.Add(formField);
+                            // get the cell label. 
+                            var cellLabels = cell.XPathSelectElements("labels/label");
+                            foreach (var cellLabel in cellLabels)
+                            {
+                                formField.name = cellLabel.Attribute("description").Value;
+                            }
+                            // get the form field name.
+                            var control = cell.XPathSelectElement("control");
+                            if ( !string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
+                            {
+                                formField.datafieldname = control.Attribute("datafieldname").Value;
+                                formSection.fields.Add(formField);
+                            }
+                            
+                            
+                            
                         }
+                        
+
 
                         formTab.sections.Add(formSection);
                     }

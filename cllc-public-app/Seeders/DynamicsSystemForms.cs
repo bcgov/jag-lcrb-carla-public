@@ -42,8 +42,14 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                 {
                     if (item.Formidunique != null)
                     {
-                        string key = "SystemForm_" + item.Formidunique.ToString() + "_FormXML";
-                        await _distributedCache.SetStringAsync(key, item.Formxml);
+                        string id = item.Formidunique.ToString();
+                        string entityKey = "SystemForm_" + id + "_Entity";
+                        string nameKey = "SystemForm_" + id + "_Name";
+                        string xmlKey = "SystemForm_" + id + "_FormXML";
+
+                        await _distributedCache.SetStringAsync(entityKey, item.Objecttypecode);
+                        await _distributedCache.SetStringAsync(nameKey, item.Name);
+                        await _distributedCache.SetStringAsync(xmlKey, item.Formxml);
                     }
                 }
             }                        
