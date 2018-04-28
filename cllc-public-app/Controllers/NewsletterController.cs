@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -38,10 +39,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult Subscribe(string slug, [FromQuery] string email)
         {
             string confirmationEmailLink = GetConfirmationLink(slug, email);
+            string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
             /* send the user an email confirmation. */
-            string body = "Thank you for your interest in BC Government Cannabis Licensing.\n\n"
-                + "Click the following link to confirm your email address:\n"
-                + confirmationEmailLink;
+            string body = "<img src=" + bclogo + "/><br><h2>Confirm your email address</h2><p>Thank you for signing up to receive updates about cannabis stores in B.C. We’ll send you updates as new rules and regulations are released about selling cannabis.</p>"
+                + "<p>To confirm your request and begin receiving updates by email, click here:</p>"
+                + "<a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a>";
 
             // send the email.
             SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
@@ -50,6 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
             message.Subject = "BC LCLB Cannabis Licensing Newsletter Subscription Confirmation";
             message.Body = body;
+            message.IsBodyHtml = true;
             client.Send(message);
 
             return Json("Ok");
@@ -58,8 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetConfirmationLink(string slug, string email)
         {
             string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
-            result += "newsletter-confirm/" + slug + "?code="; 
-
+            result += "/newsletter-confirm/" + slug + "?code="; 
 
             // create a newsletter confirmation object.
 
@@ -114,10 +116,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string EncryptString(string text, string keyString)
         {
             string result = null;
-            byte[] key = Encoding.UTF8.GetBytes(keyString);
 
             using (Aes aes = Aes.Create())
             {
+                byte[] key = Encoding.UTF8.GetBytes(keyString.Substring(0, aes.Key.Length));
+
                 using (var encryptor = aes.CreateEncryptor(key, aes.IV))
                 {
                     using (var msEncrypt = new MemoryStream())
@@ -147,30 +150,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string DecryptString(string cipherText, string keyString)
         {
             string result = null;
-            var fullCipher = Convert.FromBase64String(cipherText);
-
-            var iv = new byte[16];
-            var cipher = new byte[16];
-
-            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
-            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
-            var key = Encoding.UTF8.GetBytes(keyString);
-
-            using (var aesAlg = Aes.Create())
+            try
             {
-                using (var decryptor = aesAlg.CreateDecryptor(key, iv))
+                cipherText = HttpUtility.UrlDecode(cipherText);
+                var fullCipher = Convert.FromBase64String(cipherText);
+
+                var iv = new byte[16];
+                var cipher = new byte[fullCipher.Length - iv.Length];
+
+                Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+                Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, fullCipher.Length - iv.Length);
+
+                using (var aesAlg = Aes.Create())
                 {
-                    using (var msDecrypt = new MemoryStream(cipher))
+                    var key = Encoding.UTF8.GetBytes(keyString.Substring(0, aesAlg.Key.Length));
+                    using (var decryptor = aesAlg.CreateDecryptor(key, iv))
                     {
-                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        using (var msDecrypt = new MemoryStream(cipher))
                         {
-                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                             {
-                                result = srDecrypt.ReadToEnd();
+                                using (var srDecrypt = new StreamReader(csDecrypt))
+                                {
+                                    result = srDecrypt.ReadToEnd();
+                                }
                             }
                         }
-                    }                    
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                // invalid code. Return a null value 
+                result = null;
             }
             return result;
         }
