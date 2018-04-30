@@ -34,7 +34,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             Account result = null;
             if (account != null)
             {
-                if (! string.IsNullOrEmpty(account.id))
+                result = new Account();
+                if (string.IsNullOrEmpty(account.id))
+                {
+                    result.Accountid = new Guid();
+                }
+                else
                 {
                     result.Accountid = new Guid(account.id);
                 }

@@ -15,6 +15,7 @@ using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OData.Client;
 using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -32,14 +33,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._system = context;
             this._distributedCache = distributedCache;
         }
+
         [HttpPost()]
         public async Task<JsonResult> CreateAccount([FromBody] ViewModels.Account item)
         {
-            // convert the view model to a Dynamics account.
-            Contexts.Microsoft.Dynamics.CRM.Account account = item.ToModel();
+            // create a new account
+            Contexts.Microsoft.Dynamics.CRM.Account account = new Contexts.Microsoft.Dynamics.CRM.Account();
 
-            _system.AddToAccounts(account);
-            await _system.SaveChangesAsync();
+            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account>(_system);
+            AccountCollection.Add(account);
+            account.Name = item.name;
+            account.Description = item.description;
+            
+            await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
 
             return Json(account);
         }

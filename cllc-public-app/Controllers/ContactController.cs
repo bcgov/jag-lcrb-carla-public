@@ -34,21 +34,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._distributedCache = distributedCache;
         }
         [HttpPost()]
-        public async Task<JsonResult> CreateContact([FromBody] Contexts.Microsoft.Dynamics.CRM.Contact contact)
+        public async Task<JsonResult> CreateContact([FromBody] Contexts.Microsoft.Dynamics.CRM.Contact item)
         {
-            var myself = await _system.WhoAmI().GetValueAsync();
+            // create a new contact.
+            Contexts.Microsoft.Dynamics.CRM.Contact contact = new Contexts.Microsoft.Dynamics.CRM.Contact();
 
-            var owner = await _system.Systemusers.ByKey(myself.UserId).GetValueAsync();
-                        
-            contact.Contactid = Guid.NewGuid();
-            contact.Ownerid = owner;
-            contact.Owninguser = owner;
+            // create a DataServiceCollection to add the record
+            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact>(_system);
+            // add a new contact.
+            ContactCollection.Add(contact);
 
-            contact.Createdby = owner;
-            
-            _system.AddToContacts(contact);
-           
-            await _system.SaveChangesAsync();
+            // changes need to made after the add in order for them to be saved.
+            contact.Firstname = item.Firstname;
+            contact.Lastname = item.Lastname;
+            contact.Emailaddress1 = item.Emailaddress1;            
+
+            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
+
+            await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
 
             return Json(contact);
         }
