@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PolicyDocumentComponent } from './policy-document/policy-document.component';
 import { ResultComponent } from './result/result.component';
+import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
@@ -14,6 +15,10 @@ const routes: Routes = [
     path: '',
     //children: []
     component: HomeComponent
+  },
+  {
+    path: 'form-viewer/:id',
+    component: FormViewerComponent
   },
   {
     path: 'policy-document/:slug',

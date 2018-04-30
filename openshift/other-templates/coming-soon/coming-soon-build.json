@@ -1,0 +1,32 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata":
+  {
+    "name": "${NAME}-build-template",
+    "creationTimestamp": null
+  },
+  "objects": [  
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata":
+      {
+        "name": "${NAME}"
+      },
+	  "spec":
+	  {
+	    "dockerImageRepository":"docker.io/openshift/hello-openshift:latest"
+	  }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "NAME",
+      "displayName": "Name",
+      "description": "The name assigned to all of the resources defined in this template.",
+      "required": true,
+      "value": "hello-openshift"
+    }
+  ]
+}
