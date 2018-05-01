@@ -15,7 +15,7 @@ export class NewsletterConfirmationComponent {
   public title: string;
   public email: string;
   public code: string;
-  public success: any;
+  public verificationResult: string;
 
     /** newsletter-confirmation ctor */
   constructor(private newsletterDataService: NewsletterDataService, private route: ActivatedRoute,
@@ -32,7 +32,7 @@ export class NewsletterConfirmationComponent {
       this.newsletterDataService.verifyCode(this.slug, this.code)
         .then((verificationResult) => {
           //alert(verificationResult);
-          this.success = true;
+          this.verificationResult = verificationResult;
         });
 
       
