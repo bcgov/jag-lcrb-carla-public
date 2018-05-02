@@ -14,34 +14,23 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
 
 
-body, h5, .h5, .btn {
-    font-size: 18px;
-    color: #494949;
-    background: #fff;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #494949;
-    font-family: MyriadWebPro, Calibri, Arial, "sans serif";
-    //line-height: 24px;
-}
+
 
 .ctx-home {
   background: #f2f2f2;
-
-  .app-content {
-    background: #999999;
-  }
 }
 
-h1, .h1 {
+
+h1 {
   font-size: 36px;
+  padding-top: 15px;
   color: #494949;
 }
-h2, .h2 {
+h2 {
   font-size: 28px;
   color: #494949;
 }
-h3, .h3 {
+h3 {
   font-size: 24px;
   color: #494949;
 }

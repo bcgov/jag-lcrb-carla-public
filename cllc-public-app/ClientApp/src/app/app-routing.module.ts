@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PolicyDocumentComponent } from './policy-document/policy-document.component';
 import { ResultComponent } from './result/result.component';
+import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
 import { SurveyEditorComponent } from './survey/editor.component';
+import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 
 const routes: Routes = [
   {
@@ -15,8 +17,16 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'form-viewer/:id',
+    component: FormViewerComponent
+  },
+  {
     path: 'policy-document/:slug',
     component: PolicyDocumentComponent
+  },
+  {
+    path: 'newsletter-confirm/:slug',
+    component: NewsletterConfirmationComponent
   },
   {
     path: 'prv',
@@ -29,7 +39,8 @@ const routes: Routes = [
       survey: SurveyResolver,
     },
     data: {
-      breadcrumb: 'Potential Applicant Survey', 
+      // do not show breadcrumb
+      //breadcrumb: 'Potential Applicant Survey', 
       survey_path: 'assets/survey-primary.json',
     }
   },
@@ -37,7 +48,8 @@ const routes: Routes = [
     path: 'result/:data',
     component: ResultComponent,
     data: {
-      breadcrumb: 'Survey Results'
+      // do not show breadcrumb
+      //breadcrumb: 'Survey Results'
     }
   },
   {
