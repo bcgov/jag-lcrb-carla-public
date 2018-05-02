@@ -6,6 +6,7 @@ export DB_PASSWORD=Test4321
 export DB_DATABASE=cllc
 export ASPNETCORE_ENVIRONMENT=Development
 export PathBase=/cannabislicensing
+export BASE_PATH=/cannabislicensing
 
 # e.g. dotnet run, dotnet test, etc.
 dotnet "$@"
