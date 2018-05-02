@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         }
 
         /// <summary>
-        /// Load User from HETS database using their userId and guid
+        /// Load User from database using their userId and guid
         /// </summary>
         /// <param name="context"></param>
         /// <param name="userId"></param>
@@ -97,6 +97,34 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 return null;
             }
 
+            return user;
+        }
+
+        public static User AddUser(this AppDbContext context, string userId, string guid = null, string displayname = null)
+        {
+            User user = new User();
+            user.SmUserId = userId;
+            user.Guid = guid;
+            user.Active = true;
+
+            if (displayname != null)
+            {
+                // convert the display name to given and surname.
+                int pos = displayname.IndexOf(" ");
+                if (pos > 0)
+                {
+                    user.GivenName = displayname.Substring(0, pos);
+                    user.Surname = displayname.Substring(pos + 1);
+                }
+                else
+                {
+                    user.GivenName = displayname;
+                    user.Surname = "";
+                }
+            }
+            
+            context.Users.Add(user);
+            context.SaveChanges();
             return user;
         }
 
