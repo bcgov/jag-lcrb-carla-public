@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -20,18 +21,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet()]
+        [AllowAnonymous]
         public JsonResult GetVoteQuestions()
         {
             return Json(db.GetVoteQuestions());
         }
 
         [HttpGet("{slug}")]
+        [AllowAnonymous]
         public JsonResult GetVoteQuestion(string slug)
         {
             return Json(db.GetViewModelVoteQuestionBySlug(slug));
         }
 
         [HttpPost("{slug}/vote")]
+        [AllowAnonymous]
         public JsonResult AddVote(string slug, [FromQuery] string option)
         {
             db.AddVote(option);

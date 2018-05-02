@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -19,6 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this.db = db;
         }
         [HttpGet("getActive")]
+        [AllowAnonymous]
         public JsonResult GetActive()
         {
             
@@ -26,6 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("getSurvey")]
+        [AllowAnonymous]
         public string GetSurvey(string surveyId)
         {
             return db.GetSurvey(surveyId);
@@ -67,12 +70,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("results")]
+        [AllowAnonymous]
         public JsonResult GetResults(string postId)
         {
             return Json(db.GetResults(postId));
         }
 
         [HttpGet("getResultByClient/{clientId}")]
+        [AllowAnonymous]
         public JsonResult GetResultByClient(string clientId)
         {
             string result = db.GetSurveyResultByClientId(clientId);
