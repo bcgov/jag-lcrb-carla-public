@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -29,6 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this.encryptionKey = Configuration["ENCRYPTION_KEY"];
         }
         [HttpGet("{slug}")]
+        [AllowAnonymous]
         public JsonResult Subscribe(string slug)
         {
             Newsletter newsletter = db.GetNewsletterBySlug(slug);
@@ -36,6 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("{slug}/subscribe")]
+        [AllowAnonymous]
         public JsonResult Subscribe(string slug, [FromQuery] string email)
         {
             string confirmationEmailLink = GetConfirmationLink(slug, email);
@@ -80,6 +83,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("{slug}/verifycode")]
+        [AllowAnonymous]
         public JsonResult Verify(string slug, string code)
         {
             string result = "Error";
@@ -101,6 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("{slug}/unsubscribe")]
+        [AllowAnonymous]
         public JsonResult UnSubscribe(string slug, [FromQuery] string email)
         {
             db.RemoveNewsletterSubscriber(slug, email);

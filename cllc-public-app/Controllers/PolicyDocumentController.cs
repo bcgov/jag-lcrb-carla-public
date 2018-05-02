@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -26,7 +27,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this.db = db;
         }
 
+        /// <summary>
+        /// Get a list of all policy documents for a given category
+        /// </summary>
+        /// <param name="category">The policy document category</param>
+        /// <returns></returns>
         [HttpGet()]
+        [AllowAnonymous]
         public JsonResult GetPolicyDocuments(string category)
         {
             List<ViewModels.PolicyDocumentSummary> PolicyDocuments = null;
@@ -49,7 +56,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(PolicyDocuments);
         }
 
+        /// <summary>
+        /// Get a specific policy document
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <returns></returns>
         [HttpGet("{slug}")]
+        [AllowAnonymous]
         public JsonResult GetPolicy(string slug)
         {
             PolicyDocument PolicyDocument = db.GetPolicyDocumentBySlug(slug);
