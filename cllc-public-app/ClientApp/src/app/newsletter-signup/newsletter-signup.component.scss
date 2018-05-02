@@ -1,5 +1,27 @@
 @import "../../../node_modules/ng2-toastr/bundles/ng2-toastr.min.css";
 
+
+h1 {
+    font-size: 36px;
+    color: #494949;
+}
+
+h2 {
+    font-size: 28px;
+    color: #494949;
+}
+
+p {
+    padding-top: 10px;
+    
+}
+
+h3 {
+    font-size: 18px;
+    color: #494949;
+     font-weight: 400;
+}
+
 .globalButton {
     background-color: #ccc;
     margin-left: 0;
@@ -24,8 +46,8 @@
     background-image: none;
     border: 1px solid transparent;
     border-radius: 0px;
-    box-shadow: 0px 0px 0px 0px
-
+    box-shadow: 0px 0px 0px 0px;
+    margin-top: 10px;
 }
 
 .globalButton:hover {
@@ -33,13 +55,13 @@
     color: #ffffff;
     border-color: #204d74;
     text-decoration: none;
-    box-shadow: 0px 0px 0px 0p
-
+    box-shadow: 0px 0px 0px 0px;
+    margin-top: 10px;
 }
 
 
 .emailSignupForm {
-    padding-right: 30px
+    padding-top: 20px;
 }
 
 
