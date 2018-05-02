@@ -1,19 +1,72 @@
-
 {
-  "kind": "Pod",
+  "kind": "Template",
   "apiVersion": "v1",
-  "metadata": {
-    "name": "coming-soon",
-    "creationTimestamp": null,
-    "labels": {
-      "name": "coming-soon"
-    }
+  "metadata":
+  {
+    "name": "${NAME}-build-template",
+    "creationTimestamp": null
   },
-  "spec": {
-    "containers": [
+  "objects": [
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "${NAME}",
+        "generation": 1,
+        "creationTimestamp": null,
+        "labels": {
+            "app": "${NAME}"
+        },
+        "annotations": {
+            "openshift.io/generated-by": "OpenShiftNewApp"
+        }
+    },
+    "spec": {
+        "strategy": {
+            "type": "Recreate",
+            "resources": {},
+            "activeDeadlineSeconds": 21600
+        },
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            },
+            {
+                "type": "ImageChange",
+                "imageChangeParams": {
+                    "automatic": true,
+                    "containerNames": [
+                        "${NAME}"
+                    ],
+                    "from": {
+                        "kind": "ImageStreamTag",
+                        "namespace": "lclb-cllc-tools",
+                        "name": "hello-openshift:latest"
+                    }
+                }
+            }
+        ],
+        "replicas": 2,
+        "test": false,
+        "selector": {
+            "app": "${NAME}",
+            "deploymentconfig": "${NAME}"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "${NAME}",
+                    "deploymentconfig": "${NAME}"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {    "containers": [
       {
         "name": "coming-soon",
-        "image": "openshift/hello-openshift",
+        "image": "lclb-cllc-tools/hello-openshift",
 		"env": [
           { "name": "RESPONSE",
             "value": "Cannabis Licensing is coming soon."
@@ -50,6 +103,53 @@
     "restartPolicy": "Always",
     "dnsPolicy": "ClusterFirst",
     "serviceAccount": ""
-  },
-  "status": {}
+
+            }
+        }
+    }
+},
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "${NAME}",
+        "creationTimestamp": null,
+        "labels": {
+            "app": "${NAME}"
+        },
+        "annotations": {
+            "openshift.io/generated-by": "OpenShiftNewApp"
+        }
+    },
+    "spec": {
+        "ports": [
+            {
+                "name": "web",
+                "protocol": "TCP",
+                "port": 8080,
+                "targetPort": 8080
+            }
+        ],
+        "selector": {
+            "app": "${NAME}",
+            "deploymentconfig": "${NAME}"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+    },
+    "status": {
+        "loadBalancer": {}
+    }
+}  
+],
+"parameters": [
+    {
+		"name": "NAME",
+		"displayName": "NAME",
+		"description": "The name assigned to all of the resources defined in this template.",
+		"required": true,
+		"value": "coming-soon"
+    }
+  ]
 }
+

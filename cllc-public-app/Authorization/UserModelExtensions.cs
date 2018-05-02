@@ -85,6 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 .Select(x => x.Role).ToList();
 
             return roles;
-        }        
+        }
+
     }
 }
