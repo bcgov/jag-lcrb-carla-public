@@ -10,8 +10,8 @@ services:
     ports:
       - 1401:1433
 
-  cllc_proxy:
-    image: cllc_proxy
+  redis1:
+    image: redis
     ports:
-      - 80:80
+      - 6379:6379
 
