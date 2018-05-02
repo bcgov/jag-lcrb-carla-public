@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 {    
     #region SiteMinder Authentication Options
     /// <summary>
-    /// Options required for setting up SiteMidner Authentication
+    /// Options required for setting up SiteMinder Authentication
     /// </summary>
     public class SiteMinderAuthOptions : AuthenticationSchemeOptions
     {
@@ -28,9 +28,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private const string ConstMissingSiteMinderUserIdError = "Missing SiteMinder UserId";
         private const string ConstMissingSiteMinderGuidError = "Missing SiteMinder Guid";
-        private const string ConstMissingDbUserIdError = "Could not find UserId in the HETS database";
-        private const string ConstInactivegDbUserIdError = "HETS database UserId is inactive";
-        private const string ConstInvalidPermissions = "HETS UserId does not have valid permissions";
+        private const string ConstMissingDbUserIdError = "Could not find UserId in the database";
+        private const string ConstInactivegDbUserIdError = "Database UserId is inactive";
+        private const string ConstInvalidPermissions = "UserId does not have valid permissions";
 
         /// <summary>
         /// DEfault Constructor
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// Process Authentication Request
         /// </summary>
         /// <returns></returns>
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+        protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             // get siteminder headers
             _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
@@ -187,13 +187,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     url.Contains(".map") ||
                     url.Contains(".js"))
                 {
-                    return Task.FromResult(AuthenticateResult.NoResult());
+                    return AuthenticateResult.NoResult();
                 }
 
                 // **************************************************
                 // Check if we have a Dev Environment Cookie
                 // **************************************************
-                if (hostingEnv.IsDevelopment())
+                if (hostingEnv.IsDevelopment() || hostingEnv.IsStaging())
                 {
                     string temp = context.Request.Cookies[options.DevAuthenticationTokenKey];
 
@@ -221,7 +221,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     _logger.LogInformation("User already authenticated with active session: " + userSettings.UserId);
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
-                    return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme)));
+                    return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
 
                 // **************************************************
@@ -245,33 +245,33 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     if (string.IsNullOrEmpty(userId))
                     {
                         _logger.LogError(options.MissingSiteMinderUserIdError);
-                        return Task.FromResult(AuthenticateResult.Fail(options.MissingSiteMinderGuidError));
+                        return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
 
                     if (string.IsNullOrEmpty(siteMinderGuid))
                     {
                         _logger.LogError(options.MissingSiteMinderGuidError);
-                        return Task.FromResult(AuthenticateResult.Fail(options.MissingSiteMinderGuidError));
+                        return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
                 }
 
                 // **************************************************
                 // Validate credential against database              
                 // **************************************************
-                userSettings.AuthenticatedUser = hostingEnv.IsDevelopment()
+                userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
                     ? dataAccess.LoadUser(userId)
                     : dataAccess.LoadUser(userId, siteMinderGuid);
 
                 if (userSettings.AuthenticatedUser == null)
                 {
                     _logger.LogWarning(options.MissingDbUserIdError + " (" + userId + ")");
-                    return Task.FromResult(AuthenticateResult.Fail(options.MissingDbUserIdError));
+                    return AuthenticateResult.Fail(options.MissingDbUserIdError);
                 }
 
                 if (!userSettings.AuthenticatedUser.Active)
                 {
                     _logger.LogWarning(options.InactivegDbUserIdError + " (" + userId + ")");
-                    return Task.FromResult(AuthenticateResult.Fail(options.InactivegDbUserIdError));
+                    return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }                
 
                 // **************************************************
@@ -279,12 +279,14 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
 
+                /* roles and permissions are disabled. 
                 if (!userPrincipal.HasClaim(User.PermissionClaim, Permission.Login)
                    )
                 {
                     _logger.LogWarning("User does not have ");
-                    return Task.FromResult(AuthenticateResult.Fail(options.InvalidPermissions));
+                    return AuthenticateResult.Fail(options.InvalidPermissions);
                 }
+                */
 
                 // **************************************************
                 // Create authenticated user
@@ -303,7 +305,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 // done!
                 principal = userPrincipal;
-                return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme)));
+                return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
             }
             catch (Exception exception)
             {
