@@ -264,6 +264,17 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (userSettings.AuthenticatedUser == null)
                 {
+                    // try to add the user.
+                    string displayname = context.Request.Headers[options.SiteMinderUserDisplayNameKey];
+
+                    userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
+                    ? dataAccess.AddUser(userId)
+                    : dataAccess.AddUser(userId, siteMinderGuid, displayname);
+                    
+                }
+
+                if (userSettings.AuthenticatedUser == null)
+                {
                     _logger.LogWarning(options.MissingDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.MissingDbUserIdError);
                 }
