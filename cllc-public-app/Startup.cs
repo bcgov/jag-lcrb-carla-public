@@ -2,9 +2,11 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
@@ -28,17 +30,38 @@ namespace Gov.Lclb.Cllb.Public
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-
-        
+        public IConfiguration Configuration { get; }        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // add a singleton for data access.
+
+            string connectionString = DatabaseTools.GetConnectionString(Configuration);
+            string databaseName = DatabaseTools.GetDatabaseName(Configuration);
+
+            DatabaseTools.CreateDatabaseIfNotExists(Configuration);
+
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(connectionString));
+
+            // determine if we wire up Dynamics.
+            if (!string.IsNullOrEmpty(Configuration["DYNAMICS_ODATA_URI"]))
+            {
+                SetupDynamics(services);
+            }
+
+
+
             // for security reasons, the following headers are set.
             services.AddMvc(opts =>
             {
+                // default deny
+                var policy = new AuthorizationPolicyBuilder()
+                 .RequireAuthenticatedUser()
+                 .Build();
+                opts.Filters.Add(new AuthorizeFilter(policy));
+
                 opts.Filters.Add(typeof(NoCacheHttpHeadersAttribute));
                 opts.Filters.Add(new XRobotsTagAttribute() { NoIndex = true, NoFollow = true });
                 opts.Filters.Add(typeof(XContentTypeOptionsAttribute));
@@ -62,31 +85,8 @@ namespace Gov.Lclb.Cllb.Public
                         // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
                         opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     });
-            
-
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
 
 
-            // add a singleton for data access.
-
-            string connectionString = DatabaseTools.GetConnectionString(Configuration);
-            string databaseName = DatabaseTools.GetDatabaseName(Configuration);
-
-            DatabaseTools.CreateDatabaseIfNotExists(Configuration);
-
-            services.AddDbContext<AppDbContext>(
-                options => options.UseSqlServer(connectionString));
-
-            // determine if we wire up Dynamics.
-            if (!string.IsNullOrEmpty(Configuration["DYNAMICS_ODATA_URI"]))
-            {
-                SetupDynamics(services);                                 
-            }
-            
             // setup siteminder authentication (core 2.0)
             services.AddAuthentication(options =>
             {
@@ -100,6 +100,15 @@ namespace Gov.Lclb.Cllb.Public
             // setup authorization
             services.AddAuthorization();
             services.RegisterPermissionHandler();
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+
+
+
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>
@@ -172,6 +181,7 @@ namespace Gov.Lclb.Cllb.Public
             app.UseNoCacheHttpHeaders();
             // IMPORTANT: This session call MUST go before UseMvc()
             app.UseSession();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -192,8 +202,7 @@ namespace Gov.Lclb.Cllb.Public
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
-            });
-            
+            });                        
 
             string connectionString = "unknown.";
             try
