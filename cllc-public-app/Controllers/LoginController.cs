@@ -52,7 +52,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     html.AppendLine("</ul>");
                     html.AppendLine("</body>");
                     html.AppendLine("</html>");
-                    return new OkObjectResult(html.ToString());
+                    ContentResult contentResult = new ContentResult();
+                    contentResult.Content = html.ToString();
+                    contentResult.ContentType = "text/html";
+                    return contentResult;
                 }
                 return LocalRedirect(path);
             }
