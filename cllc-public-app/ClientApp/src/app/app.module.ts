@@ -48,6 +48,8 @@ import { SearchBoxDirective } from './search-box/search-box.directive';
 import { GeneralDataService } from './general-data.service';
 import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { DynamicsDataService } from './services/dynamics-data.service';
+import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
 import { StaticComponent } from './static/static.component';
@@ -91,7 +93,8 @@ import { NewsletterDataService } from "./services/newsletter-data.service";
     AccordionComponent,
     VoteComponent,
     NewsletterConfirmationComponent,
-    NewsletterSignupComponent
+    NewsletterSignupComponent,
+    FormViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -178,7 +181,16 @@ import { NewsletterDataService } from "./services/newsletter-data.service";
     MatToolbarModule,
     MatTooltipModule
   ],
-  providers: [GeneralDataService, InsertService, CookieService, VoteDataService, NewsletterDataService, SurveyDataService, PolicyDocumentDataService ],
+  providers: [
+    CookieService,
+    DynamicsDataService,
+    InsertService,
+    GeneralDataService,
+    NewsletterDataService,
+    PolicyDocumentDataService,
+    SurveyDataService,        
+    VoteDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
