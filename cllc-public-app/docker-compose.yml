@@ -1,0 +1,17 @@
+version: '3'
+services:
+
+  sql1:
+    image: microsoft/mssql-server-linux:2017-latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Test1234
+      SA_PASSWORD: Test1234
+    ports:
+      - 1401:1433
+
+  redis1:
+    image: redis
+    ports:
+      - 6379:6379
+

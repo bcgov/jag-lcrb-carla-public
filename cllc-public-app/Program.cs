@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public
         public static void Main(string[] args)
         {            
             var host = CreateWebHostBuilder(args).Build();
-            
+
             host.Run();
         }
 
