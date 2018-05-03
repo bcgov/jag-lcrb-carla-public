@@ -261,7 +261,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
                     ? dataAccess.LoadUser(userId)
                     : dataAccess.LoadUser(userId, siteMinderGuid);
-
+                /*
                 if (userSettings.AuthenticatedUser == null)
                 {
                     // try to add the user.
@@ -278,26 +278,26 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     _logger.LogWarning(options.MissingDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.MissingDbUserIdError);
                 }
+                */
 
-                if (!userSettings.AuthenticatedUser.Active)
+
+                if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
                     _logger.LogWarning(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
-                }                
+                }
 
                 // **************************************************
                 // Validate / check user permissions
                 // **************************************************
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
 
-                /* roles and permissions are disabled. 
-                if (!userPrincipal.HasClaim(User.PermissionClaim, Permission.Login)
-                   )
+                if (userPrincipal != null && !(userPrincipal.HasClaim(User.PermissionClaim, Permission.Login) || userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration)))
                 {
-                    _logger.LogWarning("User does not have ");
+                    _logger.LogWarning("User does not have permission to login or register.");
                     return AuthenticateResult.Fail(options.InvalidPermissions);
                 }
-                */
+
 
                 // **************************************************
                 // Create authenticated user
@@ -308,6 +308,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // create session info
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
+
+                userSettings.IsNewUserRegistration = userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration);
 
                 // **************************************************
                 // Update user settings
