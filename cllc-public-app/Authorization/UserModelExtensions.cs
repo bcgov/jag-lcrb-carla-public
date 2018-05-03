@@ -28,27 +28,36 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         private static List<Claim> GetClaims(this User user)
         {
-            List<Claim> claims = new List<Claim> {new Claim(ClaimTypes.Name, user.SmUserId)};
+            List<Claim> claims = new List<Claim>();
+            if (user == null)
+            {
+                claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
+            }
+            else
+            {
+                claims.Add(new Claim(ClaimTypes.Name, user.SmUserId));
 
-            if (!string.IsNullOrEmpty(user.Surname))
-                claims.Add(new Claim(ClaimTypes.Surname, user.Surname));
+                if (!string.IsNullOrEmpty(user.Surname))
+                    claims.Add(new Claim(ClaimTypes.Surname, user.Surname));
 
-            if (!string.IsNullOrEmpty(user.GivenName))
-                claims.Add(new Claim(ClaimTypes.GivenName, user.GivenName));
+                if (!string.IsNullOrEmpty(user.GivenName))
+                    claims.Add(new Claim(ClaimTypes.GivenName, user.GivenName));
 
-            if (!string.IsNullOrEmpty(user.Email))
-                claims.Add(new Claim(ClaimTypes.Email, user.Email));
+                if (!string.IsNullOrEmpty(user.Email))
+                    claims.Add(new Claim(ClaimTypes.Email, user.Email));
 
-            if (user.Id != null)
-                claims.Add(new Claim(User.UseridClaim, user.Id.ToString()));
+                if (user.Id != null)
+                    claims.Add(new Claim(User.UseridClaim, user.Id.ToString()));
 
-            var permissions = user.GetActivePermissions().Select(p => new Claim(User.PermissionClaim, p.Code)).ToList();
-            if (permissions.Any())
-                claims.AddRange(permissions);
+                var permissions = user.GetActivePermissions().Select(p => new Claim(User.PermissionClaim, p.Code)).ToList();
+                if (permissions.Any())
+                    claims.AddRange(permissions);
 
-            var roles = user.GetActiveRoles().Select(r => new Claim(ClaimTypes.Role, r.Name)).ToList();
-            if (roles.Any())
-                claims.AddRange(roles);            
+                var roles = user.GetActiveRoles().Select(r => new Claim(ClaimTypes.Role, r.Name)).ToList();
+                if (roles.Any())
+                    claims.AddRange(roles);
+
+            }
 
             return claims;
         }
