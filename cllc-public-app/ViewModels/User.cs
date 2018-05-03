@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string lastname { get; set; }
 
-        public string Emailaddress1 { get; set; }
+        public string email { get; set; }
 
         public bool isNewUser { get; set; }
 
