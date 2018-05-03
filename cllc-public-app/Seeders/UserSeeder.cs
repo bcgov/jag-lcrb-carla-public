@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         {
             get { return ProfileTriggers; }
         }
-        
+        public override Type InvokeAfter => typeof(RoleSeeder);
 
         protected override void Invoke(AppDbContext context)
         {
