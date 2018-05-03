@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         public bool UserAuthenticated { get; set; }
 
         /// <summary>
-        /// HETS/SiteMinder User Id
+        /// SiteMinder User Id
         /// </summary>
         public string UserId { get; set; }
 
@@ -28,6 +28,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// AuthenticatedUser User Model
         /// </summary>
         public User AuthenticatedUser { get; set; }
+
+        public bool IsNewUserRegistration { get; set; }
 
         /// <summary>
         /// Serializes UserSettings as a Json String

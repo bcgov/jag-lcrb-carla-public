@@ -27,10 +27,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         public const string Admin = "Admin";
 
-        /// <summary>
-        /// Import Legacy Data Permission Permission
-        /// </summary>
-        public const string ImportData = "ImportData";
+        
+        public const string NewUserRegistration = "NewUserRegistration";
 
         /// <summary>
         /// Code Table Management Permission
@@ -54,15 +52,15 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             new Permission
             {
-                Code = Login,
-                Name = "Login",
-                Description = "Permission to login to the application and perform all Clerk functions within their designated District"
+                Code = NewUserRegistration,
+                Name = "New User Registration",
+                Description = "Only permission given to new users.  Removed when they complete registration."
             },
             new Permission
             {
-                Code = UserManagement,
-                Name = "User Management",
-                Description = "Gives the user access to the User Management screens"
+                Code = Login,
+                Name = "Login",
+                Description = "Permission to login to the application"
             },
             new Permission
             {
@@ -75,25 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Code = Admin,
                 Name = "Admin",
                 Description = "Allows the user to perform special administrative tasks"
-            },
-            new Permission
-            {
-                Code = ImportData,
-                Name = "Import Data",
-                Description = "Enables the user to import data from the legacy system"
-            },
-            new Permission
-            {
-                Code = CodeTableManagement,
-                Name = "Code Table Management",
-                Description = "Gives the user access to the Code Table Management screens"
-            },
-            new Permission
-            {
-                Code = DistrictCodeTableManagement,
-                Name = "District Code Table Management",
-                Description = "Gives the user access to the District Code Table Management screens"
-            },
+            },                
             new Permission
             {
                 Code = BusinessLogin,
