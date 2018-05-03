@@ -36,6 +36,22 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 user.SmUserId = userInfo.SmUserId;
                 user.Surname = userInfo.Surname;
 
+                // Sync Roles
+                if (user.UserRoles == null)
+                {
+                    user.UserRoles = new List<UserRole>();
+                }
+
+                foreach (UserRole item in user.UserRoles)
+                {
+                    context.Entry(item).State = EntityState.Deleted;
+                }
+
+                foreach (UserRole item in userInfo.UserRoles)
+                {
+                    user.UserRoles.Add(item);
+                }                
+
             }
         }
     }
