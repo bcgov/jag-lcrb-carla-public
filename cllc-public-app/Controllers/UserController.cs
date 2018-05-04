@@ -51,16 +51,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (userSettings.IsNewUserRegistration)
             {
-                user.isNewUser = true;                
+                user.isNewUser = true;
                 // get details from the headers.
-                user.name = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserDisplayNameKey];
+                user.name = userSettings.UserDisplayName;
+                user.businessname = userSettings.BusinessLegalName;
+                 
+                // determine if there is an Dynamics contact available.
+
+                string siteminderID = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUniversalIdKey];
+
+
+
             }
             else
             {
                 user.lastname = userSettings.AuthenticatedUser.Surname;
                 user.firstname = userSettings.AuthenticatedUser.GivenName;
                 user.email = userSettings.AuthenticatedUser.Email;                
-                user.isNewUser = false;                
+                user.isNewUser = false;  
+                
             }
 
             return new JsonResult(user);
