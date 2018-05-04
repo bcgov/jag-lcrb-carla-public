@@ -71,7 +71,7 @@ import { VoteDataService } from "./services/vote-data.service";
 import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NewsletterDataService } from "./services/newsletter-data.service";
-
+import { UserDataService } from "./services/user-data.service";
 
 @NgModule({
   declarations: [
@@ -189,7 +189,8 @@ import { NewsletterDataService } from "./services/newsletter-data.service";
     NewsletterDataService,
     PolicyDocumentDataService,
     SurveyDataService,        
-    VoteDataService
+    VoteDataService,
+    UserDataService
   ],
   bootstrap: [AppComponent]
 })

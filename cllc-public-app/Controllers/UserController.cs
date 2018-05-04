@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 user.lastname = userSettings.AuthenticatedUser.Surname;
                 user.firstname = userSettings.AuthenticatedUser.GivenName;
-                user.Emailaddress1 = userSettings.AuthenticatedUser.Email;                
+                user.email = userSettings.AuthenticatedUser.Email;                
                 user.isNewUser = false;                
             }
 
