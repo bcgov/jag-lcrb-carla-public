@@ -14,7 +14,7 @@
 </div>
 <div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == false ">
   <h2>Verify Contact</h2>
-  <app-dynamics-form [formid]="('a8da3914-a43f-49fc-8726-159e2da68819')"></app-dynamics-form>
+  <app-dynamics-form [formid]="('439e59e4-7a39-4ed6-8915-292a0dbda9e0')" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
   <div class="col-md-12 text-left">
     <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="confirmContact()"><strong>Confirm Contact</strong><br></a>
   </div>
