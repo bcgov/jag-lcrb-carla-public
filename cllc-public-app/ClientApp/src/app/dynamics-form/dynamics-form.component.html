@@ -1,5 +1,5 @@
 <div class="col-md-6" *ngIf="dynamicsForm">
-  <h3>{{dynamicsForm.name}}</h3>
+  <h3 *ngIf="!hideHeader">{{dynamicsForm.name}}</h3>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div *ngFor="let tab of dynamicsForm.tabs">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div>
+    <div *ngIf="!hideSubmit">
       <button class="globalButton" type="submit" [disabled]="!form.valid">Save</button>
     </div>
   </form>

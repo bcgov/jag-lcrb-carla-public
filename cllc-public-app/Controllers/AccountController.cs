@@ -42,6 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account>(_system);
             AccountCollection.Add(account);
+            
             account.Name = item.name;
             account.Description = item.description;
             
