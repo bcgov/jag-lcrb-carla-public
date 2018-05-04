@@ -15,6 +15,8 @@ import { DynamicsForm } from "../models/dynamics-form.model";
 /** dynamics-form component*/
 export class DynamicsFormComponent {
   @Input('formid') formid: string;
+  @Input('hideHeader') hideHeader: boolean;
+  @Input('hideSubmit') hideSubmit: boolean;
   public payload: string;
   public responseText: string;
   public dynamicsForm: DynamicsForm;
