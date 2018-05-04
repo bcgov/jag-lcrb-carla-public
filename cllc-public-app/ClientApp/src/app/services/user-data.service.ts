@@ -24,7 +24,10 @@ export class UserDataService {
          user.firstname = data.firstname;
          user.lastname = data.lastname;
          user.name = data.name;
+         user.businessname = data.businessname;
          user.isNewUser = data.isNewUser;
+         user.isContactCreated = data.isContactCreated;
+         user.isAccountCreated = data.isAccountCreated;
          return user;
        })
        .catch(this.handleError);
