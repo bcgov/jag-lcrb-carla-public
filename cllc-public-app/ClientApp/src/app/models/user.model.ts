@@ -4,6 +4,9 @@ export class User {
   firstname: string;
   lastname: string;
   email: string;
+  businessname: string;
   isNewUser: boolean;
+  isContactCreated: boolean;
+  isAccountCreated: boolean;
   constructor() { }
 }
