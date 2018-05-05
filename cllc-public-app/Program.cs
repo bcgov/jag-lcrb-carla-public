@@ -19,13 +19,19 @@ namespace Gov.Lclb.Cllb.Public
         public static void Main(string[] args)
         {            
             var host = CreateWebHostBuilder(args).Build();
-
             host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseHealthChecks("/hc")
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.AddConsole(options => options.IncludeScopes = true);
+                    logging.SetMinimumLevel(LogLevel.Debug);
+                    logging.AddDebug();
+                    logging.AddEventSourceLogger();
+                })
                 .UseStartup<Startup>();
     }
 }

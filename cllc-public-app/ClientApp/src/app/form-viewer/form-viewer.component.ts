@@ -27,41 +27,5 @@ export class FormViewerComponent {
       this.id = this.route.snapshot.params["id"];
   }
 
-    toFormGroup(dynamicsForm: DynamicsForm) {
-      let group: any = {};
-
-      dynamicsForm.tabs.forEach(tab => {
-        tab.sections.forEach(section => {
-          section.fields.forEach(field => {
-            group[field.datafieldname] = new FormControl('');
-          });
-        });
-      });
-
-        //group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
-
-      return new FormGroup(group);
-    }
-
-    ngOnInit(): void {
-
-      if (this.id != null) {
-        // get data.
-        this.dynamicsDataService.getForm(this.id)
-          .then((dynamicsForm) => {
-            this.dynamicsForm = dynamicsForm;
-            // update the form group.
-            this.form = this.toFormGroup(this.dynamicsForm);
-          });        
-      }
-    }
-
-    onSubmit() {
-      this.payload = JSON.stringify(this.form.value);
-      this.dynamicsDataService.createRecord(this.dynamicsForm.entity, this.payload)
-        .then((data) => {
-          this.responseText = JSON.stringify(data);
-        });        
-
-    }
+    
 }
