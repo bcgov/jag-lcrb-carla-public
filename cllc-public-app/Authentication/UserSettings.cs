@@ -23,6 +23,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// SiteMinder Guid
         /// </summary>
         public string SiteMinderGuid { get; set; }
+        public string SiteMinderBusinessGuid { get; set; }
+
+        public string UserDisplayName { get; set; }
+        public string BusinessLegalName { get; set; }
+        public string UserType { get; set; }
 
         /// <summary>
         /// AuthenticatedUser User Model
