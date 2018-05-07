@@ -33,16 +33,25 @@ export class DynamicsDataService {
            let newTab = new DynamicsFormTab();
            newTab.id = tab.id;
            newTab.name = tab.name;
+           newTab.visible = tab.visible;
+           newTab.showlabel = tab.showlabel;
            newTab.sections = [];
            tab.sections.forEach((section) => {
              let newSection = new DynamicsFormSection();
              newSection.id = section.id;
              newSection.name = section.name;
+             newSection.visible = section.visible;
+             newSection.showlabel = section.showlabel;
              newSection.fields = [];
              section.fields.forEach((field) => {
                let newField = new DynamicsFormField();
                newField.name = field.name;
                newField.datafieldname = field.datafieldname;
+               newField.showlabel = field.showlabel;
+               newField.visible = field.visible;
+               newField.classid = field.classid;
+               newField.controltype = field.controltype;
+               newField.required = field.required;
                newSection.fields.push(newField);
              });
              newTab.sections.push(newSection);
