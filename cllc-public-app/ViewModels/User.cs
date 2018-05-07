@@ -15,8 +15,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string lastname { get; set; }
 
         public string email { get; set; }
-
+        public string businessname { get; set; }
         public bool isNewUser { get; set; }
+        public bool isContactCreated { get; set; }
+        public bool isAccountCreated { get; set; }
+        public bool isBceidConfirmed { get; set; }
 
     }
 }
