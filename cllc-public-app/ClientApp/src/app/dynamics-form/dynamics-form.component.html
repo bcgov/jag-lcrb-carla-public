@@ -1,0 +1,25 @@
+<div class="col-md-6" *ngIf="dynamicsForm">
+  <h3>{{dynamicsForm.name}}</h3>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let tab of dynamicsForm.tabs">
+      <div *ngFor="let section of tab.sections">
+        <h3>{{section.name}}</h3>
+        <div *ngFor="let field of section.fields">
+          <label class="label" [for]="field.datafieldname">{{field.name}}</label> <input class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname"
+                                                                                         [id]="field.datafieldname">
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="globalButton" type="submit" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
+
+  <div *ngIf="payload" class="form-row">
+    <strong>Saved the following values</strong><br>{{payload}}
+  </div>
+  <div *ngIf="responseText" class="form-row">
+    <strong>Received the following data</strong><br><pre>{{responseText}}</pre>
+  </div>
+</div>

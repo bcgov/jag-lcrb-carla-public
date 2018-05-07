@@ -1,26 +1,26 @@
-<div class="app-outer" *ngIf="currentUser">
-  <div *ngIf="currentUser.isNewUser">
-    <h1>New User Detected.</h1>
-    <b>Show new user forms.</b>
-    <b>Username is {{currentUser.id}}</b>
-  </div>
-  <div *ngIf="!currentUser.isNewUser">
-    <h1>User is logged in and is not a new user.</h1>
-    {{currentUser.name}}
-    {{currentUser.firstname}} {{currentUser.lastname}}
-  </div>
-</div>
-<div class="app-outer" *ngIf="!currentUser">
-    <header class="app-header">
-      <div class="container">
-        <a href="http://www2.gov.bc.ca/" tabindex="-1">
-          <img class="header-logo"
-               tabindex="-1" alt="B.C. Government Logo"
-               src="/cannabislicensing/assets/bc-logo.svg">
-        </a>
-        <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
+<div class="app-outer" >
+  <header class="app-header">
+    <div class="container">
+      <a href="http://www2.gov.bc.ca/" tabindex="-1">
+        <img class="header-logo"
+             tabindex="-1" alt="B.C. Government Logo"
+             src="/cannabislicensing/assets/bc-logo.svg">
+      </a>
+      <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
+    </div>
+  </header>
+
+  <div *ngIf="currentUser">
+    <main class="app-content container">
+      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
+      <div *ngIf="!currentUser.isNewUser">
+        <h1>User is logged in and is not a new user.</h1>
+        {{currentUser.name}}
+        {{currentUser.firstname}} {{currentUser.lastname}}
       </div>
-    </header>
+      </main>
+  </div>
+  <div *ngIf="!currentUser">
 
     <!-- /NAVBAR -->
     <div class="navigationRibbon">
@@ -50,21 +50,23 @@
       <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
     </main>
 
-    <footer class="app-footer">
-      <nav class="navbar navbar-default navbar-footer navbar-static-bottom">
-        <div class="container c1">
-          <ul class="nav navbar-nav">
-            <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" title="Goes to BC Gov Disclaimer Page">Disclaimer</a></li>
-            <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" title="Goes to BC Gov Privacy Page">Privacy</a></li>
-            <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" title="Goes to BC Gov Accessibility Page">Accessibility</a></li>
-            <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a></li>
-            <li class="c2">
-              <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/bc-liquor-control-and-licensing-contact-us"
-                 target="_blank" title="Goes to BC Gov Contact Page">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </footer>
   </div>
+
+  <footer class="app-footer">
+    <nav class="navbar navbar-default navbar-footer navbar-static-bottom">
+      <div class="container c1">
+        <ul class="nav navbar-nav">
+          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" title="Goes to BC Gov Disclaimer Page">Disclaimer</a></li>
+          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" title="Goes to BC Gov Privacy Page">Privacy</a></li>
+          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" title="Goes to BC Gov Accessibility Page">Accessibility</a></li>
+          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a></li>
+          <li class="c2">
+            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/bc-liquor-control-and-licensing-contact-us"
+               target="_blank" title="Goes to BC Gov Contact Page">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+</div>
 
