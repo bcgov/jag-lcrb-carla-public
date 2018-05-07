@@ -14,6 +14,32 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string lastname { get; set; }
 
-        public string Emailaddress1 { get; set; }
+        public string emailaddress1 { get; set; }
+
+        public string telephone1 { get; set; }
+
+        public string address1_line1 { get; set; }
+
+        public string address1_city { get; set; }
+
+        public string address1_stateorprovince { get; set; }
+
+        public string address1_postalcode { get; set; }
+
+        public Boolean? adoxio_cansignpermanentchangeapplications { get; set; }
+
+        public Boolean? adoxio_canattendeducationsessions { get; set; }
+
+        public Boolean? adoxio_cansigntemporarychangeapplications { get; set; }
+
+        public Boolean? adoxio_canattendcompliancemeetings { get; set; }
+
+        public Boolean? adoxio_canobtainlicenceinfofrombranch { get; set; }
+
+        public Boolean? adoxio_canrepresentlicenseeathearings { get; set; }
+
+        public Boolean? adoxio_cansigngrocerystoreproofofsalesrevenue { get; set; }
+
+
     }
 }
