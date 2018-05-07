@@ -18,7 +18,7 @@
                    [id]="field.datafieldname">
             <textarea *ngSwitchCase="'TextAreaControl'" class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname" [id]="field.datafieldname" ngRequired="field.required"></textarea>
             <ng-container *ngSwitchCase="'CheckBoxControl'">
-              <input type="checkbox" name="field.datafieldname" ngRequired="field.required">
+              <input type="checkbox" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required" ng-true-value="true" ng-false-value="false" >
               <label class="label" [for]="field.datafieldname">{{field.name}}</label>
             </ng-container>
             <div *ngSwitchDefault>
