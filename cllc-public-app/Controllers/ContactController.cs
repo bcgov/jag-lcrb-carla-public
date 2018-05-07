@@ -34,8 +34,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._distributedCache = distributedCache;
         }
         [HttpPost()]
-        public async Task<JsonResult> CreateContact([FromBody] Contexts.Microsoft.Dynamics.CRM.Contact item)
+        public async Task<JsonResult> CreateContact([FromBody] ViewModels.Contact viewModel)
         {
+            Contexts.Microsoft.Dynamics.CRM.Contact item = viewModel.ToModel();
+
             // create a new contact.
             Contexts.Microsoft.Dynamics.CRM.Contact contact = new Contexts.Microsoft.Dynamics.CRM.Contact();
 
@@ -45,13 +47,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ContactCollection.Add(contact);
 
             // changes need to made after the add in order for them to be saved.
-            contact.Firstname = item.Firstname;
-            contact.Lastname = item.Lastname;
-            contact.Emailaddress1 = item.Emailaddress1;            
+            contact.CopyValues(item);
+            contact.Contactid = Guid.NewGuid();
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
             await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+
+           // if we have not yet authenticated, then this is the new record for the user.
+
+           // add the user to the session.
+
 
             return Json(contact);
         }
