@@ -1,5 +1,10 @@
 export class DynamicsFormField {
+  classid: string;
+  controltype: string;
+  datafieldname: string;
   name: string;
-  datafieldname: string;   
+  required: boolean;
+  showlabel: boolean;
+  visible: boolean;
   constructor() { }
 }
