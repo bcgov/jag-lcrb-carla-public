@@ -1,5 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { DynamicsFormComponent } from '../dynamics-form/dynamics-form.component';
+import { User } from "../models/user.model";
+
 @Component({
     selector: 'app-bceid-confirmation',
     templateUrl: './bceid-confirmation.component.html',
@@ -7,7 +9,7 @@ import { DynamicsFormComponent } from '../dynamics-form/dynamics-form.component'
 })
 /** bceid-confirmation component*/
 export class BceidConfirmationComponent {
-  @Input('currentUser') currentUser: any;
+  @Input('currentUser') currentUser: User;
   @ViewChild(DynamicsFormComponent)
   private dynamicsFormComponent: DynamicsFormComponent;
 
@@ -21,13 +23,15 @@ export class BceidConfirmationComponent {
     }
 
     confirmContact() {
-      // confirm BCeID
-      this.currentUser.isContactCreated = true;
+      // confirm Contact
       this.dynamicsFormComponent.onSubmit();
+      this.currentUser.isContactCreated = true;
+      
     }
 
     confirmAccount() {
-      // confirm BCeID
+      // confirm Account
+      this.dynamicsFormComponent.onSubmit();
       this.currentUser.isAccountCreated = true;
     }
     
