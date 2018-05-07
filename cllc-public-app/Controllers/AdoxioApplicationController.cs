@@ -34,6 +34,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._distributedCache = distributedCache;
         }
 
+        [HttpGet()]
+        public async Task<JsonResult> GetDynamicsApplications ()
+        {
+            // create a DataServiceCollection to add the record
+            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ApplcationCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
+
+            var dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
+            
+            List<ViewModels.AdoxioApplication> adoxioApplications = new List<AdoxioApplication>();
+            ViewModels.AdoxioApplication adoxioApplication = null;
+
+            if (dynamicsApplicationList != null)
+            {
+                foreach (var dynamicsApplication in dynamicsApplicationList)
+                {
+                    adoxioApplication = new ViewModels.AdoxioApplication();
+                    adoxioApplication.name = dynamicsApplication.Adoxio_name;
+                    //adoxioApplication.applyingPerson = dynamicsApplication.Adoxio_ApplyingPerson.Adoxio_contact_adoxio_application_ApplyingPerson.ToString();
+                    adoxioApplication.applyingPerson = dynamicsApplication._adoxio_applyingperson_value.ToString();
+                    adoxioApplication.jobNumber = dynamicsApplication.Adoxio_jobnumber;
+                    adoxioApplication.licenseType = dynamicsApplication._adoxio_licencetype_value.ToString();
+                    adoxioApplications.Add(adoxioApplication);
+                }
+            }
+
+            return Json(adoxioApplications);
+        }
+
         [HttpPost()]
         public async Task<JsonResult> CreateApplication([FromBody] Contexts.Microsoft.Dynamics.CRM.Adoxio_application item)
         {
