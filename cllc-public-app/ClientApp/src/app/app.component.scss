@@ -26,11 +26,11 @@ $bootstrap-sass-asset-helper: true;
 }
 
 .app-content {
-  background: #fff;
-  display: flex;
-  flex: 1 0 auto;
-  flex-flow: row nowrap;
-  max-width: 100%;
+    background: #fff;
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    max-width: 100%
 
 }
 
@@ -134,8 +134,24 @@ a:active {
 }
 
 
+/* dashboard leftside navigation */
+
+.navleft {
+    border-right: dashed 1px #ccc;
+    max-width: 200px;
+    background-color: #ccc;
+    margin-right: 25px;
+    color: #000;
+    /*padding-left: 15px;*/
+    padding-right: 15px;
+    padding-top: 20px;
+    display: block;
+    flex: none;
+    position: relative
+
+}
 
 
-
-
-
+li {
+    list-style-type: none;
+}

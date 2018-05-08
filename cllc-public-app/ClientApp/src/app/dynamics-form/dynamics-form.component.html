@@ -1,4 +1,4 @@
-<div class="col-md-6" *ngIf="dynamicsForm">
+<div class="col-md-12" *ngIf="dynamicsForm">
   <h3>{{dynamicsForm.name}}</h3>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
@@ -6,13 +6,10 @@
       <div *ngFor="let section of tab.sections">
         <h3>{{section.name}}</h3>
         <div *ngFor="let field of section.fields">
-          <label class="label" [for]="field.datafieldname">{{field.name}}</label> <input class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname"
+          <label class="label " [for]="field.datafieldname">{{field.name}}</label> <input class="form-control form-style" name="field.datafieldname" [formControlName]="field.datafieldname"
                                                                                          [id]="field.datafieldname">
         </div>
       </div>
-    </div>
-    <div>
-      <button class="globalButton" type="submit" [disabled]="!form.valid">Save</button>
     </div>
   </form>
 

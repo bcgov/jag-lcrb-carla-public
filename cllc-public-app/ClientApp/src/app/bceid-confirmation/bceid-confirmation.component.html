@@ -1,6 +1,6 @@
 
 <div *ngIf="!currentUser.isBceidConfirmed">
-  <h2>BCeID Confirmation</h2>
+  <h1>BCeID Confirmation</h1>
   <p>Please confirm your BCeID account details.  If these details are incorrect, please adjust them with BCeID.</p>
   <ul>
     <li>Business Legal Name: {{currentUser.businessname}}</li>
@@ -8,7 +8,7 @@
   </ul>
   <div class="row">
     <div class="col-md-12 text-left">
-      <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="confirmBceid()"><strong>Confirm</strong><br></a>
+      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBceid()"><strong>Confirm</strong><br></a>
     </div>
   </div>
 </div>
@@ -16,7 +16,7 @@
   <h2>Verify Contact</h2>
   <app-dynamics-form [formid]="('a8da3914-a43f-49fc-8726-159e2da68819')"></app-dynamics-form>
   <div class="col-md-12 text-left">
-    <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="confirmContact()"><strong>Confirm Contact</strong><br></a>
+    <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContact()"><strong>Confirm Contact</strong><br></a>
   </div>
 </div>
 <div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == true">
@@ -24,6 +24,6 @@
   <app-dynamics-form [formid]="('82b2f73c-a34d-47e9-a37d-903ab10fdfe2')"></app-dynamics-form>
 
   <div class="col-md-12 text-left">
-    <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="confirmBusiness()"><strong>Confirm Business</strong><br></a>
+    <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBusiness()"><strong>Confirm Business</strong><br></a>
   </div>
 </div>
