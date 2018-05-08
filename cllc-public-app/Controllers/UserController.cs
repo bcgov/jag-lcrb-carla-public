@@ -48,6 +48,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             user.id = userSettings.UserId;
+            user.contactid = userSettings.ContactId;
+            user.accountid = userSettings.AccountId;
 
             if (userSettings.IsNewUserRegistration)
             {
@@ -56,8 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.name = userSettings.UserDisplayName;
                 user.businessname = userSettings.BusinessLegalName;
                 user.lastname = DynamicsExtensions.GetLastName(user.name);
-                user.firstname = DynamicsExtensions.GetFirstName(user.name);
-
+                user.firstname = DynamicsExtensions.GetFirstName(user.name);                
                 // determine if there is an Dynamics contact available.
 
                 string siteminderID = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUniversalIdKey];

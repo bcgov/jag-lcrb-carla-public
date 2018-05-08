@@ -10,18 +10,13 @@
     </div>
   </header>
 
-  <div *ngIf="currentUser">
+  <div *ngIf="currentUser && currentUser.isNewUser == true">
     <main class="app-content container">
-      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
-      <div *ngIf="!currentUser.isNewUser">
-        <h1>User is logged in and is not a new user.</h1>
-        {{currentUser.name}}
-        {{currentUser.firstname}} {{currentUser.lastname}}
-        <router-outlet></router-outlet>
-      </div>
-      </main>
+      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>      
+    </main>
   </div>
-  <div *ngIf="!currentUser">
+  <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true)">
+
 
     <!-- /NAVBAR -->
     <div class="navigationRibbon">
@@ -39,13 +34,22 @@
     </div>
     <!-- /NAVBAR END -->
 
+    <div *ngIf="currentUser">
+      <h1>User is logged in and is not a new user.</h1>
+      {{currentUser.name}}
+      {{currentUser.firstname}} {{currentUser.lastname}}
+      <router-outlet></router-outlet>
+    </div>
+
     <main class="app-content container">
       <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
 
       <div class="app-main">
 
         <breadcrumb></breadcrumb>
+
         <router-outlet></router-outlet>
+
       </div>
 
       <app-insert id="sidebar-right" class="sidebar-right"></app-insert>

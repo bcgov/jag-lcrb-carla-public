@@ -36,6 +36,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         public bool IsNewUserRegistration { get; set; }
 
+        public string ContactId { get; set; }
+        public string AccountId { get; set; }
+
         /// <summary>
         /// Serializes UserSettings as a Json String
         /// </summary>
