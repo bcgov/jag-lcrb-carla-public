@@ -24,6 +24,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         private const string ConstSiteMinderUserGuidKey = "smgov_userguid";
         private const string ConstSiteMinderUniversalIdKey = "sm_universalid";
         private const string ConstSiteMinderUserNameKey = "sm_user";
+        private const string ConstSiteMinderBusinessGuidKey = "smgov_businessguid";
+        private const string ConstSiteMinderBusinessLegalNameKey = "smgov_businesslegalname";
+
         private const string ConstSiteMinderUserDisplayNameKey = "smgov_userdisplayname";
 
         private const string ConstMissingSiteMinderUserIdError = "Missing SiteMinder UserId";
@@ -37,6 +40,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// </summary>
         public SiteMinderAuthOptions()
         {
+            SiteMinderBusinessGuidKey = ConstSiteMinderBusinessGuidKey;
             SiteMinderUserGuidKey = ConstSiteMinderUserGuidKey;
             SiteMinderUniversalIdKey = ConstSiteMinderUniversalIdKey;
             SiteMinderUserNameKey = ConstSiteMinderUserNameKey;
@@ -59,6 +63,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// SiteMinder Authentication Scheme Name
         /// </summary>
         public string Scheme => AuthenticationSchemeName;
+
+        public string SiteMinderBusinessGuidKey { get; set; }
 
         /// <summary>
         /// User GUID
@@ -261,7 +267,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
                     ? dataAccess.LoadUser(userId)
                     : dataAccess.LoadUser(userId, siteMinderGuid);
-
+                /*
                 if (userSettings.AuthenticatedUser == null)
                 {
                     // try to add the user.
@@ -278,26 +284,25 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     _logger.LogWarning(options.MissingDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.MissingDbUserIdError);
                 }
+                */
 
-                if (!userSettings.AuthenticatedUser.Active)
+
+                if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
                     _logger.LogWarning(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
-                }                
+                }
 
                 // **************************************************
                 // Validate / check user permissions
                 // **************************************************
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
 
-                /* roles and permissions are disabled. 
-                if (!userPrincipal.HasClaim(User.PermissionClaim, Permission.Login)
-                   )
+                if (userPrincipal != null && !(userPrincipal.HasClaim(User.PermissionClaim, Permission.Login) || userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration)))
                 {
-                    _logger.LogWarning("User does not have ");
+                    _logger.LogWarning("User does not have permission to login or register.");
                     return AuthenticateResult.Fail(options.InvalidPermissions);
                 }
-                */
 
                 // **************************************************
                 // Create authenticated user
@@ -308,6 +313,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // create session info
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
+                userSettings.IsNewUserRegistration = userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration);
+
+                if (userSettings.IsNewUserRegistration && (hostingEnv.IsDevelopment() || hostingEnv.IsStaging()))
+                {
+                    userSettings.BusinessLegalName = "Business Legal Name for " + userId;
+                    userSettings.UserDisplayName = "Displayname for " + userId;
+                }
 
                 // **************************************************
                 // Update user settings
