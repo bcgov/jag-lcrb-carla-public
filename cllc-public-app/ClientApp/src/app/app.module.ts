@@ -44,11 +44,13 @@ import {
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
+import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
 import { GeneralDataService } from './general-data.service';
 import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
+import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -71,14 +73,18 @@ import { VoteDataService } from "./services/vote-data.service";
 import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NewsletterDataService } from "./services/newsletter-data.service";
+import { UserDataService } from "./services/user-data.service";
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    DynamicsFormComponent,
     SearchBoxDirective,
     HomeComponent,
     ResultComponent,
+    BceidConfirmationComponent,
     BreadcrumbComponent,
     InsertComponent,
     PolicyDocumentComponent,
@@ -189,7 +195,8 @@ import { NewsletterDataService } from "./services/newsletter-data.service";
     NewsletterDataService,
     PolicyDocumentDataService,
     SurveyDataService,        
-    VoteDataService
+    VoteDataService,
+    UserDataService
   ],
   bootstrap: [AppComponent]
 })

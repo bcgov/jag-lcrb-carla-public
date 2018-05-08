@@ -1,34 +1,5 @@
 <div class="container">
   <div class="row">
-    <h2>Form Viewer Demo</h2>
-    <div class="col-md-8" *ngIf="dynamicsForm">
-      <h2>Form Name: {{dynamicsForm.name}}</h2>
-      <h3>Entity: {{dynamicsForm.entity}}</h3>
-      <form (ngSubmit)="onSubmit()" [formGroup]="form">
-
-        <div *ngFor="let tab of dynamicsForm.tabs">
-          <div *ngFor="let section of tab.sections" class="form-row">
-            <h3>{{section.name}}</h3>
-            <div *ngFor="let field of section.fields" class="form-row">
-              <label [for]="field.datafieldname">{{field.name}}</label> <input name="field.datafieldname" [formControlName]="field.datafieldname"
-                                                                               [id]="field.datafieldname">
-            </div>
-
-          </div>
-        </div>
-
-        <div class="form-row">
-          <button type="submit" [disabled]="!form.valid">Save</button>
-        </div>
-      </form>
-
-      <div *ngIf="payload" class="form-row">
-        <strong>Saved the following values</strong><br>{{payload}}
-      </div>
-
-      <div *ngIf="responseText" class="form-row">
-        <strong>Received the following data</strong><br><pre>{{responseText}}</pre>
-      </div>
-    </div>
+    <app-dynamics-form [formid]="id"></app-dynamics-form>
   </div>
 </div>

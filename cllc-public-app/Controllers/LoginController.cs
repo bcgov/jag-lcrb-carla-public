@@ -61,7 +61,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Redirect("/");
+                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
+                return Redirect(basePath);
             }            
         }
 
