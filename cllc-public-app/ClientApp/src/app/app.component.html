@@ -7,11 +7,22 @@
              src="/cannabislicensing/assets/bc-logo.svg">
       </a>
       <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
+        <span class="label">login&nbsp;</span><span class="label">Sign Out</span>
     </div>
   </header>
 
   <div *ngIf="currentUser">
     <main class="app-content container">
+        <div class="navleft">
+
+            <ul>
+                <li>Dashboard</li>
+                <li>Business Profile</li>
+                <li>Store 1</li>
+                <li>Store 1</li>
+            </ul>
+
+        </div>
       <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
       <div *ngIf="!currentUser.isNewUser">
         <h1>User is logged in and is not a new user.</h1>
@@ -70,3 +81,4 @@
   </footer>
 </div>
 
+<script src="dropdown.js"></script>
