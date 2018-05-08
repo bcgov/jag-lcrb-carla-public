@@ -9,6 +9,7 @@ import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
 import { SurveyEditorComponent } from './survey/editor.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
+import { ApplicationsListComponent } from './applications-list/applications-list.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'newsletter-confirm/:slug',
     component: NewsletterConfirmationComponent
+  },
+  {
+    path: 'applications-list',
+    component: ApplicationsListComponent
   },
   {
     path: 'prv',
