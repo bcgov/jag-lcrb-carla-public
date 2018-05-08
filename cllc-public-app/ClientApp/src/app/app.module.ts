@@ -74,6 +74,7 @@ import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NewsletterDataService } from "./services/newsletter-data.service";
 import { UserDataService } from "./services/user-data.service";
+import { ApplicationsListComponent } from './applications-list/applications-list.component';
 
 
 
@@ -100,7 +101,8 @@ import { UserDataService } from "./services/user-data.service";
     VoteComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
-    FormViewerComponent
+    FormViewerComponent,
+    ApplicationsListComponent
   ],
   imports: [
     BrowserModule,
