@@ -82,19 +82,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var tabLabel = tab.XPathSelectElement("labels/label");
                     string description = tabLabel.Attribute("description").Value;
                     string tabId = tabLabel.Attribute("id") == null ? "" : tabLabel.Attribute("id").Value;
+                    Boolean tabShowLabel = tab.Attribute("showlabel").DynamicsAttributeToBoolean();
+                    Boolean tabVisible = tab.Attribute("visible").DynamicsAttributeToBoolean();
+
                     FormTab formTab = new FormTab();
-                    formTab.name = description;
                     formTab.id = tabId;
+                    formTab.name = description;
                     formTab.sections = new List<FormSection>();
-                    
+                    formTab.showlabel = tabShowLabel;
+                    formTab.visible = tabVisible;
 
                     // get the sections
                     var sections = tab.XPathSelectElements("columns/column/sections/section");
                     foreach (var section in sections)
                     {
+                        Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
+                        Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
+
                         FormSection formSection = new FormSection();
-                        formSection.id = section.Attribute("id").Value;
                         formSection.fields = new List<FormField>();
+                        formSection.id = section.Attribute("id").Value;
+                        formSection.showlabel = sectionShowLabel;
+                        formSection.visible = sectionVisible;
 
                         // get the fields.
                         var sectionLabels = section.XPathSelectElements("labels/label");
@@ -110,7 +119,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         foreach (var cell in cells)
                         {
                             FormField formField = new FormField();
+                            // get cell visibility and showlabel
+                            Boolean cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
+                            Boolean cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
+                            
+
+                            formField.showlabel = cellShowLabel;
+                            formField.visible = cellVisible;
+
                             // get the cell label. 
+
+
                             var cellLabels = cell.XPathSelectElements("labels/label");
                             foreach (var cellLabel in cellLabels)
                             {
@@ -120,16 +139,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             var control = cell.XPathSelectElement("control");
                             if ( !string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
                             {
+                                formField.classid = control.Attribute("classid").Value;
+                                formField.controltype = formField.classid.DynamicsControlClassidToName();
                                 formField.datafieldname = control.Attribute("datafieldname").Value;
+                                formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
                                 formSection.fields.Add(formField);
                             }
                             
-                            
-                            
                         }
                         
-
-
                         formTab.sections.Add(formSection);
                     }
 
@@ -143,12 +161,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 form.tabs.Add(formTab);
             }
 
-            // extract the fields from the formxml.
-            /*
-            var sections = XDocument.Parse(formXml).XPathSelectElements("form/tabs/tab").Where(
-                    tab => tab.XPathSelectElements("labels/label").Any(
-                        label => label.Attributes("description").Any(description => description.Value == TabName))).SelectMany(tab => tab.XPathSelectElements("columns/column/sections/section"));
-*/
             return Json(form);
         }
     }

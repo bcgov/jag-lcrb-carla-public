@@ -8,5 +8,6 @@ export class User {
   isNewUser: boolean;
   isContactCreated: boolean;
   isAccountCreated: boolean;
+  isBceidConfirmed: boolean;
   constructor() { }
 }
