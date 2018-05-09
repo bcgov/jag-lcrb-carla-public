@@ -9,5 +9,8 @@ export class User {
   isContactCreated: boolean;
   isAccountCreated: boolean;
   isBceidConfirmed: boolean;
+  contactid: string;
+  accountid: string;
+
   constructor() { }
 }
