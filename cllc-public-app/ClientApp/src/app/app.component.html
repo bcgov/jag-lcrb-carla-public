@@ -1,4 +1,4 @@
-<div class="app-outer" >
+﻿<div class="app-outer" >
   <header class="app-header">
     <div class="container">
       <a href="http://www2.gov.bc.ca/" tabindex="-1">
@@ -7,14 +7,39 @@
              src="/cannabislicensing/assets/bc-logo.svg">
       </a>
       <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
+        <span class="sign"><a href="">Sign In</a></span>
     </div>
   </header>
 
   <div *ngIf="currentUser && currentUser.isNewUser == true">
     <main class="app-content container">
-      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>      
-    </main>
+        <div class="navbackground">
+            <div class="sidenav">
+                <a href="#about">Dashboard</a>
+                <a href="#contact">Navigation</a>
+                <a href="#contact">Navigation</a>
+                <button class="dropdown-btn">
+                    Business Profile
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div> 
+
+
+
+
+
+
+        </div>
+      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>            
+      </main>
   </div>
+
+
   <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true)">
 
 
