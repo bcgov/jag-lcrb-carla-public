@@ -134,8 +134,73 @@ a:active {
 }
 
 
+.signin {
+    color: #fff;
+    font-size: 16px;
+    margin-top: -35px;
+}
 
 
 
+
+/* Sidebar Styles */
+
+.sidebar-wrapper {
+    margin-left: -15px;
+    width: 200px;
+    background-color: #234075;
+    margin-right: 30px;
+
+}
+
+
+.sidebar-nav {
+    position: relative;
+    top: 30px;
+    width: 200px;
+
+    list-style: none;
+    background-color: #234075;
+
+}
+
+.sidebar-nav li {
+    text-indent: 0px;
+    line-height: 40px
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    margin-left: -20px;
+
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: underline;
+    color: #fff;
+    padding:0 0 0 0;   
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none
+
+}
 
 

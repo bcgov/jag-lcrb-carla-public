@@ -6,12 +6,35 @@
              tabindex="-1" alt="B.C. Government Logo"
              src="/cannabislicensing/assets/bc-logo.svg">
       </a>
-      <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
-    </div>
+      <span class="title">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span><p class="text-right signin"><a href="url">Sign In</a></p></span>
+        
+</div>
   </header>
 
   <div *ngIf="currentUser && currentUser.isNewUser == true">
     <main class="app-content container">
+        
+        <!-- Sidebar -->
+        <div class="sidebar-wrapper">
+            <ul class="sidebar-nav">
+
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Business Profiles</a>
+                </li>
+                <li>
+                    <a href="#">Profile 1</a>
+                </li>
+                <li>
+                    <a href="#">Profile 2</a>
+                </li>
+         
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
       <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>      
     </main>
   </div>
