@@ -1,29 +1,27 @@
-<div class="container">
-  <div class="row">
-    <div *ngIf="!currentUser.isBceidConfirmed">
-      <h2>BCeID Confirmation</h2>
-      <p>Please confirm your BCeID account details.  If these details are incorrect, please adjust them with BCeID.</p>
-      <ul>
-        <li>Business Legal Name: {{currentUser.businessname}}</li>
-        <li>BCeID Account Name: {{currentUser.name}}</li>
-      </ul>
-      <div class="row">
-        <div class="col-md-12 text-left">
-          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="confirmBceid()"><strong>Confirm</strong><br></a>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == false ">
 
-      <h2>Verify Contact</h2>
-      <app-dynamics-form [formid]="('439e59e4-7a39-4ed6-8915-292a0dbda9e0')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
-      <div class="col-md-12 text-left">
-        <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="confirmContact()"><strong>Confirm Contact</strong><br></a>
-      </div>
+<div *ngIf="!currentUser.isBceidConfirmed">
+  <h1>BCeID Confirmation</h1>
+  <p>Please confirm your BCeID account details.  If these details are incorrect, please adjust them with BCeID.</p>
+  <ul>
+    <li>Business Legal Name: {{currentUser.businessname}}</li>
+    <li>BCeID Account Name: {{currentUser.name}}</li>
+  </ul>
+  <div class="row">
+    <div class="col-md-12 text-left">
+      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBceid()"><strong>Confirm</strong><br></a>
     </div>
-    <div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == true">
-      <h2>Verify Account</h2>
-      <app-dynamics-form [formid]="('82b2f73c-a34d-47e9-a37d-903ab10fdfe2')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
+  </div>
+</div>
+<div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == false ">
+  <h2>Verify Contact</h2>
+  <app-dynamics-form [formid]="('a8da3914-a43f-49fc-8726-159e2da68819')"></app-dynamics-form>
+  <div class="col-md-12 text-left">
+    <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContact()"><strong>Confirm Contact</strong><br></a>
+  </div>
+</div>
+<div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == true">
+  <h2>Verify Account</h2>
+  <app-dynamics-form [formid]="('82b2f73c-a34d-47e9-a37d-903ab10fdfe2')"></app-dynamics-form>
 
       <div class="col-md-12 text-left">
         <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="confirmAccount()"><strong>Confirm Business</strong><br></a>

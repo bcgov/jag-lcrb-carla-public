@@ -42,7 +42,9 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
+import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -75,12 +77,14 @@ import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsl
 import { NewsletterDataService } from "./services/newsletter-data.service";
 import { UserDataService } from "./services/user-data.service";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ApplicationsListComponent } from './applications-list/applications-list.component';
 
 
 @NgModule({
   declarations: [
     AccordionComponent,
-    AppComponent,
+      AppComponent,
+      ApplicationsListComponent,
     BceidConfirmationComponent,
     BreadcrumbComponent,
     DynamicsFormComponent,
@@ -112,6 +116,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -155,6 +160,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -197,7 +203,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PolicyDocumentDataService,
     SurveyDataService,        
     VoteDataService,
-    UserDataService
+    UserDataService,
+    AdoxioApplicationDataService
   ],
   bootstrap: [AppComponent]
 })
