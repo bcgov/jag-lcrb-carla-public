@@ -23,29 +23,35 @@
 </table>-->
 
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="License Applications Filter">
+    </mat-form-field>
+  </div>
 
-    <!-- Position Column -->
+  <mat-table matSort #table [dataSource]="dataSource">
+
+    <!-- Column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Name </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Column -->
     <ng-container matColumnDef="applyingPerson">
-      <mat-header-cell *matHeaderCellDef> Applying Person </mat-header-cell>
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Applying Person </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.applyingPerson}} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Column -->
     <ng-container matColumnDef="jobNumber">
-      <mat-header-cell *matHeaderCellDef> Job Number </mat-header-cell>
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Job Number </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.jobNumber}} </mat-cell>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Column -->
     <ng-container matColumnDef="licenseType">
-      <mat-header-cell *matHeaderCellDef> License Type </mat-header-cell>
+      <mat-header-cell mat-sort-header *matHeaderCellDef> License Type </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.licenseType}} </mat-cell>
     </ng-container>
 
