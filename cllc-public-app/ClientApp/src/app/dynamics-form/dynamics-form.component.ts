@@ -50,6 +50,9 @@ export class DynamicsFormComponent {
               else if (field.datafieldname == "lastname") {
                 group[field.datafieldname].patchValue(this.currentUser.lastname);
               }
+              else if (field.datafieldname == "name") {
+                group[field.datafieldname].patchValue(this.currentUser.businessname);
+              }
             }
 
           });
