@@ -28,6 +28,8 @@ export class UserDataService {
          user.isNewUser = data.isNewUser;
          user.isContactCreated = data.isContactCreated;
          user.isAccountCreated = data.isAccountCreated;
+         user.contactid = data.contactid;
+         user.accountid = data.accountid;
          return user;
        })
        .catch(this.handleError);
