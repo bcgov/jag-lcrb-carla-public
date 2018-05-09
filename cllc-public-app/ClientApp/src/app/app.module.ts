@@ -42,7 +42,9 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
+import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -113,6 +115,7 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -156,6 +159,7 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -198,7 +202,8 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     PolicyDocumentDataService,
     SurveyDataService,        
     VoteDataService,
-    UserDataService
+    UserDataService,
+    AdoxioApplicationDataService
   ],
   bootstrap: [AppComponent]
 })
