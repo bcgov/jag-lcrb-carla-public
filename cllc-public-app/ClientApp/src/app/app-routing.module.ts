@@ -9,6 +9,7 @@ import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
 import { SurveyEditorComponent } from './survey/editor.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -69,7 +70,9 @@ const routes: Routes = [
       breadcrumb: 'Survey Editor',
       survey_path: 'assets/survey-primary.json'
     }
-  }
+  },
+  //{ path: '404', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

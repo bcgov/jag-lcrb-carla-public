@@ -74,33 +74,34 @@ import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NewsletterDataService } from "./services/newsletter-data.service";
 import { UserDataService } from "./services/user-data.service";
-
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
+    AccordionComponent,
     AppComponent,
-    DynamicsFormComponent,
-    SearchBoxDirective,
-    HomeComponent,
-    ResultComponent,
     BceidConfirmationComponent,
     BreadcrumbComponent,
+    DynamicsFormComponent,
+    FormViewerComponent,
+    HomeComponent,
     InsertComponent,
-    PolicyDocumentComponent,
-    PolicyDocumentSidebarComponent,
-    StatusBadgeComponent,
-    SurveyComponent,
-    SurveyPrimaryComponent,
-    SurveyTestComponent,
-    SurveyEditorComponent,
-    SurveySidebarComponent,
-    StaticComponent,
-    AccordionComponent,
-    VoteComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
-    FormViewerComponent
+    NotFoundComponent,
+    PolicyDocumentComponent,
+    PolicyDocumentSidebarComponent,
+    ResultComponent,
+    SearchBoxDirective,
+    StaticComponent,
+    StatusBadgeComponent,
+    SurveyComponent,
+    SurveyEditorComponent,
+    SurveyPrimaryComponent,
+    SurveySidebarComponent,
+    SurveyTestComponent,
+    VoteComponent
   ],
   imports: [
     BrowserModule,
