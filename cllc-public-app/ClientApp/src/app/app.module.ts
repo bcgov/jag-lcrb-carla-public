@@ -42,7 +42,9 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
+import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -74,6 +76,7 @@ import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NewsletterDataService } from "./services/newsletter-data.service";
 import { UserDataService } from "./services/user-data.service";
+import { ApplicationsListComponent } from './applications-list/applications-list.component';
 
 
 
@@ -100,7 +103,8 @@ import { UserDataService } from "./services/user-data.service";
     VoteComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
-    FormViewerComponent
+    FormViewerComponent,
+    ApplicationsListComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +115,7 @@ import { UserDataService } from "./services/user-data.service";
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -154,6 +159,7 @@ import { UserDataService } from "./services/user-data.service";
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -196,7 +202,8 @@ import { UserDataService } from "./services/user-data.service";
     PolicyDocumentDataService,
     SurveyDataService,        
     VoteDataService,
-    UserDataService
+    UserDataService,
+    AdoxioApplicationDataService
   ],
   bootstrap: [AppComponent]
 })
