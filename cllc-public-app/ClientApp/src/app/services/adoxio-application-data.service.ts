@@ -22,13 +22,13 @@ export class AdoxioApplicationDataService {
 
          data.forEach((entry) => {
            let adoxioApplication = new AdoxioApplication();
-           adoxioApplication.name = data.name;
-           adoxioApplication.applyingPerson = data.applyingPerson;
-           adoxioApplication.jobNumber = data.jobNumber;
-           adoxioApplication.licenseType = data.licenseType;
+           adoxioApplication.name = entry.name;
+           adoxioApplication.applyingPerson = entry.applyingPerson;
+           adoxioApplication.jobNumber = entry.jobNumber;
+           adoxioApplication.licenseType = entry.licenseType;
            allAdoxioApplications.push(adoxioApplication);
          });
-
+         
          return allAdoxioApplications;
        })
        .catch(this.handleError);
