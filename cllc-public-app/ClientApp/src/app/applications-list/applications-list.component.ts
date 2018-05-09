@@ -10,9 +10,10 @@ import { MatPaginator, MatTableDataSource, MatTableModule, MatInputModule, MatTo
   styleUrls: ['./applications-list.component.css']
 })
 export class ApplicationsListComponent {
-  adoxioApplications: AdoxioApplication[];
+  //adoxioApplications: AdoxioApplication[];
+
   displayedColumns = ['name', 'applyingPerson', 'jobNumber', 'licenseType'];
-  dataSource = new MatTableDataSource<AdoxioApplication>(this.adoxioApplications);
+  dataSource = new MatTableDataSource<AdoxioApplication>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService, private route: ActivatedRoute) {
@@ -21,11 +22,10 @@ export class ApplicationsListComponent {
   ngOnInit() {
     this.adoxioApplicationDataService.getAdoxioApplications()
       .then((data) => {
-        this.adoxioApplications = data;
+        //this.adoxioApplications = data;
         this.dataSource.data = data;
       });
     this.dataSource.paginator = this.paginator;
-    //this.dataSource.data = this.adoxioApplications;
   }
 
 }
