@@ -10,5 +10,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+
+        public ViewModels.Contact primarycontact { get; set; }
     }
 }
