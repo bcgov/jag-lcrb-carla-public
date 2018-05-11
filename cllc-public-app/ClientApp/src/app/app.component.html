@@ -7,21 +7,41 @@
              src="/cannabislicensing/assets/bc-logo.svg">
       </a>
       <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
+      <span class="sign" *ngIf="isDevMode"><a href="/login">Sign In</a></span> 
     </div>
   </header>
 
-  <div *ngIf="currentUser">
+  <div *ngIf="currentUser && currentUser.isNewUser == true">
     <main class="app-content container">
-      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
-      <div *ngIf="!currentUser.isNewUser">
-        <h1>User is logged in and is not a new user.</h1>
-        {{currentUser.name}}
-        {{currentUser.firstname}} {{currentUser.lastname}}
-        <router-outlet></router-outlet>
-      </div>
+        <div class="navbackground">
+            <div class="sidenav">
+                <a href="#about">Dashboard</a>
+                <a href="#contact">Navigation</a>
+                <a href="#contact">Navigation</a>
+                <button class="dropdown-btn">
+                    Business Profile
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div> 
+
+
+
+
+
+
+        </div>
+      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>            
       </main>
   </div>
-  <div *ngIf="!currentUser">
+
+
+  <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true)">
+
 
     <!-- /NAVBAR -->
     <div class="navigationRibbon">
@@ -39,13 +59,21 @@
     </div>
     <!-- /NAVBAR END -->
 
+    <div *ngIf="currentUser">
+      <h1>User is logged in and is not a new user.</h1>
+      {{currentUser.name}}
+      {{currentUser.firstname}} {{currentUser.lastname}}
+    </div>
+
     <main class="app-content container">
       <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
 
       <div class="app-main">
 
         <breadcrumb></breadcrumb>
+
         <router-outlet></router-outlet>
+
       </div>
 
       <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
