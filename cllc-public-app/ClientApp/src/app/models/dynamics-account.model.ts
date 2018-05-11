@@ -1,10 +1,9 @@
-import { DynamicsFormTab } from "./dynamics-form-tab.model";
-export class DynamicsForm {
+export class DynamicsAccount {
   id: string;
   name: string;
   displayname: string;
   entity: string;
-  tabs: DynamicsFormTab[];
+
   
   constructor() { }
 }
