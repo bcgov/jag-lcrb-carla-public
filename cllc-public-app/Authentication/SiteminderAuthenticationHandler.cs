@@ -267,24 +267,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
                     ? dataAccess.LoadUser(userId)
                     : dataAccess.LoadUser(userId, siteMinderGuid);
-                /*
-                if (userSettings.AuthenticatedUser == null)
-                {
-                    // try to add the user.
-                    string displayname = context.Request.Headers[options.SiteMinderUserDisplayNameKey];
-
-                    userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
-                    ? dataAccess.AddUser(userId)
-                    : dataAccess.AddUser(userId, siteMinderGuid, displayname);
-                    
-                }
-
-                if (userSettings.AuthenticatedUser == null)
-                {
-                    _logger.LogWarning(options.MissingDbUserIdError + " (" + userId + ")");
-                    return AuthenticateResult.Fail(options.MissingDbUserIdError);
-                }
-                */
+                
 
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
@@ -317,8 +300,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (userSettings.IsNewUserRegistration && (hostingEnv.IsDevelopment() || hostingEnv.IsStaging()))
                 {
-                    userSettings.BusinessLegalName = "Business Legal Name for " + userId;
-                    userSettings.UserDisplayName = "Displayname for " + userId;
+                    userSettings.BusinessLegalName = userId + " TestBusiness";
+                    userSettings.UserDisplayName = userId + " TestUser";
+                    // add generated guids
+                    userSettings.SiteMinderBusinessGuid = new Guid().ToString();
+                    userSettings.SiteMinderGuid = new Guid().ToString();
                 }
 
                 // **************************************************

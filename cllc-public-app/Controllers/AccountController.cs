@@ -45,11 +45,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Contexts.Microsoft.Dynamics.CRM.Account account = new Contexts.Microsoft.Dynamics.CRM.Account();
 
             DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account>(_system);
-            AccountCollection.Add(account);
-            
+            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact>(_system);
+
+            AccountCollection.Add(account);          
             account.Name = item.name;
             account.Description = item.description;
-            
+
+            if (item.primarycontact != null)
+            {
+                // get the contact.
+                Contexts.Microsoft.Dynamics.CRM.Contact contact = new Contexts.Microsoft.Dynamics.CRM.Contact();
+                contact.Fullname = item.primarycontact.name;
+                contact.Contactid = new Guid(item.primarycontact.id);
+                account.Primarycontactid = contact;
+            }
+
+
             await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
 
             // if we have not yet authenticated, then this is the new record for the user.
