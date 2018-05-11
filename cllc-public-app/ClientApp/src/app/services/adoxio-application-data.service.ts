@@ -2,41 +2,39 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { User } from "../models/user.model";
+import { AdoxioApplication } from "../models/adoxio-application.model";
 
 @Injectable()
-export class UserDataService {
+export class AdoxioApplicationDataService {
    constructor(private http: Http) { }
 
-   getCurrentUser() {
+   getAdoxioApplications() {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("api/user/current", {
+     return this.http.get("api/adoxioapplication", {
        headers: headers
      })
        .toPromise()
        .then((res: Response) => {
          let data = res.json();
-         let user = new User();
-         user.id = data.id;
-         user.email = data.email;
-         user.firstname = data.firstname;
-         user.lastname = data.lastname;
-         user.name = data.name;
-         user.businessname = data.businessname;
-         user.isNewUser = data.isNewUser;
-         user.isContactCreated = data.isContactCreated;
-         user.isAccountCreated = data.isAccountCreated;
-         user.contactid = data.contactid;
-         user.accountid = data.accountid;
-         return user;
+         let allAdoxioApplications = [];
+
+         data.forEach((entry) => {
+           let adoxioApplication = new AdoxioApplication();
+           adoxioApplication.name = entry.name;
+           adoxioApplication.applyingPerson = entry.applyingPerson;
+           adoxioApplication.jobNumber = entry.jobNumber;
+           adoxioApplication.licenseType = entry.licenseType;
+           allAdoxioApplications.push(adoxioApplication);
+         });
+         
+         return allAdoxioApplications;
        })
        .catch(this.handleError);
    }
 
-
-     private handleError(error: Response | any) {
+   private handleError(error: Response | any) {
      let errMsg: string;
      if (error instanceof Response) {
        const body = error.json() || "";
