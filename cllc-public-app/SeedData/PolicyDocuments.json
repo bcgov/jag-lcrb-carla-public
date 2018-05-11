@@ -25,11 +25,12 @@
   },
   {
     "title": "Growing & Processing Cannabis",
-	"slug": "growing-cannabis",
-	"manuText": "Growing Cannabis",
-	"category": "licence-types",
-	"body": "<p>Provincial cannabis licences do not allow you to grow or process cannabis products. To grow or process cannabis, you must apply for a licence from the federal government. For more information, please visit the Government of Canada’s <a href='https://www.canada.ca/en/services/health/campaigns/marijuana-cannabis.html'>cannabis page</a>.</p>Please note that cannabis producers are not eligible for a cannabis retail licence. In addition, cannabis stores with a <a href='policy-document/tied-house'>close financial, business or personal connection</a> to a cannabis producer or processor may not be allowed to sell the producer’s or processor’s products.</p>",
-	"displayOrder": 3
+    "slug": "growing-cannabis",
+    "manuText": "Growing Cannabis",
+    "category": "licence-types",
+    "body": "<p>Provincial cannabis licences do not allow you to grow or process cannabis products. To grow or process cannabis, you must apply for a licence from the federal government. For more information, please visit the Government of Canada’s <a href='https://www.canada.ca/en/services/health/campaigns/marijuana-cannabis.html'>cannabis page</a>.</p>Please note that cannabis producers are not eligible for a cannabis retail licence. In addition, cannabis stores with a <a href='policy-document/tied-house'>close financial, business or personal connection</a> to a cannabis producer or processor may not be allowed to sell the producer’s or processor’s products.</p>",
+    "displayOrder": 3
+  },
   {
     "title": "Eligibility",
     "slug": "eligibility",
