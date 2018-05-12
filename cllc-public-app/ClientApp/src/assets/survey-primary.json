@@ -45,15 +45,17 @@
             "Corporation",
             "Partnership",
             "Sole-Proprietorship",
-            {
-              "value": "Society",
-              "text": "Society or similar (Legion, Fraternal Organization etc.)"
-            },
+            "Society",
             "Trust",
             "Estate",
             "Local Government",
-            "First Nation",
-            "Other"
+            "Indigenous Nation",
+            "School/University",
+            "Co-op",
+            "Strata Council",
+            "Church",
+            "Legion",
+            "Fraternal Organization"
           ]
         },
         {
@@ -102,20 +104,6 @@
               "value": "Limited Liability Partnership",
               "text": "Limited Liability Partnership"
             }
-          ]
-        },
-        {
-          "type": "radiogroup",
-          "name": "otherType",
-          "visible": false,
-          "visibleIf": "{businessType} = 'Other'",
-          "title": "OtherType",
-          "isRequired": true,
-          "choices": [
-            "School/University",
-            "Co-op",
-            "Strata Council",
-            "Church"
           ]
         }
       ],
