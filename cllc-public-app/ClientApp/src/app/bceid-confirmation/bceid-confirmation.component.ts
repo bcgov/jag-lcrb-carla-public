@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { DynamicsDataService } from "../services/dynamics-data.service";
 import { DynamicsAccount } from "../models/dynamics-account.model";
+import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
 
 @Component({
@@ -47,6 +48,13 @@ export class BceidConfirmationComponent {
     confirmContactYes() {
       // create a contact.
       var account = new DynamicsAccount();
+      account.name = this.currentUser.businessname;
+      account.id = this.currentUser.accountid;
+      var contact = new DynamicsContact();
+      contact.fullname = this.currentUser.name;
+      contact.id = this.currentUser.contactid;
+      account.primarycontact = contact;
+
       var payload = JSON.stringify(account);
       this.dynamicsDataService.createRecord('account', payload)
         .then((data) => {          
