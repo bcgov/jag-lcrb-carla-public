@@ -17,6 +17,18 @@
         </ul>
       </ng-template>
 
+      <!--licensedProducer-->
+      <div *ngIf="data && data.licensedProducer == 'Yes'">
+        <ul class="detail-step">
+          <li>You are a licenced producer of cannabis</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.licensedProducer == 'No'">
+        <ul class="detail-step">
+          <li>You are not a licenced producer of cannabis</li>
+        </ul>
+      </div>
+
       <!-- registeredBusiness -->
       <div *ngIf="data && data.registeredBusiness == 'Yes'">
         <ul class="detail-step">
@@ -50,6 +62,18 @@
       <div *ngIf="data && data.bceidAccount == 'No'">
         <ul class="detail-step">
           <li>You don't have a 'Business BCeID' account</li>
+        </ul>
+      </div>
+
+      <!--ruralRetailStore-->
+      <div *ngIf="data && data.ruralRetailStore == 'Yes'">
+        <ul class="detail-step">
+          <li>You think that you qualify for a cannabis rural retail store licence</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.ruralRetailStore == 'No'">
+        <ul class="detail-step">
+          <li>You don't think that you qualify for a cannabis rural retail store licence</li>
         </ul>
       </div>
 
@@ -139,6 +163,15 @@
         <ul class="detail-step">
           <li>You are not eligible to apply for a Cannabis Retail Store Licence if you are under 19 years old.</li>
         </ul>
+      </div>
+
+      <!--licensedProducer-->
+      <div *ngIf="data && data.licensedProducer == 'Yes'">
+        <h3>Licenced producer of cannabis</h3>
+        <p>
+          You are not eligible for a Cannabis Retail Store Licence if you are a licenced producer of cannabis.
+        </p>
+        <hr />
       </div>
 
       <!-- registeredBusiness -->
@@ -642,6 +675,12 @@
         <hr />
       </div>
 
+      <!--ruralRetailStore-->
+      <div *ngIf="data && data.ruralRetailStore == 'Yes'">
+      </div>
+      <div *ngIf="data && data.ruralRetailStore == 'No'">
+      </div>
+
       <!--firstNationsLand-->
       <div *ngIf="data.firstNationsLand">
         <h3>Cannabis Stores in {{data.firstNationsLand}}</h3>
@@ -681,51 +720,163 @@
       </div>
 
       <!-- locationOwnedLeased -->
-      <div *ngIf="data.locationOwnedLeased">
+      <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
         <h3>Information about your store</h3>
-        <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
+        <div *ngIf="data.ruralRetailStore == 'Yes'">
+          <p>Your store must be a self-contained business.</p>
+          <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
           <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
           <ul>
-            <li>Parcel Identifier (PID)</li>
-            <li>Floor plan showing:</li>
+            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>Photos/renderings of your store’s exterior and signage</li>
+            <li>
+              A floor plan showing:
               <ul>
                 <li>All doors leading into/out of the sales area</li>
                 <li>All entrances to the store (including back doors)</li>
                 <li>The locations of all fixed shelving and/or display cases</li>
                 <li>The locations of all cash registers</li>
                 <li>Which areas are public and which are for staff only</li>
-                <li>The dimensions of all rooms</li>
                 <li>The locations of all storage areas</li>
-              </ul>
-            <li>
-              Siteplan showing:
-              <ul>
-                <li>The location of your store&rsquo;s main public entrance</li>
-                <li>The locations of other buildings and businesses nearby, the entrances to those buildings, and their names or a description of what they are (e.g. gas station, office building)</li>
-                <li>Relevant street names nearby</li>
+                <li>How cannabis will not be accessible to minors (including any barriers or partitions separating the cannabis area from the rest of the business)</li>
               </ul>
             </li>
-            <li>Photos or renderings of your store's exterior and signage</li>
+            <li>
+              A site plan showing:
+              <ul>
+                <li>The location of the building and where it’s located on the property</li>
+                <li>The location of all entrances to the store</li>
+                <li>The locations of other buildings and businesses nearby, the entrances to those buildings, and their names or a description of what they are (e.g. gas station, office building)</li>
+                <li>Relevant street names nearby</li>
+                <li>Road access to the property, including the locations of any driveways and parking spots</li>
+                <li>The locations of any businesses that are located in the same building, including the business the store will be located inside of</li>
+              </ul>
+            </li>
           </ul>
-          <p>Make sure that any lease or property arrangement will be valid for at least 12 months after you would receive a licence.</p>
         </div>
-        <div *ngIf="data && data.locationOwnedLeased == 'No'">
-          <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to commit to a location if you are approved. Once your licence is conditially approved, you must gain ownership, a lease or have an acceptable property arrangement in place (such as a sublease or a property in the name of one of your business partners).</p>
-          <p>Make sure that any lease or property arrangement will be valid for at least 12 months after you would receive a licence.</p>
+        <div *ngIf="data.ruralRetailStore == 'No'">
+          <p>Your store must be a self-contained business.</p>
+          <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
+          <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
+          <ul>
+            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>Photos/renderings of your store’s exterior and signage</li>
+            <li>
+              A floor plan showing:
+              <ul>
+                <li>All doors leading into/out of the sales area</li>
+                <li>All entrances to the store (including back doors)</li>
+                <li>The locations of all fixed shelving and/or display cases</li>
+                <li>The locations of all cash registers</li>
+                <li>Which areas are public and which are for staff only</li>
+                <li>The locations of all storage areas</li>
+              </ul>
+            </li>
+            <li>
+              A site plan showing:
+              <ul>
+                <li>The location of the building and where it’s located on the property</li>
+                <li>The location of all entrances to the store</li>
+                <li>The locations of other buildings and businesses nearby, the entrances to those buildings, and their names or a description of what they are (e.g. gas station, office building)</li>
+                <li>Relevant street names nearby</li>
+                <li>Road access to the property, including the locations of any driveways and parking spots</li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <hr />
+      </div>
+
+      <div *ngIf="data && data.locationOwnedLeased == 'No'">
+        <h3>Information about your store</h3>
+        <div *ngIf="data.ruralRetailStore == 'Yes'">
+          <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to purchase a property or sign a lease if you are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of your business partner’s, may also be accepted.</p>
+          <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
+          <p>Your store must be a self-contained business. </p>
+          <p>During the application, you will need to submit the following information about your location:</p>
+          <ul>
+            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>Photos/renderings of your store’s exterior and signage</li>
+            <li>
+              A floor plan showing:
+              <ul>
+                <li>All doors leading into/out of the sales area</li>
+                <li>All entrances to the store (including back doors)</li>
+                <li>The locations of all fixed shelving and/or display cases</li>
+                <li>The locations of all cash registers</li>
+                <li>Which areas are public and which are for staff only</li>
+                <li>The locations of all storage areas</li>
+                <li>How cannabis will not be accessible to minors (including any barriers or partitions separating the cannabis area from the rest of the business)</li>
+              </ul>
+            </li>
+            <li>
+              A site plan showing:
+              <ul>
+                <li>The location of the building and where it’s located on the property</li>
+                <li>The location of all entrances to the store</li>
+                <li>The locations of other buildings and businesses nearby, the entrances to those buildings, and their names or a description of what they are (e.g. gas station, office building)</li>
+                <li>Relevant street names nearby</li>
+                <li>Road access to the property, including the locations of any driveways and parking spots</li>
+                <li>The locations of any businesses that are located in the same building, including the business the store will be located inside of</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="data.ruralRetailStore == 'No'">
+          <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to purchase a property or sign a lease if you are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of your business partner’s, may also be accepted.</p>
+          <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
+          <p>Your store must be a self-contained business.</p>
+          <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
+          <ul>
+            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>Photos/renderings of your store’s exterior and signage</li>
+            <li>
+              A floor plan showing:
+              <ul>
+                <li>All doors leading into/out of the sales area</li>
+                <li>All entrances to the store (including back doors)</li>
+                <li>The locations of all fixed shelving and/or display cases</li>
+                <li>The locations of all cash registers</li>
+                <li>Which areas are public and which are for staff only</li>
+                <li>The locations of all storage areas</li>
+              </ul>
+            </li>
+            <li>
+              A site plan showing:
+              <ul>
+                <li>The location of the building and where it’s located on the property</li>
+                <li>The location of all entrances to the store</li>
+                <li>The locations of other buildings and businesses nearby, the entrances to those buildings, and their names or a description of what they are (e.g. gas station, office building)</li>
+                <li>Relevant street names nearby</li>
+                <li>Road access to the property, including the locations of any driveways and parking spots</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <!-- connectionToProducerCultivator -->
       <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
         <h3>Connections to Licensed Producers</h3>
-        <p>Restrictions will be placed on a retail store that has a connection to a licenced producer. If there&rsquo;s a close association with the producer, the retailer will be prohibited from selling any of their products. The criteria to determine this connection is currently being created.</p>
+        <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. You will be prohibited from selling any of a producer's products if:</p>
+        <ul>
+          <li>You own 20% or more of a producer&rsquo;s voting shares</li>
+          <li>One of your immediate family members owns 20% or more of a producer&rsquo;s voting shares</li>
+          <li>A producer owns 20% or more of your voting shares</li>
+          <li>Any company, person or group of people owns 20% or more of both your organization&rsquo;s and a producer&rsquo;s voting share&nbsp;</li>
+        </ul>
+        <p>When you apply, you must declare any business, financial or family connections that you have to a producer, even if less than 20%.</p>
       </div>
+
+      <!--final text-->
+      <div *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">
+        <p>You must pay an application fee to apply for a licence. The application fee includes the cost of all required security clearances and financial integrity checks.</p>
+      </div>
+
       <hr />
 
       <!--newsletter-signup-->
       <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
 
     </div>
-  </div>
+    </div>
 </div>
