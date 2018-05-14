@@ -68,26 +68,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             if (userSettings.IsNewUserRegistration)
             {
-                if (string.IsNullOrEmpty(userSettings.AccountId))
+                
+                // we can now authenticate.
+                if (userSettings.AuthenticatedUser == null)
                 {
-                    userSettings.AccountId = account.Accountid.ToString();
-
-                    // we can now authenticate.
-                    if (userSettings.AuthenticatedUser == null)
-                    {
-                        Models.User user = new Models.User();
-                        user.Active = true;
-                        user.Guid = userSettings.ContactId;
-
-                        userSettings.AuthenticatedUser = user;                        
-                    }
-
-                    userSettings.IsNewUserRegistration = false;
-
-                    string userSettingsString = JsonConvert.SerializeObject(userSettings);
-                    // add the user to the session.
-                    _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
+                    Models.User user = new Models.User();
+                    user.Active = true;
+                    user.Guid = userSettings.ContactId;
+                    user.SmUserId = userSettings.UserId;
+                    userSettings.AuthenticatedUser = user;                        
                 }
+
+                userSettings.IsNewUserRegistration = false;
+
+                string userSettingsString = JsonConvert.SerializeObject(userSettings);
+                // add the user to the session.
+                _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
+                
             }
 
             return Json(account);

@@ -303,8 +303,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings.BusinessLegalName = userId + " TestBusiness";
                     userSettings.UserDisplayName = userId + " TestUser";
                     // add generated guids
-                    userSettings.SiteMinderBusinessGuid = new Guid().ToString();
-                    userSettings.SiteMinderGuid = new Guid().ToString();
+                    userSettings.SiteMinderBusinessGuid = Guid.NewGuid().ToString();
+                    userSettings.SiteMinderGuid = Guid.NewGuid().ToString();
+                    userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
+                    userSettings.ContactId = userSettings.SiteMinderGuid;
                 }
 
                 // **************************************************

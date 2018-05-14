@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
-
+            
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
