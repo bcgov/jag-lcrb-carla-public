@@ -1,9 +1,10 @@
+import { DynamicsContact } from "./dynamics-contact.model";
+
 export class DynamicsAccount {
   id: string;
   name: string;
-  displayname: string;
-  entity: string;
-
+  description: string;
+  primarycontact: DynamicsContact;
   
   constructor() { }
 }
