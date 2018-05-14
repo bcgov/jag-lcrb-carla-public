@@ -17,6 +17,23 @@
       ]
     },
     {
+      "name": "p1.5",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "licensedProducer",
+          "title": "Are you a licenced producer of cannabis?",
+          "isRequired": true,
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        }
+      ],
+      "visible": false,
+      "visibleIf": "{age19} = 'Yes'"
+    },
+    {
       "name": "p2",
       "elements": [
         {
@@ -31,7 +48,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p3",
@@ -108,7 +125,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {registeredBusiness} = \"Yes\""
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
     },
     {
       "name": "p4",
@@ -128,7 +145,26 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {registeredBusiness} = \"Yes\""
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
+    },
+    {
+      "name": "p4.5",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "ruralRetailStore",
+          "visible": false,
+          "visibleIf": "{registeredBusiness} = 'Yes'",
+          "title": "A cannabis rural retail licence is for cannabis stores in areas where the population would not support a standalone cannabis business. To qualify, the population must be no more than 2500 and the store must be at least 10km away from other cannabis stores (including proposed stores with an application in progress). Do you think you qualify for a cannabis rural retail store licence?",
+          "isRequired": true,
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        }
+      ],
+      "visible": false,
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p5",
@@ -145,7 +181,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' "
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p6",
@@ -160,7 +196,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' "
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p7",
@@ -178,7 +214,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' "
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p8",
@@ -198,7 +234,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p9",
@@ -206,6 +242,7 @@
         {
           "type": "radiogroup",
           "name": "contactLg",
+          "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'No'",
           "title": "Have you contacted the local government about opening a cannabis store?",
           "isRequired": true,
@@ -216,7 +253,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p10",
@@ -233,7 +270,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p11",
@@ -250,7 +287,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     }
   ],
   "showQuestionNumbers": "off",
