@@ -720,7 +720,7 @@
       </div>
 
       <!-- locationOwnedLeased -->
-      <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
+      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'Yes'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>Your store must be a self-contained business.</p>
@@ -784,9 +784,10 @@
             </li>
           </ul>
         </div>
+        <hr />
       </div>
 
-      <div *ngIf="data && data.locationOwnedLeased == 'No'">
+      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'No'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to purchase a property or sign a lease if you are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of your business partner’s, may also be accepted.</p>
@@ -852,6 +853,7 @@
             </li>
           </ul>
         </div>
+        <hr />
       </div>
 
       <!-- connectionToProducerCultivator -->
@@ -865,14 +867,16 @@
           <li>Any company, person or group of people owns 20% or more of both your organization&rsquo;s and a producer&rsquo;s voting share&nbsp;</li>
         </ul>
         <p>When you apply, you must declare any business, financial or family connections that you have to a producer, even if less than 20%.</p>
+        <hr />
       </div>
+
 
       <!--final text-->
       <div *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">
+        <h3>Application Fee</h3>
         <p>You must pay an application fee to apply for a licence. The application fee includes the cost of all required security clearances and financial integrity checks.</p>
+        <hr />
       </div>
-
-      <hr />
 
       <!--newsletter-signup-->
       <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
