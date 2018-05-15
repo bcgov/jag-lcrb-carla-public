@@ -18,7 +18,7 @@
   {
     "title": "Cannabis Marketing Licence",
     "slug": "cannabis-marketing-licence",
-    "manuText": "Marketing Licence",
+    "menuText": "Marketing Licence",
     "category": "license-types",
     "body": "<p>A cannabis marketing licence allows you to promote the products of cannabis producers and processors to cannabis stores. You might have heard of this licence referred to as an agent licence.</p><p>The cannabis marketing licence is still under development and no information is available. Please keep checking this page for updates, or sign up to receive updates on our home page.</p>",
     "displayOrder": 2
@@ -26,7 +26,7 @@
   {
     "title": "Growing & Processing Cannabis",
     "slug": "growing-cannabis",
-    "manuText": "Growing Cannabis",
+    "menuText": "Growing Cannabis",
     "category": "license-types",
     "body": "<p>Provincial cannabis licences do not allow you to grow or process cannabis products. To grow or process cannabis, you must apply for a licence from the federal government. For more information, please visit the Government of Canada’s <a href='https://www.canada.ca/en/services/health/campaigns/marijuana-cannabis.html'>cannabis page</a>.</p>Please note that cannabis producers are not eligible for a cannabis retail licence. In addition, cannabis stores with a <a href='policy-document/tied-house'>close financial, business or personal connection</a> to a cannabis producer or processor may not be allowed to sell the producer’s or processor’s products.</p>",
     "displayOrder": 3
