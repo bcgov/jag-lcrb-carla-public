@@ -63,6 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("post")]
+        [AllowAnonymous]
         public JsonResult PostResult([FromBody]ViewModels.PostSurveyResult model)
         {
             db.PostResults(model.postId, model.clientId, model.surveyResult);
