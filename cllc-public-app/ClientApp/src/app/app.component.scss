@@ -26,13 +26,16 @@ $bootstrap-sass-asset-helper: true;
 }
 
 .app-content {
-  background: #fff;
-  display: flex;
-  flex: 1 0 auto;
-  flex-flow: row nowrap;
-  max-width: 100%;
+    background: #fff;
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    max-width: 85%;
+    margin: auto;
 
 }
+
+
 
 
 .app-main {
@@ -148,20 +151,15 @@ a:active {
 .sidebar-wrapper {
     margin-left: -15px;
     width: 200px;
-    background-color: #234075;
+    background-color: #c6cdda;
     margin-right: 30px;
-
+    padding-top: 20px
 }
 
 
 .sidebar-nav {
-    position: relative;
-    top: 30px;
     width: 200px;
-
     list-style: none;
-    background-color: #234075;
-
 }
 
 .sidebar-nav li {
@@ -172,15 +170,17 @@ a:active {
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #fff;
+    color: #000;
     margin-left: -20px;
-
+    font-weight:200;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: underline;
-    color: #fff;
-    padding:0 0 0 0;   
+    color: #000;
+    margin-left: -40px;
+    padding-left: 20px;
+    background-color: #efefef;
 }
 
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
@@ -199,7 +199,7 @@ a:active {
 
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
-    background: none
+    background: none;
 
 }
 
