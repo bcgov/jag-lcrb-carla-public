@@ -1,30 +1,38 @@
 
 <div *ngIf="!currentUser.isBceidConfirmed">
-  <h1>BCeID Confirmation</h1>
-  <p>Please confirm your BCeID account details.  If these details are incorrect, please adjust them with BCeID.</p>
-  <ul>
-    <li>Business Legal Name: {{currentUser.businessname}}</li>
-    <li>BCeID Account Name: {{currentUser.name}}</li>
-  </ul>
-  <div class="row">
-    <div class="col-md-12 text-left">
-      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBceid()"><strong>Confirm</strong><br></a>
+  <div *ngIf="!bceidConfirmAccount">
+
+    <h1>Confirm Business BCeID Information</h1>
+    <p>Do we have the correct information?</p>
+    <ul>
+      <li>Company Name: {{currentUser.businessname}}</li>
+    </ul>
+    <div class="row">
+      <div class="col-md-12 text-left" *ngIf="!showBceidCorrection">
+        <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBceidAccountYes()"><strong>Yes</strong><br></a>
+
+        <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBceidAccountNo()"><strong>No</strong><br></a>
+      </div>
+      <div class="col-md-12 text-left" *ngIf="showBceidCorrection">
+        Before you continue, update your information with <a href="https://www.bceid.ca">Business BCeID</a> or log in with a different account.
+      </div>
+    </div>
+  </div>
+  <div *ngIf="bceidConfirmAccount">
+    <h1>Confirm Business BCeID Information</h1>
+    <p>Are you {{currentUser.name}}?</p>
+    <div class="row">
+      <div class="col-md-12 text-left" *ngIf="!showBceidUserContinue">
+        <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactYes()"><strong>Yes</strong></a>
+        <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactNo()"><strong>No</strong></a>
+        <br>
+      </div>
+      <div class="col-md-12 text-left" *ngIf="showBceidUserContinue">
+        Each user should have their own user account to fill out the application. Contact the BCeID primary user to add your account to the Business BCeID.
+        <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactYes()"><strong>Continue</strong></a>
+        <br>
+      </div>
     </div>
   </div>
 </div>
-<div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == false ">
-  <h2>Verify Contact</h2>
-  <app-dynamics-form [formid]="('a8da3914-a43f-49fc-8726-159e2da68819')"></app-dynamics-form>
-  <div class="col-md-12 text-left">
-    <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContact()"><strong>Confirm Contact</strong><br></a>
-  </div>
-</div>
-<div *ngIf="currentUser.isBceidConfirmed == true && currentUser.isContactCreated == true">
-  <h2>Verify Account</h2>
-  <app-dynamics-form [formid]="('82b2f73c-a34d-47e9-a37d-903ab10fdfe2')"></app-dynamics-form>
 
-  <div class="col-md-12 text-left">
-    <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBusiness()"><strong>Confirm Business</strong><br></a>
-
-  </div>
-</div>
