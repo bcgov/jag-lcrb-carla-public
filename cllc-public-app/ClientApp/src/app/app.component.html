@@ -6,9 +6,11 @@
              tabindex="-1" alt="B.C. Government Logo"
              src="/cannabislicensing/assets/bc-logo.svg">
       </a>
-      <span class="title">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span><p class="text-right signin"><a href="url">Sign Out</a></p></span>
-        
-</div>
+      <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
+      <span class="sign" *ngIf="isDevMode">
+          <p class="text-right signin"><a href="/login">Sign In</a></p>
+      </span> 
+    </div>
   </header>
 
   <div *ngIf="currentUser && currentUser.isNewUser == true">
@@ -38,6 +40,8 @@
       <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>      
     </main>
   </div>
+
+
   <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true)">
 
 
@@ -61,7 +65,6 @@
       <h1>User is logged in and is not a new user.</h1>
       {{currentUser.name}}
       {{currentUser.firstname}} {{currentUser.lastname}}
-      <router-outlet></router-outlet>
     </div>
 
     <main class="app-content container">

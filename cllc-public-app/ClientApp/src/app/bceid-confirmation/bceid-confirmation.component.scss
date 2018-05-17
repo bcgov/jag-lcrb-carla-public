@@ -1,4 +1,17 @@
-﻿
+﻿.globalButton {
+    background-color: #003366;
+    color: #ffffff;
+    margin-bottom: 25px;
+    margin-top: 10px
+}
+
+.globalButton:hover {
+    background-color: #2f567b !important;
+    color: #ffffff;
+    box-shadow: 0px 0px 0px 0px;
+    text-decoration: none;
+}
+
 .globalButton {
     background-color: #003366;
     border: #003366 1px solid;

@@ -42,7 +42,9 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
+import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -74,33 +76,36 @@ import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NewsletterDataService } from "./services/newsletter-data.service";
 import { UserDataService } from "./services/user-data.service";
-
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ApplicationsListComponent } from './applications-list/applications-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DynamicsFormComponent,
-    SearchBoxDirective,
-    HomeComponent,
-    ResultComponent,
+    AccordionComponent,
+      AppComponent,
+      ApplicationsListComponent,
     BceidConfirmationComponent,
     BreadcrumbComponent,
+    DynamicsFormComponent,
+    FormViewerComponent,
+    HomeComponent,
     InsertComponent,
-    PolicyDocumentComponent,
-    PolicyDocumentSidebarComponent,
-    StatusBadgeComponent,
-    SurveyComponent,
-    SurveyPrimaryComponent,
-    SurveyTestComponent,
-    SurveyEditorComponent,
-    SurveySidebarComponent,
-    StaticComponent,
-    AccordionComponent,
-    VoteComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
-    FormViewerComponent
+    NotFoundComponent,
+    PolicyDocumentComponent,
+    PolicyDocumentSidebarComponent,
+    ResultComponent,
+    SearchBoxDirective,
+    StaticComponent,
+    StatusBadgeComponent,
+    SurveyComponent,
+    SurveyEditorComponent,
+    SurveyPrimaryComponent,
+    SurveySidebarComponent,
+    SurveyTestComponent,
+    VoteComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +116,7 @@ import { UserDataService } from "./services/user-data.service";
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -154,6 +160,7 @@ import { UserDataService } from "./services/user-data.service";
     NgbModule,
     AdminModule,
     BrowserAnimationsModule,
+    CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -196,7 +203,8 @@ import { UserDataService } from "./services/user-data.service";
     PolicyDocumentDataService,
     SurveyDataService,        
     VoteDataService,
-    UserDataService
+    UserDataService,
+    AdoxioApplicationDataService
   ],
   bootstrap: [AppComponent]
 })
