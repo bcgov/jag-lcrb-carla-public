@@ -4,6 +4,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { InsertService } from './insert/insert.service';
 import { UserDataService } from './services/user-data.service';
 import { User } from './models/user.model';
+import { isDevMode } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,14 @@ export class AppComponent {
   previousUrl: string;
   public currentUser: User;
   public isNewUser: boolean;
+  public isDevMode: boolean;
 
   constructor(
       private renderer: Renderer2,
       private router: Router,
       private userDataService: UserDataService,
   ) {
+    this.isDevMode = isDevMode();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let prevSlug = this.previousUrl;

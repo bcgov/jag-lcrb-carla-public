@@ -13,6 +13,14 @@ $bootstrap-sass-asset-helper: true;
   vertical-align: middle;
 }
 
+.sign {
+    color: #ffffff;
+    background-color: none;
+    float: right;
+    padding-top:20px;
+    font-size: 17px;
+}
+
   .app-outer {
     display: flex;
     flex-flow: column nowrap;
@@ -123,6 +131,7 @@ a:visited {
 }
 
 /* mouse over link */
+
 a:hover {
     color: #fff;
     text-decoration: underline;
@@ -134,6 +143,47 @@ a:active {
     color: #fff;
     text-decoration: underline;
     font-weight: 900;
+}
+
+
+
+
+
+/* Fixed sidenav, full height */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #596c93;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-right: 25px;
+    font-weight: normal;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: right;
+    padding-right: 30px;
+    font-weight: 500;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #fff;
+    text-decoration: underline;
+    background-color: #415273;
+    font-weight: 400
 }
 
 
