@@ -40,8 +40,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a DataServiceCollection to add the record
             DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
 
-            var dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();             
-            
+            // get all applications in Dynamics filtered by the applying person
+            //var dynamicsApplicationList = await _system.Adoxio_applications.AddQueryOption("$filter", "_adoxio_applyingperson_value eq 7d4a5b20-e352-e811-8140-480fcfeac941").ExecuteAsync();
+
+            // get all applications in Dynamics
+            var dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
+
             List<ViewModels.AdoxioApplication> adoxioApplications = new List<AdoxioApplication>();
             ViewModels.AdoxioApplication adoxioApplication = null;
 
