@@ -3,5 +3,7 @@ export class AdoxioApplication {
   applyingPerson: string;
   jobNumber: string;
   licenseType: string;
-  //constructor() { }
+  establishmentName: string;
+  establishmentAddress: string;
+  applicationStatus: string;
 }

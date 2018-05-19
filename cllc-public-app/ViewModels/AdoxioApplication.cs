@@ -11,5 +11,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string applyingPerson { get; set; }
         public string jobNumber { get; set; }
         public string licenseType { get; set; }
+        public string establishmentName { get; set; }
+        public string establishmentAddress { get; set; }
+        public string applicationStatus { get; set; }
+
     }
 }

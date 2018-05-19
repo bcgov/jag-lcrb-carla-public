@@ -50,13 +50,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     adoxioLicense = new ViewModels.AdoxioLicense();
 
-                    // fetch the establishment
+                    // fetch the establishment and get name and address
                     Guid? adoxioEstablishmentId = dynamicsLicense._adoxio_establishment_value;
                     if (adoxioEstablishmentId != null)
                     {
                         Contexts.Microsoft.Dynamics.CRM.Adoxio_establishment establishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmentid: adoxioEstablishmentId).GetValueAsync();
                         adoxioLicense.establishmentName = establishment.Adoxio_name;
-                        adoxioLicense.establishmentAddress = establishment.Adoxio_addressstreet + ", " + establishment.Adoxio_addresscity + " " + establishment.Adoxio_addresspostalcode;
+                        adoxioLicense.establishmentAddress = establishment.Adoxio_addressstreet 
+                                                            + ", " + establishment.Adoxio_addresscity 
+                                                            + " " + establishment.Adoxio_addresspostalcode;
                     }
 
                     // fetch the licence status
