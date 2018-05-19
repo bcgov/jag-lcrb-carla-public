@@ -32,12 +32,12 @@
       <!-- registeredBusiness -->
       <div *ngIf="data && data.registeredBusiness == 'Yes'">
         <ul class="detail-step">
-          <li>You have a registered business in British Columbia that will be applying for a licence</li>
+          <li>You have a registered business/organization in British Columbia that will be applying for a licence</li>
         </ul>
       </div>
       <div *ngIf="data && data.registeredBusiness == 'No'">
         <ul class="detail-step">
-          <li>You don't have a registered business in British Columbia that will be applying for a licence</li>
+          <li>You don't have a registered business/organization in British Columbia that will be applying for a licence</li>
         </ul>
       </div>
 
@@ -45,7 +45,7 @@
       <div *ngIf="data.businessType">
         <ul class="detail-step">
           <li>
-            The type of business that will be applying for the licence is {{data.businessType}}
+            The type of business/organization that will be applying for the licence is {{data.businessType}}
             <span *ngIf="data.corporationType"> - {{data.corporationType}}</span>
             <span *ngIf="data.partnershipType"> - {{data.partnershipType}}</span>
             <span *ngIf="data.otherType"> - {{data.otherType}}</span>
@@ -62,6 +62,11 @@
       <div *ngIf="data && data.bceidAccount == 'No'">
         <ul class="detail-step">
           <li>You don't have a 'Business BCeID' account</li>
+        </ul>
+      </div>
+      <div *ngIf="data && data.bceidAccount == 'doNotknow'">
+        <ul class="detail-step">
+          <li>You don’t know if you have a 'Business BCeID' account</li>
         </ul>
       </div>
 
@@ -142,12 +147,12 @@
       <!-- connectionToProducerCultivator -->
       <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
         <ul class="detail-step">
-          <li>Your business or you have at least one business, financial or family connection to licensed producers of cannabis.</li>
+          <li>You or your business/organization has at least one business, financial or family connection to licensed producers of cannabis.</li>
         </ul>
       </div>
       <div *ngIf="data && data.connectionToProducerCultivator == 'No'">
         <ul class="detail-step">
-          <li>Neither your business nor you have any business, financial or family connections to licensed producers of cannabis.</li>
+          <li>Neither you nor your business/organization has any business, financial or family connections to licensed producers of cannabis.</li>
         </ul>
       </div>
 
@@ -178,7 +183,7 @@
       <div *ngIf="data && data.registeredBusiness == 'No'">
         <h3>Registered business or organization</h3>
         <p>
-          You must have a registered business or organization to apply for a licence. The type of business you register will determine who will need a security clearance check and what business information you need to submit. You can register a business or other organization with OneStop.
+          You must have a registered business or organization to apply for a licence. The type of business you register will determine who will need a security clearance check and what business information you need to submit. You can register a business or other organization with OneStop, B.C.’s Business Registry.
         </p>
         <hr />
       </div>
@@ -364,7 +369,7 @@
             </li>
             <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of organization. </li>
           </ul>
-          <p>The following people in your corporation will go through a security clearance check during the application process:</p>
+          <p>The following people in your partnership will go through a security clearance check during the application process:</p>
           <ul>
             <li>All general partners</li>
             <li>Limited partners holding at least a 10% interest in the partnership</li>
@@ -388,7 +393,7 @@
             </li>
             <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of organization. </li>
           </ul>
-          <p>The following people in your corporation will go through a security clearance check during the application process:</p>
+          <p>The following people in your partnership will go through a security clearance check during the application process:</p>
           <ul>
             <li>All general partners</li>
             <li>Limited partners holding at least a 10% interest in the partnership</li>
@@ -661,7 +666,7 @@
       <!-- bceidAccount -->
       <div *ngIf="data && data.bceidAccount == 'Yes'">
         <h3>Business BCeID</h3>
-        <p>Your organization's Business BCeID will be used to log in to the cannabis retail licence application. Additional Business BCeID user accounts can be created for people who may access the application on the organization&rsquo;s behalf. Create a user account for the person who has been authorized to submit the application.</p>
+        <p>Your organization's Business BCeID will be used to log in to the cannabis retail licence application. Additional Business BCeID user accounts can be created for people who may access the application on the organization's behalf. Create a user account for the person who has been authorized to submit the application.</p>
         <hr />
       </div>
       <div *ngIf="data && data.bceidAccount == 'No'">
@@ -670,7 +675,7 @@
         <hr />
       </div>
       <div *ngIf="data && data.bceidAccount == 'doNotknow'">
-        <h3>Find out about a Business BCeID</h3>
+        <h3>Find out if you have a Business BCeID account</h3>
         <p>Check if you have a Business BCeID. If you don't have one, you'll need to get one to log in to the application. Additional Business BCeID user accounts can be created for people who may access the application on the organization's behalf. Create a user account for the person who has been authorized to submit the application.</p>
         <hr />
       </div>
@@ -679,13 +684,6 @@
       <div *ngIf="data && data.ruralRetailStore == 'Yes'">
       </div>
       <div *ngIf="data && data.ruralRetailStore == 'No'">
-      </div>
-
-      <!--firstNationsLand-->
-      <div *ngIf="data.firstNationsLand">
-        <h3>Cannabis Stores in {{data.firstNationsLand}}</h3>
-        <p>If the First Nation has a population of less than 2500 people and your proposed location is at least 10km from any other retail cannabis application, you may qualify for a rural cannabis retail licence.</p>
-        <hr />
       </div>
 
       <!--contactedFirstNation-->
@@ -697,13 +695,6 @@
         <div *ngIf="data.contactedFirstNation == 'No'">
           <p>The First Nation must approve your cannabis store application. Contact the First Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements. You may be required to get a local business licence and zoning approval from the First Nation to sell cannabis.</p>
         </div>
-        <hr />
-      </div>
-
-      <!-- storelocation -->
-      <div *ngIf="data.storelocation">
-        <h3>Cannabis Stores in {{data.storelocation}}</h3>
-        <p>If the city has a population of less than 2500 people and your proposed location is at least 10km from any other retail cannabis application, you may qualify for a rural cannabis retail licence.</p>
         <hr />
       </div>
 
@@ -720,7 +711,7 @@
       </div>
 
       <!-- locationOwnedLeased -->
-      <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
+      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'Yes'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>Your store must be a self-contained business.</p>
@@ -784,9 +775,10 @@
             </li>
           </ul>
         </div>
+        <hr />
       </div>
 
-      <div *ngIf="data && data.locationOwnedLeased == 'No'">
+      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'No'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to purchase a property or sign a lease if you are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of your business partner’s, may also be accepted.</p>
@@ -852,6 +844,7 @@
             </li>
           </ul>
         </div>
+        <hr />
       </div>
 
       <!-- connectionToProducerCultivator -->
@@ -859,20 +852,22 @@
         <h3>Connections to Licensed Producers</h3>
         <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. You will be prohibited from selling any of a producer's products if:</p>
         <ul>
-          <li>You own 20% or more of a producer&rsquo;s voting shares</li>
-          <li>One of your immediate family members owns 20% or more of a producer&rsquo;s voting shares</li>
+          <li>You own 20% or more of a producer's voting shares</li>
+          <li>One of your immediate family members owns 20% or more of a producer's voting shares</li>
           <li>A producer owns 20% or more of your voting shares</li>
-          <li>Any company, person or group of people owns 20% or more of both your organization&rsquo;s and a producer&rsquo;s voting share&nbsp;</li>
+          <li>Any company, person or group of people owns 20% or more of both your organization's and a producer's voting share</li>
         </ul>
         <p>When you apply, you must declare any business, financial or family connections that you have to a producer, even if less than 20%.</p>
+        <hr />
       </div>
+
 
       <!--final text-->
       <div *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">
+        <h3>Application Fee</h3>
         <p>You must pay an application fee to apply for a licence. The application fee includes the cost of all required security clearances and financial integrity checks.</p>
+        <hr />
       </div>
-
-      <hr />
 
       <!--newsletter-signup-->
       <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
