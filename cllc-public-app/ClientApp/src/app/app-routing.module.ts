@@ -11,6 +11,7 @@ import { SurveyEditorComponent } from './survey/editor.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
     component: ApplicationsListComponent
   },
   {
+    path: 'lic-app-summary',
+    component: LicenseApplicationSummaryComponent
+  },
+    {
     path: 'prv',
     redirectTo: 'prv/survey'
   },
