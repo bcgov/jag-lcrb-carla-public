@@ -1,5 +1,5 @@
-<div class="col-md-12" *ngIf="dynamicsForm">
-  <h3>{{dynamicsForm.name}}</h3>
+<div class="col-md-9" *ngIf="dynamicsForm">
+  <h3 *ngIf="!hideHeader">{{dynamicsForm.name}}</h3>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div *ngFor="let tab of dynamicsForm.tabs">

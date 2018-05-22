@@ -134,7 +134,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (! (_env.IsDevelopment() || _env.IsStaging() )) return BadRequest("This API is not available outside a development environment.");
 
             string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
-
+            if (temp == null)
+            {
+                temp = "";
+            }
             // clear session
             HttpContext.Session.Clear();
 

@@ -38,10 +38,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetDynamicsApplications ()
         {
             // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ApplcationCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
+            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
 
+            // get all applications in Dynamics filtered by the applying person
+            //var dynamicsApplicationList = await _system.Adoxio_applications.AddQueryOption("$filter", "_adoxio_applyingperson_value eq 7d4a5b20-e352-e811-8140-480fcfeac941").ExecuteAsync();
+
+            // get all applications in Dynamics
             var dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
-            
+
             List<ViewModels.AdoxioApplication> adoxioApplications = new List<AdoxioApplication>();
             ViewModels.AdoxioApplication adoxioApplication = null;
 
@@ -52,9 +56,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioApplication = new ViewModels.AdoxioApplication();
                     adoxioApplication.name = dynamicsApplication.Adoxio_name;
                     //adoxioApplication.applyingPerson = dynamicsApplication.Adoxio_ApplyingPerson.Adoxio_contact_adoxio_application_ApplyingPerson.ToString();
-                    adoxioApplication.applyingPerson = dynamicsApplication._adoxio_applyingperson_value.ToString();
+                    Guid? applyingPersonId = dynamicsApplication._adoxio_applyingperson_value;
+
+                    if (applyingPersonId != null)
+                    {
+                        // fetch a contact
+                        Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
+                        adoxioApplication.applyingPerson = contact.Fullname;
+                    }
+
                     adoxioApplication.jobNumber = dynamicsApplication.Adoxio_jobnumber;
-                    adoxioApplication.licenseType = dynamicsApplication._adoxio_licencetype_value.ToString();
+
+                    Guid? adoxio_licencetypeId = dynamicsApplication._adoxio_licencetype_value;
+                    if (adoxio_licencetypeId != null)
+                    {
+                        Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
+                        adoxioApplication.licenseType = adoxio_licencetype.Adoxio_name;
+                    }
+                                        
                     adoxioApplications.Add(adoxioApplication);
                 }
             }
