@@ -26,6 +26,9 @@ export class AdoxioApplicationDataService {
            adoxioApplication.applyingPerson = entry.applyingPerson;
            adoxioApplication.jobNumber = entry.jobNumber;
            adoxioApplication.licenseType = entry.licenseType;
+           adoxioApplication.establishmentName = entry.establishmentName;
+           adoxioApplication.establishmentAddress = entry.establishmentAddress;
+           adoxioApplication.applicationStatus = entry.applicationStatus;
            allAdoxioApplications.push(adoxioApplication);
          });
          
