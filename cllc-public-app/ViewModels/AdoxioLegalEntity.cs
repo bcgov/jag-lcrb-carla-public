@@ -7,8 +7,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class AdoxioLegalEntity
     {
-        public string adoxio_legalentityid { get; set; }
-        public string adoxio_name { get; set; }
+        public string id { get; set; }
+        public string name { get; set; }
 
         public Account account { get; set; }
     }

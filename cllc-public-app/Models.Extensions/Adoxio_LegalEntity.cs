@@ -21,13 +21,39 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.AdoxioLegalEntity();
                 if (adoxio_legalentity.Adoxio_legalentityid != null)
                 {
-                    result.adoxio_legalentityid = adoxio_legalentity.Adoxio_legalentityid.ToString();
+                    result.id = adoxio_legalentity.Adoxio_legalentityid.ToString();
                 }
-                result.adoxio_name = adoxio_legalentity.Adoxio_name;
-                                
+                result.name = adoxio_legalentity.Adoxio_name;
+                               
             }            
             return result;
-        }   
-        
+        }
+
+
+        public static void CopyValues(this Adoxio_legalentity to, Adoxio_legalentity from)
+        {
+            to.Adoxio_legalentityid = from.Adoxio_legalentityid;
+            to.Adoxio_name = from.Adoxio_name;
+        }
+
+        public static void CopyValues(this Adoxio_legalentity to, ViewModels.AdoxioLegalEntity from)
+        {
+            to.Adoxio_legalentityid = new Guid(from.id);
+            to.Adoxio_name = from.name;
+        }
+
+
+        public static Adoxio_legalentity ToModel(this ViewModels.AdoxioLegalEntity adoxioLegalEntity)
+        {
+            Adoxio_legalentity result = null;
+            if (adoxioLegalEntity != null)
+            {
+                result = new Adoxio_legalentity();
+                result.Adoxio_legalentityid = new Guid(adoxioLegalEntity.id);
+                result.Adoxio_name = adoxioLegalEntity.name;
+            }
+            return result;
+        }
+
     }
 }
