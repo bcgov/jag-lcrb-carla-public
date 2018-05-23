@@ -77,6 +77,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
+            jsonString = await response.Content.ReadAsStringAsync();
+
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal(changedName, responseViewModel.name);
 
@@ -85,6 +87,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
+
+            // second delete should return a 404.
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);

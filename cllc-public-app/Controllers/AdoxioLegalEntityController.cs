@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<JsonResult> GetDynamicsLegalEntity(string id)
+        public async Task<IActionResult> GetDynamicsLegalEntity(string id)
         {
             ViewModels.AdoxioLegalEntity result = null;
             // query the Dynamics system to get the legal entity record.
@@ -80,9 +80,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Adoxio_legalentity legalEntity = null;
             if (adoxio_legalentityid != null)
             {
-                // fetch the legal entity
-                legalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid: adoxio_legalentityid).GetValueAsync();
-                result = legalEntity.ToViewModel();
+                try
+                {
+                    legalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid: adoxio_legalentityid).GetValueAsync();
+                    result = legalEntity.ToViewModel();
+                }
+                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                {
+                    return new NotFoundResult();
+                }
             }
 
             return Json(result);
@@ -133,13 +139,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         
             // copy values over from the data provided
             adoxioLegalEntity.CopyValues(item);
-            
+
             
             _system.UpdateObject(adoxioLegalEntity);
            
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            await _system.SaveChangesAsync(); // SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset
+            DataServiceResponse dsr = await _system.SaveChangesAsync(); // SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset
 
             return Json(adoxioLegalEntity.ToViewModel());
         }
@@ -150,22 +156,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost("{id}/delete")]
-        public async Task<JsonResult> DeleteDynamicsLegalEntity(string id)
+        public async Task<IActionResult> DeleteDynamicsLegalEntity(string id)
         {
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
-            Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
+            try
+            {
+                Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
+                _system.DeleteObject(adoxioLegalEntity);
+                DataServiceResponse dsr = await _system.SaveChangesAsync();
+            }
+            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+            {
+                return new NotFoundResult();
+            }            
 
-            // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
-            // remove the item.
-            LegalEntityCollection.Remove(adoxioLegalEntity);
-
-            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-
-            await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-
-            return Json(adoxioLegalEntity.ToViewModel());
+            return NoContent(); // 204
         }
     }
 }

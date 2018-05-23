@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         protected ApiIntegrationTestBase()
         {
             var builder = WebHost.CreateDefaultBuilder()
-                .UseEnvironment("Development")
+                .UseEnvironment("Staging")
                 .UseStartup<Startup>();
 
             _server = new TestServer(builder);
