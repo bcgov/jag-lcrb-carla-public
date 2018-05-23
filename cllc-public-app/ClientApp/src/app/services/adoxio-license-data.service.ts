@@ -2,37 +2,35 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { AdoxioApplication } from "../models/adoxio-application.model";
+import { AdoxioLicense } from "../models/adoxio-license.model";
 
 @Injectable()
-export class AdoxioApplicationDataService {
+export class AdoxioLicenseDataService {
    constructor(private http: Http) { }
 
-   getAdoxioApplications() {
+   getAdoxioLicenses() {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("api/adoxioapplication", {
+     return this.http.get("api/adoxiolicense", {
        headers: headers
      })
        .toPromise()
        .then((res: Response) => {
          let data = res.json();
-         let allAdoxioApplications = [];
+         let allAdoxioLicenses = [];
 
          data.forEach((entry) => {
-           let adoxioApplication = new AdoxioApplication();
-           adoxioApplication.name = entry.name;
-           adoxioApplication.applyingPerson = entry.applyingPerson;
-           adoxioApplication.jobNumber = entry.jobNumber;
-           adoxioApplication.licenseType = entry.licenseType;
-           adoxioApplication.establishmentName = entry.establishmentName;
-           adoxioApplication.establishmentAddress = entry.establishmentAddress;
-           adoxioApplication.applicationStatus = entry.applicationStatus;
-           allAdoxioApplications.push(adoxioApplication);
+           let adoxioLicense = new AdoxioLicense();
+           adoxioLicense.establishmentName = entry.establishmentName;
+           adoxioLicense.establishmentAddress = entry.establishmentAddress;
+           adoxioLicense.licenseType = entry.licenseType;
+           adoxioLicense.licenseStatus = entry.licenseStatus;
+           adoxioLicense.licenseNumber = entry.licenseNumber;
+           allAdoxioLicenses.push(adoxioLicense);
          });
          
-         return allAdoxioApplications;
+         return allAdoxioLicenses;
        })
        .catch(this.handleError);
    }
