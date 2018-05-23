@@ -63,49 +63,81 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //var dynamicsAttributeList = await _system.GlobalOptionSetDefinitions.ExecuteAsync();
 
             List<ViewModels.AdoxioApplication> adoxioApplications = new List<AdoxioApplication>();
-            ViewModels.AdoxioApplication adoxioApplication = null;
+            ViewModels.AdoxioApplication adoxioApplicationVM = null;
 
             if (dynamicsApplicationList != null)
             {
                 foreach (var dynamicsApplication in dynamicsApplicationList)
                 {
-                    adoxioApplication = new ViewModels.AdoxioApplication();
-                    //get name
-                    adoxioApplication.name = dynamicsApplication.Adoxio_name;
-
-                    //get applying person from Contact entity
-                    Guid? applyingPersonId = dynamicsApplication._adoxio_applyingperson_value;
-                    if (applyingPersonId != null)
-                    {
-                        Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
-                        adoxioApplication.applyingPerson = contact.Fullname;
-                    }
-
-                    //get job number
-                    adoxioApplication.jobNumber = dynamicsApplication.Adoxio_jobnumber;
-
-                    //get license type from Adoxio_licencetype entity
-                    Guid? adoxio_licencetypeId = dynamicsApplication._adoxio_licencetype_value;
-                    if (adoxio_licencetypeId != null)
-                    {
-                        Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
-                        adoxioApplication.licenseType = adoxio_licencetype.Adoxio_name;
-                    }
-
-                    //get establishment name and address
-                    adoxioApplication.establishmentName = dynamicsApplication.Adoxio_establishmentpropsedname;
-                    adoxioApplication.establishmentAddress = dynamicsApplication.Adoxio_establishmentaddressstreet
-                                                            + ", " + dynamicsApplication.Adoxio_establishmentaddresscity
-                                                            + " " + dynamicsApplication.Adoxio_establishmentaddresspostalcode;
-
-                    //get application status
-                    adoxioApplication.applicationStatus = dynamicsApplication.Statuscode.ToString();
-
-                    adoxioApplications.Add(adoxioApplication);
+                    adoxioApplicationVM = await ToViewModel(dynamicsApplication);
+                    adoxioApplications.Add(adoxioApplicationVM);
                 }
             }
 
             return Json(adoxioApplications);
+        }
+
+        [HttpGet("{applyingPersonId}")]
+        public async Task<JsonResult> GetDynamicsApplications(string applyingPersonId)
+        {
+            // create a DataServiceCollection to add the record
+            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
+
+            // get all applications in Dynamics filtered by the GUID of the applying person
+            //var filter = "_adoxio_applyingperson_value eq 7d4a5b20-e352-e811-8140-480fcfeac941";
+            var filter = "_adoxio_applyingperson_value eq " + applyingPersonId;
+            var dynamicsApplicationList = await _system.Adoxio_applications.AddQueryOption("$filter", filter).ExecuteAsync();
+
+            List<ViewModels.AdoxioApplication> adoxioApplications = new List<AdoxioApplication>();
+            ViewModels.AdoxioApplication adoxioApplicationVM = null;
+
+            if (dynamicsApplicationList != null)
+            {
+                foreach (var dynamicsApplication in dynamicsApplicationList)
+                {
+                    adoxioApplicationVM = await ToViewModel(dynamicsApplication);
+                    adoxioApplications.Add(adoxioApplicationVM);
+                }
+            }
+
+            return Json(adoxioApplications);
+        }
+
+        private async Task<AdoxioApplication> ToViewModel(Adoxio_application dynamicsApplication)
+        {
+            AdoxioApplication adoxioApplicationVM = new ViewModels.AdoxioApplication();
+            
+            //get name
+            adoxioApplicationVM.name = dynamicsApplication.Adoxio_name;
+
+            //get applying person from Contact entity
+            Guid? applyingPersonId = dynamicsApplication._adoxio_applyingperson_value;
+            if (applyingPersonId != null)
+            {
+                Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
+                adoxioApplicationVM.applyingPerson = contact.Fullname;
+            }
+
+            //get job number
+            adoxioApplicationVM.jobNumber = dynamicsApplication.Adoxio_jobnumber;
+
+            //get license type from Adoxio_licencetype entity
+            Guid? adoxio_licencetypeId = dynamicsApplication._adoxio_licencetype_value;
+            if (adoxio_licencetypeId != null)
+            {
+                Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
+                adoxioApplicationVM.licenseType = adoxio_licencetype.Adoxio_name;
+            }
+
+            //get establishment name and address
+            adoxioApplicationVM.establishmentName = dynamicsApplication.Adoxio_establishmentpropsedname;
+            adoxioApplicationVM.establishmentAddress = dynamicsApplication.Adoxio_establishmentaddressstreet
+                                                    + ", " + dynamicsApplication.Adoxio_establishmentaddresscity
+                                                    + " " + dynamicsApplication.Adoxio_establishmentaddresspostalcode;
+
+            //get application status
+            adoxioApplicationVM.applicationStatus = dynamicsApplication.Statuscode.ToString();
+            return adoxioApplicationVM;
         }
 
         [HttpPost()]
