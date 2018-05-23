@@ -45,6 +45,7 @@ import {
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
+import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -79,13 +80,14 @@ import { UserDataService } from "./services/user-data.service";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
 
 
 @NgModule({
   declarations: [
     AccordionComponent,
-      AppComponent,
-      ApplicationsListComponent,
+    AppComponent,
+    ApplicationsListComponent,
     BceidConfirmationComponent,
     BusinessProfileComponent,
     BreadcrumbComponent,
@@ -107,7 +109,8 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
     SurveyPrimaryComponent,
     SurveySidebarComponent,
     SurveyTestComponent,
-    VoteComponent
+    VoteComponent,
+    LicenseApplicationSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -206,7 +209,8 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
     SurveyDataService,        
     VoteDataService,
     UserDataService,
-    AdoxioApplicationDataService
+    AdoxioApplicationDataService,
+    AdoxioLicenseDataService
   ],
   bootstrap: [AppComponent]
 })
