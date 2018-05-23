@@ -188,10 +188,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 string url = context.Request.GetDisplayUrl().ToLower();
 
-                if (url.Contains("/authentication/dev") ||
-                    url.Contains("/error") ||
-                    url.Contains(".map") ||
-                    url.Contains(".js"))
+                if (url.Contains(".js"))
                 {
                     return AuthenticateResult.NoResult();
                 }
@@ -204,7 +201,20 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     string temp = context.Request.Cookies[options.DevAuthenticationTokenKey];
 
                     if (!string.IsNullOrEmpty(temp))
+                    {
                         userId = temp;
+                    }
+                    else // could be an automated test.
+                    {
+                        temp = context.Request.Headers["DEV-USER"];
+                        if (! string.IsNullOrEmpty(temp))
+                        {
+                            userId = temp;
+                        }
+                    }
+
+                        
+
                 }
 
                 // **************************************************
