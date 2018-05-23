@@ -18,6 +18,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   adoxioApplications: AdoxioApplication[] = [];
   adoxioLicenses: AdoxioLicense[] = [];
   licenseApplicationSummaryArray: LicenseApplicationSummary[] = [];
+  public dataLoaded;
 
   displayedColumns = ['establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
@@ -48,28 +49,31 @@ export class LicenseApplicationSummaryComponent implements OnInit {
           licAppSum.licenseType = entry.licenseType;
           licAppSum.status = entry.applicationStatus;
           this.licenseApplicationSummaryArray.push(licAppSum);
+
+          //get licenses
+          this.adoxioLicenseDataService.getAdoxioLicenses()
+            .then((data) => {
+              this.adoxioLicenses = data;
+              this.adoxioLicenses.forEach((entry) => {
+                let licAppSum = new LicenseApplicationSummary();
+                licAppSum.establishmentName = entry.establishmentName;
+                licAppSum.establishmentAddress = entry.establishmentAddress;
+                licAppSum.licenseType = entry.licenseType;
+                licAppSum.status = entry.licenseStatus;
+                licAppSum.licenseNumber = entry.licenseNumber;
+                this.licenseApplicationSummaryArray.push(licAppSum);
+              });
+            });
+
           this.dataSource.data = this.licenseApplicationSummaryArray;
-        });
-      });
+          this.dataLoaded = true;
 
-    //get licenses
-    this.adoxioLicenseDataService.getAdoxioLicenses()
-      .then((data) => {
-        this.adoxioLicenses = data;
-        //this.dataSource.data = data;
-        this.adoxioLicenses.forEach((entry) => {
-          let licAppSum = new LicenseApplicationSummary();
-          licAppSum.establishmentName = entry.establishmentName;
-          licAppSum.establishmentAddress = entry.establishmentAddress;
-          licAppSum.licenseType = entry.licenseType;
-          licAppSum.status = entry.licenseStatus;
-          licAppSum.licenseNumber = entry.licenseNumber;
-          this.licenseApplicationSummaryArray.push(licAppSum);
         });
       });
 
 
-    this.dataSource.data = this.licenseApplicationSummaryArray;
+
+    //this.dataSource.data = this.licenseApplicationSummaryArray;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
