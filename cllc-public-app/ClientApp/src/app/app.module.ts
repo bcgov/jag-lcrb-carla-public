@@ -79,6 +79,7 @@ import { NewsletterDataService } from "./services/newsletter-data.service";
 import { UserDataService } from "./services/user-data.service";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
 
 
@@ -88,6 +89,7 @@ import { LicenseApplicationSummaryComponent } from './license-application-summar
     AppComponent,
     ApplicationsListComponent,
     BceidConfirmationComponent,
+    BusinessProfileComponent,
     BreadcrumbComponent,
     DynamicsFormComponent,
     FormViewerComponent,

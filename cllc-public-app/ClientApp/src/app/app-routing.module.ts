@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { HomeComponent } from './home/home.component';
 import { PolicyDocumentComponent } from './policy-document/policy-document.component';
 import { ResultComponent } from './result/result.component';
@@ -18,6 +19,10 @@ const routes: Routes = [
     path: '',
     //children: []
     component: HomeComponent
+  },
+  {
+    path: 'business-profile',
+    component: BusinessProfileComponent
   },
   {
     path: 'form-viewer/:id',
