@@ -119,7 +119,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             );
 
-            return Ok();
+            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
+            return Redirect(basePath);
         }
 
         /// <summary>
@@ -153,7 +154,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             );
 
-            return Ok();
+            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
+            return Redirect(basePath);
         }
     }
     

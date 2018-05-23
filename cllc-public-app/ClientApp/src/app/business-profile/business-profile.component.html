@@ -1,0 +1,28 @@
+
+<div class="col-md-10">
+  <h1>Business Profile</h1>
+  <h2>Business Name</h2>
+  <mat-tab-group>
+    <mat-tab label="Corporate Details">
+      <div class="col-md-10 row">
+        <app-dynamics-form [formid]="('2401506d-7360-452b-974f-ea53b9219ee2')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
+      </div>
+      <div class="col-md-10 row">
+        <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Save</strong><br></a>
+      </div>
+      
+    </mat-tab>
+  <mat-tab label="Directors & Officers">
+    <h1>Some more tab content</h1>
+    <p>...</p>
+  </mat-tab>
+  <mat-tab label="Shareholders">
+    <h1>Some more tab content</h1>
+    <p>...</p>
+  </mat-tab>
+  <mat-tab label="Security Assessments">
+    <h1>Some more tab content</h1>
+    <p>...</p>
+  </mat-tab>
+  </mat-tab-group>
+</div>
