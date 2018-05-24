@@ -45,6 +45,7 @@ import {
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
+import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -53,6 +54,7 @@ import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
+import { EditShareholdersComponent } from './edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -79,17 +81,19 @@ import { UserDataService } from "./services/user-data.service";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
 
 
 @NgModule({
   declarations: [
     AccordionComponent,
-      AppComponent,
-      ApplicationsListComponent,
+    AppComponent,
+    ApplicationsListComponent,
     BceidConfirmationComponent,
     BusinessProfileComponent,
     BreadcrumbComponent,
     DynamicsFormComponent,
+    EditShareholdersComponent,
     FormViewerComponent,
     HomeComponent,
     InsertComponent,
@@ -107,7 +111,8 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
     SurveyPrimaryComponent,
     SurveySidebarComponent,
     SurveyTestComponent,
-    VoteComponent
+    VoteComponent,
+    LicenseApplicationSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -206,7 +211,8 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
     SurveyDataService,        
     VoteDataService,
     UserDataService,
-    AdoxioApplicationDataService
+    AdoxioApplicationDataService,
+    AdoxioLicenseDataService
   ],
   bootstrap: [AppComponent]
 })

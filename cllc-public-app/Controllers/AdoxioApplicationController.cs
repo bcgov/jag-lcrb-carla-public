@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
+
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -27,59 +30,74 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
 
-        public AdoxioApplicationController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+  
+        public AdoxioApplicationController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             this._system = context;
+            this._httpContextAccessor = httpContextAccessor;
             this._distributedCache = distributedCache;
+        }
+
+        private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByAplicant(string applicantId)
+        {
+            List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
+            IEnumerable<Adoxio_application> dynamicsApplicationList = null;
+            if (string.IsNullOrEmpty (applicantId))
+            {
+                dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
+            }
+            else
+            {
+                // Shareholders have an adoxio_position value of x.
+                dynamicsApplicationList = await _system.Adoxio_applications
+                    .AddQueryOption("$filter", "_adoxio_applicant_value eq " + applicantId) 
+                    .ExecuteAsync();
+            }
+
+            if (dynamicsApplicationList != null)
+            {
+                foreach (Adoxio_application dynamicsApplication in dynamicsApplicationList)
+                {
+                    result.Add(await dynamicsApplication.ToViewModel(_system));
+                }
+            }
+            return result;
         }
 
         [HttpGet()]
         public async Task<JsonResult> GetDynamicsApplications ()
         {
-            // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
-
-            // get all applications in Dynamics filtered by the applying person
-            //var dynamicsApplicationList = await _system.Adoxio_applications.AddQueryOption("$filter", "_adoxio_applyingperson_value eq 7d4a5b20-e352-e811-8140-480fcfeac941").ExecuteAsync();
-
             // get all applications in Dynamics
-            var dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
+            
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(null);
+            
+            return Json(adoxioApplications);
+        }
 
-            List<ViewModels.AdoxioApplication> adoxioApplications = new List<AdoxioApplication>();
-            ViewModels.AdoxioApplication adoxioApplication = null;
+        [HttpGet("current")]
+        public async Task<JsonResult> GetCurrentUserDyanamicsApplications()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            if (dynamicsApplicationList != null)
-            {
-                foreach (var dynamicsApplication in dynamicsApplicationList)
-                {
-                    adoxioApplication = new ViewModels.AdoxioApplication();
-                    adoxioApplication.name = dynamicsApplication.Adoxio_name;
-                    //adoxioApplication.applyingPerson = dynamicsApplication.Adoxio_ApplyingPerson.Adoxio_contact_adoxio_application_ApplyingPerson.ToString();
-                    Guid? applyingPersonId = dynamicsApplication._adoxio_applyingperson_value;
-
-                    if (applyingPersonId != null)
-                    {
-                        // fetch a contact
-                        Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
-                        adoxioApplication.applyingPerson = contact.Fullname;
-                    }
-
-                    adoxioApplication.jobNumber = dynamicsApplication.Adoxio_jobnumber;
-
-                    Guid? adoxio_licencetypeId = dynamicsApplication._adoxio_licencetype_value;
-                    if (adoxio_licencetypeId != null)
-                    {
-                        Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
-                        adoxioApplication.licenseType = adoxio_licencetype.Adoxio_name;
-                    }
-                                        
-                    adoxioApplications.Add(adoxioApplication);
-                }
-            }
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(userSettings.AccountId);
 
             return Json(adoxioApplications);
         }
+
+        [HttpGet("{applicantId}")]
+        public async Task<JsonResult> GetDynamicsApplications(string applicantId)
+        {
+            // get all applications in Dynamics
+
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(applicantId);
+
+            return Json(adoxioApplications);
+        }
+
 
         [HttpPost()]
         public async Task<JsonResult> CreateApplication([FromBody] Contexts.Microsoft.Dynamics.CRM.Adoxio_application item)
