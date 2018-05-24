@@ -15,9 +15,9 @@ import { AdoxioLicense } from '../models/adoxio-license.model';
 })
 export class LicenseApplicationSummaryComponent implements OnInit {
 
-  adoxioApplications: AdoxioApplication[] = [];
-  adoxioLicenses: AdoxioLicense[] = [];
-  licenseApplicationSummaryArray: LicenseApplicationSummary[] = [];
+  //adoxioApplications: AdoxioApplication[] = [];
+  //adoxioLicenses: AdoxioLicense[] = [];
+  //licenseApplicationSummaryArray: LicenseApplicationSummary[] = [];
   public dataLoaded;
 
   displayedColumns = ['establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
@@ -38,44 +38,42 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    //get applications
-    this.adoxioApplicationDataService.getAdoxioApplications()
-      .then((data) => {
-        this.adoxioApplications = data;
-        this.adoxioApplications.forEach((entry) => {
-          let licAppSum = new LicenseApplicationSummary();
-          licAppSum.establishmentName = entry.establishmentName;
-          licAppSum.establishmentAddress = entry.establishmentAddress;
-          licAppSum.licenseType = entry.licenseType;
-          licAppSum.status = entry.applicationStatus;
-          this.licenseApplicationSummaryArray.push(licAppSum);
+    let licenseApplicationSummary: LicenseApplicationSummary[] = [];
 
-          //get licenses
-          this.adoxioLicenseDataService.getAdoxioLicenses()
-            .then((data) => {
-              this.adoxioLicenses = data;
-              this.adoxioLicenses.forEach((entry) => {
-                let licAppSum = new LicenseApplicationSummary();
-                licAppSum.establishmentName = entry.establishmentName;
-                licAppSum.establishmentAddress = entry.establishmentAddress;
-                licAppSum.licenseType = entry.licenseType;
-                licAppSum.status = entry.licenseStatus;
-                licAppSum.licenseNumber = entry.licenseNumber;
-                this.licenseApplicationSummaryArray.push(licAppSum);
-              });
-            });
+    Promise.all([
+      this.adoxioApplicationDataService.getAdoxioApplications(),
+      this.adoxioLicenseDataService.getAdoxioLicenses()
+    ]).then(value => {
+      let adoxioApplications = value[0];
+      let adoxioLicenses = value[1];
 
-          this.dataSource.data = this.licenseApplicationSummaryArray;
-          this.dataLoaded = true;
-
-        });
+      adoxioApplications.forEach((entry) => {
+        let licAppSum = new LicenseApplicationSummary();
+        licAppSum.establishmentName = entry.establishmentName;
+        licAppSum.establishmentAddress = entry.establishmentAddress;
+        licAppSum.licenseType = entry.licenseType;
+        licAppSum.status = entry.applicationStatus;
+        licenseApplicationSummary.push(licAppSum);
       });
 
+      adoxioLicenses.forEach((entry) => {
+        let licAppSum = new LicenseApplicationSummary();
+        licAppSum.establishmentName = entry.establishmentName;
+        licAppSum.establishmentAddress = entry.establishmentAddress;
+        licAppSum.licenseType = entry.licenseType;
+        licAppSum.status = entry.licenseStatus;
+        licAppSum.licenseNumber = entry.licenseNumber;
+        licenseApplicationSummary.push(licAppSum);
+      });
 
+      this.dataSource.data = licenseApplicationSummary;
+      this.dataLoaded = true;
 
-    //this.dataSource.data = this.licenseApplicationSummaryArray;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    });
   }
 
 }
