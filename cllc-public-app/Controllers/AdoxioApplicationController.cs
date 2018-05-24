@@ -40,26 +40,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._distributedCache = distributedCache;
         }
 
-        //private string GetOptionsSetTextOnValue(IOrganizationService service, string entityName, string attributeName, int option)
-        //{
-        //    RetrieveAttributeRequest retrieveAttributeRequest = new RetrieveAttributeRequest
-        //    {
-        //        EntityLogicalName = entityName,
-        //        LogicalName = attributeName,
-        //        RetrieveAsIfPublished = true
-        //    };
-        //    RetrieveAttributeResponse retrieveAttributeResponse = (RetrieveAttributeResponse)service.Execute(retrieveAttributeRequest);
-        //    PicklistAttributeMetadata attributeMetadata = (PicklistAttributeMetadata)retrieveAttributeResponse?.AttributeMetadata;
-        //    if (attributeMetadata == null) return string.Empty;
-        //    var currentOption = attributeMetadata?.OptionSet?.Options?.FirstOrDefault(x => x.Value == option);
-        //    return currentOption?.Label?.UserLocalizedLabel?.Label != null ? currentOption.Label.UserLocalizedLabel.Label : string.Empty;
-        //}
-
-        private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByUser(string userId)
+        private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByAplicant(string applicantId)
         {
             List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
             IEnumerable<Adoxio_application> dynamicsApplicationList = null;
-            if (string.IsNullOrEmpty (userId))
+            if (string.IsNullOrEmpty (applicantId))
             {
                 dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
             }
@@ -67,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // Shareholders have an adoxio_position value of x.
                 dynamicsApplicationList = await _system.Adoxio_applications
-                    .AddQueryOption("$filter", "_adoxio_applyingperson_value eq " + userId) 
+                    .AddQueryOption("$filter", "_adoxio_applicant_value eq " + applicantId) 
                     .ExecuteAsync();
             }
 
@@ -86,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get all applications in Dynamics
             
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByUser(null);
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(null);
             
             return Json(adoxioApplications);
         }
@@ -98,17 +83,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByUser(userSettings.AccountId);
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(userSettings.AccountId);
 
             return Json(adoxioApplications);
         }
 
-        [HttpGet("{applyingPersonId}")]
-        public async Task<JsonResult> GetDynamicsApplications(string applyingPersonId)
+        [HttpGet("{applicantId}")]
+        public async Task<JsonResult> GetDynamicsApplications(string applicantId)
         {
             // get all applications in Dynamics
 
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByUser(applyingPersonId);
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(applicantId);
 
             return Json(adoxioApplications);
         }

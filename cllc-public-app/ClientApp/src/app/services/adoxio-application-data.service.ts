@@ -12,7 +12,7 @@ export class AdoxioApplicationDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("api/adoxioapplication", {
+     return this.http.get("api/adoxioapplication/current", {
        headers: headers
      })
        .toPromise()
