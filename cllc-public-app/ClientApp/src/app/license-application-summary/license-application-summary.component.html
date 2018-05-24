@@ -9,12 +9,14 @@
 
 <div class="example-container mat-elevation-z8">
 
-  <div class="spinner-container" *ngIf="!dataLoaded">
+  <div class="spinner-container" style="padding: 2em;" *ngIf="!dataLoaded">
     <mat-spinner></mat-spinner>
   </div>
-  <div *ngIf="dataSource.empty">No results</div>
+
+  <div *ngIf="dataSource.empty">No licence applications have been started</div>
 
   <div *ngIf="dataLoaded">
+
     <div class="example-header">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="License Applications Filter">
