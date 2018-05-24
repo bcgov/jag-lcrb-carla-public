@@ -54,6 +54,7 @@ import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
+import { EditShareholdersComponent } from './edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -92,6 +93,7 @@ import { LicenseApplicationSummaryComponent } from './license-application-summar
     BusinessProfileComponent,
     BreadcrumbComponent,
     DynamicsFormComponent,
+    EditShareholdersComponent,
     FormViewerComponent,
     HomeComponent,
     InsertComponent,
