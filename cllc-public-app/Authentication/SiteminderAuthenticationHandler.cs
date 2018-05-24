@@ -317,6 +317,19 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings.SiteMinderGuid = Guid.NewGuid().ToString();
                     userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
                     userSettings.ContactId = userSettings.SiteMinderGuid;
+                } 
+                // handle case where we are signed on as a development user but don't have any siteminder headers.
+                else if (userSettings.AuthenticatedUser != null && (hostingEnv.IsDevelopment() || hostingEnv.IsStaging()))
+                {
+                    // populate the business GUID.
+                    if (string.IsNullOrEmpty(userSettings.AccountId))
+                    {
+                        userSettings.AccountId = userSettings.AuthenticatedUser.Guid;
+                    }
+                    if (string.IsNullOrEmpty(userSettings.ContactId))
+                    {
+                        userSettings.ContactId = userSettings.AuthenticatedUser.Guid;
+                    }
                 }
 
                 // **************************************************
