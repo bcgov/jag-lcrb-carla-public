@@ -1,1 +1,20 @@
-﻿
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  border-bottom-color: #ddd;
+  margin-right: 0;
+}
+
+
+
+.nav-tabs > li.active {
+  background-color: green;
+  padding-left: 5px;
+}
+
+
+
+.nav-tabs {
+  border-bottom: none;
+}
