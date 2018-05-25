@@ -1,21 +1,21 @@
-
+﻿/// <reference path="../../../../node_modules/@types/jasmine/index.d.ts" />
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { BrowserModule, By } from "@angular/platform-browser";
-import { BceidConfirmationComponent } from './bceid-confirmation.component';
+import { EditShareholdersComponent } from './edit-shareholders.component';
 
-let component: BceidConfirmationComponent;
-let fixture: ComponentFixture<BceidConfirmationComponent>;
+let component: EditShareholdersComponent;
+let fixture: ComponentFixture<EditShareholdersComponent>;
 
-describe('bceid-confirmation component', () => {
+describe('EditShareholders component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ BceidConfirmationComponent ],
+            declarations: [ EditShareholdersComponent ],
             imports: [ BrowserModule ],
             providers: [
                 { provide: ComponentFixtureAutoDetect, useValue: true }
             ]
         });
-        fixture = TestBed.createComponent(BceidConfirmationComponent);
+        fixture = TestBed.createComponent(EditShareholdersComponent);
         component = fixture.componentInstance;
     }));
 

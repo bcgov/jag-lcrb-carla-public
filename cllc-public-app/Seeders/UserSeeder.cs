@@ -52,6 +52,14 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private List<User> GetSeedUsers(AppDbContext context)
         {
             List<User> users = new List<User>(GetDefaultUsers(context));
+
+            // purge users if we are running in development / staging mode.
+            if (IsDevelopmentEnvironment || IsStagingEnvironment)
+            {
+                context.UserRoles.RemoveRange(context.UserRoles);
+                context.Users.RemoveRange(context.Users);
+            }
+
             if (IsDevelopmentEnvironment)
                 users.AddRange(GetDevUsers(context));
             if (IsTestEnvironment || IsStagingEnvironment)
@@ -82,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                     Active = true,
                     Email = "Testy.McTesterson@TestDomain.test",
                     GivenName = "Testy",
-                    Guid = "2cbf7cb8d6b445f087fb82ad75566a9c",
+                    Guid = "172fd5bf-4210-4067-a248-074ae8580f35",
                     Initials = "TT",
                     SmAuthorizationDirectory = "TEST",
                     SmUserId = "TMcTesterson",
