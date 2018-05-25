@@ -6,6 +6,7 @@ import { DynamicsForm } from "../models/dynamics-form.model";
 import { DynamicsFormTab } from "../models/dynamics-form-tab.model";
 import { DynamicsFormSection } from "../models/dynamics-form-section.model";
 import { DynamicsFormField } from "../models/dynamics-form-field.model";
+import { DynamicsFormFieldOption } from '../models/dynamics-form-field-option.model';
 
 @Injectable()
 export class DynamicsDataService {
@@ -52,6 +53,17 @@ export class DynamicsDataService {
                newField.classid = field.classid;
                newField.controltype = field.controltype;
                newField.required = field.required;
+                
+               newField.options = [];
+               if (field.options) {
+                 field.options.forEach((option) => {
+                   let newFieldOption = new DynamicsFormFieldOption();
+                   newFieldOption.description = option.description;
+                   newFieldOption.label = option.label;                   
+                   newFieldOption.value = option.value;
+                   newField.options.push(newFieldOption);
+                 });
+               }
                newSection.fields.push(newField);
              });
              newTab.sections.push(newSection);
