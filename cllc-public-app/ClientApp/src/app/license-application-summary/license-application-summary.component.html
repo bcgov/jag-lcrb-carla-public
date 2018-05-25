@@ -1,11 +1,4 @@
 <h1>Licences</h1>
-<!--{{adoxioApplications | json}}-->
-<!--<p>------------------------------------</p>-->
-<!--{{adoxioLicenses | json}}-->
-<!--<p>------------------------------------</p>-->
-<!--{{licenseApplicationSummaryArray | json}}-->
-<!--<p>------------------------------------</p>-->
-<!--{{dataSource.data | json}}-->
 
 <div class="example-container mat-elevation-z8">
 
@@ -13,9 +6,9 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <div *ngIf="dataSource.empty">No licence applications have been started</div>
+  <div *ngIf="dataSource.data.length == 0 && dataLoaded ">No licence applications have been started</div>
 
-  <div *ngIf="dataLoaded">
+  <div *ngIf="dataLoaded && dataSource.data.length > 0">
 
     <div class="example-header">
       <mat-form-field>
