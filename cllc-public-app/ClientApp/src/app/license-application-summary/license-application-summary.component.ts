@@ -15,9 +15,6 @@ import { AdoxioLicense } from '../models/adoxio-license.model';
 })
 export class LicenseApplicationSummaryComponent implements OnInit {
 
-  //adoxioApplications: AdoxioApplication[] = [];
-  //adoxioLicenses: AdoxioLicense[] = [];
-  //licenseApplicationSummaryArray: LicenseApplicationSummary[] = [];
   public dataLoaded;
 
   displayedColumns = ['establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
@@ -68,6 +65,9 @@ export class LicenseApplicationSummaryComponent implements OnInit {
 
       this.dataSource.data = licenseApplicationSummary;
       this.dataLoaded = true;
+      //console.log(adoxioApplications);
+      //console.log(adoxioLicenses);
+      //console.log(this.dataSource.data);
 
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
