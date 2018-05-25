@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-business-profile',
@@ -7,8 +7,13 @@
 })
 /** BusinessProfile component*/
 export class BusinessProfileComponent {
+  public view_tab: string;
     /** BusinessProfile ctor */
     constructor() {
+      this.view_tab = "application-information-tab";
+  }
 
-    }
+  changeTab(tab) {
+    this.view_tab = tab;
+  }
 }
