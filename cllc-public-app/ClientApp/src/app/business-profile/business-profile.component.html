@@ -26,7 +26,7 @@
         </div>
          
         <div class="row">
-          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Save</strong><br></a>
+          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveApplicationInformation()"><strong>Save</strong><br></a>
         </div>
       </div>
       <div [hidden]="view_tab != 'corporate-details-tab'">Corporate Details</div>
@@ -39,8 +39,8 @@
         <!-- <app-edit-shareholders></app-edit-shareholders> -->
 
         <div class="col-md-10 row">
-          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Back</strong><br></a>
-          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Next</strong><br></a>
+          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="back"><strong>Back</strong><br></a>
+          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="next"><strong>Next</strong><br></a>
         </div>
 
       </div>
