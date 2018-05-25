@@ -10,6 +10,31 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class AccountExtensions
     {
+
+        /// <summary>
+        /// Copy values from a Dynamics legal entity to another one
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="from"></param>
+        public static void CopyValues(this Account to, Account from)
+        {
+            to.Accountid = from.Accountid;
+            to.Name = from.Name;
+            to.Description = from.Description;
+        }
+
+        /// <summary>
+        /// Copy values from a Dynamics legal entity to a view model.
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="from"></param>
+        public static void CopyValues(this Account to, ViewModels.Account from)
+        {
+            to.Accountid = new Guid(from.id);
+            to.Name = from.name;
+            to.Description = from.description;
+        }
+
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
@@ -24,7 +49,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.id = account.Accountid.ToString();
                 }
 
-                result.name = account.Name;                
+                result.name = account.Name;
+                result.description = account.Description;
             }            
             return result;
         }   
