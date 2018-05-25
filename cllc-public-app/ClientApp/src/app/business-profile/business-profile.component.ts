@@ -12,9 +12,16 @@ export class BusinessProfileComponent {
   private dynamicsFormComponent: DynamicsFormComponent;
 
   public view_tab: string;
+  number_tabs = 7;
     /** BusinessProfile ctor */
     constructor() {
-      this.view_tab = "application-information-tab";
+      this.view_tab = "tab-1";
+  }
+
+  getTab() {
+    var temp = this.view_tab.substring(4);
+    var result = parseInt(temp);
+    return result;
   }
 
   saveApplicantInformation() {    
@@ -26,11 +33,24 @@ export class BusinessProfileComponent {
     this.view_tab = tab;
   }
 
+
+
   back() {
-
+    var currentTab = this.getTab();
+    currentTab--;
+    if (currentTab < 1) {
+      currentTab = this.number_tabs;
+    }
+    this.view_tab = "tab-" + currentTab;
   }
-  next() {
 
+  next() {
+    var currentTab = this.getTab();
+    currentTab++;
+    if (currentTab > this.number_tabs) {
+      currentTab = 1;
+    }
+    this.view_tab = "tab-" + currentTab;
   }
 
 
