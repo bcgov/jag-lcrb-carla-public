@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -66,16 +56,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
+        /// GET all applications in Dynamics
         [HttpGet()]
         public async Task<JsonResult> GetDynamicsApplications ()
         {
             // get all applications in Dynamics
-            
             List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(null);
             
             return Json(adoxioApplications);
         }
 
+        /// GET all applications in Dynamics for the current user
         [HttpGet("current")]
         public async Task<JsonResult> GetCurrentUserDyanamicsApplications()
         {
@@ -88,11 +79,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(adoxioApplications);
         }
 
+        /// GET all applications in Dynamics by applicant ID
         [HttpGet("{applicantId}")]
         public async Task<JsonResult> GetDynamicsApplications(string applicantId)
         {
             // get all applications in Dynamics
-
             List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(applicantId);
 
             return Json(adoxioApplications);
