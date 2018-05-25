@@ -2,27 +2,52 @@
 <div class="col-md-10">
   <h1>Business Profile</h1>
   <h2>Business Name</h2>
-  <mat-tab-group>
-    <mat-tab label="Corporate Details">
-      <div class="col-md-10 row">
-        <app-dynamics-form [formid]="('2401506d-7360-452b-974f-ea53b9219ee2')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
+
+
+  <div class="col-xs-3">
+    <!-- required for floating -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tabs-right sideways">
+      <li class="active"><a href="#application-information-tab" data-toggle="tab">Application Information</a></li>
+      <li><a href="#corporate-details-tab" data-toggle="tab">Corporate Details</a></li>
+      <li><a href="#organization-structure-tab" data-toggle="tab">Organization Structure</a></li>
+      <li><a href="#" data-toggle="directors-and-officers-tab">Directors &Aacute; Officers</a></li>
+      <li><a href="#" data-toggle="shareholders-tab">Shareholders</a></li>
+      <li><a href="#" data-toggle="directors-and-officers-tab">Directors &Aacute; Officers</a></li>
+      <li><a href="#" data-toggle="accounting-and-taxes-tab">Accounting &Aacute; Taxes</a></li>
+      <li><a href="#" data-toggle="investments-tab">Investments &Aacute; Loans</a></li>
+      <li><a href="#" data-toggle="security-assessment-tab">Security Assessments</a></li>
+    </ul>
+  </div>
+  <div class="col-xs-9">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="application-information-tab">
+        <div class="col-md-10 row">
+          <app-dynamics-form [formid]="('2401506d-7360-452b-974f-ea53b9219ee2')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
+        </div>
+        <div class="col-md-10 row">
+          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Save</strong><br></a>
+        </div>
       </div>
-      <div class="col-md-10 row">
-        <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Save</strong><br></a>
-      </div>
-      
-    </mat-tab>
-  <mat-tab label="Directors & Officers">
-    <h1>Some more tab content</h1>
-    <p>...</p>
-  </mat-tab>
-  <mat-tab label="Shareholders">
-    <h1>Some more tab content</h1>
-    <p>...</p>
-  </mat-tab>
-  <mat-tab label="Security Assessments">
-    <h1>Some more tab content</h1>
-    <p>...</p>
-  </mat-tab>
-  </mat-tab-group>
+      <div class="tab-pane" id="corporate-details-tab">Corporate Details</div>
+      <div class="tab-pane" id="organization-structure-tab">  </div>
+      <div class="tab-pane" id="organization-structure-vr">  </div>
+    </div>
+
+    <h1>Shareholders</h1>
+    <p>Enter all shareholders for the corporation</p>
+
+    <!-- <app-edit-shareholders></app-edit-shareholders> -->
+
+    <div class="col-md-10 row">
+      <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Back</strong><br></a>
+      <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Next</strong><br></a>
+    </div>
+
+
+  </div>
+
+
+
 </div>
