@@ -74,10 +74,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
+            // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(userSettings.AccountId);
+
             // For Demo Only, hardcode the account id !!!
-            //List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(userSettings.AccountId);
-            string accountId = "f3310e39-e352-e811-8140-480fcfeac941";
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(accountId);
+            //string accountId = "f3310e39-e352-e811-8140-480fcfeac941";
+            //List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(accountId);
 
             return Json(adoxioApplications);
         }
