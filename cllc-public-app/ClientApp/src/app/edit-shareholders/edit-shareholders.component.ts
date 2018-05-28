@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-edit-shareholders',
@@ -7,6 +7,10 @@
 })
 /** EditShareholders component*/
 export class EditShareholdersComponent {
+  public dataLoaded;
+
+  public dataSource;
+
     /** EditShareholders ctor */
     constructor() {
 
