@@ -75,7 +75,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(userSettings.AccountId);
+            //List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(userSettings.AccountId);
+
+            // For Demo Only, hardcode the account id !!!
+            string accountId = "f3310e39-e352-e811-8140-480fcfeac941";
+            List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(accountId);
+
 
             return Json(adoxioLicenses);
         }
