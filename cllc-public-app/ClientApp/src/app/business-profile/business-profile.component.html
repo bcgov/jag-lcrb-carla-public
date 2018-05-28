@@ -24,7 +24,7 @@
     <div class="tab-content">
       <div class="tab-pane active" id="application-information-tab">
         <div class="col-md-10 row">
-          <app-dynamics-form [formid]="('2401506d-7360-452b-974f-ea53b9219ee2')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
+          <!--<app-dynamics-form [formid]="('2401506d-7360-452b-974f-ea53b9219ee2')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>-->
         </div>
         <div class="col-md-10 row">
           <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Save</strong><br></a>
@@ -34,11 +34,11 @@
       <div class="tab-pane" id="organization-structure-tab">  </div>
       <div class="tab-pane" id="organization-structure-vr">  </div>
     </div>
-
+    <hr/>
     <h1>Shareholders</h1>
     <p>Enter all shareholders for the corporation</p>
 
-    <!-- <app-edit-shareholders></app-edit-shareholders> -->
+     <app-edit-shareholders></app-edit-shareholders> 
 
     <div class="col-md-10 row">
       <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Back</strong><br></a>

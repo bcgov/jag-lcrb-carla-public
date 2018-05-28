@@ -1,59 +1,96 @@
 <div class="spinner-container" *ngIf="!dataLoaded">
   <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="dataSource.empty">No results</div>
 
 <div *ngIf="dataLoaded">
-  <div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="License Applications Filter">
-    </mat-form-field>
-  </div>
 
-  <mat-table matSort #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataSource">
 
     <!-- Column -->
-    <ng-container matColumnDef="establishmentName">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Store Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
+    <ng-container matColumnDef="shareholderType">
+      <mat-header-cell *matHeaderCellDef> Shareholder Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.shareholderType}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
-    <ng-container matColumnDef="establishmentAddress">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Address </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.establishmentAddress}} </mat-cell>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
-    <ng-container matColumnDef="status">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
-    <ng-container matColumnDef="licenseType">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.licenseType}} </mat-cell>
+    <ng-container matColumnDef="numberOfNonVotingShares">
+      <mat-header-cell *matHeaderCellDef> Number of Non-voting Shares </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfNonVotingShares}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
-    <ng-container matColumnDef="licenseNumber">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Licence Number </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.licenseNumber}} </mat-cell>
+    <ng-container matColumnDef="numberOfVotingShares">
+      <mat-header-cell *matHeaderCellDef> Number of Voting Shares </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfVotingShares}} </mat-cell>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="dateIssued">
+      <mat-header-cell *matHeaderCellDef> Date Issued </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator
-                 [pageSize]="5"
-                 [pageSizeOptions]="[5, 10, 15]"
-                 [showFirstLastButtons]="true">
-  </mat-paginator>
 </div>
-
 <div class="col-md-10 row">
+  <p>&nbsp;</p>
   <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Add Person</strong><br></a>
   <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Add Organization</strong><br></a>
+  <p>&nbsp;</p>
 </div>
+
+<div>
+  <div class="col-md-10">
+    <h2>Add Shareholder - Person</h2>
+  </div>
+  <form [formGroup]='shareholderForm' (ngSubmit)="saveShareholder(shareholderForm)">
+    <div class="form-container">
+      <div class="row columns">
+        <div class="col-xs-6">
+          <label>First Name</label>
+          <input type="text" formControlName='firstName' placeholder="First Name">
+        </div>
+        <div class="col-xs-6">
+          <label>Last Name</label>
+          <input type="text" formControlName='lastName' placeholder="Last Name">
+        </div>
+        <div class="col-md-10">
+          <label>Email</label>
+          <input type="text" formControlName='email' placeholder="Email">
+        </div>
+        <div class="col-xs-6">
+          <label>Number of<br />Non-voting Shares</label>
+          <input type="number" formControlName='numberOfNonVotingShares' placeholder="Number of Non-voting Shares">
+        </div>
+        <div class="col-xs-6">
+          <label>Number of <br />Voting Shares</label>
+          <input type="number" formControlName='numberOfVotingShares' placeholder="Number of Voting Shares">
+        </div>
+        <div class="col-xs-6">
+          <label>Date Issued</label>
+          <input type="date" formControlName='dateIssued' placeholder="Date Issued">
+        </div>
+        <div class="col-md-10">
+          <input type="Submit" value="Save">
+          <input type="reset" value="Cancel">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" formControlName='shareholderType'>
+  </form>
+</div>  
