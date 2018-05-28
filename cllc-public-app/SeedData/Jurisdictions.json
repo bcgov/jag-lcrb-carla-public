@@ -28,6 +28,10 @@
     "Message": "Jurisdiction Message"
   },
   {
+    "Name": "Ballenas-Winchelsea Island (Island Trust)",
+    "Message": "Jurisdiction Message"
+  },
+  {
     "Name": "Barriere",
     "Message": "Jurisdiction Message"
   },
@@ -128,6 +132,10 @@
     "Message": "Jurisdiction Message"
   },
   {
+    "Name": "Denman Island (Island Trust)",
+    "Message": "Jurisdiction Message"
+  },
+  {
     "Name": "Duncan",
     "Message": "Jurisdiction Message"
   },
@@ -161,6 +169,18 @@
   },
   {
     "Name": "Fruitvale",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "Gabriola Island (Island Trust)",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "Galiano Island (Island Trust)",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "Gambier Island (Island Trust)",
     "Message": "Jurisdiction Message"
   },
   {
@@ -201,6 +221,10 @@
   },
   {
     "Name": "Hope",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "Hornby Island (Island Trust)",
     "Message": "Jurisdiction Message"
   },
   {
@@ -280,6 +304,10 @@
     "Message": "Jurisdiction Message"
   },
   {
+    "Name": "Lasqueti Island (Island Trust)",
+    "Message": "Jurisdiction Message"
+  },
+  {
     "Name": "Lillooet",
     "Message": "Jurisdiction Message"
   },
@@ -309,6 +337,10 @@
   },
   {
     "Name": "Masset",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "Mayne Island (Island Trust)",
     "Message": "Jurisdiction Message"
   },
   {
@@ -361,6 +393,10 @@
   },
   {
     "Name": "North Cowichan",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "North Pender Island (Island Trust)",
     "Message": "Jurisdiction Message"
   },
   {
@@ -504,6 +540,14 @@
     "Message": "Jurisdiction Message"
   },
   {
+    "Name": "Salt Spring Island (Island Trust)",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "Saturna Island (Island Trust)",
+    "Message": "Jurisdiction Message"
+  },
+  {
     "Name": "Sayward",
     "Message": "Jurisdiction Message"
   },
@@ -537,6 +581,10 @@
   },
   {
     "Name": "Sooke",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "South Pender Island (Island Trust)",
     "Message": "Jurisdiction Message"
   },
   {
@@ -581,6 +629,10 @@
   },
   {
     "Name": "Terrace",
+    "Message": "Jurisdiction Message"
+  },
+  {
+    "Name": "Thetis Island (Island Trust)",
     "Message": "Jurisdiction Message"
   },
   {
