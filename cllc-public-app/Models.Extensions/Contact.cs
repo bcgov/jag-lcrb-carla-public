@@ -62,6 +62,26 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Telephone1 = from.Telephone1;
         }
 
+
+        public static void CopyValues(this Contact to, ViewModels.Contact from)
+        {
+            to.Fullname = from.name;
+            to.Emailaddress1 = from.emailaddress1;
+            to.Firstname = from.firstname;
+            to.Lastname = from.lastname;
+            to.Address1_city = from.address1_city;
+            to.Address1_line1 = from.address1_line1;
+            to.Address1_postalcode = from.address1_postalcode;
+            to.Address1_stateorprovince = from.address1_stateorprovince;
+            to.Adoxio_canattendcompliancemeetings = from.adoxio_canattendcompliancemeetings;
+            to.Adoxio_canobtainlicenceinfofrombranch = from.adoxio_canobtainlicenceinfofrombranch;
+            to.Adoxio_canrepresentlicenseeathearings = from.adoxio_canrepresentlicenseeathearings;
+            to.Adoxio_cansigngrocerystoreproofofsalesrevenue = from.adoxio_cansigngrocerystoreproofofsalesrevenue;
+            to.Adoxio_cansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
+            to.Adoxio_cansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
+            to.Telephone1 = from.telephone1;
+        }
+
         public static Contact ToModel(this ViewModels.Contact contact)
         {
             Contact result = null;
