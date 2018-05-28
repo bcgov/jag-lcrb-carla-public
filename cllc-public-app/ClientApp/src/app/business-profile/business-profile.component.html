@@ -8,51 +8,52 @@
     <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-      <li [ngClass]="{'active': view_tab == 'application-information-tab'}"><a (click)="changeTab('application-information-tab')">Application Information</a></li>
-      <li [ngClass]="{'active': view_tab == 'corporate-details-tab'}"><a (click)="changeTab('corporate-details-tab')">Corporate Details</a></li>
-      <li [ngClass]="{'active': view_tab == 'organization-structure-tab'}"><a (click)="changeTab('organization-structure-tab')">Organization Structure</a></li>
-      <li [ngClass]="{'active': view_tab == 'directors-and-officers-tab'}"><a (click)="changeTab('directors-and-officers-tab')">Directors &amp; Officers</a></li>
-      <li [ngClass]="{'active': view_tab == 'shareholders-tab'}"><a (click)="changeTab('shareholders-tab')">Shareholders</a></li>
-      <li [ngClass]="{'active': view_tab == 'accounting-and-taxes-tab'}"><a (click)="changeTab('accounting-and-taxes-tab')">Accounting &amp; Taxes</a></li>
-      <li [ngClass]="{'active': view_tab == 'investments-and-loans-tab'}"><a (click)="changeTab('investments-and-loans-tab')">Investments &amp; Loans</a></li>
-      <li [ngClass]="{'active': view_tab == 'security-assessment-tab'}"><a (click)="changeTab('security-assessment-tab')">Security Assessments</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-1'}"><a (click)="changeTab('tab-1')">Application Information</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-2'}"><a (click)="changeTab('tab-2')">Corporate Details</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-3'}"><a (click)="changeTab('tab-3')">Organization Structure</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-4'}"><a (click)="changeTab('tab-4')">Directors &amp; Officers</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-5'}"><a (click)="changeTab('tab-5')">Shareholders</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Accounting &amp; Taxes</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-7'}"><a (click)="changeTab('tab-7')">Investments &amp; Loans</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-8'}"><a (click)="changeTab('tab-8')">Security Assessments</a></li>
     </ul>
   </div>
   <div class="col-md-9">
     <!-- Tab panes -->
-      <div [hidden]="view_tab != 'application-information-tab'">
-        <div class="row">
-          <app-dynamics-form [formid]="('a316464c-0ef8-43f9-b938-6e582dc7fe49')" [currentUser]="currentUser" [enableUserOverride]="true" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
-        </div>
-         
-        <div class="row">
-          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveApplicationInformation()"><strong>Save</strong><br></a>
-        </div>
+    <div [hidden]="view_tab != 'tab-1'">
+      <div class="row">
+        <h1>Applicant Information</h1>
+        <app-dynamics-form [formid]="('a316464c-0ef8-43f9-b938-6e582dc7fe49')" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
       </div>
-      <div [hidden]="view_tab != 'corporate-details-tab'">Corporate Details</div>
-      <div [hidden]="view_tab != 'organization-structure-tab'">Organization Structure</div>
-      <div [hidden]="view_tab != 'directors-and-officers-tab'">Directors and Officers</div>
-      <div [hidden]="view_tab != 'shareholders-tab'">
-        <h1>Shareholders</h1>
-        <p>Enter all shareholders for the corporation</p>
 
-        <!-- <app-edit-shareholders></app-edit-shareholders> -->
-
-        <div class="col-md-10 row">
-          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="back"><strong>Back</strong><br></a>
-          <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="next"><strong>Next</strong><br></a>
-        </div>
-
+      <div class="row">
+        <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveApplicantInformation()"><strong>Save</strong><br></a>
       </div>
-      <div [hidden]="view_tab != 'accounting-and-taxes-tab'">Accounting and Taxes</div>
-      <div [hidden]="view_tab != 'investments-and-loans-tab'">Investments and Loans</div>
-      <div [hidden]="view_tab != 'security-assessment-tab'">Security Assessment</div>
     </div>
+    <div [hidden]="view_tab != 'tab-2'"><h1>Corporate Details</h1></div>
+    <div [hidden]="view_tab != 'tab-3'"><h1>Organization Structure</h1></div>
+    <div [hidden]="view_tab != 'tab-4'"><h1>Directors and Officers</h1></div>
+    <div [hidden]="view_tab != 'tab-5'">
+      <h1>Shareholders</h1>
+      <p>Enter all shareholders for the corporation</p>
 
-    
+      <!-- <app-edit-shareholders></app-edit-shareholders> -->
 
-
+    </div>
+    <div [hidden]="view_tab != 'tab-6'"><h1>Accounting and Taxes</h1></div>
+    <div [hidden]="view_tab != 'tab-7'"><h1>Investments and Loans</h1></div>
+    <div [hidden]="view_tab != 'tab-8'"><h1>Security Assessment</h1></div>
+    <p>&nbsp;</p>
+    <div class="col-md-10 row">
+      <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="back()"><strong>Back</strong><br></a>
+      <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="next()"><strong>Next</strong><br></a>
+    </div>
   </div>
+  
+
+
+
+</div>
 
 
 
