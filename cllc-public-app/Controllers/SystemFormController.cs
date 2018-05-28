@@ -142,7 +142,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 formField.classid = control.Attribute("classid").Value;
                                 formField.controltype = formField.classid.DynamicsControlClassidToName();
                                 formField.datafieldname = control.Attribute("datafieldname").Value;
+
                                 formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
+                                // special case for picklists.
+                                if (formField.controltype != null && formField.controltype.Equals("PicklistControl"))
+                                {
+                                    // get the options for the picklist and add it to the field.
+                                    List<ViewModels.OptionMetadata> options = await _system.GetPicklistOptions(_distributedCache, formField.datafieldname);
+                                    formField.options = options;
+                                }
+
                                 formSection.fields.Add(formField);
                             }
                             
