@@ -51,6 +51,14 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 result.name = account.Name;
                 result.description = account.Description;
+
+                if (account._primarycontactid_value != null)
+                {
+                    // add the primary contact.
+                    result.primarycontact = new ViewModels.Contact();
+                    result.primarycontact.id = account._primarycontactid_value.ToString();
+                    // TODO - load other fields (if necessary)
+                }
             }            
             return result;
         }   
