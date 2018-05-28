@@ -4,14 +4,15 @@ import { Shareholder } from '../models/shareholder.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms' 
 
 @Component({
-    selector: 'app-edit-shareholders',
-    templateUrl: './edit-shareholders.component.html',
-    styleUrls: ['./edit-shareholders.component.scss']
+  selector: 'app-edit-shareholders',
+  templateUrl: './edit-shareholders.component.html',
+  styleUrls: ['./edit-shareholders.component.scss']
 })
 
 export class EditShareholdersComponent implements OnInit {
 
   shareholderForm: FormGroup;
+  shareholderList: Shareholder[] = [];
   dataSource = new MatTableDataSource<Shareholder>();
   public dataLoaded;
   displayedColumns = ['shareholderType', 'name', 'email', 'numberOfNonVotingShares', 'numberOfVotingShares', 'dateIssued'];
@@ -29,22 +30,38 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    let shareholderList: Shareholder[] = [];
+
     let shareholder: Shareholder;
-    shareholder = this.getTestShareholder();
+    shareholder = this.getShareholderTest();
+    this.shareholderList.push(shareholder);
 
-    shareholderList.push(shareholder);
-
-    this.dataSource.data = shareholderList;
+    this.dataSource.data = this.shareholderList;
     this.dataLoaded = true;
   }
 
   saveShareholder(shareholderForm: NgForm) {
     console.log(shareholderForm.controls);
+    this.addShareholdertoTable(shareholderForm);
+    this.dataSource.data = this.shareholderList;
   }
 
-  getTestShareholder(): Shareholder {
+  addShareholdertoTable(shareholderForm: NgForm) {
+    let shareholder: Shareholder;
+    shareholder = new Shareholder();
+    shareholder.shareholderType = 'Person';
+    shareholder.firstName = shareholderForm.controls.firstName.value;
+    shareholder.lastName = shareholderForm.controls.lastName.value;
+    shareholder.email = shareholderForm.controls.email.value;
+    shareholder.numberOfNonVotingShares = shareholderForm.controls.numberOfNonVotingShares.value;
+    shareholder.numberOfVotingShares = shareholderForm.controls.numberOfVotingShares.value;
+    shareholder.dateIssued = shareholderForm.controls.dateIssued.value;
+    this.shareholderList.push(shareholder);
+  }
+
+  postData() {
+  }
+
+  getShareholderTest(): Shareholder {
     let shareholder: Shareholder;
     shareholder = new Shareholder();
     shareholder.shareholderType = 'Test';
@@ -56,5 +73,6 @@ export class EditShareholdersComponent implements OnInit {
     shareholder.dateIssued = new Date();
     return shareholder;
   }
+
 
 }
