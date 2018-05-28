@@ -1,3 +1,5 @@
+import { DynamicsFormFieldOption } from "./dynamics-form-field-option.model";
+
 export class DynamicsFormField {
   classid: string;
   controltype: string;
@@ -6,5 +8,6 @@ export class DynamicsFormField {
   required: boolean;
   showlabel: boolean;
   visible: boolean;
+  options: DynamicsFormFieldOption[];
   constructor() { }
 }

@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
+using Microsoft.OData.Client;
+
 
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
@@ -155,7 +157,44 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
             else
             {
+                // fetch from Dynamics.
 
+            }
+
+            return result;
+        }
+
+        public static async Task<List<ViewModels.OptionMetadata>> GetPicklistOptions (this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string datafield)
+        {
+            List<ViewModels.OptionMetadata> result = null;
+            string key = "GlobalOptionSetDefinition_" + datafield;
+            // first look in the cache.
+
+            string temp = distributedCache.GetString(key);
+            if (!string.IsNullOrEmpty(temp))
+            {
+                result = JsonConvert.DeserializeObject<List<ViewModels.OptionMetadata>>(temp);
+            }
+            else
+            {
+                // fetch from dynamics
+                var source = system.GlobalOptionSetDefinitions;
+                OptionSetMetadataBaseSingle optionSetMetadataBaseSingle = new OptionSetMetadataBaseSingle (source.Context, source.GetKeyPath("Name='"+datafield+"'"));
+
+                OptionSetMetadata optionSetMetadata = (OptionSetMetadata) await optionSetMetadataBaseSingle.GetValueAsync();
+
+                if (optionSetMetadata != null)
+                {
+                    // convert it to a list.
+                    result = new List<ViewModels.OptionMetadata>();
+                    foreach (Microsoft.Dynamics.CRM.OptionMetadata option in optionSetMetadata.Options)
+                    {
+                        result.Add(option.ToViewModel());
+                    }
+                }
+                // store the picklist data.
+                string cacheValue = JsonConvert.SerializeObject(result);
+                distributedCache.SetString(key, cacheValue);
             }
 
             return result;
