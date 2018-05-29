@@ -77,7 +77,22 @@ export class DynamicsDataService {
          return dynamicsForm;
        })
        .catch(this.handleError);
-   }
+  }
+
+  // load a record from Dynamics.
+  getRecord(entity: string, recordId: string) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    return this.http.get("api/" + entity + "/" + recordId, {
+      headers: headers
+    })
+      .toPromise()
+      .then((res: Response) => {
+        return res.json();
+      })
+      .catch(this.handleError);
+  }
 
    createRecord(entity: string, data: any) {
      let headers = new Headers();
@@ -91,7 +106,22 @@ export class DynamicsDataService {
          return res.json();
        })
        .catch(this.handleError);
-   }
+  }
+
+
+  updateRecord(entity: string, id: string, data: any) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    return this.http.put("api/" + entity + "/" + id, data, {
+      headers: headers
+    })
+      .toPromise()
+      .then((res: Response) => {
+        return res.json();
+      })
+      .catch(this.handleError);
+  }
   
 
      private handleError(error: Response | any) {
