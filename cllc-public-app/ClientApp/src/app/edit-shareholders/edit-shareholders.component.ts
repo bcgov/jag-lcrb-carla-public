@@ -33,28 +33,30 @@ export class EditShareholdersComponent implements OnInit {
   ngOnInit() {
 
     let shareholder: Shareholder;
-    shareholder = this.getShareholderTest();
-    this.shareholderList.push(shareholder);
+    //shareholder = this.getShareholderTest();
+    //this.shareholderList.push(shareholder);
 
     this.dataSource.data = this.shareholderList;
     this.dataLoaded = true;
   }
 
-  addShareholder(shareholderForm: NgForm) {
+  addShareholderPerson(shareholderForm: NgForm) {
     console.log(shareholderForm.controls);
-    let shareholderModel = this.toShareholderModel(shareholderForm);
+    let shareholderModel = this.toShareholderModel(shareholderForm, "Person");
     console.log(shareholderModel);
     this.legalEntityDataservice.post(shareholderModel);
     this.addShareholdertoTable(shareholderForm);
     this.dataSource.data = this.shareholderList;
   }
 
-  toShareholderModel(shareholderForm: NgForm): Shareholder {
+  toShareholderModel(shareholderForm: NgForm, shareholderType: string ): Shareholder {
     let shareholder: Shareholder = new Shareholder();
-    if (shareholder.isindividual) {
-      shareholder.shareholderType = 'Person';
+    shareholder.id = this.guid();
+    if (shareholder.shareholderType = 'Person') {
+      shareholder.isindividual = true;
     } else {
-      shareholder.shareholderType = 'Organization';
+      shareholder.shareholderType = 'Organization'
+      shareholder.isindividual = false;
     }
     shareholder.firstname = shareholderForm.controls.firstName.value;
     shareholder.lastname = shareholderForm.controls.lastName.value;
@@ -62,6 +64,7 @@ export class EditShareholdersComponent implements OnInit {
     shareholder.commonnonvotingshares = shareholderForm.controls.numberOfNonVotingShares.value;
     shareholder.commonvotingshares = shareholderForm.controls.numberOfVotingShares.value;
     //shareholder.dateIssued = shareholderForm.controls.dateIssued.value;
+    shareholder.legalentitytype = "845280001";
     return shareholder;
   }
 
@@ -91,5 +94,14 @@ export class EditShareholdersComponent implements OnInit {
     return shareholder;
   }
 
+  guid() {
+    return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
+      this.s4() + '-' + this.s4() + this.s4() + this.s4();
+  }
+
+  s4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16).substring(1);
+  }
 
 }
