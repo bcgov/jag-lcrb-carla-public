@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cllc-bcreg-wrapper\cllc-bcreg-wrapper.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\cllc-interfaces.csproj" />
   </ItemGroup>
 
 </Project>
