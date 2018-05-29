@@ -16,5 +16,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string formxml { get; set; }
 
         public List<FormTab> tabs { get; set; }
+        
     }
 }
