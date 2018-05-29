@@ -83,6 +83,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { LicenseApplicationSummaryComponent } from './license-application-summar
     SurveySidebarComponent,
     SurveyTestComponent,
     VoteComponent,
-    LicenseApplicationSummaryComponent
+    LicenseApplicationSummaryComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
