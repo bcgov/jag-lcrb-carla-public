@@ -37,6 +37,74 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._httpContextAccessor = httpContextAccessor;
             this._distributedCache = distributedCache;
         }
+
+
+        /// <summary>
+        /// Get a specific legal entity
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetContact(string id)
+        {
+            ViewModels.Contact result = null;
+            // query the Dynamics system to get the contact record.
+
+            Guid? contactId = new Guid(id);
+            Contexts.Microsoft.Dynamics.CRM.Contact contact = null;
+            if (contactId != null)
+            {
+                try
+                {
+                    contact = await _system.Contacts.ByKey(contactId).GetValueAsync();
+                    result = contact.ToViewModel();
+                }
+                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                {
+                    return new NotFoundResult();
+                }
+            }
+
+            return Json(result);
+        }
+
+
+        /// <summary>
+        /// Update a legal entity
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
+        {
+            /*
+            if (id != item.id)
+            {
+                return BadRequest();
+            }
+            */
+
+            // get the legal entity.
+            Guid adoxio_legalentityid = new Guid(id);
+            Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(adoxio_legalentityid).GetValueAsync();
+
+            // copy values over from the data provided
+            contact.CopyValues(item);
+            // TODO - figure out how to avoid having to specify these values.
+            contact._accountid_value = new Guid("11b1cd43-2b3b-491d-aa43-8d9bb74edfbf");           
+            contact._adoxio_applicationid_value = new Guid("79d9d4cb-7042-e811-a822-0003ff623e3e");
+            contact._adoxio_establishment_value = new Guid("eb7f172e-e552-e811-8140-480fcfeac941");
+            contact._adoxio_relatedlicence_value = new Guid("0380172e-e552-e811-8140-480fcfeac941");
+            _system.UpdateObject(contact);
+
+            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
+
+            //DataServiceResponse dsr = await _system.SaveChangesAsync(); 
+
+            return Json(contact.ToViewModel());
+        }
+
         [HttpPost()]
         public async Task<JsonResult> CreateContact([FromBody] ViewModels.Contact viewModel)
         {

@@ -45,10 +45,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ViewModels.Form form = new ViewModels.Form();
                 form.name = systemForm.Name;
                 form.id = systemForm.Formidunique == null ? "" : systemForm.Formidunique.ToString();
-
-                //adxForm.Adx_entityformid == null ? "" : adxForm.Adx_entityformid.ToString();
-                //form.displayname = adxForm.Adx_formname;
-                //form.entity = adxForm.Adx_entityname;
                 form.entity = systemForm.Objecttypecode;
                 // get the form fields.  
                 string key = "SystemForm_FormXML_" + form.entity;
@@ -57,6 +53,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 forms.Add(form);
             }
             return Json(forms);
+        }
+
+        private string TranslateDatafieldname (string entity, string dataFieldName)
+        {
+            Dictionary<string, Dictionary<string, string>> fieldMaps = new Dictionary<string, Dictionary<string, string>>
+            {
+                { "account", new Dictionary<string, string>
+                    {
+                        { "accountid", "id" },
+                        { "name","name"},
+                        { "description", "description"}
+                    }
+                },
+                {
+                  "contact", new Dictionary<string,string>
+                  {
+                      { "fullname", "name" },
+                      { "address1_city", "address1_city" },
+                      { "address1_line1", "address1_line1" },
+                      { "address1_postalcode", "address1_postalcode" },
+                      { "address1_stateorprovince", "address1_stateorprovince" },
+                      { "adoxio_canattendcompliancemeetings", "adoxio_canattendcompliancemeetings" },
+                      { "adoxio_canobtainlicenceinfofrombranch", "adoxio_canobtainlicenceinfofrombranch" },
+                      { "adoxio_canrepresentlicenseeathearings", "adoxio_canrepresentlicenseeathearings" },
+                      { "adoxio_cansigngrocerystoreproofofsalesrevenue", "adoxio_cansigngrocerystoreproofofsalesrevenue"},
+                      { "adoxio_cansignpermanentchangeapplications", "adoxio_cansignpermanentchangeapplications" },
+                      { "adoxio_cansigntemporarychangeapplications", "adoxio_cansigntemporarychangeapplications" },
+                      { "emailaddress1", "emailaddress1" },
+                      { "firstname", "firstname" },
+                      { "lastname", "lastname" },
+                      { "telephone1", "telephone1" }
+                  }
+                }
+            };
+
+            Dictionary<string, string> entityFieldMap = fieldMaps[entity];
+            string result = null;
+            if (entityFieldMap.ContainsKey(dataFieldName))
+            {
+                result = entityFieldMap[dataFieldName];
+            }
+            return result;
         }
 
 
@@ -139,22 +177,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             var control = cell.XPathSelectElement("control");
                             if ( !string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
                             {
-                                formField.classid = control.Attribute("classid").Value;
-                                formField.controltype = formField.classid.DynamicsControlClassidToName();
-                                formField.datafieldname = control.Attribute("datafieldname").Value;
+                                // datafieldname has to be translated.
 
-                                formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
-                                // special case for picklists.
-                                if (formField.controltype != null && formField.controltype.Equals("PicklistControl"))
+                                formField.datafieldname = TranslateDatafieldname(form.entity, control.Attribute("datafieldname").Value);
+                                if (formField.datafieldname != null)
                                 {
-                                    // get the options for the picklist and add it to the field.
-                                    List<ViewModels.OptionMetadata> options = await _system.GetPicklistOptions(_distributedCache, formField.datafieldname);
-                                    formField.options = options;
-                                }
+                                    formField.classid = control.Attribute("classid").Value;
+                                    formField.controltype = formField.classid.DynamicsControlClassidToName();
+                                    formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
+                                    // special case for picklists.
+                                    if (formField.controltype != null && formField.controltype.Equals("PicklistControl"))
+                                    {
+                                        // get the options for the picklist and add it to the field.
+                                        List<ViewModels.OptionMetadata> options = await _system.GetPicklistOptions(_distributedCache, formField.datafieldname);
+                                        formField.options = options;
+                                    }
 
-                                formSection.fields.Add(formField);
-                            }
-                            
+                                    formSection.fields.Add(formField);
+                                }
+                            }                            
                         }
                         
                         formTab.sections.Add(formSection);

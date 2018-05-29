@@ -13,12 +13,18 @@ import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsl
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     //children: []
     component: HomeComponent
+  },
+  {
+    path: 'dashboard',
+    //children: []
+    component: DashboardComponent
   },
   {
     path: 'business-profile',
