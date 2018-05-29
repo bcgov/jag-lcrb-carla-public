@@ -58,7 +58,7 @@
   <div class="col-md-10">
     <h2>Add Shareholder - Person</h2>
   </div>
-  <form [formGroup]='shareholderForm' (ngSubmit)="addShareholder(shareholderForm)">
+  <form [formGroup]='shareholderForm' (ngSubmit)="addShareholderPerson(shareholderForm)">
     <div class="form-container">
       <div class="row columns">
         <div class="col-xs-6">
@@ -74,16 +74,16 @@
           <input type="text" formControlName='email' placeholder="Email">
         </div>
         <div class="col-xs-6">
-          <label>Number of<br />Non-voting Shares</label>
-          <input type="number" formControlName='numberOfNonVotingShares' placeholder="Number of Non-voting Shares">
+          <label>Number of <br />voting shares</label>
+          <input type="number" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
         </div>
         <div class="col-xs-6">
-          <label>Number of <br />Voting Shares</label>
-          <input type="number" formControlName='numberOfVotingShares' placeholder="Number of Voting Shares">
+          <label>Number of<br />non voting shares</label>
+          <input type="number" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
         </div>
         <div class="col-xs-6">
-          <label>Date Issued</label>
-          <input type="date" formControlName='dateIssued' placeholder="Date Issued">
+          <label>Date of Shares Issued</label>
+          <input type="date" formControlName='dateIssued' placeholder="Date of Shares Issued">
         </div>
         <div class="col-md-10">
           <input type="Submit" value="Save">
@@ -93,4 +93,41 @@
     </div>
     <input type="hidden" formControlName='shareholderType'>
   </form>
-</div>  
+</div>
+
+<div>
+  <div class="col-md-10">
+    <h2>Add Shareholder - Organization</h2>
+  </div>
+  <form [formGroup]='shareholderForm' (ngSubmit)="addShareholderOrganization(shareholderForm)">
+    <div class="form-container">
+      <div class="row columns">
+        <div class="col-xs-6">
+          <label>First Name</label>
+          <input type="text" formControlName='organizationType' placeholder="Organization Type">
+        </div>
+        <div class="col-xs-6">
+          <label>Last Name</label>
+          <input type="text" formControlName='organizationName' placeholder="Organization Name">
+        </div>
+        <div class="col-xs-6">
+          <label>Number of <br />voting shares</label>
+          <input type="number" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
+        </div>
+        <div class="col-xs-6">
+          <label>Number of<br />non voting shares</label>
+          <input type="number" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
+        </div>
+        <div class="col-xs-6">
+          <label>Date of Shares Issued</label>
+          <input type="date" formControlName='dateIssued' placeholder="Date of Shares Issued">
+        </div>
+        <div class="col-md-10">
+          <input type="Submit" value="Save">
+          <input type="reset" value="Cancel">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" formControlName='shareholderType'>
+  </form>
+</div>

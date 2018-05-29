@@ -11,7 +11,7 @@ export class AdoxioLegalEntityDataService {
     console.log('===== AdoxioLegalEntityDataService =====');
     console.log(data.controls);
 
-    return this.http.post("api/adoxiolegalentity/", data.controls, {
+    return this.http.post("api/adoxiolegalentity/", data, {
       headers: headers
     })
       .subscribe(
