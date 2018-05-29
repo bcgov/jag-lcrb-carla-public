@@ -50,13 +50,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
-            
+            user.businessname = userSettings.BusinessLegalName;
+
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
                 // get details from the headers.
                 user.name = userSettings.UserDisplayName;
-                user.businessname = userSettings.BusinessLegalName;
+                
                 user.lastname = DynamicsExtensions.GetLastName(user.name);
                 user.firstname = DynamicsExtensions.GetFirstName(user.name);
                 user.accountid = userSettings.AccountId;
@@ -73,7 +74,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.lastname = userSettings.AuthenticatedUser.Surname;
                 user.firstname = userSettings.AuthenticatedUser.GivenName;
                 user.email = userSettings.AuthenticatedUser.Email;                
-                user.isNewUser = false;                  
+                user.isNewUser = false;  
+            
             }
 
             return new JsonResult(user);
