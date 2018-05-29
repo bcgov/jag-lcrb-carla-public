@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.Fullname = from.name;
             to.Emailaddress1 = from.emailaddress1;
-            to.Firstname = from.firstname;
+            to.Firstname = from.firstname;            
             to.Lastname = from.lastname;
             to.Address1_city = from.address1_city;
             to.Address1_line1 = from.address1_line1;
@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_cansigngrocerystoreproofofsalesrevenue = from.adoxio_cansigngrocerystoreproofofsalesrevenue;
             to.Adoxio_cansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
             to.Adoxio_cansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
-            to.Telephone1 = from.telephone1;
+            to.Telephone1 = from.telephone1;            
         }
 
         public static Contact ToModel(this ViewModels.Contact contact)
