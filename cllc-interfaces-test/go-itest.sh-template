@@ -1,0 +1,8 @@
+#/bin/bash
+# setup environment and then run dotnet with whatever passed params
+export BCREG_SERVICE_ACCT=cannabis
+export BCREG_SERVICE_PASSWD=xxx
+
+# e.g. dotnet run, dotnet test, etc.
+dotnet test
+

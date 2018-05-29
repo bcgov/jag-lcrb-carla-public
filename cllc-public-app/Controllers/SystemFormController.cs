@@ -74,6 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                       { "address1_line1", "address1_line1" },
                       { "address1_postalcode", "address1_postalcode" },
                       { "address1_stateorprovince", "address1_stateorprovince" },
+                      { "adoxio_stateprovince", "address1_stateorprovince" },
                       { "adoxio_canattendcompliancemeetings", "adoxio_canattendcompliancemeetings" },
                       { "adoxio_canobtainlicenceinfofrombranch", "adoxio_canobtainlicenceinfofrombranch" },
                       { "adoxio_canrepresentlicenseeathearings", "adoxio_canrepresentlicenseeathearings" },
@@ -178,8 +179,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             if ( !string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
                             {
                                 // datafieldname has to be translated.
-
-                                formField.datafieldname = TranslateDatafieldname(form.entity, control.Attribute("datafieldname").Value);
+                                string originalFieldName = control.Attribute("datafieldname").Value;
+                                formField.datafieldname = TranslateDatafieldname(form.entity, originalFieldName);
                                 if (formField.datafieldname != null)
                                 {
                                     formField.classid = control.Attribute("classid").Value;
@@ -189,7 +190,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     if (formField.controltype != null && formField.controltype.Equals("PicklistControl"))
                                     {
                                         // get the options for the picklist and add it to the field.
-                                        List<ViewModels.OptionMetadata> options = await _system.GetPicklistOptions(_distributedCache, formField.datafieldname);
+                                        List<ViewModels.OptionMetadata> options = await _system.GetPicklistOptions(_distributedCache, originalFieldName);
                                         formField.options = options;
                                     }
 
