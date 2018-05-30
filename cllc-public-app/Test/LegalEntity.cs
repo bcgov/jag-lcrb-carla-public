@@ -31,8 +31,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
                 Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_name = initialName
+                Adoxio_legalentitytype = (int?) ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                Adoxio_position = (int?) ViewModels.PositionOptions.Director,
+                Adoxio_name = initialName               
             };
+
+            
 
             ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
 

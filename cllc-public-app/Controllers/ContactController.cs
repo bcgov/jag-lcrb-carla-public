@@ -98,12 +98,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             contact.CopyValues(item);
 
             DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
-
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
             return Json(contact.ToViewModel());
         }
 
         [HttpPost()]
-        public async Task<JsonResult> CreateContact([FromBody] ViewModels.Contact viewModel)
+        public async Task<IActionResult> CreateContact([FromBody] ViewModels.Contact viewModel)
         {
             Contexts.Microsoft.Dynamics.CRM.Contact item = viewModel.ToModel();
 
@@ -121,8 +127,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
             // if we have not yet authenticated, then this is the new record for the user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
