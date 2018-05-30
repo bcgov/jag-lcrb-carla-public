@@ -52,15 +52,17 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private List<Jurisdiction> GetSeedJurisdictions()
         {
             List<Jurisdiction> jurisdictions = new List<Jurisdiction>(GetDefaultJurisdictions());
-
-            if (IsDevelopmentEnvironment)
-                jurisdictions.AddRange(GetDevJurisdictions());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                jurisdictions.AddRange(GetTestJurisdictions());
-
+                
             if (IsProductionEnvironment)
+            {
                 jurisdictions.AddRange(GetProdJurisdictions());
+            }
+            else
+            {
+                jurisdictions.AddRange(GetDevJurisdictions());
+            }
+
+                
 
             return jurisdictions;
         }

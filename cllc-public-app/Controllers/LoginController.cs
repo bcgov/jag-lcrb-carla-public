@@ -35,10 +35,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public ActionResult Login(string path)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
-            if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || ((_env.IsDevelopment() || _env.IsStaging()) && path.Equals("headers"))))
+            if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
             {
                 // diagnostic feature for development - echo headers back.
-                if ((_env.IsDevelopment() || _env.IsStaging()) && path.Equals("headers"))
+                if ((!_env.IsProduction()) && path.Equals("headers"))
                 {
                     StringBuilder html = new StringBuilder();
                     html.AppendLine("<html>");
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public virtual IActionResult GetDevAuthenticationCookie(string userId)
         {
-            if (! (_env.IsDevelopment() || _env.IsStaging() )) return BadRequest("This API is not available outside a development environment.");
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             if (string.IsNullOrEmpty(userId)) return BadRequest("Missing required userid query parameter.");
 
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public virtual IActionResult ClearDevAuthenticationCookie()
         {
-            if (! (_env.IsDevelopment() || _env.IsStaging() )) return BadRequest("This API is not available outside a development environment.");
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
             if (temp == null)
