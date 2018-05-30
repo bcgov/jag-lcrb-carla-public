@@ -53,14 +53,15 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         {
             List<VoteQuestion> VoteQuestions = new List<VoteQuestion>(GetDefaultVoteQuestions());
 
-            if (IsDevelopmentEnvironment)
-                VoteQuestions.AddRange(GetDevVoteQuestions());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                VoteQuestions.AddRange(GetTestVoteQuestions());
-
             if (IsProductionEnvironment)
+            {
                 VoteQuestions.AddRange(GetProdVoteQuestions());
+            }
+            else
+            {
+                VoteQuestions.AddRange(GetDevVoteQuestions());
+            }
+                
 
             return VoteQuestions;
         }

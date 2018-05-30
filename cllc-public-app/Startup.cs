@@ -164,49 +164,7 @@ namespace Gov.Lclb.Cllb.Public
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            string pathBase = Configuration["BASE_PATH"];
-            if (! string.IsNullOrEmpty(pathBase))
-            {
-                app.UsePathBase(pathBase);
-            }            
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-            
-            app.UseXContentTypeOptions();
-            app.UseXfo(xfo => xfo.Deny());
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-            app.UseNoCacheHttpHeaders();
-            // IMPORTANT: This session call MUST go before UseMvc()
-            app.UseSession();
-            app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
-
             var log = loggerFactory.CreateLogger("Startup");
-
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });                        
 
             string connectionString = "unknown.";
             try
@@ -216,9 +174,9 @@ namespace Gov.Lclb.Cllb.Public
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
-                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>(); 
-                    Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System>(); 
-                    
+                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>();
+                    Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System>();
+
                     connectionString = context.Database.GetDbConnection().ConnectionString;
 
                     log.LogInformation("Migrating the database ...");
@@ -242,7 +200,52 @@ namespace Gov.Lclb.Cllb.Public
                 msg.AppendLine("If you are running in a development environment, ensure your test database and server configuration match the project's default connection string.");
                 msg.AppendLine("Which is: " + connectionString);
                 log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
+            }
+
+            string pathBase = Configuration["BASE_PATH"];
+            if (! string.IsNullOrEmpty(pathBase))
+            {
+                app.UsePathBase(pathBase);
             }            
+            if (! env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            
+            app.UseXContentTypeOptions();
+            app.UseXfo(xfo => xfo.Deny());
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseNoCacheHttpHeaders();
+            // IMPORTANT: This session call MUST go before UseMvc()
+            app.UseSession();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+            
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                // Only run the angular CLI Server in Development mode (not staging or test.)
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });                        
+
         }
     }
 }
