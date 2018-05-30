@@ -196,25 +196,19 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Check if we have a Dev Environment Cookie
                 // **************************************************
-                if (hostingEnv.IsDevelopment() || hostingEnv.IsStaging())
+                if (! hostingEnv.IsProduction())
                 {
                     string temp = context.Request.Cookies[options.DevAuthenticationTokenKey];
+
+                    if (string.IsNullOrEmpty(temp)) // could be an automated test user.
+                    {
+                        temp = context.Request.Headers["DEV-USER"];                        
+                    }
 
                     if (!string.IsNullOrEmpty(temp))
                     {
                         userId = temp;
                     }
-                    else // could be an automated test.
-                    {
-                        temp = context.Request.Headers["DEV-USER"];
-                        if (! string.IsNullOrEmpty(temp))
-                        {
-                            userId = temp;
-                        }
-                    }
-
-                        
-
                 }
 
                 // **************************************************
@@ -274,10 +268,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Validate credential against database              
                 // **************************************************
-                userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
-                    ? dataAccess.LoadUser(userId)
-                    : dataAccess.LoadUser(userId, siteMinderGuid);
-                
+                userSettings.AuthenticatedUser = hostingEnv.IsProduction()
+                    ? dataAccess.LoadUser(userId, siteMinderGuid)
+                    : dataAccess.LoadUser(userId);
+
+
 
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
@@ -307,8 +302,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
                 userSettings.IsNewUserRegistration = userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration);
-
-                if (hostingEnv.IsDevelopment() || hostingEnv.IsStaging())
+               
+                if (! hostingEnv.IsProduction())
                 {
                     userSettings.BusinessLegalName = userId + " TestBusiness";
                     userSettings.UserDisplayName = userId + " TestUser";
