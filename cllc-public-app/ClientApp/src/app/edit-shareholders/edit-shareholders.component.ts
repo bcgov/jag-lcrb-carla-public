@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { Shareholder } from '../models/shareholder.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
@@ -18,7 +18,9 @@ export class EditShareholdersComponent implements OnInit {
   public dataLoaded;
   displayedColumns = ['shareholderType', 'name', 'email', 'numberOfNonVotingShares', 'numberOfVotingShares', 'dateIssued'];
 
-  constructor(private frmbuilder: FormBuilder, private legalEntityDataservice: AdoxioLegalEntityDataService) {
+  constructor(private frmbuilder: FormBuilder, private legalEntityDataservice: AdoxioLegalEntityDataService,
+              public dialog: MatDialog)
+  {
     this.shareholderForm = frmbuilder.group({
       shareholderType: new FormControl(),
       firstName: new FormControl(),
@@ -104,4 +106,79 @@ export class EditShareholdersComponent implements OnInit {
     .toString(16).substring(1);
   }
 
+  // Person shareholder dialog
+  openPersonDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Angular For Beginners'
+    };
+
+    this.dialog.open(ShareholderPersonDialog, dialogConfig);
+  }
+
+  // Organization shareholder dialog
+  openOrganizationDialog() {
+    //const dialogRef = this.dialog.open(ShareholderOrganizationDialog, {
+    //  height: '350px'
+    //});
+
+    //dialogRef.afterClosed().subscribe(result => {
+    //  console.log(`Dialog result: ${result}`);
+    //});
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Angular For Beginners'
+    };
+
+    this.dialog.open(ShareholderOrganizationDialog, dialogConfig);
+  }
+
 }
+
+@Component({
+  selector: 'edit-shareholders-person-dialog',
+  templateUrl: 'edit-shareholders-person-dialog.html',
+})
+export class ShareholderPersonDialog {
+  shareholderForm: FormGroup;
+
+  constructor(private frmbuilder: FormBuilder, private legalEntityDataservice: AdoxioLegalEntityDataService,
+    private dialogRef: MatDialogRef<ShareholderPersonDialog>) {
+    this.shareholderForm = frmbuilder.group({
+      shareholderType: new FormControl(),
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      email: new FormControl(),
+      numberOfNonVotingShares: new FormControl(),
+      numberOfVotingShares: new FormControl(),
+      dateIssued: new FormControl()
+    });
+  }
+
+  save() {
+    console.log(this.shareholderForm.value);
+    this.dialogRef.close(this.shareholderForm.value);
+  }
+
+  close() {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'edit-shareholders-organization-dialog',
+  templateUrl: 'edit-shareholders-organization-dialog.html',
+})
+export class ShareholderOrganizationDialog { }
