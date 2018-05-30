@@ -1,25 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 
-import { Newsletter } from "../models/newsletter.model";
-
 @Injectable()
 export class AdoxioLegalEntityDataService {
    constructor(private http: Http) { }
 
-   signup(slug: any, email: any) {
-     let headers = new Headers();
-     headers.append("Content-Type", "application/json");
+  post(data: any) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    console.log('===== AdoxioLegalEntityDataService =====');
+    console.log(data.controls);
 
-     return this.http.post("api/adoxiolegalentity/" + slug + "/subscribe?email=" + email, {
-       headers: headers
-     })
-       .toPromise()
-       .then((res: Response) => {
-         // do nothing
-       })
-       .catch(this.handleError);
-   }
+    return this.http.post("api/adoxiolegalentity/", data, {
+      headers: headers
+    })
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+          this.handleError(err);
+        }
+      );
+  }
 
    private handleError(error: Response | any) {
      let errMsg: string;

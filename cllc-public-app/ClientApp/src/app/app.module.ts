@@ -45,6 +45,7 @@ import {
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
+import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
 import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
@@ -54,7 +55,7 @@ import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
-import { EditShareholdersComponent } from './edit-shareholders/edit-shareholders.component';
+import { EditShareholdersComponent, ShareholderPersonDialog, ShareholderOrganizationDialog } from './edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -95,6 +96,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BreadcrumbComponent,
     DynamicsFormComponent,
     EditShareholdersComponent,
+    ShareholderPersonDialog,
+    ShareholderOrganizationDialog,
     FormViewerComponent,
     HomeComponent,
     InsertComponent,
@@ -214,7 +217,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     VoteDataService,
     UserDataService,
     AdoxioApplicationDataService,
+    AdoxioLegalEntityDataService,
     AdoxioLicenseDataService
+  ],
+  entryComponents: [
+    ShareholderPersonDialog,
+    ShareholderOrganizationDialog
   ],
   bootstrap: [AppComponent]
 })
