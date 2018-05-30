@@ -17,8 +17,9 @@ export class FileUploaderComponent implements OnInit {
   public files: UploadFile[] = [];
 
   public dropped(event: UploadEvent) {
-    this.files = event.files;
-    for (const droppedFile of event.files) {
+    let files = event.files;
+    this.files = files;
+    for (const droppedFile of files) {
 
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
@@ -52,6 +53,16 @@ export class FileUploaderComponent implements OnInit {
       }
     }
   }
+
+  onBrowserFileSelect(event: any){
+    let files = event.target.files;
+    this.files = files;
+    for (const file of files) {
+      console.log(file.path, file);
+      
+    }
+  }
+
 
   public fileOver(event) {
     console.log(event);
