@@ -49,48 +49,7 @@
 </div>
 <div class="col-md-10 row">
   <p>&nbsp;</p>
-  <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Add Person</strong><br></a>
-  <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveForm()"><strong>Add Organization</strong><br></a>
+  <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
+  <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="openOrganizationDialog()"><strong>Add Organization</strong><br></a>
   <p>&nbsp;</p>
 </div>
-
-<div>
-  <div class="col-md-10">
-    <h2>Add Shareholder - Person</h2>
-  </div>
-  <form [formGroup]='shareholderForm' (ngSubmit)="saveShareholder(shareholderForm)">
-    <div class="form-container">
-      <div class="row columns">
-        <div class="col-xs-6">
-          <label>First Name</label>
-          <input type="text" formControlName='firstName' placeholder="First Name">
-        </div>
-        <div class="col-xs-6">
-          <label>Last Name</label>
-          <input type="text" formControlName='lastName' placeholder="Last Name">
-        </div>
-        <div class="col-md-10">
-          <label>Email</label>
-          <input type="text" formControlName='email' placeholder="Email">
-        </div>
-        <div class="col-xs-6">
-          <label>Number of<br />Non-voting Shares</label>
-          <input type="number" formControlName='numberOfNonVotingShares' placeholder="Number of Non-voting Shares">
-        </div>
-        <div class="col-xs-6">
-          <label>Number of <br />Voting Shares</label>
-          <input type="number" formControlName='numberOfVotingShares' placeholder="Number of Voting Shares">
-        </div>
-        <div class="col-xs-6">
-          <label>Date Issued</label>
-          <input type="date" formControlName='dateIssued' placeholder="Date Issued">
-        </div>
-        <div class="col-md-10">
-          <input type="Submit" value="Save">
-          <input type="reset" value="Cancel">
-        </div>
-      </div>
-    </div>
-    <input type="hidden" formControlName='shareholderType'>
-  </form>
-</div>  
