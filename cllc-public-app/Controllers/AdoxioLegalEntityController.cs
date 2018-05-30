@@ -101,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost()]
-        public async Task<JsonResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
+        public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
             // create a new legal entity.
             Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity adoxioLegalEntity = new Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity();
@@ -114,8 +114,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            var res = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations); 
-
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
+            
             return Json(adoxioLegalEntity.ToViewModel());
         }
 
@@ -146,7 +153,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
             DataServiceResponse dsr = await _system.SaveChangesAsync(); // SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset
-
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
             return Json(adoxioLegalEntity.ToViewModel());
         }
 
@@ -165,6 +178,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
                 _system.DeleteObject(adoxioLegalEntity);
                 DataServiceResponse dsr = await _system.SaveChangesAsync();
+                foreach (OperationResponse result in dsr)
+                {
+                    if (result.StatusCode == 500) // error
+                    {
+                        return StatusCode(500, result.Error.Message);
+                    }
+                }
             }
             catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
             {
