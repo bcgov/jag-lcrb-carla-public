@@ -55,7 +55,7 @@ import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
-import { EditShareholdersComponent } from './edit-shareholders/edit-shareholders.component';
+import { EditShareholdersComponent, ShareholderPersonDialog, ShareholderOrganizationDialog } from './edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -96,6 +96,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BreadcrumbComponent,
     DynamicsFormComponent,
     EditShareholdersComponent,
+    ShareholderPersonDialog,
+    ShareholderOrganizationDialog,
     FormViewerComponent,
     HomeComponent,
     InsertComponent,
@@ -217,6 +219,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AdoxioApplicationDataService,
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService
+  ],
+  entryComponents: [
+    ShareholderPersonDialog,
+    ShareholderOrganizationDialog
   ],
   bootstrap: [AppComponent]
 })
