@@ -42,16 +42,16 @@ export class EditShareholdersComponent implements OnInit {
     this.dataLoaded = true;
   }
 
-  addShareholderPerson(shareholderForm: NgForm) {
-    console.log(shareholderForm.controls);
-    let shareholderModel = this.toShareholderModel(shareholderForm, "Person");
-    console.log(shareholderModel);
-    this.legalEntityDataservice.post(shareholderModel);
-    this.addShareholdertoTable(shareholderForm);
-    this.dataSource.data = this.shareholderList;
-  }
+  //addShareholderPerson(shareholderForm: NgForm) {
+  //  console.log(shareholderForm.controls);
+  //  let shareholderModel = this.toShareholderModel(shareholderForm, "Person");
+  //  console.log(shareholderModel);
+  //  this.legalEntityDataservice.post(shareholderModel);
+  //  this.addShareholdertoTable(shareholderForm);
+  //  this.dataSource.data = this.shareholderList;
+  //}
 
-  toShareholderModel(shareholderForm: NgForm, shareholderType: string ): Shareholder {
+  toShareholderModel(formData: any, shareholderType: string ): Shareholder {
     let shareholder: Shareholder = new Shareholder();
     shareholder.id = this.guid();
     if (shareholder.shareholderType = 'Person') {
@@ -60,26 +60,19 @@ export class EditShareholdersComponent implements OnInit {
       shareholder.shareholderType = 'Organization'
       shareholder.isindividual = false;
     }
-    shareholder.firstname = shareholderForm.controls.firstName.value;
-    shareholder.lastname = shareholderForm.controls.lastName.value;
-    //shareholder.email = shareholderForm.controls.email.value;
-    shareholder.commonnonvotingshares = shareholderForm.controls.numberOfNonVotingShares.value;
-    shareholder.commonvotingshares = shareholderForm.controls.numberOfVotingShares.value;
-    //shareholder.dateIssued = shareholderForm.controls.dateIssued.value;
-    shareholder.legalentitytype = "845280001";
+    shareholder.firstname = formData.firstName;
+    shareholder.lastname = formData.lastName;
+    //shareholder.email = formData.email;
+    shareholder.commonnonvotingshares = formData.numberOfNonVotingShares;
+    shareholder.commonvotingshares = formData.numberOfVotingShares;
+    //shareholder.dateIssued = formData.dateIssued;
+    shareholder.legalentitytype = "845280000"; //845280000 = PrivateCorporation
+    shareholder.position = "1"; //1 = Shareholder
     return shareholder;
   }
 
-  addShareholdertoTable(shareholderForm: NgForm) {
-    let shareholder: Shareholder;
-    shareholder = new Shareholder();
-    shareholder.shareholderType = 'Person';
-    shareholder.firstname = shareholderForm.controls.firstName.value;
-    shareholder.lastname = shareholderForm.controls.lastName.value;
-    //shareholder.email = shareholderForm.controls.email.value;
-    shareholder.commonnonvotingshares = shareholderForm.controls.numberOfNonVotingShares.value;
-    shareholder.commonvotingshares = shareholderForm.controls.numberOfVotingShares.value;
-    //shareholder.dateIssued = shareholderForm.controls.dateIssued.value;
+  addShareholdertoTable(formData: any, shareholderType: string) {
+    let shareholder: Shareholder = this.toShareholderModel(formData, shareholderType);
     this.shareholderList.push(shareholder);
   }
 
@@ -108,17 +101,31 @@ export class EditShareholdersComponent implements OnInit {
 
   // Person shareholder dialog
   openPersonDialog() {
+    // set dialogConfig settings
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
-    };
+    // set dialogConfig data
+    //dialogConfig.data = {
+    //  id: 1,
+    //  title: 'Angular For Beginners'
+    //};
 
+    // open dialog, get reference and process returned data from dialog
     this.dialog.open(ShareholderPersonDialog, dialogConfig);
+    const dialogRef = this.dialog.open(ShareholderPersonDialog, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+        console.log("ShareholderPersonDialog output:", data)
+        let shareholderType: string = "Person";
+        let shareholderModel = this.toShareholderModel(data, shareholderType);
+        console.log("shareholderModel output:", shareholderModel);
+        this.legalEntityDataservice.post(shareholderModel);
+        this.addShareholdertoTable(data, shareholderType);
+        this.dataSource.data = this.shareholderList;
+      }
+    );
   }
 
   // Organization shareholder dialog
@@ -169,6 +176,7 @@ export class ShareholderPersonDialog {
   save() {
     console.log(this.shareholderForm.value);
     this.dialogRef.close(this.shareholderForm.value);
+    
   }
 
   close() {
