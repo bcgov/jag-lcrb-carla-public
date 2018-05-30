@@ -53,14 +53,15 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         {
             List<Newsletter> Newsletters = new List<Newsletter>(GetDefaultNewsletters());
 
-            if (IsDevelopmentEnvironment)
-                Newsletters.AddRange(GetDevNewsletters());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                Newsletters.AddRange(GetTestNewsletters());
-
             if (IsProductionEnvironment)
+            {
                 Newsletters.AddRange(GetProdNewsletters());
+            }
+            else
+            {
+                Newsletters.AddRange(GetDevNewsletters());
+            }
+                
 
             return Newsletters;
         }
