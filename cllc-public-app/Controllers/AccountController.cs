@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpPost()]
-        public async Task<JsonResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
+        public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             // create a new account
             Contexts.Microsoft.Dynamics.CRM.Account account = new Contexts.Microsoft.Dynamics.CRM.Account();
@@ -110,7 +110,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account.Primarycontactid = contact;
             }
 
-            await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
+
 
             // if we have not yet authenticated, then this is the new record for the user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -164,7 +172,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset); 
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
 
             return Json(account.ToViewModel());
         }
@@ -184,6 +199,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Contexts.Microsoft.Dynamics.CRM.Account account = await _system.Accounts.ByKey(adoxio_legalentityid).GetValueAsync();
                 _system.DeleteObject(account);
                 DataServiceResponse dsr = await _system.SaveChangesAsync();
+                foreach (OperationResponse result in dsr)
+                {
+                    if (result.StatusCode == 500) // error
+                    {
+                        return StatusCode(500, result.Error.Message);
+                    }
+                }
             }
             catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
             {

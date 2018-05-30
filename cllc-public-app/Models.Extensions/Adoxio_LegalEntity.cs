@@ -83,10 +83,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // convert from int to bool.
                 result.isindividual = (adoxio_legalentity.Adoxio_isindividual != null && adoxio_legalentity.Adoxio_isindividual != 0);
                 result.lastname = adoxio_legalentity.Adoxio_lastname;
-                result.legalentitytype = (Adoxio_applicanttypecodes) adoxio_legalentity.Adoxio_legalentitytype;
+                if (adoxio_legalentity.Adoxio_legalentitytype != null)
+                {
+                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
+                }
+                
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
                 result.name = adoxio_legalentity.Adoxio_name;
-                result.position = (PositionOptions) adoxio_legalentity.Adoxio_position;
+                if (adoxio_legalentity.Adoxio_position != null)
+                {
+                    result.position = (PositionOptions)adoxio_legalentity.Adoxio_position;
+                }
+                
                 result.preferrednonvotingshares = adoxio_legalentity.Adoxio_preferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.Adoxio_preferredvotingshares;
                 // convert from int to bool.
