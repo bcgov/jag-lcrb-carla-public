@@ -1,0 +1,44 @@
+<h1>Corporate Details</h1>
+<div class="row">
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" placeholder="B.C. Incorporation Number">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Date of Incorporation in B.C.">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" placeholder="Business Number">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width">
+    <mat-label floatLabel="always">PST Number</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+  <br>
+  <section>
+    <span>Is the organization incorporated, continued or conducts business in other provinces or countries?</span>
+    <br>
+    <mat-radio-group>
+      <mat-radio-button value="1">Yes</mat-radio-button>
+      <br>
+      <mat-radio-button value="2">No</mat-radio-button>
+    </mat-radio-group>
+  </section>
+
+  <p></p>
+  <section>
+    <span>Upload the following documents about the corporation:</span>
+    <br>
+    <ul>
+      <li>Certificate of Incorporation</li>
+      <li>Articles of incorporation or corporate charter</li>
+      <li>By-laws</li>
+      <li>Any other basic documentation including any periodic updates or amending agreements</li>
+    </ul>
+    <app-file-uploader></app-file-uploader>
+  </section>
+</div>

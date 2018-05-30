@@ -84,6 +84,9 @@ import { ApplicationsListComponent } from './applications-list/applications-list
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FileDropModule } from 'ngx-file-drop';
+import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
 
 
 @NgModule({
@@ -117,7 +120,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SurveyTestComponent,
     VoteComponent,
     LicenseApplicationSummaryComponent,
-    DashboardComponent
+    DashboardComponent,
+    FileUploaderComponent,
+    CorporateDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -161,6 +166,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    FileDropModule,
     ToastModule.forRoot()
   ],
   exports: [
@@ -204,6 +210,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    FileDropModule,
     MatTooltipModule
   ],
   providers: [

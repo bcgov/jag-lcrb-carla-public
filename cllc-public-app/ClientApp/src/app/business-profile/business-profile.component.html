@@ -27,8 +27,11 @@
         <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveApplicantInformation()"><strong>Save</strong><br></a>
       </div>
     </div>
-    <div [hidden]="view_tab != 'tab-2'"><h1>Corporate Details</h1></div>
-    <div [hidden]="view_tab != 'tab-3'"><h1>Organization Structure</h1></div>
+    <div [hidden]="view_tab != 'tab-2'">
+      <app-corporate-details></app-corporate-details>
+    </div>
+    <div [hidden]="view_tab != 'tab-3'"><h1>Organization Structure</h1>
+    </div>
     <div [hidden]="view_tab != 'tab-4'"><h1>Directors and Officers</h1></div>
     <div [hidden]="view_tab != 'tab-5'">
       <h1>Shareholders</h1>
