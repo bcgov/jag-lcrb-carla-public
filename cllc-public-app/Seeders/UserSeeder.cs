@@ -51,21 +51,19 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private List<User> GetSeedUsers(AppDbContext context)
         {
-            List<User> users = new List<User>(GetDefaultUsers(context));
-
-            // purge users if we are running in development / staging mode.
-            if (IsDevelopmentEnvironment || IsStagingEnvironment)
+            List<User> users = new List<User>(GetDefaultUsers(context));            
+                
+            if (IsProductionEnvironment)
+            {
+                users.AddRange(GetProdUsers(context));
+            }
+            else
             {
                 context.UserRoles.RemoveRange(context.UserRoles);
                 context.Users.RemoveRange(context.Users);
-            }
-
-            if (IsDevelopmentEnvironment)
                 users.AddRange(GetDevUsers(context));
-            if (IsTestEnvironment || IsStagingEnvironment)
-                users.AddRange(GetTestUsers(context));
-            if (IsProductionEnvironment)
-                users.AddRange(GetProdUsers(context));
+            }
+                
 
             return users;
         }

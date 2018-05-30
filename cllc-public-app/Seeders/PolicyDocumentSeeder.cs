@@ -51,16 +51,16 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private List<PolicyDocument> GetSeedPolicyDocuments()
         {
-            List<PolicyDocument> PolicyDocuments = new List<PolicyDocument>(GetDefaultPolicyDocuments());
-
-            if (IsDevelopmentEnvironment)
-                PolicyDocuments.AddRange(GetDevPolicyDocuments());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                PolicyDocuments.AddRange(GetTestPolicyDocuments());
+            List<PolicyDocument> PolicyDocuments = new List<PolicyDocument>(GetDefaultPolicyDocuments());            
 
             if (IsProductionEnvironment)
+            {
                 PolicyDocuments.AddRange(GetProdPolicyDocuments());
+            }
+            else
+            {
+                PolicyDocuments.AddRange(GetDevPolicyDocuments());
+            }                
 
             return PolicyDocuments;
         }
