@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpPost()]
-        public async Task<JsonResult> CreateApplication([FromBody] Contexts.Microsoft.Dynamics.CRM.Adoxio_application item)
+        public async Task<IActionResult> CreateApplication([FromBody] Contexts.Microsoft.Dynamics.CRM.Adoxio_application item)
         {
             // create a new contact.
             Contexts.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Contexts.Microsoft.Dynamics.CRM.Adoxio_application();
@@ -183,7 +183,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
 
             return Json(adoxioApplication);
         }

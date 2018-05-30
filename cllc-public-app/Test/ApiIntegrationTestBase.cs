@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System.IO;
 using System.Net.Http;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Extensions.Configuration;
+
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -16,8 +19,14 @@ namespace Gov.Lclb.Cllb.Public.Test
         /// </summary>        
         protected ApiIntegrationTestBase()
         {
-            var builder = WebHost.CreateDefaultBuilder()
+            var testConfig = new ConfigurationBuilder()
+                .AddUserSecrets<ApiIntegrationTestBase>()
+                .AddEnvironmentVariables()
+                .Build();
+
+            var builder = WebHost.CreateDefaultBuilder()               
                 .UseEnvironment("Staging")
+                .UseConfiguration(testConfig)
                 .UseStartup<Startup>();
 
             _server = new TestServer(builder);
