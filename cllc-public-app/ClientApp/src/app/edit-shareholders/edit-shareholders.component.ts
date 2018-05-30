@@ -53,21 +53,23 @@ export class EditShareholdersComponent implements OnInit {
 
   toShareholderModel(formData: any, shareholderType: string ): Shareholder {
     let shareholder: Shareholder = new Shareholder();
-    shareholder.id = this.guid();
-    if (shareholder.shareholderType = 'Person') {
-      shareholder.isindividual = true;
-    } else {
-      shareholder.shareholderType = 'Organization'
-      shareholder.isindividual = false;
-    }
-    shareholder.firstname = formData.firstName;
-    shareholder.lastname = formData.lastName;
-    //shareholder.email = formData.email;
-    shareholder.commonnonvotingshares = formData.numberOfNonVotingShares;
-    shareholder.commonvotingshares = formData.numberOfVotingShares;
-    //shareholder.dateIssued = formData.dateIssued;
-    shareholder.legalentitytype = "845280000"; //845280000 = PrivateCorporation
-    shareholder.position = "1"; //1 = Shareholder
+    ////shareholder.id = this.guid();
+    //if (shareholder.shareholderType = 'Person') {
+    //  shareholder.isindividual = true;
+    //} else {
+    //  shareholder.shareholderType = 'Organization'
+    //  shareholder.isindividual = false;
+    //}
+    //shareholder.firstname = formData.firstName;
+    //shareholder.lastname = formData.lastName;
+    ////shareholder.email = formData.email;
+    //shareholder.commonnonvotingshares = formData.numberOfNonVotingShares;
+    //shareholder.commonvotingshares = formData.numberOfVotingShares;
+    ////shareholder.dateIssued = formData.dateIssued;
+    shareholder.legalentitytype = "PrivateCorporation"; //845280000 = PrivateCorporation
+    shareholder.position = "Shareholder"; //1 = Shareholder
+    shareholder.name = formData.firstName + " " + formData.lastName;
+    shareholder.relatedentities = [];
     return shareholder;
   }
 
@@ -117,6 +119,7 @@ export class EditShareholdersComponent implements OnInit {
     const dialogRef = this.dialog.open(ShareholderPersonDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => {
+        this.dialog.closeAll();
         console.log("ShareholderPersonDialog output:", data)
         let shareholderType: string = "Person";
         let shareholderModel = this.toShareholderModel(data, shareholderType);
