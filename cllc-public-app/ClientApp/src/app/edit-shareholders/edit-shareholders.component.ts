@@ -16,21 +16,22 @@ export class EditShareholdersComponent implements OnInit {
   shareholderList: Shareholder[] = [];
   dataSource = new MatTableDataSource<Shareholder>();
   public dataLoaded;
-  displayedColumns = ['shareholderType', 'name', 'email', 'numberOfNonVotingShares', 'numberOfVotingShares', 'dateIssued'];
+  displayedColumns = ['position', 'name', 'email', 'commonnonvotingshares', 'commonvotingshares', 'dateIssued'];
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
     let shareholder: Shareholder;
-    //shareholder = this.getShareholderTest();
-    //this.shareholderList.push(shareholder);
-
-    this.dataSource.data = this.shareholderList;
-    this.dataLoaded = true;
+    this.legalEntityDataservice.getShareholders()
+      .then((data) => {
+        //console.log("getShareholders(): ", data);
+        this.dataSource.data = data;
+        this.dataLoaded = true;
+      });
   }
 
-  toShareholderModel(formData: any, shareholderType: string ): Shareholder {
+  formDataToModelData(formData: any, shareholderType: string ): Shareholder {
     let shareholder: Shareholder = new Shareholder();
     if (shareholderType == "Person") {
       shareholder.isindividual = true;
@@ -51,25 +52,7 @@ export class EditShareholdersComponent implements OnInit {
     return shareholder;
   }
 
-  addShareholdertoTable(formData: any, shareholderType: string) {
-    let shareholder: Shareholder = this.toShareholderModel(formData, shareholderType);
-    this.shareholderList.push(shareholder);
-  }
-
-  getShareholderTest(): Shareholder {
-    let shareholder: Shareholder;
-    shareholder = new Shareholder();
-    shareholder.shareholderType = 'Person';
-    shareholder.firstname = 'Test';
-    shareholder.lastname = 'Test';
-    //shareholder.email = 'Test';
-    shareholder.commonnonvotingshares = 0;
-    shareholder.commonvotingshares = 0;
-    //shareholder.dateIssued = new Date();
-    return shareholder;
-  }
-
-  // Person shareholder dialog
+  // Open Person shareholder dialog
   openPersonDialog() {
     // set dialogConfig settings
     const dialogConfig = new MatDialogConfig();
@@ -85,19 +68,17 @@ export class EditShareholdersComponent implements OnInit {
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ShareholderPersonDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      data => {
+      formData => {
         //console.log("ShareholderPersonDialog output:", data);
         let shareholderType = "Person";
-        let shareholderModel = this.toShareholderModel(data, shareholderType);
+        let shareholderModel = this.formDataToModelData(formData, shareholderType);
         //console.log("shareholderModel output:", shareholderModel);
         this.legalEntityDataservice.post(shareholderModel);
-        this.addShareholdertoTable(data, shareholderType);
-        this.dataSource.data = this.shareholderList;
       }
     );
   }
 
-  // Organization shareholder dialog
+  // Open Organization shareholder dialog
   openOrganizationDialog() {
     // set dialogConfig settings
     const dialogConfig = new MatDialogConfig();
@@ -113,20 +94,21 @@ export class EditShareholdersComponent implements OnInit {
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ShareholderOrganizationDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      data => {
+      formData => {
         //console.log("ShareholderOrganizationDialog output:", data)
         let shareholderType = "Organization";
-        let shareholderModel = this.toShareholderModel(data, shareholderType);
+        let shareholderModel = this.formDataToModelData(formData, shareholderType);
         //console.log("shareholderModel output:", shareholderModel);
         this.legalEntityDataservice.post(shareholderModel);
-        this.addShareholdertoTable(data, shareholderType);
-        this.dataSource.data = this.shareholderList;
       }
     );
   }
 
 }
 
+/***************************************
+ * Shareholder Person Dialog
+ ***************************************/
 @Component({
   selector: 'edit-shareholders-person-dialog',
   templateUrl: 'edit-shareholders-person-dialog.html',
@@ -146,7 +128,7 @@ export class ShareholderPersonDialog {
   }
 
   save() {
-    console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
+    //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
     if (this.shareholderForm.valid) {
       this.dialogRef.close(this.shareholderForm.value);
     } else {
@@ -163,6 +145,9 @@ export class ShareholderPersonDialog {
 
 }
 
+/***************************************
+ * Shareholder Organization Dialog
+ ***************************************/
 @Component({
   selector: 'edit-shareholders-organization-dialog',
   templateUrl: 'edit-shareholders-organization-dialog.html',
@@ -181,7 +166,7 @@ export class ShareholderOrganizationDialog {
   }
 
   save() {
-    console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
+    //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
     if (this.shareholderForm.valid) {
       this.dialogRef.close(this.shareholderForm.value);
     } else {
