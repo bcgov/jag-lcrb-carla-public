@@ -12,6 +12,7 @@ using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
@@ -94,6 +95,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
+        [HttpPost("{id}/attachments")]
+        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file)
+        {
+            return Ok(file);
+        }
+
+        [HttpGet("{id}/attachments/{fileId}")]
+        public async Task<IActionResult> DownloadFile([FromRoute] string id, [FromRoute] string fileId)
+        {
+            string filename = "";
+            byte[] fileContents = new byte[10];
+            return new FileContentResult(fileContents, "application/octet-stream")
+            {
+                FileDownloadName = filename
+            };
+        }
 
         /// <summary>
         /// Create a legal entity

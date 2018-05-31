@@ -72,7 +72,6 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(typeof(XDownloadOptionsAttribute));
                 opts.Filters.Add(typeof(XFrameOptionsAttribute));
                 opts.Filters.Add(typeof(XXssProtectionAttribute));
-                //CSP
                 opts.Filters.Add(typeof(CspAttribute));
                 opts.Filters.Add(new CspDefaultSrcAttribute { Self = true });
                 opts.Filters.Add(new CspScriptSrcAttribute { Self = true });
@@ -213,6 +212,10 @@ namespace Gov.Lclb.Cllb.Public
             }
             else
             {
+                app.UseCsp(options => options
+                .DefaultSources(s => s.Self())
+                .ScriptSources(s => s.Self())
+                .StyleSources(s => s.Self()));
                 app.UseExceptionHandler("/Home/Error");
             }
             
@@ -220,6 +223,7 @@ namespace Gov.Lclb.Cllb.Public
             app.UseXfo(xfo => xfo.Deny());
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseXXssProtection(options => options.EnabledWithBlockMode());
             app.UseNoCacheHttpHeaders();
             // IMPORTANT: This session call MUST go before UseMvc()
             app.UseSession();
