@@ -96,9 +96,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("{id}/attachments")]
-        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IList<IFormFile> files)
+        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file)
         {
-            return Ok();
+            return Ok(file);
         }
 
         [HttpGet("{id}/attachments/{fileId}")]
@@ -125,8 +125,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // create a DataServiceCollection to add the record
             DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
+
             // add a new contact.
             LegalEntityCollection.Add(adoxioLegalEntity);
+
+            if (item.id == null)
+            {
+                item.id = Guid.NewGuid().ToString();
+            }
+                        
             adoxioLegalEntity.CopyValues(item);
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
