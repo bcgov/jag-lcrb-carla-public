@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces", "cllc-int
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{27F1F3AB-9F73-414C-ADD2-3CE032C49978}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces-test", "cllc-interfaces-test", "{E5822CDE-12E6-41C4-9BA6-B172BE63DE22}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint.Tests", "..\cllc-interfaces-test\SharePoint\SharePoint.Tests.csproj", "{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +27,17 @@ Global
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
+		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369} = {E5822CDE-12E6-41C4-9BA6-B172BE63DE22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5C395A-DA58-4406-95D8-AAEBD4437D0A}
