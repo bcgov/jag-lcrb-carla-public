@@ -96,9 +96,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("{id}/attachments")]
-        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IList<IFormFile> files)
+        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file)
         {
-            return Ok();
+            return Ok(file);
         }
 
         [HttpGet("{id}/attachments/{fileId}")]
