@@ -40,5 +40,23 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			await GetCurrentUserIsUnauthorized();
         }
+
+        [Fact]
+        public async System.Threading.Tasks.Task NewUserRegistrationProcessWorks()
+        {
+			await GetCurrentUserIsUnauthorized();
+
+			await Login("newuser123");
+
+			string jsonString = await GetCurrentUser();
+
+			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+            //Assert.Equal(user.name, "TMcTesterson TestUser");
+            Assert.True(user.isNewUser);
+
+			await Logout();
+
+            await GetCurrentUserIsUnauthorized();
+        }
 	}
 }
