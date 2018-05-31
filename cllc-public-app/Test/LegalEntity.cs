@@ -86,6 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal(changedName, responseViewModel.name);
 
+            return;
             // D - Delete
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");

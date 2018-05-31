@@ -16,136 +16,99 @@ export class EditShareholdersComponent implements OnInit {
   shareholderList: Shareholder[] = [];
   dataSource = new MatTableDataSource<Shareholder>();
   public dataLoaded;
-  displayedColumns = ['shareholderType', 'name', 'email', 'numberOfNonVotingShares', 'numberOfVotingShares', 'dateIssued'];
+  displayedColumns = ['position', 'name', 'email', 'commonnonvotingshares', 'commonvotingshares', 'dateIssued'];
 
-  constructor(private frmbuilder: FormBuilder, private legalEntityDataservice: AdoxioLegalEntityDataService,
-              public dialog: MatDialog)
-  {
-    this.shareholderForm = frmbuilder.group({
-      shareholderType: new FormControl(),
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      email: new FormControl(),
-      numberOfNonVotingShares: new FormControl(),
-      numberOfVotingShares: new FormControl(),
-      dateIssued: new FormControl()
-    });
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
-
     let shareholder: Shareholder;
-    //shareholder = this.getShareholderTest();
-    //this.shareholderList.push(shareholder);
-
-    this.dataSource.data = this.shareholderList;
-    this.dataLoaded = true;
+    this.legalEntityDataservice.getShareholders()
+      .then((data) => {
+        //console.log("getShareholders(): ", data);
+        this.dataSource.data = data;
+        this.dataLoaded = true;
+      });
   }
 
-  addShareholderPerson(shareholderForm: NgForm) {
-    console.log(shareholderForm.controls);
-    let shareholderModel = this.toShareholderModel(shareholderForm, "Person");
-    console.log(shareholderModel);
-    this.legalEntityDataservice.post(shareholderModel);
-    this.addShareholdertoTable(shareholderForm);
-    this.dataSource.data = this.shareholderList;
-  }
-
-  toShareholderModel(shareholderForm: NgForm, shareholderType: string ): Shareholder {
+  formDataToModelData(formData: any, shareholderType: string ): Shareholder {
     let shareholder: Shareholder = new Shareholder();
-    shareholder.id = this.guid();
-    if (shareholder.shareholderType = 'Person') {
+    if (shareholderType == "Person") {
       shareholder.isindividual = true;
+      shareholder.firstname = formData.firstName;
+      shareholder.lastname = formData.lastName;
+      shareholder.legalentitytype = "PrivateCorporation";
+      //shareholder.email = formData.email;
     } else {
-      shareholder.shareholderType = 'Organization'
       shareholder.isindividual = false;
+      shareholder.name = formData.organizationName;
+      shareholder.legalentitytype = formData.organizationType;
     }
-    shareholder.firstname = shareholderForm.controls.firstName.value;
-    shareholder.lastname = shareholderForm.controls.lastName.value;
-    //shareholder.email = shareholderForm.controls.email.value;
-    shareholder.commonnonvotingshares = shareholderForm.controls.numberOfNonVotingShares.value;
-    shareholder.commonvotingshares = shareholderForm.controls.numberOfVotingShares.value;
-    //shareholder.dateIssued = shareholderForm.controls.dateIssued.value;
-    shareholder.legalentitytype = "845280001";
+    shareholder.commonnonvotingshares = formData.numberOfNonVotingShares;
+    shareholder.commonvotingshares = formData.numberOfVotingShares;
+    ////shareholder.dateIssued = formData.dateIssued;
+    shareholder.position = "Shareholder";
+    shareholder.relatedentities = [];
     return shareholder;
   }
 
-  addShareholdertoTable(shareholderForm: NgForm) {
-    let shareholder: Shareholder;
-    shareholder = new Shareholder();
-    shareholder.shareholderType = 'Person';
-    shareholder.firstname = shareholderForm.controls.firstName.value;
-    shareholder.lastname = shareholderForm.controls.lastName.value;
-    //shareholder.email = shareholderForm.controls.email.value;
-    shareholder.commonnonvotingshares = shareholderForm.controls.numberOfNonVotingShares.value;
-    shareholder.commonvotingshares = shareholderForm.controls.numberOfVotingShares.value;
-    //shareholder.dateIssued = shareholderForm.controls.dateIssued.value;
-    this.shareholderList.push(shareholder);
-  }
-
-  getShareholderTest(): Shareholder {
-    let shareholder: Shareholder;
-    shareholder = new Shareholder();
-    shareholder.shareholderType = 'Person';
-    shareholder.firstname = 'Test';
-    shareholder.lastname = 'Test';
-    //shareholder.email = 'Test';
-    shareholder.commonnonvotingshares = 0;
-    shareholder.commonvotingshares = 0;
-    //shareholder.dateIssued = new Date();
-    return shareholder;
-  }
-
-  guid() {
-    return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
-      this.s4() + '-' + this.s4() + this.s4() + this.s4();
-  }
-
-  s4() {
-  return Math.floor((1 + Math.random()) * 0x10000)
-    .toString(16).substring(1);
-  }
-
-  // Person shareholder dialog
+  // Open Person shareholder dialog
   openPersonDialog() {
+    // set dialogConfig settings
     const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
-    };
+    // set dialogConfig data
+    //dialogConfig.data = {
+    //  id: 1,
+    //  title: 'Angular For Beginners'
+    //};
 
-    this.dialog.open(ShareholderPersonDialog, dialogConfig);
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(ShareholderPersonDialog, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      formData => {
+        //console.log("ShareholderPersonDialog output:", data);
+        let shareholderType = "Person";
+        let shareholderModel = this.formDataToModelData(formData, shareholderType);
+        //console.log("shareholderModel output:", shareholderModel);
+        this.legalEntityDataservice.post(shareholderModel);
+      }
+    );
   }
 
-  // Organization shareholder dialog
+  // Open Organization shareholder dialog
   openOrganizationDialog() {
-    //const dialogRef = this.dialog.open(ShareholderOrganizationDialog, {
-    //  height: '350px'
-    //});
-
-    //dialogRef.afterClosed().subscribe(result => {
-    //  console.log(`Dialog result: ${result}`);
-    //});
-
+    // set dialogConfig settings
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
-    };
+    // set dialogConfig data
+    //dialogConfig.data = {
+    //  id: 1,
+    //  title: 'Angular For Beginners'
+    //};
 
-    this.dialog.open(ShareholderOrganizationDialog, dialogConfig);
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(ShareholderOrganizationDialog, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      formData => {
+        //console.log("ShareholderOrganizationDialog output:", data)
+        let shareholderType = "Organization";
+        let shareholderModel = this.formDataToModelData(formData, shareholderType);
+        //console.log("shareholderModel output:", shareholderModel);
+        this.legalEntityDataservice.post(shareholderModel);
+      }
+    );
   }
 
 }
 
+/***************************************
+ * Shareholder Person Dialog
+ ***************************************/
 @Component({
   selector: 'edit-shareholders-person-dialog',
   templateUrl: 'edit-shareholders-person-dialog.html',
@@ -153,22 +116,27 @@ export class EditShareholdersComponent implements OnInit {
 export class ShareholderPersonDialog {
   shareholderForm: FormGroup;
 
-  constructor(private frmbuilder: FormBuilder, private legalEntityDataservice: AdoxioLegalEntityDataService,
-    private dialogRef: MatDialogRef<ShareholderPersonDialog>) {
+  constructor(private frmbuilder: FormBuilder, private dialogRef: MatDialogRef<ShareholderPersonDialog>) {
     this.shareholderForm = frmbuilder.group({
-      shareholderType: new FormControl(),
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      email: new FormControl(),
-      numberOfNonVotingShares: new FormControl(),
-      numberOfVotingShares: new FormControl(),
-      dateIssued: new FormControl()
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.email],
+      numberOfVotingShares: ['', Validators.required],
+      numberOfNonVotingShares: ['', Validators.required],
+      dateIssued: ['']
     });
   }
 
   save() {
-    console.log(this.shareholderForm.value);
-    this.dialogRef.close(this.shareholderForm.value);
+    //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
+    if (this.shareholderForm.valid) {
+      this.dialogRef.close(this.shareholderForm.value);
+    } else {
+      Object.keys(this.shareholderForm.controls).forEach(field => {
+        const control = this.shareholderForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
   }
 
   close() {
@@ -177,8 +145,41 @@ export class ShareholderPersonDialog {
 
 }
 
+/***************************************
+ * Shareholder Organization Dialog
+ ***************************************/
 @Component({
   selector: 'edit-shareholders-organization-dialog',
   templateUrl: 'edit-shareholders-organization-dialog.html',
 })
-export class ShareholderOrganizationDialog { }
+export class ShareholderOrganizationDialog {
+  shareholderForm: FormGroup;
+
+  constructor(private frmbuilder: FormBuilder, private dialogRef: MatDialogRef<ShareholderOrganizationDialog>) {
+    this.shareholderForm = frmbuilder.group({
+      organizationType: ['', Validators.required],
+      organizationName: ['', Validators.required],
+      numberOfVotingShares: ['', Validators.required],
+      numberOfNonVotingShares: ['', Validators.required],
+      dateIssued: ['']
+    });
+  }
+
+  save() {
+    //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
+    if (this.shareholderForm.valid) {
+      this.dialogRef.close(this.shareholderForm.value);
+    } else {
+      Object.keys(this.shareholderForm.controls).forEach(field => {
+        const control = this.shareholderForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
+  }
+
+  close() {
+    this.dialogRef.close();
+  }
+
+}
+
