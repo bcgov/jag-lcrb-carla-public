@@ -1,29 +1,69 @@
 <h2 mat-dialog-title>Add Shareholder - Person</h2>
-<mat-dialog-content [formGroup]='shareholderForm' (ngSubmit)="addShareholderPerson(shareholderForm)">
-  <div class="col-xs-6" dir="auto">
-    <label>First Name</label>
-    <input type="text" formControlName='firstName' placeholder="First Name">
+<mat-dialog-content>
+  <form [formGroup]='shareholderForm' class="form-horizontal">
+    <!--(ngSubmit)="addShareholderPerson(shareholderForm)"-->
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+        <div *ngIf="shareholderForm.controls['firstName'].touched && !shareholderForm.controls['firstName'].valid">
+          <span *ngIf="shareholderForm.controls['firstName'].hasError('required') ">
+            First name is required
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+        <div *ngIf="shareholderForm.controls['lastName'].touched && !shareholderForm.controls['lastName'].valid">
+          <span *ngIf="shareholderForm.controls['lastName'].hasError('required') ">
+            Last name is required
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Email</label>
+        <input type="text" class="form-control" formControlName='email' placeholder="Email">
+        <div *ngIf="shareholderForm.controls['email'].touched && !shareholderForm.controls['email'].valid">
+          <span *ngIf="shareholderForm.controls['email'].hasError('required') ">
+            Email is required
+          </span>
+          <span *ngIf="shareholderForm.controls['email'].hasError('email') ">
+            Email is invalid
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Number of <br />voting shares</label>
+        <input type="number" class="form-control" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
+        <div *ngIf="shareholderForm.controls['numberOfVotingShares'].touched && !shareholderForm.controls['numberOfVotingShares'].valid">
+          <span *ngIf="shareholderForm.controls['numberOfVotingShares'].hasError('required') ">
+            Number of voting shares is required
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Number of<br />non voting shares</label>
+        <input type="number" class="form-control" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
+        <div *ngIf="shareholderForm.controls['numberOfNonVotingShares'].touched && !shareholderForm.controls['numberOfNonVotingShares'].valid">
+          <span *ngIf="shareholderForm.controls['numberOfNonVotingShares'].hasError('required') ">
+            Number of non voting shares is required
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Date of Shares Issued</label>
+        <input type="date" class="form-control" formControlName='dateIssued' placeholder="Date of Shares Issued">
+      </div>
   </div>
-  <div class="col-xs-6">
-    <label>Last Name</label>
-    <input type="text" formControlName='lastName' placeholder="Last Name">
-  </div>
-  <div class="col-md-10">
-    <label>Email</label>
-    <input type="text" formControlName='email' placeholder="Email">
-  </div>
-  <div class="col-xs-6">
-    <label>Number of <br />voting shares</label>
-    <input type="number" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
-  </div>
-  <div class="col-xs-6">
-    <label>Number of<br />non voting shares</label>
-    <input type="number" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
-  </div>
-  <div class="col-xs-6">
-    <label>Date of Shares Issued</label>
-    <input type="date" formControlName='dateIssued' placeholder="Date of Shares Issued">
-  </div>
+</form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button class="mat-raised-button" color="accent" (click)="close()">Close</button>
