@@ -1,0 +1,32 @@
+<style>
+    .drop-zone {
+        border: 2px dashed #ddd !important;
+        padding: 3px;
+    }
+</style>
+<div class="center">
+    <file-drop (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <div>
+                <div style="text-align: center">Upload Files</div>
+            <span>Drop your files here or &nbsp;</span>
+            <button mat-button color="accent" (click)="fileBrowser.click()">browse for files</button>
+            <input (change)="onBrowserFileSelect($event)" type="file" style="visibility: hidden;" #fileBrowser>
+        </div>
+    </file-drop>
+    <div class="upload-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody class="upload-name-style">
+                <tr *ngFor="let item of files; let i=index">
+                    <td>
+                        <strong>{{ item.relativePath || item.name }}</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
