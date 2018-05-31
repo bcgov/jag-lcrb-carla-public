@@ -1,32 +1,44 @@
 <h1>Corporate Details</h1>
-<div class="row">
-  <mat-form-field color="accent" class="example-full-width">
-    <input matInput type="text" placeholder="B.C. Incorporation Number">
-  </mat-form-field>
-  <br>
-  <mat-form-field color="accent">
-    <input matInput [matDatepicker]="picker"  placeholder="Date of Incorporation in B.C.">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker  #picker></mat-datepicker>
-  </mat-form-field>
-  <br>
-  <mat-form-field color="accent" class="example-full-width">
-    <input matInput type="text" placeholder="Business Number">
-  </mat-form-field>
-  <br>
-  <mat-form-field color="accent" class="example-full-width">
-    <mat-label floatLabel="always">PST Number</mat-label>
-    <input matInput type="text">
-  </mat-form-field>
-  <br>
+<div class="">
+  <section>
+    <label for="">B.C. Incorporation Number</label>
+    <br>
+    <input class="form-style" type="text">
+  </section>
+
+  <section>
+    <label>Date of Incorporation in B.C.</label>
+    <br>
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+        <!-- <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <mat-icon>calendar_today</mat-icon>
+          </button>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <label for="">Business Number</label>
+    <br>
+    <input class="form-style" type="text">
+  </section>
+
+  <section>
+    <label for="">PST Number</label>
+    <br>
+    <input class="form-style" type="text">
+  </section>
+
   <section>
     <span>Is the organization incorporated, continued or conducts business in other provinces or countries?</span>
     <br>
-    <mat-radio-group>
-      <mat-radio-button value="1">Yes</mat-radio-button>
-      <br>
-      <mat-radio-button value="2">No</mat-radio-button>
-    </mat-radio-group>
+    <input type="radio" value="true"> Yes
+    <br>
+    <input type="radio" value="false"> Yes
   </section>
 
   <p></p>
