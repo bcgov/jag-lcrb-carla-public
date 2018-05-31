@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { Http, Headers } from '@angular/http';
 
 @Component({
   selector: 'app-file-uploader',
@@ -8,7 +9,8 @@ import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry 
 })
 export class FileUploaderComponent implements OnInit {
 
-  constructor() {
+  //TODO: move http call to a service
+  constructor(private http: Http) {
   }
 
   ngOnInit(): void {
@@ -31,19 +33,20 @@ export class FileUploaderComponent implements OnInit {
 
           /**
           // You could upload it like this:
+          **/
           const formData = new FormData()
-          formData.append('logo', file, relativePath)
+          formData.append('file', file, droppedFile.relativePath)
+          formData.append('file', file, droppedFile.relativePath)
 
           // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
+          const headers = new Headers({
+            //'Content-Type': 'multipart/form-data'
           })
 
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
+          this.http.post('api/AdoxioLegalEntity/id/attachments', formData, { headers: headers })
           .subscribe(data => {
             // Sanitized logo returned from backend
           })
-          **/
 
         });
       } else {
