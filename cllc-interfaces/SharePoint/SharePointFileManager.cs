@@ -1,5 +1,6 @@
 ﻿using Microsoft.AppServices;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.SharePoint.DataService;
 using MS.FileServices;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,19 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
-    class SharePointFileManager
+    public class SharePointFileManager
     {
+        private LCLBCannabisDEVDataContext listData;
         private ApiData apiData;
+        private AuthenticationResult authenticationResult;
 
         public SharePointFileManager(string serverAppIdUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword)
         {
-            string endpoint = serverAppIdUri + webname + "/_api";
-            this.apiData = new ApiData(new Uri(endpoint));
+            string listDataEndpoint = serverAppIdUri + webname + "/_vti_bin/listdata.svc/";
+            string apiEndpoint = serverAppIdUri + webname + "/_api/";
+
+            this.listData = new LCLBCannabisDEVDataContext(new Uri(listDataEndpoint));
+            this.apiData = new ApiData(new Uri(apiEndpoint));
              
             // add authentication.
             var authenticationContext = new AuthenticationContext(
@@ -36,6 +42,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
             "Authorization", authenticationResult.CreateAuthorizationHeader());
+
+            listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+            "Authorization", authenticationResult.CreateAuthorizationHeader());
         }
 
         public async Task<List<FileSystemItem>> GetFiles ()
@@ -49,11 +58,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result.ToList();
         }
 
-        public async Task<FileSystemItem> GetFile(string name)
+        public async Task<FileSystemItem> GetFile(string url)
         {
             DataServiceQuery<MS.FileServices.FileSystemItem> query = (DataServiceQuery<MS.FileServices.FileSystemItem>)
                 from file in apiData.Files
-                where file.Name == name
+                where file.Url == url
                 select file;
 
             TaskFactory<IEnumerable<FileSystemItem>> taskFactory = new TaskFactory<IEnumerable<FileSystemItem>>();
@@ -61,14 +70,60 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result.FirstOrDefault();           
         }
 
-        public async Task UploadFile(FileSystemItem fileSystemItem, FileStream fileData, string contentType, string slug)
+        public async Task UploadFile(string name, string path, Stream fileData, string contentType, string slug)
         {
-            // upload a file.            
-            apiData.AddToFiles( fileSystemItem );
-            apiData.SetSaveStream(fileSystemItem, fileData, true, contentType, slug);
+            // upload a file.   
+            
+            DocumentsItem documentsItem = new DocumentsItem()
+            {
+                ContentType = contentType,
+                Name = name,
+                Title = name,
+                Path = path
+            };
+
+            listData.AddToDocuments(documentsItem);            
+            DataServiceRequestArgs dsra = new DataServiceRequestArgs()
+            {
+                ContentType = contentType,                
+                Slug = path
+            };
+
+
+            listData.SetSaveStream(documentsItem, fileData, false, dsra);
             TaskFactory taskFactory = new TaskFactory();
-            await taskFactory.FromAsync(apiData.BeginSaveChanges(null, null), iar => apiData.EndSaveChanges(iar));
+            await taskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
+
+            
+
         }
-        
+
+        public async Task<byte[]> DownloadFile(string url)
+        {
+            var file = await this.GetFile(url);
+            byte[] result = null;
+
+            var request = System.Net.HttpWebRequest.Create(file.Url);
+            request.Headers.Add ("Authorization", authenticationResult.CreateAuthorizationHeader());
+
+            // we need to add authentication to a HTTP Client to fetch the file.
+            using (MemoryStream ms = new MemoryStream())
+            {
+                request.GetResponse().GetResponseStream().CopyTo(ms);
+                result = ms.ToArray();
+            }
+            
+            return result;
+        }
+
+        public async Task DeleteFile(string url)
+        {
+            var file = await this.GetFile(url);
+            
+
+            apiData.DeleteObject(file);
+            TaskFactory taskFactory = new TaskFactory();
+            await taskFactory.FromAsync(apiData.BeginSaveChanges(null, null), iar => apiData.EndSaveChanges(iar));            
+        }        
     }
 }
