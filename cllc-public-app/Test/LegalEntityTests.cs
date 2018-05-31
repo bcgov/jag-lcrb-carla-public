@@ -16,7 +16,7 @@ using Gov.Lclb.Cllb.Public.Models;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class LegalEntity : ApiIntegrationTestBase
+	public class LegalEntityTests : ApiIntegrationTestBaseWithLogin
     {
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
@@ -24,6 +24,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             string initialName = "InitialName";
             string changedName = "ChangedName";
             string service = "adoxiolegalentity";
+
+			await LoginAsDefault();
 
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -86,7 +88,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal(changedName, responseViewModel.name);
 
-            return;
+			await Logout();
+
+			return;
             // D - Delete
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");

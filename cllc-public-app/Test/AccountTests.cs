@@ -16,7 +16,7 @@ using Gov.Lclb.Cllb.Public.Models;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class Account : ApiIntegrationTestBase
+	public class AccountTests : ApiIntegrationTestBaseWithLogin
     {
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
@@ -25,7 +25,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             string changedName = "ChangedName";
             string service = "account";
 
-            // C - Create
+			await LoginAsDefault();
+
+			// C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
             Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account()
@@ -98,6 +100,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
+			await Logout();
         }
 
         [Fact]
@@ -108,7 +111,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             string accountService = "account";
             string legalEntityService = "adoxiolegalentity";
 
-            // Create an account.
+			await LoginAsDefault();
+
+			// Create an account.
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
             Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account()
@@ -189,6 +194,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
+			await Logout();
         }
     }
 }
