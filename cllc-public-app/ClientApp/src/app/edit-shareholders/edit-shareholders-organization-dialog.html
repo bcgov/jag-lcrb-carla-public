@@ -1,36 +1,63 @@
-<div>
-  <div class="col-md-10">
-    <h2>Add Shareholder - Organization</h2>
-  </div>
-  <form [formGroup]='shareholderForm' (ngSubmit)="addShareholderOrganization(shareholderForm)">
-    <div class="form-container">
-      <div class="row columns">
-        <div class="col-xs-6">
-          <label>First Name</label>
-          <input type="text" formControlName='organizationType' placeholder="Organization Type">
+<h2 mat-dialog-title>Add Shareholder - Organization</h2>
+<mat-dialog-content>
+  <form [formGroup]='shareholderForm' class="form-horizontal">
+
+    <div class="form-row">
+      <div class="form-group col-md-9">
+        <label>Organization Type</label>
+        <select class="form-control" formControlName='organizationType' >
+          <option value="PrivateCorporation">Private Corporation</option>
+          <option value="Partnership">Partnership</option>
+          <option value="SoleProprietor">Sole Proprietor</option>
+          <option value="PublicCorporation">Public Corporation</option>
+          <option value="Society">Society</option>
+          <option value="Other">Other</option>
+        </select>
+        <div *ngIf="shareholderForm.controls['organizationType'].touched && !shareholderForm.controls['organizationType'].valid">
+          <span *ngIf="shareholderForm.controls['organizationType'].hasError('required') ">
+            Organization Type is required
+          </span>
         </div>
-        <div class="col-xs-6">
-          <label>Last Name</label>
-          <input type="text" formControlName='organizationName' placeholder="Organization Name">
-        </div>
-        <div class="col-xs-6">
-          <label>Number of <br />voting shares</label>
-          <input type="number" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
-        </div>
-        <div class="col-xs-6">
-          <label>Number of<br />non voting shares</label>
-          <input type="number" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
-        </div>
-        <div class="col-xs-6">
-          <label>Date of Shares Issued</label>
-          <input type="date" formControlName='dateIssued' placeholder="Date of Shares Issued">
-        </div>
-        <div class="col-md-10">
-          <input type="Submit" value="Save">
-          <input type="reset" value="Cancel">
+      </div>
+      <div class="form-group col-md-12">
+        <label>Organization Name</label>
+        <input type="text" class="form-control" formControlName="organizationName" placeholder="Organization Name">
+        <div *ngIf="shareholderForm.controls['organizationName'].touched && !shareholderForm.controls['organizationName'].valid">
+          <span *ngIf="shareholderForm.controls['organizationName'].hasError('required') ">
+            Organization name is required
+          </span>
         </div>
       </div>
     </div>
-    <input type="hidden" formControlName='shareholderType'>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Number of <br />voting shares</label>
+        <input type="number" class="form-control" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
+        <div *ngIf="shareholderForm.controls['numberOfVotingShares'].touched && !shareholderForm.controls['numberOfVotingShares'].valid">
+          <span *ngIf="shareholderForm.controls['numberOfVotingShares'].hasError('required') ">
+            Number of voting shares is required
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Number of<br />non voting shares</label>
+        <input type="number" class="form-control" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
+        <div *ngIf="shareholderForm.controls['numberOfNonVotingShares'].touched && !shareholderForm.controls['numberOfNonVotingShares'].valid">
+          <span *ngIf="shareholderForm.controls['numberOfNonVotingShares'].hasError('required') ">
+            Number of non voting shares is required
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Date of Shares Issued</label>
+        <input type="date" class="form-control" formControlName='dateIssued' placeholder="Date of Shares Issued">
+      </div>
+    </div>
   </form>
-</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" color="accent" (click)="close()">Close</button>
+  <button class="mat-raised-button" color="accent" (click)="save()">Save</button>
+</mat-dialog-actions>

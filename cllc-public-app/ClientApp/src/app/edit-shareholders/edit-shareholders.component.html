@@ -7,15 +7,15 @@
   <mat-table #table [dataSource]="dataSource">
 
     <!-- Column -->
-    <ng-container matColumnDef="shareholderType">
+    <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef> Shareholder Type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.shareholderType}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
@@ -25,15 +25,15 @@
     </ng-container>
 
     <!-- Column -->
-    <ng-container matColumnDef="numberOfNonVotingShares">
+    <ng-container matColumnDef="commonnonvotingshares">
       <mat-header-cell *matHeaderCellDef> Number of Non-voting Shares </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.numberOfNonVotingShares}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.commonnonvotingshares}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
-    <ng-container matColumnDef="numberOfVotingShares">
+    <ng-container matColumnDef="commonvotingshares">
       <mat-header-cell *matHeaderCellDef> Number of Voting Shares </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.numberOfVotingShares}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.commonvotingshares}} </mat-cell>
     </ng-container>
 
     <!-- Column -->
