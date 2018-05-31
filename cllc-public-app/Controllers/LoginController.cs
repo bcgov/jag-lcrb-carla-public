@@ -30,8 +30,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
         
         [HttpGet]
+        [Route("headers")]
         [Authorize]
-
         public ActionResult Login(string path)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
