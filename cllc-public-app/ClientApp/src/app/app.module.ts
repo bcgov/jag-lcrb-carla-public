@@ -130,7 +130,7 @@ import { CorporateDetailsComponent } from './business-profile/tabs/corporate-det
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    NgbModule,
+    NgbModule.forRoot(),
     AdminModule,
     BrowserAnimationsModule,
     CdkTableModule,
