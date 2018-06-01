@@ -30,8 +30,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
         
         [HttpGet]
+        // remove this Route line, as it changes the behavior of the controller. 
+        // We need the controller to respond to a GET request on /login in order for SiteMinder logins to work
+        //[Route("headers")]
         [Authorize]
-
         public ActionResult Login(string path)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
