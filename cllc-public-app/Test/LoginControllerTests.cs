@@ -46,13 +46,17 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
 			await GetCurrentUserIsUnauthorized();
 
-			await Login("newuser123");
+            // register as a new user
+			await Login("NewUser123");
 
 			string jsonString = await GetCurrentUser();
 
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
-            //Assert.Equal(user.name, "TMcTesterson TestUser");
+			Assert.Equal(user.name, "NewUser123 TestUser");
             Assert.True(user.isNewUser);
+
+            // now create an account and contact in Dynamics
+            // TODO TBD
 
 			await Logout();
 
