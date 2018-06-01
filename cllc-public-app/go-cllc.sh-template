@@ -19,6 +19,9 @@ export DYNAMICS_ODATA_URI=https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.
 export DYNAMICS_CLIENT_ID={CLIENT_ID}
 export DYNAMICS_CLIENT_KEY={CLIENT_KEY}
 
+export BCREG_SERVICE_ACCT=cannabis
+export BCREG_SERVICE_PASSWD={BCREG_PASSWD}
+
 # e.g. dotnet run, dotnet test, etc.
 dotnet run
 
