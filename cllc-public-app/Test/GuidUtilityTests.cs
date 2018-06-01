@@ -46,13 +46,13 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void CreateGuidForDynamicsObject()
         {
-			Guid guid1 = GuidUtility.Create(GuidUtility.IsoOidNamespace, "Account.MyAccount", 5);
+			Guid guid1 = GuidUtility.CreateIdForDynamics("Account", "MyAccount");
 			Assert.Equal(new Guid("601866b1-ff79-56c1-ae09-ba267d5013a2"), guid1);
 
-			Guid guid2 = GuidUtility.Create(GuidUtility.IsoOidNamespace, "Contact.MyContact", 5);
+			Guid guid2 = GuidUtility.CreateIdForDynamics("Contact", "MyContact");
 			Assert.Equal(new Guid("b01cc1fb-0e1b-5164-aa34-4cc7d8cf1233"), guid2);
 
-			Guid guid3 = GuidUtility.Create(GuidUtility.IsoOidNamespace, "Account.MyAccount.Contact.MyContact", 5);
+			Guid guid3 = GuidUtility.CreateIdForDynamics("Account.MyAccount.Contact", "MyContact");
 			Assert.Equal(new Guid("9e055f91-989f-52e8-a068-ac6ff05a04c8"), guid3);
         }
 	}
