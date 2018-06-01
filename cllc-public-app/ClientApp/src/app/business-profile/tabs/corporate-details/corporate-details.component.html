@@ -3,20 +3,16 @@
   <section>
     <label for="">B.C. Incorporation Number</label>
     <br>
-    <input class="form-style" type="text">
+    <input class="form-control" style="width: 250px;" type="text">
   </section>
 
   <section>
     <label>Date of Incorporation in B.C.</label>
     <br>
-    <div class="form-group">
-      <div class="input-group">
-        <input class="form-control" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-        <!-- <div class="input-group-append">
-          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-            <mat-icon>calendar_today</mat-icon>
-          </button>
-        </div> -->
+    <div class="input-group">
+      <input class="form-control" style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+          <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
       </div>
     </div>
   </section>
@@ -24,13 +20,13 @@
   <section>
     <label for="">Business Number</label>
     <br>
-    <input class="form-style" type="text">
+    <input class="form-control" style="width: 250px;" type="text">
   </section>
 
   <section>
     <label for="">PST Number</label>
     <br>
-    <input class="form-style" type="text">
+    <input class="form-control" style="width: 250px;" type="text">
   </section>
 
   <section>
