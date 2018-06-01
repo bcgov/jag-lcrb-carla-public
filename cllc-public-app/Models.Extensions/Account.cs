@@ -30,7 +30,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="from"></param>
         public static void CopyValues(this Account to, ViewModels.Account from)
         {
-            to.Accountid = new Guid(from.id);
             to.Name = from.name;
             to.Description = from.description;
         }
