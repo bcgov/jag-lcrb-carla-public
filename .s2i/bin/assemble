@@ -11,6 +11,15 @@
 
 set -e
 
+if [ -n "${DOTNET_VERBOSITY}" ]; then
+  echo "--> Environment:"
+  env | sort
+  VERBOSITY_OPTION="-v ${DOTNET_VERBOSITY}"
+else
+  VERBOSITY_OPTION=""
+fi
+
+
 # npm
 if [ -n "${DOTNET_NPM_TOOLS}" ]; then
   echo "---> Installing npm tools ..."
@@ -32,6 +41,19 @@ if [ -n "${DOTNET_NPM_TOOLS}" ]; then
   npm install ${DOTNET_NPM_TOOLS}
   popd
 fi
+
+# sdk version
+DOTNET_SDK_VERSION="${DOTNET_SDK_VERSION:-$DOTNET_SDK_BASE_VERSION}"
+if [ "$DOTNET_SDK_VERSION" != "latest" ]; then
+cat >../global.json <<EOF
+{
+  "sdk": {
+    "version": "$DOTNET_SDK_VERSION"
+  }
+}
+EOF
+fi
+echo "Using SDK: $(dotnet --version)"
 
 echo "---> Copying application source ..."
 cp -Rf /tmp/src/. ./

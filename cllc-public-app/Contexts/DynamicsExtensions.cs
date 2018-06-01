@@ -18,6 +18,82 @@ namespace Gov.Lclb.Cllb.Public.Contexts
     public static class DynamicsExtensions
     {
 
+        /// <summary>
+        /// Load User from database using their userId and guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="userId"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static async Task<User> LoadUser(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string userId, string guid = null)
+        {
+            User user = null;
+
+            if (!string.IsNullOrEmpty(guid))
+                user = await system.GetUserByGuid(distributedCache, guid);
+
+            if (user == null)
+                user = await system.GetUserBySmUserId(distributedCache, userId);
+
+            if (user == null)
+                return null;
+
+            if (guid == null)
+                return user;
+
+            
+            if (!user.Guid.Equals(guid, StringComparison.OrdinalIgnoreCase))
+            {
+                // invalid account - guid doesn't match user credential
+                return null;
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Returns a User based on the guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static async Task<User> GetUserByGuid(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string guid)
+        {
+            Guid id = new Guid(guid);
+            User user = null;
+            Contact contact = await system.GetContactById(distributedCache, id);
+            if (contact != null)
+            {
+                user.FromContact(contact);
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Returns a User based on the Siteminder ID
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="smUserId"></param>
+        /// <returns></returns>
+        public static async Task<User> GetUserBySmUserId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string smUserId)
+        {
+            User user = null;
+            Contact contact = await system.GetContactBySiteminderId(distributedCache, smUserId);
+            if (contact != null)
+            {
+                user = new User();
+                user.FromContact(contact);
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Convert a Dynamics attribute to boolean
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static Boolean DynamicsAttributeToBoolean(this XAttribute attribute)
         {
             Boolean result = false;
@@ -33,7 +109,12 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             return result;
         }
 
-        public static string GetFirstName(string value)
+        /// <summary>
+        /// Get the first name from 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetFirstName(this string value)
         {
             string result = "";
             if (value != null)
@@ -53,7 +134,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             return result;
         }
 
-        public static string GetLastName(string value)
+        public static string GetLastName(this string value)
         {
             string result = "";
             if (value != null)
@@ -144,8 +225,95 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
             return result;
         }
-        
-        public static Contact GetContact(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
+
+        /// <summary>
+        /// Get a contact by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+        {
+            Account result = null;
+            string key = "Account_" + id.ToString();
+            // first look in the cache.
+            string temp = distributedCache.GetString(key);
+            if (!string.IsNullOrEmpty(temp))
+            {
+                result = JsonConvert.DeserializeObject<Account>(temp);
+            }
+            else
+            {
+                // fetch from Dynamics.
+                try
+                {
+                    result = await system.Accounts.ByKey(id).GetValueAsync();
+                }
+                catch (DataServiceQueryException dsqe)
+                {
+                    result = null;
+                }
+                
+                if (result != null)
+                {
+                    // store the contact data.
+                    string cacheValue = JsonConvert.SerializeObject(result);
+                    distributedCache.SetString(key, cacheValue);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get a contact by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<Contact> GetContactById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+        {
+            Contact result = null;
+            string key = "Contact_" + id.ToString();
+            // first look in the cache.
+            string temp = distributedCache.GetString(key);
+            if (!string.IsNullOrEmpty(temp))
+            {
+                result = JsonConvert.DeserializeObject<Contact>(temp);
+            }
+            else
+            {
+                // fetch from Dynamics.
+                try
+                {
+                    result = await system.Contacts.ByKey(id).GetValueAsync();
+                }
+                catch (DataServiceQueryException dsqe)
+                {
+                    result = null;
+                }
+
+                if (result != null)
+                {
+                    // store the contact data.
+                    string cacheValue = JsonConvert.SerializeObject(result);
+                    distributedCache.SetString(key, cacheValue);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get a contact by their Siteminder ID
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="siteminderId"></param>
+        /// <returns></returns>
+        public static async Task<Contact> GetContactBySiteminderId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
         {
             Contact result = null;
             string key = "Contact_" + siteminderId;
@@ -153,17 +321,38 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             string temp = distributedCache.GetString(key);
             if (! string.IsNullOrEmpty(temp))
             {
-                result = JsonConvert.DeserializeObject<Contact>(temp);
+                Guid id = new Guid(temp);
+                result = await system.GetContactById(distributedCache, id);
             }
             else
             {
                 // fetch from Dynamics.
 
+                var contacts = await system.Contacts.AddQueryOption("$filter", "employeeid eq '" + siteminderId + "'").ExecuteAsync();
+
+                result = contacts.FirstOrDefault();
+                if (result != null)
+                {
+                    // store the contact data.
+                    Guid id = (Guid) result.Contactid;
+                    distributedCache.SetString(key, id.ToString());
+                    // update the cache for the contact.
+                    string contact_key = "Contact_" + id.ToString();
+                    string cacheValue = JsonConvert.SerializeObject(result);
+                    distributedCache.SetString(contact_key, cacheValue);
+                }                
             }
 
             return result;
         }
 
+        /// <summary>
+        /// Get picklist options for a given field
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="datafield"></param>
+        /// <returns></returns>
         public static async Task<List<ViewModels.OptionMetadata>> GetPicklistOptions (this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string datafield)
         {
             List<ViewModels.OptionMetadata> result = null;
