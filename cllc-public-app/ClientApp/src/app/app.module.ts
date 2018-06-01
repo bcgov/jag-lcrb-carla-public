@@ -87,7 +87,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
-import { DirectorsAndOfficersComponent } from './directors-and-officers/directors-and-officers.component';
+import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
 
 
 @NgModule({
@@ -124,7 +124,8 @@ import { DirectorsAndOfficersComponent } from './directors-and-officers/director
     DashboardComponent,
     FileUploaderComponent,
     CorporateDetailsComponent,
-    DirectorsAndOfficersComponent
+    DirectorsAndOfficersComponent,
+    DirectorAndOfficerPersonDialog
   ],
   imports: [
     BrowserModule,
@@ -231,7 +232,8 @@ import { DirectorsAndOfficersComponent } from './directors-and-officers/director
   ],
   entryComponents: [
     ShareholderPersonDialog,
-    ShareholderOrganizationDialog
+    ShareholderOrganizationDialog,
+    DirectorAndOfficerPersonDialog
   ],
   bootstrap: [AppComponent]
 })

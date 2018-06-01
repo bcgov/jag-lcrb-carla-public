@@ -23,7 +23,7 @@ export class EditShareholdersComponent implements OnInit {
 
   ngOnInit() {
     let shareholder: Shareholder;
-    this.legalEntityDataservice.getShareholders()
+    this.legalEntityDataservice.getLegalEntitiesbyPosition("shareholder")
       .then((data) => {
         //console.log("getShareholders(): ", data);
         this.dataSource.data = data;
