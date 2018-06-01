@@ -88,8 +88,6 @@ namespace SharePoint.Tests
             string name = "test-name";            
             string path = "/cannabisdev/Shared%20Documents/" + name;
             string url = serverAppIdUri + "/cannabisdev/Shared Documents/" + name;
-
-            string title = "test-title";
             
             string contentType = "text/plain";
             

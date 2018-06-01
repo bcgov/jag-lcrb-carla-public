@@ -68,7 +68,6 @@ import { StatusBadgeComponent } from './status-badge/status-badge.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
-import { SurveyEditorComponent } from './survey/editor.component';
 import { SurveySidebarComponent } from './survey/sidebar.component';
 import { SurveyDataService } from "./services/survey-data.service";
 import { ResultComponent } from './result/result.component';
@@ -114,7 +113,6 @@ import { CorporateDetailsComponent } from './business-profile/tabs/corporate-det
     StaticComponent,
     StatusBadgeComponent,
     SurveyComponent,
-    SurveyEditorComponent,
     SurveyPrimaryComponent,
     SurveySidebarComponent,
     SurveyTestComponent,
