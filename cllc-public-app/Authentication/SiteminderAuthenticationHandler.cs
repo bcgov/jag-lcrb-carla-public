@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Microsoft.Extensions.Caching.Distributed;
+using Logos.Utility;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {    
@@ -310,8 +311,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     if (userSettings.IsNewUserRegistration)
                     {
                         // add generated guids
-                        userSettings.SiteMinderBusinessGuid = Guid.NewGuid().ToString();
-                        userSettings.SiteMinderGuid = Guid.NewGuid().ToString();
+						userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+						userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
                         userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
                         userSettings.ContactId = userSettings.SiteMinderGuid;
                     }
