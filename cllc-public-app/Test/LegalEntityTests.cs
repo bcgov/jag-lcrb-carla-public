@@ -18,6 +18,22 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
 	public class LegalEntityTests : ApiIntegrationTestBaseWithLogin
     {
+		[Fact]
+		public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
+		{
+			string service = "adoxiolegalentity";
+			string id = "SomeRandomId";
+
+			// first confirm we are not logged in
+			await GetCurrentUserIsUnauthorized();
+
+            // try a random GET, should return unauthorized
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            var response = await _client.SendAsync(request);
+			Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
+            string _discard = await response.Content.ReadAsStringAsync();
+		}
+
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
