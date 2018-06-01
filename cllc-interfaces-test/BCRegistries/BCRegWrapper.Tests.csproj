@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cllc-interfaces\cllc-interfaces.csproj" />
+    <ProjectReference Include="../../cllc-interfaces/BCRegistries/BCRegWrapper.csproj" />
   </ItemGroup>
 
 </Project>
+
