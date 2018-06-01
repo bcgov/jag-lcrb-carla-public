@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import { Shareholder } from "../models/shareholder.model";
+import { AdoxioLegalEntity } from "../models/adoxio-legalentities.model";
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -63,6 +64,47 @@ export class AdoxioLegalEntityDataService {
             allShareholders.push(shareholder);
           });
           return allShareholders;
+      })
+      .catch(this.handleError);
+  }
+
+  getDirectorsAndOfficers() {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    return this.http.get("api/adoxiolegalentity/?directorandofficer=true", {
+      headers: headers
+    })
+      .toPromise()
+      .then((res: Response) => {
+        //console.log(res);
+        let data = res.json();
+        let allDirectorsAndOfficers = [];
+
+        data.forEach((entry) => {
+          let directorofficer = new AdoxioLegalEntity();
+          directorofficer.account = entry.account;
+          directorofficer.commonnonvotingshares = entry.commonnonvotingshares;
+          directorofficer.commonvotingshares = entry.commonvotingshares;
+          directorofficer.dateofbirth = entry.dateofbirth;
+          directorofficer.firstname = entry.xxfirstname
+          directorofficer.id = entry.id;
+          directorofficer.interestpercentage = entry.interestpercentage;
+          directorofficer.isindividual = entry.isindividual;
+          directorofficer.lastname = entry.lastname;
+          directorofficer.legalentitytype = entry.legalentitytype;
+          directorofficer.middlename = entry.middlename;
+          directorofficer.name = entry.name;
+          directorofficer.otherlegalentitytype = entry.otherlegalentitytype;
+          directorofficer.position = entry.position;
+          directorofficer.preferrednonvotingshares = entry.preferrednonvotingshares;
+          directorofficer.preferredvotingshares = entry.preferredvotingshares;
+          directorofficer.relatedentities = entry.relatedentities;
+          directorofficer.sameasapplyingperson = entry.sameasapplyingperson;
+          directorofficer.shareholderType = entry.shareholderType;
+          allDirectorsAndOfficers.push(directorofficer);
+        });
+        return allDirectorsAndOfficers;
       })
       .catch(this.handleError);
   }
