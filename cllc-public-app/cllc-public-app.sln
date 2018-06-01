@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cllc-public-app", "cllc-public-app.csproj", "{1B123454-DD56-472C-B459-BB0EDECADFF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cllc-public-app", "cllc-public-app.csproj", "{1B123454-DD56-472C-B459-BB0EDECADFF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces", "cllc-interfaces", "{0584B916-A0B9-44B4-97D3-1E9DBF16220E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{27F1F3AB-9F73-414C-ADD2-3CE032C49978}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{27F1F3AB-9F73-414C-ADD2-3CE032C49978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
