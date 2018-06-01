@@ -5,7 +5,7 @@ export class AdoxioLegalEntity {
   //email: string;
   //dateIssued: Date;
   
-  id: string; // string form of the guid
+  id: string; // guid
   name: string;
   isindividual: boolean;
   sameasapplyingperson: boolean;
