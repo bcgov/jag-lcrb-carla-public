@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {    
@@ -176,7 +177,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 ClaimsPrincipal principal;
 
                 HttpContext context = Request.HttpContext;
-                AppDbContext dataAccess = (AppDbContext)context.RequestServices.GetService(typeof(AppDbContext));
+                Contexts.Microsoft.Dynamics.CRM.System _system = (Contexts.Microsoft.Dynamics.CRM.System)context.RequestServices.GetService(typeof(Contexts.Microsoft.Dynamics.CRM.System));
+
+                IDistributedCache _distributedCache = (IDistributedCache) context.RequestServices.GetService(typeof(IDistributedCache));
+
+
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
                 
                 UserSettings userSettings = new UserSettings();
@@ -269,10 +274,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // Validate credential against database              
                 // **************************************************
                 userSettings.AuthenticatedUser = hostingEnv.IsProduction()
-                    ? dataAccess.LoadUser(userId, siteMinderGuid)
-                    : dataAccess.LoadUser(userId);
-
-
+                    ? await _system.LoadUser(_distributedCache, userId, siteMinderGuid)
+                    : await _system.LoadUser(_distributedCache, userId);
 
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
@@ -281,15 +284,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
-                // **************************************************
-                // Validate / check user permissions
-                // **************************************************
-                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
+                ClaimsPrincipal userPrincipal = null;
 
-                if (userPrincipal != null && !(userPrincipal.HasClaim(User.PermissionClaim, Permission.Login) || userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration)))
+                if (userSettings.AuthenticatedUser != null)
                 {
-                    _logger.LogWarning("User does not have permission to login or register.");
-                    return AuthenticateResult.Fail(options.InvalidPermissions);
+                    userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
                 }
 
                 // **************************************************
@@ -301,7 +300,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // create session info
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
-                userSettings.IsNewUserRegistration = userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration);
+                userSettings.IsNewUserRegistration = (userSettings.AuthenticatedUser == null);
                
                 if (! hostingEnv.IsProduction())
                 {
@@ -310,7 +309,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                     if (userSettings.IsNewUserRegistration)
                     {
-
                         // add generated guids
                         userSettings.SiteMinderBusinessGuid = Guid.NewGuid().ToString();
                         userSettings.SiteMinderGuid = Guid.NewGuid().ToString();

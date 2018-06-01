@@ -16,13 +16,14 @@ using Gov.Lclb.Cllb.Public.Models;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class CurrentUserTests : ApiIntegrationTestBase
+	public class CurrentUserTests : ApiIntegrationTestBaseWithLogin
     {
         [Fact]
         public async System.Threading.Tasks.Task DefaultDevelopmentUserIsValid()
         {
+			await LoginAsDefault();
+
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
-            
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
@@ -32,6 +33,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // The Default development user should not be a new user.
             Assert.False(user.isNewUser);
+
+			await Logout();
         }
     }
 }
