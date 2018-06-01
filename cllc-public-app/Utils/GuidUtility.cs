@@ -22,6 +22,11 @@ namespace Logos.Utility
 			return Create(namespaceId, name, 5);
 		}
 
+        public static Guid CreateIdForDynamics(string entity, string name) 
+		{
+			return Create(IsoOidNamespace, entity + "." + name, 5);
+		}
+
 		/// <summary>
 		/// Creates a name-based UUID using the algorithm from RFC 4122 §4.3.
 		/// </summary>
