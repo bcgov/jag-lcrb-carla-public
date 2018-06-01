@@ -1,0 +1,155 @@
+#!/bin/bash
+
+# S2I Assemble Script
+# For the BC Government GCPE News WebApp project
+# This script is based on the S2I assemble script for dotnet 2, with the following extra features:
+#
+# 1. A Sonarqube scan can be done on the source
+# 2. A Snyk scan can be done on the source
+# 3. Dotnet tests can be done
+# 4. Or a regular build for production of an application image can be done.
+
+set -e
+
+# npm
+if [ -n "${DOTNET_NPM_TOOLS}" ]; then
+  echo "---> Installing npm tools ..."
+
+  if [ ! -z $HTTP_PROXY ]; then
+    echo "---> Setting npm http proxy"
+    npm config set proxy $HTTP_PROXY
+  fi
+  if [ ! -z $HTTPS_PROXY ]; then
+    echo "---> Setting npm https proxy"
+    npm config set https-proxy $HTTPS_PROXY
+  fi
+  if [ ! -z $NPM_MIRROR ]; then
+    echo "---> Setting npm mirror"
+    npm config set registry $NPM_MIRROR
+  fi
+
+  pushd $HOME
+  npm install ${DOTNET_NPM_TOOLS}
+  popd
+fi
+
+echo "---> Copying application source ..."
+cp -Rf /tmp/src/. ./
+
+if [ "$DEV_MODE" == true ]; then
+  # fix permissions
+  fix-permissions /opt/app-root
+
+  exit 0
+fi
+
+# User settable environment
+DOTNET_CONFIGURATION="${DOTNET_CONFIGURATION:-Release}"
+DOTNET_STARTUP_PROJECT="${DOTNET_STARTUP_PROJECT:-.}"
+DOTNET_ASPNET_STORE="${DOTNET_ASPNET_STORE:-false}"
+if [ "$DOTNET_ASPNET_STORE" != "false" ]; then
+  DOTNET_ASPNET_STORE="true"
+fi
+
+# Ensure there is a project file and derive assembly name from project name.
+PROJFILES=(`find "${DOTNET_STARTUP_PROJECT}" -maxdepth 1 -name "*.??proj"`)
+if [ ${#PROJFILES[@]} -eq 0 ]; then
+# look for a sln.
+	PROJFILES=(`find "${DOTNET_STARTUP_PROJECT}" -maxdepth 1 -name "*.sln"`)
+fi
+
+if [ ${#PROJFILES[@]} -eq 1 ]; then
+  PROJFILE=$(basename ${PROJFILES[0]})
+  APP_DLL_NAME="${PROJFILE: : -7}.dll"
+else
+  if [ ${#PROJFILES[@]} -eq 0 ]; then
+    echo "error: DOTNET_STARTUP_PROJECT has no project file"
+  else
+    echo "error: DOTNET_STARTUP_PROJECT contains multiple project files"
+  fi
+  echo "You can specify the startup project by adding an '.s2i/environment' file to the source repository."
+  # find all projects and strip leading './'
+  PROJFILES=(`find -name "*.??proj" | sed "s|^\./||"`)
+  if [ ${#PROJFILES[@]} -eq 0 ]; then
+    echo "The source repository has no project files."
+  else
+    echo "The source repository contains the following projects:"
+    for PROJFILE in ${PROJFILES[@]}; do
+      echo "- ${PROJFILE}"
+    done
+    echo "Update the '.s2i/environment' file to specify the project you want to publish, for example DOTNET_STARTUP_PROJECT=${PROJFILES[0]}".
+  fi
+  exit 1
+fi
+
+# Override assembly name
+if [ -n "$DOTNET_ASSEMBLY_NAME" ]; then
+  APP_DLL_NAME="${DOTNET_ASSEMBLY_NAME}.dll"
+fi
+
+# Build nuget sources list for when doing the restore
+RESTORE_OPTIONS="--disable-parallel"
+for SOURCE in $DOTNET_RESTORE_SOURCES; do
+  RESTORE_OPTIONS="$RESTORE_OPTIONS --source $SOURCE"
+done
+
+# run tests
+for TEST_PROJECT in $DOTNET_TEST_PROJECTS; do
+    echo "---> Restoring test project ($TEST_PROJECT) dependencies..."
+    dotnet restore "$TEST_PROJECT" $RESTORE_OPTIONS
+    echo "---> Running test project: $TEST_PROJECT..."
+    dotnet test "$TEST_PROJECT" -f "$DOTNET_FRAMEWORK"
+done
+
+# get the text after the last dash in the openshift build name.
+BUILDNUMBER=${OPENSHIFT_BUILD_NAME##*-} 
+if [ -z $VERSION_PREFIX ]; then
+  VERSION_PREFIX=1.0.0
+fi
+
+# publish application
+echo "---> Restoring application dependencies..."
+dotnet restore "$DOTNET_STARTUP_PROJECT" $RESTORE_OPTIONS
+
+if [ -n "$SONAR_TOKEN" ]; then
+	echo "---> Running SonarQube Scan..."
+	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe begin /d:sonar.login=$SONAR_TOKEN /k:$SONAR_PROJECT /d:sonar.host.url=$SONAR_URL /v:$VERSION_PREFIX$BUILDNUMBER 
+	dotnet build "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" 
+	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe end /d:sonar.login=$SONAR_TOKEN 
+elif [ -n "$SNYK_TOKEN" ]; then
+		# run the snyk scan.  Note SNYK_TOKEN is automatically used by the snyk scanner for authentication.
+		snyk test --file="$DOTNET_STARTUP_PROJECT"
+elif [ -n "$DOTNET_TEST" ]; then
+	dotnet test "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION"
+else	
+	# Build and publish the application for production usage
+	echo "---> Publishing application..."
+	dotnet publish "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" \
+		   --self-contained false /p:PublishWithAspNetCoreTargetManifest=$DOTNET_ASPNET_STORE -o "$DOTNET_APP_PATH"
+
+	# check if the assembly used by the script exists
+	if [ ! -f "$DOTNET_APP_PATH/${APP_DLL_NAME}" ]; then
+	  echo "error: Build output does not contain entrypoint assembly: ${APP_DLL_NAME}"
+	  exit 1
+	fi
+
+	# Create run script in publish folder
+	cat << EOF >"$DOTNET_APP_PATH/$DOTNET_DEFAULT_CMD"
+#!/bin/bash
+
+exec dotnet ${APP_DLL_NAME} \$@
+EOF
+	chmod +x "$DOTNET_APP_PATH/$DOTNET_DEFAULT_CMD"
+
+	if [ "$DOTNET_PACK" == "true" ]; then
+	  echo "---> Packing application..."
+	  fix-permissions $DOTNET_APP_PATH
+	  tar -czf /opt/app-root/app.tar.gz -C $DOTNET_APP_PATH .
+	fi
+
+	# cleanup NuGet artifacts
+	rm -rf ~/{.local,.nuget}
+
+	# fix permissions
+	fix-permissions /opt/app-root
+fi
