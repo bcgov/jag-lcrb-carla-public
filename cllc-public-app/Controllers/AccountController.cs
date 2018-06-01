@@ -92,25 +92,57 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            // create a new account
-            Contexts.Microsoft.Dynamics.CRM.Account account = new Contexts.Microsoft.Dynamics.CRM.Account();
+            Guid id = new Guid(item.id);
+            // get UserSettings from the session
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account>(_system);
             DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact>(_system);
+            // first check to see that a contact exists.
+            Guid userContactId = new Guid(userSettings.ContactId);
+            Contexts.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactById(_distributedCache, userContactId);
+            if (userContact == null)
+            {
+                // create the user contact record.
+                userContact = new Contexts.Microsoft.Dynamics.CRM.Contact();
+                ContactCollection.Add(userContact);
+                userContact.Contactid = userContactId;
+                userContact.Fullname = userSettings.UserDisplayName;
+                userContact.Nickname = userSettings.UserDisplayName;
+                userContact.Employeeid = userSettings.UserId;
+                userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
+                userContact.Lastname = userSettings.UserDisplayName.GetLastName();
+                userContact.Statuscode = 1;
+            }
+            // save the new contact. 
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
+
+            // this may be an existing account, as this service is used during the account confirmation process.
+            Contexts.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
+            if (account == null)
+            {
+                // create a new account
+                account = new Contexts.Microsoft.Dynamics.CRM.Account();
+                account.Accountid = id;
+            }
 
             AccountCollection.Add(account);
             account.CopyValues(item);
 
-            if (item.primarycontact != null)
-            {
-                // get the contact.
-                Contexts.Microsoft.Dynamics.CRM.Contact contact = new Contexts.Microsoft.Dynamics.CRM.Contact();
-                contact.Fullname = item.primarycontact.name;
-                contact.Contactid = new Guid(item.primarycontact.id);
-                account.Primarycontactid = contact;
+            if (account.Primarycontactid == null) // we need to add the primary contact.
+            {                
+                account.Primarycontactid = userContact;                                
             }
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -121,8 +153,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             // if we have not yet authenticated, then this is the new record for the user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            
             if (userSettings.IsNewUserRegistration)
             {
 
