@@ -280,7 +280,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
-                    _logger.LogWarning(options.InactivegDbUserIdError + " (" + userId + ")");
+                    _logger.LogError(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
@@ -289,8 +289,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Create authenticated user
                 // **************************************************
-                _logger.LogInformation("Authentication successful: " + userId);
-                _logger.LogInformation("Setting identity and creating session for: " + userId);
+                _logger.LogError("Authentication successful: " + userId);
+                _logger.LogError("Setting identity and creating session for: " + userId);
 
                 // create session info
                 userSettings.UserId = userId;
@@ -315,6 +315,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 						userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
                         userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
                         userSettings.ContactId = userSettings.SiteMinderGuid;
+
+						_logger.LogError("New user registration:" + userSettings.UserDisplayName);
+						_logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
+						_logger.LogError("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
+						_logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
+						_logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
                     }
                     // handle case where we are signed on as a development user but don't have any siteminder headers.
                     else if (userSettings.AuthenticatedUser != null)
@@ -326,8 +332,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         }
                         if (string.IsNullOrEmpty(userSettings.ContactId))
                         {
-                            userSettings.ContactId = userSettings.AuthenticatedUser.Guid;
+							userSettings.ContactId = userSettings.AuthenticatedUser.Id.ToString();
                         }
+						_logger.LogError("Returning user:" + userSettings.UserDisplayName);
+						_logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
                     }
                 }                
 
