@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Verify the Default development user.
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
             Assert.Equal(user.name, "TMcTesterson TestUser");
-            Assert.True(user.isNewUser);
+            Assert.False(user.isNewUser);
 
 			await Logout();
 
@@ -58,7 +58,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
 			Assert.Equal(user.name, loginUser + " TestUser");
 			Assert.Equal(user.businessname, loginUser + " TestBusiness");
-            Assert.True(user.isNewUser);
+            // TODO change to random user, and cleanup afterwards
+            Assert.False(user.isNewUser);
             /*
             // now create an account and contact in Dynamics
 			var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
