@@ -3,69 +3,74 @@
   <form [formGroup]='shareholderForm' class="form-horizontal">
     <!--(ngSubmit)="addShareholderPerson(shareholderForm)"-->
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
+    <div class="form-group row">
+      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('firstName')}">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
-        <div *ngIf="shareholderForm.controls['firstName'].touched && !shareholderForm.controls['firstName'].valid">
-          <span *ngIf="shareholderForm.controls['firstName'].hasError('required') ">
-            First name is required
-          </span>
+        <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="First Name">
+        <div *ngIf="this.isFieldError('firstName')" class="error-msg">
+          <div *ngIf="shareholderForm.controls['firstName'].hasError('required') ">
+            This is required
+          </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
-        <label>Last Name</label>
-        <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
-        <div *ngIf="shareholderForm.controls['lastName'].touched && !shareholderForm.controls['lastName'].valid">
-          <span *ngIf="shareholderForm.controls['lastName'].hasError('required') ">
-            Last name is required
-          </span>
+      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('lastName')}">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
+        <div *ngIf="this.isFieldError('lastName')">
+          <div *ngIf="shareholderForm.controls['lastName'].hasError('required') ">
+            This is required
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label>Email</label>
-        <input type="text" class="form-control" formControlName='email' placeholder="Email">
-        <div *ngIf="shareholderForm.controls['email'].touched && !shareholderForm.controls['email'].valid">
-          <span *ngIf="shareholderForm.controls['email'].hasError('required') ">
-            Email is required
-          </span>
-          <span *ngIf="shareholderForm.controls['email'].hasError('email') ">
+    <div class="form-group row">
+      <div class="col-md-12" [ngClass]="{'has-error': this.isFieldError('email')}">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
+        <div *ngIf="this.isFieldError('email')">
+          <div *ngIf="shareholderForm.controls['email'].hasError('required') ">
+            This is required
+          </div>
+          <div *ngIf="shareholderForm.controls['email'].hasError('email') ">
             Email is invalid
-          </span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <label>Number of <br />voting shares</label>
-        <input type="number" class="form-control" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
-        <div *ngIf="shareholderForm.controls['numberOfVotingShares'].touched && !shareholderForm.controls['numberOfVotingShares'].valid">
-          <span *ngIf="shareholderForm.controls['numberOfVotingShares'].hasError('required') ">
-            Number of voting shares is required
-          </span>
+    <div class="form-group row">
+      <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('numberOfVotingShares')}">
+        <label for="numberOfVotingShares">Number of <br />Voting Shares</label>
+        <input type="number" class="form-control" formControlName="numberOfVotingShares" id="numberOfVotingShares">
+        <div *ngIf="this.isFieldError('numberOfVotingShares')">
+          <div *ngIf="shareholderForm.controls['numberOfVotingShares'].hasError('required') ">
+            This is required
+          </div>
         </div>
       </div>
-      <div class="form-group col-md-4">
-        <label>Number of<br />non voting shares</label>
-        <input type="number" class="form-control" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
-        <div *ngIf="shareholderForm.controls['numberOfNonVotingShares'].touched && !shareholderForm.controls['numberOfNonVotingShares'].valid">
-          <span *ngIf="shareholderForm.controls['numberOfNonVotingShares'].hasError('required') ">
-            Number of non voting shares is required
-          </span>
+      <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('numberOfNonVotingShares')}">
+        <label for="numberOfNonVotingShares">Number of<br />Non Voting Shares</label>
+        <input type="number" class="form-control" formControlName="numberOfNonVotingShares" id="numberOfNonVotingShares">
+        <div *ngIf="this.isFieldError('numberOfNonVotingShares')">
+          <div *ngIf="shareholderForm.controls['numberOfNonVotingShares'].hasError('required') ">
+            This is required
+          </div>
         </div>
       </div>
-      <div class="form-group col-md-4">
-        <label>Date of Shares Issued</label>
-        <input type="date" class="form-control" formControlName='dateIssued' placeholder="Date of Shares Issued">
+      <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
+        <label for="dateIssued">Date of Shares<br />Issued</label>
+        <input type="date" class="form-control" formControlName="dateIssued">
+        <div *ngIf="this.isFieldError('dateIssued')">
+          <div *ngIf="shareholderForm.controls['dateIssued'].hasError('dateLessThanToday') ">
+            Date Issued must be before today
+          </div>
+        </div>
       </div>
   </div>
 </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button class="mat-raised-button" color="accent" (click)="close()">Close</button>
-  <button class="mat-raised-button" color="accent" (click)="save()">Save</button>
+  <button class="mat-raised-button" color="primary" (click)="save()">Save</button>
 </mat-dialog-actions>
