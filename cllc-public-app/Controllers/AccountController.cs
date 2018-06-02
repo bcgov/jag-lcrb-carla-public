@@ -113,7 +113,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Employeeid = userSettings.UserId;
                 userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
-                userContact.Statuscode = 1;
+                userContact.Statuscode = 1;                
             }
             // save the new contact. 
             DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
@@ -151,9 +151,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
+            // ensure that there is a link between the new contact and the account.
+
+            account.Contact_customer_accounts.Add(userContact);
+            
+            dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
 
             // if we have not yet authenticated, then this is the new record for the user.
-            
+
             if (userSettings.IsNewUserRegistration)
             {
 
