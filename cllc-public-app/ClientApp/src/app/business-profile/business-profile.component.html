@@ -32,11 +32,11 @@
     </div>
     <div [hidden]="view_tab != 'tab-3'"><h1>Organization Structure</h1>
     </div>
-    <div [hidden]="view_tab != 'tab-4'"><h1>Directors and Officers</h1></div>
+    <div [hidden]="view_tab != 'tab-4'">
+      <app-directors-and-officers></app-directors-and-officers>
+    </div>
     <div [hidden]="view_tab != 'tab-5'">
-      <h1>Shareholders</h1>
-      <p>Enter all shareholders for the corporation</p>
-     <app-edit-shareholders></app-edit-shareholders>
+      <app-edit-shareholders></app-edit-shareholders>
     </div>
     <div [hidden]="view_tab != 'tab-6'"><h1>Accounting and Taxes</h1></div>
     <div [hidden]="view_tab != 'tab-7'"><h1>Investments and Loans</h1></div>
