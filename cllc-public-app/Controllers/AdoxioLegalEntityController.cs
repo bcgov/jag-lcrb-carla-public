@@ -44,26 +44,99 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="shareholder"></param>
         /// <returns></returns>
         [HttpGet()]
-        public async Task<JsonResult> GetDynamicsLegalEntities(bool? shareholder)
+        public async Task<JsonResult> GetDynamicsLegalEntities() //bool? shareholder
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<Adoxio_legalentity> legalEntities = null;
-            if (shareholder == null)
-            {
-                legalEntities = await _system.Adoxio_legalentities.ExecuteAsync();
-            }
-            else
-            {
-                // Shareholders have an adoxio_position value of x.
-                legalEntities = await _system.Adoxio_legalentities
-                    .AddQueryOption("$filter", "adoxio_position eq 1") // 1 is a Shareholder
-                    .ExecuteAsync();
-            }
+            legalEntities = await _system.Adoxio_legalentities.ExecuteAsync();
 
+            //if (shareholder == null)
+            //{
+            //    legalEntities = await _system.Adoxio_legalentities.ExecuteAsync();
+            //}
+            //else
+            //{
+            //    // Shareholders have an adoxio_position value of x.
+            //    legalEntities = await _system.Adoxio_legalentities
+            //        .AddQueryOption("$filter", "adoxio_position eq 1") // 1 is a Shareholder
+            //        .ExecuteAsync();
+            //}
 
             foreach (var legalEntity in legalEntities)
             {
                 result.Add(legalEntity.ToViewModel());
+            }
+
+            return Json(result);
+        }
+
+        /// <summary>
+        /// Get all Legal Entities where the position matches the parameter received
+        /// </summary>
+        /// <param name="positionType"></param>
+        /// <returns></returns>
+        [HttpGet()]
+        [Route("position/{positionType}")]
+        public async Task<JsonResult> GetDynamicsLegalEntitiesByPosition(string positionType)
+        {
+            List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
+            IEnumerable<Adoxio_legalentity> legalEntities = null;
+            String filter = null;
+
+            if (positionType == null)
+            {
+                legalEntities = await _system.Adoxio_legalentities.ExecuteAsync();
+            }
+            else
+            {   /*
+                Partner     = adoxio_position value of 0
+                Shareholder = adoxio_position value of 1
+                Trustee     = adoxio_position value of 2
+                Director    = adoxio_position value of 3
+                Officer     = adoxio_position value of 4
+                Owner       = adoxio_position value of 5 
+                */
+                positionType = positionType.ToLower();
+                switch (positionType)
+                {
+                    case "partner":
+                        filter = "adoxio_position eq 0";
+                        break;
+                    case "shareholder":
+                        filter = "adoxio_position eq 1";
+                        break;
+                    case "trustee":
+                        filter = "adoxio_position eq 2";
+                        break;
+                    case "director":
+                        filter = "adoxio_position eq 3";
+                        break;
+                    case "officer":
+                        filter = "adoxio_position eq 4";
+                        break;
+                    case "owner":
+                        filter = "adoxio_position eq 5";
+                        break;
+                    case "directorofficer":
+                        filter = "adoxio_position eq 3 or adoxio_position eq 4";
+                        break;
+                }
+
+                // Execute query if filter is valid
+                if (filter != null)
+                {
+                    legalEntities = await _system.Adoxio_legalentities
+                    .AddQueryOption("$filter", filter)
+                    .ExecuteAsync();
+                }
+            }
+
+            if (legalEntities != null)
+            {
+                foreach (var legalEntity in legalEntities)
+                {
+                    result.Add(legalEntity.ToViewModel());
+                }
             }
 
             return Json(result);
