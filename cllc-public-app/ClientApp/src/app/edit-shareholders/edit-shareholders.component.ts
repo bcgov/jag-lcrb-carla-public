@@ -23,7 +23,7 @@ export class EditShareholdersComponent implements OnInit {
 
   ngOnInit() {
     let shareholder: Shareholder;
-    this.legalEntityDataservice.getShareholders()
+    this.legalEntityDataservice.getLegalEntitiesbyPosition("shareholder")
       .then((data) => {
         //console.log("getShareholders(): ", data);
         this.dataSource.data = data;
@@ -124,7 +124,21 @@ export class ShareholderPersonDialog {
       numberOfVotingShares: ['', Validators.required],
       numberOfNonVotingShares: ['', Validators.required],
       dateIssued: ['']
-    });
+    }, { validator: this.dateLessThanToday('dateIssued') });
+  }
+
+  dateLessThanToday(field1) {
+    return form => {
+      const d1 = form.controls[field1].value;
+      if (!d1) {
+        return {};
+      }
+      const d1Date = new Date(d1.year, d1.month, d1.day);
+      if (d1Date < new Date()) {
+        return { dateLessThanToday: true };
+      }
+      return {};
+    }
   }
 
   save() {
@@ -137,6 +151,11 @@ export class ShareholderPersonDialog {
         control.markAsTouched({ onlySelf: true });
       });
     }
+  }
+
+  isFieldError(field: string) {
+    const isError = !this.shareholderForm.get(field).valid && this.shareholderForm.get(field).touched;
+    return isError;
   }
 
   close() {
@@ -176,6 +195,8 @@ export class ShareholderOrganizationDialog {
       });
     }
   }
+
+
 
   close() {
     this.dialogRef.close();

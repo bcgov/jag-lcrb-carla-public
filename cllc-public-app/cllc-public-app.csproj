@@ -81,6 +81,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\adoxio-legalentities.model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Contexts\ODataClient.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
