@@ -51,12 +51,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
             user.businessname = userSettings.BusinessLegalName;
+            user.name = userSettings.UserDisplayName;
 
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
                 // get details from the headers.
-                user.name = userSettings.UserDisplayName;
+            
                 
                 user.lastname = DynamicsExtensions.GetLastName(user.name);
                 user.firstname = DynamicsExtensions.GetFirstName(user.name);
