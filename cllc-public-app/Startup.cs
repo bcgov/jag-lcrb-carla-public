@@ -1,3 +1,4 @@
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
 using Gov.Lclb.Cllb.Public.Contexts;
@@ -152,12 +153,24 @@ namespace Gov.Lclb.Cllb.Public
             task.Wait();
             AuthenticationResult authenticationResult = task.Result; 
 
-            Contexts.Microsoft.Dynamics.CRM.System context = new Contexts.Microsoft.Dynamics.CRM.System (new Uri("https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"));
+            Contexts.Microsoft.Dynamics.CRM.System context = new Contexts.Microsoft.Dynamics.CRM.System (new Uri(Configuration["DYNAMICS_ODATA_URI"]));
 
             context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
             "Authorization", authenticationResult.CreateAuthorizationHeader());            
 
             services.AddSingleton<Contexts.Microsoft.Dynamics.CRM.System>(context);
+
+            // add SharePoint.
+
+            string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
+            string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
+            string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
+            string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
+            string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
+            string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
+
+            SharePointFileManager sharePointFileManager = new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword);
+            services.AddSingleton<SharePointFileManager>(sharePointFileManager);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -201,6 +214,7 @@ namespace Gov.Lclb.Cllb.Public
                 log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
             }
 
+            
             string pathBase = Configuration["BASE_PATH"];
             if (! string.IsNullOrEmpty(pathBase))
             {

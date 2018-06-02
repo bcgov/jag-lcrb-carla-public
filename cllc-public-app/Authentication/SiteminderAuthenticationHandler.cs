@@ -277,19 +277,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     ? await _system.LoadUser(_distributedCache, userId, siteMinderGuid)
                     : await _system.LoadUser(_distributedCache, userId);
 
-
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
                     _logger.LogWarning(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
-                ClaimsPrincipal userPrincipal = null;
-
-                if (userSettings.AuthenticatedUser != null)
-                {
-                    userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
-                }
+                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
 
                 // **************************************************
                 // Create authenticated user
@@ -306,6 +300,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     userSettings.BusinessLegalName = userId + " TestBusiness";
                     userSettings.UserDisplayName = userId + " TestUser";
+
+                    if (userSettings.AuthenticatedUser != null)
+                    {
+                        userSettings.ContactId = userSettings.AuthenticatedUser.Id.ToString();
+                        userSettings.AccountId = userSettings.AuthenticatedUser.Guid;
+                    }
 
                     if (userSettings.IsNewUserRegistration)
                     {
