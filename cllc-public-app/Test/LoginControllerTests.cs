@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await GetCurrentUserIsUnauthorized();
 
 			// register as a new user
-			var loginUser = "iannewuser000"; // "NewUser" + TestUtilities.RandomANString(6);
+			var loginUser = "NewUser" + TestUtilities.RandomANString(6);
 			await Login(loginUser);
 
 			string jsonString = await GetCurrentUser();
@@ -58,30 +58,25 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
 			Assert.Equal(user.name, loginUser + " TestUser");
 			Assert.Equal(user.businessname, loginUser + " TestBusiness");
-            // TODO change to random user, and cleanup afterwards
-            Assert.False(user.isNewUser);
-            /*
-            // now create an account and contact in Dynamics
+            Assert.True(user.isNewUser);
+            
+            // create a new account and contact in Dynamics
 			var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
-			var accountId = GuidUtility.CreateIdForDynamics(accountService, user.businessname);
-			//Assert.Equal(new Guid("c23089ef-19dc-59d0-8aef-db9521785a94"), accountId);
+			var accountId = new Guid(user.accountid);
             Account account = new Account()
             {
 				Accountid = accountId,
 				Name = user.businessname
             };
-
+            
             ViewModels.Account viewmodel_account = account.ToViewModel();
+			Assert.Equal(account.Accountid, new Guid(viewmodel_account.id));
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
-
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
-
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
-
-            // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
             ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
@@ -89,21 +84,35 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal(user.businessname, responseViewModel.name);
             Guid id = new Guid(responseViewModel.id);
 			Assert.Equal(accountId, id);
+			string strId = responseViewModel.id;
 
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
+            // verify we can fetch the account via web service
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
+            response = await _client.SendAsync(request);
+			response.EnsureSuccessStatusCode();
+			String _discard = await response.Content.ReadAsStringAsync();
+
+            // TODO return account id
+			// return id;
+
+            // cleanup - delete the account and contract when we are done
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
+			_discard = await response.Content.ReadAsStringAsync();
 
             // second delete should return a 404.
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+			_discard = await response.Content.ReadAsStringAsync();
 
             // should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-            */
+			_discard = await response.Content.ReadAsStringAsync();
+            
 			await Logout();
 
             await GetCurrentUserIsUnauthorized();
