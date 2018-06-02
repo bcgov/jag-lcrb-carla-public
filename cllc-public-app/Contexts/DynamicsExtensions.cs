@@ -279,7 +279,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             string key = "Contact_" + id.ToString();
             // first look in the cache.
             string temp = distributedCache.GetString(key);
-            if (!string.IsNullOrEmpty(temp))
+            if (0 == 1 && !string.IsNullOrEmpty(temp))
             {
                 result = JsonConvert.DeserializeObject<Contact>(temp);
             }

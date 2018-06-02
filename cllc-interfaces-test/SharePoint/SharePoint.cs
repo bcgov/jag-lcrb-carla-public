@@ -23,6 +23,8 @@ namespace SharePoint.Tests
         public SharePoint()
         {
             Configuration = new ConfigurationBuilder()
+                // The following line is the only reason we have a project reference for cllc-public-app.
+                // If you were to use this code on a different project simply add user secrets as appropriate to match the environment / secret variables below.
                 .AddUserSecrets<ApiIntegrationTestBase>() // Add secrets from the cllc-public-app
                 .AddEnvironmentVariables()
                 .Build();
@@ -102,7 +104,16 @@ namespace SharePoint.Tests
             await sharePointFileManager.DeleteFile(url);
         }
 
+        /// <summary>
+        /// Test Create Folder
+        /// </summary>
+        [Fact]
+        public async void CreateFolderTest()
+        {
+            SP.ListItem folder = await sharePointFileManager.CreateFolder("Documents", "Test Folder");
 
+            Assert.True(folder != null);
+        }
 
     }
 }

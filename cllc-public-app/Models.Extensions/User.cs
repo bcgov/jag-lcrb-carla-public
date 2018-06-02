@@ -22,7 +22,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.Id = (Guid)from.Contactid;
             }
-            to.Guid = to.Id.ToString();
+
+            to.Guid = from._parentcustomerid_value.ToString();
             to.GivenName = from.Firstname;
             to.Surname = from.Lastname;
             to.SmUserId = from.Employeeid;

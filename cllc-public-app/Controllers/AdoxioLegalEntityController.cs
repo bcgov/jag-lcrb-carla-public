@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
@@ -27,12 +28,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration Configuration;
         private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
+        private readonly SharePointFileManager _sharePointFileManager;
 
-        public AdoxioLegalEntityController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        public AdoxioLegalEntityController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager)
         {
             Configuration = configuration;
             this._system = context;
             this._distributedCache = distributedCache;
+            this._sharePointFileManager = sharePointFileManager;
         }
 
         /// <summary>
@@ -95,6 +98,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
+        // get a list of files associated with this legal entity.
+        [HttpGet("{id}/attachments")]
+        public async Task<IActionResult> GetFiles([FromRoute] string id, [FromForm]IFormFile file)
+        {
+            return Ok(file);
+        }
+
         [HttpPost("{id}/attachments")]
         public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file)
         {
@@ -104,6 +114,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}/attachments/{fileId}")]
         public async Task<IActionResult> DownloadFile([FromRoute] string id, [FromRoute] string fileId)
         {
+            // get the file.
+            if (fileId == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                _sharePointFileManager.GetFileById(fileId);
+            }
             string filename = "";
             byte[] fileContents = new byte[10];
             return new FileContentResult(fileContents, "application/octet-stream")

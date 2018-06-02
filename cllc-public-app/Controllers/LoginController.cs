@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Configuration;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -21,14 +23,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly AppDbContext db;
         private readonly IHostingEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
+        private readonly IDistributedCache _distributedCache;
 
-        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env)
+        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env, IDistributedCache distributedCache)
         {
             Configuration = configuration;
             _env = env;
             this.db = db;
+            this._distributedCache = distributedCache;
         }
-        
+
         [HttpGet]
         // remove this Route line, as it changes the behavior of the controller. 
         // We need the controller to respond to a GET request on /login in order for SiteMinder logins to work
@@ -44,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     StringBuilder html = new StringBuilder();
                     html.AppendLine("<html>");
-                    html.AppendLine("<body>");                    
+                    html.AppendLine("<body>");
                     html.AppendLine("<b>Request Headers:</b>");
                     html.AppendLine("<ul style=\"list-style-type:none\">");
                     foreach (var item in Request.Headers)
@@ -65,7 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
                 return Redirect(basePath);
-            }            
+            }
         }
 
         /// <summary>
@@ -160,5 +164,4 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Redirect(basePath);
         }
     }
-    
 }
