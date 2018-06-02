@@ -238,7 +238,11 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             Account result = null;
             string key = "Account_" + id.ToString();
             // first look in the cache.
-            string temp = distributedCache.GetString(key);
+            string temp = null;
+            if (distributedCache != null)
+            {
+                temp = distributedCache.GetString(key);
+            }
             if (!string.IsNullOrEmpty(temp))
             {
                 result = JsonConvert.DeserializeObject<Account>(temp);
@@ -248,6 +252,9 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 // fetch from Dynamics.
                 try
                 {
+                    // if ById does not return child objects, then we can use 
+                    //AddQueryOption("$expand", "contact_customer_accounts")
+                    //AddQueryOption("$filter", "accountid eq <id>")
                     result = await system.Accounts.ByKey(id).GetValueAsync();
                 }
                 catch (DataServiceQueryException dsqe)
@@ -255,7 +262,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     result = null;
                 }
                 
-                if (result != null)
+                if (result != null && distributedCache != null)
                 {
                     // store the contact data.
                     string cacheValue = JsonConvert.SerializeObject(result);
@@ -278,7 +285,12 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             Contact result = null;
             string key = "Contact_" + id.ToString();
             // first look in the cache.
-            string temp = distributedCache.GetString(key);
+            string temp = null;
+            if (distributedCache != null)
+            {
+                temp = distributedCache.GetString(key);
+            }
+
             if (!string.IsNullOrEmpty(temp))
             {
                 result = JsonConvert.DeserializeObject<Contact>(temp);
@@ -295,7 +307,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     result = null;
                 }
 
-                if (result != null)
+                if (result != null && distributedCache != null)
                 {
                     // store the contact data.
                     string cacheValue = JsonConvert.SerializeObject(result);
@@ -318,7 +330,11 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             Contact result = null;
             string key = "Contact_" + siteminderId;
             // first look in the cache.
-            string temp = distributedCache.GetString(key);
+            string temp = null;
+            if (distributedCache != null)
+            {
+                temp = distributedCache.GetString(key);
+            }
             if (! string.IsNullOrEmpty(temp))
             {
                 Guid id = new Guid(temp);
@@ -331,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 var contacts = await system.Contacts.AddQueryOption("$filter", "employeeid eq '" + siteminderId + "'").ExecuteAsync();
 
                 result = contacts.FirstOrDefault();
-                if (result != null)
+                if (result != null && distributedCache != null)
                 {
                     // store the contact data.
                     Guid id = (Guid) result.Contactid;
@@ -358,8 +374,11 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             List<ViewModels.OptionMetadata> result = null;
             string key = "GlobalOptionSetDefinition_" + datafield;
             // first look in the cache.
-
-            string temp = distributedCache.GetString(key);
+            string temp = null;
+            if (distributedCache != null)
+            {
+                temp = distributedCache.GetString(key);
+            }
             if (!string.IsNullOrEmpty(temp))
             {
                 result = JsonConvert.DeserializeObject<List<ViewModels.OptionMetadata>>(temp);
@@ -380,10 +399,14 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     {
                         result.Add(option.ToViewModel());
                     }
+
                 }
-                // store the picklist data.
-                string cacheValue = JsonConvert.SerializeObject(result);
-                distributedCache.SetString(key, cacheValue);
+                if (distributedCache != null)
+                {
+                    // store the picklist data.
+                    string cacheValue = JsonConvert.SerializeObject(result);
+                    distributedCache.SetString(key, cacheValue);
+                }
             }
 
             return result;
