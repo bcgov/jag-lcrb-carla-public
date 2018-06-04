@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     {
         const string NameDocumentTypeSeparator = "__";
 
-        private static string GetDocumentName (string value)
+        public static string GetDocumentName (string value)
         {
             string result = "";
             if (value != null)
@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
-        private static string GetDocumentType (string value)
+        public static string GetDocumentType (string value)
         {
             string result = "";
             if (value != null)
@@ -40,7 +40,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
-        private static string CombineNameDocumentType (string name, string documentType)
+        public static string CombineNameDocumentType (string name, string documentType)
         {
             string result = name + NameDocumentTypeSeparator + documentType;
             return result;
