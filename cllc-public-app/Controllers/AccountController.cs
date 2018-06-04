@@ -107,8 +107,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            Guid id = new Guid(item.id);
+            //Guid id = new Guid(item.id);
+			if (item.externalId == null || item.externalId.Length == 0)
+			{
+				item.externalId = item.id;
+			}
 			var strid = item.externalId;
+
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -150,7 +155,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // create a new account
                 account = new Contexts.Microsoft.Dynamics.CRM.Account();
-                account.Accountid = id;
+                //account.Accountid = id;
 				account.Adoxio_externalid = strid;
             }
 
