@@ -10,7 +10,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -26,11 +26,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class ContactController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
         
-        public ContactController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
+        public ContactController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             this._system = context;
@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the contact record.
 
             Guid? contactId = new Guid(id);
-            Contexts.Microsoft.Dynamics.CRM.Contact contact = null;
+            Interfaces.Microsoft.Dynamics.CRM.Contact contact = null;
             if (contactId != null)
             {
                 try
@@ -88,10 +88,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the legal entity.
             Guid contactId = new Guid(id);
 
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact>(_system);
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
 
 
-            Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactId).GetValueAsync();
+            Interfaces.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactId).GetValueAsync();
 
             _system.UpdateObject(contact);
             // copy values over from the data provided
@@ -111,13 +111,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateContact([FromBody] ViewModels.Contact viewModel)
         {
-            Contexts.Microsoft.Dynamics.CRM.Contact item = viewModel.ToModel();
+            Interfaces.Microsoft.Dynamics.CRM.Contact item = viewModel.ToModel();
 
             // create a new contact.
-            Contexts.Microsoft.Dynamics.CRM.Contact contact = new Contexts.Microsoft.Dynamics.CRM.Contact();
+            Interfaces.Microsoft.Dynamics.CRM.Contact contact = new Interfaces.Microsoft.Dynamics.CRM.Contact();
 
             // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact>(_system);
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
             // add a new contact.
             ContactCollection.Add(contact);
 

@@ -11,7 +11,7 @@ using Xunit;
 using System.Text;
 using Newtonsoft.Json;
 using System.Net;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 
 namespace Gov.Lclb.Cllb.Public.Test
@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account()
+            Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account()
             {
                 Accountid = Guid.NewGuid(),
                 Name = initialName
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// Create an account.
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
-            Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.Account()
+            Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account()
             {
                 Accountid = Guid.NewGuid(),
                 Name = initialName

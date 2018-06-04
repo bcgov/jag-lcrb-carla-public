@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -13,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class Adoxio_LicenseExtensions
     {
 
-        public async static Task<AdoxioLicense> ToViewModel(this Adoxio_licences dynamicsLicense, Contexts.Microsoft.Dynamics.CRM.System _system)
+        public async static Task<AdoxioLicense> ToViewModel(this Adoxio_licences dynamicsLicense, Interfaces.Microsoft.Dynamics.CRM.System _system)
         {
             AdoxioLicense adoxioLicenseVM = new AdoxioLicense();
 
@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             Guid? adoxioEstablishmentId = dynamicsLicense._adoxio_establishment_value;
             if (adoxioEstablishmentId != null)
             {
-                Contexts.Microsoft.Dynamics.CRM.Adoxio_establishment establishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmentid: adoxioEstablishmentId).GetValueAsync();
+                Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment establishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmentid: adoxioEstablishmentId).GetValueAsync();
                 adoxioLicenseVM.establishmentName = establishment.Adoxio_name;
                 adoxioLicenseVM.establishmentAddress = establishment.Adoxio_addressstreet
                                                     + ", " + establishment.Adoxio_addresscity
