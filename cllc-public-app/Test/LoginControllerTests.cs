@@ -67,11 +67,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             Account account = new Account()
             {
 				Accountid = accountId,
-				Name = user.businessname
-            };
+				Name = user.businessname,
+				Adoxio_externalid = user.accountid
+			};
             
             ViewModels.Account viewmodel_account = account.ToViewModel();
 			Assert.Equal(account.Accountid, new Guid(viewmodel_account.id));
+			Assert.Equal(account.Adoxio_externalid, viewmodel_account.id);
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
@@ -84,7 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal(user.businessname, responseViewModel.name);
             Guid id = new Guid(responseViewModel.id);
 			Assert.Equal(accountId, id);
-			string strId = responseViewModel.id;
+			string strId = responseViewModel.externalId;
 
             // verify we can fetch the account via web service
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
