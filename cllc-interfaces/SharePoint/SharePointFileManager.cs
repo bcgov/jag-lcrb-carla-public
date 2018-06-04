@@ -15,13 +15,16 @@ namespace Gov.Lclb.Cllb.Interfaces
 {
     public class SharePointFileManager
     {
+        public const string DefaultDocumentListTitle = "Shared%20Documents";
         private LCLBCannabisDEVDataContext listData;
         private ApiData apiData;
         private AuthenticationResult authenticationResult;
         public string ServerAppIdUri { get; set; }
+        public string WebName { get; set; }
         public SharePointFileManager(string serverAppIdUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword)
         {
             this.ServerAppIdUri = serverAppIdUri;
+            this.WebName = webname;
             string listDataEndpoint = serverAppIdUri + webname + "/_vti_bin/listdata.svc/";
             string apiEndpoint = serverAppIdUri + webname + "/_api/";
 
@@ -165,6 +168,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result.FirstOrDefault();
         }
 
+        public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
+        {
+            // start by ensuring that the folder exists.
+            Folder folder = await this.GetFolder(folderName);
+            if (folder == null)
+            {
+                await this.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+                folder = await this.GetFolder(folderName);
+            }
+
+            // now add the file to the folder.
+            string path = "/" + this.WebName + "/" + fileName;
+
+            await this.UploadFile(fileName, path, fileData, contentType);
+
+        }
+
         /// <summary>
         /// Upload a file
         /// </summary>
@@ -174,7 +194,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="contentType"></param>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public async Task UploadFile(string name, string path, Stream fileData, string contentType, string slug)
+        public async Task UploadFile(string name, string path, Stream fileData, string contentType)
         {
             // upload a file.   
             
