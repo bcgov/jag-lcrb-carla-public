@@ -45,78 +45,30 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task NewUserRegistrationProcessWorks()
         {
-			string accountService = "account";
+			//string accountService = "account";
 
 			await GetCurrentUserIsUnauthorized();
 
 			// register as a new user
-			var loginUser = "NewUser" + TestUtilities.RandomANString(6);
-			await Login(loginUser);
+			var loginUser = randomNewUserName("NewUser", 6);
+
+			var strId = await LoginAndRegisterAsNewUser(loginUser);
 
 			string jsonString = await GetCurrentUser();
-
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
 			Assert.Equal(user.name, loginUser + " TestUser");
 			Assert.Equal(user.businessname, loginUser + " TestBusiness");
-            Assert.True(user.isNewUser);
-            
-            // create a new account and contact in Dynamics
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
-			//var accountId = new Guid(user.accountid);
-            Account account = new Account()
-            {
-				//Accountid = accountId,
-				Name = user.businessname,
-				Adoxio_externalid = user.accountid
-			};
-            
-            ViewModels.Account viewmodel_account = account.ToViewModel();
-			//Assert.Equal(account.Accountid, new Guid(viewmodel_account.id));
-			Assert.Equal(account.Adoxio_externalid, viewmodel_account.externalId);
-
-            string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
-            request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
-            var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
-
-            // name should match.
-			Assert.Equal(user.businessname, responseViewModel.name);
-            //Guid id = new Guid(responseViewModel.id);
-			//Assert.Equal(accountId, id);
-			string strId = responseViewModel.externalId;
-			Assert.Equal(strId, user.accountid);
-
-            // verify we can fetch the account via web service
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
-            response = await _client.SendAsync(request);
-			response.EnsureSuccessStatusCode();
-			String _discard = await response.Content.ReadAsStringAsync();
-
-            // TODO return account id
-			// return id;
-
-            // cleanup - delete the account and contract when we are done
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
-            response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-			_discard = await response.Content.ReadAsStringAsync();
-
-            // second delete should return a 404.
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
-            response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-			_discard = await response.Content.ReadAsStringAsync();
-
-            // should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
-            response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-			_discard = await response.Content.ReadAsStringAsync();
-            
 			await Logout();
+            await GetCurrentUserIsUnauthorized();
+
+			await Login(loginUser);
+			jsonString = await GetCurrentUser();
+            user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+            Assert.Equal(user.name, loginUser + " TestUser");
+            Assert.Equal(user.businessname, loginUser + " TestBusiness");
+
+			await LogoutAndCleanupTestUser(strId);
 
             await GetCurrentUserIsUnauthorized();
         }
