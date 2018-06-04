@@ -21,6 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Accountid = from.Accountid;
             to.Name = from.Name;
             to.Description = from.Description;
+			to.Adoxio_externalid = from.Adoxio_externalid;
         }
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.Name = from.name;
             to.Description = from.description;
+			to.Adoxio_externalid = from.externalId;
         }
 
         /// <summary>
@@ -50,6 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 result.name = account.Name;
                 result.description = account.Description;
+				result.externalId = account.Adoxio_externalid;
 
                 if (account._primarycontactid_value != null)
                 {
@@ -76,7 +79,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.Accountid = new Guid(account.id);
                 }
-                result.Name = account.name;                
+                result.Name = account.name;
+				result.Adoxio_externalid = account.externalId;
             }
             return result;
         }

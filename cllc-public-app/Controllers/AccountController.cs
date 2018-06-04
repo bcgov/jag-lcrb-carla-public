@@ -70,16 +70,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> GetAccount(string id)
         {
             ViewModels.Account result = null;
-            // query the Dynamics system to get the legal entity record.
 
-            Guid? accountid = new Guid(id);
-            Interfaces.Microsoft.Dynamics.CRM.Account account = null;
-            if (accountid != null)
+			// query the Dynamics system to get the account record.
+            if (id != null)
             {
                 try
                 {
-                    account = await _system.Accounts.ByKey(accountid).GetValueAsync();
-                    result = account.ToViewModel();
+					var accounts = await _system.Accounts.AddQueryOption("$filter", "adoxio_externalid eq '" + id + "'").ExecuteAsync();
+					if (accounts != null) 
+					{
+						List<ViewModels.Account> results = new List<ViewModels.Account>();
+						foreach (var accountEntity in accounts)
+                        {
+							results.Add(accountEntity.ToViewModel());
+                        }
+						if (results.Count == 0) {
+							return new NotFoundResult();
+						}
+						result = results.First();
+					}
+					else 
+					{
+						return new NotFoundResult();
+					}
                 }
                 catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
                 {
@@ -94,7 +107,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            Guid id = new Guid(item.id);
+            //Guid id = new Guid(item.id);
+			if (item.externalId == null || item.externalId.Length == 0)
+			{
+				item.externalId = item.id;
+			}
+			var strid = item.externalId;
+
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -131,12 +150,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
 
             // this may be an existing account, as this service is used during the account confirmation process.
-            Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
+			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, strid);
             if (account == null)
             {
                 // create a new account
                 account = new Interfaces.Microsoft.Dynamics.CRM.Account();
-                account.Accountid = id;
+				account.Adoxio_externalid = strid;
             }
 
             AccountCollection.Add(account);
@@ -207,14 +226,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
         {
-            if (id != item.id)
+			if (id != item.externalId)
             {
                 return BadRequest();
             }
 
             // get the legal entity.
-            Guid accountid = new Guid(id);
-            Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.Accounts.ByKey(accountid).GetValueAsync();
+            //Guid accountid = new Guid(id);
+			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
 
             // copy values over from the data provided
             account.CopyValues(item);
@@ -244,10 +263,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> DeleteDynamicsAccount(string id)
         {
             // get the legal entity.
-            Guid adoxio_legalentityid = new Guid(id);
+            //Guid adoxio_legalentityid = new Guid(id);
             try
             {
-                Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.Accounts.ByKey(adoxio_legalentityid).GetValueAsync();
+				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
+				if (account == null)
+				{
+					return new NotFoundResult();
+				}
                 _system.DeleteObject(account);
                 DataServiceResponse dsr = await _system.SaveChangesAsync();
                 foreach (OperationResponse result in dsr)

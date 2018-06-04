@@ -461,6 +461,9 @@
         <Property Name="adoxio_accounttype" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_externalid" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="address2_latitude" Type="Edm.Double">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the latitude value for the secondary address for use in mapping and other applications." />
         </Property>
@@ -16453,6 +16456,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the number of children the contact has for reference in follow-up phone calls and other communications." />
         </Property>
         <Property Name="adoxio_contactportalurl" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_externalid" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="gendercode" Type="Edm.Int32">
