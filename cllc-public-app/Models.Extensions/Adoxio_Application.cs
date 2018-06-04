@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -13,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class Adoxio_ApplicationExtensions
     {
 
-        public async static Task<AdoxioApplication> ToViewModel(this Adoxio_application dynamicsApplication, Contexts.Microsoft.Dynamics.CRM.System _system)
+        public async static Task<AdoxioApplication> ToViewModel(this Adoxio_application dynamicsApplication, Interfaces.Microsoft.Dynamics.CRM.System _system)
         {
             AdoxioApplication adoxioApplicationVM = new ViewModels.AdoxioApplication();
 
@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             Guid? applyingPersonId = dynamicsApplication._adoxio_applyingperson_value;
             if (applyingPersonId != null)
             {
-                Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
+                Interfaces.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
                 adoxioApplicationVM.applyingPerson = contact.Fullname;
             }
 
