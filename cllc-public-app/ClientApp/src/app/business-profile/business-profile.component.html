@@ -33,7 +33,7 @@
     <div [hidden]="view_tab != 'tab-3'"><h1>Organization Structure</h1>
     </div>
     <div [hidden]="view_tab != 'tab-4'">
-      <app-directors-and-officers></app-directors-and-officers>
+      <app-directors-and-officers [accountId] = "accountId"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'tab-5'">
       <app-edit-shareholders></app-edit-shareholders>
