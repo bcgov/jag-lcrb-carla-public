@@ -63,17 +63,17 @@ namespace Gov.Lclb.Cllb.Public.Test
             // create a new account and contact in Dynamics
 			var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
-			var accountId = new Guid(user.accountid);
+			//var accountId = new Guid(user.accountid);
             Account account = new Account()
             {
-				Accountid = accountId,
+				//Accountid = accountId,
 				Name = user.businessname,
 				Adoxio_externalid = user.accountid
 			};
             
             ViewModels.Account viewmodel_account = account.ToViewModel();
-			Assert.Equal(account.Accountid, new Guid(viewmodel_account.id));
-			Assert.Equal(account.Adoxio_externalid, viewmodel_account.id);
+			//Assert.Equal(account.Accountid, new Guid(viewmodel_account.id));
+			Assert.Equal(account.Adoxio_externalid, viewmodel_account.externalId);
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
@@ -84,9 +84,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // name should match.
 			Assert.Equal(user.businessname, responseViewModel.name);
-            Guid id = new Guid(responseViewModel.id);
-			Assert.Equal(accountId, id);
+            //Guid id = new Guid(responseViewModel.id);
+			//Assert.Equal(accountId, id);
 			string strId = responseViewModel.externalId;
+			Assert.Equal(strId, user.accountid);
 
             // verify we can fetch the account via web service
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
