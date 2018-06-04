@@ -95,6 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             Guid id = new Guid(item.id);
+
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -116,6 +117,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
                 userContact.Statuscode = 1;
+
                 // save the new contact. 
                 DataServiceResponse userContactDsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
                 foreach (OperationResponse result in userContactDsr)
