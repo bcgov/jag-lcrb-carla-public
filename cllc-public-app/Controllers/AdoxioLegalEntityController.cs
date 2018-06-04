@@ -173,9 +173,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         // get a list of files associated with this legal entity.
         [HttpGet("{id}/attachments")]
-        public async Task<IActionResult> GetFiles([FromRoute] string id, [FromForm]IFormFile file)
+        public async Task<IActionResult> GetFiles([FromRoute] string id)
         {
-            return Ok(file);
+            List<ViewModels.FileSystemItem> result = new List<ViewModels.FileSystemItem>();
+            // get the LegalEntity.
+            Adoxio_legalentity legalEntity = null;
+
+            if (id != null)
+            {
+                Guid adoxio_legalentityid = new Guid(id);
+                try
+                {
+                    legalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid: adoxio_legalentityid).GetValueAsync();
+                    string sanitized = legalEntity.Adoxio_name.Replace(" ", "_");
+                    string folder_name = "LegalEntity_Files_" + sanitized;
+                    // Get the folder contents for this Legal Entity.
+                    List<MS.FileServices.FileSystemItem> items = await _sharePointFileManager.GetFilesInFolder(folder_name);
+                    foreach (MS.FileServices.FileSystemItem item in items)
+                    {
+                        result.Add(item.ToViewModel());
+                    }
+                }
+                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                {
+                    return new NotFoundResult();
+                }
+            }
+
+            return Json(result);
         }
 
         [HttpPost("{id}/attachments")]
