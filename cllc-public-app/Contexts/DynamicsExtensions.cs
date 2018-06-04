@@ -11,6 +11,7 @@ using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
 using Microsoft.OData.Client;
+using System.Collections.Generic;
 
 
 namespace Gov.Lclb.Cllb.Public.Contexts
@@ -233,10 +234,10 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string id)
         {
             Account result = null;
-            string key = "Account_" + id.ToString();
+            string key = "Account_" + id;
             // first look in the cache.
             string temp = null;
             if (distributedCache != null)
@@ -252,10 +253,27 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 // fetch from Dynamics.
                 try
                 {
-                    // if ById does not return child objects, then we can use 
-                    //AddQueryOption("$expand", "contact_customer_accounts")
-                    //AddQueryOption("$filter", "accountid eq <id>")
-                    result = await system.Accounts.ByKey(id).GetValueAsync();
+					var accounts = await system.Accounts.AddQueryOption("$filter", "adoxio_externalid eq '" + id + "'").ExecuteAsync();
+					if (accounts != null)
+                    {
+                        List<Account> results = new List<Account>();
+                        foreach (var accountEntity in accounts)
+                        {
+                            results.Add(accountEntity);
+                        }
+						if (results.Count == 0)
+						{
+							result = null;
+						}
+						else
+						{
+							result = results.First();
+						}
+                    }
+                    else
+                    {
+                        result = null;
+                    }
                 }
                 catch (DataServiceQueryException dsqe)
                 {
