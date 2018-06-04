@@ -106,7 +106,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			await Logout();
 
-			return;
             // D - Delete
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
