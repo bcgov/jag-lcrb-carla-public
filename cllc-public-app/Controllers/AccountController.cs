@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +18,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -26,11 +26,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class AccountController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
+        public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             this._system = context;
@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetDynamicsAccounts()
         {
             List<ViewModels.Account> result = new List<ViewModels.Account>();
-            IEnumerable<Contexts.Microsoft.Dynamics.CRM.Account> accounts = null;
+            IEnumerable<Interfaces.Microsoft.Dynamics.CRM.Account> accounts = null;
             accounts = await _system.Accounts.ExecuteAsync();            
 
             foreach (var legalEntity in accounts)
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the legal entity record.
 
             Guid? accountid = new Guid(id);
-            Contexts.Microsoft.Dynamics.CRM.Account account = null;
+            Interfaces.Microsoft.Dynamics.CRM.Account account = null;
             if (accountid != null)
             {
                 try
@@ -100,15 +100,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Account>(_system);
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Contact>(_system);
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
             // first check to see that a contact exists.
             Guid userContactId = new Guid(userSettings.ContactId);
-            Contexts.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactById(_distributedCache, userContactId);
+            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactById(_distributedCache, userContactId);
             if (userContact == null)
             {
                 // create the user contact record.
-                userContact = new Contexts.Microsoft.Dynamics.CRM.Contact();
+                userContact = new Interfaces.Microsoft.Dynamics.CRM.Contact();
                 ContactCollection.Add(userContact);
                 userContact.Contactid = userContactId;
                 userContact.Fullname = userSettings.UserDisplayName;
@@ -131,11 +131,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
 
             // this may be an existing account, as this service is used during the account confirmation process.
-            Contexts.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
+            Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
             if (account == null)
             {
                 // create a new account
-                account = new Contexts.Microsoft.Dynamics.CRM.Account();
+                account = new Interfaces.Microsoft.Dynamics.CRM.Account();
                 account.Accountid = id;
             }
 
@@ -214,7 +214,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the legal entity.
             Guid accountid = new Guid(id);
-            Contexts.Microsoft.Dynamics.CRM.Account account = await _system.Accounts.ByKey(accountid).GetValueAsync();
+            Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.Accounts.ByKey(accountid).GetValueAsync();
 
             // copy values over from the data provided
             account.CopyValues(item);
@@ -247,7 +247,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid adoxio_legalentityid = new Guid(id);
             try
             {
-                Contexts.Microsoft.Dynamics.CRM.Account account = await _system.Accounts.ByKey(adoxio_legalentityid).GetValueAsync();
+                Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.Accounts.ByKey(adoxio_legalentityid).GetValueAsync();
                 _system.DeleteObject(account);
                 DataServiceResponse dsr = await _system.SaveChangesAsync();
                 foreach (OperationResponse result in dsr)
