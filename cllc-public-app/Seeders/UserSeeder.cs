@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private string[] ProfileTriggers = { AllProfiles };
 
-        public UserSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
+        public UserSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
             : base(configuration, env, loggerFactory)
         { }
 

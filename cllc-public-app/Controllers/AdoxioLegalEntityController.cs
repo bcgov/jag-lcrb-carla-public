@@ -10,7 +10,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -26,11 +26,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class AdoxioLegalEntityController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly SharePointFileManager _sharePointFileManager;
 
-        public AdoxioLegalEntityController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager)
+        public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager)
         {
             Configuration = configuration;
             this._system = context;
@@ -204,9 +204,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("{id}/attachments")]
-        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file)
+        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file, [FromForm] string documentType)
         {
-            return Ok(file);
+            ViewModels.FileSystemItem result = null;
+            // get the LegalEntity.
+            Adoxio_legalentity legalEntity = null;
+
+            if (id != null)
+            {
+                Guid adoxio_legalentityid = new Guid(id);
+                try
+                {
+                    legalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid: adoxio_legalentityid).GetValueAsync();
+                    // process the upload.
+                    string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
+                    string sanitized = legalEntity.Adoxio_name.Replace(" ", "_");
+                    string folderName = "LegalEntity_Files_" + sanitized;
+
+                    await _sharePointFileManager.AddFile(folderName, fileName, file.OpenReadStream() , file.ContentType);
+                }
+                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                {
+                    return new NotFoundResult();
+                }
+            }
+            return Json(result);
         }
 
         [HttpGet("{id}/attachments/{fileId}")]
@@ -238,10 +260,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
             // create a new legal entity.
-            Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity adoxioLegalEntity = new Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity();
+            Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity adoxioLegalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
 
             // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
 
             // add a new contact.
             LegalEntityCollection.Add(adoxioLegalEntity);
