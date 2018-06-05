@@ -8,7 +8,7 @@ using System.Text;
 using System.Net;
 using Xunit;
 using Newtonsoft.Json;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 
 
