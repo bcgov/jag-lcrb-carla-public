@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
 using Microsoft.OData.Client;
+using System.Collections.Generic;
 
 
-namespace Gov.Lclb.Cllb.Public.Contexts
+namespace Gov.Lclb.Cllb.Interfaces
 {
     public static class DynamicsExtensions
     {
@@ -233,10 +234,10 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string id)
         {
             Account result = null;
-            string key = "Account_" + id.ToString();
+            string key = "Account_" + id;
             // first look in the cache.
             string temp = null;
             if (distributedCache != null)
@@ -252,10 +253,27 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 // fetch from Dynamics.
                 try
                 {
-                    // if ById does not return child objects, then we can use 
-                    //AddQueryOption("$expand", "contact_customer_accounts")
-                    //AddQueryOption("$filter", "accountid eq <id>")
-                    result = await system.Accounts.ByKey(id).GetValueAsync();
+					var accounts = await system.Accounts.AddQueryOption("$filter", "adoxio_externalid eq '" + id + "'").ExecuteAsync();
+					if (accounts != null)
+                    {
+                        List<Account> results = new List<Account>();
+                        foreach (var accountEntity in accounts)
+                        {
+                            results.Add(accountEntity);
+                        }
+						if (results.Count == 0)
+						{
+							result = null;
+						}
+						else
+						{
+							result = results.First();
+						}
+                    }
+                    else
+                    {
+                        result = null;
+                    }
                 }
                 catch (DataServiceQueryException dsqe)
                 {
@@ -369,9 +387,9 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// <param name="distributedCache"></param>
         /// <param name="datafield"></param>
         /// <returns></returns>
-        public static async Task<List<ViewModels.OptionMetadata>> GetPicklistOptions (this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string datafield)
+        public static async Task<List<Public.ViewModels.OptionMetadata>> GetPicklistOptions (this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string datafield)
         {
-            List<ViewModels.OptionMetadata> result = null;
+            List<Public.ViewModels.OptionMetadata> result = null;
             string key = "GlobalOptionSetDefinition_" + datafield;
             // first look in the cache.
             string temp = null;
@@ -381,7 +399,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
             if (!string.IsNullOrEmpty(temp))
             {
-                result = JsonConvert.DeserializeObject<List<ViewModels.OptionMetadata>>(temp);
+                result = JsonConvert.DeserializeObject<List<Public.ViewModels.OptionMetadata>>(temp);
             }
             else
             {
@@ -394,7 +412,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 if (optionSetMetadata != null)
                 {
                     // convert it to a list.
-                    result = new List<ViewModels.OptionMetadata>();
+                    result = new List<Public.ViewModels.OptionMetadata>();
                     foreach (Microsoft.Dynamics.CRM.OptionMetadata option in optionSetMetadata.Options)
                     {
                         result.Add(option.ToViewModel());

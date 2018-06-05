@@ -12,6 +12,7 @@ using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Microsoft.Extensions.Caching.Distributed;
 using Logos.Utility;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {    
@@ -178,7 +179,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 ClaimsPrincipal principal;
 
                 HttpContext context = Request.HttpContext;
-                Contexts.Microsoft.Dynamics.CRM.System _system = (Contexts.Microsoft.Dynamics.CRM.System)context.RequestServices.GetService(typeof(Contexts.Microsoft.Dynamics.CRM.System));
+                Interfaces.Microsoft.Dynamics.CRM.System _system = (Interfaces.Microsoft.Dynamics.CRM.System)context.RequestServices.GetService(typeof(Interfaces.Microsoft.Dynamics.CRM.System));
 
                 IDistributedCache _distributedCache = (IDistributedCache) context.RequestServices.GetService(typeof(IDistributedCache));
 
