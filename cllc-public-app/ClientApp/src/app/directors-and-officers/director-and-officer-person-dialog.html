@@ -57,7 +57,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
+      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
         <label for="dateIssued">Date of Appointment</label>
         <input type="date" class="form-control" formControlName="dateIssued">
         <div *ngIf="this.isFieldError('dateIssued')">
