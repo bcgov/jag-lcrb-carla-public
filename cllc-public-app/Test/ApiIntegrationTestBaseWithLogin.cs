@@ -97,10 +97,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             // name should match.
             Assert.Equal(user.businessname, responseViewModel.name);
             string strId = responseViewModel.externalId;
+            string id = responseViewModel.id;
             Assert.Equal(strId, user.accountid);
 
             // verify we can fetch the account via web service
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             string _discard = await response.Content.ReadAsStringAsync();
