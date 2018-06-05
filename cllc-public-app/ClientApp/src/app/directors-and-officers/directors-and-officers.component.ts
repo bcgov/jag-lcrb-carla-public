@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
@@ -8,11 +8,12 @@ import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-da
 @Component({
   selector: 'app-directors-and-officers',
   templateUrl: './directors-and-officers.component.html',
-  styleUrls: ['./directors-and-officers.component.css']
+  styleUrls: ['./directors-and-officers.component.scss']
 })
 export class DirectorsAndOfficersComponent implements OnInit {
 
-  //shareholderForm: FormGroup;
+  @Input() accountId: string;
+
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   public dataLoaded;
@@ -43,6 +44,11 @@ export class DirectorsAndOfficersComponent implements OnInit {
     //shareholder.email = formData.email;
     //adoxioLegalEntity.dateIssued = formData.dateIssued;
     adoxioLegalEntity.legalentitytype = "PrivateCorporation";
+    // the accountId is received as parameter from the business profile
+    //TODO: remove if when accountId is assigned properly
+    if (this.accountId) {
+      adoxioLegalEntity.account.id = this.accountId;
+    }
     //adoxioLegalEntity.relatedentities = [];
     return adoxioLegalEntity;
   }
@@ -51,7 +57,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   openPersonDialog() {
     // set dialogConfig settings
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     // set dialogConfig data
@@ -64,11 +70,13 @@ export class DirectorsAndOfficersComponent implements OnInit {
     const dialogRef = this.dialog.open(DirectorAndOfficerPersonDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
       formData => {
-        //console.log("DirectorAndOfficerPersonDialog output:", data);
-        let adoxioLegalEntity = this.formDataToModelData(formData);
-        //console.log("shareholderModel output:", shareholderModel);
-        this.legalEntityDataservice.post(adoxioLegalEntity);
-        this.getDirectorsAndOfficers();
+        //console.log("DirectorAndOfficerPersonDialog output:", formData);
+        if (formData) {
+          let adoxioLegalEntity = this.formDataToModelData(formData);
+          //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
+          this.legalEntityDataservice.post(adoxioLegalEntity);
+          this.getDirectorsAndOfficers();
+        }
       }
     );
   }
@@ -120,13 +128,13 @@ export class DirectorAndOfficerPersonDialog {
     }
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
   isFieldError(field: string) {
     const isError = !this.directorOfficerForm.get(field).valid && this.directorOfficerForm.get(field).touched;
     return isError;
-  }
-
-  close() {
-    this.dialogRef.close();
   }
 
 }
