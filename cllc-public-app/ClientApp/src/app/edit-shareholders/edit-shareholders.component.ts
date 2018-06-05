@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
-import { Shareholder } from '../models/shareholder.model';
+import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 
@@ -12,9 +12,11 @@ import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-da
 
 export class EditShareholdersComponent implements OnInit {
 
+  @Input() accountId: string;
+
   shareholderForm: FormGroup;
-  shareholderList: Shareholder[] = [];
-  dataSource = new MatTableDataSource<Shareholder>();
+  shareholderList: AdoxioLegalEntity[] = [];
+  dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   public dataLoaded;
   displayedColumns = ['position', 'name', 'email', 'commonnonvotingshares', 'commonvotingshares', 'dateIssued'];
 
@@ -22,41 +24,49 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    let shareholder: Shareholder;
+    this.getShareholders();
+  }
+
+  getShareholders() {
     this.legalEntityDataservice.getLegalEntitiesbyPosition("shareholder")
       .then((data) => {
-        //console.log("getShareholders(): ", data);
+        //console.log("getLegalEntitiesbyPosition("shareholder"): ", data);
         this.dataSource.data = data;
         this.dataLoaded = true;
       });
   }
 
-  formDataToModelData(formData: any, shareholderType: string ): Shareholder {
-    let shareholder: Shareholder = new Shareholder();
+  formDataToModelData(formData: any, shareholderType: string ): AdoxioLegalEntity {
+    let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
     if (shareholderType == "Person") {
-      shareholder.isindividual = true;
-      shareholder.firstname = formData.firstName;
-      shareholder.lastname = formData.lastName;
-      shareholder.legalentitytype = "PrivateCorporation";
-      //shareholder.email = formData.email;
+      adoxioLegalEntity.isindividual = true;
+      adoxioLegalEntity.firstname = formData.firstName;
+      adoxioLegalEntity.lastname = formData.lastName;
+      adoxioLegalEntity.name = formData.firstName + " " + formData.lastName;
+      adoxioLegalEntity.legalentitytype = "PrivateCorporation";
+      //adoxioLegalEntity.email = formData.email;
     } else {
-      shareholder.isindividual = false;
-      shareholder.name = formData.organizationName;
-      shareholder.legalentitytype = formData.organizationType;
+      adoxioLegalEntity.isindividual = false;
+      adoxioLegalEntity.name = formData.organizationName;
+      adoxioLegalEntity.legalentitytype = formData.organizationType;
     }
-    shareholder.commonnonvotingshares = formData.numberOfNonVotingShares;
-    shareholder.commonvotingshares = formData.numberOfVotingShares;
-    ////shareholder.dateIssued = formData.dateIssued;
-    shareholder.position = "Shareholder";
-    shareholder.relatedentities = [];
-    return shareholder;
+    adoxioLegalEntity.commonnonvotingshares = formData.numberOfNonVotingShares;
+    adoxioLegalEntity.commonvotingshares = formData.numberOfVotingShares;
+    ////adoxioLegalEntity.dateIssued = formData.dateIssued;
+    adoxioLegalEntity.position = "Shareholder";
+    //adoxioLegalEntity.relatedentities = [];
+    //TODO: remove if when accountId is assigned properly
+    if (this.accountId) {
+      adoxioLegalEntity.account.id = this.accountId;
+    }
+    return adoxioLegalEntity;
   }
 
   // Open Person shareholder dialog
   openPersonDialog() {
     // set dialogConfig settings
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     // set dialogConfig data
@@ -70,10 +80,13 @@ export class EditShareholdersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       formData => {
         //console.log("ShareholderPersonDialog output:", data);
-        let shareholderType = "Person";
-        let shareholderModel = this.formDataToModelData(formData, shareholderType);
-        //console.log("shareholderModel output:", shareholderModel);
-        this.legalEntityDataservice.post(shareholderModel);
+        if (formData) {
+          let shareholderType = "Person";
+          let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
+          //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
+          this.legalEntityDataservice.post(adoxioLegalEntity);
+          this.getShareholders();
+        }
       }
     );
   }
@@ -96,10 +109,13 @@ export class EditShareholdersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       formData => {
         //console.log("ShareholderOrganizationDialog output:", data)
-        let shareholderType = "Organization";
-        let shareholderModel = this.formDataToModelData(formData, shareholderType);
-        //console.log("shareholderModel output:", shareholderModel);
-        this.legalEntityDataservice.post(shareholderModel);
+        if (formData) {
+          let shareholderType = "Organization";
+          let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
+          //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
+          this.legalEntityDataservice.post(adoxioLegalEntity);
+          this.getShareholders();
+        }
       }
     );
   }
