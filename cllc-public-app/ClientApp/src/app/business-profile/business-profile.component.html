@@ -36,7 +36,7 @@
       <app-directors-and-officers [accountId] = "accountId"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'tab-5'">
-      <app-edit-shareholders></app-edit-shareholders>
+      <app-edit-shareholders [accountId] = "accountId"></app-edit-shareholders>
     </div>
     <div [hidden]="view_tab != 'tab-6'"><h1>Accounting and Taxes</h1></div>
     <div [hidden]="view_tab != 'tab-7'"><h1>Investments and Loans</h1></div>
