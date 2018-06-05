@@ -24,7 +24,7 @@
         <app-dynamics-form [formid]="('a316464c-0ef8-43f9-b938-6e582dc7fe49')" [recordId]="currentUser.contactid" [hideHeader]="true" [hideSubmit]="true"></app-dynamics-form>
       </div>
       <div class="row">
-        <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="saveApplicantInformation()"><strong>Save</strong><br></a>
+        <a class="globalButton"  class="btn btn-primary" tabindex="1" (click)="saveApplicantInformation()"><strong>Save</strong><br></a>
       </div>
     </div>
     <div [hidden]="view_tab != 'tab-2'">
@@ -43,9 +43,9 @@
     <div [hidden]="view_tab != 'tab-8'"><h1>Security Assessment</h1></div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
-      <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="back()"><strong>Back</strong><br></a> 
+      <a class="globalButton"  class="btn btn-secondary" tabindex="1" (click)="back()"><strong>Back</strong><br></a> 
       &nbsp;
-      <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="next()"><strong>Next</strong><br></a>
+      <a class="globalButton"  class="btn btn-primary" tabindex="2" (click)="next()"><strong>Next</strong><br></a>
     </div>
   </div>
 </div>
