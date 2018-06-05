@@ -4,9 +4,9 @@ import { PolicyDocument } from "../models/policy-document.model";
 import { PolicyDocumentDataService } from "../services/policy-document-data.service";
 
 @Component({
-    selector: 'app-policy-document',
-    templateUrl: './policy-document.component.html',
-    styleUrls: ['./policy-document.component.scss']
+  selector: 'app-policy-document',
+  templateUrl: './policy-document.component.html',
+  styleUrls: ['./policy-document.component.scss']
 })
 /** PolicyDocument component*/
 export class PolicyDocumentComponent {
@@ -20,15 +20,17 @@ export class PolicyDocumentComponent {
 
   }
 
-  ngOnInit(): void {    
-    const slug = this.route.snapshot.params["slug"];
-    this.policyDocumentDataService.getPolicyDocument(slug)
-      .then((data) => {
+  ngOnInit(): void {
+    this.route.params.subscribe((data: any) => {
+      let slug = data.slug;
+      this.policyDocumentDataService.getPolicyDocument(slug).then((data) => {
         this.policyDocument = data;
         this.title = this.policyDocument.title;
         this.body = this.policyDocument.body;
         this.category = this.policyDocument.category;
       });
+    });
+
   }
 
 }
