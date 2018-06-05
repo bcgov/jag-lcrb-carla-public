@@ -78,8 +78,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a DataServiceCollection to add the record
             var EstablishmentCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_establishment>(_system);
 
-            // add a new contact.
-            EstablishmentCollection.Add(adoxioEstablishment);
 
             if (item.id == null)
             {
@@ -87,6 +85,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
                         
             adoxioEstablishment.CopyValues(item);
+            // add a new contact.
+            EstablishmentCollection.Add(adoxioEstablishment);
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
