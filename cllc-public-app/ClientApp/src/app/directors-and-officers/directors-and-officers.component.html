@@ -1,24 +1,26 @@
 <h1>Directors and Officers</h1>
 <p>Enter all directors and officers for the corporation</p>
-<div class="spinner-container" *ngIf="!dataLoaded">
-  <mat-spinner></mat-spinner>
-</div>
 
-<div *ngIf="dataLoaded">
+<div class="example-container mat-elevation-z8">
 
-  <mat-table #table [dataSource]="dataSource">
+  <div class="spinner-container" *ngIf="!dataLoaded">
+    <mat-spinner></mat-spinner>
+  </div>
 
-    <!-- Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
+  <div *ngIf="dataLoaded">
+    <mat-table #table [dataSource]="dataSource">
 
-    <!-- Column -->
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-    </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
 
     <!-- Column -->
     <ng-container matColumnDef="position">
@@ -39,6 +41,6 @@
 </div>
 <div class="col-md-10 row">
   <p>&nbsp;</p>
-  <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
+  <a class="globalButton"  class="btn btn-primary" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
   <p>&nbsp;</p>
 </div>

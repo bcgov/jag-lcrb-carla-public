@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -25,14 +25,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class AdoxioEstablishmentController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
 
-        public AdoxioEstablishmentController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        public AdoxioEstablishmentController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;
+            this._distributedCache = null;  // distributedCache;
         }
 
         /// <summary>
@@ -73,10 +73,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioEstablishment item)
         {
             // create a new establishment.
-            var adoxioEstablishment = new Contexts.Microsoft.Dynamics.CRM.Adoxio_establishment();
+            var adoxioEstablishment = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment();
 
             // create a DataServiceCollection to add the record
-            var EstablishmentCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_establishment>(_system);
+			var EstablishmentCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment>(_system);
 
 
             if (item.id == null)

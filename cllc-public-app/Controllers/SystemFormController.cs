@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -23,14 +24,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class SystemFormController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
 
-        public SystemFormController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        public SystemFormController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;
+            this._distributedCache = null; // distributedCache;
         }
         [HttpGet()]
         public async Task<JsonResult> GetSystemForms()
@@ -100,118 +101,131 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<JsonResult> GetSystemForm(string id)
+        public async Task<IActionResult> GetSystemForm(string id)
         {
-            string entityKey = "SystemForm_" + id + "_Entity";
-            string nameKey = "SystemForm_" + id + "_Name";
-            string xmlKey = "SystemForm_" + id + "_FormXML";
-            string formXml = await _distributedCache.GetStringAsync(xmlKey);
-            ViewModels.Form form = new ViewModels.Form();
-            form.id = id;
-            form.entity = await _distributedCache.GetStringAsync(entityKey);
-            form.name = await _distributedCache.GetStringAsync(nameKey);
-            form.formxml = formXml;
-            form.tabs = new List<ViewModels.FormTab>();
-
-            var tabs = XDocument.Parse(formXml).XPathSelectElements("form/tabs/tab");
-            if (tabs != null)
+            ViewModels.Form form = null;
+            Guid? systemformid = new Guid(id);
+            Interfaces.Microsoft.Dynamics.CRM.Systemform systemform = null;
+            if (id != null)
             {
-                foreach (var tab in tabs)
+                try
                 {
-                    var tabLabel = tab.XPathSelectElement("labels/label");
-                    string description = tabLabel.Attribute("description").Value;
-                    string tabId = tabLabel.Attribute("id") == null ? "" : tabLabel.Attribute("id").Value;
-                    Boolean tabShowLabel = tab.Attribute("showlabel").DynamicsAttributeToBoolean();
-                    Boolean tabVisible = tab.Attribute("visible").DynamicsAttributeToBoolean();
+                    systemform = await _system.Systemforms.ByKey(systemformid).GetValueAsync();
+                    form = new ViewModels.Form();
+                    form.id = id;
+                    form.entity = systemform.Objecttypecode;
+                    form.name = systemform.Name;
+                    form.formxml = systemform.Formxml;
+                    form.tabs = new List<ViewModels.FormTab>();
 
-                    FormTab formTab = new FormTab();
-                    formTab.id = tabId;
-                    formTab.name = description;
-                    formTab.sections = new List<FormSection>();
-                    formTab.showlabel = tabShowLabel;
-                    formTab.visible = tabVisible;
-
-                    // get the sections
-                    var sections = tab.XPathSelectElements("columns/column/sections/section");
-                    foreach (var section in sections)
+                    var tabs = XDocument.Parse(form.formxml).XPathSelectElements("form/tabs/tab");
+                    if (tabs != null)
                     {
-                        Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
-                        Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
-
-                        FormSection formSection = new FormSection();
-                        formSection.fields = new List<FormField>();
-                        formSection.id = section.Attribute("id").Value;
-                        formSection.showlabel = sectionShowLabel;
-                        formSection.visible = sectionVisible;
-
-                        // get the fields.
-                        var sectionLabels = section.XPathSelectElements("labels/label");
-
-                        // the section label is the section name.
-                        foreach (var sectionLabel in sectionLabels)
+                        foreach (var tab in tabs)
                         {
-                            formSection.name = sectionLabel.Attribute("description").Value;                            
-                        }
-                        // get the cells.
-                        var cells = section.XPathSelectElements("rows/row/cell");
-                        
-                        foreach (var cell in cells)
-                        {
-                            FormField formField = new FormField();
-                            // get cell visibility and showlabel
-                            Boolean cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
-                            Boolean cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
-                            
+                            var tabLabel = tab.XPathSelectElement("labels/label");
+                            string description = tabLabel.Attribute("description").Value;
+                            string tabId = tabLabel.Attribute("id") == null ? "" : tabLabel.Attribute("id").Value;
+                            Boolean tabShowLabel = tab.Attribute("showlabel").DynamicsAttributeToBoolean();
+                            Boolean tabVisible = tab.Attribute("visible").DynamicsAttributeToBoolean();
 
-                            formField.showlabel = cellShowLabel;
-                            formField.visible = cellVisible;
+                            FormTab formTab = new FormTab();
+                            formTab.id = tabId;
+                            formTab.name = description;
+                            formTab.sections = new List<FormSection>();
+                            formTab.showlabel = tabShowLabel;
+                            formTab.visible = tabVisible;
 
-                            // get the cell label. 
-
-
-                            var cellLabels = cell.XPathSelectElements("labels/label");
-                            foreach (var cellLabel in cellLabels)
+                            // get the sections
+                            var sections = tab.XPathSelectElements("columns/column/sections/section");
+                            foreach (var section in sections)
                             {
-                                formField.name = cellLabel.Attribute("description").Value;
-                            }
-                            // get the form field name.
-                            var control = cell.XPathSelectElement("control");
-                            if ( !string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
-                            {
-                                // datafieldname has to be translated.
-                                string originalFieldName = control.Attribute("datafieldname").Value;
-                                formField.datafieldname = TranslateDatafieldname(form.entity, originalFieldName);
-                                if (formField.datafieldname != null)
+                                Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
+                                Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
+
+                                FormSection formSection = new FormSection();
+                                formSection.fields = new List<FormField>();
+                                formSection.id = section.Attribute("id").Value;
+                                formSection.showlabel = sectionShowLabel;
+                                formSection.visible = sectionVisible;
+
+                                // get the fields.
+                                var sectionLabels = section.XPathSelectElements("labels/label");
+
+                                // the section label is the section name.
+                                foreach (var sectionLabel in sectionLabels)
                                 {
-                                    formField.classid = control.Attribute("classid").Value;
-                                    formField.controltype = formField.classid.DynamicsControlClassidToName();
-                                    formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
-                                    // special case for picklists.
-                                    if (formField.controltype != null && formField.controltype.Equals("PicklistControl"))
-                                    {
-                                        // get the options for the picklist and add it to the field.
-                                        List<ViewModels.OptionMetadata> options = await _system.GetPicklistOptions(_distributedCache, originalFieldName);
-                                        formField.options = options;
-                                    }
-
-                                    formSection.fields.Add(formField);
+                                    formSection.name = sectionLabel.Attribute("description").Value;
                                 }
-                            }                            
+                                // get the cells.
+                                var cells = section.XPathSelectElements("rows/row/cell");
+
+                                foreach (var cell in cells)
+                                {
+                                    FormField formField = new FormField();
+                                    // get cell visibility and showlabel
+                                    Boolean cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
+                                    Boolean cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
+
+
+                                    formField.showlabel = cellShowLabel;
+                                    formField.visible = cellVisible;
+
+                                    // get the cell label. 
+
+
+                                    var cellLabels = cell.XPathSelectElements("labels/label");
+                                    foreach (var cellLabel in cellLabels)
+                                    {
+                                        formField.name = cellLabel.Attribute("description").Value;
+                                    }
+                                    // get the form field name.
+                                    var control = cell.XPathSelectElement("control");
+                                    if (!string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
+                                    {
+                                        // datafieldname has to be translated.
+                                        string originalFieldName = control.Attribute("datafieldname").Value;
+                                        formField.datafieldname = TranslateDatafieldname(form.entity, originalFieldName);
+                                        if (formField.datafieldname != null)
+                                        {
+                                            formField.classid = control.Attribute("classid").Value;
+                                            formField.controltype = formField.classid.DynamicsControlClassidToName();
+                                            formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
+                                            // special case for picklists.
+                                            if (formField.controltype != null && formField.controltype.Equals("PicklistControl"))
+                                            {
+                                                // get the options for the picklist and add it to the field.
+                                                List<ViewModels.OptionMetadata> options = await _system.GetPicklistOptions(_distributedCache, originalFieldName);
+                                                formField.options = options;
+                                            }
+
+                                            formSection.fields.Add(formField);
+                                        }
+                                    }
+                                }
+
+                                formTab.sections.Add(formSection);
+                            }
+
+                            form.tabs.Add(formTab);
                         }
-                        
-                        formTab.sections.Add(formSection);
+                    }
+                    else // single tab form.
+                    {
+                        FormTab formTab = new FormTab();
+                        formTab.name = "";
+                        form.tabs.Add(formTab);
                     }
 
-                    form.tabs.Add(formTab);
+                }
+                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                {
+                    return new NotFoundResult();
                 }
             }
-            else // single tab form.
-            {
-                FormTab formTab = new FormTab();
-                formTab.name = "";
-                form.tabs.Add(formTab);
-            }
 
+            
+            
             return Json(form);
         }
     }
