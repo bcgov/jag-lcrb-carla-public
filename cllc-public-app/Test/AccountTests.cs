@@ -59,6 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
             var response = await _client.SendAsync(request);
+            string createText = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // parse as JSON.
