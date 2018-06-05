@@ -74,20 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this Adoxio_establishment to, ViewModels.AdoxioEstablishment from)
         {
             to.Adoxio_establishmentid = new Guid(from.id);
-            //to._adoxio_licencee_value = from._licencee_value;
-            //to._adoxio_licencetypeid_value = from._licencetypeid_value;
-            //to._adoxio_municipality_value = from._municipality_value;
-            //to._adoxio_policejurisdiction_value = from._policejurisdiction_value;
-            //to._adoxio_primaryinspectorid_value = from._primaryinspectorid_value;
-            //to._adoxio_territory_value = from._territory_value;
-            //to._createdby_value = from._createdby_value;
-            //to._createdonbehalfby_value = from._createdonbehalfby_value;
-            //to._modifiedby_value = from._modifiedby_value;
-            //to._modifiedonbehalfby_value = from._modifiedonbehalfby_value;
-            //to._ownerid_value = from._ownerid_value;
-            //to._owningbusinessunit_value = from._owningbusinessunit_value;
-            //to._owningteam_value = from._owningteam_value;
-            //to._owninguser_value = from._owninguser_value;
+
             if (to.Adoxio_addresscity != from.Addresscity)
             {
                 to.Adoxio_addresscity = from.Addresscity;
