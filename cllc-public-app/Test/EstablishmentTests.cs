@@ -11,8 +11,8 @@ using Xunit;
 using System.Text;
 using Newtonsoft.Json;
 using System.Net;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
