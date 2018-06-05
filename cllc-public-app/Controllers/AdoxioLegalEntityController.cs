@@ -282,17 +282,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return StatusCode(500, result.Error.Message);
                 }                
             }
-            ChangeOperationResponse cor = (ChangeOperationResponse)dsr.FirstOrDefault();
-            if (cor != null)
-            {
-                EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
-                string identity = ed.Identity.ToString();
-                // convert the identity to a guid.
-                int endpos = identity.LastIndexOf(")");
-                int startpos = identity.LastIndexOf("(") + 1;
-                string guid = identity.Substring(startpos, endpos - startpos);
-                adoxioLegalEntity.Adoxio_legalentityid = new Guid(guid);
-            }
+            // get the primary key assigned by Dynamics.
+            adoxioLegalEntity.Adoxio_legalentityid = dsr.GetAssignedId();
 
             return Json(adoxioLegalEntity.ToViewModel());
         }

@@ -47,8 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
 			Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account()
-			{
-				//Accountid = Guid.NewGuid(),
+			{				
 				Name = initialName,
 				Adoxio_externalid = Guid.NewGuid().ToString()
             };
@@ -68,13 +67,14 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
-			//Guid id = new Guid(responseViewModel.id);
+            //Guid id = new Guid(responseViewModel.id);
+            Guid id = new Guid(responseViewModel.id);
 			String strid = responseViewModel.externalId;
 			Assert.Equal(strid, viewmodel_account.externalId);
 
             // R - Read
 
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + strid);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
@@ -82,10 +82,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
 
+            account.Accountid = id;
+
             // U - Update            
             account.Name = changedName;
+            
 
-            request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + strid)
+            request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
             };
@@ -94,7 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // verify that the update persisted.
 
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + strid);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
@@ -105,17 +108,18 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // D - Delete
 
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + strid + "/delete");
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
+            string responseText = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // second delete should return a 404.
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + strid + "/delete");
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + strid);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
@@ -159,16 +163,17 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(initialName, responseViewModel.name);
             //Guid id = new Guid(responseViewModel.id);
 			var strid = responseViewModel.externalId;
+            string id = responseViewModel.id;
 
 			// R - Read
 
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strid);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
-			Guid id = new Guid(responseViewModel.id);
+			
 
             // Add a Director.
 
@@ -177,7 +182,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
-                Adoxio_legalentityid = Guid.NewGuid(),
                 Adoxio_name = initialName,
                 Adoxio_Account = account,
                 Adoxio_position = (int?)ViewModels.PositionOptions.Director,
@@ -211,17 +215,17 @@ namespace Gov.Lclb.Cllb.Public.Test
             
             // D - Delete
 
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strid + "/delete");
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // second delete should return a 404.
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strid + "/delete");
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strid);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
