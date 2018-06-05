@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
             string _discard = await response.Content.ReadAsStringAsync();
         }
-        /*
+        
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
@@ -46,32 +46,33 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-			Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Adoxio_application application = new Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Adoxio_application()
-            {
-				Adoxio_applicationid = Guid.NewGuid(),
-                Adoxio_name = initialName,
-				Adoxio_nameofapplicant = initialName
-            };
-
-			ViewModels.AdoxioApplication viewmodel_application = application.ToViewModel();
+			ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+			{
+				name = "My Name",
+				applyingPerson = "Applying Person",
+				jobNumber = "123",
+				licenseType = "Cannabis",
+				establishmentName = "Not a Dispensary",
+				establishmentAddress = "123 Any Street",
+				applicationStatus = "Active"
+			};
 
 			string jsonString = JsonConvert.SerializeObject(viewmodel_application);
 
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
+            /*
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+			ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
             Guid id = new Guid(responseViewModel.id);
 
             // R - Read
-
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
@@ -118,8 +119,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
 			await Logout();
+			*/
         }
-
+        /*
         [Fact]
         public async System.Threading.Tasks.Task TestDirectorsAndOfficers()
         {
