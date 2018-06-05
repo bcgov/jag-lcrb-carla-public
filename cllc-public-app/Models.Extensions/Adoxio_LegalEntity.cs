@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="from"></param>
         public static void CopyValues(this Adoxio_legalentity to, ViewModels.AdoxioLegalEntity from)
         {
-            to.Adoxio_legalentityid = new Guid(from.id);
+                     
             to.Adoxio_commonnonvotingshares = from.commonnonvotingshares;
             to.Adoxio_commonvotingshares = from.commonvotingshares;
             to.Adoxio_dateofbirth = from.dateofbirth;
@@ -83,10 +83,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // convert from int to bool.
                 result.isindividual = (adoxio_legalentity.Adoxio_isindividual != null && adoxio_legalentity.Adoxio_isindividual != 0);
                 result.lastname = adoxio_legalentity.Adoxio_lastname;
-                result.legalentitytype = (Adoxio_applicanttypecodes) adoxio_legalentity.Adoxio_legalentitytype;
+                if (adoxio_legalentity.Adoxio_legalentitytype != null)
+                {
+                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
+                }
+                
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
                 result.name = adoxio_legalentity.Adoxio_name;
-                result.position = (PositionOptions) adoxio_legalentity.Adoxio_position;
+                if (adoxio_legalentity.Adoxio_position != null)
+                {
+                    result.position = (PositionOptions)adoxio_legalentity.Adoxio_position;
+                }
+                
                 result.preferrednonvotingshares = adoxio_legalentity.Adoxio_preferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.Adoxio_preferredvotingshares;
                 // convert from int to bool.

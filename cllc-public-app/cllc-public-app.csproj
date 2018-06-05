@@ -48,6 +48,12 @@
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
+  
+
+  <ItemGroup>
+    <ProjectReference Include="..\cllc-interfaces\Dynamics\Dynamics.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\SharePoint\SharePoint.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Update="SeedData\PolicyDocuments.json">
@@ -73,6 +79,10 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\adoxio-legalentities.model.ts" />
   </ItemGroup>
 
   <ItemGroup>

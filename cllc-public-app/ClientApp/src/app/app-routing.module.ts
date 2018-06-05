@@ -8,17 +8,22 @@ import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
-import { SurveyEditorComponent } from './survey/editor.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     //children: []
     component: HomeComponent
+  },
+  {
+    path: 'dashboard',
+    //children: []
+    component: DashboardComponent
   },
   {
     path: 'business-profile',
@@ -73,17 +78,6 @@ const routes: Routes = [
     component: SurveyTestComponent,
     data: {
       breadcrumb: 'Survey Test'
-    }
-  },
-  {
-    path: 'survey-editor',
-    component: SurveyEditorComponent,
-    resolve: {
-      survey: SurveyResolver,
-    },
-    data: {
-      breadcrumb: 'Survey Editor',
-      survey_path: 'assets/survey-primary.json'
     }
   },
   //{ path: '404', component: NotFoundComponent },

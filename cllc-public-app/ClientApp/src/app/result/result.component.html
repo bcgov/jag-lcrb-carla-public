@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <h1>Here's What You Told Us</h1>
       <h3>Review your answers</h3>
-
+     
       <!-- *********************** ANSWERS ********************************* -->
       <!-- age19 -->
       <div *ngIf="data && data.age19 == 'Yes'; else elseAge">
@@ -42,7 +42,7 @@
       </div>
 
       <!-- businessType -->
-      <div *ngIf="data.businessType">
+      <div *ngIf="data && data.businessType">
         <ul class="detail-step">
           <li>
             The type of business that will be applying for the licence is {{data.businessType}}
@@ -114,7 +114,7 @@
       </div>
 
       <!-- storelocation -->
-      <div *ngIf="data.storelocation">
+      <div *ngIf="data && data.storelocation">
         <ul class="detail-step">
           <li>Your proposed location is in {{data.storelocation}}</li>
         </ul>
@@ -189,8 +189,8 @@
       </div>
 
       <!-- businessType -->
-      <!--<div *ngIf="data. && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">-->
-      <div *ngIf="data.businessType">
+      <!--<div *ngIf="data && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">-->
+      <div *ngIf="data && data.businessType">
         <h3>
           Applying as {{data.businessType}}
           <span *ngIf="data.corporationType"> - {{data.corporationType}}</span>
@@ -199,7 +199,7 @@
         </h3>
 
         <!--data.corporationType-->
-        <div *ngIf="data.corporationType == 'Public Corporation'">
+        <div *ngIf="data && data.corporationType == 'Public Corporation'">
           <p>As a public corporation, you must submit the corporation's:</p>
           <ul class="detail-step">
             <li>Name</li>
@@ -226,7 +226,7 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.corporationType == 'Private Corporation'">
+        <div *ngIf="data && corporationType == 'Private Corporation'">
           <p>As a private corporation, you must submit the corporation's:</p>
           <ul>
             <li>Name</li>
@@ -263,7 +263,7 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.corporationType == 'Limited Liability Corporation'">
+        <div *ngIf="data && corporationType == 'Limited Liability Corporation'">
           <p>As a limited liability corporation, you must submit the corporation's:</p>
           <ul>
             <li>Name</li>
@@ -300,7 +300,7 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.corporationType == 'Unlimited Liability Corporation'">
+        <div *ngIf="data && corporationType == 'Unlimited Liability Corporation'">
           <p>As an unlimited liability corporation, you must submit the corporation's:</p>
           <ul>
             <li>Name</li>
@@ -337,7 +337,7 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.partnershipType == 'General Partnership'">
+        <div *ngIf="data && partnershipType == 'General Partnership'">
           <p>As a general partnership, you must submit the partnership's:</p>
           <ul>
             <li>Name</li>
@@ -357,7 +357,7 @@
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.partnershipType == 'Limited Partnership'">
+        <div *ngIf="data && data.partnershipType == 'Limited Partnership'">
           <p>As a limited partnership, you must submit the partnership's:</p>
           <ul>
             <li>Name</li>
@@ -382,7 +382,7 @@
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.partnershipType == 'Limited Liability Partnership'">
+        <div *ngIf="data && data.partnershipType == 'Limited Liability Partnership'">
           <p>As a limited liability partnership, you must submit the partnership's:</p>
           <ul>
             <li>Name</li>
@@ -407,7 +407,7 @@
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Sole-Proprietorship'">
+        <div *ngIf="data && data.businessType == 'Sole-Proprietorship'">
           <p>As a sole proprietor, you must submit your:</p>
           <ul>
             <li>Full legal name</li>
@@ -421,7 +421,7 @@
           <p>The sole proprietorship will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Society'">
+        <div *ngIf="data && data.businessType == 'Society'">
           <p>As a society, you must submit your society's:</p>
           <ul>
             <li>Name</li>
@@ -448,7 +448,7 @@
           <p>The society will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Local Government'">
+        <div *ngIf="data && data.businessType == 'Local Government'">
           <p>As a local government, you must submit your local government's:</p>
           <ul>
             <li>Full Name</li>
@@ -467,7 +467,7 @@
           <p>The local government will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Indigenous Nation'">
+        <div *ngIf="data && data.businessType == 'Indigenous Nation'">
           <p>As an Indigenous Nation, you must submit your Indigenous Nation's:</p>
           <ul>
             <li>Full Name</li>
@@ -486,7 +486,7 @@
           <p>The Indigenous Nation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'School/University'">
+        <div *ngIf="data && data.businessType == 'School/University'">
           <p>As a school or university, you must submit your business's:</p>
           <ul>
             <li>Full Name</li>
@@ -529,31 +529,31 @@
       </div>
 
       <!--contactedFirstNation-->
-      <div *ngIf="data.contactedFirstNation">
+      <div *ngIf="data && data.contactedFirstNation">
         <h3>Contact with the Indigenous Nation</h3>
-        <div *ngIf="data.contactedFirstNation == 'Yes'">
+        <div *ngIf="data && data.contactedFirstNation == 'Yes'">
           <p>Keep communicating with the Indigenous Nation about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the Indigenous Nation to sell cannabis.</p>
         </div>
-        <div *ngIf="data.contactedFirstNation == 'No'">
+        <div *ngIf="data && data.contactedFirstNation == 'No'">
           <p>The Indigenous Nation must approve your cannabis store application. Contact the Indigenous Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements. You may be required to get a local business licence and zoning approval from the Indigenous Nation to sell cannabis.</p>
         </div>
         <hr />
       </div>
 
       <!--contactLg-->
-      <div *ngIf="data.contactLg">
+      <div *ngIf="data && data.contactLg">
         <h3>Contact with the Local Government</h3>
-        <div *ngIf="data.contactLg == 'Yes'">
+        <div *ngIf="data && data.contactLg == 'Yes'">
           <p>Keep communicating with the local government about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the local government to sell cannabis.</p>
         </div>
-        <div *ngIf="data.contactLg == 'No'">
+        <div *ngIf="data && data.contactLg == 'No'">
           <p>The local government must approve your cannabis store application. Contact the local government to make sure they are accepting applications for cannabis stores and to ask about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the local government to sell cannabis.</p>
         </div>
         <hr />
       </div>
 
       <!-- locationOwnedLeased -->
-      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'Yes'">
+      <div *ngIf="data && data.ruralRetailStore && data.locationOwnedLeased == 'Yes'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>Your store must be a self-contained business.</p>
@@ -571,7 +571,8 @@
                 <li>The locations of all cash registers</li>
                 <li>Which areas are public and which are for staff only</li>
                 <li>The locations of all storage areas</li>
-                <li>How cannabis will not be accessible to minors (including any barriers separating the cannabis area from the rest of the business)<li>
+                <li>How cannabis will not be accessible to minors (including any barriers separating the cannabis area from the rest of the business)
+                <li>
               </ul>
             </li>
             <li>
@@ -620,7 +621,7 @@
         <hr />
       </div>
 
-      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'No'">
+      <div *ngIf="data && data.ruralRetailStore && data.locationOwnedLeased == 'No'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to purchase a property or sign a lease if you are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of your business partner’s, may also be accepted.</p>
@@ -707,7 +708,7 @@
       <!--final text-->
       <div *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">
         <h3>Application Fee</h3>
-        <p>You must pay an application fee to apply for a licence. The application fee includes the cost of all required securitycd .. clearances and financial integrity checks.</p>
+        <p>You must pay an application fee to apply for a licence. The application fee includes the cost of all required security clearances and financial integrity checks.</p>
         <hr />
       </div>
 

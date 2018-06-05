@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Configuration;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -21,28 +23,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly AppDbContext db;
         private readonly IHostingEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
+        private readonly IDistributedCache _distributedCache;
 
-        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env)
+        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env, IDistributedCache distributedCache)
         {
             Configuration = configuration;
             _env = env;
             this.db = db;
+            this._distributedCache = distributedCache;
         }
-        
-        [HttpGet]
-        [Authorize]
 
+        [HttpGet]
+        // remove this Route line, as it changes the behavior of the controller. 
+        // We need the controller to respond to a GET request on /login in order for SiteMinder logins to work
+        //[Route("headers")]
+        [Authorize]
         public ActionResult Login(string path)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
-            if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || ((_env.IsDevelopment() || _env.IsStaging()) && path.Equals("headers"))))
+            if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
             {
                 // diagnostic feature for development - echo headers back.
-                if ((_env.IsDevelopment() || _env.IsStaging()) && path.Equals("headers"))
+                if ((!_env.IsProduction()) && path.Equals("headers"))
                 {
                     StringBuilder html = new StringBuilder();
                     html.AppendLine("<html>");
-                    html.AppendLine("<body>");                    
+                    html.AppendLine("<body>");
                     html.AppendLine("<b>Request Headers:</b>");
                     html.AppendLine("<ul style=\"list-style-type:none\">");
                     foreach (var item in Request.Headers)
@@ -63,7 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
                 return Redirect(basePath);
-            }            
+            }
         }
 
         /// <summary>
@@ -95,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public virtual IActionResult GetDevAuthenticationCookie(string userId)
         {
-            if (! (_env.IsDevelopment() || _env.IsStaging() )) return BadRequest("This API is not available outside a development environment.");
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             if (string.IsNullOrEmpty(userId)) return BadRequest("Missing required userid query parameter.");
 
@@ -132,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public virtual IActionResult ClearDevAuthenticationCookie()
         {
-            if (! (_env.IsDevelopment() || _env.IsStaging() )) return BadRequest("This API is not available outside a development environment.");
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
             if (temp == null)
@@ -158,5 +164,4 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Redirect(basePath);
         }
     }
-    
 }

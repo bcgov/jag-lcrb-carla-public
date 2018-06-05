@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public PolicyDocumentSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
+        public PolicyDocumentSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
             : base(configuration, env, loggerFactory)
         { }
 
@@ -51,16 +51,16 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private List<PolicyDocument> GetSeedPolicyDocuments()
         {
-            List<PolicyDocument> PolicyDocuments = new List<PolicyDocument>(GetDefaultPolicyDocuments());
-
-            if (IsDevelopmentEnvironment)
-                PolicyDocuments.AddRange(GetDevPolicyDocuments());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                PolicyDocuments.AddRange(GetTestPolicyDocuments());
+            List<PolicyDocument> PolicyDocuments = new List<PolicyDocument>(GetDefaultPolicyDocuments());            
 
             if (IsProductionEnvironment)
+            {
                 PolicyDocuments.AddRange(GetProdPolicyDocuments());
+            }
+            else
+            {
+                PolicyDocuments.AddRange(GetDevPolicyDocuments());
+            }                
 
             return PolicyDocuments;
         }

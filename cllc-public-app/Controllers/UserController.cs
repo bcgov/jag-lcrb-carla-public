@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
 using Gov.Lclb.Cllb.Public.Contexts;
@@ -50,13 +51,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
-            
+            user.businessname = userSettings.BusinessLegalName;
+            user.name = userSettings.UserDisplayName;
+
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
                 // get details from the headers.
-                user.name = userSettings.UserDisplayName;
-                user.businessname = userSettings.BusinessLegalName;
+            
+                
                 user.lastname = DynamicsExtensions.GetLastName(user.name);
                 user.firstname = DynamicsExtensions.GetFirstName(user.name);
                 user.accountid = userSettings.AccountId;
@@ -73,7 +76,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.lastname = userSettings.AuthenticatedUser.Surname;
                 user.firstname = userSettings.AuthenticatedUser.GivenName;
                 user.email = userSettings.AuthenticatedUser.Email;                
-                user.isNewUser = false;                  
+                user.isNewUser = false;  
+            
             }
 
             return new JsonResult(user);

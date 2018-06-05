@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private string[] ProfileTriggers = { AllProfiles };
 
-        public UserSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
+        public UserSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
             : base(configuration, env, loggerFactory)
         { }
 
@@ -51,21 +51,19 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private List<User> GetSeedUsers(AppDbContext context)
         {
-            List<User> users = new List<User>(GetDefaultUsers(context));
-
-            // purge users if we are running in development / staging mode.
-            if (IsDevelopmentEnvironment || IsStagingEnvironment)
+            List<User> users = new List<User>(GetDefaultUsers(context));            
+                
+            if (IsProductionEnvironment)
+            {
+                users.AddRange(GetProdUsers(context));
+            }
+            else
             {
                 context.UserRoles.RemoveRange(context.UserRoles);
                 context.Users.RemoveRange(context.Users);
-            }
-
-            if (IsDevelopmentEnvironment)
                 users.AddRange(GetDevUsers(context));
-            if (IsTestEnvironment || IsStagingEnvironment)
-                users.AddRange(GetTestUsers(context));
-            if (IsProductionEnvironment)
-                users.AddRange(GetProdUsers(context));
+            }
+                
 
             return users;
         }

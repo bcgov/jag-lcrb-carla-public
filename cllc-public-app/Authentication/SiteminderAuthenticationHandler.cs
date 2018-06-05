@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Microsoft.Extensions.Caching.Distributed;
+using Logos.Utility;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {    
@@ -176,7 +179,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 ClaimsPrincipal principal;
 
                 HttpContext context = Request.HttpContext;
-                AppDbContext dataAccess = (AppDbContext)context.RequestServices.GetService(typeof(AppDbContext));
+                Interfaces.Microsoft.Dynamics.CRM.System _system = (Interfaces.Microsoft.Dynamics.CRM.System)context.RequestServices.GetService(typeof(Interfaces.Microsoft.Dynamics.CRM.System));
+
+                IDistributedCache _distributedCache = (IDistributedCache) context.RequestServices.GetService(typeof(IDistributedCache));
+
+
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
                 
                 UserSettings userSettings = new UserSettings();
@@ -196,25 +203,19 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Check if we have a Dev Environment Cookie
                 // **************************************************
-                if (hostingEnv.IsDevelopment() || hostingEnv.IsStaging())
+                if (! hostingEnv.IsProduction())
                 {
                     string temp = context.Request.Cookies[options.DevAuthenticationTokenKey];
+
+                    if (string.IsNullOrEmpty(temp)) // could be an automated test user.
+                    {
+                        temp = context.Request.Headers["DEV-USER"];                        
+                    }
 
                     if (!string.IsNullOrEmpty(temp))
                     {
                         userId = temp;
                     }
-                    else // could be an automated test.
-                    {
-                        temp = context.Request.Headers["DEV-USER"];
-                        if (! string.IsNullOrEmpty(temp))
-                        {
-                            userId = temp;
-                        }
-                    }
-
-                        
-
                 }
 
                 // **************************************************
@@ -274,63 +275,71 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Validate credential against database              
                 // **************************************************
-                userSettings.AuthenticatedUser = hostingEnv.IsDevelopment() || hostingEnv.IsStaging()
-                    ? dataAccess.LoadUser(userId)
-                    : dataAccess.LoadUser(userId, siteMinderGuid);
-                
-
+                userSettings.AuthenticatedUser = hostingEnv.IsProduction()
+                    ? await _system.LoadUser(_distributedCache, userId, siteMinderGuid)
+                    : await _system.LoadUser(_distributedCache, userId);
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
-                    _logger.LogWarning(options.InactivegDbUserIdError + " (" + userId + ")");
+                    _logger.LogError(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
-                // **************************************************
-                // Validate / check user permissions
-                // **************************************************
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
-
-                if (userPrincipal != null && !(userPrincipal.HasClaim(User.PermissionClaim, Permission.Login) || userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration)))
-                {
-                    _logger.LogWarning("User does not have permission to login or register.");
-                    return AuthenticateResult.Fail(options.InvalidPermissions);
-                }
 
                 // **************************************************
                 // Create authenticated user
                 // **************************************************
-                _logger.LogInformation("Authentication successful: " + userId);
-                _logger.LogInformation("Setting identity and creating session for: " + userId);
+                _logger.LogError("Authentication successful: " + userId);
+                _logger.LogError("Setting identity and creating session for: " + userId);
 
                 // create session info
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
-                userSettings.IsNewUserRegistration = userPrincipal.HasClaim(User.PermissionClaim, Permission.NewUserRegistration);
-
-                if (userSettings.IsNewUserRegistration && (hostingEnv.IsDevelopment() || hostingEnv.IsStaging()))
+                userSettings.IsNewUserRegistration = (userSettings.AuthenticatedUser == null);
+               
+                if (! hostingEnv.IsProduction())
                 {
                     userSettings.BusinessLegalName = userId + " TestBusiness";
                     userSettings.UserDisplayName = userId + " TestUser";
-                    // add generated guids
-                    userSettings.SiteMinderBusinessGuid = Guid.NewGuid().ToString();
-                    userSettings.SiteMinderGuid = Guid.NewGuid().ToString();
-                    userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
-                    userSettings.ContactId = userSettings.SiteMinderGuid;
-                } 
-                // handle case where we are signed on as a development user but don't have any siteminder headers.
-                else if (userSettings.AuthenticatedUser != null && (hostingEnv.IsDevelopment() || hostingEnv.IsStaging()))
-                {
-                    // populate the business GUID.
-                    if (string.IsNullOrEmpty(userSettings.AccountId))
+
+                    if (userSettings.AuthenticatedUser != null)
                     {
+                        userSettings.ContactId = userSettings.AuthenticatedUser.Id.ToString();
                         userSettings.AccountId = userSettings.AuthenticatedUser.Guid;
                     }
-                    if (string.IsNullOrEmpty(userSettings.ContactId))
+
+                    if (userSettings.IsNewUserRegistration)
                     {
-                        userSettings.ContactId = userSettings.AuthenticatedUser.Guid;
+                        // add generated guids
+						userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+						userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+                        userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
+                        userSettings.ContactId = userSettings.SiteMinderGuid;
+
+						_logger.LogError("New user registration:" + userSettings.UserDisplayName);
+						_logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
+						_logger.LogError("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
+						_logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
+						_logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
                     }
-                }
+                    // handle case where we are signed on as a development user but don't have any siteminder headers.
+                    else if (userSettings.AuthenticatedUser != null)
+                    {
+                        // populate the business GUID.
+                        if (string.IsNullOrEmpty(userSettings.AccountId))
+                        {
+                            userSettings.AccountId = userSettings.AuthenticatedUser.Guid;
+                        }
+                        if (string.IsNullOrEmpty(userSettings.ContactId))
+                        {
+							userSettings.ContactId = userSettings.AuthenticatedUser.Id.ToString();
+                        }
+						_logger.LogError("Returning user:" + userSettings.UserDisplayName);
+						_logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
+                    }
+                }                
 
                 // **************************************************
                 // Update user settings
