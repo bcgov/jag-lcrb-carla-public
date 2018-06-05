@@ -26,7 +26,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   getDirectorsAndOfficers() {
-    this.legalEntityDataservice.getLegalEntitiesbyPosition("directorofficer")
+    this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition("directorofficer"): ", data);
         this.dataSource.data = data;
