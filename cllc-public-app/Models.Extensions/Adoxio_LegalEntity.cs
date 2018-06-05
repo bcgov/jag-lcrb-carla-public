@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="from"></param>
         public static void CopyValues(this Adoxio_legalentity to, ViewModels.AdoxioLegalEntity from)
         {
-            to.Adoxio_legalentityid = new Guid(from.id);
+                     
             to.Adoxio_commonnonvotingshares = from.commonnonvotingshares;
             to.Adoxio_commonvotingshares = from.commonvotingshares;
             to.Adoxio_dateofbirth = from.dateofbirth;
