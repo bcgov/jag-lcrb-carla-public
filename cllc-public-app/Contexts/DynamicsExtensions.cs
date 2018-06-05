@@ -18,6 +18,30 @@ namespace Gov.Lclb.Cllb.Interfaces
 {
     public static class DynamicsExtensions
     {
+        /// <summary>
+        /// Return the ID assigned by dynamics, or NULL if none.
+        /// </summary>
+        /// <param name="dsr"></param>
+        /// <returns></returns>
+        public static Guid? GetAssignedId(this DataServiceResponse dsr)
+        {
+            Guid? result = null;
+            if (dsr != null)
+            {
+                ChangeOperationResponse cor = (ChangeOperationResponse)dsr.FirstOrDefault();
+                if (cor != null)
+                {
+                    EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
+                    string identity = ed.Identity.ToString();
+                    // convert the identity to a guid.
+                    int endpos = identity.LastIndexOf(")");
+                    int startpos = identity.LastIndexOf("(") + 1;
+                    string guid = identity.Substring(startpos, endpos - startpos);
+                    result = new Guid(guid);
+                }
+            }            
+            return result;
+        }
 
         /// <summary>
         /// Load User from database using their userId and guid
@@ -228,16 +252,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get a contact by their Guid
+        /// Get a Account by their Guid
         /// </summary>
         /// <param name="system"></param>
         /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string id)
+        public static async Task<Account> GetAccountBySiteminderId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
         {
             Account result = null;
-            string key = "Account_" + id;
+            string key = "Account_" + siteminderId;
             // first look in the cache.
             string temp = null;
             if (distributedCache != null)
@@ -253,7 +277,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 try
                 {
-					var accounts = await system.Accounts.AddQueryOption("$filter", "adoxio_externalid eq '" + id + "'").ExecuteAsync();
+					var accounts = await system.Accounts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
 					if (accounts != null)
                     {
                         List<Account> results = new List<Account>();
@@ -288,6 +312,28 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
             }
 
+            return result;
+        }
+
+        /// <summary>
+        /// Get a Account by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+        {
+            Account result = null;
+            // fetch from Dynamics.
+            try
+            {
+                result = await system.Accounts.ByKey(id).GetValueAsync();                
+            }
+            catch (DataServiceQueryException dsqe)
+            {
+                result = null;
+            }
             return result;
         }
 
