@@ -35,42 +35,6 @@ namespace Gov.Lclb.Cllb.Public.Test
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task TestCreate()
-        {
-            string initialName = "InitialName";
-            await LoginAsDefault();
-
-            // C - Create
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-            var  establishment = new ViewModels.AdoxioEstablishment()
-            {
-                Name = initialName
-            };
-
-            string jsonString = JsonConvert.SerializeObject(establishment);
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            var response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            response.EnsureSuccessStatusCode();
-
-            // parse as JSON.
-            jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioEstablishment responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioEstablishment>(jsonString);
-
-            // name should match.
-            Assert.Equal(initialName, responseViewModel.Name);
-            Guid id = new Guid(responseViewModel.id);
-
-            // R - Read
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
-            response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioEstablishment>(jsonString);
-            Assert.Equal(initialName, responseViewModel.Name);
-        }
-
-        [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
             string initialName = "InitialName";
@@ -137,9 +101,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioEstablishment>(jsonString);
             Assert.Equal(changedName, responseViewModel.Name);
 
-            await Logout();
-
-            return;
             // D - Delete
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
@@ -155,6 +116,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            await Logout();
 
         }
     }

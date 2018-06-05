@@ -21,20 +21,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this Adoxio_establishment to, Adoxio_establishment from)
         {
             to.Adoxio_establishmentid = from.Adoxio_establishmentid;
-            to._adoxio_licencee_value = from._adoxio_licencee_value;
-            to._adoxio_licencetypeid_value = from._adoxio_licencetypeid_value;
-            to._adoxio_municipality_value = from._adoxio_municipality_value;
-            to._adoxio_policejurisdiction_value = from._adoxio_policejurisdiction_value;
-            to._adoxio_primaryinspectorid_value = from._adoxio_primaryinspectorid_value;
-            to._adoxio_territory_value = from._adoxio_territory_value;
-            to._createdby_value = from._createdby_value;
-            to._createdonbehalfby_value = from._createdonbehalfby_value;
-            to._modifiedby_value = from._modifiedby_value;
-            to._modifiedonbehalfby_value = from._modifiedonbehalfby_value;
-            to._ownerid_value = from._ownerid_value;
-            to._owningbusinessunit_value = from._owningbusinessunit_value;
-            to._owningteam_value = from._owningteam_value;
-            to._owninguser_value = from._owninguser_value;
             to.Adoxio_addresscity = from.Adoxio_addresscity;
             to.Adoxio_addresspostalcode = from.Adoxio_addresspostalcode;
             to.Adoxio_addressstreet = from.Adoxio_addressstreet;
@@ -88,63 +74,192 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this Adoxio_establishment to, ViewModels.AdoxioEstablishment from)
         {
             to.Adoxio_establishmentid = new Guid(from.id);
-            to._adoxio_licencee_value = from._licencee_value;
-            to._adoxio_licencetypeid_value = from._licencetypeid_value;
-            to._adoxio_municipality_value = from._municipality_value;
-            to._adoxio_policejurisdiction_value = from._policejurisdiction_value;
-            to._adoxio_primaryinspectorid_value = from._primaryinspectorid_value;
-            to._adoxio_territory_value = from._territory_value;
-            to._createdby_value = from._createdby_value;
-            to._createdonbehalfby_value = from._createdonbehalfby_value;
-            to._modifiedby_value = from._modifiedby_value;
-            to._modifiedonbehalfby_value = from._modifiedonbehalfby_value;
-            to._ownerid_value = from._ownerid_value;
-            to._owningbusinessunit_value = from._owningbusinessunit_value;
-            to._owningteam_value = from._owningteam_value;
-            to._owninguser_value = from._owninguser_value;
-            to.Adoxio_addresscity = from.Addresscity;
-            to.Adoxio_addresspostalcode = from.Addresspostalcode;
-            to.Adoxio_addressstreet = from.Addressstreet;
-            to.Adoxio_alreadyopen = from.Alreadyopen;
-            to.Adoxio_email = from.Email;
-            to.Adoxio_expectedopendate = from.Expectedopendate;
-            to.Adoxio_fridayclose = from.Fridayclose;
-            to.Adoxio_fridayopen = from.Fridayopen;
-            to.Adoxio_hasduallicence = from.Hasduallicence;
-            to.Adoxio_isrural = from.Isrural;
-            to.Adoxio_isstandalonepatio = from.Isstandalonepatio;
-            to.Adoxio_locatedatwinery = from.Locatedatwinery;
-            to.Adoxio_locatedonfirstnationland = from.Locatedonfirstnationland;
-            to.Adoxio_mailsenttorestaurant = from.Mailsenttorestaurant;
-            to.Adoxio_mondayclose = from.Mondayclose;
-            to.Adoxio_mondayopen = from.Mondayopen;
-            to.Adoxio_name = from.Name;
-            to.Adoxio_occupantcapacity = from.Occupantcapacity;
-            to.Adoxio_occupantload = from.Occupantload;
-            to.Adoxio_parcelid = from.Parcelid;
-            to.Adoxio_patronparticipation = from.Patronparticipation;
-            to.Adoxio_phone = from.Phone;
-            to.Adoxio_saturdayclose = from.Saturdayclose;
-            to.Adoxio_saturdayopen = from.Saturdayopen;
-            to.Adoxio_sendmailtoestablishmentuponapproval = from.Sendmailtoestablishmentuponapproval;
-            to.Adoxio_standardhours = from.Standardhours;
-            to.Adoxio_sundayclose = from.Sundayclose;
-            to.Adoxio_sundayopen = from.Sundayopen;
-            to.Adoxio_thursdayclose = from.Thursdayclose;
-            to.Adoxio_thursdayopen = from.Thursdayopen;
-            to.Adoxio_tuesdayclose = from.Tuesdayclose;
-            to.Adoxio_tuesdayopen = from.Tuesdayopen;
-            to.Adoxio_wednesdayclose = from.Wednesdayclose;
-            to.Adoxio_wednesdayopen = from.Wednesdayopen;
-            to.Createdon = from.Createdon;
-            to.Importsequencenumber = from.Importsequencenumber;
-            to.Modifiedon = from.Modifiedon;
-            to.Overriddencreatedon = from.Overriddencreatedon;
-            to.Statuscode = from.StatusCode;
-            to.Statecode = from.StateCode;
-            to.Timezoneruleversionnumber = from.Timezoneruleversionnumber;
-            to.Utcconversiontimezonecode = from.Utcconversiontimezonecode;
-            to.Versionnumber = from.Versionnumber;
+            //to._adoxio_licencee_value = from._licencee_value;
+            //to._adoxio_licencetypeid_value = from._licencetypeid_value;
+            //to._adoxio_municipality_value = from._municipality_value;
+            //to._adoxio_policejurisdiction_value = from._policejurisdiction_value;
+            //to._adoxio_primaryinspectorid_value = from._primaryinspectorid_value;
+            //to._adoxio_territory_value = from._territory_value;
+            //to._createdby_value = from._createdby_value;
+            //to._createdonbehalfby_value = from._createdonbehalfby_value;
+            //to._modifiedby_value = from._modifiedby_value;
+            //to._modifiedonbehalfby_value = from._modifiedonbehalfby_value;
+            //to._ownerid_value = from._ownerid_value;
+            //to._owningbusinessunit_value = from._owningbusinessunit_value;
+            //to._owningteam_value = from._owningteam_value;
+            //to._owninguser_value = from._owninguser_value;
+            if (to.Adoxio_addresscity != from.Addresscity)
+            {
+                to.Adoxio_addresscity = from.Addresscity;
+            }
+            if (to.Adoxio_addresspostalcode != from.Addresspostalcode)
+            {
+                to.Adoxio_addresspostalcode = from.Addresspostalcode;
+            }
+            if (to.Adoxio_addressstreet != from.Addressstreet)
+            {
+                to.Adoxio_addressstreet = from.Addressstreet;
+            }
+            if (to.Adoxio_alreadyopen != from.Alreadyopen)
+            {
+                to.Adoxio_alreadyopen = from.Alreadyopen;
+            }
+            if (to.Adoxio_email != from.Email)
+            {
+                to.Adoxio_email = from.Email;
+            }
+            if (to.Adoxio_expectedopendate != from.Expectedopendate)
+            {
+                to.Adoxio_expectedopendate = from.Expectedopendate;
+            }
+            if (to.Adoxio_fridayclose != from.Fridayclose)
+            {
+                to.Adoxio_fridayclose = from.Fridayclose;
+            }
+            if (to.Adoxio_fridayopen != from.Fridayopen)
+            {
+                to.Adoxio_fridayopen = from.Fridayopen;
+            }
+            if (to.Adoxio_hasduallicence != from.Hasduallicence)
+            {
+                to.Adoxio_hasduallicence = from.Hasduallicence;
+            }
+            if (to.Adoxio_isrural != from.Isrural)
+            {
+                to.Adoxio_isrural = from.Isrural;
+            }
+            if (to.Adoxio_isstandalonepatio != from.Isstandalonepatio)
+            {
+                to.Adoxio_isstandalonepatio = from.Isstandalonepatio;
+            }
+            if (to.Adoxio_locatedatwinery != from.Locatedatwinery)
+            {
+                to.Adoxio_locatedatwinery = from.Locatedatwinery;
+            }
+            if (to.Adoxio_locatedonfirstnationland != from.Locatedonfirstnationland)
+            {
+                to.Adoxio_locatedonfirstnationland = from.Locatedonfirstnationland;
+            }
+            if (to.Adoxio_mailsenttorestaurant != from.Mailsenttorestaurant)
+            {
+                to.Adoxio_mailsenttorestaurant = from.Mailsenttorestaurant;
+            }
+            if (to.Adoxio_mondayclose != from.Mondayclose)
+            {
+                to.Adoxio_mondayclose = from.Mondayclose;
+            }
+            if (to.Adoxio_mondayopen != from.Mondayopen)
+            {
+                to.Adoxio_mondayopen = from.Mondayopen;
+            }
+            if (to.Adoxio_name != from.Name)
+            {
+                to.Adoxio_name = from.Name;
+            }
+            if (to.Adoxio_occupantcapacity != from.Occupantcapacity)
+            {
+                to.Adoxio_occupantcapacity = from.Occupantcapacity;
+            }
+            if (to.Adoxio_occupantload != from.Occupantload)
+            {
+                to.Adoxio_occupantload = from.Occupantload;
+            }
+            if (to.Adoxio_parcelid != from.Parcelid)
+            {
+                to.Adoxio_parcelid = from.Parcelid;
+            }
+            if (to.Adoxio_patronparticipation != from.Patronparticipation)
+            {
+                to.Adoxio_patronparticipation = from.Patronparticipation;
+            }
+            if (to.Adoxio_phone != from.Phone)
+            {
+                to.Adoxio_phone = from.Phone;
+            }
+            if (to.Adoxio_saturdayclose != from.Saturdayclose)
+            {
+                to.Adoxio_saturdayclose = from.Saturdayclose;
+            }
+            if (to.Adoxio_saturdayopen != from.Saturdayopen)
+            {
+                to.Adoxio_saturdayopen = from.Saturdayopen;
+            }
+            if (to.Adoxio_sendmailtoestablishmentuponapproval != from.Sendmailtoestablishmentuponapproval)
+            {
+                to.Adoxio_sendmailtoestablishmentuponapproval = from.Sendmailtoestablishmentuponapproval;
+            }
+            if (to.Adoxio_standardhours != from.Standardhours)
+            {
+                to.Adoxio_standardhours = from.Standardhours;
+            }
+            if (to.Adoxio_sundayclose != from.Sundayclose)
+            {
+                to.Adoxio_sundayclose = from.Sundayclose;
+            }
+            if (to.Adoxio_sundayopen != from.Sundayopen)
+            {
+                to.Adoxio_sundayopen = from.Sundayopen;
+            }
+            if (to.Adoxio_thursdayclose != from.Thursdayclose)
+            {
+                to.Adoxio_thursdayclose = from.Thursdayclose;
+            }
+            if (to.Adoxio_thursdayopen != from.Thursdayopen)
+            {
+                to.Adoxio_thursdayopen = from.Thursdayopen;
+            }
+            if (to.Adoxio_tuesdayclose != from.Tuesdayclose)
+            {
+                to.Adoxio_tuesdayclose = from.Tuesdayclose;
+            }
+            if (to.Adoxio_tuesdayopen != from.Tuesdayopen)
+            {
+                to.Adoxio_tuesdayopen = from.Tuesdayopen;
+            }
+            if (to.Adoxio_wednesdayclose != from.Wednesdayclose)
+            {
+                to.Adoxio_wednesdayclose = from.Wednesdayclose;
+            }
+            if (to.Adoxio_wednesdayopen != from.Wednesdayopen)
+            {
+                to.Adoxio_wednesdayopen = from.Wednesdayopen;
+            }
+            if (to.Createdon != from.Createdon)
+            {
+                to.Createdon = from.Createdon;
+            }
+            if (to.Importsequencenumber != from.Importsequencenumber)
+            {
+                to.Importsequencenumber = from.Importsequencenumber;
+            }
+            if (to.Modifiedon != from.Modifiedon)
+            {
+                to.Modifiedon = from.Modifiedon;
+            }
+            if (to.Overriddencreatedon != from.Overriddencreatedon)
+            {
+                to.Overriddencreatedon = from.Overriddencreatedon;
+            }
+            if (to.Statuscode != from.StatusCode)
+            {
+                to.Statuscode = from.StatusCode;
+            }
+            if (to.Statecode != from.StateCode)
+            {
+                to.Statecode = from.StateCode;
+            }
+            if (to.Timezoneruleversionnumber != from.Timezoneruleversionnumber)
+            {
+                to.Timezoneruleversionnumber = from.Timezoneruleversionnumber;
+            }
+            if (to.Utcconversiontimezonecode != from.Utcconversiontimezonecode)
+            {
+                to.Utcconversiontimezonecode = from.Utcconversiontimezonecode;
+            }
+            if (to.Versionnumber != from.Versionnumber)
+            {
+                to.Versionnumber = from.Versionnumber;
+            }
         }
 
         /// <summary>
