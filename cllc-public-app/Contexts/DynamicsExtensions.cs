@@ -36,8 +36,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     // convert the identity to a guid.
                     int endpos = identity.LastIndexOf(")");
                     int startpos = identity.LastIndexOf("(") + 1;
-                    string guid = identity.Substring(startpos, endpos - startpos);
-                    result = new Guid(guid);
+                    string guid = identity.Substring(startpos, endpos - startpos);                   
+                    result = Guid.ParseExact(guid, "D");
                 }
             }            
             return result;
