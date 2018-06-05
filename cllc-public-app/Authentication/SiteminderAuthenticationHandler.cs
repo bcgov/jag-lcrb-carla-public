@@ -181,7 +181,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 HttpContext context = Request.HttpContext;
                 Interfaces.Microsoft.Dynamics.CRM.System _system = (Interfaces.Microsoft.Dynamics.CRM.System)context.RequestServices.GetService(typeof(Interfaces.Microsoft.Dynamics.CRM.System));
 
-                IDistributedCache _distributedCache = (IDistributedCache) context.RequestServices.GetService(typeof(IDistributedCache));
+                IDistributedCache _distributedCache = null; // (IDistributedCache) context.RequestServices.GetService(typeof(IDistributedCache));
 
 
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
