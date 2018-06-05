@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Configuration = configuration;
             _env = env;
             this.db = db;
-            this._distributedCache = distributedCache;
+            this._distributedCache = null; // distributedCache;
         }
 
         [HttpGet]
