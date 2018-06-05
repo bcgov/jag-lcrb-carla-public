@@ -72,30 +72,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			// query the Dynamics system to get the account record.
             if (id != null)
             {
-                try
-                {
-					var accounts = await _system.Accounts.AddQueryOption("$filter", "adoxio_externalid eq '" + id + "'").ExecuteAsync();
-					if (accounts != null) 
-					{
-						List<ViewModels.Account> results = new List<ViewModels.Account>();
-						foreach (var accountEntity in accounts)
-                        {
-							results.Add(accountEntity.ToViewModel());
-                        }
-						if (results.Count == 0) {
-							return new NotFoundResult();
-						}
-						result = results.First();
-					}
-					else 
-					{
-						return new NotFoundResult();
-					}
-                }
-                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                Guid accountId = new Guid(id);
+                Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
+                if (account == null)
                 {
                     return new NotFoundResult();
                 }
+                result = account.ToViewModel();
             }
 
             return Json(result);
@@ -120,14 +103,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
             // first check to see that a contact exists.
-            Guid userContactId = new Guid(userSettings.ContactId);
-            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactById(_distributedCache, userContactId);
+            string contactSiteminderGuid = userSettings.ContactId;
+            Guid userContactId = new Guid(contactSiteminderGuid);
+            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderId(_distributedCache, contactSiteminderGuid);
             if (userContact == null)
             {
                 // create the user contact record.
                 userContact = new Interfaces.Microsoft.Dynamics.CRM.Contact();
                 ContactCollection.Add(userContact);
-                userContact.Contactid = userContactId;
+                // Adoxio_externalid is where we will store the guid from siteminder.
+                userContact.Adoxio_externalid = contactSiteminderGuid;
                 userContact.Fullname = userSettings.UserDisplayName;
                 userContact.Nickname = userSettings.UserDisplayName;
                 userContact.Employeeid = userSettings.UserId;
@@ -144,20 +129,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         return StatusCode(500, result.Error.Message);
                     }
                 }
+                userContact.Contactid = userContactDsr.GetAssignedId();
             }
             
 
             // this may be an existing account, as this service is used during the account confirmation process.
-			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, strid);
+			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderId(_distributedCache, strid);
             if (account == null)
             {
                 // create a new account
                 account = new Interfaces.Microsoft.Dynamics.CRM.Account();
-				account.Adoxio_externalid = strid;
+                AccountCollection.Add(account);
+                // set the account siteminder guid
+                account.Adoxio_externalid = strid;
+            }
+            else // it is an update.
+            {
+                _system.UpdateObject(account);
             }
 
-            AccountCollection.Add(account);
-            account.CopyValues(item);
+            account.CopyValues(item);            
 
             if (account.Primarycontactid == null) // we need to add the primary contact.
             {                
@@ -172,6 +163,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return StatusCode(500, result.Error.Message);
                 }
             }
+            account.Accountid = dsr.GetAssignedId();
 
             // ensure that there is a link between the new contact and the account.
             if (! account.Contact_customer_accounts.Contains(userContact))
@@ -209,7 +201,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
                 // add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
-
             }
 
             return Json(account.ToViewModel());
@@ -219,19 +210,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Update a legal entity
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="id"></param>
+        /// <param name="accountId"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
         {
-			if (id != item.externalId)
+            if (id == null || id != item.id)
             {
                 return BadRequest();
             }
-
+            Guid accountId = new Guid(id);
+			
             // get the legal entity.
-            //Guid accountid = new Guid(id);
-			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
+			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
 
             // copy values over from the data provided
             account.CopyValues(item);
@@ -264,11 +255,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //Guid adoxio_legalentityid = new Guid(id);
             try
             {
-				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, id);
+                DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
+                //DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
+                Guid accountId = new Guid(id);
+                Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
 				if (account == null)
 				{
 					return new NotFoundResult();
 				}
+                AccountCollection.Remove(account);
                 _system.DeleteObject(account);
                 DataServiceResponse dsr = await _system.SaveChangesAsync();
                 foreach (OperationResponse result in dsr)
