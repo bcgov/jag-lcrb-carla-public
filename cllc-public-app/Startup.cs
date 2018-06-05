@@ -153,12 +153,12 @@ namespace Gov.Lclb.Cllb.Public
             task.Wait();
             AuthenticationResult authenticationResult = task.Result; 
 
-            Contexts.Microsoft.Dynamics.CRM.System context = new Contexts.Microsoft.Dynamics.CRM.System (new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System (new Uri(Configuration["DYNAMICS_ODATA_URI"]));
 
             context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
             "Authorization", authenticationResult.CreateAuthorizationHeader());            
 
-            services.AddSingleton<Contexts.Microsoft.Dynamics.CRM.System>(context);
+            services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
 
             // add SharePoint.
 
@@ -187,7 +187,7 @@ namespace Gov.Lclb.Cllb.Public
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
                     IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>();
-                    Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System>();
+                    Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System>();
 
                     connectionString = context.Database.GetDbConnection().ConnectionString;
 
