@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
+import { FileSystemItem } from '../models/file-system-item.model';
 
 @Component({
   selector: 'app-file-uploader',
@@ -8,7 +9,8 @@ import { Http, Headers } from '@angular/http';
   styleUrls: ['./file-uploader.component.scss']
 })
 export class FileUploaderComponent implements OnInit {
-
+  @Input() uploadUrl: string;
+  
   //TODO: move http call to a service
   constructor(private http: Http) {
   }
@@ -16,11 +18,10 @@ export class FileUploaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public files: UploadFile[] = [];
+  public files: FileSystemItem[] = [];
 
   public dropped(event: UploadEvent) {
     let files = event.files;
-    this.files = files;
     for (const droppedFile of files) {
 
       // Is it a file?
@@ -44,9 +45,9 @@ export class FileUploaderComponent implements OnInit {
           })
 
           this.http.post('api/AdoxioLegalEntity/id/attachments', formData, { headers: headers })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
+            .subscribe(data => {
+              // Sanitized logo returned from backend
+            })
 
         });
       } else {
@@ -57,13 +58,24 @@ export class FileUploaderComponent implements OnInit {
     }
   }
 
-  onBrowserFileSelect(event: any){
-    let files = event.target.files;
-    this.files = files;
-    for (const file of files) {
+  onBrowserFileSelect(event: any) {
+    let uploadedFiles = event.target.files;
+    for (const file of uploadedFiles) {
       console.log(file.path, file);
-      
+
     }
+  }
+
+  getUploadedFileData() {
+    const headers = new Headers({
+      //'Content-Type': 'multipart/form-data'
+    })
+    let id = "some-id";
+    this.http.get(`api/AdoxioLegalEntity/${id}/attachments`, { headers: headers })
+      .map((data: Response) => { return <FileSystemItem[]>data.json() })
+      .subscribe((data) => {
+        this.files = data;
+      })
   }
 
 
