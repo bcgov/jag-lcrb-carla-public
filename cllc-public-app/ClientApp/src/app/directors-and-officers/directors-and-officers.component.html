@@ -1,44 +1,47 @@
 <h1>Directors and Officers</h1>
 <p>Enter all directors and officers for the corporation</p>
-<div class="spinner-container" *ngIf="!dataLoaded">
-  <mat-spinner></mat-spinner>
-</div>
 
-<div *ngIf="dataLoaded">
+<div class="example-container mat-elevation-z8">
 
-  <mat-table #table [dataSource]="dataSource">
+  <div class="spinner-container" *ngIf="!dataLoaded">
+    <mat-spinner></mat-spinner>
+  </div>
 
-    <!-- Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
+  <div *ngIf="dataLoaded">
+    <mat-table #table [dataSource]="dataSource">
 
-    <!-- Column -->
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-    </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
 
-    <!-- Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> Shareholder Type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-    </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
 
-    <!-- Column -->
-    <ng-container matColumnDef="dateIssued">
-      <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
-    </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> Shareholder Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+      <!-- Column -->
+      <ng-container matColumnDef="dateIssued">
+        <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
+      </ng-container>
 
-</div>
-<div class="col-md-10 row">
-  <p>&nbsp;</p>
-  <a class="globalButton"  class="btn btn-primary" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
-  <p>&nbsp;</p>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <p></p>
+  <div class="col-md-10 row">
+    <a class="globalButton" mat-raised-button color="accent" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
+  </div>
+  <p></p>
+
 </div>
