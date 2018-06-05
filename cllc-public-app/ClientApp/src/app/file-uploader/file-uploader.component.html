@@ -5,11 +5,18 @@
     }
 </style>
 <div class="center">
+    <p></p>
+    <label for="">Document Type</label><br>
+    <select name="" id="" class="form-control" style="height: 30px; width: 200px;">
+        <option value="1">Type 1</option>
+        <option value="2">Type 2</option>
+    </select>
+    <p></p>
     <file-drop (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
         <div>
-                <div style="text-align: center">Upload Files</div>
+                <h3 style="text-align: center">Upload Files</h3>
             <span>Drop your files here or &nbsp;</span>
-            <button mat-button color="accent" (click)="fileBrowser.click()">browse for files</button>
+            <button mat-raised-button color="accent" (click)="fileBrowser.click()">browse for files</button>
             <input (change)="onBrowserFileSelect($event)" type="file" style="visibility: hidden;" #fileBrowser>
         </div>
     </file-drop>
@@ -17,13 +24,25 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Filename</th>
+                    <th>Size (kb)</th>
+                    <th>Document Type</th>
+                    <th>Uploaded On</th>
                 </tr>
             </thead>
             <tbody class="upload-name-style">
                 <tr *ngFor="let item of files; let i=index">
                     <td>
-                        <strong>{{ item.relativePath || item.name }}</strong>
+                        <strong>{{ item.name }}</strong>
+                    </td>
+                    <td>
+                        <strong>{{item.size }}</strong>
+                    </td>
+                    <td>
+                        <strong>{{item.documenttype }}</strong>
+                    </td>
+                    <td>
+                        <strong>{{item.timecreated }}</strong>
                     </td>
                 </tr>
             </tbody>
