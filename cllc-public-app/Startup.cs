@@ -141,11 +141,7 @@ namespace Gov.Lclb.Cllb.Public
             string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
             string clientId = Configuration["DYNAMICS_CLIENT_ID"];
 
-            if (string.IsNullOrEmpty(redisServer))
-            {
-                // turn off caching.
-                services.AddSingleton<IDistributedCache>((IDistributedCache)null);
-            }
+            if (string.IsNullOrEmpty(redisServer))            
             {
                 services.AddDistributedRedisCache(options =>
                 {
