@@ -19,6 +19,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -122,8 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ContactCollection.Add(contact);
 
             // changes need to made after the add in order for them to be saved.
-            contact.CopyValues(item);
-            contact.Contactid = Guid.NewGuid();
+            contact.CopyValues(item);            
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
@@ -135,6 +135,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return StatusCode(500, result.Error.Message);
                 }
             }
+            contact.Contactid = dsr.GetAssignedId();
             // if we have not yet authenticated, then this is the new record for the user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -149,7 +150,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }            
 
-            return Json(contact);
+            return Json(contact.ToViewModel());
         }
     }
 }
