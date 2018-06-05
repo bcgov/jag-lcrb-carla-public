@@ -141,10 +141,17 @@ namespace Gov.Lclb.Cllb.Public
             string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
             string clientId = Configuration["DYNAMICS_CLIENT_ID"];
 
-            services.AddDistributedRedisCache(options =>
+            if (string.IsNullOrEmpty(redisServer))
             {
-                options.Configuration = redisServer;
-            });
+                // turn off caching.
+                services.AddSingleton<IDistributedCache>((IDistributedCache)null);
+            }
+            {
+                services.AddDistributedRedisCache(options =>
+                {
+                    options.Configuration = redisServer;
+                });
+            }
 
             var authenticationContext = new AuthenticationContext(
                "https://login.windows.net/" + aadTenantId);
