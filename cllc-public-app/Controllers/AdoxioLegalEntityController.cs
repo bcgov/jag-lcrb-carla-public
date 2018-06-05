@@ -117,8 +117,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     case "owner":
                         filter = "adoxio_position eq 5";
                         break;
-                    case "directorofficer":
+                    case "director-officer":
                         filter = "adoxio_position eq 3 or adoxio_position eq 4";
+                        break;
+                    case "director-officer-shareholder":
+                        filter = "adoxio_position eq 3 or adoxio_position eq 4 or adoxio_position eq 1";
                         break;
                 }
 
