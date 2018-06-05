@@ -103,9 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
 
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
-            Assert.Equal(changedName, responseViewModel.name);
-
-			await Logout();
+            Assert.Equal(changedName, responseViewModel.name);			
 			
             // D - Delete
 
@@ -122,6 +120,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            await Logout();
         }
 
         [Fact]

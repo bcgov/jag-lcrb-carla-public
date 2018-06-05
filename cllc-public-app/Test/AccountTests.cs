@@ -179,7 +179,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Add a Director.
 
 
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + legalEntityService);
 
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
