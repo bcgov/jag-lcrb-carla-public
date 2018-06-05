@@ -103,10 +103,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             // verify we can fetch the account via web service
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
             response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
             string _discard = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            
 
-			return strId;
+			return id;
 		}
 
 		public async System.Threading.Tasks.Task Logout() 
