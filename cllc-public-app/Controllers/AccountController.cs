@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;                        
+            this._distributedCache = null; //distributedCache;                        
             this._httpContextAccessor = httpContextAccessor;
         }
 
@@ -88,8 +88,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            //Guid id = new Guid(item.id);
-			if (item.externalId == null || item.externalId.Length == 0)
+            Guid? id = null;
+            
+            if (item.externalId == null || item.externalId.Length == 0)
 			{
 				item.externalId = item.id;
 			}
@@ -104,7 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
             // first check to see that a contact exists.
             string contactSiteminderGuid = userSettings.ContactId;
-            Guid userContactId = new Guid(contactSiteminderGuid);
+            //Guid userContactId = new Guid(contactSiteminderGuid);
             Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderId(_distributedCache, contactSiteminderGuid);
             if (userContact == null)
             {
@@ -129,7 +130,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         return StatusCode(500, result.Error.Message);
                     }
                 }
-                userContact.Contactid = userContactDsr.GetAssignedId();
+                Guid contactId = (Guid) userContactDsr.GetAssignedId();
+                userContact = await _system.GetContactById(_distributedCache, contactId);
             }
             
 
@@ -163,14 +165,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return StatusCode(500, result.Error.Message);
                 }
             }
-            account.Accountid = dsr.GetAssignedId();
+            id = dsr.GetAssignedId();
+            account = await _system.GetAccountById(_distributedCache, (Guid) id);
 
             // ensure that there is a link between the new contact and the account.
             if (! account.Contact_customer_accounts.Contains(userContact))
             {
+                _system.UpdateObject(account);
                 account.Contact_customer_accounts.Add(userContact);
 
-                dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+                dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
                 foreach (OperationResponse result in dsr)
                 {
                     if (result.StatusCode == 500) // error
@@ -202,7 +206,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
             }
-
+            account.Accountid = id;
             return Json(account.ToViewModel());
         }
 
