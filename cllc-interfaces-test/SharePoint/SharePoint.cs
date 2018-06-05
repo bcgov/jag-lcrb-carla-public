@@ -96,7 +96,7 @@ namespace SharePoint.Tests
 
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
 
-            await sharePointFileManager.UploadFile(name, path, fileData, contentType, path);
+            await sharePointFileManager.UploadFile(name, path, fileData, contentType);
 
             // now delete it.
 
