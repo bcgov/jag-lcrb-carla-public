@@ -14,6 +14,5 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string establishmentName { get; set; }
         public string establishmentAddress { get; set; }
         public string applicationStatus { get; set; }
-
     }
 }

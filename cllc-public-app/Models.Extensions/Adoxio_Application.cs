@@ -13,6 +13,38 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class Adoxio_ApplicationExtensions
     {
 
+		/// <summary>
+        /// Copy values from a Dynamics Application to another one
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="from"></param>
+		public static void CopyValues(this Adoxio_application to, Adoxio_application from)
+        {
+			to.Adoxio_name = from.Adoxio_name;
+			to.Adoxio_nameofapplicant = from.Adoxio_nameofapplicant;
+			to.Adoxio_jobnumber = from.Adoxio_jobnumber;
+			to._adoxio_licencetype_value = from._adoxio_licencetype_value;
+			to.Adoxio_establishmentpropsedname = from.Adoxio_establishmentpropsedname;
+			to.Adoxio_addresscity = from.Adoxio_addresscity;
+			to.Statuscode = from.Statuscode;
+        }
+
+        /// <summary>
+        /// Copy values from a Dynamics Application to a view model.
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="from"></param>
+		public static void CopyValues(this Adoxio_application to, ViewModels.AdoxioApplication from)
+        {
+			to.Adoxio_name = from.name;
+			to.Adoxio_nameofapplicant = from.applyingPerson;
+			to.Adoxio_jobnumber = from.jobNumber;
+			//to._adoxio_licencetype_value = Guid.Parse(from.licenseType);
+			to.Adoxio_establishmentpropsedname = from.establishmentName;
+			to.Adoxio_addresscity = from.establishmentAddress;
+			//to.Statuscode = from.applicationStatus;
+        }
+
         public async static Task<AdoxioApplication> ToViewModel(this Adoxio_application dynamicsApplication, Interfaces.Microsoft.Dynamics.CRM.System _system)
         {
             AdoxioApplication adoxioApplicationVM = new ViewModels.AdoxioApplication();
@@ -48,6 +80,19 @@ namespace Gov.Lclb.Cllb.Public.Models
             //get application status
             adoxioApplicationVM.applicationStatus = dynamicsApplication.Statuscode.ToString();
             return adoxioApplicationVM;
+        }
+
+        public async static Task<Adoxio_application> ToModel(this AdoxioApplication adoxioApplicationVM, Interfaces.Microsoft.Dynamics.CRM.System _system)
+        {
+			Adoxio_application result = null;
+			if (adoxioApplicationVM != null)
+            {
+				result = new Adoxio_application();
+				result.Adoxio_name = adoxioApplicationVM.name;
+				result.Adoxio_nameofapplicant = adoxioApplicationVM.applyingPerson;
+				result.Adoxio_jobnumber = adoxioApplicationVM.jobNumber;
+            }
+            return result;
         }
     }
 }
