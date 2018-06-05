@@ -86,8 +86,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
                         
             adoxioEstablishment.CopyValues(item);
-            // add a new contact.
-            EstablishmentCollection.Add(adoxioEstablishment);
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
