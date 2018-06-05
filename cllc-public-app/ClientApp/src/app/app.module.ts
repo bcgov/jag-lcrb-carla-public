@@ -87,6 +87,7 @@ import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
 import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
+import { SecurityAssessmentsComponent } from './security-assessments/security-assessments.component';
 
 
 @NgModule({
@@ -123,7 +124,8 @@ import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from '.
     FileUploaderComponent,
     CorporateDetailsComponent,
     DirectorsAndOfficersComponent,
-    DirectorAndOfficerPersonDialog
+    DirectorAndOfficerPersonDialog,
+    SecurityAssessmentsComponent
   ],
   imports: [
     BrowserModule,
