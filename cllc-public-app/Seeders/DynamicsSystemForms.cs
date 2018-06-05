@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         public DynamicsSystemFormseeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
             : base(configuration, env, loggerFactory)
         {
-            _distributedCache = distributedCache;
+            _distributedCache = distributedCache;            
             _system = system;
         }
 
@@ -28,13 +28,16 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected override void Invoke(AppDbContext context)
         {
-            UpdateDynamicsSystemForms();            
+            if (_distributedCache != null)
+            {
+                UpdateDynamicsSystemForms();
+            }
         }
 
         public async void UpdateDynamicsSystemForms()
         {
             // only get the dynamics data if we have a dynamics config.
-            if (! string.IsNullOrEmpty(Configuration["DYNAMICS_ODATA_URI"]) )
+            if (! string.IsNullOrEmpty(Configuration["DYNAMICS_ODATA_URI"]) && _distributedCache != null)
             {
                 var systemForms = await _system.Systemforms.ExecuteAsync();                
 

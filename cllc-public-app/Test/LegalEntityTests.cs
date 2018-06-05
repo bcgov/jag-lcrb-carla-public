@@ -86,7 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // U - Update            
             adoxio_legalentity.Adoxio_name = changedName;
-
+            adoxio_legalentity.Adoxio_legalentityid = id;
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(adoxio_legalentity.ToViewModel()), Encoding.UTF8, "application/json")
