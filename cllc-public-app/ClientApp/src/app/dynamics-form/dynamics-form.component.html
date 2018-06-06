@@ -22,7 +22,7 @@
               <label class="label" [for]="field.datafieldname">{{field.name}}</label>
             </ng-container>
             <ng-container *ngSwitchCase="'LookupControl'">
-              <select *ngIf="!enableUserOverride || field.datafieldname != 'primarycontactid'" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required">
+              <select class="form-control" *ngIf="!enableUserOverride || field.datafieldname != 'primarycontactid'" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required">
                 <option value="">Field Values...</option>
               </select>
               <div *ngIf="enableUserOverride && field.datafieldname == 'primarycontactid'">
@@ -30,8 +30,7 @@
                 <p>{{currentUser.name}}</p>
               </div>
             </ng-container>
-            
-            <select *ngSwitchCase="'PicklistControl'" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required">
+            <select class="form-control" *ngSwitchCase="'PicklistControl'" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required">
               <option *ngFor="let picklistOption of field.options" [value]="picklistOption.value">{{ picklistOption.label }}</option>
             </select>              
             
