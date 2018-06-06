@@ -42,6 +42,7 @@ export class AdoxioLegalEntityDataService {
           adoxioLegalEntity.relatedentities = entry.relatedentities;
           adoxioLegalEntity.sameasapplyingperson = entry.sameasapplyingperson;
           adoxioLegalEntity.shareholderType = entry.shareholderType;
+          adoxioLegalEntity.email = entry.email;
           legalEntitiesList.push(adoxioLegalEntity);
         });
 

@@ -59,6 +59,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
+            to.Adoxio_email = from.email;
+            // adoxio_dateemailsent
         }
 
         /// <summary>
