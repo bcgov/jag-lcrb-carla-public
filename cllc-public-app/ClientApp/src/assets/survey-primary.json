@@ -169,7 +169,7 @@
         {
           "type": "radiogroup",
           "name": "isFirstNationsLand",
-          "title": "Will your proposed location be located on Indigenous Nations land?",
+          "title": "Will your proposed location be located under the jurisdiction of an Indigenous Nation?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -189,7 +189,7 @@
           "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'Yes'",
           "width": "50%",
-          "title": "Which Indigenous Nation will the proposed location be operating in?"
+          "title": "Which Indigenous Nation has jurisdiction over your proposed location?"
         }
       ],
       "visible": false,
@@ -275,7 +275,7 @@
         {
           "type": "radiogroup",
           "name": "connectionToProducerCultivator",
-          "title": "Does your business or you have any business, financial or family connections to licensed producers of cannabis?",
+          "title": "Do you or your business have any business, financial or family connections to licensed producers of cannabis?",
           "isRequired": true,
           "choices": [
             "Yes",
