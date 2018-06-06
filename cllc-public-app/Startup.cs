@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Net.Http.Headers;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
 using System;
@@ -238,8 +239,21 @@ namespace Gov.Lclb.Cllb.Public
             
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+
+            StaticFileOptions staticFileOptions = new StaticFileOptions();
+
+            staticFileOptions.OnPrepareResponse = ctx =>
+            {
+                ctx.Context.Response.Headers[HeaderNames.CacheControl] = "no-cache, no-store, must-revalidate, private";
+                ctx.Context.Response.Headers[HeaderNames.Pragma] = "no-cache";
+                ctx.Context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
+                ctx.Context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
+                ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' https://apis.google.com";
+            };
+            
+            app.UseStaticFiles(staticFileOptions);
+            app.UseSpaStaticFiles(staticFileOptions);
             app.UseXXssProtection(options => options.EnabledWithBlockMode());
             app.UseNoCacheHttpHeaders();
             // IMPORTANT: This session call MUST go before UseMvc()
