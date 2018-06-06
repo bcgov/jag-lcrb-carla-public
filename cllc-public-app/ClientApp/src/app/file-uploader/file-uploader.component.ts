@@ -3,13 +3,32 @@ import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry 
 import { Http, Headers, Response } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
 
+
+export interface DropdownOption{
+  id: string,
+  name: string
+}
+
 @Component({
   selector: 'app-file-uploader',
   templateUrl: './file-uploader.component.html',
   styleUrls: ['./file-uploader.component.scss']
 })
 export class FileUploaderComponent implements OnInit {
+  selectedDocumentType: DropdownOption;
+  @Input() accountId: string;
   @Input() uploadUrl: string;
+
+  _documentTypes: DropdownOption[];
+  get documentTypes(){
+    return this._documentTypes;
+  }
+  @Input() set documentTypes(types: DropdownOption[]){
+    this._documentTypes = types;
+    if(types && types.length  == 1){
+      this.selectedDocumentType  = types[0];
+    }
+  };
   
   //TODO: move http call to a service
   constructor(private http: Http) {
@@ -77,7 +96,6 @@ export class FileUploaderComponent implements OnInit {
         this.files = data;
       })
   }
-
 
   public fileOver(event) {
     console.log(event);
