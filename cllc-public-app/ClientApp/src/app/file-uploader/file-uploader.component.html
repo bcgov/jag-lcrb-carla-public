@@ -1,10 +1,12 @@
 
 <div class="center">
+
+    {{accountId}}
     <p></p>
     <label for="">Document Type</label><br>
-    <select name="" id="" class="form-control" style="height: 30px; width: 200px;">
-        <option value="1">Type 1</option>
-        <option value="2">Type 2</option>
+    <select name="" id="" [(ngModel)]="selectDocumentType" class="form-control" style="width: 200px;">
+        <option value=""></option>
+        <option *ngFor="let item of documementTypes" value="{{item.id}}">{{item.name}}</option>
     </select>
     <p></p>
     <file-drop (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
