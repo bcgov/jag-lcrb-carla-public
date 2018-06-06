@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;
+            this._distributedCache = null;  // distributedCache;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDynamicsEstablishments(string id)
+        public async Task<IActionResult> GetEstablishment(string id)
         {
             ViewModels.AdoxioEstablishment result = null;
             // query the Dynamics system to get the establishment record.
@@ -70,15 +70,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost()]
-        public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioEstablishment item)
+        public async Task<IActionResult> CreateEstablishment([FromBody] ViewModels.AdoxioEstablishment item)
         {
             // create a new establishment.
-            var adoxioEstablishment = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment();
+            var adoxioEstablishment = new Adoxio_establishment();
 
             // create a DataServiceCollection to add the record
-			var EstablishmentCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment>(_system);
+			var EstablishmentCollection = new DataServiceCollection<Adoxio_establishment>(_system);
 
-            // add a new contact.
             EstablishmentCollection.Add(adoxioEstablishment);
 
             if (item.id == null)
@@ -97,8 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     return StatusCode(500, result.Error.Message);
                 }
-            }
-            
+            }            
             return Json(adoxioEstablishment.ToViewModel());
         }
 
@@ -109,13 +107,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDynamicsLegalEntity([FromBody] ViewModels.AdoxioEstablishment item, string id)
+        public async Task<IActionResult> UpdateEstablishment([FromBody] ViewModels.AdoxioEstablishment item, string id)
         {
             if (id != item.id)
             {
                 return BadRequest();
             }
-
             // get the establishment.
             Guid adoxio_establishmetid = new Guid(id);
             Adoxio_establishment adoxioEstablishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmetid).GetValueAsync();
@@ -128,7 +125,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
            
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(); // SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -145,7 +142,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost("{id}/delete")]
-        public async Task<IActionResult> DeleteDynamicsLegalEntity(string id)
+        public async Task<IActionResult> DeleteEstablishment(string id)
         {
             // get the establishment.
             Guid adoxio_establishmetid = new Guid(id);
@@ -166,7 +163,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }            
-
             return NoContent(); // 204
         }
     }

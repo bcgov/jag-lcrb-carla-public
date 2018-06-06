@@ -8,6 +8,7 @@ using System.Data.Services.Client;
 using System.Data.Services.Common;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
@@ -16,6 +17,11 @@ namespace Gov.Lclb.Cllb.Interfaces
     public class SharePointFileManager
     {
         public const string DefaultDocumentListTitle = "Shared%20Documents";
+
+        public const string DefaultDocumentList = "Documents";
+
+        private string AuthorizationHeader;
+
         private LCLBCannabisDEVDataContext listData;
         private ApiData apiData;
         private AuthenticationResult authenticationResult;
@@ -42,7 +48,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             //ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
             var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientAssertionCertificate);
             task.Wait();
-            AuthenticationResult authenticationResult = task.Result;
+            authenticationResult = task.Result;
+            
 
             apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
             "Authorization", authenticationResult.CreateAuthorizationHeader());
@@ -62,24 +69,32 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result.ToList();
         }
 
-        public async Task<List<FileSystemItem>> GetFilesInFolder(string name)
+        public async Task<List<FileSystemItem>> GetFilesInFolder(string listTitle, string folderName)
         {
             List<FileSystemItem> result = new List<FileSystemItem>();
 
-            DataServiceQuery<Folder> query = (DataServiceQuery<Folder>)
-                from folder in apiData.Folders
-                where folder.Name == name
-                select folder;
+            // first get a reference to the containing list.
+            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
+                from list in apiData.Lists
+                where list.Title == listTitle
+                select list;
+            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
+            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
+            SP.List listResult = listResults.FirstOrDefault();
 
-            TaskFactory<IEnumerable<Folder>> taskFactory = new TaskFactory<IEnumerable<Folder>>();
-            IEnumerable<Folder> folderResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            Folder folderResult = folderResults.FirstOrDefault();
-            // get the files in the folder.
-            if (folderResult != null)
+            SP.ListItem folderListItem = listResult.Items.Where(x => x.DisplayName == folderName).FirstOrDefault();
+
+
+            var items = folderListItem.Folder.Files;
+            foreach (var item in items)
             {
-                result = folderResult.Children.ToList();
-            }
+                FileSystemItem fsi = new MS.FileServices.File();
+                fsi.Id = item.UniqueId.ToString();
+                fsi.Name = item.Name;
 
+                result.Add (fsi);
+            }
+            
             return result;
         }
 
@@ -90,6 +105,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<SP.ListItem> CreateFolder(string listTitle, string folderName)
         {
+            SP.ListItem folder = null;
             // first get a reference to the containing list.
             DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
                 from list in apiData.Lists
@@ -98,20 +114,71 @@ namespace Gov.Lclb.Cllb.Interfaces
             TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
             IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
             SP.List listResult = listResults.FirstOrDefault();
-            apiData.UpdateObject(listResult);
-            SP.ListItem folder = new SP.ListItem();
-            folder.DisplayName = folderName;
-            folder.Folder = new SP.Folder
-            {
-                Name = folderName
-            };
 
-            listResult.Items.Add(folder);
-            // save to SharePoint.
+            if (listResult != null)
+            {
+                apiData.UpdateObject(listResult);
+                folder = new SP.ListItem();
+                folder.DisplayName = folderName;
+                folder.Folder = new SP.Folder
+                {
+                    Name = folderName
+                };
+
+                listResult.Items.Add(folder);
+                // save to SharePoint.
+                TaskFactory saveTaskFactory = new TaskFactory();
+                await saveTaskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
+            }            
+
+            return folder;
+        }
+
+        public async Task DeleteFolder(string listTitle, string folderName)
+        {
+            // first get a reference to the containing list.
+            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
+                from list in apiData.Lists
+                where list.Title == listTitle
+                select list;
+            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
+            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
+            SP.List listResult = listResults.FirstOrDefault();
+
+            SP.ListItem folderListItem = listResult.Items.Where(x => x.DisplayName == folderName).FirstOrDefault();
+            if (folderListItem != null)
+            {
+                listResult.Items.Remove(folderListItem);
+            }
+
             TaskFactory saveTaskFactory = new TaskFactory();
             await saveTaskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
 
-            return folder;
+
+        }
+
+
+        public async Task<bool> FolderExists(string listTitle, string folderName)
+        {
+            bool result = false;
+            // first get a reference to the containing list.
+            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
+                from list in apiData.Lists
+                where list.Title == listTitle
+                select list;
+            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
+            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
+            SP.List listResult = listResults.FirstOrDefault();
+            if (listResult != null)
+            {
+                SP.ListItem folderListItem = listResult.Items.Where(x => x.DisplayName == folderName).FirstOrDefault();
+                if (folderListItem != null)
+                {
+                    result = true;
+                }
+            }
+            
+            return result;
         }
 
         /// <summary>
@@ -171,15 +238,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
         {
             // start by ensuring that the folder exists.
-            Folder folder = await this.GetFolder(folderName);
-            if (folder == null)
+            bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
+            if (! folderExists)
             {
-                await this.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
-                folder = await this.GetFolder(folderName);
+                await this.CreateFolder(DefaultDocumentListTitle, folderName);                
             }
 
             // now add the file to the folder.
-            string path = "/" + this.WebName + "/" + fileName;
+            string path = "/" + this.WebName + "/" + DefaultDocumentListTitle + "/" + fileName;
 
             await this.UploadFile(fileName, path, fileData, contentType);
 
@@ -228,12 +294,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             var file = await this.GetFile(url);
             byte[] result = null;
-
-            var request = System.Net.HttpWebRequest.Create(file.Url);
+            var webRequest = System.Net.WebRequest.Create(this.ServerAppIdUri + "/_api/Web/getfilebyserverrelativeurl('"+ url +"')/$value");            
+            HttpWebRequest request = (HttpWebRequest)webRequest;
+            request.PreAuthenticate = true;
             request.Headers.Add ("Authorization", authenticationResult.CreateAuthorizationHeader());
-
+            request.Accept = "*";
+                        
             // we need to add authentication to a HTTP Client to fetch the file.
-            using (MemoryStream ms = new MemoryStream())
+            using (
+                MemoryStream ms = new MemoryStream())
             {
                 request.GetResponse().GetResponseStream().CopyTo(ms);
                 result = ms.ToArray();

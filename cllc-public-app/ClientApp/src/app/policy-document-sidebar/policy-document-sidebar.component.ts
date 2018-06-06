@@ -8,18 +8,25 @@ import { PolicyDocumentSummary } from "../models/policy-document-summary.model";
 })
 /** PolicyDocumentSidebar component*/
 export class PolicyDocumentSidebarComponent {
-  @Input('category') category: string;
+  _category: string;
+  get category(): string{
+    return this._category;
+  }
+  @Input('category') 
+  set category(cat: string){
+    this._category = cat;
+    if(cat && cat.length){
+      this.policyDocumentDataService.getPolicyDocuments(cat)
+        .then((data) => {
+          this.policyDocumentSummaries = data;
+        });
+    }
+  }
   public policyDocumentSummaries:PolicyDocumentSummary[];
     /** PolicyDocumentSidebar ctor */
   constructor(private policyDocumentDataService: PolicyDocumentDataService) {
   }
 
   ngOnInit(): void {  
-    if (this.category != null && this.category.length > 0) {
-      this.policyDocumentDataService.getPolicyDocuments(this.category)
-        .then((data) => {
-          this.policyDocumentSummaries = data;
-        });
-    }
   }
 }

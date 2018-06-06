@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;
+            this._distributedCache = null; // distributedCache;
             this._sharePointFileManager = sharePointFileManager;
         }
 
@@ -188,7 +188,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     string sanitized = legalEntity.Adoxio_name.Replace(" ", "_");
                     string folder_name = "LegalEntity_Files_" + sanitized;
                     // Get the folder contents for this Legal Entity.
-                    List<MS.FileServices.FileSystemItem> items = await _sharePointFileManager.GetFilesInFolder(folder_name);
+                    List<MS.FileServices.FileSystemItem> items = await _sharePointFileManager.GetFilesInFolder("Documents",folder_name);
                     foreach (MS.FileServices.FileSystemItem item in items)
                     {
                         result.Add(item.ToViewModel());

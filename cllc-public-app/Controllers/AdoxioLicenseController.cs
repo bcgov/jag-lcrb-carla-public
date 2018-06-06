@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;
+            this._distributedCache = null; // distributedCache;
             this._httpContextAccessor = httpContextAccessor;
         }
 
