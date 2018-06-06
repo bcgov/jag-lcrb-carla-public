@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
 			{
-				name = "My Name",
+				name = initialName,
 				applyingPerson = "Applying Person",
 				jobNumber = "123",
 				licenseType = "Cannabis",
@@ -58,9 +58,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 			};
 
 			string jsonString = JsonConvert.SerializeObject(viewmodel_application);
-
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            /*
+            
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
@@ -70,6 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
+            /*
             Guid id = new Guid(responseViewModel.id);
 
             // R - Read
