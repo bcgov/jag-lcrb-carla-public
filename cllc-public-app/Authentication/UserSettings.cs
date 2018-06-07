@@ -74,6 +74,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// <param name="context"></param>
         public static void SaveUserSettings(UserSettings userSettings, HttpContext context)
         {
+			//if (userSettings.AccountId == null || userSettings.AccountId.Length == 0)
+			//	throw new System.InvalidOperationException("Error set empty account id in user session");
+
             string temp = userSettings.GetJson();
             context.Session.SetString("UserSettings", temp);
         }

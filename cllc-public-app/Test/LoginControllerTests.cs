@@ -30,10 +30,9 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
 			await LoginAsDefault();
 
-			string jsonString = await GetCurrentUser();
+			ViewModels.User user = await GetCurrentUser();
             
             // Verify the Default development user.
-			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
             Assert.Equal(user.name, "TMcTesterson TestUser");
             Assert.False(user.isNewUser);
 
@@ -53,10 +52,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 			var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // verify the current user represents our new user
-			string jsonString = await GetCurrentUser();
-			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+			ViewModels.User user = await GetCurrentUser();
 			Assert.Equal(user.name, loginUser + " TestUser");
 			Assert.Equal(user.businessname, loginUser + " TestBusiness");
+
+			// fetch our current account
+			ViewModels.Account account = await GetAccountForCurrentUser();
 
             // logout and verify we are logged out
 			await Logout();
@@ -64,10 +65,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // login again as the same user as above ^^^
 			await Login(loginUser);
-			jsonString = await GetCurrentUser();
-            user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+			user = await GetCurrentUser();
             Assert.Equal(user.name, loginUser + " TestUser");
             Assert.Equal(user.businessname, loginUser + " TestBusiness");
+            account = await GetAccountForCurrentUser();
 
             // logout and cleanup (deletes the account and contact created above ^^^)
 			await LogoutAndCleanupTestUser(strId);
