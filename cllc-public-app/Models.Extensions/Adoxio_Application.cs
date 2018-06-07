@@ -20,34 +20,27 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="from"></param>
 		public static void CopyValues(this Adoxio_application to, Adoxio_application from)
         {
+			to.Adoxio_applicationid = from.Adoxio_applicationid;
 			to.Adoxio_name = from.Adoxio_name;
+			to.Adoxio_Applicant = from.Adoxio_Applicant;
 			to.Adoxio_nameofapplicant = from.Adoxio_nameofapplicant;
 			to.Adoxio_jobnumber = from.Adoxio_jobnumber;
 			to._adoxio_licencetype_value = from._adoxio_licencetype_value;
 			to.Adoxio_establishmentpropsedname = from.Adoxio_establishmentpropsedname;
+			to.Adoxio_establishmentaddressstreet = from.Adoxio_establishmentaddressstreet;
+			to.Adoxio_establishmentaddresscity = from.Adoxio_establishmentaddresscity;
+			to.Adoxio_establishmentaddresspostalcode = from.Adoxio_establishmentaddresspostalcode;
 			to.Adoxio_addresscity = from.Adoxio_addresscity;
 			to.Statuscode = from.Statuscode;
-        }
-
-        /// <summary>
-        /// Copy values from a Dynamics Application to a view model.
-        /// </summary>
-        /// <param name="to"></param>
-        /// <param name="from"></param>
-		public static void CopyValues(this Adoxio_application to, ViewModels.AdoxioApplication from)
-        {
-			to.Adoxio_name = from.name;
-			to.Adoxio_nameofapplicant = from.applyingPerson;
-			to.Adoxio_jobnumber = from.jobNumber;
-			//to._adoxio_licencetype_value = Guid.Parse(from.licenseType);
-			to.Adoxio_establishmentpropsedname = from.establishmentName;
-			to.Adoxio_addresscity = from.establishmentAddress;
-			//to.Statuscode = from.applicationStatus;
         }
 
         public async static Task<AdoxioApplication> ToViewModel(this Adoxio_application dynamicsApplication, Interfaces.Microsoft.Dynamics.CRM.System _system)
         {
             AdoxioApplication adoxioApplicationVM = new ViewModels.AdoxioApplication();
+
+			// id
+			if (dynamicsApplication.Adoxio_applicationid != null)
+			    adoxioApplicationVM.id = dynamicsApplication.Adoxio_applicationid.ToString();
 
             //get name
             adoxioApplicationVM.name = dynamicsApplication.Adoxio_name;
@@ -59,6 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Interfaces.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
                 adoxioApplicationVM.applyingPerson = contact.Fullname;
             }
+			adoxioApplicationVM.applicant = dynamicsApplication.Adoxio_Applicant.ToViewModel();
 
             //get job number
             adoxioApplicationVM.jobNumber = dynamicsApplication.Adoxio_jobnumber;
@@ -73,13 +67,17 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             //get establishment name and address
             adoxioApplicationVM.establishmentName = dynamicsApplication.Adoxio_establishmentpropsedname;
+			adoxioApplicationVM.establishmentaddressstreet = dynamicsApplication.Adoxio_establishmentaddressstreet;
+			adoxioApplicationVM.establishmentaddresscity = dynamicsApplication.Adoxio_establishmentaddresscity;
+			adoxioApplicationVM.establishmentaddresspostalcode = dynamicsApplication.Adoxio_establishmentaddresspostalcode;
             adoxioApplicationVM.establishmentAddress = dynamicsApplication.Adoxio_establishmentaddressstreet
                                                     + ", " + dynamicsApplication.Adoxio_establishmentaddresscity
                                                     + " " + dynamicsApplication.Adoxio_establishmentaddresspostalcode;
 
             //get application status
             adoxioApplicationVM.applicationStatus = dynamicsApplication.Statuscode.ToString();
-            return adoxioApplicationVM;
+
+			return adoxioApplicationVM;
         }
 
         public async static Task<Adoxio_application> ToModel(this AdoxioApplication adoxioApplicationVM, Interfaces.Microsoft.Dynamics.CRM.System _system)
@@ -88,9 +86,18 @@ namespace Gov.Lclb.Cllb.Public.Models
 			if (adoxioApplicationVM != null)
             {
 				result = new Adoxio_application();
+				if (adoxioApplicationVM.id != null)
+					result.Adoxio_applicationid = Guid.Parse(adoxioApplicationVM.id);
 				result.Adoxio_name = adoxioApplicationVM.name;
+				result.Adoxio_Applicant = adoxioApplicationVM.applicant.ToModel();
 				result.Adoxio_nameofapplicant = adoxioApplicationVM.applyingPerson;
 				result.Adoxio_jobnumber = adoxioApplicationVM.jobNumber;
+				//result._adoxio_licencetype_value = adoxioApplicationVM.licenseType;
+				result.Adoxio_establishmentpropsedname = adoxioApplicationVM.establishmentName;
+				result.Adoxio_establishmentaddressstreet = adoxioApplicationVM.establishmentaddressstreet;
+				result.Adoxio_establishmentaddresscity = adoxioApplicationVM.establishmentaddresscity;
+				result.Adoxio_establishmentaddresspostalcode = adoxioApplicationVM.establishmentaddresspostalcode;
+				//result.Statuscode = adoxioApplicationVM.Statuscode;
             }
             return result;
         }
