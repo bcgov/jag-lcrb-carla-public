@@ -38,7 +38,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._httpContextAccessor = httpContextAccessor;
         }
 
+		/// GET account in Dynamics for the current user
+        [HttpGet("current")]
+        public async Task<IActionResult> GetCurrentAccount()
+        {
+            ViewModels.Account result = null;
 
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // query the Dynamics system to get the account record.
+			if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+				var accountId = Guid.Parse(userSettings.AccountId);
+				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
+                if (account == null)
+                {
+					return new NotFoundResult();
+                }
+                result = account.ToViewModel();
+            }
+			else
+			{
+				return new NotFoundResult();
+			}
+
+            return Json(result);
+        }
+        
         /// <summary>
         /// Get all Legal Entities
         /// </summary>
@@ -73,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (id != null)
             {
                 Guid accountId = new Guid(id);
-                Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
+				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
                 if (account == null)
                 {
                     return new NotFoundResult();
@@ -83,7 +111,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return Json(result);
         }
-
 
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
