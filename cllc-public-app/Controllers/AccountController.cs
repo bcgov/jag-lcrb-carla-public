@@ -195,13 +195,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             id = dsr.GetAssignedId();
             account = await _system.GetAccountById(_distributedCache, (Guid) id);
-<<<<<<< HEAD
-			userSettings.AccountId = id.ToString();
-=======
             userContact = await _system.GetContactById(_distributedCache, contactId);
             _system.UpdateObject(userContact);
             userContact.Parentcustomerid_account = account;
->>>>>>> upstream/master
 
             dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations );
             foreach (OperationResponse result in dsr)
