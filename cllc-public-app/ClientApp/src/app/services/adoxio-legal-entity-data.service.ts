@@ -70,6 +70,27 @@ export class AdoxioLegalEntityDataService {
       );
   }
 
+  sendConsentRequestEmail(data: string[]) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    //console.log("===== AdoxioLegalEntityDataService.post: ", data);
+    let legalEntityId:string = data[0];
+    let apiPath = "api/adoxiolegalentity/" + legalEntityId + "/sendconsentrequests";
+
+    return this.http.post(apiPath, data, {
+      headers: headers
+    })
+      .subscribe(
+        res => {
+          //console.log(res);
+        },
+        err => {
+          //console.log("Error occured");
+          this.handleError(err);
+        }
+      );
+  }
+
    private handleError(error: Response | any) {
      let errMsg: string;
      if (error instanceof Response) {
