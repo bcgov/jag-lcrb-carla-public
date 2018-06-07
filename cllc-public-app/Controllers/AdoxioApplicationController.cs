@@ -101,9 +101,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
         {
 			// create a new dynamics application object.
-            Interfaces.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_application();
-
-			adoxioApplication.CopyValues(item);
+            //Interfaces.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_application();
+			Adoxio_application adoxioApplication = await item.ToModel(_system);
 
 			// create a DataServiceCollection to add the record
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
@@ -129,6 +128,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
 			var id = dsr.GetAssignedId();
 			Adoxio_application application = await _system.GetAdoxioApplicationById(_distributedCache, (Guid)id);
+			if (application == null) {
+				return StatusCode(500, "Something bad happened");
+			}
 
 			return Json(await application.ToViewModel(_system));
 
