@@ -2,7 +2,7 @@
 
 Steps:
 1. Login to Dynamics
-2. Navigate to /_api/$manifest
+2. Navigate to <dynamics URL>/api/data/v8.2/$metadata
 3. Copy the contents to a file
 4. Ensure that the file is valid XML.  For example, the first line should not be blank.
 5. Do a search / replace to remove ConcurrencyMode="Fixed"
