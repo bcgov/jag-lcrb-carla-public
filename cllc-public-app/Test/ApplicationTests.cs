@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using System.Net;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Interfaces;
+
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -41,7 +43,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             string changedName = "ChangedName";
 			string service = "adoxioapplication";
 
-			await LoginAsDefault();
+			// login as default and get account for current user
+			string loginName = randomNewUserName("AppUser", 6);
+			var strId = await LoginAndRegisterAsNewUser(loginName);
+
+			ViewModels.User user = await GetCurrentUser();
+			ViewModels.Account currentAccount = await GetAccountForCurrentUser();
 
 			// C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -50,14 +57,18 @@ namespace Gov.Lclb.Cllb.Public.Test
 			{
 				name = initialName,
 				applyingPerson = "Applying Person",
+                applicant = currentAccount,
 				jobNumber = "123",
 				licenseType = "Cannabis",
 				establishmentName = "Not a Dispensary",
-				establishmentAddress = "123 Any Street",
+				establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
+				establishmentaddressstreet = "123 Any Street",
+				establishmentaddresscity = "Victoria, BC",
+				establishmentaddresspostalcode = "V1X 1X1",
 				applicationStatus = "Active"
 			};
 
-			string jsonString = JsonConvert.SerializeObject(viewmodel_application);
+			var jsonString = JsonConvert.SerializeObject(viewmodel_application);
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
             
             var response = await _client.SendAsync(request);
@@ -69,7 +80,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
-            /*
+			Assert.Equal("Applying Person", responseViewModel.applyingPerson);
+			Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
+			Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
+			Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+            
             Guid id = new Guid(responseViewModel.id);
 
             // R - Read
@@ -78,9 +93,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+			responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
+			Assert.Equal(currentAccount.id, responseViewModel.applicant.id);
 
+            /*
             // U - Update            
             account.Name = changedName;
 
@@ -120,6 +137,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			await Logout();
 			*/
+
+			// logout and cleanup (deletes the account and contact created above ^^^)
+            await LogoutAndCleanupTestUser(strId);
         }
         /*
         [Fact]
