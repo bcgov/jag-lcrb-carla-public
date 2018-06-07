@@ -116,7 +116,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             Guid? id = null;
-            
+            Guid contactId = new Guid();
             if (item.externalId == null || item.externalId.Length == 0)
 			{
 				item.externalId = item.id;
@@ -149,7 +149,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Statuscode = 1;
 
                 // save the new contact. 
-                DataServiceResponse userContactDsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+                DataServiceResponse userContactDsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations );
                 foreach (OperationResponse result in userContactDsr)
                 {
                     if (result.StatusCode == 500) // error
@@ -157,7 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         return StatusCode(500, result.Error.Message);
                     }
                 }
-                Guid contactId = (Guid) userContactDsr.GetAssignedId();
+                contactId = (Guid) userContactDsr.GetAssignedId();
                 userContact = await _system.GetContactById(_distributedCache, contactId);
             }
             
@@ -184,7 +184,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account.Primarycontactid = userContact;                                
             }
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -192,27 +192,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return StatusCode(500, result.Error.Message);
                 }
             }
+
             id = dsr.GetAssignedId();
             account = await _system.GetAccountById(_distributedCache, (Guid) id);
+<<<<<<< HEAD
 			userSettings.AccountId = id.ToString();
+=======
+            userContact = await _system.GetContactById(_distributedCache, contactId);
+            _system.UpdateObject(userContact);
+            userContact.Parentcustomerid_account = account;
+>>>>>>> upstream/master
 
-            // ensure that there is a link between the new contact and the account.
-            if (! account.Contact_customer_accounts.Contains(userContact))
+            dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations );
+            foreach (OperationResponse result in dsr)
             {
-                _system.UpdateObject(account);
-                account.Contact_customer_accounts.Add(userContact);
-
-                dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
-                foreach (OperationResponse result in dsr)
+                if (result.StatusCode == 500) // error
                 {
-                    if (result.StatusCode == 500) // error
-                    {
-                        return StatusCode(500, result.Error.Message);
-                    }
+                    return StatusCode(500, result.Error.Message);
                 }
             }
             
-
             // if we have not yet authenticated, then this is the new record for the user.
 
             if (userSettings.IsNewUserRegistration)
