@@ -167,8 +167,18 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string testData = "This is just a test.";
             byte[] bytes = Encoding.ASCII.GetBytes(testData);
-            string filename = "TestFile.txt";
             string documentType = "Test Document Type";
+
+            // Create random filename
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[9];
+            var random = new Random();
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+            var randomString = new String(stringChars);
+            string filename = randomString + ".txt";
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
             var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
@@ -177,16 +187,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             fileContent.Headers.ContentDisposition.Name = "File";
             fileContent.Headers.ContentDisposition.FileName = filename;
             multiPartContent.Add(fileContent);
-
-            var formFieldContent = new MultipartContent { new StringContent(documentType) };
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
-            formFieldContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
-            formFieldContent.Headers.ContentDisposition.Name = "documentType";
+            multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
             // create a new request object for the upload, as we will be using multipart form submission.
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/attachments");
             requestMessage.Content = multiPartContent;
-            
 
             var uploadResponse = await _client.SendAsync(requestMessage);
             uploadResponse.EnsureSuccessStatusCode();
@@ -206,7 +211,5 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
-
-
     }
 }
