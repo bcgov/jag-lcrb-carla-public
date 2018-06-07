@@ -27,7 +27,7 @@ export class AdoxioLegalEntityDataService {
           adoxioLegalEntity.commonnonvotingshares = entry.commonnonvotingshares;
           adoxioLegalEntity.commonvotingshares = entry.commonvotingshares;
           adoxioLegalEntity.dateofbirth = entry.dateofbirth;
-          adoxioLegalEntity.firstname = entry.xxfirstname
+          adoxioLegalEntity.firstname = entry.firstname
           adoxioLegalEntity.id = entry.id;
           adoxioLegalEntity.interestpercentage = entry.interestpercentage;
           adoxioLegalEntity.isindividual = entry.isindividual;

@@ -40,7 +40,9 @@
     </div>
     <div [hidden]="view_tab != 'tab-6'"><h1>Accounting and Taxes</h1></div>
     <div [hidden]="view_tab != 'tab-7'"><h1>Investments and Loans</h1></div>
-    <div [hidden]="view_tab != 'tab-8'"><h1>Security Assessment</h1></div>
+    <div [hidden]="view_tab != 'tab-8'"><h1>Security Assessment</h1>
+      <app-security-assessments [accountId] = "accountId"></app-security-assessments>
+    </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
       <a class="globalButton"  class="btn btn-secondary" tabindex="1" (click)="back()"><strong>Back</strong><br></a> 
