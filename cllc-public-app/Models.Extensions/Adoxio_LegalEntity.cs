@@ -92,6 +92,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
                 result.name = adoxio_legalentity.Adoxio_name;
+                result.email = adoxio_legalentity.Adoxio_email;
                 if (adoxio_legalentity.Adoxio_position != null)
                 {
                     result.position = (PositionOptions)adoxio_legalentity.Adoxio_position;
