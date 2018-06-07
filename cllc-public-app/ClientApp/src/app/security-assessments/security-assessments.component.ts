@@ -40,13 +40,18 @@ export class SecurityAssessmentsComponent implements OnInit {
   }
 
   sendConsentRequestEmail() {
+    let consentRequestList: string[] = [];
     this.dataSource.data.forEach((row) => {
       console.log("row values: ", row.id + " - " + row.sendConsentRequest + " - " + row.firstname);
       if (row.sendConsentRequest) {
-        this.toastr.success('Consent Request(s) Sent ' + row.firstname, 'Success!');
+        consentRequestList.push(row.id);
       }
     });
 
+    if (consentRequestList) {
+      this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList);
+      this.toastr.success('Consent Request(s) Sent ', 'Success!');
+    }
   }
 
 }
