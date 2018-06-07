@@ -426,6 +426,28 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+		/// <summary>
+        /// Get a dynamics application by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<Adoxio_application> GetAdoxioApplicationById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+        {
+			Adoxio_application result = null;
+            // fetch from Dynamics.
+            try
+            {
+				result = await system.Adoxio_applications.ByKey(id).GetValueAsync();
+            }
+            catch (DataServiceQueryException dsqe)
+            {
+                result = null;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Get picklist options for a given field
         /// </summary>
