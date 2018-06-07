@@ -85,19 +85,19 @@
       <!-- isFirstNationsLand -->
       <div *ngIf="data && data.isFirstNationsLand == 'Yes'">
         <ul class="detail-step">
-          <li>Your proposed location will be located on Indigenous Nations land</li>
+          <li>Your proposed location is under the jurisdiction of an Indigenous Nation</li>
         </ul>
       </div>
       <div *ngIf="data && data.isFirstNationsLand == 'No'">
         <ul class="detail-step">
-          <li>Your proposed location will not be located on Indigenous Nations land</li>
+          <li>Your proposed location is not under the jurisdiction of an Indigenous Nation</li>
         </ul>
       </div>
 
       <!-- firstNationsLand -->
       <div *ngIf="data && data.firstNationsLand">
         <ul class="detail-step">
-          <li>Indigenous Nation location proposed: {{data.firstNationsLand}}</li>
+          <li>The Indigenous Nation that has jurisdiction over your proposed location is: {{data.firstNationsLand}}</li>
         </ul>
       </div>
 
@@ -174,7 +174,7 @@
       <div *ngIf="data && data.licensedProducer == 'Yes'">
         <h3>Licensed producer of cannabis</h3>
         <p>
-          You are not eligible for a cannabis retail store licence or a cannabis rural retail store licence if you are a federally licensed producer of cannabis.
+          You are not eligible for a cannabis retail store licence if you are a federally licensed producer of cannabis.
         </p>
         <hr />
       </div>
@@ -192,7 +192,7 @@
       <!--<div *ngIf="data && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">-->
       <div *ngIf="data && data.businessType">
         <h3>
-          Applying as {{data.businessType}}
+          Applying as a(n) {{data.businessType}}
           <span *ngIf="data.corporationType"> - {{data.corporationType}}</span>
           <span *ngIf="data.partnershipType"> - {{data.partnershipType}}</span>
           <span *ngIf="data.otherType"> - {{data.otherType}}</span>
@@ -222,7 +222,6 @@
             <li>Directors</li>
             <li>Officers</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
@@ -259,7 +258,6 @@
             <li>Officers</li>
             <li>Shareholders holding 10% or more of voting shares</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
@@ -296,7 +294,6 @@
             <li>Officers</li>
             <li>Shareholders</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
@@ -333,7 +330,6 @@
             <li>Officers</li>
             <li>Shareholders</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
@@ -378,7 +374,6 @@
             <li>All general partners</li>
             <li>Limited partners holding at least a 10% interest in the partnership</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
@@ -403,7 +398,6 @@
             <li>All general partners</li>
             <li>Limited partners holding at least a 10% interest in the partnership</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
@@ -417,7 +411,6 @@
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
           </ul>
           <p>The sole proprietor will go through a security clearance check during the application process.</p>
-          <p>The sole proprietor must have a Photo BC Services Card.” </p>
           <p>The sole proprietorship will also go through a financial integrity check.</p>
         </div>
 
@@ -444,7 +437,6 @@
             <li>Officers</li>
             <li>Senior management</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The society will also go through a financial integrity check.</p>
         </div>
 
@@ -462,8 +454,7 @@
               </ul>
             </li>
           </ul>
-          <p>The appointed delegate in your local government will go through a security clearance check during the application process.</p>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
+          <p>The authorized person in your local government will go through a security clearance check during the application process.</p>
           <p>The local government will also go through a financial integrity check.</p>
         </div>
 
@@ -481,8 +472,7 @@
               </ul>
             </li>
           </ul>
-          <p>The appointed delegate in your Indigenous Nation will go through a security clearance check during the application process.</p>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
+          <p>The authorized person in your Indigenous Nation will go through a security clearance check during the application process.</p>
           <p>The Indigenous Nation will also go through a financial integrity check.</p>
         </div>
 
@@ -505,7 +495,6 @@
             <li>Directors</li>
             <li>Persons with the authority to bind the business</li>
           </ul>
-          <p>Everyone who goes through a security clearance check must have a Photo BC Services Card.</p>
           <p>The school/university will also go through a financial integrity check.</p>
         </div>
         <hr />
@@ -530,24 +519,24 @@
 
       <!--contactedFirstNation-->
       <div *ngIf="data && data.contactedFirstNation">
-        <h3>Contact with the Indigenous Nation</h3>
+        <h3>Communication with the Indigenous Nation</h3>
         <div *ngIf="data && data.contactedFirstNation == 'Yes'">
-          <p>Keep communicating with the Indigenous Nation about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the Indigenous Nation to sell cannabis.</p>
+          <p>The Indigenous Nation must approve your cannabis store application. Keep communicating with the Indigenous Nation about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
         <div *ngIf="data && data.contactedFirstNation == 'No'">
-          <p>The Indigenous Nation must approve your cannabis store application. Contact the Indigenous Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements. You may be required to get a local business licence and zoning approval from the Indigenous Nation to sell cannabis.</p>
+          <p>The Indigenous Nation must approve your cannabis store application. Contact the Indigenous Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements, such as zoning approval and business licensing.</p>
         </div>
         <hr />
       </div>
 
       <!--contactLg-->
       <div *ngIf="data && data.contactLg">
-        <h3>Contact with the Local Government</h3>
+        <h3>Communication with the Local Government</h3>
         <div *ngIf="data && data.contactLg == 'Yes'">
-          <p>Keep communicating with the local government about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the local government to sell cannabis.</p>
+          <p>The local government must approve your cannabis store application. Keep communicating with the local government about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
         <div *ngIf="data && data.contactLg == 'No'">
-          <p>The local government must approve your cannabis store application. Contact the local government to make sure they are accepting applications for cannabis stores and to ask about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the local government to sell cannabis.</p>
+          <p>The local government must approve your cannabis store application. Contact the local government to make sure they are accepting applications for cannabis stores and to ask about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
         <hr />
       </div>
@@ -560,7 +549,7 @@
           <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
           <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
           <ul>
-            <li>PID (either a nine-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
@@ -593,7 +582,7 @@
           <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
           <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
           <ul>
-            <li>PID (either a nine-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
@@ -629,7 +618,7 @@
           <p>Your store must be a self-contained business. </p>
           <p>During the application, you will need to submit the following information about your location:</p>
           <ul>
-            <li>PID (either a nine-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
@@ -662,7 +651,7 @@
           <p>Your store must be a self-contained business.</p>
           <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
           <ul>
-            <li>PID (either a nine-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
