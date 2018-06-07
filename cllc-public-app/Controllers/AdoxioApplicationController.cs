@@ -113,7 +113,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            Interfaces.Microsoft.Dynamics.CRM.Account owningAccount = await _system.GetAccountBySiteminderId(_distributedCache, userSettings.AccountId);
+			Interfaces.Microsoft.Dynamics.CRM.Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
 			adoxioApplication.Adoxio_Applicant = owningAccount;
 
 			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
@@ -131,6 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			if (application == null) {
 				return StatusCode(500, "Something bad happened");
 			}
+			application.Adoxio_applicationid = id;
 
 			return Json(await application.ToViewModel(_system));
 
