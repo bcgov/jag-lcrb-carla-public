@@ -34,6 +34,28 @@ namespace Gov.Lclb.Cllb.Public.Models
 			to.Statuscode = from.Statuscode;
         }
 
+        public static void CopyValues(this Adoxio_application to, ViewModels.AdoxioApplication from)
+        {
+            to.Adoxio_applicationid = Guid.Parse(from.id);
+            to.Adoxio_name = from.name;
+            if (from.applicant != null)
+            {
+                to.Adoxio_Applicant = new Interfaces.Microsoft.Dynamics.CRM.Account()
+                {
+                    Accountid = Guid.Parse(from.applicant.id)
+                };
+                to.Adoxio_Applicant.CopyValues(from.applicant);
+            }
+                        
+            to.Adoxio_jobnumber = from.jobNumber;            
+            to.Adoxio_establishmentpropsedname = from.establishmentName;
+            to.Adoxio_establishmentaddressstreet = from.establishmentaddressstreet;
+            to.Adoxio_establishmentaddresscity = from.establishmentaddresscity;
+            to.Adoxio_establishmentaddresspostalcode = from.establishmentaddresspostalcode;
+            to.Adoxio_addresscity = from.establishmentaddresscity;
+            to.Statuscode = int.Parse(from.applicationStatus);
+        }
+
         public async static Task<AdoxioApplication> ToViewModel(this Adoxio_application dynamicsApplication, Interfaces.Microsoft.Dynamics.CRM.System _system)
         {
             AdoxioApplication adoxioApplicationVM = new ViewModels.AdoxioApplication();
