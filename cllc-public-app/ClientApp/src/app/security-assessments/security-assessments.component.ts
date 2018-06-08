@@ -30,7 +30,7 @@ export class SecurityAssessmentsComponent implements OnInit {
   getDirectorsAndOfficersAndShareholders() {
     this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer-shareholder")
       .then((data) => {
-        console.log("getLegalEntitiesbyPosition(\"director-officer-shareholder\"): ", data);
+        //console.log("getLegalEntitiesbyPosition(\"director-officer-shareholder\"): ", data);
         data.forEach((entry) => {
           entry.sendConsentRequest = false;
         });
@@ -40,7 +40,9 @@ export class SecurityAssessmentsComponent implements OnInit {
   }
 
   sendConsentRequestEmail() {
+
     let consentRequestList: string[] = [];
+
     this.dataSource.data.forEach((row) => {
       console.log("row values: ", row.id + " - " + row.sendConsentRequest + " - " + row.firstname);
       if (row.sendConsentRequest) {
@@ -49,9 +51,28 @@ export class SecurityAssessmentsComponent implements OnInit {
     });
 
     if (consentRequestList) {
-      this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList);
-      this.toastr.success('Consent Request(s) Sent ', 'Success!');
+      this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
+        .subscribe(
+          res => { this.toastr.success('Consent Request(s) Sent ', 'Success!'); },
+          err => {
+            //console.log("Error occured");
+            this.handleError(err);
+          }
+      );
     }
+
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || "";
+      const err = body || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
   }
 
 }
