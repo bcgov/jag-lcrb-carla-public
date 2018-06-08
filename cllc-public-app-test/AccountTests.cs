@@ -1,11 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 
 using System.Text;
@@ -18,7 +12,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
 	public class AccountTests : ApiIntegrationTestBaseWithLogin
     {
-		[Fact]
+        public AccountTests(CustomWebApplicationFactory<Startup> factory)
+          : base(factory)
+        { }
+
+        [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
             string service = "account";
@@ -30,7 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // try a random GET, should return unauthorized
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             var response = await _client.SendAsync(request);
-            Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
         }
 
@@ -59,10 +57,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
             var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            // parse as JSON.
-            jsonString = await response.Content.ReadAsStringAsync();
+            // parse as JSON.            
             ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
             // name should match.
@@ -92,6 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // verify that the update persisted.
@@ -129,7 +128,6 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task TestDirectorsAndOfficers()
         {
             string initialName = "InitialName";
-            string changedName = "ChangedName";
             string accountService = "account";
             string legalEntityService = "adoxiolegalentity";
 

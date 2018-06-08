@@ -157,12 +157,18 @@ namespace Gov.Lclb.Cllb.Public
             task.Wait();
             AuthenticationResult authenticationResult = task.Result; 
 
-            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System (new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+            
 
-            context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-            "Authorization", authenticationResult.CreateAuthorizationHeader());            
+                        
 
-            services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
+            services.AddTransient<Interfaces.Microsoft.Dynamics.CRM.System>(_ =>
+            {
+                var context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                    "Authorization", authenticationResult.CreateAuthorizationHeader());
+                return context;
+            }
+                );
 
             // add SharePoint.
 
