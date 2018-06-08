@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly SharePointFileManager _sharePointFileManager;
+        private readonly string _encryptionKey;
 
         public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager)
         {
@@ -36,6 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._system = context;
             this._distributedCache = null; // distributedCache;
             this._sharePointFileManager = sharePointFileManager;
+            this._encryptionKey = Configuration["ENCRYPTION_KEY"];
         }
 
         /// <summary>
@@ -346,6 +342,121 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         return StatusCode(500, result.Error.Message);
                     }
                 }
+            }
+            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+            {
+                return new NotFoundResult();
+            }
+
+            return NoContent(); // 204
+        }
+        /// <summary>
+        /// Generate a link to be sent to an email address.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="individualId"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        private string GetConsentLink(string email, string individualId, string parentId)
+        {
+            string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
+
+            result += "/security-consent/" + parentId + "/" + individualId + "?code=";
+
+            // create a newsletter confirmation object.
+
+            ViewModels.SecurityConsentConfirmation securityConsentConfirmation = new ViewModels.SecurityConsentConfirmation()
+            {
+                email = email,
+                parentid = parentId,
+                individualid = individualId
+            };
+
+            // convert it to a json string.
+            string json = JsonConvert.SerializeObject(securityConsentConfirmation);
+
+            // encrypt that using two way encryption.
+
+            result += System.Net.WebUtility.UrlEncode(EncryptionUtility.EncryptString(json, _encryptionKey));
+
+            return result;
+        }
+
+        [HttpGet("{id}/verifyconsentcode/{individualid}")]
+        public JsonResult VerifyConsentCode(string id, string individualid, string code)
+        {
+            string result = "Error";
+            // validate the code.
+
+            string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
+            if (decrypted != null)
+            {
+                // convert the json back to an object.
+                ViewModels.SecurityConsentConfirmation consentConfirmation = JsonConvert.DeserializeObject<ViewModels.SecurityConsentConfirmation>(decrypted);
+                // check that the keys match.
+                if (id.Equals(consentConfirmation.parentid) && individualid.Equals(consentConfirmation.individualid))
+                {
+                    // update the appropriate dynamics record here.
+                    result = "Success";
+                }
+            }
+            return Json(result);
+        }
+
+
+        /// <summary>
+        /// send consent requests to the supplied list of legal entities.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="idList"></param>
+        /// <returns></returns>
+        [HttpPost("{id}/sendconsentrequests")]
+        public async Task<IActionResult> SendConsentRequests(string id, [FromBody] List<string> recipientIds)
+        {
+            // start by getting the record for the current legal entity.
+
+            // get the legal entity.
+            Guid adoxio_legalentityid = new Guid(id);
+            try
+            {
+                Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
+
+                // now get each of the supplied ids and send an email to them.
+
+                foreach (string recipientId in recipientIds)
+                {
+                    Guid recipientIdGuid = new Guid(recipientId);
+                    try
+                    {
+                        Adoxio_legalentity recipientEntity = await _system.Adoxio_legalentities.ByKey(recipientIdGuid).GetValueAsync();
+                        string email = recipientEntity.Adoxio_email;
+                        string firstname = recipientEntity.Adoxio_firstname;
+                        string lastname = recipientEntity.Adoxio_lastname;
+
+                        string confirmationEmailLink = GetConsentLink(email, recipientId, id);
+                        string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
+                        /* send the user an email confirmation. */
+                        string body = "<img src='" + bclogo + "'/><br><h2>Security Check Consent</h2>"
+                                     + "<p>Please confirm your security consent by clicking this link:</p>"
+                                     + "<a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a>";
+
+                        // send the email.
+                        SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
+
+                        // Specify the message content.
+                        MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
+                        message.Subject = "BC LCLB Cannabis Licensing Security Consent";
+                        message.Body = body;
+                        message.IsBodyHtml = true;
+                        //client.Send(message);
+                    }
+                    catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                    {
+                        // ignore any not found errors.
+                    }
+
+                }
+
             }
             catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
             {
