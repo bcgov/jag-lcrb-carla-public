@@ -53,7 +53,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_establishmentaddresscity = from.establishmentaddresscity;
             to.Adoxio_establishmentaddresspostalcode = from.establishmentaddresspostalcode;
             to.Adoxio_addresscity = from.establishmentaddresscity;
-            to.Statuscode = int.Parse(from.applicationStatus);
+            if (!String.IsNullOrEmpty(from.applicationStatus))
+            {
+                to.Statuscode = int.Parse(from.applicationStatus);
+            }
+            else
+            {
+                to.Statecode = null;
+            }
         }
 
         public async static Task<AdoxioApplication> ToViewModel(this Adoxio_application dynamicsApplication, Interfaces.Microsoft.Dynamics.CRM.System _system)
