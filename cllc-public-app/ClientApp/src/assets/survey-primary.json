@@ -63,9 +63,7 @@
             "Partnership",
             "Sole-Proprietorship",
             "Society",
-            "Local Government",
-            "Indigenous Nation",
-            "School/University"
+            "Indigenous Nation"
           ]
         },
         {
@@ -83,14 +81,6 @@
             {
               "value": "Private Corporation",
               "text": "Private Corporation"
-            },
-            {
-              "value": "Limited Liability Corporation",
-              "text": "Limited Liability Corporation"
-            },
-            {
-              "value": "Unlimited Liability Corporation",
-              "text": "Unlimited Liability Corporation"
             }
           ]
         },
@@ -109,10 +99,6 @@
             {
               "value": "Limited Partnership",
               "text": "Limited Partnership"
-            },
-            {
-              "value": "Limited Liability Partnership",
-              "text": "Limited Liability Partnership"
             }
           ]
         }
@@ -139,29 +125,6 @@
       ],
       "visible": false,
       "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
-    },
-    {
-      "name": "p4.5",
-      "elements": [
-        {
-          "type": "radiogroup",
-          "name": "ruralRetailStore",
-          "title": "Do you think you qualify for a cannabis rural retail store licence?",
-          "isRequired": true,
-          "choices": [
-            "Yes",
-            "No"
-          ]
-        },
-        {
-          "type": "infotext",
-          "name": "note",
-          "title": "A cannabis rural retail store licence is for cannabis stores in areas where the population would not support a standalone cannabis business. To qualify, the population must be no more than 2500 and the store must be at least 10km away from other cannabis stores (including proposed stores with an application in progress). ",
-          "titleLocation": "hidden"
-        }
-      ],
-      "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p5",
@@ -279,7 +242,11 @@
           "isRequired": true,
           "choices": [
             "Yes",
-            "No"
+            "No",
+            {
+              "value": "doNotknow",
+              "text": "I don't know"
+            }
           ]
         }
       ],
