@@ -27,7 +27,7 @@ export class AdoxioLegalEntityDataService {
           adoxioLegalEntity.commonnonvotingshares = entry.commonnonvotingshares;
           adoxioLegalEntity.commonvotingshares = entry.commonvotingshares;
           adoxioLegalEntity.dateofbirth = entry.dateofbirth;
-          adoxioLegalEntity.firstname = entry.xxfirstname
+          adoxioLegalEntity.firstname = entry.firstname
           adoxioLegalEntity.id = entry.id;
           adoxioLegalEntity.interestpercentage = entry.interestpercentage;
           adoxioLegalEntity.isindividual = entry.isindividual;
@@ -42,6 +42,7 @@ export class AdoxioLegalEntityDataService {
           adoxioLegalEntity.relatedentities = entry.relatedentities;
           adoxioLegalEntity.sameasapplyingperson = entry.sameasapplyingperson;
           adoxioLegalEntity.shareholderType = entry.shareholderType;
+          adoxioLegalEntity.email = entry.email;
           legalEntitiesList.push(adoxioLegalEntity);
         });
 
@@ -50,23 +51,41 @@ export class AdoxioLegalEntityDataService {
       .catch(this.handleError);
   }
 
-  post(data: any) {
+  createLegalEntity(data: any) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     //console.log("===== AdoxioLegalEntityDataService.post: ", data);
 
-    return this.http.post("api/adoxiolegalentity/", data, {
-      headers: headers
-    })
-      .subscribe(
-        res => {
-          //console.log(res);
-        },
-        err => {
-          //console.log("Error occured");
-          this.handleError(err);
-        }
-      );
+    return this.http.post("api/adoxiolegalentity/", data, { headers: headers });
+    //  .subscribe(
+    //    res => {
+    //  return res['employees']
+    //      //console.log(res);
+    //    },
+    //    err => {
+    //      //console.log("Error occured");
+    //      this.handleError(err);
+    //    }
+    //);
+  }
+
+  sendConsentRequestEmail(data: string[]) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    //console.log("===== AdoxioLegalEntityDataService.post: ", data);
+    let legalEntityId:string = data[0];
+    let apiPath = "api/adoxiolegalentity/" + legalEntityId + "/sendconsentrequests";
+
+    return this.http.post(apiPath, data, { headers: headers });
+      //.subscribe(
+      //  res => {
+      //    //console.log(res);
+      //  },
+      //  err => {
+      //    //console.log("Error occured");
+      //    this.handleError(err);
+      //  }
+      //);
   }
 
    private handleError(error: Response | any) {
