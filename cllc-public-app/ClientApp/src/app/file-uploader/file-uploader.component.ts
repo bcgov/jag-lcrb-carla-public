@@ -2,9 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { Http, Headers, Response } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
+import { Observable, Subject } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
+import { debug } from 'util';
 
 
-export interface DropdownOption{
+export interface DropdownOption {
   id: string,
   name: string
 }
@@ -15,21 +18,10 @@ export interface DropdownOption{
   styleUrls: ['./file-uploader.component.scss']
 })
 export class FileUploaderComponent implements OnInit {
-  selectedDocumentType: DropdownOption;
   @Input() accountId: string;
   @Input() uploadUrl: string;
+  @Input() documentType: string;
 
-  _documentTypes: DropdownOption[];
-  get documentTypes(){
-    return this._documentTypes;
-  }
-  @Input() set documentTypes(types: DropdownOption[]){
-    this._documentTypes = types;
-    if(types && types.length  == 1){
-      this.selectedDocumentType  = types[0];
-    }
-  };
-  
   //TODO: move http call to a service
   constructor(private http: Http) {
   }
@@ -39,42 +31,31 @@ export class FileUploaderComponent implements OnInit {
 
   public files: FileSystemItem[] = [];
 
+
   public dropped(event: UploadEvent) {
     let files = event.files;
-    for (const droppedFile of files) {
-
-      // Is it a file?
+    var queue: Subject<any> = new Subject<any>();
+    var timeout = 0;
+    for (var droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        let fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-
-          // Here you can access the real file
-          console.log(droppedFile.relativePath, file);
-
-          /**
-          // You could upload it like this:
-          **/
-          const formData = new FormData()
-          formData.append('file', file, droppedFile.relativePath)
-          formData.append('file', file, droppedFile.relativePath)
-
-          // Headers
-          const headers = new Headers({
-            //'Content-Type': 'multipart/form-data'
-          })
-
-          this.http.post('api/AdoxioLegalEntity/id/attachments', formData, { headers: headers })
-            .subscribe(data => {
-              // Sanitized logo returned from backend
-            })
-
+          let formData = new FormData();
+          formData.append('file', file, file.name);
+          formData.append('documentType', this.documentType);
+          let headers = new Headers();
+          let url = `api/AdoxioLegalEntity/${this.accountId}/attachments`;
+          this.http.post(url, formData, { headers: headers }).subscribe(result => {
+          });
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        let fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
         console.log(droppedFile.relativePath, fileEntry);
       }
     }
+    queue.subscribe((data) => {
+    });
   }
 
   onBrowserFileSelect(event: any) {
@@ -89,8 +70,7 @@ export class FileUploaderComponent implements OnInit {
     const headers = new Headers({
       //'Content-Type': 'multipart/form-data'
     })
-    let id = "some-id";
-    this.http.get(`api/AdoxioLegalEntity/${id}/attachments`, { headers: headers })
+    this.http.get(`api/AdoxioLegalEntity/${this.accountId}/attachments`, { headers: headers })
       .map((data: Response) => { return <FileSystemItem[]>data.json() })
       .subscribe((data) => {
         this.files = data;

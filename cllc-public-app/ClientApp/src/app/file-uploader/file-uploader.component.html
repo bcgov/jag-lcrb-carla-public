@@ -1,20 +1,11 @@
-
 <div class="center">
-
-    {{accountId}}
-    <p></p>
-    <label for="">Document Type</label><br>
-    <select name="" id="" [(ngModel)]="selectDocumentType" class="form-control" style="width: 200px;">
-        <option value=""></option>
-        <option *ngFor="let item of documementTypes" value="{{item.id}}">{{item.name}}</option>
-    </select>
     <p></p>
     <file-drop (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
         <div>
                 <h3 style="text-align: center">Upload Files</h3>
             <span>Drop your files here or &nbsp;</span>
             <button  class="btn btn-primary" (click)="fileBrowser.click()">browse for files</button>
-            <input (change)="onBrowserFileSelect($event)" type="file" style="visibility: hidden;" #fileBrowser>
+            <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowser>
         </div>
     </file-drop>
     <br>
