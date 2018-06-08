@@ -18,6 +18,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
 	public class CurrentUserTests : ApiIntegrationTestBaseWithLogin
     {
+        public CurrentUserTests(CustomWebApplicationFactory<Startup> factory)
+          : base(factory)
+        { }
         [Fact]
         public async System.Threading.Tasks.Task DefaultDevelopmentUserIsValid()
         {

@@ -1,6 +1,6 @@
 
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Public.Test;
+using Gov.Lclb.Cllb.Public;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
@@ -24,7 +24,7 @@ namespace SharePoint.Tests
             Configuration = new ConfigurationBuilder()
                 // The following line is the only reason we have a project reference for cllc-public-app.
                 // If you were to use this code on a different project simply add user secrets as appropriate to match the environment / secret variables below.
-                .AddUserSecrets<ApiIntegrationTestBase>() // Add secrets from the cllc-public-app
+                .AddUserSecrets<Startup>() // Add secrets from the cllc-public-app
                 .AddEnvironmentVariables()
                 .Build();
 
