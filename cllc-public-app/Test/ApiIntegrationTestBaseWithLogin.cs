@@ -68,9 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			await Login(loginUser);
 
-            string jsonString = await GetCurrentUser();
-
-            ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+			ViewModels.User user = await GetCurrentUser();
             Assert.Equal(user.name, loginUser + " TestUser");
             Assert.Equal(user.businessname, loginUser + " TestBusiness");
             Assert.True(user.isNewUser);
@@ -89,9 +87,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
-            var response = await _client.SendAsync(request);
+			var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            jsonString = await response.Content.ReadAsStringAsync();
+            var jsonString = await response.Content.ReadAsStringAsync();
             ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
             // name should match.
@@ -105,7 +103,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             string _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            
+
+			// test that the current user is updated
+			user = await GetCurrentUser();
+			Assert.NotNull(user.accountid);
+			//Assert.NotEmpty(user.accountid);
+			//Assert.Equal(strId, user.accountid);
 
 			return id;
 		}
@@ -144,16 +147,27 @@ namespace Gov.Lclb.Cllb.Public.Test
             await Logout();
 		}
 
-        public async System.Threading.Tasks.Task<string> GetCurrentUser()
+		public async System.Threading.Tasks.Task<ViewModels.User> GetCurrentUser()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
 			response.EnsureSuccessStatusCode();
             string resp = await response.Content.ReadAsStringAsync();
-            return resp;
+			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(resp);
+            return user;
         }
 
-        public async System.Threading.Tasks.Task GetCurrentUserIsUnauthorized()
+		public async System.Threading.Tasks.Task<ViewModels.Account> GetAccountForCurrentUser()
+		{
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/account/current");
+			var response = await _client.SendAsync(request);
+			response.EnsureSuccessStatusCode();
+			var jsonString = await response.Content.ReadAsStringAsync();
+			var currentAccount = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+			return currentAccount;
+		}
+
+		public async System.Threading.Tasks.Task GetCurrentUserIsUnauthorized()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
