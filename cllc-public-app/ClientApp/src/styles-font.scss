@@ -102,3 +102,11 @@ h5 {
     font-size: 21px;
     color: #494949;
 }
+
+select.form-control:not([size]):not([multiple]) {
+    height: auto;
+  }
+
+.form-control{
+    border-radius: 5px;
+}
