@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 try
                 {
-                    establishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmentid: adoxio_establishment_id).GetValueAsync();
+                    establishment = await _system.Adoxio_establishments.ByKey(adoxio_establishment_id).GetValueAsync();
                     result = establishment.ToViewModel();
                 }
                 catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
@@ -80,24 +80,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             EstablishmentCollection.Add(adoxioEstablishment);
 
-            if (item.id == null)
-            {
-                item.id = Guid.NewGuid().ToString();
-            }
-                        
             adoxioEstablishment.CopyValues(item);
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
             DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
-            foreach (OperationResponse result in dsr)
+            foreach (OperationResponse operationResult in dsr)
             {
-                if (result.StatusCode == 500) // error
+                if (operationResult.StatusCode == 500) // error
                 {
-                    return StatusCode(500, result.Error.Message);
+                    return StatusCode(500, operationResult.Error.Message);
                 }
-            }            
-            return Json(adoxioEstablishment.ToViewModel());
+            }
+            ViewModels.AdoxioEstablishment result = adoxioEstablishment.ToViewModel();
+            result.id = ((Guid)dsr.GetAssignedId()).ToString();
+            
+            return Json(result);
         }
 
         /// <summary>
@@ -115,17 +113,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             // get the establishment.
             Guid adoxio_establishmetid = new Guid(id);
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment>(_system);
+
             Adoxio_establishment adoxioEstablishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmetid).GetValueAsync();
-                        
+            _system.UpdateObject(adoxioEstablishment);
             // copy values over from the data provided
             adoxioEstablishment.CopyValues(item);
 
-            
-            _system.UpdateObject(adoxioEstablishment);
            
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error

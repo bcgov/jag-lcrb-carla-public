@@ -72,9 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="to"></param>
         /// <param name="from"></param>
         public static void CopyValues(this Adoxio_establishment to, ViewModels.AdoxioEstablishment from)
-        {
-            to.Adoxio_establishmentid = new Guid(from.id);
-
+        {            
             if (to.Adoxio_addresscity != from.Addresscity)
             {
                 to.Adoxio_addresscity = from.Addresscity;

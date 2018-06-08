@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
+import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 
@@ -28,6 +29,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   getShareholders() {
+    this.dataLoaded = false;
     this.legalEntityDataservice.getLegalEntitiesbyPosition("shareholder")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition("shareholder"): ", data);
@@ -55,8 +57,9 @@ export class EditShareholdersComponent implements OnInit {
     ////adoxioLegalEntity.dateIssued = formData.dateIssued;
     adoxioLegalEntity.position = "Shareholder";
     //adoxioLegalEntity.relatedentities = [];
-    //TODO: remove if when accountId is assigned properly
+    // the accountId is received as parameter from the business profile
     if (this.accountId) {
+      adoxioLegalEntity.account = new DynamicsAccount();
       adoxioLegalEntity.account.id = this.accountId;
     }
     return adoxioLegalEntity;
@@ -84,8 +87,15 @@ export class EditShareholdersComponent implements OnInit {
           let shareholderType = "Person";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.legalEntityDataservice.post(adoxioLegalEntity);
-          this.getShareholders();
+          this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+            res => {
+              this.getShareholders();
+            },
+            err => {
+              //console.log("Error occured");
+              this.handleError(err);
+            }
+          );
         }
       }
     );
@@ -113,12 +123,32 @@ export class EditShareholdersComponent implements OnInit {
           let shareholderType = "Organization";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.legalEntityDataservice.post(adoxioLegalEntity);
-          this.getShareholders();
+          this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+            res => {
+              this.getShareholders();
+            },
+            err => {
+              //console.log("Error occured");
+              this.handleError(err);
+            }
+          );
         }
       }
     );
   }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || "";
+      const err = body || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+  }
+
 
 }
 

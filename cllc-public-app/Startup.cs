@@ -157,12 +157,18 @@ namespace Gov.Lclb.Cllb.Public
             task.Wait();
             AuthenticationResult authenticationResult = task.Result; 
 
-            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System (new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+            
 
-            context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-            "Authorization", authenticationResult.CreateAuthorizationHeader());            
+                        
 
-            services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
+            services.AddTransient<Interfaces.Microsoft.Dynamics.CRM.System>(_ =>
+            {
+                var context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                    "Authorization", authenticationResult.CreateAuthorizationHeader());
+                return context;
+            }
+                );
 
             // add SharePoint.
 
@@ -173,8 +179,8 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            SharePointFileManager sharePointFileManager = new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword);
-            services.AddSingleton<SharePointFileManager>(sharePointFileManager);
+            // SharePointFileManager sharePointFileManager = ;
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
