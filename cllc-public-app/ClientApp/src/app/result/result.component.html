@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <h1>Here's What You Told Us</h1>
       <h3>Review your answers</h3>
-
+     
       <!-- *********************** ANSWERS ********************************* -->
       <!-- age19 -->
       <div *ngIf="data && data.age19 == 'Yes'; else elseAge">
@@ -20,32 +20,32 @@
       <!--licensedProducer-->
       <div *ngIf="data && data.licensedProducer == 'Yes'">
         <ul class="detail-step">
-          <li>You are a licenced producer of cannabis</li>
+          <li>You are a federally licensed producer of cannabis</li>
         </ul>
       </div>
       <div *ngIf="data && data.licensedProducer == 'No'">
         <ul class="detail-step">
-          <li>You are not a licenced producer of cannabis</li>
+          <li>You are not a federally licensed producer of cannabis</li>
         </ul>
       </div>
 
       <!-- registeredBusiness -->
       <div *ngIf="data && data.registeredBusiness == 'Yes'">
         <ul class="detail-step">
-          <li>You have a registered business/organization in British Columbia that will be applying for a licence</li>
+          <li>You have a registered business in British Columbia that will be applying for a licence</li>
         </ul>
       </div>
       <div *ngIf="data && data.registeredBusiness == 'No'">
         <ul class="detail-step">
-          <li>You don't have a registered business/organization in British Columbia that will be applying for a licence</li>
+          <li>You don't have a registered business in British Columbia that will be applying for a licence</li>
         </ul>
       </div>
 
       <!-- businessType -->
-      <div *ngIf="data.businessType">
+      <div *ngIf="data && data.businessType">
         <ul class="detail-step">
           <li>
-            The type of business/organization that will be applying for the licence is {{data.businessType}}
+            The type of business that will be applying for the licence is {{data.businessType}}
             <span *ngIf="data.corporationType"> - {{data.corporationType}}</span>
             <span *ngIf="data.partnershipType"> - {{data.partnershipType}}</span>
             <span *ngIf="data.otherType"> - {{data.otherType}}</span>
@@ -85,36 +85,36 @@
       <!-- isFirstNationsLand -->
       <div *ngIf="data && data.isFirstNationsLand == 'Yes'">
         <ul class="detail-step">
-          <li>Your proposed location will be located on First Nations land</li>
+          <li>Your proposed location is under the jurisdiction of an Indigenous Nation</li>
         </ul>
       </div>
       <div *ngIf="data && data.isFirstNationsLand == 'No'">
         <ul class="detail-step">
-          <li>Your proposed location will not be located on First Nations land</li>
+          <li>Your proposed location is not under the jurisdiction of an Indigenous Nation</li>
         </ul>
       </div>
 
       <!-- firstNationsLand -->
       <div *ngIf="data && data.firstNationsLand">
         <ul class="detail-step">
-          <li>First Nation location proposed: {{data.firstNationsLand}}</li>
+          <li>The Indigenous Nation that has jurisdiction over your proposed location is: {{data.firstNationsLand}}</li>
         </ul>
       </div>
 
       <!-- contactedFirstNation -->
       <div *ngIf="data && data.contactedFirstNation == 'Yes'">
         <ul class="detail-step">
-          <li>You have contacted the First Nation about opening a cannabis store</li>
+          <li>You have contacted the Indigenous Nation about opening a cannabis store</li>
         </ul>
       </div>
       <div *ngIf="data && data.contactedFirstNation == 'No'">
         <ul class="detail-step">
-          <li>You have not contacted the First Nation about opening a cannabis store</li>
+          <li>You have not contacted the Indigenous Nation about opening a cannabis store</li>
         </ul>
       </div>
 
       <!-- storelocation -->
-      <div *ngIf="data.storelocation">
+      <div *ngIf="data && data.storelocation">
         <ul class="detail-step">
           <li>Your proposed location is in {{data.storelocation}}</li>
         </ul>
@@ -147,12 +147,12 @@
       <!-- connectionToProducerCultivator -->
       <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
         <ul class="detail-step">
-          <li>You or your business/organization has at least one business, financial or family connection to licensed producers of cannabis.</li>
+          <li>You or your business has at least one business, financial or family connection to licensed producers of cannabis.</li>
         </ul>
       </div>
       <div *ngIf="data && data.connectionToProducerCultivator == 'No'">
         <ul class="detail-step">
-          <li>Neither you nor your business/organization has any business, financial or family connections to licensed producers of cannabis.</li>
+          <li>Neither you nor your business has any business, financial or family connections to licensed producers of cannabis.</li>
         </ul>
       </div>
 
@@ -166,47 +166,47 @@
       <div *ngIf="data && data.age19 == 'No'">
         <h3>Age Eligibility</h3>
         <ul class="detail-step">
-          <li>You are not eligible to apply for a Cannabis Retail Store Licence if you are under 19 years old.</li>
+          <li>You are not eligible to apply for a cannabis retail store licence if you are under 19 years old.</li>
         </ul>
       </div>
 
       <!--licensedProducer-->
       <div *ngIf="data && data.licensedProducer == 'Yes'">
-        <h3>Licenced producer of cannabis</h3>
+        <h3>Licensed producer of cannabis</h3>
         <p>
-          You are not eligible for a Cannabis Retail Store Licence if you are a licenced producer of cannabis.
+          You are not eligible for a cannabis retail store licence if you are a federally licensed producer of cannabis.
         </p>
         <hr />
       </div>
 
       <!-- registeredBusiness -->
       <div *ngIf="data && data.registeredBusiness == 'No'">
-        <h3>Registered business or organization</h3>
+        <h3>Registered business</h3>
         <p>
-          You must have a registered business or organization to apply for a licence. The type of business you register will determine who will need a security clearance check and what business information you need to submit. You can register a business or other organization with OneStop, B.C.’s Business Registry.
+          You must have a registered business to apply for a licence. The type of business you register will determine who will need a security clearance check and what business information you need to submit. You can register a business with <a href="http://www.bcbusinessregistry.ca/" target="_blank">OneStop</a>, B.C.'s Business Registry. You should also register for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>.
         </p>
         <hr />
       </div>
 
       <!-- businessType -->
-      <!--<div *ngIf="data. && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">-->
-      <div *ngIf="data.businessType">
+      <!--<div *ngIf="data && (data.businessType == 'corporation' || data.businessType == 'soleProprietorship' || data.businessType == 'partnership' || data.businessType == 'society')">-->
+      <div *ngIf="data && data.businessType">
         <h3>
-          Applying as {{data.businessType}}
+          Applying as a(n) {{data.businessType}}
           <span *ngIf="data.corporationType"> - {{data.corporationType}}</span>
           <span *ngIf="data.partnershipType"> - {{data.partnershipType}}</span>
           <span *ngIf="data.otherType"> - {{data.otherType}}</span>
         </h3>
 
         <!--data.corporationType-->
-        <div *ngIf="data.corporationType == 'Public Corporation'">
+        <div *ngIf="data && data.corporationType == 'Public Corporation'">
           <p>As a public corporation, you must submit the corporation's:</p>
           <ul class="detail-step">
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
             <li>Incorporation number</li>
             <li>Date of incorporation</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Register of all current directors and officers by:
               <ul class="detail-step">
@@ -215,7 +215,7 @@
                 <li>Date of appointment</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of organization</li>
+            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of business</li>
           </ul>
           <p>The following people in your corporation will go through a security clearance check during the application process:</p>
           <ul class="detail-step">
@@ -225,14 +225,14 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.corporationType == 'Private Corporation'">
+        <div *ngIf="data && corporationType == 'Private Corporation'">
           <p>As a private corporation, you must submit the corporation's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (address, email, phone number)</li>
             <li>Incorporation number</li>
             <li>Date of incorporation</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Register of all current directors and officers by:
               <ul class="detail-step">
@@ -250,7 +250,7 @@
                 <li>Date shares issued/transferred/cancelled</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of organization</li>
+            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of business</li>
           </ul>
           <p>The following people in your corporation will go through a security clearance check during the application process:</p>
           <ul>
@@ -261,14 +261,14 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.corporationType == 'Limited Liability Corporation'">
+        <div *ngIf="data && corporationType == 'Limited Liability Corporation'">
           <p>As a limited liability corporation, you must submit the corporation's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (address, email, phone number)</li>
             <li>Incorporation number</li>
             <li>Date of incorporation</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Register of all current directors and officers by:
               <ul class="detail-step">
@@ -286,7 +286,7 @@
                 <li>Date shares issued/transferred/cancelled</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of organization</li>
+            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of business</li>
           </ul>
           <p>The following people in your corporation will go through a security clearance check during the application process:</p>
           <ul>
@@ -297,14 +297,14 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.corporationType == 'Unlimited Liability Corporation'">
+        <div *ngIf="data && corporationType == 'Unlimited Liability Corporation'">
           <p>As an unlimited liability corporation, you must submit the corporation's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (address, email, phone number)</li>
             <li>Incorporation number</li>
             <li>Date of incorporation</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Register of all current directors and officers by:
               <ul class="detail-step">
@@ -322,7 +322,7 @@
                 <li>Date shares issued/transferred/cancelled</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of organization</li>
+            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of business</li>
           </ul>
           <p>The following people in your corporation will go through a security clearance check during the application process:</p>
           <ul>
@@ -333,12 +333,12 @@
           <p>The corporation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.partnershipType == 'General Partnership'">
+        <div *ngIf="data && partnershipType == 'General Partnership'">
           <p>As a general partnership, you must submit the partnership's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Partnership Agreement identifying each partner by their:
               <ul>
@@ -347,18 +347,18 @@
                 <li>Date of birth</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of organization.</li>
+            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of business.</li>
           </ul>
           <p>All partners will go through a security clearance check during the application process.</p>
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.partnershipType == 'Limited Partnership'">
+        <div *ngIf="data && data.partnershipType == 'Limited Partnership'">
           <p>As a limited partnership, you must submit the partnership's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Partnership Agreement identifying each partner by their:
               <ul class="detail-step">
@@ -367,7 +367,7 @@
                 <li>Date of birth</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of organization. </li>
+            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of business. </li>
           </ul>
           <p>The following people in your partnership will go through a security clearance check during the application process:</p>
           <ul>
@@ -377,12 +377,12 @@
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.partnershipType == 'Limited Liability Partnership'">
+        <div *ngIf="data && data.partnershipType == 'Limited Liability Partnership'">
           <p>As a limited liability partnership, you must submit the partnership's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Partnership Agreement identifying each partner by their:
               <ul class="detail-step">
@@ -391,7 +391,7 @@
                 <li>Date of birth</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of organization. </li>
+            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of business. </li>
           </ul>
           <p>The following people in your partnership will go through a security clearance check during the application process:</p>
           <ul>
@@ -401,25 +401,25 @@
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Sole-Proprietorship'">
+        <div *ngIf="data && data.businessType == 'Sole-Proprietorship'">
           <p>As a sole proprietor, you must submit your:</p>
           <ul>
             <li>Full legal name</li>
             <li>Address</li>
             <li>Contact information (mailing address, email, phone number)</li>
             <li>Date of birth</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
           </ul>
           <p>The sole proprietor will go through a security clearance check during the application process.</p>
           <p>The sole proprietorship will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Society'">
+        <div *ngIf="data && data.businessType == 'Society'">
           <p>As a society, you must submit your society's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Register of all current directors and officers by:
               <ul>
@@ -440,56 +440,12 @@
           <p>The society will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Trust'">
-          <p>As a trust, you must submit your trust's:</p>
-          <ul>
-            <li>Full Name</li>
-            <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
-            <li>
-              Representatives by:
-              <ul>
-                <li>Full legal name</li>
-                <li>Business contact information</li>
-              </ul>
-            </li>
-          </ul>
-          <p>The following people in your trust will go through a security clearance check during the application process:</p>
-          <ul>
-            <li>Trustees</li>
-            <li>Beneficiaries</li>
-          </ul>
-          <p>The trust will also go through a financial integrity check.</p>
-        </div>
-
-        <div *ngIf="data.businessType == 'Estate'">
-          <p>As an estate, you must submit your estate's:</p>
-          <ul>
-            <li>Full Name</li>
-            <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
-            <li>
-              Representatives by:
-              <ul>
-                <li>Full legal name</li>
-                <li>Business contact information</li>
-              </ul>
-            </li>
-          </ul>
-          <p>The following people in your estate will go through a security clearance check during the application process:</p>
-          <ul>
-            <li>Executors</li>
-            <li>Administrators</li>
-          </ul>
-          <p>The estate will also go through a financial integrity check.</p>
-        </div>
-
-        <div *ngIf="data.businessType == 'Local Government'">
+        <div *ngIf="data && data.businessType == 'Local Government'">
           <p>As a local government, you must submit your local government's:</p>
           <ul>
             <li>Full Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Representatives by:
               <ul>
@@ -498,16 +454,16 @@
               </ul>
             </li>
           </ul>
-          <p>The appointed delegate in your local government will go through a security clearance check during the application process.</p>
+          <p>The authorized person in your local government will go through a security clearance check during the application process.</p>
           <p>The local government will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'Indigenous Nation'">
+        <div *ngIf="data && data.businessType == 'Indigenous Nation'">
           <p>As an Indigenous Nation, you must submit your Indigenous Nation's:</p>
           <ul>
             <li>Full Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Representatives by:
               <ul>
@@ -516,16 +472,16 @@
               </ul>
             </li>
           </ul>
-          <p>The appointed delegate in your Indigenous Nation will go through a security clearance check during the application process.</p>
+          <p>The authorized person in your Indigenous Nation will go through a security clearance check during the application process.</p>
           <p>The Indigenous Nation will also go through a financial integrity check.</p>
         </div>
 
-        <div *ngIf="data.businessType == 'School/University'">
-          <p>As a school or university, you must submit your organization's:</p>
+        <div *ngIf="data && data.businessType == 'School/University'">
+          <p>As a school or university, you must submit your business's:</p>
           <ul>
             <li>Full Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
+            <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
               Representatives by:
               <ul>
@@ -537,188 +493,63 @@
           <p>The following people in your school/university will go through a security clearance check during the application process:</p>
           <ul>
             <li>Directors</li>
-            <li>Persons with the authority to bind the organization</li>
+            <li>Persons with the authority to bind the business</li>
           </ul>
           <p>The school/university will also go through a financial integrity check.</p>
         </div>
-
-        <div *ngIf="data.businessType == 'Co-op'">
-          <p>As a co-op, you must submit your co-op's:</p>
-          <ul>
-            <li>Full Name</li>
-            <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
-            <li>
-              Representatives by:
-              <ul>
-                <li>Full legal name</li>
-                <li>Business contact information</li>
-              </ul>
-            </li>
-          </ul>
-          <p>The following people in your co-op will go through a security clearance check during the application process:</p>
-          <ul>
-            <li>Directors</li>
-            <li>Persons with the authority to bind the organization</li>
-          </ul>
-          <p>The co-op will also go through a financial integrity check.</p>
-        </div>
-
-        <div *ngIf="data.businessType == 'Strata Council'">
-          <p>As a strata council, you must submit your council's:</p>
-          <ul>
-            <li>Full Name</li>
-            <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
-            <li>
-              Representatives by:
-              <ul>
-                <li>Full legal name</li>
-                <li>Business contact information</li>
-              </ul>
-            </li>
-          </ul>
-          <p>The following people in your strata council will go through a security clearance check during the application process:</p>
-          <ul>
-            <li>Directors</li>
-            <li>Persons with the authority to bind the organization</li>
-          </ul>
-          <p>The strata council will also go through a financial integrity check.</p>
-        </div>
-
-        <div *ngIf="data.businessType == 'Church'">
-          <p>As a church, you must submit your church's:</p>
-          <ul>
-            <li>Full Name</li>
-            <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
-            <li>
-              Representatives by:
-              <ul>
-                <li>Full legal name</li>
-                <li>Business contact information</li>
-              </ul>
-            </li>
-          </ul>
-          <p>The following people in your church will go through a security clearance check during the application process:</p>
-          <ul>
-            <li>Directors</li>
-            <li>Persons with the authority to bind the organization</li>
-          </ul>
-          <p>The church will also go through a financial integrity check.</p>
-        </div>
-
-        <div *ngIf="data.businessType == 'Legion'">
-          <p>As a legion, you must submit your legion's:</p>
-          <ul>
-            <li>Name</li>
-            <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
-            <li>
-              Register of all current directors and officers by:
-              <ul>
-                <li>Full legal name</li>
-                <li>Position</li>
-                <li>Date of appointment</li>
-              </ul>
-            </li>
-            <li>Society incorporation number</li>
-            <li>Date of incorporation</li>
-          </ul>
-          <p>The following people in your legion will go through a security clearance check during the application process:</p>
-          <ul>
-            <li>Directors</li>
-            <li>Officers</li>
-            <li>Senior management</li>
-          </ul>
-          <p>The legion will also go through a financial integrity check.</p>
-        </div>
-
-        <div *ngIf="data.businessType == 'Fraternal Organization'">
-          <p>As a fraternal organization, you must submit your fraternal organization's:</p>
-          <ul>
-            <li>Name</li>
-            <li>Contact information (mailing address, email, phone number)</li>
-            <li>Business Number (9-digit number issued by the Canada Revenue Agency)</li>
-            <li>
-              Register of all current directors and officers by:
-              <ul>
-                <li>Full legal name</li>
-                <li>Position</li>
-                <li>Date of appointment</li>
-              </ul>
-            </li>
-            <li>Society incorporation number</li>
-            <li>Date of incorporation</li>
-          </ul>
-          <p>The following people in your fraternal organization will go through a security clearance check during the application process:</p>
-          <ul>
-            <li>Directors</li>
-            <li>Officers</li>
-            <li>Senior management</li>
-          </ul>
-          <p>The fraternal organization will also go through a financial integrity check.</p>
-        </div>
-
         <hr />
       </div>
 
       <!-- bceidAccount -->
       <div *ngIf="data && data.bceidAccount == 'Yes'">
         <h3>Business BCeID</h3>
-        <p>Your organization's Business BCeID will be used to log in to the cannabis retail licence application. Additional Business BCeID user accounts can be created for people who may access the application on the organization's behalf. Create a user account for the person who has been authorized to submit the application.</p>
+        <p>Your business's <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a> will be used to log in to the cannabis retail licence application. Your business can register only one legal entity for a Business BCeID. Additional Business BCeID user accounts can be created for people who may access the application on the organization’s behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
         <hr />
       </div>
       <div *ngIf="data && data.bceidAccount == 'No'">
         <h3>Register for a Business BCeID</h3>
-        <p>Your organization will need a Business BCeID to log in to the application. Check if you have a Business BCeID. If you don't, you need to create one. Additional Business BCeID user accounts can be created for people who may access the application on the organization's behalf. Create a user account for the person who has been authorized to submit the application.</p>
+        <p>Your business will need a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a> to log in to the application. Check if you have a Business BCeID. If you don't, you need to register for one. Additional Business BCeID user accounts can be created for people who may access the application on the business's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
         <hr />
       </div>
       <div *ngIf="data && data.bceidAccount == 'doNotknow'">
         <h3>Find out if you have a Business BCeID account</h3>
-        <p>Check if you have a Business BCeID. If you don't have one, you'll need to get one to log in to the application. Additional Business BCeID user accounts can be created for people who may access the application on the organization's behalf. Create a user account for the person who has been authorized to submit the application.</p>
+        <p>Check if your business has registered for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>. If you don't have one, you'll need to get one to log in to the application. Additional Business BCeID user accounts can be created for people who may access the application on the business's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
         <hr />
       </div>
 
-      <!--ruralRetailStore-->
-      <div *ngIf="data && data.ruralRetailStore == 'Yes'">
-      </div>
-      <div *ngIf="data && data.ruralRetailStore == 'No'">
-      </div>
-
       <!--contactedFirstNation-->
-      <div *ngIf="data.contactedFirstNation">
-        <h3>Contact with the First Nation</h3>
-        <div *ngIf="data.contactedFirstNation == 'Yes'">
-          <p>Keep communicating with the First Nation about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the First Nation to sell cannabis.</p>
+      <div *ngIf="data && data.contactedFirstNation">
+        <h3>Communication with the Indigenous Nation</h3>
+        <div *ngIf="data && data.contactedFirstNation == 'Yes'">
+          <p>The Indigenous Nation must approve your cannabis store application. Keep communicating with the Indigenous Nation about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
-        <div *ngIf="data.contactedFirstNation == 'No'">
-          <p>The First Nation must approve your cannabis store application. Contact the First Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements. You may be required to get a local business licence and zoning approval from the First Nation to sell cannabis.</p>
+        <div *ngIf="data && data.contactedFirstNation == 'No'">
+          <p>The Indigenous Nation must approve your cannabis store application. Contact the Indigenous Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements, such as zoning approval and business licensing.</p>
         </div>
         <hr />
       </div>
 
       <!--contactLg-->
-      <div *ngIf="data.contactLg">
-        <h3>Contact with the Local Government</h3>
-        <div *ngIf="data.contactLg == 'Yes'">
-          <p>Keep communicating with the local government about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the local government to sell cannabis.</p>
+      <div *ngIf="data && data.contactLg">
+        <h3>Communication with the Local Government</h3>
+        <div *ngIf="data && data.contactLg == 'Yes'">
+          <p>The local government must approve your cannabis store application. Keep communicating with the local government about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
-        <div *ngIf="data.contactLg == 'No'">
-          <p>The local government must approve your cannabis store application. Contact the local government to make sure they are accepting applications for cannabis stores and to ask about requirements for cannabis stores that are specific to their community. You may be required to get a local business licence and zoning approval from the local government to sell cannabis.</p>
+        <div *ngIf="data && data.contactLg == 'No'">
+          <p>The local government must approve your cannabis store application. Contact the local government to make sure they are accepting applications for cannabis stores and to ask about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
         <hr />
       </div>
 
       <!-- locationOwnedLeased -->
-      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'Yes'">
+      <div *ngIf="data && data.ruralRetailStore && data.locationOwnedLeased == 'Yes'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>Your store must be a self-contained business.</p>
           <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
           <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
           <ul>
-            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
@@ -729,7 +560,8 @@
                 <li>The locations of all cash registers</li>
                 <li>Which areas are public and which are for staff only</li>
                 <li>The locations of all storage areas</li>
-                <li>How cannabis will not be accessible to minors (including any barriers or partitions separating the cannabis area from the rest of the business)</li>
+                <li>How cannabis will not be accessible to minors (including any barriers separating the cannabis area from the rest of the business)
+                <li>
               </ul>
             </li>
             <li>
@@ -750,7 +582,7 @@
           <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
           <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
           <ul>
-            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
@@ -778,7 +610,7 @@
         <hr />
       </div>
 
-      <div *ngIf="data.ruralRetailStore && data.locationOwnedLeased == 'No'">
+      <div *ngIf="data && data.ruralRetailStore && data.locationOwnedLeased == 'No'">
         <h3>Information about your store</h3>
         <div *ngIf="data.ruralRetailStore == 'Yes'">
           <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to purchase a property or sign a lease if you are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of your business partner’s, may also be accepted.</p>
@@ -786,7 +618,7 @@
           <p>Your store must be a self-contained business. </p>
           <p>During the application, you will need to submit the following information about your location:</p>
           <ul>
-            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
@@ -797,7 +629,7 @@
                 <li>The locations of all cash registers</li>
                 <li>Which areas are public and which are for staff only</li>
                 <li>The locations of all storage areas</li>
-                <li>How cannabis will not be accessible to minors (including any barriers or partitions separating the cannabis area from the rest of the business)</li>
+                <li>How cannabis will not be accessible to minors (including any barriers separating the cannabis area from the rest of the business)</li>
               </ul>
             </li>
             <li>
@@ -819,7 +651,7 @@
           <p>Your store must be a self-contained business.</p>
           <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
           <ul>
-            <li>PID (either a 9-digit number or a physical description of your property)</li>
+            <li>PID (either a nine-digit number or a legal description of your property)</li>
             <li>Photos/renderings of your store’s exterior and signage</li>
             <li>
               A floor plan showing:
@@ -850,12 +682,12 @@
       <!-- connectionToProducerCultivator -->
       <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
         <h3>Connections to Licensed Producers</h3>
-        <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. You will be prohibited from selling any of a producer's products if:</p>
+        <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. You will be prohibited from selling any of a federal producer's products if:</p>
         <ul>
           <li>You own 20% or more of a producer's voting shares</li>
           <li>One of your immediate family members owns 20% or more of a producer's voting shares</li>
           <li>A producer owns 20% or more of your voting shares</li>
-          <li>Any company, person or group of people owns 20% or more of both your organization's and a producer's voting share</li>
+          <li>Any company, person or group of people owns 20% or more of both your business's and a producer's voting share</li>
         </ul>
         <p>When you apply, you must declare any business, financial or family connections that you have to a producer, even if less than 20%.</p>
         <hr />

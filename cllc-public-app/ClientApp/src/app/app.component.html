@@ -7,36 +7,20 @@
              src="/cannabislicensing/assets/bc-logo.svg">
       </a>
       <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
-      <span class="sign" *ngIf="isDevMode">
-          <p class="text-right signin"><a href="/login">Sign In</a></p>
-      </span> 
+      <div *ngIf="isDevMode">
+        <span class="sign" *ngIf="currentUser">
+          {{currentUser.name}}
+          <p class="text-right signin"><a href="/login/cleartoken">Sign Out</a></p>
+        </span>
+        <span class="sign" *ngIf="!currentUser">          
+            <p class="text-right signin"><a href="/login/token/default">Sign In</a></p>          
+        </span>
+      </div> 
     </div>
   </header>
 
   <div *ngIf="currentUser && currentUser.isNewUser == true">
     <main class="app-content">
-        
-        <!-- Sidebar -->
-        <div class="sidebar-wrapper">
-            <ul class="sidebar-nav">
-
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Business Profiles</a>
-                </li>
-                <li>
-                    <a href="#">Profile 1</a>
-                </li>
-                <li>
-                    <a href="#">Profile 2</a>
-                </li>
-         
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
       <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>      
     </main>
   </div>
@@ -46,29 +30,51 @@
 
 
     <!-- /NAVBAR -->
-    <div class="navigationRibbon">
+    <div class="navigationRibbon" *ngIf="!currentUser">
       <div class="level2Navigation">
         <div class="container">
-          <a href="#">Home</a>
-          <a href="policy-document/cannabis-retail-licence">Licence Types</a>
-          <a href="policy-document/eligibility">Application Requirements</a>
-          <a href="policy-document/employee-registration-training">Employees</a>
-          <a href="policy-document/ordering-cannabis">Ordering Cannabis</a>
-          <a href="policy-document/reporting-sales">Reporting</a>
-          <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/bc-liquor-control-and-licensing-contact-us">Contact Us</a>
+          <a routerLink="/">Home</a>
+          <a routerLink="/policy-document/cannabis-retail-licence">Licence Types</a>
+          <a routerLink="/policy-document/eligibility">Application Requirements</a>
+          <a routerLink="/policy-document/employee-registration-training">Employees</a>
+          <a routerLink="/policy-document/ordering-cannabis">Ordering Cannabis</a>
+          <a routerLink="/policy-document/reporting-sales">Reporting</a>
+          <a routerLink="/policy-document/contact">Contact Us</a>
         </div>
       </div>
     </div>
     <!-- /NAVBAR END -->
 
-    <div *ngIf="currentUser">
-      <h1>User is logged in and is not a new user.</h1>
-      {{currentUser.name}}
-      {{currentUser.firstname}} {{currentUser.lastname}}
-    </div>
+    
 
     <main class="app-content container">
-      <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
+      <app-insert id="sidebar-left" class="sidebar-left">
+
+
+      </app-insert>
+
+      <div *ngIf="currentUser">
+        <!-- Sidebar -->
+        <div class="sidebar-wrapper">
+          <ul class="sidebar-nav">
+
+            <li>
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a routerLink="/business-profile">Business Profiles</a>
+            </li>
+            <li>
+              <a routerLink="/">Profile 1</a>
+            </li>
+            <li>
+              <a routerLink="/">Profile 2</a>
+            </li>
+
+          </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+      </div>
 
       <div class="app-main">
 
@@ -84,16 +90,15 @@
   </div>
 
   <footer class="app-footer">
-    <nav class="navbar navbar-default navbar-footer navbar-static-bottom">
+    <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
       <div class="container c1">
-        <ul class="nav navbar-nav">
+        <ul class="navbar-nav">
           <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" title="Goes to BC Gov Disclaimer Page">Disclaimer</a></li>
           <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" title="Goes to BC Gov Privacy Page">Privacy</a></li>
           <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" title="Goes to BC Gov Accessibility Page">Accessibility</a></li>
           <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a></li>
-          <li class="c2">
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/bc-liquor-control-and-licensing-contact-us"
-               target="_blank" title="Goes to BC Gov Contact Page">Contact Us</a>
+          <li class="c2"><a href="policy-document/contact" target="_blank" title="Goes to Contact Page">Contact Us
+            </a>
           </li>
         </ul>
       </div>

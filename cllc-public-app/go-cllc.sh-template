@@ -19,6 +19,16 @@ export DYNAMICS_ODATA_URI=https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.
 export DYNAMICS_CLIENT_ID={CLIENT_ID}
 export DYNAMICS_CLIENT_KEY={CLIENT_KEY}
 
-# e.g. dotnet run, dotnet test, etc.
+export BCREG_SERVICE_ACCT=cannabis
+export BCREG_SERVICE_PASSWD={BCREG_PASSWD}
+
+export SHAREPOINT_SERVER_APPID_URI=https://server.sharepoint.com/
+export SHAREPOINT_WEBNAME=cannabisdev
+export SHAREPOINT_AAD_TENANTID=tenant.onmicrosoft.com
+export SHAREPOINT_CLIENT_ID={CLIENT_ID}
+export SHAREPOINT_CERTIFICATE_FILENAME={PATH_TO_PFX}
+export SHAREPOINT_CERTIFICATE_PASSWORD={PFX_PASSWD}
+
+# .eg. dotnet run, dotnet test, etc.
 dotnet run
 

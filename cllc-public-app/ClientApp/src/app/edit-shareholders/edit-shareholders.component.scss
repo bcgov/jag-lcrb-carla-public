@@ -1,0 +1,19 @@
+
+/*
+.error-msg > div:before {
+  font-family: FontAwesome;
+  content: "\f06a";
+  margin-right: 5px;
+}*/
+
+.error-msg > div {
+  font-size: 85%;
+}
+
+.has-error {
+  color: #a94442;
+}
+
+.has-error .form-control {
+  border-color: #a94442;
+}

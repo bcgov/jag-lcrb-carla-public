@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { HomeComponent } from './home/home.component';
 import { PolicyDocumentComponent } from './policy-document/policy-document.component';
 import { ResultComponent } from './result/result.component';
@@ -7,16 +8,26 @@ import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
-import { SurveyEditorComponent } from './survey/editor.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     //children: []
     component: HomeComponent
+  },
+  {
+    path: 'dashboard',
+    //children: []
+    component: DashboardComponent
+  },
+  {
+    path: 'business-profile',
+    component: BusinessProfileComponent
   },
   {
     path: 'form-viewer/:id',
@@ -35,6 +46,10 @@ const routes: Routes = [
     component: ApplicationsListComponent
   },
   {
+    path: 'lic-app-summary',
+    component: LicenseApplicationSummaryComponent
+  },
+    {
     path: 'prv',
     redirectTo: 'prv/survey'
   },
@@ -63,17 +78,6 @@ const routes: Routes = [
     component: SurveyTestComponent,
     data: {
       breadcrumb: 'Survey Test'
-    }
-  },
-  {
-    path: 'survey-editor',
-    component: SurveyEditorComponent,
-    resolve: {
-      survey: SurveyResolver,
-    },
-    data: {
-      breadcrumb: 'Survey Editor',
-      survey_path: 'assets/survey-primary.json'
     }
   },
   //{ path: '404', component: NotFoundComponent },

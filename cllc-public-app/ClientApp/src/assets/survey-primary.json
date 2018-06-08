@@ -22,7 +22,7 @@
         {
           "type": "radiogroup",
           "name": "licensedProducer",
-          "title": "Are you a licenced producer of cannabis?",
+          "title": "Are you a federally licensed producer of cannabis?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -39,7 +39,7 @@
         {
           "type": "radiogroup",
           "name": "registeredBusiness",
-          "title": "Do you have a registered business or organization?",
+          "title": "Do you have a registered business?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -56,23 +56,16 @@
         {
           "type": "radiogroup",
           "name": "businessType",
-          "title": "What type of business or organization is applying for the licence?",
+          "title": "What type of business is applying for the licence?",
           "isRequired": true,
           "choices": [
             "Corporation",
             "Partnership",
             "Sole-Proprietorship",
             "Society",
-            "Trust",
-            "Estate",
             "Local Government",
             "Indigenous Nation",
-            "School/University",
-            "Co-op",
-            "Strata Council",
-            "Church",
-            "Legion",
-            "Fraternal Organization"
+            "School/University"
           ]
         },
         {
@@ -163,12 +156,12 @@
         {
           "type": "infotext",
           "name": "note",
-          "title": "A cannabis rural retail licence is for cannabis stores in areas where the population would not support a standalone cannabis business. To qualify, the population must be no more than 2500 and the store must be at least 10km away from other cannabis stores (including proposed stores with an application in progress). ",
+          "title": "A cannabis rural retail store licence is for cannabis stores in areas where the population would not support a standalone cannabis business. To qualify, the population must be no more than 2500 and the store must be at least 10km away from other cannabis stores (including proposed stores with an application in progress). ",
           "titleLocation": "hidden"
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
     },
     {
       "name": "p5",
@@ -176,7 +169,7 @@
         {
           "type": "radiogroup",
           "name": "isFirstNationsLand",
-          "title": "Will your proposed location be located on First Nations land?",
+          "title": "Will your proposed location be located under the jurisdiction of an Indigenous Nation?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -196,7 +189,7 @@
           "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'Yes'",
           "width": "50%",
-          "title": "Which First Nation will the proposed location be operating in?"
+          "title": "Which Indigenous Nation has jurisdiction over your proposed location?"
         }
       ],
       "visible": false,
@@ -210,7 +203,7 @@
           "name": "contactedFirstNation",
           "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'Yes'",
-          "title": "Have you contacted the First Nation about opening a cannabis store?",
+          "title": "Have you contacted the Indigenous Nation about opening a cannabis store?",
           "choices": [
             "Yes",
             "No"
@@ -229,7 +222,7 @@
           "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'No'",
           "width": "50%",
-          "title": "Which municipality will the proposed location be operating in?",
+          "title": "Where will your store be operating?",
           "isRequired": true,
           "choicesByUrl": {
             "url": "api/jurisdiction",
@@ -282,7 +275,7 @@
         {
           "type": "radiogroup",
           "name": "connectionToProducerCultivator",
-          "title": "Does your business or you have any business, financial or family connections to licensed producers of cannabis?",
+          "title": "Do you or your business have any business, financial or family connections to licensed producers of cannabis?",
           "isRequired": true,
           "choices": [
             "Yes",

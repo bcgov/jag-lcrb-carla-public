@@ -12,7 +12,7 @@ export class AdoxioApplicationDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("api/adoxioapplication", {
+     return this.http.get("api/adoxioapplication/current", {
        headers: headers
      })
        .toPromise()
@@ -26,6 +26,9 @@ export class AdoxioApplicationDataService {
            adoxioApplication.applyingPerson = entry.applyingPerson;
            adoxioApplication.jobNumber = entry.jobNumber;
            adoxioApplication.licenseType = entry.licenseType;
+           adoxioApplication.establishmentName = entry.establishmentName;
+           adoxioApplication.establishmentAddress = entry.establishmentAddress;
+           adoxioApplication.applicationStatus = entry.applicationStatus;
            allAdoxioApplications.push(adoxioApplication);
          });
          

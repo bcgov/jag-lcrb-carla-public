@@ -22,7 +22,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
-        private readonly Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
 
         private readonly List<Seeder<T>> _seederInstances = new List<Seeder<T>>();
@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// <param name="configuration"></param>
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
-        public SeedFactory(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
+        public SeedFactory(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
         {
             _env = env;
             _loggerFactory = loggerFactory;
