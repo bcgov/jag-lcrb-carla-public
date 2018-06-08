@@ -38,21 +38,36 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
-            string initialName = "InitialName";
             string changedName = "ChangedName";
             string service = "adoxiolegalentity";
+            string firstName = "First";
+            string middleName = "Middle";
+            string lastName = "Last";
+            string initialName = firstName + " " + lastName;
+            DateTime dateOfBirth = DateTime.Now;
+            int commonNonVotingshares = 3000;
+            int commonVotingshares = 1000;
+            int isIndividual = 1;
 
-			await LoginAsDefault();
+
+            await LoginAsDefault();
 
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
-                Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_legalentitytype = (int?) ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                Adoxio_position = (int?) ViewModels.PositionOptions.Director,
-                Adoxio_name = initialName               
+                //Adoxio_legalentityid = Guid.NewGuid(),
+                Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                Adoxio_position = (int?)ViewModels.PositionOptions.Director,
+                Adoxio_name = initialName,
+                Adoxio_firstname = firstName,
+                Adoxio_middlename = middleName,
+                Adoxio_lastname = lastName,
+                Adoxio_commonnonvotingshares = commonNonVotingshares,
+                Adoxio_commonvotingshares = commonVotingshares,
+                Adoxio_dateofbirth = dateOfBirth,
+                Adoxio_isindividual = isIndividual
             };
 
             
@@ -83,7 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
-
+            
             // U - Update            
             adoxio_legalentity.Adoxio_name = changedName;
             adoxio_legalentity.Adoxio_legalentityid = id;
