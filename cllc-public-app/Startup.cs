@@ -173,8 +173,8 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            SharePointFileManager sharePointFileManager = new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword);
-            services.AddSingleton<SharePointFileManager>(sharePointFileManager);
+            // SharePointFileManager sharePointFileManager = ;
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
