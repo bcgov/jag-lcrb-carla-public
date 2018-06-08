@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
+using Gov.Lclb.Cllb.Interfaces;
 
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -96,16 +98,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpPost()]
-        public async Task<IActionResult> CreateApplication([FromBody] Interfaces.Microsoft.Dynamics.CRM.Adoxio_application item)
+		public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
         {
-            // create a new contact.
-            Interfaces.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_application();
+			// create a new dynamics application object.
+            //Interfaces.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_application();
+			Adoxio_application adoxioApplication = await item.ToModel(_system);
 
-            // create a DataServiceCollection to add the record
+			// create a DataServiceCollection to add the record
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
+            // add a new contact.
+			ApplicationCollection.Add(adoxioApplication);
+
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+			Interfaces.Microsoft.Dynamics.CRM.Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+			adoxioApplication.Adoxio_Applicant = owningAccount;
+
+			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
+            
+			var id = dsr.GetAssignedId();
+			Adoxio_application application = await _system.GetAdoxioApplicationById(_distributedCache, (Guid)id);
+			if (application == null) {
+				return StatusCode(500, "Something bad happened");
+			}
+			application.Adoxio_applicationid = id;
+
+			return Json(await application.ToViewModel(_system));
+
+            /*
+			// create a DataServiceCollection to add the record
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
             // add a new contact.
             ContactCollection.Add(adoxioApplication);
-
+            
             // changes need to made after the add in order for them to be saved.
             // tab_general
             adoxioApplication.Adoxio_LicenceType = item.Adoxio_LicenceType; // Licence Type*
@@ -182,7 +217,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplication.Adoxio_LicenceFeeInvoice = item.Adoxio_LicenceFeeInvoice; // Licence Fee Invoice
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-
             DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse result in dsr)
             {
@@ -193,6 +227,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return Json(adoxioApplication);
+            */
         }
     }
 }

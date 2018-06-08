@@ -59,7 +59,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
             var response = await _client.SendAsync(request);
-            string createText = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // parse as JSON.
@@ -68,7 +67,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
-            //Guid id = new Guid(responseViewModel.id);
             Guid id = new Guid(responseViewModel.id);
 			String strid = responseViewModel.externalId;
 			Assert.Equal(strid, viewmodel_account.externalId);
