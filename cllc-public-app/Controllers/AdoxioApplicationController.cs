@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
+using Gov.Lclb.Cllb.Interfaces;
+
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -24,74 +19,128 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class AdoxioApplicationController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
 
-        public AdoxioApplicationController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+  
+        public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;
+            this._httpContextAccessor = httpContextAccessor;
+            this._distributedCache = null; // distributedCache;
         }
 
-        [HttpGet()]
-        public async Task<JsonResult> GetDynamicsApplications ()
+        private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByAplicant(string applicantId)
         {
-            // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
-
-            // get all applications in Dynamics filtered by the applying person
-            //var dynamicsApplicationList = await _system.Adoxio_applications.AddQueryOption("$filter", "_adoxio_applyingperson_value eq 7d4a5b20-e352-e811-8140-480fcfeac941").ExecuteAsync();
-
-            // get all applications in Dynamics
-            var dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
-
-            List<ViewModels.AdoxioApplication> adoxioApplications = new List<AdoxioApplication>();
-            ViewModels.AdoxioApplication adoxioApplication = null;
+            List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
+            IEnumerable<Adoxio_application> dynamicsApplicationList = null;
+            if (string.IsNullOrEmpty (applicantId))
+            {
+                dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
+            }
+            else
+            {
+                // Shareholders have an adoxio_position value of x.
+                dynamicsApplicationList = await _system.Adoxio_applications
+                    .AddQueryOption("$filter", "_adoxio_applicant_value eq " + applicantId) 
+                    .ExecuteAsync();
+            }
 
             if (dynamicsApplicationList != null)
             {
-                foreach (var dynamicsApplication in dynamicsApplicationList)
+                foreach (Adoxio_application dynamicsApplication in dynamicsApplicationList)
                 {
-                    adoxioApplication = new ViewModels.AdoxioApplication();
-                    adoxioApplication.name = dynamicsApplication.Adoxio_name;
-                    //adoxioApplication.applyingPerson = dynamicsApplication.Adoxio_ApplyingPerson.Adoxio_contact_adoxio_application_ApplyingPerson.ToString();
-                    Guid? applyingPersonId = dynamicsApplication._adoxio_applyingperson_value;
-
-                    if (applyingPersonId != null)
-                    {
-                        // fetch a contact
-                        Contexts.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactid: applyingPersonId).GetValueAsync();
-                        adoxioApplication.applyingPerson = contact.Fullname;
-                    }
-
-                    adoxioApplication.jobNumber = dynamicsApplication.Adoxio_jobnumber;
-
-                    Guid? adoxio_licencetypeId = dynamicsApplication._adoxio_licencetype_value;
-                    if (adoxio_licencetypeId != null)
-                    {
-                        Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
-                        adoxioApplication.licenseType = adoxio_licencetype.Adoxio_name;
-                    }
-                                        
-                    adoxioApplications.Add(adoxioApplication);
+                    result.Add(await dynamicsApplication.ToViewModel(_system));
                 }
             }
+            return result;
+        }
+
+        /// GET all applications in Dynamics
+        [HttpGet()]
+        public async Task<JsonResult> GetDynamicsApplications ()
+        {
+            // get all applications in Dynamics
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(null);
+            
+            return Json(adoxioApplications);
+        }
+
+        /// GET all applications in Dynamics for the current user
+        [HttpGet("current")]
+        public async Task<JsonResult> GetCurrentUserDyanamicsApplications()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(userSettings.AccountId);
+
+            // For Demo Only, hardcode the account id !!!
+            //string accountId = "f3310e39-e352-e811-8140-480fcfeac941";
+            //List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(accountId);
 
             return Json(adoxioApplications);
         }
 
-        [HttpPost()]
-        public async Task<JsonResult> CreateApplication([FromBody] Contexts.Microsoft.Dynamics.CRM.Adoxio_application item)
+        /// GET all applications in Dynamics by applicant ID
+        [HttpGet("{applicantId}")]
+        public async Task<JsonResult> GetDynamicsApplications(string applicantId)
         {
-            // create a new contact.
-            Contexts.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Contexts.Microsoft.Dynamics.CRM.Adoxio_application();
+            // get all applications in Dynamics
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(applicantId);
 
-            // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application> ContactCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
+            return Json(adoxioApplications);
+        }
+
+
+        [HttpPost()]
+		public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
+        {
+			// create a new dynamics application object.
+            //Interfaces.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_application();
+			Adoxio_application adoxioApplication = await item.ToModel(_system);
+
+			// create a DataServiceCollection to add the record
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application> ApplicationCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
+            // add a new contact.
+			ApplicationCollection.Add(adoxioApplication);
+
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+			Interfaces.Microsoft.Dynamics.CRM.Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+			adoxioApplication.Adoxio_Applicant = owningAccount;
+
+			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
+            
+			var id = dsr.GetAssignedId();
+			Adoxio_application application = await _system.GetAdoxioApplicationById(_distributedCache, (Guid)id);
+			if (application == null) {
+				return StatusCode(500, "Something bad happened");
+			}
+			application.Adoxio_applicationid = id;
+
+			return Json(await application.ToViewModel(_system));
+
+            /*
+			// create a DataServiceCollection to add the record
+            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
             // add a new contact.
             ContactCollection.Add(adoxioApplication);
-
+            
             // changes need to made after the add in order for them to be saved.
             // tab_general
             adoxioApplication.Adoxio_LicenceType = item.Adoxio_LicenceType; // Licence Type*
@@ -168,10 +217,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplication.Adoxio_LicenceFeeInvoice = item.Adoxio_LicenceFeeInvoice; // Licence Fee Invoice
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-
-            await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
 
             return Json(adoxioApplication);
+            */
         }
     }
 }
