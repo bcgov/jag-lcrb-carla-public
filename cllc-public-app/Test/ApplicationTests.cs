@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // TODO figure out where data is getting stored and do the validations
 			
             
-            Guid id = new Guid(responseViewModel.applicant.id);
+            Guid id = new Guid(responseViewModel.id);
 
             /* TODO the following code assumes we fetch a single application by id, but the service takes an applicant id */
             // R - Read
@@ -94,22 +94,21 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-			var applications = JsonConvert.DeserializeObject<List<ViewModels.AdoxioApplication>>(jsonString);
-            var application  = applications.Where(a => a.id == responseViewModel.id).FirstOrDefault();
+			var application = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
             Assert.Equal(initialName, application.name);
 			Assert.Equal(currentAccount.id, application.applicant.id);
-            Assert.Equal("Applying Person", application.applyingPerson);
+            //Assert.Equal("Applying Person", application.applyingPerson);
             Assert.Equal("Not a Dispensary", application.establishmentName);
             Assert.Equal("Victoria, BC", application.establishmentaddresscity);
             Assert.Equal("V1X 1X1", application.establishmentaddresspostalcode);
 
-            /*
+            
             // U - Update            
-            account.Name = changedName;
+            application.name = changedName;
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(application), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
@@ -119,10 +118,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
-
             jsonString = await response.Content.ReadAsStringAsync();
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
 
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
             Assert.Equal(changedName, responseViewModel.name);
 
             // D - Delete
@@ -142,7 +140,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
 			await Logout();
-			*/
+			
 
             // TODO include this once it works with a newly registered user
             // logout and cleanup (deletes the account and contact created above ^^^)
