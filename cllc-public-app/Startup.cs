@@ -1,3 +1,4 @@
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
 using Gov.Lclb.Cllb.Public.Contexts;
@@ -16,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Net.Http.Headers;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
 using System;
@@ -72,7 +74,6 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(typeof(XDownloadOptionsAttribute));
                 opts.Filters.Add(typeof(XFrameOptionsAttribute));
                 opts.Filters.Add(typeof(XXssProtectionAttribute));
-                //CSP
                 opts.Filters.Add(typeof(CspAttribute));
                 opts.Filters.Add(new CspDefaultSrcAttribute { Self = true });
                 opts.Filters.Add(new CspScriptSrcAttribute { Self = true });
@@ -141,10 +142,13 @@ namespace Gov.Lclb.Cllb.Public
             string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
             string clientId = Configuration["DYNAMICS_CLIENT_ID"];
 
-            services.AddDistributedRedisCache(options =>
+            if (string.IsNullOrEmpty(redisServer))            
             {
-                options.Configuration = redisServer;
-            });
+                services.AddDistributedRedisCache(options =>
+                {
+                    options.Configuration = redisServer;
+                });
+            }
 
             var authenticationContext = new AuthenticationContext(
                "https://login.windows.net/" + aadTenantId);
@@ -153,60 +157,30 @@ namespace Gov.Lclb.Cllb.Public
             task.Wait();
             AuthenticationResult authenticationResult = task.Result; 
 
-            Contexts.Microsoft.Dynamics.CRM.System context = new Contexts.Microsoft.Dynamics.CRM.System (new Uri("https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"));
+            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System (new Uri(Configuration["DYNAMICS_ODATA_URI"]));
 
             context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
             "Authorization", authenticationResult.CreateAuthorizationHeader());            
 
-            services.AddSingleton<Contexts.Microsoft.Dynamics.CRM.System>(context);
+            services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
+
+            // add SharePoint.
+
+            string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
+            string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
+            string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
+            string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
+            string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
+            string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
+
+            SharePointFileManager sharePointFileManager = new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword);
+            services.AddSingleton<SharePointFileManager>(sharePointFileManager);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            string pathBase = Configuration["BASE_PATH"];
-            if (! string.IsNullOrEmpty(pathBase))
-            {
-                app.UsePathBase(pathBase);
-            }            
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-            
-            app.UseXContentTypeOptions();
-            app.UseXfo(xfo => xfo.Deny());
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-            app.UseNoCacheHttpHeaders();
-            // IMPORTANT: This session call MUST go before UseMvc()
-            app.UseSession();
-            app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
-
             var log = loggerFactory.CreateLogger("Startup");
-
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });                        
 
             string connectionString = "unknown.";
             try
@@ -216,9 +190,9 @@ namespace Gov.Lclb.Cllb.Public
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
-                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>(); 
-                    Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System>(); 
-                    
+                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>();
+                    Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System>();
+
                     connectionString = context.Database.GetDbConnection().ConnectionString;
 
                     log.LogInformation("Migrating the database ...");
@@ -242,7 +216,71 @@ namespace Gov.Lclb.Cllb.Public
                 msg.AppendLine("If you are running in a development environment, ensure your test database and server configuration match the project's default connection string.");
                 msg.AppendLine("Which is: " + connectionString);
                 log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
+            }
+
+            
+            string pathBase = Configuration["BASE_PATH"];
+            if (! string.IsNullOrEmpty(pathBase))
+            {
+                app.UsePathBase(pathBase);
             }            
+            if (! env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseCsp(options => options
+                .DefaultSources(s => s.Self())
+                .ScriptSources(s => s.Self())
+                .StyleSources(s => s.Self()));
+                app.UseExceptionHandler("/Home/Error");
+            }
+            
+            app.UseXContentTypeOptions();
+            app.UseXfo(xfo => xfo.Deny());
+
+            StaticFileOptions staticFileOptions = new StaticFileOptions();
+
+            staticFileOptions.OnPrepareResponse = ctx =>
+            {
+                ctx.Context.Response.Headers[HeaderNames.CacheControl] = "no-cache, no-store, must-revalidate, private";
+                ctx.Context.Response.Headers[HeaderNames.Pragma] = "no-cache";
+                ctx.Context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
+                ctx.Context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
+                ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' https://apis.google.com";
+            };
+            
+            app.UseStaticFiles(staticFileOptions);
+            app.UseSpaStaticFiles(staticFileOptions);
+            app.UseXXssProtection(options => options.EnabledWithBlockMode());
+            app.UseNoCacheHttpHeaders();
+            // IMPORTANT: This session call MUST go before UseMvc()
+            app.UseSession();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+            
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                // Only run the angular CLI Server in Development mode (not staging or test.)
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });                        
+
         }
     }
 }
