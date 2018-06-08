@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.OData.Client;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Http;
+using Gov.Lclb.Cllb.Public.Authentication;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -17,78 +18,82 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class AdoxioLicenseController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Contexts.Microsoft.Dynamics.CRM.System _system;
+        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AdoxioLicenseController(Contexts.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        public AdoxioLicenseController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = distributedCache;
+            this._distributedCache = null; // distributedCache;
+            this._httpContextAccessor = httpContextAccessor;
         }
-        
-        // GET: api/adoxiolicense
-        [HttpGet]
-        public async Task<JsonResult> GetDynamicsLicenses()
+
+        private async Task<List<AdoxioLicense>> GetLicensesByLicencee(string licenceeId)
         {
-            // create a DataServiceCollection to add the record
-            DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_licences> LicenseCollection = new DataServiceCollection<Contexts.Microsoft.Dynamics.CRM.Adoxio_licences>(_system);
-
-            // get all licenses in Dynamics filtered by the applying person
-            //var dynamicsApplicationList = await _system.Adoxio_applications.AddQueryOption("$filter", "_adoxio_applyingperson_value eq 7d4a5b20-e352-e811-8140-480fcfeac941").ExecuteAsync();
-
-            // get all licenses in Dynamics
-            var dynamicsLicenseList = await _system.Adoxio_licenceses.ExecuteAsync();
-
-            List<ViewModels.AdoxioLicense> adoxioLicenses = new List<AdoxioLicense>();
-
-            ViewModels.AdoxioLicense adoxioLicense = null;
+            List<AdoxioLicense> adoxioLiceseVMList = new List<AdoxioLicense>();
+            IEnumerable<Adoxio_licences> dynamicsLicenseList = null;
+            if (string.IsNullOrEmpty(licenceeId))
+            {
+                dynamicsLicenseList = await _system.Adoxio_licenceses.ExecuteAsync();
+            }
+            else
+            {
+                // get all licenses in Dynamics filtered by the GUID of the licencee
+                var filter = "_adoxio_licencee_value eq " + licenceeId;
+                dynamicsLicenseList = await _system.Adoxio_licenceses
+                        .AddQueryOption("$filter", filter).ExecuteAsync();
+            }
 
             if (dynamicsLicenseList != null)
             {
-                foreach (var dynamicsLicense in dynamicsLicenseList)
+                foreach (Adoxio_licences dynamicsLicense in dynamicsLicenseList)
                 {
-                    adoxioLicense = new ViewModels.AdoxioLicense();
-
-                    // fetch the establishment
-                    Guid? adoxioEstablishmentId = dynamicsLicense._adoxio_establishment_value;
-                    if (adoxioEstablishmentId != null)
-                    {
-                        Contexts.Microsoft.Dynamics.CRM.Adoxio_establishment establishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmentid: adoxioEstablishmentId).GetValueAsync();
-                        adoxioLicense.establishmentName = establishment.Adoxio_name;
-                        adoxioLicense.establishmentAddress = establishment.Adoxio_addressstreet + ", " + establishment.Adoxio_addresscity + " " + establishment.Adoxio_addresspostalcode;
-                    }
-
-                    // fetch the licence status
-                    int? adoxio_licenceStatusId = dynamicsLicense.Statuscode;
-                    if (adoxio_licenceStatusId != null)
-                    {
-                        adoxioLicense.licenseStatus = dynamicsLicense.Statuscode.ToString();
-                    }
-
-                    // fetch the licence type
-                    Guid? adoxio_licencetypeId = dynamicsLicense._adoxio_licencetype_value;
-                    if (adoxio_licencetypeId != null)
-                    {
-                        Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
-                        adoxioLicense.licenseType = adoxio_licencetype.Adoxio_name;
-                    }
-
-                    adoxioLicense.licenseNumber = dynamicsLicense.Adoxio_licencenumber;
-
-                    adoxioLicenses.Add(adoxioLicense);
+                    adoxioLiceseVMList.Add(await dynamicsLicense.ToViewModel(_system));
                 }
             }
+            return adoxioLiceseVMList;
+        }
+
+        /// GET all licenses in Dynamics
+        [HttpGet()]
+        public async Task<JsonResult> GetDynamicsLicenses()
+        {
+            // get all licenses in Dynamics
+            List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(null);
 
             return Json(adoxioLicenses);
         }
 
-        // GET: api/AdoxioLicense/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+        [HttpGet("current")]
+        public async Task<JsonResult> GetCurrentUserDyanamicsApplications()
         {
-            return "value";
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(userSettings.AccountId);
+
+            // For Demo Only, hardcode the account id !!!
+            //string accountId = "f3310e39-e352-e811-8140-480fcfeac941";
+            //List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(accountId);
+
+            return Json(adoxioLicenses);
         }
-        
+
+        /// GET all licenses in Dynamics filtered by the GUID of the licencee
+        [HttpGet("{licenceeId}")]
+        public async Task<JsonResult> GetDynamicsLicenses(string licenceeId)
+        {
+            // get all licenses in Dynamics by Licencee Id
+            List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(licenceeId);
+
+            return Json(adoxioLicenses);
+        }
+
+
     }
 }

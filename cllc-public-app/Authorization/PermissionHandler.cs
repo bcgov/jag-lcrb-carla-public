@@ -51,9 +51,16 @@ namespace Gov.Lclb.Cllb.Public.Authorization
             // **************************************************
             // Check if we have a Dev Environment Cookie
             // **************************************************
-            if (_hostingEnv.IsDevelopment())
+            if (!_hostingEnv.IsProduction())
             {
                 string temp = _httpContext.Request.Cookies["DEV-USER"];
+
+                if (string.IsNullOrEmpty(temp))
+                { 
+                    // may be a dev header.
+                    temp = _httpContext.Request.Headers["DEV-USER"];
+                }
+
 
                 if (!string.IsNullOrEmpty(temp))
                 {

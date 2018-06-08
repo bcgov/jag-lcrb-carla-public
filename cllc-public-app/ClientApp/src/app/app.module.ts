@@ -45,6 +45,8 @@ import {
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
+import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
+import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -53,6 +55,7 @@ import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
+import { EditShareholdersComponent, ShareholderPersonDialog, ShareholderOrganizationDialog } from './edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -65,7 +68,6 @@ import { StatusBadgeComponent } from './status-badge/status-badge.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
-import { SurveyEditorComponent } from './survey/editor.component';
 import { SurveySidebarComponent } from './survey/sidebar.component';
 import { SurveyDataService } from "./services/survey-data.service";
 import { ResultComponent } from './result/result.component';
@@ -78,16 +80,27 @@ import { NewsletterDataService } from "./services/newsletter-data.service";
 import { UserDataService } from "./services/user-data.service";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { FileDropModule } from 'ngx-file-drop';
+import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
+import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
 
 
 @NgModule({
   declarations: [
     AccordionComponent,
-      AppComponent,
-      ApplicationsListComponent,
+    AppComponent,
+    ApplicationsListComponent,
     BceidConfirmationComponent,
+    BusinessProfileComponent,
     BreadcrumbComponent,
     DynamicsFormComponent,
+    EditShareholdersComponent,
+    ShareholderPersonDialog,
+    ShareholderOrganizationDialog,
     FormViewerComponent,
     HomeComponent,
     InsertComponent,
@@ -101,11 +114,16 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     StaticComponent,
     StatusBadgeComponent,
     SurveyComponent,
-    SurveyEditorComponent,
     SurveyPrimaryComponent,
     SurveySidebarComponent,
     SurveyTestComponent,
-    VoteComponent
+    VoteComponent,
+    LicenseApplicationSummaryComponent,
+    DashboardComponent,
+    FileUploaderComponent,
+    CorporateDetailsComponent,
+    DirectorsAndOfficersComponent,
+    DirectorAndOfficerPersonDialog
   ],
   imports: [
     BrowserModule,
@@ -113,7 +131,7 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    NgbModule,
+    NgbModule.forRoot(),
     AdminModule,
     BrowserAnimationsModule,
     CdkTableModule,
@@ -149,6 +167,7 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    FileDropModule,
     ToastModule.forRoot()
   ],
   exports: [
@@ -192,6 +211,7 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    FileDropModule,
     MatTooltipModule
   ],
   providers: [
@@ -204,7 +224,14 @@ import { ApplicationsListComponent } from './applications-list/applications-list
     SurveyDataService,        
     VoteDataService,
     UserDataService,
-    AdoxioApplicationDataService
+    AdoxioApplicationDataService,
+    AdoxioLegalEntityDataService,
+    AdoxioLicenseDataService
+  ],
+  entryComponents: [
+    ShareholderPersonDialog,
+    ShareholderOrganizationDialog,
+    DirectorAndOfficerPersonDialog
   ],
   bootstrap: [AppComponent]
 })

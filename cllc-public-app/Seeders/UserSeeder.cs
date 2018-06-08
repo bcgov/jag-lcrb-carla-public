@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private string[] ProfileTriggers = { AllProfiles };
 
-        public UserSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Public.Contexts.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
+        public UserSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
             : base(configuration, env, loggerFactory)
         { }
 
@@ -51,13 +51,19 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private List<User> GetSeedUsers(AppDbContext context)
         {
-            List<User> users = new List<User>(GetDefaultUsers(context));
-            if (IsDevelopmentEnvironment)
-                users.AddRange(GetDevUsers(context));
-            if (IsTestEnvironment || IsStagingEnvironment)
-                users.AddRange(GetTestUsers(context));
+            List<User> users = new List<User>(GetDefaultUsers(context));            
+                
             if (IsProductionEnvironment)
+            {
                 users.AddRange(GetProdUsers(context));
+            }
+            else
+            {
+                context.UserRoles.RemoveRange(context.UserRoles);
+                context.Users.RemoveRange(context.Users);
+                users.AddRange(GetDevUsers(context));
+            }
+                
 
             return users;
         }
@@ -82,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                     Active = true,
                     Email = "Testy.McTesterson@TestDomain.test",
                     GivenName = "Testy",
-                    Guid = "2cbf7cb8d6b445f087fb82ad75566a9c",
+                    Guid = "172fd5bf-4210-4067-a248-074ae8580f35",
                     Initials = "TT",
                     SmAuthorizationDirectory = "TEST",
                     SmUserId = "TMcTesterson",
