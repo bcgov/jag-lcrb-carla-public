@@ -1,0 +1,61 @@
+<h1>Security & Financial Assessments</h1>
+<p>
+  The following people in your organization will need to provide their consent for a security assessment and financial check . An email will be sent to each person with a unique login link to provide their consent.
+</p>
+
+<div class="example-container mat-elevation-z8">
+
+  <div class="spinner-container" *ngIf="!dataLoaded">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="dataLoaded">
+    <mat-table #table [dataSource]="dataSource">
+
+      <!-- Column -->
+      <ng-container matColumnDef="sendConsentRequest">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <mat-checkbox [(ngModel)]="element.sendConsentRequest"></mat-checkbox> </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="firstname">
+        <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="emailsent">
+        <mat-header-cell *matHeaderCellDef> Email Sent </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.emailsent | date:'shortDate' }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+</div>
+
+<p>&nbsp;</p>
+<div class="col-md-10 row" style="margin-bottom: 5px;">
+  <a class="globalButton btn btn-primary" tabindex="1" (click)="sendConsentRequestEmail()"><strong>Send Consent Request</strong><br></a>
+</div>

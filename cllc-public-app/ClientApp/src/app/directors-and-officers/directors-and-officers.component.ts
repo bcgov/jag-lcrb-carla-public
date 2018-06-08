@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
+import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 
@@ -26,9 +27,10 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   getDirectorsAndOfficers() {
-    this.legalEntityDataservice.getLegalEntitiesbyPosition("directorofficer")
+    this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition("directorofficer"): ", data);
+        //console.log("parameter: accountId = ", this.accountId)
         this.dataSource.data = data;
         this.dataLoaded = true;
       });
@@ -41,12 +43,12 @@ export class DirectorsAndOfficersComponent implements OnInit {
     adoxioLegalEntity.firstname = formData.firstName;
     adoxioLegalEntity.lastname = formData.lastName;
     adoxioLegalEntity.name = formData.firstName + " " + formData.lastName;
-    //shareholder.email = formData.email;
+    adoxioLegalEntity.email = formData.email;
     //adoxioLegalEntity.dateIssued = formData.dateIssued;
     adoxioLegalEntity.legalentitytype = "PrivateCorporation";
     // the accountId is received as parameter from the business profile
-    //TODO: remove if when accountId is assigned properly
     if (this.accountId) {
+      adoxioLegalEntity.account = new DynamicsAccount();
       adoxioLegalEntity.account.id = this.accountId;
     }
     //adoxioLegalEntity.relatedentities = [];
@@ -74,11 +76,30 @@ export class DirectorsAndOfficersComponent implements OnInit {
         if (formData) {
           let adoxioLegalEntity = this.formDataToModelData(formData);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.legalEntityDataservice.post(adoxioLegalEntity);
-          this.getDirectorsAndOfficers();
+          this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+            res => {
+              this.getDirectorsAndOfficers();
+            },
+            err => {
+              //console.log("Error occured");
+              this.handleError(err);
+            });
         }
       }
     );
+    
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || "";
+      const err = body || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
   }
 
 }
