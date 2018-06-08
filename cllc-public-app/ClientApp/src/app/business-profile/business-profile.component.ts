@@ -56,15 +56,12 @@ export class BusinessProfileComponent {
   }
 
   saveApplicantInformation() {    
-    
     this.dynamicsFormComponent.onSubmit();
   }
 
   changeTab(tab) {
     this.view_tab = tab;
   }
-
-
 
   back() {
     var currentTab = this.getTab();
@@ -83,6 +80,4 @@ export class BusinessProfileComponent {
     }
     this.view_tab = "tab-" + currentTab;
   }
-
-
 }

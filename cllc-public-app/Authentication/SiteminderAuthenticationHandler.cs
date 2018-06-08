@@ -225,10 +225,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     _logger.LogInformation("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
+					_logger.LogError("UserSettings found: " + userSettings.GetJson());
                 }
                 catch
                 {
-                    //do nothing
+					//do nothing
+					_logger.LogError("No UserSettings found");
                 }
 
                 // is user authenticated - if so we're done
