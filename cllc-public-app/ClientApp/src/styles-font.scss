@@ -106,3 +106,7 @@ h5 {
 select.form-control:not([size]):not([multiple]) {
     height: auto;
   }
+
+.form-control{
+    border-radius: 5px;
+}
