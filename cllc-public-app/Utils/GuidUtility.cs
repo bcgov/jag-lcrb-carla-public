@@ -91,7 +91,7 @@ namespace Logos.Utility
 		public static readonly Guid IsoOidNamespace = new Guid("6ba7b812-9dad-11d1-80b4-00c04fd430c8");
 
 		// Converts a GUID (expressed as a byte array) to/from network order (MSB-first).
-		internal static void SwapByteOrder(byte[] guid)
+		public static void SwapByteOrder(byte[] guid)
 		{
 			SwapBytes(guid, 0, 3);
 			SwapBytes(guid, 1, 2);
