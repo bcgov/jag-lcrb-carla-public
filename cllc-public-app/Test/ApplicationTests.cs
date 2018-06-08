@@ -43,9 +43,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             string changedName = "ChangedName";
 			string service = "adoxioapplication";
 
+            // TODO once the unit tests are fixed (session management) change this test to use a newly registered user
 			// login as default and get account for current user
-			string loginName = randomNewUserName("AppUser", 6);
-			var strId = await LoginAndRegisterAsNewUser(loginName);
+			//string loginName = randomNewUserName("AppUser", 6);
+			//var strId = await LoginAndRegisterAsNewUser(loginName);
+			await LoginAsDefault();
 
 			ViewModels.User user = await GetCurrentUser();
 			ViewModels.Account currentAccount = await GetAccountForCurrentUser();
@@ -53,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-			ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+			var viewmodel_application = new ViewModels.AdoxioApplication()
 			{
 				name = initialName,
 				applyingPerson = "Applying Person",
@@ -80,22 +82,26 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
-			Assert.Equal("Applying Person", responseViewModel.applyingPerson);
-			Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
-			Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
-			Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+            // TODO figure out where data is getting stored and do the validations
+			
             
-            Guid id = new Guid(responseViewModel.id);
+            Guid id = new Guid(responseViewModel.applicant.id);
 
+            /* TODO the following code assumes we fetch a single application by id, but the service takes an applicant id */
             // R - Read
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-			responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-            Assert.Equal(initialName, responseViewModel.name);
-			Assert.Equal(currentAccount.id, responseViewModel.applicant.id);
+			var applications = JsonConvert.DeserializeObject<List<ViewModels.AdoxioApplication>>(jsonString);
+            var application  = applications.Where(a => a.id == responseViewModel.id).FirstOrDefault();
+            Assert.Equal(initialName, application.name);
+			Assert.Equal(currentAccount.id, application.applicant.id);
+            Assert.Equal("Applying Person", application.applyingPerson);
+            Assert.Equal("Not a Dispensary", application.establishmentName);
+            Assert.Equal("Victoria, BC", application.establishmentaddresscity);
+            Assert.Equal("V1X 1X1", application.establishmentaddresspostalcode);
 
             /*
             // U - Update            
@@ -138,8 +144,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await Logout();
 			*/
 
-			// logout and cleanup (deletes the account and contact created above ^^^)
-            await LogoutAndCleanupTestUser(strId);
+            // TODO include this once it works with a newly registered user
+            // logout and cleanup (deletes the account and contact created above ^^^)
+            //await LogoutAndCleanupTestUser(strId);
         }
         /*
         [Fact]
