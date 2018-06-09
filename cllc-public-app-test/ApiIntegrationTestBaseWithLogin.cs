@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Mvc.Testing;
 using System.IO;
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
@@ -10,48 +11,42 @@ using Xunit;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public abstract class ApiIntegrationTestBaseWithLogin
+    public abstract class ApiIntegrationTestBaseWithLogin : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
-        protected readonly TestServer _server;
-        protected readonly HttpClient _client;
+        private readonly CustomWebApplicationFactory<Startup> _factory;
 
-        /// <summary>
-        /// Setup the test
-        /// </summary>        
-		protected ApiIntegrationTestBaseWithLogin()
+        public HttpClient _client { get; }
+
+        public ApiIntegrationTestBaseWithLogin(CustomWebApplicationFactory<Startup> fixture)
         {
-            var testConfig = new ConfigurationBuilder()
-                .AddUserSecrets<ApiIntegrationTestBase>()
-                .AddEnvironmentVariables()
-                .Build();
-
-            var builder = WebHost.CreateDefaultBuilder()               
-                .UseEnvironment("Staging")
-                .UseConfiguration(testConfig)
-                .UseStartup<Startup>();
-
-            _server = new TestServer(builder);
-			_client = _server.CreateClient();
+            _factory = fixture;
+            _client = _factory                
+                .CreateClient(new WebApplicationFactoryClientOptions
+                {
+                    AllowAutoRedirect = false
+                });                
         }
 
-		public async System.Threading.Tasks.Task Login(string userid)
+        public async System.Threading.Tasks.Task Login(string userid)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/login/token/" + userid);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + userid);
             var response = await _client.SendAsync(request);
-            Assert.Equal(response.StatusCode, HttpStatusCode.Found);
+            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
             _client.DefaultRequestHeaders.Add("DEV-USER", userid);
         }
 
 		public async System.Threading.Tasks.Task LoginAsDefault()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "/login/token/default");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/default");
             var response = await _client.SendAsync(request);
-            Assert.Equal(response.StatusCode, HttpStatusCode.Found);
+            var temp = await response.Content.ReadAsStringAsync();
+            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
 			_client.DefaultRequestHeaders.Add("DEV-USER", "TMcTesterson");
             string _discard = await response.Content.ReadAsStringAsync();
         }
@@ -107,8 +102,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// test that the current user is updated
 			user = await GetCurrentUser();
 			Assert.NotNull(user.accountid);
-			//Assert.NotEmpty(user.accountid);
-			//Assert.Equal(strId, user.accountid);
+			Assert.NotEmpty(user.accountid);
+			Assert.Equal(strId, user.accountid);
 
 			return id;
 		}
@@ -117,7 +112,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		{
 			var request = new HttpRequestMessage(HttpMethod.Get, "/login/cleartoken");
             var response = await _client.SendAsync(request);
-            Assert.Equal(response.StatusCode, HttpStatusCode.Found);
+            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
 			_client.DefaultRequestHeaders.Remove("DEV-USER");
             string _discard = await response.Content.ReadAsStringAsync();
 		}
@@ -171,7 +166,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
-            Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
 			string _discard = await response.Content.ReadAsStringAsync();
         }
     }
