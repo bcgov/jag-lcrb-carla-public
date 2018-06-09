@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user.businessname, loginUser + " TestBusiness");
 
             // fetch our current account
-            //ViewModels.Account account = await GetAccountForCurrentUser();
+            ViewModels.Account account = await GetAccountForCurrentUser();
 
             // logout and verify we are logged out
             await Logout();
@@ -72,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             user = await GetCurrentUser();
             Assert.Equal(user.name, loginUser + " TestUser");
             Assert.Equal(user.businessname, loginUser + " TestBusiness");
-            //account = await GetAccountForCurrentUser();
+            account = await GetAccountForCurrentUser();
 
             // logout and cleanup (deletes the account and contact created above ^^^)
             await LogoutAndCleanupTestUser(strId);

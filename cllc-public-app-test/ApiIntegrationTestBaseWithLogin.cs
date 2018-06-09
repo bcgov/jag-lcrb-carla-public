@@ -83,9 +83,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
 			var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
             var jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+			response.EnsureSuccessStatusCode();
+
+			ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
             // name should match.
             Assert.Equal(user.businessname, responseViewModel.name);
@@ -103,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			user = await GetCurrentUser();
 			Assert.NotNull(user.accountid);
 			Assert.NotEmpty(user.accountid);
-			Assert.Equal(strId, user.accountid);
+			Assert.Equal(id, user.accountid);
 
 			return id;
 		}
@@ -112,9 +113,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 		{
 			var request = new HttpRequestMessage(HttpMethod.Get, "/login/cleartoken");
             var response = await _client.SendAsync(request);
+			string _discard = await response.Content.ReadAsStringAsync();
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
 			_client.DefaultRequestHeaders.Remove("DEV-USER");
-            string _discard = await response.Content.ReadAsStringAsync();
 		}
 
         public async System.Threading.Tasks.Task LogoutAndCleanupTestUser(string strId)
@@ -124,20 +125,20 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// cleanup - delete the account and contract when we are done
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
             var response = await _client.SendAsync(request);
+			var _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            var _discard = await response.Content.ReadAsStringAsync();
 
             // second delete should return a 404.
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
             response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             _discard = await response.Content.ReadAsStringAsync();
+			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
             response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             _discard = await response.Content.ReadAsStringAsync();
+			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             await Logout();
 		}
@@ -146,8 +147,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
-			response.EnsureSuccessStatusCode();
             string resp = await response.Content.ReadAsStringAsync();
+			response.EnsureSuccessStatusCode();
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(resp);
             return user;
         }
@@ -156,8 +157,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 		{
 			var request = new HttpRequestMessage(HttpMethod.Get, "/api/account/current");
 			var response = await _client.SendAsync(request);
-			response.EnsureSuccessStatusCode();
 			var jsonString = await response.Content.ReadAsStringAsync();
+			response.EnsureSuccessStatusCode();
 			var currentAccount = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 			return currentAccount;
 		}
@@ -166,8 +167,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
 			string _discard = await response.Content.ReadAsStringAsync();
+			Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
     }
 }
