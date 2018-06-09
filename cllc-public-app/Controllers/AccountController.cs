@@ -226,6 +226,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 userSettings.IsNewUserRegistration = false;
 
+				userSettings.AccountId = id.ToString();
+				userSettings.ContactId = contactId.ToString();
+
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
                 // add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
