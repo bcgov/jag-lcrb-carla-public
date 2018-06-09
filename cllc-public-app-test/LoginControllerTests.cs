@@ -19,62 +19,66 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
     public class LoginControllerTests : ApiIntegrationTestBaseWithLogin
     {
+        public LoginControllerTests(CustomWebApplicationFactory<Startup> factory)
+          : base(factory)
+        { }
+
         [Fact]
         public async System.Threading.Tasks.Task DefaultUserIsAnonymous()
         {
-			await GetCurrentUserIsUnauthorized();
+            await GetCurrentUserIsUnauthorized();
         }
 
         [Fact]
         public async System.Threading.Tasks.Task LoginSetsCurrentUserThenLogoutIsAnonymous()
         {
-			await LoginAsDefault();
+            await LoginAsDefault();
 
-			ViewModels.User user = await GetCurrentUser();
-            
+            ViewModels.User user = await GetCurrentUser();
+
             // Verify the Default development user.
             Assert.Equal(user.name, "TMcTesterson TestUser");
             Assert.False(user.isNewUser);
 
-			await Logout();
+            await Logout();
 
-			await GetCurrentUserIsUnauthorized();
+            await GetCurrentUserIsUnauthorized();
         }
 
         [Fact]
         public async System.Threading.Tasks.Task NewUserRegistrationProcessWorks()
         {
             // verify (before we log in) that we are not logged in
-			await GetCurrentUserIsUnauthorized();
+            await GetCurrentUserIsUnauthorized();
 
-			// register as a new user (creates an account and contact)
-			var loginUser = randomNewUserName("NewUser", 6);
-			var strId = await LoginAndRegisterAsNewUser(loginUser);
+            // register as a new user (creates an account and contact)
+            var loginUser = randomNewUserName("NewUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // verify the current user represents our new user
-			ViewModels.User user = await GetCurrentUser();
-			Assert.Equal(user.name, loginUser + " TestUser");
-			Assert.Equal(user.businessname, loginUser + " TestBusiness");
+            ViewModels.User user = await GetCurrentUser();
+            Assert.Equal(user.name, loginUser + " TestUser");
+            Assert.Equal(user.businessname, loginUser + " TestBusiness");
 
-			// fetch our current account
-			//ViewModels.Account account = await GetAccountForCurrentUser();
+            // fetch our current account
+            //ViewModels.Account account = await GetAccountForCurrentUser();
 
             // logout and verify we are logged out
-			await Logout();
+            await Logout();
             await GetCurrentUserIsUnauthorized();
 
             // login again as the same user as above ^^^
-			await Login(loginUser);
-			user = await GetCurrentUser();
+            await Login(loginUser);
+            user = await GetCurrentUser();
             Assert.Equal(user.name, loginUser + " TestUser");
             Assert.Equal(user.businessname, loginUser + " TestBusiness");
             //account = await GetAccountForCurrentUser();
 
             // logout and cleanup (deletes the account and contact created above ^^^)
-			await LogoutAndCleanupTestUser(strId);
+            await LogoutAndCleanupTestUser(strId);
 
             // verify we are now logged out and un-authorized
-			await GetCurrentUserIsUnauthorized();
+            await GetCurrentUserIsUnauthorized();
         }
-	}
+    }
 }
