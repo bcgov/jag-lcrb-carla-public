@@ -57,16 +57,6 @@ export class AdoxioLegalEntityDataService {
     //console.log("===== AdoxioLegalEntityDataService.post: ", data);
 
     return this.http.post("api/adoxiolegalentity/", data, { headers: headers });
-    //  .subscribe(
-    //    res => {
-    //  return res['employees']
-    //      //console.log(res);
-    //    },
-    //    err => {
-    //      //console.log("Error occured");
-    //      this.handleError(err);
-    //    }
-    //);
   }
 
   sendConsentRequestEmail(data: string[]) {
@@ -77,15 +67,6 @@ export class AdoxioLegalEntityDataService {
     let apiPath = "api/adoxiolegalentity/" + legalEntityId + "/sendconsentrequests";
 
     return this.http.post(apiPath, data, { headers: headers });
-      //.subscribe(
-      //  res => {
-      //    //console.log(res);
-      //  },
-      //  err => {
-      //    //console.log("Error occured");
-      //    this.handleError(err);
-      //  }
-      //);
   }
 
    private handleError(error: Response | any) {
