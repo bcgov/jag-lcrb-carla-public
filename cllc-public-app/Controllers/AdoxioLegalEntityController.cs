@@ -4,6 +4,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
 
@@ -23,15 +25,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly SharePointFileManager _sharePointFileManager;
+		private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string _encryptionKey;
+		private readonly ILogger _logger;        
 
-        public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager)
+		public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, 
+		                                   ILoggerFactory loggerFactory, IDistributedCache distributedCache, 
+		                                   IHttpContextAccessor httpContextAccessor, SharePointFileManager sharePointFileManager)
         {
             Configuration = configuration;
             this._system = context;
             this._distributedCache = null; // distributedCache;
             this._sharePointFileManager = sharePointFileManager;
             this._encryptionKey = Configuration["ENCRYPTION_KEY"];
+			this._httpContextAccessor = httpContextAccessor;
+			_logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));                    
         }
 
         /// <summary>
@@ -218,17 +226,64 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // process the upload.
                     string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
                     // string sanitized = legalEntity.Adoxio_name.Replace(" ", "_");
-                    string folderName = "Shared Documents";
+					string folderName = await GetCurrentSharePointFolderName(); // "Shared Documents";
+
+					_logger.LogError("File name = " + fileName);
+					_logger.LogError("Folder name = " + folderName);
 
                     await _sharePointFileManager.AddFile(folderName, fileName, file.OpenReadStream(), file.ContentType);
                 }
                 catch (Exception dsqe)
                 {
-                    return new NotFoundResult();
+					_logger.LogError(dsqe.Message);
+					_logger.LogError(dsqe.StackTrace);
+					return StatusCode(500, dsqe.Message + dsqe.StackTrace);
+                    //return new NotFoundResult();
                 }
             }
             return Json(result);
         }
+
+		[HttpGet("{accountId}/folder")]
+		public async Task<string> GetSharePointFolderName([FromRoute] string accountId)
+		{
+			return await GetSharePointFolderNameInternal(accountId);
+		}
+
+		public async Task<string> GetCurrentSharePointFolderName()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+			return await GetSharePointFolderNameInternal(userSettings.AccountId);
+        }
+
+		private async Task<string> GetSharePointFolderNameInternal(string accountId)
+        {
+			var currentAccountId = Guid.Parse(accountId);
+            Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, currentAccountId);
+            if (account == null)
+            {
+                throw new Exception("Account not found");
+            }
+            var currentAccount = account.ToViewModel();
+
+            string folder = nameSubfolder(currentAccount.name) + "_" + idSubfolder(currentAccount.id);
+
+            return folder;
+        }
+
+		private string nameSubfolder(string accountName)
+		{
+			return accountName;
+		}
+
+        private string idSubfolder(string accountId)
+		{
+			// remove "-" and convert to upper case
+			return accountId.Replace("-", "").ToUpper();
+		}
 
         [HttpGet("{id}/attachments/{fileId}")]
         public async Task<IActionResult> DownloadFile([FromRoute] string id, [FromRoute] string fileId)
