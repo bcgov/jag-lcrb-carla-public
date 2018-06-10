@@ -143,6 +143,32 @@ namespace Gov.Lclb.Cllb.Public.Test
             await Logout();
         }
 
+		[Fact]
+		public async System.Threading.Tasks.Task TestSharepointUploadFolder()
+		{
+			string service = "adoxiolegalentity";
+
+			// create a new account
+			var loginUser = randomNewUserName("TestSharePointUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
+            var response = await _client.SendAsync(request);
+            string jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+
+            // get folder name
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + strId + "/folder");
+			response = await _client.SendAsync(request);
+			string folder = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+			Assert.Equal(loginUser + " TestBusiness_" + strId.Replace("-", "").ToUpper(), folder);
+
+			await LogoutAndCleanupTestUser(strId);
+		}
+
         [Fact]
         public async System.Threading.Tasks.Task TestFileUpload()
         {
