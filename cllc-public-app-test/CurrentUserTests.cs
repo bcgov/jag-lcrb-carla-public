@@ -18,6 +18,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
 	public class CurrentUserTests : ApiIntegrationTestBaseWithLogin
     {
+        public CurrentUserTests(CustomWebApplicationFactory<Startup> factory)
+          : base(factory)
+        { }
+
         [Fact]
         public async System.Threading.Tasks.Task DefaultDevelopmentUserIsValid()
         {
@@ -25,9 +29,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
             string jsonString = await response.Content.ReadAsStringAsync();
+			response.EnsureSuccessStatusCode();
 
             ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
 
@@ -50,10 +53,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
+			string jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-
-            string jsonString = await response.Content.ReadAsStringAsync();
-
             ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
 
             // The Default development user should not be a new user.
@@ -63,6 +64,27 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             ViewModels.Account account = await GetAccountForCurrentUser();
             Assert.NotNull(account);
+			var prevId = account.id;
+
+            // logout and then login again, and verify we can still get our account
+			await Logout();
+			await Login(loginUser);
+
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+
+            // The Default development user should not be a new user.
+            Assert.False(user.isNewUser);
+            Assert.NotNull(user.accountid);
+            Assert.NotEmpty(user.accountid);
+
+			account = await GetAccountForCurrentUser();
+            Assert.NotNull(account);
+
+			Assert.Equal(account.id, prevId);
 
 			await LogoutAndCleanupTestUser(strId);
         }

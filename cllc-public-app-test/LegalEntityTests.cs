@@ -19,21 +19,25 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
 	public class LegalEntityTests : ApiIntegrationTestBaseWithLogin
     {
-		[Fact]
-		public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
-		{
-			string service = "adoxiolegalentity";
-			string id = "SomeRandomId";
+        public LegalEntityTests(CustomWebApplicationFactory<Startup> factory)
+          : base(factory)
+        { }
 
-			// first confirm we are not logged in
-			await GetCurrentUserIsUnauthorized();
+        [Fact]
+        public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
+        {
+            string service = "adoxiolegalentity";
+            string id = "SomeRandomId";
+
+            // first confirm we are not logged in
+            await GetCurrentUserIsUnauthorized();
 
             // try a random GET, should return unauthorized
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             var response = await _client.SendAsync(request);
-			Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
+            Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
             string _discard = await response.Content.ReadAsStringAsync();
-		}
+        }
 
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
@@ -72,7 +76,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 //Adoxio_Account = Guid.Parse(accountId)
             };
 
-            
+
 
             ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
 
@@ -100,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
-            
+
             // U - Update            
             adoxio_legalentity.Adoxio_name = changedName;
             adoxio_legalentity.Adoxio_legalentityid = id;
@@ -120,8 +124,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
 
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
-            Assert.Equal(changedName, responseViewModel.name);			
-			
+            Assert.Equal(changedName, responseViewModel.name);
+
             // D - Delete
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");

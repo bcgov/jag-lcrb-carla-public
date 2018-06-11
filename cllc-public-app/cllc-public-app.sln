@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces-test", "cll
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint.Tests", "..\cllc-interfaces-test\SharePoint\SharePoint.Tests.csproj", "{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dynamics", "..\cllc-interfaces\Dynamics\Dynamics.csproj", "{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynamics", "..\cllc-interfaces\Dynamics\Dynamics.csproj", "{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cllc-public-app-test", "..\cllc-public-app-test\cllc-public-app-test.csproj", "{6027CAC7-CECF-4C24-BD31-324689631D7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
