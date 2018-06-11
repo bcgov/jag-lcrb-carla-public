@@ -77,7 +77,9 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Adoxio_externalid = user.accountid
             };
 
+            
             ViewModels.Account viewmodel_account = account.ToViewModel();
+
             Assert.Equal(account.Adoxio_externalid, viewmodel_account.externalId);
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);

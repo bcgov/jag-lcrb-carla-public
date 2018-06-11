@@ -8,36 +8,36 @@
       <!-- age19 -->
       <div *ngIf="data && data.age19 == 'Yes'; else elseAge">
         <ul class="detail-step">
-          <li>You are 19 years old or over</li>
+          <li>The applicant is 19 years old or over</li>
         </ul>
       </div>
       <ng-template #elseAge>
         <ul class="detail-step">
-          <li>You are not 19 years old or over</li>
+          <li>The applicant is not 19 years old or over</li>
         </ul>
       </ng-template>
 
       <!--licensedProducer-->
       <div *ngIf="data && data.licensedProducer == 'Yes'">
         <ul class="detail-step">
-          <li>You are a federally licensed producer of cannabis</li>
+          <li>The applicant is a federally licensed producer of cannabis</li>
         </ul>
       </div>
       <div *ngIf="data && data.licensedProducer == 'No'">
         <ul class="detail-step">
-          <li>You are not a federally licensed producer of cannabis</li>
+          <li>The applicant is not a federally licensed producer of cannabis</li>
         </ul>
       </div>
 
       <!-- registeredBusiness -->
       <div *ngIf="data && data.registeredBusiness == 'Yes'">
         <ul class="detail-step">
-          <li>You have a registered business in British Columbia that will be applying for a licence</li>
+          <li>The applicant has a registered business in British Columbia that will be applying for a licence</li>
         </ul>
       </div>
       <div *ngIf="data && data.registeredBusiness == 'No'">
         <ul class="detail-step">
-          <li>You don't have a registered business in British Columbia that will be applying for a licence</li>
+          <li>The applicant does not have a registered business in British Columbia that will be applying for a licence</li>
         </ul>
       </div>
 
@@ -56,96 +56,96 @@
       <!-- bceidAccount -->
       <div *ngIf="data && data.bceidAccount == 'Yes'">
         <ul class="detail-step">
-          <li>You have a 'Business BCeID' account</li>
+          <li>The business applying for the licence has a 'Business BCeID' account</li>
         </ul>
       </div>
       <div *ngIf="data && data.bceidAccount == 'No'">
         <ul class="detail-step">
-          <li>You don't have a 'Business BCeID' account</li>
+          <li>The business applying for the licence doesn't have a 'Business BCeID' account</li>
         </ul>
       </div>
       <div *ngIf="data && data.bceidAccount == 'doNotknow'">
         <ul class="detail-step">
-          <li>You don’t know if you have a 'Business BCeID' account</li>
+          <li>You don’t know if the business applying for the licence has a 'Business BCeID' account</li>
         </ul>
       </div>
 
       <!-- isFirstNationsLand -->
       <div *ngIf="data && data.isFirstNationsLand == 'Yes'">
         <ul class="detail-step">
-          <li>Your proposed location is under the jurisdiction of an Indigenous Nation</li>
+          <li>The proposed store location is under the jurisdiction of an Indigenous Nation</li>
         </ul>
       </div>
       <div *ngIf="data && data.isFirstNationsLand == 'No'">
         <ul class="detail-step">
-          <li>Your proposed location is not under the jurisdiction of an Indigenous Nation</li>
+          <li>The proposed store location is not under the jurisdiction of an Indigenous Nation</li>
         </ul>
       </div>
 
       <!-- firstNationsLand -->
       <div *ngIf="data && data.firstNationsLand">
         <ul class="detail-step">
-          <li>The Indigenous Nation that has jurisdiction over your proposed location is: {{data.firstNationsLand}}</li>
+          <li>The Indigenous Nation that has jurisdiction over the proposed store location is: {{data.firstNationsLand}}</li>
         </ul>
       </div>
 
       <!-- contactedFirstNation -->
       <div *ngIf="data && data.contactedFirstNation == 'Yes'">
         <ul class="detail-step">
-          <li>You have contacted the Indigenous Nation about opening a cannabis store</li>
+          <li>The applicant has contacted the Indigenous Nation about opening a cannabis store</li>
         </ul>
       </div>
       <div *ngIf="data && data.contactedFirstNation == 'No'">
         <ul class="detail-step">
-          <li>You have not contacted the Indigenous Nation about opening a cannabis store</li>
+          <li>The applicant has not contacted the Indigenous Nation about opening a cannabis store</li>
         </ul>
       </div>
 
       <!-- storelocation -->
       <div *ngIf="data && data.storelocation">
         <ul class="detail-step">
-          <li>Your proposed location is in {{data.storelocation}}</li>
+          <li>The proposed store location is in {{data.storelocation}}</li>
         </ul>
       </div>
 
       <!-- contactLg -->
       <div *ngIf="data && data.contactLg == 'Yes'">
         <ul class="detail-step">
-          <li>You have contacted the local government about opening a cannabis store</li>
+          <li>The applicant has contacted the local government about opening a cannabis store</li>
         </ul>
       </div>
       <div *ngIf="data && data.contactLg == 'No'">
         <ul class="detail-step">
-          <li>You have not contacted the local government about opening a cannabis store</li>
+          <li>The applicant has not contacted the local government about opening a cannabis store</li>
         </ul>
       </div>
 
       <!-- locationOwnedLeased -->
       <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
         <ul class="detail-step">
-          <li>You have a store location currently owned or leased</li>
+          <li>The applicant has a store location currently owned or leased</li>
         </ul>
       </div>
       <div *ngIf="data && data.locationOwnedLeased == 'No'">
         <ul class="detail-step">
-          <li>You don't have a store location currently owned or leased</li>
+          <li>The applicant doesn't have a store location currently owned or leased</li>
         </ul>
       </div>
 
       <!-- connectionToProducerCultivator -->
       <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
         <ul class="detail-step">
-          <li>You or your business has at least one business, financial or family connection to licensed producers of cannabis.</li>
+          <li>The applicant or the business applying for a licence has at least one business, financial or family connection to licensed producers of cannabis.</li>
         </ul>
       </div>
       <div *ngIf="data && data.connectionToProducerCultivator == 'No'">
         <ul class="detail-step">
-          <li>Neither you nor your business has any business, financial or family connections to licensed producers of cannabis.</li>
+          <li>Neither the applicant nor the business applying for the licence has any business, financial or family connections to licensed producers of cannabis.</li>
         </ul>
       </div>
       <div *ngIf="data && data.connectionToProducerCultivator == 'doNotknow'">
         <ul class="detail-step">
-          <li>You don’t know if you or your business has any business, financial or family connections to licensed producers of cannabis.</li>
+          <li>You don’t know if the applicant or the business applying for the licence has any business, financial or family connections to licensed producers of cannabis.</li>
         </ul>
       </div>
 
@@ -153,13 +153,13 @@
 
       <!-- *********************** RESULTS ********************************* -->
 
-      <h2 *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">What you need to prepare</h2>
+      <h2 *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">What the applicant needs to prepare</h2>
 
       <!-- age19 -->
       <div *ngIf="data && data.age19 == 'No'">
         <h3>Age Eligibility</h3>
         <ul class="detail-step">
-          <li>You are not eligible to apply for a cannabis retail store licence if you are under 19 years old.</li>
+          <li>The applicant is not eligible to apply for a cannabis retail store licence if they are under 19 years old.</li>
         </ul>
       </div>
 
@@ -167,7 +167,7 @@
       <div *ngIf="data && data.licensedProducer == 'Yes'">
         <h3>Licensed producer of cannabis</h3>
         <p>
-          You are not eligible for a cannabis retail store licence if you are a federally licensed producer of cannabis.
+          The applicant is not eligible for a cannabis retail store licence if they are a federally licensed producer of cannabis.
         </p>
         <hr />
       </div>
@@ -176,7 +176,7 @@
       <div *ngIf="data && data.registeredBusiness == 'No'">
         <h3>Registered business</h3>
         <p>
-          You must have a registered business to apply for a licence. The type of business you register will determine who will need a security clearance check and what business information you need to submit. You can register a business with <a href="http://www.bcbusinessregistry.ca/" target="_blank">OneStop</a>, B.C.'s Business Registry. You should also register for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>.
+          The applicant must have a registered business to apply for a licence. The type of business that an applicant holds will determine who will need a security clearance check and what business information the applicant needs to submit. The applicant can register a business with <a href="http://www.bcbusinessregistry.ca/" target="_blank">OneStop</a>, B.C.'s Business Registry. The business should also register for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>.
         </p>
         <hr />
       </div>
@@ -193,7 +193,7 @@
 
         <!--data.corporationType-->
         <div *ngIf="data && data.corporationType == 'Public Corporation'">
-          <p>As a public corporation, you must submit the corporation's:</p>
+          <p>Applicants applying as a public corporation must submit the corporation's:</p>
           <ul class="detail-step">
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
@@ -208,9 +208,9 @@
                 <li>Date of appointment</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of business</li>
+            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, the applicant must submit all the required information for that type of business</li>
           </ul>
-          <p>The following people in your corporation will go through a security clearance check during the application process:</p>
+          <p>The following people in the corporation will go through a security clearance check during the application process:</p>
           <ul class="detail-step">
             <li>Directors</li>
             <li>Officers</li>
@@ -219,7 +219,7 @@
         </div>
 
         <div *ngIf="data && data.corporationType == 'Private Corporation'">
-          <p>As a private corporation, you must submit the corporation's:</p>
+          <p>Applicants applying as a private corporation must submit the corporation's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (address, email, phone number)</li>
@@ -243,9 +243,9 @@
                 <li>Date shares issued/transferred/cancelled</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, you must submit all the required information for that type of business</li>
+            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, the applicant must submit all the required information for that type of business</li>
           </ul>
-          <p>The following people in your corporation will go through a security clearance check during the application process:</p>
+          <p>The following people in the corporation will go through a security clearance check during the application process:</p>
           <ul>
             <li>Directors</li>
             <li>Officers</li>
@@ -255,7 +255,7 @@
         </div>
 
         <div *ngIf="data && data.partnershipType == 'General Partnership'">
-          <p>As a general partnership, you must submit the partnership's:</p>
+          <p>Applicants applying as a general partnership must submit the partnership's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
@@ -268,14 +268,14 @@
                 <li>Date of birth</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of business.</li>
+            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of business.</li>
           </ul>
           <p>All partners will go through a security clearance check during the application process.</p>
           <p>The partnership will also go through a financial integrity check.</p>
         </div>
 
         <div *ngIf="data && data.partnershipType == 'Limited Partnership'">
-          <p>As a limited partnership, you must submit the partnership's:</p>
+          <p>Applicants applying as a limited partnership must submit the partnership's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
@@ -288,9 +288,9 @@
                 <li>Date of birth</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, you must submit all of the required information for that type of business. </li>
+            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of business. </li>
           </ul>
-          <p>The following people in your partnership will go through a security clearance check during the application process:</p>
+          <p>The following people in the partnership will go through a security clearance check during the application process:</p>
           <ul>
             <li>All general partners</li>
             <li>Limited partners holding at least a 10% interest in the partnership</li>
@@ -299,7 +299,7 @@
         </div>
 
         <div *ngIf="data && data.businessType == 'Sole-Proprietorship'">
-          <p>As a sole proprietor, you must submit your:</p>
+          <p>Applicants applying as a sole proprietor must submit the sole proprietor's:</p>
           <ul>
             <li>Full legal name</li>
             <li>Address</li>
@@ -308,11 +308,11 @@
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
           </ul>
           <p>The sole proprietor will go through a security clearance check during the application process.</p>
-          <p>The sole proprietorship will also go through a financial integrity check.</p>
+          <p>The sole proprietor will also go through a financial integrity check.</p>
         </div>
 
         <div *ngIf="data && data.businessType == 'Society'">
-          <p>As a society, you must submit your society's:</p>
+          <p>Applicants applying as a society must submit the society's:</p>
           <ul>
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
@@ -328,7 +328,7 @@
             <li>Society incorporation number</li>
             <li>Date of incorporation</li>
           </ul>
-          <p>The following people in your society will go through a security clearance check during the application process:</p>
+          <p>The following people in the society will go through a security clearance check during the application process:</p>
           <ul>
             <li>Directors</li>
             <li>Officers</li>
@@ -338,7 +338,7 @@
         </div>
 
         <div *ngIf="data && data.businessType == 'Indigenous Nation'">
-          <p>As an Indigenous Nation, you must submit your Indigenous Nation's:</p>
+          <p>Applicants applying as an Indigenous Nation must submit the Indigenous Nation's:</p>
           <ul>
             <li>Full Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
@@ -351,7 +351,7 @@
               </ul>
             </li>
           </ul>
-          <p>The authorized person in your Indigenous Nation will go through a security clearance check during the application process.</p>
+          <p>The authorized person in the Indigenous Nation will go through a security clearance check during the application process.</p>
           <p>The Indigenous Nation will also go through a financial integrity check.</p>
         </div>
         <hr />
@@ -360,17 +360,17 @@
       <!-- bceidAccount -->
       <div *ngIf="data && data.bceidAccount == 'Yes'">
         <h3>Business BCeID</h3>
-        <p>Your business's <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a> will be used to log in to the cannabis retail licence application. Your business can register only one legal entity for a Business BCeID. Additional Business BCeID user accounts can be created for people who may access the application on the organization’s behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
+        <p>The business's <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a> will be used to log in to the cannabis retail licence application. A business can register only one legal entity for a Business BCeID. Additional Business BCeID user accounts can be created for people who may access the application on the organization’s behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
         <hr />
       </div>
       <div *ngIf="data && data.bceidAccount == 'No'">
         <h3>Register for a Business BCeID</h3>
-        <p>Your business will need a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a> to log in to the application. Check if you have a Business BCeID. If you don't, you need to register for one. Additional Business BCeID user accounts can be created for people who may access the application on the business's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
+        <p>The business will need a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a> to log in to the application. Check if the business has a Business BCeID. If it doesn't, the business needs to register for one. Additional Business BCeID user accounts can be created for people who may access the application on the business's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
         <hr />
       </div>
       <div *ngIf="data && data.bceidAccount == 'doNotknow'">
-        <h3>Find out if you have a Business BCeID account</h3>
-        <p>Check if your business has registered for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>. If you don't have one, you'll need to get one to log in to the application. Additional Business BCeID user accounts can be created for people who may access the application on the business's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
+        <h3>Find out if the business has a Business BCeID account</h3>
+        <p>Check if the business applying for the licence has registered for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>. If the business doesn't have a Business BCeID, the business will need to register for one to log in to the application. Additional Business BCeID user accounts can be created for people who may access the application on the business's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
         <hr />
       </div>
 
@@ -378,10 +378,10 @@
       <div *ngIf="data && data.contactedFirstNation">
         <h3>Communication with the Indigenous Nation</h3>
         <div *ngIf="data && data.contactedFirstNation == 'Yes'">
-          <p>The Indigenous Nation must approve your cannabis store application. Keep communicating with the Indigenous Nation about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
+          <p>The Indigenous Nation must approve the cannabis store application. The applicant should keep communicating with the Indigenous Nation about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
         <div *ngIf="data && data.contactedFirstNation == 'No'">
-          <p>The Indigenous Nation must approve your cannabis store application. Contact the Indigenous Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements, such as zoning approval and business licensing.</p>
+          <p>The Indigenous Nation must approve the cannabis store application. The applicant should contact the Indigenous Nation to make sure they are accepting applications for cannabis stores and to ask about local requirements, such as zoning approval and business licensing.</p>
         </div>
         <hr />
       </div>
@@ -390,24 +390,24 @@
       <div *ngIf="data && data.contactLg">
         <h3>Communication with the Local Government</h3>
         <div *ngIf="data && data.contactLg == 'Yes'">
-          <p>The local government must approve your cannabis store application. Keep communicating with the local government about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
+          <p>The local government must approve the cannabis store application. The applicant should keep communicating with the local government about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
         <div *ngIf="data && data.contactLg == 'No'">
-          <p>The local government must approve your cannabis store application. Contact the local government to make sure they are accepting applications for cannabis stores and to ask about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
+          <p>The local government must approve the cannabis store application. The applicant should contact the local government to make sure they are accepting applications for cannabis stores and to ask about requirements for cannabis stores that are specific to their community, such as zoning approval and business licensing.</p>
         </div>
         <hr />
       </div>
 
       <!-- locationOwnedLeased -->
       <div *ngIf="data && data.locationOwnedLeased == 'Yes'">
-        <h3>Information about your store</h3>
+        <h3>Information about the store</h3>
         <div>
-          <p>Your store must be a self-contained business.</p>
-          <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
-          <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
+          <p>The store must be a self-contained business.</p>
+          <p>The store's property arrangement must be valid for at least 12 months after the licence is issued.</p>
+          <p>During the application, the applicant will need to submit the following pieces of information about the store's location:</p>
           <ul>
-            <li>PID (either a nine-digit number or a legal description of your property)</li>
-            <li>Photos/renderings of your store’s exterior and signage</li>
+            <li>PID (either a nine-digit number or a legal description of the property)</li>
+            <li>Photos/renderings of the store’s exterior and signage</li>
             <li>
               A floor plan showing:
               <ul>
@@ -435,15 +435,15 @@
       </div>
 
       <div *ngIf="data && data.locationOwnedLeased == 'No'">
-        <h3>Information about your store</h3>
+        <h3>Information about the store</h3>
         <div>
-          <p>You do not have to commit to buying or leasing a location before you submit an application. However, you must have an arrangement that will allow you to purchase a property or sign a lease if you are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of your business partner’s, may also be accepted.</p>
-          <p>Your property arrangement must be valid for at least 12 months after you would receive your licence.</p>
-          <p>Your store must be a self-contained business.</p>
-          <p>During the application, you will need to submit the following pieces of information about your store's location:</p>
+          <p>Applicants do not have to commit to buying or leasing a location before submitting an application. However, applicants must have an arrangement that will allow them to purchase a property or sign a lease if they are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of the applicant's business partner’s, may also be accepted.</p>
+          <p>The store's property arrangement must be valid for at least 12 months after the licence is issued.</p>
+          <p>The store must be a self-contained business.</p>
+          <p>During the application, the applicant will need to submit the following pieces of information about the store's location:</p>
           <ul>
-            <li>PID (either a nine-digit number or a legal description of your property)</li>
-            <li>Photos/renderings of your store’s exterior and signage</li>
+            <li>PID (either a nine-digit number or a legal description of the property)</li>
+            <li>Photos/renderings of the store’s exterior and signage</li>
             <li>
               A floor plan showing:
               <ul>
@@ -473,27 +473,27 @@
       <!-- connectionToProducerCultivator -->
       <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
         <h3>Connections to Licensed Producers</h3>
-        <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. You will be prohibited from selling any of a federal producer's products if:</p>
+        <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. Licensees will be prohibited from selling any of a federal producer's products if:</p>
         <ul>
-          <li>You own 20% or more of a producer's voting shares</li>
-          <li>One of your immediate family members owns 20% or more of a producer's voting shares</li>
-          <li>A producer owns 20% or more of your voting shares</li>
-          <li>Any company, person or group of people owns 20% or more of both your business's and a producer's voting share</li>
+          <li>The licensee holds or has a beneficial interest in, directly or indirectly, 20% or more of the producer's voting shares</li>
+          <li>An immediate family member has any financial interest in the producer</li>
+          <li>The producer holds or has a beneficial interest in, directly or indirectly, 20% or more of the cannabis retail business's voting shares</li>
+          <li>Any person, partnership or company holds or has a beneficial interest in, directly or indirectly, 20% or more of both the cannabis retail store’s and the producer's voting shares</li>
         </ul>
-        <p>When you apply, you must declare any business, financial or family connections that you have to a producer, even if less than 20%.</p>
+        <p>When they apply, Applicants must declare if they or any business partners or an immediate family member of the applicant or any business partner has any ownership in a cannabis producer, even if less than 20%.</p>
         <hr />
       </div>
 
       <div *ngIf="data && data.connectionToProducerCultivator == 'doNotknow'">
         <h3>Connections to Licensed Producers</h3>
-        <p>Check if you or your business has any business, financial or family connections to licensed producers of cannabis. Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. You will be prohibited from selling any of a federal producer's products if:</p>
+        <p>Check if the applicant or business has any business, financial or family connections to licensed producers of cannabis. Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. Licensees will be prohibited from selling any of a federal producer's products if:</p>
         <ul>
-          <li>You own 20% or more of a producer's voting shares</li>
-          <li>One of your immediate family members owns 20% or more of a producer's voting shares</li>
-          <li>A producer owns 20% or more of your voting shares</li>
-          <li>Any company, person or group of people owns 20% or more of both your business's and a producer's voting share</li>
+          <li>The licensee holds or has a beneficial interest in, directly or indirectly, 20% or more of the producer's voting shares</li>
+          <li>An immediate family member has any financial interest in the producer</li>
+          <li>The producer holds or has a beneficial interest in, directly or indirectly, 20% or more of the cannabis retail business's voting shares</li>
+          <li>Any person, partnership or company holds or has a beneficial interest in, directly or indirectly, 20% or more of both the cannabis retail store’s and the producer's voting shares</li>
         </ul>
-        <p>When you apply, you must declare any business, financial or family connections that you have to a producer, even if less than 20%.</p>
+        <p>When they apply, Applicants must declare if they or any business partners or an immediate family member of the applicant or any business partner has any ownership in a cannabis producer, even if less than 20%.</p>
         <hr />
       </div>
 
@@ -501,7 +501,7 @@
       <!--final text-->
       <div *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">
         <h3>Application Fee</h3>
-        <p>You must pay an application fee to apply for a licence. The application fee includes the cost of all required security clearances and financial integrity checks.</p>
+        <p>Applicants must pay an application fee to apply for a licence. The application fee includes the cost of all required security clearances and financial integrity checks.</p>
         <hr />
       </div>
 
