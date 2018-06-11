@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
+using Gov.Lclb.Cllb.Interfaces;
 
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -19,7 +21,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration Configuration;
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
-
         private readonly IHttpContextAccessor _httpContextAccessor;
   
         public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
@@ -30,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._distributedCache = null; // distributedCache;
         }
 
-        private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByAplicant(string applicantId)
+        private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByApplicant(string applicantId)
         {
             List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
             IEnumerable<Adoxio_application> dynamicsApplicationList = null;
@@ -56,13 +57,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        /// GET all applications in Dynamics
+        /// <summary>
+        /// GET all applications in Dynamics. Optional parameter for applicant ID. Or all applications if the applicantId is null
+        /// </summary>
+        /// <param name="applicantId"></param>
+        /// <returns></returns>
         [HttpGet()]
-        public async Task<JsonResult> GetDynamicsApplications ()
+        public async Task<JsonResult> GetDynamicsApplications (string applicantId)
         {
-            // get all applications in Dynamics
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(null);
-            
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByApplicant(applicantId);
             return Json(adoxioApplications);
         }
 
@@ -75,37 +78,71 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(userSettings.AccountId);
-
-            // For Demo Only, hardcode the account id !!!
-            //string accountId = "f3310e39-e352-e811-8140-480fcfeac941";
-            //List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(accountId);
-
+            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByApplicant(userSettings.AccountId);
             return Json(adoxioApplications);
         }
 
-        /// GET all applications in Dynamics by applicant ID
-        [HttpGet("{applicantId}")]
-        public async Task<JsonResult> GetDynamicsApplications(string applicantId)
+        /// <summary>
+        /// GET an Application
+        /// </summary>
+        /// <param name="id">GUID of the Application to get</param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDynamicsApplication(string id)
         {
-            // get all applications in Dynamics
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByAplicant(applicantId);
-
-            return Json(adoxioApplications);
+            ViewModels.AdoxioApplication result = null;
+            var dynamicsApplication = await _system.GetAdoxioApplicationById(_distributedCache, Guid.Parse(id));
+            if (dynamicsApplication == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                result = await dynamicsApplication.ToViewModel(_system);
+            }
+            return Json(result);
         }
-
 
         [HttpPost()]
-        public async Task<IActionResult> CreateApplication([FromBody] Interfaces.Microsoft.Dynamics.CRM.Adoxio_application item)
+		public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
         {
-            // create a new contact.
-            Interfaces.Microsoft.Dynamics.CRM.Adoxio_application adoxioApplication = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_application();
+			Adoxio_application adoxioApplication = await item.ToModel(_system);
 
-            // create a DataServiceCollection to add the record
+			// create a DataServiceCollection to add the record
+            var ApplicationCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
+			ApplicationCollection.Add(adoxioApplication);
+
+			// for association with current user
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+			Interfaces.Microsoft.Dynamics.CRM.Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+			adoxioApplication.Adoxio_Applicant = owningAccount;
+
+			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
+            
+			var id = dsr.GetAssignedId();
+			Adoxio_application application = await _system.GetAdoxioApplicationById(_distributedCache, (Guid)id);
+			if (application == null) {
+				return StatusCode(500, "Something bad happened");
+			}
+			application.Adoxio_applicationid = id;
+
+			return Json(await application.ToViewModel(_system));
+
+            /*
+			// create a DataServiceCollection to add the record
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
             // add a new contact.
             ContactCollection.Add(adoxioApplication);
-
+            
             // changes need to made after the add in order for them to be saved.
             // tab_general
             adoxioApplication.Adoxio_LicenceType = item.Adoxio_LicenceType; // Licence Type*
@@ -182,7 +219,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplication.Adoxio_LicenceFeeInvoice = item.Adoxio_LicenceFeeInvoice; // Licence Fee Invoice
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-
             DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse result in dsr)
             {
@@ -193,6 +229,68 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return Json(adoxioApplication);
+            */
+        }
+
+        /// <summary>
+        /// Update an Application
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateApplication([FromBody] ViewModels.AdoxioApplication item, string id)
+        {
+            if (id != item.id)
+            {
+                return BadRequest();
+            }
+            //Prepare application for update
+            Guid adoxio_applicationId = new Guid(id);
+            Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationId).GetValueAsync();
+            adoxioApplication.CopyValues(item);
+
+
+            _system.UpdateObject(adoxioApplication);
+            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            foreach (OperationResponse result in dsr)
+            {
+                if (result.StatusCode == 500) // error
+                {
+                    return StatusCode(500, result.Error.Message);
+                }
+            }
+            return Json(await adoxioApplication.ToViewModel(_system));
+        }
+
+        /// <summary>
+        /// Delete an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost("{id}/delete")]
+        public async Task<IActionResult> DeleteApplication(string id)
+        {
+            // get the application.
+            Guid adoxio_applicationid = new Guid(id);
+            try
+            {
+                Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationid).GetValueAsync();
+                _system.DeleteObject(adoxioApplication);
+                DataServiceResponse dsr = await _system.SaveChangesAsync();
+                foreach (OperationResponse result in dsr)
+                {
+                    if (result.StatusCode == 500) // error
+                    {
+                        return StatusCode(500, result.Error.Message);
+                    }
+                }
+            }
+            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+            {
+                return new NotFoundResult();
+            }
+            return NoContent(); // 204
         }
     }
 }
