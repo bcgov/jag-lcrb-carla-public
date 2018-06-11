@@ -13,11 +13,16 @@ using Newtonsoft.Json;
 using System.Net;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class EstablishmentTests : ApiIntegrationTestBaseWithLogin
+    public class EstablishmentTests :  ApiIntegrationTestBaseWithLogin
     {
+        public EstablishmentTests(CustomWebApplicationFactory<Startup> factory)
+          : base(factory) 
+        { }
+
         const string service = "adoxioestablishment";
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
@@ -30,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // try a random GET, should return unauthorized
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             var response = await _client.SendAsync(request);
-            Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
         }
 
@@ -50,7 +55,6 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Adoxio_establishmentid = Guid.NewGuid(),
                 Adoxio_name = initialName
             };
-
 
 
             ViewModels.AdoxioEstablishment viewmodel_adoxio_establishment = adoxio_establishment.ToViewModel();
@@ -82,14 +86,16 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // U - Update            
             adoxio_establishment.Adoxio_name = changedName;
+            adoxio_establishment.Adoxio_establishmentid = id;
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(adoxio_establishment.ToViewModel()), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-
+            
             // verify that the update persisted.
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
