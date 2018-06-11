@@ -48,6 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             int commonNonVotingshares = 3000;
             int commonVotingshares = 1000;
             int isIndividual = 1;
+            string accountId = "a425cf89-e769-e811-8146-480fcfeac941";
 
 
             await LoginAsDefault();
@@ -68,6 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Adoxio_commonvotingshares = commonVotingshares,
                 Adoxio_dateofbirth = dateOfBirth,
                 Adoxio_isindividual = isIndividual
+                //Adoxio_Account = Guid.Parse(accountId)
             };
 
             

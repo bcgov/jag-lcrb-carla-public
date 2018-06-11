@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         /// <summary>
-        /// Copy values from a Dynamics legal entity to a view model.
+        /// Copy values from View Model to Dynamics legal entity
         /// </summary>
         /// <param name="to"></param>
         /// <param name="from"></param>
@@ -60,6 +60,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
             to.Adoxio_email = from.email;
+            if (from.account.id != null)
+            {
+                to.Adoxio_Account = new Interfaces.Microsoft.Dynamics.CRM.Account();
+                to.Adoxio_Account.Accountid = new Guid(from.account.id);
+            }
             // adoxio_dateemailsent
         }
 
