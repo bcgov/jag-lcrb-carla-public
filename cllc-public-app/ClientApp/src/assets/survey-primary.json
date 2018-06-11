@@ -1,5 +1,5 @@
 {
-  "title": "Find out what you need to apply for a licence",
+  "title": "What does an applicant need to apply for a cannabis licence?",
   "pages": [
     {
       "name": "p1",
@@ -7,7 +7,7 @@
         {
           "type": "radiogroup",
           "name": "age19",
-          "title": "Are you 19 years old or older?",
+          "title": "Is the applicant 19 years old or older?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -22,7 +22,7 @@
         {
           "type": "radiogroup",
           "name": "licensedProducer",
-          "title": "Are you a federally licensed producer of cannabis?",
+          "title": "Is the applicant a federally licensed producer of cannabis?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -39,7 +39,7 @@
         {
           "type": "radiogroup",
           "name": "registeredBusiness",
-          "title": "Do you have a registered business?",
+          "title": "Does the applicant have a business that is registered in B.C.?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -112,7 +112,7 @@
         {
           "type": "radiogroup",
           "name": "bceidAccount",
-          "title": "Do you have a Business BCeID account?",
+          "title": "Does the applicant have a Business BCeID account?",
           "choices": [
             "Yes",
             "No",
@@ -132,7 +132,7 @@
         {
           "type": "radiogroup",
           "name": "isFirstNationsLand",
-          "title": "Will your proposed location be located under the jurisdiction of an Indigenous Nation?",
+          "title": "Will the proposed cannabis store be located under the jurisdiction of an Indigenous Nation?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -152,7 +152,7 @@
           "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'Yes'",
           "width": "50%",
-          "title": "Which Indigenous Nation has jurisdiction over your proposed location?"
+          "title": "Which Indigenous Nation has jurisdiction over the proposed location?"
         }
       ],
       "visible": false,
@@ -166,7 +166,7 @@
           "name": "contactedFirstNation",
           "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'Yes'",
-          "title": "Have you contacted the Indigenous Nation about opening a cannabis store?",
+          "title": "Has the applicant contacted the Indigenous Nation about opening a cannabis store?",
           "choices": [
             "Yes",
             "No"
@@ -204,7 +204,7 @@
           "name": "contactLg",
           "visible": false,
           "visibleIf": "{isFirstNationsLand} = 'No'",
-          "title": "Have you contacted the local government about opening a cannabis store?",
+          "title": "Has the applicant contacted the local government about opening a cannabis store?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -221,7 +221,7 @@
         {
           "type": "radiogroup",
           "name": "locationOwnedLeased",
-          "title": "Do you have a location currently owned or leased?",
+          "title": "Does the applicant have a location currently owned or leased?",
           "isRequired": true,
           "choices": [
             "Yes",
@@ -238,7 +238,7 @@
         {
           "type": "radiogroup",
           "name": "connectionToProducerCultivator",
-          "title": "Do you or your business have any business, financial or family connections to licensed producers of cannabis?",
+          "title": "Does the applicant or the applicant's business have any business, financial or family connections to licensed producers of cannabis?",
           "isRequired": true,
           "choices": [
             "Yes",
