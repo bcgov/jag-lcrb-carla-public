@@ -305,6 +305,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings.BusinessLegalName = userId + " TestBusiness";
                     userSettings.UserDisplayName = userId + " TestUser";
 
+					// add generated guids
+                    userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+                    userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+
                     if (userSettings.AuthenticatedUser != null)
                     {
                         userSettings.ContactId = userSettings.AuthenticatedUser.Id.ToString();
@@ -314,10 +318,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     if (userSettings.IsNewUserRegistration)
                     {
                         // add generated guids
-						userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
-						userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
-                        userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
-                        userSettings.ContactId = userSettings.SiteMinderGuid;
+						//userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+						//userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+                        //userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
+                        //userSettings.ContactId = userSettings.SiteMinderGuid;
 
 						_logger.LogError("New user registration:" + userSettings.UserDisplayName);
 						_logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
