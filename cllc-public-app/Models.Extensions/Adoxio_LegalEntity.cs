@@ -59,6 +59,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
+            to.Adoxio_email = from.email;
+            // adoxio_dateemailsent
         }
 
         /// <summary>
@@ -90,6 +92,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
                 result.name = adoxio_legalentity.Adoxio_name;
+                result.email = adoxio_legalentity.Adoxio_email;
                 if (adoxio_legalentity.Adoxio_position != null)
                 {
                     result.position = (PositionOptions)adoxio_legalentity.Adoxio_position;

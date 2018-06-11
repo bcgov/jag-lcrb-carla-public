@@ -34,19 +34,11 @@ export class FileUploaderComponent implements OnInit {
 
   public dropped(event: UploadEvent) {
     let files = event.files;
-    var queue: Subject<any> = new Subject<any>();
-    var timeout = 0;
     for (var droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         let fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          let formData = new FormData();
-          formData.append('file', file, file.name);
-          formData.append('documentType', this.documentType);
-          let headers = new Headers();
-          let url = `api/AdoxioLegalEntity/${this.accountId}/attachments`;
-          this.http.post(url, formData, { headers: headers }).subscribe(result => {
-          });
+          this.uploadFile(file);
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -54,16 +46,23 @@ export class FileUploaderComponent implements OnInit {
         console.log(droppedFile.relativePath, fileEntry);
       }
     }
-    queue.subscribe((data) => {
-    });
   }
 
   onBrowserFileSelect(event: any) {
     let uploadedFiles = event.target.files;
     for (const file of uploadedFiles) {
-      console.log(file.path, file);
-
+     this.uploadFile(file);
     }
+  }
+
+  private uploadFile(file){
+    let formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('documentType', this.documentType);
+    let headers = new Headers();
+    let url = `api/AdoxioLegalEntity/${this.accountId}/attachments`;
+    this.http.post(url, formData, { headers: headers }).subscribe(result => {
+    });
   }
 
   getUploadedFileData() {

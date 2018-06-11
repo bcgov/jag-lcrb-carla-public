@@ -1,9 +1,6 @@
 import { DynamicsAccount } from './dynamics-account.model';
 
 export class AdoxioLegalEntity {
-  shareholderType: string;
-  //email: string;
-  //dateIssued: Date;
   
   id: string; // guid
   name: string;
@@ -23,4 +20,11 @@ export class AdoxioLegalEntity {
   preferrednonvotingshares: number;
   account: DynamicsAccount;
   relatedentities: AdoxioLegalEntity[];
+  email: string;
+  //dateIssued: Date;
+
+  // helper fields
+  shareholderType: string;
+  sendConsentRequest: boolean;
+
 }
