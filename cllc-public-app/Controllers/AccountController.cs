@@ -75,39 +75,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet()]
         public async Task<JsonResult> GetDynamicsAccounts()
         {
-            List<ViewModels.Account> result = new List<ViewModels.Account>();
-            IEnumerable<Interfaces.Microsoft.Dynamics.CRM.Account> accounts = null;
-            accounts = await _system.Accounts.ExecuteAsync();            
+            // this method is not required, remove 
+			throw new NotImplementedException();
 
-            foreach (var legalEntity in accounts)
-            {
-                result.Add(legalEntity.ToViewModel());
-            }
-
-            return Json(result);
+            //List<ViewModels.Account> result = new List<ViewModels.Account>();
+            //IEnumerable<Interfaces.Microsoft.Dynamics.CRM.Account> accounts = null;
+            //accounts = await _system.Accounts.ExecuteAsync();            
+            //foreach (var legalEntity in accounts)
+            //{
+            //    result.Add(legalEntity.ToViewModel());
+            //}
+            //return Json(result);
         }
 
-        /// <summary>
-        /// Get a specific legal entity
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAccount(string id)
-        {
-            ViewModels.Account result = null;
+		/// <summary>
+		/// Get a specific legal entity
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetAccount(string id)
+		{
+			ViewModels.Account result = null;
 
 			// query the Dynamics system to get the account record.
-            if (id != null)
-            {
+			if (id != null)
+			{
+				// verify the currently logged in user has access to this account
                 Guid accountId = new Guid(id);
-				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
-                if (account == null)
+                if (!CurrentUserHasAccessToAccount(accountId))
                 {
                     return new NotFoundResult();
                 }
-                result = account.ToViewModel();
-            }
+
+				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
+				if (account == null)
+				{
+					return new NotFoundResult();
+				}
+				result = account.ToViewModel();
+			}
+			else
+			{
+				return BadRequest();
+			}
 
             return Json(result);
         }
@@ -226,6 +237,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 userSettings.IsNewUserRegistration = false;
 
+				userSettings.AccountId = id.ToString();
+				userSettings.ContactId = contactId.ToString();
+
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
                 // add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
@@ -248,8 +262,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-            Guid accountId = new Guid(id);
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
+
+			// verify the currently logged in user has access to this account
+			Guid accountId = new Guid(id);
+            if (!CurrentUserHasAccessToAccount(accountId))
+            {
+                return new NotFoundResult();
+            }
+
+			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
 
             // get the legal entity.
             Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
@@ -281,11 +302,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteDynamicsAccount(string id)
         {
-            // get the legal entity.
+			// verify the currently logged in user has access to this account
+            Guid accountId = new Guid(id);
+            if (!CurrentUserHasAccessToAccount(accountId))
+            {
+                return new NotFoundResult();
+            }
+
+			// get the legal entity.
             //Guid adoxio_legalentityid = new Guid(id);
             try
             {
-                Guid accountId = new Guid(id);
                 Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
 				if (account == null)
 				{
@@ -316,6 +343,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}/directorsandofficers")]
         public async Task<IActionResult> GetAccountDirectorsAndOfficers(string id)
         {
+			// verify the currently logged in user has access to this account
+            Guid accountId = new Guid(id);
+            if (!CurrentUserHasAccessToAccount(accountId))
+            {
+                return new NotFoundResult();
+            }
+
             List<ViewModels.AdoxioLegalEntity> result = new List<ViewModels.AdoxioLegalEntity>();
             var legalEntities = await _system.Adoxio_legalentities
                  // select all records for which there is a matching account and the position is director or officer.
@@ -330,5 +364,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
+		/// <summary>
+        /// Verify whether currently logged in user has access to this account
+        /// </summary>
+        /// <returns>boolean</returns>
+		private bool CurrentUserHasAccessToAccount(ViewModels.Account account)
+		{
+			return CurrentUserHasAccessToAccount(Guid.Parse(account.id));
+		}
+
+		/// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+		private bool CurrentUserHasAccessToAccount(Guid id)
+		{
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
+            // TODO there may be some account relationships in the future
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return Guid.Parse(userSettings.AccountId) == id;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
+		}
     }
 }
