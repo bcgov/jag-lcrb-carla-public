@@ -127,34 +127,16 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestDirectorsAndOfficers()
         {
-            string initialName = "InitialName";
+			//await LoginAsDefault();
+			var loginUser = randomNewUserName("TestDirUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+			string initialName = loginUser + " TestBusiness";
             string accountService = "account";
             string legalEntityService = "adoxiolegalentity";
 
-			await LoginAsDefault();
-
-			// Create an account.
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
-
-            Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account()
-            {
-                //Accountid = Guid.NewGuid(),
-                Name = initialName,
-				Adoxio_externalid = Guid.NewGuid().ToString()
-            };
-
-            ViewModels.Account viewmodel_account = account.ToViewModel();
-
-            string jsonString = JsonConvert.SerializeObject(viewmodel_account);
-
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-            var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            // parse as JSON.
-            jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+			// Get current account.
+			ViewModels.Account responseViewModel = await GetAccountForCurrentUser();
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
@@ -164,23 +146,20 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			// R - Read
 
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
-            response = await _client.SendAsync(request);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
+            var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            jsonString = await response.Content.ReadAsStringAsync();
+            var jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 			
-
             // Add a Director.
-
-
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + legalEntityService);
 
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
                 Adoxio_name = initialName,
-                Adoxio_Account = account,
+				Adoxio_Account = responseViewModel.ToModel(),
                 Adoxio_position = (int?)ViewModels.PositionOptions.Director,
                 Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation
             };
@@ -204,29 +183,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 
             // fetch the directors and officers.
-
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id + "/directorsandofficers");
             response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            
-            
-            // D - Delete
+			var _discard = await response.Content.ReadAsStringAsync();
+			response.EnsureSuccessStatusCode();
 
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
-            response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            // second delete should return a 404.
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
-            response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-
-            // should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
-            response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-
-			await Logout();
+			await LogoutAndCleanupTestUser(strId);
         }
     }
 }
