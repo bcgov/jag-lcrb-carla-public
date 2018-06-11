@@ -55,6 +55,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? commonnonvotingshares { get; set; }
         public int? preferrednonvotingshares { get; set; }
         public Account account { get; set; }
-        List<AdoxioLegalEntity> relatedentities { get; set; }                
+        List<AdoxioLegalEntity> relatedentities { get; set; }
+        public string email { get; set; }
     }
 }
