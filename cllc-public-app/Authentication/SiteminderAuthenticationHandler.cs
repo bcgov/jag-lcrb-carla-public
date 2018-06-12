@@ -13,6 +13,7 @@ using Gov.Lclb.Cllb.Public.Contexts;
 using Microsoft.Extensions.Caching.Distributed;
 using Logos.Utility;
 using Gov.Lclb.Cllb.Interfaces;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {    
@@ -277,9 +278,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Validate credential against database              
                 // **************************************************
-                userSettings.AuthenticatedUser = hostingEnv.IsProduction()
-                    ? await _system.LoadUser(_distributedCache, userId, siteMinderGuid)
-                    : await _system.LoadUser(_distributedCache, userId);
+				if (!hostingEnv.IsProduction()) {
+					siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userId).ToString();
+				}
+                userSettings.AuthenticatedUser = //hostingEnv.IsProduction()
+					//? await _system.LoadUser(_distributedCache, userId, siteMinderGuid) :
+					  await _system.LoadUser(_distributedCache, userId, siteMinderGuid);
+				_logger.LogError("Loaded user for " + siteMinderGuid + " = " + JsonConvert.SerializeObject(userSettings));
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {

@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -29,13 +30,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly ILogger _logger;        
 
-        public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
+		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             this._system = context;
             this._distributedCache = null; //distributedCache;                        
             this._httpContextAccessor = httpContextAccessor;
+			_logger = loggerFactory.CreateLogger(typeof(AccountController));                    
         }
 
 		/// GET account in Dynamics for the current user
@@ -261,7 +264,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (userSettings.IsNewUserRegistration)
             {
-                // we can now authenticate.
+				userSettings.AccountId = account.Accountid.ToString();
+                userSettings.ContactId = userContact.Contactid.ToString();
+
+				// we can now authenticate.
                 if (userSettings.AuthenticatedUser == null)
                 {
                     Models.User user = new Models.User();
@@ -273,11 +279,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 userSettings.IsNewUserRegistration = false;
 
-				userSettings.AccountId = account.Accountid.ToString();
-				userSettings.ContactId = userContact.Contactid.ToString();
-
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
-                // add the user to the session.
+				_logger.LogError("AccountController --> " + userSettingsString);
+
+				// add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
             }
 			else
@@ -287,6 +292,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             //account.Accountid = id;
             result = account.ToViewModel();
+			_logger.LogError("AccountController --> id=" + result.id);
+			_logger.LogError("AccountController --> externalId=" + result.externalId);
+
             return Json(result);
         }
 
