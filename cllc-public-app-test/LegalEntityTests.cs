@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
-
+using Microsoft.Extensions.Configuration;
 using System.Text;
 using Newtonsoft.Json;
 using System.Net;
@@ -19,6 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
 	public class LegalEntityTests : ApiIntegrationTestBaseWithLogin
     {
+        private const string service = "adoxiolegalentity";
         public LegalEntityTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
         { }
@@ -35,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // try a random GET, should return unauthorized
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             var response = await _client.SendAsync(request);
-            Assert.Equal(response.StatusCode, HttpStatusCode.Unauthorized);
+            Assert.Equal(HttpStatusCode.Unauthorized ,response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
         }
 
@@ -63,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 //Adoxio_legalentityid = Guid.NewGuid(),
                 Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                Adoxio_position = (int?)ViewModels.PositionOptions.Director,
+                Adoxio_position = (int)ViewModels.PositionOptions.Director,
                 Adoxio_name = initialName,
                 Adoxio_firstname = firstName,
                 Adoxio_middlename = middleName,
@@ -229,6 +230,61 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task VerifyConsentCode__WithAGoodCode()
+        {
+            await LoginAsDefault();
+
+            var id = Guid.NewGuid();
+            var individualId = Guid.NewGuid();
+            ViewModels.SecurityConsentConfirmation securityConsentConfirmation = new ViewModels.SecurityConsentConfirmation()
+            {
+                email = "",
+                parentid = id.ToString(),
+                individualid = individualId.ToString()
+            };
+            string _encryptionKey = Configuration["ENCRYPTION_KEY"];
+            string json = JsonConvert.SerializeObject(securityConsentConfirmation);
+            string code = System.Net.WebUtility.UrlEncode(Utility.EncryptionUtility.EncryptString(json, _encryptionKey));
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/{id}/verifyconsentcode/{individualId}/?code={code}");
+            var response = await _client.SendAsync(request);
+            var jsonResult = await response.Content.ReadAsStringAsync();
+            string result = JsonConvert.DeserializeObject<String>(jsonResult);
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("success", result, true);
+
+            await Logout();
+        }
+        [Fact]
+        public async System.Threading.Tasks.Task VerifyConsentCode__WithABadCode()
+        {
+            await LoginAsDefault();
+
+            var id = Guid.NewGuid();
+            var individualId = Guid.NewGuid();
+            ViewModels.SecurityConsentConfirmation securityConsentConfirmation = new ViewModels.SecurityConsentConfirmation()
+            {
+                email = "",
+                parentid = id.ToString(),
+                individualid = individualId.ToString()
+            };
+
+            //Use a random encryption key
+            string _encryptionKey = Guid.NewGuid().ToString();
+            string json = JsonConvert.SerializeObject(securityConsentConfirmation);
+            string code = System.Net.WebUtility.UrlEncode(Utility.EncryptionUtility.EncryptString(json, _encryptionKey));
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/{id}/verifyconsentcode/{individualId}/?code={code}");
+            var response = await _client.SendAsync(request);
+            var jsonResult = await response.Content.ReadAsStringAsync();
+            string result = JsonConvert.DeserializeObject<String>(jsonResult);
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("error", result, true);
+
+            await Logout();
         }
     }
 }
