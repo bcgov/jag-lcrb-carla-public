@@ -272,7 +272,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     Models.User user = new Models.User();
                     user.Active = true;
-                    user.Guid = userSettings.ContactId;
+					user.Guid = userSettings.AccountId;
+					user.Id = Guid.Parse(userSettings.ContactId);
                     user.SmUserId = userSettings.UserId;
                     userSettings.AuthenticatedUser = user;
                 }

@@ -35,11 +35,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 
         public async System.Threading.Tasks.Task Login(string userid)
         {
+			_client.DefaultRequestHeaders.Add("DEV-USER", userid);
 			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + userid);
             var response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
-            _client.DefaultRequestHeaders.Add("DEV-USER", userid);
         }
 
 		public async System.Threading.Tasks.Task LoginAsDefault()
