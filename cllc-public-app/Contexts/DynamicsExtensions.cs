@@ -43,6 +43,31 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+		public static Guid? GetAssignedIdOfType(this DataServiceResponse dsr, string entityType)
+		{
+			Guid? result = null;
+			if (dsr != null)
+			{
+				var ienum = dsr.GetEnumerator();
+				while (ienum.MoveNext())
+				{
+					ChangeOperationResponse cor = (ChangeOperationResponse)ienum.Current;
+					EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
+                    string identity = ed.Identity.ToString();
+					// convert the identity to a guid.
+					if (identity.Contains(entityType))
+					{
+						int endpos = identity.LastIndexOf(")");
+						int startpos = identity.LastIndexOf("(") + 1;
+						string guid = identity.Substring(startpos, endpos - startpos);
+						result = Guid.ParseExact(guid, "D");
+						return result;
+					}
+				}
+			}
+			return result;
+		}
+
         /// <summary>
         /// Load User from database using their userId and guid
         /// </summary>
@@ -408,7 +433,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // fetch from Dynamics.
 
-                var contacts = await system.Contacts.AddQueryOption("$filter", "employeeid eq '" + siteminderId + "'").ExecuteAsync();
+				var contacts = await system.Contacts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
 
                 result = contacts.FirstOrDefault();
                 if (result != null && distributedCache != null)

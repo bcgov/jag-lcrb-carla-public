@@ -189,6 +189,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 UserSettings userSettings = new UserSettings();
                 string userId = "";
                 string siteMinderGuid = "";
+				string siteMinderBusinessGuid = "";
 
                 // **************************************************
                 // If this is an Error or Authentiation API - Ignore
@@ -215,6 +216,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     if (!string.IsNullOrEmpty(temp))
                     {
                         userId = temp;
+						_logger.LogError("Got user from dev cookie = " + userId);
                     }
                 }
 
@@ -238,7 +240,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
-                    _logger.LogInformation("User already authenticated with active session: " + userSettings.UserId);
+                    _logger.LogError("User already authenticated with active session: " + userSettings.UserId);
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
@@ -246,7 +248,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
-                _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
+                _logger.LogError("Parsing the HTTP headers for SiteMinder authentication credential");
 
                 if (string.IsNullOrEmpty(userId))
                 {
@@ -257,6 +259,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
 
                     siteMinderGuid = context.Request.Headers[options.SiteMinderUserGuidKey];
+					siteMinderBusinessGuid = context.Request.Headers[options.SiteMinderBusinessGuidKey];
 
                     // **************************************************
                     // Validate credentials
@@ -274,12 +277,22 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
                 }
 
-                // **************************************************
-                // Validate credential against database              
-                // **************************************************
-                userSettings.AuthenticatedUser = hostingEnv.IsProduction()
-                    ? await _system.LoadUser(_distributedCache, userId, siteMinderGuid)
-                    : await _system.LoadUser(_distributedCache, userId);
+				// **************************************************
+				// Validate credential against database              
+				// **************************************************
+				if (!hostingEnv.IsProduction())
+				{
+                    userSettings.BusinessLegalName = userId + " TestBusiness";
+                    userSettings.UserDisplayName = userId + " TestUser";
+					siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+					siteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+				}
+				//userSettings.AuthenticatedUser = hostingEnv.IsProduction()
+				//    ? await _system.LoadUser(_distributedCache, userId, siteMinderGuid)
+				//    : await _system.LoadUser(_distributedCache, userId);
+				_logger.LogError("Loading user external id = " + siteMinderGuid);
+				userSettings.AuthenticatedUser = await _system.LoadUser(_distributedCache, siteMinderGuid);
+				_logger.LogError("After getting authenticated user = " + userSettings.GetJson());
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
@@ -299,9 +312,23 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
                 userSettings.IsNewUserRegistration = (userSettings.AuthenticatedUser == null);
+
+                // set other session info
+				userSettings.SiteMinderGuid = siteMinderGuid;
+				userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
+				_logger.LogError("Before getting contact and account ids = " + userSettings.GetJson());
+				if (userSettings.AuthenticatedUser != null)
+				{
+					userSettings.ContactId = userSettings.AuthenticatedUser.Id.ToString();
+					var account = await _system.GetAccountBySiteminderId(_distributedCache, siteMinderBusinessGuid);
+					userSettings.AccountId = account.Accountid.ToString();
+					userSettings.AuthenticatedUser.Guid = userSettings.AccountId;
+				}
                
                 if (! hostingEnv.IsProduction())
                 {
+					_logger.LogError("DEV MODE Setting identity and creating session for: " + userId);
+
                     userSettings.BusinessLegalName = userId + " TestBusiness";
                     userSettings.UserDisplayName = userId + " TestUser";
 
