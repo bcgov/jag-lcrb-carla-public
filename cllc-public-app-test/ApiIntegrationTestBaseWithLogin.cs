@@ -21,15 +21,21 @@ namespace Gov.Lclb.Cllb.Public.Test
         private readonly CustomWebApplicationFactory<Startup> _factory;
 
         public HttpClient _client { get; }
+        protected readonly IConfiguration Configuration;
 
         public ApiIntegrationTestBaseWithLogin(CustomWebApplicationFactory<Startup> fixture)
         {
+            Configuration = new ConfigurationBuilder()
+                .AddUserSecrets<Gov.Lclb.Cllb.Public.Startup>()
+                   .Build();
+
             _factory = fixture;
             _client = _factory                
                 .CreateClient(new WebApplicationFactoryClientOptions
                 {
                     AllowAutoRedirect = false
-                });                
+                }); 
+            
         }
 
         public async System.Threading.Tasks.Task Login(string userid)
