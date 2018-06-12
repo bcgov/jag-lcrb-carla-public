@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user.businessname, responseViewModel.name);
             string strId = responseViewModel.externalId;
             string id = responseViewModel.id;
-            Assert.Equal(strId, user.accountid);
+			Assert.Equal(strId, responseViewModel.externalId);
 
             // verify we can fetch the account via web service
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
