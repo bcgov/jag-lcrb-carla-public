@@ -13,15 +13,19 @@ namespace Gov.Lclb.Cllb.Public.Test
     public class CustomWebApplicationFactory<TStartup>
         : WebApplicationFactory<Gov.Lclb.Cllb.Public.Startup>
     {
+        public IConfiguration Configuration;
+
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            Configuration = new ConfigurationBuilder()
+                                .AddUserSecrets<Gov.Lclb.Cllb.Public.Startup>()
+                                .AddEnvironmentVariables()
+                                .Build();
+
             builder
-                .UseEnvironment("Staging")
-                .UseConfiguration(new ConfigurationBuilder()
-                    .AddUserSecrets<Gov.Lclb.Cllb.Public.Startup>()
-                    .AddEnvironmentVariables()
-                .Build())
-                .UseStartup<Gov.Lclb.Cllb.Public.Startup>();
+            .UseEnvironment("Staging")
+            .UseConfiguration(Configuration)
+            .UseStartup<Gov.Lclb.Cllb.Public.Startup>();
         }
     }
     #endregion
