@@ -169,7 +169,6 @@ namespace Gov.Lclb.Cllb.Public
             //});
 
             // add SharePoint.
-
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
             string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
             string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
