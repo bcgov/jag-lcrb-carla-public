@@ -245,7 +245,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 parentid = id.ToString(),
                 individualid = individualId.ToString()
             };
-            string _encryptionKey = Configuration["ENCRYPTION_KEY"];
+            string _encryptionKey = this._factory.Configuration["ENCRYPTION_KEY"];
             string json = JsonConvert.SerializeObject(securityConsentConfirmation);
             string code = System.Net.WebUtility.UrlEncode(Utility.EncryptionUtility.EncryptString(json, _encryptionKey));
 
