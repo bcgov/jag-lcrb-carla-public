@@ -18,9 +18,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
     public abstract class ApiIntegrationTestBaseWithLogin : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
-        private readonly CustomWebApplicationFactory<Startup> _factory;
+        protected readonly CustomWebApplicationFactory<Startup> _factory;
 
         public HttpClient _client { get; }
+
 
         public ApiIntegrationTestBaseWithLogin(CustomWebApplicationFactory<Startup> fixture)
         {
@@ -29,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 .CreateClient(new WebApplicationFactoryClientOptions
                 {
                     AllowAutoRedirect = false
-                });                
+                });    
         }
 
         public async System.Threading.Tasks.Task Login(string userid)
