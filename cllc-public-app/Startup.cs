@@ -179,16 +179,12 @@ namespace Gov.Lclb.Cllb.Public
                 "Authorization", "Basic " + credentials);
             }
 
+            
+
             services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
 
-			//services.AddTransient<Interfaces.Microsoft.Dynamics.CRM.System>(_ =>
-            //{
-            //    var context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
-            //    context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add("Authorization", authenticationResult.CreateAuthorizationHeader());
-            //    return context;
-            //});
-
             // add SharePoint.
+
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
             string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
             string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
