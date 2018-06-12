@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.Extensions.DependencyInjection;
-
+using Logos.Utility;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -150,7 +150,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             string resp = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(resp);
-            return user;
+
+			return user;
         }
 
 		public async System.Threading.Tasks.Task<ViewModels.Account> GetAccountForCurrentUser()
