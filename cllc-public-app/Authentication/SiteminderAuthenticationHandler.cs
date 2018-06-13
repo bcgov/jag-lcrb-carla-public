@@ -318,8 +318,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
-                // set t
-                if (userSettings.AuthenticatedUser == null)
 
                 // This line gets the various claims for the current user.
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
