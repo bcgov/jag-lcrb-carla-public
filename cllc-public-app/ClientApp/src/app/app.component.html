@@ -1,38 +1,41 @@
-<div class="app-outer" >
+<div class="app-outer">
   <header class="app-header">
-    <div class="container">
+    <div class="nav-container" style="padding-left: 30px">
       <a href="http://www2.gov.bc.ca/" tabindex="-1">
-        <img class="header-logo"
-             tabindex="-1" alt="B.C. Government Logo"
-             src="/cannabislicensing/assets/bc-logo.svg">
+        <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="/cannabislicensing/assets/bc-logo.svg">
       </a>
-      <span class="title" role="banner">Cannabis Licencing&nbsp;<span class="label label-beta">Beta</span></span>
-      <div *ngIf="isDevMode">
-        <span class="sign" *ngIf="currentUser">
-          {{currentUser.name}}
-          <p class="text-right signin"><a href="/login/cleartoken">Sign Out</a></p>
+      <span class="title" role="banner">Cannabis Licencing&nbsp;
+        <span class="label label-beta">Beta</span>
+      </span>
+      <span *ngIf="isDevMode">
+        <span class="sign" style="margin-top: -10px" *ngIf="currentUser">
+          <span>{{currentUser.name}}</span>
+          &nbsp;
+          <span class="text-right signin">
+            <a href="/login/cleartoken">Sign Out</a>
+          </span>
         </span>
-        <span class="sign" *ngIf="!currentUser">          
-            <p class="text-right signin"><a href="/login/token/default">Sign In</a></p>          
+        <span class="sign" *ngIf="!currentUser">
+          <span class="text-right signin">
+            <a href="/login/token/default">Sign In</a>
+          </span>
         </span>
-      </div> 
+      </span>
     </div>
   </header>
 
   <div *ngIf="currentUser && currentUser.isNewUser == true">
     <main class="app-content">
-      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>      
+      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
     </main>
   </div>
 
 
   <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true)">
-
-
     <!-- /NAVBAR -->
     <div class="navigationRibbon" *ngIf="!currentUser">
       <div class="level2Navigation">
-        <div class="container">
+        <div class="nav-container">
           <a routerLink="/">Home</a>
           <a routerLink="/policy-document/cannabis-retail-licence">Licence Types</a>
           <a routerLink="/policy-document/eligibility">Application Requirements</a>
@@ -43,61 +46,75 @@
         </div>
       </div>
     </div>
-    <!-- /NAVBAR END -->
 
-    
+    <section *ngIf="currentUser" class="navigationRibbon">
+      <div class="level2Navigation ">
+        <nav class="navbar navbar-expand-lg navbar-dark nav-container">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left: 0;">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item dropdown">
+                <div ngbDropdown class="d-inline-block">
+                  <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
+                  <div ngbDropdownMenu>
+                    <button class="dropdown-item" routerLink="/business-profile">Main Profile</button>
+                    <button class="dropdown-item" routerLink="/business-profile">Profile 1</button>
+                    <button class="dropdown-item" routerLink="/business-profile">Profile 2</button>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <div ngbDropdown class="d-inline-block">
+                  <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Licences</a>
+                  <div ngbDropdownMenu>
+                    <button class="dropdown-item" routerLink="/lic-app-summary">Main License</button>
+                    <button class="dropdown-item" routerLink="/lic-app-summary">License 1</button>
+                    <button class="dropdown-item" routerLink="/lic-app-summary">License 2</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
+    <!-- /NAVBAR END -->
 
     <main class="app-content container">
       <app-insert id="sidebar-left" class="sidebar-left">
-
-
       </app-insert>
 
-      <div *ngIf="currentUser">
-        <!-- Sidebar -->
-        <div class="sidebar-wrapper">
-          <ul class="sidebar-nav">
-
-            <li>
-              <a routerLink="/dashboard">Dashboard</a>
-            </li>
-            <li>
-              <a routerLink="/business-profile">Business Profiles</a>
-            </li>
-            <li>
-              <a routerLink="/">Profile 1</a>
-            </li>
-            <li>
-              <a routerLink="/">Profile 2</a>
-            </li>
-
-          </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-      </div>
-
       <div class="app-main">
-
         <breadcrumb></breadcrumb>
-
-        <router-outlet></router-outlet>
-
+        <div class="row">
+          <router-outlet></router-outlet>
+        </div>
       </div>
 
       <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
     </main>
-
   </div>
 
   <footer class="app-footer">
     <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
       <div class="container c1">
         <ul class="navbar-nav">
-          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" title="Goes to BC Gov Disclaimer Page">Disclaimer</a></li>
-          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" title="Goes to BC Gov Privacy Page">Privacy</a></li>
-          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" title="Goes to BC Gov Accessibility Page">Accessibility</a></li>
-          <li class="c2"><a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a></li>
-          <li class="c2"><a href="policy-document/contact" target="_blank" title="Goes to Contact Page">Contact Us
+          <li class="c2">
+            <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" title="Goes to BC Gov Disclaimer Page">Disclaimer</a>
+          </li>
+          <li class="c2">
+            <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" title="Goes to BC Gov Privacy Page">Privacy</a>
+          </li>
+          <li class="c2">
+            <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" title="Goes to BC Gov Accessibility Page">Accessibility</a>
+          </li>
+          <li class="c2">
+            <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a>
+          </li>
+          <li class="c2">
+            <a href="policy-document/contact" target="_blank" title="Goes to Contact Page">Contact Us
             </a>
           </li>
         </ul>
@@ -105,4 +122,3 @@
     </nav>
   </footer>
 </div>
-
