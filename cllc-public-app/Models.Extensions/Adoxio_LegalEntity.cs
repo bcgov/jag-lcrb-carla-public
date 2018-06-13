@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
@@ -42,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="to"></param>
         /// <param name="from"></param>
-        public static void CopyValues(this Adoxio_legalentity to, ViewModels.AdoxioLegalEntity from)
+        public static void CopyValues(this Adoxio_legalentity to, ViewModels.AdoxioLegalEntity from, Interfaces.Microsoft.Dynamics.CRM.System _system)
         {
                      
             to.Adoxio_commonnonvotingshares = from.commonnonvotingshares;
@@ -60,11 +61,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
             to.Adoxio_email = from.email;
-            if (from.account.id != null)
-            {
-                to.Adoxio_Account = new Interfaces.Microsoft.Dynamics.CRM.Account();
-                to.Adoxio_Account.Accountid = new Guid(from.account.id);
-            }
+            // Assigning the account this way throws exception:
+            // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+            //if (from.account.id != null)
+            //{
+            //    // fetch the account from Dynamics.
+            //    var getAccountTask = _system.GetAccountById(null, Guid.Parse(from.account.id));
+            //    getAccountTask.Wait();
+            //    to.Adoxio_Account= getAccountTask.Result;
+            //}
             // adoxio_dateemailsent
         }
 
@@ -148,5 +153,55 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             return result;
         }
+
+        /// <summary>
+        /// Get the query string to filter a legal entity by position(s)
+        /// Partner     = adoxio_position value of 0
+        /// Shareholder = adoxio_position value of 1
+        /// Trustee     = adoxio_position value of 2
+        /// Director    = adoxio_position value of 3
+        /// Officer     = adoxio_position value of 4
+        /// Owner       = adoxio_position value of 5 
+        /// </summary>
+        /// <param name="positionType"></param>
+        /// <returns>string</returns>
+        public static string GetPositionFilter(string positionType)
+        {
+            String filter = null;
+            positionType = positionType.ToLower();
+
+            switch (positionType)
+            {
+                case "partner":
+                    filter = "adoxio_position eq 0";
+                    break;
+                case "shareholder":
+                    filter = "adoxio_position eq 1";
+                    break;
+                case "trustee":
+                    filter = "adoxio_position eq 2";
+                    break;
+                case "director":
+                    filter = "adoxio_position eq 3";
+                    break;
+                case "officer":
+                    filter = "adoxio_position eq 4";
+                    break;
+                case "owner":
+                    filter = "adoxio_position eq 5";
+                    break;
+                case "director-officer":
+                    filter = "adoxio_position eq 3 or adoxio_position eq 4";
+                    break;
+                case "director-officer-shareholder":
+                    filter = "adoxio_position eq 3 or adoxio_position eq 4 or adoxio_position eq 1";
+                    break;
+            }
+
+            return filter;
+        }
+
+
     }
+
 }
