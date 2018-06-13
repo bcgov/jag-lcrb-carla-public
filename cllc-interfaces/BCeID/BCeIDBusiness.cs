@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 using System;
 using System.Globalization;
 
-namespace BCeIDWrapper
+namespace Gov.Lclb.Cllb.Interfaces
 {
     public class BCeIDBusiness
     {
