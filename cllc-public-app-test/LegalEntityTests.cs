@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string initialName = firstName + " " + lastName;
             DateTime dateOfBirth = DateTime.Now;
             int commonNonVotingshares = 3000;
-            int commonVotingshares = 1000;
+            int commonVotingshares = 2018;
             bool isIndividual = true;
 
             await LoginAsDefault();
@@ -72,23 +72,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // C - Create
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-
-            //Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
-            //{
-            //    //Adoxio_legalentityid = Guid.NewGuid(),
-            //    Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-            //    Adoxio_position = (int?)ViewModels.PositionOptions.Director,
-            //    Adoxio_name = initialName,
-            //    Adoxio_firstname = firstName,
-            //    Adoxio_middlename = middleName,
-            //    Adoxio_lastname = lastName,
-            //    Adoxio_commonnonvotingshares = commonNonVotingshares,
-            //    Adoxio_commonvotingshares = commonVotingshares,
-            //    Adoxio_dateofbirth = dateOfBirth,
-            //    Adoxio_isindividual = isIndividual,
-            //    //Adoxio_Account = accountId
-            //};
-            //ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
 
             ViewModels.Account vmAccount = new ViewModels.Account
             {
@@ -113,7 +96,16 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-            response = await _client.SendAsync(request);
+            try
+            {
+                response = await _client.SendAsync(request);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
@@ -124,7 +116,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
             var newId = responseViewModel.id;
-            return;
+            
             // R - Read
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + newId);
@@ -141,7 +133,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             vmAdoxioLegalEntity.id = responseViewModel.id;
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + newId)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(adoxio_legalentity.ToViewModel()), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(vmAdoxioLegalEntity), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
