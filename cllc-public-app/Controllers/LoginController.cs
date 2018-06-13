@@ -125,7 +125,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             );
 
-            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
+            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+            basePath += "/dashboard";
             return Redirect(basePath);
         }
 

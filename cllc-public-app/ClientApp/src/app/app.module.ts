@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AppRoutingModule } from './app-routing.module';
@@ -228,7 +228,8 @@ import { SecurityAssessmentsComponent } from './security-assessments/security-as
     UserDataService,
     AdoxioApplicationDataService,
     AdoxioLegalEntityDataService,
-    AdoxioLicenseDataService
+    AdoxioLicenseDataService,
+    NgbDropdown
   ],
   entryComponents: [
     ShareholderPersonDialog,
