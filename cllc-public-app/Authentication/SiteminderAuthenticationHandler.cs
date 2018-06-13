@@ -245,6 +245,19 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
 
+                // get user name details from headers if they exist.
+                string smgov_userdisplayname = context.Request.Headers["smgov_userdisplayname"];
+                if (! string.IsNullOrEmpty(smgov_userdisplayname))
+                {
+                    userSettings.UserDisplayName = smgov_userdisplayname;
+                }
+
+                string smgov_businesslegalname = context.Request.Headers["smgov_businesslegalname"];
+                if (! string.IsNullOrEmpty(smgov_businesslegalname))
+                {
+                    userSettings.BusinessLegalName = smgov_businesslegalname;
+                }
+
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
@@ -304,6 +317,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     _logger.LogError(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
+
+                // set t
+                if (userSettings.AuthenticatedUser == null)
 
                 // This line gets the various claims for the current user.
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
