@@ -1,3 +1,6 @@
 .DS_Store
 
 /cllc-interfaces-test/SharePoint/Properties/launchSettings.json
+/functional-tests/bin
+/functional-tests/obj
+/.vs
