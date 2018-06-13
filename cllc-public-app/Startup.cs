@@ -150,17 +150,36 @@ namespace Gov.Lclb.Cllb.Public
                 });
             }
 
-            var authenticationContext = new AuthenticationContext(
+            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+
+            // determine if we have a SSG connection.
+
+            string ssgUsername = Configuration["SSG_USERNAME"];
+            string ssgPassword = Configuration["SSG_PASSWORD"];
+
+            if (string.IsNullOrEmpty (ssgUsername) || string.IsNullOrEmpty(ssgPassword))
+            {
+                // authenticate using ADFS.
+                var authenticationContext = new AuthenticationContext(
                "https://login.windows.net/" + aadTenantId);
-            ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-            var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-            task.Wait();
-            AuthenticationResult authenticationResult = task.Result; 
+                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
+                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
+                task.Wait();
+                AuthenticationResult authenticationResult = task.Result;
 
-            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System (new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", authenticationResult.CreateAuthorizationHeader());
+            }
+            else
+            {
+                // authenticate using the SSG.                
+                string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(ssgUsername + ":" + ssgPassword));
 
-            context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-            "Authorization", authenticationResult.CreateAuthorizationHeader());            
+                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", "Basic " + credentials);
+            }
+
+            
 
             services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
 
@@ -172,8 +191,7 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
-
-            // SharePointFileManager sharePointFileManager = ;
+           
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword));
         }
 
