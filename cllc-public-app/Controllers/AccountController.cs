@@ -20,7 +20,6 @@ using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
-using BCeIDWrapper;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -31,6 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly BCeIDBusinessQuery _bceid;
 		private readonly ILogger _logger;        
 
 		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
@@ -70,34 +70,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return Json(result);
         }
-        
-        /// <summary>
-        /// Get all Legal Entities
-        /// </summary>
-        /// <param name="shareholder"></param>
-        /// <returns></returns>
-        [HttpGet()]
-        public async Task<JsonResult> GetDynamicsAccounts()
-        {
-            // this method is not required, remove 
-			throw new NotImplementedException();
 
-            //List<ViewModels.Account> result = new List<ViewModels.Account>();
-            //IEnumerable<Interfaces.Microsoft.Dynamics.CRM.Account> accounts = null;
-            //accounts = await _system.Accounts.ExecuteAsync();            
-            //foreach (var legalEntity in accounts)
-            //{
-            //    result.Add(legalEntity.ToViewModel());
-            //}
-            //return Json(result);
+        /// GET account in Dynamics for the current user
+        [HttpGet("bceid")]
+        public async Task<IActionResult> GetCurrentBCeIDBusiness()
+        {
+            ViewModels.Account result = null;
+
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // query the BCeID API to get the business record.
+            var business = await _bceid.ProcessBusinessQuery("");
+
+            if (business != null)
+            {
+                return new NotFoundResult();
+            }
+
+            return Json(business);
         }
 
-		/// <summary>
-		/// Get a specific legal entity
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		[HttpGet("{id}")]
+        /// <summary>
+        /// Get a specific legal entity
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
 		public async Task<IActionResult> GetAccount(string id)
 		{
 			ViewModels.Account result = null;
