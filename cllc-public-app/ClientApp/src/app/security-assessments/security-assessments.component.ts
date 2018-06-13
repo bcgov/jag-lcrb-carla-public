@@ -44,7 +44,7 @@ export class SecurityAssessmentsComponent implements OnInit {
     let consentRequestList: string[] = [];
 
     this.dataSource.data.forEach((row) => {
-      console.log("row values: ", row.id + " - " + row.sendConsentRequest + " - " + row.firstname);
+      //console.log("row values: ", row.id + " - " + row.sendConsentRequest + " - " + row.firstname);
       if (row.sendConsentRequest) {
         consentRequestList.push(row.id);
       }
