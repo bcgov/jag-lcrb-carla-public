@@ -20,6 +20,7 @@ using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
+using BCeIDWrapper;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
