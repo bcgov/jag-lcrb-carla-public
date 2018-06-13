@@ -39,7 +39,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             string changedName = "ChangedName";
             string service = "account";
 
-			await LoginAsDefault();
+			// register and login as our first user
+            var loginUser1 = randomNewUserName("TestAccountUser", 6);
+            await Login(loginUser1);
 
 			// C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -66,8 +68,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
             Guid id = new Guid(responseViewModel.id);
-			String strid = responseViewModel.externalId;
-			Assert.Equal(strid, viewmodel_account.externalId);
+			//String strid = responseViewModel.externalId;
+			//Assert.Equal(strid, viewmodel_account.externalId);
 
             // R - Read
 
