@@ -250,6 +250,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 _logger.LogError("Parsing the HTTP headers for SiteMinder authentication credential");
 
+                // At this point userID would only be set if we are logging in through as a DEV user
+               
                 if (string.IsNullOrEmpty(userId))
                 {
                     userId = context.Request.Headers[options.SiteMinderUserNameKey];
@@ -276,21 +278,18 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
                 }
-
-				// **************************************************
-				// Validate credential against database              
-				// **************************************************
-				if (!hostingEnv.IsProduction())
-				{
+                else // DEV user, setup a fake session and SiteMinder headers.
+                {
                     userSettings.BusinessLegalName = userId + " TestBusiness";
-                    userSettings.UserDisplayName = userId + " TestUser";
-					siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
-					siteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
-				}
-				//userSettings.AuthenticatedUser = hostingEnv.IsProduction()
-				//    ? await _system.LoadUser(_distributedCache, userId, siteMinderGuid)
-				//    : await _system.LoadUser(_distributedCache, userId);
-				_logger.LogError("Loading user external id = " + siteMinderGuid);
+                    userSettings.UserDisplayName = userId + " TestUser";                    
+                    siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+                    siteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+                }
+
+                // Previously the code would do a database lookup here.  However there is no backing database for the users table now,
+                // so we just do a Dynamics lookup on the siteMinderGuid.
+
+                _logger.LogError("Loading user external id = " + siteMinderGuid);
 				userSettings.AuthenticatedUser = await _system.LoadUser(_distributedCache, siteMinderGuid);
 				_logger.LogError("After getting authenticated user = " + userSettings.GetJson());
 
@@ -300,6 +299,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
+                // This line gets the various claims for the current user.
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
 
                 // **************************************************
@@ -308,7 +308,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 _logger.LogError("Authentication successful: " + userId);
                 _logger.LogError("Setting identity and creating session for: " + userId);
 
-                // create session info
+                // create session info for the current user
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
                 userSettings.IsNewUserRegistration = (userSettings.AuthenticatedUser == null);
