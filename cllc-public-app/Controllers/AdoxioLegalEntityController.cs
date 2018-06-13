@@ -4,6 +4,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -24,39 +25,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDistributedCache _distributedCache;
         private readonly SharePointFileManager _sharePointFileManager;
         private readonly string _encryptionKey;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager)
+        public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             this._system = context;
             this._distributedCache = null; // distributedCache;
             this._sharePointFileManager = sharePointFileManager;
             this._encryptionKey = Configuration["ENCRYPTION_KEY"];
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
-        /// Get all Legal Entities
+        /// Get all Dynamics Legal Entities
         /// </summary>
-        /// <param name="shareholder"></param>
+        /// <param name=""></param>
         /// <returns></returns>
         [HttpGet()]
-        public async Task<JsonResult> GetDynamicsLegalEntities() //bool? shareholder
+        public async Task<JsonResult> GetDynamicsLegalEntities()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<Adoxio_legalentity> legalEntities = null;
-            legalEntities = await _system.Adoxio_legalentities.ExecuteAsync();
+            String accountfilter = null;
 
-            //if (shareholder == null)
-            //{
-            //    legalEntities = await _system.Adoxio_legalentities.ExecuteAsync();
-            //}
-            //else
-            //{
-            //    // Shareholders have an adoxio_position value of x.
-            //    legalEntities = await _system.Adoxio_legalentities
-            //        .AddQueryOption("$filter", "adoxio_position eq 1") // 1 is a Shareholder
-            //        .ExecuteAsync();
-            //}
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // set account filter
+            accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
+
+            legalEntities = await _system.Adoxio_legalentities
+                        .AddQueryOption("$filter", accountfilter)
+                        .ExecuteAsync();
 
             foreach (var legalEntity in legalEntities)
             {
@@ -68,6 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// <summary>
         /// Get all Legal Entities where the position matches the parameter received
+        /// By default, the account linked to the current user is used
         /// </summary>
         /// <param name="positionType"></param>
         /// <returns></returns>
@@ -77,58 +79,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<Adoxio_legalentity> legalEntities = null;
+            String positionFilter = null;
+            String accountfilter = null;
             String filter = null;
 
-            if (positionType == null)
-            {
-                legalEntities = await _system.Adoxio_legalentities.ExecuteAsync();
-            }
-            else
-            {   /*
-                Partner     = adoxio_position value of 0
-                Shareholder = adoxio_position value of 1
-                Trustee     = adoxio_position value of 2
-                Director    = adoxio_position value of 3
-                Officer     = adoxio_position value of 4
-                Owner       = adoxio_position value of 5 
-                */
-                positionType = positionType.ToLower();
-                switch (positionType)
-                {
-                    case "partner":
-                        filter = "adoxio_position eq 0";
-                        break;
-                    case "shareholder":
-                        filter = "adoxio_position eq 1";
-                        break;
-                    case "trustee":
-                        filter = "adoxio_position eq 2";
-                        break;
-                    case "director":
-                        filter = "adoxio_position eq 3";
-                        break;
-                    case "officer":
-                        filter = "adoxio_position eq 4";
-                        break;
-                    case "owner":
-                        filter = "adoxio_position eq 5";
-                        break;
-                    case "director-officer":
-                        filter = "adoxio_position eq 3 or adoxio_position eq 4";
-                        break;
-                    case "director-officer-shareholder":
-                        filter = "adoxio_position eq 3 or adoxio_position eq 4 or adoxio_position eq 1";
-                        break;
-                }
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // set account filter
+            accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
+            filter = accountfilter;
 
-                // Execute query if filter is valid
-                if (filter != null)
+            try
+            {
+                if (positionType == null)
                 {
                     legalEntities = await _system.Adoxio_legalentities
-                    .AddQueryOption("$filter", filter)
-                    .ExecuteAsync();
+                        .AddQueryOption("$filter", filter)
+                        .ExecuteAsync();
+
+                }
+                else
+                {
+                    positionFilter = Models.Adoxio_LegalEntityExtensions.GetPositionFilter(positionType);
+                    //filter = accountfilter + " and " + positionFilter;
+                    filter = positionFilter;
+
+                    // Execute query if filter is valid
+                    if (positionFilter != null)
+                    {
+                        legalEntities = await _system.Adoxio_legalentities
+                        .AddQueryOption("$filter", filter)
+                        .ExecuteAsync();
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
+
 
             if (legalEntities != null)
             {
@@ -163,6 +155,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
                 {
+                    Console.WriteLine(dsqe.Message);
+                    Console.WriteLine(dsqe.StackTrace);
                     return new NotFoundResult();
                 }
             }
@@ -258,21 +252,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
-            // create a new legal entity.
-            Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity adoxioLegalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
-
+            
             // create a DataServiceCollection to add the record
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
 
-            // force a primary key to be generated by dynamics.
-            item.id = null;
+            // create a new legal entity.
+            Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity adoxioLegalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
+
 
             // add Dynamics LegalEntity to LegalEntity Collection
             LegalEntityCollection.Add(adoxioLegalEntity);
 
             // copy received values to Dynamics LegalEntity
             // !!!! Values must be copied after adding to the collection, otherwise the entity will be created without the values assigned !!!!
-            adoxioLegalEntity.CopyValues(item);
+            adoxioLegalEntity.CopyValues(item, _system);
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
             DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);            
@@ -310,7 +303,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _system.UpdateObject(adoxioLegalEntity);
             // copy values over from the data provided
-            adoxioLegalEntity.CopyValues(item);
+            adoxioLegalEntity.CopyValues(item, _system);
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
