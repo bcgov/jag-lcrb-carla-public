@@ -4,6 +4,8 @@ import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
+import { UserDataService } from '../services/user-data.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -20,12 +22,17 @@ export class EditShareholdersComponent implements OnInit {
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   public dataLoaded;
   displayedColumns = ['position', 'name', 'email', 'commonnonvotingshares', 'commonvotingshares', 'dateIssued'];
+  user: User;
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog) {
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, 
+    public dialog: MatDialog, private userDataService: UserDataService) {
   }
 
   ngOnInit() {
     this.getShareholders();
+    this.userDataService.getCurrentUser().then(user =>{
+      this.user = user;
+    })
   }
 
   getShareholders() {
