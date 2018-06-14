@@ -20,10 +20,14 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             if (from.Contactid != null)
             {
-                to.Id = (Guid)from.Contactid;
+                to.ContactId = (Guid)from.Contactid;
             }
-
-            to.Guid = from._parentcustomerid_value.ToString();
+            
+            if (from._parentcustomerid_value != null)
+            {
+                to.AccountId = (Guid)from._parentcustomerid_value;
+            }
+            
             to.GivenName = from.Firstname;
             to.Surname = from.Lastname;
             to.SmUserId = from.Employeeid;
