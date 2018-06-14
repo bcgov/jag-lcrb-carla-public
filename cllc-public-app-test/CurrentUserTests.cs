@@ -22,7 +22,7 @@ namespace Gov.Lclb.Cllb.Public.Test
           : base(factory)
         { }
 
-        //[Fact]
+        [Fact]
         public async System.Threading.Tasks.Task DefaultDevelopmentUserIsValid()
         {
 			// register and login as our first user
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await LogoutAndCleanupTestUser(strId);
         }
         
-		//[Fact]
+		[Fact]
         public async System.Threading.Tasks.Task NewRegistrationUserIsValid()
         {
 			var loginUser = randomNewUserName("TestUser", 6);

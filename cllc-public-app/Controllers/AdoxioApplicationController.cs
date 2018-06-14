@@ -119,7 +119,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			adoxioApplication.Adoxio_Applicant = owningAccount;
 
 			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -252,7 +252,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             _system.UpdateObject(adoxioApplication);
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -277,7 +277,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationid).GetValueAsync();
                 _system.DeleteObject(adoxioApplication);
-                DataServiceResponse dsr = await _system.SaveChangesAsync();
+                DataServiceResponse dsr = _system.SaveChangesSynchronous();
                 foreach (OperationResponse result in dsr)
                 {
                     if (result.StatusCode == 500) // error

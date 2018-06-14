@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
 			var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
-			Console.WriteLine(jsonString);
+			//Console.WriteLine(jsonString);
 			response.EnsureSuccessStatusCode();
 
 			ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
