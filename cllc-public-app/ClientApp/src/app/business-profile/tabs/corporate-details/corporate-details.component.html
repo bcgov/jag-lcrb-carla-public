@@ -1,42 +1,79 @@
 <h1>Corporate Details</h1>
 
-<form [formGroup]='corporateDetailsForm' class="form-horizontal">
+<form [formGroup]='corporateDetailsForm' class="form-horizontal" (ngSubmit)="save()" >
   <div class="">
     <section>
-      <label for="">B.C. Incorporation Number</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber" formControlName="bcIncorporationNumber">
-    </section>
-
-    <section>
-      <label>Date of Incorporation in B.C.</label>
-      <br>
-      <div class="input-group">
-        <input class="form-control" style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker">
-        <div class="input-group-append">
-          <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
+      <div [ngClass]="{'has-error': this.isFieldError('bcIncorporationNumber')}">
+        <label for="">B.C. Incorporation Number</label>
+        <br />
+        <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber" formControlName="bcIncorporationNumber">
+        <div *ngIf="this.isFieldError('bcIncorporationNumber')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['bcIncorporationNumber'].hasError('required') ">
+            This is required
+          </div>
         </div>
       </div>
     </section>
 
     <section>
-      <label for="">Business Number</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="businessNumber" formControlName="businessNumber">
+      <div [ngClass]="{'has-error': this.isFieldError('bcIncorporationNumber')}">
+        <label>Date of Incorporation in B.C.</label>
+        <br>
+        <div class="input-group">
+          <input class="form-control" style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="bcIncorporationDate">
+          <div class="input-group-append">
+            <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
+          </div>
+          <div *ngIf="this.isFieldError('bcIncorporationDate')" class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="corporateDetailsForm.controls['bcIncorporationDate'].hasError('required') ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <label for="">PST Number</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="pstNumber" formControlName="pstNumber">
+      <div [ngClass]="{'has-error': this.isFieldError('businessNumber')}">
+        <label for="">Business Number</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="businessNumber" formControlName="businessNumber">
+        <div *ngIf="this.isFieldError('businessNumber')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['businessNumber'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <label>Is the organization incorporated, continued or conducts business in other provinces or countries?</label>
-      <br>
-      <input type="radio" value="true"> Yes
-      <br>
-      <input type="radio" value="false"> Yes
+      <div [ngClass]="{'has-error': this.isFieldError('pstNumber')}">
+        <label for="">PST Number</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="pstNumber" formControlName="pstNumber">
+        <div *ngIf="this.isFieldError('pstNumber')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['pstNumber'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div [ngClass]="{'has-error': this.isFieldError('isCorporationOutsideBC')}">
+        <label>Is the organization incorporated, continued or conducts business in other provinces or countries?</label>
+        <br />
+        <input class="form-check-inline" type="radio" id="isCorporationOutsideBCTrue" formControlName="isCorporationOutsideBC" value="true">
+        <label class="form-check-inline" for="isCorporationOutsideBCTrue">Yes</label>
+        <br />
+        <input class="form-check-inline" type="radio" id="isCorporationOutsideBCFalse" formControlName="isCorporationOutsideBC" value="false">
+        <label class="form-check-inline" for="isCorporationOutsideBCFalse">No</label>
+        <div *ngIf="this.isFieldError('isCorporationOutsideBC')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['isCorporationOutsideBC'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
     </section>
 
     <p></p>
@@ -60,39 +97,100 @@
     </section>
 
     <section>
-      <label for="">Name</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="mailName" formControlName="mailName">
+      <div [ngClass]="{'has-error': this.isFieldError('mailName')}">
+        <label for="">Name</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="mailName" formControlName="mailName">
+        <div *ngIf="this.isFieldError('mailName')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailName'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <label for="">Address</label>
-      <br>
-      <input class="form-control" style="width: 350px;" type="text" id="mailAddress" formControlName="mailAddress">
+      <div [ngClass]="{'has-error': this.isFieldError('mailAddress')}">
+        <label for="">Address</label>
+        <br>
+        <input class="form-control" style="width: 350px;" type="text" id="mailAddress" formControlName="mailAddress">
+        <div *ngIf="this.isFieldError('mailAddress')" class="alert alert-danger" style="width: 350px;">
+          <div *ngIf="corporateDetailsForm.controls['mailAddress'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <label for="">City</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="mailCity" formControlName="mailCity">
+      <div [ngClass]="{'has-error': this.isFieldError('mailCity')}">
+        <label for="">City</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="mailCity" formControlName="mailCity">
+        <div *ngIf="this.isFieldError('mailCity')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailCity'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <label for="">Country</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="mailCountry" formControlName="mailCountry">
+      <div [ngClass]="{'has-error': this.isFieldError('mailCountry')}">
+        <label for="">Country</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="mailCountry" formControlName="mailCountry">
+        <div *ngIf="this.isFieldError('mailCountry')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailCountry'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <label for="">Province</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="mailProvince" formControlName="mailProvince">
+      <div [ngClass]="{'has-error': this.isFieldError('mailProvince')}">
+        <label for="">Province</label>
+        <br>
+        <!--<input class="form-control" style="width: 250px;" type="text" id="mailProvince" formControlName="mailProvince">-->
+        <select class="form-control" id="mailProvince" formControlName="mailProvince" style="width: 250px;">
+          <option value="AB">Alberta</option>
+          <option value="BC">British Columbia</option>
+          <option value="MB">Manitoba</option>
+          <option value="NB">New Brunswick</option>
+          <option value="NL">Newfoundland and Labrador</option>
+          <option value="NS">Nova Scotia</option>
+          <option value="ON">Ontario</option>
+          <option value="PE">Prince Edward Island</option>
+          <option value="QC">Quebec</option>
+          <option value="SK">Saskatchewan</option>
+          <option value="NT">Northwest Territories</option>
+          <option value="NU">Nunavut</option>
+          <option value="YT">Yukon</option>
+        </select>
+        <div *ngIf="this.isFieldError('mailProvince')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailProvince'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-      <label for="">Postal Code</label>
-      <br>
-      <input class="form-control" style="width: 250px;" type="text" id="mailPostalcode" formControlName="mailPostalcode">
+      <div [ngClass]="{'has-error': this.isFieldError('mailPostalcode')}">
+        <label for="">Postal Code</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="mailPostalcode" formControlName="mailPostalcode">
+        <div *ngIf="this.isFieldError('mailPostalcode')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailPostalcode'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <button class="mat-raised-button" color="primary" type="submit">Save</button>
     </section>
 
   </div>
