@@ -29,6 +29,11 @@ export SHAREPOINT_CLIENT_ID={CLIENT_ID}
 export SHAREPOINT_CERTIFICATE_FILENAME={PATH_TO_PFX}
 export SHAREPOINT_CERTIFICATE_PASSWORD={PFX_PASSWD}
 
+export BCEID_SERVICE_URL=https://gws1.development.bceid.ca/webservices/Client/V10/BCeIDService.asmx
+export BCEID_SERVICE_USER={SVCACCT}
+export BCEID_SERVICE_PASSWD={PASSWD}
+export BCEID_SERVICE_SVCID={SVCID}
+
 # .eg. dotnet run, dotnet test, etc.
 dotnet run
 

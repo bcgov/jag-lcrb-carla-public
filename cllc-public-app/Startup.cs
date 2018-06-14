@@ -193,6 +193,15 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
            
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword));
+
+            // add BCeID Web Services
+
+            string bceidUrl    = Configuration["BCEID_SERVICE_URL"];
+            string bceidSvcId  = Configuration["BCEID_SERVICE_SVCID"];
+            string bceidUserid = Configuration["BCEID_SERVICE_USER"];
+            string bceidPasswd = Configuration["BCEID_SERVICE_PASSWD"];
+
+            services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
