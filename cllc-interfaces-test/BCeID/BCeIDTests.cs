@@ -1,8 +1,8 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BCeIDWrapper;
+using Gov.Lclb.Cllb.Interfaces;
 
-namespace BCeIDWrapperTest
+namespace Gov.Lclb.Cllb.Interfaces
 {
     [TestClass]
     public class BusinessQueryUnitTest
@@ -17,7 +17,8 @@ namespace BCeIDWrapperTest
 			var svc_userid = Environment.GetEnvironmentVariable("BCEID_SERVICE_USER");
 			var svc_passwd = Environment.GetEnvironmentVariable("BCEID_SERVICE_PASSWD");
             
-			var business = BusinessQuery.ProcessBusinessQuery(svc_svcid, svc_userid, svc_passwd, svc_url, test_guid).Result;
+			var bq = new BCeIDBusinessQuery(svc_svcid, svc_userid, svc_passwd, svc_url);
+            var business = bq.ProcessBusinessQuery(test_guid).Result;
 			Assert.IsNotNull(business);
 
 			Assert.AreEqual("ian.costanzo@quartech.com", business.contactEmail);
