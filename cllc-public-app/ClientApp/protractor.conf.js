@@ -5,7 +5,7 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
   SELENIUM_PROMISE_MANAGER: false,
-  allScriptsTimeout: 300000,
+  allScriptsTimeout: 30000,
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: [
     './e2e/**/*.e2e-spec.ts'
@@ -13,8 +13,8 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
 	 chromeOptions: {
-       // args: ["--headless", "--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
-       args: ["--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
+       args: ["--headless", "--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
+       //args: ["--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
 	 },
     'loggingPrefs': {
       'driver': 'INFO',
@@ -27,7 +27,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 300000,
+    defaultTimeoutInterval: 30000,
     print: function() {}
   },
   onPrepare() {
