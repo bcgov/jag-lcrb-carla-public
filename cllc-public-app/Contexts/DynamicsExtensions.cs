@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return user;
 
             
-            if (!user.Guid.Equals(guid, StringComparison.OrdinalIgnoreCase))
+            if (!user.ContactId.ToString().Equals(guid, StringComparison.OrdinalIgnoreCase))
             {
                 // invalid account - guid doesn't match user credential
                 return null;
@@ -129,7 +129,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static async Task<User> GetUserBySmUserId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string smUserId)
         {
             User user = null;
-            Contact contact = await system.GetContactBySiteminderId(distributedCache, smUserId);
+            Contact contact = await system.GetContactBySiteminderGuid(distributedCache, smUserId);
             if (contact != null)
             {
                 user = new User();
@@ -283,7 +283,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<Account> GetAccountBySiteminderId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
+        public static async Task<Account> GetAccountBySiteminderBusinessGuid(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
         {
             Account result = null;
             string key = "Account_" + siteminderId;
@@ -414,7 +414,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="distributedCache"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
-        public static async Task<Contact> GetContactBySiteminderId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
+        public static async Task<Contact> GetContactBySiteminderGuid(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
         {
             Contact result = null;
             string key = "Contact_" + siteminderId;
