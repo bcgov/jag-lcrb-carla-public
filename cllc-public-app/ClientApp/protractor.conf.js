@@ -5,7 +5,7 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
   SELENIUM_PROMISE_MANAGER: false,
-  allScriptsTimeout: 30000,
+  allScriptsTimeout: 300000,
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: [
     './e2e/**/*.e2e-spec.ts'
@@ -27,7 +27,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 300000,
     print: function() {}
   },
   onPrepare() {
