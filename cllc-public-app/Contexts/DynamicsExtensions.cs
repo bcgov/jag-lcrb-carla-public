@@ -17,6 +17,51 @@ namespace Gov.Lclb.Cllb.Interfaces
 {
     public static class DynamicsExtensions
     {
+		/// <summary>
+        /// Utility method to call Dynamics <see langword="async"/>, with a delay to compensate for timing issues.
+        /// </summary>
+        /// <param name="system"></param>
+        /// <returns>dsr</returns>
+        public static DataServiceResponse SaveChangesSynchronous(this Microsoft.Dynamics.CRM.System system)
+        {
+            Task<DataServiceResponse> t = system.SaveChangesAsync();
+            System.Threading.Thread.Sleep(5000);
+            t.Wait();
+            if (t.IsFaulted)
+            {
+                throw new Exception("Error save changes failed:" + t.Exception.Message);
+            }
+            else if (!t.IsCompletedSuccessfully)
+            {
+                throw new Exception("Error save changes failed with no message");
+            }
+            DataServiceResponse dsr = t.Result;
+            return dsr;
+        }
+
+		/// <summary>
+        /// Utility method to call Dynamics <see langword="async"/>, with a delay to compensate for timing issues.
+        /// </summary>
+		/// <param name="system"></param>
+		/// <param name="options"></param>
+        /// <returns>dsr</returns>
+		public static DataServiceResponse SaveChangesSynchronous(this Microsoft.Dynamics.CRM.System system, SaveChangesOptions options)
+		{
+			Task<DataServiceResponse> t = system.SaveChangesAsync(options);
+            System.Threading.Thread.Sleep(5000);
+            t.Wait();
+            if (t.IsFaulted)
+            {
+                throw new Exception("Error save changes failed:" + t.Exception.Message);
+            }
+            else if (!t.IsCompletedSuccessfully)
+            {
+                throw new Exception("Error save changes failed with no message");
+            }
+            DataServiceResponse dsr = t.Result;
+			return dsr;
+		}
+
         /// <summary>
         /// Return the ID assigned by dynamics, or NULL if none.
         /// </summary>
@@ -40,6 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         int startpos = identity.LastIndexOf("(") + 1;
                         string guid = identity.Substring(startpos, endpos - startpos);
                         result = Guid.ParseExact(guid, "D");
+						return result;
                     }
                 }
             }            
@@ -66,6 +112,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 							int startpos = identity.LastIndexOf("(") + 1;
 							string guid = identity.Substring(startpos, endpos - startpos);
 							result = Guid.ParseExact(guid, "D");
+							return result;
 						}
 					}
 				}
