@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve --sourcemaps ",
     "build": "ng build --extract-css --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
+    "builduat": "ng build --extract-css --base-href /uat/cannabislicensing/ --deploy-url /uat/cannabislicensing/",
     "watch": "ng build --watch --extract-css --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
