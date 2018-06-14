@@ -39,7 +39,8 @@ $bootstrap-sass-asset-helper: true;
     display: flex;
     flex: 1 0 auto;
     flex-flow: row nowrap;
-    max-width: 85%;
+    width: 99%;
+    max-width: 1600px;
     margin: auto;
 
 }
@@ -191,7 +192,6 @@ a:active {
 .signin {
     color: #fff;
     font-size: 16px;
-    margin-top: -35px;
 }
 
 
@@ -255,3 +255,30 @@ a:active {
 }
 
 
+.nav-container {
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    width: 99%;
+    max-width: 1600px;
+    min-width: 910px;
+    margin: auto;
+}
+
+.top-menu{
+    justify-content: space-between;
+    padding-left: 30px; 
+    padding-right: 30px;
+}
+
+.nav-link{
+    font-weight: 600 !important;
+    color: white !important; 
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    cursor: pointer;
+}
+
+.sign-container{
+    padding-right: 15px;
+}

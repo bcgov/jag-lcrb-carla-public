@@ -7,6 +7,7 @@ using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Net;
+using System;
 using Xunit;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
@@ -20,19 +21,19 @@ namespace Gov.Lclb.Cllb.Public.Test
     {
         protected readonly CustomWebApplicationFactory<Startup> _factory;
 
-        public HttpClient _client { get; }
+		public HttpClient _client { get; }
 
 
         public ApiIntegrationTestBaseWithLogin(CustomWebApplicationFactory<Startup> fixture)
         {
             _factory = fixture;
-            _client = _factory                
-                .CreateClient(new WebApplicationFactoryClientOptions
+			_client = _factory
+				.CreateClient(new WebApplicationFactoryClientOptions
                 {
                     AllowAutoRedirect = false
                 });    
         }
-
+        
         public async System.Threading.Tasks.Task Login(string userid)
         {
 			_client.DefaultRequestHeaders.Add("DEV-USER", userid);
