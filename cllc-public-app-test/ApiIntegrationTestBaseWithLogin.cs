@@ -21,23 +21,19 @@ namespace Gov.Lclb.Cllb.Public.Test
     {
         protected readonly CustomWebApplicationFactory<Startup> _factory;
 
-		public HttpClient _client { get; set; }
+		public HttpClient _client { get; }
 
 
         public ApiIntegrationTestBaseWithLogin(CustomWebApplicationFactory<Startup> fixture)
         {
             _factory = fixture;
-			InitializeHttpClient();    
-        }
-
-		private void InitializeHttpClient() {
-			_client = _factory                
-                .CreateClient(new WebApplicationFactoryClientOptions
+			_client = _factory
+				.CreateClient(new WebApplicationFactoryClientOptions
                 {
                     AllowAutoRedirect = false
                 });    
-		}
-
+        }
+        
         public async System.Threading.Tasks.Task Login(string userid)
         {
 			_client.DefaultRequestHeaders.Add("DEV-USER", userid);
@@ -92,7 +88,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
 			var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
-			//Console.WriteLine(jsonString);
 			response.EnsureSuccessStatusCode();
 
 			ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
@@ -125,7 +120,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string _discard = await response.Content.ReadAsStringAsync();
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
 			_client.DefaultRequestHeaders.Remove("DEV-USER");
-			//InitializeHttpClient();
 		}
 
         public async System.Threading.Tasks.Task LogoutAndCleanupTestUser(string strId)
