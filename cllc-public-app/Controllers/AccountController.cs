@@ -159,7 +159,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				throw new Exception("Oops no contactSiteminderGuid exernal id");
 
 			//Guid userContactId = new Guid(contactSiteminderGuid);
-            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderId(_distributedCache, contactSiteminderGuid);
+            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
             if (userContact == null)
             {
                 // create the user contact record.
@@ -189,7 +189,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
 
             // this may be an existing account, as this service is used during the account confirmation process.
-			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderId(_distributedCache, accountSiteminderGuid);
+			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
             if (account == null)
             {
                 // create a new account
@@ -231,9 +231,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			//account = await _system.GetAccountById(_distributedCache, (Guid) id);
 			//userContact = await _system.GetContactById(_distributedCache, (Guid)id);
 
-			account = await _system.GetAccountBySiteminderId(_distributedCache, accountSiteminderGuid);
+			account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
 			account.Accountid = ida;
-			userContact = await _system.GetContactBySiteminderId(_distributedCache, contactSiteminderGuid);
+			userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
 			userContact.Contactid = idc;
             if (account == null && userContact == null)
 				throw new Exception("Opps both account and contact are null");
@@ -273,8 +273,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     Models.User user = new Models.User();
                     user.Active = true;
-					user.Guid = userSettings.AccountId;
-					user.Id = Guid.Parse(userSettings.ContactId);
+					user.AccountId = Guid.Parse(userSettings.AccountId);
+					user.ContactId = Guid.Parse(userSettings.ContactId);
                     user.SmUserId = userSettings.UserId;
                     userSettings.AuthenticatedUser = user;
                 }
