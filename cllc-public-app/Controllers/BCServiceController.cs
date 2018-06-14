@@ -34,12 +34,59 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]        
         // [Authorize] - enable this line after the appropriate changes to enable BC Service Card Login are done.
         [AllowAnonymous]
-        public ActionResult BCServiceLogin()
+        public ActionResult BCServiceLogin(string path)
         {
+            // check to see if we have a local path.  (do not allow a redirect to another website)
+            if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
+            {
+                // diagnostic feature for development - echo headers back.
+                if ((!_env.IsProduction()) && path.Equals("headers"))
+                {
+                    StringBuilder html = new StringBuilder();
+                    html.AppendLine("<html>");
+                    html.AppendLine("<body>");
+                    html.AppendLine("<b>Request Headers:</b>");
+                    html.AppendLine("<ul style=\"list-style-type:none\">");
+                    foreach (var item in Request.Headers)
+                    {
+                        html.AppendFormat("<li><b>{0}</b> = {1}</li>\r\n", item.Key, ExpandValue(item.Value));
+                    }
+                    html.AppendLine("</ul>");
+                    html.AppendLine("</body>");
+                    html.AppendLine("</html>");
+                    ContentResult contentResult = new ContentResult();
+                    contentResult.Content = html.ToString();
+                    contentResult.ContentType = "text/html";
+                    return contentResult;
+                }
+                return LocalRedirect(path);
+            }
+            else
+            {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
                 return Redirect(basePath);
+            }
         }
 
-        
+        /// <summary>
+        /// Utility function used to expand headers.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        private static string ExpandValue(IEnumerable<string> values)
+        {
+            StringBuilder value = new StringBuilder();
+
+            foreach (string item in values)
+            {
+                if (value.Length > 0)
+                {
+                    value.Append(", ");
+                }
+                value.Append(item);
+            }
+            return value.ToString();
+        }
+
     }
 }
