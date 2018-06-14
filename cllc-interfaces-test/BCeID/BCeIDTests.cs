@@ -7,10 +7,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     [TestClass]
     public class BusinessQueryUnitTest
     {
-		private static string test_guid = "44437132CF6B4E919FE6FBFC5594FC44";
+        private static string test_guid  = "44437132CF6B4E919FE6FBFC5594FC44";
+        private static string test_guid2 = "4443-7132-cf6b-4e91-9fe6-fbfc-5594-fc44";
+        private static string bad_guid   = "44437132CF6ABCD19FE6FBFC55949999";
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestSuccessfullBCeIDBusinessCal()
         {
 			var svc_url    = Environment.GetEnvironmentVariable("BCEID_SERVICE_URL");
 			var svc_svcid  = Environment.GetEnvironmentVariable("BCEID_SERVICE_SVCID");
@@ -36,25 +38,44 @@ namespace Gov.Lclb.Cllb.Interfaces
 			Assert.AreEqual("V8W1P6", business.addressPostal);
 			Assert.AreEqual("CA", business.addressCountry);
         }
-/*
-        [TestMethod]
-        public void TestMethod2()
-        {
-        	var svc_userid = Environment.GetEnvironmentVariable("BCREG_SERVICE_ACCT");
-        	var svc_passwd = Environment.GetEnvironmentVariable("BCREG_SERVICE_PASSWD");
 
-            var company = CompanyQuery.ProcessCompanyQuery(svc_userid, svc_passwd, "https://twmgateway.gov.bc.ca/rest/ltsa/v1/corporations/IDONTEXIST").Result;
-            Assert.IsNull(company);
+        [TestMethod]
+        public void TestCallWithBusinessNotExistsWorks()
+        {
+            var svc_url    = Environment.GetEnvironmentVariable("BCEID_SERVICE_URL");
+            var svc_svcid  = Environment.GetEnvironmentVariable("BCEID_SERVICE_SVCID");
+            var svc_userid = Environment.GetEnvironmentVariable("BCEID_SERVICE_USER");
+            var svc_passwd = Environment.GetEnvironmentVariable("BCEID_SERVICE_PASSWD");
+            
+            var bq = new BCeIDBusinessQuery(svc_svcid, svc_userid, svc_passwd, svc_url);
+            var business = bq.ProcessBusinessQuery(bad_guid).Result;
+            Assert.IsNull(business);
         }
 
         [TestMethod]
-        public void TestMethod3()
+        public void TestGuidnormalizationWorks()
         {
-        	var svc_userid = Environment.GetEnvironmentVariable("BCREG_SERVICE_ACCT");
-
-            var company = CompanyQuery.ProcessCompanyQuery(svc_userid, "bad_passwd", "https://twmgateway.gov.bc.ca/rest/ltsa/v1/corporations/0410721").Result;
-            Assert.IsNull(company);
+            var svc_url    = Environment.GetEnvironmentVariable("BCEID_SERVICE_URL");
+            var svc_svcid  = Environment.GetEnvironmentVariable("BCEID_SERVICE_SVCID");
+            var svc_userid = Environment.GetEnvironmentVariable("BCEID_SERVICE_USER");
+            var svc_passwd = Environment.GetEnvironmentVariable("BCEID_SERVICE_PASSWD");
+            
+            var bq = new BCeIDBusinessQuery(svc_svcid, svc_userid, svc_passwd, svc_url);
+            Assert.AreEqual(test_guid, bq.NormalizeGuid(test_guid2));
         }
-*/
+
+        [TestMethod]
+        public void TestBadPasswordReturnsError()
+        {
+            var svc_url    = Environment.GetEnvironmentVariable("BCEID_SERVICE_URL");
+            var svc_svcid  = Environment.GetEnvironmentVariable("BCEID_SERVICE_SVCID");
+            var svc_userid = Environment.GetEnvironmentVariable("BCEID_SERVICE_USER");
+
+            var bq = new BCeIDBusinessQuery(svc_svcid, svc_userid, "bad_passwd", svc_url);
+
+            var business = bq.ProcessBusinessQuery(test_guid).Result;
+            Assert.IsNull(business);
+        }
+
     }
 }
