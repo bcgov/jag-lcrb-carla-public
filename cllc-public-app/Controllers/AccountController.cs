@@ -20,7 +20,6 @@ using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
-using BCeIDWrapper;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -232,15 +231,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			//userContact = await _system.GetContactById(_distributedCache, (Guid)id);
 
 			account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
-			account.Accountid = ida;
 			userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
-			userContact.Contactid = idc;
             if (account == null && userContact == null)
 				throw new Exception("Opps both account and contact are null");
 			if (account == null)
                 throw new Exception("Opps account is null");
 			if (userContact == null)
                 throw new Exception("Opps contact is null");
+			account.Accountid = ida;
+            userContact.Contactid = idc;
 			if (account.Accountid == null && userContact.Contactid == null)
                 throw new Exception("Opps both account and contact ID's are null");
 			if (account.Accountid == null)
