@@ -69,34 +69,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return Json(result);
         }
-        
+
         /// <summary>
-        /// Get all Legal Entities
+        /// Get a specific legal entity
         /// </summary>
-        /// <param name="shareholder"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet()]
-        public async Task<JsonResult> GetDynamicsAccounts()
-        {
-            // this method is not required, remove 
-			throw new NotImplementedException();
-
-            //List<ViewModels.Account> result = new List<ViewModels.Account>();
-            //IEnumerable<Interfaces.Microsoft.Dynamics.CRM.Account> accounts = null;
-            //accounts = await _system.Accounts.ExecuteAsync();            
-            //foreach (var legalEntity in accounts)
-            //{
-            //    result.Add(legalEntity.ToViewModel());
-            //}
-            //return Json(result);
-        }
-
-		/// <summary>
-		/// Get a specific legal entity
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		[HttpGet("{id}")]
+        [HttpGet("{id}")]
 		public async Task<IActionResult> GetAccount(string id)
 		{
 			ViewModels.Account result = null;
@@ -130,15 +109,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             ViewModels.Account result = null;
-            //Guid? id = null;
-            //Guid contactId = new Guid();
-            //if (item.externalId == null || item.externalId.Length == 0)
-			//{
-			//	item.externalId = item.id;
-			//}
-			//var strid = item.externalId;
-			//if (strid == null || strid.Length == 0)
-			//	throw new Exception("Oops no account exernal id");
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -172,18 +142,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
                 userContact.Statuscode = 1;
-
-                // save the new contact. 
-                //DataServiceResponse userContactDsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations );
-                //foreach (OperationResponse operationResponse in userContactDsr)
-                //{
-                //    if (operationResponse.StatusCode == 500) // error
-                //    {
-                //        return StatusCode(500, operationResponse.Error.Message);
-                //    }
-                //}
-                //contactId = (Guid) userContactDsr.GetAssignedId();
-                //userContact = await _system.GetContactById(_distributedCache, contactId);
             }
             
 
@@ -211,35 +169,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				userContact.Parentcustomerid_account = account;
             }
 
-			DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-            foreach (OperationResponse operationResponse in dsr)
+			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+			foreach (OperationResponse operationResponse in dsr)
             {
+				_logger.LogError("dsr.response = " + operationResponse.StatusCode);
                 if (operationResponse.StatusCode == 500) // error
                 {
+					_logger.LogError("dsr.error = " + operationResponse.Error.Message);
                     return StatusCode(500, operationResponse.Error.Message);
                 }
             }
 
-			var ida = dsr.GetAssignedIdOfType("account");
+			var ida = dsr.GetAssignedIdOfType("accounts");
             if (ida == null)
                 throw new Exception("account id is null");
-			var idc = dsr.GetAssignedIdOfType("contact");
+			_logger.LogError("Account id = " + ida.ToString());
+			var idc = dsr.GetAssignedIdOfType("contacts");
             if (idc == null)
                 throw new Exception("contact id is null");
+			_logger.LogError("Contact id = " + idc.ToString());
             
-			//account = await _system.GetAccountById(_distributedCache, (Guid) id);
-			//userContact = await _system.GetContactById(_distributedCache, (Guid)id);
-
+			_logger.LogError("accountSiteminderGuid = " + accountSiteminderGuid);
+			_logger.LogError("contactSiteminderGuid = " + contactSiteminderGuid);
 			account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
-			account.Accountid = ida;
 			userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
-			userContact.Contactid = idc;
             if (account == null && userContact == null)
 				throw new Exception("Opps both account and contact are null");
 			if (account == null)
                 throw new Exception("Opps account is null");
 			if (userContact == null)
                 throw new Exception("Opps contact is null");
+			account.Accountid = ida;
+            userContact.Contactid = idc;
 			if (account.Accountid == null && userContact.Contactid == null)
                 throw new Exception("Opps both account and contact ID's are null");
 			if (account.Accountid == null)
@@ -247,21 +208,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			if (userContact.Contactid == null)
 				throw new Exception("Opps contact.Contactid is null");
 
-            //userContact = await _system.GetContactById(_distributedCache, contactId);
-            //_system.UpdateObject(userContact);
-            //userContact.Parentcustomerid_account = account;
-
-            //dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations );
-            //foreach (OperationResponse operationResult in dsr)
-            //{
-            //    if (operationResult.StatusCode == 500) // error
-            //    {
-            //        return StatusCode(500, operationResult.Error.Message);
-            //    }
-            //}
-            
             // if we have not yet authenticated, then this is the new record for the user.
-
             if (userSettings.IsNewUserRegistration)
             {
 				userSettings.AccountId = account.Accountid.ToString();
@@ -303,7 +250,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Update a legal entity
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="accountId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
@@ -332,7 +279,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
+			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -369,7 +316,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 					return new NotFoundResult();
 				}                
                 _system.DeleteObject(account);
-                DataServiceResponse dsr = await _system.SaveChangesAsync();
+                DataServiceResponse dsr = _system.SaveChangesSynchronous();
                 foreach (OperationResponse result in dsr)
                 {
                     if (result.StatusCode == 500) // error
