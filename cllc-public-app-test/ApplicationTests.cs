@@ -47,9 +47,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string service = "adoxioapplication";
 
 			// login as default and get account for current user
-			string loginName = randomNewUserName("AppUser", 6);
-            await LoginAsDefault();
-
+			string loginUser = randomNewUserName("TestAppUser", 6);
+			var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             ViewModels.User user = await GetCurrentUser();
 			ViewModels.Account currentAccount = await GetAccountForCurrentUser();
@@ -69,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 				establishmentaddressstreet = "123 Any Street",
 				establishmentaddresscity = "Victoria, BC",
 				establishmentaddresspostalcode = "V1X 1X1",
-				applicationStatus = "Active"
+				applicationStatus = "0"
 			};
 
 			var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -142,107 +141,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-			
-			
-
             // logout and cleanup (deletes the account and contact created above ^^^)
-            //await LogoutAndCleanupTestUser(strId);
-            await Logout();
+			await LogoutAndCleanupTestUser(strId);
         }
-        /*
-        [Fact]
-        public async System.Threading.Tasks.Task TestDirectorsAndOfficers()
-        {
-            string initialName = "InitialName";
-            string changedName = "ChangedName";
-            string accountService = "account";
-            string legalEntityService = "adoxiolegalentity";
-
-			await LoginAsDefault();
-
-			// Create an account.
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
-
-            Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account()
-            {
-                Accountid = Guid.NewGuid(),
-                Name = initialName
-            };
-
-            ViewModels.Account viewmodel_account = account.ToViewModel();
-
-            string jsonString = JsonConvert.SerializeObject(viewmodel_account);
-
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-            var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            // parse as JSON.
-            jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
-
-            // name should match.
-            Assert.Equal(initialName, responseViewModel.name);
-            Guid id = new Guid(responseViewModel.id);
-
-            // Add a Director.
-
-
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
-
-            Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
-            {
-                Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_name = initialName,
-                Adoxio_Account = account,
-                Adoxio_position = (int?)ViewModels.PositionOptions.Director,
-                Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation
-            };
-
-            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
-
-            jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_legalentity);
-
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-            response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            // parse as JSON.
-            jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioLegalEntity responseLegalEntityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
-
-            // name should match.
-            Assert.Equal(initialName, responseLegalEntityViewModel.name);
-            Guid directorId = new Guid(responseLegalEntityViewModel.id);
-
-
-            // fetch the directors and officers.
-
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id + "/directorsandofficers");
-            response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            
-
-            // D - Delete
-
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
-            response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            // second delete should return a 404.
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + id + "/delete");
-            response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-
-            // should get a 404 if we try a get now.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
-            response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-
-			await Logout();
-        }
-        */
     }
 }

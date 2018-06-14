@@ -136,7 +136,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
+			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
+			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> legalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
 
 			// get account siteminder id
 			string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
@@ -164,7 +165,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
                 userContact.Statuscode = 1;
             }
-            
 
             // this may be an existing account, as this service is used during the account confirmation process.
 			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
@@ -176,6 +176,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set the account siteminder guid
 				account.Adoxio_externalid = accountSiteminderGuid;
 				item.externalId = accountSiteminderGuid;
+
+				// add a new legal entity record for this account
+                Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity legalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
+                legalEntityCollection.Add(legalEntity);
+                legalEntity.Adoxio_Account = account;
+				legalEntity.Adoxio_name = item.name;
+				legalEntity.Adoxio_isindividual = 0;
+				legalEntity.Adoxio_isowner = true;
             }
             else // it is an update.
             {

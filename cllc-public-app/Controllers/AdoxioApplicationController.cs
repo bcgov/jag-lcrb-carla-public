@@ -113,9 +113,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			ApplicationCollection.Add(adoxioApplication);
 
 			// for association with current user
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-			Interfaces.Microsoft.Dynamics.CRM.Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+			UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+			Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
 			adoxioApplication.Adoxio_Applicant = owningAccount;
 
 			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
@@ -128,7 +128,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
             
-			var id = dsr.GetAssignedId();
+			var id = dsr.GetAssignedIdOfType("adoxio_application");
+			if (id == null)
+			{
+				throw new Exception("Error application id is null");
+			}
 			Adoxio_application application = await _system.GetAdoxioApplicationById(_distributedCache, (Guid)id);
 			if (application == null) {
 				return StatusCode(500, "Something bad happened");
@@ -245,13 +249,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-            //Prepare application for update
+
+			// for association with current user
+            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+			//_system.UpdateObject(owningAccount);
+
+			//Prepare application for update
             Guid adoxio_applicationId = new Guid(id);
             Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationId).GetValueAsync();
-            adoxioApplication.CopyValues(item);
 
+			if (CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication.Adoxio_Applicant.Accountid))
+			{
+				return new NotFoundResult();
+			}
 
-            _system.UpdateObject(adoxioApplication);
+			_system.UpdateObject(adoxioApplication);
+            
+			adoxioApplication.CopyValues(item);
+
             DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse result in dsr)
             {
@@ -291,6 +308,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
             return NoContent(); // 204
+        }
+
+		/// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        private bool CurrentUserHasAccessToApplicationOwnedBy(Guid? accountId)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
+            // TODO there may be some account relationships in the future
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+				return Guid.Parse(userSettings.AccountId) == accountId;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
         }
     }
 }
