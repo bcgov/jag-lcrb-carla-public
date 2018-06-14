@@ -1,0 +1,7 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: mssql-uat
+#=========================================================
+NAME=mssql-uat
+DATABASE_SERVICE_NAME=mssql-uat
+
