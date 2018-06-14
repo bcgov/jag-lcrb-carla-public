@@ -215,22 +215,42 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
             foreach (OperationResponse operationResponse in dsr)
             {
+				_logger.LogError("dsr.response = " + operationResponse.StatusCode);
                 if (operationResponse.StatusCode == 500) // error
                 {
+					_logger.LogError("dsr.error = " + operationResponse.Error.Message);
                     return StatusCode(500, operationResponse.Error.Message);
+                }
+            }
+			if (dsr != null)
+            {
+                var ienum = dsr.GetEnumerator();
+                while (ienum.MoveNext())
+                {
+                    ChangeOperationResponse cor = (ChangeOperationResponse)ienum.Current;
+					if (cor.Descriptor is EntityDescriptor)
+					{
+						EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
+						string identity = ed.Identity.ToString();
+						_logger.LogError("Identity = " + identity);
+					}
                 }
             }
 
 			var ida = dsr.GetAssignedIdOfType("account");
             if (ida == null)
                 throw new Exception("account id is null");
+			_logger.LogError("Account id = " + ida.ToString());
 			var idc = dsr.GetAssignedIdOfType("contact");
             if (idc == null)
                 throw new Exception("contact id is null");
+			_logger.LogError("Contact id = " + idc.ToString());
             
 			//account = await _system.GetAccountById(_distributedCache, (Guid) id);
 			//userContact = await _system.GetContactById(_distributedCache, (Guid)id);
 
+			_logger.LogError("accountSiteminderGuid = " + accountSiteminderGuid);
+			_logger.LogError("contactSiteminderGuid = " + contactSiteminderGuid);
 			account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
 			userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
             if (account == null && userContact == null)
