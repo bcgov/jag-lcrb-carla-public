@@ -208,11 +208,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Guid adoxio_legalentityid = new Guid(accountId);
                 try
                 {
-                    // legalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid: adoxio_legalentityid).GetValueAsync();
-                    // process the upload.
+                    var accountGUID = new Guid(accountId);
+                     var account = await _system.Accounts.ByKey(accountid: accountGUID).GetValueAsync();
+
                     string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
-                    // string sanitized = legalEntity.Adoxio_name.Replace(" ", "_");
-                    string folderName = "Shared Documents";
+                    var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
+                    string folderName = $"{account.Name}_{accountIdCleaned}";
 
                     await _sharePointFileManager.AddFile(folderName, fileName, file.OpenReadStream(), file.ContentType);
                 }
