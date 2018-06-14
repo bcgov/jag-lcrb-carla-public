@@ -30,14 +30,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly BCeIDBusinessQuery _bceid;
 		private readonly ILogger _logger;        
 
-		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             this._system = context;
             this._distributedCache = null; //distributedCache;                        
             this._httpContextAccessor = httpContextAccessor;
+			this._bceid = bceid;
 			_logger = loggerFactory.CreateLogger(typeof(AccountController));                    
         }
 
@@ -68,6 +70,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			}
 
             return Json(result);
+        }
+
+        /// GET account in Dynamics for the current user
+        [HttpGet("bceid")]
+        public async Task<IActionResult> GetCurrentBCeIDBusiness()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // query the BCeID API to get the business record.
+			var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+
+            if (business == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return Json(business);
         }
 
         /// <summary>
