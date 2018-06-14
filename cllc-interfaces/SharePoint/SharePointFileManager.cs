@@ -16,9 +16,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 {
     public class SharePointFileManager
     {
-        public const string DefaultDocumentListTitle = "Shared%20Documents";
+        public const string DefaultDocumentListTitle = "Account";
 
-        public const string DefaultDocumentList = "Documents";
+        //public const string DefaultDocumentList = "Account";
 
         private string AuthorizationHeader;
 
@@ -124,11 +124,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     Name = folderName
                 };
-
+                
                 listResult.Items.Add(folder);
+                listData.AddObject("List", listResult);
                 // save to SharePoint.
                 TaskFactory saveTaskFactory = new TaskFactory();
-                await saveTaskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
+                var res = await saveTaskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
             }            
 
             return folder;
@@ -238,15 +239,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
         {
             // start by ensuring that the folder exists.
-            bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
-            if (! folderExists)
-            {
-                await this.CreateFolder(DefaultDocumentListTitle, folderName);                
-            }
+            //bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
+            //if (! folderExists)
+            //{
+            //   var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
+            //}
 
             // now add the file to the folder.
-            string path = "/" + this.WebName + "/" + DefaultDocumentListTitle + "/" + fileName;
-
+            string path = $"/{this.WebName}/{DefaultDocumentListTitle}/{folderName}/{fileName}";
             await this.UploadFile(fileName, path, fileData, contentType);
 
         }
