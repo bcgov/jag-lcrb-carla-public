@@ -22,7 +22,7 @@ namespace Gov.Lclb.Cllb.Public.Test
           : base(factory)
         { }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task DefaultDevelopmentUserIsValid()
         {
 			// register and login as our first user
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await LogoutAndCleanupTestUser(strId);
         }
         
-		[Fact]
+		//[Fact]
         public async System.Threading.Tasks.Task NewRegistrationUserIsValid()
         {
 			var loginUser = randomNewUserName("TestUser", 6);
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		public async System.Threading.Tasks.Task SwitchBetweenLoggedInUsersWorks()
 		{
             // register and login as our first user
-			var loginUser1 = randomNewUserName("TestUser", 6);
+			var loginUser1 = randomNewUserName("TestUser-1-", 6);
             var strId1 = await LoginAndRegisterAsNewUser(loginUser1);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
@@ -125,7 +125,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await Logout();
 
 			// register and login as our second user
-			var loginUser2 = randomNewUserName("TestUser", 6);
+			var loginUser2 = randomNewUserName("TestUser-2-", 6);
             var strId2 = await LoginAndRegisterAsNewUser(loginUser2);
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
