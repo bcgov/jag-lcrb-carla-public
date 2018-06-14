@@ -36,23 +36,23 @@ describe('App Survey Page', () => {
       await page.navigateTo();
       let heading = await page.getMainHeading();
       console.log("Survey title is: " + heading);
-      expect(heading).toEqual('Find out what you need to apply for a licence');
+      expect(heading).toEqual('What does an applicant need to apply for a cannabis licence?');
     });
 
     it('should load the survey configuration file', async () => {
-      console.log('surveyConfig title is ' + surveyConfig.title);
-        expect(surveyConfig.title).toEqual('Find out what you need to apply for a licence');
+        console.log('surveyConfig title is ' + surveyConfig.title);
+        expect(surveyConfig.title).toEqual('What does an applicant need to apply for a cannabis licence?');
         expect(page.getMainHeading()).toEqual(surveyConfig.title);
-        expect(surveyConfig.pages[0].name).toEqual('q1');
+        expect(surveyConfig.pages[0].name).toEqual('p1');
         expect(surveyConfig.pages[0].elements[0].type).toEqual('radiogroup');
         expect(surveyConfig.pages[0].elements[0].name).toEqual('age19');
-        expect(surveyConfig.pages[0].elements[0].title).toEqual('Are you 19 years old or over?');
+        expect(surveyConfig.pages[0].elements[0].title).toEqual('Is the applicant 19 years old or older?');
 
         // TODO verify survey results text has loaded
     });
 
     it('should not allow under 19 years old to apply', async () => {
-      var navPath = [{ 'q': 'q1', 'r': 'No', 'button': 'complete' }];
+      var navPath = [{ 'q': 'p1', 'r': 'No', 'button': 'complete' }];
 
         await page.navigateTo();
         await page.executeSurvey(navPath, surveyConfig);
@@ -62,15 +62,15 @@ describe('App Survey Page', () => {
     });
 
     it('should allow over 19 years old to apply and capture all information', async () => {
-        var navPath = [{'q':'q1', 'r':'Yes', 'button':'next'},
-                       {'q':'q2', 'r':'Yes', 'button':'next'},
-                       {'q':'q3', 'r':'Corporation', 'button':'next'},
-                       {'q':'q4', 'r':'Yes', 'button':'next'},
-                       {'q':'q5', 'r':'Richmond', 'button':'next'},
-                       {'q':'q6', 'r':'Yes', 'button':'next'},
-                       {'q':'q7', 'r':'Yes', 'button':'next'},
-                       {'q':'q8', 'r':'Yes', 'button':'next'},
-                       {'q':'q9', 'r':'Yes', 'button':'complete'}];
+        var navPath = [{'q':'p1', 'r':'Yes', 'button':'next'},
+                       {'q':'p2', 'r':'Yes', 'button':'next'},
+                       {'q':'p3', 'r':'Corporation', 'button':'next'},
+                       {'q':'p4', 'r':'Yes', 'button':'next'},
+                       {'q':'p5', 'r':'Richmond', 'button':'next'},
+                       {'q':'p6', 'r':'Yes', 'button':'next'},
+                       {'q':'p7', 'r':'Yes', 'button':'next'},
+                       {'q':'p8', 'r':'Yes', 'button':'next'},
+                       {'q':'p9', 'r':'Yes', 'button':'complete'}];
         
         await page.navigateTo();
         await page.executeSurvey(navPath, surveyConfig);
@@ -79,17 +79,17 @@ describe('App Survey Page', () => {
     });
 
     it('should allow backtrack to update previously entered information', async () => {
-        var navPath = [{'q':'q1', 'r':'Yes', 'button':'next'},
-                       {'q':'q2', 'r':'Yes', 'button':'next'},
-                       {'q':'q3', 'r':'Corporation', 'button':'next'},
-                       {'q':'q4', 'r':'Yes', 'button':'next'},
-                       {'q':'q5', 'r':'Richmond', 'button':'next'},
-                       {'q':'q6', 'r':'Yes', 'button':'prev'},
-                       {'q':'q5', 'r':'Saanich', 'button':'next'},
-                       {'q':'q6', 'r':'Yes', 'button':'next'},
-                       {'q':'q7', 'r':'Yes', 'button':'next'},
-                       {'q':'q8', 'r':'Yes', 'button':'next'},
-                       {'q':'q9', 'r':'Yes', 'button':'complete'}];
+        var navPath = [{'q':'p1', 'r':'Yes', 'button':'next'},
+                       {'q':'p2', 'r':'Yes', 'button':'next'},
+                       {'q':'p3', 'r':'Corporation', 'button':'next'},
+                       {'q':'p4', 'r':'Yes', 'button':'next'},
+                       {'q':'p5', 'r':'Richmond', 'button':'next'},
+                       {'q':'p6', 'r':'Yes', 'button':'prev'},
+                       {'q':'p5', 'r':'Saanich', 'button':'next'},
+                       {'q':'p6', 'r':'Yes', 'button':'next'},
+                       {'q':'p7', 'r':'Yes', 'button':'next'},
+                       {'q':'p8', 'r':'Yes', 'button':'next'},
+                       {'q':'p9', 'r':'Yes', 'button':'complete'}];
         
         await page.navigateTo();
         await page.executeSurvey(navPath, surveyConfig);
