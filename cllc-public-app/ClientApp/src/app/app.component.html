@@ -1,14 +1,16 @@
 <div class="app-outer">
   <header class="app-header">
-    <div class="nav-container" style="padding-left: 30px">
-      <a href="http://www2.gov.bc.ca/" tabindex="-1">
-        <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="/cannabislicensing/assets/bc-logo.svg">
-      </a>
-      <span class="title" role="banner">Cannabis Licencing&nbsp;
-        <span class="label label-beta">Beta</span>
-      </span>
+    <div class="nav-container top-menu">
+      <section>
+        <a href="http://www2.gov.bc.ca/" tabindex="-1">
+          <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="/cannabislicensing/assets/bc-logo.svg">
+        </a>
+        <span class="title" role="banner">Cannabis Licencing&nbsp;
+          <span class="label label-beta">Beta</span>
+        </span>
+      </section>
       <span *ngIf="isDevMode">
-        <span class="sign" style="margin-top: -10px" *ngIf="currentUser">
+        <span class="sign" *ngIf="currentUser">
           <span>{{currentUser.name}}</span>
           &nbsp;
           <span class="text-right signin">
@@ -49,7 +51,7 @@
 
     <section *ngIf="currentUser" class="navigationRibbon">
       <div class="level2Navigation ">
-        <nav class="navbar navbar-expand-lg navbar-dark nav-container">
+        <nav class="navbar navbar-expand navbar-dark nav-container">
           <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left: 0;">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
@@ -83,14 +85,11 @@
     <!-- /NAVBAR END -->
 
     <main class="app-content container">
-      <app-insert id="sidebar-left" class="sidebar-left">
-      </app-insert>
+      <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
 
       <div class="app-main">
         <breadcrumb></breadcrumb>
-        <div class="row">
           <router-outlet></router-outlet>
-        </div>
       </div>
 
       <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
