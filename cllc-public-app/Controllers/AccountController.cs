@@ -30,7 +30,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly BCeIDBusinessQuery _bceid;
 		private readonly ILogger _logger;        
 
 		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
