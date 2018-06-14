@@ -55,9 +55,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                     claims.Add(new Claim(ClaimTypes.Email, user.Email));
                 }                    
 
-                if (user.Id != null)
+                if (user.ContactId != null)
                 {
-                    claims.Add(new Claim(User.UseridClaim, user.Id.ToString()));
+                    claims.Add(new Claim(User.UseridClaim, user.ContactId.ToString()));
                 }                    
 
                 var permissions = user.GetActivePermissions().Select(p => new Claim(User.PermissionClaim, p.Code)).ToList();
