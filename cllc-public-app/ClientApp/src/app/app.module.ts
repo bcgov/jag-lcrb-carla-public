@@ -89,6 +89,7 @@ import { CorporateDetailsComponent } from './business-profile/tabs/corporate-det
 import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
 import { SecurityAssessmentsComponent } from './security-assessments/security-assessments.component';
 import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
+import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { OrganizationStructureComponent } from './business-profile/tabs/organiza
     OrganizationStructureComponent,
     DirectorsAndOfficersComponent,
     DirectorAndOfficerPersonDialog,
-    SecurityAssessmentsComponent
+    SecurityAssessmentsComponent,
+    BeforeYouStartComponent
   ],
   imports: [
     BrowserModule,
