@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { UserDataService } from '../../../services/user-data.service';
-import { User } from '../../../models/user.model';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-corporate-details',
@@ -8,14 +6,12 @@ import { User } from '../../../models/user.model';
   styleUrls: ['./corporate-details.component.scss']
 })
 export class CorporateDetailsComponent implements OnInit {
-  user: User;
+  @Input() accountId: string;
 
-  constructor(private userDataService: UserDataService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.userDataService.getCurrentUser().then(user =>{
-      this.user = user;
-    })
+
   }
 
 }

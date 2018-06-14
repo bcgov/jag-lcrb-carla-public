@@ -88,6 +88,7 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
 import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
 import { SecurityAssessmentsComponent } from './security-assessments/security-assessments.component';
+import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
 
 
 @NgModule({
@@ -123,6 +124,7 @@ import { SecurityAssessmentsComponent } from './security-assessments/security-as
     DashboardComponent,
     FileUploaderComponent,
     CorporateDetailsComponent,
+    OrganizationStructureComponent,
     DirectorsAndOfficersComponent,
     DirectorAndOfficerPersonDialog,
     SecurityAssessmentsComponent
