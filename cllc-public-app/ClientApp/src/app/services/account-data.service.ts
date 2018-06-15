@@ -6,31 +6,26 @@ import { DynamicsAccount } from "../models/dynamics-account.model";
 @Injectable()
 export class AccountDataService {
 
+  apiPath = "api/account/";
+
   constructor(private http: Http) { }
 
   getAccount(accountId: string) {
-
-    let apiPath = "api/account/" + accountId;
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
 
-    // call API
-    return this.http.get(apiPath, { headers: headers });
+    //call API
+    //console.log("===== AccountDataService.getAccount: ", accountId);
+    return this.http.get(this.apiPath + accountId, { headers: headers });
+  }
 
-      //.toPromise()
-      //.then((res: Response) => {
-      //  //console.log(res);
-      //  let data = res.json();
-      //  let legalEntitiesList = [];
+  updateAccount(accountModel: DynamicsAccount) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
 
-      //  data.forEach((entry) => {
-      //    let adoxioLegalEntity = new AdoxioLegalEntity();
-      //    adoxioLegalEntity.account = entry.account;
-      //    legalEntitiesList.push(adoxioLegalEntity);
-      //  });
-
-      //  return legalEntitiesList;
-      //})
+    //call API
+    //console.log("===== AccountDataService.updateAccount: ", accountData);
+    return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: headers });
   }
 
 }

@@ -234,7 +234,7 @@ import { BeforeYouStartComponent } from './business-profile/tabs/before-you-star
     AdoxioApplicationDataService,
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
-    AccountDataService
+    AccountDataService,
     NgbDropdown
   ],
   entryComponents: [

@@ -12,8 +12,9 @@ import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angula
 })
 export class CorporateDetailsComponent implements OnInit {
   @Input() accountId: string;
-  user: User;
+  //user: User;
   corporateDetailsForm: FormGroup;
+  accountModel: DynamicsAccount;
 
   constructor(private userDataService: UserDataService, private accountDataService: AccountDataService,
               private fb: FormBuilder) {
@@ -21,18 +22,19 @@ export class CorporateDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    // get account data and then display form
+    this.accountDataService.getAccount(this.accountId).subscribe(
+      res => {
+        this.corporateDetailsForm.patchValue(res.json());
+      },
+      err => {
+        console.log("Error occured");
+      }
+    );
 
-    this.userDataService.getCurrentUser().then(user => {
-      this.user = user;
-      this.accountDataService.getAccount(user.accountid).subscribe(
-        res => {
-          this.corporateDetailsForm.patchValue(res.json());
-        },
-        err => {
-          console.log("Error occured");
-        }
-      );
-    });
+    //this.userDataService.getCurrentUser().then(user => {
+    //  this.user = user;
+    //});
   }
 
   createForm() {
@@ -71,6 +73,8 @@ export class CorporateDetailsComponent implements OnInit {
     console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
     if (this.corporateDetailsForm.valid) {
       console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
+      this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
+      this.accountDataService.updateAccount(this.accountModel);
     } else {
       Object.keys(this.corporateDetailsForm.controls).forEach(field => {
       const control = this.corporateDetailsForm.get(field);
@@ -94,6 +98,25 @@ export class CorporateDetailsComponent implements OnInit {
         //console.log("Error occured");
       }
     );
+  }
+
+  toAccountModel(formData) {
+    let accountModel = new DynamicsAccount();
+    accountModel.id = this.accountId;
+    accountModel.bcIncorporationNumber = formData.bcIncorporationNumber;
+    accountModel.businessNumber = formData.businessNumber;
+    accountModel.contactEmail = formData.contactEmail;
+    accountModel.contactPhone = formData.contactPhone;
+    accountModel.dateOfIncorporationInBC = formData.dateOfIncorporationInBC;
+    accountModel.mailingAddresPostalCode = formData.mailingAddresPostalCode;
+    accountModel.mailingAddressCity = formData.mailingAddressCity;
+    accountModel.mailingAddressCountry = formData.mailingAddressCountry;
+    accountModel.mailingAddressName = formData.mailingAddressName;
+    accountModel.mailingAddressProvince = formData.mailingAddressProvince;
+    accountModel.mailingAddressStreet = formData.mailingAddressStreet;
+    accountModel.pstNumber = formData.pstNumber;
+
+    return accountModel;
   }
 
 }
