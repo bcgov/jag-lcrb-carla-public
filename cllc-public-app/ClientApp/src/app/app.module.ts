@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AppRoutingModule } from './app-routing.module';
@@ -89,6 +89,8 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
 import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
 import { SecurityAssessmentsComponent } from './security-assessments/security-assessments.component';
+import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
+import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
 
 
 @NgModule({
@@ -124,9 +126,11 @@ import { SecurityAssessmentsComponent } from './security-assessments/security-as
     DashboardComponent,
     FileUploaderComponent,
     CorporateDetailsComponent,
+    OrganizationStructureComponent,
     DirectorsAndOfficersComponent,
     DirectorAndOfficerPersonDialog,
-    SecurityAssessmentsComponent
+    SecurityAssessmentsComponent,
+    BeforeYouStartComponent
   ],
   imports: [
     BrowserModule,
@@ -231,6 +235,7 @@ import { SecurityAssessmentsComponent } from './security-assessments/security-as
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
     AccountDataService
+    NgbDropdown
   ],
   entryComponents: [
     ShareholderPersonDialog,
