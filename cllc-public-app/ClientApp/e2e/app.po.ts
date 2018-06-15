@@ -16,11 +16,9 @@ export class AppHomePage {
         return element(by.id("inputEmailButton"));
     }
 
-
     inputVoteButton(slug, number) {
       return element(by.id("vote_" + slug + "_" + number));
     }
-
 
     hasEmailRegistration() {
         return this.inputEmail().isPresent() && this.inputEmailButton().isPresent();
@@ -42,11 +40,22 @@ export class AppHomePage {
       return element(by.id("voteOptionButtons_" + slug)).isPresent();
     }
 
-  //accordion functions
-  getAccordionHeading() {
+    //accordion functions
+    getAccordionHeading() {
+        return element(by.id('accordion_heading')).getText();
+    }
 
-    return element(by.id('accordion_heading')).getText();
-  }
+    expandAccordion() {
+        element(by.css(".e2e-accordion-show-all")).click();
+    }
+
+    collapseAccordion() {
+        element(by.css(".e2e-accordion-hide-all")).click();
+    }
+
+    getFirstAccodionElement() {
+        return element(by.css(".e2e-accordion-first-child"));
+    }
 
 }
 

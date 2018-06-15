@@ -1,7 +1,7 @@
 <h1>Shareholders</h1>
 <p>Enter all shareholders for the corporation</p>
 
-<div class="example-container mat-elevation-z8">
+<div class="example-container mat-elevation-z0">
 
   <div class="spinner-container" *ngIf="!dataLoaded">
     <mat-spinner></mat-spinner>
@@ -57,4 +57,10 @@
   &nbsp;
   <a class="globalButton"  class="btn btn-primary" tabindex="1" (click)="openOrganizationDialog()"><strong>Add Organization</strong><br></a>
 </div>
+<br>
+<br>
+<br>
+<br>
+<label for="">Upload the corporation's Central Securities Register</label>
+<app-file-uploader documentType="Central Securities Register" [accountId]="user?.accountid"></app-file-uploader>
 

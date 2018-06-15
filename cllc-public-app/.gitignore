@@ -236,4 +236,5 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-
+# e2e screenshots and reports
+/cllc-public-app/ClientApp/e2e-reports
