@@ -16,16 +16,16 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('bcIncorporationNumber')}">
+      <div [ngClass]="{'has-error': this.isFieldError('dateOfIncorporationInBC')}">
         <label>Date of Incorporation in B.C.</label>
         <br>
         <div class="input-group">
-          <input class="form-control" style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="bcIncorporationDate">
+          <input class="form-control" style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="dateOfIncorporationInBC">
           <div class="input-group-append">
             <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
           </div>
-          <div *ngIf="this.isFieldError('bcIncorporationDate')" class="alert alert-danger" style="width: 250px;">
-            <div *ngIf="corporateDetailsForm.controls['bcIncorporationDate'].hasError('required') ">
+          <div *ngIf="this.isFieldError('dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="corporateDetailsForm.controls['dateOfIncorporationInBC'].hasError('required') ">
               This is required
             </div>
           </div>
@@ -60,6 +60,32 @@
     </section>
 
     <section>
+      <div [ngClass]="{'has-error': this.isFieldError('contactEmail')}">
+        <label for="">Email</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="contactEmail" formControlName="contactEmail">
+        <div *ngIf="this.isFieldError('contactEmail')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['contactEmail'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div [ngClass]="{'has-error': this.isFieldError('contactPhone')}">
+        <label for="">Phone</label>
+        <br>
+        <input class="form-control" style="width: 250px;" type="text" id="contactPhone" formControlName="contactPhone">
+        <div *ngIf="this.isFieldError('contactPhone')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['contactPhone'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--<section>
       <div [ngClass]="{'has-error': this.isFieldError('isCorporationOutsideBC')}">
         <label>Is the organization incorporated, continued or conducts business in other provinces or countries?</label>
         <br />
@@ -74,7 +100,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
 
     <p></p>
     <section>
@@ -97,12 +123,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('mailName')}">
+      <div [ngClass]="{'has-error': this.isFieldError('mailingAddressName')}">
         <label for="">Name</label>
         <br>
-        <input class="form-control" style="width: 250px;" type="text" id="mailName" formControlName="mailName">
-        <div *ngIf="this.isFieldError('mailName')" class="alert alert-danger" style="width: 250px;">
-          <div *ngIf="corporateDetailsForm.controls['mailName'].hasError('required') ">
+        <input class="form-control" style="width: 250px;" type="text" id="mailingAddressName" formControlName="mailingAddressName">
+        <div *ngIf="this.isFieldError('mailingAddressName')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailingAddressName'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -110,12 +136,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('mailAddress')}">
+      <div [ngClass]="{'has-error': this.isFieldError('mailingAddressStreet')}">
         <label for="">Address</label>
         <br>
-        <input class="form-control" style="width: 350px;" type="text" id="mailAddress" formControlName="mailAddress">
-        <div *ngIf="this.isFieldError('mailAddress')" class="alert alert-danger" style="width: 350px;">
-          <div *ngIf="corporateDetailsForm.controls['mailAddress'].hasError('required') ">
+        <input class="form-control" style="width: 350px;" type="text" id="mailingAddressStreet" formControlName="mailingAddressStreet">
+        <div *ngIf="this.isFieldError('mailingAddressStreet')" class="alert alert-danger" style="width: 350px;">
+          <div *ngIf="corporateDetailsForm.controls['mailingAddressStreet'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -123,12 +149,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('mailCity')}">
+      <div [ngClass]="{'has-error': this.isFieldError('mailingAddressCity')}">
         <label for="">City</label>
         <br>
-        <input class="form-control" style="width: 250px;" type="text" id="mailCity" formControlName="mailCity">
-        <div *ngIf="this.isFieldError('mailCity')" class="alert alert-danger" style="width: 250px;">
-          <div *ngIf="corporateDetailsForm.controls['mailCity'].hasError('required') ">
+        <input class="form-control" style="width: 250px;" type="text" id="mailingAddressCity" formControlName="mailingAddressCity">
+        <div *ngIf="this.isFieldError('mailingAddressCity')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailingAddressCity'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -136,12 +162,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('mailCountry')}">
+      <div [ngClass]="{'has-error': this.isFieldError('mailingAddressCountry')}">
         <label for="">Country</label>
         <br>
-        <input class="form-control" style="width: 250px;" type="text" id="mailCountry" formControlName="mailCountry">
-        <div *ngIf="this.isFieldError('mailCountry')" class="alert alert-danger" style="width: 250px;">
-          <div *ngIf="corporateDetailsForm.controls['mailCountry'].hasError('required') ">
+        <input class="form-control" style="width: 250px;" type="text" id="mailingAddressCountry" formControlName="mailingAddressCountry">
+        <div *ngIf="this.isFieldError('mailingAddressCountry')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailingAddressCountry'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -149,14 +175,14 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('mailProvince')}">
+      <div [ngClass]="{'has-error': this.isFieldError('mailingAddressProvince')}">
         <label for="">Province</label>
         <br>
         <!--<input class="form-control" style="width: 250px;" type="text" id="mailProvince" formControlName="mailProvince">-->
-        <select class="form-control" id="mailProvince" formControlName="mailProvince" style="width: 250px;">
+        <select class="form-control" id="mailingAddressProvince" formControlName="mailingAddressProvince" style="width: 250px;">
           <option value="AB">Alberta</option>
           <option value="BC">British Columbia</option>
-          <option value="MB">Manitoba</option>
+          <option value="MN">Manitoba</option>
           <option value="NB">New Brunswick</option>
           <option value="NL">Newfoundland and Labrador</option>
           <option value="NS">Nova Scotia</option>
@@ -168,8 +194,8 @@
           <option value="NU">Nunavut</option>
           <option value="YT">Yukon</option>
         </select>
-        <div *ngIf="this.isFieldError('mailProvince')" class="alert alert-danger" style="width: 250px;">
-          <div *ngIf="corporateDetailsForm.controls['mailProvince'].hasError('required') ">
+        <div *ngIf="this.isFieldError('mailingAddressProvince')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailingAddressProvince'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -177,12 +203,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('mailPostalcode')}">
+      <div [ngClass]="{'has-error': this.isFieldError('mailingAddresPostalCode')}">
         <label for="">Postal Code</label>
         <br>
-        <input class="form-control" style="width: 250px;" type="text" id="mailPostalcode" formControlName="mailPostalcode">
-        <div *ngIf="this.isFieldError('mailPostalcode')" class="alert alert-danger" style="width: 250px;">
-          <div *ngIf="corporateDetailsForm.controls['mailPostalcode'].hasError('required') ">
+        <input class="form-control" style="width: 250px;" type="text" id="mailingAddresPostalCode" formControlName="mailingAddresPostalCode">
+        <div *ngIf="this.isFieldError('mailingAddresPostalCode')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="corporateDetailsForm.controls['mailingAddresPostalCode'].hasError('required') ">
             This is required
           </div>
         </div>
