@@ -16,29 +16,40 @@ export class CorporateDetailsComponent implements OnInit {
 
   constructor(private userDataService: UserDataService, private accountDataService: AccountDataService,
               private fb: FormBuilder) {
-    this.createForm();
   }
 
   ngOnInit() {
+    this.createForm();
+
     this.userDataService.getCurrentUser().then(user => {
       this.user = user;
-    })
+      this.accountDataService.getAccount(user.accountid).subscribe(
+        res => {
+          this.corporateDetailsForm.patchValue(res.json());
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+    });
   }
 
   createForm() {
     this.corporateDetailsForm = this.fb.group({
       bcIncorporationNumber: ['', Validators.required],
-      bcIncorporationDate: [''],
+      dateOfIncorporationInBC: [''],
       businessNumber: ['', Validators.required],
       pstNumber: ['', Validators.required],
-      isCorporationOutsideBC: ['', Validators.required],
-      mailName: ['', Validators.required],
-      mailAddress: ['', Validators.required],
-      mailCity: ['', Validators.required],
-      mailCountry: ['', Validators.required],
-      mailProvince: ['', Validators.required],
-      mailPostalcode: ['', Validators.required]
-    }, { validator: this.dateLessThanToday('bcIncorporationDate') });
+      contactEmail: ['', Validators.required],
+      contactPhone: ['', Validators.required],
+      //isCorporationOutsideBC: ['', Validators.required],
+      mailingAddressName: ['', Validators.required],
+      mailingAddressStreet: ['', Validators.required],
+      mailingAddressCity: ['', Validators.required],
+      mailingAddressCountry: ['', Validators.required],
+      mailingAddressProvince: ['', Validators.required],
+      mailingAddresPostalCode: ['', Validators.required]
+    }, { validator: this.dateLessThanToday('dateOfIncorporationInBC') });
   }
 
   dateLessThanToday(field1) {
@@ -70,6 +81,18 @@ export class CorporateDetailsComponent implements OnInit {
   isFieldError(field: string) {
     const isError = !this.corporateDetailsForm.get(field).valid && this.corporateDetailsForm.get(field).touched;
     return isError;
+  }
+
+  getAccount(accountId: string) {
+    this.accountDataService.getAccount(accountId).subscribe(
+      res => {
+        console.log("accountVM: ", res.json());
+        return res.json();
+      },
+      err => {
+        //console.log("Error occured");
+      }
+    );
   }
 
 }
