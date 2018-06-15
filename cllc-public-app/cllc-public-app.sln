@@ -4,18 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cllc-public-app", "cllc-public-app.csproj", "{1B123454-DD56-472C-B459-BB0EDECADFF6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3} = {BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces", "cllc-interfaces", "{0584B916-A0B9-44B4-97D3-1E9DBF16220E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{27F1F3AB-9F73-414C-ADD2-3CE032C49978}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces-test", "cllc-interfaces-test", "{E5822CDE-12E6-41C4-9BA6-B172BE63DE22}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint.Tests", "..\cllc-interfaces-test\SharePoint\SharePoint.Tests.csproj", "{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynamics", "..\cllc-interfaces\Dynamics\Dynamics.csproj", "{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cllc-public-app-test", "..\cllc-public-app-test\cllc-public-app-test.csproj", "{6027CAC7-CECF-4C24-BD31-324689631D7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCeID", "..\cllc-interfaces\BCeID\BCeID.csproj", "{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,26 +30,22 @@ Global
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6027CAC7-CECF-4C24-BD31-324689631D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
-		{C1A98E01-564C-4BBC-BB9D-F7FCAB827369} = {E5822CDE-12E6-41C4-9BA6-B172BE63DE22}
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
+		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5C395A-DA58-4406-95D8-AAEBD4437D0A}

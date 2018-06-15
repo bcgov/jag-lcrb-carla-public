@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -29,13 +30,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly BCeIDBusinessQuery _bceid;
+		private readonly ILogger _logger;        
 
-        public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
+		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             this._system = context;
             this._distributedCache = null; //distributedCache;                        
             this._httpContextAccessor = httpContextAccessor;
+			this._bceid = bceid;
+			_logger = loggerFactory.CreateLogger(typeof(AccountController));                    
         }
 
 		/// GET account in Dynamics for the current user
@@ -66,34 +71,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return Json(result);
         }
-        
-        /// <summary>
-        /// Get all Legal Entities
-        /// </summary>
-        /// <param name="shareholder"></param>
-        /// <returns></returns>
-        [HttpGet()]
-        public async Task<JsonResult> GetDynamicsAccounts()
-        {
-            // this method is not required, remove 
-			throw new NotImplementedException();
 
-            //List<ViewModels.Account> result = new List<ViewModels.Account>();
-            //IEnumerable<Interfaces.Microsoft.Dynamics.CRM.Account> accounts = null;
-            //accounts = await _system.Accounts.ExecuteAsync();            
-            //foreach (var legalEntity in accounts)
-            //{
-            //    result.Add(legalEntity.ToViewModel());
-            //}
-            //return Json(result);
+        /// GET account in Dynamics for the current user
+        [HttpGet("bceid")]
+        public async Task<IActionResult> GetCurrentBCeIDBusiness()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // query the BCeID API to get the business record.
+			var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+
+            if (business == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return Json(business);
         }
 
-		/// <summary>
-		/// Get a specific legal entity
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		[HttpGet("{id}")]
+        /// <summary>
+        /// Get a specific legal entity
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
 		public async Task<IActionResult> GetAccount(string id)
 		{
 			ViewModels.Account result = null;
@@ -127,14 +130,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             ViewModels.Account result = null;
-            Guid? id = null;
-            Guid contactId = new Guid();
-            if (item.externalId == null || item.externalId.Length == 0)
-			{
-				item.externalId = item.id;
-			}
-			var strid = item.externalId;
-
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -142,10 +137,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
-            // first check to see that a contact exists.
-            string contactSiteminderGuid = userSettings.ContactId;
-            //Guid userContactId = new Guid(contactSiteminderGuid);
-            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderId(_distributedCache, contactSiteminderGuid);
+
+			// get account siteminder id
+			string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
+			if (accountSiteminderGuid == null || accountSiteminderGuid.Length == 0)
+				throw new Exception("Oops no accountSiteminderGuid exernal id");
+
+			// first check to see that a contact exists.
+			string contactSiteminderGuid = userSettings.SiteMinderGuid;
+			if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
+				throw new Exception("Oops no contactSiteminderGuid exernal id");
+
+			//Guid userContactId = new Guid(contactSiteminderGuid);
+            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
             if (userContact == null)
             {
                 // create the user contact record.
@@ -159,30 +163,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
                 userContact.Statuscode = 1;
-
-                // save the new contact. 
-                DataServiceResponse userContactDsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations );
-                foreach (OperationResponse operationResponse in userContactDsr)
-                {
-                    if (operationResponse.StatusCode == 500) // error
-                    {
-                        return StatusCode(500, operationResponse.Error.Message);
-                    }
-                }
-                contactId = (Guid) userContactDsr.GetAssignedId();
-                userContact = await _system.GetContactById(_distributedCache, contactId);
             }
             
 
             // this may be an existing account, as this service is used during the account confirmation process.
-			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderId(_distributedCache, strid);
+			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
             if (account == null)
             {
                 // create a new account
                 account = new Interfaces.Microsoft.Dynamics.CRM.Account();
                 AccountCollection.Add(account);
                 // set the account siteminder guid
-                account.Adoxio_externalid = strid;
+				account.Adoxio_externalid = accountSiteminderGuid;
+				item.externalId = accountSiteminderGuid;
             }
             else // it is an update.
             {
@@ -193,59 +186,84 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (account.Primarycontactid == null) // we need to add the primary contact.
             {                
-                account.Primarycontactid = userContact;                                
+                account.Primarycontactid = userContact;
+				userContact.Parentcustomerid_account = account;
             }
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties);
-            foreach (OperationResponse operationResponse in dsr)
+			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
+			foreach (OperationResponse operationResponse in dsr)
             {
+				_logger.LogError("dsr.response = " + operationResponse.StatusCode);
                 if (operationResponse.StatusCode == 500) // error
                 {
+					_logger.LogError("dsr.error = " + operationResponse.Error.Message);
                     return StatusCode(500, operationResponse.Error.Message);
                 }
             }
 
-            id = dsr.GetAssignedId();
-            account = await _system.GetAccountById(_distributedCache, (Guid) id);
-            userContact = await _system.GetContactById(_distributedCache, contactId);
-            _system.UpdateObject(userContact);
-            userContact.Parentcustomerid_account = account;
-
-            dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations );
-            foreach (OperationResponse operationResult in dsr)
-            {
-                if (operationResult.StatusCode == 500) // error
-                {
-                    return StatusCode(500, operationResult.Error.Message);
-                }
-            }
+			var ida = dsr.GetAssignedIdOfType("accounts");
+            if (ida == null)
+                throw new Exception("account id is null");
+			_logger.LogError("Account id = " + ida.ToString());
+			var idc = dsr.GetAssignedIdOfType("contacts");
+            if (idc == null)
+                throw new Exception("contact id is null");
+			_logger.LogError("Contact id = " + idc.ToString());
             
-            // if we have not yet authenticated, then this is the new record for the user.
+			_logger.LogError("accountSiteminderGuid = " + accountSiteminderGuid);
+			_logger.LogError("contactSiteminderGuid = " + contactSiteminderGuid);
+			account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
+			userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
+            if (account == null && userContact == null)
+				throw new Exception("Opps both account and contact are null");
+			if (account == null)
+                throw new Exception("Opps account is null");
+			if (userContact == null)
+                throw new Exception("Opps contact is null");
+			account.Accountid = ida;
+            userContact.Contactid = idc;
+			if (account.Accountid == null && userContact.Contactid == null)
+                throw new Exception("Opps both account and contact ID's are null");
+			if (account.Accountid == null)
+				throw new Exception("Opps account.Accountid is null");
+			if (userContact.Contactid == null)
+				throw new Exception("Opps contact.Contactid is null");
 
+            // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
             {
+				userSettings.AccountId = account.Accountid.ToString();
+                userSettings.ContactId = userContact.Contactid.ToString();
 
-                // we can now authenticate.
+				// we can now authenticate.
                 if (userSettings.AuthenticatedUser == null)
                 {
                     Models.User user = new Models.User();
                     user.Active = true;
-                    user.Guid = userSettings.ContactId;
+					user.AccountId = Guid.Parse(userSettings.AccountId);
+					user.ContactId = Guid.Parse(userSettings.ContactId);
                     user.SmUserId = userSettings.UserId;
                     userSettings.AuthenticatedUser = user;
                 }
 
                 userSettings.IsNewUserRegistration = false;
 
-				userSettings.AccountId = id.ToString();
-				userSettings.ContactId = contactId.ToString();
-
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
-                // add the user to the session.
+				_logger.LogError("AccountController --> " + userSettingsString);
+
+				// add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
             }
-            account.Accountid = id;
+			else
+			{
+				throw new Exception("Oops not a new user registration");
+			}
+
+            //account.Accountid = id;
             result = account.ToViewModel();
+			_logger.LogError("AccountController --> id=" + result.id);
+			_logger.LogError("AccountController --> externalId=" + result.externalId);
+
             return Json(result);
         }
 
@@ -253,7 +271,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Update a legal entity
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="accountId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
@@ -282,7 +300,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
+			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -319,7 +337,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 					return new NotFoundResult();
 				}                
                 _system.DeleteObject(account);
-                DataServiceResponse dsr = await _system.SaveChangesAsync();
+                DataServiceResponse dsr = _system.SaveChangesSynchronous();
                 foreach (OperationResponse result in dsr)
                 {
                     if (result.StatusCode == 500) // error

@@ -58,6 +58,9 @@ echo "Using SDK: $(dotnet --version)"
 echo "---> Copying application source ..."
 cp -Rf /tmp/src/. ./
 
+echo "---> Fix permissions on source ..."
+fix-permissions ./
+
 if [ "$DEV_MODE" == true ]; then
   # fix permissions
   fix-permissions /opt/app-root
@@ -136,18 +139,18 @@ dotnet restore "$DOTNET_STARTUP_PROJECT" $RESTORE_OPTIONS
 if [ -n "$SONAR_TOKEN" ]; then
 	echo "---> Running SonarQube Scan..."
 	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe begin /d:sonar.login=$SONAR_TOKEN /k:$SONAR_PROJECT /d:sonar.host.url=$SONAR_URL /v:$VERSION_PREFIX$BUILDNUMBER 
-	dotnet build "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" 
+	dotnet build "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" /m:1 -c "$DOTNET_CONFIGURATION" 
 	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe end /d:sonar.login=$SONAR_TOKEN 
 elif [ -n "$SNYK_TOKEN" ]; then
 		# run the snyk scan.  Note SNYK_TOKEN is automatically used by the snyk scanner for authentication.
 		snyk test --file="$DOTNET_STARTUP_PROJECT"
 elif [ -n "$DOTNET_TEST" ]; then
-	dotnet test "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION"
+	dotnet test "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" /m:1 -c "$DOTNET_CONFIGURATION"
 else	
 	# Build and publish the application for production usage
 	echo "---> Publishing application..."
-	dotnet publish "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" \
-		   --self-contained false /p:PublishWithAspNetCoreTargetManifest=$DOTNET_ASPNET_STORE -o "$DOTNET_APP_PATH"
+	dotnet publish /m:1 "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" \
+		 --self-contained false /p:PublishWithAspNetCoreTargetManifest=$DOTNET_ASPNET_STORE -o "$DOTNET_APP_PATH"
 
 	# check if the assembly used by the script exists
 	if [ ! -f "$DOTNET_APP_PATH/${APP_DLL_NAME}" ]; then

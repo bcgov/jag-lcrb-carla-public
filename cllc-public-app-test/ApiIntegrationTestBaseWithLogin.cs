@@ -7,38 +7,40 @@ using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Net;
+using System;
 using Xunit;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.Extensions.DependencyInjection;
-
+using Logos.Utility;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
     public abstract class ApiIntegrationTestBaseWithLogin : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
-        private readonly CustomWebApplicationFactory<Startup> _factory;
+        protected readonly CustomWebApplicationFactory<Startup> _factory;
 
-        public HttpClient _client { get; }
+		public HttpClient _client { get; }
+
 
         public ApiIntegrationTestBaseWithLogin(CustomWebApplicationFactory<Startup> fixture)
         {
             _factory = fixture;
-            _client = _factory                
-                .CreateClient(new WebApplicationFactoryClientOptions
+			_client = _factory
+				.CreateClient(new WebApplicationFactoryClientOptions
                 {
                     AllowAutoRedirect = false
-                });                
+                });    
         }
-
+        
         public async System.Threading.Tasks.Task Login(string userid)
         {
+			_client.DefaultRequestHeaders.Add("DEV-USER", userid);
 			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + userid);
             var response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
-            _client.DefaultRequestHeaders.Add("DEV-USER", userid);
         }
 
 		public async System.Threading.Tasks.Task LoginAsDefault()
@@ -77,7 +79,9 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Adoxio_externalid = user.accountid
             };
 
+            
             ViewModels.Account viewmodel_account = account.ToViewModel();
+
             Assert.Equal(account.Adoxio_externalid, viewmodel_account.externalId);
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
@@ -92,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user.businessname, responseViewModel.name);
             string strId = responseViewModel.externalId;
             string id = responseViewModel.id;
-            Assert.Equal(strId, user.accountid);
+			Assert.Equal(strId, responseViewModel.externalId);
 
             // verify we can fetch the account via web service
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
@@ -150,7 +154,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             string resp = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
 			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(resp);
-            return user;
+
+			return user;
         }
 
 		public async System.Threading.Tasks.Task<ViewModels.Account> GetAccountForCurrentUser()

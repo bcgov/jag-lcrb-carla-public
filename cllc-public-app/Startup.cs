@@ -150,25 +150,38 @@ namespace Gov.Lclb.Cllb.Public
                 });
             }
 
-            var authenticationContext = new AuthenticationContext(
+            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
+
+            // determine if we have a SSG connection.
+
+            string ssgUsername = Configuration["SSG_USERNAME"];
+            string ssgPassword = Configuration["SSG_PASSWORD"];
+
+            if (string.IsNullOrEmpty (ssgUsername) || string.IsNullOrEmpty(ssgPassword))
+            {
+                // authenticate using ADFS.
+                var authenticationContext = new AuthenticationContext(
                "https://login.windows.net/" + aadTenantId);
-            ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-            var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-            task.Wait();
-            AuthenticationResult authenticationResult = task.Result; 
+                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
+                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
+                task.Wait();
+                AuthenticationResult authenticationResult = task.Result;
+
+                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", authenticationResult.CreateAuthorizationHeader());
+            }
+            else
+            {
+                // authenticate using the SSG.                
+                string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(ssgUsername + ":" + ssgPassword));
+
+                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", "Basic " + credentials);
+            }
 
             
 
-                        
-
-            services.AddTransient<Interfaces.Microsoft.Dynamics.CRM.System>(_ =>
-            {
-                var context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
-                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                    "Authorization", authenticationResult.CreateAuthorizationHeader());
-                return context;
-            }
-                );
+            services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
 
             // add SharePoint.
 
@@ -178,9 +191,17 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
-
-            // SharePointFileManager sharePointFileManager = ;
+           
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword));
+
+            // add BCeID Web Services
+
+            string bceidUrl    = Configuration["BCEID_SERVICE_URL"];
+			string bceidSvcId = Configuration["BCEID_SERVICE_SVCID"];
+			string bceidUserid = Configuration["BCEID_SERVICE_USER"];
+			string bceidPasswd = Configuration["BCEID_SERVICE_PASSWD"];
+
+			services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

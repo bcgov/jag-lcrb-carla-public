@@ -1,9 +1,10 @@
 <h2>A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.</h2>
+<h2 id="accordion_heading">A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.</h2>
 <h3>Below is a step-by-step guide to applying for a cannabis retail store licence and selling cannabis products. </h3>
 <p>&nbsp;</p>
 
 <div class="accordion-btn body">
-  <button mat-button color="accent" (click)="showAll()">Show all</button>
+  <button class="e2e-accordion-show-all" mat-button color="accent" (click)="showAll()">Show all</button>
   &nbsp;|&nbsp;
   <button mat-button color="accent" (click)="collapseAll()">Collapse all</button>
 </div>
@@ -18,6 +19,7 @@
     </mat-expansion-panel-header>
     <ul class="detail-step">
       <li>Applicants must have a business that is <a routerLink="policy-document/businesses-and-other-legal-entities">registered in B.C.</a></li>
+      <li class="e2e-accordion-first-child">Applicants must have a business that is <a routerLink="policy-document/businesses-and-other-legal-entities">registered in B.C.</a></li>
       <li>Applicants must be <a href="https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/pst/register" target="_blank">registered to collect PST.</a></li>
       <li>Applicants must have a <a href="https://www.canada.ca/en/services/taxes/business-number.html" target="_blank">Business Number</a> (9-digit number issued by the Canada Revenue Agency)</li>
     </ul>

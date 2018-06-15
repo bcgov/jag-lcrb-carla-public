@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>Add Shareholder - Organization</h2>
 <mat-dialog-content>
-  <form [formGroup]='shareholderForm' class="form-horizontal">
+  <form [formGroup]='shareholderForm' class="">
 
-    <div class="form-row">
-      <div class="form-group col-md-9">
+    <div class="row">
+      <div class="form-group col-md-12">
         <label>Organization Type</label>
-        <select class="form-control" formControlName='organizationType' >
+        <select class="form-control" style="width: 250px;" formControlName='organizationType' #orgType>
           <option value="PrivateCorporation">Private Corporation</option>
           <option value="Partnership">Partnership</option>
           <option value="SoleProprietor">Sole Proprietor</option>
@@ -19,9 +19,10 @@
           </span>
         </div>
       </div>
-      <div class="form-group col-md-12">
+
+      <div class="form-group  col-md-12">
         <label>Organization Name</label>
-        <input type="text" class="form-control" formControlName="organizationName" placeholder="Organization Name">
+        <input style="width: 250px;" type="text" class="form-control" formControlName="organizationName" placeholder="Organization Name">
         <div *ngIf="shareholderForm.controls['organizationName'].touched && !shareholderForm.controls['organizationName'].valid">
           <span *ngIf="shareholderForm.controls['organizationName'].hasError('required') ">
             Organization name is required
@@ -29,35 +30,40 @@
         </div>
       </div>
     </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <label>Number of <br />voting shares</label>
-        <input type="number" class="form-control" formControlName='numberOfVotingShares' placeholder="Number of voting shares">
+    <div class="row">
+      <div class="form-group  col-md-4">
+        <label>Number of voting shares</label>
+        <input style="width: 150px;" type="number" class="form-control" formControlName='numberOfVotingShares'>
         <div *ngIf="shareholderForm.controls['numberOfVotingShares'].touched && !shareholderForm.controls['numberOfVotingShares'].valid">
           <span *ngIf="shareholderForm.controls['numberOfVotingShares'].hasError('required') ">
             Number of voting shares is required
           </span>
         </div>
       </div>
-      <div class="form-group col-md-4">
-        <label>Number of<br />non voting shares</label>
-        <input type="number" class="form-control" formControlName='numberOfNonVotingShares' placeholder="Number of non voting shares">
+      <!-- <div class="form-group  col-md-5" *ngIf="orgType.value !== 'SoleProprietor'">
+        <label>Number of non voting shares</label>
+        <input style="width: 150px;" type="number" class="form-control" formControlName='numberOfNonVotingShares'>
         <div *ngIf="shareholderForm.controls['numberOfNonVotingShares'].touched && !shareholderForm.controls['numberOfNonVotingShares'].valid">
           <span *ngIf="shareholderForm.controls['numberOfNonVotingShares'].hasError('required') ">
             Number of non voting shares is required
           </span>
         </div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group  col-md-12" *ngIf="orgType.value !== 'SoleProprietor'">
         <label>Date of Shares Issued</label>
-        <input type="date" class="form-control" formControlName='dateIssued' placeholder="Date of Shares Issued">
-      </div>
+        <div class="input-group">
+          <input class="form-control" formControlName='dateIssued' style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
+          </div>
+        </div>
+      </div> -->
     </div>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button" color="accent" (click)="close()">Close</button>
-  <button class="mat-raised-button" color="accent" (click)="save()">Save</button>
+  <button class="btn btn-secondary" (click)="close()">Close</button>
+  &nbsp;
+  <button class="btn btn-primary" (click)="save()">Save</button>
 </mat-dialog-actions>
