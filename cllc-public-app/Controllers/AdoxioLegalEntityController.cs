@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     positionFilter = Models.Adoxio_LegalEntityExtensions.GetPositionFilter(positionType);
-                    filter = accountfilter + " and " + positionFilter;
+					filter = accountfilter + " and " + positionFilter;
                     //filter = positionFilter;
 
                     // Execute query if filter is valid
@@ -261,20 +261,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
-            
-            // create a DataServiceCollection to add the record
+			// create a DataServiceCollection to add the record
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
 
             // create a new legal entity.
             Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity adoxioLegalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
 
-
-            // add Dynamics LegalEntity to LegalEntity Collection
+			// add Dynamics LegalEntity to LegalEntity Collection
             LegalEntityCollection.Add(adoxioLegalEntity);
+
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+			var userAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+			_system.UpdateObject(userAccount);
 
             // copy received values to Dynamics LegalEntity
             // !!!! Values must be copied after adding to the collection, otherwise the entity will be created without the values assigned !!!!
             adoxioLegalEntity.CopyValues(item, _system);
+			adoxioLegalEntity.Adoxio_Account = userAccount;
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
             DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);            
