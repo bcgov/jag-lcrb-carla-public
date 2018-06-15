@@ -88,7 +88,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.mailingAddressStreet = account.Address1_line1;
                 accountVM.mailingAddressCity = account.Address1_city;
                 accountVM.mailingAddressCountry = account.Address1_county;
-                accountVM.mailingAddressProvince = (ViewModels.Adoxio_stateprovince)account.Adoxio_stateprovince;
+                if (account.Adoxio_stateprovince != null)
+		    accountVM.mailingAddressProvince = (ViewModels.Adoxio_stateprovince)account.Adoxio_stateprovince;
+		else
+		    accountVM.mailingAddressProvince = ViewModels.Adoxio_stateprovince.BC;
                 accountVM.mailingAddresPostalCode = account.Address1_postalcode;
 
                 if (account._primarycontactid_value != null)
