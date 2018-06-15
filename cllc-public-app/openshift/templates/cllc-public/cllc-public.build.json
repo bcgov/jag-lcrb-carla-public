@@ -187,6 +187,6 @@
       "displayName": "UAT Build",
       "description": "1 if true",      
       "value": ""
-    },    
+    }    
   ]
 }
