@@ -58,6 +58,9 @@ echo "Using SDK: $(dotnet --version)"
 echo "---> Copying application source ..."
 cp -Rf /tmp/src/. ./
 
+echo "---> Fix permissions on source ..."
+fix-permissions ./
+
 if [ "$DEV_MODE" == true ]; then
   # fix permissions
   fix-permissions /opt/app-root
