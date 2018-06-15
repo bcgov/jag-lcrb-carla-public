@@ -21,7 +21,7 @@ export class EditShareholdersComponent implements OnInit {
   shareholderList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   public dataLoaded;
-  displayedColumns = ['position', 'name', 'email', 'commonnonvotingshares', 'commonvotingshares', 'dateIssued'];
+  displayedColumns = ['position', 'name', 'email', 'commonvotingshares'];
   user: User;
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, 
