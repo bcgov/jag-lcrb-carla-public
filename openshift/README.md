@@ -118,3 +118,21 @@ Check **Active**
 
 Click **Add webhook**
 
+### UAT ###
+
+UAT is not currently supported by the process above.  To setup the UAT environment, change the console directory to the location of the public-app openshift directory, and execute the following.
+
+`oc project lclb-cllc-tools`
+
+`oc process -f templates/cllc-public/cllc-public.build.json --param-file=cllc-public-build.uat.param`
+
+`oc project lclb-cllc-test`
+
+`oc process -f templates/cllc-public/cllc-public-deploy.json --param-file=cllc-public-deploy.uat.param`
+
+
+
+Change directory to the directory containing the mssql server template, and execute the following:
+
+`oc process -f sql-server-deploy.json --param-file=sql-server-deploy.uat.param | oc create -f -`
+
