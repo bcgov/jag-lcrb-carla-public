@@ -49,10 +49,7 @@ const routes: Routes = [
     path: 'lic-app-summary',
     component: LicenseApplicationSummaryComponent
   },
-    {
-    path: 'prv',
-    redirectTo: 'prv/survey'
-  },
+
   {
     path: 'prv/survey',
     component: SurveyPrimaryComponent,
@@ -65,10 +62,16 @@ const routes: Routes = [
       survey_path: 'assets/survey-primary.json',
     }
   },
+
+  {
+    path: 'prv',
+    redirectTo: 'prv/survey'
+  },
+  
   {
     path: 'result/:data',
     component: ResultComponent,
-    data: {
+    data: { 
       // do not show breadcrumb
       //breadcrumb: 'Survey Results'
     }

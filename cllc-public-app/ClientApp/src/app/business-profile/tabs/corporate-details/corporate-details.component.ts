@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { AccountDataService } from '../../../services/account-data.service';
 import { User } from '../../../models/user.model';
@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angula
   styleUrls: ['./corporate-details.component.scss']
 })
 export class CorporateDetailsComponent implements OnInit {
+  @Input() accountId: string;
   user: User;
   corporateDetailsForm: FormGroup;
 

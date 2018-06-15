@@ -11,13 +11,57 @@ using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
 using Microsoft.OData.Client;
-using System.Collections.Generic;
 
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
     public static class DynamicsExtensions
     {
+		/// <summary>
+        /// Utility method to call Dynamics <see langword="async"/>, with a delay to compensate for timing issues.
+        /// </summary>
+        /// <param name="system"></param>
+        /// <returns>dsr</returns>
+        public static DataServiceResponse SaveChangesSynchronous(this Microsoft.Dynamics.CRM.System system)
+        {
+            Task<DataServiceResponse> t = system.SaveChangesAsync();
+            System.Threading.Thread.Sleep(5000);
+            t.Wait();
+            if (t.IsFaulted)
+            {
+                throw new Exception("Error save changes failed:" + t.Exception.Message);
+            }
+            else if (!t.IsCompletedSuccessfully)
+            {
+                throw new Exception("Error save changes failed with no message");
+            }
+            DataServiceResponse dsr = t.Result;
+            return dsr;
+        }
+
+		/// <summary>
+        /// Utility method to call Dynamics <see langword="async"/>, with a delay to compensate for timing issues.
+        /// </summary>
+		/// <param name="system"></param>
+		/// <param name="options"></param>
+        /// <returns>dsr</returns>
+		public static DataServiceResponse SaveChangesSynchronous(this Microsoft.Dynamics.CRM.System system, SaveChangesOptions options)
+		{
+			Task<DataServiceResponse> t = system.SaveChangesAsync(options);
+            System.Threading.Thread.Sleep(5000);
+            t.Wait();
+            if (t.IsFaulted)
+            {
+                throw new Exception("Error save changes failed:" + t.Exception.Message);
+            }
+            else if (!t.IsCompletedSuccessfully)
+            {
+                throw new Exception("Error save changes failed with no message");
+            }
+            DataServiceResponse dsr = t.Result;
+			return dsr;
+		}
+
         /// <summary>
         /// Return the ID assigned by dynamics, or NULL if none.
         /// </summary>
@@ -28,16 +72,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             Guid? result = null;
             if (dsr != null)
             {
-                ChangeOperationResponse cor = (ChangeOperationResponse)dsr.FirstOrDefault();
-                if (cor != null)
+				var ienum = dsr.GetEnumerator();
+                while (ienum.MoveNext())
                 {
-                    EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
-                    string identity = ed.Identity.ToString();
-                    // convert the identity to a guid.
-                    int endpos = identity.LastIndexOf(")");
-                    int startpos = identity.LastIndexOf("(") + 1;
-                    string guid = identity.Substring(startpos, endpos - startpos);                   
-                    result = Guid.ParseExact(guid, "D");
+                    ChangeOperationResponse cor = (ChangeOperationResponse)ienum.Current;
+                    if (cor.Descriptor is EntityDescriptor)
+                    {
+                        EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
+                        string identity = ed.Identity.ToString();
+                        // convert the identity to a guid.
+                        int endpos = identity.LastIndexOf(")");
+                        int startpos = identity.LastIndexOf("(") + 1;
+                        string guid = identity.Substring(startpos, endpos - startpos);
+                        result = Guid.ParseExact(guid, "D");
+						return result;
+                    }
                 }
             }            
             return result;
@@ -52,16 +101,19 @@ namespace Gov.Lclb.Cllb.Interfaces
 				while (ienum.MoveNext())
 				{
 					ChangeOperationResponse cor = (ChangeOperationResponse)ienum.Current;
-					EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
-                    string identity = ed.Identity.ToString();
-					// convert the identity to a guid.
-					if (identity.Contains(entityType))
+					if (cor.Descriptor is EntityDescriptor)
 					{
-						int endpos = identity.LastIndexOf(")");
-						int startpos = identity.LastIndexOf("(") + 1;
-						string guid = identity.Substring(startpos, endpos - startpos);
-						result = Guid.ParseExact(guid, "D");
-						return result;
+						EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
+						string identity = ed.Identity.ToString();
+						// convert the identity to a guid.
+						if (identity.Contains(entityType))
+						{
+							int endpos = identity.LastIndexOf(")");
+							int startpos = identity.LastIndexOf("(") + 1;
+							string guid = identity.Substring(startpos, endpos - startpos);
+							result = Guid.ParseExact(guid, "D");
+							return result;
+						}
 					}
 				}
 			}
@@ -326,7 +378,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 catch (DataServiceQueryException dsqe)
                 {
-                    result = null;
+					if (dsqe.Message.Contains("Does Not Exist"))
+						result = null;
+					else
+						throw;
                 }
                 
                 if (result != null && distributedCache != null)
@@ -350,6 +405,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
         {
             Account result = null;
+
             // fetch from Dynamics.
             try
             {
@@ -357,7 +413,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             catch (DataServiceQueryException dsqe)
             {
-                result = null;
+				if (dsqe.Message.Contains("Does Not Exist") || dsqe.InnerException.Message.Contains("Does Not Exist"))
+                    result = null;
+                else
+                    throw;
             }
             return result;
         }
@@ -393,7 +452,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 catch (DataServiceQueryException dsqe)
                 {
-                    result = null;
+					if (dsqe.Message.Contains("Does Not Exist"))
+                        result = null;
+                    else
+                        throw;
                 }
 
                 if (result != null && distributedCache != null)
@@ -424,6 +486,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 temp = distributedCache.GetString(key);
             }
+
             if (! string.IsNullOrEmpty(temp))
             {
                 Guid id = new Guid(temp);
@@ -431,21 +494,31 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                // fetch from Dynamics.
+				try
+				{
+					// fetch from Dynamics.
 
-				var contacts = await system.Contacts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
+					var contacts = await system.Contacts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
 
-                result = contacts.FirstOrDefault();
-                if (result != null && distributedCache != null)
+					result = contacts.FirstOrDefault();
+					if (result != null && distributedCache != null)
+					{
+						// store the contact data.
+						Guid id = (Guid)result.Contactid;
+						distributedCache.SetString(key, id.ToString());
+						// update the cache for the contact.
+						string contact_key = "Contact_" + id.ToString();
+						string cacheValue = JsonConvert.SerializeObject(result);
+						distributedCache.SetString(contact_key, cacheValue);
+					}
+				}
+				catch (DataServiceQueryException dsqe)
                 {
-                    // store the contact data.
-                    Guid id = (Guid) result.Contactid;
-                    distributedCache.SetString(key, id.ToString());
-                    // update the cache for the contact.
-                    string contact_key = "Contact_" + id.ToString();
-                    string cacheValue = JsonConvert.SerializeObject(result);
-                    distributedCache.SetString(contact_key, cacheValue);
-                }                
+                    if (dsqe.Message.Contains("Does Not Exist"))
+                        result = null;
+                    else
+                        throw;
+                }
             }
 
             return result;
