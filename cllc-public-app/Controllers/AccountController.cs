@@ -183,7 +183,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 legalEntity.Adoxio_Account = account;
 				legalEntity.Adoxio_name = item.name;
 				legalEntity.Adoxio_isindividual = 0;
-				//legalEntity.Adoxio_isapplicant = true;
+				legalEntity.Adoxio_isapplicant = true;
             }
             else // it is an update.
             {
@@ -360,34 +360,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return NoContent(); // 204
-        }
-
-        /// <summary>
-        /// Get Directors and Officers for a given Account (Business)
-        /// </summary>
-        /// <returns>JSON list of directors and officers (Legal entities)</returns>
-        [HttpGet("{id}/directorsandofficers")]
-        public async Task<IActionResult> GetAccountDirectorsAndOfficers(string id)
-        {
-			// verify the currently logged in user has access to this account
-            Guid accountId = new Guid(id);
-            if (!CurrentUserHasAccessToAccount(accountId))
-            {
-                return new NotFoundResult();
-            }
-
-            List<ViewModels.AdoxioLegalEntity> result = new List<ViewModels.AdoxioLegalEntity>();
-            var legalEntities = await _system.Adoxio_legalentities
-                 // select all records for which there is a matching account and the position is director or officer.
-                 // 3 is Director, 4 is Officer
-                 .AddQueryOption("$filter", "_adoxio_account_value eq '" + id + "' and (adoxio_position eq 3 or adoxio_position eq 4)")
-                 .ExecuteAsync();
-
-            foreach (var legalEntity in legalEntities)
-            {
-                result.Add(legalEntity.ToViewModel());
-            }
-            return Json(result);
         }
 
 		/// <summary>

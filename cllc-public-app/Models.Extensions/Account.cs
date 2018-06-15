@@ -56,7 +56,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.Address1_line1 = fromVM.mailingAddressStreet;
             toDynamics.Address1_city = fromVM.mailingAddressCity;
             toDynamics.Address1_county = fromVM.mailingAddressCountry;
-            toDynamics.Adoxio_stateprovince = (int?) fromVM.mailingAddressProvince;
+			if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
+				fromVM.mailingAddressProvince <= ViewModels.Adoxio_stateprovince.YT)
+				toDynamics.Adoxio_stateprovince = (int?)fromVM.mailingAddressProvince;
+			else
+				toDynamics.Adoxio_stateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
             toDynamics.Address1_postalcode = fromVM.mailingAddresPostalCode;
         }
 
@@ -89,9 +93,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.mailingAddressCity = account.Address1_city;
                 accountVM.mailingAddressCountry = account.Address1_county;
                 if (account.Adoxio_stateprovince != null)
-		    accountVM.mailingAddressProvince = (ViewModels.Adoxio_stateprovince)account.Adoxio_stateprovince;
-		else
-		    accountVM.mailingAddressProvince = ViewModels.Adoxio_stateprovince.BC;
+        		    accountVM.mailingAddressProvince = (ViewModels.Adoxio_stateprovince)account.Adoxio_stateprovince;
+        		else
+        		    accountVM.mailingAddressProvince = ViewModels.Adoxio_stateprovince.BC;
                 accountVM.mailingAddresPostalCode = account.Address1_postalcode;
 
                 if (account._primarycontactid_value != null)
@@ -135,7 +139,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Address1_line1 = accountVM.mailingAddressStreet;
                 result.Address1_city = accountVM.mailingAddressCity;
                 result.Address1_county = accountVM.mailingAddressCountry;
-                result.Adoxio_stateprovince = (int?)accountVM.mailingAddressProvince;
+				if (accountVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
+				    accountVM.mailingAddressProvince <= ViewModels.Adoxio_stateprovince.YT)
+					result.Adoxio_stateprovince = (int?)accountVM.mailingAddressProvince;
+                else
+					result.Adoxio_stateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
                 result.Address1_postalcode = accountVM.mailingAddresPostalCode;
             }
             return result;
