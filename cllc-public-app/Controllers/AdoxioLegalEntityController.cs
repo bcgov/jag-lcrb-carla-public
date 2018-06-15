@@ -14,6 +14,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -26,8 +27,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly SharePointFileManager _sharePointFileManager;
         private readonly string _encryptionKey;
         private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly ILogger _logger;        
 
-        public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor)
+		public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             this._system = context;
@@ -35,6 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._sharePointFileManager = sharePointFileManager;
             this._encryptionKey = Configuration["ENCRYPTION_KEY"];
             this._httpContextAccessor = httpContextAccessor;
+			_logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
         }
 
         /// <summary>
@@ -52,8 +55,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
+			_logger.LogError("Account filter = " + accountfilter);
 
             legalEntities = await _system.Adoxio_legalentities
                         .AddQueryOption("$filter", accountfilter)
@@ -86,6 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
             filter = accountfilter;
@@ -94,6 +100,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 if (positionType == null)
                 {
+					_logger.LogError("Account filter = " + filter);
                     legalEntities = await _system.Adoxio_legalentities
                         .AddQueryOption("$filter", filter)
                         .ExecuteAsync();
@@ -102,12 +109,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     positionFilter = Models.Adoxio_LegalEntityExtensions.GetPositionFilter(positionType);
-                    //filter = accountfilter + " and " + positionFilter;
-                    filter = positionFilter;
+                    filter = accountfilter + " and " + positionFilter;
+                    //filter = positionFilter;
 
                     // Execute query if filter is valid
-                    if (positionFilter != null)
+                    if (filter != null)
                     {
+						_logger.LogError("Account filter = " + filter);
                         legalEntities = await _system.Adoxio_legalentities
                         .AddQueryOption("$filter", filter)
                         .ExecuteAsync();
@@ -269,7 +277,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioLegalEntity.CopyValues(item, _system);
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);            
+            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);            
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -308,7 +316,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations); // SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset
+            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations); // SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
@@ -333,7 +341,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
                 _system.DeleteObject(adoxioLegalEntity);
-                DataServiceResponse dsr = await _system.SaveChangesAsync();
+				DataServiceResponse dsr = _system.SaveChangesSynchronous();
                 foreach (OperationResponse result in dsr)
                 {
                     if (result.StatusCode == 500) // error
