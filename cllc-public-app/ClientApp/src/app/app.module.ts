@@ -44,6 +44,7 @@ import {
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
+import { AccountDataService } from './services/account-data.service';
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
 import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
@@ -233,6 +234,7 @@ import { BeforeYouStartComponent } from './business-profile/tabs/before-you-star
     AdoxioApplicationDataService,
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
+    AccountDataService,
     NgbDropdown
   ],
   entryComponents: [
