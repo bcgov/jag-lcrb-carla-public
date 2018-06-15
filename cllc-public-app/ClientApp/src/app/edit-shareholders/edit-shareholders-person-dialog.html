@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('numberOfNonVotingShares')}">
+      <!-- <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('numberOfNonVotingShares')}">
         <label for="numberOfNonVotingShares">Number of<br />Non Voting Shares</label>
         <input type="number" class="form-control" formControlName="numberOfNonVotingShares" id="numberOfNonVotingShares">
         <div *ngIf="this.isFieldError('numberOfNonVotingShares')">
@@ -66,11 +66,12 @@
             Date Issued must be before today
           </div>
         </div>
-      </div>
+      </div> -->
   </div>
 </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="mat-raised-button" color="accent" (click)="close()">Close</button>
-  <button class="mat-raised-button" color="primary" (click)="save()">Save</button>
+  <button class="btn btn-secondary" (click)="close()">Close</button>
+  &nbsp;
+  <button class="btn btn-primary" (click)="save()">Save</button>
 </mat-dialog-actions>
