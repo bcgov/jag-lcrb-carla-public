@@ -210,7 +210,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await LogoutAndCleanupTestUser(strId);
         }
 
-        //[Fact]
+        [Fact]
         public async System.Threading.Tasks.Task TestFileUpload()
         {
             // First create a Legal Entity
@@ -300,7 +300,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await Logout();
         }
 
-        //[Fact]
+        [Fact]
         public async System.Threading.Tasks.Task VerifyConsentCode__WithAGoodCode()
         {
             await LoginAsDefault();
@@ -327,7 +327,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await Logout();
         }
 
-        //[Fact]
+        [Fact]
         public async System.Threading.Tasks.Task VerifyConsentCode__WithABadCode()
         {
             await LoginAsDefault();
