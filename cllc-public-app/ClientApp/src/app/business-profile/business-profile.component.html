@@ -12,7 +12,7 @@
       <li [ngClass]="{'active': view_tab == 'tab-3'}"><a (click)="changeTab('tab-3')">Organization Structure</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-4'}"><a (click)="changeTab('tab-4')">Directors &amp; Officers</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-5'}"><a (click)="changeTab('tab-5')">Shareholders</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Accounting &amp; Taxes</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Financial Information</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-7'}"><a (click)="changeTab('tab-7')">Investments &amp; Loans</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-8'}"><a (click)="changeTab('tab-8')">Security Assessments</a></li>
     </ul>
@@ -41,12 +41,14 @@
       <app-directors-and-officers [accountId]="accountId"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'tab-5'">
-      <app-edit-shareholders [accountId] = "accountId"></app-edit-shareholders>
+      <app-edit-shareholders [accountId]="accountId"></app-edit-shareholders>
     </div>
-    <div [hidden]="view_tab != 'tab-6'"><h1>Accounting and Taxes</h1></div>
+    <div [hidden]="view_tab != 'tab-6'">
+      <app-financial-information  [accountId]="accountId"></app-financial-information>
+    </div>
     <div [hidden]="view_tab != 'tab-7'"><h1>Investments and Loans</h1></div>
     <div [hidden]="view_tab != 'tab-8'"><h1>Security Assessment</h1>
-      <app-security-assessments [accountId] = "accountId"></app-security-assessments>
+      <app-security-assessments [accountId]="accountId"></app-security-assessments>
     </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
