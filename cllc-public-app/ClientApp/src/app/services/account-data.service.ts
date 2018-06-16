@@ -24,7 +24,7 @@ export class AccountDataService {
     headers.append("Content-Type", "application/json");
 
     //call API
-    //console.log("===== AccountDataService.updateAccount: ", accountData);
+    //console.log("===== AccountDataService.updateAccount: ", accountModel);
     return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: headers });
   }
 
