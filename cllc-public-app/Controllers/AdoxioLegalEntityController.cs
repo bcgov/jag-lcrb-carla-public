@@ -282,7 +282,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			adoxioLegalEntity.Adoxio_Account = userAccount;
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);            
+			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);            
             foreach (OperationResponse result in dsr)
             {
                 if (result.StatusCode == 500) // error
