@@ -61,6 +61,10 @@
               {
                 "name": "DOTNET_STARTUP_PROJECT",
                 "value": "${DOTNET_STARTUP_PROJECT}"
+              },
+			  {
+                "name": "UAT_BUILD",
+                "value": "${UAT_BUILD}"
               }
             ]
           }
@@ -141,7 +145,7 @@
       "displayName": "DotNet Startup Project",
       "description": "The path to the startup project for the .Net application.",
       "required": true,
-      "value": "cllc-public-app"
+      "value": "cllc-public-app/cllc-public-app.csproj"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",
@@ -177,6 +181,12 @@
       "description": "The resources Memory request (in Mi, Gi, etc) for this build.",
       "required": true,
       "value": "4Gi"
+    },
+	{
+      "name": "UAT_BUILD",
+      "displayName": "UAT Build",
+      "description": "1 if true",      
+      "value": ""
     }    
   ]
 }
