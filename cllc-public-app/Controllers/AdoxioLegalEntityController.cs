@@ -274,7 +274,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 			var userAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
-			_system.UpdateObject(userAccount);
+			//_system.UpdateObject(userAccount);
 
             // copy received values to Dynamics LegalEntity
             // !!!! Values must be copied after adding to the collection, otherwise the entity will be created without the values assigned !!!!
