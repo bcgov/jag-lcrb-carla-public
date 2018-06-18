@@ -524,6 +524,31 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+		public static async Task<Adoxio_legalentity> GetGetAdoxioLegalentityByAccountId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+		{
+			Adoxio_legalentity result = null;
+			try
+            {
+				IEnumerable<Adoxio_legalentity> results = await system.Adoxio_legalentities
+				                     .AddQueryOption("$filter", "_adoxio_account_value eq " + id.ToString() + " and adoxio_isapplicant eq true")
+				                     .ExecuteAsync();
+				var ienum = results.GetEnumerator();
+				if (ienum.MoveNext())
+				{
+					result = ienum.Current;
+				}
+
+            }
+            catch (DataServiceQueryException dsqe)
+            {
+				if (dsqe.Message.Contains("Does Not Exist"))
+                    result = null;
+                else
+                    throw;
+            }
+			return result;
+		}
+
 		/// <summary>
         /// Get a dynamics application by their Guid
         /// </summary>

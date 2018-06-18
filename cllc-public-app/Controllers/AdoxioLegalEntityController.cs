@@ -141,6 +141,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
+		/// <summary>
+        /// Get the special applicant legal entity for the current user
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("applicant")]
+        public async Task<IActionResult> GetApplicantDynamicsLegalEntity()
+        {
+            ViewModels.AdoxioLegalEntity result = null;
+
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+			// query the Dynamics system to get the legal entity record.
+            Adoxio_legalentity legalEntity = null;
+            try
+            {
+				_logger.LogError("Find legal entity for applicant = " + userSettings.AccountId.ToString());
+
+				legalEntity = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, Guid.Parse(userSettings.AccountId));
+                result = legalEntity.ToViewModel();
+            }
+            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+            {
+                Console.WriteLine(dsqe.Message);
+                Console.WriteLine(dsqe.StackTrace);
+                return new NotFoundResult();
+            }
+
+            return Json(result);
+        }
+
         /// <summary>
         /// Get a specific legal entity
         /// </summary>
