@@ -53,10 +53,15 @@
 </div>
 <p></p>
 <div class="col-md-10 row" style="margin-bottom: 5px">
-  <a class="globalButton"  class="btn btn-primary" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
+  <a class="btn btn-primary" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
   &nbsp;
-  <a class="globalButton"  class="btn btn-primary" tabindex="1" (click)="openOrganizationDialog()"><strong>Add Organization</strong><br></a>
+  <a class="btn btn-primary" tabindex="1" (click)="openOrganizationDialog()"><strong>Add Organization</strong><br></a>
 </div>
+
+<div class="spinner-container" *ngIf="!saveCompleted">
+  <mat-spinner></mat-spinner>
+</div>
+
 <br>
 <br>
 <br>
