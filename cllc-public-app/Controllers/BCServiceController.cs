@@ -31,9 +31,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this.db = db;
         }
 
-        [HttpGet]        
-        // [Authorize] - enable this line after the appropriate changes to enable BC Service Card Login are done.
-        [AllowAnonymous]
+        [HttpGet]
+        [Authorize] // enable this line after the appropriate changes to enable BC Service Card Login are done.
+
         public ActionResult BCServiceLogin(string path)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
@@ -63,10 +63,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
+                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+                basePath += "/dashboard";
                 return Redirect(basePath);
             }
+            return Redirect(basePath);
         }
+    }
 
         /// <summary>
         /// Utility function used to expand headers.
@@ -90,3 +93,4 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     }
 }
+
