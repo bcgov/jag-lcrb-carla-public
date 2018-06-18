@@ -47,13 +47,8 @@ The application uses .Net 2.0 s2i images for the builds.  In the pathfinder envi
 
 To resolve this issue the project defines builds for `dotnet-20-runtime-centos7` and `dotnet-20-centos7`; which at the time of writing were not available in image form.  The `dotnet-20-centos7` s2i image is the CentOS equivalent of the `dotnet-20-rhel7` s2i image that can be used for local development.  These two images are not used in the Pathfinder environment and exist only to be used in a local environment.
 
-To switch to the `dotnet-20-centos7` image for local deployment, open your `client-build.local.param` and `dotnet-20-node-89-build.local.param` file and update the following 2 lines;
+To switch to the `dotnet-20-centos7` image for local deployment, open your `cllc-public.build.local.param file and add the following 2 lines;
 
-```
-# SOURCE_IMAGE_KIND=DockerImage
-# SOURCE_IMAGE_NAME=registry.access.redhat.com/dotnet/dotnet-20-rhel7
-```
-with
 ```
 SOURCE_IMAGE_KIND=ImageStreamTag
 SOURCE_IMAGE_NAME=dotnet-20-centos7
