@@ -174,24 +174,7 @@ export class ShareholderPersonDialog {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.email],
-      numberOfVotingShares: ['', Validators.required],
-      numberOfNonVotingShares: ['', Validators.required],
-      dateIssued: ['']
-    }, { validator: this.dateLessThanToday('dateIssued') });
-  }
-
-  dateLessThanToday(field1) {
-    return form => {
-      const d1 = form.controls[field1].value;
-      if (!d1) {
-        return {};
-      }
-      const d1Date = new Date(d1.year, d1.month, d1.day);
-      if (d1Date < new Date()) {
-        return { dateLessThanToday: true };
-      }
-      return {};
-    }
+      numberOfVotingShares: ['', Validators.required] });
   }
 
   save() {
