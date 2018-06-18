@@ -17,6 +17,7 @@ export class SecurityAssessmentsComponent implements OnInit {
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   public dataLoaded;
   displayedColumns = ['sendConsentRequest', 'firstname', 'lastname', 'email', 'position', 'emailsent'];
+  consentCompleted: boolean = true;
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public toastr: ToastsManager,
           vcr: ViewContainerRef) {
@@ -51,10 +52,15 @@ export class SecurityAssessmentsComponent implements OnInit {
     });
 
     if (consentRequestList) {
+      this.consentCompleted = false;
       this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
         .subscribe(
-          res => { this.toastr.success('Consent Request(s) Sent ', 'Success!'); },
+        res => {
+          this.consentCompleted = true;
+          this.toastr.success('Consent Request(s) Sent ', 'Success!');
+        },
           err => {
+            this.consentCompleted = true;
             //console.log("Error occured");
             this.handleError(err);
           }
