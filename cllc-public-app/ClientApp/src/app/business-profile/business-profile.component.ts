@@ -23,7 +23,7 @@ export class BusinessProfileComponent {
   number_tabs = 7;
   /** BusinessProfile ctor */
   constructor(private userDataService: UserDataService, private dynamicsDataService: DynamicsDataService) {
-      this.view_tab = "tab-1";
+      this.view_tab = "tab-0";
   }
 
   ngOnInit(): void {
@@ -66,7 +66,7 @@ export class BusinessProfileComponent {
   back() {
     var currentTab = this.getTab();
     currentTab--;
-    if (currentTab < 1) {
+    if (currentTab < 0) {
       currentTab = this.number_tabs;
     }
     this.view_tab = "tab-" + currentTab;
@@ -76,7 +76,7 @@ export class BusinessProfileComponent {
     var currentTab = this.getTab();
     currentTab++;
     if (currentTab > this.number_tabs) {
-      currentTab = 1;
+      currentTab = 0;
     }
     this.view_tab = "tab-" + currentTab;
   }

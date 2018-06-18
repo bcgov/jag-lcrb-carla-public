@@ -6,18 +6,22 @@
     <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
+      <li [ngClass]="{'active': view_tab == 'tab-0'}"><a (click)="changeTab('tab-0')">Before You Start</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-1'}"><a (click)="changeTab('tab-1')">Application Information</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-2'}"><a (click)="changeTab('tab-2')">Corporate Details</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-3'}"><a (click)="changeTab('tab-3')">Organization Structure</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-4'}"><a (click)="changeTab('tab-4')">Directors &amp; Officers</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-5'}"><a (click)="changeTab('tab-5')">Shareholders</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Accounting &amp; Taxes</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Financial Information</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-7'}"><a (click)="changeTab('tab-7')">Investments &amp; Loans</a></li>
       <li [ngClass]="{'active': view_tab == 'tab-8'}"><a (click)="changeTab('tab-8')">Security Assessments</a></li>
     </ul>
   </div>
   <div class="col-md-9">
     <!-- Tab panes -->
+    <div [hidden]="view_tab != 'tab-0'">
+        <app-before-you-start></app-before-you-start>
+    </div>
     <div [hidden]="view_tab != 'tab-1'">
       <div class="row">
         <h1>Applicant Information</h1>
@@ -37,18 +41,23 @@
       <app-directors-and-officers [accountId]="accountId"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'tab-5'">
-      <app-edit-shareholders [accountId] = "accountId"></app-edit-shareholders>
+      <app-edit-shareholders [accountId]="accountId"></app-edit-shareholders>
     </div>
-    <div [hidden]="view_tab != 'tab-6'"><h1>Accounting and Taxes</h1></div>
+    <div [hidden]="view_tab != 'tab-6'">
+      <app-financial-information  [accountId]="accountId"></app-financial-information>
+    </div>
     <div [hidden]="view_tab != 'tab-7'"><h1>Investments and Loans</h1></div>
     <div [hidden]="view_tab != 'tab-8'"><h1>Security Assessment</h1>
-      <app-security-assessments [accountId] = "accountId"></app-security-assessments>
+      <app-security-assessments [accountId]="accountId"></app-security-assessments>
     </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
-      <a class="globalButton"  class="btn btn-secondary" tabindex="1" (click)="back()"><strong>Back</strong><br></a> 
+      <a class="globalButton" *ngIf="view_tab != 'tab-0'"  class="btn btn-secondary" tabindex="1" (click)="back()"><strong>Back</strong><br></a> 
       &nbsp;
-      <a class="globalButton"  class="btn btn-primary" tabindex="2" (click)="next()"><strong>Next</strong><br></a>
+      <a class="globalButton"  class="btn btn-primary" tabindex="2" (click)="next()">
+        <strong *ngIf="view_tab != 'tab-0'">Next</strong>
+        <strong *ngIf="view_tab == 'tab-0'">Start</strong>
+        <br></a>
     </div>
   </div>
 </div>
