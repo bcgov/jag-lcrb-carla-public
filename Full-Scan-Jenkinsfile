@@ -1,5 +1,10 @@
 node('master') {
 
+   stage('SonarQube Scan') {
+        echo "Scanning..."        
+    }
+	
+
     stage('Build Image') {
         echo "Building..."
         openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
@@ -48,7 +53,7 @@ podTemplate(label: 'owasp-zap', name: 'owasp-zap', serviceAccount: 'jenkins', cl
 }	
 
 node('nodejs') {
-	stage('FT on Dev') {
+	stage('End to End test on Dev') {
 		//the checkout is mandatory, otherwise functional test would fail
         echo "checking out source"
         echo "Build: ${BUILD_ID}"
@@ -77,9 +82,7 @@ node('nodejs') {
 }
 
 
-
-stage('Deploy on Test') {
-    input "Deploy to test?"
+stage('Deploy on Test') {    
     node('master') {
         openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'test', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
 	sh 'sleep 3m'
