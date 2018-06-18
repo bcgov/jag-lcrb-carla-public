@@ -81,7 +81,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // query the BCeID API to get the business record.
-			var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			var business = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
+			//var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             if (business == null)
             {
@@ -136,7 +137,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
+			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
+			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> legalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
 
 			// get account siteminder id
 			string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
@@ -164,7 +166,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
                 userContact.Statuscode = 1;
             }
-            
 
             // this may be an existing account, as this service is used during the account confirmation process.
 			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
@@ -176,6 +177,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set the account siteminder guid
 				account.Adoxio_externalid = accountSiteminderGuid;
 				item.externalId = accountSiteminderGuid;
+
+				// add a new legal entity record for this account
+                Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity legalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
+                legalEntityCollection.Add(legalEntity);
+                legalEntity.Adoxio_Account = account;
+				legalEntity.Adoxio_name = item.name;
+				legalEntity.Adoxio_isindividual = 0;
+				legalEntity.Adoxio_isapplicant = true;
             }
             else // it is an update.
             {
@@ -352,34 +361,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return NoContent(); // 204
-        }
-
-        /// <summary>
-        /// Get Directors and Officers for a given Account (Business)
-        /// </summary>
-        /// <returns>JSON list of directors and officers (Legal entities)</returns>
-        [HttpGet("{id}/directorsandofficers")]
-        public async Task<IActionResult> GetAccountDirectorsAndOfficers(string id)
-        {
-			// verify the currently logged in user has access to this account
-            Guid accountId = new Guid(id);
-            if (!CurrentUserHasAccessToAccount(accountId))
-            {
-                return new NotFoundResult();
-            }
-
-            List<ViewModels.AdoxioLegalEntity> result = new List<ViewModels.AdoxioLegalEntity>();
-            var legalEntities = await _system.Adoxio_legalentities
-                 // select all records for which there is a matching account and the position is director or officer.
-                 // 3 is Director, 4 is Officer
-                 .AddQueryOption("$filter", "_adoxio_account_value eq " + id + " and (adoxio_position eq 3 or adoxio_position eq 4)")
-                 .ExecuteAsync();
-
-            foreach (var legalEntity in legalEntities)
-            {
-                result.Add(legalEntity.ToViewModel());
-            }
-            return Json(result);
         }
 
 		/// <summary>
