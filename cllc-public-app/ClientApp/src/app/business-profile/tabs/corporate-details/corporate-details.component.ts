@@ -4,6 +4,7 @@ import { AccountDataService } from '../../../services/account-data.service';
 import { User } from '../../../models/user.model';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-corporate-details',
@@ -12,12 +13,12 @@ import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angula
 })
 export class CorporateDetailsComponent implements OnInit {
   @Input() accountId: string;
-  //user: User;
   corporateDetailsForm: FormGroup;
   accountModel: DynamicsAccount;
+  dataLoaded: boolean = false;
 
   constructor(private userDataService: UserDataService, private accountDataService: AccountDataService,
-              private fb: FormBuilder) {
+    private fb: FormBuilder, public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -25,22 +26,21 @@ export class CorporateDetailsComponent implements OnInit {
     // get account data and then display form
     this.accountDataService.getAccount(this.accountId).subscribe(
       res => {
-        this.corporateDetailsForm.patchValue(res.json());
+        let data = this.toFormModel(res.json());
+        this.corporateDetailsForm.patchValue(data);
+        this.dataLoaded = true;
       },
       err => {
         console.log("Error occured");
       }
     );
 
-    //this.userDataService.getCurrentUser().then(user => {
-    //  this.user = user;
-    //});
   }
 
   createForm() {
     this.corporateDetailsForm = this.fb.group({
       bcIncorporationNumber: ['', Validators.required],
-      dateOfIncorporationInBC: [''],
+      dateOfIncorporationInBC: ['', Validators.required],
       businessNumber: ['', Validators.required],
       pstNumber: ['', Validators.required],
       contactEmail: ['', Validators.required],
@@ -52,7 +52,8 @@ export class CorporateDetailsComponent implements OnInit {
       mailingAddressCountry: ['', Validators.required],
       mailingAddressProvince: ['', Validators.required],
       mailingAddresPostalCode: ['', Validators.required]
-    }, { validator: this.dateLessThanToday('dateOfIncorporationInBC') });
+    }//, { validator: this.dateLessThanToday('dateOfIncorporationInBC') }
+    );
   }
 
   dateLessThanToday(field1) {
@@ -70,11 +71,19 @@ export class CorporateDetailsComponent implements OnInit {
   }
 
   save() {
-    console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
+    //console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
     if (this.corporateDetailsForm.valid) {
-      console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
+      //console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
       this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
-      this.accountDataService.updateAccount(this.accountModel);
+      //console.log("this.accountModel", this.accountModel);
+      this.accountDataService.updateAccount(this.accountModel).subscribe(
+        res => {
+          //console.log("Account updated:", res.json());
+          this.snackBar.open('Corporate Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar']});
+      },
+        err => {
+          console.log("Error occured");
+        });
     } else {
       Object.keys(this.corporateDetailsForm.controls).forEach(field => {
       const control = this.corporateDetailsForm.get(field);
@@ -91,32 +100,31 @@ export class CorporateDetailsComponent implements OnInit {
   getAccount(accountId: string) {
     this.accountDataService.getAccount(accountId).subscribe(
       res => {
-        console.log("accountVM: ", res.json());
+        //console.log("accountVM: ", res.json());
         return res.json();
       },
       err => {
-        //console.log("Error occured");
+        console.log("Error occured");
       }
     );
   }
 
   toAccountModel(formData) {
-    let accountModel = new DynamicsAccount();
-    accountModel.id = this.accountId;
-    accountModel.bcIncorporationNumber = formData.bcIncorporationNumber;
-    accountModel.businessNumber = formData.businessNumber;
-    accountModel.contactEmail = formData.contactEmail;
-    accountModel.contactPhone = formData.contactPhone;
-    accountModel.dateOfIncorporationInBC = formData.dateOfIncorporationInBC;
-    accountModel.mailingAddresPostalCode = formData.mailingAddresPostalCode;
-    accountModel.mailingAddressCity = formData.mailingAddressCity;
-    accountModel.mailingAddressCountry = formData.mailingAddressCountry;
-    accountModel.mailingAddressName = formData.mailingAddressName;
-    accountModel.mailingAddressProvince = formData.mailingAddressProvince;
-    accountModel.mailingAddressStreet = formData.mailingAddressStreet;
-    accountModel.pstNumber = formData.pstNumber;
+    formData.id = this.accountId;
+    let date = formData.dateOfIncorporationInBC;
+    formData.dateOfIncorporationInBC = new Date(date.year, date.month-1, date.day);
 
-    return accountModel;
+    return formData;
+  }
+
+  toFormModel(dynamicsData) {
+    let date: Date = new Date(dynamicsData.dateOfIncorporationInBC);
+    dynamicsData.dateOfIncorporationInBC = {
+      year: date.getFullYear(),
+      month: date.getMonth()+1,
+      day: date.getDate()
+    }
+    return dynamicsData;
   }
 
 }

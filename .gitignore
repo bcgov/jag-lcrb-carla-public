@@ -5,3 +5,4 @@ cllc-public-app/ClientApp/e2e-reports
 /functional-tests/bin
 /functional-tests/obj
 /.vs
+cllc-interfaces/BCeID/BCeID.csproj
