@@ -4,7 +4,7 @@ import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
-
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-directors-and-officers',
@@ -19,8 +19,10 @@ export class DirectorsAndOfficersComponent implements OnInit {
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   public dataLoaded;
   displayedColumns = ['name', 'email', 'position', 'dateIssued'];
+  saveCompleted: boolean = true;
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog) { }
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getDirectorsAndOfficers();
@@ -74,14 +76,19 @@ export class DirectorsAndOfficersComponent implements OnInit {
       formData => {
         //console.log("DirectorAndOfficerPersonDialog output:", formData);
         if (formData) {
+          this.saveCompleted = false;
           let adoxioLegalEntity = this.formDataToModelData(formData);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
           this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
             res => {
+              this.saveCompleted = true;
+              this.snackBar.open('Director / Officer Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getDirectorsAndOfficers();
             },
             err => {
               //console.log("Error occured");
+              this.saveCompleted = true;
+              this.snackBar.open('Error saving Director / Officer Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
               this.handleError(err);
             });
         }
