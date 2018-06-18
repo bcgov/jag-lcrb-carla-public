@@ -22,21 +22,21 @@
         <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
       </ng-container>
 
-    <!-- Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> Shareholder Type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-    </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> Shareholder Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
 
-    <!-- Column -->
-    <ng-container matColumnDef="dateIssued">
-      <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
-    </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="dateIssued">
+        <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 
   </div>
 </div>
@@ -45,3 +45,7 @@
 <div class="col-md-10 row" style="margin-bottom: 5px;">
   <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
 </div>
+<div class="spinner-container" *ngIf="!saveCompleted">
+  <mat-spinner></mat-spinner>
+</div>
+
