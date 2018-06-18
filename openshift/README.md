@@ -23,7 +23,7 @@ Differences can include:
 * Source repositories (such as your development repo).
 * Etc.
 
-To target a different repo and branch, create a `setting.local.sh` file in your project's local `openshift` directory and override the GIT parameters, for example;
+To target a different repo and branch, create a `settings.local.sh` file in your project's local `openshift` directory and override the GIT parameters, for example;
 ```
 export GIT_URI="https://github.com/bcgov/ag-lclb-cllc-public.git"
 export GIT_REF="openshift-updates"
