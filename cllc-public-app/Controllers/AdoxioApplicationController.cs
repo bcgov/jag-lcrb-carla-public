@@ -128,7 +128,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
             
-			var id = dsr.GetAssignedIdOfType("adoxio_application");
+			var id = dsr.GetAssignedIdOfType("application");
 			if (id == null)
 			{
 				throw new Exception("Error application id is null");
