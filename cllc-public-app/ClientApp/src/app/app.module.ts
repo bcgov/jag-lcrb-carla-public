@@ -44,6 +44,7 @@ import {
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
+import { AccountDataService } from './services/account-data.service';
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
 import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
@@ -89,6 +90,8 @@ import { CorporateDetailsComponent } from './business-profile/tabs/corporate-det
 import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
 import { SecurityAssessmentsComponent } from './security-assessments/security-assessments.component';
 import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
+import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
+import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
 
 
 @NgModule({
@@ -127,7 +130,9 @@ import { OrganizationStructureComponent } from './business-profile/tabs/organiza
     OrganizationStructureComponent,
     DirectorsAndOfficersComponent,
     DirectorAndOfficerPersonDialog,
-    SecurityAssessmentsComponent
+    SecurityAssessmentsComponent,
+    BeforeYouStartComponent,
+    FinancialInformationComponent
   ],
   imports: [
     BrowserModule,
@@ -231,6 +236,7 @@ import { OrganizationStructureComponent } from './business-profile/tabs/organiza
     AdoxioApplicationDataService,
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
+    AccountDataService,
     NgbDropdown
   ],
   entryComponents: [
