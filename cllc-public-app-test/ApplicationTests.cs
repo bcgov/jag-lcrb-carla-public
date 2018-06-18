@@ -42,8 +42,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
-            string initialName = "InitialName";
-            string changedName = "ChangedName";
+			string initialName = randomNewUserName("Application Initial Name ", 6);
+			string changedName = randomNewUserName("Application Changed Name ", 6);
 			string service = "adoxioapplication";
 
 			// login as default and get account for current user
@@ -82,13 +82,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
 
             // name should match.
-            Assert.Equal(initialName, responseViewModel.name);
-            /*
-			Assert.Equal("Applying Person", responseViewModel.applyingPerson);
+            Assert.Equal(initialName + " - Not a Dispensary", responseViewModel.name);
+			//Assert.Equal("Applying Person", responseViewModel.applyingPerson);
 			Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
 			Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
 			Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
-            */
 
             Guid id = new Guid(responseViewModel.id);
 
@@ -99,7 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
 			responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-            Assert.Equal(initialName, responseViewModel.name);
+			Assert.Equal(initialName + " - Not a Dispensary", responseViewModel.name);
 			Assert.Equal(currentAccount.id, responseViewModel.applicant.id);
 
 
@@ -123,7 +121,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
 
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-            Assert.Equal(changedName, responseViewModel.name);
+			Assert.Equal(changedName, responseViewModel.establishmentName);
 
             // D - Delete
 

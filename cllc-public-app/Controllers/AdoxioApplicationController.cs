@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Extensions.Logging;
 
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -22,13 +23,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly ILogger _logger;        
   
-        public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
+		public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             this._system = context;
             this._httpContextAccessor = httpContextAccessor;
             this._distributedCache = null; // distributedCache;
+			_logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
         }
 
         private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByApplicant(string applicantId)
@@ -90,7 +93,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDynamicsApplication(string id)
         {
-            ViewModels.AdoxioApplication result = null;
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+			_logger.LogError("Application id = " + id);
+			_logger.LogError("User id = " + userSettings.AccountId);
+
+			ViewModels.AdoxioApplication result = null;
             var dynamicsApplication = await _system.GetAdoxioApplicationById(_distributedCache, Guid.Parse(id));
             if (dynamicsApplication == null)
             {
@@ -98,8 +108,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
+				if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication.Adoxio_Applicant.Accountid))
+                {
+                    return new NotFoundResult();
+                }
                 result = await dynamicsApplication.ToViewModel(_system);
             }
+
             return Json(result);
         }
 
@@ -116,6 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
 			UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
 			Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+			adoxioApplication.CopyValues(item);
 			adoxioApplication.Adoxio_Applicant = owningAccount;
 
 			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
@@ -260,7 +276,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid adoxio_applicationId = new Guid(id);
             Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationId).GetValueAsync();
 
-			if (CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication.Adoxio_Applicant.Accountid))
+			if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication.Adoxio_Applicant.Accountid))
 			{
 				return new NotFoundResult();
 			}
@@ -293,6 +309,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationid).GetValueAsync();
+
+				if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication.Adoxio_Applicant.Accountid))
+                {
+                    return new NotFoundResult();
+                }
+
                 _system.DeleteObject(adoxioApplication);
                 DataServiceResponse dsr = _system.SaveChangesSynchronous();
                 foreach (OperationResponse result in dsr)

@@ -36,21 +36,21 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this Adoxio_application to, ViewModels.AdoxioApplication from)
         {
-            to.Adoxio_name = from.name;
-            to.Adoxio_jobnumber = from.jobNumber;            
+			to.Adoxio_name = from.name + " - " + from.establishmentName;
+            //to.Adoxio_jobnumber = from.jobNumber;            
             to.Adoxio_establishmentpropsedname = from.establishmentName;
             to.Adoxio_establishmentaddressstreet = from.establishmentaddressstreet;
             to.Adoxio_establishmentaddresscity = from.establishmentaddresscity;
             to.Adoxio_establishmentaddresspostalcode = from.establishmentaddresspostalcode;
             to.Adoxio_addresscity = from.establishmentaddresscity;
-            if (!String.IsNullOrEmpty(from.applicationStatus))
-            {
-                to.Statuscode = int.Parse(from.applicationStatus);
-            }
-            else
-            {
-                to.Statecode = null;
-            }
+            //if (!String.IsNullOrEmpty(from.applicationStatus))
+            //{
+            //    to.Statuscode = int.Parse(from.applicationStatus);
+            //}
+            //else
+            //{
+            //    to.Statecode = null;
+            //}
         }
 
         public async static Task<AdoxioApplication> ToViewModel(this Adoxio_application dynamicsApplication, Interfaces.Microsoft.Dynamics.CRM.System _system)
