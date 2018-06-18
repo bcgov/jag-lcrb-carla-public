@@ -67,9 +67,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 basePath += "/dashboard";
                 return Redirect(basePath);
             }
-            return Redirect(basePath);
+            //return Redirect(path);
         }
-    }
+    
 
         /// <summary>
         /// Utility function used to expand headers.
@@ -93,4 +93,3 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     }
 }
-
