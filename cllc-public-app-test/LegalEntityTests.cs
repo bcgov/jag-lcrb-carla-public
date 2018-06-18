@@ -41,21 +41,59 @@ namespace Gov.Lclb.Cllb.Public.Test
             string _discard = await response.Content.ReadAsStringAsync();
         }
 
+		[Fact]
+		public async System.Threading.Tasks.Task TestNewAccountHasNoShareholdersOrDirectors()
+		{
+			string service = "adoxiolegalentity";
+			string shareholders = "shareholder";
+			string directors = "director-officer";
+
+			var loginUser = randomNewUserName("TestLegalEntityUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+			// get the current account.
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
+            var response = await _client.SendAsync(request);
+            string jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+            string accountId = user.accountid;
+
+            // get shareholders
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + shareholders);
+			response = await _client.SendAsync(request);
+			jsonString = await response.Content.ReadAsStringAsync();
+			response.EnsureSuccessStatusCode();
+			var responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+			Assert.Equal(0, responseViewModel.Count);
+
+            // get directors
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + directors);
+            response = await _client.SendAsync(request);
+			jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+			responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+			Assert.Equal(0, responseViewModel.Count);
+
+			await LogoutAndCleanupTestUser(strId);
+		}
+
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
-            string changedName = "ChangedName";
+			string changedName = randomNewUserName("LETest ChangedName", 6);
             string service = "adoxiolegalentity";
-            string firstName = "First";
-            string middleName = "Middle";
-            string lastName = "Last";
-            string initialName = firstName + " " + lastName;
+            string firstName = "LETFirst";
+            string middleName = "LETMiddle";
+            string lastName = "LETLast";
+			string initialName = randomNewUserName(firstName + " " + lastName, 6);
             DateTime dateOfBirth = DateTime.Now;
             int commonNonVotingshares = 3000;
             int commonVotingshares = 2018;
             bool isIndividual = true;
 
-            await LoginAsDefault();
+			var loginUser = randomNewUserName("TestLegalEntityUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // get the current account.
 
@@ -121,9 +159,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + newId);
             response = await _client.SendAsync(request);
+			jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-
-            jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
             //return;
@@ -136,12 +173,14 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Content = new StringContent(JsonConvert.SerializeObject(vmAdoxioLegalEntity), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
+			var _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // verify that the update persisted.
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + newId);
             response = await _client.SendAsync(request);
+			_discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
@@ -153,19 +192,22 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + newId + "/delete");
             response = await _client.SendAsync(request);
+			_discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // second delete should return a 404.
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + newId + "/delete");
             response = await _client.SendAsync(request);
+			_discard = await response.Content.ReadAsStringAsync();
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + newId);
             response = await _client.SendAsync(request);
+			_discard = await response.Content.ReadAsStringAsync();
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-            await Logout();
+			await LogoutAndCleanupTestUser(strId);
         }
 
         [Fact]
@@ -173,8 +215,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             // First create a Legal Entity
 
-            string initialName = "InitialName";
-            string changedName = "ChangedName";
+			string initialName = randomNewUserName("LETest InitialName", 6);
+			string changedName = randomNewUserName("LETest ChangedName", 6);
             string service = "adoxiolegalentity";
 
             await LoginAsDefault();
@@ -254,6 +296,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+			await Logout();
         }
 
         [Fact]
@@ -282,6 +326,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             await Logout();
         }
+
         [Fact]
         public async System.Threading.Tasks.Task VerifyConsentCode__WithABadCode()
         {
