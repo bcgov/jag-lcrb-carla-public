@@ -91,21 +91,21 @@
       </section>
 
       <!--<section>
-        <div [ngClass]="{'has-error': this.isFieldError('isCorporationOutsideBC')}">
-          <label>Is the organization incorporated, continued or conducts business in other provinces or countries?</label>
-          <br />
-          <input class="form-check-inline" type="radio" id="isCorporationOutsideBCTrue" formControlName="isCorporationOutsideBC" value="true">
-          <label class="form-check-inline" for="isCorporationOutsideBCTrue">Yes</label>
-          <br />
-          <input class="form-check-inline" type="radio" id="isCorporationOutsideBCFalse" formControlName="isCorporationOutsideBC" value="false">
-          <label class="form-check-inline" for="isCorporationOutsideBCFalse">No</label>
-          <div *ngIf="this.isFieldError('isCorporationOutsideBC')" class="alert alert-danger" style="width: 250px;">
-            <div *ngIf="corporateDetailsForm.controls['isCorporationOutsideBC'].hasError('required') ">
-              This is required
-            </div>
-          </div>
+    <div [ngClass]="{'has-error': this.isFieldError('isCorporationOutsideBC')}">
+      <label>Is the organization incorporated, continued or conducts business in other provinces or countries?</label>
+      <br />
+      <input class="form-check-inline" type="radio" id="isCorporationOutsideBCTrue" formControlName="isCorporationOutsideBC" value="true">
+      <label class="form-check-inline" for="isCorporationOutsideBCTrue">Yes</label>
+      <br />
+      <input class="form-check-inline" type="radio" id="isCorporationOutsideBCFalse" formControlName="isCorporationOutsideBC" value="false">
+      <label class="form-check-inline" for="isCorporationOutsideBCFalse">No</label>
+      <div *ngIf="this.isFieldError('isCorporationOutsideBC')" class="alert alert-danger" style="width: 250px;">
+        <div *ngIf="corporateDetailsForm.controls['isCorporationOutsideBC'].hasError('required') ">
+          This is required
         </div>
-      </section>-->
+      </div>
+    </div>
+  </section>-->
 
       <p></p>
       <section>
@@ -223,6 +223,10 @@
       <section>
         <button class="btn btn-primary" type="submit">Save</button>
       </section>
+      <div class="spinner-container" *ngIf="!saveCompleted">
+        <mat-spinner></mat-spinner>
+      </div>
+
 
     </div>
   </form>

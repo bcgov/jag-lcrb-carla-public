@@ -38,30 +38,78 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         /// <summary>
         /// Copy values from a ViewModel to a Dynamics Account.
+        /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
+        /// updateIfNull defaults to true
         /// </summary>
         /// <param name="toDynamics"></param>
         /// <param name="fromVM"></param>
-        public static void CopyValues(this Account toDynamics, ViewModels.Account fromVM)
+        /// <param name="copyIfNull"></param>
+        public static void CopyValues(this Account toDynamics, ViewModels.Account fromVM, Boolean copyIfNull)
         {
-            toDynamics.Name = fromVM.name;
-            toDynamics.Description = fromVM.description;
-			toDynamics.Adoxio_externalid = fromVM.externalId;
-            toDynamics.Adoxio_bcincorporationnumber = fromVM.bcIncorporationNumber;
-            toDynamics.Adoxio_dateofincorporationinbc = fromVM.dateOfIncorporationInBC;
-            toDynamics.Accountnumber = fromVM.businessNumber;
-            toDynamics.Adoxio_pstnumber = fromVM.pstNumber;
-            toDynamics.Emailaddress1 = fromVM.contactEmail;
-            toDynamics.Telephone1 = fromVM.contactPhone;
-            toDynamics.Address1_name = fromVM.mailingAddressName;
-            toDynamics.Address1_line1 = fromVM.mailingAddressStreet;
-            toDynamics.Address1_city = fromVM.mailingAddressCity;
-            toDynamics.Address1_county = fromVM.mailingAddressCountry;
-			if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
-				fromVM.mailingAddressProvince <= ViewModels.Adoxio_stateprovince.YT)
-				toDynamics.Adoxio_stateprovince = (int?)fromVM.mailingAddressProvince;
-			else
-				toDynamics.Adoxio_stateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
-            toDynamics.Address1_postalcode = fromVM.mailingAddresPostalCode;
+            if (copyIfNull || (!copyIfNull && fromVM.name!= null))
+            {
+                toDynamics.Name = fromVM.name;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.description != null))
+            {
+                toDynamics.Description = fromVM.description;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.externalId != null))
+            {
+                toDynamics.Adoxio_externalid = fromVM.externalId;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.bcIncorporationNumber != null))
+            {
+                toDynamics.Adoxio_bcincorporationnumber = fromVM.bcIncorporationNumber;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.dateOfIncorporationInBC != null))
+            {
+                toDynamics.Adoxio_dateofincorporationinbc = fromVM.dateOfIncorporationInBC;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.businessNumber != null))
+            {
+                toDynamics.Accountnumber = fromVM.businessNumber;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.pstNumber != null))
+            {
+                toDynamics.Adoxio_pstnumber = fromVM.pstNumber;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.contactEmail != null))
+            {
+                toDynamics.Emailaddress1 = fromVM.contactEmail;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.contactPhone != null))
+            {
+                toDynamics.Telephone1 = fromVM.contactPhone;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressName != null))
+            {
+                toDynamics.Address1_name = fromVM.mailingAddressName;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressStreet != null))
+            {
+                toDynamics.Address1_line1 = fromVM.mailingAddressStreet;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCity != null))
+            {
+                toDynamics.Address1_city = fromVM.mailingAddressCity;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
+            {
+                toDynamics.Address1_county = fromVM.mailingAddressCountry;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressProvince != null))
+            {
+                if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
+                fromVM.mailingAddressProvince <= ViewModels.Adoxio_stateprovince.YT)
+                    toDynamics.Adoxio_stateprovince = (int?)fromVM.mailingAddressProvince;
+                else
+                    toDynamics.Adoxio_stateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddresPostalCode != null))
+            {
+                toDynamics.Address1_postalcode = fromVM.mailingAddresPostalCode;
+            }
         }
 
         /// <summary>
