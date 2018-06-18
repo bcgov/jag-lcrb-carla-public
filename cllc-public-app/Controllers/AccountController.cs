@@ -344,8 +344,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				if (account == null)
 				{
 					return new NotFoundResult();
-				}                
+				}
+
+                // clean up dependant Legal Entity record when deleting the account
+				if (account.Adoxio_account_adoxio_legalentity_Account != null)
+				{
+					Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity legalentity = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, accountId);
+					if (legalentity != null)
+					{
+						_system.DeleteObject(legalentity);
+					}
+				}
+            
                 _system.DeleteObject(account);
+
                 DataServiceResponse dsr = _system.SaveChangesSynchronous();
                 foreach (OperationResponse result in dsr)
                 {
