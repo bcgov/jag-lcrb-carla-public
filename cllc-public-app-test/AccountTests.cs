@@ -83,6 +83,15 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             account.Accountid = id;
 
+            // get legal entity record for account
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+			ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+			Assert.Equal(id.ToString(), legalentityViewModel.account.id);
+
             // U - Update            
             account.Name = changedName;
             
