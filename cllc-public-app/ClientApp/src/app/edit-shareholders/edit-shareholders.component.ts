@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angula
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -23,9 +24,10 @@ export class EditShareholdersComponent implements OnInit {
   public dataLoaded;
   displayedColumns = ['position', 'name', 'email', 'commonvotingshares'];
   user: User;
+  saveCompleted: boolean = true;
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, 
-    public dialog: MatDialog, private userDataService: UserDataService) {
+    public dialog: MatDialog, private userDataService: UserDataService, public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -79,27 +81,26 @@ export class EditShareholdersComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    // set dialogConfig data
-    //dialogConfig.data = {
-    //  id: 1,
-    //  title: 'Angular For Beginners'
-    //};
-
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ShareholderPersonDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
       formData => {
         //console.log("ShareholderPersonDialog output:", data);
         if (formData) {
+          this.saveCompleted = false;
           let shareholderType = "Person";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
           this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
             res => {
+              this.saveCompleted = true;
+              this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['green-snackbar'] });
               this.getShareholders();
             },
             err => {
               //console.log("Error occured");
+              this.saveCompleted = true;
+              this.snackBar.open('Error saving Shareholder Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
               this.handleError(err);
             }
           );
@@ -115,27 +116,26 @@ export class EditShareholdersComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    // set dialogConfig data
-    //dialogConfig.data = {
-    //  id: 1,
-    //  title: 'Angular For Beginners'
-    //};
-
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ShareholderOrganizationDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
       formData => {
         //console.log("ShareholderOrganizationDialog output:", data)
         if (formData) {
+          this.saveCompleted = false;
           let shareholderType = "Organization";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
           this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
             res => {
+              this.saveCompleted = true;
+              this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getShareholders();
             },
             err => {
               //console.log("Error occured");
+              this.saveCompleted = true;
+              this.snackBar.open('Error saving Shareholder Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
               this.handleError(err);
             }
           );
@@ -215,7 +215,7 @@ export class ShareholderOrganizationDialog {
       organizationType: ['', Validators.required],
       organizationName: ['', Validators.required],
       numberOfVotingShares: ['', Validators.required],
-      numberOfNonVotingShares: ['', Validators.required],
+      //numberOfNonVotingShares: ['', Validators.required],
       dateIssued: ['']
     });
   }

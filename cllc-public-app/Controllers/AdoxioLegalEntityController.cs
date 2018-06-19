@@ -142,6 +142,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
+		/// <summary>
+        /// Get the special applicant legal entity for the current user
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("applicant")]
+        public async Task<IActionResult> GetApplicantDynamicsLegalEntity()
+        {
+            ViewModels.AdoxioLegalEntity result = null;
+
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+			// query the Dynamics system to get the legal entity record.
+            Adoxio_legalentity legalEntity = null;
+            try
+            {
+				_logger.LogError("Find legal entity for applicant = " + userSettings.AccountId.ToString());
+
+				legalEntity = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, Guid.Parse(userSettings.AccountId));
+                result = legalEntity.ToViewModel();
+            }
+            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+            {
+                Console.WriteLine(dsqe.Message);
+                Console.WriteLine(dsqe.StackTrace);
+                return new NotFoundResult();
+            }
+
+            return Json(result);
+        }
+
         /// <summary>
         /// Get a specific legal entity
         /// </summary>
@@ -276,12 +308,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 			var userAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
-			//_system.UpdateObject(userAccount);
 
             // copy received values to Dynamics LegalEntity
             // !!!! Values must be copied after adding to the collection, otherwise the entity will be created without the values assigned !!!!
             adoxioLegalEntity.CopyValues(item, _system);
 			adoxioLegalEntity.Adoxio_Account = userAccount;
+
+			// TODO take the default for now from the parent account's legal entity record
+            // TODO likely will have to re-visit for shareholders that are corporations/organizations
+			adoxioLegalEntity.Adoxio_LegalEntityOwned = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, Guid.Parse(userSettings.AccountId));
 
             // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
 			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);            

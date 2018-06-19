@@ -16,6 +16,7 @@ export class CorporateDetailsComponent implements OnInit {
   corporateDetailsForm: FormGroup;
   accountModel: DynamicsAccount;
   dataLoaded: boolean = false;
+  saveCompleted: boolean = true;
 
   constructor(private userDataService: UserDataService, private accountDataService: AccountDataService,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
@@ -39,19 +40,19 @@ export class CorporateDetailsComponent implements OnInit {
 
   createForm() {
     this.corporateDetailsForm = this.fb.group({
-      bcIncorporationNumber: ['', Validators.required],
-      dateOfIncorporationInBC: ['', Validators.required],
-      businessNumber: ['', Validators.required],
-      pstNumber: ['', Validators.required],
-      contactEmail: ['', Validators.required],
-      contactPhone: ['', Validators.required],
+      bcIncorporationNumber: [''],//Validators.required
+      dateOfIncorporationInBC: [''],
+      businessNumber: [''],
+      pstNumber: [''],
+      contactEmail: [''],
+      contactPhone: [''],
       //isCorporationOutsideBC: ['', Validators.required],
-      mailingAddressName: ['', Validators.required],
-      mailingAddressStreet: ['', Validators.required],
-      mailingAddressCity: ['', Validators.required],
-      mailingAddressCountry: ['', Validators.required],
-      mailingAddressProvince: ['', Validators.required],
-      mailingAddresPostalCode: ['', Validators.required]
+      mailingAddressName: [''],
+      mailingAddressStreet: [''],
+      mailingAddressCity: [''],
+      mailingAddressCountry: [''],
+      mailingAddressProvince: [''],
+      mailingAddresPostalCode: ['']
     }//, { validator: this.dateLessThanToday('dateOfIncorporationInBC') }
     );
   }
@@ -73,15 +74,19 @@ export class CorporateDetailsComponent implements OnInit {
   save() {
     //console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
     if (this.corporateDetailsForm.valid) {
+      this.saveCompleted = false;
       //console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
       this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
       //console.log("this.accountModel", this.accountModel);
       this.accountDataService.updateAccount(this.accountModel).subscribe(
         res => {
           //console.log("Account updated:", res.json());
-          this.snackBar.open('Corporate Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar']});
+          this.saveCompleted = true;
+          this.snackBar.open('Corporate Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
       },
         err => {
+          this.saveCompleted = true;
+          this.snackBar.open('Error saving Corporate Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
           console.log("Error occured");
         });
     } else {
