@@ -107,8 +107,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             SP.ListItem folder = null;
             // first get a reference to the containing list.
-            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
-                from list in apiData.Lists
+            var query = (DataServiceQuery<SP.List>)
+                from list in apiData.Lists.Expand(l => l.Items)
                 where list.Title == listTitle
                 select list;
             TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
@@ -122,14 +122,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                 folder.DisplayName = folderName;
                 folder.Folder = new SP.Folder
                 {
-                    Name = folderName
+                    Name = folderName,
+                    ServerRelativeUrl = $"/${listTitle}/${folderName}"
                 };
-                
                 listResult.Items.Add(folder);
-                listData.AddObject("List", listResult);
+                apiData.AddObject("AccountItem", folder);
+                
                 // save to SharePoint.
                 TaskFactory saveTaskFactory = new TaskFactory();
-                var res = await saveTaskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
+                var res = await saveTaskFactory.FromAsync(apiData.BeginSaveChanges(null, null), iar => apiData.EndSaveChanges(iar));
             }            
 
             return folder;
@@ -158,27 +159,23 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         }
 
-
         public async Task<bool> FolderExists(string listTitle, string folderName)
         {
             bool result = false;
             // first get a reference to the containing list.
-            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
-                from list in apiData.Lists
-                where list.Title == listTitle
-                select list;
-            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
+            var query = (DataServiceQuery<SP.List>)(
+                        from list in apiData.Lists.Expand(l => l.Items)
+                          where list.Title == listTitle
+                          select list);
+
+            var taskFactory = new TaskFactory<IEnumerable<SP.List>>();
             IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            SP.List listResult = listResults.FirstOrDefault();
+            var listResult = listResults.FirstOrDefault();
             if (listResult != null)
             {
-                SP.ListItem folderListItem = listResult.Items.Where(x => x.DisplayName == folderName).FirstOrDefault();
-                if (folderListItem != null)
-                {
-                    result = true;
-                }
+                result = listResult.Items.Any(i => i.Folder.Name == folderName);
             }
-            
+
             return result;
         }
 
@@ -239,11 +236,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
         {
             // start by ensuring that the folder exists.
-            //bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
-            //if (! folderExists)
-            //{
-            //   var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
-            //}
+            bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
+            if (! folderExists)
+            {
+              var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
+            }
 
             // now add the file to the folder.
             string path = $"/{this.WebName}/{DefaultDocumentListTitle}/{folderName}/{fileName}";
