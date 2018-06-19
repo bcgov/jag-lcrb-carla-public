@@ -59,4 +59,7 @@
 <div class="col-md-10 row" style="margin-bottom: 5px;">
   <a class="globalButton btn btn-primary" tabindex="1" (click)="sendConsentRequestEmail()"><strong>Send Consent Request</strong><br></a>
 </div>
-<hr>
+
+<div class="spinner-container" *ngIf="!consentCompleted">
+  <mat-spinner></mat-spinner>
+</div>

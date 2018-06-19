@@ -131,6 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             ViewModels.Account result = null;
+            Boolean updateIfNull = true;
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -189,9 +190,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else // it is an update.
             {
                 _system.UpdateObject(account);
+                // do not update fields with null values
+                updateIfNull = false;
             }
 
-            account.CopyValues(item);            
+            account.CopyValues(item, updateIfNull);            
 
             if (account.Primarycontactid == null) // we need to add the primary contact.
             {                
@@ -302,8 +305,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the legal entity.
             Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
             _system.UpdateObject(account);
-            // copy values over from the data provided
-            account.CopyValues(item);
+            // copy values over from the data provided (only when value is not null)
+            account.CopyValues(item, false);
 
             
 
@@ -344,8 +347,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				if (account == null)
 				{
 					return new NotFoundResult();
-				}                
+				}
+
+                // clean up dependant Legal Entity record when deleting the account
+				if (account.Adoxio_account_adoxio_legalentity_Account != null)
+				{
+					Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity legalentity = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, accountId);
+					if (legalentity != null)
+					{
+						_system.DeleteObject(legalentity);
+					}
+				}
+            
                 _system.DeleteObject(account);
+
                 DataServiceResponse dsr = _system.SaveChangesSynchronous();
                 foreach (OperationResponse result in dsr)
                 {
