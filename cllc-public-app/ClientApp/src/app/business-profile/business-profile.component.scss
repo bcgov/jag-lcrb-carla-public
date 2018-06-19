@@ -9,8 +9,13 @@
 
 
 .nav-tabs > li.active {
-  background-color: green;
+  background-color: #003366;
   padding-left: 5px;
+}
+
+li.active > a {
+  background-color: #eee;
+  font-weight: 600;
 }
 
 
