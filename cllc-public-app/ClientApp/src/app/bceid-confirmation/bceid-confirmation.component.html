@@ -26,11 +26,17 @@
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactYes()"><strong>Yes</strong></a>
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactNo()"><strong>No</strong></a>
         <br>
+        <div class="spinner-container" *ngIf="!confirmCompleted">
+          <mat-spinner></mat-spinner>
+        </div>
       </div>
       <div class="col-md-12 text-left" *ngIf="showBceidUserContinue">
         Each user should have their own user account to fill out the application. Contact the BCeID primary user to add your account to the Business BCeID.
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactYes()"><strong>Continue</strong></a>
         <br>
+        <div class="spinner-container" *ngIf="!confirmCompleted">
+          <mat-spinner></mat-spinner>
+        </div>
       </div>
     </div>
   </div>
