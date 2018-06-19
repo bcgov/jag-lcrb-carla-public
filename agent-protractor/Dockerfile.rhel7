@@ -2,9 +2,9 @@ FROM agent-nodejs-8:latest
 
 USER 0
 
-RUN wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum -y localinstall epel-release-latest-7.noarch.rpm && \
+RUN yum -y localinstall epel-release-latest-7.noarch.rpm && \
 	yum -y install wget nano Xvfb  xorg-x11-xauth java-1.8.0-openjdk git && \
+	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
 	yum -y localinstall google-chrome-stable_current_x86_64.rpm && \
 	rm google-chrome-stable_current_x86_64.rpm && \
