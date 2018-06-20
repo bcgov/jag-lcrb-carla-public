@@ -23,6 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public ApplicationTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
         { }
+
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
@@ -142,5 +143,95 @@ namespace Gov.Lclb.Cllb.Public.Test
             // logout and cleanup (deletes the account and contact created above ^^^)
 			await LogoutAndCleanupTestUser(strId);
         }
+
+		[Fact]
+		public async System.Threading.Tasks.Task TestUserCannotAccessAnotherUsersApplication()
+		{
+			string initialName = randomNewUserName("Application Private ", 6);
+            string service = "adoxioapplication";
+
+            // login as default and get account for current user
+            string loginUser1 = randomNewUserName("TestAppUser", 6);
+            var strId1 = await LoginAndRegisterAsNewUser(loginUser1);
+
+            ViewModels.User user1 = await GetCurrentUser();
+            ViewModels.Account currentAccount1 = await GetAccountForCurrentUser();
+
+            // C - Create
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+
+            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+            {
+                name = initialName,
+                applyingPerson = "Applying Person",
+                applicant = currentAccount1,
+                jobNumber = "123",
+                licenseType = "Cannabis",
+                establishmentName = "Private Retail Store",
+                establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
+                establishmentaddressstreet = "666 Any Street",
+                establishmentaddresscity = "Victoria, BC",
+                establishmentaddresspostalcode = "V1X 1X1",
+                applicationStatus = "0"
+            };
+
+            var jsonString = JsonConvert.SerializeObject(viewmodel_application);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // parse as JSON.
+            jsonString = await response.Content.ReadAsStringAsync();
+            ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+
+            // name should match.
+			Assert.Equal("Private Retail Store", responseViewModel.establishmentName);
+            Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
+            Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+
+            Guid id = new Guid(responseViewModel.id);
+
+			// R - Read
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+            Assert.Equal(currentAccount1.id, responseViewModel.applicant.id);
+
+			await Logout();
+
+            // register and login as a second user
+            string loginUser2 = randomNewUserName("TestAppUser", 6);
+            var strId2 = await LoginAndRegisterAsNewUser(loginUser2);
+
+            ViewModels.User user2 = await GetCurrentUser();
+            ViewModels.Account currentAccount2 = await GetAccountForCurrentUser();
+
+			// R - Read (404, no access by user)
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+			// logout and cleanup (deletes the account and contact created above ^^^)
+            await LogoutAndCleanupTestUser(strId2);
+
+			// log back in as first user
+			await Login(loginUser1);
+
+			// R - Read - still has access to application
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+            Assert.Equal(currentAccount1.id, responseViewModel.applicant.id);
+
+			// logout and cleanup (deletes the account and contact created above ^^^)
+            await LogoutAndCleanupTestUser(strId1);
+		}
     }
 }
