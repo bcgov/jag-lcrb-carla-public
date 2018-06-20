@@ -5,6 +5,7 @@ import { User } from '../../../models/user.model';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-corporate-details',
@@ -15,8 +16,7 @@ export class CorporateDetailsComponent implements OnInit {
   @Input() accountId: string;
   corporateDetailsForm: FormGroup;
   accountModel: DynamicsAccount;
-  dataLoaded: boolean = false;
-  saveCompleted: boolean = true;
+  busy: Subscription;
 
   constructor(private userDataService: UserDataService, private accountDataService: AccountDataService,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
@@ -25,11 +25,10 @@ export class CorporateDetailsComponent implements OnInit {
   ngOnInit() {
     this.createForm();
     // get account data and then display form
-    this.accountDataService.getAccount(this.accountId).subscribe(
+    this.busy = this.accountDataService.getAccount(this.accountId).subscribe(
       res => {
         let data = this.toFormModel(res.json());
         this.corporateDetailsForm.patchValue(data);
-        this.dataLoaded = true;
       },
       err => {
         console.log("Error occured");
@@ -74,18 +73,16 @@ export class CorporateDetailsComponent implements OnInit {
   save() {
     //console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
     if (this.corporateDetailsForm.valid) {
-      this.saveCompleted = false;
+
       //console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
       this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
       //console.log("this.accountModel", this.accountModel);
-      this.accountDataService.updateAccount(this.accountModel).subscribe(
+      this.busy =  this.accountDataService.updateAccount(this.accountModel).subscribe(
         res => {
           //console.log("Account updated:", res.json());
-          this.saveCompleted = true;
           this.snackBar.open('Corporate Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
       },
         err => {
-          this.saveCompleted = true;
           this.snackBar.open('Error saving Corporate Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
           console.log("Error occured");
         });
