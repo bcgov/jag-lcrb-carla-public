@@ -175,7 +175,14 @@ namespace Gov.Lclb.Cllb.Public
 
                 if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
                 {
-                    serviceClientCredentials = new TokenCredentials(authenticationResult.AccessToken, authenticationResult.AccessTokenType);                    
+                    var authenticationContext = new AuthenticationContext(
+                    "https://login.windows.net/" + aadTenantId);
+                    ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
+                    var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
+                    task.Wait();
+                    authenticationResult = task.Result;
+
+                    serviceClientCredentials = new TokenCredentials(task.Result.AccessToken, task.Result.AccessTokenType);                    
                 }
                 else
                 {
@@ -187,6 +194,7 @@ namespace Gov.Lclb.Cllb.Public
                 }
                                 
                 IDynamicsClient client = new DynamicsClient(new Uri(Configuration["DYNAMICS_ODATA_URI"]), serviceClientCredentials);
+                
                 return client;
             }));
 
@@ -194,8 +202,6 @@ namespace Gov.Lclb.Cllb.Public
             Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
 
             // determine if we have a SSG connection.
-
-            
 
             if (string.IsNullOrEmpty (ssgUsername) || string.IsNullOrEmpty(ssgPassword))
             {

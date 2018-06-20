@@ -36,7 +36,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         ServiceClientCredentials Credentials { get; }
 
-
         /// <summary>
         /// Gets the IAccounts.
         /// </summary>
@@ -48,6 +47,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccountsaccountid Accountsaccountid { get; }
 
         /// <summary>
+        /// Gets the IAdoxiolegalentities.
+        /// </summary>
+        IAdoxiolegalentities Adoxiolegalentities { get; }
+
+        /// <summary>
+        /// Gets the IAdoxiolegalentitiesadoxio.
+        /// </summary>
+        IAdoxiolegalentitiesadoxio Adoxiolegalentitiesadoxio { get; }
+
+        /// <summary>
         /// Gets the IAdoxio.
         /// </summary>
         IAdoxio Adoxio { get; }
@@ -56,11 +65,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContacts.
         /// </summary>
         IContacts Contacts { get; }
-
-        /// <summary>
-        /// Gets the IContactscontactid.
-        /// </summary>
-        IContactscontactid Contactscontactid { get; }
 
     }
 }

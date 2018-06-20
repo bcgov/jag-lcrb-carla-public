@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }
 
-        /// <summary>
+        /// <summary>        
         /// Subscription credentials which uniquely identify client subscription.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
@@ -51,6 +51,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccountsaccountid Accountsaccountid { get; private set; }
 
         /// <summary>
+        /// Gets the IAdoxiolegalentities.
+        /// </summary>
+        public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdoxiolegalentitiesadoxio.
+        /// </summary>
+        public virtual IAdoxiolegalentitiesadoxio Adoxiolegalentitiesadoxio { get; private set; }
+
+        /// <summary>
         /// Gets the IAdoxio.
         /// </summary>
         public virtual IAdoxio Adoxio { get; private set; }
@@ -59,11 +69,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
-
-        /// <summary>
-        /// Gets the IContactscontactid.
-        /// </summary>
-        public virtual IContactscontactid Contactscontactid { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -76,9 +81,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Initialize();
         }
 
-        /// <summary>
-        /// Initializes a new instance of the DynamicsClient class.
-        /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
         /// </param>
@@ -268,9 +270,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Accounts = new Accounts(this);
             Accountsaccountid = new Accountsaccountid(this);
+            Adoxiolegalentities = new Adoxiolegalentities(this);
+            Adoxiolegalentitiesadoxio = new Adoxiolegalentitiesadoxio(this);
             Adoxio = new Adoxio(this);
             Contacts = new Contacts(this);
-            Contactscontactid = new Contactscontactid(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
