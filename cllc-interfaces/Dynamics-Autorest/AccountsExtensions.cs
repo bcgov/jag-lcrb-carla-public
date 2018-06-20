@@ -24,9 +24,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New entity
             /// </param>
-            public static MicrosoftDynamicsCRMaccount Addnewentitytoaccounts(this IAccounts operations, MicrosoftDynamicsCRMaccount body)
+            /// <param name='prefer'>
+            /// Required in order for the service to return a JSON representation of the
+            /// object.
+            /// </param>
+            public static MicrosoftDynamicsCRMaccount Addnewentitytoaccounts(this IAccounts operations, MicrosoftDynamicsCRMaccount body, string prefer = "return=representation")
             {
-                return operations.AddnewentitytoaccountsAsync(body).GetAwaiter().GetResult();
+                return operations.AddnewentitytoaccountsAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -38,12 +42,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New entity
             /// </param>
+            /// <param name='prefer'>
+            /// Required in order for the service to return a JSON representation of the
+            /// object.
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMaccount> AddnewentitytoaccountsAsync(this IAccounts operations, MicrosoftDynamicsCRMaccount body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMaccount> AddnewentitytoaccountsAsync(this IAccounts operations, MicrosoftDynamicsCRMaccount body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.AddnewentitytoaccountsWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.AddnewentitytoaccountsWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

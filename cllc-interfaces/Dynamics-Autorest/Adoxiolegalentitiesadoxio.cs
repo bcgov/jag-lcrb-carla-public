@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Adoxio operations.
+    /// Adoxiolegalentitiesadoxio operations.
     /// </summary>
-    public partial class Adoxio : IServiceOperations<DynamicsClient>, IAdoxio
+    public partial class Adoxiolegalentitiesadoxio : IServiceOperations<DynamicsClient>, IAdoxiolegalentitiesadoxio
     {
         /// <summary>
-        /// Initializes a new instance of the Adoxio class.
+        /// Initializes a new instance of the Adoxiolegalentitiesadoxio class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Adoxio(DynamicsClient client)
+        public Adoxiolegalentitiesadoxio(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,13 +47,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Update entity in adoxio_legalentities
+        /// Delete entity from adoxio_legalentities
         /// </summary>
         /// <param name='adoxioLegalentityid'>
         /// key: adoxio_legalentityid
         /// </param>
-        /// <param name='body'>
-        /// New property values
+        /// <param name='ifMatch'>
+        /// ETag
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -73,15 +73,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> LegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeleteentityfromadoxiolegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (adoxioLegalentityid == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLegalentityid");
-            }
-            if (body == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "body");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -91,9 +87,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("adoxioLegalentityid", adoxioLegalentityid);
-                tracingParameters.Add("body", body);
+                tracingParameters.Add("ifMatch", ifMatch);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "Legalentities", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Deleteentityfromadoxiolegalentities", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
@@ -102,9 +98,17 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PATCH");
+            _httpRequest.Method = new HttpMethod("DELETE");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+            if (ifMatch != null)
+            {
+                if (_httpRequest.Headers.Contains("If-Match"))
+                {
+                    _httpRequest.Headers.Remove("If-Match");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("If-Match", ifMatch);
+            }
 
 
             if (customHeaders != null)
@@ -121,12 +125,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // Serialize Request
             string _requestContent = null;
-            if(body != null)
-            {
-                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(body, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
             // Send Request
             if (_shouldTrace)
             {

@@ -19,78 +19,6 @@ namespace Gov.Lclb.Cllb.Interfaces
     public partial interface IAdoxio
     {
         /// <summary>
-        /// Add new entity to adoxio_legalentities
-        /// </summary>
-        /// <param name='body'>
-        /// New entity
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLegalentity>> LegalentitiesWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Delete entity from adoxio_legalentities
-        /// </summary>
-        /// <param name='adoxioLegalentityid'>
-        /// key: adoxio_legalentityid
-        /// </param>
-        /// <param name='ifMatch'>
-        /// ETag
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> Legalentities1WithHttpMessagesAsync(string adoxioLegalentityid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get entity from adoxio_legalentities by key
-        /// </summary>
-        /// <param name='adoxioLegalentityid'>
-        /// key: adoxio_legalentityid
-        /// </param>
-        /// <param name='select'>
-        /// Select properties to be returned
-        /// </param>
-        /// <param name='expand'>
-        /// Expand related entities
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLegalentity>> LegalentitiesbykeyWithHttpMessagesAsync(string adoxioLegalentityid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Update entity in adoxio_legalentities
         /// </summary>
         /// <param name='adoxioLegalentityid'>
@@ -111,6 +39,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> Legalentities2WithHttpMessagesAsync(string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> LegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

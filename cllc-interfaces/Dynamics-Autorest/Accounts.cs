@@ -52,6 +52,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='body'>
         /// New entity
         /// </param>
+        /// <param name='prefer'>
+        /// Required in order for the service to return a JSON representation of the
+        /// object.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -73,7 +77,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMaccount>> AddnewentitytoaccountsWithHttpMessagesAsync(MicrosoftDynamicsCRMaccount body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMaccount>> AddnewentitytoaccountsWithHttpMessagesAsync(MicrosoftDynamicsCRMaccount body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -87,6 +91,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("body", body);
+                tracingParameters.Add("prefer", prefer);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Addnewentitytoaccounts", tracingParameters);
             }
@@ -99,6 +104,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+            if (prefer != null)
+            {
+                if (_httpRequest.Headers.Contains("Prefer"))
+                {
+                    _httpRequest.Headers.Remove("Prefer");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("Prefer", prefer);
+            }
 
 
             if (customHeaders != null)
@@ -120,12 +133,6 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(body, Client.SerializationSettings);
                 _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
-            // Set Credentials
-            if (Client.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             }
             // Send Request
             if (_shouldTrace)
