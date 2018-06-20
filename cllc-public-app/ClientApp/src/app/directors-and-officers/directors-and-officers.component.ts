@@ -5,6 +5,7 @@ import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 import { MatSnackBar } from '@angular/material';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-directors-and-officers',
@@ -17,9 +18,9 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
-  public dataLoaded;
   displayedColumns = ['name', 'email', 'position', 'dateIssued'];
-  saveCompleted: boolean = true;
+  busy: Promise<any>;
+  busyObsv: Subscription;
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog,
               public snackBar: MatSnackBar) { }
@@ -29,12 +30,11 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   getDirectorsAndOfficers() {
-    this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer")
+    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition("directorofficer"): ", data);
         //console.log("parameter: accountId = ", this.accountId)
         this.dataSource.data = data;
-        this.dataLoaded = true;
       });
   }
 
@@ -74,20 +74,14 @@ export class DirectorsAndOfficersComponent implements OnInit {
     const dialogRef = this.dialog.open(DirectorAndOfficerPersonDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
       formData => {
-        //console.log("DirectorAndOfficerPersonDialog output:", formData);
         if (formData) {
-          this.saveCompleted = false;
           let adoxioLegalEntity = this.formDataToModelData(formData);
-          //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
             res => {
-              this.saveCompleted = true;
               this.snackBar.open('Director / Officer Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getDirectorsAndOfficers();
             },
             err => {
-              //console.log("Error occured");
-              this.saveCompleted = true;
               this.snackBar.open('Error saving Director / Officer Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
               this.handleError(err);
             });

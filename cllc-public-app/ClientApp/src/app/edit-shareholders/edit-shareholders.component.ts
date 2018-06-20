@@ -7,6 +7,7 @@ import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-da
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { MatSnackBar } from '@angular/material';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -21,10 +22,11 @@ export class EditShareholdersComponent implements OnInit {
   shareholderForm: FormGroup;
   shareholderList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
-  public dataLoaded;
   displayedColumns = ['position', 'name', 'email', 'commonvotingshares'];
   user: User;
-  saveCompleted: boolean = true;
+  busy: Promise<any>;
+  busyObsv: Subscription;
+
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, 
     public dialog: MatDialog, private userDataService: UserDataService, public snackBar: MatSnackBar) {
@@ -38,12 +40,10 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   getShareholders() {
-    this.dataLoaded = false;
-    this.legalEntityDataservice.getLegalEntitiesbyPosition("shareholder")
+    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("shareholder")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition("shareholder"): ", data);
         this.dataSource.data = data;
-        this.dataLoaded = true;
       });
   }
 
@@ -87,19 +87,16 @@ export class EditShareholdersComponent implements OnInit {
       formData => {
         //console.log("ShareholderPersonDialog output:", data);
         if (formData) {
-          this.saveCompleted = false;
           let shareholderType = "Person";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
             res => {
-              this.saveCompleted = true;
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['green-snackbar'] });
               this.getShareholders();
             },
             err => {
               //console.log("Error occured");
-              this.saveCompleted = true;
               this.snackBar.open('Error saving Shareholder Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
               this.handleError(err);
             }
@@ -122,19 +119,16 @@ export class EditShareholdersComponent implements OnInit {
       formData => {
         //console.log("ShareholderOrganizationDialog output:", data)
         if (formData) {
-          this.saveCompleted = false;
           let shareholderType = "Organization";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
             res => {
-              this.saveCompleted = true;
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getShareholders();
             },
             err => {
               //console.log("Error occured");
-              this.saveCompleted = true;
               this.snackBar.open('Error saving Shareholder Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
               this.handleError(err);
             }
