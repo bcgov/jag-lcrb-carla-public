@@ -18,6 +18,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/ng-busy/src/style/busy.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
         "styles-font.scss"
