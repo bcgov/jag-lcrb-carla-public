@@ -36,6 +36,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         ServiceClientCredentials Credentials { get; }
 
+
         /// <summary>
         /// Gets the IAccounts.
         /// </summary>

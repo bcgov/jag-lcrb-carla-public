@@ -134,6 +134,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             bool createLegalEntity = false;
+            bool createContact = false;
 
             ViewModels.Account result = null;
             Boolean updateIfNull = true;
@@ -169,9 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Employeeid = userSettings.UserId;
                 userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
-                userContact.Statuscode = 1;
-
-                userContact = await _dynamicsClient.Contacts.AddnewentitytocontactsAsync(userContact);
+                userContact.Statuscode = 1;                
             }
 
             MicrosoftDynamicsCRMaccount account = null;            
@@ -183,8 +182,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // create a new account
                 account = new MicrosoftDynamicsCRMaccount();
-                // set the account siteminder guid
-				account.AdoxioExternalid = accountSiteminderGuid;
+                // ensure that we create an account for the current user.				
 				item.externalId = accountSiteminderGuid;
 
                 createLegalEntity = true;
@@ -197,31 +195,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             account.CopyValues(item, updateIfNull);            
 
-            if (account.Primarycontactid == null) // we need to add the primary contact.
+            if (account._primarycontactidValue == null) // we need to add the primary contact.
             {                
-                account.Primarycontactid = userContact;				
+                account.Primarycontactid = userContact;
+                createContact = false; // the contact will be created at the same time as the account.
             }
 
             // create the account.
+            // account is created at the same time as the legal entity.
+            //account = await _dynamicsClient.Accounts.AddnewentitytoaccountsAsync(account);
 
-            account = await _dynamicsClient.Accounts.AddnewentitytoaccountsAsync(account);
-
-            // update the userContact.
-
-            userContact.ParentcustomeridAccount = account;
-
-            await _dynamicsClient.Contacts.UpdateentityincontactsAsync(userContact.Contactid.ToString(), userContact);
-
-            if (createLegalEntity)
+            // create a legal entity.
+            var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
             {
-                // create a legal entity.
-                var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
-                legalEntity.AdoxioAccount = account;
-                legalEntity.AdoxioName = item.name;
-                legalEntity.AdoxioIsindividual = 0;
-                legalEntity.AdoxioIsapplicant = true;
-                await _dynamicsClient.Adoxiolegalentities.AddnewentitytoadoxiolegalentitiesAsync(legalEntity);
+                AdoxioAccount = account,
+                AdoxioName = item.name,
+                AdoxioIsindividual = 0,
+                AdoxioIsapplicant = true
+            };
+            legalEntity = await _dynamicsClient.Adoxiolegalentities.AddnewentitytoadoxiolegalentitiesAsync(legalEntity);
+
+            account.Accountid = legalEntity._adoxioAccountValue;
+            
+
+
+            if (createContact)
+            {
+                // parent customer id relationship will be created using the method here:
+                //https://msdn.microsoft.com/en-us/library/mt607875.aspx
+                //userContact.ParentcustomeridAccount = new MicrosoftDynamicsCRMaccount() { Accountid = account.Accountid };
+                userContact = await _dynamicsClient.Contacts.AddnewentitytocontactsAsync(userContact);
+                
             }
+            else
+            {
+                // fetch the account and get the created contact.
+                var a = await _system.GetAccountById(null, Guid.Parse(account.Accountid));
+                userContact.Contactid = a._primarycontactid_value.ToString();
+            }
+            
+
+            //await _dynamicsClient.Contacts.UpdateentityincontactsAsync(userContact.Contactid.ToString(), userContact);
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
