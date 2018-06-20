@@ -202,8 +202,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                   
             SiteMinderAuthOptions options = new SiteMinderAuthOptions();
             bool isDeveloperLogin = false;
-            try
-            {
+            //try
+           // {
                 ClaimsPrincipal principal;
                 HttpContext context = Request.HttpContext;
                 Interfaces.Microsoft.Dynamics.CRM.System _system = (Interfaces.Microsoft.Dynamics.CRM.System)context.RequestServices.GetService(typeof(Interfaces.Microsoft.Dynamics.CRM.System));
@@ -438,13 +438,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // done!
                 principal = userPrincipal;
                 return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
-            }
+            /*}
             catch (Exception exception)
             {
                 _logger.LogError(exception.Message);
                 Console.WriteLine(exception);
                 throw;
-            }
+            }*/
         }        
     }    
 }
