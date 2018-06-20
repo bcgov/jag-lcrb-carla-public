@@ -6,13 +6,11 @@
   <mat-card-subtitle><p>Your Licences</p></mat-card-subtitle>
   <mat-card>
 
-    <div class="spinner-container" style="padding: 2em;" *ngIf="!dataLoaded">
-      <mat-spinner></mat-spinner>
-    </div>
+  <div [ngBusy]="busy"></div>
 
-    <div *ngIf="dataSource.data.length == 0 && dataLoaded ">No licence applications have been started</div>
+  <div *ngIf="dataSource.data && dataSource.data.length == 0">No licence applications have been started</div>
 
-    <div *ngIf="dataLoaded && dataSource.data.length > 0">
+  <div *ngIf="dataSource.data.length > 0">
 
       <div class="example-header">
         <mat-form-field>
