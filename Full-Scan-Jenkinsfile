@@ -79,7 +79,6 @@ node('nodejs') {
 
 
 stage('Deploy on Test') {
-    input "Deploy to test?"
     node('master') {
         openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'test', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
 	sh 'sleep 3m'
