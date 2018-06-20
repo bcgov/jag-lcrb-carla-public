@@ -29,11 +29,11 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="email">The email address of the user in the system..</param>
         /// <param name="smUserId">Security Manager User ID.</param>
         /// <param name="guid">The GUID unique to the user as provided by the authentication system. In this case, authentication is done by Siteminder and the GUID uniquely identifies the user within the user directories managed by Siteminder - e.g. IDIR and BCeID. The GUID is equivalent to the IDIR Id, but is guaranteed unique to a person, while the IDIR ID is not - IDIR IDs can be recycled..</param>
-        /// <param name="smAuthorizationDirectory">The user directory service used by Siteminder to authenticate the user - usually IDIR or BCeID..</param>
+        /// <param name="userType">The user directory service used by Siteminder to authenticate the user - usually IDIR or BCeID..</param>
         /// <param name="userRoles">UserRoles.</param>
         /// <param name="district">The District that the User belongs to.</param>
         public User(Guid id, string givenName, string surname, bool active, string initials = null, string email = null,
-            string smUserId = null, string accountId = null, string smAuthorizationDirectory = null, List<UserRole> userRoles = null)
+            string smUserId = null, string accountId = null, string userType = null, List<UserRole> userRoles = null)
         {
             ContactId = id;
             GivenName = givenName;
@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 AccountId = Guid.Parse(accountId);
             }            
-            SmAuthorizationDirectory = smAuthorizationDirectory;
+            UserType = userType;
             UserRoles = userRoles;
         }
 
@@ -121,7 +121,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 		/// </summary>
 		/// <value>The user directory service used by Siteminder to authenticate the user - usually IDIR or BCeID.</value>
 		[MaxLength(255)]
-		public string SmAuthorizationDirectory { get; set; }
+		public string UserType { get; set; }
 
 		/// <summary>
 		/// Gets or Sets UserRoles
@@ -146,7 +146,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 			sb.Append("  Email: ").Append(Email).Append("\n");
 			sb.Append("  SmUserId: ").Append(SmUserId).Append("\n");
 			sb.Append("  Guid: ").Append(AccountId).Append("\n");
-			sb.Append("  SmAuthorizationDirectory: ").Append(SmAuthorizationDirectory).Append("\n");
+			sb.Append("  SmAuthorizationDirectory: ").Append(UserType).Append("\n");
 			sb.Append("  UserRoles: ").Append(UserRoles).Append("\n");
 			sb.Append("}\n");
 
@@ -224,9 +224,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                     AccountId.Equals(other.AccountId)
                 ) &&
                 (
-                    SmAuthorizationDirectory == other.SmAuthorizationDirectory ||
-                    SmAuthorizationDirectory != null &&
-                    SmAuthorizationDirectory.Equals(other.SmAuthorizationDirectory)
+                    UserType == other.UserType ||
+                    UserType != null &&
+                    UserType.Equals(other.UserType)
                 ) &&
                 (
                     UserRoles == other.UserRoles ||
@@ -281,9 +281,9 @@ namespace Gov.Lclb.Cllb.Public.Models
 					hash = hash * 59 + AccountId.GetHashCode();
 				}
 
-			    if (SmAuthorizationDirectory != null)
+			    if (UserType != null)
 				{
-					hash = hash * 59 + SmAuthorizationDirectory.GetHashCode();
+					hash = hash * 59 + UserType.GetHashCode();
 				}
 
 				if (UserRoles != null)

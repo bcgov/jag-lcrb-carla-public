@@ -94,6 +94,7 @@ import { BeforeYouStartComponent } from './business-profile/tabs/before-you-star
 import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
 import { BusinessProfileSummaryComponent } from './business-profile-summary/business-profile-summary.component';
 
+import {NgBusyModule} from 'ng-busy';
 
 @NgModule({
   declarations: [
@@ -145,6 +146,7 @@ import { BusinessProfileSummaryComponent } from './business-profile-summary/busi
     NgbModule.forRoot(),
     AdminModule,
     BrowserAnimationsModule,
+    NgBusyModule,
     CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
