@@ -210,7 +210,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             userContact.ParentcustomeridAccount = account;
 
-            await _dynamicsClient.Contactscontactid.UpdateentityincontactsAsync(userContact.Contactid.ToString(), userContact);
+            await _dynamicsClient.Contacts.UpdateentityincontactsAsync(userContact.Contactid.ToString(), userContact);
 
             if (createLegalEntity)
             {
@@ -220,9 +220,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 legalEntity.AdoxioName = item.name;
                 legalEntity.AdoxioIsindividual = 0;
                 legalEntity.AdoxioIsapplicant = true;
+                await _dynamicsClient.Adoxiolegalentities.AddnewentitytoadoxiolegalentitiesAsync(legalEntity);
             }
-
-
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)

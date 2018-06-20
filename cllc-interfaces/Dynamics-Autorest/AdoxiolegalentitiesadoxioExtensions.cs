@@ -11,12 +11,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for Adoxio.
+    /// Extension methods for Adoxiolegalentitiesadoxio.
     /// </summary>
-    public static partial class AdoxioExtensions
+    public static partial class AdoxiolegalentitiesadoxioExtensions
     {
             /// <summary>
-            /// Update entity in adoxio_legalentities
+            /// Delete entity from adoxio_legalentities
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -24,16 +24,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='adoxioLegalentityid'>
             /// key: adoxio_legalentityid
             /// </param>
-            /// <param name='body'>
-            /// New property values
+            /// <param name='ifMatch'>
+            /// ETag
             /// </param>
-            public static void Legalentities(this IAdoxio operations, string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body)
+            public static void Deleteentityfromadoxiolegalentities(this IAdoxiolegalentitiesadoxio operations, string adoxioLegalentityid, string ifMatch = default(string))
             {
-                operations.LegalentitiesAsync(adoxioLegalentityid, body).GetAwaiter().GetResult();
+                operations.DeleteentityfromadoxiolegalentitiesAsync(adoxioLegalentityid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in adoxio_legalentities
+            /// Delete entity from adoxio_legalentities
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -41,15 +41,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='adoxioLegalentityid'>
             /// key: adoxio_legalentityid
             /// </param>
-            /// <param name='body'>
-            /// New property values
+            /// <param name='ifMatch'>
+            /// ETag
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task LegalentitiesAsync(this IAdoxio operations, string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteentityfromadoxiolegalentitiesAsync(this IAdoxiolegalentitiesadoxio operations, string adoxioLegalentityid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.LegalentitiesWithHttpMessagesAsync(adoxioLegalentityid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteentityfromadoxiolegalentitiesWithHttpMessagesAsync(adoxioLegalentityid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

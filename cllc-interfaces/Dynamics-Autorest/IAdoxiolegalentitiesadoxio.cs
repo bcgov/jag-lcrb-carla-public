@@ -14,19 +14,18 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Accounts operations.
+    /// Adoxiolegalentitiesadoxio operations.
     /// </summary>
-    public partial interface IAccounts
+    public partial interface IAdoxiolegalentitiesadoxio
     {
         /// <summary>
-        /// Add new entity to accounts
+        /// Delete entity from adoxio_legalentities
         /// </summary>
-        /// <param name='body'>
-        /// New entity
+        /// <param name='adoxioLegalentityid'>
+        /// key: adoxio_legalentityid
         /// </param>
-        /// <param name='prefer'>
-        /// Required in order for the service to return a JSON representation
-        /// of the object.
+        /// <param name='ifMatch'>
+        /// ETag
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -37,12 +36,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="OdataerrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMaccount>> AddnewentitytoaccountsWithHttpMessagesAsync(MicrosoftDynamicsCRMaccount body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteentityfromadoxiolegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
