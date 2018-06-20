@@ -3,11 +3,9 @@
 
 <div class="example-container mat-elevation-z0">
 
-  <div class="spinner-container" *ngIf="!dataLoaded">
-    <mat-spinner></mat-spinner>
-  </div>
+  <div [ngBusy]="busy">
 
-  <div *ngIf="dataLoaded">
+  <div>
     <mat-table #table [dataSource]="dataSource">
 
       <!-- Column -->
@@ -58,9 +56,7 @@
   <a class="btn btn-primary" tabindex="1" (click)="openOrganizationDialog()"><strong>Add Organization</strong><br></a>
 </div>
 
-<div class="spinner-container" *ngIf="!saveCompleted">
-  <mat-spinner></mat-spinner>
-</div>
+<div [ngBusy]="busy"></div>
 
 <br>
 <br>
