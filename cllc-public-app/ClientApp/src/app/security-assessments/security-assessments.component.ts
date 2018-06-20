@@ -3,6 +3,7 @@ import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-security-assessments',
@@ -15,9 +16,9 @@ export class SecurityAssessmentsComponent implements OnInit {
 
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
-  public dataLoaded;
   displayedColumns = ['sendConsentRequest', 'firstname', 'lastname', 'email', 'position', 'emailsent'];
-  consentCompleted: boolean = true;
+  busy: Promise<any>;
+  busyObsv: Subscription;
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public toastr: ToastsManager,
           vcr: ViewContainerRef) {
@@ -29,14 +30,13 @@ export class SecurityAssessmentsComponent implements OnInit {
   }
 
   getDirectorsAndOfficersAndShareholders() {
-    this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer-shareholder")
+    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer-shareholder")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition(\"director-officer-shareholder\"): ", data);
         data.forEach((entry) => {
           entry.sendConsentRequest = false;
         });
         this.dataSource.data = data;
-        this.dataLoaded = true;
       });
   }
 
@@ -52,16 +52,12 @@ export class SecurityAssessmentsComponent implements OnInit {
     });
 
     if (consentRequestList) {
-      this.consentCompleted = false;
-      this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
+      this.busyObsv = this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
         .subscribe(
         res => {
-          this.consentCompleted = true;
           this.toastr.success('Consent Request(s) Sent ', 'Success!');
         },
           err => {
-            this.consentCompleted = true;
-            //console.log("Error occured");
             this.handleError(err);
           }
       );

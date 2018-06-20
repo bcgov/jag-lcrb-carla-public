@@ -1,13 +1,12 @@
 <h1>Directors and Officers</h1>
 <p>Enter all directors and officers for the corporation</p>
 
+<div [ngBusy]="busy"></div>
+<div [ngBusy]="busyObsv"></div>
+
 <div class="example-container mat-elevation-z0">
 
-  <div class="spinner-container" *ngIf="!dataLoaded">
-    <mat-spinner></mat-spinner>
-  </div>
-
-  <div *ngIf="dataLoaded">
+  <div>
     <mat-table #table [dataSource]="dataSource">
 
       <!-- Column -->
@@ -45,7 +44,5 @@
 <div class="col-md-10 row" style="margin-bottom: 5px;">
   <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
 </div>
-<div class="spinner-container" *ngIf="!saveCompleted">
-  <mat-spinner></mat-spinner>
-</div>
+
 
