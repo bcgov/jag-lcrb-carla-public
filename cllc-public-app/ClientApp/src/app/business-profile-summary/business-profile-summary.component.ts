@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-//import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
-//import { AdoxioLicense } from '../models/adoxio-license.model';
+
+export class ProfileSummary {
+  name: string;
+  legalentitytype: string;
+  profileComplete: boolean;
+}
 
 @Component({
   selector: 'app-business-profile-summary',
@@ -15,7 +19,8 @@ export class BusinessProfileSummaryComponent implements OnInit {
   public dataLoaded;
 
   displayedColumns = ['organization', 'businessRelationship', 'profileComplete'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<ProfileSummary>();
+  profileSummaryList: ProfileSummary[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -29,37 +34,36 @@ export class BusinessProfileSummaryComponent implements OnInit {
   constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService) { }
 
   ngOnInit() {
-
     this.getBusinessProfileData();
-    //this.dataSource.data = this.getBusinessProfileData();
-    //console.log("this.dataSource.data:", this.dataSource.data);
-    //this.dataLoaded = true;
-    //setTimeout(() => {
-    //  this.dataSource.paginator = this.paginator;
-    //  this.dataSource.sort = this.sort;
-    //});
-
   }
 
-  getBusinessProfileData() : any {
-    //let summary1 = { "organization": "ACME Inc", "businessRelationship": "Applicant Company", "profileComplete": "No" };
-    //let summary2 = { "organization": "LJHR Inc", "businessRelationship": "Shareholder Company", "profileComplete": "No" };
-    //let summary: any[] = [];
-    //summary.push(summary1);
-    //summary.push(summary2);
-    //console.log("summary: ", summary);
-    //return summary;
-
+  getBusinessProfileData() {
     this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
       res => {
-        let data: any = res.json();
+        let data = res.json();
         console.log("getBusinessProfileSummary():", data);
-        this.dataSource.data = data;
+        //debugger;
+        if (data) {
+          //Change Business Releationship label when 
+          data.forEach((entry) => {
+            let profileSummary = new ProfileSummary();
+            profileSummary.name = entry.name;
+            profileSummary.profileComplete = false;
+            if (entry.legalentitytype == 0) {
+              profileSummary.legalentitytype = "Applicant"
+            } else {
+              profileSummary.legalentitytype = entry.legalentitytype;
+            }
+            this.profileSummaryList.push(profileSummary);
+          });
+          console.log("this.profileSummaryList:", this.profileSummaryList);
+        }
+        this.dataSource.data = this.profileSummaryList;
         this.dataLoaded = true;
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-        });
+        }, 0);
       },
       err => {
         console.error("Error", err);
