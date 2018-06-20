@@ -1,10 +1,8 @@
 <h1>Corporate Details</h1>
 
-<div class="spinner-container" *ngIf="!dataLoaded">
-  <mat-spinner></mat-spinner>
-</div>
+<div [ngBusy]="busy"></div>
 
-<div *ngIf="dataLoaded">
+<div>
   <form [formGroup]='corporateDetailsForm' class="form-horizontal" (ngSubmit)="save()">
     <div class="">
       <section>
@@ -223,11 +221,6 @@
       <section>
         <button class="btn btn-primary" type="submit">Save</button>
       </section>
-      <div class="spinner-container" *ngIf="!saveCompleted">
-        <mat-spinner></mat-spinner>
-      </div>
-
-
     </div>
   </form>
 </div>

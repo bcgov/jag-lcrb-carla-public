@@ -2,7 +2,7 @@
 <div class="col-md-12"  *ngIf="componentLoaded">
   <h1>Business Profile</h1>
   <h2 *ngIf="currentUser">{{ currentUser.businessname }}</h2>
-  <div class="col-xs-3">
+  <div class="col-sm-3 col-md-2" style="padding-left: 0">
     <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
@@ -15,7 +15,7 @@
       <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Security Assessments</a></li>
     </ul>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-9 col-sm-9">
     <!-- Tab panes -->
     <div [hidden]="view_tab != 'tab-0'">
         <app-before-you-start></app-before-you-start>
@@ -36,7 +36,6 @@
         <app-financial-information [accountId]="accountId"></app-financial-information>
       </div>
       <div [hidden]="view_tab != 'tab-6'">
-        <h1>Security Assessment</h1>
         <app-security-assessments [accountId]="accountId"></app-security-assessments>
       </div>
       <p>&nbsp;</p>
