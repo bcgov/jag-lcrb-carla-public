@@ -83,6 +83,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<Adoxio_legalentity> legalEntities = null;
             String accountfilter = null;
+            String bpFilter = null;
+            String filter = null;
 
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -90,9 +92,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
+            bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
+            filter = accountfilter + " " + bpFilter;
 
             legalEntities = await _system.Adoxio_legalentities
-                        .AddQueryOption("$filter", accountfilter)
+                        .AddQueryOption("$filter", filter)
                         .ExecuteAsync();
 
             foreach (var legalEntity in legalEntities)

@@ -39,7 +39,7 @@
           <!-- Column -->
           <ng-container matColumnDef="profileComplete">
             <mat-header-cell mat-sort-header *matHeaderCellDef> Profile Complete </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.isindividual}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.profileComplete}} </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -47,8 +47,8 @@
         </mat-table>
 
         <mat-paginator #paginator
-                       [pageSize]="5"
-                       [pageSizeOptions]="[5, 10, 15]"
+                       [pageSize]="3"
+                       [pageSizeOptions]="[3, 5, 10]"
                        [showFirstLastButtons]="true">
         </mat-paginator>
       </div>
