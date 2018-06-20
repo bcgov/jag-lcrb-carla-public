@@ -181,8 +181,8 @@ namespace Gov.Lclb.Cllb.Public
                     var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
                     task.Wait();
                     authenticationResult = task.Result;
-
-                    serviceClientCredentials = new TokenCredentials(task.Result.AccessToken, task.Result.AccessTokenType);                    
+                    string token = authenticationResult.CreateAuthorizationHeader().Substring("Bearer ".Length);
+                    serviceClientCredentials = new TokenCredentials(token);                    
                 }
                 else
                 {
@@ -194,7 +194,7 @@ namespace Gov.Lclb.Cllb.Public
                 }
                                 
                 IDynamicsClient client = new DynamicsClient(new Uri(Configuration["DYNAMICS_ODATA_URI"]), serviceClientCredentials);
-                
+
                 return client;
             }));
 

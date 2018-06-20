@@ -30,11 +30,11 @@ You can use this tool to convert from Openapi V3 to V2.  Autorest currently requ
 ```
 
 @IF EXIST "%~dp0\node.exe" (
-  "%~dp0\node.exe" "--max-old-space-size=8192" "%~dp0\node_modules\autorest\dist\app.js" %*
+  "%~dp0\node.exe" "--max-old-space-size=4096" "%~dp0\node_modules\autorest\dist\app.js" %*
 ) ELSE (
   @SETLOCAL
   @SET PATHEXT=%PATHEXT:;.JS;=;%
-  node --max-old-space-size=8192 "%~dp0\node_modules\autorest\dist\app.js" %*
+  node --max-old-space-size=4096 "%~dp0\node_modules\autorest\dist\app.js" %*
 )
 ```
 
@@ -59,6 +59,6 @@ use Odata.OpenAPI to convert the file
 5. Use this file as an input to autorest.
 
 ```
-ag-lclb-cllc-public\cllc-interfaces>autorest --verbose --input-file=dynamics-2.1.json --output-folder=Dynamics-Autorest  --csharp --use-datetimeoffset --generate-empty-classes --override-client-name=DynamicsClient  --namespace=Gov.Lclb.Cllb.Interfaces --preview --credentials
+autorest --verbose --input-file=dynamics-2.1.json --output-folder=Dynamics-Autorest  --csharp --use-datetimeoffset --generate-empty-classes --override-client-name=DynamicsClient  --namespace=Gov.Lclb.Cllb.Interfaces --preview  --add-credentials
 ```
 
