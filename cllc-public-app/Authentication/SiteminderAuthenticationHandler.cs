@@ -212,7 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
 
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
-                
+
                 UserSettings userSettings = new UserSettings();
                 string userId = null;
                 string siteMinderGuid = "";
@@ -238,7 +238,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                     if (string.IsNullOrEmpty(temp)) // could be an automated test user.
                     {
-                        temp = context.Request.Headers["DEV-USER"];                        
+                        temp = context.Request.Headers["DEV-USER"];
                     }
 
                     if (!string.IsNullOrEmpty(temp))
@@ -257,12 +257,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     _logger.LogInformation("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
-					_logger.LogError("UserSettings found: " + userSettings.GetJson());
+                    _logger.LogError("UserSettings found: " + userSettings.GetJson());
                 }
                 catch
                 {
-					//do nothing
-					_logger.LogError("No UserSettings found");
+                    //do nothing
+                    _logger.LogError("No UserSettings found");
                 }
 
                 // is user authenticated - if so we're done
@@ -307,11 +307,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     siteMinderGuid = context.Request.Headers[options.SiteMinderUserGuidKey];
                     siteMinderBusinessGuid = context.Request.Headers[options.SiteMinderBusinessGuidKey];
                     siteMinderUserType = context.Request.Headers[options.SiteMinderUserTypeKey];
-                    if (!String.IsNullOrEmpty(siteMinderUserType))
-                    {
-                        userSettings.AuthenticatedUser.SmAuthorizationDirectory = siteMinderUserType;
-                    }
-                    
+
 
                     // **************************************************
                     // Validate credentials
@@ -355,10 +351,15 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
+
                     _logger.LogError(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
+                if (userSettings.AuthenticatedUser != null && !String.IsNullOrEmpty(siteMinderUserType))
+                {
+                    userSettings.AuthenticatedUser.SmAuthorizationDirectory = siteMinderUserType;
+                }
                 // This line gets the various claims for the current user.
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
 
@@ -372,7 +373,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
                 userSettings.IsNewUserRegistration = (userSettings.AuthenticatedUser == null);
-               
+
                 // set other session info
                 userSettings.SiteMinderGuid = siteMinderGuid;
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
@@ -396,7 +397,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings.BusinessLegalName = userId + " TestBusiness";
                     userSettings.UserDisplayName = userId + " TestUser";
 
-					// add generated guids
+                    // add generated guids
                     userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
                     userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
 
@@ -407,10 +408,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         userSettings.ContactId = userSettings.SiteMinderGuid;
 
                         _logger.LogError("New user registration:" + userSettings.UserDisplayName);
-						_logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
-						_logger.LogError("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
-						_logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
-						_logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
+                        _logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
+                        _logger.LogError("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
+                        _logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
                     }
                     // Set account ID from authenticated user
                     else if (userSettings.AuthenticatedUser != null)
@@ -422,13 +423,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         }
                         if (string.IsNullOrEmpty(userSettings.ContactId))
                         {
-							userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
+                            userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
                         }
-						_logger.LogError("Returning user:" + userSettings.UserDisplayName);
-						_logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogError("Returning user:" + userSettings.UserDisplayName);
+                        _logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
                         _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
                     }
-                }                
+                }
 
                 // **************************************************
                 // Update user settings
