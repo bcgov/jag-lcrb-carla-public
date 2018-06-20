@@ -19,6 +19,8 @@ export class BceidConfirmationComponent {
   public showBceidUserContinue: boolean;
   confirmCompleted: boolean = true;
 
+  public corp: boolean;
+
     /** bceid-confirmation ctor */
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
 
@@ -33,6 +35,10 @@ export class BceidConfirmationComponent {
    confirmBceidAccountYes() {
     // confirm BCeID
     this.bceidConfirmAccount = true;
+  }
+
+  confirmCorp(){
+
   }
 
    confirmBceidAccountNo() {
