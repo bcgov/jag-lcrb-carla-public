@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }
 
-        /// <summary>        
+        /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
@@ -81,6 +81,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             Initialize();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the DynamicsClient class.
+        /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
         /// </param>
