@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         private static List<Claim> GetClaims(this User user)
         {
             List<Claim> claims = new List<Claim>();
-            if (user == null)
+            if (user == null ) //a user is only a new users if they are a BCeID user
             {
                 claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
             }
@@ -59,9 +59,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     claims.Add(new Claim(User.UseridClaim, user.ContactId.ToString()));
                 }                    
-                if (!string.IsNullOrEmpty(user.SmAuthorizationDirectory))
+                if (!string.IsNullOrEmpty(user.UserType))
                 {
-                    claims.Add(new Claim(User.UserTypeClaim, user.SmAuthorizationDirectory));
+                    claims.Add(new Claim(User.UserTypeClaim, user.UserType));
                 }
 
                 var permissions = user.GetActivePermissions().Select(p => new Claim(User.PermissionClaim, p.Code)).ToList();

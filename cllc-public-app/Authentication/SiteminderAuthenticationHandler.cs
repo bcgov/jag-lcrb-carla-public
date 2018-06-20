@@ -338,7 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         userSettings.UserDisplayName = userId + " TestUser";
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
                         siteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
-                        siteMinderUserType = "BCeID";
+                        siteMinderUserType = "Business";
                     }
                 }
 
@@ -358,7 +358,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (userSettings.AuthenticatedUser != null && !String.IsNullOrEmpty(siteMinderUserType))
                 {
-                    userSettings.AuthenticatedUser.SmAuthorizationDirectory = siteMinderUserType;
+                    userSettings.AuthenticatedUser.UserType = siteMinderUserType;
                 }
                 // This line gets the various claims for the current user.
                 ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);

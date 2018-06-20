@@ -14,14 +14,12 @@ import { AdoxioLicense } from '../models/adoxio-license.model';
   styleUrls: ['./license-application-summary.component.css']
 })
 export class LicenseApplicationSummaryComponent implements OnInit {
-
-  public dataLoaded;
-
   displayedColumns = ['establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  busy: Promise<any>;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -37,7 +35,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   ngOnInit() {
     let licenseApplicationSummary: LicenseApplicationSummary[] = [];
 
-    Promise.all([
+    this.busy = Promise.all([
       this.adoxioApplicationDataService.getAdoxioApplications(),
       this.adoxioLicenseDataService.getAdoxioLicenses()
     ]).then(value => {
@@ -64,7 +62,6 @@ export class LicenseApplicationSummaryComponent implements OnInit {
       });
 
       this.dataSource.data = licenseApplicationSummary;
-      this.dataLoaded = true;
       //console.log(adoxioApplications);
       //console.log(adoxioLicenses);
       //console.log(this.dataSource.data);
