@@ -20,6 +20,34 @@
   </div>
   <div *ngIf="bceidConfirmAccount">
     <h1>Confirm Business BCeID Information</h1>
+    <p>What type of corporation is {{currentUser.businessname}}?</p>
+    <form name="myForm" ng-controller="ExampleController">
+        <label>
+          <input type="radio" ng-model="corp" value="private_corp">
+          Private corporation
+        </label><br/>
+        <label>
+          <input type="radio" ng-model="corp" ng-value="public_corp">
+          Public corporation
+        </label><br/>
+        <label>
+          <input type="radio" ng-model="corp" value="ulc">
+          Unlimited liability corporation
+        </label><br/>
+        <label>
+            <input type="radio" ng-model="corp" value="llc">
+            Limited liability corporation
+        </label><br/>
+        <div class="col-md-12 text-left" *ngIf="bceidConfirmAccount">
+          <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorp()"><strong>Next</strong><br></a>
+        </div>
+      </form>
+    
+
+
+  </div>
+  <div *ngIf="XXXXX">
+    <h1>Confirm Business BCeID Information</h1>
     <p>Are you {{currentUser.name}}?</p>
     <div class="row">
       <div class="col-md-12 text-left" *ngIf="!showBceidUserContinue">
