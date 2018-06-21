@@ -18,6 +18,82 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class ContactsExtensions
     {
             /// <summary>
+            /// Get entities from contacts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// Show only the first n items
+            /// </param>
+            /// <param name='skip'>
+            /// Skip only the first n items
+            /// </param>
+            /// <param name='search'>
+            /// Search items by search phrases
+            /// </param>
+            /// <param name='filter'>
+            /// Filter items by property values
+            /// </param>
+            /// <param name='count'>
+            /// Include count of items
+            /// </param>
+            /// <param name='orderby'>
+            /// Order items by property values
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static GetOKResponseModel Get(this IContacts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get entities from contacts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// Show only the first n items
+            /// </param>
+            /// <param name='skip'>
+            /// Skip only the first n items
+            /// </param>
+            /// <param name='search'>
+            /// Search items by search phrases
+            /// </param>
+            /// <param name='filter'>
+            /// Filter items by property values
+            /// </param>
+            /// <param name='count'>
+            /// Include count of items
+            /// </param>
+            /// <param name='orderby'>
+            /// Order items by property values
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<GetOKResponseModel> GetAsync(this IContacts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Add new entity to contacts
             /// </summary>
             /// <param name='operations'>
@@ -30,9 +106,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMcontact Addnewentitytocontacts(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMcontact Create(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation")
             {
-                return operations.AddnewentitytocontactsAsync(body, prefer).GetAwaiter().GetResult();
+                return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -51,9 +127,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMcontact> AddnewentitytocontactsAsync(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMcontact> CreateAsync(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.AddnewentitytocontactsWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -71,9 +147,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void Deleteentityfromcontacts(this IContacts operations, string contactid, string ifMatch = default(string))
+            public static void Delete(this IContacts operations, string contactid, string ifMatch = default(string))
             {
-                operations.DeleteentityfromcontactsAsync(contactid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(contactid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -91,9 +167,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteentityfromcontactsAsync(this IContacts operations, string contactid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IContacts operations, string contactid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteentityfromcontactsWithHttpMessagesAsync(contactid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(contactid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -111,9 +187,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMcontact Getentityfromcontactsbykey(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMcontact GetByKey(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetentityfromcontactsbykeyAsync(contactid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(contactid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -134,9 +210,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMcontact> GetentityfromcontactsbykeyAsync(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMcontact> GetByKeyAsync(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetentityfromcontactsbykeyWithHttpMessagesAsync(contactid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(contactid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -154,9 +230,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Updateentityincontacts(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body)
+            public static void Update(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body)
             {
-                operations.UpdateentityincontactsAsync(contactid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(contactid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -174,9 +250,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateentityincontactsAsync(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateentityincontactsWithHttpMessagesAsync(contactid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(contactid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

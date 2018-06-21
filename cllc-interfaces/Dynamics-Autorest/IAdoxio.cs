@@ -39,6 +39,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> LegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateentityinadoxiolegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

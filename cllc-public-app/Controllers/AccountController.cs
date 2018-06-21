@@ -213,7 +213,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 AdoxioIsindividual = 0,
                 AdoxioIsapplicant = true
             };
-            legalEntity = await _dynamicsClient.Adoxiolegalentities.AddnewentitytoadoxiolegalentitiesAsync(legalEntity);
+            legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
 
             account.Accountid = legalEntity._adoxioAccountValue;
             
@@ -224,7 +224,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // parent customer id relationship will be created using the method here:
                 //https://msdn.microsoft.com/en-us/library/mt607875.aspx
                 //userContact.ParentcustomeridAccount = new MicrosoftDynamicsCRMaccount() { Accountid = account.Accountid };
-                userContact = await _dynamicsClient.Contacts.AddnewentitytocontactsAsync(userContact);
+                userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
                 
             }
             else
@@ -347,10 +347,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // clean up dependant Legal Entity record when deleting the account
 				if (account.Adoxio_account_adoxio_legalentity_Account != null)
 				{
-					Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity legalentity = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, accountId);
+                    MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
 					if (legalentity != null)
 					{
-						_system.DeleteObject(legalentity);
+                        await _dynamicsClient.Adoxiolegalentities.DeleteAsync(accountId.ToString());
 					}
 				}
             

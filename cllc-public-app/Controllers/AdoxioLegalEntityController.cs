@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -24,12 +25,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration Configuration;
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
+        private readonly IDynamicsClient _dynamicsClient;
         private readonly SharePointFileManager _sharePointFileManager;
         private readonly string _encryptionKey;
         private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ILogger _logger;        
 
-		public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+		public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             this._system = context;
@@ -37,7 +39,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._sharePointFileManager = sharePointFileManager;
             this._encryptionKey = Configuration["ENCRYPTION_KEY"];
             this._httpContextAccessor = httpContextAccessor;
-			_logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
+            this._dynamicsClient = dynamicsClient;
+            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetDynamicsLegalEntities()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
-            IEnumerable<Adoxio_legalentity> legalEntities = null;
+            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String accountfilter = null;
 
             // get the current user.
@@ -60,9 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
 			_logger.LogError("Account filter = " + accountfilter);
 
-            legalEntities = await _system.Adoxio_legalentities
-                        .AddQueryOption("$filter", accountfilter)
-                        .ExecuteAsync();
+            legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: accountfilter);
 
             foreach (var legalEntity in legalEntities)
             {
@@ -83,7 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetDynamicsLegalEntitiesByPosition(string positionType)
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
-            IEnumerable<Adoxio_legalentity> legalEntities = null;
+            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String positionFilter = null;
             String accountfilter = null;
             String filter = null;
@@ -101,24 +102,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (positionType == null)
                 {
 					_logger.LogError("Account filter = " + filter);
-                    legalEntities = await _system.Adoxio_legalentities
-                        .AddQueryOption("$filter", filter)
-                        .ExecuteAsync();
+                    legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: accountfilter);
 
                 }
                 else
                 {
                     positionFilter = Models.Adoxio_LegalEntityExtensions.GetPositionFilter(positionType);
-					filter = accountfilter + " and " + positionFilter;
-                    //filter = positionFilter;
+					filter = accountfilter + " and " + positionFilter;                    
 
                     // Execute query if filter is valid
                     if (filter != null)
                     {
 						_logger.LogError("Account filter = " + filter);
-                        legalEntities = await _system.Adoxio_legalentities
-                        .AddQueryOption("$filter", filter)
-                        .ExecuteAsync();
+                        legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: filter);
                     }
                 }
             }
@@ -154,22 +150,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-			// query the Dynamics system to get the legal entity record.
-            Adoxio_legalentity legalEntity = null;
-            try
-            {
-				_logger.LogError("Find legal entity for applicant = " + userSettings.AccountId.ToString());
+            // query the Dynamics system to get the legal entity record.
+            MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
+            _logger.LogError("Find legal entity for applicant = " + userSettings.AccountId.ToString());
 
-				legalEntity = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, Guid.Parse(userSettings.AccountId));
-                result = legalEntity.ToViewModel();
-            }
-            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+			legalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            
+            if (legalEntity == null)            
             {
-                Console.WriteLine(dsqe.Message);
-                Console.WriteLine(dsqe.StackTrace);
                 return new NotFoundResult();
             }
-
+            result = legalEntity.ToViewModel();
             return Json(result);
         }
 
@@ -185,20 +176,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the legal entity record.
 
             Guid? adoxio_legalentityid = new Guid(id);
-            Adoxio_legalentity legalEntity = null;
-            if (adoxio_legalentityid != null)
+            MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
+            if (! string.IsNullOrEmpty(id))
             {
-                try
+                legalEntity = await _dynamicsClient.Adoxiolegalentities.GetByKeyAsync(adoxio_legalentityid.ToString());
+                if (legalEntity == null)
                 {
-                    legalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid: adoxio_legalentityid).GetValueAsync();
-                    result = legalEntity.ToViewModel();
-                }
-                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-                {
-                    Console.WriteLine(dsqe.Message);
-                    Console.WriteLine(dsqe.StackTrace);
                     return new NotFoundResult();
                 }
+                result = legalEntity.ToViewModel();                
             }
 
             return Json(result);
@@ -293,41 +279,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
-			// create a DataServiceCollection to add the record
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
 
             // create a new legal entity.
-            Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity adoxioLegalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
+            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
 
-			// add Dynamics LegalEntity to LegalEntity Collection
-            LegalEntityCollection.Add(adoxioLegalEntity);
 
 			// get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-			var userAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
+			var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
 
             // copy received values to Dynamics LegalEntity
-            // !!!! Values must be copied after adding to the collection, otherwise the entity will be created without the values assigned !!!!
-            adoxioLegalEntity.CopyValues(item, _system);
-			adoxioLegalEntity.Adoxio_Account = userAccount;
+            adoxioLegalEntity.CopyValues(item);
+			adoxioLegalEntity.AdoxioAccount = userAccount;
 
 			// TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
-			adoxioLegalEntity.Adoxio_LegalEntityOwned = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, Guid.Parse(userSettings.AccountId));
+			adoxioLegalEntity.AdoxioLegalEntityOwned = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
-            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);            
-            foreach (OperationResponse result in dsr)
-            {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
-            }
-            // get the primary key assigned by Dynamics.
-            adoxioLegalEntity.Adoxio_legalentityid = dsr.GetAssignedId();
+            // create the record.
 
+            adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
+            
             return Json(adoxioLegalEntity.ToViewModel());
         }
 
@@ -344,26 +317,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> LegalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
 
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
-            Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
+            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.GetByKeyAsync(adoxio_legalentityid.ToString());
 
-            _system.UpdateObject(adoxioLegalEntity);
             // copy values over from the data provided
-            adoxioLegalEntity.CopyValues(item, _system);
+            adoxioLegalEntity.CopyValues(item);
 
-            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-
-            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations); // SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset
-            foreach (OperationResponse result in dsr)
-            {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
-            }
+            await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxio_legalentityid.ToString(), adoxioLegalEntity);
             return Json(adoxioLegalEntity.ToViewModel());
         }
 
@@ -377,24 +339,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
-            try
-            {
-                Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
-                _system.DeleteObject(adoxioLegalEntity);
-				DataServiceResponse dsr = _system.SaveChangesSynchronous();
-                foreach (OperationResponse result in dsr)
-                {
-                    if (result.StatusCode == 500) // error
-                    {
-                        return StatusCode(500, result.Error.Message);
-                    }
-                }
-            }
-            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-            {
-                return new NotFoundResult();
-            }
-
+            await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());                
+            
             return NoContent(); // 204
         }
         /// <summary>
