@@ -231,7 +231,7 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
            
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword));
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, ssgUsername, ssgPassword));
 
             // add BCeID Web Services
 
