@@ -27,6 +27,7 @@ export class FileUploaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUploadedFileData();
   }
 
   public files: FileSystemItem[] = [];
@@ -34,6 +35,7 @@ export class FileUploaderComponent implements OnInit {
 
   public dropped(event: UploadEvent) {
     let files = event.files;
+
     for (var droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         let fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -69,7 +71,7 @@ export class FileUploaderComponent implements OnInit {
     const headers = new Headers({
       //'Content-Type': 'multipart/form-data'
     })
-    this.http.get(`api/AdoxioLegalEntity/${this.accountId}/attachments`, { headers: headers })
+    this.http.get(`api/AdoxioLegalEntity/${this.accountId}/attachments/${this.documentType}`, { headers: headers })
       .map((data: Response) => { return <FileSystemItem[]>data.json() })
       .subscribe((data) => {
         this.files = data;

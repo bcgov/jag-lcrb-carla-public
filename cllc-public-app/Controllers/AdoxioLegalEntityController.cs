@@ -74,6 +74,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
+        /// Get all Dynamics Legal Entities for the current Business Profile Summary
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpGet("business-profile-summary")]
+        public async Task<JsonResult> GetBusinessProfileSummary()
+        {
+            List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
+            IEnumerable<Adoxio_legalentity> legalEntities = null;
+            String accountfilter = null;
+            String bpFilter = null;
+            String filter = null;
+
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // set account filter
+            accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
+            bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
+            filter = accountfilter + " " + bpFilter;
+
+            legalEntities = await _system.Adoxio_legalentities
+                        .AddQueryOption("$filter", filter)
+                        .ExecuteAsync();
+
+            foreach (var legalEntity in legalEntities)
+            {
+                result.Add(legalEntity.ToViewModel());
+            }
+
+            return Json(result);
+        }
+
+        /// <summary>
         /// Get all Legal Entities where the position matches the parameter received
         /// By default, the account linked to the current user is used
         /// </summary>
@@ -202,23 +237,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         // get a list of files associated with this legal entity.
-        [HttpGet("{id}/attachments")]
-        public async Task<IActionResult> GetFiles([FromRoute] string id)
+        [HttpGet("{accountId}/attachments/{documentType}")]
+        public async Task<IActionResult> GetFiles([FromRoute] string accountId, [FromRoute] string documentType)
         {
             List<ViewModels.FileSystemItem> result = new List<ViewModels.FileSystemItem>();
             // get the LegalEntity.
             Adoxio_legalentity legalEntity = null;
 
-            if (id != null)
+            if (accountId != null)
             {
-                Guid adoxio_legalentityid = new Guid(id);
                 try
                 {
-                    legalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid: adoxio_legalentityid).GetValueAsync();
-                    string sanitized = legalEntity.Adoxio_name.Replace(" ", "_");
-                    string folder_name = "LegalEntity_Files_" + sanitized;
+                    var accountGUID = new Guid(accountId);
+                    var account = await _system.Accounts.ByKey(accountid: accountGUID).GetValueAsync();
+                    
+                    var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
+                    string folderName = $"{account.Name}_{accountIdCleaned}";
                     // Get the folder contents for this Legal Entity.
-                    List<MS.FileServices.FileSystemItem> items = await _sharePointFileManager.GetFilesInFolder("Documents", folder_name);
+                    List<MS.FileServices.FileSystemItem> items = await _sharePointFileManager.GetFilesInFolder("Accounts", folderName);
+                    items = items.Where(i => i.Name.EndsWith(documentType)).ToList();
                     foreach (MS.FileServices.FileSystemItem item in items)
                     {
                         result.Add(item.ToViewModel());
@@ -242,11 +279,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (accountId != null)
             {
-                // Guid adoxio_legalentityid = new Guid(accountId);
                 try
                 {
                     var accountGUID = new Guid(accountId);
-                     var account = await _system.Accounts.ByKey(accountid: accountGUID).GetValueAsync();
+                    var account = await _system.Accounts.ByKey(accountid: accountGUID).GetValueAsync();
 
                     string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
                     var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
