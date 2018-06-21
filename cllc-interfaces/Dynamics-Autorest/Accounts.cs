@@ -468,7 +468,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "accounts('{accountid}')").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "accounts({accountid})").ToString();
             _url = _url.Replace("{accountid}", System.Uri.EscapeDataString(accountid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -614,7 +614,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "accounts('{accountid}')").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "accounts({accountid})").ToString();
             _url = _url.Replace("{accountid}", System.Uri.EscapeDataString(accountid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
@@ -780,7 +780,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "accounts('{accountid}')").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "accounts({accountid})").ToString();
             _url = _url.Replace("{accountid}", System.Uri.EscapeDataString(accountid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
