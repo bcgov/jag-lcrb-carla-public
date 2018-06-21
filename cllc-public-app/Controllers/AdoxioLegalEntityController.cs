@@ -432,7 +432,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
 
-            result += "/security-consent/" + parentId + "/" + individualId + "?code=";
+            result += "/bcservice?path=/security-consent/" + parentId + "/" + individualId + "?code=";
 
             // create a newsletter confirmation object.
 
