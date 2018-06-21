@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
+import { Subscription } from 'rxjs';
 
 export class ProfileSummary {
   name: string;
@@ -21,6 +22,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
   displayedColumns = ['organization', 'businessRelationship', 'profileComplete'];
   dataSource = new MatTableDataSource<ProfileSummary>();
   profileSummaryList: ProfileSummary[] = [];
+  busy: Subscription;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -38,11 +40,10 @@ export class BusinessProfileSummaryComponent implements OnInit {
   }
 
   getBusinessProfileData() {
-    this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
+    this.busy = this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
       res => {
         let data = res.json();
-        console.log("getBusinessProfileSummary():", data);
-        //debugger;
+        //console.log("getBusinessProfileSummary():", data);
         if (data) {
           //Change Business Releationship label when 
           data.forEach((entry) => {
@@ -56,7 +57,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
             }
             this.profileSummaryList.push(profileSummary);
           });
-          console.log("this.profileSummaryList:", this.profileSummaryList);
+          //console.log("this.profileSummaryList:", this.profileSummaryList);
         }
         this.dataSource.data = this.profileSummaryList;
         this.dataLoaded = true;
