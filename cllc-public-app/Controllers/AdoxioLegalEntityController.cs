@@ -255,7 +255,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     string folderName = $"{account.Name}_{accountIdCleaned}";
                     // Get the folder contents for this Legal Entity.
                     List<MS.FileServices.FileSystemItem> items = await _sharePointFileManager.GetFilesInFolder("Accounts", folderName);
-                    items = items.Where(i => i.Name.EndsWith(documentType)).ToList();
+                    // TODO FIX
+					//items = items.Where(i => i.Name.EndsWith(documentType)).ToList();
                     foreach (MS.FileServices.FileSystemItem item in items)
                     {
                         result.Add(item.ToViewModel());
