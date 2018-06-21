@@ -22,7 +22,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
     /// </summary>
     public class SiteMinderAuthOptions : AuthenticationSchemeOptions
     {
-        private const string ConstDevAuthenticationTokenKey = "DEV-USER";
+		private const string ConstDevAuthenticationTokenKey = "DEV-USER";
+		private const string ConstDevBCSCAuthenticationTokenKey = "DEV-BCSC-USER";
         private const string ConstDevDefaultUserId = "TMcTesterson";       
         private const string ConstSiteMinderUserGuidKey = "smgov_userguid"; //deprecated -- smgov_useridentifier
         private const string ConstSiteMinderUserIdentifierKey = "smgov_useridentifier";
@@ -66,6 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             InactivegDbUserIdError = ConstInactivegDbUserIdError;
             InvalidPermissions = ConstInvalidPermissions;
             DevAuthenticationTokenKey = ConstDevAuthenticationTokenKey;
+			DevBCSCAuthenticationTokenKey = ConstDevBCSCAuthenticationTokenKey;
             DevDefaultUserId = ConstDevDefaultUserId;
 
         }        
@@ -147,6 +149,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// </summary>
         public string DevAuthenticationTokenKey { get; set; }
 
+		/// <summary>
+        /// Development Environment Authentication Key
+        /// </summary>
+        public string DevBCSCAuthenticationTokenKey { get; set; }
+
         /// <summary>
         /// Development Environment efault UserId
         /// </summary>
@@ -202,6 +209,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                   
             SiteMinderAuthOptions options = new SiteMinderAuthOptions();
             bool isDeveloperLogin = false;
+			bool isBCSCDeveloperLogin = false;
             try
             {
                 ClaimsPrincipal principal;
@@ -234,6 +242,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 if (!hostingEnv.IsProduction())
                 {
+                    // check for a fake BCeID login in dev mode
                     string temp = context.Request.Cookies[options.DevAuthenticationTokenKey];
 
                     if (string.IsNullOrEmpty(temp)) // could be an automated test user.
@@ -247,7 +256,25 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         isDeveloperLogin = true;
 
                         _logger.LogError("Got user from dev cookie = " + userId);
-                    }
+					} 
+					else 
+					{
+                        // same set of tests for a BC Services Card dev login
+						temp = context.Request.Cookies[options.DevBCSCAuthenticationTokenKey];
+
+                        if (string.IsNullOrEmpty(temp)) // could be an automated test user.
+                        {
+                            temp = context.Request.Headers["DEV-BCSC-USER"];
+                        }
+
+						if (!string.IsNullOrEmpty(temp))
+						{
+							userId = temp;
+							isBCSCDeveloperLogin = true;
+
+							_logger.LogError("Got user from dev cookie = " + userId);
+						}
+					}
                 }
 
                 // **************************************************
@@ -339,7 +366,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
                         siteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
                         siteMinderUserType = "Business";
-                    }
+					} else if (isBCSCDeveloperLogin) {
+						_logger.LogError("Generating a Development BC Services user");
+                        userSettings.BusinessLegalName = "";
+                        userSettings.UserDisplayName = userId;
+                        siteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
+                        siteMinderUserType = "BC Services Card";
+					}
                 }
 
                 // Previously the code would do a database lookup here.  However there is no backing database for the users table now,
@@ -378,6 +411,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.SiteMinderGuid = siteMinderGuid;
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
                 _logger.LogError("Before getting contact and account ids = " + userSettings.GetJson());
+
                 if (userSettings.AuthenticatedUser != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
@@ -430,6 +464,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
                     }
                 }
+				else if (!hostingEnv.IsProduction() && isBCSCDeveloperLogin)
+				{
+
+				}
 
                 // **************************************************
                 // Update user settings
