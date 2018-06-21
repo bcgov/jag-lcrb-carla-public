@@ -19,7 +19,7 @@ export class BceidConfirmationComponent {
   public showBceidUserContinue: boolean;
   confirmCompleted: boolean = true;
 
-  public corp: boolean;
+  public corp: string;
 
     /** bceid-confirmation ctor */
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
@@ -37,8 +37,9 @@ export class BceidConfirmationComponent {
     this.bceidConfirmAccount = true;
   }
 
-  confirmCorp(){
-
+  confirmCorperation(){
+    // Hook up to radio buttons
+    this.corp = "Private corporation" 
   }
 
    confirmBceidAccountNo() {
