@@ -1,16 +1,10 @@
-<!--<h1>Business Profile</h1>
-<hr />
-<p>Your business profile represents all the legal entities that make up your organizations structure</p>-->
 <mat-card>
 
-  <!--<div class="example-container mat-elevation-z0">-->
     <mat-card-title><h1>Business Profile</h1></mat-card-title>
     <mat-card-subtitle><p>Your business profile represents all the legal entities that make up your organizations structure</p></mat-card-subtitle>
     <mat-card>
 
-      <div class="spinner-container" style="padding: 2em;" *ngIf="!dataLoaded">
-        <mat-spinner></mat-spinner>
-      </div>
+      <div [ngBusy]="busy"></div>
 
       <div *ngIf="dataSource.data.length == 0 && dataLoaded ">No business profile has been started</div>
 
@@ -53,5 +47,4 @@
         </mat-paginator>
       </div>
     </mat-card>
-  <!--</div>-->
 </mat-card>
