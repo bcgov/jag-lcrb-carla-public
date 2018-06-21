@@ -152,7 +152,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
 
             // name should match.
-            Assert.Equal(initialName, responseViewModel.name);
+            Assert.Equal(firstName + " " + lastName, responseViewModel.name);
             var newId = responseViewModel.id;
             
             // R - Read
@@ -162,11 +162,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 			jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
-            Assert.Equal(initialName, responseViewModel.name);
+            Assert.Equal(firstName + " " + lastName, responseViewModel.name);
             //return;
 
             // U - Update            
-            vmAdoxioLegalEntity.name = changedName;
+            vmAdoxioLegalEntity.firstname = changedName;
             vmAdoxioLegalEntity.id = responseViewModel.id;
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + newId)
             {
@@ -186,7 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
 
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
-            Assert.Equal(changedName, responseViewModel.name);
+            Assert.Equal(changedName, responseViewModel.firstname);
 
             // D - Delete
 
