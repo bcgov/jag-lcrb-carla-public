@@ -18,42 +18,26 @@
       </div>
     </div>
   </div>
-  <div *ngIf="bceidConfirmAccount">
+
+  <div *ngIf="bceidConfirmAccount && corp==undefined">
     <h1>Confirm Business BCeID Information</h1>
     <p>What type of corporation is {{currentUser.businessname}}?</p>
-    <form name="myForm" ng-controller="ExampleController">
-        <label>
-          <input type="radio" ng-model="corp" value="private_corp">
-          Private corporation
-        </label><br/>
-        <label>
-          <input type="radio" ng-model="corp" ng-value="public_corp">
-          Public corporation
-        </label><br/>
-        <label>
-          <input type="radio" ng-model="corp" value="ulc">
-          Unlimited liability corporation
-        </label><br/>
-        <label>
-            <input type="radio" ng-model="corp" value="llc">
-            Limited liability corporation
-        </label><br/>
-        <div class="col-md-12 text-left" *ngIf="bceidConfirmAccount">
-          <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorp()"><strong>Next</strong><br></a>
-        </div>
-      </form>
+    <input name="options" ng-control="options" type="radio" [value]="1"  [(ngModel)]="model.options" > Private corporation<br/>
+    <input name="options" ng-control="options" type="radio" [value]="2" [(ngModel)]="model.options" > Public corporation<br/>
+    <input name="options" ng-control="options" type="radio" [value]="3"  [(ngModel)]="model.options" > Unlimited liability corporation<br/>
+    <input name="options" ng-control="options" type="radio" [value]="4" [(ngModel)]="model.options" > Limited liability corporation<br/>
     
-
-
+    <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorperation()"><strong>Next</strong><br></a>
   </div>
-  <div *ngIf="XXXXX">
+
+  <div *ngIf="corp!==undefined">
     <h1>Confirm Business BCeID Information</h1>
     <p>Are you {{currentUser.name}}?</p>
     <div class="row">
       <div class="col-md-12 text-left" *ngIf="!showBceidUserContinue">
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactYes()"><strong>Yes</strong></a>
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactNo()"><strong>No</strong></a>
-        <br>
+          <br>
         <div class="spinner-container" *ngIf="!confirmCompleted">
           <mat-spinner></mat-spinner>
         </div>
