@@ -485,11 +485,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> SendConsentRequests(string id, [FromBody] List<string> recipientIds)
         {
             // start by getting the record for the current legal entity.
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
+			MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
             try
             {
+                // TODO verify that this is the current user's legal entity
                 Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
 
                 // now get each of the supplied ids and send an email to them.
@@ -499,6 +505,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     Guid recipientIdGuid = new Guid(recipientId);
                     try
                     {
+                        // TODO verify that each recipient is part of the current user's user set
+                        // TODO switch over to new AuthAPI framework
                         Adoxio_legalentity recipientEntity = await _system.Adoxio_legalentities.ByKey(recipientIdGuid).GetValueAsync();
                         string email = recipientEntity.Adoxio_email;
                         string firstname = recipientEntity.Adoxio_firstname;
@@ -519,11 +527,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         message.Subject = "BC LCLB Cannabis Licensing Security Consent";
                         message.Body = body;
                         message.IsBodyHtml = true;
-                        //client.Send(message);
+                        client.Send(message);
+
+						// save the consent link and the fact that the email has been sent
+						recipientEntity.Adoxio_dateemailsent = DateTime.Now;
+						//await _dynamicsClient.Adoxiolegalentities.UpdateAsync(recipientEntity.Adoxio_legalentityid, recipientEntity);
                     }
                     catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
                     {
-                        // ignore any not found errors.
+						// ignore any not found errors.
+						_logger.LogError(dsqe.Message);
+						_logger.LogError(dsqe.StackTrace);
                     }
 
                 }
