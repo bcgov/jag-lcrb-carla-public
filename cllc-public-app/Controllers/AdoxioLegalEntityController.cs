@@ -225,7 +225,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                Guid adoxio_legalentityid = new Guid(id);
+				// get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+				Guid adoxio_legalentityid = new Guid(id);
                 MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
                 if (adoxioLegalEntity == null)
                 {
@@ -244,6 +248,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<ViewModels.FileSystemItem> result = new List<ViewModels.FileSystemItem>();
             // get the LegalEntity.
             Adoxio_legalentity legalEntity = null;
+
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             if (accountId != null)
             {
@@ -264,6 +272,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
                 {
+					_logger.LogError(dsqe.Message);
+                    _logger.LogError(dsqe.StackTrace);
                     return new NotFoundResult();
                 }
             }
@@ -278,7 +288,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the LegalEntity.
             // Adoxio_legalentity legalEntity = null;
 
-            if (accountId != null)
+			// get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+			if (accountId != null)
             {
                 try
                 {
@@ -293,6 +307,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Exception dsqe)
                 {
+					_logger.LogError(dsqe.Message);
+					_logger.LogError(dsqe.StackTrace);
                     return new NotFoundResult();
                 }
             }
