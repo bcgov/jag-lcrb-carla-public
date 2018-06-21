@@ -26,14 +26,14 @@
     </div>
   </header>
 
-  <div *ngIf="currentUser && currentUser.isNewUser == true">
+  <div *ngIf="currentUser && currentUser.businessname && currentUser.isNewUser == true">
     <main class="app-content">
       <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
     </main>
   </div>
 
 
-  <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true)">
+  <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname)">
     <!-- /NAVBAR -->
     <div class="navigationRibbon" *ngIf="!currentUser">
       <div class="level2Navigation">
