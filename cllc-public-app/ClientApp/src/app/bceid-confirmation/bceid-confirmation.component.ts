@@ -4,6 +4,7 @@ import { DynamicsDataService } from "../services/dynamics-data.service";
 import { DynamicsAccount } from "../models/dynamics-account.model";
 import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
+import { ReadVarExpr } from '@angular/compiler';
 
 @Component({
     selector: 'app-bceid-confirmation',
@@ -19,7 +20,7 @@ export class BceidConfirmationComponent {
   public showBceidUserContinue: boolean;
   busy: Promise<any>;
 
-  public corp: string;
+  public corp: number;
 
     /** bceid-confirmation ctor */
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
@@ -38,8 +39,7 @@ export class BceidConfirmationComponent {
   }
 
   confirmCorperation(){
-    // Hook up to radio buttons
-    this.corp = "Private corporation" 
+    
   }
 
    confirmBceidAccountNo() {
@@ -62,6 +62,7 @@ export class BceidConfirmationComponent {
       contact.fullname = this.currentUser.name;
       contact.id = this.currentUser.contactid;
       account.primarycontact = contact;
+      account.adoxio_businesstype = this.corp;
 
       var payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
