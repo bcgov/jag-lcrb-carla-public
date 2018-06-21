@@ -17,6 +17,13 @@ namespace Gov.Lclb.Cllb.Interfaces
 {
     public static class DynamicsExtensions
     {
+
+        public static string GetEntityURI(this IDynamicsClient client, string entityType, string id)
+        {
+            string result = "";
+            result = client.BaseUri + entityType + "(" + id + ")";
+            return result;
+        }
 		/// <summary>
         /// Utility method to call Dynamics <see langword="async"/>, with a delay to compensate for timing issues.
         /// </summary>
@@ -430,13 +437,50 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountById(this IDynamicsClient system, Guid id)
         {
-            MicrosoftDynamicsCRMaccount result = null;
-
-            // fetch from Dynamics.
-            //result = await system.Accounts.ByKey(id).GetValueAsync();
-            
+            MicrosoftDynamicsCRMaccount result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Accounts.GetByKeyAsync(id.ToString());
+            }            
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                result = null;
+            }
             return result;
         }
+
+        public static async Task<MicrosoftDynamicsCRMadoxioLegalentity> GetLegalEntityById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioLegalentity result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Adoxiolegalentities.GetByKeyAsync(id.ToString());
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                result = null;
+            }
+            return result;
+        }
+
+
+        public static async Task<MicrosoftDynamicsCRMcontact> GetContactById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMcontact result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Contacts.GetByKeyAsync(id.ToString());
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                result = null;
+            }
+            return result;
+        }
+
 
         /// <summary>
         /// Get a contact by their Guid
@@ -546,8 +590,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
 			string accountFilter = "_adoxio_account_value eq " + id.ToString();
 
-
-            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: accountFilter);
+            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value;
 
             result = legalEntities.FirstOrDefault();
             

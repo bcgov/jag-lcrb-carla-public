@@ -97,7 +97,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities('{adoxio_legalentityid}')").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities({adoxio_legalentityid})").ToString();
             _url = _url.Replace("{adoxio_legalentityid}", System.Uri.EscapeDataString(adoxioLegalentityid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();

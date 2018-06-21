@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
 			_logger.LogError("Account filter = " + accountfilter);
 
-            legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: accountfilter);
+            legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountfilter).Value;
 
             foreach (var legalEntity in legalEntities)
             {
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (positionType == null)
                 {
 					_logger.LogError("Account filter = " + filter);
-                    legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: accountfilter);
+                    legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountfilter).Value;
 
                 }
                 else
@@ -114,7 +114,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (filter != null)
                     {
 						_logger.LogError("Account filter = " + filter);
-                        legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: filter);
+                        legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value;
                     }
                 }
             }
@@ -160,7 +160,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
+            // fix the account.
+            
             result = legalEntity.ToViewModel();
+            
+            if (result.account == null)
+            {
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
+                result.account = account.ToViewModel();
+            }
+
             return Json(result);
         }
 
@@ -174,17 +183,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             ViewModels.AdoxioLegalEntity result = null;
             // query the Dynamics system to get the legal entity record.
-
-            Guid? adoxio_legalentityid = new Guid(id);
-            MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
-            if (! string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
-                legalEntity = await _dynamicsClient.Adoxiolegalentities.GetByKeyAsync(adoxio_legalentityid.ToString());
-                if (legalEntity == null)
+                return new NotFoundResult();
+            }
+            else
+            {
+                Guid adoxio_legalentityid = new Guid(id);
+                MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+                if (adoxioLegalEntity == null)
                 {
                     return new NotFoundResult();
-                }
-                result = legalEntity.ToViewModel();                
+                }                
+                result = adoxioLegalEntity.ToViewModel();                
             }
 
             return Json(result);
@@ -291,12 +302,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // copy received values to Dynamics LegalEntity
             adoxioLegalEntity.CopyValues(item);
-			adoxioLegalEntity.AdoxioAccount = userAccount;
+			adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", userAccount.Accountid);
 
-			// TODO take the default for now from the parent account's legal entity record
+            // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
-			adoxioLegalEntity.AdoxioLegalEntityOwned = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
-
+            MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntity.AdoxioLegalentityid);
             // create the record.
 
             adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
@@ -320,7 +331,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
-            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.GetByKeyAsync(adoxio_legalentityid.ToString());
+
+            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+            if (adoxioLegalEntity == null)
+            {
+                return new NotFoundResult();
+            }
+
+            // we are doing a patch, so wipe out the record.
+            adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
 
             // copy values over from the data provided
             adoxioLegalEntity.CopyValues(item);
@@ -339,6 +358,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
+            MicrosoftDynamicsCRMadoxioLegalentity legalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+            if (legalEntity == null)
+            {
+                return new NotFoundResult();
+            }
+
             await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());                
             
             return NoContent(); // 204

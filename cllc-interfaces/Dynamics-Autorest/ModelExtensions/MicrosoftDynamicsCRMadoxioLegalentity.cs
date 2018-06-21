@@ -11,13 +11,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMaccount
+    public partial class MicrosoftDynamicsCRMadoxioLegalentity
     {
         
+
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_account_adoxio_legalentity_Account@odata.bind")]
-        public string AdoxioAccountAdoxioLegalentityAccountODataBind { get; set; }
+        [JsonProperty(PropertyName = "adoxio_Account@odata.bind")]
+        public string AdoxioAccountValueODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_LegalEntityOwned@odata.bind")]
+        public string AdoxioLegalEntityOwnedODataBind { get; set; }
     }
 }

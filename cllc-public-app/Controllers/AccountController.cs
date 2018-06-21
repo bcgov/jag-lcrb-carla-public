@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using System.Net;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -232,8 +233,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fetch the account and get the created contact.
                 var a = await _system.GetAccountById(null, Guid.Parse(account.Accountid));
                 userContact.Contactid = a._primarycontactid_value.ToString();
-            }
-            
+            }           
+
 
             //await _dynamicsClient.Contacts.UpdateentityincontactsAsync(userContact.Contactid.ToString(), userContact);
 
@@ -334,42 +335,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-			// get the legal entity.
-            //Guid adoxio_legalentityid = new Guid(id);
             try
             {
-                Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
-				if (account == null)
-				{
-					return new NotFoundResult();
-				}
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                if (account == null)
+                {
+                    return new NotFoundResult();
+                }
 
                 // clean up dependant Legal Entity record when deleting the account
-				if (account.Adoxio_account_adoxio_legalentity_Account != null)
-				{
-                    MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
-					if (legalentity != null)
-					{
-                        await _dynamicsClient.Adoxiolegalentities.DeleteAsync(accountId.ToString());
-					}
-				}
-            
-                _system.DeleteObject(account);
-
-                DataServiceResponse dsr = _system.SaveChangesSynchronous();
-                foreach (OperationResponse result in dsr)
+                if (account.AdoxioAccountAdoxioLegalentityAccount != null)
                 {
-                    if (result.StatusCode == 500) // error
+                    MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
+                    if (legalentity != null)
                     {
-                        return StatusCode(500, result.Error.Message);
+                        await _dynamicsClient.Adoxiolegalentities.DeleteAsync(legalentity.AdoxioLegalentityid);
                     }
                 }
-            }
-            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-            {
-                return new NotFoundResult();
-            }
 
+                await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                if (ex.Response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return new NotFoundResult();
+                }
+                else
+                {
+                    return new BadRequestResult();
+                }
+            }
             return NoContent(); // 204
         }
 

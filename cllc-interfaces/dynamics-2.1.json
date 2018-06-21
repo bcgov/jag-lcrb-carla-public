@@ -788,7 +788,7 @@
         }
       }
     },
-    "/accounts('{accountid}')": {
+    "/accounts({accountid})": {
       "delete": {
         "tags": [
           "accounts"
@@ -1460,16 +1460,21 @@
           }
         ],
         "responses": {
-		
 		"200": {
-            "description": "Created entity",
-            "schema": {				
-					"type": "array",
-					"items": {
-							"$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
-					}			
+            "description": "Retrieved entities",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+                  },
+                  "type": "array"
                 }
-          },		         
+              },
+              "title": "Collection of legal entities",
+              "type": "object"
+            }
+          },		      
           "default": {
 			"description": "error",
 			"schema": {
@@ -1524,7 +1529,7 @@
         }
       }
     },
-    "/adoxio_legalentities('{adoxio_legalentityid}')": {	
+    "/adoxio_legalentities({adoxio_legalentityid})": {	
       "delete": {
         "tags": [
           "adoxio_legalentities"
@@ -2619,7 +2624,7 @@
         }
       }
     },
-    "/contacts('{contactid}')": {
+    "/contacts({contactid})": {
       "delete": {
         "tags": [
           "contacts"
