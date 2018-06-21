@@ -92,7 +92,9 @@ import { SecurityAssessmentsComponent } from './security-assessments/security-as
 import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
 import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
 import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
+import { BusinessProfileSummaryComponent } from './business-profile-summary/business-profile-summary.component';
 
+import {NgBusyModule} from 'ng-busy';
 
 @NgModule({
   declarations: [
@@ -132,7 +134,8 @@ import { FinancialInformationComponent } from './business-profile/tabs/financial
     DirectorAndOfficerPersonDialog,
     SecurityAssessmentsComponent,
     BeforeYouStartComponent,
-    FinancialInformationComponent
+    FinancialInformationComponent,
+    BusinessProfileSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -143,6 +146,7 @@ import { FinancialInformationComponent } from './business-profile/tabs/financial
     NgbModule.forRoot(),
     AdminModule,
     BrowserAnimationsModule,
+    NgBusyModule,
     CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
