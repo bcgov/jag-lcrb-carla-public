@@ -55,7 +55,7 @@ export class EditShareholdersComponent implements OnInit {
       adoxioLegalEntity.lastname = formData.lastName;
       adoxioLegalEntity.name = formData.firstName + " " + formData.lastName;
       adoxioLegalEntity.legalentitytype = "PrivateCorporation";
-      //adoxioLegalEntity.email = formData.email;
+      adoxioLegalEntity.email = formData.email;
     } else {
       adoxioLegalEntity.isindividual = false;
       adoxioLegalEntity.name = formData.organizationName;
