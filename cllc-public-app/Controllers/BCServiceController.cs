@@ -32,8 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet]
-        [Authorize] // enable this line after the appropriate changes to enable BC Service Card Login are done.
-
+        [Authorize] 
         public ActionResult BCServiceLogin(string path)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
@@ -67,7 +66,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 basePath += "/dashboard";
                 return Redirect(basePath);
             }
-            //return Redirect(path);
         }
     
 
@@ -91,5 +89,107 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return value.ToString();
         }
 
-    }
+		/// <summary>
+        /// Injects an authentication token cookie into the response for use with the 
+        /// SiteMinder authentication middleware
+        /// </summary>
+        [HttpGet]
+        [Route("token/{userid}")]
+        [AllowAnonymous]
+        public virtual IActionResult GetDevAuthenticationCookie(string userId)
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            if (string.IsNullOrEmpty(userId)) return BadRequest("Missing required userid query parameter.");
+
+            if (userId.ToLower() == "default")
+                userId = _options.DevDefaultUserId;
+
+            // clear session
+            HttpContext.Session.Clear();
+
+			// expire "dev" user cookie
+			string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
+            if (temp == null)
+            {
+                temp = "";
+            }
+            Response.Cookies.Append(
+                _options.DevAuthenticationTokenKey,
+                temp,
+                new CookieOptions
+                {
+                    Path = "/",
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.UtcNow.AddDays(-1)
+                }
+            );
+            // create new "dev" user cookie
+            Response.Cookies.Append(
+                _options.DevBCSCAuthenticationTokenKey,
+                userId,
+                new CookieOptions
+                {
+                    Path = "/",
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.UtcNow.AddDays(7)
+                }
+            );
+
+            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+            basePath += "/dashboard";
+            return Redirect(basePath);
+        }
+
+        /// <summary>
+        /// Clear out any existing dev authentication tokens
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("cleartoken")]
+        [AllowAnonymous]
+        public virtual IActionResult ClearDevAuthenticationCookie()
+        {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
+            string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
+            if (temp == null)
+            {
+                temp = "";
+            }
+            // clear session
+            HttpContext.Session.Clear();
+
+            // expire "dev" user cookie
+            Response.Cookies.Append(
+                _options.DevAuthenticationTokenKey,
+                temp,
+                new CookieOptions
+                {
+                    Path = "/",
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.UtcNow.AddDays(-1)
+                }
+            );
+			// expire "dev" user cookie
+			temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+            if (temp == null)
+            {
+                temp = "";
+            }
+            Response.Cookies.Append(
+                _options.DevBCSCAuthenticationTokenKey,
+                temp,
+                new CookieOptions
+                {
+                    Path = "/",
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.UtcNow.AddDays(-1)
+                }
+            );
+
+            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
+            return Redirect(basePath);
+        }
+	}
 }
