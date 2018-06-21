@@ -199,6 +199,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (account._primarycontactidValue == null) // we need to add the primary contact.
             {                
                 account.Primarycontactid = userContact;
+				// TODO figure out how to properly set these two values:
+				account.AdoxioAccounttype = 845280000;
+				account.AdoxioBusinesstype = 845280000;
                 createContact = false; // the contact will be created at the same time as the account.
             }
 

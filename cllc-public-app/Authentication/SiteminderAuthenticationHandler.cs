@@ -368,7 +368,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         siteMinderUserType = "Business";
 					} else if (isBCSCDeveloperLogin) {
 						_logger.LogError("Generating a Development BC Services user");
-                        userSettings.BusinessLegalName = "";
+						userSettings.BusinessLegalName = null;
                         userSettings.UserDisplayName = userId;
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
                         siteMinderUserType = "BC Services Card";
