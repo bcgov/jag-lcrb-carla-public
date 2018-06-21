@@ -34,9 +34,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet]
-        // remove this Route line, as it changes the behavior of the controller. 
-        // We need the controller to respond to a GET request on /login in order for SiteMinder logins to work
-        //[Route("headers")]
         [Authorize]
         public ActionResult Login(string path)
         {
@@ -108,12 +105,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userId.ToLower() == "default")
                 userId = _options.DevDefaultUserId;
 
-            string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
-
             // clear session
             HttpContext.Session.Clear();
 
-            // crearte new "dev" user cookie
+			// expire "dev" user cookie
+			string temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+            if (temp == null)
+            {
+                temp = "";
+            }
+            Response.Cookies.Append(
+                _options.DevBCSCAuthenticationTokenKey,
+                temp,
+                new CookieOptions
+                {
+                    Path = "/",
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.UtcNow.AddDays(-1)
+                }
+            );
+            // create new "dev" user cookie
             Response.Cookies.Append(
                 _options.DevAuthenticationTokenKey,
                 userId,
@@ -152,6 +163,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // expire "dev" user cookie
             Response.Cookies.Append(
                 _options.DevAuthenticationTokenKey,
+                temp,
+                new CookieOptions
+                {
+                    Path = "/",
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.UtcNow.AddDays(-1)
+                }
+            );
+			// expire "dev" user cookie
+			temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+            if (temp == null)
+            {
+                temp = "";
+            }
+            Response.Cookies.Append(
+                _options.DevBCSCAuthenticationTokenKey,
                 temp,
                 new CookieOptions
                 {
