@@ -16,6 +16,7 @@ using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
