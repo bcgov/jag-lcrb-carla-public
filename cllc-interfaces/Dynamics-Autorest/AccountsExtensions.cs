@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces
 {
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -15,6 +17,82 @@ namespace Gov.Lclb.Cllb.Interfaces
     /// </summary>
     public static partial class AccountsExtensions
     {
+            /// <summary>
+            /// Get entities from accounts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// Show only the first n items
+            /// </param>
+            /// <param name='skip'>
+            /// Skip only the first n items
+            /// </param>
+            /// <param name='search'>
+            /// Search items by search phrases
+            /// </param>
+            /// <param name='filter'>
+            /// Filter items by property values
+            /// </param>
+            /// <param name='count'>
+            /// Include count of items
+            /// </param>
+            /// <param name='orderby'>
+            /// Order items by property values
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static GetOKResponse Get(this IAccounts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get entities from accounts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// Show only the first n items
+            /// </param>
+            /// <param name='skip'>
+            /// Skip only the first n items
+            /// </param>
+            /// <param name='search'>
+            /// Search items by search phrases
+            /// </param>
+            /// <param name='filter'>
+            /// Filter items by property values
+            /// </param>
+            /// <param name='count'>
+            /// Include count of items
+            /// </param>
+            /// <param name='orderby'>
+            /// Order items by property values
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<GetOKResponse> GetAsync(this IAccounts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
             /// <summary>
             /// Add new entity to accounts
             /// </summary>
@@ -28,9 +106,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMaccount Addnewentitytoaccounts(this IAccounts operations, MicrosoftDynamicsCRMaccount body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMaccount Create(this IAccounts operations, MicrosoftDynamicsCRMaccount body, string prefer = "return=representation")
             {
-                return operations.AddnewentitytoaccountsAsync(body, prefer).GetAwaiter().GetResult();
+                return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -49,12 +127,132 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMaccount> AddnewentitytoaccountsAsync(this IAccounts operations, MicrosoftDynamicsCRMaccount body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMaccount> CreateAsync(this IAccounts operations, MicrosoftDynamicsCRMaccount body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.AddnewentitytoaccountsWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
+            }
+
+            /// <summary>
+            /// Delete entity from accounts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='accountid'>
+            /// key: accountid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            public static void Delete(this IAccounts operations, string accountid, string ifMatch = default(string))
+            {
+                operations.DeleteAsync(accountid, ifMatch).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from accounts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='accountid'>
+            /// key: accountid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAsync(this IAccounts operations, string accountid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteWithHttpMessagesAsync(accountid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Get entity from accounts by key
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='accountid'>
+            /// key: accountid
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            public static MicrosoftDynamicsCRMaccount GetByKey(this IAccounts operations, string accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            {
+                return operations.GetByKeyAsync(accountid, select, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get entity from accounts by key
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='accountid'>
+            /// key: accountid
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMaccount> GetByKeyAsync(this IAccounts operations, string accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(accountid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Update entity in accounts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='accountid'>
+            /// key: accountid
+            /// </param>
+            /// <param name='body'>
+            /// New property values
+            /// </param>
+            public static void Update(this IAccounts operations, string accountid, MicrosoftDynamicsCRMaccount body)
+            {
+                operations.UpdateAsync(accountid, body).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Update entity in accounts
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='accountid'>
+            /// key: accountid
+            /// </param>
+            /// <param name='body'>
+            /// New property values
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task UpdateAsync(this IAccounts operations, string accountid, MicrosoftDynamicsCRMaccount body, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.UpdateWithHttpMessagesAsync(accountid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

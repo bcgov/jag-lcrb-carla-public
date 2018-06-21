@@ -11,7 +11,7 @@ using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
 using Microsoft.OData.Client;
-
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -422,6 +422,23 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
+        /// Get a Account by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<MicrosoftDynamicsCRMaccount> GetAccountById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMaccount result = null;
+
+            // fetch from Dynamics.
+            //result = await system.Accounts.ByKey(id).GetValueAsync();
+            
+            return result;
+        }
+
+        /// <summary>
         /// Get a contact by their Guid
         /// </summary>
         /// <param name="system"></param>
@@ -524,28 +541,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-		public static async Task<Adoxio_legalentity> GetGetAdoxioLegalentityByAccountId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+		public static async Task<MicrosoftDynamicsCRMadoxioLegalentity> GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
 		{
-			Adoxio_legalentity result = null;
-			try
-            {
-				IEnumerable<Adoxio_legalentity> results = await system.Adoxio_legalentities
-				                     .AddQueryOption("$filter", "_adoxio_account_value eq " + id.ToString() + " and adoxio_isapplicant eq true")
-				                     .ExecuteAsync();
-				var ienum = results.GetEnumerator();
-				if (ienum.MoveNext())
-				{
-					result = ienum.Current;
-				}
+            MicrosoftDynamicsCRMadoxioLegalentity result = null;
+			string accountFilter = "_adoxio_account_value eq " + id.ToString();
 
-            }
-            catch (DataServiceQueryException dsqe)
-            {
-				if (dsqe.Message.Contains("Does Not Exist"))
-                    result = null;
-                else
-                    throw;
-            }
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = await _dynamicsClient.Adoxiolegalentities.GetAsync(filter: accountFilter);
+
+            result = legalEntities.FirstOrDefault();
+            
 			return result;
 		}
 
