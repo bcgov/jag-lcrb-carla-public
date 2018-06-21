@@ -17,7 +17,7 @@ export class BceidConfirmationComponent {
   public bceidConfirmContact: boolean;
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
-  confirmCompleted: boolean = true;
+  busy: Promise<any>;
 
   public corp: string;
 
@@ -54,7 +54,6 @@ export class BceidConfirmationComponent {
     }
 
     confirmContactYes() {
-      this.confirmCompleted = false;
       // create a contact
       var account = new DynamicsAccount();
       account.name = this.currentUser.businessname;
@@ -65,9 +64,8 @@ export class BceidConfirmationComponent {
       account.primarycontact = contact;
 
       var payload = JSON.stringify(account);
-      this.dynamicsDataService.createRecord('account', payload)
+      this.busy = this.dynamicsDataService.createRecord('account', payload)
         .then((data) => {
-          this.confirmCompleted = true;
           window.location.reload();
         });          
     }
