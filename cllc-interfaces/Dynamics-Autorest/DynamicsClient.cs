@@ -46,24 +46,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccounts Accounts { get; private set; }
 
         /// <summary>
-        /// Gets the IAccountsaccountid.
-        /// </summary>
-        public virtual IAccountsaccountid Accountsaccountid { get; private set; }
-
-        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdoxiolegalentitiesadoxio.
-        /// </summary>
-        public virtual IAdoxiolegalentitiesadoxio Adoxiolegalentitiesadoxio { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdoxio.
-        /// </summary>
-        public virtual IAdoxio Adoxio { get; private set; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -272,10 +257,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
-            Accountsaccountid = new Accountsaccountid(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
-            Adoxiolegalentitiesadoxio = new Adoxiolegalentitiesadoxio(this);
-            Adoxio = new Adoxio(this);
             Contacts = new Contacts(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings

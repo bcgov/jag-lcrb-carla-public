@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> LegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdateentityinadoxiolegalentitiesWithHttpMessagesAsync(string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (adoxioLegalentityid == null)
             {
@@ -93,7 +93,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 tracingParameters.Add("adoxioLegalentityid", adoxioLegalentityid);
                 tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "Legalentities", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Updateentityinadoxiolegalentities", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;

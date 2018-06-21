@@ -27,9 +27,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Legalentities(this IAdoxio operations, string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body)
+            public static void Updateentityinadoxiolegalentities(this IAdoxio operations, string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body)
             {
-                operations.LegalentitiesAsync(adoxioLegalentityid, body).GetAwaiter().GetResult();
+                operations.UpdateentityinadoxiolegalentitiesAsync(adoxioLegalentityid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -47,9 +47,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task LegalentitiesAsync(this IAdoxio operations, string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateentityinadoxiolegalentitiesAsync(this IAdoxio operations, string adoxioLegalentityid, MicrosoftDynamicsCRMadoxioLegalentity body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.LegalentitiesWithHttpMessagesAsync(adoxioLegalentityid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateentityinadoxiolegalentitiesWithHttpMessagesAsync(adoxioLegalentityid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

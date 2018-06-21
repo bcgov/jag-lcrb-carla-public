@@ -43,24 +43,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccounts Accounts { get; }
 
         /// <summary>
-        /// Gets the IAccountsaccountid.
-        /// </summary>
-        IAccountsaccountid Accountsaccountid { get; }
-
-        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         IAdoxiolegalentities Adoxiolegalentities { get; }
-
-        /// <summary>
-        /// Gets the IAdoxiolegalentitiesadoxio.
-        /// </summary>
-        IAdoxiolegalentitiesadoxio Adoxiolegalentitiesadoxio { get; }
-
-        /// <summary>
-        /// Gets the IAdoxio.
-        /// </summary>
-        IAdoxio Adoxio { get; }
 
         /// <summary>
         /// Gets the IContacts.
