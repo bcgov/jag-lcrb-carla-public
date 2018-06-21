@@ -22,10 +22,10 @@
   <div *ngIf="bceidConfirmAccount && corp==undefined">
     <h1>Confirm Business BCeID Information</h1>
     <p>What type of corporation is {{currentUser.businessname}}?</p>
-    <input name="options" ng-control="options" type="radio" [value]="1"  [(ngModel)]="model.options" > Private corporation<br/>
-    <input name="options" ng-control="options" type="radio" [value]="2" [(ngModel)]="model.options" > Public corporation<br/>
-    <input name="options" ng-control="options" type="radio" [value]="3"  [(ngModel)]="model.options" > Unlimited liability corporation<br/>
-    <input name="options" ng-control="options" type="radio" [value]="4" [(ngModel)]="model.options" > Limited liability corporation<br/>
+    <input name="options" ng-control="options" type="radio" [value]="1"  [(ngModel)]="corp" > Private corporation<br/>
+    <input name="options" ng-control="options" type="radio" [value]="2" [(ngModel)]="corp" > Public corporation<br/>
+    <input name="options" ng-control="options" type="radio" [value]="3"  [(ngModel)]="corp" > Unlimited liability corporation<br/>
+    <input name="options" ng-control="options" type="radio" [value]="4" [(ngModel)]="corp" > Limited liability corporation<br/>
     
     <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorperation()"><strong>Next</strong><br></a>
   </div>
