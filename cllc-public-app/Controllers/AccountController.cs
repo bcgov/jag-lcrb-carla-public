@@ -20,6 +20,8 @@ using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using System.Net;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -29,18 +31,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration Configuration;
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
+        private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly BCeIDBusinessQuery _bceid;
 		private readonly ILogger _logger;        
 
-		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory)
+		public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             this._system = context;
             this._distributedCache = null; //distributedCache;                        
             this._httpContextAccessor = httpContextAccessor;
 			this._bceid = bceid;
-			_logger = loggerFactory.CreateLogger(typeof(AccountController));                    
+            this._dynamicsClient = dynamicsClient;
+            _logger = loggerFactory.CreateLogger(typeof(AccountController));                    
         }
 
 		/// GET account in Dynamics for the current user
@@ -130,18 +134,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
+            bool createLegalEntity = false;
+            bool createContact = false;
+
             ViewModels.Account result = null;
             Boolean updateIfNull = true;
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
-			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
-			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity> legalEntityCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity>(_system);
-
-			// get account siteminder id
+            
+			// get account Siteminder GUID
 			string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
 			if (accountSiteminderGuid == null || accountSiteminderGuid.Length == 0)
 				throw new Exception("Oops no accountSiteminderGuid exernal id");
@@ -149,97 +152,91 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			// first check to see that a contact exists.
 			string contactSiteminderGuid = userSettings.SiteMinderGuid;
 			if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
-				throw new Exception("Oops no contactSiteminderGuid exernal id");
+				throw new Exception("Oops no ContactSiteminderGuid exernal id");
 
-			//Guid userContactId = new Guid(contactSiteminderGuid);
-            Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
+            // get the contact record.
+
+            MicrosoftDynamicsCRMcontact userContact = null;
+
+            //Interfaces.Microsoft.Dynamics.CRM.Contact userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
+            
             if (userContact == null)
             {
                 // create the user contact record.
-                userContact = new Interfaces.Microsoft.Dynamics.CRM.Contact();
-                ContactCollection.Add(userContact);
+                userContact = new MicrosoftDynamicsCRMcontact();
                 // Adoxio_externalid is where we will store the guid from siteminder.
-                userContact.Adoxio_externalid = contactSiteminderGuid;
+                userContact.AdoxioExternalid = contactSiteminderGuid;
                 userContact.Fullname = userSettings.UserDisplayName;
                 userContact.Nickname = userSettings.UserDisplayName;
                 userContact.Employeeid = userSettings.UserId;
                 userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
                 userContact.Lastname = userSettings.UserDisplayName.GetLastName();
-                userContact.Statuscode = 1;
+                userContact.Statuscode = 1;                
             }
 
+            MicrosoftDynamicsCRMaccount account = null;            
+
+
             // this may be an existing account, as this service is used during the account confirmation process.
-			Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
+            //Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
             if (account == null)
             {
                 // create a new account
-                account = new Interfaces.Microsoft.Dynamics.CRM.Account();
-                AccountCollection.Add(account);
-                // set the account siteminder guid
-				account.Adoxio_externalid = accountSiteminderGuid;
+                account = new MicrosoftDynamicsCRMaccount();
+                // ensure that we create an account for the current user.				
 				item.externalId = accountSiteminderGuid;
 
-				// add a new legal entity record for this account
-                Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity legalEntity = new Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity();
-                legalEntityCollection.Add(legalEntity);
-                legalEntity.Adoxio_Account = account;
-				legalEntity.Adoxio_name = item.name;
-				legalEntity.Adoxio_isindividual = 0;
-				legalEntity.Adoxio_isapplicant = true;
+                createLegalEntity = true;
             }
             else // it is an update.
             {
-                _system.UpdateObject(account);
                 // do not update fields with null values
                 updateIfNull = false;
             }
 
             account.CopyValues(item, updateIfNull);            
 
-            if (account.Primarycontactid == null) // we need to add the primary contact.
+            if (account._primarycontactidValue == null) // we need to add the primary contact.
             {                
                 account.Primarycontactid = userContact;
-				userContact.Parentcustomerid_account = account;
+                createContact = false; // the contact will be created at the same time as the account.
             }
 
-			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-			foreach (OperationResponse operationResponse in dsr)
+            // create the account.
+            // account is created at the same time as the legal entity.
+            //account = await _dynamicsClient.Accounts.AddnewentitytoaccountsAsync(account);
+
+            // create a legal entity.
+            var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
             {
-				_logger.LogError("dsr.response = " + operationResponse.StatusCode);
-                if (operationResponse.StatusCode == 500) // error
-                {
-					_logger.LogError("dsr.error = " + operationResponse.Error.Message);
-                    return StatusCode(500, operationResponse.Error.Message);
-                }
-            }
+                AdoxioAccount = account,
+                AdoxioName = item.name,
+                AdoxioIsindividual = 0,
+                AdoxioIsapplicant = true
+            };
+            legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
 
-			var ida = dsr.GetAssignedIdOfType("accounts");
-            if (ida == null)
-                throw new Exception("account id is null");
-			_logger.LogError("Account id = " + ida.ToString());
-			var idc = dsr.GetAssignedIdOfType("contacts");
-            if (idc == null)
-                throw new Exception("contact id is null");
-			_logger.LogError("Contact id = " + idc.ToString());
+            account.Accountid = legalEntity._adoxioAccountValue;
             
-			_logger.LogError("accountSiteminderGuid = " + accountSiteminderGuid);
-			_logger.LogError("contactSiteminderGuid = " + contactSiteminderGuid);
-			account = await _system.GetAccountBySiteminderBusinessGuid(_distributedCache, accountSiteminderGuid);
-			userContact = await _system.GetContactBySiteminderGuid(_distributedCache, contactSiteminderGuid);
-            if (account == null && userContact == null)
-				throw new Exception("Opps both account and contact are null");
-			if (account == null)
-                throw new Exception("Opps account is null");
-			if (userContact == null)
-                throw new Exception("Opps contact is null");
-			account.Accountid = ida;
-            userContact.Contactid = idc;
-			if (account.Accountid == null && userContact.Contactid == null)
-                throw new Exception("Opps both account and contact ID's are null");
-			if (account.Accountid == null)
-				throw new Exception("Opps account.Accountid is null");
-			if (userContact.Contactid == null)
-				throw new Exception("Opps contact.Contactid is null");
+
+
+            if (createContact)
+            {
+                // parent customer id relationship will be created using the method here:
+                //https://msdn.microsoft.com/en-us/library/mt607875.aspx
+                //userContact.ParentcustomeridAccount = new MicrosoftDynamicsCRMaccount() { Accountid = account.Accountid };
+                userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
+                
+            }
+            else
+            {
+                // fetch the account and get the created contact.
+                var a = await _system.GetAccountById(null, Guid.Parse(account.Accountid));
+                userContact.Contactid = a._primarycontactid_value.ToString();
+            }           
+
+
+            //await _dynamicsClient.Contacts.UpdateentityincontactsAsync(userContact.Contactid.ToString(), userContact);
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
@@ -273,8 +270,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             //account.Accountid = id;
             result = account.ToViewModel();
-			_logger.LogError("AccountController --> id=" + result.id);
-			_logger.LogError("AccountController --> externalId=" + result.externalId);
+
 
             return Json(result);
         }
@@ -339,42 +335,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-			// get the legal entity.
-            //Guid adoxio_legalentityid = new Guid(id);
             try
             {
-                Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
-				if (account == null)
-				{
-					return new NotFoundResult();
-				}
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                if (account == null)
+                {
+                    return new NotFoundResult();
+                }
 
                 // clean up dependant Legal Entity record when deleting the account
-				if (account.Adoxio_account_adoxio_legalentity_Account != null)
-				{
-					Interfaces.Microsoft.Dynamics.CRM.Adoxio_legalentity legalentity = await _system.GetGetAdoxioLegalentityByAccountId(_distributedCache, accountId);
-					if (legalentity != null)
-					{
-						_system.DeleteObject(legalentity);
-					}
-				}
-            
-                _system.DeleteObject(account);
-
-                DataServiceResponse dsr = _system.SaveChangesSynchronous();
-                foreach (OperationResponse result in dsr)
+                if (account.AdoxioAccountAdoxioLegalentityAccount != null)
                 {
-                    if (result.StatusCode == 500) // error
+                    MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
+                    if (legalentity != null)
                     {
-                        return StatusCode(500, result.Error.Message);
+                        await _dynamicsClient.Adoxiolegalentities.DeleteAsync(legalentity.AdoxioLegalentityid);
                     }
                 }
-            }
-            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-            {
-                return new NotFoundResult();
-            }
 
+                await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                if (ex.Response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return new NotFoundResult();
+                }
+                else
+                {
+                    return new BadRequestResult();
+                }
+            }
             return NoContent(); // 204
         }
 

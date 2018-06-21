@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -73,6 +74,42 @@ namespace Gov.Lclb.Cllb.Public.Models
             // adoxio_dateemailsent
         }
 
+
+        /// <summary>
+        /// Copy values from View Model to Dynamics legal entity
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="from"></param>
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioLegalentity to, ViewModels.AdoxioLegalEntity from)
+        {
+
+            to.AdoxioCommonnonvotingshares = from.commonnonvotingshares;
+            to.AdoxioCommonvotingshares = from.commonvotingshares;
+            to.AdoxioDateofbirth = from.dateofbirth;
+            to.AdoxioFirstname = from.firstname;
+            to.AdoxioInterestpercentage = (double?) from.interestpercentage;
+            to.AdoxioIsindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
+            to.AdoxioLastname = from.lastname;
+            to.AdoxioLegalentitytype = (int?)from.legalentitytype;
+            to.AdoxioMiddlename = from.middlename;
+            to.AdoxioName = from.name;
+            to.AdoxioPosition = (int?)from.position;
+            to.AdoxioPreferrednonvotingshares = from.preferrednonvotingshares;
+            to.AdoxioPreferredvotingshares = from.preferredvotingshares;
+            to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
+            to.AdoxioEmail = from.email;
+            // Assigning the account this way throws exception:
+            // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+            //if (from.account.id != null)
+            //{
+            //    // fetch the account from Dynamics.
+            //    var getAccountTask = _system.GetAccountById(null, Guid.Parse(from.account.id));
+            //    getAccountTask.Wait();
+            //    to.Adoxio_Account= getAccountTask.Result;
+            //}
+            // adoxio_dateemailsent
+        }
+
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
@@ -120,6 +157,56 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
                 
             }            
+            return result;
+        }
+
+        /// <summary>
+        /// Convert a given voteQuestion to a ViewModel
+        /// </summary>        
+        public static ViewModels.AdoxioLegalEntity ToViewModel(this MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity)
+        {
+            ViewModels.AdoxioLegalEntity result = null;
+            if (adoxio_legalentity != null)
+            {
+                result = new ViewModels.AdoxioLegalEntity();
+                if (adoxio_legalentity.AdoxioLegalentityid != null)
+                {
+                    result.id = adoxio_legalentity.AdoxioLegalentityid.ToString();
+                }
+
+                result.commonnonvotingshares = adoxio_legalentity.AdoxioCommonnonvotingshares;
+                result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
+                result.dateofbirth = adoxio_legalentity.AdoxioDateofbirth;
+                result.firstname = adoxio_legalentity.AdoxioFirstname;
+                result.interestpercentage = (decimal?) adoxio_legalentity.AdoxioInterestpercentage;
+                // convert from int to bool.
+                result.isindividual = (adoxio_legalentity.AdoxioIsindividual != null && adoxio_legalentity.AdoxioIsindividual != 0);
+                result.lastname = adoxio_legalentity.AdoxioLastname;
+                if (adoxio_legalentity.AdoxioLegalentitytype != null)
+                {
+                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.AdoxioLegalentitytype;
+                }
+
+                result.middlename = adoxio_legalentity.AdoxioMiddlename;
+                result.name = adoxio_legalentity.AdoxioName;
+                result.email = adoxio_legalentity.AdoxioEmail;
+                if (adoxio_legalentity.AdoxioPosition != null)
+                {
+                    result.position = (PositionOptions)adoxio_legalentity.AdoxioPosition;
+                }
+
+                result.preferrednonvotingshares = adoxio_legalentity.AdoxioPreferrednonvotingshares;
+                result.preferredvotingshares = adoxio_legalentity.AdoxioPreferredvotingshares;
+                // convert from int to bool.
+                result.sameasapplyingperson = (adoxio_legalentity.AdoxioSameasapplyingperson != null && adoxio_legalentity.AdoxioSameasapplyingperson != 0);
+
+                // populate the account.
+                if (adoxio_legalentity.AdoxioAccount != null)
+                {
+                    result.account = adoxio_legalentity.AdoxioAccount.ToViewModel();
+                }
+
+            }
             return result;
         }
 
