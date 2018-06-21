@@ -7,6 +7,10 @@ import { Observable } from 'rxjs/Observable';
 export class AdoxioLegalEntityDataService {
    constructor(private http: Http) { }
 
+  /**
+   * Get legal entities from Dynamics filtered by position
+   * @param positionType
+   */
   getLegalEntitiesbyPosition(positionType: string) {
 
     let apiPath = "api/adoxiolegalentity/position/" + positionType;
@@ -51,6 +55,23 @@ export class AdoxioLegalEntityDataService {
       .catch(this.handleError);
   }
 
+  getBusinessProfileSummary() {
+    let apiPath = "api/adoxiolegalentity/business-profile-summary/";
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    // call API
+    return this.http.get(apiPath, { headers: headers });
+
+    //let summary: any[] = [];
+    //return summary;
+
+  }
+
+  /**
+   * Create a new legal entity in Dynamics
+   * @param data - legal entity data
+   */
   createLegalEntity(data: any) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -59,6 +80,10 @@ export class AdoxioLegalEntityDataService {
     return this.http.post("api/adoxiolegalentity/", data, { headers: headers });
   }
 
+  /**
+   * Send a consent request to the emails received as parameter
+   * @param data - array of emails
+   */
   sendConsentRequestEmail(data: string[]) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -69,7 +94,11 @@ export class AdoxioLegalEntityDataService {
     return this.http.post(apiPath, data, { headers: headers });
   }
 
-   private handleError(error: Response | any) {
+  /**
+   * Handle error
+   * @param error
+   */
+  private handleError(error: Response | any) {
      let errMsg: string;
      if (error instanceof Response) {
        const body = error.json() || "";
