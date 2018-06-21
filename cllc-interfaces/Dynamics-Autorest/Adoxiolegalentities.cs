@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<IList<MicrosoftDynamicsCRMadoxioLegalentity>>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOKResponseLegalEntity>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -212,7 +212,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<IList<MicrosoftDynamicsCRMadoxioLegalentity>>();
+            var _result = new HttpOperationResponse<GetOKResponseLegalEntity>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -221,7 +221,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<IList<MicrosoftDynamicsCRMadoxioLegalentity>>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseLegalEntity>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -453,7 +453,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities('{adoxio_legalentityid}')").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities({adoxio_legalentityid})").ToString();
             _url = _url.Replace("{adoxio_legalentityid}", System.Uri.EscapeDataString(adoxioLegalentityid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -599,7 +599,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities('{adoxio_legalentityid}')").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities({adoxio_legalentityid})").ToString();
             _url = _url.Replace("{adoxio_legalentityid}", System.Uri.EscapeDataString(adoxioLegalentityid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
@@ -765,7 +765,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities('{adoxio_legalentityid}')").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_legalentities({adoxio_legalentityid})").ToString();
             _url = _url.Replace("{adoxio_legalentityid}", System.Uri.EscapeDataString(adoxioLegalentityid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
