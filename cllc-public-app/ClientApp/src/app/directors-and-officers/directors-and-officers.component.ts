@@ -18,7 +18,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
-  displayedColumns = ['name', 'email', 'position', 'dateIssued'];
+  displayedColumns = ['name', 'email', 'position', 'dateofappointment'];
   busy: Promise<any>;
   busyObsv: Subscription;
 
@@ -32,7 +32,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   getDirectorsAndOfficers() {
     this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer")
       .then((data) => {
-        //console.log("getLegalEntitiesbyPosition("directorofficer"): ", data);
+        console.log("getLegalEntitiesbyPosition('director-officer'): ", data);
         //console.log("parameter: accountId = ", this.accountId)
         this.dataSource.data = data;
       });
@@ -46,7 +46,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     adoxioLegalEntity.lastname = formData.lastName;
     adoxioLegalEntity.name = formData.firstName + " " + formData.lastName;
     adoxioLegalEntity.email = formData.email;
-    //adoxioLegalEntity.dateIssued = formData.dateIssued;
+    adoxioLegalEntity.dateofappointment = formData.dateOfAppointment; //adoxio_dateofappointment
     adoxioLegalEntity.legalentitytype = "PrivateCorporation";
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
@@ -63,12 +63,6 @@ export class DirectorsAndOfficersComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
-    // set dialogConfig data
-    //dialogConfig.data = {
-    //  id: 1,
-    //  title: 'Angular For Beginners'
-    //};
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(DirectorAndOfficerPersonDialog, dialogConfig);
@@ -121,8 +115,9 @@ export class DirectorAndOfficerPersonDialog {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.email],
-      dateIssued: ['']
-    }, { validator: this.dateLessThanToday('dateIssued') });
+      dateOfAppointment: ['', Validators.required]
+    }, { validator: this.dateLessThanToday('dateOfAppointment') }
+    );
   }
 
   dateLessThanToday(field1) {
