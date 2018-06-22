@@ -16,7 +16,7 @@
       "apiVersion": "v1",
       "metadata":
       {
-        "name": "${NAME}",
+        "name": "sonar-postgresql",
         "labels":
         {
           "app": "${NAME}-persistent",
@@ -124,7 +124,7 @@
                     {
                       "secretKeyRef":
                       {
-                        "name": "${NAME}",
+                        "name": "sonar-postgresql",
                         "key": "database-user"
                       }
                     }
@@ -135,7 +135,7 @@
                     {
                       "secretKeyRef":
                       {
-                        "name": "${NAME}",
+                        "name": "sonar-postgresql",
                         "key": "database-password"
                       }
                     }

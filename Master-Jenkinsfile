@@ -6,9 +6,9 @@ node('master') {
         openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
     }
 
-	stage('Deploy to Test') {
-        echo "Deploying to test..."
-		openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'test', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
+	stage('Deploy to UAT') {
+        echo "Deploying to UAT..."
+		openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'uat', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
     }	
 }
 
