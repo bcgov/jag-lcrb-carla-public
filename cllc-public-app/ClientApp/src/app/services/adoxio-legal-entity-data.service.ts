@@ -63,9 +63,6 @@ export class AdoxioLegalEntityDataService {
     // call API
     return this.http.get(apiPath, { headers: headers });
 
-    //let summary: any[] = [];
-    //return summary;
-
   }
 
   /**
