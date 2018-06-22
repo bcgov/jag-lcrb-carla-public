@@ -369,8 +369,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 					} else if (isBCSCDeveloperLogin) {
 						_logger.LogError("Generating a Development BC Services user");
 						userSettings.BusinessLegalName = null;
-                        userSettings.UserDisplayName = userId;
+                        userSettings.UserDisplayName = userId + " Associate";
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
+						siteMinderBusinessGuid = null;
                         siteMinderUserType = "BC Services Card";
 					}
                 }
@@ -412,7 +413,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
                 _logger.LogError("Before getting contact and account ids = " + userSettings.GetJson());
 
-                if (userSettings.AuthenticatedUser != null)
+				if (userSettings.AuthenticatedUser != null && siteMinderBusinessGuid != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
                     var account = await _system.
@@ -424,22 +425,43 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
                 }
 
-                if (!hostingEnv.IsProduction() && isDeveloperLogin)
+				if (!hostingEnv.IsProduction() && (isDeveloperLogin || isBCSCDeveloperLogin))
                 {
                     _logger.LogError("DEV MODE Setting identity and creating session for: " + userId);
 
-                    userSettings.BusinessLegalName = userId + " TestBusiness";
-                    userSettings.UserDisplayName = userId + " TestUser";
+					if (isDeveloperLogin)
+					{
+						userSettings.BusinessLegalName = userId + " TestBusiness";
+						userSettings.UserDisplayName = userId + " TestUser";
 
-                    // add generated guids
-                    userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
-                    userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+						// add generated guids
+						userSettings.SiteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
+						userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
+					}
+					else if (isBCSCDeveloperLogin)
+					{
+						userSettings.BusinessLegalName = null;
+						userSettings.UserDisplayName = userId + " Associate";
+
+                        // add generated guids
+                        userSettings.SiteMinderBusinessGuid = null;
+						userSettings.SiteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
+					}
 
                     if (userSettings.IsNewUserRegistration)
                     {
-                        // add generated guids
-                        userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
-                        userSettings.ContactId = userSettings.SiteMinderGuid;
+						if (isDeveloperLogin)
+						{
+							// add generated guids
+							userSettings.AccountId = userSettings.SiteMinderBusinessGuid;
+							userSettings.ContactId = userSettings.SiteMinderGuid;
+						}
+						else if (isBCSCDeveloperLogin)
+						{
+							// set to null for now
+                            userSettings.AccountId = null;
+                            userSettings.ContactId = null;
+						}
 
                         _logger.LogError("New user registration:" + userSettings.UserDisplayName);
                         _logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
