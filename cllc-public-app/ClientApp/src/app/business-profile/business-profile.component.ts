@@ -3,6 +3,8 @@ import { DynamicsFormComponent } from '../dynamics-form/dynamics-form.component'
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
 import { DynamicsDataService } from '../services/dynamics-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-business-profile',
@@ -11,10 +13,12 @@ import { DynamicsDataService } from '../services/dynamics-data.service';
 })
 /** BusinessProfile component*/
 export class BusinessProfileComponent {
+  businessProfileId: string;
   @ViewChild(DynamicsFormComponent) dynamicsFormComponent: DynamicsFormComponent;
   @Input('currentUser') currentUser: User;
   // GUID for the account we want to edit the profile for.  If blank then it will be the current user's account.
   @Input('accountId') accountId: string;
+  legalEntityId: string;
 
   public view_tab: string;
   public contactId: string;
@@ -22,7 +26,7 @@ export class BusinessProfileComponent {
 
   number_tabs = 7;
   /** BusinessProfile ctor */
-  constructor(private userDataService: UserDataService, private dynamicsDataService: DynamicsDataService) {
+  constructor(private userDataService: UserDataService, private route: ActivatedRoute, private dynamicsDataService: DynamicsDataService) {
       this.view_tab = "tab-0";
   }
 
@@ -46,7 +50,10 @@ export class BusinessProfileComponent {
 
           this.componentLoaded = true;
         });
-      }
+    }
+    this.businessProfileId = <string>this.route.snapshot.params.id;
+    //this.businessProfileId = <string>this.route.snapshot.paramMap.get('id');
+    //this.legalEntityId = this.route.snapshot.params["id"];
     }
     
   getTab() {

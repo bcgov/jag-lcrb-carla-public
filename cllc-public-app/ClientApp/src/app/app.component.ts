@@ -5,6 +5,7 @@ import { InsertService } from './insert/insert.service';
 import { UserDataService } from './services/user-data.service';
 import { User } from './models/user.model';
 import { isDevMode } from '@angular/core';
+import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { isDevMode } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  businessProfiles: any;
   title = '';
   previousUrl: string;
   public currentUser: User;
@@ -21,7 +23,8 @@ export class AppComponent {
   constructor(
       private renderer: Renderer2,
       private router: Router,
-      private userDataService: UserDataService,
+    private userDataService: UserDataService,
+    private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
   ) {
     this.isDevMode = isDevMode();
     this.router.events.subscribe((event) => {
@@ -45,6 +48,10 @@ export class AppComponent {
       .then((data) => {
         this.currentUser = data;        
         this.isNewUser = this.currentUser.isNewUser;
+      });
+    this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
+      res => {
+        this.businessProfiles = res.json();
       });
   }
 }
