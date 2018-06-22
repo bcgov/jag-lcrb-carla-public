@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -60,12 +59,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the account record.
 			if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-				var accountId = Guid.Parse(userSettings.AccountId);
-				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
+                var accountId = Guid.Parse(userSettings.AccountId);
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
                 if (account == null)
                 {
-					return new NotFoundResult();
+                    return new NotFoundResult();
                 }
+                				
                 result = account.ToViewModel();
             }
 			else
@@ -116,12 +116,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
-				Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
-				if (account == null)
-				{
-					return new NotFoundResult();
-				}
-				result = account.ToViewModel();
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                if (account == null)
+                {
+                    return new NotFoundResult();
+                }
+                result = account.ToViewModel();
 			}
 			else
 			{
@@ -134,7 +134,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            bool createLegalEntity = false;
             bool createContact = false;
 
             ViewModels.Account result = null;
@@ -185,8 +184,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account = new MicrosoftDynamicsCRMaccount();
                 // ensure that we create an account for the current user.				
 				item.externalId = accountSiteminderGuid;
-
-                createLegalEntity = true;
             }
             else // it is an update.
             {
@@ -218,13 +215,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             account.Accountid = legalEntity._adoxioAccountValue;
             
-
-
             if (createContact)
             {
                 // parent customer id relationship will be created using the method here:
                 //https://msdn.microsoft.com/en-us/library/mt607875.aspx
-                //userContact.ParentcustomeridAccount = new MicrosoftDynamicsCRMaccount() { Accountid = account.Accountid };
+                //userContact.ParentcustomeridAccount = new MicrosoftDynamicsCRMaccount() { accountId = account.accountId };
                 userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
                 
             }
@@ -268,7 +263,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				throw new Exception("Oops not a new user registration");
 			}
 
-            //account.Accountid = id;
+            //account.accountId = id;
             result = account.ToViewModel();
 
 
@@ -284,40 +279,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
         {
-            if (id == null || id != item.id)
+            if (id != item.id)
             {
                 return BadRequest();
             }
 
-			// verify the currently logged in user has access to this account
-			Guid accountId = new Guid(id);
-            if (!CurrentUserHasAccessToAccount(accountId))
+            // get the legal entity.
+            Guid accountId = new Guid(id);
+
+            MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountById(accountId);
+            if (adoxioAccount == null)
             {
                 return new NotFoundResult();
             }
 
-			DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account> AccountCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Account>(_system);
+            // we are doing a patch, so wipe out the record.
+            adoxioAccount = new MicrosoftDynamicsCRMaccount();
 
-            // get the legal entity.
-            Interfaces.Microsoft.Dynamics.CRM.Account account = await _system.GetAccountById(_distributedCache, accountId);
-            _system.UpdateObject(account);
-            // copy values over from the data provided (only when value is not null)
-            account.CopyValues(item, false);
+            // copy values over from the data provided
+            adoxioAccount.CopyValues(item);
 
-            
-
-            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-
-			DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
-            foreach (OperationResponse result in dsr)
-            {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
-            }
-
-            return Json(account.ToViewModel());
+            await _dynamicsClient.Accounts.UpdateAsync(accountId.ToString(), adoxioAccount);
+            return Json(adoxioAccount.ToViewModel());
         }
 
         /// <summary>
@@ -335,39 +318,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            try
+            // get the account
+            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+            if (account == null)
             {
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
-                if (account == null)
-                {
-                    return new NotFoundResult();
-                }
-
-                // clean up dependant Legal Entity record when deleting the account
-                if (account.AdoxioAccountAdoxioLegalentityAccount != null)
-                {
-                    MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
-                    if (legalentity != null)
-                    {
-                        await _dynamicsClient.Adoxiolegalentities.DeleteAsync(legalentity.AdoxioLegalentityid);
-                    }
-                }
-
-                await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
-
+                return new NotFoundResult();
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
-            {
-                if (ex.Response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return new NotFoundResult();
-                }
-                else
-                {
-                    return new BadRequestResult();
-                }
-            }
-            return NoContent(); // 204
+
+            await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+
+            return NoContent(); // 204 
         }
 
 		/// <summary>
