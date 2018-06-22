@@ -211,6 +211,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 AdoxioIsindividual = 0,
                 AdoxioIsapplicant = true
             };
+
+            string legalEntityString = JsonConvert.SerializeObject(userSettings);
+            _logger.LogError("Legal Entity --> " + legalEntityString);
+
             legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
 
             account.Accountid = legalEntity._adoxioAccountValue;
