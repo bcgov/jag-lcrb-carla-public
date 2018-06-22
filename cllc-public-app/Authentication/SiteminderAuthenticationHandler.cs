@@ -223,6 +223,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 UserSettings userSettings = new UserSettings();
                 string userId = null;
+				string devCompanyId = null;
                 string siteMinderGuid = "";
                 string siteMinderBusinessGuid = "";
                 string siteMinderUserType = "";
@@ -252,10 +253,23 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                     if (!string.IsNullOrEmpty(temp))
                     {
-                        userId = temp;
+						if (temp.Contains("::"))
+						{
+							var temp2 = temp.Split("::");
+							userId = temp2[0];
+							if (temp2.Length >= 2 )
+								devCompanyId = temp2[1];
+							else
+								devCompanyId = temp2[0];
+						}
+						else
+						{
+							userId = temp;
+							devCompanyId = temp;
+						}
                         isDeveloperLogin = true;
 
-                        _logger.LogError("Got user from dev cookie = " + userId);
+						_logger.LogError("Got user from dev cookie = " + userId + ", company = " + devCompanyId);
 					} 
 					else 
 					{
@@ -361,7 +375,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     if (isDeveloperLogin)
                     {
                         _logger.LogError("Generating a Development user");
-                        userSettings.BusinessLegalName = userId + " TestBusiness";
+						userSettings.BusinessLegalName = devCompanyId + " TestBusiness";
                         userSettings.UserDisplayName = userId + " TestUser";
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
                         siteMinderBusinessGuid = GuidUtility.CreateIdForDynamics("account", userSettings.BusinessLegalName).ToString();
@@ -431,7 +445,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
 					if (isDeveloperLogin)
 					{
-						userSettings.BusinessLegalName = userId + " TestBusiness";
+						userSettings.BusinessLegalName = devCompanyId + " TestBusiness";
 						userSettings.UserDisplayName = userId + " TestUser";
 
 						// add generated guids
