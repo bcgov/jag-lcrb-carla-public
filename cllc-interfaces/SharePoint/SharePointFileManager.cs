@@ -235,12 +235,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
         {
-            // start by ensuring that the folder exists.
-            bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
-            if (! folderExists)
-            {
-              var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
-            }
+			// TODO this currently fails with:
+			// The property 'DisableGridEditing' does not exist on type 'SP.List'. Make sure to only use property names that are defined by the type.
+			// start by ensuring that the folder exists.
+            //bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
+            //if (! folderExists)
+            //{
+            //  var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
+            //}
 
             // now add the file to the folder.
             string path = $"/{this.WebName}/{DefaultDocumentListTitle}/{folderName}/{fileName}";
