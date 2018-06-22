@@ -33,7 +33,7 @@
     </main>
   </div>
 
-  <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname && !currentUser.name)">
+  <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname)">
     <!-- /NAVBAR -->
     <div class="navigationRibbon" *ngIf="!currentUser">
       <div class="level2Navigation">
