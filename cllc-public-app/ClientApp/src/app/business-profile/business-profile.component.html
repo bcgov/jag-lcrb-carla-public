@@ -1,55 +1,67 @@
-
-<div class="col-md-12"  *ngIf="componentLoaded">
+<div class="col-md-12" *ngIf="componentLoaded">
   <h1>Business Profile</h1>
   <h2 *ngIf="currentUser">{{ currentUser.businessname }}</h2>
   <div class="col-sm-3 col-md-2" style="padding-left: 0">
     <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-      <li [ngClass]="{'active': view_tab == 'tab-0'}"><a (click)="changeTab('tab-0')">Before You Start</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-1'}"><a (click)="changeTab('tab-1')">Corporate Details</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-2'}"><a (click)="changeTab('tab-2')">Organization Structure</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-3'}"><a (click)="changeTab('tab-3')">Directors &amp; Officers</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-4'}"><a (click)="changeTab('tab-4')">Shareholders</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-5'}"><a (click)="changeTab('tab-5')">Financial Information</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Security Assessments</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-0'}">
+        <a (click)="changeTab('tab-0')">Before You Start</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-1'}">
+        <a (click)="changeTab('tab-1')">Corporate Details</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-2'}">
+        <a (click)="changeTab('tab-2')">Organization Structure</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-3'}">
+        <a (click)="changeTab('tab-3')">Directors &amp; Officers</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-4'}">
+        <a (click)="changeTab('tab-4')">Shareholders</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-5'}">
+        <a (click)="changeTab('tab-5')">Financial Information</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-6'}">
+        <a (click)="changeTab('tab-6')">Security Assessments</a>
+      </li>
     </ul>
   </div>
   <div class="col-md-9 col-sm-9">
     <!-- Tab panes -->
     <div [hidden]="view_tab != 'tab-0'">
-        <app-before-you-start></app-before-you-start>
-      </div>
-      <div [hidden]="view_tab != 'tab-1'">
-        <app-corporate-details [accountId]="accountId"></app-corporate-details>
-      </div>
-      <div [hidden]="view_tab != 'tab-2'">
-        <app-organization-structure [accountId]="accountId"></app-organization-structure>
-      </div>
-      <div [hidden]="view_tab != 'tab-3'">
-        <app-directors-and-officers [accountId]="accountId"></app-directors-and-officers>
-      </div>
-      <div [hidden]="view_tab != 'tab-4'">
-        <app-edit-shareholders [accountId]="accountId"></app-edit-shareholders>
-      </div>
-      <div [hidden]="view_tab != 'tab-5'">
-        <app-financial-information [accountId]="accountId"></app-financial-information>
-      </div>
-      <div [hidden]="view_tab != 'tab-6'">
-        <app-security-assessments [accountId]="accountId"></app-security-assessments>
-      </div>
-      <p>&nbsp;</p>
-      <div class="col-md-10 row">
-        <a class="globalButton" *ngIf="view_tab != 'tab-0'"  class="btn btn-secondary" tabindex="1" (click)="back()"><strong>Back</strong><br></a>
-        &nbsp;
-        <a class="globalButton"  class="btn btn-primary" tabindex="2" (click)="next()">
-          <strong *ngIf="view_tab != 'tab-0'">Next</strong>
-          <strong *ngIf="view_tab == 'tab-0'">Start</strong>
-          <br></a>
-      </div>
+      <app-before-you-start></app-before-you-start>
     </div>
+    <div [hidden]="view_tab != 'tab-1'">
+      <app-corporate-details [accountId]="accountId"></app-corporate-details>
+    </div>
+    <div [hidden]="view_tab != 'tab-2'">
+      <app-organization-structure [accountId]="accountId"></app-organization-structure>
+    </div>
+    <div [hidden]="view_tab != 'tab-3'">
+      <app-directors-and-officers [accountId]="accountId"></app-directors-and-officers>
+    </div>
+    <div [hidden]="view_tab != 'tab-4'">
+      <app-edit-shareholders [accountId]="accountId"></app-edit-shareholders>
+    </div>
+    <div [hidden]="view_tab != 'tab-5'">
+      <app-financial-information [accountId]="accountId"></app-financial-information>
+    </div>
+    <div [hidden]="view_tab != 'tab-6'">
+      <app-security-assessments [accountId]="accountId"></app-security-assessments>
+    </div>
+    <div style="margin-top: 30px;">
+      <a class="globalButton" *ngIf="view_tab != 'tab-0'" class="btn btn-secondary" tabindex="1" (click)="back()">
+        <strong>Back</strong>
+        <br>
+      </a>
+      &nbsp;
+      <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
+        <strong *ngIf="view_tab != 'tab-0'">Next</strong>
+        <strong *ngIf="view_tab == 'tab-0'">Start</strong>
+        <br>
+      </a>
+    </div>
+  </div>
 </div>
-
-
-
-
