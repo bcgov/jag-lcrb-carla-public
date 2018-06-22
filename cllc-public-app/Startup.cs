@@ -18,10 +18,13 @@ using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
+using Microsoft.Rest;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
 using System;
 using System.Data.SqlClient;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 
 namespace Gov.Lclb.Cllb.Public
@@ -142,6 +145,9 @@ namespace Gov.Lclb.Cllb.Public
             string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
             string clientId = Configuration["DYNAMICS_CLIENT_ID"];
 
+            string ssgUsername = Configuration["SSG_USERNAME"];
+            string ssgPassword = Configuration["SSG_PASSWORD"];
+
             if (string.IsNullOrEmpty(redisServer))            
             {
                 services.AddDistributedRedisCache(options =>
@@ -149,24 +155,57 @@ namespace Gov.Lclb.Cllb.Public
                     options.Configuration = redisServer;
                 });
             }
+            AuthenticationResult authenticationResult = null;
+            // authenticate using ADFS.
+            if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
+            {
+                var authenticationContext = new AuthenticationContext(
+                    "https://login.windows.net/" + aadTenantId);
+                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
+                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
+                task.Wait();
+                authenticationResult = task.Result;
+            }
+
+
+            services.AddSingleton(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
+            {
+                
+                ServiceClientCredentials serviceClientCredentials = null;
+
+                if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
+                {
+                    var authenticationContext = new AuthenticationContext(
+                    "https://login.windows.net/" + aadTenantId);
+                    ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
+                    var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
+                    task.Wait();
+                    authenticationResult = task.Result;
+                    string token = authenticationResult.CreateAuthorizationHeader().Substring("Bearer ".Length);
+                    serviceClientCredentials = new TokenCredentials(token);                    
+                }
+                else
+                {
+                    serviceClientCredentials = new BasicAuthenticationCredentials()
+                    {
+                        UserName = ssgUsername,
+                        Password = ssgPassword
+                    };                    
+                }
+                                
+                IDynamicsClient client = new DynamicsClient(new Uri(Configuration["DYNAMICS_ODATA_URI"]), serviceClientCredentials);
+
+                return client;
+            }));
+
 
             Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
 
             // determine if we have a SSG connection.
 
-            string ssgUsername = Configuration["SSG_USERNAME"];
-            string ssgPassword = Configuration["SSG_PASSWORD"];
-
             if (string.IsNullOrEmpty (ssgUsername) || string.IsNullOrEmpty(ssgPassword))
             {
-                // authenticate using ADFS.
-                var authenticationContext = new AuthenticationContext(
-               "https://login.windows.net/" + aadTenantId);
-                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-                task.Wait();
-                AuthenticationResult authenticationResult = task.Result;
-
+                
                 context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
                 "Authorization", authenticationResult.CreateAuthorizationHeader());
             }
