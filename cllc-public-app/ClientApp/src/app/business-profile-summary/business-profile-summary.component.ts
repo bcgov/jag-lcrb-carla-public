@@ -68,7 +68,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
         }
         // sort the array
         this.profileSummaryList = this.sortbyProperty(this.profileSummaryList, "legalentitytype");
-        console.log("profileSummaryList sorted:", this.profileSummaryList);
+        //console.log("profileSummaryList sorted:", this.profileSummaryList);
         // set table data source
         this.dataSource.data = this.profileSummaryList;
         // set 
