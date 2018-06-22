@@ -1,48 +1,49 @@
-<h1>Directors and Officers</h1>
-<p>Enter all directors and officers for the corporation</p>
+<div>
+  <h1>Directors and Officers</h1>
+  <p>Enter all directors and officers for the corporation</p>
 
-<div [ngBusy]="busy"></div>
-<div [ngBusy]="busyObsv"></div>
+  <div [ngBusy]="busy"></div>
+  <div [ngBusy]="busyObsv"></div>
 
-<div class="example-container mat-elevation-z0">
+  <div class="example-container mat-elevation-z0">
 
-  <div>
-    <mat-table #table [dataSource]="dataSource">
+    <div>
+      <mat-table #table [dataSource]="dataSource">
 
-      <!-- Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-      </ng-container>
+        <!-- Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
 
-      <!-- Column -->
-      <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-      </ng-container>
+        <!-- Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
 
-    <!-- Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-    </ng-container>
+        <!-- Column -->
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+        </ng-container>
 
-    <!-- Column -->
-    <ng-container matColumnDef="dateIssued">
-      <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
-    </ng-container>
+        <!-- Column -->
+        <ng-container matColumnDef="dateIssued">
+          <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
 
+    </div>
   </div>
+
+  <p></p>
+  <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog()">
+    <strong>Add Person</strong>
+    <br>
+  </a>
 </div>
-
-<p>&nbsp;</p>
-<div class="col-md-10 row" style="margin-bottom: 5px;">
-  <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog()"><strong>Add Person</strong><br></a>
-</div>
-
-

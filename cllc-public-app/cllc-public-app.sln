@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynamics", "..\cllc-interfa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCeID", "..\cllc-interfaces\BCeID\BCeID.csproj", "{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{E03AD5AD-3E27-45D1-8B78-E2DEB035972D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E03AD5AD-3E27-45D1-8B78-E2DEB035972D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03AD5AD-3E27-45D1-8B78-E2DEB035972D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03AD5AD-3E27-45D1-8B78-E2DEB035972D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03AD5AD-3E27-45D1-8B78-E2DEB035972D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{27F1F3AB-9F73-414C-ADD2-3CE032C49978} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 		{9CC0FB3D-FE32-423E-9722-D6E69895AA4C} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 		{BA3C93A6-DCA4-4F5A-83D0-F15A2E7D83A3} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
+		{E03AD5AD-3E27-45D1-8B78-E2DEB035972D} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5C395A-DA58-4406-95D8-AAEBD4437D0A}
