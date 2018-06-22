@@ -6,6 +6,10 @@ import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
 import { ReadVarExpr } from '@angular/compiler';
 
+// class BusinessType{
+//   value: string;
+// }
+
 @Component({
     selector: 'app-bceid-confirmation',
     templateUrl: './bceid-confirmation.component.html',
@@ -18,13 +22,32 @@ export class BceidConfirmationComponent {
   public bceidConfirmContact: boolean;
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
+  businessType: string = "";
+  prefix: string = "a";
+  businessValue: number;
   busy: Promise<any>;
-
-  public corp: number;
 
     /** bceid-confirmation ctor */
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
+    
+  }
 
+  onTypeChange(select) {
+   switch (select.value) {
+     case "void":
+     case "proprietorship":
+     case "partnership":
+     case "corporation":
+       this.prefix = "a";
+       break;
+     case "extra provincially registered company":
+     case "other":
+       this.prefix = "an";
+       break;
+   
+     default:
+       break;
+   }
   }
   
   confirmBceid() {
@@ -32,15 +55,11 @@ export class BceidConfirmationComponent {
     this.currentUser.isBceidConfirmed = true;
   }
 
-
    confirmBceidAccountYes() {
     // confirm BCeID
     this.bceidConfirmAccount = true;
   }
 
-  confirmCorperation(){
-    
-  }
 
    confirmBceidAccountNo() {
      // confirm BCeID
@@ -62,7 +81,7 @@ export class BceidConfirmationComponent {
       contact.fullname = this.currentUser.name;
       contact.id = this.currentUser.contactid;
       account.primarycontact = contact;
-      account.adoxio_businesstype = this.corp;
+      // account.adoxio_businesstype = this.corp;
 
       var payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
