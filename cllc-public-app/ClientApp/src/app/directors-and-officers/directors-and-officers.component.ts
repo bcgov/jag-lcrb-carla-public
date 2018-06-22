@@ -32,7 +32,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   getDirectorsAndOfficers() {
     this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer")
       .then((data) => {
-        console.log("getLegalEntitiesbyPosition('director-officer'): ", data);
+        //console.log("getLegalEntitiesbyPosition('director-officer'): ", data);
         //console.log("parameter: accountId = ", this.accountId)
         this.dataSource.data = data;
       });
