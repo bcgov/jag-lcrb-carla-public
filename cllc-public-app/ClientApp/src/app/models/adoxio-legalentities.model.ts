@@ -21,7 +21,7 @@ export class AdoxioLegalEntity {
   account: DynamicsAccount;
   relatedentities: AdoxioLegalEntity[];
   email: string;
-  //dateIssued: Date;
+  dateofappointment: Date; //adoxio_dateofappointment
 
   // helper fields
   shareholderType: string;
