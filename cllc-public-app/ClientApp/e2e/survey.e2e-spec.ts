@@ -17,8 +17,8 @@ describe('App Survey Page', () => {
 
     beforeAll(async () => {
       // load survey json from resources      
-      var resp_json = httpGet(browser.baseUrl + '/assets/survey-primary.json');
-      surveyConfig = JSON.parse(resp_json);      
+      var resp_json = httpGet(browser.baseUrl + 'assets/survey-primary.json');
+      surveyConfig = JSON.parse(resp_json);
     });
 
     beforeEach(() => {
@@ -46,7 +46,7 @@ describe('App Survey Page', () => {
         expect(surveyConfig.pages[0].name).toEqual('p1');
         expect(surveyConfig.pages[0].elements[0].type).toEqual('radiogroup');
         expect(surveyConfig.pages[0].elements[0].name).toEqual('age19');
-        expect(surveyConfig.pages[0].elements[0].title).toEqual('Is the applicant 19 years old or older?');
+        expect(surveyConfig.pages[0].elements[0].title).toEqual('Is the person who will fill out and submit the application 19 years old or older?');
 
         // TODO verify survey results text has loaded
     });
@@ -63,14 +63,12 @@ describe('App Survey Page', () => {
 
     it('should allow over 19 years old to apply and capture all information', async () => {
         var navPath = [{'q':'p1', 'r':'Yes', 'button':'next'},
+                       {'q':'p1.5', 'r':'No', 'button':'next'},
                        {'q':'p2', 'r':'Yes', 'button':'next'},
-                       {'q':'p3', 'r':'Corporation', 'button':'next'},
+                       {'q':'p3', 'r':'Sole-Proprietorship', 'button':'next'},
                        {'q':'p4', 'r':'Yes', 'button':'next'},
-                       {'q':'p5', 'r':'Richmond', 'button':'next'},
-                       {'q':'p6', 'r':'Yes', 'button':'next'},
-                       {'q':'p7', 'r':'Yes', 'button':'next'},
-                       {'q':'p8', 'r':'Yes', 'button':'next'},
-                       {'q':'p9', 'r':'Yes', 'button':'complete'}];
+                       {'q':'p5', 'r':'Yes', 'button':'next'},
+                       {'q':'p6', 'r':'Yes', 'button':'next'}];
         
         await page.navigateTo();
         await page.executeSurvey(navPath, surveyConfig);
@@ -80,16 +78,16 @@ describe('App Survey Page', () => {
 
     it('should allow backtrack to update previously entered information', async () => {
         var navPath = [{'q':'p1', 'r':'Yes', 'button':'next'},
+                       {'q':'p1.5', 'r':'No', 'button':'next'},
+                       {'q':'p2', 'r':'none', 'button':'next'},
+                       {'q':'p5', 'r':'No', 'button':'prev'},
+                       {'q':'p2', 'r':'No', 'button':'next'},
+                       {'q':'p5', 'r':'No', 'button':'prev'},
                        {'q':'p2', 'r':'Yes', 'button':'next'},
-                       {'q':'p3', 'r':'Corporation', 'button':'next'},
+                       {'q':'p3', 'r':'Sole-Proprietorship', 'button':'next'},
                        {'q':'p4', 'r':'Yes', 'button':'next'},
-                       {'q':'p5', 'r':'Richmond', 'button':'next'},
-                       {'q':'p6', 'r':'Yes', 'button':'prev'},
-                       {'q':'p5', 'r':'Saanich', 'button':'next'},
-                       {'q':'p6', 'r':'Yes', 'button':'next'},
-                       {'q':'p7', 'r':'Yes', 'button':'next'},
-                       {'q':'p8', 'r':'Yes', 'button':'next'},
-                       {'q':'p9', 'r':'Yes', 'button':'complete'}];
+                       {'q':'p5', 'r':'Yes', 'button':'next'},
+                       {'q':'p6', 'r':'Yes', 'button':'next'}];
         
         await page.navigateTo();
         await page.executeSurvey(navPath, surveyConfig);
