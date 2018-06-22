@@ -18,10 +18,12 @@ import { ReadVarExpr } from '@angular/compiler';
 /** bceid-confirmation component*/
 export class BceidConfirmationComponent {
   @Input('currentUser') currentUser: User;
-  public bceidConfirmAccount: boolean;
-  public bceidConfirmContact: boolean;
+  public bceidConfirmAccount: boolean=true;
+  public bceidConfirmBusinessType: boolean=false;
+  public bceidConfirmContact: boolean=false;
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
+  corp: boolean;
   businessType: string = "";
   prefix: string = "a";
   businessValue: number;
@@ -57,7 +59,8 @@ export class BceidConfirmationComponent {
 
    confirmBceidAccountYes() {
     // confirm BCeID
-    this.bceidConfirmAccount = true;
+    this.bceidConfirmAccount = false;
+    this.bceidConfirmBusinessType = true;
   }
 
 
@@ -69,6 +72,12 @@ export class BceidConfirmationComponent {
     confirmBceidUser() {
       // confirm BCeID
 
+      this.bceidConfirmContact = true;
+    }
+
+    confirmCorpType() {
+      this.corp = true;
+      this.bceidConfirmBusinessType = false;
       this.bceidConfirmContact = true;
     }
 
