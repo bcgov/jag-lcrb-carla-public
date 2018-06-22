@@ -29,9 +29,9 @@
         </ng-container>
 
         <!-- Column -->
-        <ng-container matColumnDef="dateIssued">
+        <ng-container matColumnDef="dateofappointment">
           <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateofappointment | date:'shortDate' }} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
