@@ -28,8 +28,8 @@ ngOnInit(): void {
         
         this.isApplicant = (this.user.businessname != null);
         this.isAssociate = (this.user.businessname == null);
-        console.log("isApplicant = " + this.isApplicant);
-        console.log("isAssociate = " + this.isAssociate);
+        //console.log("isApplicant = " + this.isApplicant);
+        //console.log("isAssociate = " + this.isAssociate);
 
         if (!this.accountId) {
           this.accountId = this.user.accountid;
