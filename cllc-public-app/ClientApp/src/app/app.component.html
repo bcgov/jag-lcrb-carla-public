@@ -5,7 +5,8 @@
         <a href="http://www2.gov.bc.ca/" tabindex="-1">
           <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="assets/bc-logo.svg">
         </a>
-        <span class="title" role="banner">Cannabis Licensing&nbsp;
+        <span class="title" role="banner">
+          Cannabis Licensing&nbsp;
           <span class="label label-beta">Beta</span>
         </span>
       </section>
@@ -31,7 +32,6 @@
       <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
     </main>
   </div>
-
 
   <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname)">
     <!-- /NAVBAR -->
@@ -89,7 +89,7 @@
 
       <div class="app-main">
         <breadcrumb></breadcrumb>
-          <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
       </div>
 
       <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
@@ -113,7 +113,8 @@
             <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a>
           </li>
           <li class="c2">
-            <a href="policy-document/contact" target="_blank" title="Goes to Contact Page">Contact Us
+            <a href="policy-document/contact" target="_blank" title="Goes to Contact Page">
+              Contact Us
             </a>
           </li>
         </ul>
