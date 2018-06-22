@@ -184,10 +184,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}' {1}", _statusCode, _responseContent));
                 try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                {                    
                     Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
