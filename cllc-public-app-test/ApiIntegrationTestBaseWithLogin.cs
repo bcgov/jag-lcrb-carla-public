@@ -33,11 +33,17 @@ namespace Gov.Lclb.Cllb.Public.Test
                     AllowAutoRedirect = false
                 });    
         }
-        
+
         public async System.Threading.Tasks.Task Login(string userid)
+		{
+			await Login(userid, userid);
+		}
+
+        public async System.Threading.Tasks.Task Login(string userid, string businessName)
         {
-			_client.DefaultRequestHeaders.Add("DEV-USER", userid);
-			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + userid);
+			string loginAs = userid + "::" + businessName;
+			_client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + loginAs);
             var response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
@@ -61,13 +67,19 @@ namespace Gov.Lclb.Cllb.Public.Test
         // this fellow returns the external id of the new account
 		public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser)
 		{
+			return await LoginAndRegisterAsNewUser(loginUser, loginUser);
+		}
+
+        // this fellow returns the external id of the new account
+        public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser, string businessName)
+		{
 			string accountService = "account";
 
-			await Login(loginUser);
+			await Login(loginUser + "::" + businessName);
 
 			ViewModels.User user = await GetCurrentUser();
             Assert.Equal(user.name, loginUser + " TestUser");
-            Assert.Equal(user.businessname, loginUser + " TestBusiness");
+			Assert.Equal(user.businessname, businessName + " TestBusiness");
             Assert.True(user.isNewUser);
 
             // create a new account and contact in Dynamics
