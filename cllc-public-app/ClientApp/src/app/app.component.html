@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-
+    
     <section *ngIf="currentUser" class="navigationRibbon">
       <div class="level2Navigation ">
         <nav class="navbar navbar-expand navbar-dark nav-container">
@@ -61,9 +61,7 @@
                 <div ngbDropdown class="d-inline-block">
                   <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
                   <div ngbDropdownMenu>
-                    <button class="dropdown-item" routerLink="/business-profile">Main Profile</button>
-                    <button class="dropdown-item" routerLink="/business-profile">Profile 1</button>
-                    <button class="dropdown-item" routerLink="/business-profile">Profile 2</button>
+                    <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile', profile.id], {skipLocationChange: true})">{{profile.name}}</button>
                   </div>
                 </div>
               </li>
