@@ -47,6 +47,9 @@ export class AdoxioLegalEntityDataService {
           adoxioLegalEntity.sameasapplyingperson = entry.sameasapplyingperson;
           adoxioLegalEntity.shareholderType = entry.shareholderType;
           adoxioLegalEntity.email = entry.email;
+          if (entry.dateofappointment) {
+            adoxioLegalEntity.dateofappointment = new Date(entry.dateofappointment);
+          }
           legalEntitiesList.push(adoxioLegalEntity);
         });
 
