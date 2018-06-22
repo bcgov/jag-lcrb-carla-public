@@ -7,6 +7,7 @@ export DB_PASSWORD=Test4321
 export DB_DATABASE=cllc
 export ASPNETCORE_ENVIRONMENT=Development
 export PathBase=/cannabislicensing
+export BASE_URI=http://localhost:5000
 export BASE_PATH=/cannabislicensing
 export REDIS_SERVER=localhost:6379
 
