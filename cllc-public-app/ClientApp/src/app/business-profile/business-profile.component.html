@@ -6,13 +6,27 @@
     <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-      <li [ngClass]="{'active': view_tab == 'tab-0'}"><a (click)="changeTab('tab-0')">Before You Start</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-1'}"><a (click)="changeTab('tab-1')">Corporate Details</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-2'}"><a (click)="changeTab('tab-2')">Organization Structure</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-3'}"><a (click)="changeTab('tab-3')">Directors &amp; Officers</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-4'}"><a (click)="changeTab('tab-4')">Shareholders</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-5'}"><a (click)="changeTab('tab-5')">Financial Information</a></li>
-      <li [ngClass]="{'active': view_tab == 'tab-6'}"><a (click)="changeTab('tab-6')">Security Assessments</a></li>
+      <li [ngClass]="{'active': view_tab == 'tab-0'}">
+        <a (click)="changeTab('tab-0')">Before You Start</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-1'}">
+        <a (click)="changeTab('tab-1')">Corporate Details</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-2'}">
+        <a (click)="changeTab('tab-2')">Organization Structure</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-3'}">
+        <a (click)="changeTab('tab-3')">Directors &amp; Officers</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-4'}">
+        <a (click)="changeTab('tab-4')">Shareholders</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-5'}">
+        <a (click)="changeTab('tab-5')">Financial Information</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-6'}">
+        <a (click)="changeTab('tab-6')">Security Assessments</a>
+      </li>
     </ul>
   </div>
   <div class="col-md-9 col-sm-9">
@@ -40,7 +54,9 @@
     </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
-      <a class="globalButton" *ngIf="view_tab != 'tab-0'" class="btn btn-secondary" tabindex="1" (click)="back()"><strong>Back</strong><br></a>
+      <a class="globalButton" *ngIf="view_tab != 'tab-0'" class="btn btn-secondary" tabindex="1" (click)="back()">
+        <strong>Back</strong><br>
+      </a>
       &nbsp;
       <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
         <strong *ngIf="view_tab != 'tab-0'">Next</strong>
@@ -50,7 +66,4 @@
     </div>
   </div>
 </div>
-
-
-
 
