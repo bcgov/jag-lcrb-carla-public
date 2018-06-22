@@ -212,7 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 AdoxioIsapplicant = true
             };
 
-            string legalEntityString = JsonConvert.SerializeObject(userSettings);
+            string legalEntityString = JsonConvert.SerializeObject(legalEntity);
             _logger.LogError("Legal Entity --> " + legalEntityString);
 
             legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
