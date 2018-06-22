@@ -30,13 +30,17 @@ export class SecurityAssessmentsComponent implements OnInit {
   }
 
   getDirectorsAndOfficersAndShareholders() {
+    let legalEntitiesList = [];
     this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer-shareholder")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition(\"director-officer-shareholder\"): ", data);
         data.forEach((entry) => {
           entry.sendConsentRequest = false;
+          if (entry.isindividual) {
+            legalEntitiesList.push(entry);
+          }
         });
-        this.dataSource.data = data;
+        this.dataSource.data = legalEntitiesList;
       });
   }
 
