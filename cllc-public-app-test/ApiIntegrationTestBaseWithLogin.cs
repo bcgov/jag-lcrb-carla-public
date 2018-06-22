@@ -138,23 +138,37 @@ namespace Gov.Lclb.Cllb.Public.Test
 		{
 			string accountService = "account";
 
-			// cleanup - delete the account and contract when we are done
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
+            // get the account and check if our current user is the primary contact
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
             var response = await _client.SendAsync(request);
-			var _discard = await response.Content.ReadAsStringAsync();
+			string jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            // second delete should return a 404.
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
-            response = await _client.SendAsync(request);
-            _discard = await response.Content.ReadAsStringAsync();
-			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+			ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
-            // should get a 404 if we try a get now.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
-            response = await _client.SendAsync(request);
-            _discard = await response.Content.ReadAsStringAsync();
-			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+			ViewModels.User user = await GetCurrentUser();
+
+            // TODO once AccountController is cleaned up restore this test
+			//if (responseViewModel.primarycontact.id.Equals(user.id))
+			//{
+				// cleanup - delete the account and contract when we are done
+				request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
+				response = await _client.SendAsync(request);
+				var _discard = await response.Content.ReadAsStringAsync();
+				response.EnsureSuccessStatusCode();
+
+				// second delete should return a 404.
+				request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
+				response = await _client.SendAsync(request);
+				_discard = await response.Content.ReadAsStringAsync();
+				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+				// should get a 404 if we try a get now.
+				request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
+				response = await _client.SendAsync(request);
+				_discard = await response.Content.ReadAsStringAsync();
+				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+			//}
 
             await Logout();
 		}
