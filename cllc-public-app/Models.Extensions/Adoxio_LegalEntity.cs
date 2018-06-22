@@ -43,6 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_preferrednonvotingshares = from.Adoxio_preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.Adoxio_preferredvotingshares;
             to.Adoxio_sameasapplyingperson = from.Adoxio_sameasapplyingperson;
+            to.Adoxio_dateofappointment = from.Adoxio_dateofappointment;
         }
 
         /// <summary>
@@ -95,6 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
             to.Adoxio_email = from.email;
+            to.Adoxio_dateofappointment = from.dateofappointment;
             // Assigning the account this way throws exception:
             // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
             //if (from.account.id != null)
@@ -158,6 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPreferredvotingshares = from.preferredvotingshares;
             to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
             to.AdoxioEmail = from.email;
+            to.AdoxioDateofappointment = from.dateofappointment;
             // Assigning the account this way throws exception:
             // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
             //if (from.account.id != null)
@@ -209,6 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.preferredvotingshares = adoxio_legalentity.Adoxio_preferredvotingshares;
                 // convert from int to bool.
                 result.sameasapplyingperson = (adoxio_legalentity.Adoxio_sameasapplyingperson != null && adoxio_legalentity.Adoxio_sameasapplyingperson != 0);
+                result.dateofappointment = adoxio_legalentity.Adoxio_dateofappointment;
 
                 // populate the account.
                 if (adoxio_legalentity.Adoxio_Account != null)
@@ -221,7 +225,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         /// <summary>
-        /// Convert a given voteQuestion to a ViewModel
+        /// Convert a Dynamics Legal Entity to a ViewModel
         /// </summary>        
         public static ViewModels.AdoxioLegalEntity ToViewModel(this MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity)
         {
@@ -279,6 +283,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.preferredvotingshares = adoxio_legalentity.AdoxioPreferredvotingshares;
                 // convert from int to bool.
                 result.sameasapplyingperson = (adoxio_legalentity.AdoxioSameasapplyingperson != null && adoxio_legalentity.AdoxioSameasapplyingperson != 0);
+                result.dateofappointment = adoxio_legalentity.AdoxioDateofappointment;
 
                 // populate the account.
                 if (adoxio_legalentity.AdoxioAccount != null)
@@ -338,6 +343,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
                 result.Adoxio_preferredvotingshares = from.preferredvotingshares;
                 result.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
+                result.Adoxio_dateofappointment = from.dateofappointment;
             }
             return result;
         }
