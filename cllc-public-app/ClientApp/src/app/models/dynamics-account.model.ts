@@ -18,6 +18,8 @@ export class DynamicsAccount {
   mailingAddresPostalCode: string;
 
   primarycontact: DynamicsContact;
+
+  // adoxio_businesstype: number
   
   constructor() { }
 }

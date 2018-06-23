@@ -1,7 +1,6 @@
 
-<div *ngIf="!currentUser.isBceidConfirmed">
-  <div *ngIf="!bceidConfirmAccount">
-
+<div class="container" *ngIf="!currentUser.isBceidConfirmed">
+  <div *ngIf="bceidConfirmAccount">
     <h1>Confirm Business BCeID Information</h1>
     <p>Do we have the correct information?</p>
     <ul>
@@ -10,7 +9,6 @@
     <div class="row">
       <div class="col-md-12 text-left" *ngIf="!showBceidCorrection">
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBceidAccountYes()"><strong>Yes</strong><br></a>
-
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmBceidAccountNo()"><strong>No</strong><br></a>
       </div>
       <div class="col-md-12 text-left" *ngIf="showBceidCorrection">
@@ -18,7 +16,38 @@
       </div>
     </div>
   </div>
-  <div *ngIf="bceidConfirmAccount">
+
+  <div *ngIf="bceidConfirmBusinessType">
+    <h1>Confirm Business BCeID Information</h1>
+    <p>What entity type is {{currentUser.businessname}}?</p>
+    <select class="form-control" (change)="onTypeChange(bceid)" [(ngModel)]="businessType" style="width: 280px;" #bceid>
+      <option value="void">Void</option>
+      <option value="proprietorship">Proprietorship</option>
+      <option value="partnership">Partnership</option>
+      <option value="corporation">Corporation</option>
+      <option value="extra provincially registered company">Extra Provincially Registered Company</option>
+      <option value="other">Other</option>
+    </select><br>
+  
+    <section *ngIf="bceidConfirmBusinessType && businessType">
+      <!-- {{businessValue}} -->
+      <p>What type of organization is {{currentUser.businessname}}?</p>
+      <input type="radio" name="businessRadio" value="1" [(ngModel)]="businessValue"> <label>Private corporation</label><br>
+      <input type="radio" name="businessRadio" value="2" [(ngModel)]="businessValue"> <label>Public corporation</label><br>
+      <input type="radio" name="businessRadio" value="3" [(ngModel)]="businessValue"> <label>Unlimited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="4" [(ngModel)]="businessValue"> <label>Limited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="5" [(ngModel)]="businessValue"> <label>Sole-proprietorship</label><br>
+      <input type="radio" name="businessRadio" value="6" [(ngModel)]="businessValue"> <label>Society</label><br>
+      <input type="radio" name="businessRadio" value="7" [(ngModel)]="businessValue"> <label>Partnership</label><br>
+      <input type="radio" name="businessRadio" value="8" [(ngModel)]="businessValue"> <label>Limited liability partnership</label><br>
+      <input type="radio" name="businessRadio" value="9" [(ngModel)]="businessValue"> <label>Limited partnership</label><br>
+      <input type="radio" name="businessRadio" value="10" [(ngModel)]="businessValue"> <label>First Nation</label><br>
+      <input type="radio" name="businessRadio" value="11" [(ngModel)]="businessValue"> <label>Other</label><br>
+      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
+    </section>
+</div>
+
+  <div *ngIf="bceidConfirmContact">
     <h1>Confirm Business BCeID Information</h1>
     <p>Are you {{currentUser.name}}?</p>
     <div class="row">
@@ -37,4 +66,3 @@
     </div>
   </div>
 </div>
-

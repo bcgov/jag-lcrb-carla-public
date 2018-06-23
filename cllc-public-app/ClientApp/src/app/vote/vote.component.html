@@ -6,7 +6,7 @@
 <div class="text-center">
   <p *ngIf="alreadyVoted==true">
     <mat-card>
-      Thanks for voting on this poll! <i class="material-icons md-18">check_circle</i>
+      Thanks for participating on this poll! <i class="material-icons md-18">check_circle</i>
     </mat-card>
   </p>
 </div>
@@ -22,7 +22,7 @@
 
   <div class="text-center">
     <p>
-      <a id="voteButton" mat-raised-button color="primary" (click)="sendVote(vote_value)">Vote</a>
+      <a id="voteButton" mat-raised-button color="primary" (click)="sendVote(vote_value)">Submit</a>
     </p>
   </div>
 </div>
@@ -32,10 +32,10 @@
 <!-- Show or Hide vote results -->
 <div class="text-center">
   <p *ngIf="showVoteResults==false">
-    <a mat-button color="accent" id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Vote Results</a>
+    <a mat-button color="accent" id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Results</a>
   </p>
   <p *ngIf="showVoteResults==true">
-    <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Vote Results</a>
+    <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Results</a>
   </p>
 </div>
 <!-- Results table -->
