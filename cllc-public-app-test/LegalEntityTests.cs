@@ -359,7 +359,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string service = "adoxiolegalentity";
 
             await LoginAsDefault();
-
+            ViewModels.User user = await GetCurrentUser();
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
@@ -414,8 +414,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(fileContent);
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
+            string accountId = user.accountid;
+
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + accountId + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
@@ -426,6 +428,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Verify that the file can be downloaded and the contents match            
 
             // Cleanup the Legal Entity
+
+            
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
