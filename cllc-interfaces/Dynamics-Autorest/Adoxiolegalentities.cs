@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetOKResponseLegalEntity>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOKResponseModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -184,10 +184,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}' {1}", _statusCode, _responseContent));
+                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
-                {                    
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -212,7 +212,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetOKResponseLegalEntity>();
+            var _result = new HttpOperationResponse<GetOKResponseModelModel>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -221,7 +221,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseLegalEntity>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseModelModel>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -350,10 +350,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 201)
             {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}' {1}", _statusCode, _responseContent));
+                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
-                {                    
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {

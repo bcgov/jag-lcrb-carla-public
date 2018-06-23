@@ -14,7 +14,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     public partial class MicrosoftDynamicsCRMadoxioLegalentity
     {
         
-
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_Account@odata.bind")]

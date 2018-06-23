@@ -81,9 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
 			ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-
-            // name should match.
-            Assert.Equal(initialName + " - Not a Dispensary", responseViewModel.name);
+            
 			//Assert.Equal("Applying Person", responseViewModel.applyingPerson);
 			Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
 			Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
@@ -98,8 +96,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
 			responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-			Assert.Equal(initialName + " - Not a Dispensary", responseViewModel.name);
-			Assert.Equal(currentAccount.id, responseViewModel.applicant.id);
+            Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
+
+            Assert.Equal(currentAccount.id, responseViewModel.applicant.id);
 
 
             // U - Update            
