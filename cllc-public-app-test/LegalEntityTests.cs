@@ -163,7 +163,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal(firstName + " " + lastName, responseViewModel.name);
-            //return;
 
             // U - Update            
             vmAdoxioLegalEntity.firstname = changedName;
@@ -209,6 +208,146 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			await LogoutAndCleanupTestUser(strId);
         }
+
+		[Fact]
+		public async System.Threading.Tasks.Task TestAddShareholderAndDirector()
+		{
+			string service = "adoxiolegalentity";
+
+			var loginUser = randomNewUserName("TestLegalEntityUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+            // get the current account.
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
+            var response = await _client.SendAsync(request);
+            string jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+
+            string accountId = user.accountid;
+
+			// create a Shareholder and fetch it to verify
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+            ViewModels.Account vmAccount = new ViewModels.Account
+            {
+				id = user.accountid
+            };
+            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            {
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                position = ViewModels.PositionOptions.Shareholder,
+                firstname = "Test",
+                middlename = "The",
+                lastname = "Shareholder",
+				name = "Test Shareholder",
+				commonvotingshares = 100,
+                isindividual = true,
+                account = vmAccount 
+            };
+            jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            try
+            {
+                response = await _client.SendAsync(request);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            ViewModels.AdoxioLegalEntity responseShareholder = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+			Assert.Equal(responseShareholder.name, responseViewModel.name);
+
+			// create a Director and fetch it to verify
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+            vmAccount = new ViewModels.Account
+            {
+                id = user.accountid
+            };
+            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            {
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                position = ViewModels.PositionOptions.Director,
+                firstname = "Test",
+                middlename = "The",
+                lastname = "Director",
+                name = "Test Director",
+                dateofbirth = DateTime.Now,
+                isindividual = true,
+                account = vmAccount
+            };
+            jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            try
+            {
+                response = await _client.SendAsync(request);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            ViewModels.AdoxioLegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+			Assert.Equal(responseDirector.name, responseViewModel.name);
+
+			// logout
+			await Logout();
+
+			// login as Default user and verify we can't see the Director or Shareholder
+			await LoginAsDefault();
+
+            // try to fetch LegalEntity records of other account
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+			// logout
+			await Logout();
+
+			// log back in as user from above ^^^
+			await Login(loginUser);
+
+            // delete Director and Shareholder
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + responseDirector.id + "/delete");
+            response = await _client.SendAsync(request);
+            var _discard = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + responseShareholder.id + "/delete");
+            response = await _client.SendAsync(request);
+            _discard = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            // logout and leanup account
+			await LogoutAndCleanupTestUser(strId);
+		}
 
         [Fact]
         public async System.Threading.Tasks.Task TestFileUpload()
