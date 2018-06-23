@@ -5,7 +5,8 @@
         <a href="http://www2.gov.bc.ca/" tabindex="-1">
           <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="assets/bc-logo.svg">
         </a>
-        <span class="title" role="banner">Cannabis Licensing&nbsp;
+        <span class="title" role="banner">
+          Cannabis Licensing&nbsp;
           <span class="label label-beta">Beta</span>
         </span>
       </section>
@@ -32,7 +33,6 @@
     </main>
   </div>
 
-
   <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname)">
     <!-- /NAVBAR -->
     <div class="navigationRibbon" *ngIf="!currentUser">
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-
+    
     <section *ngIf="currentUser" class="navigationRibbon">
       <div class="level2Navigation ">
         <nav class="navbar navbar-expand navbar-dark nav-container">
@@ -61,9 +61,7 @@
                 <div ngbDropdown class="d-inline-block">
                   <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
                   <div ngbDropdownMenu>
-                    <button class="dropdown-item" routerLink="/business-profile">Main Profile</button>
-                    <button class="dropdown-item" routerLink="/business-profile">Profile 1</button>
-                    <button class="dropdown-item" routerLink="/business-profile">Profile 2</button>
+                    <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile', profile.id], {skipLocationChange: true})">{{profile.name}}</button>
                   </div>
                 </div>
               </li>
@@ -89,7 +87,7 @@
 
       <div class="app-main">
         <breadcrumb></breadcrumb>
-          <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
       </div>
 
       <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
@@ -113,7 +111,8 @@
             <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a>
           </li>
           <li class="c2">
-            <a href="policy-document/contact" target="_blank" title="Goes to Contact Page">Contact Us
+            <a href="policy-document/contact" target="_blank" title="Goes to Contact Page">
+              Contact Us
             </a>
           </li>
         </ul>

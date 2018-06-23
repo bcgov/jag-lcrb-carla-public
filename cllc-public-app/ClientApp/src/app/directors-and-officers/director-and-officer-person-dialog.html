@@ -7,14 +7,12 @@
         <fieldset>
           <label>Position</label>
           <br>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="director" formControlName="position" value="Director">
-            <span for="director">Director</span>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="officer" formControlName="position" value="Officer">
-            <span>Officer</span>
-          </div>
+
+          <mat-radio-group class="radio-group" formControlName="position">
+            <mat-radio-button class="radio-button" name="Director" value="Director">Director</mat-radio-button>
+            <mat-radio-button class="radio-button" name="Officer" value="Officer">Officer</mat-radio-button>
+          </mat-radio-group>
+
           <div *ngIf="this.isFieldError('position')" class="error-msg">
             <div *ngIf="directorOfficerForm.controls['position'].hasError('required') ">
               This is required
@@ -58,11 +56,11 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
+      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateOfAppointment')}">
         <label for="dateIssued">Date of Appointment</label>
-        <input type="date" class="form-control" formControlName="dateIssued">
-        <div *ngIf="this.isFieldError('dateIssued')">
-          <div *ngIf="directorOfficerForm.controls['dateIssued'].hasError('dateLessThanToday') ">
+        <input type="date" class="form-control" formControlName="dateOfAppointment">
+        <div *ngIf="this.isFieldError('dateOfAppointment')">
+          <div *ngIf="directorOfficerForm.controls['dateOfAppointment'].hasError('dateLessThanToday') ">
             Date must be before today
           </div>
         </div>

@@ -4,6 +4,11 @@ import { DynamicsDataService } from "../services/dynamics-data.service";
 import { DynamicsAccount } from "../models/dynamics-account.model";
 import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
+import { ReadVarExpr } from '@angular/compiler';
+
+// class BusinessType{
+//   value: string;
+// }
 
 @Component({
     selector: 'app-bceid-confirmation',
@@ -13,15 +18,38 @@ import { User } from "../models/user.model";
 /** bceid-confirmation component*/
 export class BceidConfirmationComponent {
   @Input('currentUser') currentUser: User;
-  public bceidConfirmAccount: boolean;
-  public bceidConfirmContact: boolean;
+  public bceidConfirmAccount: boolean=true;
+  public bceidConfirmBusinessType: boolean=false;
+  public bceidConfirmContact: boolean=false;
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
+  corp: boolean;
+  businessType: string = "";
+  prefix: string = "a";
+  businessValue: number;
   busy: Promise<any>;
 
     /** bceid-confirmation ctor */
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
+    
+  }
 
+  onTypeChange(select) {
+   switch (select.value) {
+     case "void":
+     case "proprietorship":
+     case "partnership":
+     case "corporation":
+       this.prefix = "a";
+       break;
+     case "extra provincially registered company":
+     case "other":
+       this.prefix = "an";
+       break;
+   
+     default:
+       break;
+   }
   }
   
   confirmBceid() {
@@ -29,11 +57,12 @@ export class BceidConfirmationComponent {
     this.currentUser.isBceidConfirmed = true;
   }
 
-
    confirmBceidAccountYes() {
     // confirm BCeID
-    this.bceidConfirmAccount = true;
+    this.bceidConfirmAccount = false;
+    this.bceidConfirmBusinessType = true;
   }
+
 
    confirmBceidAccountNo() {
      // confirm BCeID
@@ -46,6 +75,12 @@ export class BceidConfirmationComponent {
       this.bceidConfirmContact = true;
     }
 
+    confirmCorpType() {
+      this.corp = true;
+      this.bceidConfirmBusinessType = false;
+      this.bceidConfirmContact = true;
+    }
+
     confirmContactYes() {
       // create a contact
       var account = new DynamicsAccount();
@@ -55,6 +90,7 @@ export class BceidConfirmationComponent {
       contact.fullname = this.currentUser.name;
       contact.id = this.currentUser.contactid;
       account.primarycontact = contact;
+      // account.adoxio_businesstype = this.corp;
 
       var payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)

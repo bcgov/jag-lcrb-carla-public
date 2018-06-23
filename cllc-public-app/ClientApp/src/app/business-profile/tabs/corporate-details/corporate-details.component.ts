@@ -42,10 +42,8 @@ export class CorporateDetailsComponent implements OnInit {
       bcIncorporationNumber: [''],//Validators.required
       dateOfIncorporationInBC: [''],
       businessNumber: [''],
-      pstNumber: [''],
       contactEmail: [''],
       contactPhone: [''],
-      //isCorporationOutsideBC: ['', Validators.required],
       mailingAddressName: [''],
       mailingAddressStreet: [''],
       mailingAddressCity: [''],
