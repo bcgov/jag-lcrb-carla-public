@@ -56,7 +56,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 var contact = await dynamicsClient.GetContactById(applyingPersonId);
                 adoxioApplicationVM.applyingPerson = contact.Fullname;
             }
-			adoxioApplicationVM.applicant = dynamicsApplication.AdoxioApplicant.ToViewModel();
+
+            if (dynamicsApplication._adoxioApplicantValue != null)
+            {
+                var applicant = await dynamicsClient.GetAccountById(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
+                adoxioApplicationVM.applicant = applicant.ToViewModel();
+            }
+
+			
 
             //get job number
             adoxioApplicationVM.jobNumber = dynamicsApplication.AdoxioJobnumber;

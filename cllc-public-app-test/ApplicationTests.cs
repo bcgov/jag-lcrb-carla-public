@@ -97,7 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
 			responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
             Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
-
+            Assert.True(responseViewModel.applicant != null);
             Assert.Equal(currentAccount.id, responseViewModel.applicant.id);
 
 
