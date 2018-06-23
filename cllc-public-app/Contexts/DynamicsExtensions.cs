@@ -402,6 +402,30 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        
+        /// <summary>
+        /// Get a Account by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<MicrosoftDynamicsCRMaccount> GetAccountBySiteminderBusinessGuid(this IDynamicsClient system, string siteminderId)
+        {
+            MicrosoftDynamicsCRMaccount result = null;
+            var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + siteminderId + "'");
+            result = accountResponse.Value.FirstOrDefault();
+            // get the primary contact.
+            if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
+            {
+                result.Primarycontactid = await system.GetContactById(Guid.Parse(result._primarycontactidValue));
+            }
+
+            return result;
+            
+        }
+
+
         /// <summary>
         /// Get a Account by their Guid
         /// </summary>
@@ -447,6 +471,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = null;
             }
+
+            // get the primary contact.
+            if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
+            {
+                try
+                {
+                    result.Primarycontactid = await system.GetContactById(Guid.Parse(result._primarycontactidValue));
+                }
+                catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+                {
+                    result.Primarycontactid = null;
+                }
+            }
             return result;
         }
 
@@ -473,6 +510,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // fetch from Dynamics.
                 result = await system.Contacts.GetByKeyAsync(id.ToString());
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                result = null;
+            }
+            return result;
+        }
+
+        public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Applications.GetByKeyAsync(id.ToString());
             }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
             {
@@ -537,6 +589,22 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="distributedCache"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
+        public static async Task<MicrosoftDynamicsCRMcontact> GetContactBySiteminderGuid(this IDynamicsClient system, string siteminderId)
+        {
+            MicrosoftDynamicsCRMcontact result = null;
+            var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + siteminderId + "'");
+            result = contactsResponse.Value.FirstOrDefault();			
+            return result;
+        }
+
+
+        /// <summary>
+        /// Get a contact by their Siteminder ID
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="siteminderId"></param>
+        /// <returns></returns>
         public static async Task<Contact> GetContactBySiteminderGuid(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
         {
             Contact result = null;
@@ -548,32 +616,32 @@ namespace Gov.Lclb.Cllb.Interfaces
                 temp = distributedCache.GetString(key);
             }
 
-            if (! string.IsNullOrEmpty(temp))
+            if (!string.IsNullOrEmpty(temp))
             {
                 Guid id = new Guid(temp);
                 result = await system.GetContactById(distributedCache, id);
             }
             else
             {
-				try
-				{
-					// fetch from Dynamics.
+                try
+                {
+                    // fetch from Dynamics.
 
-					var contacts = await system.Contacts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
+                    var contacts = await system.Contacts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
 
-					result = contacts.FirstOrDefault();
-					if (result != null && distributedCache != null)
-					{
-						// store the contact data.
-						Guid id = (Guid)result.Contactid;
-						distributedCache.SetString(key, id.ToString());
-						// update the cache for the contact.
-						string contact_key = "Contact_" + id.ToString();
-						string cacheValue = JsonConvert.SerializeObject(result);
-						distributedCache.SetString(contact_key, cacheValue);
-					}
-				}
-				catch (DataServiceQueryException dsqe)
+                    result = contacts.FirstOrDefault();
+                    if (result != null && distributedCache != null)
+                    {
+                        // store the contact data.
+                        Guid id = (Guid)result.Contactid;
+                        distributedCache.SetString(key, id.ToString());
+                        // update the cache for the contact.
+                        string contact_key = "Contact_" + id.ToString();
+                        string cacheValue = JsonConvert.SerializeObject(result);
+                        distributedCache.SetString(contact_key, cacheValue);
+                    }
+                }
+                catch (DataServiceQueryException dsqe)
                 {
                     if (dsqe.Message.Contains("Does Not Exist"))
                         result = null;
@@ -585,7 +653,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-		public static async Task<MicrosoftDynamicsCRMadoxioLegalentity> GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
+        public static async Task<MicrosoftDynamicsCRMadoxioLegalentity> GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
 		{
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
 			string accountFilter = "_adoxio_account_value eq " + id.ToString();
@@ -604,9 +672,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<Adoxio_application> GetAdoxioApplicationById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
+        public static async Task<MicrosoftDynamicsCRMadoxioapplication> GetAdoxioApplicationById(this Microsoft.Dynamics.CRM.System system, Guid id)
         {
-			Adoxio_application result = null;
+			MicrosoftDynamicsCRMadoxioapplication result = null;
             // fetch from Dynamics.
             try
             {
