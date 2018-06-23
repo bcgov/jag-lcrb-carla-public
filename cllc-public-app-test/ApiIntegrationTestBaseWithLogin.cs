@@ -149,8 +149,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.User user = await GetCurrentUser();
 
             // TODO once AccountController is cleaned up restore this test
-			//if (responseViewModel.primarycontact.id.Equals(user.id))
-			//{
+			if (responseViewModel.primarycontact.id.Equals(user.id))
+			{
 				// cleanup - delete the account and contract when we are done
 				request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
 				response = await _client.SendAsync(request);
@@ -168,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 				response = await _client.SendAsync(request);
 				_discard = await response.Content.ReadAsStringAsync();
 				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-			//}
+			}
 
             await Logout();
 		}
