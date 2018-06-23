@@ -52,19 +52,6 @@
         </section>
 
         <section>
-          <div [ngClass]="{'has-error': this.isFieldError('pstNumber')}">
-            <label for="">PST Number</label>
-            <br>
-            <input class="form-control" style="width: 250px;" type="text" id="pstNumber" formControlName="pstNumber">
-            <div *ngIf="this.isFieldError('pstNumber')" class="alert alert-danger" style="width: 250px;">
-              <div *ngIf="corporateDetailsForm.controls['pstNumber'].hasError('required') ">
-                This is required
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
           <div [ngClass]="{'has-error': this.isFieldError('contactEmail')}">
             <label for="">Email</label>
             <br>
