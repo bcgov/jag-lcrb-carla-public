@@ -182,7 +182,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account = new MicrosoftDynamicsCRMaccount();
                 account.CopyValues(item, updateIfNull);
                 // ensure that we create an account for the current user.				
-                item.externalId = accountSiteminderGuid;
+                //item.externalId = accountSiteminderGuid;
+				account.AdoxioExternalid = accountSiteminderGuid;
 
                 account.Primarycontactid = userContact;
                 // TODO figure out how to properly set these two values:
