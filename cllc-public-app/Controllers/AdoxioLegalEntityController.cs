@@ -294,21 +294,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 			if (accountId != null)
             {
-                try
+                var accountIdGUID = Guid.Parse(accountId);
+                var account = await _dynamicsClient.GetAccountById(accountIdGUID);
+
+                if (account == null)
                 {
-                    var accountGUID = new Guid(accountId);
-                    var account = await _system.Accounts.ByKey(accountid: accountGUID).GetValueAsync();
+                    return new NotFoundResult();
+                }
 
-                    string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
-                    var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
-                    string folderName = $"{account.Name}_{accountIdCleaned}";
+                string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
+                var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
+                string folderName = $"{account.Name}_{accountIdCleaned}";
 
+                try
+                {                
                     await _sharePointFileManager.AddFile(folderName, fileName, file.OpenReadStream(), file.ContentType);
                 }
-                catch (Exception dsqe)
+                catch (Exception ex)
                 {
-					_logger.LogError(dsqe.Message);
-					_logger.LogError(dsqe.StackTrace);
+					_logger.LogError(ex.Message);
+					_logger.LogError(ex.StackTrace);
                     return new NotFoundResult();
                 }
             }
@@ -360,7 +365,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
             MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
-            adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntity.AdoxioLegalentityid);
+            if (tempLegalEntity != null)
+            {
+                adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntity.AdoxioLegalentityid);
+            }
             // create the record.
 
             adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
