@@ -57,5 +57,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Account account { get; set; }
         List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; }
+        public DateTimeOffset? dateofappointment { get; set; }
     }
 }
