@@ -54,4 +54,16 @@ export class AppComponent {
         this.businessProfiles = res.json();
       });
   }
+
+  isIE10orLower() {
+    let result, jscriptVersion;    
+    result = false;
+    
+    jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
+    
+    if (jscriptVersion !== undefined) {
+      result = true;
+    }
+    return result;
+  }
 }
