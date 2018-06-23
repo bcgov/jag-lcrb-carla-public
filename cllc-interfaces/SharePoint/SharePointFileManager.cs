@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Interfaces
@@ -27,7 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private AuthenticationResult authenticationResult;
         public string ServerAppIdUri { get; set; }
         public string WebName { get; set; }
-        public SharePointFileManager(string serverAppIdUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword)
+        public SharePointFileManager(string serverAppIdUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword, string ssgUsername, string ssgPassword)
         {
             this.ServerAppIdUri = serverAppIdUri;
             this.WebName = webname;
@@ -36,26 +37,43 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             this.listData = new LCLBCannabisDEVDataContext(new Uri(listDataEndpoint));
             this.apiData = new ApiData(new Uri(apiEndpoint));
-             
-            // add authentication.
-            var authenticationContext = new AuthenticationContext(
-               "https://login.windows.net/" + aadTenantId);
 
-            // Create the Client cert.
-            X509Certificate2 cert = new X509Certificate2(certFileName, certPassword);
-            ClientAssertionCertificate clientAssertionCertificate = new ClientAssertionCertificate(clientId, cert);
+            if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
+            {
 
-            //ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-            var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientAssertionCertificate);
-            task.Wait();
-            authenticationResult = task.Result;
+                // add authentication.
+                var authenticationContext = new AuthenticationContext(
+                   "https://login.windows.net/" + aadTenantId);
+
+                // Create the Client cert.
+                X509Certificate2 cert = new X509Certificate2(certFileName, certPassword);
+                ClientAssertionCertificate clientAssertionCertificate = new ClientAssertionCertificate(clientId, cert);
+
+                //ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
+                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientAssertionCertificate);
+                task.Wait();
+                authenticationResult = task.Result;
+
+
+                apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", authenticationResult.CreateAuthorizationHeader());
+
+                listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", authenticationResult.CreateAuthorizationHeader());
+            }
+            else
+            {
+                // authenticate using the SSG.                
+                string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(ssgUsername + ":" + ssgPassword));
+
+                apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", "Basic " + credentials);
+
+                listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", "Basic " + credentials);
+            }
+
             
-
-            apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-            "Authorization", authenticationResult.CreateAuthorizationHeader());
-
-            listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-            "Authorization", authenticationResult.CreateAuthorizationHeader());
         }
 
         public async Task<List<FileSystemItem>> GetFiles ()
