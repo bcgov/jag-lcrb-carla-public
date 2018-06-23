@@ -23,7 +23,7 @@ export class SurveyComponent {
 
     let surveyModel = new Survey.Model(this.jsonData);
     surveyModel.showQuestionNumbers = 'off';
-    Survey.Survey.cssType = "bootstrap";
+    // Survey.Survey.cssType = "bootstrap";  //This breaks IE 11
     Survey.defaultBootstrapCss.page.root = "sv_page";
     Survey.defaultBootstrapCss.pageDescription = "sv_page_description";
     Survey.defaultBootstrapCss.pageTitle = "sv_page_title";
