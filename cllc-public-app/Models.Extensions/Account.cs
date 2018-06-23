@@ -190,6 +190,20 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         /// <summary>
+        /// Copy values from a ViewModel to a Dynamics Account.
+        /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
+        /// updateIfNull defaults to true
+        /// </summary>
+        /// <param name="toDynamics"></param>
+        /// <param name="fromVM"></param>
+        /// <param name="copyIfNull"></param>
+        public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM)
+        {
+            bool copyIfNull = true;
+            toDynamics.CopyValues(fromVM, copyIfNull);            
+        }
+
+        /// <summary>
         /// Create a new ViewModel from a Dynamics Account
         /// </summary>
         /// <param name="account"></param>

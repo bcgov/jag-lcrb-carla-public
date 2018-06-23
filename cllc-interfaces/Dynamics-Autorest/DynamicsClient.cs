@@ -46,6 +46,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccounts Accounts { get; private set; }
 
         /// <summary>
+        /// Gets the IApplications.
+        /// </summary>
+        public virtual IApplications Applications { get; private set; }
+
+        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
@@ -257,6 +262,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
+            Applications = new Applications(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
             Contacts = new Contacts(this);
             BaseUri = new System.Uri("http://localhost");
