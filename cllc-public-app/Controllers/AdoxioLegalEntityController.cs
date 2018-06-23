@@ -514,10 +514,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         string confirmationEmailLink = GetConsentLink(email, recipientId, id);
                         string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
-                        /* send the user an email confirmation. */
-                        string body = "<img src='" + bclogo + "'/><br><h2>Security Check Consent</h2>"
-                                     + "<p>Please confirm your security consent by clicking this link:</p>"
-                                     + "<a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a>";
+						/* send the user an email confirmation. */
+						string body =
+							  "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
+							+ "<p>"
+							+ "Dear " + firstname + " " + lastname + ","
+							+ "</p>"
+							+ "<p>"
+							+ "An application from " + "[TBD Company Name]"
+							+ " has been submitted for a non-medical retail cannabis licence in British Columbia. "
+							+ "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
+							+ " you are required to authorize a security screening — including criminal and police record checks—"
+							+ "and financial integrity checks as part of the application process. "
+							+ "</p>"
+							+ "<p>"
+							+ "Where you reside will determine how you are able to authorize the security screening."
+							+ "</p>"
+							+ "<p><strong>B.C. Residents</strong></p>"
+							+ "<p>"
+							+ "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
+							+ "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
+							+ "</p>"
+							+ "<p>"
+							+ "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
+							+ "</p>"
+							+ "<p>"
+							+ "After you receive your verified Photo B.C. Services Card, login through this unique link:"
+							+ "</p>"
+							+ "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
+							+ "<p><strong>Out of Province Residents</strong></p>"
+							+ "<p>TBD</p>"
+							+ "<p><strong>Residents Outside of Canada</strong></p>"
+							+ "<p>TBD</p>"
+							+ "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
+							+ "<p>Do not reply to this email address</p>";
 
                         // send the email.
                         SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
