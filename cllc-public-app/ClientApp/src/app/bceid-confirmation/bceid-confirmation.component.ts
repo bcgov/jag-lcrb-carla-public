@@ -23,9 +23,7 @@ export class BceidConfirmationComponent {
   public bceidConfirmContact: boolean=false;
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
-  corp: boolean;
   businessType: string = "";
-  prefix: string = "a";
   businessValue: number;
   busy: Promise<any>;
 
@@ -33,24 +31,6 @@ export class BceidConfirmationComponent {
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
     // TODO load BCeID data from service
     this.businessType = "Corporation";
-  }
-
-  onTypeChange(select) {
-   switch (select.value) {
-     case "void":
-     case "proprietorship":
-     case "partnership":
-     case "corporation":
-       this.prefix = "a";
-       break;
-     case "extra provincially registered company":
-     case "other":
-       this.prefix = "an";
-       break;
-   
-     default:
-       break;
-   }
   }
   
   confirmBceid() {
@@ -62,6 +42,14 @@ export class BceidConfirmationComponent {
     // confirm BCeID
     this.bceidConfirmAccount = false;
     this.bceidConfirmBusinessType = true;
+    this.dynamicsDataService.getRecord("account", this.currentUser.accountid)
+      .then((data) => {
+        console.log(data);
+        // this.account = data;
+        // if (data.primarycontact) {
+        //   this.contactId = data.primarycontact.id;
+        // }              
+      });
   }
 
 
@@ -77,24 +65,25 @@ export class BceidConfirmationComponent {
     }
 
     confirmCorpType() {
-      this.corp = true;
       this.bceidConfirmBusinessType = false;
       this.bceidConfirmContact = true;
     }
 
     confirmContactYes() {
       // create a contact
-      var account = new DynamicsAccount();
+      let account = new DynamicsAccount();
       account.name = this.currentUser.businessname;
       account.id = this.currentUser.accountid;
-      var contact = new DynamicsContact();
+      let contact = new DynamicsContact();
       contact.fullname = this.currentUser.name;
       contact.id = this.currentUser.contactid;
       account.primarycontact = contact;
-      // account.adoxio_businesstype = this.corp;
 
       // TODO submit selected comany type and sub-type to the account service
-      var payload = JSON.stringify(account);
+      // account.adoxio_business_type = 
+      // account.adoxio_business_subtype = 
+
+      let payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
         .then((data) => {
           window.location.reload();
