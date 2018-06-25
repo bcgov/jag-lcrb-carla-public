@@ -29,9 +29,10 @@ export class BceidConfirmationComponent {
   businessValue: number;
   busy: Promise<any>;
 
-    /** bceid-confirmation ctor */
+  /** bceid-confirmation ctor */
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
-    
+    // TODO load BCeID data from service
+    this.businessType = "Corporation";
   }
 
   onTypeChange(select) {
