@@ -198,11 +198,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 				if (bceidBusiness != null)
 				{
-                    // TODO
+                    // TODO set values from BCeID service, as well as company type and sub-type
 				}
 				else
 				{
-					// TODO figure out how to properly set these two values:
+					// TODO figure out how to properly set these two values (from user selection)
 					account.AdoxioAccounttype = 845280000;
 					account.AdoxioBusinesstype = 845280000;
 				}
