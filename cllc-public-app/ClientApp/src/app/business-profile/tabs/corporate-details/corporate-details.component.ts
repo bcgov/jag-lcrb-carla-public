@@ -28,6 +28,7 @@ export class CorporateDetailsComponent implements OnInit {
     this.busy = this.accountDataService.getAccount(this.accountId).subscribe(
       res => {
         let data = this.toFormModel(res.json());
+        data.dateOfIncorporationInBC = new Date(data.dateOfIncorporationInBC);
         this.corporateDetailsForm.patchValue(data);
       },
       err => {
@@ -111,19 +112,19 @@ export class CorporateDetailsComponent implements OnInit {
 
   toAccountModel(formData) {
     formData.id = this.accountId;
-    let date = formData.dateOfIncorporationInBC;
-    formData.dateOfIncorporationInBC = new Date(date.year, date.month-1, date.day);
+    //let date = formData.dateOfIncorporationInBC;
+    //formData.dateOfIncorporationInBC = new Date(date.year, date.month-1, date.day);
 
     return formData;
   }
 
   toFormModel(dynamicsData) {
-    let date: Date = new Date(dynamicsData.dateOfIncorporationInBC);
-    dynamicsData.dateOfIncorporationInBC = {
-      year: date.getFullYear(),
-      month: date.getMonth()+1,
-      day: date.getDate()
-    }
+    //let date: Date = new Date(dynamicsData.dateOfIncorporationInBC);
+    //dynamicsData.dateOfIncorporationInBC = {
+    //  year: date.getFullYear(),
+    //  month: date.getMonth()+1,
+    //  day: date.getDate()
+    //}
     return dynamicsData;
   }
 
