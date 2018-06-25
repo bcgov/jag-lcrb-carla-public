@@ -55,7 +55,7 @@ use Odata.OpenAPI to convert the file
 `dotnet run --file \tmp\meta-data\metadata.xml -j -o dynamics.json`
 
 4. Convert the openapi v3 file into openapi v2 using api-spec-converter   
-`api-spec-converter dynamics.json --from=swagger_3 --to=swagger_2 > dynamics-2.json`
+`api-spec-converter dynamics.json --from=openapi_3 --to=swagger_2 > dynamics-2.json`
 5. Use this file as an input to autorest.
 
 ```
