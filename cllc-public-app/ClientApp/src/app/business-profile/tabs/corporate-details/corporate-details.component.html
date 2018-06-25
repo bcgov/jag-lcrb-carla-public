@@ -23,7 +23,7 @@
           <div [ngClass]="{'has-error': this.isFieldError('dateOfIncorporationInBC')}">
             <label>Date of Incorporation in B.C.</label>
             <br>
-            <div class="input-group">
+            <!--<div class="input-group">
               <input class="form-control" style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker"
                 formControlName="dateOfIncorporationInBC">
               <div class="input-group-append">
@@ -34,7 +34,13 @@
                   This is required
                 </div>
               </div>
-            </div>
+            </div>-->
+              <input type="date" class="form-control" formControlName="dateOfIncorporationInBC" style="width: 250px;">
+              <div *ngIf="this.isFieldError('dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="corporateDetailsForm.controls['dateOfIncorporationInBC'].hasError('required') ">
+                  This is required
+                </div>
+              </div>
           </div>
         </section>
 
