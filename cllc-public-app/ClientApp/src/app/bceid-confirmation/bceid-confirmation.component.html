@@ -19,7 +19,7 @@
 
   <div *ngIf="bceidConfirmBusinessType">
     <h1>Confirm Business BCeID Information</h1>
-    <p>Please confirm the Business Type of {{currentUser.businessname}}?</p>
+    <p>Please confirm the Business Type of {{currentUser.businessname}}.</p>
     <select class="form-control" (change)="onTypeChange(bceid)" [(ngModel)]="businessType" style="width: 280px;" #bceid>
       <option value="Void">Not Specified</option>
       <option value="Proprietorship">Proprietorship</option>
