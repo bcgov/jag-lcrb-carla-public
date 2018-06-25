@@ -12,7 +12,7 @@ using Microsoft.OData.Client;
 using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
-
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -23,38 +23,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
-		private readonly ILogger _logger;        
-  
-		public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+		private readonly ILogger _logger;
+        private readonly IDynamicsClient _dynamicsClient;
+
+        public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             this._system = context;
             this._httpContextAccessor = httpContextAccessor;
-            this._distributedCache = null; // distributedCache;
-			_logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
+            this._distributedCache = null;
+            this._dynamicsClient = dynamicsClient;
+            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
         }
 
         private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByApplicant(string applicantId)
         {
             List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
-            IEnumerable<Adoxio_application> dynamicsApplicationList = null;
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty (applicantId))
             {
-                dynamicsApplicationList = await _system.Adoxio_applications.ExecuteAsync();
+                dynamicsApplicationList = _dynamicsClient.Applications.Get().Value;
             }
             else
             {
-                // Shareholders have an adoxio_position value of x.
-                dynamicsApplicationList = await _system.Adoxio_applications
-                    .AddQueryOption("$filter", "_adoxio_applicant_value eq " + applicantId) 
-                    .ExecuteAsync();
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(filter:"_adoxio_applicant_value eq " + applicantId).Value;
+
             }
 
             if (dynamicsApplicationList != null)
             {
-                foreach (Adoxio_application dynamicsApplication in dynamicsApplicationList)
+                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
-                    result.Add(await dynamicsApplication.ToViewModel(_system));
+                    result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
                 }
             }
             return result;
@@ -101,18 +101,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			_logger.LogError("User id = " + userSettings.AccountId);
 
 			ViewModels.AdoxioApplication result = null;
-            var dynamicsApplication = await _system.GetAdoxioApplicationById(_distributedCache, Guid.Parse(id));
+            var dynamicsApplication = await _dynamicsClient.GetApplicationById(Guid.Parse(id));
             if (dynamicsApplication == null)
             {
                 return NotFound();
             }
             else
             {
-				if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication.Adoxio_Applicant.Accountid))
+				if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
                 {
                     return new NotFoundResult();
                 }
-                result = await dynamicsApplication.ToViewModel(_system);
+                result = await dynamicsApplication.ToViewModel(_dynamicsClient);
             }
 
             return Json(result);
@@ -120,136 +120,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpPost()]
 		public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
-        {
-			Adoxio_application adoxioApplication = await item.ToModel(_system);
-
-			// create a DataServiceCollection to add the record
-            var ApplicationCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
-			ApplicationCollection.Add(adoxioApplication);
+        {			
 
 			// for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-			UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
-			Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
-			adoxioApplication.CopyValues(item);
-			adoxioApplication.Adoxio_Applicant = owningAccount;
+			UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);			
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+            adoxioApplication.CopyValues(item);
+			adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI ("adoxio_applications", userSettings.AccountId);
 
-			// PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-            foreach (OperationResponse result in dsr)
-            {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
-            }
+            adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
             
-			var id = dsr.GetAssignedIdOfType("application");
-			if (id == null)
-			{
-				throw new Exception("Error application id is null");
-			}
-			Adoxio_application application = await _system.GetAdoxioApplicationById(_distributedCache, (Guid)id);
-			if (application == null) {
-				return StatusCode(500, "Something bad happened");
-			}
-			application.Adoxio_applicationid = id;
-
-			return Json(await application.ToViewModel(_system));
-
-            /*
-			// create a DataServiceCollection to add the record
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Adoxio_application>(_system);
-            // add a new contact.
-            ContactCollection.Add(adoxioApplication);
+			return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
             
-            // changes need to made after the add in order for them to be saved.
-            // tab_general
-            adoxioApplication.Adoxio_LicenceType = item.Adoxio_LicenceType; // Licence Type*
-            adoxioApplication.Adoxio_ApplyingPerson = item.Adoxio_ApplyingPerson; // Applying Person
-            adoxioApplication.Adoxio_LastCompletedStep = item.Adoxio_LastCompletedStep; //Last Completed Step
-            adoxioApplication.Adoxio_jobnumber = item.Adoxio_jobnumber; //Job Number
-            adoxioApplication.Adoxio_Applicant = item.Adoxio_Applicant; // Applicant
-            adoxioApplication.Adoxio_otherapplicanttype = item.Adoxio_otherapplicanttype; // Other Applicant Type
-            adoxioApplication.Adoxio_MarkStepIncomplete = item.Adoxio_MarkStepIncomplete; // Mark Step Incomplete
-            adoxioApplication.Adoxio_AssignedLicence = item.Adoxio_AssignedLicence; // Assigned Licence
-
-            // tab_businessinfo
-            adoxioApplication.Adoxio_applicanttype = item.Adoxio_applicanttype; // Business Type*
-            adoxioApplication.Adoxio_businessnumber = item.Adoxio_businessnumber; // The Business Registration Number is
-            adoxioApplication.Adoxio_businessnumber = item.Adoxio_businessnumber; // The Business Name is
-            adoxioApplication.Adoxio_addressstreet = item.Adoxio_addressstreet; // Street
-            adoxioApplication.Adoxio_addresscity = item.Adoxio_addresscity; // City
-            adoxioApplication.Adoxio_addressprovince = item.Adoxio_addressprovince; // Province
-            adoxioApplication.Adoxio_addresspostalcode = item.Adoxio_addresspostalcode; // Postal Code
-            adoxioApplication.Adoxio_addresscountry = item.Adoxio_addresscountry; // Country
-
-            // tab_contactperson
-            adoxioApplication.Adoxio_areyouthemaincontactforapplication = item.Adoxio_areyouthemaincontactforapplication; // Are you the main person to contact for  this application?
-            adoxioApplication.Adoxio_contactpersonfirstname = item.Adoxio_contactpersonfirstname; // First Name
-            adoxioApplication.Adoxio_contactmiddlename = item.Adoxio_contactmiddlename; // Middle Name
-            adoxioApplication.Adoxio_contactpersonlastname = item.Adoxio_contactpersonlastname; // Last Name
-            adoxioApplication.Adoxio_email = item.Adoxio_email; // Email
-            adoxioApplication.Adoxio_contactpersonphone = item.Adoxio_contactpersonphone; // Phone
-
-            //  tab_personalhistory
-            adoxioApplication.Adoxio_applicanttype = item.Adoxio_applicanttype; // Applicant Type*
-            adoxioApplication.Adoxio_personalhistoryinstructionfield = item.Adoxio_personalhistoryinstructionfield; // Personal History Instruction Field
-
-            // tab_establishmentpart1
-            adoxioApplication.Adoxio_registeredestablishment = item.Adoxio_registeredestablishment; // Are you applying for a previously registered establishment in your account?*
-            adoxioApplication.Adoxio_LicenceEstablishment = item.Adoxio_LicenceEstablishment; // Establishment
-            adoxioApplication.Adoxio_establishmentpropsedname = item.Adoxio_establishmentpropsedname; // The Establishment Name is
-            adoxioApplication.Adoxio_establishmentaddressstreet = item.Adoxio_establishmentaddressstreet; // Street
-            adoxioApplication.Adoxio_establishmentaddresscity = item.Adoxio_establishmentaddresscity; // City
-            adoxioApplication.Adoxio_establishmentaddresspostalcode = item.Adoxio_establishmentaddresspostalcode; // Postal Code
-            adoxioApplication.Adoxio_establishmentaddresscountry = item.Adoxio_establishmentaddresscountry; // Country
-            adoxioApplication.Adoxio_LocalGoverment = item.Adoxio_LocalGoverment; // Local Goverment
-            adoxioApplication.Adoxio_Jurisdiction = item.Adoxio_Jurisdiction; // Jurisdiction
-            adoxioApplication.Adoxio_establishmentparcelid = item.Adoxio_establishmentparcelid; // Parcel ID
-
-            // tab_establishmentpart2
-            adoxioApplication.Adoxio_establishmentcomplytozoningregulations = item.Adoxio_establishmentcomplytozoningregulations; // Does the Establishment location comply to all zoning regulations?
-            adoxioApplication.Adoxio_establishmentcomplytoallbylaws = item.Adoxio_establishmentcomplytoallbylaws; // Does the Establishment location comply to all by-laws?
-
-            // tab_establishmentpart3
-            adoxioApplication.Adoxio_holdsotherlicencesoptionset = item.Adoxio_holdsotherlicencesoptionset; // Does the Establishment hold other licences?
-            adoxioApplication.Adoxio_otherbusinessesatthesamelocation = item.Adoxio_otherbusinessesatthesamelocation; // Are there other businesses operating at the same location?
-            adoxioApplication.Adoxio_establishmentotherbusinessname = item.Adoxio_establishmentotherbusinessname; // What is the Business Name?
-            adoxioApplication.Adoxio_establishmentotherbusinessnature = item.Adoxio_establishmentotherbusinessnature; // In what nature this Business is operating?
-
-            // tab_supportingdocuments
-            adoxioApplication.Adoxio_uploadedevidenceofvalidinterest = item.Adoxio_uploadedevidenceofvalidinterest; // Have you attached and uploaded the Evidence of Valid Interest?
-            adoxioApplication.Adoxio_uploadedfloorplans = item.Adoxio_uploadedfloorplans; // Have you attached and uploaded the Floor Plan?
-            adoxioApplication.Adoxio_uploadedsitemap = item.Adoxio_uploadedsitemap; // Have you attached and uploaded the Site Map?
-            adoxioApplication.Adoxio_uploadedimageofestablishment = item.Adoxio_uploadedimageofestablishment; // Have you attached and uploaded Images of the Establishment?
-
-            // tab_declarationofsigningauthority
-            adoxioApplication.Adoxio_signatureagreement = item.Adoxio_signatureagreement; // Signature Agreement
-            adoxioApplication.Adoxio_signaturename = item.Adoxio_signaturename; // Signature Name
-            adoxioApplication.Adoxio_signatureposition = item.Adoxio_signatureposition; // Signature Position
-            adoxioApplication.Adoxio_signaturedate = item.Adoxio_signaturedate; // Signature Date
-
-            // tab_payment
-            adoxioApplication.Adoxio_paymentmethod = item.Adoxio_paymentmethod; // Payment Method
-            adoxioApplication.Adoxio_Invoice = item.Adoxio_Invoice; // Invoice
-
-            // tab_LicenceFeePayment
-            adoxioApplication.Adoxio_licencefeeinvoicepaid = item.Adoxio_licencefeeinvoicepaid; // Licence Fee Invoice Paid
-            adoxioApplication.Adoxio_LicenceFeeInvoice = item.Adoxio_LicenceFeeInvoice; // Licence Fee Invoice
-
-            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-            foreach (OperationResponse result in dsr)
-            {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
-            }
-
-            return Json(adoxioApplication);
-            */
         }
 
         /// <summary>
@@ -269,31 +152,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			// for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
-            Account owningAccount = await _system.GetAccountById(_distributedCache, Guid.Parse(userSettings.AccountId));
-			//_system.UpdateObject(owningAccount);
+            
 
 			//Prepare application for update
             Guid adoxio_applicationId = new Guid(id);
-            Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationId).GetValueAsync();
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
 
-			if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication.Adoxio_Applicant.Accountid))
+			if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
 			{
 				return new NotFoundResult();
 			}
 
-			_system.UpdateObject(adoxioApplication);
-            
-			adoxioApplication.CopyValues(item);
 
-            DataServiceResponse dsr = _system.SaveChangesSynchronous(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-            foreach (OperationResponse result in dsr)
-            {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
-            }
-            return Json(await adoxioApplication.ToViewModel(_system));
+            adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+
+            adoxioApplication.CopyValues(item);
+
+            _dynamicsClient.Applications.Update(id, adoxioApplication);
+
+            adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
+
+            return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
         }
 
         /// <summary>
@@ -306,29 +185,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get the application.
             Guid adoxio_applicationid = new Guid(id);
-            try
-            {
-                Adoxio_application adoxioApplication = await _system.Adoxio_applications.ByKey(adoxio_applicationid).GetValueAsync();
 
-				if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication.Adoxio_Applicant.Accountid))
-                {
-                    return new NotFoundResult();
-                }
-
-                _system.DeleteObject(adoxioApplication);
-                DataServiceResponse dsr = _system.SaveChangesSynchronous();
-                foreach (OperationResponse result in dsr)
-                {
-                    if (result.StatusCode == 500) // error
-                    {
-                        return StatusCode(500, result.Error.Message);
-                    }
-                }
-            }
-            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationid);
+            if (adoxioApplication == null)
             {
                 return new NotFoundResult();
             }
+
+            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            {
+                return new NotFoundResult();
+            }
+
+
+            await _dynamicsClient.Applications.DeleteAsync(adoxio_applicationid.ToString());
+
             return NoContent(); // 204
         }
 
@@ -336,7 +207,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Verify whether currently logged in user has access to this account id
         /// </summary>
         /// <returns>boolean</returns>
-        private bool CurrentUserHasAccessToApplicationOwnedBy(Guid? accountId)
+        private bool CurrentUserHasAccessToApplicationOwnedBy(string accountId)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -346,7 +217,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // TODO there may be some account relationships in the future
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-				return Guid.Parse(userSettings.AccountId) == accountId;
+				return userSettings.AccountId == accountId;
             }
 
             // if current user doesn't have an account they are probably not logged in

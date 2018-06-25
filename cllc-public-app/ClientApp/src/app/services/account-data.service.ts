@@ -19,6 +19,12 @@ export class AccountDataService {
     return this.http.get(this.apiPath + accountId, { headers: headers });
   }
 
+  getBCeID(){
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    return this.http.get(this.apiPath + "bceid", { headers: headers });
+  }
+
   updateAccount(accountModel: DynamicsAccount) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");

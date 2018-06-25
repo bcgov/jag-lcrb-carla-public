@@ -43,6 +43,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccounts Accounts { get; }
 
         /// <summary>
+        /// Gets the IApplications.
+        /// </summary>
+        IApplications Applications { get; }
+
+        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         IAdoxiolegalentities Adoxiolegalentities { get; }
