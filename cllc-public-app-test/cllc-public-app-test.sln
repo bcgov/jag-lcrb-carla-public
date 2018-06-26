@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCRegWrapper", "..\cllc-int
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{309D775B-CF5B-4194-9E63-3410A95D20F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces-test", "cllc-interfaces-test", "{A5BF3AF6-7B6F-4216-9918-3D0AE9A86646}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint.Tests", "..\cllc-interfaces-test\SharePoint\SharePoint.Tests.csproj", "{34357658-13CF-4654-B799-5C64D877FD16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34357658-13CF-4654-B799-5C64D877FD16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34357658-13CF-4654-B799-5C64D877FD16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34357658-13CF-4654-B799-5C64D877FD16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34357658-13CF-4654-B799-5C64D877FD16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +71,7 @@ Global
 		{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64} = {16C4AEED-68DC-44A3-93E4-014C80604C10}
 		{71683144-E7F4-42C2-B1EF-641E1131A19A} = {16C4AEED-68DC-44A3-93E4-014C80604C10}
 		{309D775B-CF5B-4194-9E63-3410A95D20F4} = {16C4AEED-68DC-44A3-93E4-014C80604C10}
+		{34357658-13CF-4654-B799-5C64D877FD16} = {A5BF3AF6-7B6F-4216-9918-3D0AE9A86646}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7840E594-A82A-4D70-82DF-02991CEB5BB2}

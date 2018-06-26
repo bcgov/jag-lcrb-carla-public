@@ -35,7 +35,7 @@ namespace SharePoint.Tests
             string certFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string certPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            sharePointFileManager = new SharePointFileManager(serverAppIdUri, webname, aadTenantId, clientId, certFileName, certPassword);
+            sharePointFileManager = new SharePointFileManager(serverAppIdUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null);
 
         }
 
@@ -145,7 +145,7 @@ namespace SharePoint.Tests
             string documentLocation = "Documents";
             string folderName = "Test Folder" + rnd.Next();
 
-            SP.ListItem folder = await sharePointFileManager.CreateFolder(documentLocation, folderName);
+            SP.Folder folder = await sharePointFileManager.CreateFolder(documentLocation, folderName);
 
             Assert.True(folder != null);
 
@@ -158,7 +158,7 @@ namespace SharePoint.Tests
             Random rnd = new Random();
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
-            SP.ListItem folder = await sharePointFileManager.CreateFolder(documentList, folderName);
+            SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
             Assert.True(folder != null);
             var files = await sharePointFileManager.GetFilesInFolder(documentList, folderName);
             Assert.True(files != null);
@@ -172,7 +172,7 @@ namespace SharePoint.Tests
             Random rnd = new Random();
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
-            SP.ListItem folder = await sharePointFileManager.CreateFolder(documentList, folderName);
+            SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
             Assert.True(folder != null);
             var files = await sharePointFileManager.GetFilesInFolder(documentList, folderName);
             Assert.True(files != null);
