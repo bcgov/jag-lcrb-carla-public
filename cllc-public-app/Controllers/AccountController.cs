@@ -174,7 +174,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 				if (bceidBusiness != null)
 				{
-					// TODO
+                    Console.Write("HERE IS THE ITEM:");
+                    Console.Write(item);
+					// TODO set contact according to item
+                    
 				}
 				else
 				{
