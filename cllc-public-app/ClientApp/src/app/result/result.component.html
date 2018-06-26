@@ -8,12 +8,12 @@
       <!-- age19 -->
       <div *ngIf="data && data.age19 == 'Yes'; else elseAge">
         <ul class="detail-step">
-          <li>The applicant is 19 years old or over</li>
+          <li>The person submitting the application is 19 years old or over</li>
         </ul>
       </div>
       <ng-template #elseAge>
         <ul class="detail-step">
-          <li>The applicant is not 19 years old or over</li>
+          <li>The person submitting the application is not 19 years old or over</li>
         </ul>
       </ng-template>
 
@@ -50,7 +50,7 @@
       <div *ngIf="data && data.businessType">
         <ul class="detail-step">
           <li>
-            The type of business that will be applying for the licence is {{data.businessType}}
+            The type of legal entity that will be applying for the licence is a {{data.businessType}}
             <span *ngIf="data.corporationType"> - {{data.corporationType}}</span>
             <span *ngIf="data.partnershipType"> - {{data.partnershipType}}</span>
             <span *ngIf="data.otherType"> - {{data.otherType}}</span>
@@ -90,17 +90,17 @@
       <!-- connectionToProducerCultivator -->
       <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
         <ul class="detail-step">
-          <li>The applicant has at least one business, financial or family connection to licensed producers of cannabis.</li>
+          <li>The applicant or the business applying for a licence has at least one business, financial or family connection to federally licensed producers of cannabis.</li>
         </ul>
       </div>
       <div *ngIf="data && data.connectionToProducerCultivator == 'No'">
         <ul class="detail-step">
-          <li>The applicant doesn't have any business, financial or family connections to licensed producers of cannabis.</li>
+          <li>Neither the applicant nor the business applying for the licence has any business, financial or family connections to federally licensed producers of cannabis.</li>
         </ul>
       </div>
       <div *ngIf="data && data.connectionToProducerCultivator == 'doNotknow'">
         <ul class="detail-step">
-          <li>You don’t know if the applicant has any business, financial or family connections to licensed producers of cannabis.</li>
+          <li>You don’t know if the applicant or the business applying for the licence has any business, financial or family connections to federally licensed producers of cannabis.</li>
         </ul>
       </div>
 
@@ -114,13 +114,13 @@
       <div *ngIf="data && data.age19 == 'No'">
         <h3>Age Eligibility</h3>
         <ul class="detail-step">
-          <li>An applicant is not eligible to complete an application for a cannabis retail store licence if they are under 19 years old. No one can operate a cannabis retail licenced business who is under 19.</li>
+          <li>An applicant is not eligible to complete an application for a cannabis retail store licence if they are under 19 years old. No one can operate a cannabis retail licensed business who is under 19.</li>
         </ul>
       </div>
 
       <!--licensedProducer-->
       <div *ngIf="data && data.licensedProducer == 'Yes'">
-        <h3>Licensed producer of cannabis</h3>
+        <h3>Federal licensed producer of cannabis</h3>
         <p>
           The applicant is not eligible for a cannabis retail store licence if they are the owner of a business which is a federally licensed producer of cannabis.
         </p>
@@ -129,9 +129,8 @@
 
       <!-- registeredBusiness -->
       <div *ngIf="data && data.registeredBusiness == 'No'">
-        <h3>Registered business</h3>
-        <p>Applying as an Indigenous nation in its own name, rather than as a sole proprietor, partnership, or corporation</p>
-        <p>Applicants applying as an Indigenous nation must submit:</p>
+        <h3>Applying as an Indigenous nation in its own name, rather than as a sole proprietor, partnership or corporation</h3>
+        <p>Applicants applying as an Indigenous nation must submit the:</p>
         <ul class="detail-step">
           <li>Full name of Indigenous nation applying for the licence</li>
           <li>Contact information (mailing address, email, phone number)</li>
@@ -145,10 +144,11 @@
           </li>
         </ul>
         <p>The authorized person in the Indigenous nation will go through a security screen and a financial integrity check during the application process.</p>
+        <p>The Indigenous nation will not need to register as a business, but will need a <a href='https://www.bceid.ca/register/business/getting_started/getting_started.aspx'>Business BCeID</a> to log in to the non-medical cannabis retail licence application. The Indigenous nation may register their type with BCeID as "other." An applicant can register only one legal entity for a Business BCeID. Additional Business BCeID user accounts can be created for people who may access the application on the organization's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
       </div>
       <div *ngIf="data && data.registeredBusiness == 'None'">
         <h3>Registered business</h3>
-        <p>Applicants, other than Indigenous nations, will need to be registered in B.C. as sole proprietors, partnerships or corporations. Indigenous nation applicants may apply in their own name or as one of the legal entities above. The type of business that an applicant operates will determine who involved with the business will need to undergo security screening, a financial integrity check and what additional information the applicant needs to submit. The applicant can register a business with <a href="http://www.bcbusinessregistry.ca/" target="_blank">OneStop</a>, B.C.’s Business Registry. The business should also register for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BceID</a>.
+        <p>Applicants, other than Indigenous nations, will need to be registered in B.C. as sole proprietors, partnerships or corporations. Indigenous nation applicants may apply in their own name or as one of the legal entities above. The type of business that an applicant operates will determine who involved with the business will need to undergo security screening, a financial integrity check and what additional information the applicant needs to submit. The applicant can register a business with <a href="http://www.bcbusinessregistry.ca/" target="_blank">OneStop</a>, B.C.’s Business Registry. The business should also register for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>.
         </p>
       </div>
 
@@ -175,13 +175,14 @@
               Register of all current directors and officers by:
               <ul class="detail-step">
                 <li>Full legal name</li>
+                <li>Email</li>
                 <li>Position</li>
                 <li>Date of appointment</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, the applicant must submit all the required information for that type of business</li>
+            <li>Central Securities Register</li>
           </ul>
-          <p>The following people in the corporation will go through a security screening and financial integrity check during the application process:</p>
+          <p>The following people in the corporation will go through security screening and a financial integrity check during the application process:</p>
           <ul class="detail-step">
             <li>Directors</li>
             <li>Officers</li>
@@ -192,7 +193,7 @@
           <p>Applicants applying as a private corporation must submit the corporation's:</p>
           <ul>
             <li>Name</li>
-            <li>Contact information (address, email, phone number)</li>
+            <li>Contact information (mailing address, email, phone number)</li>
             <li>Incorporation number</li>
             <li>Date of incorporation</li>
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
@@ -200,26 +201,27 @@
               Register of all current directors and officers by:
               <ul class="detail-step">
                 <li>Full legal name</li>
+                <li>Email</li>
                 <li>Position</li>
                 <li>Date of appointment</li>
               </ul>
             </li>
             <li>
-              List of shareholders by:
+              List of voting shareholders by:
               <ul>
                 <li>Full legal name</li>
-                <li>Class of shares</li>
-                <li>Percentage of voting and non-voting shares</li>
-                <li>Date shares issued/transferred/cancelled</li>
+                <li>Email</li>
+                <li>Number of voting shares</li>
               </ul>
             </li>
-            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, the applicant must submit all the required information for that type of business</li>
+            <li>Central Securities Register</li>
+            <li>If one of the shareholders is a private corporation, a public corporation, a society or a partnership, the applicant must submit all the required information for that type of organization</li>
           </ul>
-          <p>The following people in the corporation will go through a security screening and financial integrity check during the application process:</p>
+          <p>The following people in the corporation will go through security screening and a financial integrity check during the application process:</p>
           <ul>
             <li>Directors</li>
             <li>Officers</li>
-            <li>Generally, shareholders holding at least 10% or more of voting shares (the Liquor Control and Licensing Branch has the discretion to screen shareholders holding less than 10%)</li>
+            <li>Generally, shareholders holding at least 10% or more of voting shares (the Liquor and Cannabis Regulation Branch has the discretion to screen shareholders holding less than 10%)</li>
           </ul>
         </div>
 
@@ -229,17 +231,18 @@
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
+            <li>Partnership Agreement</li>
             <li>
-              Partnership Agreement identifying each partner by their:
+              List of partners identifying:
               <ul>
+                <li>Type of partner</li>
                 <li>Full legal name</li>
-                <li>Address</li>
-                <li>Date of birth</li>
+                <li>Email</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of business.</li>
+            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of organization.</li>
           </ul>
-          <p>All partners will go through a security screening and financial integrity check during the application process.</p>
+          <p>All partners will go through security screening and a financial integrity check during the application process.</p>
         </div>
         <div *ngIf="data && data.partnershipType == 'Limited Liability Partnership'">
           <p>Applicants applying as a limited liability partnership must submit the partnership's:</p>
@@ -247,15 +250,16 @@
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
+            <li>Partnership Agreement</li>
             <li>
-              Partnership Agreement identifying each partner by their:
+              List of partners identifying:
               <ul class="detail-step">
+                <li>Type of partner</li>
                 <li>Full legal name</li>
-                <li>Address</li>
-                <li>Date of birth</li>
+                <li>Email</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of business. </li>
+            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of organization. </li>
           </ul>
           <p>All partners will go through security screening and a financial integrity check during the application process.</p>
         </div>
@@ -266,20 +270,21 @@
             <li>Name</li>
             <li>Contact information (mailing address, email, phone number)</li>
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
+            <li>Partnership Agreement</li>
             <li>
-              Partnership Agreement identifying each partner by their:
+              List of partners identifying:
               <ul class="detail-step">
+                <li>Type of partner</li>
                 <li>Full legal name</li>
-                <li>Address</li>
-                <li>Date of birth</li>
+                <li>Email</li>
               </ul>
             </li>
-            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of business. </li>
+            <li>If one of the partners is a private corporation, public corporation or society, the applicant must submit all of the required information for that type of organization. </li>
           </ul>
-          <p>The following people in the partnership will go through a security screening and financial integrity check during the application process:</p>
+          <p>The following people in the partnership will go through security screening and a financial integrity check during the application process:</p>
           <ul>
             <li>All general partners</li>
-            <li>Generally, limited partners holding at least a 10% interest in the partnership (the Liquor Control and Licensing Branch has the discretion to screen partners holding less than 10%)</li>
+            <li>Generally, limited partners holding at least a 10% interest in the partnership (the Liquor and Cannabis Regulation Branch has the discretion to screen partners holding less than 10%)</li>
           </ul>
         </div>
 
@@ -292,7 +297,7 @@
             <li>Date of birth</li>
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
           </ul>
-          <p>The sole proprietor will go through a security screening and financial integrity check during the application process.</p>
+          <p>The sole proprietor will go through security screening and a financial integrity check during the application process.</p>
         </div>
 
         <div *ngIf="data && data.businessType == 'Society'">
@@ -302,9 +307,10 @@
             <li>Contact information (mailing address, email, phone number)</li>
             <li>Business Number (nine-digit number issued by the Canada Revenue Agency)</li>
             <li>
-              Register of all current directors and officers by:
+              Register of all current directors and senior management by:
               <ul>
                 <li>Full legal name</li>
+                <li>Email</li>
                 <li>Position</li>
                 <li>Date of appointment</li>
               </ul>
@@ -312,7 +318,8 @@
             <li>Society incorporation number</li>
             <li>Date of incorporation</li>
           </ul>
-          <p>The following people in the society will go through a security screening and financial integrity check during the application process:</p>
+          <p>Please note: While they are not normally required as part of the licence application, the Liquor and Cannabis Regulation Branch reserves the right to ask for a society's membership lists.</p>
+          <p>The following people in the society will go through security screening and a financial security check during the application process:</p>
           <ul>
             <li>Directors</li>
             <li>Officers</li>
@@ -322,7 +329,7 @@
         </div>
         <!-- bceidAccount -->
         <div *ngIf="data && data.bceidAccount == 'Yes'">
-          <h3>Business BCeID</h3>
+          <h3>Applicant's BCeID</h3>
           <p>The applicant's <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a> will be used to log in to the non-medical cannabis retail licence application. An Indigenous nation is not required to register as a business. In such cases, the Indigenous nation may register their type with BCeID as ‘other’. An applicant can register only one legal entity for a Business BCeID. Additional Business BCeID user accounts can be created for people who may access the application on the organization’s behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
           <hr />
         </div>
@@ -332,7 +339,7 @@
           <hr />
         </div>
         <div *ngIf="data && data.bceidAccount == 'doNotknow'">
-          <h3>Find out if the business has a Business BCeID account</h3>
+          <h3>Find out if the applicant has a Business BCeID account</h3>
           <p>Check if the applicant has registered for a <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID</a>. If the applicant doesn't have a Business BCeID, the applicant will need to register for one to log in to the application. Additional Business BCeID user accounts can be created for people who may access the application on the organization's behalf. Contact a BCeID Business Profile Manager or a Business Account Manager to request a Business BCeID user account.</p>
           <hr />
         </div>
@@ -371,15 +378,15 @@
             </ul>
           </div>
           <hr />
-          <p>Note: If a proposed store is located in the area of a local government or Indigenous nation, the Liquor Control and Licensing Branch must provide notice of the application to the appropriate local government or Indigenous Nation. Learn more about local governments or Indigenous nations.</p>
         </div>
 
         <div *ngIf="data && data.locationOwnedLeased == 'No'">
           <h3>Information about the store</h3>
           <div>
-            <p>Applicants do not have to commit to buying or leasing a location before submitting an application. However, applicants must have an arrangement that will allow them to purchase a property or sign a lease if they are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of the applicant's business partner’s, may also be accepted.</p>
+            <p>Applicants do not have to commit to buying or leasing a location before submitting an application.</p>
+            <p>However, applicants must have an arrangement that will allow them to purchase a property or sign a lease if they are approved for a licence. Other property arrangements, such as a sublease or a property in the name of one of the applicant's business partner’s, may also be accepted.</p>
             <p>The store's property arrangement must be valid for at least 12 months after the licence is issued.</p>
-            <p>The store must be in a self-contained location. Licensees must not operate a cannabis retail store as part of another business, such as a pharmacy, restaurant or a liquor store.</p>
+            <p>The store must be a self-contained business.</p>
             <p>During the application, the applicant will need to submit the following pieces of information about the store's location:</p>
             <ul>
               <li>PID (either a nine-digit number or a legal description of the property)</li>
@@ -408,33 +415,34 @@
             </ul>
           </div>
           <hr />
-          <p>Note: If a proposed store is located in the area of a local government or Indigenous nation, the Liquor Control and Licensing Branch must provide notice of the application to the appropriate local government or Indigenous Nation. Learn more about local governments or Indigenous nations.</p>
+          <p>Note: If a proposed store is located in the area of a local government or Indigenous nation, the Liquor and Cannabis Regulation Branch must provide notice of the application to the appropriate local government or Indigenous Nation. Learn more about local governments or Indigenous nations.</p>
         </div>
 
         <!-- connectionToProducerCultivator -->
         <div *ngIf="data && data.connectionToProducerCultivator == 'Yes'">
-          <h3>Connections to Licensed Producers</h3>
-          <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. Licensees will not be permitted to enter agreements to sell a producer’s product in preference to others.  A license will not be issued if the Liquor Control and Licensing Branch (LCLB) is of the opinion that the association between the licensee and producer is so close that the licensee is likely to promote the sale of cannabis of the federal producer.  In making this determination, the LCLB will consider whether:</p>
+          <h3>Connections to Federally Licensed Cannabis Producers</h3>
+          <p>Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. Licensees will not be permitted to enter agreements to sell a producer’s product in preference to others.  A licence will not be issued if the Liquor and Cannabis Regulation Branch (LCRB) is of the opinion that the association between the licensee and producer is so close that the licensee is likely to promote the sale of cannabis of the federally licensed producer.  In making this determination, the LCRB will consider whether:</p>
           <ul>
             <li>The licensee holds or has a beneficial interest in, directly or indirectly, 20% or more of the producer's voting shares</li>
             <li>An immediate family member has any financial interest in the producer</li>
             <li>The producer holds or has a beneficial interest in, directly or indirectly, 20% or more of the cannabis retail business's voting shares</li>
-            <li>Any person, partnership or company holds or has a beneficial interest in, directly or indirectly, 20% or more of both the cannabis retail store’s and the producer's voting shares</li>
+            <li>Any person, partnership or company holds or has a beneficial interest in, directly or indirectly, 20% or more of both the cannabis retail store's and the producer's voting shares</li>
           </ul>
-          <p>When making a license application, Applicants must declare if they or any business partners or an immediate family member of the applicant or any business partner has any ownership in a cannabis producer, even if less than 20%.</p>
+          <p>When making a licence application, applicants must declare if they or any business partners or an immediate family member of the applicant or any business partner has any ownership in a federally licensed cannabis producer, even if less than 20%.</p>
           <hr />
         </div>
 
         <div *ngIf="data && data.connectionToProducerCultivator == 'doNotknow'">
-          <h3>Connections to Licensed Producers</h3>
-          <p>Check if the applicant or business has any business, financial or family connections to licensed producers of cannabis. Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. Licensees will not be permitted to enter agreements to sell a producer’s product in preference to others. A license will not be issued if the Liquor Control and Licensing Branch (LCLB) is of the opinion that the association between the licensee and producer is so close that the licensee is likely to promote the sale of cannabis of the federal producer.  In making this determination, the LCLB will consider whether:</p>
+          <h3>Connections to Federally Licensed Cannabis Producers</h3>
+          <p>Check if the applicant or business has any business, financial or family connections to federally licensed producers of cannabis. Restrictions will be placed on a retail store that has a close business, financial or family connection to a producer. Licensees will not be permitted to enter agreements to sell a producer’s product in preference to others.</p>
+          <p>A licence will not be issued if the Liquor and Cannabis Regulation Branch (LCRB) is of the opinion that the association between the licensee and producer is so close that the licensee is likely to promote the sale of cannabis of the federal producer.  In making this determination, the LCRB will consider whether:</p>
           <ul>
             <li>The licensee holds or has a beneficial interest in, directly or indirectly, 20% or more of the producer's voting shares</li>
             <li>An immediate family member has any financial interest in the producer</li>
             <li>The producer holds or has a beneficial interest in, directly or indirectly, 20% or more of the cannabis retail business's voting shares</li>
             <li>Any person, partnership or company holds or has a beneficial interest in, directly or indirectly, 20% or more of both the cannabis retail store’s and the producer's voting shares</li>
           </ul>
-          <p>When making a licence application, applicants must declare if they or any business partners or an immediate family member of the applicant or any business partner has any ownership in a cannabis producer, even if less than 20%.</p>
+          <p>When they apply, applicants must declare if they or any business partners or an immediate family member of the applicant or any business partner has any ownership in a federally licensed cannabis producer, even if less than 20%.</p>
           <hr />
         </div>
 
@@ -442,7 +450,7 @@
         <!--final text-->
         <div *ngIf="data && data.age19 == 'Yes' && data.licensedProducer == 'No'">
           <h3>Application Fee</h3>
-          <p>Applicants must pay an application fee to apply for a licence. The application fee includes the cost of all required security clearances and financial integrity checks.</p>
+          <p>Applicants must pay an application fee to apply for a licence. The application fee includes the cost of the initial required security screening and financial integrity checks.</p>
           <hr />
         </div>
 
