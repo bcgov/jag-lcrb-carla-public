@@ -117,8 +117,12 @@ select.form-control:not([size]):not([multiple]) {
     padding-right: 15px;
 }
 
-.extra-padding-left{
-    margin-left: 15px; 
+
+
+@media (max-width: 575.98px) { 
+    .extra-padding-left{
+        margin-left: 0; 
+    }
 }
 
 
