@@ -31,55 +31,55 @@
      <section *ngIf="bceidConfirmBusinessType && businessType == 'Other'">
        <!-- {{businessValue}} -->
        <p>What type of Organization is {{currentUser.businessname}}?</p>
-       <input type="radio" name="businessRadio" value="Limited liability partnership" [(ngModel)]="businessValue"> <label>Limited liability partnership</label><br>
-       <input type="radio" name="businessRadio" value="Limited partnership" [(ngModel)]="businessValue"> <label>Limited partnership</label><br>
-       <input type="radio" name="businessRadio" value="First Nation" [(ngModel)]="businessValue"> <label>First Nation</label><br>
-       <input type="radio" name="businessRadio" value="Other" [(ngModel)]="businessValue"> <label>Other</label><br>
+       <input type="radio" name="businessRadio" value="Limited liability partnership" [(ngModel)]="finalBusinessType"> <label>Limited liability partnership</label><br>
+       <input type="radio" name="businessRadio" value="Limited partnership" [(ngModel)]="finalBusinessType"> <label>Limited partnership</label><br>
+       <input type="radio" name="businessRadio" value="First Nation" [(ngModel)]="finalBusinessType"> <label>First Nation</label><br>
+       <input type="radio" name="businessRadio" value="Other" [(ngModel)]="finalBusinessType"> <label>Other</label><br>
        <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
      </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Proprietorship'">
       <!-- {{businessValue}} -->
-      <p>What type of Proprietorship is {{currentUser.businessname}}?</p>
-      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
+      <!-- <p>What type of Proprietorship is {{currentUser.businessname}}?</p> -->
+      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType('Proprietorship')"><strong>Next</strong><br></a>
     </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Partnership'">
       <!-- {{businessValue}} -->
-      <p>What type of Partnership is {{currentUser.businessname}}?</p>
-      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
+      <!-- <p>What type of Partnership is {{currentUser.businessname}}?</p> -->
+      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType('Partnership')"><strong>Next</strong><br></a>
     </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Corporation'">
       <!-- {{businessValue}} -->
       <p>What type of Corporation is {{currentUser.businessname}}?</p>
-      <input type="radio" name="businessRadio" value="Private corporation" [(ngModel)]="businessValue"> <label>Private corporation</label><br>
-      <input type="radio" name="businessRadio" value="Public corporation" [(ngModel)]="businessValue"> <label>Public corporation</label><br>
-      <input type="radio" name="businessRadio" value="Unlimited liability corporation" [(ngModel)]="businessValue"> <label>Unlimited liability corporation</label><br>
-      <input type="radio" name="businessRadio" value="Limited liability corporation" [(ngModel)]="businessValue"> <label>Limited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="Private corporation" [(ngModel)]="finalBusinessType"> <label>Private corporation</label><br>
+      <input type="radio" name="businessRadio" value="Public corporation" [(ngModel)]="finalBusinessType"> <label>Public corporation</label><br>
+      <input type="radio" name="businessRadio" value="Unlimited liability corporation" [(ngModel)]="finalBusinessType"> <label>Unlimited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="Limited liability corporation" [(ngModel)]="finalBusinessType"> <label>Limited liability corporation</label><br>
       <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
     </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Extra Provincially Registered Company'">
       <!-- {{businessValue}} -->
       <p>What type of Extra Provincially Registered Company is {{currentUser.businessname}}?</p>
-      <input type="radio" name="businessRadio" value="Private corporation" [(ngModel)]="businessValue"> <label>Private corporation</label><br>
-      <input type="radio" name="businessRadio" value="Public corporation" [(ngModel)]="businessValue"> <label>Public corporation</label><br>
-      <input type="radio" name="businessRadio" value="Unlimited liability corporation" [(ngModel)]="businessValue"> <label>Unlimited liability corporation</label><br>
-      <input type="radio" name="businessRadio" value="Limited liability corporation" [(ngModel)]="businessValue"> <label>Limited liability corporation</label><br>
-      <input type="radio" name="businessRadio" value="Other" [(ngModel)]="businessValue"> <label>Other</label><br>
+      <input type="radio" name="businessRadio" value="Private corporation" [(ngModel)]="finalBusinessType"> <label>Private corporation</label><br>
+      <input type="radio" name="businessRadio" value="Public corporation" [(ngModel)]="finalBusinessType"> <label>Public corporation</label><br>
+      <input type="radio" name="businessRadio" value="Unlimited liability corporation" [(ngModel)]="finalBusinessType"> <label>Unlimited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="Limited liability corporation" [(ngModel)]="finalBusinessType"> <label>Limited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="Other" [(ngModel)]="finalBusinessType"> <label>Other</label><br>
       <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
     </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Void'">
       <!-- {{businessValue}} -->
       <p>What type of Organization is {{currentUser.businessname}}?</p>
-      <input type="radio" name="businessRadio" value="Private corporation" [(ngModel)]="businessValue"> <label>Private corporation</label><br>
-      <input type="radio" name="businessRadio" value="Public corporation" [(ngModel)]="businessValue"> <label>Public corporation</label><br>
-      <input type="radio" name="businessRadio" value="Unlimited liability corporation" [(ngModel)]="businessValue"> <label>Unlimited liability corporation</label><br>
-      <input type="radio" name="businessRadio" value="Limited liability corporation" [(ngModel)]="businessValue"> <label>Limited liability corporation</label><br>
-      <input type="radio" name="businessRadio" value="Sole-proprietorship" [(ngModel)]="businessValue"> <label>Sole-proprietorship</label><br>
-      <input type="radio" name="businessRadio" value="Society" [(ngModel)]="businessValue"> <label>Society</label><br>
-      <input type="radio" name="businessRadio" value="Partnership" [(ngModel)]="businessValue"> <label>Partnership</label><br>
-      <input type="radio" name="businessRadio" value="Limited liability partnership" [(ngModel)]="businessValue"> <label>Limited liability partnership</label><br>
-      <input type="radio" name="businessRadio" value="Limited partnership" [(ngModel)]="businessValue"> <label>Limited partnership</label><br>
-      <input type="radio" name="businessRadio" value="First Nation" [(ngModel)]="businessValue"> <label>First Nation</label><br>
-      <input type="radio" name="businessRadio" value="Other" [(ngModel)]="businessValue"> <label>Other</label><br>
+      <input type="radio" name="businessRadio" value="Private corporation" [(ngModel)]="finalBusinessType"> <label>Private corporation</label><br>
+      <input type="radio" name="businessRadio" value="Public corporation" [(ngModel)]="finalBusinessType"> <label>Public corporation</label><br>
+      <input type="radio" name="businessRadio" value="Unlimited liability corporation" [(ngModel)]="finalBusinessType"> <label>Unlimited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="Limited liability corporation" [(ngModel)]="finalBusinessType"> <label>Limited liability corporation</label><br>
+      <input type="radio" name="businessRadio" value="Sole-proprietorship" [(ngModel)]="finalBusinessType"> <label>Sole-proprietorship</label><br>
+      <input type="radio" name="businessRadio" value="Society" [(ngModel)]="finalBusinessType"> <label>Society</label><br>
+      <input type="radio" name="businessRadio" value="Partnership" [(ngModel)]="finalBusinessType"> <label>Partnership</label><br>
+      <input type="radio" name="businessRadio" value="Limited liability partnership" [(ngModel)]="finalBusinessType"> <label>Limited liability partnership</label><br>
+      <input type="radio" name="businessRadio" value="Limited partnership" [(ngModel)]="finalBusinessType"> <label>Limited partnership</label><br>
+      <input type="radio" name="businessRadio" value="First Nation" [(ngModel)]="finalBusinessType"> <label>First Nation</label><br>
+      <input type="radio" name="businessRadio" value="Other" [(ngModel)]="finalBusinessType"> <label>Other</label><br>
       <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
     </section>
   </div>

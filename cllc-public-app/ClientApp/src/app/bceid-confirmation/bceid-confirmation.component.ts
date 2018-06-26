@@ -21,15 +21,15 @@ export class BceidConfirmationComponent {
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
   businessType: string = "";
-  businessValue: number;
+  finalBusinessType: string = "";
   busy: Promise<any>;
 
   /** bceid-confirmation ctor */
   constructor(private router: Router, private accountDataService: AccountDataService, private dynamicsDataService: DynamicsDataService) {
-    // TODO load BCeID data from service
+    // Load BCeID data from service
     this.accountDataService.getBCeID().subscribe((data) => {
       let temp = data.json();
-      this.businessType = temp.businessTypeName;
+      this.businessType = temp.businessTypeCode;
     }, err =>{
       console.log(err);
     });
@@ -58,9 +58,14 @@ export class BceidConfirmationComponent {
       this.bceidConfirmContact = true;
     }
 
-    confirmCorpType() {
+    confirmCorpType(propOrPartner) {
       this.bceidConfirmBusinessType = false;
       this.bceidConfirmContact = true;
+
+      // Proprietorship and Partnership do not have radio buttons to chane the value of finalBusienssType
+      if(propOrPartner){
+        this.finalBusinessType = propOrPartner;
+      }
     }
 
     confirmContactYes() {
@@ -72,10 +77,9 @@ export class BceidConfirmationComponent {
       contact.fullname = this.currentUser.name;
       contact.id = this.currentUser.contactid;
       account.primarycontact = contact;
-
-      // TODO submit selected comany type and sub-type to the account service
-      // account.adoxio_business_type = 
-      // account.adoxio_business_subtype = 
+        
+      // Submit selected company type and sub-type to the account service
+      account.businessType = this.finalBusinessType;
 
       let payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
