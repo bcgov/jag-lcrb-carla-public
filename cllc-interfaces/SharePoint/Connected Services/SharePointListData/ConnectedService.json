@@ -6,7 +6,7 @@
   },
   "ExtendedData": {
     "ServiceName": "OData Service",
-    "Endpoint": "C:\\tmp\\meta-data\\sharepoint-2.xml",
+    "Endpoint": "C:\\tmp\\meta-data\\sharepoint-api-metadata.xml",
     "EdmxVersion": {
       "Major": 1,
       "Minor": 0,
