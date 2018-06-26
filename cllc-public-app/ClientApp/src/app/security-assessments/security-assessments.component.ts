@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
@@ -20,6 +20,8 @@ export class SecurityAssessmentsComponent implements OnInit {
   busy: Promise<any>;
   busyObsv: Subscription;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public toastr: ToastsManager,
           vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -27,6 +29,7 @@ export class SecurityAssessmentsComponent implements OnInit {
 
   ngOnInit() {
     this.getDirectorsAndOfficersAndShareholders();
+    this.dataSource.paginator = this.paginator;
   }
 
   getDirectorsAndOfficersAndShareholders() {
