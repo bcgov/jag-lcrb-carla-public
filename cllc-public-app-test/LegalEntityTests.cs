@@ -319,13 +319,13 @@ namespace Gov.Lclb.Cllb.Public.Test
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
-            response.EnsureSuccessStatusCode();
+            //response status code should be 404
 			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
-            response.EnsureSuccessStatusCode();
+            //response status code should be 404
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
 			// logout
