@@ -63,11 +63,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpGet("{slug}")]
         [AllowAnonymous]
-        public JsonResult GetPolicy(string slug)
+        public ActionResult GetPolicy(string slug)
         {
-            PolicyDocument PolicyDocument = db.GetPolicyDocumentBySlug(slug);
-            return Json(PolicyDocument.ToViewModel());
-        }
+            PolicyDocument policyDocument = db.GetPolicyDocumentBySlug(slug);
 
+            if (policyDocument == null)
+            {
+                return new NotFoundResult();
+            }
+            else
+            {
+                return Json(policyDocument.ToViewModel());
+            }            
+        }
     }
 }
