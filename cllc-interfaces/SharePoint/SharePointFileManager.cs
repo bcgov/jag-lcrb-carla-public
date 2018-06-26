@@ -22,8 +22,6 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         public const string DefaultDocumentListTitle = "Account";
 
-        //public const string DefaultDocumentList = "Account";
-
         private string AuthorizationHeader;
 
         private LCLBCannabisDEVDataContext listData;
@@ -33,6 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public string WebName { get; set; }
         public string apiEndpoint { get; set; }
         string authorization { get; set; }
+        private HttpClient client;
 
         public SharePointFileManager(string serverAppIdUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword, string ssgUsername, string ssgPassword)
         {
@@ -78,6 +77,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
             "Authorization", authorization);
 
+            // create the HttpClient that is used for our direct REST calls.
+            client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
+            client.DefaultRequestHeaders.Add("Authorization", authorization);
+
         }
 
         public async Task<List<FileSystemItem>> GetFiles ()
@@ -108,10 +113,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string serverRelativeUrl = $"/{WebName}/{listTitle}/{folderName}";
             HttpRequestMessage endpointRequest =
                             new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "/web/getfolderbyserverrelativeurl('" + serverRelativeUrl + "')/files");
-            HttpClient client = new HttpClient();
 
-            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
-            client.DefaultRequestHeaders.Add("Authorization", authorization);
             // make the request.
             var response = await client.SendAsync(endpointRequest);
 
@@ -175,120 +177,65 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await client.SendAsync(endpointRequest);
            
             jsonString = await response.Content.ReadAsStringAsync();
-           
-
-
-
-            /*
-            SP.ListItem folder = null;
-
-            // first get a reference to the containing list.
-            var query = (DataServiceQuery<SP.List>)
-                from list in apiData.Lists.Expand(l => l.Items)
-                where list.Title == listTitle
-                select list              
-                ;
-            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
-            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            SP.List listResult = listResults.FirstOrDefault();
-
-            if (listResult != null)
-            {
-                if (listResult.RootFolder == null)
-                {
-                    listResult.RootFolder = new SP.Folder()
-                    {
-                        Name = listResult.Title,
-                        ServerRelativeUrl = $"/cannabisdev/{listTitle}"
-                    };
-                }
-
-                
-                var x = listResult.RootFolder;
-                apiData.UpdateObject(listResult);
-                folder = new SP.ListItem();
-                folder.DisplayName = folderName;
-                folder.Folder = new SP.Folder
-                {
-                    Name = folderName                    
-                };
-                
-                //folder.Folder.ServerRelativeUrl = $"/cannabisdev/{listTitle}/{folderName}";
-                
-                listResult.Items.Add(folder);
-                //apiData.AddObject("AccountItem", folder);
-
-                
-                // save to SharePoint.
-                TaskFactory saveTaskFactory = new TaskFactory();
-                var res = await saveTaskFactory.FromAsync(apiData.BeginSaveChanges(null, null), iar => apiData.EndSaveChanges(iar));
-            }            
-            */
+                       
             return folder;
         }
 
-        public async Task DeleteFolder(string listTitle, string folderName)
-        {
-            // first get a reference to the containing list.
-            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
-                from list in apiData.Lists
-                where list.Title == listTitle
-                select list;
-            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
-            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            SP.List listResult = listResults.FirstOrDefault();
 
-            SP.ListItem folderListItem = listResult.Items.Where(x => x.DisplayName == folderName).FirstOrDefault();
-            if (folderListItem != null)
-            {
-                listResult.Items.Remove(folderListItem);
+
+        public async Task<bool> DeleteFolder(string listTitle, string folderName)
+        {
+            bool result = false;
+            // Delete is very similar to a GET.
+            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+
+            HttpRequestMessage endpointRequest =
+    new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
+            
+
+            // We want to delete this folder.
+            endpointRequest.Headers.Add("IF-MATCH", "*");
+            endpointRequest.Headers.Add("X-HTTP-Method", "DELETE");
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {                
+                result = true;
             }
 
-            TaskFactory saveTaskFactory = new TaskFactory();
-            await saveTaskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
-
-
+            return result;
         }
 
         public async Task<bool> FolderExists(string listTitle, string folderName)
         {
-            bool result = false;
-            // first get a reference to the containing list.
-            var query = (DataServiceQuery<SP.List>)(
-                        from list in apiData.Lists.Expand(l => l.Items)
-                          where list.Title == listTitle
-                          select list);
+            SP.Folder folder = await GetFolder(listTitle, folderName);
 
-            var taskFactory = new TaskFactory<IEnumerable<SP.List>>();
-            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            var listResult = listResults.FirstOrDefault();
-            if (listResult != null)
+            return (folder != null);            
+        }
+
+        public async Task<SP.Folder> GetFolder(string listTitle, string folderName)
+        {
+            SP.Folder result = null;
+            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+
+            HttpRequestMessage endpointRequest =
+    new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
+            
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                result = listResult.Items.Any(i => i.Folder != null && i.Folder.Name == folderName);
+                string jsonString = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<SP.Folder>(jsonString);
             }
 
             return result;
         }
 
-        /// <summary>
-        /// Get Folder
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public async Task<Folder> GetFolder(string name)
-        {            
-            DataServiceQuery<Folder> query = (DataServiceQuery<Folder>)
-                from folder in apiData.Folders
-                where folder.Name == name
-                select folder;
-
-            TaskFactory<IEnumerable<Folder>> taskFactory = new TaskFactory<IEnumerable<Folder>>();
-            IEnumerable<Folder> folderResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            Folder result = folderResults.FirstOrDefault();
-            // get the files in the folder.
-            
-            return result;
-        }
 
         /// <summary>
         /// Get File
@@ -326,9 +273,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
         {
-			// TODO this currently fails with:
-			// The property 'DisableGridEditing' does not exist on type 'SP.List'. Make sure to only use property names that are defined by the type.
-			// start by ensuring that the folder exists.
+
             bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
             if (! folderExists)
             {
@@ -336,8 +281,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             // now add the file to the folder.
-            string path = $"/{this.WebName}/{DefaultDocumentListTitle}/{folderName}/{fileName}";
-            await this.UploadFile(fileName, path, fileData, contentType);
+            
+            await this.UploadFile(fileName, DefaultDocumentListTitle, folderName, fileData, contentType);
 
         }
 
@@ -345,34 +290,35 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Upload a file
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="path"></param>
+        /// <param name="listTitle"></param>
+        /// <param name="folderName"></param>
         /// <param name="fileData"></param>
         /// <param name="contentType"></param>
-        /// <param name="slug"></param>
         /// <returns></returns>
-        public async Task UploadFile(string name, string path, Stream fileData, string contentType)
+        public async Task<bool> UploadFile(string name, string listTitle, string folderName, Stream fileData, string contentType)
         {
-            // upload a file.   
-            
-            DocumentsItem documentsItem = new DocumentsItem()
-            {
-                ContentType = contentType,
-                Name = name,
-                Title = name,
-                Path = path
-            };
+            bool result = false;
+            // Delete is very similar to a GET.
+            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
 
-            listData.AddToDocuments(documentsItem);            
-            DataServiceRequestArgs dsra = new DataServiceRequestArgs()
-            {
-                ContentType = contentType,                
-                Slug = path
-            };
+            HttpRequestMessage endpointRequest =
+    new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='" 
+    + name + "',overwrite=true)");
+            // convert the stream into a byte array.
+            MemoryStream ms = new MemoryStream();
+            fileData.CopyTo(ms);
+            Byte[] data = ms.ToArray();
 
-            listData.SetSaveStream(documentsItem, fileData, false, dsra);
-            TaskFactory taskFactory = new TaskFactory();
-            await taskFactory.FromAsync(listData.BeginSaveChanges(null, null), iar => listData.EndSaveChanges(iar));
-            
+            endpointRequest.Content = new ByteArrayContent(data);
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result = true;
+            }
+            return result;
         }
 
         /// <summary>
@@ -394,7 +340,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             using (
                 MemoryStream ms = new MemoryStream())
             {
-                request.GetResponse().GetResponseStream().CopyTo(ms);
+                await request.GetResponse().GetResponseStream().CopyToAsync(ms);
                 result = ms.ToArray();
             }
             
@@ -406,14 +352,28 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public async Task DeleteFile(string url)
+        public async Task<bool> DeleteFile(string listTitle, string folderName, string fileName)
         {
-            var file = await this.GetFile(url);
-            
+            bool result = false;
+            // Delete is very similar to a GET.
+            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName) + "/" + Uri.EscapeDataString(fileName);
 
-            apiData.DeleteObject(file);
-            TaskFactory taskFactory = new TaskFactory();
-            await taskFactory.FromAsync(apiData.BeginSaveChanges(null, null), iar => apiData.EndSaveChanges(iar));            
+            HttpRequestMessage endpointRequest =
+    new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");
+
+            // We want to delete this file.
+            endpointRequest.Headers.Add("IF-MATCH", "*");
+            endpointRequest.Headers.Add("X-HTTP-Method", "DELETE");
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result = true;
+            }
+
+            return result;
         }        
     }
 }
