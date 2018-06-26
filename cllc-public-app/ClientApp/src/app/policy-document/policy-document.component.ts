@@ -22,15 +22,17 @@ export class PolicyDocumentComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe((data: any) => {
-      let slug = data.slug;
-      this.policyDocumentDataService.getPolicyDocument(slug).then((data) => {
-        this.policyDocument = data;
-        this.title = this.policyDocument.title;
-        this.body = this.policyDocument.body;
-        this.category = this.policyDocument.category;
-      });
+      this.setSlug(data.slug);
     });
+  }
 
+  setSlug(slug){
+    this.policyDocumentDataService.getPolicyDocument(slug).then((data) => {
+      this.policyDocument = data;
+      this.title = this.policyDocument.title;
+      this.body = this.policyDocument.body;
+      this.category = this.policyDocument.category;
+    });
   }
 
 }
