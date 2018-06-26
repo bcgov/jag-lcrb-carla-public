@@ -12,6 +12,9 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -28,15 +31,20 @@ namespace Gov.Lclb.Cllb.Interfaces
         private AuthenticationResult authenticationResult;
         public string ServerAppIdUri { get; set; }
         public string WebName { get; set; }
+        public string apiEndpoint { get; set; }
+        string authorization { get; set; }
+
         public SharePointFileManager(string serverAppIdUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword, string ssgUsername, string ssgPassword)
         {
             this.ServerAppIdUri = serverAppIdUri;
             this.WebName = webname;
             string listDataEndpoint = serverAppIdUri + webname + "/_vti_bin/listdata.svc/";
-            string apiEndpoint = serverAppIdUri + webname + "/_api/";
+            apiEndpoint = serverAppIdUri + webname + "/_api/";
 
             this.listData = new LCLBCannabisDEVDataContext(new Uri(listDataEndpoint));
             this.apiData = new ApiData(new Uri(apiEndpoint));
+
+            
 
             if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
             {
@@ -53,27 +61,23 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientAssertionCertificate);
                 task.Wait();
                 authenticationResult = task.Result;
-
-
-                apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", authenticationResult.CreateAuthorizationHeader());
-
-                listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", authenticationResult.CreateAuthorizationHeader());
+                authorization = authenticationResult.CreateAuthorizationHeader();
             }
             else
             {
                 // authenticate using the SSG.                
                 string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(ssgUsername + ":" + ssgPassword));
-
-                apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", "Basic " + credentials);
-
-                listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", "Basic " + credentials);
+                authorization = "Basic " + credentials;
+                
             }
 
-            
+
+            apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+                "Authorization", authorization);
+
+            listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
+            "Authorization", authorization);
+
         }
 
         public async Task<List<FileSystemItem>> GetFiles ()
@@ -87,8 +91,35 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result.ToList();
         }
 
+        public class FileFolderResults
+        {
+            public List<FileSystemItem> results { get; set; }
+        }
+
+
+        public class FileFolderData
+        {
+            public FileFolderResults d { get; set; }
+        }
+
+
         public async Task<List<FileSystemItem>> GetFilesInFolder(string listTitle, string folderName)
         {
+            string serverRelativeUrl = $"/{WebName}/{listTitle}/{folderName}";
+            HttpRequestMessage endpointRequest =
+                            new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "/web/getfolderbyserverrelativeurl('" + serverRelativeUrl + "')/files");
+            HttpClient client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
+            client.DefaultRequestHeaders.Add("Authorization", authorization);
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            FileFolderData result = JsonConvert.DeserializeObject<FileFolderData>(jsonString);
+            return result.d.results;
+            /*
             List<FileSystemItem> result = new List<FileSystemItem>();
 
             // first get a reference to the containing list.
@@ -114,6 +145,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             
             return result;
+
+            */
         }
 
         /// <summary>
@@ -121,36 +154,76 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<SP.ListItem> CreateFolder(string listTitle, string folderName)
+        public async Task<SP.Folder> CreateFolder(string listTitle, string folderName)
         {
+            HttpRequestMessage endpointRequest =
+                new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/folders");
+            HttpClient client = new HttpClient();
+            
+            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");            
+            client.DefaultRequestHeaders.Add("Authorization", authorization);
+            SP.Folder folder = new SP.Folder()
+            {
+                Name = folderName,
+                ServerRelativeUrl = $"/{WebName}/{listTitle}/{folderName}"
+            };
+
+            string jsonString = JsonConvert.SerializeObject(folder);
+            endpointRequest.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+           
+            jsonString = await response.Content.ReadAsStringAsync();
+           
+
+
+
+            /*
             SP.ListItem folder = null;
+
             // first get a reference to the containing list.
             var query = (DataServiceQuery<SP.List>)
                 from list in apiData.Lists.Expand(l => l.Items)
                 where list.Title == listTitle
-                select list;
+                select list              
+                ;
             TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
             IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
             SP.List listResult = listResults.FirstOrDefault();
 
             if (listResult != null)
             {
+                if (listResult.RootFolder == null)
+                {
+                    listResult.RootFolder = new SP.Folder()
+                    {
+                        Name = listResult.Title,
+                        ServerRelativeUrl = $"/cannabisdev/{listTitle}"
+                    };
+                }
+
+                
+                var x = listResult.RootFolder;
                 apiData.UpdateObject(listResult);
                 folder = new SP.ListItem();
                 folder.DisplayName = folderName;
                 folder.Folder = new SP.Folder
                 {
-                    Name = folderName,
-                    ServerRelativeUrl = $"/${listTitle}/${folderName}"
+                    Name = folderName                    
                 };
+                
+                //folder.Folder.ServerRelativeUrl = $"/cannabisdev/{listTitle}/{folderName}";
+                
                 listResult.Items.Add(folder);
-                apiData.AddObject("AccountItem", folder);
+                //apiData.AddObject("AccountItem", folder);
+
                 
                 // save to SharePoint.
                 TaskFactory saveTaskFactory = new TaskFactory();
                 var res = await saveTaskFactory.FromAsync(apiData.BeginSaveChanges(null, null), iar => apiData.EndSaveChanges(iar));
             }            
-
+            */
             return folder;
         }
 
@@ -191,7 +264,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             var listResult = listResults.FirstOrDefault();
             if (listResult != null)
             {
-                result = listResult.Items.Any(i => i.Folder.Name == folderName);
+                result = listResult.Items.Any(i => i.Folder != null && i.Folder.Name == folderName);
             }
 
             return result;
@@ -256,11 +329,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 			// TODO this currently fails with:
 			// The property 'DisableGridEditing' does not exist on type 'SP.List'. Make sure to only use property names that are defined by the type.
 			// start by ensuring that the folder exists.
-            //bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
-            //if (! folderExists)
-            //{
-            //  var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
-            //}
+            bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
+            if (! folderExists)
+            {
+              var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
+            }
 
             // now add the file to the folder.
             string path = $"/{this.WebName}/{DefaultDocumentListTitle}/{folderName}/{fileName}";
