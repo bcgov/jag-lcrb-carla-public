@@ -29,9 +29,10 @@ export class BceidConfirmationComponent {
   businessValue: number;
   busy: Promise<any>;
 
-    /** bceid-confirmation ctor */
+  /** bceid-confirmation ctor */
   constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
-    
+    // TODO load BCeID data from service
+    this.businessType = "Corporation";
   }
 
   onTypeChange(select) {
@@ -92,6 +93,7 @@ export class BceidConfirmationComponent {
       account.primarycontact = contact;
       // account.adoxio_businesstype = this.corp;
 
+      // TODO submit selected comany type and sub-type to the account service
       var payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
         .then((data) => {

@@ -152,8 +152,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
 				throw new Exception("Oops no ContactSiteminderGuid exernal id");
 
-            // get the contact record.
+            // get BCeID record for the current user
+			var bceidBusiness = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
+			//var bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
+            // get the contact record.
             MicrosoftDynamicsCRMcontact userContact = null;
 
             // see if the contact exists.
@@ -168,13 +171,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Fullname = userSettings.UserDisplayName;
                 userContact.Nickname = userSettings.UserDisplayName;
                 userContact.Employeeid = userSettings.UserId;
-                userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
-                userContact.Lastname = userSettings.UserDisplayName.GetLastName();
+
+				if (bceidBusiness != null)
+				{
+					// TODO
+				}
+				else
+				{
+					userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
+					userContact.Lastname = userSettings.UserDisplayName.GetLastName();
+				}
                 userContact.Statuscode = 1;                
             }
             // this may be an existing account, as this service is used during the account confirmation process.
             MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(accountSiteminderGuid);            
-
             
             if (account == null) // do a deep create.  create 3 objects at once.
             {
@@ -182,13 +192,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account = new MicrosoftDynamicsCRMaccount();
                 account.CopyValues(item, updateIfNull);
                 // ensure that we create an account for the current user.				
-                //item.externalId = accountSiteminderGuid;
 				account.AdoxioExternalid = accountSiteminderGuid;
 
                 account.Primarycontactid = userContact;
-                // TODO figure out how to properly set these two values:
-                account.AdoxioAccounttype = 845280000;
-                account.AdoxioBusinesstype = 845280000;
+
+				if (bceidBusiness != null)
+				{
+                    // TODO set values from BCeID service, as well as company type and sub-type
+				}
+				else
+				{
+					// TODO figure out how to properly set these two values (from user selection)
+					account.AdoxioAccounttype = 845280000;
+					account.AdoxioBusinesstype = 845280000;
+				}
 
                 var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
                 {
