@@ -35,7 +35,7 @@ namespace SharePoint.Tests
             string certFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string certPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            sharePointFileManager = new SharePointFileManager(serverAppIdUri, webname, aadTenantId, clientId, certFileName, certPassword);
+            sharePointFileManager = new SharePointFileManager(serverAppIdUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null);
 
         }
 
@@ -77,7 +77,6 @@ namespace SharePoint.Tests
             {
                 var temp = sharePointFileManager.DownloadFile(file.Url);
                 Assert.True(temp != null);
-
             }
 
             Assert.True(files != null);
@@ -87,9 +86,10 @@ namespace SharePoint.Tests
         public async void UploadRemoveFilesTest()
         {
             Random rnd = new Random();
-            string name = "test-name" + rnd.Next();            
-            string path = "/cannabisdev/Shared%20Documents/" + name;
-            string url = serverAppIdUri + "/cannabisdev/Shared Documents/" + name;
+            string name = "test-name" + rnd.Next() +".txt";
+            string testFolder = "test-folder" + rnd.Next();
+            string listTitle = "Shared Documents";
+            string url = serverAppIdUri + "/cannabisdev/Shared Documents/" + testFolder + "/" + name;
             
             string contentType = "text/plain";
             
@@ -97,21 +97,26 @@ namespace SharePoint.Tests
 
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
 
-            await sharePointFileManager.UploadFile(name, path, fileData, contentType);
+            await sharePointFileManager.CreateFolder(listTitle, testFolder);
+
+            await sharePointFileManager.UploadFile(name, "Shared Documents",testFolder, fileData, contentType);
 
             // now delete it.
 
-            await sharePointFileManager.DeleteFile(url);
+            await sharePointFileManager.DeleteFile("Shared Documents", testFolder, name);
+
+            // cleanup the test folder.
+            await sharePointFileManager.DeleteFolder("Shared Documents", testFolder);
         }
 
         [Fact]
         public async void AddRemoveFilesTest()
         {
             Random rnd = new Random();
-            string name = "test-name" + rnd.Next();
-            string folderName = "Shared Documents";
-            string path = "/cannabisdev/Shared%20Documents/" + name;
-            string url = serverAppIdUri + "cannabisdev/Shared Documents/" + name;
+            string fileName = "test-name" + rnd.Next() +".txt";
+            string folderName = "test-folder" + rnd.Next();
+            string path = "/" + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
+            string url = serverAppIdUri + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
 
             string contentType = "text/plain";
 
@@ -119,9 +124,8 @@ namespace SharePoint.Tests
 
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
 
-            await sharePointFileManager.AddFile(folderName, name, fileData, contentType);
-
-            System.Threading.Thread.Sleep(1000);
+            await sharePointFileManager.AddFile(folderName, fileName, fileData, contentType);
+            
 
             // verify that we can download the same file.
 
@@ -132,7 +136,27 @@ namespace SharePoint.Tests
             Assert.Equal(stringData, testData);
             // now delete it.
 
-            await sharePointFileManager.DeleteFile(url);
+           await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentListTitle, folderName, fileName);
+
+            // cleanup the folder
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+        }
+
+        /// <summary>
+        /// Test Create Folder
+        /// </summary>
+        [Fact]
+        public async void InvalidFolderDoesNotExist()
+        {
+            Random rnd = new Random();
+            string documentLocation = "Account";
+            string folderName = "Test Folder" + rnd.Next() + "---" + rnd.Next();
+
+            
+            bool exists = await sharePointFileManager.FolderExists(documentLocation, folderName);
+
+            Assert.False(exists);
+
         }
 
         /// <summary>
@@ -142,14 +166,23 @@ namespace SharePoint.Tests
         public async void CreateFolderTest()
         {
             Random rnd = new Random();
-            string documentLocation = "Documents";
+            string documentLocation = "Account";
             string folderName = "Test Folder" + rnd.Next();
 
-            SP.ListItem folder = await sharePointFileManager.CreateFolder(documentLocation, folderName);
+            SP.Folder folder = await sharePointFileManager.CreateFolder(documentLocation, folderName);
 
             Assert.True(folder != null);
 
+            bool exists = await sharePointFileManager.FolderExists(documentLocation, folderName);
+
+            Assert.True(exists);
+
+
             await sharePointFileManager.DeleteFolder(documentLocation, folderName);
+
+            exists = await sharePointFileManager.FolderExists(documentLocation, folderName);
+
+            Assert.False(exists);
         }
 
         [Fact]
@@ -158,7 +191,7 @@ namespace SharePoint.Tests
             Random rnd = new Random();
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
-            SP.ListItem folder = await sharePointFileManager.CreateFolder(documentList, folderName);
+            SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
             Assert.True(folder != null);
             var files = await sharePointFileManager.GetFilesInFolder(documentList, folderName);
             Assert.True(files != null);
@@ -172,7 +205,7 @@ namespace SharePoint.Tests
             Random rnd = new Random();
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
-            SP.ListItem folder = await sharePointFileManager.CreateFolder(documentList, folderName);
+            SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
             Assert.True(folder != null);
             var files = await sharePointFileManager.GetFilesInFolder(documentList, folderName);
             Assert.True(files != null);
