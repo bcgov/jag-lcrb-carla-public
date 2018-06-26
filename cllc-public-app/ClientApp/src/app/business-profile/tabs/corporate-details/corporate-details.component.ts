@@ -6,6 +6,7 @@ import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-corporate-details',
@@ -28,7 +29,10 @@ export class CorporateDetailsComponent implements OnInit {
     this.busy = this.accountDataService.getAccount(this.accountId).subscribe(
       res => {
         let data = this.toFormModel(res.json());
-        data.dateOfIncorporationInBC = new Date(data.dateOfIncorporationInBC);
+        let dp = new DatePipe(this.getLang());
+        let dateFormat = 'y-MM-dd'; // YYYY-MM-DD
+        let dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
+        data.dateOfIncorporationInBC = dtr;
         this.corporateDetailsForm.patchValue(data);
       },
       err => {
@@ -36,6 +40,13 @@ export class CorporateDetailsComponent implements OnInit {
       }
     );
 
+  }
+
+  getLang() {
+    if (navigator.languages != undefined)
+      return navigator.languages[0];
+    else
+      return navigator.language;
   }
 
   createForm() {
