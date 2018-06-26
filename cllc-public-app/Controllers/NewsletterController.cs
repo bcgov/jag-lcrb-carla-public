@@ -32,10 +32,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
         [HttpGet("{slug}")]
         [AllowAnonymous]
-        public JsonResult Subscribe(string slug)
+        public ActionResult GetNewsletter(string slug)
         {
             Newsletter newsletter = db.GetNewsletterBySlug(slug);
-            return Json(newsletter);
+            if (newsletter == null)
+            {
+                return new NotFoundResult();
+            }
+            else
+            {
+                return Json(newsletter);
+            }
+            
         }
 
         [HttpPost("{slug}/subscribe")]
