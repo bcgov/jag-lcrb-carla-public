@@ -231,7 +231,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 				Guid adoxio_legalentityid = new Guid(id);
                 MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-                if (adoxioLegalEntity == null)
+                if (adoxioLegalEntity == null || adoxioLegalEntity._adoxioAccountValue != userSettings.AccountId)
                 {
                     return new NotFoundResult();
                 }                
