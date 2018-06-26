@@ -1,12 +1,12 @@
-<section *ngIf="isIE10orLower()">
-  <p>Internet Explorer version less than 11 are not supported</p>
-  <p>Please Google Chrome, Firefox, IE 11 or Edge</p>
+<section class="container not-supported-browser" *ngIf="isIE10orLower()">
+  <p>Internet Explorer versions 10 and lower are not supported</p>
+  <p>Please use Google Chrome, Firefox, Edge or IE 11</p>
 </section>
 
 <div class="app-outer" *ngIf="!isIE10orLower()">
   <header class="app-header">
-    <div class="nav-container top-menu">
-      <section>
+    <div class="nav-container2 top-menu row" style="padding-left: 30px; padding-right: 30px;"> 
+      <section class="col-md-8 col-xs-12">
         <a href="http://www2.gov.bc.ca/" tabindex="-1">
           <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="assets/bc-logo.svg">
         </a>
@@ -15,7 +15,7 @@
           <span class="label label-beta">Beta</span>
         </span>
       </section>
-      <span *ngIf="isDevMode" class="sign-container">
+      <section class="col-md-4 col-xs-12 sign-container" *ngIf="isDevMode">
         <span class="sign" *ngIf="currentUser">
           <span>{{currentUser.name}}</span>
           &nbsp;
@@ -28,7 +28,7 @@
             <a href="/login/token/default">Sign In</a>
           </span>
         </span>
-      </span>
+      </section>
     </div>
   </header>
 
@@ -42,46 +42,64 @@
     <!-- /NAVBAR -->
     <div class="navigationRibbon" *ngIf="!currentUser">
       <div class="level2Navigation">
-        <div class="nav-container">
-          <a routerLink="/">Home</a>
-          <a routerLink="/policy-document/cannabis-retail-licence">Licence Types</a>
-          <a routerLink="/policy-document/eligibility">Application Requirements</a>
-          <a routerLink="/policy-document/employee-registration-training">Employees</a>
-          <a routerLink="/policy-document/ordering-cannabis">Ordering Cannabis</a>
-          <a routerLink="/policy-document/reporting-sales">Reporting</a>
+        <div class="nav-container2">
+          <nav class="navbar navbar-expand-lg navbar-light justify-content-end"  style="margin-bottom: 0; width: 100%;">
+              <a class="navbar-brand" href="javascript:void(0);"></a>
+            <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a routerLink="/">Home</a></li>
+                <li class="nav-item"><a routerLink="/policy-document/cannabis-retail-licence">Licence Types</a></li>
+                <li class="nav-item"><a routerLink="/policy-document/eligibility">Application Requirements</a></li>
+                <li class="nav-item"><a routerLink="/policy-document/employee-registration-training">Employees</a></li>
+                <li class="nav-item"><a routerLink="/policy-document/ordering-cannabis">Ordering Cannabis</a></li>
+                <li class="nav-item"><a routerLink="/policy-document/reporting-sales">Reporting</a></li>
+                <li class="nav-item"><a routerLink="/policy-document/contact">Contact Us</a></li>
+              </ul>
+            </div>
+          </nav>
         </div>
       </div>
+
     </div>
 
     <section *ngIf="currentUser" class="navigationRibbon">
       <div class="level2Navigation ">
-        <nav class="navbar navbar-expand navbar-dark nav-container">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left: 0;">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-              </li>
-              <li class="nav-item dropdown">
-                <div ngbDropdown class="d-inline-block">
-                  <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
-                  <div ngbDropdownMenu>
-                    <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile', profile.id], {skipLocationChange: true})">{{profile.name}}</button>
-                  </div>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <div ngbDropdown class="d-inline-block">
-                  <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Licences</a>
-                  <div ngbDropdownMenu>
-                    <button class="dropdown-item" routerLink="/lic-app-summary">Main License</button>
-                    <button class="dropdown-item" routerLink="/lic-app-summary">License 1</button>
-                    <button class="dropdown-item" routerLink="/lic-app-summary">License 2</button>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
+          <nav class="navbar navbar-expand-lg navbar-dark" style="margin-bottom: 0;  width: 100%;">
+              <a class="navbar-brand" href="javascript:void(0);"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" style="float: right" data-target="#loggedInMenu" aria-controls="loggedInMenu"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="loggedInMenu">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <div ngbDropdown class="d-inline-block">
+                      <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
+                      <div ngbDropdownMenu>
+                        <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile', profile.id], {skipLocationChange: true})">{{profile.name}}</button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <div ngbDropdown class="d-inline-block">
+                      <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Licences</a>
+                      <div ngbDropdownMenu>
+                        <button class="dropdown-item" routerLink="/lic-app-summary">Main License</button>
+                        <button class="dropdown-item" routerLink="/lic-app-summary">License 1</button>
+                        <button class="dropdown-item" routerLink="/lic-app-summary">License 2</button>
+                      </div>
+                    </div>
+                  </li>
+              </ul>
+            </div>
+          </nav>
       </div>
     </section>
     <!-- /NAVBAR END -->
