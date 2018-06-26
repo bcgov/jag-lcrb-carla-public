@@ -5,10 +5,7 @@ import { DynamicsAccount } from "../models/dynamics-account.model";
 import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
 import { ReadVarExpr } from '@angular/compiler';
-
-// class BusinessType{
-//   value: string;
-// }
+import { AccountDataService } from '../services/account-data.service';
 
 @Component({
     selector: 'app-bceid-confirmation',
@@ -28,9 +25,14 @@ export class BceidConfirmationComponent {
   busy: Promise<any>;
 
   /** bceid-confirmation ctor */
-  constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
+  constructor(private router: Router, private accountDataService: AccountDataService, private dynamicsDataService: DynamicsDataService) {
     // TODO load BCeID data from service
-    this.businessType = "Corporation";
+    this.accountDataService.getBCeID().subscribe((data) => {
+      let temp = data.json();
+      this.businessType = temp.businessTypeName;
+    }, err =>{
+      console.log(err);
+    });
   }
   
   confirmBceid() {
@@ -42,14 +44,6 @@ export class BceidConfirmationComponent {
     // confirm BCeID
     this.bceidConfirmAccount = false;
     this.bceidConfirmBusinessType = true;
-    this.dynamicsDataService.getRecord("account", this.currentUser.accountid)
-      .then((data) => {
-        console.log(data);
-        // this.account = data;
-        // if (data.primarycontact) {
-        //   this.contactId = data.primarycontact.id;
-        // }              
-      });
   }
 
 
