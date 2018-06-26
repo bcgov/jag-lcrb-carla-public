@@ -23,18 +23,6 @@
           <div [ngClass]="{'has-error': this.isFieldError('dateOfIncorporationInBC')}">
             <label>Date of Incorporation in B.C.</label>
             <br>
-            <!--<div class="input-group">
-              <input class="form-control" style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker"
-                formControlName="dateOfIncorporationInBC">
-              <div class="input-group-append">
-                <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
-              </div>
-              <div *ngIf="this.isFieldError('dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
-                <div *ngIf="corporateDetailsForm.controls['dateOfIncorporationInBC'].hasError('required') ">
-                  This is required
-                </div>
-              </div>
-            </div>-->
               <input type="date" class="form-control" formControlName="dateOfIncorporationInBC" style="width: 250px;">
               <div *ngIf="this.isFieldError('dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
                 <div *ngIf="corporateDetailsForm.controls['dateOfIncorporationInBC'].hasError('required') ">
@@ -82,23 +70,6 @@
             </div>
           </div>
         </section>
-
-        <!--<section>
-    <div [ngClass]="{'has-error': this.isFieldError('isCorporationOutsideBC')}">
-      <label>Is the organization incorporated, continued or conducts business in other provinces or countries?</label>
-      <br />
-      <input class="form-check-inline" type="radio" id="isCorporationOutsideBCTrue" formControlName="isCorporationOutsideBC" value="true">
-      <label class="form-check-inline" for="isCorporationOutsideBCTrue">Yes</label>
-      <br />
-      <input class="form-check-inline" type="radio" id="isCorporationOutsideBCFalse" formControlName="isCorporationOutsideBC" value="false">
-      <label class="form-check-inline" for="isCorporationOutsideBCFalse">No</label>
-      <div *ngIf="this.isFieldError('isCorporationOutsideBC')" class="alert alert-danger" style="width: 250px;">
-        <div *ngIf="corporateDetailsForm.controls['isCorporationOutsideBC'].hasError('required') ">
-          This is required
-        </div>
-      </div>
-    </div>
-  </section>-->
 
         <p></p>
         <section>

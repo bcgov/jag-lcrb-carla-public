@@ -28,7 +28,9 @@ export class CorporateDetailsComponent implements OnInit {
     // get account data and then display form
     this.busy = this.accountDataService.getAccount(this.accountId).subscribe(
       res => {
-        let data = this.toFormModel(res.json());
+        //let data = this.toFormModel(res.json());
+        let data = res.json();
+        // format date based on user locale
         let dp = new DatePipe(this.getLang());
         let dateFormat = 'y-MM-dd'; // YYYY-MM-DD
         let dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
@@ -125,7 +127,6 @@ export class CorporateDetailsComponent implements OnInit {
     formData.id = this.accountId;
     //let date = formData.dateOfIncorporationInBC;
     //formData.dateOfIncorporationInBC = new Date(date.year, date.month-1, date.day);
-
     return formData;
   }
 
