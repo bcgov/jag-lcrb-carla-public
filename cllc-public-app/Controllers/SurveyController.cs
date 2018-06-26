@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
@@ -29,9 +30,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpGet("getSurvey")]
         [AllowAnonymous]
-        public string GetSurvey(string surveyId)
+        public ActionResult GetSurvey(string surveyId)
         {
-            return db.GetSurvey(surveyId);
+            string result = db.GetSurvey(surveyId);
+            if (result != null)
+            {
+                return base.Content(result);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("create")]
