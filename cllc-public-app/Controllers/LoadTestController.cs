@@ -31,7 +31,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this.db = db;
         }
 
-        [HttpGet]        
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult LoadTest(string path)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
