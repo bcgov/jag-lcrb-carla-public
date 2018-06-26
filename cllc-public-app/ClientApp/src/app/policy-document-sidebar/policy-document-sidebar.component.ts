@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PolicyDocumentDataService } from "../services/policy-document-data.service";
 import { PolicyDocumentSummary } from "../models/policy-document-summary.model";
 @Component({
@@ -22,11 +22,17 @@ export class PolicyDocumentSidebarComponent {
         });
     }
   }
+
+  @Output() slugChange = new EventEmitter<string>();
   public policyDocumentSummaries:PolicyDocumentSummary[];
     /** PolicyDocumentSidebar ctor */
   constructor(private policyDocumentDataService: PolicyDocumentDataService) {
   }
 
   ngOnInit(): void {  
+  }
+
+  onSlugChange(slug: string){
+    this.slugChange.emit(slug);
   }
 }
