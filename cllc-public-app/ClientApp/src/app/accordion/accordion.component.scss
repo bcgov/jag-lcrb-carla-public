@@ -52,6 +52,12 @@ h3 {
   font-size: 22px;
 }
 
+@media (max-width: 575.98px) { 
+  .mat-expansion-panel-header-title{
+      font-size: 18px;
+  }
+}
+
 .mat-expansion-panel-header-description {
   justify-content: flex-end;
   font-size: 12px;
