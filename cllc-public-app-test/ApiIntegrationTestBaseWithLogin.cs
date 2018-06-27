@@ -148,10 +148,13 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			ViewModels.User user = await GetCurrentUser();
 
-            // TODO once AccountController is cleaned up restore this test
-			if (responseViewModel.primarycontact.id.Equals(user.id))
+			// TODO once AccountController is cleaned up restore this test
+			Console.WriteLine(">>> responseViewModel.primarycontact.id=" + responseViewModel.primarycontact.id);
+			Console.WriteLine(">>>                      user.contactid=" + user.contactid);
+			Console.WriteLine(">>>                           user.name=" + user.name);
+			if (responseViewModel.primarycontact.id.Equals(user.contactid))
 			{
-				// cleanup - delete the account and contract when we are done
+				// cleanup - delete the account and contact when we are done
 				request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
 				response = await _client.SendAsync(request);
 				var _discard = await response.Content.ReadAsStringAsync();
@@ -168,6 +171,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 				response = await _client.SendAsync(request);
 				_discard = await response.Content.ReadAsStringAsync();
 				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+			}
+			else
+			{
+				// TODO delete the non-primary contact
 			}
 
             await Logout();
