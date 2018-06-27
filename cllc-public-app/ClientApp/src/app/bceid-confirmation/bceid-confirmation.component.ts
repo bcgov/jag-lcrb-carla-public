@@ -5,10 +5,7 @@ import { DynamicsAccount } from "../models/dynamics-account.model";
 import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
 import { ReadVarExpr } from '@angular/compiler';
-
-// class BusinessType{
-//   value: string;
-// }
+import { AccountDataService } from '../services/account-data.service';
 
 @Component({
     selector: 'app-bceid-confirmation',
@@ -23,34 +20,19 @@ export class BceidConfirmationComponent {
   public bceidConfirmContact: boolean=false;
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
-  corp: boolean;
   businessType: string = "";
-  prefix: string = "a";
-  businessValue: number;
+  finalBusinessType: string = "";
   busy: Promise<any>;
 
   /** bceid-confirmation ctor */
-  constructor(private router: Router, private dynamicsDataService: DynamicsDataService) {
-    // TODO load BCeID data from service
-    this.businessType = "Corporation";
-  }
-
-  onTypeChange(select) {
-   switch (select.value) {
-     case "void":
-     case "proprietorship":
-     case "partnership":
-     case "corporation":
-       this.prefix = "a";
-       break;
-     case "extra provincially registered company":
-     case "other":
-       this.prefix = "an";
-       break;
-   
-     default:
-       break;
-   }
+  constructor(private router: Router, private accountDataService: AccountDataService, private dynamicsDataService: DynamicsDataService) {
+    // Load BCeID data from service
+    this.accountDataService.getBCeID().subscribe((data) => {
+      let temp = data.json();
+      this.businessType = temp.businessTypeCode;
+    }, err =>{
+      console.log(err);
+    });
   }
   
   confirmBceid() {
@@ -76,25 +58,30 @@ export class BceidConfirmationComponent {
       this.bceidConfirmContact = true;
     }
 
-    confirmCorpType() {
-      this.corp = true;
+    confirmCorpType(propOrPartner) {
       this.bceidConfirmBusinessType = false;
       this.bceidConfirmContact = true;
+
+      // Proprietorship and Partnership do not have radio buttons to chane the value of finalBusienssType
+      if(propOrPartner){
+        this.finalBusinessType = propOrPartner;
+      }
     }
 
     confirmContactYes() {
       // create a contact
-      var account = new DynamicsAccount();
+      let account = new DynamicsAccount();
       account.name = this.currentUser.businessname;
       account.id = this.currentUser.accountid;
-      var contact = new DynamicsContact();
+      let contact = new DynamicsContact();
       contact.fullname = this.currentUser.name;
       contact.id = this.currentUser.contactid;
       account.primarycontact = contact;
-      // account.adoxio_businesstype = this.corp;
+        
+      // Submit selected company type and sub-type to the account service
+      account.businessType = this.finalBusinessType;
 
-      // TODO submit selected comany type and sub-type to the account service
-      var payload = JSON.stringify(account);
+      let payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
         .then((data) => {
           window.location.reload();
