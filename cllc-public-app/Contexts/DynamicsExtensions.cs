@@ -624,9 +624,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 try
-                {
-                    // fetch from Dynamics.
-
+                {                    
                     var contacts = await system.Contacts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
 
                     result = contacts.FirstOrDefault();
@@ -642,11 +640,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     }
                 }
                 catch (DataServiceQueryException dsqe)
-                {
-                    if (dsqe.Message.Contains("Does Not Exist"))
-                        result = null;
-                    else
-                        throw;
+                {                    
+                    result = null;                    
                 }
             }
 
