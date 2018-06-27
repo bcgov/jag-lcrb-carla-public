@@ -5,6 +5,19 @@ $bootstrap-sass-asset-helper: true;
 .title {
   font-size: 30px;
 }
+@media (max-width: 575.98px) { 
+    .title {
+        font-size: 20px;
+      }
+
+    .app-header{
+        padding-top: 10px;
+    }
+
+    .app-content{
+        padding-left: 2%;
+    }
+}
 
 .label-beta {
   color: #ffffff;
@@ -261,7 +274,7 @@ a:active {
     flex-flow: row nowrap;
     width: 99%;
     max-width: 1600px;
-    min-width: 910px;
+    // min-width: 910px;
     margin: auto;
 }
 
@@ -281,4 +294,15 @@ a:active {
 
 .sign-container{
     padding-right: 15px;
+}
+
+
+.not-supported-browser{
+    padding-top: 20px;
+}
+
+button.btn-mobile {
+    border: none;
+    outline: none;
+    background: #ddd;
 }
