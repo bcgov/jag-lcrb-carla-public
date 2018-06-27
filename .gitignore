@@ -6,3 +6,5 @@ cllc-public-app/ClientApp/e2e-reports
 /functional-tests/obj
 /.vs
 /package-lock.json
+.vscode/launch.json
+.vscode/tasks.json
