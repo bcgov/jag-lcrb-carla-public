@@ -8,7 +8,8 @@ import { User } from '../../../models/user.model';
   styleUrls: ['./before-you-start.component.scss']
 })
 export class BeforeYouStartComponent implements OnInit {
-  @Input() accountId;
+  @Input() accountId: string;
+  @Input() businessType: string;
 
   constructor() { }
 
