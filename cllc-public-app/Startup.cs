@@ -296,10 +296,14 @@ namespace Gov.Lclb.Cllb.Public
             }
             else
             {
-                app.UseCsp(options => options
-                .DefaultSources(s => s.Self())
-                .ScriptSources(s => s.Self())
-                .StyleSources(s => s.Self()));
+
+                app.Use(async (ctx, next) =>
+                {
+                    ctx.Response.Headers.Add("Content-Security-Policy",
+                                             "script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
+                    await next();
+                });
+                //"script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
                 app.UseExceptionHandler("/Home/Error");
             }
             
