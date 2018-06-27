@@ -95,6 +95,10 @@ import { FinancialInformationComponent } from './business-profile/tabs/financial
 import { BusinessProfileSummaryComponent } from './business-profile-summary/business-profile-summary.component';
 
 import {NgBusyModule} from 'ng-busy';
+import { KeyPersonelComponent } from './business-profile/tabs/key-personel/key-personel.component';
+import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { ShareholdersPublicComponent } from './business-profile/tabs/shareholders-public/shareholders-public.component';
+import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholders-ucl-llc/shareholders-ucl-llc.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +139,11 @@ import {NgBusyModule} from 'ng-busy';
     SecurityAssessmentsComponent,
     BeforeYouStartComponent,
     FinancialInformationComponent,
-    BusinessProfileSummaryComponent
+    BusinessProfileSummaryComponent,
+    KeyPersonelComponent,
+    ConnectionToProducersComponent,
+    ShareholdersPublicComponent,
+    ShareholdersUclLlcComponent
   ],
   imports: [
     BrowserModule,
