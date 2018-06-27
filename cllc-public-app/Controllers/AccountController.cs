@@ -174,10 +174,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 				if (bceidBusiness != null)
 				{
-                    Console.Write("HERE IS THE ITEM:");
-                    Console.Write(item);
-					// TODO set contact according to item
-                    
+					// set contact according to item
+                    userContact.Firstname = item.primarycontact.firstname;
+                    userContact.Lastname = item.primarycontact.lastname;
+                    userContact.Emailaddress1 = item.primarycontact.emailaddress1;
+                    userContact.Telephone1 = item.primarycontact.telephone1;
+                    userContact.Address1City = item.primarycontact.address1_city;
+                    userContact.Address1Postalcode = item.primarycontact.address1_postalcode;
+                    userContact.Address1Addressid = item.primarycontact.address1_line1;
+                    userContact.Address1Postalcode = item.primarycontact.address1_postalcode;
 				}
 				else
 				{
@@ -202,6 +207,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (bceidBusiness != null)
 				{
+                    // sets Business type with numerical value found in Adoxio_applicanttypecodes
+                    // using account.businessType which is set in bceid-confirmation.component.ts
                     account.AdoxioBusinesstype = (int)Enum.Parse(typeof(Adoxio_applicanttypecodes), item.businessType, true);
 				}
 				else
