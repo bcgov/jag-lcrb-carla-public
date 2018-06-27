@@ -53,6 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             };
 
             ViewModels.Account viewmodel_account = account.ToViewModel();
+			viewmodel_account.businessType = "PublicCorporation";
 
             string jsonString = JsonConvert.SerializeObject(viewmodel_account);
 
