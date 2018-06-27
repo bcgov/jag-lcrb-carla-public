@@ -1,31 +1,21 @@
 <div *ngIf="policyDocumentSummaries && category">
 
     <!-- SITE SECONDARY NAVIGATION -->
-   
-        <!-- googleoff:all -->
-        <a id="navigation-anchor"></a>
-        <div class="contentPageLeftNavigation">
-            <div id="topicLeftNav" class="navbar" role="navigation" aria-label="secondary">
-                <div class="navbar-header">
-                    <button class="navbar-toggle topic-menu-trigger " aria-expanded="true" type="button" data-toggle="collapse" data-target="#topicLeftNav .navbar-collapse">
-                        Section Navigation
-                    </button>
-                </div>
-                <div class="row navbar-collapse collapse">
-                    <div class="col-xs-12">
-                        <ul class="leftNav nav navbar-nav">
-                            <li class="open" *ngFor="let policyDocumentSummary of policyDocumentSummaries">
-                                <div class="leftNav-item-wrapper">
-                                    <a href="policy-document/{{ policyDocumentSummary.slug }}">{{ policyDocumentSummary.menuText }}</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
+    <!-- googleoff:all -->
+    <a id="navigation-anchor"></a>
+    <div class="contentPageLeftNavigation">
+        <nav class="navbar">
+            <div class="" id="navbarSupportedContent">
+                <ul class="leftNav nav navbar-nav">
+                    <li class="open" *ngFor="let policyDocumentSummary of policyDocumentSummaries">
+                        <div class="leftNav-item-wrapper">
+                            <a href="javascript:void(0);" (click)="onSlugChange(policyDocumentSummary.slug)">{{ policyDocumentSummary.menuText }}</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <!-- END SITE SECONDARY NAVIGATION -->
+        </nav>
+    </div>
 
-    
-
-
+    <!-- END SITE SECONDARY NAVIGATION -->
