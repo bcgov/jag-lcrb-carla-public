@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-connection-to-producers',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./connection-to-producers.component.css']
 })
 export class ConnectionToProducersComponent implements OnInit {
-
+  @Input() accountId: string;
+  @Input() businessType: string;
   constructor() { }
 
   ngOnInit() {
