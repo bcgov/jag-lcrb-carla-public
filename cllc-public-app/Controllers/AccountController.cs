@@ -175,14 +175,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				if (bceidBusiness != null)
 				{
 					// set contact according to item
-                    userContact.Firstname = item.primarycontact.firstname;
-                    userContact.Lastname = item.primarycontact.lastname;
-                    userContact.Emailaddress1 = item.primarycontact.emailaddress1;
-                    userContact.Telephone1 = item.primarycontact.telephone1;
-                    userContact.Address1City = item.primarycontact.address1_city;
-                    userContact.Address1Postalcode = item.primarycontact.address1_postalcode;
-                    userContact.Address1Addressid = item.primarycontact.address1_line1;
-                    userContact.Address1Postalcode = item.primarycontact.address1_postalcode;
+                    userContact.Firstname = bceidBusiness.individualFirstname;
+                    userContact.Middlename = bceidBusiness.individualMiddlename;
+                    userContact.Lastname = bceidBusiness.individualSurname;
+                    userContact.Emailaddress1 = bceidBusiness.contactEmail;
+                    userContact.Telephone1 = bceidBusiness.contactPhone;
+                    userContact.Address1City = bceidBusiness.addressCity;
+                    userContact.Address1Postalcode = bceidBusiness.addressPostal;
+                    userContact.Address1Line1 = bceidBusiness.addressLine1;
+                    userContact.Address1Line2 = bceidBusiness.addressLine2;
+                    userContact.Address1Postalcode = bceidBusiness.addressPostal;
 				}
 				else
 				{
@@ -205,16 +207,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account.Primarycontactid = userContact;
                 account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Applicant;
 
-                if (bceidBusiness != null)
-				{
-                    // sets Business type with numerical value found in Adoxio_applicanttypecodes
-                    // using account.businessType which is set in bceid-confirmation.component.ts
-                    account.AdoxioBusinesstype = (int)Enum.Parse(typeof(Adoxio_applicanttypecodes), item.businessType, true);
-				}
-				else
-				{
-                    account.AdoxioBusinesstype = (int)Adoxio_applicanttypecodes.PublicCorporation;
-                }
+                // sets Business type with numerical value found in Adoxio_applicanttypecodes
+                // using account.businessType which is set in bceid-confirmation.component.ts
+                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(Adoxio_applicanttypecodes), item.businessType, true);
 
                 var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
                 {
