@@ -1,6 +1,6 @@
 <div>
   <h1 style="margin-top: 0;">Before You Start</h1>
-  <div *ngIf="businessType == 'private-corporation'">
+  <div *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessType) !== -1">
     <section>
       <label for="">Gather this information before you begin:</label>
       <ul>

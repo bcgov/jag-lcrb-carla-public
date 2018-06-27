@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 export class EditShareholdersComponent implements OnInit {
 
   @Input() accountId: string;
+  @Input() businessType: string;
 
   shareholderForm: FormGroup;
   shareholderList: AdoxioLegalEntity[] = [];

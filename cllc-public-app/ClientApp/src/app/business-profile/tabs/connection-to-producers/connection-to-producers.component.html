@@ -1,3 +1,43 @@
-<p>
-  connection-to-producers works!
-</p>
+<div>
+  <h1>Connections to Producers</h1>
+  <span>A "
+    <strong>federal producer</strong>" is a federally licensed producer of cannabis
+  </span><br>
+  <p></p>
+
+  <section>
+    <label for="">Does the corporation have any financial or business connection to a federal producer?</label>
+    <span>This includes:</span>
+    <ul>
+      <li>Directly holding voting shares in a federal producer</li>
+      <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary</li>
+      <li>Having a beneficial interest in a federal producer. For example, through a trust</li>
+    </ul>
+    <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+    <br>
+    <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+  </section>
+  <p></p>
+
+  <section>
+    <label for="">Does a federal producer have any financial or business connection in the corporation?</label>
+    <span>This includes:</span>
+    <ul>
+      <li>Directly holding voting shares in the corporation</li>
+      <li>Indirectly holding voting shares in the corporation. For example, through a subsidiary</li>
+      <li>Having a beneficial interest in the corporation. For example, through a trust</li>
+    </ul>
+    <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+    <br>
+    <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+  </section>
+  <p></p>
+
+  <section>
+    <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about the
+      holding of voting shares</span>
+    <br>
+    <textarea name="" id="" class="form-control" rows="10"></textarea>
+  </section>
+
+</div>
