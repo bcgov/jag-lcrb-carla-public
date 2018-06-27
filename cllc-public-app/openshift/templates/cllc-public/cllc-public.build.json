@@ -65,6 +65,10 @@
 			  {
                 "name": "UAT_BUILD",
                 "value": "${UAT_BUILD}"
+              },
+			  {
+                "name": "PROD_BUILD",
+                "value": "${PROD_BUILD}"
               }
             ]
           }
@@ -187,6 +191,12 @@
       "displayName": "UAT Build",
       "description": "1 if true",      
       "value": ""
-    }    
+    },
+	{
+      "name": "PROD_BUILD",
+      "displayName": "UAT Build",
+      "description": "1 if true",      
+      "value": ""
+    }     
   ]
 }

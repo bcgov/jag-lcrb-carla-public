@@ -29,9 +29,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpGet("{slug}")]
         [AllowAnonymous]
-        public JsonResult GetVoteQuestion(string slug)
+        public ActionResult GetVoteQuestion(string slug)
         {
-            return Json(db.GetViewModelVoteQuestionBySlug(slug));
+            var result = db.GetViewModelVoteQuestionBySlug(slug);
+
+            if (result == null)
+            {
+                return new NotFoundResult();
+            }
+            else
+            {
+                return Json(result);
+            }
         }
 
         [HttpPost("{slug}/vote")]
