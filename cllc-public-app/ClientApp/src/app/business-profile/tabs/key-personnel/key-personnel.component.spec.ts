@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KeyPersonelComponent } from './key-personel.component';
+import { KeyPersonnelComponent } from './key-personnel.component';
 
 describe('KeyPersonelComponent', () => {
-  let component: KeyPersonelComponent;
-  let fixture: ComponentFixture<KeyPersonelComponent>;
+  let component: KeyPersonnelComponent;
+  let fixture: ComponentFixture<KeyPersonnelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KeyPersonelComponent ]
+      declarations: [ KeyPersonnelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KeyPersonelComponent);
+    fixture = TestBed.createComponent(KeyPersonnelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

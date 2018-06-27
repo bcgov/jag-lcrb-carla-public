@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-shareholders-ucl-llc',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shareholders-ucl-llc.component.css']
 })
 export class ShareholdersUclLlcComponent implements OnInit {
-
+  @Input() accountId: string;
   constructor() { }
 
   ngOnInit() {
