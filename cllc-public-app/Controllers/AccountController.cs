@@ -85,8 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // query the BCeID API to get the business record.
-			var business = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
-			//var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+	    var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             if (business == null)
             {
