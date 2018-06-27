@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.Public
                 ctx.Context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
                 ctx.Context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
                 ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' https://apis.google.com";
+                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com";
             };
             
             app.UseStaticFiles(staticFileOptions);
