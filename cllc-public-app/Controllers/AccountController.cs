@@ -344,7 +344,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+			// delete the associated LegalEntity
+			MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
+			if (legalentity != null) 
+			{
+				_dynamicsClient.Adoxiolegalentities.Delete(legalentity.AdoxioLegalentityid);
+			}
+
+			await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
 
             return NoContent(); // 204 
         }
