@@ -10,7 +10,12 @@
         <a (click)="changeTab('tab-0')">Before You Start</a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-1'}">
-        <a (click)="changeTab('tab-1')">Corporate Details</a>
+        <a (click)="changeTab('tab-1')">
+           <span *ngIf="businessTypeSel.value == 'private-corporation'">Corporate Details</span>
+           <span *ngIf="businessTypeSel.value == 'society'">Society Details</span>
+           <span *ngIf="businessTypeSel.value == 'partnership'">Partnership Details</span>
+           <span *ngIf="businessTypeSel.value == 'sole-proprietor'">Sole-Prop Details</span>
+        </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-2'}">
         <a (click)="changeTab('tab-2')">Organization Structure</a>
@@ -19,23 +24,42 @@
         <a (click)="changeTab('tab-3')">Directors &amp; Officers</a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-4'}">
-        <a (click)="changeTab('tab-4')">Shareholders</a>
+        <a (click)="changeTab('tab-3')">Key Personnel</a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-5'}">
-        <a (click)="changeTab('tab-5')">Financial Information</a>
+        <a (click)="changeTab('tab-4')">Shareholders</a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-6'}">
+        <a (click)="changeTab('tab-4')">Shareholders (UCL - LLC)</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-7'}">
+        <a (click)="changeTab('tab-4')">Shareholders (Public)</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-8'}">
+        <a (click)="changeTab('tab-5')">Connections to Producers</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-9'}">
+        <a (click)="changeTab('tab-5')">Financial Information</a>
+      </li>
+      <li [ngClass]="{'active': view_tab == 'tab-10'}">
         <a (click)="changeTab('tab-6')">Security Assessments</a>
       </li>
     </ul>
   </div>
   <div class="col-md-9 col-sm-9">
+    <select name="" id="" #businessTypeSel>
+      <option value="private-corporation">private-corporation</option>
+      <option value="partnership">partnership</option>
+      <option value="society">society</option>
+      <option value="sole-proprietor">sole-proprietor</option>
+    </select>
+    <br>
     <!-- Tab panes -->
     <div [hidden]="view_tab != 'tab-0'">
-      <app-before-you-start></app-before-you-start>
+      <app-before-you-start [businessType]="businessTypeSel.value"></app-before-you-start>
     </div>
     <div [hidden]="view_tab != 'tab-1'">
-      <app-corporate-details [accountId]="accountId"></app-corporate-details>
+      <app-corporate-details [accountId]="accountId" [businessType]="businessTypeSel.value"></app-corporate-details>
     </div>
     <div [hidden]="view_tab != 'tab-2'">
       <app-organization-structure [accountId]="accountId"></app-organization-structure>
