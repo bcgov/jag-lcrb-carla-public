@@ -30,30 +30,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<BCeIDBusiness> ProcessBusinessQuery(string guid) 
         {
             if (String.IsNullOrEmpty(url)){
-                var temp_business = new BCeIDBusiness();
-                temp_business.contactEmail = "ian.costanzo@quartech.com";
-                temp_business.contactPhone = "250-555-1234";
-
-                temp_business.individualFirstname = "Chief";
-                temp_business.individualMiddlename = "";
-                temp_business.individualOtherMiddlename = "";
-                temp_business.individualSurname = "Developer1";
-
-                temp_business.businessTypeName = "";
-                temp_business.businessTypeDescription = "";
-                temp_business.businessTypeCode = "Other";
-                temp_business.businessTypeOther = "Development Account for Cannabis Licensing System";
-                temp_business.legalName = "ABC Cannabis Sales Dev";
-                temp_business.businessNumber = "";
-                temp_business.incorporationNumber = "";
-                temp_business.jurisdictionOfIncorporation = "";
-                temp_business.addressLine1 = "123 Any Street";
-                temp_business.addressLine2 = "";
-                temp_business.addressCity  = "Victoria";
-                temp_business.addressProv  = "BC";
-                temp_business.addressPostal = "V8W1P6";
-                temp_business.addressCountry = "CA";
-                return temp_business;
+		return null;
             }
                 
             // create the SOAP client
