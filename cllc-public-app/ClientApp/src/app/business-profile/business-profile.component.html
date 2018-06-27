@@ -1,4 +1,3 @@
-
 <div class="col-md-12" *ngIf="componentLoaded">
   <h1>Business Profile</h1>
   <h2 *ngIf="currentUser">{{ currentUser.businessname }}</h2>
@@ -11,38 +10,46 @@
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-1'}">
         <a (click)="changeTab('tab-1')">
-           <span *ngIf="businessTypeSel.value == 'private-corporation'">Corporate Details</span>
-           <span *ngIf="businessTypeSel.value == 'society'">Society Details</span>
-           <span *ngIf="businessTypeSel.value == 'partnership'">Partnership Details</span>
-           <span *ngIf="businessTypeSel.value == 'sole-proprietor'">Sole-Prop Details</span>
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Corporate Details</span>
+          <span *ngIf="businessTypeSel.value == 'society'">Society Details</span>
+          <span *ngIf="businessTypeSel.value == 'partnership'">Partnership Details</span>
+          <span *ngIf="businessTypeSel.value == 'sole-proprietor'">Sole-Prop Details</span>
         </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-2'}">
-        <a (click)="changeTab('tab-2')">Organization Structure</a>
+        <a (click)="changeTab('tab-2')">
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Organization Structure</span>
+        </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-3'}">
-        <a (click)="changeTab('tab-3')">Directors &amp; Officers</a>
+        <a (click)="changeTab('tab-3')">
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Directors &amp; Officers</span>
+        </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-4'}">
-        <a (click)="changeTab('tab-3')">Key Personnel</a>
+        <a (click)="changeTab('tab-4')">
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Key Personnel</span>
+        </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-5'}">
-        <a (click)="changeTab('tab-4')">Shareholders</a>
+        <a (click)="changeTab('tab-5')">
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Shareholders</span>
+        </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-6'}">
-        <a (click)="changeTab('tab-4')">Shareholders (UCL - LLC)</a>
+        <a (click)="changeTab('tab-6')">
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Connections to Producers</span>
+        </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-7'}">
-        <a (click)="changeTab('tab-4')">Shareholders (Public)</a>
+        <a (click)="changeTab('tab-7')">
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Financial Information</span>
+        </a>
       </li>
       <li [ngClass]="{'active': view_tab == 'tab-8'}">
-        <a (click)="changeTab('tab-5')">Connections to Producers</a>
-      </li>
-      <li [ngClass]="{'active': view_tab == 'tab-9'}">
-        <a (click)="changeTab('tab-5')">Financial Information</a>
-      </li>
-      <li [ngClass]="{'active': view_tab == 'tab-10'}">
-        <a (click)="changeTab('tab-6')">Security Assessments</a>
+        <a (click)="changeTab('tab-8')">
+          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Security Assessments</span>
+        </a>
       </li>
     </ul>
   </div>
@@ -52,6 +59,8 @@
       <option value="partnership">partnership</option>
       <option value="society">society</option>
       <option value="sole-proprietor">sole-proprietor</option>
+      <option value="ucl-llc">ucl-llc</option>
+      <option value="public">public</option>
     </select>
     <br>
     <!-- Tab panes -->
@@ -68,18 +77,25 @@
       <app-directors-and-officers [accountId]="accountId"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'tab-4'">
-      <app-edit-shareholders [accountId]="accountId"></app-edit-shareholders>
+      <app-key-personnel [accountId]="accountId"></app-key-personnel>
     </div>
     <div [hidden]="view_tab != 'tab-5'">
-      <app-financial-information [accountId]="accountId"></app-financial-information>
+      <app-edit-shareholders [accountId]="accountId" [businessType]="businessTypeSel.value"></app-edit-shareholders>
     </div>
     <div [hidden]="view_tab != 'tab-6'">
+      <app-connection-to-producers [accountId]="accountId" [businessType]="businessTypeSel.value"></app-connection-to-producers>
+    </div>
+    <div [hidden]="view_tab != 'tab-7'">
+      <app-financial-information [accountId]="accountId"></app-financial-information>
+    </div>
+    <div [hidden]="view_tab != 'tab-8'">
       <app-security-assessments [accountId]="accountId"></app-security-assessments>
     </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
       <a class="globalButton" *ngIf="view_tab != 'tab-0'" class="btn btn-secondary" tabindex="1" (click)="back()">
-        <strong>Back</strong><br>
+        <strong>Back</strong>
+        <br>
       </a>
       &nbsp;
       <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
@@ -90,4 +106,3 @@
     </div>
   </div>
 </div>
-
