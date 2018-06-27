@@ -14,13 +14,39 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         [Display(Name = "Private Corporation")]
         PrivateCorporation = 845280000,
-        Partnership,
-        [Display(Name = "Sole Proprietor")]
-        SoleProprietor,
         [Display(Name = "Public Corporation")]
-        PublicCorporation,
-        Society,
-        Other
+        PublicCorporation = 845280003,
+        [Display(Name = "Unlimited Liability Corporation")]
+        UnlimitedLiabilityCorporation = 845280007,
+        [Display(Name = "Limited Liability Corporation")]
+        LimitedLiabilityCorporation = 845280006,
+        [Display(Name = "General Partnership")]
+        GeneralPartnership = 845280001,
+        [Display(Name = "Limited Partnership")]
+        LimitedPartnership = 845280008,
+        [Display(Name = "Limited Liability Partnership")]
+        LimitedLiabilityPartnership = 845280009,
+        Society = 845280004,
+        [Display(Name = "Sole Proprietor")]
+        SoleProprietor = 845280002,
+        [Display(Name = "Indigenous Nation")]
+        IndigenousNation = 845280010,
+        [Display(Name = "Co-op")]
+        Coop = 845280011,
+        Trust = 845280012,
+        Estate = 845280013,
+        [Display(Name = "Local Government")]
+        LocalGovernment = 845280014,
+        University = 845280016
+    }
+    public enum Adoxio_accounttypecodes
+    {
+        Applicant = 845280000,
+        Licensee = 2,
+        Shareholder = 845280001,
+        [Display(Name = "Police Jurisdiction")]
+        PoliceJurisdiction = 0,
+        Municipality = 1
     }
 
     public enum PositionOptions

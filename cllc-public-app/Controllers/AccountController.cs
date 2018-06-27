@@ -198,17 +198,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				account.AdoxioExternalid = accountSiteminderGuid;
 
                 account.Primarycontactid = userContact;
+                account.AdoxioAccounttype = (int?)Adoxio_accounttypecodes.Applicant;
 
-				if (bceidBusiness != null)
+                if (bceidBusiness != null)
 				{
-                    // TODO set values from BCeID service, as well as company type and sub-type
+                    account.AdoxioBusinesstype = (int)Enum.Parse(typeof(Adoxio_applicanttypecodes), item.businessType, true);
 				}
 				else
 				{
-					// TODO figure out how to properly set these two values (from user selection)
-					account.AdoxioAccounttype = 845280000;
-					account.AdoxioBusinesstype = 845280000;
-				}
+                    account.AdoxioBusinesstype = (int)Adoxio_applicanttypecodes.PublicCorporation;
+                }
 
                 var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
                 {
