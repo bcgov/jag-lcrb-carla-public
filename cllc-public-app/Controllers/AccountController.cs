@@ -203,7 +203,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				account.AdoxioExternalid = accountSiteminderGuid;
 
                 account.Primarycontactid = userContact;
-                account.AdoxioAccounttype = (int?)Adoxio_accounttypecodes.Applicant;
+                account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Applicant;
 
                 if (bceidBusiness != null)
 				{
