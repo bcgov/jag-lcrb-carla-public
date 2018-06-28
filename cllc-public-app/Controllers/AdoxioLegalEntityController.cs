@@ -268,15 +268,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
                     string folderName = $"{account.Name}_{accountIdCleaned}";
                     // Get the file details list in folder
-                    List<FileDetailsList> fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+                    List<FileDetailsList> fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
                     if (fileDetailsList != null)
                     {
                         foreach (FileDetailsList fileDetails in fileDetailsList)
                         {
                             ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
-                            fileSystemItemVM.name = fileDetails.Name;
+                            // remove the document type text from file name
+                            fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
+                            // convert size from bytes (original) to KB
                             fileSystemItemVM.size = int.Parse(fileDetails.Length);
                             fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
+                            fileSystemItemVM.documenttype = fileDetails.DocumentType;
                             fileSystemItemVMList.Add(fileSystemItemVM);
                         }
                     }

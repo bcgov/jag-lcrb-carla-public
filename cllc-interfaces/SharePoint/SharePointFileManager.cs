@@ -113,6 +113,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             public string Name { get; set; }
             public string TimeLastModified { get; set; }
             public string Length { get; set; }
+            public string DocumentType { get; set; }
         }
 
 
@@ -159,7 +160,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             */
         }
 
-        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string siteName, string folderName)
+        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string siteName, string folderName, string documentType)
         {
             string serverRelativeUrl = $"/{WebName}/{siteName}/{folderName}";
             HttpRequestMessage endpointRequest =
@@ -171,22 +172,25 @@ namespace Gov.Lclb.Cllb.Interfaces
             // parse the response
             JObject responseObject = JObject.Parse(jsonString);
             // get JSON response objects into a list
-            List<JToken> results = responseObject["d"]["results"].Children().ToList();
+            List<JToken> responseResults = responseObject["d"]["results"].Children().ToList();
+            // create file details list to add from response
+            List<FileDetailsList> fileDetailsList = new List<FileDetailsList>();
             // create .NET objects
-            List<FileDetailsList> responseResults = new List<FileDetailsList>();
-            foreach (JToken res in results)
+            foreach (JToken responseResult in responseResults)
             {
                 // JToken.ToObject is a helper method that uses JsonSerializer internally
-                FileDetailsList searchResult = res.ToObject<FileDetailsList>();
-                responseResults.Add(searchResult);
+                FileDetailsList searchResult = responseResult.ToObject<FileDetailsList>();
+                //filter by parameter documentType
+                int fileDoctypeStart = searchResult.Name.IndexOf("__") + 2;
+                string fileDoctype = searchResult.Name.Substring(fileDoctypeStart);
+                if (fileDoctype == documentType)
+                {
+                    searchResult.DocumentType = documentType;
+                    fileDetailsList.Add(searchResult);
+                }
             }
 
-            return responseResults;
-
-            //var settings = new JsonSerializerSettings();
-            //settings.TypeNameHandling = TypeNameHandling.Objects;
-            //FileFolderData result = JsonConvert.DeserializeObject<FileFolderData>(jsonString, settings);
-            //return result.d.results;
+            return fileDetailsList;
         }
 
             /// <summary>
