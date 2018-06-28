@@ -118,7 +118,8 @@ namespace SharePoint.Tests
             // set file and folder settings
 
             Random rnd = new Random();
-            string fileName = "test-file-name" + rnd.Next() +".txt";
+            string documentType = "Document Type";
+            string fileName = "test-file-name" + rnd.Next() + ".txt" + "__" + documentType;
             string folderName = "test-folder-name" + rnd.Next();
             string path = "/" + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
             string url = serverAppIdUri + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
@@ -132,18 +133,15 @@ namespace SharePoint.Tests
 
             // get file details list in SP folder
 
-            List<FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            List<FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
-            if (fileDetailsList != null)
+            // validate that file name uploaded and listed are the same
+            foreach (FileDetailsList fileDetails in fileDetailsList)
             {
-                foreach (FileDetailsList fileDetails in fileDetailsList)
-                {
-                    // validate that file name uploaded and listed are the same
-                    Assert.Equal(fileName, fileDetails.Name);
-                }
+                Assert.Equal(fileName, fileDetails.Name);
             }
-
+            
             // verify that we can download the same file.
 
             byte[] data = await sharePointFileManager.DownloadFile(path);
@@ -208,9 +206,10 @@ namespace SharePoint.Tests
             Random rnd = new Random();
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
+            string documentType = "Corporate Information";
             SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
             Assert.True(folder != null);
-            var files = await sharePointFileManager.GetFilesInFolder(documentList, folderName);
+            var files = await sharePointFileManager.GetFileDetailsListInFolder(documentList, folderName, documentType);
             Assert.True(files != null);
             Assert.True(files.Count == 0);
             await sharePointFileManager.DeleteFolder(documentList, folderName);            
@@ -222,9 +221,10 @@ namespace SharePoint.Tests
             Random rnd = new Random();
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
+            string documentType = "Corporate Information";
             SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
             Assert.True(folder != null);
-            var files = await sharePointFileManager.GetFilesInFolder(documentList, folderName);
+            var files = await sharePointFileManager.GetFileDetailsListInFolder(documentList, folderName, documentType);
             Assert.True(files != null);
             Assert.True(files.Count == 0);
             await sharePointFileManager.DeleteFolder(documentList, folderName);
