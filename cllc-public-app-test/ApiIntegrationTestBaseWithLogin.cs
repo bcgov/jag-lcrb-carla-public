@@ -88,11 +88,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             Account account = new Account()
             {
                 Name = user.businessname,
-                Adoxio_externalid = user.accountid
+                Adoxio_externalid = user.accountid,
             };
 
-            
             ViewModels.Account viewmodel_account = account.ToViewModel();
+			viewmodel_account.businessType = "PublicCorporation";
 
             Assert.Equal(account.Adoxio_externalid, viewmodel_account.externalId);
 

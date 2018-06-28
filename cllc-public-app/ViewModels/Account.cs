@@ -60,5 +60,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string mailingAddresPostalCode { get; set; } //dynamics = address1_postalcode
 
         public ViewModels.Contact primarycontact { get; set; }
+
+        public string businessType { get; set; }
+
     }
 }

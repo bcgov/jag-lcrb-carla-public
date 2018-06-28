@@ -85,8 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // query the BCeID API to get the business record.
-			var business = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
-			//var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+	    var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             if (business == null)
             {
@@ -174,7 +173,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 				if (bceidBusiness != null)
 				{
-					// TODO
+					// set contact according to item
+                    userContact.Firstname = bceidBusiness.individualFirstname;
+                    userContact.Middlename = bceidBusiness.individualMiddlename;
+                    userContact.Lastname = bceidBusiness.individualSurname;
+                    userContact.Emailaddress1 = bceidBusiness.contactEmail;
+                    userContact.Telephone1 = bceidBusiness.contactPhone;
+                    userContact.Address1City = bceidBusiness.addressCity;
+                    userContact.Address1Postalcode = bceidBusiness.addressPostal;
+                    userContact.Address1Line1 = bceidBusiness.addressLine1;
+                    userContact.Address1Line2 = bceidBusiness.addressLine2;
+                    userContact.Address1Postalcode = bceidBusiness.addressPostal;
 				}
 				else
 				{
@@ -195,17 +204,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				account.AdoxioExternalid = accountSiteminderGuid;
 
                 account.Primarycontactid = userContact;
+                account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Applicant;
 
-				if (bceidBusiness != null)
-				{
-                    // TODO set values from BCeID service, as well as company type and sub-type
-				}
-				else
-				{
-					// TODO figure out how to properly set these two values (from user selection)
-					account.AdoxioAccounttype = 845280000;
-					account.AdoxioBusinesstype = 845280000;
-				}
+                // sets Business type with numerical value found in Adoxio_applicanttypecodes
+                // using account.businessType which is set in bceid-confirmation.component.ts
+                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(Adoxio_applicanttypecodes), item.businessType, true);
 
                 var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
                 {
@@ -216,7 +219,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogError("Legal Entity Before --> " + legalEntityString);
+                //_logger.LogError("Legal Entity Before --> " + legalEntityString);
                 
                 legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
 
@@ -236,7 +239,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Contactid = legalEntity.AdoxioAccount._primarycontactidValue;
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogError("Legal Entity After --> " + legalEntityString);
+                //_logger.LogError("Legal Entity After --> " + legalEntityString);
 
             }
             else // it is a new user only.
@@ -344,7 +347,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+			// delete the associated LegalEntity
+			MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
+			if (legalentity != null) 
+			{
+				_dynamicsClient.Adoxiolegalentities.Delete(legalentity.AdoxioLegalentityid);
+			}
+
+			await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
 
             return NoContent(); // 204 
         }
