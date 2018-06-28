@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FinancialInformationComponent implements OnInit {
   @Input() accountId: string;
+  @Input() businessType: string;
   operatingForMoreThanOneYear: string = '';
 
   constructor() { }

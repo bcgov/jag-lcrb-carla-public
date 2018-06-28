@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class KeyPersonnelComponent implements OnInit {
   @Input() accountId: string;
+  @Input() businessType: string;
   constructor() { }
 
   ngOnInit() {

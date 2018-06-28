@@ -3,69 +3,178 @@
   <div *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessType) !== -1">
     <section>
       <label for="">Gather this information before you begin:</label>
+      <p></p>
+      <label>Corporate Information</label>
+      <br>
       <ul>
-        <li>Corporate Documents:
-          <ul>
-            <li>Certificate of incorporation</li>
-            <li>Articles of incorporation or corporate charter</li>
-            <li>By-laws</li>
-            <li>Any other basic documentation including any periodic updates or amending agreements</li>
-          </ul>
-        </li>
-
-        <li>Organization chart of your corporate relationships</li>
-        <li>List of directors and officers</li>
-        <li>List of voting shareholders</li>
+        <li>Incorporation number</li>
+        <li>Date of incorporation</li>
+        <li>Business Number from Canada Revenue Agency</li>
+        <li>Corporate Documents:</li>
+        <ul>
+          <li>Certificate of incorporation</li>
+          <li>Articles of incorporation or corporate charter</li>
+          <li>By-laws</li>
+          <li>Any other basic documentation including any periodic updates or amending agreements</li>
+        </ul>
+        <li>Contact information and mailing address</li>
+        <li>Organization structure of your corporate relationships</li>
+        <li>List of directors and officers, with their email addresses</li>
+        <li>List of voting shareholders, with their email addresses</li>
         <li>Central Securities Register document</li>
-        <li>Document of key personnel</li>
-        <li>Tax filing for the past 3 years</li>
-        <li> Notice of Assessment for past 3 years</li>
-        <li>Financial statements</li>
-        <li>Information about business accounts at financial institutions</li>
-        <li>Documentation of funding sources and debt</li>
+        <li>Document of key personnel of the corporation</li>
+      </ul>
+
+      <label>Finances</label>
+      <br>
+      <ul>
+        <li>Annual financial statements for the past 3 years including:</li>
+        <ul>
+          <li>Balance sheet</li>
+          <li>Profit and loss statement</li>
+          <li>Cash flows</li>
+        </ul>
+        <li>If operating for less than a year, create projected amounts with assumptions used</li>
+        <li>Tax filing for the past 3 years in all jurisdictions filed in</li>
+        <li>Notice of Assessment (or equivalent) for past 3 years in all jurisdictions filed in</li>
+        <li>Business Accounts with financial institutions</li>
+        <li>Contact information for the corporation’s:</li>
+        <ul>
+          <li>Accountants</li>
+          <li>Bookkeepers</li>
+          <li>Tax filers</li>
+        </ul>
+        <li>Documentation of funding sources and amounts</li>
+        <li>Documentation about any debts owed</li>
+        <li>Documentation about any loans given</li>
       </ul>
     </section>
   </div>
   <div *ngIf="businessType == 'sole-proprietor'">
     <section>
       <label for="">Gather this information before you begin:</label>
+      <p></p>
+      <label>Sole Proprietor Information</label>
+      <br>
       <ul>
-        <li>Document of key personnel</li>
-        <li>Tax filing for the past 3 years</li>
-        <li>Notice of Assessment for past 3 years</li>
-        <li>Financial statements for the past 3 years</li>
-        <li>Information about business accounts at financial institutions</li>
-        <li>Documentation of funding sources and debt</li>
+        <li>Business Number from Canada Revenue Agency </li>
+        <li>Contact information and mailing address </li>
+        <li>Document of key personnel of the business</li>
+      </ul>
+
+      <p></p>
+      <label>Finances</label>
+      <ul>
+        <li>Annual financial statements for the past 3 years including:</li>
+        <ul>
+          <li>Balance sheet</li>
+          <li>Profit and loss statement</li>
+          <li>Cash flows</li>
+        </ul>
+        <li>If operating for less than a year, create projected amounts with assumptions used</li>
+        <li>Tax filing for the past 3 years in all jurisdictions filed in</li>
+        <li>Notice of Assessment (or equivalent) for past 3 years in all jurisdictions filed in</li>
+        <li>Business Accounts with financial institutions</li>
+        <li>Contact information for the business’s:</li>
+        <ul>
+          <li>Accountants</li>
+          <li>Bookkeepers</li>
+          <li>Tax filers</li>
+        </ul>
+        <li>Documentation of funding sources and amounts</li>
+        <li>Documentation about any debts owed</li>
+        <li>Documentation about any loans given</li>
       </ul>
     </section>
   </div>
+
   <div *ngIf="businessType == 'society'">
     <section>
       <label for="">Gather this information before you begin:</label>
+      <p></p>
+      <label for="">Society Information</label>
       <ul>
-        <li>Corporate Documents</li>
-        <li>Organization chart of your corporate relationships</li>
-        <li>A list of directors, officers, senior management</li>
-        <li>Document of key personnel</li>
-        <li>Tax filing for the past 3 years</li>
-        <li>Financial statements</li>
-        <li>Business Accounts</li>
-        <li>Documentation of funding sources and debt</li>
+        <li>Society incorporation number</li>
+        <li>Date of incorporation</li>
+        <li>Business Number from Canada Revenue Agency</li>
+        <li>Corporate Documents:</li>
+        <ul>
+          <li>Certificate of incorporation</li>
+          <li>Articles of incorporation or corporate charter</li>
+          <li>By-laws</li>
+          <li>Any other basic documentation including any periodic updates or amending agreements</li>
+        </ul>
+        <li>Contact information and mailing address</li>
+        <li>Organization structure of your society relationships</li>
+        <li>List of directors and senior managers, with their email addresses</li>
+        <li>Document of key personnel of the society</li>
+      </ul>
+    </section>
+
+    <p></p>
+    <section>
+      <label for="">Finances</label>
+      <ul>
+        <li>Annual financial statements for the past 3 years including:</li>
+        <ul>
+          <li>Balance sheet</li>
+          <li>Profit and loss statement</li>
+          <li>Cash flows</li>
+        </ul>
+        <li>If operating for less than a year, create projected amounts with assumptions used</li>
+        <li>Tax filing for the past 3 years in all jurisdictions filed in</li>
+        <li>Notice of Assessment (or equivalent) for past 3 years in all jurisdictions filed in</li>
+        <li>Business Accounts with financial institutions</li>
+        <li>Contact information for the society's:</li>
+        <ul>
+          <li>Accountants</li>
+          <li>Bookkeepers</li>
+          <li>Tax filers</li>
+        </ul>
+        <li>Documentation of funding sources and amounts</li>
+        <li>Documentation about any debts owed</li>
+        <li>Documentation about any loans given</li>
       </ul>
     </section>
   </div>
-  <div *ngIf="businessType == 'partnership'">
+
+  <div *ngIf="['partnership', 'limited', 'limited-liability'].indexOf(businessType) !== -1">
     <section>
       <label for="">Gather this information before you begin:</label>
+      <p></p>
+
+      <label>Partnership Information</label>
+      <br>
       <ul>
-        <li>Corporate Documents</li>
-        <li>Organization chart of your corporate relationships</li>
-        <li>A list of directors, officers, senior management</li>
-        <li>Document of key personnel</li>
-        <li>Tax filing for the past 3 years</li>
-        <li>Financial statements</li>
-        <li>Business Accounts</li>
-        <li>Documentation of funding sources and debt</li>
+        <li>Business Number from Canada Revenue Agency</li>
+        <li>Partnership agreement</li>
+        <li>Contact information and mailing address</li>
+        <li>Organization structure of your partnership</li>
+        <li>List of partners, with their email addresses</li>
+        <li>Document of key personnel of the partnership</li>
+      </ul>
+
+      <label>Finances</label>
+      <ul>
+        <li>Annual financial statements for the past 3 years including:</li>
+        <ul>
+          <li>Balance sheet</li>
+          <li>Profit and loss statement</li>
+          <li>Cash flows</li>
+        </ul>
+        <li>If operating for less than a year, create projected amounts with assumptions used</li>
+        <li>Tax filing for the past 3 years in all jurisdictions filed in</li>
+        <li>Notice of Assessment (or equivalent) for past 3 years in all jurisdictions filed in</li>
+        <li>Business Accounts with financial institutions</li>
+        <li>Contact information for the partnership’s:</li>
+        <ul>
+          <li>Accountants</li>
+          <li>Bookkeepers</li>
+          <li>Tax filers</li>
+        </ul>
+        <li>Documentation of funding sources and amounts</li>
+        <li>Documentation about any debts owed</li>
+        <li>Documentation about any loans given</li>
       </ul>
     </section>
   </div>
