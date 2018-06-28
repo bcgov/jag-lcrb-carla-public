@@ -229,6 +229,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
             Assert.Equal(currentAccount1.id, responseViewModel.applicant.id);
 
+			// D - Delete
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
 			// logout and cleanup (deletes the account and contact created above ^^^)
             await LogoutAndCleanupTestUser(strId1);
 		}
@@ -323,8 +328,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
             Assert.Equal(currentAccount1.id, responseViewModel.applicant.id);
 
+			// D - Delete
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
             // logout and cleanup (deletes the account and contact created above ^^^)
             await LogoutAndCleanupTestUser(strId1);
+			//await Logout();
 		}
     }
 }
