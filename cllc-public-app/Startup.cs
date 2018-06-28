@@ -296,10 +296,14 @@ namespace Gov.Lclb.Cllb.Public
             }
             else
             {
-                app.UseCsp(options => options
-                .DefaultSources(s => s.Self())
-                .ScriptSources(s => s.Self())
-                .StyleSources(s => s.Self()));
+
+                app.Use(async (ctx, next) =>
+                {
+                    ctx.Response.Headers.Add("Content-Security-Policy",
+                                             "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
+                    await next();
+                });
+                //"script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
                 app.UseExceptionHandler("/Home/Error");
             }
             
@@ -315,7 +319,7 @@ namespace Gov.Lclb.Cllb.Public
                 ctx.Context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
                 ctx.Context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
                 ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' https://apis.google.com";
+                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com";
             };
             
             app.UseStaticFiles(staticFileOptions);
