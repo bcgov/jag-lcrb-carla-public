@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -107,6 +108,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             public FileFolderResults d { get; set; }
         }
 
+        public class FileDetailsList
+        {
+            public string Name { get; set; }
+            public string TimeLastModified { get; set; }
+            public string Length { get; set; }
+        }
+
 
         public async Task<List<FileSystemItem>> GetFilesInFolder(string listTitle, string folderName)
         {
@@ -151,12 +159,42 @@ namespace Gov.Lclb.Cllb.Interfaces
             */
         }
 
-        /// <summary>
-        /// Create Folder
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public async Task<SP.Folder> CreateFolder(string listTitle, string folderName)
+        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string siteName, string folderName)
+        {
+            string serverRelativeUrl = $"/{WebName}/{siteName}/{folderName}";
+            HttpRequestMessage endpointRequest =
+                            new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "/web/getfolderbyserverrelativeurl('" + serverRelativeUrl + "')/files");
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+            // parse the response
+            JObject responseObject = JObject.Parse(jsonString);
+            // get JSON response objects into a list
+            List<JToken> results = responseObject["d"]["results"].Children().ToList();
+            // create .NET objects
+            List<FileDetailsList> responseResults = new List<FileDetailsList>();
+            foreach (JToken res in results)
+            {
+                // JToken.ToObject is a helper method that uses JsonSerializer internally
+                FileDetailsList searchResult = res.ToObject<FileDetailsList>();
+                responseResults.Add(searchResult);
+            }
+
+            return responseResults;
+
+            //var settings = new JsonSerializerSettings();
+            //settings.TypeNameHandling = TypeNameHandling.Objects;
+            //FileFolderData result = JsonConvert.DeserializeObject<FileFolderData>(jsonString, settings);
+            //return result.d.results;
+        }
+
+            /// <summary>
+            /// Create Folder
+            /// </summary>
+            /// <param name="name"></param>
+            /// <returns></returns>
+            public async Task<SP.Folder> CreateFolder(string listTitle, string folderName)
         {
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/folders");

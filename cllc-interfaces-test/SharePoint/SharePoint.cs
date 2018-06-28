@@ -3,8 +3,10 @@ using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Xunit;
+using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace SharePoint.Tests
 {
@@ -16,6 +18,7 @@ namespace SharePoint.Tests
         SharePointFileManager sharePointFileManager;
 
         string serverAppIdUri;
+
         /// <summary>
         /// Setup the test
         /// </summary>        
@@ -110,35 +113,49 @@ namespace SharePoint.Tests
         }
 
         [Fact]
-        public async void AddRemoveFilesTest()
+        public async void AddRemoveListFilesTest()
         {
+            // set file and folder settings
+
             Random rnd = new Random();
-            string fileName = "test-name" + rnd.Next() +".txt";
-            string folderName = "test-folder" + rnd.Next();
+            string fileName = "test-file-name" + rnd.Next() +".txt";
+            string folderName = "test-folder-name" + rnd.Next();
             string path = "/" + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
             string url = serverAppIdUri + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
-
             string contentType = "text/plain";
-
             string testData = "This is just a test.";
-
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
 
+            // add file to SP
+
             await sharePointFileManager.AddFile(folderName, fileName, fileData, contentType);
-            
+
+            // get file details list in SP folder
+
+            List<FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            //only one file should be returned
+            Assert.Single(fileDetailsList);
+            if (fileDetailsList != null)
+            {
+                foreach (FileDetailsList fileDetails in fileDetailsList)
+                {
+                    // validate that file name uploaded and listed are the same
+                    Assert.Equal(fileName, fileDetails.Name);
+                }
+            }
 
             // verify that we can download the same file.
 
             byte[] data = await sharePointFileManager.DownloadFile(path);
-
             string stringData = System.Text.Encoding.ASCII.GetString(data);
-
             Assert.Equal(stringData, testData);
-            // now delete it.
 
-           await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentListTitle, folderName, fileName);
+            // delete file from SP
 
-            // cleanup the folder
+            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentListTitle, folderName, fileName);
+
+            // delete folder from SP
+
             await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
         }
 
