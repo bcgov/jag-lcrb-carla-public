@@ -45,7 +45,7 @@
       </li>
       <li *ngIf="tabStructure.indexOf('finance-integrity') !== -1" [ngClass]="{'active': view_tab == 'finance-integrity'}">
         <a (click)="changeTab('finance-integrity')">
-          <span>Finance Integrity</span>
+          <span>Finance Information</span>
         </a>
       </li>
       <li *ngIf="tabStructure.indexOf('security-assessment') !== -1" [ngClass]="{'active': view_tab == 'security-assessment'}">
@@ -63,6 +63,8 @@
       <option value="sole-proprietor">sole-proprietor</option>
       <option value="ucl-llc">ucl-llc</option>
       <option value="public">public</option>
+      <option value="limited">limited</option>
+      <option value="limited-liability">limited-liability</option>
     </select>
     <br>
     <!-- Tab panes -->
@@ -76,7 +78,7 @@
       <app-organization-structure [accountId]="accountId"  [businessType]="businessTypeSel.value"></app-organization-structure>
     </div>
     <div [hidden]="view_tab != 'directors-and-officers'">
-      <app-directors-and-officers [accountId]="accountId"></app-directors-and-officers>
+      <app-directors-and-officers [accountId]="accountId" [businessType]="businessTypeSel.value"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'key-personnel'">
       <app-key-personnel [accountId]="accountId" [businessType]="businessTypeSel.value"></app-key-personnel>
