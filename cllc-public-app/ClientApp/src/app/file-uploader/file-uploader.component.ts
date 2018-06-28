@@ -65,7 +65,8 @@ export class FileUploaderComponent implements OnInit {
     formData.append('documentType', this.documentType);
     let headers = new Headers();
     let url = `api/AdoxioLegalEntity/${this.accountId}/attachments`;
-    this.http.post(url, formData, { headers: headers }).subscribe(result => {
+    this.busy = this.http.post(url, formData, { headers: headers }).subscribe(result => {
+      this.getUploadedFileData();
     });
   }
 
