@@ -10,31 +10,33 @@
     </file-drop>
     <br>
     <div class="upload-table">
+      <div [ngBusy]="busy">
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Filename</th>
-                    <th>Size (kb)</th>
-                    <th>Document Type</th>
-                    <th>Uploaded On</th>
-                </tr>
-            </thead>
-            <tbody class="upload-name-style">
-                <tr *ngFor="let item of files; let i=index">
-                    <td>
-                        <strong>{{ item.name }}</strong>
-                    </td>
-                    <td>
-                        <strong>{{item.size }}</strong>
-                    </td>
-                    <td>
-                        <strong>{{item.documenttype }}</strong>
-                    </td>
-                    <td>
-                        <strong>{{item.timecreated }}</strong>
-                    </td>
-                </tr>
-            </tbody>
+          <thead>
+            <tr>
+              <th>Filename</th>
+              <th>Size (kb)</th>
+              <th>Document Type</th>
+              <th>Uploaded On</th>
+            </tr>
+          </thead>
+          <tbody class="upload-name-style">
+            <tr *ngFor="let item of files; let i=index">
+              <td>
+                <strong>{{ item.name }}</strong>
+              </td>
+              <td>
+                <strong>{{item.size.toFixed(2) }}</strong>
+              </td>
+              <td>
+                <strong>{{item.documenttype }}</strong>
+              </td>
+              <td>
+                <strong>{{item.timelastmodified | date:'short' }}</strong>
+              </td>
+            </tr>
+          </tbody>
         </table>
+      </div>
     </div>
 </div>
