@@ -116,50 +116,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             public string DocumentType { get; set; }
         }
 
-
-        public async Task<List<FileSystemItem>> GetFilesInFolder(string listTitle, string folderName)
-        {
-            string serverRelativeUrl = $"/{WebName}/{listTitle}/{folderName}";
-            HttpRequestMessage endpointRequest =
-                            new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "/web/getfolderbyserverrelativeurl('" + serverRelativeUrl + "')/files");
-
-            // make the request.
-            var response = await client.SendAsync(endpointRequest);
-
-            string jsonString = await response.Content.ReadAsStringAsync();
-
-            FileFolderData result = JsonConvert.DeserializeObject<FileFolderData>(jsonString);
-            return result.d.results;
-            /*
-            List<FileSystemItem> result = new List<FileSystemItem>();
-
-            // first get a reference to the containing list.
-            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
-                from list in apiData.Lists
-                where list.Title == listTitle
-                select list;
-            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
-            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            SP.List listResult = listResults.FirstOrDefault();
-
-            SP.ListItem folderListItem = listResult.Items.Where(x => x.DisplayName == folderName).FirstOrDefault();
-
-
-            var items = folderListItem.Folder.Files;
-            foreach (var item in items)
-            {
-                FileSystemItem fsi = new MS.FileServices.File();
-                fsi.Id = item.UniqueId.ToString();
-                fsi.Name = item.Name;
-
-                result.Add (fsi);
-            }
-            
-            return result;
-
-            */
-        }
-
+        /// <summary>
+        /// Get file details list from SharePoint filtered by folder name and document type
+        /// </summary>
+        /// <param name="siteName"></param>
+        /// <param name="folderName"></param>
+        /// <param name="documentType"></param>
+        /// <returns></returns>
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string siteName, string folderName, string documentType)
         {
             string serverRelativeUrl = $"/{WebName}/{siteName}/{folderName}";
