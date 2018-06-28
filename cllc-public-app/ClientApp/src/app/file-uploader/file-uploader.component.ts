@@ -5,7 +5,8 @@ import { FileSystemItem } from '../models/file-system-item.model';
 import { Observable, Subject } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { debug } from 'util';
-
+import { forEach } from '@angular/router/src/utils/collection';
+import { Subscription } from 'rxjs';
 
 export interface DropdownOption {
   id: string,
@@ -21,6 +22,7 @@ export class FileUploaderComponent implements OnInit {
   @Input() accountId: string;
   @Input() uploadUrl: string;
   @Input() documentType: string;
+  busy: Subscription;
 
   //TODO: move http call to a service
   constructor(private http: Http) {
@@ -71,9 +73,13 @@ export class FileUploaderComponent implements OnInit {
     const headers = new Headers({
       //'Content-Type': 'multipart/form-data'
     })
-    this.http.get(`api/AdoxioLegalEntity/${this.accountId}/attachments/${this.documentType}`, { headers: headers })
+    this.busy = this.http.get(`api/AdoxioLegalEntity/${this.accountId}/attachments/${this.documentType}`, { headers: headers })
       .map((data: Response) => { return <FileSystemItem[]>data.json() })
       .subscribe((data) => {
+        // convert bytes to KB
+        data.forEach((entry) => {
+          entry.size = entry.size /1024
+        });
         this.files = data;
       })
   }
