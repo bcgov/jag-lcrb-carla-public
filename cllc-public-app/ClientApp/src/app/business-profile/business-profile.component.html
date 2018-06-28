@@ -12,7 +12,7 @@
         <a (click)="changeTab('corporate-details')">
           <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Corporate Details</span>
           <span *ngIf="businessTypeSel.value == 'society'">Society Details</span>
-          <span *ngIf="businessTypeSel.value == 'partnership'">Partnership Details</span>
+          <span *ngIf="['partnership', 'limited', 'limited-liability'].indexOf(businessTypeSel.value) !== -1">Partnership Details</span>
           <span *ngIf="businessTypeSel.value == 'sole-proprietor'">Sole-Prop Details</span>
         </a>
       </li>
@@ -23,7 +23,8 @@
       </li>
       <li *ngIf="tabStructure.indexOf('directors-and-officers') !== -1" [ngClass]="{'active': view_tab == 'directors-and-officers'}">
         <a (click)="changeTab('directors-and-officers')">
-          <span>Directors &amp; Officers</span>
+          <span *ngIf="['society'].indexOf(businessTypeSel.value) == -1">Directors &amp; Officers</span>
+          <span  *ngIf="['society'].indexOf(businessTypeSel.value) !== -1">Directors &amp; Senior Managers</span>
         </a>
       </li>
       <li *ngIf="tabStructure.indexOf('key-personnel') !== -1" [ngClass]="{'active': view_tab == 'key-personnel'}">
@@ -34,7 +35,7 @@
       <li *ngIf="tabStructure.indexOf('shareholders') !== -1" [ngClass]="{'active': view_tab == 'shareholders'}">
         <a (click)="changeTab('shareholders')">
           <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Shareholders</span>
-          <span *ngIf="['partnership'].indexOf(businessTypeSel.value) !== -1">Partners</span>
+          <span *ngIf="['partnership','limited', 'limited-liability'].indexOf(businessTypeSel.value) !== -1">Partners</span>
         </a>
       </li>
       <li *ngIf="tabStructure.indexOf('connections-to-producers') !== -1" [ngClass]="{'active': view_tab == 'connections-to-producers'}">
@@ -44,7 +45,7 @@
       </li>
       <li *ngIf="tabStructure.indexOf('finance-integrity') !== -1" [ngClass]="{'active': view_tab == 'finance-integrity'}">
         <a (click)="changeTab('finance-integrity')">
-          <span>Financial Information</span>
+          <span>Finance Integrity</span>
         </a>
       </li>
       <li *ngIf="tabStructure.indexOf('security-assessment') !== -1" [ngClass]="{'active': view_tab == 'security-assessment'}">
@@ -72,13 +73,13 @@
       <app-corporate-details [accountId]="accountId" [businessType]="businessTypeSel.value"></app-corporate-details>
     </div>
     <div [hidden]="view_tab != 'organization-structure'">
-      <app-organization-structure [accountId]="accountId"></app-organization-structure>
+      <app-organization-structure [accountId]="accountId"  [businessType]="businessTypeSel.value"></app-organization-structure>
     </div>
     <div [hidden]="view_tab != 'directors-and-officers'">
       <app-directors-and-officers [accountId]="accountId"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'key-personnel'">
-      <app-key-personnel [accountId]="accountId"></app-key-personnel>
+      <app-key-personnel [accountId]="accountId" [businessType]="businessTypeSel.value"></app-key-personnel>
     </div>
     <div [hidden]="view_tab != 'shareholders'">
       <app-edit-shareholders [accountId]="accountId" [businessType]="businessTypeSel.value"></app-edit-shareholders>
@@ -87,10 +88,10 @@
       <app-connection-to-producers [accountId]="accountId" [businessType]="businessTypeSel.value"></app-connection-to-producers>
     </div>
     <div [hidden]="view_tab != 'finance-integrity'">
-      <app-financial-information [accountId]="accountId"></app-financial-information>
+      <app-financial-information [accountId]="accountId"  [businessType]="businessTypeSel.value"></app-financial-information>
     </div>
     <div [hidden]="view_tab != 'security-assessment'">
-      <app-security-assessments [accountId]="accountId"></app-security-assessments>
+      <app-security-assessments [accountId]="accountId" [businessType]="businessTypeSel.value"></app-security-assessments>
     </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
