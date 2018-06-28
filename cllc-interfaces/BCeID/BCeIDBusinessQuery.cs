@@ -29,8 +29,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<BCeIDBusiness> ProcessBusinessQuery(string guid) 
         {
-            if (String.IsNullOrEmpty(url))
-                return null;
+            if (String.IsNullOrEmpty(url)){
+		return null;
+            }
                 
             // create the SOAP client
             //var binding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
