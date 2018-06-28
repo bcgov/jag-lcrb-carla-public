@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using System.Linq;
+using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -242,15 +243,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
-        // get a list of files associated with this legal entity.
+        /// <summary>
+        /// Get the file details list in folder associated to the account folder and document type
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="documentType"></param>
+        /// <returns></returns>
         [HttpGet("{accountId}/attachments/{documentType}")]
-        public async Task<IActionResult> GetFiles([FromRoute] string accountId, [FromRoute] string documentType)
+        public async Task<IActionResult> GetFileDetailsListInFolder([FromRoute] string accountId, [FromRoute] string documentType)
         {
-            List<ViewModels.FileSystemItem> result = new List<ViewModels.FileSystemItem>();
-            // get the LegalEntity.
-            Adoxio_legalentity legalEntity = null;
-
-			// get the current user.
+            List<ViewModels.FileSystemItem> fileSystemItemVMList = new List<ViewModels.FileSystemItem>();
+            
+            // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
@@ -263,15 +267,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     
                     var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
                     string folderName = $"{account.Name}_{accountIdCleaned}";
-                    // Get the folder contents for this Legal Entity.
-                    List<MS.FileServices.FileSystemItem> items = await _sharePointFileManager.GetFilesInFolder("Accounts", folderName);
-                    items = items.Where(i => i.Name.EndsWith(documentType)).ToList();
-                    foreach (MS.FileServices.FileSystemItem item in items)
+                    // Get the file details list in folder
+                    List<FileDetailsList> fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+                    if (fileDetailsList != null)
                     {
-                        result.Add(item.ToViewModel());
+                        foreach (FileDetailsList fileDetails in fileDetailsList)
+                        {
+                            ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
+                            fileSystemItemVM.name = fileDetails.Name;
+                            fileSystemItemVM.size = int.Parse(fileDetails.Length);
+                            fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
+                            fileSystemItemVMList.Add(fileSystemItemVM);
+                        }
                     }
                 }
-                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                catch (Exception dsqe)
                 {
 					_logger.LogError(dsqe.Message);
                     _logger.LogError(dsqe.StackTrace);
@@ -279,7 +289,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            return Json(result);
+            return Json(fileSystemItemVMList);
         }
 
         [HttpPost("{accountId}/attachments")]
