@@ -19,7 +19,7 @@ export class DynamicsAccount {
 
   primarycontact: DynamicsContact;
 
-  // adoxio_businesstype: number
+  businessType: string;
   
   constructor() { }
 }
