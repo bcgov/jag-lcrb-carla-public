@@ -8,7 +8,8 @@ import { User } from '../../../models/user.model';
   styleUrls: ['./organization-structure.component.scss']
 })
 export class OrganizationStructureComponent implements OnInit {
-  @Input() accountId;
+  @Input() accountId: string;
+  @Input() businessType: string;
 
   constructor() { }
 
