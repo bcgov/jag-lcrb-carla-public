@@ -1,40 +1,46 @@
-<div class="center">
+<mat-card>
+  <div class="center">
     <p></p>
     <file-drop (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-        <div>
-                <h3 style="text-align: center">Upload Files</h3>
-            <span>Drop your files here or &nbsp;</span>
-            <button  class="btn btn-primary" (click)="fileBrowser.click()">browse for files</button>
-            <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowser>
-        </div>
+      <div>
+        <h3 style="text-align: center">Upload Files</h3>
+        <span>Drop your files here or &nbsp;</span>
+        <button class="btn btn-primary" (click)="fileBrowser.click()">browse for files</button>
+        <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowser>
+      </div>
     </file-drop>
     <br>
-    <div class="upload-table">
-        <table class="table">
+    <mat-card>
+      <div class="upload-table">
+        <div [ngBusy]="busy">
+          <table class="table">
             <thead>
-                <tr>
-                    <th>Filename</th>
-                    <th>Size (kb)</th>
-                    <th>Document Type</th>
-                    <th>Uploaded On</th>
-                </tr>
+              <tr>
+                <th>Filename</th>
+                <th>Size (kb)</th>
+                <th>Document Type</th>
+                <th>Uploaded On</th>
+              </tr>
             </thead>
             <tbody class="upload-name-style">
-                <tr *ngFor="let item of files; let i=index">
-                    <td>
-                        <strong>{{ item.name }}</strong>
-                    </td>
-                    <td>
-                        <strong>{{item.size }}</strong>
-                    </td>
-                    <td>
-                        <strong>{{item.documenttype }}</strong>
-                    </td>
-                    <td>
-                        <strong>{{item.timecreated }}</strong>
-                    </td>
-                </tr>
+              <tr *ngFor="let item of files; let i=index">
+                <td>
+                  <strong>{{ item.name }}</strong>
+                </td>
+                <td>
+                  <strong>{{item.size.toFixed(2) }}</strong>
+                </td>
+                <td>
+                  <strong>{{item.documenttype }}</strong>
+                </td>
+                <td>
+                  <strong>{{item.timelastmodified | date:'short' }}</strong>
+                </td>
+              </tr>
             </tbody>
-        </table>
-    </div>
-</div>
+          </table>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</mat-card>
