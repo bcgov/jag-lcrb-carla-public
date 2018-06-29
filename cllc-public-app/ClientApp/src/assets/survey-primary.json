@@ -137,7 +137,7 @@
         }
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
     },
     {
       "name": "p5",
