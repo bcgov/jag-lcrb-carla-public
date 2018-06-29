@@ -85,7 +85,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // query the BCeID API to get the business record.
-	    var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			// var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			var business = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
 
             if (business == null)
             {
@@ -219,7 +220,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                //_logger.LogError("Legal Entity Before --> " + legalEntityString);
+                _logger.LogError("Legal Entity Before --> " + legalEntityString);
                 
                 legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
 
@@ -239,7 +240,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Contactid = legalEntity.AdoxioAccount._primarycontactidValue;
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                //_logger.LogError("Legal Entity After --> " + legalEntityString);
+                _logger.LogError("Legal Entity After --> " + legalEntityString);
 
             }
             else // it is a new user only.
