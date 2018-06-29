@@ -8,6 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ConnectionToProducersComponent implements OnInit {
   @Input() accountId: string;
   @Input() businessType: string;
+
+  operatingForMoreThanOneYear: any;
+  
   constructor() { }
 
   ngOnInit() {
