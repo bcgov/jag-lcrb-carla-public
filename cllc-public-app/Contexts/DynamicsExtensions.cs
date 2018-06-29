@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static string GetEntityURI(this IDynamicsClient client, string entityType, string id)
         {
             string result = "";
-            result = client.BaseUri + entityType + "(" + id + ")";
+            result = client.NativeBaseUri + entityType + "(" + id + ")";
             return result;
         }
 		/// <summary>
