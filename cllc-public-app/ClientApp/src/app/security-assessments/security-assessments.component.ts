@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class SecurityAssessmentsComponent implements OnInit {
 
   @Input() accountId: string;
+  @Input() businessType: string;
 
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
