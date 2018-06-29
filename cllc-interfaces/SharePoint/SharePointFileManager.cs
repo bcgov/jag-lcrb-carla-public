@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -107,56 +108,60 @@ namespace Gov.Lclb.Cllb.Interfaces
             public FileFolderResults d { get; set; }
         }
 
-
-        public async Task<List<FileSystemItem>> GetFilesInFolder(string listTitle, string folderName)
+        public class FileDetailsList
         {
-            string serverRelativeUrl = $"/{WebName}/{listTitle}/{folderName}";
+            public string Name { get; set; }
+            public string TimeLastModified { get; set; }
+            public string Length { get; set; }
+            public string DocumentType { get; set; }
+        }
+
+        /// <summary>
+        /// Get file details list from SharePoint filtered by folder name and document type
+        /// </summary>
+        /// <param name="siteName"></param>
+        /// <param name="folderName"></param>
+        /// <param name="documentType"></param>
+        /// <returns></returns>
+        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string siteName, string folderName, string documentType)
+        {
+            string serverRelativeUrl = $"/{WebName}/{siteName}/{folderName}";
             HttpRequestMessage endpointRequest =
                             new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "/web/getfolderbyserverrelativeurl('" + serverRelativeUrl + "')/files");
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
-
             string jsonString = await response.Content.ReadAsStringAsync();
-
-            FileFolderData result = JsonConvert.DeserializeObject<FileFolderData>(jsonString);
-            return result.d.results;
-            /*
-            List<FileSystemItem> result = new List<FileSystemItem>();
-
-            // first get a reference to the containing list.
-            DataServiceQuery<SP.List> query = (DataServiceQuery<SP.List>)
-                from list in apiData.Lists
-                where list.Title == listTitle
-                select list;
-            TaskFactory<IEnumerable<SP.List>> taskFactory = new TaskFactory<IEnumerable<SP.List>>();
-            IEnumerable<SP.List> listResults = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            SP.List listResult = listResults.FirstOrDefault();
-
-            SP.ListItem folderListItem = listResult.Items.Where(x => x.DisplayName == folderName).FirstOrDefault();
-
-
-            var items = folderListItem.Folder.Files;
-            foreach (var item in items)
+            // parse the response
+            JObject responseObject = JObject.Parse(jsonString);
+            // get JSON response objects into a list
+            List<JToken> responseResults = responseObject["d"]["results"].Children().ToList();
+            // create file details list to add from response
+            List<FileDetailsList> fileDetailsList = new List<FileDetailsList>();
+            // create .NET objects
+            foreach (JToken responseResult in responseResults)
             {
-                FileSystemItem fsi = new MS.FileServices.File();
-                fsi.Id = item.UniqueId.ToString();
-                fsi.Name = item.Name;
-
-                result.Add (fsi);
+                // JToken.ToObject is a helper method that uses JsonSerializer internally
+                FileDetailsList searchResult = responseResult.ToObject<FileDetailsList>();
+                //filter by parameter documentType
+                int fileDoctypeStart = searchResult.Name.IndexOf("__") + 2;
+                string fileDoctype = searchResult.Name.Substring(fileDoctypeStart);
+                if (fileDoctype == documentType)
+                {
+                    searchResult.DocumentType = documentType;
+                    fileDetailsList.Add(searchResult);
+                }
             }
-            
-            return result;
 
-            */
+            return fileDetailsList;
         }
 
-        /// <summary>
-        /// Create Folder
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public async Task<SP.Folder> CreateFolder(string listTitle, string folderName)
+            /// <summary>
+            /// Create Folder
+            /// </summary>
+            /// <param name="name"></param>
+            /// <returns></returns>
+            public async Task<SP.Folder> CreateFolder(string listTitle, string folderName)
         {
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/folders");
