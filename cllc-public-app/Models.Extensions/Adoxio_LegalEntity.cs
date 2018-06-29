@@ -219,6 +219,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
                 }
+
+                result.accountId = adoxio_legalentity._adoxio_account_value.ToString();
                 
             }            
             return result;

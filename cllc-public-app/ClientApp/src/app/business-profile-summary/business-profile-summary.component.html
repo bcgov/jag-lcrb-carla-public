@@ -20,15 +20,15 @@
 
           <!-- Column -->
           <ng-container matColumnDef="organization">
-            <mat-header-cell mat-sort-header *matHeaderCellDef> Organization </mat-header-cell>
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Organization2 </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <!--<button (click)="router.navigate(['/business-profile', {id: element.id}], {skipLocationChange: true})">{{element.name}}</button>-->
               <!--<a [routerLink]="['/business-profile', element.id]"> {{element.name}}</a>-->
-              <a routerLink="/business-profile/{{element.legalEntityId}}" skipLocationChange>{{element.name}}</a>
+              <a href="javascrit:void(0);"(click)="loadBusinessProfile(element)">{{element.name}}</a>
             </mat-cell> 
           </ng-container>
 
-          <!-- Column -->
+          Column
           <ng-container matColumnDef="businessRelationship">
             <mat-header-cell mat-sort-header *matHeaderCellDef> Business Relationship </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.legalentitytype}} </mat-cell>

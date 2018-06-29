@@ -8,6 +8,8 @@ import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { State } from '../app-state/reducers/app-state';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -27,10 +29,16 @@ export class EditShareholdersComponent implements OnInit {
   user: User;
   busy: Promise<any>;
   busyObsv: Subscription;
+  legalEntityId: string;
 
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, 
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, private store: Store<State>,
     public dialog: MatDialog, private userDataService: UserDataService, public snackBar: MatSnackBar) {
+      store.select(state => state.appState.currentLegalEntityId)
+      .filter(id => !!id)
+      .subscribe(id => {
+        this.legalEntityId = id;
+      });
   }
 
   ngOnInit() {
@@ -50,6 +58,7 @@ export class EditShareholdersComponent implements OnInit {
 
   formDataToModelData(formData: any, shareholderType: string ): AdoxioLegalEntity {
     let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+    adoxioLegalEntity.parentLegalEntityId = this.legalEntityId;
     if (shareholderType == "Person") {
       adoxioLegalEntity.isindividual = true;
       adoxioLegalEntity.firstname = formData.firstName;
@@ -91,7 +100,7 @@ export class EditShareholdersComponent implements OnInit {
           let shareholderType = "Person";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.busyObsv = this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createShareholderLegalEntity(adoxioLegalEntity).subscribe(
             res => {
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['green-snackbar'] });
               this.getShareholders();
@@ -123,7 +132,7 @@ export class EditShareholdersComponent implements OnInit {
           let shareholderType = "Organization";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.busyObsv = this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createShareholderLegalEntity(adoxioLegalEntity).subscribe(
             res => {
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getShareholders();

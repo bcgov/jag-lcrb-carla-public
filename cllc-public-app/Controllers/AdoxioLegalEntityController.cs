@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetBusinessProfileSummary()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
-            IEnumerable<Adoxio_legalentity> legalEntities = null;
+            List<Adoxio_legalentity> legalEntities = null;
             String accountfilter = null;
             String bpFilter = null;
             String filter = null;
@@ -98,9 +98,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
             filter = accountfilter + " " + bpFilter;
 
-            legalEntities = await _system.Adoxio_legalentities
+            legalEntities = (await _system.Adoxio_legalentities
                         .AddQueryOption("$filter", filter)
-                        .ExecuteAsync();
+                        .ExecuteAsync()).ToList();
+
+            if(legalEntities.Count > 0){
+                var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].Adoxio_legalentityid.ToString()}";
+                childFilter += " and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
+                var childEntities = (await _system.Adoxio_legalentities
+                        .AddQueryOption("$filter", childFilter)
+                        .ExecuteAsync()).ToList();
+                legalEntities.AddRange(childEntities);
+            }
 
             foreach (var legalEntity in legalEntities)
             {
@@ -383,6 +392,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntity.AdoxioLegalentityid);
             }
             // create the record.
+
+            adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
+            
+            return Json(adoxioLegalEntity.ToViewModel());
+        }
+
+        /// <summary>
+        /// Create a legal entity
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        [HttpPost()]
+        [Route("shareholder")]
+        public async Task<IActionResult> CreateDynamicsShareholderLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
+        {
+
+            // create a new legal entity.
+            var account = new MicrosoftDynamicsCRMaccount();
+            account.Name = item.name;
+            account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Shareholder;
+            account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), item.legalentitytype);
+            account = await _dynamicsClient.Accounts.CreateAsync(account);
+
+            var adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+            adoxioLegalEntity.CopyValues(item);
+            
+			adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+			adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", item.parentLegalEntityId);
 
             adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
             
