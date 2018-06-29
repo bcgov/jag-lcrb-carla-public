@@ -214,7 +214,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		{
 			string service = "adoxiolegalentity";
 
-			var loginUser = randomNewUserName("TestLegalEntityUser", 6);
+			var loginUser = randomNewUserName("TestAddShareholderAndDirector", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // get the current account.
@@ -312,11 +312,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// logout
 			await Logout();
 
-			// login as Default user and verify we can't see the Director or Shareholder
-			await LoginAsDefault();
+            // login as new user and verify we can't see the Director or Shareholder
+            var newLoginUser = randomNewUserName("TestAddShareholderAndDirectorSecond", 6);
+            var newStrId = await LoginAndRegisterAsNewUser(loginUser);
 
             // try to fetch LegalEntity records of other account
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             //response status code should be 404
@@ -328,11 +329,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             //response status code should be 404
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-			// logout
-			await Logout();
+            // logout
+            await LogoutAndCleanupTestUser(newStrId);
 
-			// log back in as user from above ^^^
-			await Login(loginUser);
+            // log back in as user from above ^^^
+            await Login(loginUser);
 
             // delete Director and Shareholder
 			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + responseDirector.id + "/delete");
@@ -358,7 +359,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string changedName = randomNewUserName("LETest ChangedName", 6);
             string service = "adoxiolegalentity";
 
-            await LoginAsDefault();
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
             ViewModels.User user = await GetCurrentUser();
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -440,13 +443,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-			await Logout();
+            await LogoutAndCleanupTestUser(strId);
         }
 
         [Fact]
         public async System.Threading.Tasks.Task VerifyConsentCode__WithAGoodCode()
         {
-            await LoginAsDefault();
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             var id = Guid.NewGuid();
             var individualId = Guid.NewGuid();
@@ -467,13 +471,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
             Assert.Equal("success", result, true);
 
-            await Logout();
+            await LogoutAndCleanupTestUser(strId);
         }
 
         [Fact]
         public async System.Threading.Tasks.Task VerifyConsentCode__WithABadCode()
         {
-            await LoginAsDefault();
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             var id = Guid.NewGuid();
             var individualId = Guid.NewGuid();
@@ -496,7 +501,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
             Assert.Equal("error", result, true);
 
-            await Logout();
+            await LogoutAndCleanupTestUser(strId);
         }
 
         [Fact]
@@ -508,7 +513,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // Login as default user
 
-            await LoginAsDefault();
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
             ViewModels.User user = await GetCurrentUser();
 
             // C - Create a Legal Entity
@@ -586,7 +593,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-            await Logout();
+            await LogoutAndCleanupTestUser(strId);
         }
 
     }
