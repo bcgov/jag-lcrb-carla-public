@@ -4,6 +4,9 @@ import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-da
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { State, AppState } from '../app-state/reducers/app-state';
+import * as appStateActions from '../app-state/actions/app-state';
 
 export class ProfileSummary {
   legalEntityId: string;
@@ -34,11 +37,11 @@ export class BusinessProfileSummaryComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService, private router: Router) { }
+  constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService, private router: Router,
+  private store: Store<State>) { }
 
   ngOnInit() {
     this.getBusinessProfileData();
-
   }
 
   /**
@@ -54,6 +57,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
           data.forEach((entry) => {
             let profileSummary = new ProfileSummary();
             profileSummary.legalEntityId = entry.id;
+            profileSummary.accountId  = entry.accountId;
             //profileSummary.accountId = entry.accountId;
             profileSummary.name = entry.name;
             profileSummary.profileComplete = false;
@@ -95,6 +99,12 @@ export class BusinessProfileSummaryComponent implements OnInit {
       return 0;
     });
     return res;
+  }
+
+  loadBusinessProfile(element){
+    this.store.dispatch(new appStateActions.SetCurrentAccountIdAction(element.accountId));
+    this.store.dispatch(new appStateActions.SetCurrentLegalEntityIdAction(element.legalEntityId));
+    this.router.navigate(['/business-profile']);
   }
 
 }

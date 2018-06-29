@@ -78,6 +78,18 @@ export class AdoxioLegalEntityDataService {
     //console.log("===== AdoxioLegalEntityDataService.post: ", data);
 
     return this.http.post("api/adoxiolegalentity/", data, { headers: headers });
+  
+  }
+  /**
+   * Create a new legal entity in Dynamics
+   * @param data - legal entity data
+   */
+  createShareholderLegalEntity(data: any) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    //console.log("===== AdoxioLegalEntityDataService.post: ", data);
+
+    return this.http.post("api/adoxiolegalentity/shareholder", data, { headers: headers });
   }
 
   /**
