@@ -260,7 +260,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //https://msdn.microsoft.com/en-us/library/mt607875.aspx
             MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
             patchUserContact.ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-            await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
+            try
+            {
+                await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error binding contact to account");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
+            
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
