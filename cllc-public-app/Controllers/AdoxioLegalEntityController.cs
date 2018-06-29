@@ -276,7 +276,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
                             // remove the document type text from file name
                             fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
-                            // convert size from bytes (original) to KB
                             fileSystemItemVM.size = int.Parse(fileDetails.Length);
                             fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
                             fileSystemItemVM.documenttype = fileDetails.DocumentType;
