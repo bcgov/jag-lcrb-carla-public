@@ -99,6 +99,8 @@ import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key
 import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { ShareholdersPublicComponent } from './business-profile/tabs/shareholders-public/shareholders-public.component';
 import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholders-ucl-llc/shareholders-ucl-llc.component';
+import { StoreModule } from '@ngrx/store';
+import { appStateReducer } from './app-state/reducers/app-state';
 
 @NgModule({
   declarations: [
@@ -189,7 +191,8 @@ import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholder
     MatToolbarModule,
     MatTooltipModule,
     FileDropModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    StoreModule.forRoot({ appState: appStateReducer })
   ],
   exports: [
     BrowserModule,
