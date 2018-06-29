@@ -2,10 +2,10 @@
   <h1>Financial Information</h1>
 
   <section>
-    <label  *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessType) !== -1">Has the corporation been operating for more than one year?</label>
-    <label  *ngIf="['sole-proprietor'].indexOf(businessType) !== -1">Has the business been operating for more than one year?</label>
-    <label  *ngIf="['society'].indexOf(businessType) !== -1">Has the society been operating for more than one year?</label>
-    <label  *ngIf="['partnership','limited', 'limited-liability'].indexOf(businessType) !== -1">Has the partnership been operating for more than one year?</label>
+    <label  *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Has the corporation been operating for more than one year?</label>
+    <label  *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Has the business been operating for more than one year?</label>
+    <label  *ngIf="['Society'].indexOf(businessType) !== -1">Has the society been operating for more than one year?</label>
+    <label  *ngIf="['GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Has the partnership been operating for more than one year?</label>
     <br>
     <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
     <br>

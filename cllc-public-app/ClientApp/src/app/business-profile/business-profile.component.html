@@ -1,4 +1,4 @@
-<div class="col-md-12" *ngIf="componentLoaded">
+<div class="col-md-12" *ngIf="componentLoaded && businessType">
   <h1>Business Profile</h1>
   <h2 *ngIf="currentUser">{{ currentUser.businessname }}</h2>
   <div class="col-sm-3 col-md-2" style="padding-left: 0">
@@ -10,10 +10,10 @@
       </li>
       <li *ngIf="tabStructure.indexOf('corporate-details') !== -1"  [ngClass]="{'active': view_tab == 'corporate-details'}">
         <a (click)="changeTab('corporate-details')">
-          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Corporate Details</span>
-          <span *ngIf="businessTypeSel.value == 'society'">Society Details</span>
-          <span *ngIf="['partnership', 'limited', 'limited-liability'].indexOf(businessTypeSel.value) !== -1">Partnership Details</span>
-          <span *ngIf="businessTypeSel.value == 'sole-proprietor'">Sole-Prop Details</span>
+          <span *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</span>
+          <span *ngIf="businessType == 'Society'">Society Details</span>
+          <span *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partnership Details</span>
+          <span *ngIf="businessType == 'SoleProprietor'">Sole-Prop Details</span>
         </a>
       </li>
       <li *ngIf="tabStructure.indexOf('organization-structure') !== -1" [ngClass]="{'active': view_tab == 'organization-structure'}">
@@ -23,8 +23,8 @@
       </li>
       <li *ngIf="tabStructure.indexOf('directors-and-officers') !== -1" [ngClass]="{'active': view_tab == 'directors-and-officers'}">
         <a (click)="changeTab('directors-and-officers')">
-          <span *ngIf="['society'].indexOf(businessTypeSel.value) == -1">Directors &amp; Officers</span>
-          <span  *ngIf="['society'].indexOf(businessTypeSel.value) !== -1">Directors &amp; Senior Managers</span>
+          <span *ngIf="['Society'].indexOf(businessType) == -1">Directors &amp; Officers</span>
+          <span  *ngIf="['Society'].indexOf(businessType) !== -1">Directors &amp; Senior Managers</span>
         </a>
       </li>
       <li *ngIf="tabStructure.indexOf('key-personnel') !== -1" [ngClass]="{'active': view_tab == 'key-personnel'}">
@@ -34,8 +34,8 @@
       </li>
       <li *ngIf="tabStructure.indexOf('shareholders') !== -1" [ngClass]="{'active': view_tab == 'shareholders'}">
         <a (click)="changeTab('shareholders')">
-          <span *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessTypeSel.value) !== -1">Shareholders</span>
-          <span *ngIf="['partnership','limited', 'limited-liability'].indexOf(businessTypeSel.value) !== -1">Partners</span>
+          <span *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Shareholders</span>
+          <span *ngIf="['GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partners</span>
         </a>
       </li>
       <li *ngIf="tabStructure.indexOf('connections-to-producers') !== -1" [ngClass]="{'active': view_tab == 'connections-to-producers'}">
@@ -56,44 +56,45 @@
     </ul>
   </div>
   <div class="col-md-9 col-sm-9">
-    <select name="" id="" (change)="onBusinessTypeChange(businessTypeSel.value)" #businessTypeSel>
-      <option value="private-corporation">private-corporation</option>
-      <option value="partnership">partnership</option>
-      <option value="society">society</option>
-      <option value="sole-proprietor">sole-proprietor</option>
-      <option value="ucl-llc">ucl-llc</option>
-      <option value="public">public</option>
-      <option value="limited">limited</option>
-      <option value="limited-liability">limited-liability</option>
+    <select name="" id="" [(ngModel)]="businessType">
+      <option value="PrivateCorporation">PrivateCorporation</option>
+      <option value="GeneralPartnership">GeneralPartnership</option>
+      <option value="Society">Society</option>
+      <option value="SoleProprietor">SoleProprietor</option>
+      <option value="UnlimitedLiabilityCorporation">UnlimitedLiabilityCorporation</option>
+      <option value="LimitedLiabilityCorporation">LimitedLiabilityCorporation</option>
+      <option value="PublicCorporation">PublicCorporation</option>
+      <option value="LimitedPartnership">LimitedPartnership</option>
+      <option value="LimitedLiabilityPartnership">LimitedLiabilityPartnershipy</option>
     </select>
     <br>
     <!-- Tab panes -->
     <div [hidden]="view_tab != 'before-you-start'">
-      <app-before-you-start [businessType]="businessTypeSel.value"></app-before-you-start>
+      <app-before-you-start [businessType]="businessType"></app-before-you-start>
     </div>
     <div [hidden]="view_tab != 'corporate-details'">
-      <app-corporate-details [accountId]="accountId" [businessType]="businessTypeSel.value"></app-corporate-details>
+      <app-corporate-details [accountId]="accountId" [businessType]="businessType"></app-corporate-details>
     </div>
     <div [hidden]="view_tab != 'organization-structure'">
-      <app-organization-structure [accountId]="accountId"  [businessType]="businessTypeSel.value"></app-organization-structure>
+      <app-organization-structure [accountId]="accountId"  [businessType]="businessType"></app-organization-structure>
     </div>
     <div [hidden]="view_tab != 'directors-and-officers'">
-      <app-directors-and-officers [accountId]="accountId" [businessType]="businessTypeSel.value"></app-directors-and-officers>
+      <app-directors-and-officers [accountId]="accountId" [businessType]="businessType"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'key-personnel'">
-      <app-key-personnel [accountId]="accountId" [businessType]="businessTypeSel.value"></app-key-personnel>
+      <app-key-personnel [accountId]="accountId" [businessType]="businessType"></app-key-personnel>
     </div>
     <div [hidden]="view_tab != 'shareholders'">
-      <app-edit-shareholders [accountId]="accountId" [businessType]="businessTypeSel.value"></app-edit-shareholders>
+      <app-edit-shareholders [accountId]="accountId" [businessType]="businessType"></app-edit-shareholders>
     </div>
     <div [hidden]="view_tab != 'connections-to-producers'">
-      <app-connection-to-producers [accountId]="accountId" [businessType]="businessTypeSel.value"></app-connection-to-producers>
+      <app-connection-to-producers [accountId]="accountId" [businessType]="businessType"></app-connection-to-producers>
     </div>
     <div [hidden]="view_tab != 'finance-integrity'">
-      <app-financial-information [accountId]="accountId"  [businessType]="businessTypeSel.value"></app-financial-information>
+      <app-financial-information [accountId]="accountId"  [businessType]="businessType"></app-financial-information>
     </div>
     <div [hidden]="view_tab != 'security-assessment'">
-      <app-security-assessments [accountId]="accountId" [businessType]="businessTypeSel.value"></app-security-assessments>
+      <app-security-assessments [accountId]="accountId" [businessType]="businessType"></app-security-assessments>
     </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">

@@ -1,6 +1,6 @@
 <div>
   <h1 style="margin-top: 0;">Before You Start</h1>
-  <div *ngIf="['private-corporation', 'ucl-llc', 'public'].indexOf(businessType) !== -1">
+  <div *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">
     <section>
       <label for="">Gather this information before you begin:</label>
       <p></p>
@@ -20,7 +20,12 @@
         <li>Contact information and mailing address</li>
         <li>Organization structure of your corporate relationships</li>
         <li>List of directors and officers, with their email addresses</li>
-        <li>List of voting shareholders, with their email addresses</li>
+        <li *ngIf="['PrivateCorporation'].indexOf(businessType) !== -1">
+          List of voting shareholders, with their email addresses
+        </li>
+        <li *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
+          List of all shareholders, with their email addresses
+        </li>
         <li>Central Securities Register document</li>
         <li>Document of key personnel of the corporation</li>
       </ul>
@@ -50,7 +55,7 @@
       </ul>
     </section>
   </div>
-  <div *ngIf="businessType == 'sole-proprietor'">
+  <div *ngIf="businessType == 'SoleProprietor'">
     <section>
       <label for="">Gather this information before you begin:</label>
       <p></p>
@@ -88,7 +93,7 @@
     </section>
   </div>
 
-  <div *ngIf="businessType == 'society'">
+  <div *ngIf="businessType == 'Society'">
     <section>
       <label for="">Gather this information before you begin:</label>
       <p></p>
@@ -138,7 +143,7 @@
     </section>
   </div>
 
-  <div *ngIf="['partnership', 'limited', 'limited-liability'].indexOf(businessType) !== -1">
+  <div *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
     <section>
       <label for="">Gather this information before you begin:</label>
       <p></p>

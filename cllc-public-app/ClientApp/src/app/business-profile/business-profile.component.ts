@@ -34,6 +34,14 @@ export class BusinessProfileComponent {
   tabStructure: any[] = this.tabs.privateCorportation;
 
   number_tabs = 7;
+  _businessType: string;
+  get businessType(): string{
+    return this._businessType;
+  }
+  set businessType(value: string){
+    this._businessType = value;
+    this.onBusinessTypeChange(value);
+  }
   /** BusinessProfile ctor */
   constructor(private userDataService: UserDataService, private route: ActivatedRoute, private dynamicsDataService: DynamicsDataService) {
     this.view_tab = "before-you-start";
@@ -54,6 +62,7 @@ export class BusinessProfileComponent {
             .then((data) => {
               if (data.primarycontact) {
                 this.contactId = data.primarycontact.id;
+                this.businessType = data.businessType;
               }
             });
 
@@ -96,20 +105,21 @@ export class BusinessProfileComponent {
     this.view_tab = this.tabStructure[currentTab];
   }
 
-  onBusinessTypeChange(value) {
+  onBusinessTypeChange(value: string) {
     switch (value) {
-      case "private-corporation":
-      case "public":
-      case "ucl-llc":
+      case 'PrivateCorporation':
+      case 'PublicCorporation':
+      case 'LimitedLiabilityCorporation':
+      case 'UnlimitedLiabilityCorporation':
         this.tabStructure = this.tabs.privateCorportation;
         break;
-      case "sole-proprietor":
+      case 'SoleProprietor':
         this.tabStructure = this.tabs.soleProprietor;
         break;
-      case "partnership":
+      case 'GeneralPartnership':
         this.tabStructure = this.tabs.partnership;
         break;
-      case "society":
+      case 'Society':
         this.tabStructure = this.tabs.society;
         break;
       default:
