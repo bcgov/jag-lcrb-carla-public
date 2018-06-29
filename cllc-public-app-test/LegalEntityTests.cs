@@ -214,7 +214,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		{
 			string service = "adoxiolegalentity";
 
-			var loginUser = randomNewUserName("TestAddShareholderAndDirector", 6);
+			var loginUser = randomNewUserName("TestAddSD", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // get the current account.
@@ -313,8 +313,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await Logout();
 
             // login as new user and verify we can't see the Director or Shareholder
-            var newLoginUser = randomNewUserName("TestAddShareholderAndDirectorSecond", 6);
-            var newStrId = await LoginAndRegisterAsNewUser(loginUser);
+            var newLoginUser = randomNewUserName("TestAddSD2", 6);
+            var newStrId = await LoginAndRegisterAsNewUser(newLoginUser);
 
             // try to fetch LegalEntity records of other account
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
