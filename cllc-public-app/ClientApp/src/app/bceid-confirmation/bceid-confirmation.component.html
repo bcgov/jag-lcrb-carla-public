@@ -20,7 +20,7 @@
   <div *ngIf="bceidConfirmBusinessType">
     <h1>Confirm Business BCeID Information</h1>
     <p>Please confirm the Business Type of {{currentUser.businessname}}.</p>
-    <select class="form-control" (change)="onTypeChange(bceid)" [(ngModel)]="businessType" style="width: 280px;" #bceid>
+    <select class="form-control" [(ngModel)]="businessType" style="width: 280px;" #bceid>
       <option value="Void">Not Specified</option>
       <option value="Proprietorship">Proprietorship</option>
       <option value="Partnership">Partnership</option>
@@ -37,11 +37,11 @@
      </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Proprietorship'">
       <!-- {{businessValue}} -->
-      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType('Proprietorship')"><strong>Next</strong><br></a>
+      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType('SoleProprietor')"><strong>Next</strong><br></a>
     </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Partnership'">
       <!-- {{businessValue}} -->
-      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType('Partnership')"><strong>Next</strong><br></a>
+      <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType('GeneralPartnership')"><strong>Next</strong><br></a>
     </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Corporation'">
       <!-- {{businessValue}} -->

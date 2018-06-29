@@ -4,6 +4,7 @@ using System.Linq;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Interfaces.Models;
 
+
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
@@ -244,6 +245,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     accountVM.primarycontact.id = account.Primarycontactid.Contactid.ToString();
                     // TODO - load other fields (if necessary)
                 }
+
+                accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), account.AdoxioBusinesstype).ToString();
             }
             return accountVM;
         }
