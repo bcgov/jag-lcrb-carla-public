@@ -269,7 +269,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 establishmentaddressstreet = "666 Any Street",
                 establishmentaddresscity = "Victoria, BC",
                 establishmentaddresspostalcode = "V1X 1X1",
-                applicationStatus = "0"
+				applicationStatus = "845280000"
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
