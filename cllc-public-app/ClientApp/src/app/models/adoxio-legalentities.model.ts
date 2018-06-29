@@ -26,5 +26,6 @@ export class AdoxioLegalEntity {
   // helper fields
   shareholderType: string;
   sendConsentRequest: boolean;
+  parentLegalEntityId: string;
 
 }
