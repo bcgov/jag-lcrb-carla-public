@@ -4,13 +4,13 @@
   </mat-card-title>
   <mat-card-subtitle>
 
-    <p *ngIf="['private-corporation', 'ucl-llc', 'public', 'society', 
-               'partnership','limited', 'limited-liability'].indexOf(businessType) !== -1">
+    <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'Society', 
+               'GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
       The following people in your organization will need to provide their consent for a security assessment and financial check.
       An email will be sent to each person with a unique login link to provide their consent.
     </p>
 
-    <p *ngIf="['sole-proprietor'].indexOf(businessType) !== -1">
+    <p *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
       You will need to provide consent for a security screening and financial assessment. An email will be sent to you with a unique
       login link to provide consent.
     </p>
