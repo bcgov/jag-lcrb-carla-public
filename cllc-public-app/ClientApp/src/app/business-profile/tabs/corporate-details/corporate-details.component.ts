@@ -15,6 +15,7 @@ import { DatePipe } from '@angular/common';
 })
 export class CorporateDetailsComponent implements OnInit {
   @Input() accountId: string;
+  @Input() businessType: string;
   corporateDetailsForm: FormGroup;
   accountModel: DynamicsAccount;
   busy: Subscription;
