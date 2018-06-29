@@ -7,9 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-business-profile',
-    templateUrl: './business-profile.component.html',
-    styleUrls: ['./business-profile.component.scss']
+  selector: 'app-business-profile',
+  templateUrl: './business-profile.component.html',
+  styleUrls: ['./business-profile.component.scss']
 })
 /** BusinessProfile component*/
 export class BusinessProfileComponent {
@@ -24,10 +24,27 @@ export class BusinessProfileComponent {
   public contactId: string;
   public componentLoaded: boolean;
 
+  tabs: any = {
+    privateCorportation: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel', 'shareholders', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
+    society: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
+    partnership: ['before-you-start', 'corporate-details', 'organization-structure', 'key-personnel', 'shareholders', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
+    soleProprietor: ['before-you-start', 'corporate-details', 'key-personnel', 'finance-integrity', 'security-assessment']
+  };
+
+  tabStructure: any[] = this.tabs.privateCorportation;
+
   number_tabs = 7;
+  _businessType: string;
+  get businessType(): string{
+    return this._businessType;
+  }
+  set businessType(value: string){
+    this._businessType = value;
+    this.onBusinessTypeChange(value);
+  }
   /** BusinessProfile ctor */
   constructor(private userDataService: UserDataService, private route: ActivatedRoute, private dynamicsDataService: DynamicsDataService) {
-      this.view_tab = "tab-0";
+    this.view_tab = "before-you-start";
   }
 
   ngOnInit(): void {
@@ -45,7 +62,8 @@ export class BusinessProfileComponent {
             .then((data) => {
               if (data.primarycontact) {
                 this.contactId = data.primarycontact.id;
-              }              
+                this.businessType = data.businessType;
+              }
             });
 
           this.componentLoaded = true;
@@ -54,15 +72,14 @@ export class BusinessProfileComponent {
     this.businessProfileId = <string>this.route.snapshot.params.id;
     //this.businessProfileId = <string>this.route.snapshot.paramMap.get('id');
     //this.legalEntityId = this.route.snapshot.params["id"];
-    }
-    
+  }
+
   getTab() {
-    var temp = this.view_tab.substring(4);
-    var result = parseInt(temp);
+    let result = this.tabStructure.indexOf(this.view_tab);
     return result;
   }
 
-  saveApplicantInformation() {    
+  saveApplicantInformation() {
     this.dynamicsFormComponent.onSubmit();
   }
 
@@ -74,17 +91,39 @@ export class BusinessProfileComponent {
     var currentTab = this.getTab();
     currentTab--;
     if (currentTab < 0) {
-      currentTab = this.number_tabs;
+      currentTab = this.tabStructure.length - 1;
     }
-    this.view_tab = "tab-" + currentTab;
+    this.view_tab = this.tabStructure[currentTab];
   }
 
   next() {
     var currentTab = this.getTab();
     currentTab++;
-    if (currentTab > this.number_tabs) {
+    if (currentTab >= this.tabStructure.length) {
       currentTab = 0;
     }
-    this.view_tab = "tab-" + currentTab;
+    this.view_tab = this.tabStructure[currentTab];
+  }
+
+  onBusinessTypeChange(value: string) {
+    switch (value) {
+      case 'PrivateCorporation':
+      case 'PublicCorporation':
+      case 'LimitedLiabilityCorporation':
+      case 'UnlimitedLiabilityCorporation':
+        this.tabStructure = this.tabs.privateCorportation;
+        break;
+      case 'SoleProprietor':
+        this.tabStructure = this.tabs.soleProprietor;
+        break;
+      case 'GeneralPartnership':
+        this.tabStructure = this.tabs.partnership;
+        break;
+      case 'Society':
+        this.tabStructure = this.tabs.society;
+        break;
+      default:
+        break;
+    }
   }
 }
