@@ -32,15 +32,15 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task LoginSetsCurrentUserThenLogoutIsAnonymous()
         {
-            await LoginAsDefault();
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             ViewModels.User user = await GetCurrentUser();
 
             // Verify the Default development user.
-            Assert.Equal(user.name, "TMcTesterson TestUser");
-            Assert.False(user.isNewUser);
+            Assert.Equal(user.name, loginUser + " TestUser");
 
-            await Logout();
+            await LogoutAndCleanupTestUser(strId);
 
             await GetCurrentUserIsUnauthorized();
         }
