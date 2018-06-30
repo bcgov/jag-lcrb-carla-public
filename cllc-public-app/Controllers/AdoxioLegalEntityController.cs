@@ -402,14 +402,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var userAccount = await _dynamicsClient.GetAccountById(accountId);
             patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
 
-            // TODO take the default for now from the parent account's legal entity record
-            // TODO likely will have to re-visit for shareholders that are corporations/organizations
-            MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
-            if (tempLegalEntity != null)
-            {
-                Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid); 
-                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
-            }
             // patch the record.
             try
             {
@@ -423,6 +415,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
             }
+
+            // TODO - collections have a different syntax, see https://msdn.microsoft.com/en-us/library/mt607875.aspx
+            // We will need to implement that for the legal entity owned field.
+            // TODO take the default for now from the parent account's legal entity record
+            // TODO likely will have to re-visit for shareholders that are corporations/organizations
+            //MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            //if (tempLegalEntity != null)
+            //{
+            //    Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
+            //    patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
+            //}
+
 
             return Json(adoxioLegalEntity.ToViewModel());
         }
