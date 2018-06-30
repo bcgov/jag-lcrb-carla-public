@@ -1,4 +1,5 @@
 export class AdoxioApplication {
+  id: string;
   name: string;
   applyingPerson: string;
   jobNumber: string;
