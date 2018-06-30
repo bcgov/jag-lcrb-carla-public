@@ -375,30 +375,75 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new legal entity.
             MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
 
-
 			// get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // check that the session is setup correctly.
             userSettings.Validate();
-
-            var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
-
             // copy received values to Dynamics LegalEntity
             adoxioLegalEntity.CopyValues(item);
-			adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", userAccount.Accountid);
+            try
+            {
+                adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error creating legal entity");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new Exception("Unable to create legal entity");
+            }
+
+            // setup navigation properties.
+            MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+            Guid accountId = Guid.Parse(userSettings.AccountId);
+            var userAccount = await _dynamicsClient.GetAccountById(accountId);
+            patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
+
+            // patch the record.
+            try
+            {
+                await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error patching legal entity");
+                _logger.LogError(odee.Request.RequestUri.ToString());
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
 
             // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
             MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
             if (tempLegalEntity != null)
             {
-                adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntity.AdoxioLegalentityid);
-            }
-            // create the record.
+                Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
 
-            adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
-            
+                // see https://msdn.microsoft.com/en-us/library/mt607875.aspx
+                patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
+                
+                // patch the record.
+                try
+                {
+                    await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error adding LegalEntityOwned reference to legal entity");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }                
+            }
+
             return Json(adoxioLegalEntity.ToViewModel());
         }
 

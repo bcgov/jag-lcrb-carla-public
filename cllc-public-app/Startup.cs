@@ -195,6 +195,16 @@ namespace Gov.Lclb.Cllb.Public
                                 
                 IDynamicsClient client = new DynamicsClient(new Uri(Configuration["DYNAMICS_ODATA_URI"]), serviceClientCredentials);
 
+                // set the native client URI
+                if (string.IsNullOrEmpty(Configuration["DYNAMICS_NATIVE_ODATA_URI"]))
+                {
+                    client.NativeBaseUri = new Uri(Configuration["DYNAMICS_ODATA_URI"]);
+                }
+                else
+                {
+                    client.NativeBaseUri = new Uri(Configuration["DYNAMICS_NATIVE_ODATA_URI"]);
+                }
+
                 return client;
             }));
 
