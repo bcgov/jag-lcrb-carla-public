@@ -410,14 +410,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (OdataerrorException odee)
             {
                 _logger.LogError("Error patching legal entity");
+                _logger.LogError(odee.Request.RequestUri.ToString());
                 _logger.LogError("Request:");
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
             }
 
-
-            // We will need to implement that for the legal entity owned field.
             // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
             MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
@@ -425,25 +424,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
 
-                // collections have a different syntax, see https://msdn.microsoft.com/en-us/library/mt607875.aspx
+                // see https://msdn.microsoft.com/en-us/library/mt607875.aspx
+                patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
+                
+                // patch the record.
                 try
                 {
-                    var adoxio_LegalEntityOwned = new Odataid();
-                    adoxio_LegalEntityOwned.OdataidProperty = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
-                    await _dynamicsClient.Adoxiolegalentities.AddRefAsync(adoxioLegalEntity.AdoxioLegalentityid,
-                        "adoxio_LegalEntityOwned", adoxio_LegalEntityOwned);
+                    await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
                 catch (OdataerrorException odee)
                 {
                     _logger.LogError("Error adding LegalEntityOwned reference to legal entity");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
                     _logger.LogError("Request:");
                     _logger.LogError(odee.Request.Content);
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
-                }
-                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
+                }                
             }
-
 
             return Json(adoxioLegalEntity.ToViewModel());
         }
