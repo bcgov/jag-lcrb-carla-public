@@ -12,4 +12,8 @@ export class SubmitPayComponent implements OnInit {
   ngOnInit() {
   }
 
+  submit_application() 
+  {
+  }
+
 }
