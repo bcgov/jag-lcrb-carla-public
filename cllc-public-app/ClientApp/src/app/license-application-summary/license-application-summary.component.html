@@ -1,6 +1,5 @@
 <mat-card>
-  <mat-card-title><h1>Licences</h1></mat-card-title>
-  <mat-card-subtitle><p>Your Licences</p></mat-card-subtitle>
+  <mat-card-title><h1>Applications</h1></mat-card-title>
   <mat-card>
 
   <div [ngBusy]="busy"></div>
@@ -16,6 +15,14 @@
       </div>
 
       <mat-table matSort #table [dataSource]="dataSource">
+
+        <!-- Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a routerLink="/license-application/{{element.id}}" skipLocationChange>{{element.name}}</a>
+          </mat-cell>
+        </ng-container>
 
         <!-- Column -->
         <ng-container matColumnDef="establishmentName">
