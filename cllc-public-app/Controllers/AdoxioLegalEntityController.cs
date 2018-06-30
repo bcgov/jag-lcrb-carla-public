@@ -398,15 +398,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // setup navigation properties.
             MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
-            var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
-            patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", userAccount.Accountid);
+            Guid accountId = Guid.Parse(userSettings.AccountId);
+            var userAccount = await _dynamicsClient.GetAccountById(accountId);
+            patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
 
             // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
             MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
             if (tempLegalEntity != null)
             {
-                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntity.AdoxioLegalentityid);
+                Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid); 
+                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
             }
             // patch the record.
             try
