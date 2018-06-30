@@ -21,6 +21,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
+		Dictionary<string, string> redirectUrl;
+
 		public PaymentController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, 
 		                         IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
@@ -28,7 +30,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._system = context;
             this._httpContextAccessor = httpContextAccessor;
             this._dynamicsClient = dynamicsClient;
-			_logger = loggerFactory.CreateLogger(typeof(PaymentController));                    
+			_logger = loggerFactory.CreateLogger(typeof(PaymentController));
+
+			redirectUrl = new Dictionary<string, string>();
+			redirectUrl["url"] = "https://google.ca";
+			redirectUrl["key2"] = "value2";
         }
 
 		/// <summary>
@@ -42,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		public async Task<JsonResult> GetPaymentUrl(string id)
 		{
 			_logger.LogError("Called GetPaymentUrl(" + id + ")");
-			return Json("{ url: 'https://google.ca' }");
+			return Json(redirectUrl);
 		}
 
 		/// <summary>
@@ -57,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		public async Task<JsonResult> UpdatePaymentStatus(string id)
         {
 			_logger.LogError("Called UpdatePaymentStatus(" + id + ")");
-			return Json("{ url: 'https://google.ca' }");
+			return Json(redirectUrl);
         }
 
 		/// <summary>
@@ -73,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		public async Task<JsonResult> VerifyPaymentStatus(string id)
         {
 			_logger.LogError("Called VerifyPaymentStatus(" + id + ")");
-			return Json("{ url: 'https://google.ca' }");
+			return Json(redirectUrl);
         }
 
     }
