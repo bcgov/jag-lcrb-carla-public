@@ -21,14 +21,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
+		private readonly BCEPWrapper _bcep;
         
 		public PaymentController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, 
-		                         IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+		                         IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, 
+		                         IDynamicsClient dynamicsClient, BCEPWrapper bcep)
         {
 			Configuration = configuration;
             this._system = context;
             this._httpContextAccessor = httpContextAccessor;
             this._dynamicsClient = dynamicsClient;
+			this._bcep = bcep;
 			_logger = loggerFactory.CreateLogger(typeof(PaymentController));
         }
 
@@ -51,7 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 			Dictionary<string, string> redirectUrl;
 			redirectUrl = new Dictionary<string, string>();
-            redirectUrl["url"] = "https://google.ca?id=" + id;
+			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(id, "7500.00");
 
 			return Json(redirectUrl);
 		}
