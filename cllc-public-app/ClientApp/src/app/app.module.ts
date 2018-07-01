@@ -266,6 +266,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
     AccountDataService,
+    PaymentDataService,
     NgbDropdown
   ],
   entryComponents: [
