@@ -11,13 +11,24 @@ export class SubmitPayComponent implements OnInit {
   @Input() applicationId: string;
   busy: Subscription;
 
-  constructor() { }
+  constructor(private paymentDataService: PaymentDataService) { }
 
   ngOnInit() {
   }
 
   submit_application() 
   {
+    this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
+      res => {
+        //console.log("applicationVM: ", res.json());
+        var jsonUrl = res.json();
+        window.alert(jsonUrl['url']);
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
+      },
+      err => {
+        console.log("Error occured");
+      }
+    );
   }
-
 }

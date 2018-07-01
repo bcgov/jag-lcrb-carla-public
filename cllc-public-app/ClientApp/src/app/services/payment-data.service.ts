@@ -7,7 +7,7 @@ import { AdoxioApplication } from "../models/adoxio-application.model";
 @Injectable()
    export class PaymentDataService {
 
-   apiPath = "api/account/";
+   apiPath = "api/payment/";
    submitPath = "submit/";
 
    constructor(private http: Http) { }
