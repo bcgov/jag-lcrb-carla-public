@@ -9,6 +9,7 @@ import { AdoxioApplication } from "../models/adoxio-application.model";
 
    apiPath = "api/payment/";
    submitPath = "submit/";
+   verifyPath = "verify/";
 
    constructor(private http: Http) { }
 
@@ -19,6 +20,15 @@ import { AdoxioApplication } from "../models/adoxio-application.model";
      //call API
      //console.log("===== PaymentService.submit: ", id);
      return this.http.get(this.apiPath + this.submitPath + id, { headers: headers });
+   }
+
+   verifyPaymentSubmission(id: string) {
+     let headers = new Headers();
+     headers.append("Content-Type", "application/json");
+
+     //call API
+     //console.log("===== PaymentService.verify: ", id);
+     return this.http.get(this.apiPath + this.verifyPath + id, { headers: headers });
    }
 
    private handleError(error: Response | any) {

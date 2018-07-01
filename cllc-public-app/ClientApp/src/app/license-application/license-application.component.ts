@@ -25,6 +25,7 @@ export class LicenseApplicationComponent implements OnInit {
   tabStructure: any[] = this.tabs.application;
 
   constructor(private userDataService: UserDataService, private route: ActivatedRoute) {
+    // TODO check license status to set initial tab
     this.view_tab = "contact-details";
     this.applicationId = route.snapshot.params.applicationId;
   }
