@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Router} from '@angular/router'
+import { HttpClientModule } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router'
 import { PaymentDataService } from '../services/payment-data.service';
 import { Subscription } from 'rxjs';
 
@@ -11,9 +12,13 @@ import { Subscription } from 'rxjs';
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
     busy: Subscription;
+    applicationId: string;
 
     /** payment-confirmation ctor */
-    constructor(private router: Router, private paymentDataService: PaymentDataService) {
+    constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
+	    this.route.queryParams.subscribe(params => {
+	        this.applicationId = params['id'];
+	    });
     }
 
     ngOnInit() {
@@ -23,12 +28,12 @@ export class PaymentConfirmationComponent {
 	    setTimeout(function () {
 	    }, 5000);
 
-        this.router.navigate(['./license-application/9591326e-6b7c-e811-814a-480fcfe9cf31']);
+        this.router.navigate(['./license-application/' + this.applicationId]);
     }
 
   verify_payment() 
   {
-    this.paymentDataService.verifyPaymentSubmission("fake-id").subscribe(
+    this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
         //console.log("applicationVM: ", res.json());
         var jsonUrl = res.json();
