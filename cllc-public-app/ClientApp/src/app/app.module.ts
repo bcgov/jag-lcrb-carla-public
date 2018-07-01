@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
@@ -169,6 +170,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     AdminModule,
@@ -215,6 +217,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule,
     AdminModule,
