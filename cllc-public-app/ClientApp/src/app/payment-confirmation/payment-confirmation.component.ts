@@ -12,23 +12,27 @@ import { Subscription } from 'rxjs';
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
     busy: Subscription;
+    orderNum: string;
     applicationId: string;
 
     /** payment-confirmation ctor */
     constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
 	    this.route.queryParams.subscribe(params => {
-	        this.applicationId = params['id'];
+	        this.orderNum = params['trnId'];
+	        this.applicationId = params['SessionKey'];
 	    });
     }
 
     ngOnInit() {
     	// TODO get slug from URL parameters and find associated Application
+        window.alert("trnId=" + this.orderNum + ", SessionKey=" + this.applicationId);
+
     	this.verify_payment();
 
 	    setTimeout(function () {
 	    }, 5000);
 
-        this.router.navigate(['./license-application/' + this.applicationId]);
+        //this.router.navigate(['./license-application/' + this.applicationId]);
     }
 
   verify_payment() 

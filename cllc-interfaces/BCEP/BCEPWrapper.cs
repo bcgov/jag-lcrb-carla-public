@@ -23,6 +23,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 		private const string BCEP_P_TRANS_TYPE = "trnType";
 		private const string BCEP_P_ORDER_NUM = "trnOrderNumber";
 		private const string BCEP_P_RESPONSE_PG = "ref1";
+		private const string BCEP_P_APPLICATION_ID = "ref3";
 		private const string BCEP_P_TRANS_AMT = "trnAmount";
 		private const string BCEP_P_HASH_VALUE = "hashValue";
 		private const string BCEP_P_HASH_EXPIRY = "hashExpiry";
@@ -38,14 +39,23 @@ namespace Gov.Lclb.Cllb.Interfaces
 			this.bcep_conf_url = conf_url;
         }
 
-        public async Task<string> GeneratePaymentRedirectUrl(string orderNum, string amount) 
+        public async Task<string> GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount) 
         {
             // build the param string for the re-direct url
 			string paramString = BCEP_P_MERCH_ID + "=" + bcep_merchid +
 				"&" + BCEP_P_TRANS_TYPE + "=" + TRANS_TYPE +
 				"&" + BCEP_P_ORDER_NUM + "=" + orderNum +
 				"&" + BCEP_P_RESPONSE_PG + "=" + bcep_conf_url +
+				"&" + BCEP_P_APPLICATION_ID + "=" + applicationId +
 				"&" + BCEP_P_TRANS_AMT + "=" + amount;
+
+			// Calculate the expiry based on the minutesToExpire value
+            DateTime expiry = DateTime.Now.AddMinutes(HASH_EXPIRY_TIME);
+            string expiryStr = expiry.ToString(HASH_EXPIRY_FMT);
+
+			// Add expiry to the redirect
+            paramString = paramString +
+                "&" + BCEP_P_HASH_EXPIRY + "=" + expiryStr;
 
 			// replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
 			paramString = paramString.Replace(" ", "%20");
@@ -63,14 +73,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             // See http://support.beanstream.com/#docs/about-hash-validation.htm?Highlight=hash for more info. 
 			string hashed = getHash(paramStringWithHash);
 
-			// Calculate the expiry based on the minutesToExpire value
-			DateTime expiry = DateTime.Now.AddMinutes(HASH_EXPIRY_TIME);
-			string expiryStr = expiry.ToString(HASH_EXPIRY_FMT);
-
 			// Add hash and expiry to the redirect
 			paramString = paramString +
-				"&" + BCEP_P_HASH_VALUE + "=" + hashed +
-				"&" + BCEP_P_HASH_EXPIRY + "=" + expiryStr;
+				"&" + BCEP_P_HASH_VALUE + "=" + hashed;
 
             // Build re-direct URL
 			string redirect = this.bcep_pay_url + "?" + paramString;
