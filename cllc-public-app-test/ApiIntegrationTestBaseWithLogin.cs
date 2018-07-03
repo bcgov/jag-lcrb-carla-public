@@ -48,17 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
         }
-
-		public async System.Threading.Tasks.Task LoginAsDefault()
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/default");
-            var response = await _client.SendAsync(request);
-            var temp = await response.Content.ReadAsStringAsync();
-            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
-			_client.DefaultRequestHeaders.Add("DEV-USER", "TMcTesterson");
-            string _discard = await response.Content.ReadAsStringAsync();
-        }
-
+		
 		public string randomNewUserName(string userid, int len)
 		{
 			return userid + TestUtilities.RandomANString(len);
