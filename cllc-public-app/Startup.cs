@@ -253,7 +253,16 @@ namespace Gov.Lclb.Cllb.Public
 			services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
 			// add BCEP services
-			services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper("", "", "", ""));
+
+			var bcep_svc_url    = Environment.GetEnvironmentVariable("BCEP_SERVICE_URL");
+			var bcep_svc_svcid  = Environment.GetEnvironmentVariable("BCEP_MERCHANT_ID");
+			var bcep_svc_hashid = Environment.GetEnvironmentVariable("BCEP_HASH_KEY");
+			var bcep_base_uri   = Environment.GetEnvironmentVariable("BASE_URI");
+			var bcep_base_path  = Environment.GetEnvironmentVariable("BASE_PATH");
+			var bcep_conf_path  = Environment.GetEnvironmentVariable("BCEP_CONF_PATH");
+
+			services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid, 
+			                                                        bcep_base_uri + bcep_base_path + bcep_conf_path));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
