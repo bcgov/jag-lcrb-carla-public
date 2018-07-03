@@ -63,12 +63,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			}
 
 			string ordernum = "04" + RandomOrderNum(8);
-
+            
 			Dictionary<string, string> redirectUrl;
 			redirectUrl = new Dictionary<string, string>();
 			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(ordernum, id, "7500.00");
 
-			_logger.LogError(redirectUrl["url"]);
+			_logger.LogError(">>>>>" + redirectUrl["url"]);
 
 			return Json(redirectUrl);
 		}
@@ -106,8 +106,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="id">GUID of the Application to pay</param>
         /// <returns></returns>
-        [HttpGet("verify/{id}")]
-		public async Task<IActionResult> VerifyPaymentStatus(string id)
+		[HttpGet("verify/{ordernum}/{id}")]
+		public async Task<IActionResult> VerifyPaymentStatus(string ordernum, string id)
         {
 			ViewModels.AdoxioApplication result = await GetDynamicsApplication(id);
             if (result == null)
@@ -115,11 +115,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
-            redirectUrl["url"] = "https://google.ca?id=" + id;
+            Dictionary<string, string> response;
+			response = new Dictionary<string, string>();
+			response["url"] = await _bcep.GetVerifyPaymentTransactionUrl(ordernum, id);
+			response["status"] = await _bcep.ProcessPaymentResponse(ordernum, id);
 
-            return Json(redirectUrl);
+			_logger.LogError(">>>>>" + response["url"]);
+			_logger.LogError(">>>>>" + response["status"]);
+
+			return Json(response);
         }
 
 		private async Task<ViewModels.AdoxioApplication> GetDynamicsApplication(string id)
