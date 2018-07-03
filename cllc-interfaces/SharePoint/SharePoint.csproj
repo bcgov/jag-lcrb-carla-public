@@ -9,7 +9,6 @@
     <PackageReference Include="Microsoft.Data.OData" Version="5.8.3" />
     <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.3" />
     <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="3.19.6" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.11" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
