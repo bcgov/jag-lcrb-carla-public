@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
@@ -48,6 +49,7 @@ import { AccountDataService } from './services/account-data.service';
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
 import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
+import { PaymentDataService } from './services/payment-data.service'; 
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
 import { SearchBoxDirective } from './search-box/search-box.directive';
@@ -100,6 +102,7 @@ import { ConnectionToProducersComponent } from './business-profile/tabs/connecti
 import { ShareholdersPublicComponent } from './business-profile/tabs/shareholders-public/shareholders-public.component';
 import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholders-ucl-llc/shareholders-ucl-llc.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
+import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
 import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
 import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
@@ -153,6 +156,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     ShareholdersPublicComponent,
     ShareholdersUclLlcComponent,
     LicenseApplicationComponent,
+    PaymentConfirmationComponent,
     ContactDetailsComponent,
     PropertyDetailsComponent,
     StoreInformationComponent,
@@ -166,6 +170,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     AdminModule,
@@ -212,6 +217,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule,
     AdminModule,
@@ -265,6 +271,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
     AccountDataService,
+    PaymentDataService,
     NgbDropdown
   ],
   entryComponents: [
