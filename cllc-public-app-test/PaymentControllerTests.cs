@@ -99,7 +99,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string json = await response.Content.ReadAsStringAsync();
 			Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 			Assert.True(values.ContainsKey("url"));
-			Assert.Equal("https://google.ca?id=" + id + "&amt=7500.00", values["url"]);
+			string actual_url = "https://google.ca/?merchant_id=123456&trnType=P&trnOrderNumber=" + id + 
+				"&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&trnAmount=7500.00&hashValue=";
+			Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
 
             // delete application
 			request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/delete");
