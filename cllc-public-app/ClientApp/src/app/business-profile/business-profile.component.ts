@@ -60,7 +60,6 @@ export class BusinessProfileComponent {
               if (data.primarycontact) {
                 this.contactId = data.primarycontact.id;
               }
-              debugger;
               this.businessType = data.businessType;
               this.componentLoaded = true;
             });

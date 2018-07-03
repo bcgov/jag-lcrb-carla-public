@@ -85,26 +85,26 @@ export class CorporateDetailsComponent implements OnInit {
 
   save() {
     //console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
-    if (this.corporateDetailsForm.valid) {
-
-      //console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
-      this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
-      //console.log("this.accountModel", this.accountModel);
-      this.busy =  this.accountDataService.updateAccount(this.accountModel).subscribe(
-        res => {
-          //console.log("Account updated:", res.json());
-          this.snackBar.open('Corporate Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
-      },
-        err => {
-          this.snackBar.open('Error saving Corporate Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
-          console.log("Error occured");
-        });
-    } else {
+    if (!this.corporateDetailsForm.valid) {
       Object.keys(this.corporateDetailsForm.controls).forEach(field => {
-      const control = this.corporateDetailsForm.get(field);
-      control.markAsTouched({ onlySelf: true });
+        const control = this.corporateDetailsForm.get(field);
+        control.markAsTouched({ onlySelf: true });
       });
     }
+
+    //console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
+    this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
+    //console.log("this.accountModel", this.accountModel);
+    this.busy = this.accountDataService.updateAccount(this.accountModel).subscribe(
+      res => {
+        //console.log("Account updated:", res.json());
+        this.snackBar.open('Corporate Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
+      },
+      err => {
+        this.snackBar.open('Error saving Corporate Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log("Error occured");
+      });
+
   }
 
   isFieldError(field: string) {
