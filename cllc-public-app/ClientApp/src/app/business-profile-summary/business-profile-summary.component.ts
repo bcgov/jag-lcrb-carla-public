@@ -102,6 +102,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
   }
 
   loadBusinessProfile(element){
+    debugger;
     this.store.dispatch(new appStateActions.SetCurrentAccountIdAction(element.accountId));
     this.store.dispatch(new appStateActions.SetCurrentLegalEntityIdAction(element.legalEntityId));
     this.router.navigate(['/business-profile']);
