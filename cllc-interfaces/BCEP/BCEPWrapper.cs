@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -89,11 +91,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             return redirect;
         }
 
-		public async Task<string> ProcessPaymentResponse(string orderNum, string txnId)
+		public async Task<Dictionary<string, string>> ProcessPaymentResponse(string orderNum, string txnId)
         {
             var txn = new BCEPTransaction();
 
 			var query_url = await GetVerifyPaymentTransactionUrl(orderNum, txnId);
+			Dictionary<string, string> responseDict = new Dictionary<string, string>();
+			responseDict["query_url"] = query_url;
 
 			// build an HTTP client and fire off a GET request
             try
@@ -102,19 +106,25 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var response = await client.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
-                    var jsonString = await response.Content.ReadAsStringAsync();
-					return jsonString;
+                    var queryString = await response.Content.ReadAsStringAsync();
+					var responseParams = HttpUtility.ParseQueryString(queryString);
+					foreach (var key in responseParams.AllKeys)
+					{
+						responseDict[key] = responseParams[key];
+					}
                 }
                 else
                 {
-					return response.StatusCode.ToString() + ":" + response.ReasonPhrase;
+					responseDict["response_code"] = response.StatusCode.ToString();
+					responseDict["response_phrase"] = response.ReasonPhrase;
                 }
             }
             catch (Exception e)
             {
 				// ignore errors and just return null
-				return e.Message;
+				responseDict["message"] = e.Message;
             }
+			return responseDict;
         }
 
 		public async Task<string> GetVerifyPaymentTransactionUrl(string orderNum, string txnId)

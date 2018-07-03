@@ -117,9 +117,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             json = await response.Content.ReadAsStringAsync();
             values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-			Assert.True(values.ContainsKey("status"));
+			Assert.True(values.ContainsKey("query_url"));
+			Assert.True(values.ContainsKey("response_code"));
+			Assert.True(values.ContainsKey("response_phrase"));
 
-			Assert.Equal("NotFound:Not Found", values["status"]);
+			Assert.Equal("NotFound", values["response_code"]);
+			Assert.Equal("Not Found", values["response_phrase"]);
 
             // delete application
 			request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/delete");

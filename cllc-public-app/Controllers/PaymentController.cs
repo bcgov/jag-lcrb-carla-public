@@ -115,13 +115,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            Dictionary<string, string> response;
-			response = new Dictionary<string, string>();
-			response["url"] = await _bcep.GetVerifyPaymentTransactionUrl(ordernum, id);
-			response["status"] = await _bcep.ProcessPaymentResponse(ordernum, id);
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id);
 
-			_logger.LogError(">>>>>" + response["url"]);
-			_logger.LogError(">>>>>" + response["status"]);
+			foreach (var key in response.Keys)
+			{
+				_logger.LogError(">>>>>" + key + ":" + response[key]);
+			}
 
 			return Json(response);
         }
