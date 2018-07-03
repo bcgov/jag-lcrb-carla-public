@@ -2676,6 +2676,56 @@
         }
       }
     },
+	"/adoxio_legalentities({adoxio_legalentityid})/{field_name}/$ref": {
+	"post": {
+	"tags": [
+          "adoxio_legalentities"
+        ],
+	"summary": "Add a reference to a specific adoxio_legalentities",
+	"operationId": "Adoxiolegalentities_AddRef",
+			"consumes": [
+	  "application/json"
+	],
+	"produces": [
+          "application/json"
+        ],
+	"parameters": [
+	  {
+		"in": "path",
+		"name": "adoxio_legalentityid",
+		"description": "key: adoxio_legalentityid",
+		"required": true,
+		"type": "string"
+	  },
+	  {
+		"in": "path",
+		"name": "field_name",
+		"description": "key: field_name",
+		"required": true,
+		"type": "string"
+	  },
+	  {
+		"in": "body",
+		"name": "body",
+		"description": "Reference",
+		"required": true,
+		"schema": {
+              "$ref": "#/definitions/odata.id"
+        }
+	  }],
+		"responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+			"schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        }
+	  }
+    },	  
     "/adoxio_legalentities({adoxio_legalentityid})": {	
       "delete": {
         "tags": [
@@ -77233,6 +77283,17 @@
         "error": {
           "$ref": "#/definitions/odata.error.main"
         }
+      }
+    },
+	"odata.id": {
+      "required": [
+        "@odata.id"
+      ],
+      "type": "object",
+      "properties": {
+        "@odata.id": {
+          "type": "string"
+        }       
       }
     },
     "odata.error.detail": {

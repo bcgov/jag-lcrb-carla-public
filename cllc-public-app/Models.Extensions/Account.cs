@@ -188,6 +188,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1Postalcode = fromVM.mailingAddresPostalCode;
             }
+			if (fromVM.businessType != null)
+			{
+				toDynamics.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), fromVM.businessType, true);
+			}
         }
 
         /// <summary>
@@ -246,7 +250,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                     // TODO - load other fields (if necessary)
                 }
 
-                accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), account.AdoxioBusinesstype).ToString();
+				if (account.AdoxioBusinesstype != null)
+				{
+					accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), account.AdoxioBusinesstype).ToString();
+				}
             }
             return accountVM;
         }
