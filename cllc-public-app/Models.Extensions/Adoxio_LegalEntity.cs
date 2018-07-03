@@ -240,6 +240,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.id = adoxio_legalentity.AdoxioLegalentityid.ToString();
                 }
 
+                if(adoxio_legalentity._adoxioAccountValue != null)
+                {
+                    result.accountId = adoxio_legalentity._adoxioAccountValue;
+                }
+
                 result.commonnonvotingshares = adoxio_legalentity.AdoxioCommonnonvotingshares;
                 result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
                 result.dateofbirth = adoxio_legalentity.AdoxioDateofbirth;

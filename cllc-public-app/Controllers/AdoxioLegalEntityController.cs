@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
@@ -24,20 +23,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     public class AdoxioLegalEntityController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
-        private readonly IDistributedCache _distributedCache;
+        private readonly IConfiguration Configuration;        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly SharePointFileManager _sharePointFileManager;
         private readonly string _encryptionKey;
         private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ILogger _logger;        
 
-		public AdoxioLegalEntityController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+		public AdoxioLegalEntityController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
-            this._system = context;
-            this._distributedCache = null; // distributedCache;
             this._sharePointFileManager = sharePointFileManager;
             this._encryptionKey = Configuration["ENCRYPTION_KEY"];
             this._httpContextAccessor = httpContextAccessor;
@@ -60,6 +55,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
 
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
@@ -84,7 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetBusinessProfileSummary()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
-            List<Adoxio_legalentity> legalEntities = null;
+            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String accountfilter = null;
             String bpFilter = null;
             String filter = null;
@@ -92,28 +89,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
 
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
             bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
             filter = accountfilter + " " + bpFilter;
 
-            legalEntities = (await _system.Adoxio_legalentities
-                        .AddQueryOption("$filter", filter)
-                        .ExecuteAsync()).ToList();
 
-            if(legalEntities.Count > 0){
-                var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].Adoxio_legalentityid.ToString()}";
+            var response = _dynamicsClient.Adoxiolegalentities.Get(filter: filter);
+            
+            if (response != null && response.Value != null)
+            {
+                legalEntities = response.Value.ToList();
+                if(legalEntities.Count > 0){
+                var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].AdoxioLegalentityid.ToString()}";
                 childFilter += " and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
-                var childEntities = (await _system.Adoxio_legalentities
-                        .AddQueryOption("$filter", childFilter)
-                        .ExecuteAsync()).ToList();
+
+                response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter);
+                var childEntities =  response.Value.ToList();
                 legalEntities.AddRange(childEntities);
             }
 
-            foreach (var legalEntity in legalEntities)
-            {
-                result.Add(legalEntity.ToViewModel());
+                foreach (var legalEntity in legalEntities)
+                {
+                    result.Add(legalEntity.ToViewModel());
+                }
             }
 
             return Json(result);
@@ -138,6 +140,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
 
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
@@ -195,6 +199,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			// get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
 
             // query the Dynamics system to get the legal entity record.
             MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
@@ -266,38 +272,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
 
-            if (accountId != null)
+
+            var accountGUID = new Guid(accountId);
+            var account = await _dynamicsClient.GetAccountById(accountGUID);                    
+            if (account != null)
             {
-                try
+                var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
+                string folderName = $"{account.Name}_{accountIdCleaned}";
+                // Get the file details list in folder
+                List<FileDetailsList> fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+                if (fileDetailsList != null)
                 {
-                    var accountGUID = new Guid(accountId);
-                    var account = await _system.Accounts.ByKey(accountid: accountGUID).GetValueAsync();
-                    
-                    var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
-                    string folderName = $"{account.Name}_{accountIdCleaned}";
-                    // Get the file details list in folder
-                    List<FileDetailsList> fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
-                    if (fileDetailsList != null)
+                    foreach (FileDetailsList fileDetails in fileDetailsList)
                     {
-                        foreach (FileDetailsList fileDetails in fileDetailsList)
-                        {
-                            ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
-                            // remove the document type text from file name
-                            fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
-                            fileSystemItemVM.size = int.Parse(fileDetails.Length);
-                            fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
-                            fileSystemItemVM.documenttype = fileDetails.DocumentType;
-                            fileSystemItemVMList.Add(fileSystemItemVM);
-                        }
+                        ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
+                        // remove the document type text from file name
+                        fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
+                        // convert size from bytes (original) to KB
+                        fileSystemItemVM.size = int.Parse(fileDetails.Length);
+                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
+                        fileSystemItemVM.documenttype = fileDetails.DocumentType;
+                        fileSystemItemVMList.Add(fileSystemItemVM);
                     }
                 }
-                catch (Exception dsqe)
-                {
-					_logger.LogError(dsqe.Message);
-                    _logger.LogError(dsqe.StackTrace);
-                    return new NotFoundResult();
-                }
+            }
+
+            else
+            {
+				_logger.LogError("Account not found.");                
+                return new NotFoundResult();
             }
 
             return Json(fileSystemItemVMList);
@@ -313,8 +319,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			// get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
 
-			if (accountId != null)
+            if (accountId != null)
             {
                 var accountIdGUID = Guid.Parse(accountId);
                 var account = await _dynamicsClient.GetAccountById(accountIdGUID);
@@ -374,27 +382,75 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new legal entity.
             MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
 
-
 			// get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-			var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
-
+            // check that the session is setup correctly.
+            userSettings.Validate();
             // copy received values to Dynamics LegalEntity
             adoxioLegalEntity.CopyValues(item);
-			adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", userAccount.Accountid);
+            try
+            {
+                adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error creating legal entity");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new Exception("Unable to create legal entity");
+            }
+
+            // setup navigation properties.
+            MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+            Guid accountId = Guid.Parse(userSettings.AccountId);
+            var userAccount = await _dynamicsClient.GetAccountById(accountId);
+            patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
+
+            // patch the record.
+            try
+            {
+                await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error patching legal entity");
+                _logger.LogError(odee.Request.RequestUri.ToString());
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
 
             // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
             MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
             if (tempLegalEntity != null)
             {
-                adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntity.AdoxioLegalentityid);
-            }
-            // create the record.
+                Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
 
-            adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
-            
+                // see https://msdn.microsoft.com/en-us/library/mt607875.aspx
+                patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
+                
+                // patch the record.
+                try
+                {
+                    await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error adding LegalEntityOwned reference to legal entity");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }                
+            }
+
             return Json(adoxioLegalEntity.ToViewModel());
         }
 
@@ -546,6 +602,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			// get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
+
             var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
 			MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
@@ -554,7 +613,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // TODO verify that this is the current user's legal entity
-                Adoxio_legalentity adoxioLegalEntity = await _system.Adoxio_legalentities.ByKey(adoxio_legalentityid).GetValueAsync();
+                var adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
 
                 // now get each of the supplied ids and send an email to them.
 
@@ -565,10 +624,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         // TODO verify that each recipient is part of the current user's user set
                         // TODO switch over to new AuthAPI framework
-                        Adoxio_legalentity recipientEntity = await _system.Adoxio_legalentities.ByKey(recipientIdGuid).GetValueAsync();
-                        string email = recipientEntity.Adoxio_email;
-                        string firstname = recipientEntity.Adoxio_firstname;
-                        string lastname = recipientEntity.Adoxio_lastname;
+                        var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
+                        string email = recipientEntity.AdoxioEmail;
+                        string firstname = recipientEntity.AdoxioFirstname;
+                        string lastname = recipientEntity.AdoxioLastname;
 
                         string confirmationEmailLink = GetConsentLink(email, recipientId, id);
                         string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
@@ -618,7 +677,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         client.Send(message);
 
 						// save the consent link and the fact that the email has been sent
-						recipientEntity.Adoxio_dateemailsent = DateTime.Now;
+						recipientEntity.AdoxioDateemailsent = DateTime.Now;
 						//await _dynamicsClient.Adoxiolegalentities.UpdateAsync(recipientEntity.Adoxio_legalentityid, recipientEntity);
                     }
                     catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
