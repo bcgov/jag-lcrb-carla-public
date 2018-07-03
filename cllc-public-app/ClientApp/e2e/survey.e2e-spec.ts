@@ -8,20 +8,17 @@ describe('App Survey Page', () => {
 
     function httpGet(theUrl)
     {
-		console.log(theUrl);
         var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-		xmlHttp.responseType = "json";
         xmlHttp.send( null );
-        return xmlHttp.response;
+        return xmlHttp.responseText;
     }
 
     beforeAll(async () => {
       // load survey json from resources      
-      surveyConfig = httpGet(browser.baseUrl + '/cannabislicensing/assets/survey-primary.json');
-	  console.log("*************************************************************************************");
-	  console.log(surveyConfig);
+      var resp_json = httpGet(browser.baseUrl + 'assets/survey-primary.json');
+      surveyConfig = JSON.parse(resp_json);
     });
 
     beforeEach(() => {
@@ -39,7 +36,7 @@ describe('App Survey Page', () => {
       await page.navigateTo();
       let heading = await page.getMainHeading();
       console.log("Survey title is: " + heading);
-      expect(heading).toEqual('What does an applicant need to apply for a cannabis licence?');	                          
+      expect(heading).toEqual('What does an applicant need to apply for a cannabis licence?');
     });
 
     it('should load the survey configuration file', async () => {
