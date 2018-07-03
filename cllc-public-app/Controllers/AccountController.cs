@@ -111,10 +111,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			{
 				// verify the currently logged in user has access to this account
                 Guid accountId = new Guid(id);
-                if (!CurrentUserHasAccessToAccount(accountId))
-                {
-                    return new NotFoundResult();
-                }
+                //TODO: This permission check needs to be revised
+                // if (!CurrentUserHasAccessToAccount(accountId))
+                // {
+                //     return new NotFoundResult();
+                // }
 
                 MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
                 if (account == null)

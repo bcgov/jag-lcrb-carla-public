@@ -7,7 +7,7 @@
   <div [ngBusy]="busy"></div>
 
   <div>
-    <form [formGroup]='corporateDetailsForm' class="form-horizontal" (ngSubmit)="save()">
+    <form [formGroup]='corporateDetailsForm' class="form-horizontal">
       <div class="">
         <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietor'].indexOf(businessType) == -1" >
           <div [ngClass]="{'has-error': this.isFieldError('bcIncorporationNumber')}">
@@ -201,7 +201,7 @@
         </section>
 
         <section>
-          <button class="btn btn-primary" type="submit">Save</button>
+          <button class="btn btn-primary" (click)="save()">Save</button>
         </section>
       </div>
     </form>
