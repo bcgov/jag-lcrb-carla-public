@@ -10,12 +10,15 @@ using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
 	[Route("api/[controller]")]
 	public class PaymentController : Controller
     {
+		private static Random random = new Random();
+
 		private readonly IConfiguration Configuration;
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -35,6 +38,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			_logger = loggerFactory.CreateLogger(typeof(PaymentController));
         }
 
+		public static string RandomOrderNum(int length)
+        {
+            const string chars = "0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
 		/// <summary>
 		/// GET a payment re-direct url for an Application
 		/// This will register an (unpaid) invoice against the application and generate an invoice number,
@@ -52,9 +62,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				return NotFound();
 			}
 
+			string ordernum = "04" + RandomOrderNum(8);
+            
 			Dictionary<string, string> redirectUrl;
 			redirectUrl = new Dictionary<string, string>();
-			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(id, "7500.00");
+			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(ordernum, id, "7500.00");
+
+			_logger.LogError(">>>>>" + redirectUrl["url"]);
 
 			return Json(redirectUrl);
 		}
@@ -92,8 +106,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="id">GUID of the Application to pay</param>
         /// <returns></returns>
-        [HttpGet("verify/{id}")]
-		public async Task<IActionResult> VerifyPaymentStatus(string id)
+		[HttpGet("verify/{ordernum}/{id}")]
+		public async Task<IActionResult> VerifyPaymentStatus(string ordernum, string id)
         {
 			ViewModels.AdoxioApplication result = await GetDynamicsApplication(id);
             if (result == null)
@@ -101,11 +115,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
-            redirectUrl["url"] = "https://google.ca?id=" + id;
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id);
 
-            return Json(redirectUrl);
+			foreach (var key in response.Keys)
+			{
+				_logger.LogError(">>>>>" + key + ":" + response[key]);
+			}
+
+			return Json(response);
         }
 
 		private async Task<ViewModels.AdoxioApplication> GetDynamicsApplication(string id)
