@@ -27,7 +27,8 @@ export class PaymentConfirmationComponent {
     	// TODO get slug from URL parameters and find associated Application
         window.alert("trnId=" + this.orderNum + ", SessionKey=" + this.applicationId);
 
-    	this.verify_payment();
+    	var str = this.verify_payment();
+        window.alert("response=" + str);
 
 	    setTimeout(function () {
 	    }, 5000);
@@ -37,7 +38,7 @@ export class PaymentConfirmationComponent {
 
   verify_payment() 
   {
-    this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
+    this.paymentDataService.verifyPaymentSubmission(this.orderNum, this.applicationId).subscribe(
       res => {
         //console.log("applicationVM: ", res.json());
         var jsonUrl = res.json();
