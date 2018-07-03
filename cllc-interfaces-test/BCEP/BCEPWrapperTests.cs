@@ -69,7 +69,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 			var validation_response = bcep.ProcessPaymentResponse(test_order, test_id).Result;
 
 			Assert.IsNotNull(validation_response);
-			Assert.AreEqual("NotFound:Not Found", validation_response);
+			Assert.IsTrue(validation_response.ContainsKey("query_url"));
+			Assert.IsTrue(validation_response.ContainsKey("response_code"));
+			Assert.IsTrue(validation_response.ContainsKey("response_phrase"));
+
+			Assert.AreEqual("NotFound", validation_response["response_code"]);
+			Assert.AreEqual("Not Found", validation_response["response_phrase"]);
         }
 
     }
