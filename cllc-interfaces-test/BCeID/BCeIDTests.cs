@@ -10,6 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private static string test_guid  = "44437132CF6B4E919FE6FBFC5594FC44";
         private static string test_guid2 = "4443-7132-cf6b-4e91-9fe6-fbfc-5594-fc44";
         private static string bad_guid   = "44437132CF6ABCD19FE6FBFC55949999";
+		private static string tester_guid = "669D7E64FBBA472FBC905BEDC4FB43A6";
 
         [TestMethod]
         public void TestSuccessfullBCeIDBusinessCal()
@@ -20,7 +21,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 			var svc_passwd = Environment.GetEnvironmentVariable("BCEID_SERVICE_PASSWD");
             
 			var bq = new BCeIDBusinessQuery(svc_svcid, svc_userid, svc_passwd, svc_url);
-            var business = bq.ProcessBusinessQuery(test_guid).Result;
+			var business = bq.ProcessBusinessQuery(test_guid).Result;
+            // this is a test guid, will have different name and attrs
+			//var business = bq.ProcessBusinessQuery(tester_guid).Result;
 			Assert.IsNotNull(business);
 
 			Assert.AreEqual("ian.costanzo@quartech.com", business.contactEmail);
