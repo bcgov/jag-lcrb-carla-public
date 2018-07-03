@@ -35,7 +35,7 @@ export BCEID_SERVICE_USER={SVCACCT}
 export BCEID_SERVICE_PASSWD={PASSWD}
 export BCEID_SERVICE_SVCID={SVCID}
 
-export BCEP_SERVICE_URL=https://google.ca/
+export BCEP_SERVICE_URL=https://google.ca
 export BCEP_MERCHANT_ID={MERCHID}
 export BCEP_HASH_KEY={HASHKEY}
 export BCEP_CONF_PATH=/payment-confirmation
