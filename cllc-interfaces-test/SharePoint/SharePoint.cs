@@ -32,58 +32,17 @@ namespace SharePoint.Tests
                 .Build();
 
             serverAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
+            string odataUri = Configuration["SHAREPOINT_ODATA_URI"];
             string webname = Configuration["SHAREPOINT_WEBNAME"];
             string aadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
             string clientId = Configuration["SHAREPOINT_CLIENT_ID"];
             string certFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string certPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            sharePointFileManager = new SharePointFileManager(serverAppIdUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null);
+            sharePointFileManager = new SharePointFileManager(serverAppIdUri, odataUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null);
 
         }
 
-        /// <summary>
-        /// Test GetFiles
-        /// </summary>
-        [Fact]
-        public async void GetFilesTest()
-        {
-            var files = await sharePointFileManager.GetFiles();
-            Assert.True(files != null);
-        }
-
-        /// <summary>
-        /// Test GetFile
-        /// </summary>
-        [Fact]
-        public async void GetFileTest()
-        {
-            var files = await sharePointFileManager.GetFiles();
-            foreach (var file in files)
-            {
-                var temp = sharePointFileManager.GetFile(file.Url);
-                Assert.True(temp != null);
-            }
-
-            Assert.True(files != null);
-        }
-
-
-        /// <summary>
-        /// Test GetFile
-        /// </summary>
-        [Fact]
-        public async void DownloadFileTest()
-        {
-            var files = await sharePointFileManager.GetFiles();
-            foreach (var file in files)
-            {
-                var temp = sharePointFileManager.DownloadFile(file.Url);
-                Assert.True(temp != null);
-            }
-
-            Assert.True(files != null);
-        }
 
         [Fact]
         public async void UploadRemoveFilesTest()
