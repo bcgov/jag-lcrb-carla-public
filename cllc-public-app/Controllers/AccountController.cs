@@ -85,8 +85,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // query the BCeID API to get the business record.
-			// var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-			var business = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
+			var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			//var business = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
 
             if (business == null)
             {
@@ -153,8 +153,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				throw new Exception("Oops no ContactSiteminderGuid exernal id");
 
             // get BCeID record for the current user
-			var bceidBusiness = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
-			//var bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			//var bceidBusiness = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
+			var bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             // get the contact record.
             MicrosoftDynamicsCRMcontact userContact = null;
@@ -180,11 +180,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     userContact.Lastname = bceidBusiness.individualSurname;
                     userContact.Emailaddress1 = bceidBusiness.contactEmail;
                     userContact.Telephone1 = bceidBusiness.contactPhone;
-                    userContact.Address1City = bceidBusiness.addressCity;
-                    userContact.Address1Postalcode = bceidBusiness.addressPostal;
-                    userContact.Address1Line1 = bceidBusiness.addressLine1;
-                    userContact.Address1Line2 = bceidBusiness.addressLine2;
-                    userContact.Address1Postalcode = bceidBusiness.addressPostal;
 				}
 				else
 				{
@@ -206,6 +201,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 account.Primarycontactid = userContact;
                 account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Applicant;
+
+				if (bceidBusiness != null)
+				{
+					account.Emailaddress1 = bceidBusiness.contactEmail;
+					account.Telephone1 = bceidBusiness.contactPhone;
+					account.Address1City = bceidBusiness.addressCity;
+					account.Address1Postalcode = bceidBusiness.addressPostal;
+					account.Address1Line1 = bceidBusiness.addressLine1;
+					account.Address1Line2 = bceidBusiness.addressLine2;
+					account.Address1Postalcode = bceidBusiness.addressPostal;
+				}
 
                 // sets Business type with numerical value found in Adoxio_applicanttypecodes
                 // using account.businessType which is set in bceid-confirmation.component.ts
@@ -254,7 +260,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //https://msdn.microsoft.com/en-us/library/mt607875.aspx
             MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
             patchUserContact.ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-            await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
+            try
+            {
+                await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error binding contact to account");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
+            
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
