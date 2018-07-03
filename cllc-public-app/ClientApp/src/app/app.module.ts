@@ -99,6 +99,14 @@ import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key
 import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { ShareholdersPublicComponent } from './business-profile/tabs/shareholders-public/shareholders-public.component';
 import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholders-ucl-llc/shareholders-ucl-llc.component';
+import { LicenseApplicationComponent } from './license-application/license-application.component';
+import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
+import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
+import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
+import { FloorPlanComponent } from './license-application/tabs/floor-plan/floor-plan.component';
+import { SiteMapComponent } from './license-application/tabs/site-map/site-map.component';
+import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
+import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
 @NgModule({
   declarations: [
@@ -143,7 +151,15 @@ import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholder
     KeyPersonnelComponent,
     ConnectionToProducersComponent,
     ShareholdersPublicComponent,
-    ShareholdersUclLlcComponent
+    ShareholdersUclLlcComponent,
+    LicenseApplicationComponent,
+    ContactDetailsComponent,
+    PropertyDetailsComponent,
+    StoreInformationComponent,
+    FloorPlanComponent,
+    SiteMapComponent,
+    DeclarationComponent,
+    SubmitPayComponent
   ],
   imports: [
     BrowserModule,

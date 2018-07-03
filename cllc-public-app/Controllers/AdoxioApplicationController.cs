@@ -126,6 +126,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
 			UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);			
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+            
+            // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
 			adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI ("adoxio_applications", userSettings.AccountId);
 

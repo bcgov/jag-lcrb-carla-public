@@ -1,0 +1,69 @@
+<div class="col-md-12" *ngIf="componentLoaded">
+  <h1>
+    License Application {{applicationId}}</h1>
+  <h2 *ngIf="currentUser">{{ currentUser.businessname }}</h2>
+    <div class="col-sm-3 col-md-2" style="padding-left: 0">
+      <!-- required for floating -->
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs">
+        <li *ngIf="tabStructure.indexOf('contact-details') !== -1" [ngClass]="{'active': view_tab == 'contact-details'}">
+          <a (click)="changeTab('contact-details')">Contact Details</a>
+        </li>
+        <li *ngIf="tabStructure.indexOf('property-details') !== -1" [ngClass]="{'active': view_tab == 'property-details'}">
+          <a (click)="changeTab('property-details')">Property Details</a>
+        </li>
+        <li *ngIf="tabStructure.indexOf('store-information') !== -1" [ngClass]="{'active': view_tab == 'store-information'}">
+          <a (click)="changeTab('store-information')">Store Information</a>
+        </li>
+        <li *ngIf="tabStructure.indexOf('floor-plan') !== -1" [ngClass]="{'active': view_tab == 'floor-plan'}">
+          <a (click)="changeTab('floor-plan')">Floor Plan</a>
+        </li>
+        <li *ngIf="tabStructure.indexOf('site-map') !== -1" [ngClass]="{'active': view_tab == 'site-map'}">
+          <a (click)="changeTab('site-map')">Site Map</a>
+        </li>
+        <li *ngIf="tabStructure.indexOf('declaration') !== -1" [ngClass]="{'active': view_tab == 'declaration'}">
+          <a (click)="changeTab('declaration')">Declaration</a>
+        </li>
+        <li *ngIf="tabStructure.indexOf('submit-pay') !== -1" [ngClass]="{'active': view_tab == 'submit-pay'}">
+          <a (click)="changeTab('submit-pay')">Submit & Pay</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9 col-sm-9">
+      <!-- Tab panes -->
+      <div [hidden]="view_tab != 'contact-details'">
+        <app-contact-details></app-contact-details>
+      </div>
+      <div [hidden]="view_tab != 'property-details'">
+        <app-property-details></app-property-details>
+      </div>
+      <div [hidden]="view_tab != 'store-information'">
+        <app-store-information></app-store-information>
+      </div>
+      <div [hidden]="view_tab != 'floor-plan'">
+        <app-floor-plan></app-floor-plan>
+      </div>
+      <div [hidden]="view_tab != 'site-map'">
+        <app-site-map></app-site-map>
+      </div>
+      <div [hidden]="view_tab != 'declaration'">
+        <app-declaration></app-declaration>
+      </div>
+      <div [hidden]="view_tab != 'submit-pay'">
+        <app-submit-pay></app-submit-pay>
+      </div>
+      <p>&nbsp;</p>
+      <div class="col-md-10 row">
+        <a class="globalButton" *ngIf="view_tab != 'contact-details'" class="btn btn-secondary" tabindex="1" (click)="back()">
+          <strong>Back</strong>
+          <br>
+        </a>
+        &nbsp;
+        <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
+          <strong *ngIf="view_tab != 'contact-details'">Next</strong>
+          <strong *ngIf="view_tab == 'contact-details'">Next</strong>
+          <br>
+        </a>
+      </div>
+    </div>
+</div>
