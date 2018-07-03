@@ -269,7 +269,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 						}
                         isDeveloperLogin = true;
 
-						_logger.LogError("Got user from dev cookie = " + userId + ", company = " + devCompanyId);
+						_logger.LogDebug("Got user from dev cookie = " + userId + ", company = " + devCompanyId);
 					} 
 					else 
 					{
@@ -286,7 +286,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 							userId = temp;
 							isBCSCDeveloperLogin = true;
 
-							_logger.LogError("Got user from dev cookie = " + userId);
+							_logger.LogDebug("Got user from dev cookie = " + userId);
 						}
 					}
                 }
@@ -298,12 +298,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     _logger.LogInformation("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
-                    _logger.LogError("UserSettings found: " + userSettings.GetJson());
+                    _logger.LogDebug("UserSettings found: " + userSettings.GetJson());
                 }
                 catch
                 {
                     //do nothing
-                    _logger.LogError("No UserSettings found");
+                    _logger.LogDebug("No UserSettings found");
                 }
 
                 // is user authenticated - if so we're done
@@ -311,7 +311,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
-                    _logger.LogError("User already authenticated with active session: " + userSettings.UserId);
+                    _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
@@ -331,13 +331,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
-                _logger.LogError("Parsing the HTTP headers for SiteMinder authentication credential");
+                _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
 
                 // At this point userID would only be set if we are logging in through as a DEV user
 
                 if (string.IsNullOrEmpty(userId))
                 {
-                    _logger.LogError("Getting user data from headers");
+                    _logger.LogDebug("Getting user data from headers");
 
                     userId = context.Request.Headers[options.SiteMinderUserNameKey];
                     if (string.IsNullOrEmpty(userId))
@@ -393,9 +393,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // Previously the code would do a database lookup here.  However there is no backing database for the users table now,
                 // so we just do a Dynamics lookup on the siteMinderGuid.
 
-                _logger.LogError("Loading user external id = " + siteMinderGuid);
+                _logger.LogDebug("Loading user external id = " + siteMinderGuid);
                 userSettings.AuthenticatedUser = await _system.LoadUser(_distributedCache, siteMinderGuid);
-                _logger.LogError("After getting authenticated user = " + userSettings.GetJson());
+                _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
@@ -414,8 +414,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Create authenticated user
                 // **************************************************
-                _logger.LogError("Authentication successful: " + userId);
-                _logger.LogError("Setting identity and creating session for: " + userId);
+                _logger.LogDebug("Authentication successful: " + userId);
+                _logger.LogDebug("Setting identity and creating session for: " + userId);
 
                 // create session info for the current user
                 userSettings.UserId = userId;
@@ -425,7 +425,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // set other session info
                 userSettings.SiteMinderGuid = siteMinderGuid;
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
-                _logger.LogError("Before getting contact and account ids = " + userSettings.GetJson());
+                _logger.LogDebug("Before getting contact and account ids = " + userSettings.GetJson());
 
 				if (userSettings.AuthenticatedUser != null && siteMinderBusinessGuid != null)
                 {
