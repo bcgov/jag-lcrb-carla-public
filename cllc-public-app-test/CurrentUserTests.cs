@@ -25,7 +25,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task DefaultDevelopmentUserIsValid()
         {
-			await LoginAsDefault();
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
@@ -42,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.Account account = await GetAccountForCurrentUser();
 			Assert.NotNull(account);
 
-			await Logout();
+            await LogoutAndCleanupTestUser(strId);
         }
         
 		[Fact]

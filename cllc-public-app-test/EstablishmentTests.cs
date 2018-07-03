@@ -45,7 +45,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             string initialName = "InitialName";
             string changedName = "ChangedName";
 
-            await LoginAsDefault();
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -123,7 +124,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-            await Logout();
+            await LogoutAndCleanupTestUser(strId);
 
         }
     }

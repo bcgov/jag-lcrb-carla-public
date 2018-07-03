@@ -40,6 +40,8 @@ You can use this tool to convert from Openapi V3 to V2.  Autorest currently requ
 
 On Windows 10 this file is located in `C:\users\<username>\AppData\Roaming\npm\autorest.cmd`
 
+If you need to patch the Autorest modeler, for example if the modeler is not able to parse a Microsoft Dynamics API with empty base classes, it will be located in `C:\users\<username>\.autorest\@microsoft.azure_autorest.modeler@2.3.55\node_modules\@microsoft.azure\autorest.modeler\src\bin\netcoreapp2.0` (substitute 2.3.55 for the current version of the modeler)
+
 ### Process ###
 
 1. You will need lots of RAM for this operation.  Close all open programs including Visual Studio, Chrome and Docker.  Greater than 9 GB free is required.
