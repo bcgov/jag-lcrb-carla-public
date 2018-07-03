@@ -2712,22 +2712,7 @@
 		"schema": {
               "$ref": "#/definitions/odata.id"
         }
-	  },
-	  {
-            "in": "header",
-            "name": "OData-Version",
-			"default": "4.0",
-            "description": "OData-Version",
-            "type": "string"
-      },
-	  {
-            "in": "header",
-            "name": "OData-MaxVersion",
-			"default": "4.0",
-            "description": "OData-MaxVersion",
-            "type": "string"
-      }
-		  ],
+	  }],
 		"responses": {
           "204": {
             "description": "Success"
@@ -2934,22 +2919,7 @@
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
             }
-          },
-		  	  {
-            "in": "header",
-            "name": "OData-Version",
-			"default": "4.0",
-            "description": "OData-Version",
-            "type": "string"
-			},
-			{
-            "in": "header",
-            "name": "OData-MaxVersion",
-			"default": "4.0",
-            "description": "OData-MaxVersion",
-            "type": "string"
-			}
-
+          }
         ],
         "responses": {
           "204": {
