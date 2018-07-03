@@ -9,9 +9,8 @@ import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver }   from './services/survey-resolver.service';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
-import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
+import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -43,12 +42,8 @@ const routes: Routes = [
     component: NewsletterConfirmationComponent
   },
   {
-    path: 'applications-list',
-    component: ApplicationsListComponent
-  },
-  {
-    path: 'lic-app-summary',
-    component: LicenseApplicationSummaryComponent
+    path: 'license-application/:applicationId',
+    component: LicenseApplicationComponent
   },
 
   {
