@@ -235,13 +235,14 @@ namespace Gov.Lclb.Cllb.Public
             // add SharePoint.
 
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
+            string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
             string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
             string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
             string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
            
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword));
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword));
 
             // add BCeID Web Services
 
