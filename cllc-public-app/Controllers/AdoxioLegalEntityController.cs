@@ -276,7 +276,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
                 string folderName = $"{account.Name}_{accountIdCleaned}";
                 // Get the file details list in folder
-                List<FileDetailsList> fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+                List<FileDetailsList> fileDetailsList = null;
+                try
+                {
+                    fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+                }
+                catch (SharePointRestException spre)
+                {
+                    _logger.LogError("Error getting SharePoint File List");
+                    _logger.LogError("Request URI:");
+                    _logger.LogError(spre.Request.RequestUri.ToString());
+                    _logger.LogError("Response:");
+                    _logger.LogError(spre.Response.Content);
+                    throw new Exception("Unable to get Sharepoint File List.");
+                }
+                
                 if (fileDetailsList != null)
                 {
                     foreach (FileDetailsList fileDetails in fileDetailsList)
