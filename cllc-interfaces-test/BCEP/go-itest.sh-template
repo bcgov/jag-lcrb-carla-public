@@ -3,6 +3,9 @@
 export BCREG_SERVICE_ACCT=cannabis
 export BCREG_SERVICE_PASSWD={PASSWD}
 
+export BASE_URI=http://localhost:5000
+export BASE_PATH=/cannabislicensing
+
 export SHAREPOINT_SERVER_APPID_URI=https://server.sharepoint.com/
 export SHAREPOINT_WEBNAME=cannabisdev
 export SHAREPOINT_AAD_TENANTID=tenant.onmicrosoft.com
@@ -14,6 +17,11 @@ export BCEID_SERVICE_URL=https://gws1.development.bceid.ca/webservices/Client/V1
 export BCEID_SERVICE_USER={SVCACCT}
 export BCEID_SERVICE_PASSWD={PASSWD}
 export BCEID_SERVICE_SVCID={SVCID}
+
+export BCEP_SERVICE_URL=https://google.ca/
+export BCEP_MERCHANT_ID={MERCHID}
+export BCEP_HASH_KEY={HASHKEY}
+export BCEP_CONF_PATH=/payment-confirmation
 
 # e.g. dotnet run, dotnet test, etc.
 dotnet test
