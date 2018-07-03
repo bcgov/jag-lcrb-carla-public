@@ -143,15 +143,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             if ((int)_statusCode != 200)
             {
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 
