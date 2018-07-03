@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
-using Microsoft.Rest;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -127,42 +126,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string siteName, string folderName, string documentType)
         {
             string serverRelativeUrl = $"/{WebName}/{siteName}/{folderName}";
-            string _responseContent = null; 
-            HttpRequestMessage _httpRequest =
+            HttpRequestMessage endpointRequest =
                             new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "/web/getfolderbyserverrelativeurl('" + serverRelativeUrl + "')/files");
-            // make the request.
-            var _httpResponse = await client.SendAsync(_httpRequest);
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
 
-            if ((int)_statusCode != 200)
-            {
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
-            else
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync();
-            }
-            
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
             // parse the response
-            JObject responseObject = JObject.Parse(_responseContent);
+            JObject responseObject = JObject.Parse(jsonString);
             // get JSON response objects into a list
             List<JToken> responseResults = responseObject["d"]["results"].Children().ToList();
             // create file details list to add from response
