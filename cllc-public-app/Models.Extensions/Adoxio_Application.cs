@@ -17,6 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.AdoxioApplication from)
         {
+            //TODO set all existing fields in Dynamics
             to.AdoxioName = from.name; 
             to.AdoxioEstablishmentpropsedname = from.establishmentName;
             //to.Adoxio_jobnumber = from.jobNumber;            
