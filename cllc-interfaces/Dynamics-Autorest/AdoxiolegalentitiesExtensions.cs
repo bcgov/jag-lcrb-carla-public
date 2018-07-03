@@ -130,6 +130,49 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
+            /// Add a reference to a specific adoxio_legalentities
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioLegalentityid'>
+            /// key: adoxio_legalentityid
+            /// </param>
+            /// <param name='fieldName'>
+            /// key: field_name
+            /// </param>
+            /// <param name='body'>
+            /// Reference
+            /// </param>
+            public static void AddRef(this IAdoxiolegalentities operations, string adoxioLegalentityid, string fieldName, Odataid body)
+            {
+                operations.AddRefAsync(adoxioLegalentityid, fieldName, body).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Add a reference to a specific adoxio_legalentities
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioLegalentityid'>
+            /// key: adoxio_legalentityid
+            /// </param>
+            /// <param name='fieldName'>
+            /// key: field_name
+            /// </param>
+            /// <param name='body'>
+            /// Reference
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task AddRefAsync(this IAdoxiolegalentities operations, string adoxioLegalentityid, string fieldName, Odataid body, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.AddRefWithHttpMessagesAsync(adoxioLegalentityid, fieldName, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Delete entity from adoxio_legalentities
             /// </summary>
             /// <param name='operations'>

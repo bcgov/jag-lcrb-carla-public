@@ -40,6 +40,26 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         public string ContactId { get; set; }
         public string AccountId { get; set; }
 
+        /// <summary>
+        /// Check the UserSettings object and throw an exception if it is invalid.
+        /// </summary>
+        public void Validate()
+        {
+            if (AccountId == null && ContactId == null)
+            {
+                throw new Exception("UserSettings Validation Error:  AccountId is null and ContactID is null");
+            }
+
+            if (AccountId == null)
+            {
+                throw new Exception("UserSettings Validation Error:  AccountId is null");
+            }
+
+            if (ContactId == null)
+            {
+                throw new Exception("UserSettings Validation Error:  ContactId is null");
+            }
+        }
 
         /// <summary>
         /// Serializes UserSettings as a Json String
