@@ -47,7 +47,7 @@ namespace SharePoint.Tests
         [Fact]
         public async void UploadRemoveFilesTest()
         {
-            Random rnd = new Random();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string name = "test-name" + rnd.Next() +".txt";
             string testFolder = "test-folder" + rnd.Next();
             string listTitle = "Shared Documents";
@@ -76,7 +76,7 @@ namespace SharePoint.Tests
         {
             // set file and folder settings
 
-            Random rnd = new Random();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string documentType = "Document Type";
             string fileName = "test-file-name" + rnd.Next() + ".txt" + "__" + documentType;
             string folderName = "test-folder-name" + rnd.Next();
@@ -122,7 +122,7 @@ namespace SharePoint.Tests
         [Fact]
         public async void InvalidFolderDoesNotExist()
         {
-            Random rnd = new Random();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string documentLocation = "Account";
             string folderName = "Test Folder" + rnd.Next() + "---" + rnd.Next();
 
@@ -139,22 +139,21 @@ namespace SharePoint.Tests
         [Fact]
         public async void CreateFolderTest()
         {
-            Random rnd = new Random();
-            string documentLocation = "Account";
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test Folder" + rnd.Next();
 
-            SP.Folder folder = await sharePointFileManager.CreateFolder(documentLocation, folderName);
+            SP.Folder folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
 
             Assert.True(folder != null);
 
-            bool exists = await sharePointFileManager.FolderExists(documentLocation, folderName);
+            bool exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentListTitle, folderName);
 
             Assert.True(exists);
 
 
-            await sharePointFileManager.DeleteFolder(documentLocation, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
 
-            exists = await sharePointFileManager.FolderExists(documentLocation, folderName);
+            exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentListTitle, folderName);
 
             Assert.False(exists);
         }
@@ -162,7 +161,7 @@ namespace SharePoint.Tests
         [Fact]
         public async void GetFilesInEmptyFolderTest()
         {
-            Random rnd = new Random();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
@@ -177,7 +176,7 @@ namespace SharePoint.Tests
         [Fact]
         public async void GetFilesInPopulatedFolderTest()
         {
-            Random rnd = new Random();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
