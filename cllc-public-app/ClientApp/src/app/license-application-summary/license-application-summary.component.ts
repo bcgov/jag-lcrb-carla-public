@@ -14,7 +14,7 @@ import { AdoxioLicense } from '../models/adoxio-license.model';
   styleUrls: ['./license-application-summary.component.css']
 })
 export class LicenseApplicationSummaryComponent implements OnInit {
-  displayedColumns = ['establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
+  displayedColumns = ['name', 'establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -44,6 +44,8 @@ export class LicenseApplicationSummaryComponent implements OnInit {
 
       adoxioApplications.forEach((entry) => {
         let licAppSum = new LicenseApplicationSummary();
+        licAppSum.id = entry.id;
+        licAppSum.name = entry.name;
         licAppSum.establishmentName = entry.establishmentName;
         licAppSum.establishmentAddress = entry.establishmentAddress;
         licAppSum.licenseType = entry.licenseType;
@@ -53,6 +55,8 @@ export class LicenseApplicationSummaryComponent implements OnInit {
 
       adoxioLicenses.forEach((entry) => {
         let licAppSum = new LicenseApplicationSummary();
+        licAppSum.id = entry.id;
+        licAppSum.name = entry.name;
         licAppSum.establishmentName = entry.establishmentName;
         licAppSum.establishmentAddress = entry.establishmentAddress;
         licAppSum.licenseType = entry.licenseType;

@@ -59,6 +59,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Owner
     }
 
+    public enum GeneralYesNo
+    {
+        No = 0,
+        Yes = 1
+    }
+
+
     public class AdoxioLegalEntity
     {
         // string form of the guid.

@@ -12,9 +12,7 @@ export class AdoxioApplicationDataService {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("api/adoxioapplication/current", {
-       headers: headers
-     })
+     return this.http.get("api/adoxioapplication/current", { headers: headers })
        .toPromise()
        .then((res: Response) => {
          let data = res.json();
@@ -22,6 +20,7 @@ export class AdoxioApplicationDataService {
 
          data.forEach((entry) => {
            let adoxioApplication = new AdoxioApplication();
+           adoxioApplication.id = entry.id;
            adoxioApplication.name = entry.name;
            adoxioApplication.applyingPerson = entry.applyingPerson;
            adoxioApplication.jobNumber = entry.jobNumber;
