@@ -18,7 +18,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
             string service = "payment";
-            string id = "SomeRandomId";
+			string id = "SomeRandomId";
+			string ordernum = "SomeRandomO";
 
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
@@ -99,8 +100,14 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string json = await response.Content.ReadAsStringAsync();
 			Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 			Assert.True(values.ContainsKey("url"));
-			string actual_url = "https://google.ca/?merchant_id=123456&trnType=P&trnOrderNumber=" + id + 
-				"&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&trnAmount=7500.00&hashValue=";
+
+			string ordernum = values["url"].Substring(values["url"].IndexOf("trnOrderNumber=")+15, 10);
+			Assert.Equal(10, ordernum.Length);
+
+			string actual_url = "https://google.ca/?merchant_id=123456&trnType=P&trnOrderNumber=" + ordernum + 
+				"&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&ref3=" + id +
+				"&trnAmount=7500.00&hashExpiry=";
+			Assert.True(values["url"].Length > actual_url.Length);
 			Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
 
             // delete application
