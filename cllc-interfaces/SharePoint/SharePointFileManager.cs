@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // create the HttpClient that is used for our direct REST calls.
             client = new HttpClient();
-
+            
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             client.DefaultRequestHeaders.Add("Authorization", authorization);
 
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
         {
-            string serverRelativeUrl = $"{WebName}/"+ Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/"+ Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
             string _responseContent = null; 
             HttpRequestMessage _httpRequest =
                             new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/files");
@@ -220,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -251,7 +251,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<SP.Folder> GetFolder(string listTitle, string folderName)
         {
             SP.Folder result = null;
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -333,7 +333,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='" 
@@ -390,7 +390,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName) + "/" + Uri.EscapeDataString(fileName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName) + "/" + Uri.EscapeUriString(fileName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");
