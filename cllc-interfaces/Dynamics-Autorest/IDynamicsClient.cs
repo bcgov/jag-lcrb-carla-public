@@ -53,6 +53,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAdoxiolegalentities Adoxiolegalentities { get; }
 
         /// <summary>
+        /// Gets the IAdoxioLicencetypes.
+        /// </summary>
+        IAdoxioLicencetypes AdoxioLicencetypes { get; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         IContacts Contacts { get; }
