@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-site-map',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./site-map.component.scss']
 })
 export class SiteMapComponent implements OnInit {
+
+  @Input('accountId') accountId: string;
+  @Input('applicationId') applicationId: string;
 
   constructor() { }
 
