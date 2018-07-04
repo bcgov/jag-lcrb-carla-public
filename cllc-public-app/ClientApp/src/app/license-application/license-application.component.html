@@ -1,8 +1,9 @@
 <div class="col-md-12" *ngIf="componentLoaded">
-  <h1>
-    License Application {{applicationId}}</h1>
+
+  <h1>License Application: <strong>{{applicationName}}</strong></h1>
   <h2 *ngIf="currentUser">{{ currentUser.businessname }}</h2>
-    <div class="col-sm-3 col-md-2" style="padding-left: 0">
+
+  <div class="col-sm-3 col-md-2" style="padding-left: 0">
       <!-- required for floating -->
       <!-- Nav tabs -->
       <ul class="nav nav-tabs">
