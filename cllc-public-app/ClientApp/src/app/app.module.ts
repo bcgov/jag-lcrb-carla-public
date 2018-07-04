@@ -101,8 +101,6 @@ import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key
 import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { ShareholdersPublicComponent } from './business-profile/tabs/shareholders-public/shareholders-public.component';
 import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholders-ucl-llc/shareholders-ucl-llc.component';
-import { StoreModule } from '@ngrx/store';
-import { appStateReducer } from './app-state/reducers/app-state';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
@@ -213,7 +211,6 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     MatTooltipModule,
     FileDropModule,
     ToastModule.forRoot(),
-    StoreModule.forRoot({ appState: appStateReducer })
   ],
   exports: [
     BrowserModule,

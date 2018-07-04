@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 export class DirectorsAndOfficersComponent implements OnInit {
 
   @Input() accountId: string;
+  @Input() parentLegalEntityId: string;
   @Input() businessType: string;
 
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
@@ -31,7 +32,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   getDirectorsAndOfficers() {
-    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("director-officer")
+    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "directors-officers-management")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition('director-officer'): ", data);
         //console.log("parameter: accountId = ", this.accountId)
@@ -41,14 +42,18 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   formDataToModelData(formData: any): AdoxioLegalEntity {
     let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
-    adoxioLegalEntity.position = formData.position;
+    adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
+    // adoxioLegalEntity.position = formData.position;
     adoxioLegalEntity.isindividual = true;
     adoxioLegalEntity.firstname = formData.firstName;
     adoxioLegalEntity.lastname = formData.lastName;
     adoxioLegalEntity.name = formData.firstName + " " + formData.lastName;
     adoxioLegalEntity.email = formData.email;
     adoxioLegalEntity.dateofappointment = formData.dateOfAppointment; //adoxio_dateofappointment
-    adoxioLegalEntity.legalentitytype = "PrivateCorporation";
+    // adoxioLegalEntity.legalentitytype = "PrivateCorporation";
+    adoxioLegalEntity.isOfficer = formData.isOfficer;
+    adoxioLegalEntity.isDirector = formData.isDirector;
+    adoxioLegalEntity.isSeniorManagement = formData.isSeniorManagement;
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
       adoxioLegalEntity.account = new DynamicsAccount();
@@ -112,7 +117,9 @@ export class DirectorAndOfficerPersonDialog {
 
   constructor(private frmbuilder: FormBuilder, private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialog>) {
     this.directorOfficerForm = frmbuilder.group({
-      position: ['', Validators.required],
+      isDirector: [''],
+      isOfficer: [''],
+      isSeniorManagement: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.email],

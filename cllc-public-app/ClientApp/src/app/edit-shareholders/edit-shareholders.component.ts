@@ -8,9 +8,8 @@ import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { State } from '../app-state/reducers/app-state';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -21,6 +20,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class EditShareholdersComponent implements OnInit {
 
   @Input() accountId: string;
+  @Input() parentLegalEntityId: string;
   @Input() businessType: string;
 
   shareholderForm: FormGroup;
@@ -30,16 +30,10 @@ export class EditShareholdersComponent implements OnInit {
   user: User;
   busy: Promise<any>;
   busyObsv: Subscription;
-  legalEntityId: string;
 
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, private store: Store<State>,
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, private route: ActivatedRoute,
     public dialog: MatDialog, private userDataService: UserDataService, public snackBar: MatSnackBar) {
-    store.select(state => state.appState.currentLegalEntityId)
-      .filter(id => !!id)
-      .subscribe(id => {
-        this.legalEntityId = id;
-      });
   }
 
   ngOnInit() {
@@ -50,7 +44,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   getShareholders() {
-    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition("shareholder")
+    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "shareholders")
       .then((data) => {
         this.dataSource.data = data;
       });
@@ -58,7 +52,7 @@ export class EditShareholdersComponent implements OnInit {
 
   formDataToModelData(formData: any, shareholderType: string): AdoxioLegalEntity {
     let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
-    adoxioLegalEntity.parentLegalEntityId = this.legalEntityId;
+    adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     if (shareholderType == "Person") {
       adoxioLegalEntity.isindividual = true;
       adoxioLegalEntity.firstname = formData.firstName;
@@ -74,7 +68,7 @@ export class EditShareholdersComponent implements OnInit {
     adoxioLegalEntity.commonnonvotingshares = formData.numberOfNonVotingShares;
     adoxioLegalEntity.commonvotingshares = formData.numberOfVotingShares;
     ////adoxioLegalEntity.dateIssued = formData.dateIssued;
-    adoxioLegalEntity.position = "Shareholder";
+    adoxioLegalEntity.isShareholder = true;
     //adoxioLegalEntity.relatedentities = [];
     // the accountId is received as parameter from the business profile
     if (this.accountId) {

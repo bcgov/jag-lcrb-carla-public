@@ -64,34 +64,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_legalentitytype = (int?)from.legalentitytype;
             to.Adoxio_middlename = from.middlename;
             to.Adoxio_name = from.name;
-            to.Adoxio_position = (int?)from.position;
 			to.Adoxio_ispartner = false;
             to.Adoxio_isshareholder = false;
             to.Adoxio_istrustee = false;
 			to.Adoxio_isdirector = false;
 			to.Adoxio_isofficer = false;
 			to.Adoxio_isowner = false;
-            switch ((int?)from.position)
-            {
-                case 0:
-					to.Adoxio_ispartner = true;
-                    break;
-                case 1:
-					to.Adoxio_isshareholder = true;
-                    break;
-                case 2:
-					to.Adoxio_istrustee = true;
-                    break;
-                case 3:
-					to.Adoxio_isdirector = true;
-                    break;
-                case 4:
-					to.Adoxio_isofficer = true;
-                    break;
-                case 5:
-					to.Adoxio_isowner = true;
-                    break;
-            }
             to.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -128,34 +106,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLegalentitytype = (int?)from.legalentitytype;
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioName = from.name;
-            to.AdoxioPosition = (int?)from.position;
 			to.AdoxioIspartner = false;
 			to.AdoxioIsshareholder = false;
 			to.AdoxioIstrustee = false;
-			to.AdoxioIsdirector = false;
-			to.AdoxioIsofficer = false;
+			to.AdoxioIsdirector = from.isDirector;
+			to.AdoxioIsofficer = from.isOfficer;
+            to.AdoxioIsseniormanagement = from.isSenoirManagement;
 			to.AdoxioIsowner = false;
-			switch ((int?)from.position)
-			{
-				case 0:
-                    to.AdoxioIspartner = true;
-                    break;
-				case 1:
-                    to.AdoxioIsshareholder = true;
-                    break;
-				case 2:
-                    to.AdoxioIstrustee = true;
-                    break;
-				case 3:
-                    to.AdoxioIsdirector = true;
-                    break;
-				case 4:
-                    to.AdoxioIsofficer = true;
-                    break;
-				case 5:
-                    to.AdoxioIsowner = true;
-                    break;
-			}
             to.AdoxioPreferrednonvotingshares = from.preferrednonvotingshares;
             to.AdoxioPreferredvotingshares = from.preferredvotingshares;
             to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -203,10 +160,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
                 result.name = adoxio_legalentity.Adoxio_name;
                 result.email = adoxio_legalentity.Adoxio_email;
-                if (adoxio_legalentity.Adoxio_position != null)
-                {
-                    result.position = (PositionOptions)adoxio_legalentity.Adoxio_position;
-                }
                 
                 result.preferrednonvotingshares = adoxio_legalentity.Adoxio_preferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.Adoxio_preferredvotingshares;
@@ -261,30 +214,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = adoxio_legalentity.AdoxioMiddlename;
                 result.name = adoxio_legalentity.AdoxioName;
                 result.email = adoxio_legalentity.AdoxioEmail;
-				if ((bool)adoxio_legalentity.AdoxioIspartner)
-                {
-					result.position = PositionOptions.Partner;
-                }
-				else if ((bool)adoxio_legalentity.AdoxioIsshareholder)
-                {
-					result.position = PositionOptions.Shareholder;
-                }
-				else if ((bool)adoxio_legalentity.AdoxioIstrustee)
-				{
-					result.position = PositionOptions.Trustee;
-                }
-				else if ((bool)adoxio_legalentity.AdoxioIsdirector)
-				{
-					result.position = PositionOptions.Director;
-                }
-				else if ((bool)adoxio_legalentity.AdoxioIsofficer)
-				{
-					result.position = PositionOptions.Officer;
-                }
-				else if ((bool)adoxio_legalentity.AdoxioIsowner)
-				{
-					result.position = PositionOptions.Owner;
-                }
+                //result.isPatner =  adoxio_legalentity.AdoxioIspartner;
+                //result.isShareholder =  adoxio_legalentity.AdoxioIsshareholder;
+                //result.isTrustee =  adoxio_legalentity.AdoxioIstrustee;
+                //result.isOwner =  adoxio_legalentity.AdoxioIsowner;
+                result.isDirector = adoxio_legalentity.AdoxioIsdirector;
+                result.isOfficer =  adoxio_legalentity.AdoxioIsofficer;
+                result.isSenoirManagement = adoxio_legalentity.AdoxioIsseniormanagement;
 
                 result.preferrednonvotingshares = adoxio_legalentity.AdoxioPreferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.AdoxioPreferredvotingshares;
@@ -325,28 +261,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_legalentitytype = (int?) from.legalentitytype;
                 result.Adoxio_middlename = from.middlename;
                 result.Adoxio_name = from.name;
-                result.Adoxio_position = (int?) from.position;
-				switch ((int?)from.position)
-                {
-                    case 0:
-						result.Adoxio_ispartner = true;
-                        break;
-                    case 1:
-						result.Adoxio_isshareholder = true;
-                        break;
-                    case 2:
-						result.Adoxio_istrustee = true;
-                        break;
-                    case 3:
-						result.Adoxio_isdirector = true;
-                        break;
-                    case 4:
-						result.Adoxio_isofficer = true;
-                        break;
-                    case 5:
-						result.Adoxio_isowner = true;
-                        break;
-                }
+
+                //result.AdoxioIspartner = from.isPartner;
+                //result.AdoxioIsshareholder =  from.isShareholder;
+                //result.AdoxioIstrustee = from.isTrustee;
+                //result.AdoxioIsowner = from.isOwner;
+                result.Adoxio_isdirector = from.isDirector;
+                result.Adoxio_isofficer  = from.isOfficer;
+                result.Adoxio_isseniormanagement = from.isSenoirManagement;
+
                 result.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
                 result.Adoxio_preferredvotingshares = from.preferredvotingshares;
                 result.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
