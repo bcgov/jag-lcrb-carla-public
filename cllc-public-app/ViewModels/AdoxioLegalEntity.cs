@@ -82,8 +82,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string firstname { get; set; } //adoxio_firstname (text)
         public string middlename { get; set; } //adoxio_middlename (text)
         public string lastname { get; set; } //adoxio_lastname (text)
-        [JsonConverter(typeof(StringEnumConverter))]
-        public PositionOptions position; //adoxio_position (option set)
+        //[JsonConverter(typeof(StringEnumConverter))]
+        //public PositionOptions position; //adoxio_position (option set)
+        public bool? isOfficer { get; set; }
+        public bool? isDirector { get; set; }
+        public bool? isSenoirManagement { get; set; }
+
         public DateTimeOffset? dateofbirth { get; set; } //adoxio_dateofbirth (date time)
         public decimal? interestpercentage { get; set; } //adoxio_interestpercentage (decimal number)
         public int? commonvotingshares { get; set; } //adoxio_commonvotingshares (whole number)
