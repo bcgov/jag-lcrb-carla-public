@@ -1,8 +1,9 @@
 <div class="col-md-12" *ngIf="componentLoaded">
-  <h1>
-    License Application {{applicationId}}</h1>
+
+  <h1>License Application: <strong>{{applicationName}}</strong></h1>
   <h2 *ngIf="currentUser">{{ currentUser.businessname }}</h2>
-    <div class="col-sm-3 col-md-2" style="padding-left: 0">
+
+  <div class="col-sm-3 col-md-2" style="padding-left: 0">
       <!-- required for floating -->
       <!-- Nav tabs -->
       <ul class="nav nav-tabs">
@@ -32,25 +33,25 @@
     <div class="col-md-9 col-sm-9">
       <!-- Tab panes -->
       <div [hidden]="view_tab != 'contact-details'">
-        <app-contact-details></app-contact-details>
+        <app-contact-details [applicationId]="applicationId" [accountId]="accountId"></app-contact-details>
       </div>
       <div [hidden]="view_tab != 'property-details'">
-        <app-property-details></app-property-details>
+        <app-property-details [applicationId]="applicationId" [accountId]="accountId"></app-property-details>
       </div>
       <div [hidden]="view_tab != 'store-information'">
-        <app-store-information></app-store-information>
+        <app-store-information [applicationId]="applicationId" [accountId]="accountId"></app-store-information>
       </div>
       <div [hidden]="view_tab != 'floor-plan'">
-        <app-floor-plan></app-floor-plan>
+        <app-floor-plan [applicationId]="applicationId" [accountId]="accountId"></app-floor-plan>
       </div>
       <div [hidden]="view_tab != 'site-map'">
-        <app-site-map></app-site-map>
+        <app-site-map [applicationId]="applicationId" [accountId]="accountId"></app-site-map>
       </div>
       <div [hidden]="view_tab != 'declaration'">
-        <app-declaration></app-declaration>
+        <app-declaration [applicationId]="applicationId" [accountId]="accountId"></app-declaration>
       </div>
       <div [hidden]="view_tab != 'submit-pay'">
-        <app-submit-pay [applicationId]="applicationId"></app-submit-pay>
+        <app-submit-pay [applicationId]="applicationId" [accountId]="accountId"></app-submit-pay>
       </div>
       <p>&nbsp;</p>
       <div class="col-md-10 row">
