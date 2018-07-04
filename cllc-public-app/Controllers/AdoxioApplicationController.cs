@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
-        private readonly IDistributedCache _distributedCache;
+        //private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
@@ -31,11 +31,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Configuration = configuration;
             this._system = context;
             this._httpContextAccessor = httpContextAccessor;
-            this._distributedCache = null;
+            //this._distributedCache = null;
             this._dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
         }
 
+        /// <summary>
+        /// Get a license application by applicant id
+        /// </summary>
+        /// <param name="applicantId"></param>
+        /// <returns></returns>
         private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByApplicant(string applicantId)
         {
             List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
@@ -86,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// GET an Application
+        /// GET an Application by ID
         /// </summary>
         /// <param name="id">GUID of the Application to get</param>
         /// <returns></returns>
@@ -118,6 +123,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// Create an Application in Dynamics (POST)
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost()]
 		public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
         {			
@@ -138,7 +148,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Update an Application
+        /// Update a Dynamics Application (PUT)
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
