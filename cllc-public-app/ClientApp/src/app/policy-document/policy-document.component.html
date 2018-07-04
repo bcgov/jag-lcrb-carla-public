@@ -1,6 +1,6 @@
-<div class="container extra-padding-left" *ngIf="policyDocument">
+<div class="extra-padding-left" *ngIf="policyDocument">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2" *ngIf="category">
       <app-policy-document-sidebar *ngIf="policyDocument" (slugChange)="setSlug($event)" [category]="category"></app-policy-document-sidebar>    
     </div>
     <div class="col-md-8 contentPolicy">
