@@ -64,6 +64,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='body'>
         /// New entity
         /// </param>
+        /// <param name='prefer'>
+        /// Required in order for the service to return a JSON representation
+        /// of the object.
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -79,7 +83,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMinvoice>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMinvoice body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMinvoice>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMinvoice body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Delete entity from invoices
         /// </summary>
