@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-floor-plan',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FloorPlanComponent implements OnInit {
 
+  @Input('accountId') accountId: string;
+  @Input('applicationId') applicationId: string;
+  
   constructor() { }
 
   ngOnInit() {

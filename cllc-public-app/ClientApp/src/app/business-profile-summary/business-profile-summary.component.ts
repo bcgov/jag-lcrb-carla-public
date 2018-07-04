@@ -38,7 +38,6 @@ export class BusinessProfileSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.getBusinessProfileData();
-
   }
 
   /**
@@ -54,6 +53,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
           data.forEach((entry) => {
             let profileSummary = new ProfileSummary();
             profileSummary.legalEntityId = entry.id;
+            profileSummary.accountId  = entry.accountId;
             //profileSummary.accountId = entry.accountId;
             profileSummary.name = entry.name;
             profileSummary.profileComplete = false;
@@ -96,5 +96,4 @@ export class BusinessProfileSummaryComponent implements OnInit {
     });
     return res;
   }
-
 }
