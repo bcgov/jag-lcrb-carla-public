@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>Add Shareholder - Organization</h2>
 <mat-dialog-content>
-  <form [formGroup]='shareholderForm' class="">
+  <form [formGroup]='form' class="">
 
     <div class="row">
       <div class="form-group col-md-12">
         <label>Organization Type</label>
-        <select class="form-control" style="width: 250px;" formControlName='organizationType' #orgType>
+        <select class="form-control" style="width: 250px;" formControlName='legalentitytype' #orgType>
           <option value="PrivateCorporation">Private Corporation</option>
           <option value="Partnership">Partnership</option>
           <option value="SoleProprietor">Sole Proprietor</option>
@@ -13,8 +13,8 @@
           <option value="Society">Society</option>
           <option value="Other">Other</option>
         </select>
-        <div *ngIf="shareholderForm.controls['organizationType'].touched && !shareholderForm.controls['organizationType'].valid">
-          <span *ngIf="shareholderForm.controls['organizationType'].hasError('required') ">
+        <div *ngIf="form.controls['legalentitytype'].touched && !form.controls['legalentitytype'].valid">
+          <span *ngIf="form.controls['legalentitytype'].hasError('required') ">
             Organization Type is required
           </span>
         </div>
@@ -22,9 +22,9 @@
 
       <div class="form-group  col-md-12">
         <label>Organization Name</label>
-        <input style="width: 250px;" type="text" class="form-control" formControlName="organizationName" placeholder="Organization Name">
-        <div *ngIf="shareholderForm.controls['organizationName'].touched && !shareholderForm.controls['organizationName'].valid">
-          <span *ngIf="shareholderForm.controls['organizationName'].hasError('required') ">
+        <input style="width: 250px;" type="text" class="form-control" formControlName="name" placeholder="Organization Name">
+        <div *ngIf="form.controls['name'].touched && !form.controls['name'].valid">
+          <span *ngIf="form.controls['name'].hasError('required') ">
             Organization name is required
           </span>
         </div>
@@ -33,23 +33,23 @@
     <div class="row">
       <div class="form-group  col-md-4">
         <label>Number of voting shares</label>
-        <input style="width: 150px;" type="number" class="form-control" formControlName='numberOfVotingShares'>
-        <div *ngIf="shareholderForm.controls['numberOfVotingShares'].touched && !shareholderForm.controls['numberOfVotingShares'].valid">
-          <span *ngIf="shareholderForm.controls['numberOfVotingShares'].hasError('required') ">
+        <input style="width: 150px;" type="number" class="form-control" formControlName='commonvotingshares'>
+        <div *ngIf="form.controls['commonvotingshares'].touched && !form.controls['commonvotingshares'].valid">
+          <span *ngIf="form.controls['commonvotingshares'].hasError('required') ">
             Number of voting shares is required
           </span>
         </div>
       </div>
-      <!-- <div class="form-group  col-md-5" *ngIf="orgType.value !== 'SoleProprietor'">
+      <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="form-group  col-md-5">
         <label>Number of non voting shares</label>
-        <input style="width: 150px;" type="number" class="form-control" formControlName='numberOfNonVotingShares'>
-        <div *ngIf="shareholderForm.controls['numberOfNonVotingShares'].touched && !shareholderForm.controls['numberOfNonVotingShares'].valid">
-          <span *ngIf="shareholderForm.controls['numberOfNonVotingShares'].hasError('required') ">
+        <input style="width: 150px;" type="number" class="form-control" formControlName='commonnonvotingshares'>
+        <div *ngIf="form.controls['commonnonvotingshares'].touched && !form.controls['commonnonvotingshares'].valid">
+          <span *ngIf="form.controls['commonnonvotingshares'].hasError('required') ">
             Number of non voting shares is required
           </span>
         </div>
       </div>
-      <div class="form-group  col-md-12" *ngIf="orgType.value !== 'SoleProprietor'">
+      <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="form-group  col-md-12">
         <label>Date of Shares Issued</label>
         <div class="input-group">
           <input class="form-control" formControlName='dateIssued' style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker">
@@ -57,7 +57,7 @@
             <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </form>
 </mat-dialog-content>

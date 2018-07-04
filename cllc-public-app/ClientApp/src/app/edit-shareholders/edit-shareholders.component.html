@@ -31,7 +31,7 @@
 
   <div [ngBusy]="busy">
 
-    <div>
+    <div *ngIf="['PublicCorporation'].indexOf(businessType) == -1">
       <mat-table #table [dataSource]="dataSource">
 
         <!-- Column -->
@@ -70,13 +70,25 @@
           <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
         </ng-container>
 
+        <!-- Column -->
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+          <mat-cell *matCellDef="let element"> <a href="javascript: void(0)" (click)="editShareholder(element)">Edit</a> </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <a href="javascript: void(0)" (click)="deleteShareholder(element)">Delete</a>  </mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
     </div>
   </div>
   <p></p>
-  <div class="col-md-10 row" style="margin-bottom: 5px">
+  <div  *ngIf="['PublicCorporation'].indexOf(businessType) == -1" class="col-md-10 row" style="margin-bottom: 5px">
     <a class="btn btn-primary" tabindex="1" (click)="openPersonDialog()">
       <strong>Add Person</strong>
       <br>

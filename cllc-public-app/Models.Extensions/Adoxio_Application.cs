@@ -19,13 +19,15 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             //TODO set all existing fields in Dynamics
             to.AdoxioName = from.name; 
-            to.AdoxioEstablishmentpropsedname = from.establishmentName;
             //to.Adoxio_jobnumber = from.jobNumber;            
             to.AdoxioEstablishmentpropsedname = from.establishmentName;
             to.AdoxioEstablishmentaddressstreet = from.establishmentaddressstreet;
             to.AdoxioEstablishmentaddresscity = from.establishmentaddresscity;
             to.AdoxioEstablishmentaddresspostalcode = from.establishmentaddresspostalcode;
             to.AdoxioAddresscity = from.establishmentaddresscity;
+            to.AdoxioEstablishmentparcelid = from.establishmentparcelid;
+            //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
+            
             //if (!String.IsNullOrEmpty(from.applicationStatus))
             //{
             //    to.Statuscode = int.Parse(from.applicationStatus);
@@ -50,27 +52,22 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioApplicationVM.name = dynamicsApplication.AdoxioName;
 
             //get applying person from Contact entity
-            
             if (dynamicsApplication._adoxioApplyingpersonValue != null)
             {
                 Guid applyingPersonId = Guid.Parse(dynamicsApplication._adoxioApplyingpersonValue);
                 var contact = await dynamicsClient.GetContactById(applyingPersonId);
                 adoxioApplicationVM.applyingPerson = contact.Fullname;
             }
-
             if (dynamicsApplication._adoxioApplicantValue != null)
             {
                 var applicant = await dynamicsClient.GetAccountById(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
                 adoxioApplicationVM.applicant = applicant.ToViewModel();
             }
 
-			
-
             //get job number
             adoxioApplicationVM.jobNumber = dynamicsApplication.AdoxioJobnumber;
 
             //get license type from Adoxio_licencetype entity
-            
             if (dynamicsApplication._adoxioLicencetypeValue != null)
             {
                 Guid? adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
@@ -89,8 +86,15 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             //get application status
             adoxioApplicationVM.applicationStatus = dynamicsApplication.Statuscode.ToString();
+            
+            //get parcel id
+            adoxioApplicationVM.establishmentparcelid = dynamicsApplication.AdoxioEstablishmentparcelid;
 
-			return adoxioApplicationVM;
+            //get additional property info
+            //adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
+
+
+            return adoxioApplicationVM;
         }
 
         public async static Task<MicrosoftDynamicsCRMadoxioapplication> ToModel(this AdoxioApplication adoxioApplicationVM, Interfaces.Microsoft.Dynamics.CRM.System _system)
@@ -110,6 +114,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 				result.Adoxio_establishmentaddressstreet = adoxioApplicationVM.establishmentaddressstreet;
 				result.Adoxio_establishmentaddresscity = adoxioApplicationVM.establishmentaddresscity;
 				result.Adoxio_establishmentaddresspostalcode = adoxioApplicationVM.establishmentaddresspostalcode;
+                result.Adoxio_establishmentparcelid = adoxioApplicationVM.establishmentparcelid;
+                //result.Adoxio_additionalpropertyinformation = adoxioApplicationVM.additionalpropertyinformation;
 				//result.Statuscode = adoxioApplicationVM.Statuscode;
             }
             return result;

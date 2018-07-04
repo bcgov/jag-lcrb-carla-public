@@ -20,6 +20,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string applicationStatus { get; set; }
         public Adoxio_applicanttypecodes applicantType { get; set; } //adoxio_applicanttype
         public GeneralYesNo registeredEstablishment { get; set; } //adoxio_registeredestablishment
+        public string establishmentparcelid { get; set; } //adoxio_establishmentparcelid
+        public string additionalpropertyinformation { get; set; } //
 
         public ViewModels.Account applicant { get; set; }
     }

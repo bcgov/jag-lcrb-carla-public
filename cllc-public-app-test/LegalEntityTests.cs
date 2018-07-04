@@ -119,7 +119,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                position = ViewModels.PositionOptions.Director,
+                //position = ViewModels.PositionOptions.Director,
                 firstname = firstName,
                 middlename = middleName,
                 lastname = lastName,
@@ -236,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                position = ViewModels.PositionOptions.Shareholder,
+                //position = ViewModels.PositionOptions.Shareholder,
                 firstname = "Test",
                 middlename = "The",
                 lastname = "Shareholder",
@@ -277,7 +277,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                position = ViewModels.PositionOptions.Director,
+                //position = ViewModels.PositionOptions.Director,
                 firstname = "Test",
                 middlename = "The",
                 lastname = "Director",

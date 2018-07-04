@@ -6,13 +6,19 @@ import { AdoxioApplication } from "../models/adoxio-application.model";
 
 @Injectable()
 export class AdoxioApplicationDataService {
-   constructor(private http: Http) { }
 
-   getAdoxioApplications() {
+  apiPath = "api/adoxioapplication/";
+
+  constructor(private http: Http) { }
+
+  /**
+   * Get all Dynamics Applications
+   * */
+  getAdoxioApplications() {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
-     return this.http.get("api/adoxioapplication/current", { headers: headers })
+    return this.http.get(this.apiPath + "current", { headers: headers })
        .toPromise()
        .then((res: Response) => {
          let data = res.json();
@@ -34,7 +40,30 @@ export class AdoxioApplicationDataService {
          return allAdoxioApplications;
        })
        .catch(this.handleError);
-   }
+  }
+
+  /**
+   * Get a Dynamics Application
+   * */
+  getApplication(applicationId: string) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    return this.http.get(this.apiPath + applicationId, { headers: headers });
+  }
+
+  /**
+   * Update the Dynamics Application
+   * @param applicationData
+   */
+  updateApplication(applicationData: any) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    //call API
+    //console.log("===== AdoxioApplicationDataService.updateApplication: ", applicationData);
+    return this.http.put(this.apiPath + applicationData.id, applicationData, { headers: headers });
+  }
 
    private handleError(error: Response | any) {
      let errMsg: string;
