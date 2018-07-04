@@ -102,9 +102,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New entity
             /// </param>
-            public static MicrosoftDynamicsCRMinvoice Create(this IInvoices operations, MicrosoftDynamicsCRMinvoice body)
+            /// <param name='prefer'>
+            /// Required in order for the service to return a JSON representation of the
+            /// object.
+            /// </param>
+            public static MicrosoftDynamicsCRMinvoice Create(this IInvoices operations, MicrosoftDynamicsCRMinvoice body, string prefer = "return=representation")
             {
-                return operations.CreateAsync(body).GetAwaiter().GetResult();
+                return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -116,12 +120,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New entity
             /// </param>
+            /// <param name='prefer'>
+            /// Required in order for the service to return a JSON representation of the
+            /// object.
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMinvoice> CreateAsync(this IInvoices operations, MicrosoftDynamicsCRMinvoice body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMinvoice> CreateAsync(this IInvoices operations, MicrosoftDynamicsCRMinvoice body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.CreateWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
