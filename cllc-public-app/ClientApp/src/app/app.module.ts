@@ -210,7 +210,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     MatToolbarModule,
     MatTooltipModule,
     FileDropModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
   ],
   exports: [
     BrowserModule,
