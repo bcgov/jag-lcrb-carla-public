@@ -254,6 +254,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='body'>
         /// New entity
         /// </param>
+        /// <param name='prefer'>
+        /// Required in order for the service to return a JSON representation of the
+        /// object.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -275,7 +279,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMinvoice>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMinvoice body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMinvoice>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMinvoice body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -288,6 +292,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("prefer", prefer);
                 tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Create", tracingParameters);
@@ -301,6 +306,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+            if (prefer != null)
+            {
+                if (_httpRequest.Headers.Contains("Prefer"))
+                {
+                    _httpRequest.Headers.Remove("Prefer");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("Prefer", prefer);
+            }
 
 
             if (customHeaders != null)
