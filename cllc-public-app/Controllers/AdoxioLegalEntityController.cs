@@ -126,10 +126,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// By default, the account linked to the current user is used
         /// </summary>
         /// <param name="positionType"></param>
+        /// <param name="parentLegalEntityId"></param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("position/{positionType}")]
-        public async Task<JsonResult> GetDynamicsLegalEntitiesByPosition(string positionType)
+        [Route("position/{parentLegalEntityId}/{positionType}")]
+        public async Task<IActionResult> GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
@@ -137,14 +138,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             String accountfilter = null;
             String filter = null;
 
-            // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            // check that the session is setup correctly.
-            userSettings.Validate();
+
 
             // set account filter
-            accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
+            accountfilter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
+            switch (positionType)
+            {
+                case "shareholders":
+                    accountfilter += " adoxio_isshareholder eq true";
+                    break;
+                case "partners":
+                    accountfilter += " adoxio_isPartner eq true";
+                    break;
+                case "directors-officers-management":
+                    accountfilter += " (adoxio_isshareholder neq true and adoxio_isPartner neq true)";
+                    break;
+                default:
+                    return BadRequest();
+            }
             filter = accountfilter;
 
             try

@@ -11,9 +11,9 @@ export class AdoxioLegalEntityDataService {
    * Get legal entities from Dynamics filtered by position
    * @param positionType
    */
-  getLegalEntitiesbyPosition(positionType: string) {
+  getLegalEntitiesbyPosition(parentLegalEntityId, positionType: string) {
 
-    let apiPath = "api/adoxiolegalentity/position/" + positionType;
+    let apiPath = `api/adoxiolegalentity/position/${parentLegalEntityId}/${positionType}`;
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
 
@@ -40,7 +40,7 @@ export class AdoxioLegalEntityDataService {
           adoxioLegalEntity.middlename = entry.middlename;
           adoxioLegalEntity.name = entry.name;
           adoxioLegalEntity.otherlegalentitytype = entry.otherlegalentitytype;
-          adoxioLegalEntity.position = entry.position;
+          // adoxioLegalEntity.position = entry.position;
           adoxioLegalEntity.preferrednonvotingshares = entry.preferrednonvotingshares;
           adoxioLegalEntity.preferredvotingshares = entry.preferredvotingshares;
           adoxioLegalEntity.relatedentities = entry.relatedentities;
