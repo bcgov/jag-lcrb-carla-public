@@ -502,6 +502,33 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        /// <summary>
+        /// Get a contact by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="distributedCache"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<Adoxio_licencetype> GetLicenceTypeById(this Microsoft.Dynamics.CRM.System system, Guid id)
+        {
+            Adoxio_licencetype result = null;
+            
+            // fetch from Dynamics.
+            try
+            {
+                result = await system.Adoxio_licencetypes.ByKey(id).GetValueAsync();
+            }
+            catch (DataServiceQueryException dsqe)
+            {
+                if (dsqe.Message.Contains("Does Not Exist"))
+                    result = null;
+                else
+                    throw;
+            }
+
+            return result;
+        }
+
 
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactById(this IDynamicsClient system, Guid id)
         {
