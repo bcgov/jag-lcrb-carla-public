@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
+using Microsoft.Rest;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -23,29 +24,35 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         public const string DefaultDocumentListTitle = "Account";
 
-        private string AuthorizationHeader;
-
         private LCLBCannabisDEVDataContext listData;
         private ApiData apiData;
         private AuthenticationResult authenticationResult;
+
+        public string OdataUri { get; set; }
         public string ServerAppIdUri { get; set; }
         public string WebName { get; set; }
         public string apiEndpoint { get; set; }
         string authorization { get; set; }
         private HttpClient client;
 
-        public SharePointFileManager(string serverAppIdUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword, string ssgUsername, string ssgPassword)
+        public SharePointFileManager(string serverAppIdUri, string odataUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword, string ssgUsername, string ssgPassword)
         {
-            this.ServerAppIdUri = serverAppIdUri;
-            this.WebName = webname;
-            string listDataEndpoint = serverAppIdUri + webname + "/_vti_bin/listdata.svc/";
-            apiEndpoint = serverAppIdUri + webname + "/_api/";
+            OdataUri = odataUri;
+            ServerAppIdUri = serverAppIdUri;
+            WebName = webname;
+
+            // ensure the webname has a slash.
+            if (!string.IsNullOrEmpty(WebName) && WebName[0] != '/')
+            {
+                WebName = "/" + WebName;
+            }
+
+            string listDataEndpoint = odataUri + "/_vti_bin/listdata.svc/";
+            apiEndpoint = odataUri + "/_api/";
 
             this.listData = new LCLBCannabisDEVDataContext(new Uri(listDataEndpoint));
             this.apiData = new ApiData(new Uri(apiEndpoint));
-
             
-
             if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
             {
 
@@ -119,21 +126,42 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Get file details list from SharePoint filtered by folder name and document type
         /// </summary>
-        /// <param name="siteName"></param>
+        /// <param name="listTitle"></param>
         /// <param name="folderName"></param>
         /// <param name="documentType"></param>
         /// <returns></returns>
-        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string siteName, string folderName, string documentType)
+        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
         {
-            string serverRelativeUrl = $"/{WebName}/{siteName}/{folderName}";
-            HttpRequestMessage endpointRequest =
-                            new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "/web/getfolderbyserverrelativeurl('" + serverRelativeUrl + "')/files");
-
+            string serverRelativeUrl = $"{WebName}/"+ Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string _responseContent = null; 
+            HttpRequestMessage _httpRequest =
+                            new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/files");
             // make the request.
-            var response = await client.SendAsync(endpointRequest);
-            string jsonString = await response.Content.ReadAsStringAsync();
+            var _httpResponse = await client.SendAsync(_httpRequest);
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+
+            if ((int)_statusCode != 200)
+            {
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            else
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync();
+            }
+            
             // parse the response
-            JObject responseObject = JObject.Parse(jsonString);
+            JObject responseObject = JObject.Parse(_responseContent);
             // get JSON response objects into a list
             List<JToken> responseResults = responseObject["d"]["results"].Children().ToList();
             // create file details list to add from response
@@ -172,7 +200,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             SP.Folder folder = new SP.Folder()
             {
                 Name = folderName,
-                ServerRelativeUrl = $"/{WebName}/{listTitle}/{folderName}"
+                ServerRelativeUrl = $"{WebName}/{listTitle}/{folderName}"
             };
 
             string jsonString = JsonConvert.SerializeObject(folder);
@@ -192,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -223,7 +251,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<SP.Folder> GetFolder(string listTitle, string folderName)
         {
             SP.Folder result = null;
-            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -231,10 +259,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                string jsonString = await response.Content.ReadAsStringAsync();
+                
                 result = JsonConvert.DeserializeObject<SP.Folder>(jsonString);
             }
 
@@ -304,7 +333,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='" 
@@ -335,7 +364,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             var file = await this.GetFile(url);
             byte[] result = null;
-            var webRequest = System.Net.WebRequest.Create(this.ServerAppIdUri + "/_api/Web/getfilebyserverrelativeurl('"+ url +"')/$value");            
+            var webRequest = System.Net.WebRequest.Create(apiEndpoint + "web/GetFileByServerRelativeUrl('" + url +"')/$value");            
             HttpWebRequest request = (HttpWebRequest)webRequest;
             request.PreAuthenticate = true;
             request.Headers.Add ("Authorization", authenticationResult.CreateAuthorizationHeader());
@@ -361,7 +390,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"/{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName) + "/" + Uri.EscapeDataString(fileName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName) + "/" + Uri.EscapeDataString(fileName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");

@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
 
             Guid id = new Guid(responseViewModel.id);
-            return;
+            //return;
             // R - Read
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
