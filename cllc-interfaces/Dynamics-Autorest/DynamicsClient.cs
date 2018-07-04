@@ -66,6 +66,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacts Contacts { get; private set; }
 
         /// <summary>
+        /// Gets the IInvoices.
+        /// </summary>
+        public virtual IInvoices Invoices { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
         /// </summary>
         /// <param name='handlers'>
@@ -271,6 +276,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
             Contacts = new Contacts(this);
+            Invoices = new Invoices(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

@@ -4625,7 +4625,787 @@
           }
         }
       }
-    }
+    },
+    "/invoices": {
+      "get": {
+	    "operationId": "Invoices_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Show only the first n items",
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "description": "Skip only the first n items",
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "description": "Search items by search phrases",
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "description": "Filter items by property values",
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "description": "Include count of items",
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "description": "Order items by property values",
+            "in": "query",
+			"name": "$orderby",
+            "type": "array",
+            "items": {
+              "enum": [
+                "name",
+                "name desc",
+                "statuscode",
+                "statuscode desc",
+                "totaltax",
+                "totaltax desc",
+                "onholdtime",
+                "onholdtime desc",
+                "ispricelocked",
+                "ispricelocked desc",
+                "discountamount_base",
+                "discountamount_base desc",
+                "shipto_fax",
+                "shipto_fax desc",
+                "entityimageid",
+                "entityimageid desc",
+                "pricingerrorcode",
+                "pricingerrorcode desc",
+                "discountpercentage",
+                "discountpercentage desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "freightamount",
+                "freightamount desc",
+                "shipto_city",
+                "shipto_city desc",
+                "createdon",
+                "createdon desc",
+                "shipto_postalcode",
+                "shipto_postalcode desc",
+                "shipto_line2",
+                "shipto_line2 desc",
+                "totallineitemdiscountamount",
+                "totallineitemdiscountamount desc",
+                "description",
+                "description desc",
+                "totallineitemamount_base",
+                "totallineitemamount_base desc",
+                "statecode",
+                "statecode desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "billto_postalcode",
+                "billto_postalcode desc",
+                "shipto_composite",
+                "shipto_composite desc",
+                "shipto_stateorprovince",
+                "shipto_stateorprovince desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "shipto_line1",
+                "shipto_line1 desc",
+                "processid",
+                "processid desc",
+                "entityimage_url",
+                "entityimage_url desc",
+                "totalamount_base",
+                "totalamount_base desc",
+                "exchangerate",
+                "exchangerate desc",
+                "_opportunityid_value",
+                "_opportunityid_value desc",
+                "_accountid_value",
+                "_accountid_value desc",
+                "shipto_telephone",
+                "shipto_telephone desc",
+                "billto_line3",
+                "billto_line3 desc",
+                "discountamount",
+                "discountamount desc",
+                "billto_telephone",
+                "billto_telephone desc",
+                "prioritycode",
+                "prioritycode desc",
+                "billto_composite",
+                "billto_composite desc",
+                "_salesorderid_value",
+                "_salesorderid_value desc",
+                "freightamount_base",
+                "freightamount_base desc",
+                "traversedpath",
+                "traversedpath desc",
+                "shipto_country",
+                "shipto_country desc",
+                "_contactid_value",
+                "_contactid_value desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "_slaid_value",
+                "_slaid_value desc",
+                "_pricelevelid_value",
+                "_pricelevelid_value desc",
+                "modifiedon",
+                "modifiedon desc",
+                "billto_stateorprovince",
+                "billto_stateorprovince desc",
+                "billto_line2",
+                "billto_line2 desc",
+                "shipto_line3",
+                "shipto_line3 desc",
+                "totaldiscountamount",
+                "totaldiscountamount desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "totallineitemdiscountamount_base",
+                "totallineitemdiscountamount_base desc",
+                "versionnumber",
+                "versionnumber desc",
+                "paymenttermscode",
+                "paymenttermscode desc",
+                "totalamount",
+                "totalamount desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "lastonholdtime",
+                "lastonholdtime desc",
+                "totalamountlessfreight",
+                "totalamountlessfreight desc",
+                "_slainvokedid_value",
+                "_slainvokedid_value desc",
+                "shipto_name",
+                "shipto_name desc",
+                "willcall",
+                "willcall desc",
+                "invoicenumber",
+                "invoicenumber desc",
+                "billto_fax",
+                "billto_fax desc",
+                "billto_country",
+                "billto_country desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "stageid",
+                "stageid desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "invoiceid",
+                "invoiceid desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "_transactioncurrencyid_value",
+                "_transactioncurrencyid_value desc",
+                "datedelivered",
+                "datedelivered desc",
+                "billto_name",
+                "billto_name desc",
+                "totalamountlessfreight_base",
+                "totalamountlessfreight_base desc",
+                "entityimage",
+                "entityimage desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "lastbackofficesubmit",
+                "lastbackofficesubmit desc",
+                "billto_city",
+                "billto_city desc",
+                "shipto_freighttermscode",
+                "shipto_freighttermscode desc",
+                "totaldiscountamount_base",
+                "totaldiscountamount_base desc",
+                "shippingmethodcode",
+                "shippingmethodcode desc",
+                "totallineitemamount",
+                "totallineitemamount desc",
+                "_customerid_value",
+                "_customerid_value desc",
+                "billto_line1",
+                "billto_line1 desc",
+                "entityimage_timestamp",
+                "entityimage_timestamp desc",
+                "totaltax_base",
+                "totaltax_base desc",
+                "duedate",
+                "duedate desc"
+              ],
+              "type": "string"
+            }            
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+			"name": "$select",
+            "type": "array",
+            "items": {
+              "enum": [
+                "name",
+                "statuscode",
+                "totaltax",
+                "onholdtime",
+                "ispricelocked",
+                "discountamount_base",
+                "shipto_fax",
+                "entityimageid",
+                "pricingerrorcode",
+                "discountpercentage",
+                "_modifiedby_value",
+                "_createdby_value",
+                "freightamount",
+                "shipto_city",
+                "createdon",
+                "shipto_postalcode",
+                "shipto_line2",
+                "totallineitemdiscountamount",
+                "description",
+                "totallineitemamount_base",
+                "statecode",
+                "_modifiedonbehalfby_value",
+                "billto_postalcode",
+                "shipto_composite",
+                "shipto_stateorprovince",
+                "importsequencenumber",
+                "shipto_line1",
+                "processid",
+                "entityimage_url",
+                "totalamount_base",
+                "exchangerate",
+                "_opportunityid_value",
+                "_accountid_value",
+                "shipto_telephone",
+                "billto_line3",
+                "discountamount",
+                "billto_telephone",
+                "prioritycode",
+                "billto_composite",
+                "_salesorderid_value",
+                "freightamount_base",
+                "traversedpath",
+                "shipto_country",
+                "_contactid_value",
+                "_owningbusinessunit_value",
+                "_slaid_value",
+                "_pricelevelid_value",
+                "modifiedon",
+                "billto_stateorprovince",
+                "billto_line2",
+                "shipto_line3",
+                "totaldiscountamount",
+                "timezoneruleversionnumber",
+                "totallineitemdiscountamount_base",
+                "versionnumber",
+                "paymenttermscode",
+                "totalamount",
+                "_owningteam_value",
+                "lastonholdtime",
+                "totalamountlessfreight",
+                "_slainvokedid_value",
+                "shipto_name",
+                "willcall",
+                "invoicenumber",
+                "billto_fax",
+                "billto_country",
+                "_createdonbehalfby_value",
+                "stageid",
+                "overriddencreatedon",
+                "_ownerid_value",
+                "invoiceid",
+                "utcconversiontimezonecode",
+                "_transactioncurrencyid_value",
+                "datedelivered",
+                "billto_name",
+                "totalamountlessfreight_base",
+                "entityimage",
+                "_owninguser_value",
+                "lastbackofficesubmit",
+                "billto_city",
+                "shipto_freighttermscode",
+                "totaldiscountamount_base",
+                "shippingmethodcode",
+                "totallineitemamount",
+                "_customerid_value",
+                "billto_line1",
+                "entityimage_timestamp",
+                "totaltax_base",
+                "duedate"
+              ],
+              "type": "string"
+            }            
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",			
+            "name": "$expand",
+            "type": "array",
+            "items": {
+              "enum": [
+                "*",
+                "contactinvoices_association",
+                "sla_invoice_sla",
+                "modifiedby",
+                "customerid_contact",
+                "Invoice_Appointments",
+                "invoice_connections1",
+                "owningbusinessunit",
+                "transactioncurrencyid",
+                "stageid_processstage",
+                "invoice_activity_parties",
+                "Invoice_RecurringAppointmentMasters",
+                "Invoice_ActivityPointers",
+                "Invoice_Phonecalls",
+                "owninguser",
+                "Invoice_Emails",
+                "Invoice_BulkDeleteFailures",
+                "Invoice_Letters",
+                "createdonbehalfby",
+                "ownerid",
+                "Invoice_Tasks",
+                "modifiedonbehalfby",
+                "Invoice_SyncErrors",
+                "opportunityid",
+                "invoice_connections2",
+                "invoice_details",
+                "Invoice_Faxes",
+                "owningteam",
+                "customerid_account",
+                "pricelevelid",
+                "Invoice_SocialActivities",
+                "Invoice_Annotation",
+                "Invoice_AsyncOperations",
+                "createdby",
+                "slakpiinstance_invoice",
+                "slainvokedid_invoice_sla",
+                "Invoice_ServiceAppointments",
+                "salesorderid",
+                "adoxio_invoice_adoxio_application_Invoice",
+                "adoxio_invoice_adoxio_application_LicenceFeeInvoice",
+                "adoxio_invoice_adoxio_violationnotification_Invoice"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+                  },
+                  "type": "array"
+                }
+              },
+              "title": "Collection of invoices",
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "invoices"
+        ],
+        "summary": "Get entities from invoices"
+      },
+      "post": {
+	    "operationId": "Invoices_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+		  {
+		  "in": "header",
+		  "name": "Prefer",
+		  "default": "return=representation",
+		  "type": "string",
+		  "description": "Required in order for the service to return a JSON representation of the object."		  
+		  },
+          {
+            "description": "New entity",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "invoices"
+        ],
+        "summary": "Add new entity to invoices"
+      }
+    },
+    "/invoices({invoiceid})": {
+      "delete": {
+		"operationId": "Invoices_Delete",
+        "parameters": [
+          {
+            "description": "key: invoiceid",
+            "in": "path",
+            "name": "invoiceid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ETag",
+            "in": "header",
+            "name": "If-Match",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "invoices"
+        ],
+        "summary": "Delete entity from invoices"
+      },
+      "get": {
+	    "operationId": "Invoices_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: invoiceid",
+            "in": "path",
+            "name": "invoiceid",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "name",
+                "statuscode",
+                "totaltax",
+                "onholdtime",
+                "ispricelocked",
+                "discountamount_base",
+                "shipto_fax",
+                "entityimageid",
+                "pricingerrorcode",
+                "discountpercentage",
+                "_modifiedby_value",
+                "_createdby_value",
+                "freightamount",
+                "shipto_city",
+                "createdon",
+                "shipto_postalcode",
+                "shipto_line2",
+                "totallineitemdiscountamount",
+                "description",
+                "totallineitemamount_base",
+                "statecode",
+                "_modifiedonbehalfby_value",
+                "billto_postalcode",
+                "shipto_composite",
+                "shipto_stateorprovince",
+                "importsequencenumber",
+                "shipto_line1",
+                "processid",
+                "entityimage_url",
+                "totalamount_base",
+                "exchangerate",
+                "_opportunityid_value",
+                "_accountid_value",
+                "shipto_telephone",
+                "billto_line3",
+                "discountamount",
+                "billto_telephone",
+                "prioritycode",
+                "billto_composite",
+                "_salesorderid_value",
+                "freightamount_base",
+                "traversedpath",
+                "shipto_country",
+                "_contactid_value",
+                "_owningbusinessunit_value",
+                "_slaid_value",
+                "_pricelevelid_value",
+                "modifiedon",
+                "billto_stateorprovince",
+                "billto_line2",
+                "shipto_line3",
+                "totaldiscountamount",
+                "timezoneruleversionnumber",
+                "totallineitemdiscountamount_base",
+                "versionnumber",
+                "paymenttermscode",
+                "totalamount",
+                "_owningteam_value",
+                "lastonholdtime",
+                "totalamountlessfreight",
+                "_slainvokedid_value",
+                "shipto_name",
+                "willcall",
+                "invoicenumber",
+                "billto_fax",
+                "billto_country",
+                "_createdonbehalfby_value",
+                "stageid",
+                "overriddencreatedon",
+                "_ownerid_value",
+                "invoiceid",
+                "utcconversiontimezonecode",
+                "_transactioncurrencyid_value",
+                "datedelivered",
+                "billto_name",
+                "totalamountlessfreight_base",
+                "entityimage",
+                "_owninguser_value",
+                "lastbackofficesubmit",
+                "billto_city",
+                "shipto_freighttermscode",
+                "totaldiscountamount_base",
+                "shippingmethodcode",
+                "totallineitemamount",
+                "_customerid_value",
+                "billto_line1",
+                "entityimage_timestamp",
+                "totaltax_base",
+                "duedate"
+              ],
+              "type": "string"
+            },
+            "name": "$select",            
+            "type": "array"
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "contactinvoices_association",
+                "sla_invoice_sla",
+                "modifiedby",
+                "customerid_contact",
+                "Invoice_Appointments",
+                "invoice_connections1",
+                "owningbusinessunit",
+                "transactioncurrencyid",
+                "stageid_processstage",
+                "invoice_activity_parties",
+                "Invoice_RecurringAppointmentMasters",
+                "Invoice_ActivityPointers",
+                "Invoice_Phonecalls",
+                "owninguser",
+                "Invoice_Emails",
+                "Invoice_BulkDeleteFailures",
+                "Invoice_Letters",
+                "createdonbehalfby",
+                "ownerid",
+                "Invoice_Tasks",
+                "modifiedonbehalfby",
+                "Invoice_SyncErrors",
+                "opportunityid",
+                "invoice_connections2",
+                "invoice_details",
+                "Invoice_Faxes",
+                "owningteam",
+                "customerid_account",
+                "pricelevelid",
+                "Invoice_SocialActivities",
+                "Invoice_Annotation",
+                "Invoice_AsyncOperations",
+                "createdby",
+                "slakpiinstance_invoice",
+                "slainvokedid_invoice_sla",
+                "Invoice_ServiceAppointments",
+                "salesorderid",
+                "adoxio_invoice_adoxio_application_Invoice",
+                "adoxio_invoice_adoxio_application_LicenceFeeInvoice",
+                "adoxio_invoice_adoxio_violationnotification_Invoice"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",            
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "invoices"
+        ],
+        "summary": "Get entity from invoices by key"
+      },
+      "patch": {
+	    "operationId": "Invoices_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: invoiceid",
+            "in": "path",
+            "name": "invoiceid",
+			"type": "string",
+            "required": true
+          },
+          {
+            "description": "New property values",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "invoices"
+        ],
+        "summary": "Update entity in invoices"
+      }
+    },    
+    "/invoices({invoiceid})/GetQuantityDecimal(entity={entity},Product={Product},UoM={UoM})": {
+      "get": {
+	    "operationId": "Invoices_GetQuantityDecimal",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "in": "path",
+            "name": "Product",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "in": "path",
+            "name": "UoM",
+            "required": true,
+			"type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.GetQuantityDecimalResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "summary": "Invoke function GetQuantityDecimal"
+      }
+    },
+    "/invoices({invoiceid})/LockInvoicePricing": {
+      "post": {
+	    "operationId": "Invoices_LockInvoicePricing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "invoiceid",
+            "required": true,
+			"type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "summary": "Invoke action LockInvoicePricing"
+      }
+    }  
   },
   "definitions": {
     "Microsoft.Dynamics.CRM.AccessRights": {
@@ -17746,6 +18526,10 @@
             "adoxio_preferredvotingshares": {
               "x-nullable": true,
               "type": "integer"
+            },
+			"adoxio_profilename": {
+              "x-nullable": true,
+              "type": "string"
             },
             "adoxio_sameasapplyingperson": {
               "x-nullable": true,
