@@ -45,6 +45,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+		public static string GetOrderNumForApplication(ViewModels.AdoxioApplication application)
+		{
+			string ordernum = "04";
+			foreach (char ch in application.id)
+			{
+				if (0 <= "0123456789".IndexOf(ch))
+					ordernum += ch;
+				if (10 <= ordernum.Length)
+					return ordernum;
+			}
+			while (10 > ordernum.Length)
+				ordernum += "0";
+			return ordernum;
+			//return "04" + RandomOrderNum(8);
+		}
+
 		/// <summary>
 		/// GET a payment re-direct url for an Application
 		/// This will register an (unpaid) invoice against the application and generate an invoice number,
@@ -62,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				return NotFound();
 			}
 
-			string ordernum = "04" + RandomOrderNum(8);
+			string ordernum = GetOrderNumForApplication(result);
             
 			Dictionary<string, string> redirectUrl;
 			redirectUrl = new Dictionary<string, string>();
@@ -106,14 +122,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="id">GUID of the Application to pay</param>
         /// <returns></returns>
-		[HttpGet("verify/{ordernum}/{id}")]
-		public async Task<IActionResult> VerifyPaymentStatus(string ordernum, string id)
+		[HttpGet("verify/{id}")]
+		public async Task<IActionResult> VerifyPaymentStatus(string id)
         {
 			ViewModels.AdoxioApplication result = await GetDynamicsApplication(id);
             if (result == null)
             {
                 return NotFound();
             }
+
+			string ordernum = GetOrderNumForApplication(result);
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id);
 

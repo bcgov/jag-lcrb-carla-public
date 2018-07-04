@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
             _discard = await response.Content.ReadAsStringAsync();
 
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/verify/" + ordernum + "/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/verify/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
             _discard = await response.Content.ReadAsStringAsync();
@@ -111,7 +111,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
 
             // get a response
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/verify/" + ordernum + "/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/verify/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 

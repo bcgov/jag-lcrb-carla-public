@@ -12,39 +12,58 @@ import { Subscription } from 'rxjs';
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
     busy: Subscription;
-    orderNum: string;
+    transactionId: string;
     applicationId: string;
+    authCode: string;
+    avsMessage: string;
+    avsAddrMatch: string;
+    messageId: string;
+    messageText: string;
+    paymentMethod: string;
+    trnAmount: string;
+    trnApproved: string;
+    trnDate: string;
+    trnId: string;
+    trnOrderNumber: string;
 
     /** payment-confirmation ctor */
     constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
 	    this.route.queryParams.subscribe(params => {
-	        this.orderNum = params['trnId'];
+	        this.transactionId = params['trnId'];
 	        this.applicationId = params['SessionKey'];
 	    });
     }
 
     ngOnInit() {
     	// TODO get slug from URL parameters and find associated Application
-        window.alert("trnId=" + this.orderNum + ", SessionKey=" + this.applicationId);
-
     	this.verify_payment();
 
-	    setTimeout(function () {
-	    }, 5000);
+	    //setTimeout(function () {
+	    //}, 5000);
 
         //this.router.navigate(['./license-application/' + this.applicationId]);
     }
 
   verify_payment() 
   {
-    this.paymentDataService.verifyPaymentSubmission(this.orderNum, this.applicationId).subscribe(
+    this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
         //console.log("applicationVM: ", res.json());
         var json = res.json();
     	console.log(json);
-        window.alert("response=" + json);
 
         // TODO do something with it!!!
+        this.authCode = json.authCode;
+        this.avsMessage = json.avsMessage;
+        this.avsAddrMatch = json.avsAddrMatch;
+        this.messageId = json.messageId;
+        this.messageText = json.messageText;
+        this.paymentMethod = json.paymentMethod;
+        this.trnAmount = json.trnAmount;
+        this.trnApproved = json.trnApproved;
+        this.trnDate = json.trnDate;
+        this.trnId = json.trnId;
+        this.trnOrderNumber = json.trnOrderNumber;
 
       },
       err => {

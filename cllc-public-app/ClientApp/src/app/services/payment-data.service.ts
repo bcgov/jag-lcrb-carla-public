@@ -22,13 +22,13 @@ import { AdoxioApplication } from "../models/adoxio-application.model";
      return this.http.get(this.apiPath + this.submitPath + id, { headers: headers });
    }
 
-   verifyPaymentSubmission(ordernum: string, id: string) {
+   verifyPaymentSubmission(id: string) {
      let headers = new Headers();
      headers.append("Content-Type", "application/json");
 
      //call API
      //console.log("===== PaymentService.verify: ", id);
-     return this.http.get(this.apiPath + this.verifyPath + ordernum + "/" + id, { headers: headers });
+     return this.http.get(this.apiPath + this.verifyPath + id, { headers: headers });
    }
 
    private handleError(error: Response | any) {
