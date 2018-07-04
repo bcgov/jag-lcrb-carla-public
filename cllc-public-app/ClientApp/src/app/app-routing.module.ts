@@ -26,9 +26,8 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'business-profile',
+    path: 'business-profile/:accountId/:legalEntityId',
     component: BusinessProfileComponent,
-    data: {}
   },
   {
     path: 'form-viewer/:id',

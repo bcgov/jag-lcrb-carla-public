@@ -79,13 +79,13 @@
       <app-organization-structure [accountId]="accountId"  [businessType]="businessType"></app-organization-structure>
     </div>
     <div [hidden]="view_tab != 'directors-and-officers'">
-      <app-directors-and-officers [accountId]="accountId" [businessType]="businessType"></app-directors-and-officers>
+      <app-directors-and-officers [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-directors-and-officers>
     </div>
     <div [hidden]="view_tab != 'key-personnel'">
       <app-key-personnel [accountId]="accountId" [businessType]="businessType"></app-key-personnel>
     </div>
     <div [hidden]="view_tab != 'shareholders'">
-      <app-edit-shareholders [accountId]="accountId" [businessType]="businessType"></app-edit-shareholders>
+      <app-edit-shareholders [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
     </div>
     <div [hidden]="view_tab != 'connections-to-producers'">
       <app-connection-to-producers [accountId]="accountId" [businessType]="businessType"></app-connection-to-producers>
