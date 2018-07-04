@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { DynamicsAccount } from '../models/dynamics-account.model';
@@ -26,7 +26,7 @@ export class EditShareholdersComponent implements OnInit {
   shareholderForm: FormGroup;
   shareholderList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
-  displayedColumns = ['position', 'name', 'email', 'commonvotingshares'];
+  displayedColumns = ['position', 'name', 'email', 'commonvotingshares', 'edit', 'delete'];
   user: User;
   busy: Promise<any>;
   busyObsv: Subscription;
@@ -56,19 +56,18 @@ export class EditShareholdersComponent implements OnInit {
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     if (shareholderType == "Person") {
       adoxioLegalEntity.isindividual = true;
-      adoxioLegalEntity.firstname = formData.firstName;
-      adoxioLegalEntity.lastname = formData.lastName;
-      adoxioLegalEntity.name = formData.firstName + " " + formData.lastName;
-      adoxioLegalEntity.legalentitytype = "PrivateCorporation";
+      adoxioLegalEntity.firstname = formData.firstname;
+      adoxioLegalEntity.lastname = formData.lastname;
+      adoxioLegalEntity.name = formData.firstname + " " + formData.lastname;
       adoxioLegalEntity.email = formData.email;
     } else {
       adoxioLegalEntity.isindividual = false;
-      adoxioLegalEntity.name = formData.organizationName;
-      adoxioLegalEntity.legalentitytype = formData.organizationType;
+      adoxioLegalEntity.name = formData.name;
+      adoxioLegalEntity.legalentitytype = formData.legalentitytype;
     }
-    adoxioLegalEntity.commonnonvotingshares = formData.numberOfNonVotingShares;
-    adoxioLegalEntity.commonvotingshares = formData.numberOfVotingShares;
-    ////adoxioLegalEntity.dateIssued = formData.dateIssued;
+    adoxioLegalEntity.commonnonvotingshares = formData.commonnonvotingshares;
+    adoxioLegalEntity.commonvotingshares = formData.commonvotingshares;
+    // adoxioLegalEntity.dateIssued = formData.dateIssued;
     //adoxioLegalEntity.relatedentities = [];
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
@@ -78,33 +77,52 @@ export class EditShareholdersComponent implements OnInit {
     return adoxioLegalEntity;
   }
 
+  editShareholder(shareholder: AdoxioLegalEntity) {
+    if (shareholder.isindividual === true) {
+      this.openPersonDialog(shareholder);
+    } else {
+      this.openOrganizationDialog(shareholder);
+    }
+  }
+
+  deleteShareholder(shareholder: AdoxioLegalEntity) {
+    if(confirm('Delete shareholer?')){
+      this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
+        this.getShareholders();
+      })
+    }
+  }
+
   // Open Person shareholder dialog
-  openPersonDialog() {
+  openPersonDialog(shareholder: AdoxioLegalEntity) {
     // set dialogConfig settings
-    const dialogConfig = {
+    let dialogConfig: any = {
       disableClose: true,
       autoFocus: true,
       data: {
-        businessType: this.businessType
+        businessType: this.businessType,
+        shareholder: shareholder
       }
     };
+
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ShareholderPersonDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
       formData => {
-        //console.log("ShareholderPersonDialog output:", data);
         if (formData) {
           let shareholderType = "Person";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
-          //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.busyObsv = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity).subscribe(
+          let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
+          if (formData.id) {
+            save = this.legalEntityDataservice.updateLegalEntity(formData, formData.id);
+          }
+          this.busyObsv = save.subscribe(
             res => {
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['green-snackbar'] });
               this.getShareholders();
             },
             err => {
-              //console.log("Error occured");
               this.snackBar.open('Error saving Shareholder Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
               this.handleError(err);
             }
@@ -115,13 +133,14 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   // Open Organization shareholder dialog
-  openOrganizationDialog() {
+  openOrganizationDialog(shareholder) {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
       data: {
-        businessType: this.businessType
+        businessType: this.businessType,
+        shareholder: shareholder
       }
     }
 
@@ -133,8 +152,11 @@ export class EditShareholdersComponent implements OnInit {
         if (formData) {
           let shareholderType = "Organization";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
-          //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.busyObsv = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity).subscribe(
+          let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
+          if (formData.id) {
+            save = this.legalEntityDataservice.updateLegalEntity(formData, formData.id);
+          }
+          this.busyObsv = save.subscribe(
             res => {
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getShareholders();
@@ -172,32 +194,44 @@ export class EditShareholdersComponent implements OnInit {
   selector: 'edit-shareholders-person-dialog',
   templateUrl: 'edit-shareholders-person-dialog.html',
 })
-export class ShareholderPersonDialog {
-  shareholderForm: FormGroup;
+export class ShareholderPersonDialog implements OnInit {
+  form: FormGroup;
 
-  constructor(private frmbuilder: FormBuilder, private dialogRef: MatDialogRef<ShareholderPersonDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.shareholderForm = frmbuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+  constructor(private fb: FormBuilder,
+    private dialogRef: MatDialogRef<ShareholderPersonDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.form = this.fb.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       email: ['', Validators.email],
-      numberOfVotingShares: ['', Validators.required]
+      commonvotingshares: ['', Validators.required],
+      dateIssued: ['']
     });
+    if (this.data.shareholder) {
+      this.form.patchValue(this.data.shareholder);
+    }
+
+  }
+
+  ngOnInit() {
   }
 
   save() {
     //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
-    if (this.shareholderForm.valid) {
-      this.dialogRef.close(this.shareholderForm.value);
+    if (this.form.valid) {
+      let formData = this.data.shareholder || {};
+      formData = (<any>Object).assign(formData, this.form.value);
+      this.dialogRef.close(formData);
     } else {
-      Object.keys(this.shareholderForm.controls).forEach(field => {
-        const control = this.shareholderForm.get(field);
+      Object.keys(this.form.controls).forEach(field => {
+        const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
     }
   }
 
   isFieldError(field: string) {
-    const isError = !this.shareholderForm.get(field).valid && this.shareholderForm.get(field).touched;
+    const isError = !this.form.get(field).valid && this.form.get(field).touched;
     return isError;
   }
 
@@ -215,25 +249,30 @@ export class ShareholderPersonDialog {
   templateUrl: 'edit-shareholders-organization-dialog.html',
 })
 export class ShareholderOrganizationDialog {
-  shareholderForm: FormGroup;
+  form: FormGroup;
 
   constructor(private frmbuilder: FormBuilder, private dialogRef: MatDialogRef<ShareholderOrganizationDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.shareholderForm = frmbuilder.group({
-      organizationType: ['', Validators.required],
-      organizationName: ['', Validators.required],
-      numberOfVotingShares: ['', Validators.required],
-      //numberOfNonVotingShares: ['', Validators.required],
+    this.form = frmbuilder.group({
+      legalentitytype: ['', Validators.required],
+      name: ['', Validators.required],
+      commonvotingshares: ['', Validators.required],
+      commonnonvotingshares: ['', Validators.required],
       dateIssued: ['']
     });
+    if (data.shareholder) {
+      this.form.patchValue(data.shareholder);
+    }
   }
 
   save() {
     //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
-    if (this.shareholderForm.valid) {
-      this.dialogRef.close(this.shareholderForm.value);
+    if (this.form.valid) {
+      let formData = this.data.shareholder || {};
+      formData = (<any>Object).assign(formData, this.form.value);
+      this.dialogRef.close(formData);
     } else {
-      Object.keys(this.shareholderForm.controls).forEach(field => {
-        const control = this.shareholderForm.get(field);
+      Object.keys(this.form.controls).forEach(field => {
+        const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
     }
