@@ -11,6 +11,7 @@ import { SurveyResolver }   from './services/survey-resolver.service';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
+import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'license-application/:applicationId',
     component: LicenseApplicationComponent
+  },
+  {
+    path: 'payment-confirmation',
+    component: PaymentConfirmationComponent
   },
 
   {

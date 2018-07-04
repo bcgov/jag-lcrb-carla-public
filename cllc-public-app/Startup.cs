@@ -235,22 +235,35 @@ namespace Gov.Lclb.Cllb.Public
             // add SharePoint.
 
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
+            string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
             string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
             string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
             string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
            
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword));
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword));
 
             // add BCeID Web Services
 
             string bceidUrl    = Configuration["BCEID_SERVICE_URL"];
-			string bceidSvcId = Configuration["BCEID_SERVICE_SVCID"];
+			string bceidSvcId  = Configuration["BCEID_SERVICE_SVCID"];
 			string bceidUserid = Configuration["BCEID_SERVICE_USER"];
 			string bceidPasswd = Configuration["BCEID_SERVICE_PASSWD"];
 
 			services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
+
+			// add BCEP services
+
+			var bcep_svc_url    = Environment.GetEnvironmentVariable("BCEP_SERVICE_URL");
+			var bcep_svc_svcid  = Environment.GetEnvironmentVariable("BCEP_MERCHANT_ID");
+			var bcep_svc_hashid = Environment.GetEnvironmentVariable("BCEP_HASH_KEY");
+			var bcep_base_uri   = Environment.GetEnvironmentVariable("BASE_URI");
+			var bcep_base_path  = Environment.GetEnvironmentVariable("BASE_PATH");
+			var bcep_conf_path  = Environment.GetEnvironmentVariable("BCEP_CONF_PATH");
+
+			services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid, 
+			                                                        bcep_base_uri + bcep_base_path + bcep_conf_path));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
