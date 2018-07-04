@@ -582,8 +582,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // Cleanup the Legal Entity
 
-
-
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
