@@ -52,6 +52,7 @@ export class EditShareholdersComponent implements OnInit {
 
   formDataToModelData(formData: any, shareholderType: string): AdoxioLegalEntity {
     let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+    adoxioLegalEntity.isShareholder = true;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     if (shareholderType == "Person") {
       adoxioLegalEntity.isindividual = true;
@@ -68,7 +69,6 @@ export class EditShareholdersComponent implements OnInit {
     adoxioLegalEntity.commonnonvotingshares = formData.numberOfNonVotingShares;
     adoxioLegalEntity.commonvotingshares = formData.numberOfVotingShares;
     ////adoxioLegalEntity.dateIssued = formData.dateIssued;
-    adoxioLegalEntity.isShareholder = true;
     //adoxioLegalEntity.relatedentities = [];
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
@@ -98,7 +98,7 @@ export class EditShareholdersComponent implements OnInit {
           let shareholderType = "Person";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.busyObsv = this.legalEntityDataservice.createShareholderLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity).subscribe(
             res => {
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['green-snackbar'] });
               this.getShareholders();
@@ -134,7 +134,7 @@ export class EditShareholdersComponent implements OnInit {
           let shareholderType = "Organization";
           let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           //console.log("adoxioLegalEntity output:", adoxioLegalEntity);
-          this.busyObsv = this.legalEntityDataservice.createShareholderLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity).subscribe(
             res => {
               this.snackBar.open('Shareholder Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getShareholders();

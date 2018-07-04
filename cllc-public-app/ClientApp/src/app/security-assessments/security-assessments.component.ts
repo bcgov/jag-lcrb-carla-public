@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class SecurityAssessmentsComponent implements OnInit {
 
   @Input() accountId: string;
+  @Input() parentLegalEntityId: string;
   @Input() businessType: string;
 
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
@@ -35,7 +36,7 @@ export class SecurityAssessmentsComponent implements OnInit {
 
   getDirectorsAndOfficersAndShareholders() {
     let legalEntitiesList = [];
-    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.accountId, "director-officer-shareholder")
+    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "director-officer-shareholder")
       .then((data) => {
         //console.log("getLegalEntitiesbyPosition(\"director-officer-shareholder\"): ", data);
         data.forEach((entry) => {

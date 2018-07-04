@@ -42,6 +42,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   formDataToModelData(formData: any): AdoxioLegalEntity {
     let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+    adoxioLegalEntity.isShareholder = false;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     // adoxioLegalEntity.position = formData.position;
     adoxioLegalEntity.isindividual = true;
@@ -76,7 +77,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
       formData => {
         if (formData) {
           let adoxioLegalEntity = this.formDataToModelData(formData);
-          this.busyObsv = this.legalEntityDataservice.createLegalEntity(adoxioLegalEntity).subscribe(
+          this.busyObsv = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity).subscribe(
             res => {
               this.snackBar.open('Director / Officer Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getDirectorsAndOfficers();
@@ -117,9 +118,9 @@ export class DirectorAndOfficerPersonDialog {
 
   constructor(private frmbuilder: FormBuilder, private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialog>) {
     this.directorOfficerForm = frmbuilder.group({
-      isDirector: [''],
-      isOfficer: [''],
-      isSeniorManagement: [''],
+      isDirector: [false],
+      isOfficer: [false],
+      isSeniorManagement: [false],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.email],

@@ -94,7 +94,7 @@
       <app-financial-information [accountId]="accountId"  [businessType]="businessType"></app-financial-information>
     </div>
     <div [hidden]="view_tab != 'security-assessment'">
-      <app-security-assessments [accountId]="accountId" [businessType]="businessType"></app-security-assessments>
+      <app-security-assessments [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-security-assessments>
     </div>
     <p>&nbsp;</p>
     <div class="col-md-10 row">
