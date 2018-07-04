@@ -140,9 +140,9 @@ namespace SharePoint.Tests
         public async void CreateFolderTest()
         {
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            string folderName = "Test Folder" + rnd.Next();
+            string folderName = "Test-Folder-" + rnd.Next();
 
-            SP.Folder folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
 
             Assert.True(folder != null);
 
@@ -162,15 +162,14 @@ namespace SharePoint.Tests
         public async void GetFilesInEmptyFolderTest()
         {
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
+            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
             Assert.True(folder != null);
-            var files = await sharePointFileManager.GetFileDetailsListInFolder(documentList, folderName, documentType);
+            var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             Assert.True(files != null);
             Assert.True(files.Count == 0);
-            await sharePointFileManager.DeleteFolder(documentList, folderName);            
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);            
         }
 
         [Fact]
@@ -180,12 +179,12 @@ namespace SharePoint.Tests
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            SP.Folder folder = await sharePointFileManager.CreateFolder(documentList, folderName);
+            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
             Assert.True(folder != null);
-            var files = await sharePointFileManager.GetFileDetailsListInFolder(documentList, folderName, documentType);
+            var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             Assert.True(files != null);
             Assert.True(files.Count == 0);
-            await sharePointFileManager.DeleteFolder(documentList, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
         }
 
     }

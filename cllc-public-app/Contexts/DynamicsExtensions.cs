@@ -687,7 +687,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 			return result;
 		}
 
-		/// <summary>
+
+        public static async Task<MicrosoftDynamicsCRMadoxioLicencetype> GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioLicencetype result = null;
+
+            try
+            {
+                result = _dynamicsClient.AdoxioLicencetypes.GetByKey(id.ToString());
+            }
+            catch (DataServiceQueryException dsqe)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Get a dynamics application by their Guid
         /// </summary>
         /// <param name="system"></param>

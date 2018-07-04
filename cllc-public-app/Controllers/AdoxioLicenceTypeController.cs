@@ -22,25 +22,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     public class AdoxioLicenceTypeController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;        
+        private readonly IConfiguration Configuration;      
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IDynamicsClient _dynamicsClient;
 
-        public AdoxioLicenceTypeController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public AdoxioLicenceTypeController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
-            this._system = context;            
             this._httpContextAccessor = httpContextAccessor;
+            this._dynamicsClient = dynamicsClient;
         }
 
         /// GET all licence types in Dynamics
         [HttpGet()]
         public async Task<JsonResult> GetDynamicsLicenseTypes()
         {
-            // get all licenses in Dynamics
-            List<AdoxioLicenseType> adoxioLicenses = await GetLicensesTypes(null);
+            List<AdoxioLicenseType> adoxioLiceseVMList = new List<AdoxioLicenseType>();
+            // get all licence types in Dynamics
+            var adoxioLicenceTypes = await _dynamicsClient.AdoxioLicencetypes.GetAsync();
 
-            return Json(adoxioLicenses);
+            foreach (var licenceType in adoxioLicenceTypes.Value)
+            {
+                adoxioLiceseVMList.Add(licenceType.ToViewModel());
+            }
+
+            return Json(adoxioLiceseVMList);
         }
 
         /// GET a specific licence type
@@ -54,7 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // get all licenses in Dynamics by Licencee Id
-            var adoxioLicenceType = await _system.GetLicenceTypeById(licenceTypeId);
+            var adoxioLicenceType = await _dynamicsClient.GetAdoxioLicencetypeById(licenceTypeId);
             if (adoxioLicenceType == null)
             {
                 return new NotFoundResult();
@@ -65,42 +71,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             
         }
-
-        private async Task<List<AdoxioLicenseType>> GetLicensesTypes(string licenceeId)
-        {
-            List<AdoxioLicenseType> adoxioLiceseVMList = new List<AdoxioLicenseType>();
-            IEnumerable<Adoxio_licencetype> dynamicsLicenseList = null;
-            if (string.IsNullOrEmpty(licenceeId))
-            {
-                dynamicsLicenseList = await _system.Adoxio_licencetypes.ExecuteAsync();
-            }
-            else
-            {
-                // get all licenses in Dynamics filtered by the GUID of the licencee
-                var filter = "adoxio_licencetypeId eq " + licenceeId;
-
-                try
-                {
-                    dynamicsLicenseList = await _system.Adoxio_licencetypes
-                        .AddQueryOption("$filter", filter).ExecuteAsync();
-                }
-                catch (Exception e)
-                {
-
-                }
-                
-            }
-
-            if (dynamicsLicenseList != null)
-            {
-                foreach (Adoxio_licencetype licenceType in dynamicsLicenseList)
-                {
-                    adoxioLiceseVMList.Add(licenceType.ToViewModel());
-                }
-            }
-            return adoxioLiceseVMList;
-        }
-
 
     }
 }
