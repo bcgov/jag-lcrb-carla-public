@@ -90,6 +90,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             client.DefaultRequestHeaders.Add("Authorization", authorization);
+            var digestTask = GetDigest(client);
+            digestTask.Wait();
+            string digest = digestTask.Result;
+            client.DefaultRequestHeaders.Add("X-RequestDigest", digest);
 
         }
 
@@ -198,28 +202,25 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name="name"></param>
             /// <returns></returns>
-            public async Task<SP.Folder> CreateFolder(string listTitle, string folderName)
+            public async Task<Object> CreateFolder(string listTitle, string folderName)
         {
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/folders");
 
-            
-            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");            
 
-            SP.Folder folder = new SP.Folder()
-            {
-                Name = folderName,
-                ServerRelativeUrl = $"{WebName}/{listTitle}/{folderName}"
-            };
+            var folder = CreateNewFolderRequest($"{WebName}/{listTitle}/{folderName}");
+           
 
             string jsonString = JsonConvert.SerializeObject(folder);
-            endpointRequest.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            endpointRequest.Content = strContent;
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
-            /*
-            if ((int)_statusCode != 200)
+            
+            if (_statusCode != HttpStatusCode.Created)
             {
                 string _responseContent = null;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
@@ -238,10 +239,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 jsonString = await response.Content.ReadAsStringAsync();
             }
-            */
+            
             return folder;
         }
 
+        private object CreateNewFolderRequest(string serverRelativeUri)
+        {
+            var type = new { type = "SP.Folder" };
+            var request = new { __metadata = type, ServerRelativeUrl = serverRelativeUri };
+            return request;
+        }
 
 
         public async Task<bool> DeleteFolder(string listTitle, string folderName)
@@ -436,6 +443,26 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = ms.ToArray();
             }
             
+            return result;
+        }
+
+        public async Task<string> GetDigest(HttpClient client)
+        {
+            string result = null;
+
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "contextinfo");
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+
+                JToken t = JToken.Parse(jsonString);
+                result = t["d"]["GetContextWebInformation"]["FormDigestValue"].ToString();
+            }
+
             return result;
         }
 
