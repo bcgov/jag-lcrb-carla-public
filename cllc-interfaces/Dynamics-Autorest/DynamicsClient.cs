@@ -56,6 +56,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
 
         /// <summary>
+        /// Gets the IAdoxioLicencetypes.
+        /// </summary>
+        public virtual IAdoxioLicencetypes AdoxioLicencetypes { get; private set; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
@@ -264,6 +269,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accounts = new Accounts(this);
             Applications = new Applications(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
+            AdoxioLicencetypes = new AdoxioLicencetypes(this);
             Contacts = new Contacts(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
