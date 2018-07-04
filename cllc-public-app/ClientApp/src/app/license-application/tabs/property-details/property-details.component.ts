@@ -12,17 +12,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PropertyDetailsComponent implements OnInit {
 
-  applicationId: string;
+  @Input('accountId') accountId: string;
+  @Input('applicationId') applicationId: string;
+  //applicationId: string;
   propertyDetailsForm: FormGroup;
   busy: Subscription;
   
   constructor(private applicationDataService: AdoxioApplicationDataService, private fb: FormBuilder,
     public snackBar: MatSnackBar, private route: ActivatedRoute) {
-
-    this.applicationId = route.snapshot.params.applicationId;
+    //this.applicationId = route.snapshot.params.applicationId;
   }
 
+  /**
+   *
+   * */
   ngOnInit() {
+    //create entry form
     this.createForm();
     // get application data, display form
     this.busy = this.applicationDataService.getApplication(this.applicationId).subscribe(
@@ -31,11 +36,15 @@ export class PropertyDetailsComponent implements OnInit {
         this.propertyDetailsForm.patchValue(data);
       },
       err => {
-        console.log("Error occured");
+        this.snackBar.open('Error getting Property Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log("Error occured getting Property Details");
       }
     );
   }
 
+  /**
+   * Property Details Form
+   * */
   createForm() {
     this.propertyDetailsForm = this.fb.group({
       id: [''],
@@ -47,8 +56,12 @@ export class PropertyDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * Save data in Dynamics
+   * */
   save() {
     //console.log('propertyDetailsForm valid, value: ', this.propertyDetailsForm.valid, this.propertyDetailsForm.value);
+
     if (this.propertyDetailsForm.valid) {
       this.busy = this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
         res => {
@@ -57,7 +70,7 @@ export class PropertyDetailsComponent implements OnInit {
         },
         err => {
           this.snackBar.open('Error saving Property Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
-          console.log("Error occured");
+          console.log("Error occured saving Property Details");
         });
     } else {
       Object.keys(this.propertyDetailsForm.controls).forEach(field => {
@@ -67,6 +80,10 @@ export class PropertyDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Check if entry field has an error
+   * @param field
+   */
   isFieldError(field: string) {
     const isError = !this.propertyDetailsForm.get(field).valid && this.propertyDetailsForm.get(field).touched;
     return isError;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-store-information',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./store-information.component.scss']
 })
 export class StoreInformationComponent implements OnInit {
+
+  @Input('accountId') accountId: string;
+  @Input('applicationId') applicationId: string;
 
   constructor() { }
 
