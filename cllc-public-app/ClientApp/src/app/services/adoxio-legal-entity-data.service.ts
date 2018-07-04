@@ -75,11 +75,30 @@ export class AdoxioLegalEntityDataService {
   createLegalEntity(data: any) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    //console.log("===== AdoxioLegalEntityDataService.post: ", data);
-
     return this.http.post("api/adoxiolegalentity/", data, { headers: headers });
-  
   }
+
+  /**
+   * update a  legal entity in Dynamics
+   * @param data - legal entity data
+   */
+  updateLegalEntity(data: any, id: string) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    return this.http.put(`api/adoxiolegalentity/${id}`, data, { headers: headers });
+  }
+
+  /**
+   * delete a  legal entity in Dynamics
+   * @param data - legal entity data
+   */
+  deleteLegalEntity(id: string) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    return this.http.post(`api/adoxiolegalentity/${id}/delete`,{}, { headers: headers });
+  }
+
+
   /**
    * Create a new legal entity in Dynamics
    * @param data - legal entity data
@@ -87,8 +106,6 @@ export class AdoxioLegalEntityDataService {
   createChildLegalEntity(data: any) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    //console.log("===== AdoxioLegalEntityDataService.post: ", data);
-
     return this.http.post("api/adoxiolegalentity/child-legal-entity", data, { headers: headers });
   }
 
@@ -99,7 +116,6 @@ export class AdoxioLegalEntityDataService {
   sendConsentRequestEmail(data: string[]) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    //console.log("===== AdoxioLegalEntityDataService.post: ", data);
     let legalEntityId:string = data[0];
     let apiPath = "api/adoxiolegalentity/" + legalEntityId + "/sendconsentrequests";
 
