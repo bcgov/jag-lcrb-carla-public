@@ -159,9 +159,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync();
             }
-            
+
             // parse the response
-            JObject responseObject = JObject.Parse(_responseContent);
+            // parse the response
+            JObject responseObject = null;
+            try
+            {
+                responseObject = JObject.Parse(_responseContent);
+            }
+            catch (JsonReaderException jre)
+            {
+                throw jre;
+            }
             // get JSON response objects into a list
             List<JToken> responseResults = responseObject["d"]["results"].Children().ToList();
             // create file details list to add from response
@@ -193,10 +202,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/folders");
-            HttpClient client = new HttpClient();
+
             
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");            
-            client.DefaultRequestHeaders.Add("Authorization", authorization);
+
             SP.Folder folder = new SP.Folder()
             {
                 Name = folderName,
@@ -208,9 +217,28 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
-           
-            jsonString = await response.Content.ReadAsStringAsync();
-                       
+            HttpStatusCode _statusCode = response.StatusCode;
+            /*
+            if ((int)_statusCode != 200)
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
+            else
+            {
+                jsonString = await response.Content.ReadAsStringAsync();
+            }
+            */
             return folder;
         }
 
@@ -234,8 +262,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await client.SendAsync(endpointRequest);
 
             if (response.StatusCode == HttpStatusCode.OK)
-            {                
+            {
                 result = true;
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
             }
 
             return result;
@@ -352,6 +395,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = true;
             }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
             return result;
         }
 
@@ -405,6 +463,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 result = true;
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
             }
 
             return result;
