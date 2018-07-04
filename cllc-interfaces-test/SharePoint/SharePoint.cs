@@ -140,9 +140,9 @@ namespace SharePoint.Tests
         public async void CreateFolderTest()
         {
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            string folderName = "Test Folder" + rnd.Next();
+            string folderName = "Test-Folder-" + rnd.Next();
 
-            SP.Folder folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
 
             Assert.True(folder != null);
 
@@ -164,7 +164,7 @@ namespace SharePoint.Tests
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            SP.Folder folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
             Assert.True(folder != null);
             var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             Assert.True(files != null);
@@ -179,7 +179,7 @@ namespace SharePoint.Tests
             string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            SP.Folder folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
             Assert.True(folder != null);
             var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             Assert.True(files != null);
