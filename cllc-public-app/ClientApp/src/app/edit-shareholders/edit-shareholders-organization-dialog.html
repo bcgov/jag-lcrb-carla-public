@@ -40,7 +40,7 @@
           </span>
         </div>
       </div>
-      <!-- <div class="form-group  col-md-5" *ngIf="orgType.value !== 'SoleProprietor'">
+      <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="form-group  col-md-5">
         <label>Number of non voting shares</label>
         <input style="width: 150px;" type="number" class="form-control" formControlName='numberOfNonVotingShares'>
         <div *ngIf="shareholderForm.controls['numberOfNonVotingShares'].touched && !shareholderForm.controls['numberOfNonVotingShares'].valid">
@@ -49,7 +49,7 @@
           </span>
         </div>
       </div>
-      <div class="form-group  col-md-12" *ngIf="orgType.value !== 'SoleProprietor'">
+      <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="form-group  col-md-12">
         <label>Date of Shares Issued</label>
         <div class="input-group">
           <input class="form-control" formControlName='dateIssued' style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker">
@@ -57,7 +57,7 @@
             <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </form>
 </mat-dialog-content>

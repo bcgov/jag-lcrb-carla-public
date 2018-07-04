@@ -31,7 +31,7 @@
 
   <div [ngBusy]="busy">
 
-    <div>
+    <div *ngIf="['PublicCorporation'].indexOf(businessType) == -1">
       <mat-table #table [dataSource]="dataSource">
 
         <!-- Column -->
@@ -76,7 +76,7 @@
     </div>
   </div>
   <p></p>
-  <div class="col-md-10 row" style="margin-bottom: 5px">
+  <div  *ngIf="['PublicCorporation'].indexOf(businessType) == -1" class="col-md-10 row" style="margin-bottom: 5px">
     <a class="btn btn-primary" tabindex="1" (click)="openPersonDialog()">
       <strong>Add Person</strong>
       <br>

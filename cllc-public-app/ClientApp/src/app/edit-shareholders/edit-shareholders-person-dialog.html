@@ -58,7 +58,7 @@
           </div>
         </div>
       </div> -->
-      <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
+      <div  *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1"  class="col-md-4" [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
         <label for="dateIssued">Date of Shares<br />Issued</label>
         <input type="date" class="form-control" formControlName="dateIssued">
         <div *ngIf="this.isFieldError('dateIssued')">
