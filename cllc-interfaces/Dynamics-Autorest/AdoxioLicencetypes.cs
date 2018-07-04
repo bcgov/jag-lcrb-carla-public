@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Contacts operations.
+    /// AdoxioLicencetypes operations.
     /// </summary>
-    public partial class Contacts : IServiceOperations<DynamicsClient>, IContacts
+    public partial class AdoxioLicencetypes : IServiceOperations<DynamicsClient>, IAdoxioLicencetypes
     {
         /// <summary>
-        /// Initializes a new instance of the Contacts class.
+        /// Initializes a new instance of the AdoxioLicencetypes class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Contacts(DynamicsClient client)
+        public AdoxioLicencetypes(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get entities from contacts
+        /// Get entities from adoxio_licencetypes
         /// </summary>
         /// <param name='top'>
         /// Show only the first n items
@@ -88,15 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetOKResponseModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOKResponseModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (expand != null)
-            {
-                if (expand.Count != expand.Distinct().Count())
-                {
-                    throw new ValidationException(ValidationRules.UniqueItems, "expand");
-                }
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -117,7 +110,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencetypes").ToString();
             List<string> _queryParameters = new List<string>();
             if (top != null)
             {
@@ -227,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetOKResponseModelModelModelModel>();
+            var _result = new HttpOperationResponse<GetOKResponseModelModelModel>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -236,7 +229,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseModelModelModelModel>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseModelModelModel>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -256,14 +249,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Add new entity to contacts
+        /// Add new entity to adoxio_licencetypes
         /// </summary>
         /// <param name='body'>
         /// New entity
-        /// </param>
-        /// <param name='prefer'>
-        /// Required in order for the service to return a JSON representation of the
-        /// object.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -286,7 +275,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMcontact body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetype>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioLicencetype body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -300,27 +289,18 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("body", body);
-                tracingParameters.Add("prefer", prefer);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Create", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencetypes").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
-            if (prefer != null)
-            {
-                if (_httpRequest.Headers.Contains("Prefer"))
-                {
-                    _httpRequest.Headers.Remove("Prefer");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("Prefer", prefer);
-            }
 
 
             if (customHeaders != null)
@@ -393,7 +373,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMcontact>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetype>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -402,7 +382,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMcontact>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioLicencetype>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -422,10 +402,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Delete entity from contacts
+        /// Delete entity from adoxio_licencetypes
         /// </summary>
-        /// <param name='contactid'>
-        /// key: contactid
+        /// <param name='adoxioLicencetypeid'>
+        /// key: adoxio_licencetypeid
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -448,11 +428,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string contactid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioLicencetypeid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (contactid == null)
+            if (adoxioLicencetypeid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "contactid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLicencetypeid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -461,15 +441,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("contactid", contactid);
+                tracingParameters.Add("adoxioLicencetypeid", adoxioLicencetypeid);
                 tracingParameters.Add("ifMatch", ifMatch);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Delete", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts({contactid})").ToString();
-            _url = _url.Replace("{contactid}", System.Uri.EscapeDataString(contactid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencetypes({adoxio_licencetypeid})").ToString();
+            _url = _url.Replace("{adoxio_licencetypeid}", System.Uri.EscapeDataString(adoxioLicencetypeid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -561,10 +541,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get entity from contacts by key
+        /// Get entity from adoxio_licencetypes by key
         /// </summary>
-        /// <param name='contactid'>
-        /// key: contactid
+        /// <param name='adoxioLicencetypeid'>
+        /// key: adoxio_licencetypeid
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -593,11 +573,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> GetByKeyWithHttpMessagesAsync(string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetype>> GetByKeyWithHttpMessagesAsync(string adoxioLicencetypeid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (contactid == null)
+            if (adoxioLicencetypeid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "contactid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLicencetypeid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -606,7 +586,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("contactid", contactid);
+                tracingParameters.Add("adoxioLicencetypeid", adoxioLicencetypeid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -614,8 +594,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts({contactid})").ToString();
-            _url = _url.Replace("{contactid}", System.Uri.EscapeDataString(contactid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencetypes({adoxio_licencetypeid})").ToString();
+            _url = _url.Replace("{adoxio_licencetypeid}", System.Uri.EscapeDataString(adoxioLicencetypeid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -701,7 +681,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMcontact>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetype>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -710,7 +690,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMcontact>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioLicencetype>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -730,10 +710,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Update entity in contacts
+        /// Update entity in adoxio_licencetypes
         /// </summary>
-        /// <param name='contactid'>
-        /// key: contactid
+        /// <param name='adoxioLicencetypeid'>
+        /// key: adoxio_licencetypeid
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -756,11 +736,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string contactid, MicrosoftDynamicsCRMcontact body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioLicencetypeid, MicrosoftDynamicsCRMadoxioLicencetype body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (contactid == null)
+            if (adoxioLicencetypeid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "contactid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioLicencetypeid");
             }
             if (body == null)
             {
@@ -773,15 +753,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("contactid", contactid);
+                tracingParameters.Add("adoxioLicencetypeid", adoxioLicencetypeid);
                 tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Update", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts({contactid})").ToString();
-            _url = _url.Replace("{contactid}", System.Uri.EscapeDataString(contactid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_licencetypes({adoxio_licencetypeid})").ToString();
+            _url = _url.Replace("{adoxio_licencetypeid}", System.Uri.EscapeDataString(adoxioLicencetypeid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

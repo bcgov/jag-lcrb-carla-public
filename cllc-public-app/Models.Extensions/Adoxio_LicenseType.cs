@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -26,6 +27,20 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             result.code = dynamicsLicenseType.Adoxio_code;
             result.name = dynamicsLicenseType.Adoxio_name;
+
+            return result;
+        }
+
+        public static AdoxioLicenseType ToViewModel(this MicrosoftDynamicsCRMadoxioLicencetype dynamicsLicenseType)
+        {
+            AdoxioLicenseType result = new AdoxioLicenseType();            
+
+            if (dynamicsLicenseType.AdoxioLicencetypeid != null)
+            {
+                result.id = dynamicsLicenseType.AdoxioLicencetypeid;
+            }
+            result.code = dynamicsLicenseType.AdoxioCode;
+            result.name = dynamicsLicenseType.AdoxioName;
 
             return result;
         }

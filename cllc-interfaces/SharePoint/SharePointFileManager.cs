@@ -87,9 +87,13 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // create the HttpClient that is used for our direct REST calls.
             client = new HttpClient();
-
+            
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             client.DefaultRequestHeaders.Add("Authorization", authorization);
+            var digestTask = GetDigest(client);
+            digestTask.Wait();
+            string digest = digestTask.Result;
+            client.DefaultRequestHeaders.Add("X-RequestDigest", digest);
 
         }
 
@@ -132,7 +136,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
         {
-            string serverRelativeUrl = $"{WebName}/"+ Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/"+ Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
             string _responseContent = null; 
             HttpRequestMessage _httpRequest =
                             new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/files");
@@ -159,9 +163,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync();
             }
-            
+
             // parse the response
-            JObject responseObject = JObject.Parse(_responseContent);
+            // parse the response
+            JObject responseObject = null;
+            try
+            {
+                responseObject = JObject.Parse(_responseContent);
+            }
+            catch (JsonReaderException jre)
+            {
+                throw jre;
+            }
             // get JSON response objects into a list
             List<JToken> responseResults = responseObject["d"]["results"].Children().ToList();
             // create file details list to add from response
@@ -189,38 +202,60 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name="name"></param>
             /// <returns></returns>
-            public async Task<SP.Folder> CreateFolder(string listTitle, string folderName)
+            public async Task<Object> CreateFolder(string listTitle, string folderName)
         {
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/folders");
-            HttpClient client = new HttpClient();
-            
-            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");            
-            client.DefaultRequestHeaders.Add("Authorization", authorization);
-            SP.Folder folder = new SP.Folder()
-            {
-                Name = folderName,
-                ServerRelativeUrl = $"{WebName}/{listTitle}/{folderName}"
-            };
+
+
+            var folder = CreateNewFolderRequest($"{WebName}/{listTitle}/{folderName}");
+           
 
             string jsonString = JsonConvert.SerializeObject(folder);
-            endpointRequest.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            endpointRequest.Content = strContent;
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
-           
-            jsonString = await response.Content.ReadAsStringAsync();
-                       
+            HttpStatusCode _statusCode = response.StatusCode;
+            
+            if (_statusCode != HttpStatusCode.Created)
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
+            else
+            {
+                jsonString = await response.Content.ReadAsStringAsync();
+            }
+            
             return folder;
         }
 
+        private object CreateNewFolderRequest(string serverRelativeUri)
+        {
+            var type = new { type = "SP.Folder" };
+            var request = new { __metadata = type, ServerRelativeUrl = serverRelativeUri };
+            return request;
+        }
 
 
         public async Task<bool> DeleteFolder(string listTitle, string folderName)
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -234,8 +269,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await client.SendAsync(endpointRequest);
 
             if (response.StatusCode == HttpStatusCode.OK)
-            {                
+            {
                 result = true;
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
             }
 
             return result;
@@ -251,7 +301,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<SP.Folder> GetFolder(string listTitle, string folderName)
         {
             SP.Folder result = null;
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -333,7 +383,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='" 
@@ -351,6 +401,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 result = true;
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
             }
             return result;
         }
@@ -381,6 +446,26 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public async Task<string> GetDigest(HttpClient client)
+        {
+            string result = null;
+
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "contextinfo");
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+
+                JToken t = JToken.Parse(jsonString);
+                result = t["d"]["GetContextWebInformation"]["FormDigestValue"].ToString();
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Delete a file
         /// </summary>
@@ -390,7 +475,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName) + "/" + Uri.EscapeDataString(fileName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName) + "/" + Uri.EscapeUriString(fileName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -405,6 +490,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 result = true;
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
             }
 
             return result;
