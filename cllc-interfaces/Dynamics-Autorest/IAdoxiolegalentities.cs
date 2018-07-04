@@ -82,31 +82,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </exception>
         Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLegalentity>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioLegalentity body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Add a reference to a specific adoxio_legalentities
-        /// </summary>
-        /// <param name='adoxioLegalentityid'>
-        /// key: adoxio_legalentityid
-        /// </param>
-        /// <param name='fieldName'>
-        /// key: field_name
-        /// </param>
-        /// <param name='body'>
-        /// Reference
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> AddRefWithHttpMessagesAsync(string adoxioLegalentityid, string fieldName, Odataid body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Delete entity from adoxio_legalentities
         /// </summary>
         /// <param name='adoxioLegalentityid'>
