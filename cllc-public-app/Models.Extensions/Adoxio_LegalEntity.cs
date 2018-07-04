@@ -34,12 +34,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_middlename = from.Adoxio_middlename;
             to.Adoxio_name = from.Adoxio_name;
             to.Adoxio_position = from.Adoxio_position;
-			to.Adoxio_ispartner = from.Adoxio_ispartner;
-			to.Adoxio_isshareholder = from.Adoxio_isshareholder;
-			to.Adoxio_istrustee = from.Adoxio_istrustee;
-			to.Adoxio_isdirector = from.Adoxio_isdirector;
-			to.Adoxio_isofficer = from.Adoxio_isofficer;
-			to.Adoxio_isowner = from.Adoxio_isowner;
+            to.Adoxio_ispartner = from.Adoxio_ispartner;
+            to.Adoxio_isshareholder = from.Adoxio_isshareholder;
+            to.Adoxio_istrustee = from.Adoxio_istrustee;
+            to.Adoxio_isdirector = from.Adoxio_isdirector;
+            to.Adoxio_isofficer = from.Adoxio_isofficer;
+            to.Adoxio_isowner = from.Adoxio_isowner;
             to.Adoxio_preferrednonvotingshares = from.Adoxio_preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.Adoxio_preferredvotingshares;
             to.Adoxio_sameasapplyingperson = from.Adoxio_sameasapplyingperson;
@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="from"></param>
         public static void CopyValues(this Adoxio_legalentity to, ViewModels.AdoxioLegalEntity from, Interfaces.Microsoft.Dynamics.CRM.System _system)
         {
-                     
+
             to.Adoxio_commonnonvotingshares = from.commonnonvotingshares;
             to.Adoxio_commonvotingshares = from.commonvotingshares;
             to.Adoxio_dateofbirth = from.dateofbirth;
@@ -64,12 +64,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_legalentitytype = (int?)from.legalentitytype;
             to.Adoxio_middlename = from.middlename;
             to.Adoxio_name = from.name;
-			to.Adoxio_ispartner = false;
-            to.Adoxio_isshareholder = false;
+            to.Adoxio_ispartner = false;
+            to.Adoxio_isshareholder = from.isShareholder;
             to.Adoxio_istrustee = false;
-			to.Adoxio_isdirector = false;
-			to.Adoxio_isofficer = false;
-			to.Adoxio_isowner = false;
+            to.Adoxio_isdirector = from.isDirector;
+            to.Adoxio_isofficer = from.isOfficer;
+            to.Adoxio_isowner = false;
             to.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -100,19 +100,22 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCommonvotingshares = from.commonvotingshares;
             to.AdoxioDateofbirth = from.dateofbirth;
             to.AdoxioFirstname = from.firstname;
-            to.AdoxioInterestpercentage = (double?) from.interestpercentage;
+            to.AdoxioInterestpercentage = (double?)from.interestpercentage;
             to.AdoxioIsindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
             to.AdoxioLastname = from.lastname;
-            to.AdoxioLegalentitytype = (int?)from.legalentitytype;
+            if (from.legalentitytype != null)
+            {
+                to.AdoxioLegalentitytype = (int?)from.legalentitytype;
+            }
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioName = from.name;
-			to.AdoxioIspartner = false;
-			to.AdoxioIsshareholder = false;
-			to.AdoxioIstrustee = false;
-			to.AdoxioIsdirector = from.isDirector;
-			to.AdoxioIsofficer = from.isOfficer;
+            to.AdoxioIspartner = false;
+            to.AdoxioIsshareholder = from.isShareholder;
+            to.AdoxioIstrustee = false;
+            to.AdoxioIsdirector = from.isDirector;
+            to.AdoxioIsofficer = from.isOfficer;
             to.AdoxioIsseniormanagement = from.isSenoirManagement;
-			to.AdoxioIsowner = false;
+            to.AdoxioIsowner = false;
             to.AdoxioPreferrednonvotingshares = from.preferrednonvotingshares;
             to.AdoxioPreferredvotingshares = from.preferredvotingshares;
             to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -143,7 +146,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.id = adoxio_legalentity.Adoxio_legalentityid.ToString();
                 }
-                
+
                 result.commonnonvotingshares = adoxio_legalentity.Adoxio_commonnonvotingshares;
                 result.commonvotingshares = adoxio_legalentity.Adoxio_commonvotingshares;
                 result.dateofbirth = adoxio_legalentity.Adoxio_dateofbirth;
@@ -156,11 +159,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
                 }
-                
+
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
                 result.name = adoxio_legalentity.Adoxio_name;
                 result.email = adoxio_legalentity.Adoxio_email;
-                
+
                 result.preferrednonvotingshares = adoxio_legalentity.Adoxio_preferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.Adoxio_preferredvotingshares;
                 // convert from int to bool.
@@ -174,8 +177,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
                 result.accountId = adoxio_legalentity._adoxio_account_value.ToString();
-                
-            }            
+
+            }
             return result;
         }
 
@@ -193,7 +196,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.id = adoxio_legalentity.AdoxioLegalentityid.ToString();
                 }
 
-                if(adoxio_legalentity._adoxioAccountValue != null)
+                if (adoxio_legalentity._adoxioAccountValue != null)
                 {
                     result.accountId = adoxio_legalentity._adoxioAccountValue;
                 }
@@ -202,7 +205,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
                 result.dateofbirth = adoxio_legalentity.AdoxioDateofbirth;
                 result.firstname = adoxio_legalentity.AdoxioFirstname;
-                result.interestpercentage = (decimal?) adoxio_legalentity.AdoxioInterestpercentage;
+                result.interestpercentage = (decimal?)adoxio_legalentity.AdoxioInterestpercentage;
                 // convert from int to bool.
                 result.isindividual = (adoxio_legalentity.AdoxioIsindividual != null && adoxio_legalentity.AdoxioIsindividual != 0);
                 result.lastname = adoxio_legalentity.AdoxioLastname;
@@ -219,7 +222,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 //result.isTrustee =  adoxio_legalentity.AdoxioIstrustee;
                 //result.isOwner =  adoxio_legalentity.AdoxioIsowner;
                 result.isDirector = adoxio_legalentity.AdoxioIsdirector;
-                result.isOfficer =  adoxio_legalentity.AdoxioIsofficer;
+                result.isOfficer = adoxio_legalentity.AdoxioIsofficer;
                 result.isSenoirManagement = adoxio_legalentity.AdoxioIsseniormanagement;
 
                 result.preferrednonvotingshares = adoxio_legalentity.AdoxioPreferrednonvotingshares;
@@ -249,16 +252,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (from != null)
             {
                 result = new Adoxio_legalentity();
-                
+
                 result.Adoxio_legalentityid = new Guid(from.id);
                 result.Adoxio_commonnonvotingshares = from.commonnonvotingshares;
                 result.Adoxio_commonvotingshares = from.commonvotingshares;
                 result.Adoxio_dateofbirth = from.dateofbirth;
                 result.Adoxio_firstname = from.firstname;
                 result.Adoxio_interestpercentage = from.interestpercentage;
-                result.Adoxio_isindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0; 
+                result.Adoxio_isindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
                 result.Adoxio_lastname = from.lastname;
-                result.Adoxio_legalentitytype = (int?) from.legalentitytype;
+                result.Adoxio_legalentitytype = (int?)from.legalentitytype;
                 result.Adoxio_middlename = from.middlename;
                 result.Adoxio_name = from.name;
 
@@ -267,7 +270,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 //result.AdoxioIstrustee = from.isTrustee;
                 //result.AdoxioIsowner = from.isOwner;
                 result.Adoxio_isdirector = from.isDirector;
-                result.Adoxio_isofficer  = from.isOfficer;
+                result.Adoxio_isofficer = from.isOfficer;
                 result.Adoxio_isseniormanagement = from.isSenoirManagement;
 
                 result.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
@@ -315,10 +318,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                     filter = "adoxio_position eq 5";
                     break;
                 case "director-officer":
-					filter = "(adoxio_position eq 3 or adoxio_position eq 4)";
+                    filter = "(adoxio_position eq 3 or adoxio_position eq 4)";
                     break;
                 case "director-officer-shareholder":
-					filter = "(adoxio_position eq 3 or adoxio_position eq 4 or adoxio_position eq 1)";
+                    filter = "(adoxio_position eq 3 or adoxio_position eq 4 or adoxio_position eq 1)";
                     break;
             }
 
