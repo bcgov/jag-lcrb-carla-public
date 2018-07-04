@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? isindividual { get; set; } //adoxio_isindividual (option set)
         public bool? sameasapplyingperson { get; set; } //adoxio_sameasapplyingperson (option set)
         [JsonConverter(typeof(StringEnumConverter))]
-        public Adoxio_applicanttypecodes legalentitytype { get; set; } //adoxio_legalentitytype (option set)
+        public Adoxio_applicanttypecodes? legalentitytype { get; set; } //adoxio_legalentitytype (option set)
         public string otherlegalentitytype { get; set; } //adoxio_otherlegalentitytype (text)
         public string firstname { get; set; } //adoxio_firstname (text)
         public string middlename { get; set; } //adoxio_middlename (text)
@@ -87,6 +87,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? isOfficer { get; set; }
         public bool? isDirector { get; set; }
         public bool? isSenoirManagement { get; set; }
+        public bool? isShareholder { get; set; }
 
         public DateTimeOffset? dateofbirth { get; set; } //adoxio_dateofbirth (date time)
         public decimal? interestpercentage { get; set; } //adoxio_interestpercentage (decimal number)
