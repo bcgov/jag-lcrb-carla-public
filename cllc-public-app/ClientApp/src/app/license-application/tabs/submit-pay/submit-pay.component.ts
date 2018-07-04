@@ -8,7 +8,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./submit-pay.component.scss']
 })
 export class SubmitPayComponent implements OnInit {
-  @Input() applicationId: string;
+
+  @Input('accountId') accountId: string;
+  @Input('applicationId') applicationId: string;
+  //@Input() applicationId: string;
   busy: Subscription;
 
   constructor(private paymentDataService: PaymentDataService) { }
