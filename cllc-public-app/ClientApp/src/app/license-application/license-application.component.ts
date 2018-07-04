@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
+import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-license-application',
@@ -12,8 +14,10 @@ import { switchMap } from 'rxjs/operators';
 export class LicenseApplicationComponent implements OnInit {
 
   applicationId: string;
+  applicationName: string;
   @Input('currentUser') currentUser: User;
   @Input('accountId') accountId: string;
+  busy: Subscription;
 
   public view_tab: string;
   public contactId: string;
@@ -24,7 +28,7 @@ export class LicenseApplicationComponent implements OnInit {
   };
   tabStructure: any[] = this.tabs.application;
 
-  constructor(private userDataService: UserDataService, private route: ActivatedRoute) {
+  constructor(private applicationDataService: AdoxioApplicationDataService, private userDataService: UserDataService, private route: ActivatedRoute) {
     this.view_tab = "contact-details";
     this.applicationId = route.snapshot.params.applicationId;
   }
@@ -42,6 +46,20 @@ export class LicenseApplicationComponent implements OnInit {
           this.componentLoaded = true;
         });
     }
+
+    // get application name
+    if (!this.applicationName) {
+      this.busy = this.applicationDataService.getApplication(this.applicationId).subscribe(
+        res => {
+          let data = res.json();
+          this.applicationName = data.name;
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+    }
+
   }
 
   getTab() {
