@@ -51,7 +51,7 @@
         <app-declaration></app-declaration>
       </div>
       <div [hidden]="view_tab != 'submit-pay'">
-        <app-submit-pay></app-submit-pay>
+        <app-submit-pay [applicationId]="applicationId"></app-submit-pay>
       </div>
       <p>&nbsp;</p>
       <div class="col-md-10 row">
@@ -60,9 +60,8 @@
           <br>
         </a>
         &nbsp;
-        <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
-          <strong *ngIf="view_tab != 'contact-details'">Next</strong>
-          <strong *ngIf="view_tab == 'contact-details'">Next</strong>
+        <a class="globalButton" *ngIf="view_tab != 'submit-pay'" class="btn btn-primary" tabindex="2" (click)="next()">
+          <strong>Next</strong>
           <br>
         </a>
       </div>
