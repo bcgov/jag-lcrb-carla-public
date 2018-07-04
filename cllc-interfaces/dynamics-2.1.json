@@ -2885,7 +2885,8 @@
       }
     },
     "/adoxio_licencetypes": {
-      "get": {
+      "get": {	    
+        "operationId": "AdoxioLicencetypes_Get",
         "produces": [
           "application/json"
         ],
@@ -3082,7 +3083,8 @@
         ],
         "summary": "Get entities from adoxio_licencetypes"
       },
-      "post": {
+      "post": {	    
+        "operationId": "AdoxioLicencetypes_Create",
         "consumes": [
           "application/json"
         ],
@@ -3121,7 +3123,8 @@
       }
     },
     "/adoxio_licencetypes({adoxio_licencetypeid})": {
-      "delete": {
+      "delete": {	    
+        "operationId": "AdoxioLicencetypes_Delete",
         "parameters": [
           {
 		    "in": "path", 
@@ -3153,7 +3156,8 @@
         ],
         "summary": "Delete entity from adoxio_licencetypes"
       },
-      "get": {
+      "get": {	    
+        "operationId": "AdoxioLicencetypes_GetByKey",
         "produces": [
           "application/json"
         ],
@@ -3259,7 +3263,8 @@
         ],
         "summary": "Get entity from adoxio_licencetypes by key"
       },
-      "patch": {
+      "patch": {	    
+        "operationId": "AdoxioLicencetypes_Update",
         "consumes": [
           "application/json"
         ],
