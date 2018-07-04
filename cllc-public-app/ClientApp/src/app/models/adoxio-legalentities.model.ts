@@ -11,7 +11,10 @@ export class AdoxioLegalEntity {
   firstname: string;
   middlename: string;
   lastname: string;
-  position: string;
+  isOfficer: boolean;
+  isDirector: boolean;
+  isSeniorManagement: boolean;
+  isShareholder: boolean;
   dateofbirth: Date;
   interestpercentage: number;
   commonvotingshares: number;
@@ -26,5 +29,6 @@ export class AdoxioLegalEntity {
   // helper fields
   shareholderType: string;
   sendConsentRequest: boolean;
+  parentLegalEntityId: string;
 
 }

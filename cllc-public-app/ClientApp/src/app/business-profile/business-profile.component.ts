@@ -13,11 +13,10 @@ import { switchMap } from 'rxjs/operators';
 })
 /** BusinessProfile component*/
 export class BusinessProfileComponent {
-  businessProfileId: string;
+
   @ViewChild(DynamicsFormComponent) dynamicsFormComponent: DynamicsFormComponent;
   @Input('currentUser') currentUser: User;
   // GUID for the account we want to edit the profile for.  If blank then it will be the current user's account.
-  @Input('accountId') accountId: string;
   legalEntityId: string;
 
   public view_tab: string;
@@ -35,43 +34,33 @@ export class BusinessProfileComponent {
 
   number_tabs = 7;
   _businessType: string;
-  get businessType(): string{
+  accountId: string;
+  get businessType(): string {
     return this._businessType;
   }
-  set businessType(value: string){
+  set businessType(value: string) {
     this._businessType = value;
     this.onBusinessTypeChange(value);
   }
   /** BusinessProfile ctor */
-  constructor(private userDataService: UserDataService, private route: ActivatedRoute, private dynamicsDataService: DynamicsDataService) {
+  constructor(private userDataService: UserDataService, private route: ActivatedRoute,
+    private dynamicsDataService: DynamicsDataService) {
     this.view_tab = "before-you-start";
   }
 
   ngOnInit(): void {
-    // TODO - pass currentUser in as router data rather than doing another call to getCurrentUser.
-    if (!this.currentUser) {
-      this.userDataService.getCurrentUser()
-        .then((data) => {
-          this.currentUser = data;
+    this.legalEntityId = this.route.snapshot.params.legalEntityId;
+    this.accountId = this.route.snapshot.params.accountId;
 
-          if (!this.accountId) {
-            this.accountId = this.currentUser.accountid;
-          }
-          // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord("account", this.accountId)
-            .then((data) => {
-              if (data.primarycontact) {
-                this.contactId = data.primarycontact.id;
-                this.businessType = data.businessType;
-              }
-            });
+    this.dynamicsDataService.getRecord("account", this.accountId)
+      .then((data) => {
+        if (data.primarycontact) {
+          this.contactId = data.primarycontact.id;
+        }
+        this.businessType = data.businessType;
+        this.componentLoaded = true;
+      });
 
-          this.componentLoaded = true;
-        });
-    }
-    this.businessProfileId = <string>this.route.snapshot.params.id;
-    //this.businessProfileId = <string>this.route.snapshot.paramMap.get('id');
-    //this.legalEntityId = this.route.snapshot.params["id"];
   }
 
   getTab() {
