@@ -99,6 +99,9 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             //get application status
             adoxioApplicationVM.applicationStatus = dynamicsApplication.Statuscode.ToString();
+
+            // set a couple of read-only flags to indicate status
+			adoxioApplicationVM.isPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved);
             
             //get parcel id
             adoxioApplicationVM.establishmentparcelid = dynamicsApplication.AdoxioEstablishmentparcelid;
@@ -110,10 +113,12 @@ namespace Gov.Lclb.Cllb.Public.Models
 			if (dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.Yes;
+				adoxioApplicationVM.isSubmitted = true;
             }
 			else
 			{
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.No;
+				adoxioApplicationVM.isSubmitted = false;
 			}
 
 			//get declarations
