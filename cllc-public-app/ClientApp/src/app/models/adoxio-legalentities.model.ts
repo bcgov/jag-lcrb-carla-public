@@ -15,6 +15,7 @@ export class AdoxioLegalEntity {
   isDirector: boolean;
   isSeniorManagement: boolean;
   isShareholder: boolean;
+  isPartner: boolean;
   dateofbirth: Date;
   interestpercentage: number;
   commonvotingshares: number;
