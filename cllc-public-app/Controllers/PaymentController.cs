@@ -82,15 +82,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			}
 
 			// set the application invoice trigger to create an invoice
-			//ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
-			//MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
-			//adoxioApplication2.CopyValues(vm);
-			adoxioApplication.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes;
-            _dynamicsClient.Applications.Update(id, adoxioApplication);
-			adoxioApplication = await GetDynamicsApplication(id);
+			ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
+			MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
+			adoxioApplication2.CopyValues(vm);
+			adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes;
+            _dynamicsClient.Applications.Update(id, adoxioApplication2);
+			adoxioApplication2 = await GetDynamicsApplication(id);
 
 			// load the invoice for this application
-			string invoiceId = adoxioApplication._adoxioInvoiceValue;
+			string invoiceId = adoxioApplication2._adoxioInvoiceValue;
 			int retries = 0;
 			while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
 			{
@@ -98,12 +98,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				retries++;
 				_logger.LogError("No invoice found, retry = " + retries);
 				System.Threading.Thread.Sleep(1000);
-				invoiceId = adoxioApplication._adoxioInvoiceValue;
+				invoiceId = adoxioApplication2._adoxioInvoiceValue;
 			}
 			_logger.LogError("Created invoice for application = " + invoiceId);
 
 			MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-			var ordernum = GetOrderNumForApplication(adoxioApplication); //invoice.AdoxioTransactionid;
+			var ordernum = GetOrderNumForApplication(adoxioApplication2); //invoice.AdoxioTransactionid;
 			var orderamt = invoice.Totalamount;
 
 			Dictionary<string, string> redirectUrl;
