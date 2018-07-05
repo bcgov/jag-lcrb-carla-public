@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
@@ -20,23 +20,21 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   adoxioLegalEntityList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
-  displayedColumns = ['name', 'email', 'position', 'dateofappointment'];
+  displayedColumns = ['name', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog,
-              public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getDirectorsAndOfficers();
   }
 
   getDirectorsAndOfficers() {
-    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "directors-officers-management")
-      .then((data) => {
-        //console.log("getLegalEntitiesbyPosition('director-officer'): ", data);
-        //console.log("parameter: accountId = ", this.accountId)
-        this.dataSource.data = data;
+    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "directors-officers-management")
+      .subscribe((data) => {
+        this.dataSource.data = data.json();
       });
   }
 
@@ -44,13 +42,13 @@ export class DirectorsAndOfficersComponent implements OnInit {
     let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
     adoxioLegalEntity.isShareholder = false;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
-    // adoxioLegalEntity.position = formData.position;
+    adoxioLegalEntity.id = formData.id;
     adoxioLegalEntity.isindividual = true;
-    adoxioLegalEntity.firstname = formData.firstName;
-    adoxioLegalEntity.lastname = formData.lastName;
-    adoxioLegalEntity.name = formData.firstName + " " + formData.lastName;
+    adoxioLegalEntity.firstname = formData.firstname;
+    adoxioLegalEntity.lastname = formData.lastname;
+    adoxioLegalEntity.name = formData.firstname + " " + formData.lastname;
     adoxioLegalEntity.email = formData.email;
-    adoxioLegalEntity.dateofappointment = formData.dateOfAppointment; //adoxio_dateofappointment
+    adoxioLegalEntity.dateofappointment = formData.dateofappointment; //adoxio_dateofappointment
     // adoxioLegalEntity.legalentitytype = "PrivateCorporation";
     adoxioLegalEntity.isOfficer = formData.isOfficer;
     adoxioLegalEntity.isDirector = formData.isDirector;
@@ -65,11 +63,15 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   // Open Person shareholder dialog
-  openPersonDialog() {
+  openPersonDialog(person: AdoxioLegalEntity) {
     // set dialogConfig settings
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      data: {
+        person: person
+      }
+    }
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(DirectorAndOfficerPersonDialog, dialogConfig);
@@ -77,7 +79,11 @@ export class DirectorsAndOfficersComponent implements OnInit {
       formData => {
         if (formData) {
           let adoxioLegalEntity = this.formDataToModelData(formData);
-          this.busyObsv = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity).subscribe(
+          let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
+          if(formData.id){
+            save = this.legalEntityDataservice.updateLegalEntity(adoxioLegalEntity, formData.id);
+          }
+          this.busyObsv = save.subscribe(
             res => {
               this.snackBar.open('Director / Officer Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getDirectorsAndOfficers();
@@ -89,7 +95,15 @@ export class DirectorsAndOfficersComponent implements OnInit {
         }
       }
     );
-    
+
+  }
+
+  deleteIndividual(person: AdoxioLegalEntity) {
+    if(confirm('Delete person?')){
+      this.legalEntityDataservice.deleteLegalEntity(person.id).subscribe(data => {
+        this.getDirectorsAndOfficers();
+      })
+    }
   }
 
   private handleError(error: Response | any) {
@@ -110,23 +124,27 @@ export class DirectorsAndOfficersComponent implements OnInit {
  * Director and Officer Person Dialog
  ***************************************/
 @Component({
-  selector:    'director-and-officer-person-dialog',
+  selector: 'director-and-officer-person-dialog',
   templateUrl: 'director-and-officer-person-dialog.html',
 })
 export class DirectorAndOfficerPersonDialog {
   directorOfficerForm: FormGroup;
 
-  constructor(private frmbuilder: FormBuilder, private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialog>) {
-    this.directorOfficerForm = frmbuilder.group({
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.directorOfficerForm = fb.group({
       isDirector: [false],
       isOfficer: [false],
       isSeniorManagement: [false],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       email: ['', Validators.email],
-      dateOfAppointment: ['', Validators.required]
-    }, { validator: this.dateLessThanToday('dateOfAppointment') }
+      dateofappointment: ['', Validators.required]
+    }, { validator: this.dateLessThanToday('dateofappointment') }
     );
+
+    if(data && data.person){
+      this.directorOfficerForm.patchValue(data.person);
+    }
   }
 
   dateLessThanToday(field1) {
@@ -145,7 +163,9 @@ export class DirectorAndOfficerPersonDialog {
 
   save() {
     if (this.directorOfficerForm.valid) {
-      this.dialogRef.close(this.directorOfficerForm.value);
+      let formData = this.data.person || {};
+      formData = (<any>Object).assign(formData, this.directorOfficerForm.value);
+      this.dialogRef.close(formData);
     } else {
       Object.keys(this.directorOfficerForm.controls).forEach(field => {
         const control = this.directorOfficerForm.get(field);
