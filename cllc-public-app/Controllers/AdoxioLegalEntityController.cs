@@ -472,9 +472,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Route("child-legal-entity")]
         public async Task<IActionResult> CreateDynamicsShareholderLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
-
-            // create a new legal entity.
-
+            if(item == null){
+                return BadRequest();
+            }
 
             var adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
             adoxioLegalEntity.CopyValues(item);
