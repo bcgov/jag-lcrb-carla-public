@@ -37,11 +37,6 @@ export class PaymentConfirmationComponent {
     ngOnInit() {
     	// TODO get slug from URL parameters and find associated Application
     	this.verify_payment();
-
-	    //setTimeout(function () {
-	    //}, 5000);
-
-        //this.router.navigate(['./license-application/' + this.applicationId]);
     }
 
   verify_payment() 
@@ -70,5 +65,10 @@ export class PaymentConfirmationComponent {
         console.log("Error occured");
       }
     );
+  }
+
+  return_to_application()
+  {
+     this.router.navigate(['./license-application/' + this.applicationId]);
   }
 }
