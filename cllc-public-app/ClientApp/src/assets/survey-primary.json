@@ -55,12 +55,6 @@
               "text": "No, the applicant is applying as an Indigenous nation in its own name, rather than as a sole proprietor, a partnership or a corporation"
             }
           ]
-        },
-        {
-          "type": "infotext",
-          "name": "note",
-          "title": "Note: An Indigenous nation is not required to register as a business. In such cases, the Indigenous nation may register their business type with BCeID as ‘other’.",
-          "titleLocation": "hidden"
         }
       ],
       "visible": false,
@@ -140,10 +134,17 @@
               "text": "I don't know"
             }
           ]
-        }
+        },
+          {
+            "type": "infotext",
+            "name": "note",
+            "title": "Note: An Indigenous nation is not required to register as a business. In such cases, the Indigenous nation may register their business type with BCeID as ‘other’.",
+            "titleLocation": "hidden"
+          }
+        
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and ({registeredBusiness} = 'Yes' or {registeredBusiness} = 'No'"
     },
     {
       "name": "p5",
