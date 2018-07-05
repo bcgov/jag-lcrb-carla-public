@@ -103,7 +103,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			_logger.LogError("Created invoice for application = " + invoiceId);
 
 			MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-			var ordernum = GetOrderNumForApplication(adoxioApplication2); //invoice.AdoxioTransactionid;
+			//var ordernum = GetOrderNumForApplication(adoxioApplication2); 
+			var ordernum = invoice.AdoxioTransactionid;
 			var orderamt = invoice.Totalamount;
 
 			Dictionary<string, string> redirectUrl;
