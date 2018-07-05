@@ -187,6 +187,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 					// set the Application invoice status back to No
 					adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
+					adoxioApplication2._adoxioInvoiceValue = null;
+					adoxioApplication2.AdoxioInvoice = null;
 
 					_dynamicsClient.Applications.Update(id, adoxioApplication2);
                     adoxioApplication2 = await GetDynamicsApplication(id);
