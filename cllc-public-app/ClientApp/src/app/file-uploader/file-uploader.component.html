@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-elevation-z0">
   <div class="center">
     <p></p>
     <file-drop (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
@@ -10,7 +10,7 @@
       </div>
     </file-drop>
     <br>
-    <mat-card>
+    <mat-card class="mat-elevation-z0">
       <div class="upload-table">
         <div [ngBusy]="busy">
           <table class="table">
