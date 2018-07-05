@@ -62,5 +62,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         IContacts Contacts { get; }
 
+        /// <summary>
+        /// Gets the IInvoices.
+        /// </summary>
+        IInvoices Invoices { get; }
+
     }
 }
