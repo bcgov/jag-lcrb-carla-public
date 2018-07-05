@@ -593,6 +593,130 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             await LogoutAndCleanupTestUser(strId);
         }
+        
+        private async Task<ViewModels.Account> AccountFactory(){
+            var loginUser = randomNewUserName("TestUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
+            var response = await _client.SendAsync(request);
+            string jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
+            ViewModels.Account vmAccount = new ViewModels.Account
+            {
+                id = user.accountid
+            };
+            return vmAccount;
+        } 
 
+        [Fact]
+		public async System.Threading.Tasks.Task TestCreateDynamicsShareholderLegalEntity()
+		{
+            string service = "adoxiolegalentity";
+            // Creating parent
+            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            {
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                firstname = "LETFirst",
+                middlename = "LETMiddle",
+                lastname = "LETLast",
+                name = randomNewUserName("LETFirst LETLast", 6),
+                dateofbirth = DateTime.Now,
+                isindividual = true,
+                commonvotingshares = 2018,
+                commonnonvotingshares = 3000,
+                account = await AccountFactory()
+            };
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+            string jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+
+            Assert.Equal("LETFirst LETLast", responseViewModel.name);
+            var parentAccountId = responseViewModel.id;
+
+            // Creating child
+            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            {
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                firstname = "Create",
+                middlename = "Dynamics",
+                lastname = "ShareholderLE",
+				name = "Create ShareholderLE",
+                commonvotingshares = 100,
+                account = await AccountFactory(),
+                isShareholder = true,
+                isindividual = false,
+                // Parent's id must be populated
+                parentLegalEntityId = parentAccountId
+            };
+
+            jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/child-legal-entity");
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            
+            response = await _client.SendAsync(request);
+            var _discard = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+		public async System.Threading.Tasks.Task TestGetDynamicsLegalEntitiesByPosition()
+		{
+           string service = "adoxiolegalentity";
+            // Creating parent
+            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            {
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                firstname = "LETFirst",
+                middlename = "LETMiddle",
+                lastname = "LETLast",
+                name = randomNewUserName("LETFirst LETLast", 6),
+                isShareholder = true,
+                isindividual = false,
+                account = await AccountFactory()
+            };
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+            string jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+
+            var parentAccountId = responseViewModel.id;
+
+            // Creating child
+            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            {
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                firstname = "Create",
+                middlename = "Dynamics",
+                lastname = "ShareholderLE",
+				name = "Create ShareholderLE",
+                commonvotingshares = 100,
+                account = await AccountFactory(),
+                isShareholder = true,
+                isindividual = false,
+                parentLegalEntityId = parentAccountId
+            };
+
+            jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/child-legal-entity");
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            await _client.SendAsync(request);
+
+            // Get legal entity by position
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + parentAccountId + "/shareholders");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+        }
     }
 }
