@@ -4,13 +4,16 @@ import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-da
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 
 export class ProfileSummary {
   legalEntityId: string;
   accountId: string;
   name: string;
   legalentitytype: string;
-  profileComplete: boolean;
+  profileComplete: string;
+  businessRelationship: string;
+
 }
 
 @Component({
@@ -46,7 +49,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
   getBusinessProfileData() {
     this.busy = this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
       res => {
-        let data = res.json();
+        let data:AdoxioLegalEntity[] = res.json();
         //console.log("getBusinessProfileSummary():", data);
         if (data) {
           //Change Business Releationship label when 
@@ -54,13 +57,12 @@ export class BusinessProfileSummaryComponent implements OnInit {
             let profileSummary = new ProfileSummary();
             profileSummary.legalEntityId = entry.id;
             profileSummary.accountId  = entry.accountId;
-            //profileSummary.accountId = entry.accountId;
             profileSummary.name = entry.name;
-            profileSummary.profileComplete = false;
-            if (entry.legalentitytype == 0) {
-              profileSummary.legalentitytype = "Applicant"
+            profileSummary.profileComplete = 'No';
+            if(entry.isShareholder){
+              profileSummary.businessRelationship = 'Shareholder';
             } else {
-              profileSummary.legalentitytype = entry.legalentitytype;
+              profileSummary.businessRelationship = 'Applicant';
             }
             this.profileSummaryList.push(profileSummary);
           });

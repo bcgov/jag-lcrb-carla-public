@@ -13,7 +13,6 @@ import { switchMap } from 'rxjs/operators';
 })
 /** BusinessProfile component*/
 export class BusinessProfileComponent {
-
   @ViewChild(DynamicsFormComponent) dynamicsFormComponent: DynamicsFormComponent;
   @Input('currentUser') currentUser: User;
   // GUID for the account we want to edit the profile for.  If blank then it will be the current user's account.
@@ -35,6 +34,7 @@ export class BusinessProfileComponent {
   number_tabs = 7;
   _businessType: string;
   accountId: string;
+  businessName: string;
   get businessType(): string {
     return this._businessType;
   }
@@ -59,6 +59,7 @@ export class BusinessProfileComponent {
         }
         this.businessType = data.businessType;
         this.componentLoaded = true;
+        this.businessName = data.name;
       });
 
   }
