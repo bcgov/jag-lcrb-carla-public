@@ -26,6 +26,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentaddresspostalcode = from.establishmentaddresspostalcode;
             to.AdoxioAddresscity = from.establishmentaddresscity;
             to.AdoxioEstablishmentparcelid = from.establishmentparcelid;
+            //TODO add to autorest
+            //to.AdoxioAuthorizedtosubmit = from.authorizedtosubmit;
+            to.AdoxioSignatureagreement = from.signatureagreement;
+            //TODO add to autorest
             //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
             
 			if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
@@ -47,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             //}
         }
 
-        
+
 
         public async static Task<AdoxioApplication> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient )
         {
@@ -100,6 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioApplicationVM.establishmentparcelid = dynamicsApplication.AdoxioEstablishmentparcelid;
 
             //get additional property info
+            //TODO add to autorest
             //adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
 
 			if (dynamicsApplication.AdoxioInvoicetrigger == 1)
@@ -110,6 +115,11 @@ namespace Gov.Lclb.Cllb.Public.Models
 			{
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.No;
 			}
+
+			//get declarations
+            //TODO add to autorest
+            //adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
+            adoxioApplicationVM.signatureagreement = dynamicsApplication.AdoxioSignatureagreement;
 
             return adoxioApplicationVM;
         }
@@ -132,8 +142,13 @@ namespace Gov.Lclb.Cllb.Public.Models
 				result.Adoxio_establishmentaddresscity = adoxioApplicationVM.establishmentaddresscity;
 				result.Adoxio_establishmentaddresspostalcode = adoxioApplicationVM.establishmentaddresspostalcode;
                 result.Adoxio_establishmentparcelid = adoxioApplicationVM.establishmentparcelid;
+                //TODO add to autorest
                 //result.Adoxio_additionalpropertyinformation = adoxioApplicationVM.additionalpropertyinformation;
-				//result.Statuscode = adoxioApplicationVM.Statuscode;
+                //TODO add to autorest
+                //result.Adoxio_authorizedtosubmit = adoxioApplicationVM.authorizedtosubmit;
+                result.Adoxio_signatureagreement = adoxioApplicationVM.signatureagreement;
+
+                // ??? result.Statuscode = adoxioApplicationVM.Statuscode;
             }
             return result;
         }

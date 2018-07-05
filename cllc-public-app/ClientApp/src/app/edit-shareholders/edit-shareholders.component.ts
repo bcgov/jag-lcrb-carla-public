@@ -44,9 +44,9 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   getShareholders() {
-    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "shareholders")
-      .then((data) => {
-        this.dataSource.data = data;
+    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "shareholders")
+      .subscribe((data) => {
+        this.dataSource.data = data.json();
       });
   }
 
