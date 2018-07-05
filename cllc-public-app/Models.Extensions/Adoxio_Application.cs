@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class Adoxio_ApplicationExtensions
     {
 
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.AdoxioApplication from)
+		public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.AdoxioApplication from)
         {
             //TODO set all existing fields in Dynamics
             to.AdoxioName = from.name; 
@@ -31,6 +31,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSignatureagreement = from.signatureagreement;
             //TODO add to autorest
             //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
+            
+			if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
+			{
+				to.AdoxioInvoicetrigger = 1;
+			}
+
+			//var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeByName(from.licenseType).Result;
+			//to.AdoxioLicenceType = adoxio_licencetype;
+			//to._adoxioLicencetypeValue = adoxio_licencetype.AdoxioLicencetypeid;
 
             //if (!String.IsNullOrEmpty(from.applicationStatus))
             //{
@@ -74,9 +83,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             //get license type from Adoxio_licencetype entity
             if (dynamicsApplication._adoxioLicencetypeValue != null)
             {
-                Guid? adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
-                //Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
-                //adoxioApplicationVM.licenseType = adoxio_licencetype.Adoxio_name;
+                Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
+				var adoxio_licencetype = await dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
+                adoxioApplicationVM.licenseType = adoxio_licencetype.AdoxioName;
             }
 
             //get establishment name and address
@@ -98,7 +107,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             //TODO add to autorest
             //adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
 
-            //get declarations
+			if (dynamicsApplication.AdoxioInvoicetrigger == 1)
+            {
+				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.Yes;
+            }
+			else
+			{
+				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.No;
+			}
+
+			//get declarations
             //TODO add to autorest
             //adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
             adoxioApplicationVM.signatureagreement = dynamicsApplication.AdoxioSignatureagreement;
