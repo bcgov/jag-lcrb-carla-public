@@ -14,7 +14,6 @@ export class PropertyDetailsComponent implements OnInit {
 
   @Input('accountId') accountId: string;
   @Input('applicationId') applicationId: string;
-  //applicationId: string;
   propertyDetailsForm: FormGroup;
   busy: Subscription;
   
