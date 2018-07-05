@@ -30,6 +30,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string contactpersonemail { get; set; } //adoxio_email
         public string contactpersonphone { get; set; } //adoxio_contactpersonphone
 
-        public ViewModels.Account applicant { get; set; }
+		public GeneralYesNo adoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
+
+		public ViewModels.Account applicant { get; set; }
     }
 }

@@ -36,9 +36,9 @@ export class SecurityAssessmentsComponent implements OnInit {
 
   getDirectorsAndOfficersAndShareholders() {
     let legalEntitiesList = [];
-    this.busy = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "director-officer-shareholder")
-      .then((data) => {
-        //console.log("getLegalEntitiesbyPosition(\"director-officer-shareholder\"): ", data);
+    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "director-officer-shareholder")
+      .subscribe((result) => {
+        let data = result.json();
         data.forEach((entry) => {
           entry.sendConsentRequest = false;
           if (entry.isindividual) {
