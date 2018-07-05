@@ -487,6 +487,29 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+
+        /// <summary>
+        /// Get an Invoice by the Id
+        /// </summary>
+        /// <param name="system">Re</param>
+        /// <param name="id"></param>
+        /// <returns>The Invoice, or null if it does not exist</returns>
+        public static async Task<MicrosoftDynamicsCRMinvoice> GetInvoiceById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMinvoice result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Invoices.GetByKeyAsync(id.ToString());
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                result = null;
+            }
+            return result;
+        }
+
+
         public static async Task<MicrosoftDynamicsCRMadoxioLegalentity> GetLegalEntityById(this IDynamicsClient system, Guid id)
         {
             MicrosoftDynamicsCRMadoxioLegalentity result;
