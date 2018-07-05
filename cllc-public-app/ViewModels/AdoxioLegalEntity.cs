@@ -37,7 +37,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Estate = 845280013,
         [Display(Name = "Local Government")]
         LocalGovernment = 845280014,
-        University = 845280016
+        University = 845280016,
+        
     }
     public enum Adoxio_accounttypecodes
     {
@@ -86,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //public PositionOptions position; //adoxio_position (option set)
         public bool? isOfficer { get; set; }
         public bool? isDirector { get; set; }
-        public bool? isSenoirManagement { get; set; }
+        public bool? isSeniorManagement { get; set; }
         public bool? isShareholder { get; set; }
         public bool? isPartner { get; set; }
 

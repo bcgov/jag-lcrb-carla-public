@@ -1,8 +1,8 @@
-<mat-card>
+<mat-card class="mat-elevation-z0">
 
     <mat-card-title><h1>Business Profile</h1></mat-card-title>
     <mat-card-subtitle><p>Your business profile represents all the legal entities that make up your organizations structure</p></mat-card-subtitle>
-    <mat-card>
+    <mat-card  class="mat-elevation-z0">
 
       <div [ngBusy]="busy"></div>
 
@@ -16,7 +16,7 @@
           </mat-form-field>
         </div>
 
-        <mat-table matSort #table [dataSource]="dataSource">
+        <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
           <!-- Column -->
           <ng-container matColumnDef="organization">
@@ -31,7 +31,7 @@
           Column
           <ng-container matColumnDef="businessRelationship">
             <mat-header-cell mat-sort-header *matHeaderCellDef> Business Relationship </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.legalentitytype}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.businessRelationship}} </mat-cell>
           </ng-container>
 
           <!-- Column -->

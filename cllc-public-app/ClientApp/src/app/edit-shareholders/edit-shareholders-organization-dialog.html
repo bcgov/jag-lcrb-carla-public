@@ -7,11 +7,16 @@
         <label>Organization Type</label>
         <select class="form-control" style="width: 250px;" formControlName='legalentitytype' #orgType>
           <option value="PrivateCorporation">Private Corporation</option>
-          <option value="Partnership">Partnership</option>
-          <option value="SoleProprietor">Sole Proprietor</option>
           <option value="PublicCorporation">Public Corporation</option>
+          <option value="UnlimitedLiabilityCorporation">Unlimited Liability Corporation</option>
+          <option value="LimitedLiabilityCorporation">Limited Liability Corporation</option>
+          <option value="GeneralPartnership">General Partnership</option>
+          <option value="LimitedPartnership">Limited Partnership</option>
+          <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
           <option value="Society">Society</option>
-          <option value="Other">Other</option>
+          <option value="Cooop">Co-op</option>
+          <option value="Trust">Trust</option>
+          <option value="Estate">Estate</option>
         </select>
         <div *ngIf="form.controls['legalentitytype'].touched && !form.controls['legalentitytype'].valid">
           <span *ngIf="form.controls['legalentitytype'].hasError('required') ">
@@ -52,10 +57,12 @@
       <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="form-group  col-md-12">
         <label>Date of Shares Issued</label>
         <div class="input-group">
-          <input class="form-control" formControlName='dateIssued' style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" ngbDatepicker #d="ngbDatepicker">
-          <div class="input-group-append">
+          <!-- <input class="form-control" formControlName='dateIssued' style="width: 110px;" placeholder="yyyy-mm-dd" (click)="d.toggle()"
+            name="dp" ngbDatepicker #d="ngbDatepicker"> -->
+          <input type="text" formControlName='dateIssued' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+          <!-- <div class="input-group-append">
             <mat-icon style="margin-top: 5px; margin-left: 5px; cursor: pointer;" (click)="d.toggle()">calendar_today</mat-icon>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
