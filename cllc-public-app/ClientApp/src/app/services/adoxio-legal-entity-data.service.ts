@@ -18,44 +18,7 @@ export class AdoxioLegalEntityDataService {
     headers.append("Content-Type", "application/json");
 
     // call API
-    return this.http.get(apiPath, {headers: headers})
-      .toPromise()
-      .then((res: Response) => {
-        //console.log(res);
-        let data = res.json();
-        let legalEntitiesList = [];
-
-        data.forEach((entry) => {
-          let adoxioLegalEntity = new AdoxioLegalEntity();
-          adoxioLegalEntity.account = entry.account;
-          adoxioLegalEntity.commonnonvotingshares = entry.commonnonvotingshares;
-          adoxioLegalEntity.commonvotingshares = entry.commonvotingshares;
-          adoxioLegalEntity.dateofbirth = entry.dateofbirth;
-          adoxioLegalEntity.firstname = entry.firstname
-          adoxioLegalEntity.id = entry.id;
-          adoxioLegalEntity.interestpercentage = entry.interestpercentage;
-          adoxioLegalEntity.isindividual = entry.isindividual;
-          adoxioLegalEntity.lastname = entry.lastname;
-          adoxioLegalEntity.legalentitytype = entry.legalentitytype;
-          adoxioLegalEntity.middlename = entry.middlename;
-          adoxioLegalEntity.name = entry.name;
-          adoxioLegalEntity.otherlegalentitytype = entry.otherlegalentitytype;
-          // adoxioLegalEntity.position = entry.position;
-          adoxioLegalEntity.preferrednonvotingshares = entry.preferrednonvotingshares;
-          adoxioLegalEntity.preferredvotingshares = entry.preferredvotingshares;
-          adoxioLegalEntity.relatedentities = entry.relatedentities;
-          adoxioLegalEntity.sameasapplyingperson = entry.sameasapplyingperson;
-          adoxioLegalEntity.shareholderType = entry.shareholderType;
-          adoxioLegalEntity.email = entry.email;
-          if (entry.dateofappointment) {
-            adoxioLegalEntity.dateofappointment = new Date(entry.dateofappointment);
-          }
-          legalEntitiesList.push(adoxioLegalEntity);
-        });
-
-        return legalEntitiesList;
-      })
-      .catch(this.handleError);
+    return this.http.get(apiPath, {headers: headers});
   }
 
   getBusinessProfileSummary() {
