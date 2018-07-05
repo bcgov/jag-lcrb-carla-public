@@ -52,7 +52,13 @@ export class EditShareholdersComponent implements OnInit {
 
   formDataToModelData(formData: any, shareholderType: string): AdoxioLegalEntity {
     let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
-    adoxioLegalEntity.isShareholder = true;
+    if (['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(this.businessType) !== -1) {
+      adoxioLegalEntity.isPartner = true;
+      adoxioLegalEntity.isShareholder = false;
+    } else {
+      adoxioLegalEntity.isShareholder = true;
+      adoxioLegalEntity.isPartner = false;
+    }
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     if (shareholderType == "Person") {
       adoxioLegalEntity.isindividual = true;
@@ -86,7 +92,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   deleteShareholder(shareholder: AdoxioLegalEntity) {
-    if(confirm('Delete shareholer?')){
+    if (confirm('Delete shareholer?')) {
       this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
         this.getShareholders();
       })
@@ -218,16 +224,15 @@ export class ShareholderPersonDialog implements OnInit {
 
   save() {
     //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
-    if (this.form.valid) {
-      let formData = this.data.shareholder || {};
-      formData = (<any>Object).assign(formData, this.form.value);
-      this.dialogRef.close(formData);
-    } else {
+    if (!this.form.valid) {
       Object.keys(this.form.controls).forEach(field => {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
     }
+    let formData = this.data.shareholder || {};
+    formData = (<any>Object).assign(formData, this.form.value);
+    this.dialogRef.close(formData);
   }
 
   isFieldError(field: string) {
@@ -236,7 +241,7 @@ export class ShareholderPersonDialog implements OnInit {
   }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef.close(); 
   }
 
 }
@@ -266,16 +271,15 @@ export class ShareholderOrganizationDialog {
 
   save() {
     //console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
-    if (this.form.valid) {
-      let formData = this.data.shareholder || {};
-      formData = (<any>Object).assign(formData, this.form.value);
-      this.dialogRef.close(formData);
-    } else {
+    if (!this.form.valid){
       Object.keys(this.form.controls).forEach(field => {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
     }
+      let formData = this.data.shareholder || {};
+      formData = (<any>Object).assign(formData, this.form.value);
+      this.dialogRef.close(formData);
   }
 
 
