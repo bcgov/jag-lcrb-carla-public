@@ -73,7 +73,7 @@
 
   <div *ngIf="bceidConfirmContact">
     <h1>Confirm Business BCeID Information</h1>
-    <p>Are you {{currentUser.name}}?</p>
+    <p><b>Are you {{currentUser.name}}?</b></p>
     <div class="row">
       <div class="col-md-12 text-left" *ngIf="!showBceidUserContinue">
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactYes()"><strong>Yes</strong></a>
@@ -82,7 +82,7 @@
         <div [ngBusy]="busy"></div>
       </div>
       <div class="col-md-12 text-left" *ngIf="showBceidUserContinue">
-        Each user should have their own user account to fill out the application. Contact the BCeID primary user to add your account to the Business BCeID.
+        <p>Each user should have their own user account to fill out the application. Contact the BCeID primary user to add your account to the Business BCeID.</p>
         <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmContactYes()"><strong>Continue</strong></a>
         <br>
         <div [ngBusy]="busy"></div>
