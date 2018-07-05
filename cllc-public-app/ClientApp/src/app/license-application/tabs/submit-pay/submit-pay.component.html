@@ -3,9 +3,27 @@
   submit-pay works!
 </p>
 <p>&nbsp;</p>
-<p>
-  <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="submit_application()">
-    <strong>Submit</strong>
-    <br>
-  </a>
-</p>
+<div *ngIf="!isSubmitted">
+  <p>
+    <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="submit_application()">
+      <strong>Submit</strong>
+      <br>
+    </a>
+  </p>
+</div>
+<div *ngIf="isSubmitted && !isPaid">
+  <p>
+    <strong>Application has been Submitted but Payment has not been verified</strong>
+  </p>
+  <p>
+    <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="verify_payment()">
+      <strong>Verify Payment</strong>
+      <br>
+    </a>
+  </p>
+</div>
+<div *ngIf="isSubmitted && isPaid">
+  <p>
+  	<strong>Application has been Submitted and Paid</strong>
+  </p>
+</div>
