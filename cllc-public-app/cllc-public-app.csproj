@@ -83,6 +83,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\bcsvcs-confirmation\bcsvcs-confirmation.component.html" />
+    <None Remove="ClientApp\src\app\models\invoice.model.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Contexts\ODataClient.tt">
@@ -96,6 +97,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\invoice.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\adoxio-legalentities.model.ts" />
   </ItemGroup>
 
@@ -129,7 +131,7 @@
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
       <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
-      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </ResolvedFileToPublish>
