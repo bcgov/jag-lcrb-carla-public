@@ -138,10 +138,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
             
             // copy received values to Dynamics Application
-            adoxioApplication.CopyValues(item);
+			adoxioApplication.CopyValues(item);
 			adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI ("adoxio_applications", userSettings.AccountId);
 
             adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
+
+			// set license type relationship
+			var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType).Result;
+			MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
+			patchApplication.AdoxioApplicationid = adoxioApplication.AdoxioApplicationid;
+			patchApplication.AdoxioLicenceType = adoxioLicencetype; // _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+			patchApplication._adoxioLicencetypeValue = adoxioLicencetype.AdoxioLicencetypeid;
+            try
+            {
+				await _dynamicsClient.Applications.UpdateAsync(patchApplication.AdoxioApplicationid, patchApplication);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error binding licence type to application");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
             
 			return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
             
@@ -174,11 +193,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			{
 				return new NotFoundResult();
 			}
-
+            
 
             adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
 
-            adoxioApplication.CopyValues(item);
+			adoxioApplication.CopyValues(item);
 
             _dynamicsClient.Applications.Update(id, adoxioApplication);
 

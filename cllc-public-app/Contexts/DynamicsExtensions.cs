@@ -727,6 +727,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+		public static async Task<MicrosoftDynamicsCRMadoxioLicencetype> GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
+        {
+			MicrosoftDynamicsCRMadoxioLicencetype result = null;
+			string typeFilter = "adoxio_name eq '" + name + "'";
+
+			IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.AdoxioLicencetypes.Get(filter: typeFilter).Value;
+
+			result = licenceTypes.FirstOrDefault();
+
+            return result;
+        }
+
         /// <summary>
         /// Get a dynamics application by their Guid
         /// </summary>

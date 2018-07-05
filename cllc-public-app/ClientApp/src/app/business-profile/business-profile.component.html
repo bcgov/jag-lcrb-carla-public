@@ -68,32 +68,33 @@
       <option value="LimitedLiabilityPartnership">LimitedLiabilityPartnershipy</option>
     </select>
     <br>
+    
     <!-- Tab panes -->
-    <div [hidden]="view_tab != 'before-you-start'">
+    <div *ngIf="view_tab =='before-you-start'">
       <app-before-you-start [businessType]="businessType"></app-before-you-start>
     </div>
-    <div [hidden]="view_tab != 'corporate-details'">
+    <div *ngIf="view_tab =='corporate-details'">
       <app-corporate-details [accountId]="accountId" [businessType]="businessType"></app-corporate-details>
     </div>
-    <div [hidden]="view_tab != 'organization-structure'">
+    <div *ngIf="view_tab =='organization-structure'">
       <app-organization-structure [accountId]="accountId"  [businessType]="businessType"></app-organization-structure>
     </div>
-    <div [hidden]="view_tab != 'directors-and-officers'">
+    <div *ngIf="view_tab =='directors-and-officers'">
       <app-directors-and-officers [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-directors-and-officers>
     </div>
-    <div [hidden]="view_tab != 'key-personnel'">
+    <div *ngIf="view_tab =='key-personnel'">
       <app-key-personnel [accountId]="accountId" [businessType]="businessType"></app-key-personnel>
     </div>
-    <div [hidden]="view_tab != 'shareholders'">
+    <div *ngIf="view_tab =='shareholders'">
       <app-edit-shareholders [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
     </div>
-    <div [hidden]="view_tab != 'connections-to-producers'">
+    <div *ngIf="view_tab =='connections-to-producers'">
       <app-connection-to-producers [accountId]="accountId" [businessType]="businessType"></app-connection-to-producers>
     </div>
-    <div [hidden]="view_tab != 'finance-integrity'">
+    <div *ngIf="view_tab =='finance-integrity'">
       <app-financial-information [accountId]="accountId"  [businessType]="businessType"></app-financial-information>
     </div>
-    <div [hidden]="view_tab != 'security-assessment'">
+    <div *ngIf="view_tab =='security-assessment'">
       <app-security-assessments [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-security-assessments>
     </div>
     <p>&nbsp;</p>
