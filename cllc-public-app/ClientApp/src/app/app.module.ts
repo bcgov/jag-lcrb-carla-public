@@ -111,6 +111,8 @@ import { SiteMapComponent } from './license-application/tabs/site-map/site-map.c
 import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
+import {BsDatepickerModule} from 'ngx-bootstrap';
+
 @NgModule({
   declarations: [
     AccordionComponent,
@@ -211,6 +213,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
     MatTooltipModule,
     FileDropModule,
     ToastModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     BrowserModule,
