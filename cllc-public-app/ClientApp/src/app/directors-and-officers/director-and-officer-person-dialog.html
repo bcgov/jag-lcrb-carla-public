@@ -59,7 +59,7 @@
       </div>
       <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateofappointment')}">
         <label for="dateIssued">Date of Appointment</label>
-        <input type="date" class="form-control" formControlName="dateofappointment">
+        <input type="text" formControlName='dateofappointment' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
         <div *ngIf="this.isFieldError('dateofappointment')">
           <div *ngIf="directorOfficerForm.controls['dateofappointment'].hasError('dateLessThanToday') ">
             Date must be before today
