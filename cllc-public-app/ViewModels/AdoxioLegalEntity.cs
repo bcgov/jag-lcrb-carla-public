@@ -88,6 +88,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? isDirector { get; set; }
         public bool? isSenoirManagement { get; set; }
         public bool? isShareholder { get; set; }
+        public bool? isPartner { get; set; }
 
         public DateTimeOffset? dateofbirth { get; set; } //adoxio_dateofbirth (date time)
         public decimal? interestpercentage { get; set; } //adoxio_interestpercentage (decimal number)
@@ -99,7 +100,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
-
         //adoxio_contact (lookup contact)
         //adoxio_correspondingpersonalhistorysummary (lookup personal history summary)
         //adoxio_dateemailsent (date time)
