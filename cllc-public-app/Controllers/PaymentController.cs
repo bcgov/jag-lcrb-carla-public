@@ -45,10 +45,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-		public static string GetOrderNumForApplication(ViewModels.AdoxioApplication application)
+		public static string GetOrderNumForApplication(MicrosoftDynamicsCRMadoxioApplication application)
 		{
 			string ordernum = "04";
-			foreach (char ch in application.id)
+			foreach (char ch in application.AdoxioApplicationid)
 			{
 				if (0 <= "0123456789".IndexOf(ch))
 					ordernum += ch;
@@ -72,17 +72,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		public async Task<IActionResult> GetPaymentUrl(string id)
 		{
 			_logger.LogError("Called GetPaymentUrl(" + id + ")");
-			ViewModels.AdoxioApplication result = await GetDynamicsApplication(id);
-			if (result == null)
+
+            // get the application and confirm access (call parse to ensure we are getting a valid id)
+			Guid applicationId = Guid.Parse(id);
+			MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id);
+			if (adoxioApplication == null)
 			{
 				return NotFound();
 			}
 
-			string ordernum = GetOrderNumForApplication(result);
-            
+			// set the application invoice trigger to create an invoice
+			//ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
+			//MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
+			//adoxioApplication2.CopyValues(vm);
+			adoxioApplication.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes;
+            _dynamicsClient.Applications.Update(id, adoxioApplication);
+			adoxioApplication = await GetDynamicsApplication(id);
+
+			// load the invoice for this application
+			string invoiceId = adoxioApplication._adoxioInvoiceValue;
+			int retries = 0;
+			while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
+			{
+				// pause and try again - in case Dynamics is slow ...
+				retries++;
+				_logger.LogError("No invoice found, retry = " + retries);
+				System.Threading.Thread.Sleep(1000);
+				invoiceId = adoxioApplication._adoxioInvoiceValue;
+			}
+			_logger.LogError("Created invoice for application = " + invoiceId);
+
+			MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
+			var ordernum = GetOrderNumForApplication(adoxioApplication); //invoice.AdoxioTransactionid;
+			var orderamt = invoice.Totalamount;
+
 			Dictionary<string, string> redirectUrl;
 			redirectUrl = new Dictionary<string, string>();
-			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(ordernum, id, "7500.00");
+			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
 
 			_logger.LogError(">>>>>" + redirectUrl["url"]);
 
@@ -100,7 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("update/{id}")]
 		public async Task<IActionResult> UpdatePaymentStatus(string id)
         {
-			ViewModels.AdoxioApplication result = await GetDynamicsApplication(id);
+			MicrosoftDynamicsCRMadoxioApplication result = await GetDynamicsApplication(id);
             if (result == null)
             {
                 return NotFound();
@@ -125,7 +151,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		[HttpGet("verify/{id}")]
 		public async Task<IActionResult> VerifyPaymentStatus(string id)
         {
-			ViewModels.AdoxioApplication result = await GetDynamicsApplication(id);
+			MicrosoftDynamicsCRMadoxioApplication result = await GetDynamicsApplication(id);
             if (result == null)
             {
                 return NotFound();
@@ -143,7 +169,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			return Json(response);
         }
 
-		private async Task<ViewModels.AdoxioApplication> GetDynamicsApplication(string id)
+		private async Task<MicrosoftDynamicsCRMadoxioApplication> GetDynamicsApplication(string id)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -152,7 +178,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogError("Application id = " + id);
             _logger.LogError("User id = " + userSettings.AccountId);
 
-            ViewModels.AdoxioApplication result = null;
             var dynamicsApplication = await _dynamicsClient.GetApplicationById(Guid.Parse(id));
             if (dynamicsApplication == null)
             {
@@ -164,10 +189,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     return null;
                 }
-                result = await dynamicsApplication.ToViewModel(_dynamicsClient);
             }
 
-            return result;
+			return dynamicsApplication;
         }
 
 		/// <summary>

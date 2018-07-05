@@ -23,6 +23,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string establishmentparcelid { get; set; } //adoxio_establishmentparcelid
         public string additionalpropertyinformation { get; set; } //
 
-        public ViewModels.Account applicant { get; set; }
+		public GeneralYesNo adoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
+
+		public ViewModels.Account applicant { get; set; }
     }
 }
