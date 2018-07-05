@@ -38,16 +38,17 @@ export class DeclarationComponent implements OnInit {
     );
   }
 
-  //save() {
-  //  this.busy = this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
-  //    res => {
-  //      //console.log("Application updated:", res.json());
-  //      this.snackBar.open('Property Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
-  //    },
-  //    err => {
-  //      this.snackBar.open('Error saving Property Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
-  //      console.log("Error occured saving Property Details");
-  //    });
-  //}
+  save() {
+    let declarationValues = { id: this.applicationId, signatureagreement: this.signatureagreement, authorizedtosubmit: this.authorizedtosubmit };
+    this.busy = this.applicationDataService.updateApplication(declarationValues).subscribe(
+      res => {
+        //console.log("Application updated:", res.json());
+        this.snackBar.open('Declaration Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
+      },
+      err => {
+        this.snackBar.open('Error saving Declaration Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log("Error occured saving Declaration Details");
+      });
+  }
 
 }
