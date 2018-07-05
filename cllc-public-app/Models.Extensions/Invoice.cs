@@ -67,7 +67,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMinvoice to, ViewModels.Invoice from)
         {
-            to.Name = from.name;
+			to.Invoiceid = from.id;
+			to.Name = from.name;
             to.Invoicenumber = from.invoicenumber;
 			to.Statecode = from.statecode;
 			to.Statuscode = from.statuscode;
