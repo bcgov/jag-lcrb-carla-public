@@ -134,10 +134,17 @@
               "text": "I don't know"
             }
           ]
-        }
+        },
+          {
+            "type": "infotext",
+            "name": "note",
+            "title": "Note: An Indigenous nation is not required to register as a business. In such cases, the Indigenous nation may register their business type with BCeID as ‘other’.",
+            "titleLocation": "hidden"
+          }
+        
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and ({registeredBusiness} = 'Yes' or {registeredBusiness} = 'No'"
     },
     {
       "name": "p5",
@@ -155,7 +162,7 @@
         {
           "type": "infotext",
           "name": "note",
-          "title": "Note: If a proposed store is located in the area of a local government or Indigenous nation, the Liquor and Cannabis Regulation Branch must provide notice of the application to the appropriate local government or Indigenous nation. Learn more about <a href='/policy-document/local-governments' target = '_blank' >local governments</a> or <a href='/policy-document/indigenous-nations' target = '_blank'>Indigenous nations</a>.",
+          "title": "Note: If a proposed store is located in the area of a local government or on reserve, Nisga'a Land or treaty settlement land on an Indigenous nation, the Liquor and Cannabis Regulation Branch must provide notice of the application to the appropriate local government or Indigenous nation. Learn more about <a href='/policy-document/local-governments' target = '_blank' >local governments</a> or <a href='/policy-document/indigenous-nations' target = '_blank'>Indigenous nations</a>.",
           "titleLocation": "hidden"
         }
       ],
