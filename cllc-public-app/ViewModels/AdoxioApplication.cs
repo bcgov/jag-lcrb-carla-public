@@ -24,6 +24,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string additionalpropertyinformation { get; set; } //adoxio_additionalpropertyinformation
         public bool? authorizedtosubmit { get; set; } //adoxio_authorizedtosubmit
         public bool? signatureagreement { get; set; } //adoxio_signatureagreement
+        public string contactpersonfirstname { get; set; } //adoxio_contactpersonfirstname
+        public string contactpersonlastname { get; set; } //adoxio_contactpersonlastname
+        public string contactpersonrole { get; set; } //adoxio_role
+        public string contactpersonemail { get; set; } //adoxio_email
+        public string contactpersonphone { get; set; } //adoxio_contactpersonphone
 
 		public GeneralYesNo adoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
 		public bool isSubmitted { get; set; }
