@@ -23,14 +23,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         //private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
-		private readonly ILogger _logger;
+        private readonly SharePointFileManager _sharePointFileManager;
+        private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
-        public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, SharePointFileManager sharePointFileManager, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             this._system = context;
             this._httpContextAccessor = httpContextAccessor;
+            this._sharePointFileManager = sharePointFileManager;
             //this._distributedCache = null;
             this._dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
@@ -52,7 +54,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 dynamicsApplicationList = _dynamicsClient.Applications.Get(filter:"_adoxio_applicant_value eq " + applicantId).Value;
-
             }
 
             if (dynamicsApplicationList != null)
@@ -138,31 +139,45 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
             
             // copy received values to Dynamics Application
-			adoxioApplication.CopyValues(item);
-			adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI ("adoxio_applications", userSettings.AccountId);
+			adoxioApplication.CopyValues(item);            
 
-            adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
-
-			// set license type relationship
-			var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType).Result;
-			MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
-			patchApplication.AdoxioApplicationid = adoxioApplication.AdoxioApplicationid;
-			patchApplication.AdoxioLicenceType = adoxioLicencetype; // _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
-			patchApplication._adoxioLicencetypeValue = adoxioLicencetype.AdoxioLicencetypeid;
             try
             {
-				await _dynamicsClient.Applications.UpdateAsync(patchApplication.AdoxioApplicationid, patchApplication);
+                adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error binding licence type to application");
+                _logger.LogError("Error creating application");
                 _logger.LogError("Request:");
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
             }
-            
-			return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
+
+            MicrosoftDynamicsCRMadoxioApplication patchAdoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+
+            // set license type relationship
+
+            var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType).Result;
+            patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
+            patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
+            try
+            {
+               _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error updating application");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
+            return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
             
         }
 
@@ -234,7 +249,69 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return NoContent(); // 204
         }
 
-		/// <summary>
+        [HttpPost("{id}/attachments")]
+        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file, [FromForm] string documentType)
+        {
+            ViewModels.FileSystemItem result = null;
+            // get the LegalEntity.
+            // Adoxio_legalentity legalEntity = null;
+
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
+
+            if (id != null)
+            {
+                var applicationId = Guid.Parse(id);
+                var application = await _dynamicsClient.GetApplicationById(applicationId);
+
+                if (application == null)
+                {
+                    return new NotFoundResult();
+                }
+
+                string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
+                var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
+                // Dynamics code for the name is {Code(Licence Type (Licence Type))} - {Business Type(Application)} - {Job Number(Application)} 
+                string folderName = $"{application.AdoxioLicenceType.AdoxioCode} - {application.AdoxioApplicant.AdoxioBusinesstype}_{applicationIdCleaned}";
+
+                try
+                {
+                    await _sharePointFileManager.AddFile(folderName, fileName, file.OpenReadStream(), file.ContentType);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message);
+                    _logger.LogError(ex.StackTrace);
+                    return new NotFoundResult();
+                }
+            }
+            return Json(result);
+        }
+
+        [HttpGet("{id}/attachments/{fileId}")]
+        public async Task<IActionResult> DownloadFile([FromRoute] string id, [FromRoute] string fileId)
+        {
+            // get the file.
+            if (fileId == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                _sharePointFileManager.GetFileById(fileId);
+            }
+            string filename = "";
+            byte[] fileContents = new byte[10];
+            return new FileContentResult(fileContents, "application/octet-stream")
+            {
+                FileDownloadName = filename
+            };
+        }
+
+        /// <summary>
         /// Verify whether currently logged in user has access to this account id
         /// </summary>
         /// <returns>boolean</returns>
