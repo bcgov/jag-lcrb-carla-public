@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicsDataService } from '../services/dynamics-data.service';
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
+import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
+import { AdoxioApplication } from '../models/adoxio-application.model';
+import { DynamicsAccount } from '../models/dynamics-account.model';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +20,12 @@ export class DashboardComponent implements OnInit {
   isAssociate: boolean = false;
   accountId: string;
   contactId: string;
-  account: any;
+  account: DynamicsAccount;
+  busy: Subscription;
 
-  constructor(private userDataService: UserDataService, private dynamicsDataService: DynamicsDataService) {
+  constructor(private userDataService: UserDataService, private dynamicsDataService: DynamicsDataService,
+    private applicationDataService: AdoxioApplicationDataService, public snackBar: MatSnackBar,
+    private router: Router) {
 }
 
 ngOnInit(): void {
@@ -46,6 +55,27 @@ ngOnInit(): void {
          }
       });
     }
+  }
+
+  /**
+   * Start a new Dynamics License Application
+   * */
+  startNewLicenceApplication() {
+    let newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
+    newLicenceApplicationData.licenseType = "Cannabis Retail Store";
+    newLicenceApplicationData.applicantType = this.account.businessType;
+    newLicenceApplicationData.account = this.account;
+    //newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      res => {
+        let data = res.json();
+        this.router.navigateByUrl("/license-application/" + data.id);
+      },
+      err => {
+        this.snackBar.open('Error starting a New Licence Application', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log("Error starting a New Licence Application");
+      }
+    );
   }
 
 }

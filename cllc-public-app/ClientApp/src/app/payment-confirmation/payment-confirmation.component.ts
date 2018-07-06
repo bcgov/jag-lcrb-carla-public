@@ -20,11 +20,13 @@ export class PaymentConfirmationComponent {
     messageId: string;
     messageText: string;
     paymentMethod: string;
+    cardType: string;
     trnAmount: string;
     trnApproved: string;
     trnDate: string;
     trnId: string;
     trnOrderNumber: string;
+    invoice: string;
 
     /** payment-confirmation ctor */
     constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
@@ -54,11 +56,13 @@ export class PaymentConfirmationComponent {
         this.messageId = json.messageId;
         this.messageText = json.messageText;
         this.paymentMethod = json.paymentMethod;
+        this.cardType = json.cardType;
         this.trnAmount = json.trnAmount;
         this.trnApproved = json.trnApproved;
         this.trnDate = json.trnDate;
         this.trnId = json.trnId;
         this.trnOrderNumber = json.trnOrderNumber;
+        this.invoice = json.invoice;
 
       },
       err => {

@@ -12,7 +12,7 @@ export class AdoxioApplicationDataService {
   constructor(private http: Http) { }
 
   /**
-   * Get all Dynamics Applications
+   * Get all Dynamics Applications for the current user
    * */
   getAdoxioApplications() {
      let headers = new Headers();
@@ -44,8 +44,9 @@ export class AdoxioApplicationDataService {
 
   /**
    * Get a Dynamics Application
-   * */
-  getApplication(applicationId: string) {
+   * @param applicationId
+   */
+  getApplicationById(applicationId: string) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
 
@@ -63,6 +64,19 @@ export class AdoxioApplicationDataService {
     //call API
     //console.log("===== AdoxioApplicationDataService.updateApplication: ", applicationData);
     return this.http.put(this.apiPath + applicationData.id, applicationData, { headers: headers });
+  }
+
+  /**
+   * Create a Dynamics Application
+   * @param applicationData
+   */
+  createApplication(applicationData: any) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    //call API
+    //console.log("===== AdoxioApplicationDataService.createApplication: ", applicationData);
+    return this.http.post(this.apiPath, applicationData, { headers: headers });
   }
 
    private handleError(error: Response | any) {

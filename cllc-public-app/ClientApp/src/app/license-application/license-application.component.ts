@@ -49,7 +49,7 @@ export class LicenseApplicationComponent implements OnInit {
 
     // get application name
     if (!this.applicationName) {
-      this.busy = this.applicationDataService.getApplication(this.applicationId).subscribe(
+      this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
         res => {
           let data = res.json();
           this.applicationName = data.name;

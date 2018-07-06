@@ -48,7 +48,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 			this.bcep_conf_url = conf_url;
         }
 
-        public async Task<string> GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount) 
+		/// <summary>
+        /// GET a payment re-direct url for an Application
+        /// </summary>
+		/// <param name="orderNum">Unique order number (transaction id from invoice)</param>
+		/// <param name="applicationId">GUID of the Application to pay</param>
+		/// <param name="amount">amount to pay (from invoice)</param>
+        /// <returns></returns>
+		public async Task<string> GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount) 
         {
             // build the param string for the re-direct url
 			string paramString = BCEP_P_MERCH_ID + "=" + bcep_merchid +
@@ -63,8 +70,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string expiryStr = expiry.ToString(HASH_EXPIRY_FMT);
 
 			// Add expiry to the redirect
-            paramString = paramString +
-                "&" + BCEP_P_HASH_EXPIRY + "=" + expiryStr;
+            paramString = paramString + "&" + BCEP_P_HASH_EXPIRY + "=" + expiryStr;
 
 			// replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
 			paramString = paramString.Replace(" ", "%20");
@@ -91,21 +97,31 @@ namespace Gov.Lclb.Cllb.Interfaces
             return redirect;
         }
 
+		/// <summary>
+        /// Process a payment response from Bamboora (payment success or failed)
+        /// This can be called if no response is received from Bamboora - it will query the server directly
+        /// based on the Application's Invoice number
+        /// </summary>
+		/// <param name="orderNum">Order number (transaction id from invoice)</param>
+		/// <param name="txnId">Bambora transaction id</param>
+        /// <returns></returns>
 		public async Task<Dictionary<string, string>> ProcessPaymentResponse(string orderNum, string txnId)
         {
             var txn = new BCEPTransaction();
 
-			var query_url = await GetVerifyPaymentTransactionUrl(orderNum, txnId);
+			var query_url = GetVerifyPaymentTransactionUrl(orderNum, txnId);
 			Dictionary<string, string> responseDict = new Dictionary<string, string>();
 			responseDict["query_url"] = query_url;
 
 			// build an HTTP client and fire off a GET request
             try
             {
+                // this is a status request to Bambora, and can be repeated multiple times
 				var request = new HttpRequestMessage(HttpMethod.Get, query_url);
                 var response = await client.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
+                    // parse response params into a dictionary
                     var queryString = await response.Content.ReadAsStringAsync();
 					var responseParams = HttpUtility.ParseQueryString(queryString);
 					foreach (var key in responseParams.AllKeys)
@@ -115,6 +131,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 else
                 {
+                    // if the request fails, record the response status
 					responseDict["response_code"] = response.StatusCode.ToString();
 					responseDict["response_phrase"] = response.ReasonPhrase;
                 }
@@ -127,7 +144,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 			return responseDict;
         }
 
-		public async Task<string> GetVerifyPaymentTransactionUrl(string orderNum, string txnId)
+		public string GetVerifyPaymentTransactionUrl(string orderNum, string txnId)
         {
 			// build the param string for the re-direct url
             string paramString = BCEP_Q_REQUEST_TYPE + 

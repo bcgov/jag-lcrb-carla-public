@@ -27,7 +27,7 @@
       <ng-container matColumnDef="sendConsentRequest">
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-checkbox [(ngModel)]="element.sendConsentRequest"></mat-checkbox>
+          <input type="checkbox" [(ngModel)]="element.sendConsentRequest"/>
         </mat-cell>
       </ng-container>
 
@@ -58,7 +58,7 @@
       <!-- Column -->
       <ng-container matColumnDef="emailsent">
         <mat-header-cell *matHeaderCellDef> Email Sent </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.emailsent | date:'shortDate' }} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.emailsent | date:'yyyy-MM-dd' }} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

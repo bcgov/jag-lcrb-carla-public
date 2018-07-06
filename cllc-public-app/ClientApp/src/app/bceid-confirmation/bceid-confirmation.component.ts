@@ -34,18 +34,20 @@ export class BceidConfirmationComponent {
       console.log(err);
     });
   }
-  
-  confirmBceid() {
-    // confirm BCeID
-    this.currentUser.isBceidConfirmed = true;
-  }
 
-   confirmBceidAccountYes() {
+  confirmBceidAccountYes() {
     // confirm BCeID
-    this.bceidConfirmAccount = false;
-    this.bceidConfirmBusinessType = true;
+    if (this.businessType !== "Proprietorship" && this.businessType !== "Partnership" )
+    {
+      this.bceidConfirmAccount = false;
+      this.bceidConfirmBusinessType = true;
+    }
+    else
+    {
+      this.bceidConfirmAccount = false;
+      this.confirmCorpType(this.businessType);
+    }
   }
-
 
    confirmBceidAccountNo() {
      // confirm BCeID

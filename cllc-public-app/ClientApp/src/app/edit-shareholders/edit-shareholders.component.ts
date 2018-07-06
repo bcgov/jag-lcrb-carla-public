@@ -18,7 +18,6 @@ import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 })
 
 export class EditShareholdersComponent implements OnInit {
-
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
@@ -45,9 +44,59 @@ export class EditShareholdersComponent implements OnInit {
 
   getShareholders() {
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "shareholders")
-      .subscribe((data) => {
-        this.dataSource.data = data.json();
+      .subscribe((response) => {
+        let data: AdoxioLegalEntity[]  = response.json();
+        data.forEach(d => {
+          d.position = this.getPosition(d);
+        })
+        this.dataSource.data = data;
       });
+  }
+
+  getPosition(shareholder: AdoxioLegalEntity): string {
+    let position: string  = '';
+    if(shareholder.isindividual){
+      position = 'Individual';
+    } else {
+      switch (shareholder.legalentitytype) {
+        case 'PrivateCorporation':
+          position = 'Private Corporation';
+          break;      
+        case 'PublicCorporation':
+          position = 'Public Corporation';
+          break;      
+        case 'UnlimitedLiabilityCorporation':
+          position = 'Unlimited Liability Corporation';
+          break;      
+        case 'LimitedLiabilityCorporation':
+          position = 'Limited Liability Corporation';
+          break;      
+        case 'GeneralPartnership':
+          position = 'General Partnership';
+          break;      
+        case 'LimitedPartnership':
+          position = 'Limited Partnership';
+          break;      
+        case 'LimitedLiabilityPartnership':
+          position = 'Limited Liability Partnership';
+          break;      
+        case 'Society':
+          position = 'Society';
+          break;      
+        case 'Coop':
+          position = 'Co-op';
+          break;      
+        case 'Estate':
+          position = 'Estate';
+          break;      
+        case 'Trust':
+          position = 'Trust';
+          break;      
+        default:
+          break;
+      }
+    }
+    return position;
   }
 
   formDataToModelData(formData: any, shareholderType: string): AdoxioLegalEntity {

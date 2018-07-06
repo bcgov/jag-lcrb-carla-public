@@ -26,10 +26,11 @@ export class AdoxioLegalEntity {
   relatedentities: AdoxioLegalEntity[];
   email: string;
   dateofappointment: Date; //adoxio_dateofappointment
-
+  accountId: string;
   // helper fields
   shareholderType: string;
   sendConsentRequest: boolean;
   parentLegalEntityId: string;
+  position: string;
 
 }

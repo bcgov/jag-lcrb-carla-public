@@ -38,29 +38,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			_logger = loggerFactory.CreateLogger(typeof(PaymentController));
         }
 
-		public static string RandomOrderNum(int length)
-        {
-            const string chars = "0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
-		public static string GetOrderNumForApplication(MicrosoftDynamicsCRMadoxioApplication application)
-		{
-			string ordernum = "04";
-			foreach (char ch in application.AdoxioApplicationid)
-			{
-				if (0 <= "0123456789".IndexOf(ch))
-					ordernum += ch;
-				if (10 <= ordernum.Length)
-					return ordernum;
-			}
-			while (10 > ordernum.Length)
-				ordernum += "0";
-			return ordernum;
-			//return "04" + RandomOrderNum(8);
-		}
-
 		/// <summary>
 		/// GET a payment re-direct url for an Application
 		/// This will register an (unpaid) invoice against the application and generate an invoice number,
@@ -85,15 +62,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
 			MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
 			adoxioApplication2.CopyValues(vm);
+            // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
 			adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes;
             _dynamicsClient.Applications.Update(id, adoxioApplication2);
 			adoxioApplication2 = await GetDynamicsApplication(id);
 
-			// load the invoice for this application
+			// now load the invoice for this application to get the pricing
 			string invoiceId = adoxioApplication2._adoxioInvoiceValue;
 			int retries = 0;
 			while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
 			{
+                // should happen immediately, but ...
 				// pause and try again - in case Dynamics is slow ...
 				retries++;
 				_logger.LogError("No invoice found, retry = " + retries);
@@ -101,8 +80,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				invoiceId = adoxioApplication2._adoxioInvoiceValue;
 			}
 			_logger.LogError("Created invoice for application = " + invoiceId);
-
-			//var ordernum = GetOrderNumForApplication(adoxioApplication2); 
 
             /*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -117,7 +94,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
              */
 
 			MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
+            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
 			var ordernum = invoice.AdoxioTransactionid;
+            // dynamics determines the amount based on the licence type of the application
 			var orderamt = invoice.Totalamount;
 
 			Dictionary<string, string> redirectUrl;
@@ -128,30 +107,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 			return Json(redirectUrl);
 		}
-
-		/// <summary>
-        /// Update a payment response from Bamboora (payment success or failed)
-        /// This is called when the re-direct is received back from Bamboora.
-		/// This will also update the invoice payment status, and, if the payment is successful,
-		/// it will push the Application into Submitted status
-        /// </summary>
-        /// <param name="id">GUID of the Application to pay</param>
-        /// <returns></returns>
-        [HttpGet("update/{id}")]
-		public async Task<IActionResult> UpdatePaymentStatus(string id)
-        {
-			MicrosoftDynamicsCRMadoxioApplication result = await GetDynamicsApplication(id);
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
-            redirectUrl["url"] = "https://google.ca?id=" + id;
-
-            return Json(redirectUrl);
-        }
 
 		/// <summary>
         /// Update a payment response from Bamboora (payment success or failed)
@@ -171,8 +126,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-			//string ordernum = GetOrderNumForApplication(result);
-
 			// load the invoice for this application
             string invoiceId = adoxioApplication._adoxioInvoiceValue;
             _logger.LogError("Found invoice for application = " + invoiceId);
@@ -181,6 +134,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var orderamt = invoice.Totalamount;
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id);
+			response["invoice"] = invoice.Invoicenumber;
 
 			foreach (var key in response.Keys)
 			{
@@ -201,6 +155,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice();
 				invoice2.CopyValues(vmi);
 
+				ViewModels.AdoxioApplication vma = await adoxioApplication.ToViewModel(_dynamicsClient);
+                MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
+                adoxioApplication2.CopyValues(vma);
+
 				// if payment was successful:
 				var pay_status = response["trnApproved"];
 				if (pay_status == "1")
@@ -214,9 +172,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 					_dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
 					// set the Application payment status
-					ViewModels.AdoxioApplication vma = await adoxioApplication.ToViewModel(_dynamicsClient);
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
-                    adoxioApplication2.CopyValues(vma);
 					adoxioApplication2.AdoxioPaymentrecieved = (bool?)true;
 					adoxioApplication2.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
 
@@ -235,10 +190,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 					_dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
+					// set the Application invoice status back to No
+					adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
+                    // don't clear the invoice, leave the previous "Cancelled" so we can report status
+					//adoxioApplication2._adoxioInvoiceValue = null;
+					//adoxioApplication2.AdoxioInvoice = null;
+
+					_dynamicsClient.Applications.Update(id, adoxioApplication2);
+                    adoxioApplication2 = await GetDynamicsApplication(id);
+
 				}
 			}
 			else
 			{
+                // that can happen if we are re-validating a completed invoice (paid or cancelled)
 				_logger.LogError("Invoice status is not New, skipping updates ...");
 			}
 
