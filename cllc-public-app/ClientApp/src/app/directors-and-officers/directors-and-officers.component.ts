@@ -33,8 +33,22 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   getDirectorsAndOfficers() {
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "directors-officers-management")
-      .subscribe((data) => {
-        this.dataSource.data = data.json();
+      .subscribe((result) => {
+        let data: AdoxioLegalEntity[] = result.json();
+        let positionList: string[] = [];
+        data.forEach(d => {
+          if (d.isDirector) {
+            positionList.push("Director");
+          }
+          if (d.isOfficer) {
+            positionList.push("Officer");
+          }
+          if (d.isSeniorManagement) {
+            positionList.push("Senior Manager")
+          }
+          d.position = positionList.join(', ');
+        })
+        this.dataSource.data = data;
       });
   }
 
@@ -69,7 +83,8 @@ export class DirectorsAndOfficersComponent implements OnInit {
       disableClose: true,
       autoFocus: true,
       data: {
-        person: person
+        person: person,
+        businessType: this.businessType
       }
     }
 
@@ -80,7 +95,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
         if (formData) {
           let adoxioLegalEntity = this.formDataToModelData(formData);
           let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
-          if(formData.id){
+          if (formData.id) {
             save = this.legalEntityDataservice.updateLegalEntity(adoxioLegalEntity, formData.id);
           }
           this.busyObsv = save.subscribe(
@@ -99,7 +114,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   deleteIndividual(person: AdoxioLegalEntity) {
-    if(confirm('Delete person?')){
+    if (confirm('Delete person?')) {
       this.legalEntityDataservice.deleteLegalEntity(person.id).subscribe(data => {
         this.getDirectorsAndOfficers();
       })
@@ -129,6 +144,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 })
 export class DirectorAndOfficerPersonDialog {
   directorOfficerForm: FormGroup;
+  businessType: string;
 
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.directorOfficerForm = fb.group({
@@ -142,9 +158,10 @@ export class DirectorAndOfficerPersonDialog {
     }, { validator: this.dateLessThanToday('dateofappointment') }
     );
 
-    if(data && data.person){
+    if (data && data.person) {
       this.directorOfficerForm.patchValue(data.person);
     }
+    this.businessType = data.businessType;
   }
 
   dateLessThanToday(field1) {
