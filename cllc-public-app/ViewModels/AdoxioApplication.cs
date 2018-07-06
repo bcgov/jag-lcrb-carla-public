@@ -26,6 +26,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? signatureagreement { get; set; } //adoxio_signatureagreement
 
 		public GeneralYesNo adoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
+		public bool isSubmitted { get; set; }
+        public bool isPaid { get; set; }
 
 		public ViewModels.Account applicant { get; set; }
     }

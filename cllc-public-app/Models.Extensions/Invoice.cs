@@ -77,6 +77,5 @@ namespace Gov.Lclb.Cllb.Public.Models
 			to.AdoxioTransactionid = from.transactionId;
         }
 
-
     }
 }
