@@ -1,16 +1,22 @@
-<span class="label label-info">Payment Confirmation Received, processing ...</span>
 
-<p><strong>authCode:</strong>{{authCode}}</p>
-<p><strong>avsMessage:</strong>{{avsMessage}}</p>
-<p><strong>avsAddrMatch:</strong>{{avsAddrMatch}}</p>
-<p><strong>messageId:</strong>{{messageId}}</p>
-<p><strong>messageText:</strong>{{messageText}}</p>
-<p><strong>paymentMethod:</strong>{{paymentMethod}}</p>
-<p><strong>trnAmount:</strong>{{trnAmount}}</p>
-<p><strong>trnApproved:</strong>{{trnApproved}}</p>
-<p><strong>trnDate:</strong>{{trnDate}}</p>
-<p><strong>trnId:</strong>{{trnId}}</p>
-<p><strong>trnOrderNumber:</strong>{{trnOrderNumber}}</p>
+<h1>{{messageText}}</h1>
+
+<p><strong>Card Type :</strong>&nbsp;{{cardType}}</p>
+<p><strong>Date/Time :</strong>&nbsp;{{trnDate}}</p>
+<p><strong>Invoice Number :</strong>&nbsp;{{invoice}}</p>
+<p><strong>Transaction Id :</strong>&nbsp;{{trnId}}</p>
+<p><strong>Authorization :</strong>&nbsp;{{authCode}}</p>
+<p><strong>Amount :</strong>&nbsp;{{trnAmount}}</p>
+
+<p>
+<strong>avsMessage:</strong>&nbsp;{{avsMessage}}<br/>
+<strong>avsAddrMatch:</strong>&nbsp;{{avsAddrMatch}}<br/>
+<strong>messageId:</strong>&nbsp;{{messageId}}<br/>
+<strong>messageText:</strong>&nbsp;{{messageText}}<br/>
+<strong>paymentMethod:</strong>&nbsp;{{paymentMethod}}<br/>
+<strong>trnApproved:</strong>&nbsp;{{trnApproved}}<br/>
+<strong>trnOrderNumber:</strong>&nbsp;{{trnOrderNumber}}<br/>
+</p>
 
 <p>
   <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="return_to_application()">

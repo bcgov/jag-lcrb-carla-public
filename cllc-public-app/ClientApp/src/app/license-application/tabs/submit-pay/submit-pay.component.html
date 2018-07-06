@@ -1,7 +1,38 @@
-<h2>License Application {{applicationId}}</h2>
+
+<div *ngIf="!isSubmitted">
+  <div *ngIf="prevPaymentFailed">
+    <p>
+      <strong>A previous Payment was declined or failed, please re-submit</strong>
+    </p>
+  </div>
+</div>
+<div *ngIf="isSubmitted && !isPaid">
+  <p>
+    <strong>Application payment has been Submitted but Payment has not been verified</strong>
+  </p>
+</div>
+<div *ngIf="isSubmitted && isPaid">
+  <p>
+  	<strong>Application has been Submitted and Paid</strong>
+  </p>
+</div>
+
+<div *ngIf="!(isSubmitted && isPaid)">
+<h1>Submit &amp; Pay</h1>
+
 <p>
-  submit-pay works!
+ 	All required fields must be completed before you can submit the application. After you submit the application you will be directed to the payment screen to complete the application. An application is not complete until the payment has been approved.
 </p>
+
+<h2>Before you Submit</h2>
+
+<p>Check that you sent all authorizations for individuals requiring security screenings and financial integrity checks. </p>
+<p>Check that the information in the business profile and licence application is complete and accurate.</p>
+<p>The information in your business profile and licence application cannot be changed or updated online after the application is submitted. You can still submit new applications for additional licences online.</p>
+<p>If you need to make any changes after submitting you must contact the Liquor and Cannabis Regulation Branch [Contact Information]</p>
+</div>
+
+<div>
 <p>&nbsp;</p>
 <div *ngIf="!isSubmitted">
   <p>
@@ -13,17 +44,10 @@
 </div>
 <div *ngIf="isSubmitted && !isPaid">
   <p>
-    <strong>Application has been Submitted but Payment has not been verified</strong>
-  </p>
-  <p>
     <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="verify_payment()">
       <strong>Verify Payment</strong>
       <br>
     </a>
   </p>
 </div>
-<div *ngIf="isSubmitted && isPaid">
-  <p>
-  	<strong>Application has been Submitted and Paid</strong>
-  </p>
 </div>
