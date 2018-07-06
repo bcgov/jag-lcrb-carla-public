@@ -19,6 +19,7 @@ export class SubmitPayComponent implements OnInit {
   busy: Subscription;
   isSubmitted: boolean;
   isPaid: boolean;
+  prevPaymentFailed: boolean;
 
   constructor(private paymentDataService: PaymentDataService, private applicationDataService: AdoxioApplicationDataService, 
   				public snackBar: MatSnackBar, private router: Router) { }
@@ -30,6 +31,7 @@ export class SubmitPayComponent implements OnInit {
         let data = res.json();
         this.isSubmitted = data['isSubmitted']
         this.isPaid = data['isPaid']
+        this.prevPaymentFailed = data['prevPaymentFailed']
       },
       err => {
         this.snackBar.open('Error getting Application Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
@@ -44,7 +46,7 @@ export class SubmitPayComponent implements OnInit {
       res => {
         //console.log("applicationVM: ", res.json());
         var jsonUrl = res.json();
-        window.alert(jsonUrl['url']);
+        //window.alert(jsonUrl['url']);
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       },
