@@ -12,24 +12,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_tiedhouseassociations
+    /// Collection of invoices
     /// </summary>
-    public partial class GetOKResponseModelModelModelModel
+    public partial class GetOKResponseModelModelModelModelModelModelModel
     {
         /// <summary>
-        /// Initializes a new instance of the GetOKResponseModelModelModelModel
-        /// class.
+        /// Initializes a new instance of the
+        /// GetOKResponseModelModelModelModelModelModelModel class.
         /// </summary>
-        public GetOKResponseModelModelModelModel()
+        public GetOKResponseModelModelModelModelModelModelModel()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the GetOKResponseModelModelModelModel
-        /// class.
+        /// Initializes a new instance of the
+        /// GetOKResponseModelModelModelModelModelModelModel class.
         /// </summary>
-        public GetOKResponseModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> value = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>))
+        public GetOKResponseModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMinvoice> value = default(IList<MicrosoftDynamicsCRMinvoice>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMinvoice> Value { get; set; }
 
     }
 }
