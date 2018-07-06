@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Contacts operations.
+    /// AdoxioTiedhouseconnections operations.
     /// </summary>
-    public partial class Contacts : IServiceOperations<DynamicsClient>, IContacts
+    public partial class AdoxioTiedhouseconnections : IServiceOperations<DynamicsClient>, IAdoxioTiedhouseconnections
     {
         /// <summary>
-        /// Initializes a new instance of the Contacts class.
+        /// Initializes a new instance of the AdoxioTiedhouseconnections class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Contacts(DynamicsClient client)
+        public AdoxioTiedhouseconnections(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get entities from contacts
+        /// Get entities from adoxio_tiedhouseconnections
         /// </summary>
         /// <param name='top'>
         /// Show only the first n items
@@ -88,15 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOKResponseModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (expand != null)
-            {
-                if (expand.Count != expand.Distinct().Count())
-                {
-                    throw new ValidationException(ValidationRules.UniqueItems, "expand");
-                }
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -117,7 +110,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections").ToString();
             List<string> _queryParameters = new List<string>();
             if (top != null)
             {
@@ -227,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetOKResponseModelModelModelModelModelModel>();
+            var _result = new HttpOperationResponse<GetOKResponseModelModelModelModelModel>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -236,7 +229,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseModelModelModelModelModelModel>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseModelModelModelModelModel>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -256,7 +249,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Add new entity to contacts
+        /// Add new entity to adoxio_tiedhouseconnections
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -286,7 +279,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMcontact body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioTiedhouseconnection body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -306,7 +299,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -393,7 +386,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMcontact>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -402,7 +395,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMcontact>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioTiedhouseconnection>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -422,10 +415,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Delete entity from contacts
+        /// Delete entity from adoxio_tiedhouseconnections
         /// </summary>
-        /// <param name='contactid'>
-        /// key: contactid
+        /// <param name='adoxioTiedhouseconnectionid'>
+        /// key: adoxio_tiedhouseconnectionid
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -448,11 +441,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string contactid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (contactid == null)
+            if (adoxioTiedhouseconnectionid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "contactid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioTiedhouseconnectionid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -461,15 +454,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("contactid", contactid);
+                tracingParameters.Add("adoxioTiedhouseconnectionid", adoxioTiedhouseconnectionid);
                 tracingParameters.Add("ifMatch", ifMatch);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Delete", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts({contactid})").ToString();
-            _url = _url.Replace("{contactid}", System.Uri.EscapeDataString(contactid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections({adoxio_tiedhouseconnectionid})").ToString();
+            _url = _url.Replace("{adoxio_tiedhouseconnectionid}", System.Uri.EscapeDataString(adoxioTiedhouseconnectionid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -561,10 +554,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get entity from contacts by key
+        /// Get entity from adoxio_tiedhouseconnections by key
         /// </summary>
-        /// <param name='contactid'>
-        /// key: contactid
+        /// <param name='adoxioTiedhouseconnectionid'>
+        /// key: adoxio_tiedhouseconnectionid
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -593,11 +586,25 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMcontact>> GetByKeyWithHttpMessagesAsync(string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>> GetByKeyWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (contactid == null)
+            if (adoxioTiedhouseconnectionid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "contactid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioTiedhouseconnectionid");
+            }
+            if (select != null)
+            {
+                if (select.Count != select.Distinct().Count())
+                {
+                    throw new ValidationException(ValidationRules.UniqueItems, "select");
+                }
+            }
+            if (expand != null)
+            {
+                if (expand.Count != expand.Distinct().Count())
+                {
+                    throw new ValidationException(ValidationRules.UniqueItems, "expand");
+                }
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -606,7 +613,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("contactid", contactid);
+                tracingParameters.Add("adoxioTiedhouseconnectionid", adoxioTiedhouseconnectionid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -614,8 +621,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts({contactid})").ToString();
-            _url = _url.Replace("{contactid}", System.Uri.EscapeDataString(contactid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections({adoxio_tiedhouseconnectionid})").ToString();
+            _url = _url.Replace("{adoxio_tiedhouseconnectionid}", System.Uri.EscapeDataString(adoxioTiedhouseconnectionid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -701,7 +708,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMcontact>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -710,7 +717,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMcontact>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioTiedhouseconnection>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -730,10 +737,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Update entity in contacts
+        /// Update entity in adoxio_tiedhouseconnections
         /// </summary>
-        /// <param name='contactid'>
-        /// key: contactid
+        /// <param name='adoxioTiedhouseconnectionid'>
+        /// key: adoxio_tiedhouseconnectionid
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -756,11 +763,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string contactid, MicrosoftDynamicsCRMcontact body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, MicrosoftDynamicsCRMadoxioTiedhouseconnection body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (contactid == null)
+            if (adoxioTiedhouseconnectionid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "contactid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioTiedhouseconnectionid");
             }
             if (body == null)
             {
@@ -773,15 +780,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("contactid", contactid);
+                tracingParameters.Add("adoxioTiedhouseconnectionid", adoxioTiedhouseconnectionid);
                 tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Update", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "contacts({contactid})").ToString();
-            _url = _url.Replace("{contactid}", System.Uri.EscapeDataString(contactid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections({adoxio_tiedhouseconnectionid})").ToString();
+            _url = _url.Replace("{adoxio_tiedhouseconnectionid}", System.Uri.EscapeDataString(adoxioTiedhouseconnectionid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
