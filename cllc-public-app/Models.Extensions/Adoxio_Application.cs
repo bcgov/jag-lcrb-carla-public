@@ -37,12 +37,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSignatureagreement = from.signatureagreement;
             //TODO add to autorest
             //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
-            to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
+            // comment out this next line as it is causing all application updates to fail
+            //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
 
-            if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
-			{
-				to.AdoxioInvoicetrigger = 1;
-			}
+            //if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
+			//{
+			//	to.AdoxioInvoicetrigger = 1;
+			//}
 
 			//var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeByName(from.licenseType).Result;
 			//to.AdoxioLicenceType = adoxio_licencetype;
