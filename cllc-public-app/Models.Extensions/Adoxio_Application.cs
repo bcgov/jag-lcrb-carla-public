@@ -37,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSignatureagreement = from.signatureagreement;
             //TODO add to autorest
             //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
-            // comment out this next line as it is causing all application updates to fail
+            // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
 
             //if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
@@ -128,6 +128,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.No;
 				adoxioApplicationVM.isSubmitted = false;
 			}
+
+			adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
 
 			//get declarations
             //TODO add to autorest
