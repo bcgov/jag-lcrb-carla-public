@@ -19,3 +19,8 @@
 .green-snackbar {
   background: #00ff21;
 }
+
+.mat-column-edit,
+.mat-column-delete{
+  flex: 0 0 100px;
+}
