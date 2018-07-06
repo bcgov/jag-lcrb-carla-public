@@ -139,6 +139,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
             // copy received values to Dynamics Application
 			adoxioApplication.CopyValues(item);
+            // moved this next line from the CopyValues() so it is only done on create
+			adoxioApplication.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), item.applicantType);
 			adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI ("adoxio_applications", userSettings.AccountId);
 
             adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
@@ -148,7 +150,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
 			patchApplication.AdoxioApplicationid = adoxioApplication.AdoxioApplicationid;
 			patchApplication.AdoxioLicenceType = adoxioLicencetype; // _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
-			patchApplication._adoxioLicencetypeValue = adoxioLicencetype.AdoxioLicencetypeid;
+            patchApplication._adoxioLicencetypeValue = adoxioLicencetype.AdoxioLicencetypeid;
             try
             {
 				await _dynamicsClient.Applications.UpdateAsync(patchApplication.AdoxioApplicationid, patchApplication);
