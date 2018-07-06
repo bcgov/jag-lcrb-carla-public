@@ -3303,6 +3303,929 @@
         "summary": "Update entity in adoxio_licencetypes"
       }
     },
+	"/adoxio_tiedhouseassociations": {
+      "get": {
+	    "operationId": "AdoxioTiedhouseassociations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Show only the first n items",
+            "in": "query",
+            "name": "$top",            
+            "type": "integer",
+            "x-example": {
+              "example": 50
+            }
+          },
+          {
+            "description": "Skip only the first n items",
+            "in": "query",
+            "name": "$skip",            
+            "type": "integer"
+          },
+          {
+            "description": "Search items by search phrases",
+            "in": "query",
+            "name": "$search",            
+            "type": "string"
+          },
+          {
+            "description": "Filter items by property values",
+            "in": "query",
+            "name": "$filter",            
+            "type": "string"
+          },
+          {
+            "description": "Include count of items",
+            "in": "query",
+            "name": "$count",            
+            "type": "boolean"
+          },
+          {
+            "description": "Order items by property values",
+			"name": "$orderby",            
+			"in": "query",
+            "type": "array",            
+            "items": {
+              "enum": [
+                "versionnumber",
+                "versionnumber desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "adoxio_type",
+                "adoxio_type desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "modifiedon",
+                "modifiedon desc",
+                "_adoxio_applicationid_value",
+                "_adoxio_applicationid_value desc",
+                "adoxio_licencenumber",
+                "adoxio_licencenumber desc",
+                "adoxio_street1",
+                "adoxio_street1 desc",
+                "adoxio_province",
+                "adoxio_province desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "statecode",
+                "statecode desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_country",
+                "adoxio_country desc",
+                "statuscode",
+                "statuscode desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_businessname",
+                "adoxio_businessname desc",
+                "adoxio_city",
+                "adoxio_city desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "createdon",
+                "createdon desc",
+                "adoxio_postalcode",
+                "adoxio_postalcode desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "adoxio_street2",
+                "adoxio_street2 desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "adoxio_tiedhouseassociationid",
+                "adoxio_tiedhouseassociationid desc"
+              ],
+              "type": "string"
+            }            
+          },
+          {
+            "description": "Select properties to be returned",
+			"name": "$select",            
+			"in": "query",
+            "type": "array",            
+            "items": {
+              "enum": [
+                "versionnumber",
+                "_createdonbehalfby_value",
+                "importsequencenumber",
+                "adoxio_type",
+                "_modifiedby_value",
+                "modifiedon",
+                "_adoxio_applicationid_value",
+                "adoxio_licencenumber",
+                "adoxio_street1",
+                "adoxio_province",
+                "adoxio_name",
+                "statecode",
+                "_ownerid_value",
+                "timezoneruleversionnumber",
+                "adoxio_country",
+                "statuscode",
+                "_createdby_value",
+                "adoxio_businessname",
+                "adoxio_city",
+                "overriddencreatedon",
+                "_owningbusinessunit_value",
+                "createdon",
+                "adoxio_postalcode",
+                "_owninguser_value",
+                "utcconversiontimezonecode",
+                "adoxio_street2",
+                "_modifiedonbehalfby_value",
+                "_owningteam_value",
+                "adoxio_tiedhouseassociationid"
+              ],
+              "type": "string"
+            }            
+          },
+          {
+			"name": "$expand",            
+			"in": "query",            
+            "type": "array",
+            "description": "Expand related entities",
+            "items": {
+              "enum": [
+                "*",
+                "adoxio_tiedhouseassociation_adoxio_tiedhouseconnection_TiedHouse",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_tiedhouseassociation_SyncErrors",
+                "adoxio_tiedhouseassociation_DuplicateMatchingRecord",
+                "adoxio_tiedhouseassociation_DuplicateBaseRecord",
+                "adoxio_tiedhouseassociation_AsyncOperations",
+                "adoxio_tiedhouseassociation_BulkDeleteFailures",
+                "adoxio_ApplicationId"
+              ],
+              "type": "string"
+            }            
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
+                  },
+                  "type": "array"
+                }
+              },
+              "title": "Collection of adoxio_tiedhouseassociations",
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseassociations"
+        ],
+        "summary": "Get entities from adoxio_tiedhouseassociations"
+      },
+      "post": {
+	    "operationId": "AdoxioTiedhouseassociations_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "New entity",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
+            }
+          },
+		  {
+		  "in": "header",
+		  "name": "Prefer",
+		  "default": "return=representation",
+		  "type": "string",
+		  "description": "Required in order for the service to return a JSON representation of the object."		  
+		  }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseassociations"
+        ],
+        "summary": "Add new entity to adoxio_tiedhouseassociations"
+      }
+    },
+    "/adoxio_tiedhouseassociations({adoxio_tiedhouseassociationid})": {
+      "delete": {
+	    "operationId": "AdoxioTiedhouseassociations_Delete",
+        "parameters": [
+          {
+		    "name": "adoxio_tiedhouseassociationid",
+			"in": "path",            
+            "description": "key: adoxio_tiedhouseassociationid",            
+            "required": true,
+			"type": "string"
+          },
+          {
+            "name": "If-Match",
+			"in": "header",            
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseassociations"
+        ],
+        "summary": "Delete entity from adoxio_tiedhouseassociations"
+      },
+      "get": {
+	    "operationId": "AdoxioTiedhouseassociations_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: adoxio_tiedhouseassociationid",
+            "in": "path",
+            "name": "adoxio_tiedhouseassociationid",
+            "required": true,
+			"type": "string"
+          },
+          {
+			"name": "$select",            
+			"description": "Select properties to be returned",
+            "in": "query",
+            "type": "array",            
+            "items": {
+              "enum": [
+                "versionnumber",
+                "_createdonbehalfby_value",
+                "importsequencenumber",
+                "adoxio_type",
+                "_modifiedby_value",
+                "modifiedon",
+                "_adoxio_applicationid_value",
+                "adoxio_licencenumber",
+                "adoxio_street1",
+                "adoxio_province",
+                "adoxio_name",
+                "statecode",
+                "_ownerid_value",
+                "timezoneruleversionnumber",
+                "adoxio_country",
+                "statuscode",
+                "_createdby_value",
+                "adoxio_businessname",
+                "adoxio_city",
+                "overriddencreatedon",
+                "_owningbusinessunit_value",
+                "createdon",
+                "adoxio_postalcode",
+                "_owninguser_value",
+                "utcconversiontimezonecode",
+                "adoxio_street2",
+                "_modifiedonbehalfby_value",
+                "_owningteam_value",
+                "adoxio_tiedhouseassociationid"
+              ],
+              "type": "string"
+            }
+            
+          },
+          {
+			"name": "$expand",            
+            "type": "array",
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "adoxio_tiedhouseassociation_adoxio_tiedhouseconnection_TiedHouse",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_tiedhouseassociation_SyncErrors",
+                "adoxio_tiedhouseassociation_DuplicateMatchingRecord",
+                "adoxio_tiedhouseassociation_DuplicateBaseRecord",
+                "adoxio_tiedhouseassociation_AsyncOperations",
+                "adoxio_tiedhouseassociation_BulkDeleteFailures",
+                "adoxio_ApplicationId"
+              ],
+              "type": "string"
+            }            
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseassociations"
+        ],
+        "summary": "Get entity from adoxio_tiedhouseassociations by key"
+      },
+      "patch": {
+	    "operationId": "AdoxioTiedhouseassociations_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "adoxio_tiedhouseassociationid",
+			"in": "path",            
+            "description": "key: adoxio_tiedhouseassociationid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "New property values",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseassociations"
+        ],
+        "summary": "Update entity in adoxio_tiedhouseassociations"
+      }
+    },
+    "/adoxio_tiedhouseconnections": {
+      "get": {
+	    "operationId": "AdoxioTiedhouseconnections_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Show only the first n items",
+            "in": "query",
+            "name": "$top",            
+            "type": "integer",
+            "x-example": {
+              "example": 50
+            }
+          },
+          {
+			"name": "$skip",            
+            "type": "integer",
+            "description": "Skip only the first n items",
+            "in": "query"           
+          },
+          {
+		    "name": "$search",
+			"in": "query",            
+            "type": "string",
+            "description": "Search items by search phrases"                       
+          },
+          {
+            "description": "Filter items by property values",
+            "in": "query",
+            "name": "$filter",            
+            "type": "string"
+          },
+          {
+            "description": "Include count of items",
+            "in": "query",
+            "name": "$count",            
+            "type": "boolean"
+          },
+          {
+			"name": "$orderby",            
+            "type": "array",
+            "description": "Order items by property values",
+            "in": "query",
+            "items": {
+              "enum": [
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_societyconnectionfederalproducerdetails",
+                "adoxio_societyconnectionfederalproducerdetails desc",
+                "adoxio_connectiontype",
+                "adoxio_connectiontype desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "modifiedon",
+                "modifiedon desc",
+                "adoxio_share20plusfamilyconnectionproducerdetail",
+                "adoxio_share20plusfamilyconnectionproducerdetail desc",
+                "versionnumber",
+                "versionnumber desc",
+                "adoxio_partnersconnectionfederalproducer",
+                "adoxio_partnersconnectionfederalproducer desc",
+                "adoxio_associateconnectionfederalproducerdetails",
+                "adoxio_associateconnectionfederalproducerdetails desc",
+                "adoxio_federalproducerconnectiontocorp",
+                "adoxio_federalproducerconnectiontocorp desc",
+                "adoxio_federalproducerconnectiontocorpdetails",
+                "adoxio_federalproducerconnectiontocorpdetails desc",
+                "statuscode",
+                "statuscode desc",
+                "_adoxio_accountid_value",
+                "_adoxio_accountid_value desc",
+                "adoxio_familymemberfederalproducer",
+                "adoxio_familymemberfederalproducer desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "adoxio_corpconnectionfederalproducerdetails",
+                "adoxio_corpconnectionfederalproducerdetails desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_tiedhouseconnectionid",
+                "adoxio_tiedhouseconnectionid desc",
+                "adoxio_additionaldetails",
+                "adoxio_additionaldetails desc",
+                "adoxio_share20plusconnectionproducer",
+                "adoxio_share20plusconnectionproducer desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "adoxio_sharetype",
+                "adoxio_sharetype desc",
+                "adoxio_partnersconnectionfederalproducerdetails",
+                "adoxio_partnersconnectionfederalproducerdetails desc",
+                "_adoxio_tiedhouse_value",
+                "_adoxio_tiedhouse_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_share20plusconnectionproducerdetails",
+                "adoxio_share20plusconnectionproducerdetails desc",
+                "adoxio_familymemberfederalproducerdetails",
+                "adoxio_familymemberfederalproducerdetails desc",
+                "statecode",
+                "statecode desc",
+                "_adoxio_contactid_value",
+                "_adoxio_contactid_value desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "adoxio_associateconnectionfederalproducer",
+                "adoxio_associateconnectionfederalproducer desc",
+                "createdon",
+                "createdon desc",
+                "adoxio_percentageofownership",
+                "adoxio_percentageofownership desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_ownershiptype",
+                "adoxio_ownershiptype desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "adoxio_isconnection",
+                "adoxio_isconnection desc",
+                "adoxio_societyconnectionfederalproducer",
+                "adoxio_societyconnectionfederalproducer desc",
+                "adoxio_share20plusfamilyconnectionproducer",
+                "adoxio_share20plusfamilyconnectionproducer desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "adoxio_corpconnectionfederalproducer",
+                "adoxio_corpconnectionfederalproducer desc",
+                "_adoxio_application_value",
+                "_adoxio_application_value desc"
+              ],
+              "type": "string"
+            }            
+          },
+          {
+		    "name": "$select",            
+            "type": "array",
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "overriddencreatedon",
+                "adoxio_societyconnectionfederalproducerdetails",
+                "adoxio_connectiontype",
+                "_modifiedby_value",
+                "modifiedon",
+                "adoxio_share20plusfamilyconnectionproducerdetail",
+                "versionnumber",
+                "adoxio_partnersconnectionfederalproducer",
+                "adoxio_associateconnectionfederalproducerdetails",
+                "adoxio_federalproducerconnectiontocorp",
+                "adoxio_federalproducerconnectiontocorpdetails",
+                "statuscode",
+                "_adoxio_accountid_value",
+                "adoxio_familymemberfederalproducer",
+                "_owninguser_value",
+                "importsequencenumber",
+                "adoxio_corpconnectionfederalproducerdetails",
+                "_ownerid_value",
+                "adoxio_tiedhouseconnectionid",
+                "adoxio_additionaldetails",
+                "adoxio_share20plusconnectionproducer",
+                "_owningteam_value",
+                "adoxio_sharetype",
+                "adoxio_partnersconnectionfederalproducerdetails",
+                "_adoxio_tiedhouse_value",
+                "timezoneruleversionnumber",
+                "adoxio_share20plusconnectionproducerdetails",
+                "adoxio_familymemberfederalproducerdetails",
+                "statecode",
+                "_adoxio_contactid_value",
+                "_modifiedonbehalfby_value",
+                "adoxio_associateconnectionfederalproducer",
+                "createdon",
+                "adoxio_percentageofownership",
+                "_createdby_value",
+                "adoxio_ownershiptype",
+                "_owningbusinessunit_value",
+                "adoxio_name",
+                "utcconversiontimezonecode",
+                "adoxio_isconnection",
+                "adoxio_societyconnectionfederalproducer",
+                "adoxio_share20plusfamilyconnectionproducer",
+                "_createdonbehalfby_value",
+                "adoxio_corpconnectionfederalproducer",
+                "_adoxio_application_value"
+              ],
+              "type": "string"
+            }            
+          },
+          {
+            "name": "$expand",            
+            "type": "array",
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_tiedhouseconnection_SyncErrors",
+                "adoxio_tiedhouseconnection_DuplicateMatchingRecord",
+                "adoxio_tiedhouseconnection_DuplicateBaseRecord",
+                "adoxio_tiedhouseconnection_AsyncOperations",
+                "adoxio_tiedhouseconnection_BulkDeleteFailures",
+                "adoxio_Application",
+                "adoxio_TiedHouse",
+                "adoxio_AccountId",
+                "adoxio_ContactId"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseconnection"
+                  },
+                  "type": "array"
+                }
+              },
+              "title": "Collection of adoxio_tiedhouseconnections",
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseconnections"
+        ],
+        "summary": "Get entities from adoxio_tiedhouseconnections"
+      },
+      "post": {
+	    "operationId": "AdoxioTiedhouseconnections_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "New entity",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseconnection"
+            }
+          },
+		  {
+		  "in": "header",
+		  "name": "Prefer",
+		  "default": "return=representation",
+		  "type": "string",
+		  "description": "Required in order for the service to return a JSON representation of the object."		  
+		  }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseconnection"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseconnections"
+        ],
+        "summary": "Add new entity to adoxio_tiedhouseconnections"
+      }
+    },
+    "/adoxio_tiedhouseconnections({adoxio_tiedhouseconnectionid})": {
+      "delete": {
+	    "operationId": "AdoxioTiedhouseconnections_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_tiedhouseconnectionid",
+			"description": "key: adoxio_tiedhouseconnectionid",
+            "in": "path",            
+            "required": true,
+			"type": "string"
+          },
+          {
+            "name": "If-Match",
+			"description": "ETag",
+            "in": "header",            
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseconnections"
+        ],
+        "summary": "Delete entity from adoxio_tiedhouseconnections"
+      },
+      "get": {
+	    "operationId": "AdoxioTiedhouseconnections_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: adoxio_tiedhouseconnectionid",
+            "in": "path",
+            "name": "adoxio_tiedhouseconnectionid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "overriddencreatedon",
+                "adoxio_societyconnectionfederalproducerdetails",
+                "adoxio_connectiontype",
+                "_modifiedby_value",
+                "modifiedon",
+                "adoxio_share20plusfamilyconnectionproducerdetail",
+                "versionnumber",
+                "adoxio_partnersconnectionfederalproducer",
+                "adoxio_associateconnectionfederalproducerdetails",
+                "adoxio_federalproducerconnectiontocorp",
+                "adoxio_federalproducerconnectiontocorpdetails",
+                "statuscode",
+                "_adoxio_accountid_value",
+                "adoxio_familymemberfederalproducer",
+                "_owninguser_value",
+                "importsequencenumber",
+                "adoxio_corpconnectionfederalproducerdetails",
+                "_ownerid_value",
+                "adoxio_tiedhouseconnectionid",
+                "adoxio_additionaldetails",
+                "adoxio_share20plusconnectionproducer",
+                "_owningteam_value",
+                "adoxio_sharetype",
+                "adoxio_partnersconnectionfederalproducerdetails",
+                "_adoxio_tiedhouse_value",
+                "timezoneruleversionnumber",
+                "adoxio_share20plusconnectionproducerdetails",
+                "adoxio_familymemberfederalproducerdetails",
+                "statecode",
+                "_adoxio_contactid_value",
+                "_modifiedonbehalfby_value",
+                "adoxio_associateconnectionfederalproducer",
+                "createdon",
+                "adoxio_percentageofownership",
+                "_createdby_value",
+                "adoxio_ownershiptype",
+                "_owningbusinessunit_value",
+                "adoxio_name",
+                "utcconversiontimezonecode",
+                "adoxio_isconnection",
+                "adoxio_societyconnectionfederalproducer",
+                "adoxio_share20plusfamilyconnectionproducer",
+                "_createdonbehalfby_value",
+                "adoxio_corpconnectionfederalproducer",
+                "_adoxio_application_value"
+              ],
+              "type": "string"
+            },
+            "name": "$select",
+            
+            "type": "array",
+            "uniqueItems": true
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_tiedhouseconnection_SyncErrors",
+                "adoxio_tiedhouseconnection_DuplicateMatchingRecord",
+                "adoxio_tiedhouseconnection_DuplicateBaseRecord",
+                "adoxio_tiedhouseconnection_AsyncOperations",
+                "adoxio_tiedhouseconnection_BulkDeleteFailures",
+                "adoxio_Application",
+                "adoxio_TiedHouse",
+                "adoxio_AccountId",
+                "adoxio_ContactId"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",
+            
+            "type": "array",
+            "uniqueItems": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseconnection"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseconnections"
+        ],
+        "summary": "Get entity from adoxio_tiedhouseconnections by key"
+      },
+      "patch": {
+	    "operationId": "AdoxioTiedhouseconnections_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: adoxio_tiedhouseconnectionid",
+            "in": "path",
+            "name": "adoxio_tiedhouseconnectionid",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "description": "New property values",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseconnection"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_tiedhouseconnections"
+        ],
+        "summary": "Update entity in adoxio_tiedhouseconnections"
+      }
+    },	
     "/contacts": {
       "get": {
 	    "operationId": "Contacts_Get",
@@ -13505,6 +14428,10 @@
             "adoxio_TerritoryId": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
             },
+            "adoxio_additionalpropertyinformation": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "adoxio_addresscity": {
               "type": "string",
               "x-nullable": true
@@ -13875,6 +14802,10 @@
               "type": "integer",
               "x-nullable": true
             },
+            "adoxio_authorizedtosubmit": {
+              "x-nullable": true,
+              "type": "boolean"
+            },
             "adoxio_businessinfoemail": {
               "type": "string",
               "x-nullable": true
@@ -14139,6 +15070,10 @@
               "type": "integer",
               "x-nullable": true
             },
+			"adoxio_role": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "adoxio_servicehoursfridayclose": {
               "type": "integer",
               "x-nullable": true
@@ -14259,28 +15194,10 @@
               "type": "integer",
               "x-nullable": true
             },
-            "bpf_adoxio_application_adoxio_applicationbpf": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpf"
-              }
-            },
             "bpf_adoxio_application_adoxio_applicationbpfmvpv2": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
-              }
-            },
-            "bpf_adoxio_application_new_bpf_839d33d7035a4f2bbe2150f27b500af6": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_839d33d7035a4f2bbe2150f27b500af6"
-              }
-            },
-            "bpf_adoxio_application_new_bpf_a5f48dac03e04d1498b374c0638698a2": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_a5f48dac03e04d1498b374c0638698a2"
               }
             },
             "createdbyname": {
@@ -14371,6 +15288,7 @@
               "x-nullable": true
             },
             "versionnumber": {
+			  "type": "integer",
               "format": "int64",
               "x-nullable": true
             }
@@ -42184,6 +43102,10 @@
                 "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationnotification"
               }
             },
+			"adoxio_transactionid": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "billto_city": {
               "type": "string",
               "x-nullable": true
@@ -42553,6 +43475,7 @@
             },
             "versionnumber": {
               "format": "int64",
+			  "type": "integer",
               "x-nullable": true
             },
             "willcall": {
