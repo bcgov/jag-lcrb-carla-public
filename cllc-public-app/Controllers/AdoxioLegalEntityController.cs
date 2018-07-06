@@ -90,7 +90,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // check that the session is setup correctly.
-            userSettings.Validate();
+            // unset for now, this is causing the new bceid user registration to fail
+            //userSettings.Validate();
 
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
