@@ -6,6 +6,7 @@ using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -13,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory) 
+        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
             : base(configuration, env, loggerFactory)
         { }
 
@@ -31,7 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
             foreach (VoteQuestion voteQuestion in seedVoteQuestions)
             {
-                context.UpdateSeedVoteQuestionInfo(voteQuestion);                
+                context.UpdateSeedVoteQuestionInfo(voteQuestion.ToViewModel());                
             }
 
             AddInitialVoteQuestions(context);            
@@ -52,14 +53,15 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         {
             List<VoteQuestion> VoteQuestions = new List<VoteQuestion>(GetDefaultVoteQuestions());
 
-            if (IsDevelopmentEnvironment)
-                VoteQuestions.AddRange(GetDevVoteQuestions());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                VoteQuestions.AddRange(GetTestVoteQuestions());
-
             if (IsProductionEnvironment)
+            {
                 VoteQuestions.AddRange(GetProdVoteQuestions());
+            }
+            else
+            {
+                VoteQuestions.AddRange(GetDevVoteQuestions());
+            }
+                
 
             return VoteQuestions;
         }

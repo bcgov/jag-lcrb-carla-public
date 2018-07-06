@@ -219,7 +219,7 @@ function initInfoText(Survey) {
       icon.className = 'heading-icon fa fa-info-circle';
       let title = document.createElement('span');
       title.className = 'title-text';
-      title.appendChild(document.createTextNode(question.title));
+      title.innerHTML = question.title;
       lbl.appendChild(icon);
       lbl.appendChild(title);
       header.appendChild(lbl);
@@ -501,7 +501,7 @@ function initAddressBlock(Survey) {
 
 
 export function addQuestionTypes(Survey) {
-  fixCheckboxes(Survey);
+  // fixCheckboxes(Survey); //this breaks IE 11
   initYesNo(Survey);
   initInfoText(Survey);
   initHelpText(Survey);

@@ -6,6 +6,7 @@ using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -13,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public NewsletterSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory) 
+        public NewsletterSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
             : base(configuration, env, loggerFactory)
         { }
 
@@ -52,14 +53,15 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         {
             List<Newsletter> Newsletters = new List<Newsletter>(GetDefaultNewsletters());
 
-            if (IsDevelopmentEnvironment)
-                Newsletters.AddRange(GetDevNewsletters());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                Newsletters.AddRange(GetTestNewsletters());
-
             if (IsProductionEnvironment)
+            {
                 Newsletters.AddRange(GetProdNewsletters());
+            }
+            else
+            {
+                Newsletters.AddRange(GetDevNewsletters());
+            }
+                
 
             return Newsletters;
         }

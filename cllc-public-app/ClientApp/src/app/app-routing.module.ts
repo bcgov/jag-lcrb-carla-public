@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { HomeComponent } from './home/home.component';
+import { PolicyDocumentComponent } from './policy-document/policy-document.component';
 import { ResultComponent } from './result/result.component';
+import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
-import { SurveyResolver }   from './survey/survey-resolver.service';
-import { SurveyEditorComponent } from './survey/editor.component';
+import { SurveyResolver }   from './services/survey-resolver.service';
+import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LicenseApplicationComponent } from './license-application/license-application.component';
+import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -14,9 +21,35 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'prv',
-    redirectTo: 'prv/survey'
+    path: 'dashboard',
+    //children: []
+    component: DashboardComponent
   },
+  {
+    path: 'business-profile/:accountId/:legalEntityId',
+    component: BusinessProfileComponent,
+  },
+  {
+    path: 'form-viewer/:id',
+    component: FormViewerComponent
+  },
+  {
+    path: 'policy-document/:slug',
+    component: PolicyDocumentComponent
+  },
+  {
+    path: 'newsletter-confirm/:slug',
+    component: NewsletterConfirmationComponent
+  },
+  {
+    path: 'license-application/:applicationId',
+    component: LicenseApplicationComponent
+  },
+  {
+    path: 'payment-confirmation',
+    component: PaymentConfirmationComponent
+  },
+
   {
     path: 'prv/survey',
     component: SurveyPrimaryComponent,
@@ -24,15 +57,23 @@ const routes: Routes = [
       survey: SurveyResolver,
     },
     data: {
-      breadcrumb: 'Potential Applicant Survey', //Provincial Family Test
+      // do not show breadcrumb
+      //breadcrumb: 'Potential Applicant Survey', 
       survey_path: 'assets/survey-primary.json',
     }
   },
+
+  {
+    path: 'prv',
+    redirectTo: 'prv/survey'
+  },
+  
   {
     path: 'result/:data',
     component: ResultComponent,
-    data: {
-      breadcrumb: 'Survey Results'
+    data: { 
+      // do not show breadcrumb
+      //breadcrumb: 'Survey Results'
     }
   },
   {
@@ -42,17 +83,8 @@ const routes: Routes = [
       breadcrumb: 'Survey Test'
     }
   },
-  {
-    path: 'survey-editor',
-    component: SurveyEditorComponent,
-    resolve: {
-      survey: SurveyResolver,
-    },
-    data: {
-      breadcrumb: 'Survey Editor',
-      survey_path: 'assets/survey-primary.json'
-    }
-  }
+  //{ path: '404', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

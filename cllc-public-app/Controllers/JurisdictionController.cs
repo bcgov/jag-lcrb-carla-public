@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -20,6 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet()]
+        [AllowAnonymous]
         public JsonResult GetJurisdictions()
         {
             return Json(db.GetJurisdictions());

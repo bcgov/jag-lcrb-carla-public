@@ -1,0 +1,36 @@
+<div class="row extra-padding" *ngIf="isApplicant">
+  <section class="col-md-9">
+    <br>
+    <app-business-profile-summary></app-business-profile-summary>
+    <br>
+    <app-license-application-summary></app-license-application-summary>
+    <br>
+    <div [ngBusy]="busy">
+      <button class="btn btn-primary" (click)="startNewLicenceApplication()">Start New Licence Application</button>
+    </div>
+    <br>
+  </section>
+
+  <section class="col-md-3">
+    <div class="help-container">
+      <strong>Need help?</strong>
+      <br>
+      <span>Contact us for help with your application:</span>
+      <br>
+      <span>Email:</span>
+      <span class="email">cannabisregs@gov.bc.ca</span>
+    </div>
+  </section>
+</div>
+<div class="row extra-padding" *ngIf="isAssociate">
+  <section class="col-md-3">
+    <div class="help-container">
+      <strong>Hello Associate!</strong>
+      <br>
+      <span>Contact us for help with your consent for CBC:</span>
+      <br>
+      <span>Email:</span>
+      <span class="email">cannabisregs@gov.bc.ca</span>
+    </div>
+  </section>
+</div>

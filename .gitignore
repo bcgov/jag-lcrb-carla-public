@@ -1,2 +1,10 @@
 .DS_Store
 
+/cllc-interfaces-test/SharePoint/Properties/launchSettings.json
+cllc-public-app/ClientApp/e2e-reports
+/functional-tests/bin
+/functional-tests/obj
+/.vs
+/package-lock.json
+.vscode/launch.json
+.vscode/tasks.json

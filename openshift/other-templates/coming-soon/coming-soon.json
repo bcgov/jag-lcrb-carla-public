@@ -1,0 +1,155 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata":
+  {
+    "name": "${NAME}-build-template",
+    "creationTimestamp": null
+  },
+  "objects": [
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "${NAME}",
+        "generation": 1,
+        "creationTimestamp": null,
+        "labels": {
+            "app": "${NAME}"
+        },
+        "annotations": {
+            "openshift.io/generated-by": "OpenShiftNewApp"
+        }
+    },
+    "spec": {
+        "strategy": {
+            "type": "Recreate",
+            "resources": {},
+            "activeDeadlineSeconds": 21600
+        },
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            },
+            {
+                "type": "ImageChange",
+                "imageChangeParams": {
+                    "automatic": true,
+                    "containerNames": [
+                        "${NAME}"
+                    ],
+                    "from": {
+                        "kind": "ImageStreamTag",
+                        "namespace": "lclb-cllc-tools",
+                        "name": "hello-openshift:latest"
+                    }
+                }
+            }
+        ],
+        "replicas": 2,
+        "test": false,
+        "selector": {
+            "app": "${NAME}",
+            "deploymentconfig": "${NAME}"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "${NAME}",
+                    "deploymentconfig": "${NAME}"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {    "containers": [
+      {
+        "name": "coming-soon",
+        "image": "lclb-cllc-tools/hello-openshift",
+		"env": [
+          { "name": "RESPONSE",
+            "value": "Cannabis Licensing is coming soon."
+          }
+        ],
+        "ports": [
+          {
+            "containerPort": 8080,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name":"tmp",
+            "mountPath":"/tmp"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "imagePullPolicy": "IfNotPresent",
+        "capabilities": {},
+        "securityContext": {
+          "capabilities": {},
+          "privileged": false
+        }
+      }
+    ],
+    "volumes": [
+      {
+        "name":"tmp",
+        "emptyDir": {}
+      }
+    ],
+    "restartPolicy": "Always",
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccount": ""
+
+            }
+        }
+    }
+},
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "${NAME}",
+        "creationTimestamp": null,
+        "labels": {
+            "app": "${NAME}"
+        },
+        "annotations": {
+            "openshift.io/generated-by": "OpenShiftNewApp"
+        }
+    },
+    "spec": {
+        "ports": [
+            {
+                "name": "web",
+                "protocol": "TCP",
+                "port": 8080,
+                "targetPort": 8080
+            }
+        ],
+        "selector": {
+            "app": "${NAME}",
+            "deploymentconfig": "${NAME}"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+    },
+    "status": {
+        "loadBalancer": {}
+    }
+}  
+],
+"parameters": [
+    {
+		"name": "NAME",
+		"displayName": "NAME",
+		"description": "The name assigned to all of the resources defined in this template.",
+		"required": true,
+		"value": "coming-soon"
+    }
+  ]
+}
+

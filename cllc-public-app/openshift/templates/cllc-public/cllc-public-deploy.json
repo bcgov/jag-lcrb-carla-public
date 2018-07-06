@@ -233,10 +233,7 @@
         "name": "${NAME}-siteminder-route",
         "labels": {
           "app": "${NAME}-siteminder-route"
-        },
-        "annotations": {
-          "haproxy.router.openshift.io/ip_whitelist": "${SITEMINDER_WHITE_LIST}"
-        }
+        }        
       },
       "spec": {
         "host": "${SITEMINDER_APPLICATION_DOMAIN}",
@@ -341,12 +338,6 @@
       "name": "REAL_IP_FROM",
       "required": true,
       "value": "172.51.0.0/16"
-    },
-	{
-      "description": "The whitelist containing all of the trusted SiteMinder IPs.",
-      "displayName": "SiteMinder Whitelist",
-      "name": "SITEMINDER_WHITE_LIST",
-      "value": "142.34.49.76 142.34.49.77 142.34.157.10 142.34.157.11"
     },
 	{
       "description": "The endpoint used for SiteMinder routed access to the application.",
