@@ -2,19 +2,23 @@
   {
     "title": "Help us prepare for demand",
     "question": "Do you plan on submitting an application for a cannabis retail licence?",
-    "slug": "initialNumberInterested",
+    "slug": "initial-number-interested",
     "options": [
       {
         "displayOrder": 0,
-        "option": "Yes"
+        "option": "Yes, as soon as applications are available"
       },
       {
         "displayOrder": 1,
-        "option": "No"
+        "option": "Yes, within the next year"
       },
       {
         "displayOrder": 2,
-        "option": "Maybe"
+        "option": "Not sure"
+      },
+      {
+        "displayOrder": 3,
+        "option": "No, just curious"
       }
     ]
   }

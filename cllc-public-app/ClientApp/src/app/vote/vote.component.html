@@ -1,27 +1,55 @@
-<h1>{{title}}</h1>
+<mat-divider></mat-divider>
+<h2>{{title}}</h2>
 <p>{{question}}</p>
-<p *ngIf="alreadyVoted">
-  You've already voted on this poll.
-</p>
-<div *ngIf="alreadyVoted==false">
-  <div class="btn-group" *ngFor="let option of options; let i = index">
-    <button id="vote_{{i}}" class="btn btn-default" (click)="sendVote(option.id)">{{option.option}}</button>
+
+<!-- Do not display vote question if vote has been submitted -->
+<div class="text-center">
+  <p *ngIf="alreadyVoted==true">
+    <mat-card>
+      Thanks for participating on this poll! <i class="material-icons md-18">check_circle</i>
+    </mat-card>
+  </p>
+</div>
+
+
+<!-- Display vote question if vote hasn't been submitted -->
+<div *ngIf="alreadyVoted==false" id="voteOptionButtons_{{slug}}">
+  <mat-radio-group class="radio-group" [(ngModel)]="vote_value">
+    <mat-radio-button class="radio-button" *ngFor="let option of options; let i = index" name="vote_{{slug}}" value="{{option.id}}" id="vote_{{slug}}_{{i}}">
+      {{option.option}}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="text-center">
+    <p>
+      <a id="voteButton" mat-raised-button color="primary" (click)="sendVote(vote_value)">Submit</a>
+    </p>
   </div>
 </div>
-<p *ngIf="showVoteResults==false">
-  <a (click)="setShowVoteResults(true)">Show Vote Results</a>
-</p>
-<p *ngIf="showVoteResults==true">
-  <a (click)="setShowVoteResults(false)">Hide Vote Results</a>
-</p>
-<table width="200" *ngIf="showVoteResults">
-  <tr>
-    <th *ngFor="let option of options; let i = index">{{option.option}}</th>
-  </tr>
-  <tr>
-    <td *ngFor="let option of options; let i = index">{{option.totalVotes}}</td>
-  </tr>
+
+<p></p>
+
+<!-- Show or Hide vote results -->
+<div class="text-center">
+  <p *ngIf="showVoteResults==false">
+    <a mat-button color="accent" id="showVoteResultsButton" (click)="setShowVoteResults(true)">Show Results</a>
+  </p>
+  <p *ngIf="showVoteResults==true">
+    <a mat-button color="accent" id="hideVoteResultsButton" (click)="setShowVoteResults(false)">Hide Results</a>
+  </p>
+</div>
+<!-- Results table -->
+<table id="voteResultsTable" width="300" *ngIf="showVoteResults" class="minimalistBlack">
+  <thead>
+    <tr>
+      <th *ngFor="let option of options; let i = index">{{option.option}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td *ngFor="let option of options; let i = index">{{option.totalVotes}}</td>
+    </tr>
+  </tbody>
 </table>
 
-
-
+<mat-divider></mat-divider>

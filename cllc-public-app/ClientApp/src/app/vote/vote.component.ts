@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Validators, FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
-import { VoteDataService } from "./vote-data.service"
+import { VoteDataService } from "../services/vote-data.service"
 
 // simple voting feature, based on https://github.com/cjsheets/angular-voting-app
 
@@ -15,6 +15,7 @@ import { VoteDataService } from "./vote-data.service"
 /** vote component*/
 export class VoteComponent implements OnInit {
   @Input('slug') slug: string;
+  @Input('vote_value') vote_value: string;
 
   public options;
   public question: string;

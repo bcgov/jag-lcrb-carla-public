@@ -1,8 +1,22 @@
 $bootstrap-sass-asset-helper: true;
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+
 .title {
   font-size: 30px;
+}
+@media (max-width: 575.98px) { 
+    .title {
+        font-size: 20px;
+      }
+
+    .app-header{
+        padding-top: 10px;
+    }
+
+    .app-content{
+        padding-left: 2%;
+    }
 }
 
 .label-beta {
@@ -10,6 +24,15 @@ $bootstrap-sass-asset-helper: true;
   background-color: none;
   border: 2px solid #337ab7;
   vertical-align: middle;
+  padding-bottom: 3px;
+}
+
+.sign {
+    color: #ffffff;
+    background-color: none;
+    float: right;
+    padding-top:20px;
+    font-size: 17px;
 }
 
   .app-outer {
@@ -19,17 +42,23 @@ $bootstrap-sass-asset-helper: true;
   }
 
 .body {
-  background: #f1f1f1;
-  color: #494949;
+    font-size: 18px;
+    background: #f1f1f1;
+    color: #494949;
 }
+
 .app-content {
-  background: #fff;
-  display: flex;
-  flex: 1 0 auto;
-  flex-flow: row nowrap;
-  max-width: 100%;
+    background: #fff;
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    width: 99%;
+    max-width: 1600px;
+    margin: auto;
 
 }
+
+
 
 
 .app-main {
@@ -50,9 +79,10 @@ $bootstrap-sass-asset-helper: true;
     }
   }
 
-  h1, h2, h3, h4, h5 {
-    color: #494949;
-  }
+h1, h2, h3, h4, h5 {
+  color: #494949;
+  font-weight: 600
+}
 
 .jumbotron {
   background-color: rgba(248, 186, 50, 0.13);
@@ -63,4 +93,216 @@ $bootstrap-sass-asset-helper: true;
     font-size: 45px;
     font-weight: 600;
   }
+}
+
+.navbar-footer {
+    background-color: #003366
+
+}
+
+div.c1 li.c2 a {
+    color: #fff;
+    
+}
+
+/*-----main nav-----*/
+.navigationRibbon {
+    /* -webkit-box-shadow: 0px 3px 3px 1px rgba(51, 51, 51, 0.5);
+    -moz-box-shadow: 0px 3px 3px 1px rgba(51, 51, 51, 0.5);
+    box-shadow: 0px 3px 3px 1px rgba(51, 51, 51, 0.5); */
+    border-top: 1px solid #fcba19;
+    width: 100%;
+}
+
+.navigationRibbon a {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.navigationRibbon .level2Navigation {
+    background-color: #38598a;
+}
+
+.navigationRibbon .level3Navigation {
+    background-color: #5475a7
+
+}
+
+/* unvisited link */
+a:link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* visited link */
+a:visited {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600
+}
+
+/* mouse over link */
+
+a:hover {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 600
+}
+
+/* selected link */
+a:active {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 900;
+}
+
+
+
+
+
+/* Fixed sidenav, full height */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #596c93;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-right: 25px;
+    font-weight: normal;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: right;
+    padding-right: 30px;
+    font-weight: 500;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #fff;
+    text-decoration: underline;
+    background-color: #415273;
+    font-weight: 400
+}
+
+
+.signin {
+    color: #fff;
+    font-size: 16px;
+}
+
+
+
+
+/* Sidebar Styles */
+
+.sidebar-wrapper {
+    margin-left: -15px;
+    width: 200px;
+    background-color: #c6cdda;
+    margin-right: 30px;
+    padding-top: 20px
+}
+
+
+.sidebar-nav {
+    width: 200px;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 0px;
+    line-height: 40px
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    margin-left: -20px;
+    font-weight:200;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: underline;
+    color: #000;
+    margin-left: -40px;
+    padding-left: 20px;
+    background-color: #efefef;
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+
+}
+
+
+.nav-container {
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    width: 99%;
+    max-width: 1600px;
+    // min-width: 910px;
+    margin: auto;
+}
+
+.top-menu{
+    justify-content: flex-start;
+    padding-left: 30px; 
+    padding-right: 30px;
+}
+
+.nav-link{
+    font-weight: 600 !important;
+    color: white !important; 
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    cursor: pointer;
+}
+
+.sign-container{
+    padding-right: 15px;
+}
+
+
+.not-supported-browser{
+    padding-top: 20px;
+}
+
+button.btn-mobile {
+    border: none;
+    outline: none;
+    background: #ddd;
 }
