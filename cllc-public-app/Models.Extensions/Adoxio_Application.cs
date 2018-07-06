@@ -32,14 +32,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             //to.AdoxioRole = from.contactpersonrole;
             to.AdoxioEmail = from.contactpersonemail;
             to.AdoxioContactpersonphone = from.contactpersonphone;
-
             //TODO add to autorest
             //to.AdoxioAuthorizedtosubmit = from.authorizedtosubmit;
             to.AdoxioSignatureagreement = from.signatureagreement;
             //TODO add to autorest
             //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
-            
-			if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
+            to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
+
+            if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
 			{
 				to.AdoxioInvoicetrigger = 1;
 			}
