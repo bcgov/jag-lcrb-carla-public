@@ -61,6 +61,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAdoxioLicencetypes AdoxioLicencetypes { get; private set; }
 
         /// <summary>
+        /// Gets the IAdoxioTiedhouseassociations.
+        /// </summary>
+        public virtual IAdoxioTiedhouseassociations AdoxioTiedhouseassociations { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdoxioTiedhouseconnections.
+        /// </summary>
+        public virtual IAdoxioTiedhouseconnections AdoxioTiedhouseconnections { get; private set; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
@@ -275,6 +285,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applications = new Applications(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
+            AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
+            AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
             Contacts = new Contacts(this);
             Invoices = new Invoices(this);
             BaseUri = new System.Uri("http://localhost");
