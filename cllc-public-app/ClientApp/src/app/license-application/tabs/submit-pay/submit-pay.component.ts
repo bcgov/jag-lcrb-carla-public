@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../../services/payment-data.service';
+import { Router, ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-submit-pay',
@@ -13,10 +17,25 @@ export class SubmitPayComponent implements OnInit {
   @Input('applicationId') applicationId: string;
   //@Input() applicationId: string;
   busy: Subscription;
+  isSubmitted: boolean;
+  isPaid: boolean;
 
-  constructor(private paymentDataService: PaymentDataService) { }
+  constructor(private paymentDataService: PaymentDataService, private applicationDataService: AdoxioApplicationDataService, 
+  				public snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
+    // get application data, display form
+    this.busy = this.applicationDataService.getApplication(this.applicationId).subscribe(
+      res => {
+        let data = res.json();
+        this.isSubmitted = data['isSubmitted']
+        this.isPaid = data['isPaid']
+      },
+      err => {
+        this.snackBar.open('Error getting Application Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log("Error occured getting Application Details");
+      }
+    );
   }
 
   submit_application() 
@@ -33,5 +52,10 @@ export class SubmitPayComponent implements OnInit {
         console.log("Error occured");
       }
     );
+  }
+
+  verify_payment()
+  {
+     this.router.navigate(['./payment-confirmation'], { queryParams: { trnId: '0', SessionKey: this.applicationId } });
   }
 }
