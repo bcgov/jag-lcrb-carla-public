@@ -139,8 +139,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
             
             // copy received values to Dynamics Application
-			adoxioApplication.CopyValues(item);            
-
+			adoxioApplication.CopyValues(item);
+            adoxioApplication.AdoxioApplicanttype = (int?)item.applicantType;
             try
             {
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
@@ -214,7 +214,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 			adoxioApplication.CopyValues(item);
 
-            _dynamicsClient.Applications.Update(id, adoxioApplication);
+            try
+            {
+                _dynamicsClient.Applications.Update(id, adoxioApplication);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error updating application");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
 
             adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
 
