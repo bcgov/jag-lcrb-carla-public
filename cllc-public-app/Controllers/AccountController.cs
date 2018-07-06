@@ -197,8 +197,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create a new account
                 account = new MicrosoftDynamicsCRMaccount();
                 account.CopyValues(item, updateIfNull);
+                // business type must be set only during creation, not in update (removed from copyValues() )
+                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), item.businessType, true);
                 // ensure that we create an account for the current user.				
-				account.AdoxioExternalid = accountSiteminderGuid;
+                account.AdoxioExternalid = accountSiteminderGuid;
 
                 account.Primarycontactid = userContact;
                 account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Applicant;
