@@ -1,0 +1,48 @@
+<div class="col-md-9" *ngIf="dynamicsForm && form">
+  <h3 *ngIf="!hideHeader">{{dynamicsForm.name}}</h3>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let tab of dynamicsForm.tabs">
+      <div *ngFor="let section of tab.sections">
+        <h3>{{section.name}}</h3>
+        <div *ngFor="let field of section.fields">
+          <label *ngIf="field.controltype != 'CheckBoxControl'" class="label" [for]="field.datafieldname">{{field.name}}</label>
+          <div [ngSwitch]="field.controltype">
+            <input *ngSwitchCase="'TextBoxControl'" class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required"
+                   [id]="field.datafieldname">
+            <input *ngSwitchCase="'EmailAddressControl'" class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required"
+                   [id]="field.datafieldname" email>
+            <input *ngSwitchCase="'MoneyControl'" class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required"
+                   [id]="field.datafieldname">
+            <input *ngSwitchCase="'IntegerControl'" class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required"
+                   [id]="field.datafieldname">
+            <textarea *ngSwitchCase="'TextAreaControl'" class="form-style" name="field.datafieldname" [formControlName]="field.datafieldname" [id]="field.datafieldname" ngRequired="field.required"></textarea>
+            <ng-container *ngSwitchCase="'CheckBoxControl'">
+              <input type="checkbox" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required" ng-true-value="true" ng-false-value="false">
+              <label class="label" [for]="field.datafieldname">{{field.name}}</label>
+            </ng-container>
+            <ng-container *ngSwitchCase="'LookupControl'">
+              <select class="form-control" *ngIf="!enableUserOverride || field.datafieldname != 'primarycontactid'" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required">
+                <option value="">Field Values...</option>
+              </select>
+              <div *ngIf="enableUserOverride && field.datafieldname == 'primarycontactid'">
+                <input *ngIf="enableUserOverride && field.datafieldname == 'primarycontactid'" type="hidden" [ngModel]="currentUser.contactid" />
+                <p>{{currentUser.name}}</p>
+              </div>
+            </ng-container>
+            <select class="form-control" *ngSwitchCase="'PicklistControl'" name="field.datafieldname" [id]="field.datafieldname" [formControlName]="field.datafieldname" ngRequired="field.required">
+              <option *ngFor="let picklistOption of field.options" [value]="picklistOption.value">{{ picklistOption.label }}</option>
+            </select>              
+            
+            <div *ngSwitchDefault>
+              Form Control Not Implemented: '{{field.controltype}}' {{field.classid}}
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div *ngIf="!hideSubmit">
+      <button class="globalButton" type="submit" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>  
+</div>

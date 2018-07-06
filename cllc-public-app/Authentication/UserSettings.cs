@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Gov.Lclb.Cllb.Public.Models;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -15,7 +16,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         public bool UserAuthenticated { get; set; }
 
         /// <summary>
-        /// HETS/SiteMinder User Id
+        /// SiteMinder User Id
         /// </summary>
         public string UserId { get; set; }
 
@@ -23,11 +24,42 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// SiteMinder Guid
         /// </summary>
         public string SiteMinderGuid { get; set; }
+        public string SiteMinderBusinessGuid { get; set; }
+
+        public string UserDisplayName { get; set; }
+        public string BusinessLegalName { get; set; }
+        public string UserType { get; set; }
 
         /// <summary>
         /// AuthenticatedUser User Model
         /// </summary>
         public User AuthenticatedUser { get; set; }
+
+        public bool IsNewUserRegistration { get; set; }
+
+        public string ContactId { get; set; }
+        public string AccountId { get; set; }
+
+        /// <summary>
+        /// Check the UserSettings object and throw an exception if it is invalid.
+        /// </summary>
+        public void Validate()
+        {
+            if (AccountId == null && ContactId == null)
+            {
+                throw new Exception("UserSettings Validation Error:  AccountId is null and ContactID is null");
+            }
+
+            if (AccountId == null)
+            {
+                throw new Exception("UserSettings Validation Error:  AccountId is null");
+            }
+
+            if (ContactId == null)
+            {
+                throw new Exception("UserSettings Validation Error:  ContactId is null");
+            }
+        }
 
         /// <summary>
         /// Serializes UserSettings as a Json String

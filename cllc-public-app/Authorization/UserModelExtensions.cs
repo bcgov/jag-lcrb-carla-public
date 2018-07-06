@@ -28,27 +28,57 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         private static List<Claim> GetClaims(this User user)
         {
-            List<Claim> claims = new List<Claim> {new Claim(ClaimTypes.Name, user.SmUserId)};
+            List<Claim> claims = new List<Claim>();
+            if (user == null ) //a user is only a new users if they are a BCeID user
+            {
+                claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(user.SmUserId))
+                {
+                    claims.Add(new Claim(ClaimTypes.Name, user.SmUserId));
+                }
+                
+                if (!string.IsNullOrEmpty(user.Surname))
+                {
+                    claims.Add(new Claim(ClaimTypes.Surname, user.Surname));
+                }
+                    
+                if (!string.IsNullOrEmpty(user.GivenName))
+                {
+                    claims.Add(new Claim(ClaimTypes.GivenName, user.GivenName));
+                }
+                    
+                if (!string.IsNullOrEmpty(user.Email))
+                {
+                    claims.Add(new Claim(ClaimTypes.Email, user.Email));
+                }                    
 
-            if (!string.IsNullOrEmpty(user.Surname))
-                claims.Add(new Claim(ClaimTypes.Surname, user.Surname));
+                if (user.ContactId != null)
+                {
+                    claims.Add(new Claim(User.UseridClaim, user.ContactId.ToString()));
+                }                    
+                if (!string.IsNullOrEmpty(user.UserType))
+                {
+                    claims.Add(new Claim(User.UserTypeClaim, user.UserType));
+                }
 
-            if (!string.IsNullOrEmpty(user.GivenName))
-                claims.Add(new Claim(ClaimTypes.GivenName, user.GivenName));
+                var permissions = user.GetActivePermissions().Select(p => new Claim(User.PermissionClaim, p.Code)).ToList();
+                if (permissions.Any())
+                {
+                    claims.AddRange(permissions);
+                }
+                    
 
-            if (!string.IsNullOrEmpty(user.Email))
-                claims.Add(new Claim(ClaimTypes.Email, user.Email));
+                var roles = user.GetActiveRoles().Select(r => new Claim(ClaimTypes.Role, r.Name)).ToList();
+                if (roles.Any())
+                {
+                    claims.AddRange(roles);
+                }
+                    
 
-            if (user.Id != null)
-                claims.Add(new Claim(User.UseridClaim, user.Id.ToString()));
-
-            var permissions = user.GetActivePermissions().Select(p => new Claim(User.PermissionClaim, p.Code)).ToList();
-            if (permissions.Any())
-                claims.AddRange(permissions);
-
-            var roles = user.GetActiveRoles().Select(r => new Claim(ClaimTypes.Role, r.Name)).ToList();
-            if (roles.Any())
-                claims.AddRange(roles);            
+            }
 
             return claims;
         }
@@ -85,6 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 .Select(x => x.Role).ToList();
 
             return roles;
-        }        
+        }
+
     }
 }

@@ -1,34 +1,29 @@
-<div class="container test1234">
+<div class="extra-padding-left">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 col-xs-12">
+      <!-- What you need message and survey button -->
       <div class="jumbotron">
         <h1>
-          Find out what you need to apply for a licence
+          What does an applicant need to apply for a cannabis licence?
         </h1>
         <h3>
-          Answer questions about your business to receive a customized to-do list to prepare an application.
+          Answer questions about the proposed business to receive a customized to-do list to prepare an application.
         </h3>
-
         <div class="row">
-          <div class="col-md-12 text-center">
-            <a class="btn btn-primary" routerLink="prv" tabindex="1">
-              <strong>Start</strong><br>
-            </a>
+          <div class="col-md-12 text-left">
+            <a class="globalButton" class="btn btn-primary"  routerLink="prv" tabindex="1"><strong>Start</strong><br></a>
           </div>
         </div>
       </div>
+
+      <!-- Accordion -->
+      <app-accordion></app-accordion>
     </div>
 
-    <div class="col-md-4">
+    <!-- Newsletter -->
+    <div class="col-md-4 newsletter">
       <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
     </div>
-    <div class="col-md-4">
-      <app-vote [slug]="'initialNumberInterested'"></app-vote>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">      
-        <app-accordion></app-accordion>      
-    </div>
+
   </div>
 </div>

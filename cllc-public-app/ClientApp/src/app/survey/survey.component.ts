@@ -23,7 +23,7 @@ export class SurveyComponent {
 
     let surveyModel = new Survey.Model(this.jsonData);
     surveyModel.showQuestionNumbers = 'off';
-    Survey.Survey.cssType = "bootstrap";
+    // Survey.Survey.cssType = "bootstrap";  //This breaks IE 11
     Survey.defaultBootstrapCss.page.root = "sv_page";
     Survey.defaultBootstrapCss.pageDescription = "sv_page_description";
     Survey.defaultBootstrapCss.pageTitle = "sv_page_title";
@@ -37,7 +37,7 @@ export class SurveyComponent {
     Survey.defaultBootstrapCss.matrixdynamic.button = "btn btn-default";
     Survey.defaultBootstrapCss.paneldynamic.button = "btn btn-default";
     Survey.defaultBootstrapCss.paneldynamic.root = "sv_p_dynamic"; // not used?
-    Survey.dxSurveyService.serviceUrl = "/api/survey";
+    Survey.dxSurveyService.serviceUrl = "api/survey";
 
     surveyModel.onComplete.add((sender, options) => {
       // generate a client identifier.  replace this with a hashed value.

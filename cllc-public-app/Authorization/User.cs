@@ -14,5 +14,10 @@
         /// UserId Claim Property
         /// </summary>
         public const string UseridClaim = "userid_claim";
+
+        /// <summary>
+        /// User Type Claim Property
+        /// </summary>
+        public const string UserTypeClaim = "usertype_claim";
     }
 }

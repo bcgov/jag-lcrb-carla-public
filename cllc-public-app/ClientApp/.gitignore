@@ -37,7 +37,15 @@ testem.log
 # e2e
 /e2e/*.js
 /e2e/*.map
+# protractor test results
+junitresults.xml
+**/e2-reports/screenshots
+**/e2-reports/*.*
+chrome-test-report.html
 
 # System Files
 .DS_Store
 Thumbs.db
+
+# workstation lock files
+package-lock.json

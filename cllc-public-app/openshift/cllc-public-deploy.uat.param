@@ -1,0 +1,10 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: cllc-public
+#=========================================================
+APPLICATION_DOMAIN=lclb-cllc-uat.pathfinder.gov.bc.ca
+SITEMINDER_APPLICATION_DOMAIN=cannabis-licensing-uat.pathfinder.bcgov
+TAG_NAME=uat
+NAME=cllc-public-uat
+DATABASE_SERVICE_NAME=mssql-uat
+

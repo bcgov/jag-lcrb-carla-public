@@ -4,7 +4,6 @@ using System.Text;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -144,15 +143,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     hash = hash * 59 + Option.GetHashCode();
                 }
 
-                if (TotalVotes != null)
-                {
-                    hash = hash * 59 + TotalVotes.GetHashCode();
-                }
-
-                if (DisplayOrder != null)
-                {
-                    hash = hash * 59 + DisplayOrder.GetHashCode();
-                }                
+                // TotalVotes is never null
+                hash = hash * 59 + TotalVotes.GetHashCode();
+                
+                // DisplayOrder is never null, so no null check.
+                hash = hash * 59 + DisplayOrder.GetHashCode();                                
 
                 return hash;
             }

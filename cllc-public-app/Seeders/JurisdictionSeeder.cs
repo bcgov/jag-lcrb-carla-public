@@ -6,6 +6,7 @@ using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -13,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public JurisdictionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory) 
+        public JurisdictionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory  loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
             : base(configuration, env, loggerFactory)
         { }
 
@@ -51,15 +52,17 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private List<Jurisdiction> GetSeedJurisdictions()
         {
             List<Jurisdiction> jurisdictions = new List<Jurisdiction>(GetDefaultJurisdictions());
-
-            if (IsDevelopmentEnvironment)
-                jurisdictions.AddRange(GetDevJurisdictions());
-
-            if (IsTestEnvironment || IsStagingEnvironment)
-                jurisdictions.AddRange(GetTestJurisdictions());
-
+                
             if (IsProductionEnvironment)
+            {
                 jurisdictions.AddRange(GetProdJurisdictions());
+            }
+            else
+            {
+                jurisdictions.AddRange(GetDevJurisdictions());
+            }
+
+                
 
             return jurisdictions;
         }

@@ -23,7 +23,7 @@ Differences can include:
 * Source repositories (such as your development repo).
 * Etc.
 
-To target a different repo and branch, create a `setting.local.sh` file in your project's local `openshift` directory and override the GIT parameters, for example;
+To target a different repo and branch, create a `settings.local.sh` file in your project's local `openshift` directory and override the GIT parameters, for example;
 ```
 export GIT_URI="https://github.com/bcgov/ag-lclb-cllc-public.git"
 export GIT_REF="openshift-updates"
@@ -47,13 +47,8 @@ The application uses .Net 2.0 s2i images for the builds.  In the pathfinder envi
 
 To resolve this issue the project defines builds for `dotnet-20-runtime-centos7` and `dotnet-20-centos7`; which at the time of writing were not available in image form.  The `dotnet-20-centos7` s2i image is the CentOS equivalent of the `dotnet-20-rhel7` s2i image that can be used for local development.  These two images are not used in the Pathfinder environment and exist only to be used in a local environment.
 
-To switch to the `dotnet-20-centos7` image for local deployment, open your `client-build.local.param` and `dotnet-20-node-89-build.local.param` file and update the following 2 lines;
+To switch to the `dotnet-20-centos7` image for local deployment, open your `cllc-public.build.local.param` file and add the following 2 lines;
 
-```
-# SOURCE_IMAGE_KIND=DockerImage
-# SOURCE_IMAGE_NAME=registry.access.redhat.com/dotnet/dotnet-20-rhel7
-```
-with
 ```
 SOURCE_IMAGE_KIND=ImageStreamTag
 SOURCE_IMAGE_NAME=dotnet-20-centos7
@@ -117,4 +112,22 @@ Select **Just the push event**
 Check **Active**
 
 Click **Add webhook**
+
+### UAT ###
+
+UAT is not currently supported by the process above.  To setup the UAT environment, change the console directory to the location of the public-app openshift directory, and execute the following.
+
+`oc project lclb-cllc-tools`
+
+`oc process -f templates/cllc-public/cllc-public.build.json --param-file=cllc-public-build.uat.param`
+
+`oc project lclb-cllc-test`
+
+`oc process -f templates/cllc-public/cllc-public-deploy.json --param-file=cllc-public-deploy.uat.param`
+
+
+
+Change directory to the directory containing the mssql server template, and execute the following:
+
+`oc process -f sql-server-deploy.json --param-file=sql-server-deploy.uat.param | oc create -f -`
 

@@ -51,9 +51,16 @@ namespace Gov.Lclb.Cllb.Public.Authorization
             // **************************************************
             // Check if we have a Dev Environment Cookie
             // **************************************************
-            if (_hostingEnv.IsDevelopment())
+            if (!_hostingEnv.IsProduction())
             {
                 string temp = _httpContext.Request.Cookies["DEV-USER"];
+
+                if (string.IsNullOrEmpty(temp))
+                { 
+                    // may be a dev header.
+                    temp = _httpContext.Request.Headers["DEV-USER"];
+                }
+
 
                 if (!string.IsNullOrEmpty(temp))
                 {
@@ -63,6 +70,26 @@ namespace Gov.Lclb.Cllb.Public.Authorization
                     await Task.CompletedTask;
                     return;
                 }
+				else
+				{
+					temp = _httpContext.Request.Cookies["DEV-BCSC-USER"];
+
+                    if (string.IsNullOrEmpty(temp))
+                    {
+                        // may be a dev header.
+                        temp = _httpContext.Request.Headers["DEV-BCSC-USER"];
+                    }
+
+
+                    if (!string.IsNullOrEmpty(temp))
+                    {
+                        // access granted
+                        context.Succeed(requirement);
+
+                        await Task.CompletedTask;
+                        return;
+                    }
+				}
             }
             
             // **************************************************
