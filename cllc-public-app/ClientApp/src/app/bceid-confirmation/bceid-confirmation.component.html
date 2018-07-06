@@ -19,15 +19,18 @@
 
   <div *ngIf="bceidConfirmBusinessType">
     <h1>Confirm Business BCeID Information</h1>
-    <!-- <p>Please confirm the Business Type of {{currentUser.businessname}}.</p>
-    <select class="form-control" [(ngModel)]="businessType" style="width: 280px;" #bceid>
-      <option value="Void">Not Specified</option>
-      <option value="Proprietorship">Proprietorship</option>
-      <option value="Partnership">Partnership</option>
-      <option value="Corporation">Corporation</option>
-      <option value="ExtraProvinciallyRegisteredCompany">Extra Provincially Registered Company</option>
-      <option value="Other">Other</option>
-    </select><br> -->
+    <p>Please confirm the Business Type of {{currentUser.businessname}}.</p>
+    <!-- handle the case where the bceid business type is not provided -->
+    <section *ngIf="businessType == ''">
+      <select class="form-control" [(ngModel)]="businessType" style="width: 280px;" #bceid>
+        <option value="Void">Not Specified</option>
+        <option value="Proprietorship">Proprietorship</option>
+        <option value="Partnership">Partnership</option>
+        <option value="Corporation">Corporation</option>
+        <option value="ExtraProvinciallyRegisteredCompany">Extra Provincially Registered Company</option>
+        <option value="Other">Other</option>
+      </select><br> 
+    </section>
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Other'">
       <!-- {{businessValue}} -->
       <p><b>What type of Organization is {{currentUser.businessname}}?</b></p>
