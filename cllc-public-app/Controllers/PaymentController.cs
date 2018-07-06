@@ -134,6 +134,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var orderamt = invoice.Totalamount;
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id);
+			response["invoice"] = invoice.Invoicenumber;
 
 			foreach (var key in response.Keys)
 			{
