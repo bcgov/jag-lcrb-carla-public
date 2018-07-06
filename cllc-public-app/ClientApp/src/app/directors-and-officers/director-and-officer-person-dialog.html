@@ -11,7 +11,9 @@
           <section>
             <input type="checkbox" formControlName="isDirector"> <label style="padding-right: 10px;" for="">Director</label>
             <input type="checkbox" formControlName="isOfficer"> <label style="padding-right: 10px;" for="">Officer</label>
-            <input type="checkbox" formControlName="isSeniorManagement"> <label style="padding-right: 10px;" for="">Senior Manager</label>
+            <span *ngIf="businessType == 'Society'">
+              <input type="checkbox" formControlName="isSeniorManagement"> <label style="padding-right: 10px;" for="">Senior Manager</label>
+            </span>
           </section>
 
           <!-- <div *ngIf="this.isFieldError('position')" class="error-msg">

@@ -83,7 +83,8 @@ export class DirectorsAndOfficersComponent implements OnInit {
       disableClose: true,
       autoFocus: true,
       data: {
-        person: person
+        person: person,
+        businessType: this.businessType
       }
     }
 
@@ -143,6 +144,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 })
 export class DirectorAndOfficerPersonDialog {
   directorOfficerForm: FormGroup;
+  businessType: string;
 
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.directorOfficerForm = fb.group({
@@ -159,6 +161,7 @@ export class DirectorAndOfficerPersonDialog {
     if (data && data.person) {
       this.directorOfficerForm.patchValue(data.person);
     }
+    this.businessType = data.businessType;
   }
 
   dateLessThanToday(field1) {
