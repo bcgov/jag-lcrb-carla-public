@@ -17,7 +17,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 		public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.AdoxioApplication from)
         {
-            to.AdoxioApplicanttype = (int?) from.applicantType;
             to.AdoxioName = from.name; 
             //to.Adoxio_jobnumber = from.jobNumber;            
             to.AdoxioEstablishmentpropsedname = from.establishmentName;
