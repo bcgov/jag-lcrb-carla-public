@@ -28,7 +28,7 @@
             <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Date of Incorporation in B.C.</label>
             <label *ngIf="businessType == 'Society'">Date of Incorporation in B.C.</label>
             <br>
-            <input type="date" required class="form-control" formControlName="dateOfIncorporationInBC" style="width: 250px;">
+            <input type="text" formControlName='dateOfIncorporationInBC' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
             <div *ngIf="this.isFieldError('dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
               <div *ngIf="corporateDetailsForm.controls['dateOfIncorporationInBC'].hasError('required') ">
                 This is required
