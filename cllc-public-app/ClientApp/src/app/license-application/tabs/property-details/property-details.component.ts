@@ -14,7 +14,6 @@ export class PropertyDetailsComponent implements OnInit {
 
   @Input('accountId') accountId: string;
   @Input('applicationId') applicationId: string;
-  //applicationId: string;
   propertyDetailsForm: FormGroup;
   busy: Subscription;
   
@@ -30,7 +29,7 @@ export class PropertyDetailsComponent implements OnInit {
     //create entry form
     this.createForm();
     // get application data, display form
-    this.busy = this.applicationDataService.getApplication(this.applicationId).subscribe(
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         let data = res.json();
         this.propertyDetailsForm.patchValue(data);

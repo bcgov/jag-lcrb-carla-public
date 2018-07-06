@@ -26,16 +26,24 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentaddresspostalcode = from.establishmentaddresspostalcode;
             to.AdoxioAddresscity = from.establishmentaddresscity;
             to.AdoxioEstablishmentparcelid = from.establishmentparcelid;
+            to.AdoxioContactpersonfirstname = from.contactpersonfirstname;
+            to.AdoxioContactpersonlastname = from.contactpersonlastname;
+            //TODO add to autorest
+            //to.AdoxioRole = from.contactpersonrole;
+            to.AdoxioEmail = from.contactpersonemail;
+            to.AdoxioContactpersonphone = from.contactpersonphone;
             //TODO add to autorest
             //to.AdoxioAuthorizedtosubmit = from.authorizedtosubmit;
             to.AdoxioSignatureagreement = from.signatureagreement;
             //TODO add to autorest
             //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
-            
-			if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
-			{
-				to.AdoxioInvoicetrigger = 1;
-			}
+            // comment out this next line as it is causing all application updates to fail (moved to controller)
+            //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
+
+            //if (from.adoxioInvoiceTrigger == GeneralYesNo.Yes)
+			//{
+			//	to.AdoxioInvoicetrigger = 1;
+			//}
 
 			//var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeByName(from.licenseType).Result;
 			//to.AdoxioLicenceType = adoxio_licencetype;
@@ -121,41 +129,62 @@ namespace Gov.Lclb.Cllb.Public.Models
 				adoxioApplicationVM.isSubmitted = false;
 			}
 
+			adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
+
 			//get declarations
             //TODO add to autorest
             //adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
             adoxioApplicationVM.signatureagreement = dynamicsApplication.AdoxioSignatureagreement;
 
+            //get contact details
+            adoxioApplicationVM.contactpersonfirstname = dynamicsApplication.AdoxioContactpersonfirstname;
+            adoxioApplicationVM.contactpersonlastname = dynamicsApplication.AdoxioContactpersonlastname;
+            //TODO add to autorest
+            //adoxioApplicationVM.contactpersonrole = dynamicsApplication.AdoxioRole;
+            adoxioApplicationVM.contactpersonemail = dynamicsApplication.AdoxioEmail;
+            adoxioApplicationVM.contactpersonphone = dynamicsApplication.AdoxioContactpersonphone;
+
             return adoxioApplicationVM;
         }
 
-        public async static Task<MicrosoftDynamicsCRMadoxioapplication> ToModel(this AdoxioApplication adoxioApplicationVM, Interfaces.Microsoft.Dynamics.CRM.System _system)
-        {
-			MicrosoftDynamicsCRMadoxioapplication result = null;
-			if (adoxioApplicationVM != null)
-            {
-				result = new MicrosoftDynamicsCRMadoxioapplication();
-				if (adoxioApplicationVM.id != null)
-					result.Adoxio_applicationid = Guid.Parse(adoxioApplicationVM.id);
-				result.Adoxio_name = adoxioApplicationVM.name;
-				result.Adoxio_Applicant = adoxioApplicationVM.applicant.ToModel();
-				result.Adoxio_nameofapplicant = adoxioApplicationVM.applyingPerson;
-				result.Adoxio_jobnumber = adoxioApplicationVM.jobNumber;
-				//result._adoxio_licencetype_value = adoxioApplicationVM.licenseType;
-				result.Adoxio_establishmentpropsedname = adoxioApplicationVM.establishmentName;
-				result.Adoxio_establishmentaddressstreet = adoxioApplicationVM.establishmentaddressstreet;
-				result.Adoxio_establishmentaddresscity = adoxioApplicationVM.establishmentaddresscity;
-				result.Adoxio_establishmentaddresspostalcode = adoxioApplicationVM.establishmentaddresspostalcode;
-                result.Adoxio_establishmentparcelid = adoxioApplicationVM.establishmentparcelid;
-                //TODO add to autorest
-                //result.Adoxio_additionalpropertyinformation = adoxioApplicationVM.additionalpropertyinformation;
-                //TODO add to autorest
-                //result.Adoxio_authorizedtosubmit = adoxioApplicationVM.authorizedtosubmit;
-                result.Adoxio_signatureagreement = adoxioApplicationVM.signatureagreement;
+        /***** 
+         * To be disabled (Odata) 
+         * ****/
+        //     public async static Task<MicrosoftDynamicsCRMadoxioapplication> ToModel(this AdoxioApplication adoxioApplicationVM, Interfaces.Microsoft.Dynamics.CRM.System _system)
+        //     {
+        //MicrosoftDynamicsCRMadoxioapplication result = null;
+        //if (adoxioApplicationVM != null)
+        //         {
+        //	result = new MicrosoftDynamicsCRMadoxioapplication();
+        //	if (adoxioApplicationVM.id != null)
+        //		result.Adoxio_applicationid = Guid.Parse(adoxioApplicationVM.id);
+        //	result.Adoxio_name = adoxioApplicationVM.name;
+        //	result.Adoxio_Applicant = adoxioApplicationVM.applicant.ToModel();
+        //	result.Adoxio_nameofapplicant = adoxioApplicationVM.applyingPerson;
+        //	result.Adoxio_jobnumber = adoxioApplicationVM.jobNumber;
+        //	//result._adoxio_licencetype_value = adoxioApplicationVM.licenseType;
+        //	result.Adoxio_establishmentpropsedname = adoxioApplicationVM.establishmentName;
+        //	result.Adoxio_establishmentaddressstreet = adoxioApplicationVM.establishmentaddressstreet;
+        //	result.Adoxio_establishmentaddresscity = adoxioApplicationVM.establishmentaddresscity;
+        //	result.Adoxio_establishmentaddresspostalcode = adoxioApplicationVM.establishmentaddresspostalcode;
+        //             result.Adoxio_establishmentparcelid = adoxioApplicationVM.establishmentparcelid;
+        //             //TODO add to autorest
+        //             //result.Adoxio_additionalpropertyinformation = adoxioApplicationVM.additionalpropertyinformation;
+        //             //TODO add to autorest
+        //             //result.Adoxio_authorizedtosubmit = adoxioApplicationVM.authorizedtosubmit;
+        //             result.Adoxio_signatureagreement = adoxioApplicationVM.signatureagreement;
+        //             result.Adoxio_contactpersonfirstname = adoxioApplicationVM.contactpersonfirstname;
+        //             result.Adoxio_contactpersonlastname = adoxioApplicationVM.contactpersonlastname;
+        //             //TODO add to autorest
+        //             //result.AdoxioRole = adoxioApplicationVM.contactpersonrole;
+        //             result.Adoxio_email = adoxioApplicationVM.contactpersonemail;
+        //             result.Adoxio_contactpersonphone = adoxioApplicationVM.contactpersonphone;
 
-                // ??? result.Statuscode = adoxioApplicationVM.Statuscode;
-            }
-            return result;
-        }
+
+        //             // ??? result.Statuscode = adoxioApplicationVM.Statuscode;
+        //         }
+        //         return result;
+        //     }
+
     }
 }
