@@ -488,6 +488,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
                 adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+            } else {
+                adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
             }
 
             adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", item.parentLegalEntityId);
