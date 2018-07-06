@@ -27,7 +27,7 @@
       <ng-container matColumnDef="sendConsentRequest">
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-checkbox [(ngModel)]="element.sendConsentRequest"></mat-checkbox>
+          <input type="checkbox" [(ngModel)]="element.sendConsentRequest"/>
         </mat-cell>
       </ng-container>
 
