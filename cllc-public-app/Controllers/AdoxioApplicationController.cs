@@ -148,7 +148,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
 			patchApplication.AdoxioApplicationid = adoxioApplication.AdoxioApplicationid;
 			patchApplication.AdoxioLicenceType = adoxioLicencetype; // _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
-			patchApplication._adoxioLicencetypeValue = adoxioLicencetype.AdoxioLicencetypeid;
+            patchApplication._adoxioLicencetypeValue = adoxioLicencetype.AdoxioLicencetypeid;
             try
             {
 				await _dynamicsClient.Applications.UpdateAsync(patchApplication.AdoxioApplicationid, patchApplication);
