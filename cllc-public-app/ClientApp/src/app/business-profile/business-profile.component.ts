@@ -49,19 +49,20 @@ export class BusinessProfileComponent {
   }
 
   ngOnInit(): void {
-    this.legalEntityId = this.route.snapshot.params.legalEntityId;
-    this.accountId = this.route.snapshot.params.accountId;
+    this.route.params.subscribe(p => {
+      this.legalEntityId = p.legalEntityId;
+      this.accountId = p.accountId;
 
-    this.dynamicsDataService.getRecord("account", this.accountId)
-      .then((data) => {
-        if (data.primarycontact) {
-          this.contactId = data.primarycontact.id;
-        }
-        this.businessType = data.businessType;
-        this.componentLoaded = true;
-        this.businessName = data.name;
-      });
-
+      this.dynamicsDataService.getRecord("account", this.accountId)
+        .then((data) => {
+          if (data.primarycontact) {
+            this.contactId = data.primarycontact.id;
+          }
+          this.businessType = data.businessType;
+          this.componentLoaded = true;
+          this.businessName = data.name;
+        });
+    });
   }
 
   getTab() {
