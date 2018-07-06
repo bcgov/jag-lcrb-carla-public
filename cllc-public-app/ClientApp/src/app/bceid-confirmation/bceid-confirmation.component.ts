@@ -49,25 +49,31 @@ export class BceidConfirmationComponent {
     }
   }
 
-   confirmBceidAccountNo() {
+  confirmBceidAccountNo() {
      // confirm BCeID
      this.showBceidCorrection = true;
    }
 
     confirmBceidUser() {
       // confirm BCeID
-
       this.bceidConfirmContact = true;
     }
 
-    confirmCorpType(propOrPartner) {
-      this.bceidConfirmBusinessType = false;
-      this.bceidConfirmContact = true;
+  confirmCorpType(propOrPartner) {
+    this.bceidConfirmBusinessType = false;
+    this.bceidConfirmContact = true;
 
-      // Proprietorship and Partnership do not have radio buttons to chane the value of finalBusienssType
-      if(propOrPartner){
-        this.finalBusinessType = propOrPartner;
+    // Proprietorship and Partnership do not have radio buttons to chane the value of finalBusienssType
+    if (propOrPartner) {
+      this.finalBusinessType = propOrPartner;
+    } else {
+      if (!this.finalBusinessType) {
+        if (this.businessType == "Proprietorship" || this.businessType == "Partnership") {
+          this.finalBusinessType = this.businessType;
+        }
       }
+    }
+
     }
 
     confirmContactYes() {
@@ -82,7 +88,7 @@ export class BceidConfirmationComponent {
         
       // Submit selected company type and sub-type to the account service
       account.businessType = this.finalBusinessType;
-
+      debugger
       let payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
         .then((data) => {
