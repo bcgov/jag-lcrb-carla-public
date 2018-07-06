@@ -21,6 +21,7 @@
         "../node_modules/ng-busy/src/style/busy.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+        "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
         "styles-font.scss"
       ],
       "scripts": [],

@@ -20,7 +20,7 @@
 </p>
 
 <p *ngIf="['LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
-  Add all limited partners holding at least a 10% interest in the partnership
+  Add all partners
 </p>
 
 <p *ngIf="['LimitedPartnership'].indexOf(businessType) !== -1">
@@ -67,7 +67,7 @@
         <!-- Column -->
         <ng-container matColumnDef="dateIssued">
           <mat-header-cell *matHeaderCellDef> Date Issued </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'shortDate' }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'yyyy-MM-dd' }} </mat-cell>
         </ng-container>
 
         <!-- Column -->
@@ -98,13 +98,11 @@
       <strong>Add Organization</strong>
       <br>
     </a>
+    <p></p>
   </div>
 
   <div [ngBusy]="busy"></div>
 
-  <br>
-  <br>
-  <br>
   <br>
   <label for="">Upload the corporation's Central Securities Register</label>
   <app-file-uploader documentType="Central Securities Register" [accountId]="accountId"></app-file-uploader>

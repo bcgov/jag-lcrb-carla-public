@@ -1,17 +1,15 @@
 <div class="row extra-padding" *ngIf="isApplicant">
   <section class="col-md-9">
-    <!--<h1>Business Profile</h1>
-    <span>Your business profile represents all the legal entities that make up your organization's structure</span>
-    <button routerLink="/business-profile" class="btn btn-primary">Start Business Profile</button>
-    <div class="org-structure-container">
-      <strong>Organization and Shareholder Structure</strong>
-    </div>-->
     <br>
     <app-business-profile-summary></app-business-profile-summary>
     <br>
     <app-license-application-summary></app-license-application-summary>
     <br>
-    <button routerLink="/lic-app-summary" class="btn btn-primary">Start New Licence Application</button>
+    <mat-card>
+      <div [ngBusy]="busy">
+        <button class="btn btn-primary" (click)="startNewLicenceApplication()">Start New Licence Application</button>
+      </div>
+    </mat-card>
     <br>
   </section>
 

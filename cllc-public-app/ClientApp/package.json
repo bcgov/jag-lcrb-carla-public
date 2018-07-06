@@ -40,6 +40,7 @@
     "mygovbc-bootstrap-theme": "^0.4.1",
     "ng-busy": "^1.4.8",
     "ng2-toastr": "^4.1.2",
+    "ngx-bootstrap": "^2.0.5",
     "ngx-cookie-service": "^1.0.10",
     "ngx-file-drop": "^3.0.2",
     "protractor-html-reporter": "^1.3.2",

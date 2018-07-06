@@ -11,7 +11,9 @@
           <section>
             <input type="checkbox" formControlName="isDirector"> <label style="padding-right: 10px;" for="">Director</label>
             <input type="checkbox" formControlName="isOfficer"> <label style="padding-right: 10px;" for="">Officer</label>
-            <input type="checkbox" formControlName="isSeniorManagement"> <label style="padding-right: 10px;" for="">Senior Manager</label>
+            <span *ngIf="businessType == 'Society'">
+              <input type="checkbox" formControlName="isSeniorManagement"> <label style="padding-right: 10px;" for="">Senior Manager</label>
+            </span>
           </section>
 
           <!-- <div *ngIf="this.isFieldError('position')" class="error-msg">
@@ -59,7 +61,7 @@
       </div>
       <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateofappointment')}">
         <label for="dateIssued">Date of Appointment</label>
-        <input type="date" class="form-control" formControlName="dateofappointment">
+        <input type="text" formControlName='dateofappointment' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
         <div *ngIf="this.isFieldError('dateofappointment')">
           <div *ngIf="directorOfficerForm.controls['dateofappointment'].hasError('dateLessThanToday') ">
             Date must be before today

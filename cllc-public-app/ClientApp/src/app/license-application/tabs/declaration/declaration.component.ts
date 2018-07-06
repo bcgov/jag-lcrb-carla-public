@@ -24,7 +24,7 @@ export class DeclarationComponent implements OnInit {
   }
 
   getApplication() {
-    this.busy = this.applicationDataService.getApplication(this.applicationId).subscribe(
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         let data = res.json();
         //TODO add to autorest
