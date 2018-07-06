@@ -1,3 +1,5 @@
+import { DynamicsAccount } from './dynamics-account.model';
+
 export class AdoxioApplication {
   id: string;
   name: string;
@@ -7,4 +9,6 @@ export class AdoxioApplication {
   establishmentName: string;
   establishmentAddress: string;
   applicationStatus: string;
+  applicantType: string;
+  account: DynamicsAccount;
 }
