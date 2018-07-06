@@ -62,15 +62,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
 			MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
 			adoxioApplication2.CopyValues(vm);
+            // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
 			adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes;
             _dynamicsClient.Applications.Update(id, adoxioApplication2);
 			adoxioApplication2 = await GetDynamicsApplication(id);
 
-			// load the invoice for this application
+			// now load the invoice for this application to get the pricing
 			string invoiceId = adoxioApplication2._adoxioInvoiceValue;
 			int retries = 0;
 			while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
 			{
+                // should happen immediately, but ...
 				// pause and try again - in case Dynamics is slow ...
 				retries++;
 				_logger.LogError("No invoice found, retry = " + retries);
@@ -92,7 +94,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
              */
 
 			MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
+            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
 			var ordernum = invoice.AdoxioTransactionid;
+            // dynamics determines the amount based on the licence type of the application
 			var orderamt = invoice.Totalamount;
 
 			Dictionary<string, string> redirectUrl;
@@ -187,8 +191,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 					// set the Application invoice status back to No
 					adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
-					adoxioApplication2._adoxioInvoiceValue = null;
-					adoxioApplication2.AdoxioInvoice = null;
+                    // don't clear the invoice, leave the previous "Cancelled" so we can report status
+					//adoxioApplication2._adoxioInvoiceValue = null;
+					//adoxioApplication2.AdoxioInvoice = null;
 
 					_dynamicsClient.Applications.Update(id, adoxioApplication2);
                     adoxioApplication2 = await GetDynamicsApplication(id);
@@ -197,6 +202,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			}
 			else
 			{
+                // that can happen if we are re-validating a completed invoice (paid or cancelled)
 				_logger.LogError("Invoice status is not New, skipping updates ...");
 			}
 
