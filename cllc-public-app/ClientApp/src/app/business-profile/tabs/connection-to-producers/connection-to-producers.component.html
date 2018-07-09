@@ -1,4 +1,4 @@
-<div style="max-width: 800px;">
+<div style="max-width: 800px;" [formGroup]="form">
   <h1>Connections to Producers</h1>
   <span>A "
     <strong>federal producer</strong>" is a federally licensed producer of cannabis
@@ -16,17 +16,17 @@
         <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary</li>
         <li>Having a beneficial interest in a federal producer. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="CorpConnectionFederalProducer"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="CorpConnectionFederalProducer"> No
     </section>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('CorpConnectionFederalProducer').value == 'yes'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="CorpConnectionFederalProducerDetails" rows="5"></textarea>
     </section>
     <p></p>
 
@@ -39,17 +39,17 @@
         <li>Indirectly holding voting shares in the corporation. For example, through a subsidiary</li>
         <li>Having a beneficial interest in the corporation. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="FederalProducerConnectionToCorp"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="FederalProducerConnectionToCorp"> No
     </section>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('FederalProducerConnectionToCorp').value == 'yes'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="FederalProducerConnectionToCorpDetails" rows="5"></textarea>
     </section>
     <p></p>
   </div>
@@ -64,17 +64,17 @@
         <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary</li>
         <li>Having a beneficial interest in a federal producer. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="FederalProducerConnectionToCorp"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="FederalProducerConnectionToCorp"> No
     </section>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('FederalProducerConnectionToCorp').value == 'yes'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="FederalProducerConnectionToCorpDetails" rows="5"></textarea>
     </section>
     <p></p>
 
@@ -87,17 +87,17 @@
         <li>Indirectly holding 20% or more voting shares in the corporation. For example, through a subsidiary</li>
         <li>Having a beneficial interest in the corporation. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="Share20PlusConnectionProducer"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="Share20PlusConnectionProducer"> No
     </section>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('Share20PlusConnectionProducer').value == 'yes'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="Share20PlusConnectionProducerDetails" rows="5"></textarea>
     </section>
     <p></p>
 
@@ -110,17 +110,17 @@
         <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary</li>
         <li>Having a beneficial interest in a federal producer. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="Share20PlusConnectionProducer"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="Share20PlusConnectionProducer"> No
     </section>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('Share20PlusConnectionProducer').value == 'yes'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="Share20PlusConnectionProducerDetails" rows="5"></textarea>
     </section>
     <p></p>
 
@@ -134,18 +134,18 @@
         <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary</li>
         <li>Having a beneficial interest in a federal producer. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="Share20PlusFamilyConnectionProducer"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="Share20PlusFamilyConnectionProducer"> No
     </section>
     <span>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</span>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('Share20PlusFamilyConnectionProducer').value == 'yes'">
       <span>Provide the relationship of the family member, the name of the federal producer, the type of shares, percentage of
         ownership, and any other details about the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="Share20PlusFamilyConnectionProducerDetails" rows="5"></textarea>
     </section>
     <p></p>
   </div>
@@ -160,17 +160,17 @@
         <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary</li>
         <li>Having a beneficial interest in a federal producer. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="PartnersConnectionFederalProducer"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="PartnersConnectionFederalProducer"> No
     </section>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('PartnersConnectionFederalProducer').value == 'yes'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="PartnersConnectionFederalProducerDetails" rows="5"></textarea>
     </section>
     <p></p>
   </div>
@@ -185,17 +185,17 @@
         <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary</li>
         <li>Having a beneficial interest in a federal producer. For example, through a trust</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
+      <input type="radio" group="moreThanAYear" value='yes' formControlName="SocietyConnectionFederalProducer"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='no' [(ngModel)]="operatingForMoreThanOneYear"> No
+      <input type="radio" group="moreThanAYear" value='no' formControlName="SocietyConnectionFederalProducer"> No
     </section>
     <p></p>
 
-    <section>
+    <section *ngIf="form.get('SocietyConnectionFederalProducer').value == 'yes'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" rows="5"></textarea>
+      <textarea name="" id="" class="form-control" formControlName="SocietyConnectionFederalProducerDetails" rows="5"></textarea>
     </section>
     <p></p>
   </div>
