@@ -19,10 +19,11 @@ export class AppComponent {
   public currentUser: User;
   public isNewUser: boolean;
   public isDevMode: boolean;
+  isAssociate: boolean = false;
 
   constructor(
-      private renderer: Renderer2,
-      private router: Router,
+    private renderer: Renderer2,
+    private router: Router,
     private userDataService: UserDataService,
     private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
   ) {
@@ -46,21 +47,25 @@ export class AppComponent {
   ngOnInit(): void {
     this.userDataService.getCurrentUser()
       .then((data) => {
-        this.currentUser = data;        
+        this.currentUser = data;
         this.isNewUser = this.currentUser.isNewUser;
+        this.isAssociate = (this.currentUser.businessname == null);
+        if (!this.isAssociate) {
+          this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
+            res => {
+              this.businessProfiles = res.json();
+            });
+        }
       });
-    this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
-      res => {
-        this.businessProfiles = res.json();
-      });
+
   }
 
   isIE10orLower() {
-    let result, jscriptVersion;    
+    let result, jscriptVersion;
     result = false;
-    
+
     jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
-    
+
     if (jscriptVersion !== undefined) {
       result = true;
     }

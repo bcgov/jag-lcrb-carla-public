@@ -188,10 +188,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1Postalcode = fromVM.mailingAddresPostalCode;
             }
-			if (fromVM.businessType != null)
-			{
-				toDynamics.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), fromVM.businessType, true);
-			}
+            
+            // business type must be set only during creation, not in update (removed from copyValues() )
+            //	toDynamics.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), fromVM.businessType, true);
         }
 
         /// <summary>

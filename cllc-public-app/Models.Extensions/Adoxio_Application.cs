@@ -17,7 +17,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 		public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.AdoxioApplication from)
         {
-            //TODO set all existing fields in Dynamics
             to.AdoxioName = from.name; 
             //to.Adoxio_jobnumber = from.jobNumber;            
             to.AdoxioEstablishmentpropsedname = from.establishmentName;
@@ -28,15 +27,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentparcelid = from.establishmentparcelid;
             to.AdoxioContactpersonfirstname = from.contactpersonfirstname;
             to.AdoxioContactpersonlastname = from.contactpersonlastname;
-            //TODO add to autorest
-            //to.AdoxioRole = from.contactpersonrole;
+            to.AdoxioRole = from.contactpersonrole;
             to.AdoxioEmail = from.contactpersonemail;
             to.AdoxioContactpersonphone = from.contactpersonphone;
-            //TODO add to autorest
-            //to.AdoxioAuthorizedtosubmit = from.authorizedtosubmit;
+            to.AdoxioAuthorizedtosubmit = from.authorizedtosubmit;
             to.AdoxioSignatureagreement = from.signatureagreement;
-            //TODO add to autorest
-            //to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
+            to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
 
@@ -115,10 +111,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioApplicationVM.establishmentparcelid = dynamicsApplication.AdoxioEstablishmentparcelid;
 
             //get additional property info
-            //TODO add to autorest
-            //adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
+            adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
 
-			if (dynamicsApplication.AdoxioInvoicetrigger == 1)
+            if (dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.Yes;
 				adoxioApplicationVM.isSubmitted = true;
@@ -131,16 +126,14 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 			adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
 
-			//get declarations
-            //TODO add to autorest
-            //adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
+            //get declarations
+            adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
             adoxioApplicationVM.signatureagreement = dynamicsApplication.AdoxioSignatureagreement;
 
             //get contact details
             adoxioApplicationVM.contactpersonfirstname = dynamicsApplication.AdoxioContactpersonfirstname;
             adoxioApplicationVM.contactpersonlastname = dynamicsApplication.AdoxioContactpersonlastname;
-            //TODO add to autorest
-            //adoxioApplicationVM.contactpersonrole = dynamicsApplication.AdoxioRole;
+            adoxioApplicationVM.contactpersonrole = dynamicsApplication.AdoxioRole;
             adoxioApplicationVM.contactpersonemail = dynamicsApplication.AdoxioEmail;
             adoxioApplicationVM.contactpersonphone = dynamicsApplication.AdoxioContactpersonphone;
 

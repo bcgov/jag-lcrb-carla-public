@@ -18,8 +18,8 @@ export class DashboardComponent implements OnInit {
   user: User;
   isApplicant: boolean = false;
   isAssociate: boolean = false;
-  accountId: string;
-  contactId: string;
+  accountId: string = null;
+  contactId: string = null;
   account: DynamicsAccount;
   busy: Subscription;
 
@@ -34,16 +34,16 @@ ngOnInit(): void {
     this.userDataService.getCurrentUser()
       .then((data) => {
         this.user = data;
-        
+
         this.isApplicant = (this.user.businessname != null);
         this.isAssociate = (this.user.businessname == null);
         //console.log("isApplicant = " + this.isApplicant);
         //console.log("isAssociate = " + this.isAssociate);
 
-        if (!this.accountId) {
+        if (!this.accountId && this.user) {
           this.accountId = this.user.accountid;
         }
-        if (this.accountId != null) {
+        if (this.accountId != null && !this.isAssociate) {
           // fetch the account to get the primary contact.
           this.dynamicsDataService.getRecord("account", this.accountId)
             .then((data) => {
