@@ -22809,6 +22809,10 @@
               "type": "string",
               "x-nullable": true
             },
+			"_adoxio_contactid_value": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "_adoxio_tiedhouse_value": {
               "type": "string",
               "x-nullable": true
@@ -22851,8 +22855,55 @@
             "adoxio_Application": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
             },
+			"adoxio_ContactId": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+            },
             "adoxio_TiedHouse": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
+            },
+			"adoxio_additionaldetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_associateconnectionfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_associateconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_connectiontype": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_corpconnectionfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_corpconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_familymemberfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_familymemberfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_federalproducerconnectiontocorp": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_federalproducerconnectiontocorpdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_isconnection": {
+              "x-nullable": true,
+              "type": "integer"
             },
             "adoxio_name": {
               "type": "string",
@@ -22862,13 +22913,41 @@
               "type": "integer",
               "x-nullable": true
             },
+			"adoxio_partnersconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "adoxio_percentageofownership": {
               "type": "integer",
               "x-nullable": true
             },
+			"adoxio_share20plusconnectionproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_share20plusconnectionproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_share20plusfamilyconnectionproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_share20plusfamilyconnectionproducerdetail": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "adoxio_sharetype": {
               "type": "string",
               "x-nullable": true
+            },
+			"adoxio_societyconnectionfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_societyconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
             },
             "adoxio_tiedhouseconnection_AsyncOperations": {
               "type": "array",
