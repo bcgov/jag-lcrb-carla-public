@@ -5,9 +5,11 @@
     <br>
     <app-license-application-summary></app-license-application-summary>
     <br>
-    <div [ngBusy]="busy">
-      <button class="btn btn-primary" (click)="startNewLicenceApplication()">Start New Licence Application</button>
-    </div>
+    <mat-card class="mat-elevation-z0">
+      <div [ngBusy]="busy">
+        <button class="btn btn-primary" (click)="startNewLicenceApplication()">Start New Licence Application</button>
+      </div>
+    </mat-card>
     <br>
   </section>
 
