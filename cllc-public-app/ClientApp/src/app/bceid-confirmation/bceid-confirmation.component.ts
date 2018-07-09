@@ -88,7 +88,6 @@ export class BceidConfirmationComponent {
         
       // Submit selected company type and sub-type to the account service
       account.businessType = this.finalBusinessType;
-      debugger
       let payload = JSON.stringify(account);
       this.busy = this.dynamicsDataService.createRecord('account', payload)
         .then((data) => {
