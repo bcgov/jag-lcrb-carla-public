@@ -5,7 +5,7 @@
 
 <div class="app-outer" *ngIf="!isIE10orLower()">
   <header class="app-header">
-    <div class="nav-container top-menu row" style="padding-left: 30px; padding-right: 30px;"> 
+    <div class="nav-container top-menu row" style="padding-left: 30px; padding-right: 30px;">
       <section class="col-md-8 col-xs-12">
         <a href="http://www2.gov.bc.ca/" tabindex="-1">
           <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="assets/bc-logo.svg">
@@ -43,20 +43,31 @@
     <div class="navigationRibbon" *ngIf="!currentUser">
       <div class="level2Navigation">
         <div class="nav-container">
-          <nav class="navbar navbar-expand-md navbar-light justify-content-end"  style="margin-bottom: 0; width: 100%;">
-              <!-- <a class="navbar-brand" href="javascript:void(0);"></a> -->
-            <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
+          <nav class="navbar navbar-expand-md navbar-light justify-content-end" style="margin-bottom: 0; width: 100%;">
+            <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a routerLink="/">Home</a></li>
-                <li class="nav-item"><a routerLink="/policy-document/cannabis-retail-licence">Licence Types</a></li>
-                <li class="nav-item"><a routerLink="/policy-document/eligibility">Application Requirements</a></li>
-                <li class="nav-item"><a routerLink="/policy-document/employee-registration-training">Employees</a></li>
-                <li class="nav-item"><a routerLink="/policy-document/ordering-cannabis">Ordering Cannabis</a></li>
-                <li class="nav-item"><a routerLink="/policy-document/reporting-sales">Reporting</a></li>
+                <li class="nav-item">
+                  <a routerLink="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a routerLink="/policy-document/cannabis-retail-licence">Licence Types</a>
+                </li>
+                <li class="nav-item">
+                  <a routerLink="/policy-document/eligibility">Application Requirements</a>
+                </li>
+                <li class="nav-item">
+                  <a routerLink="/policy-document/employee-registration-training">Employees</a>
+                </li>
+                <li class="nav-item">
+                  <a routerLink="/policy-document/ordering-cannabis">Ordering Cannabis</a>
+                </li>
+                <li class="nav-item">
+                  <a routerLink="/policy-document/reporting-sales">Reporting</a>
+                </li>
               </ul>
             </div>
           </nav>
@@ -65,40 +76,41 @@
 
     </div>
 
-    <section *ngIf="currentUser" class="navigationRibbon">
+    <section *ngIf="currentUser && !isAssociate" class="navigationRibbon">
       <div class="level2Navigation ">
-          <nav class="navbar navbar-expand-lg navbar-dark" style="margin-bottom: 0;  width: 100%;">
-              <a class="navbar-brand" href="javascript:void(0);"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" style="float: right" data-target="#loggedInMenu" aria-controls="loggedInMenu"
+        <div class="nav-container">
+          <nav class="navbar navbar-expand-md navbar-light justify-content-end" style="margin-bottom: 0;  width: 100%;">
+            <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#loggedInMenu" aria-controls="loggedInMenu"
               aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="loggedInMenu">
               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <div ngbDropdown class="d-inline-block">
-                      <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
-                      <div ngbDropdownMenu>
-                        <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile', profile.id], {skipLocationChange: true})">{{profile.name}}</button>
-                      </div>
+                <li class="nav-item active">
+                  <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <div ngbDropdown class="d-inline-block">
+                    <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
+                    <div ngbDropdownMenu>
+                      <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile/' + profile.accountId + '/' + profile.id])">{{profile.name}}</button>
                     </div>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <div ngbDropdown class="d-inline-block">
-                      <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Licences</a>
-                      <div ngbDropdownMenu>
-                        <button class="dropdown-item" routerLink="/lic-app-summary">Main License</button>
-                        <button class="dropdown-item" routerLink="/lic-app-summary">License 1</button>
-                        <button class="dropdown-item" routerLink="/lic-app-summary">License 2</button>
-                      </div>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <div ngbDropdown class="d-inline-block">
+                    <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Licences</a>
+                    <div ngbDropdownMenu>
+                      <button class="dropdown-item" routerLink="/lic-app-summary">Main License</button>
+                      <button class="dropdown-item" routerLink="/lic-app-summary">License 1</button>
+                      <button class="dropdown-item" routerLink="/lic-app-summary">License 2</button>
                     </div>
-                  </li>
+                  </div>
+                </li>
               </ul>
             </div>
           </nav>
+        </div>
       </div>
     </section>
     <!-- /NAVBAR END -->

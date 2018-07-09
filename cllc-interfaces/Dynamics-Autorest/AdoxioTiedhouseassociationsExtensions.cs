@@ -13,12 +13,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for Contacts.
+    /// Extension methods for AdoxioTiedhouseassociations.
     /// </summary>
-    public static partial class ContactsExtensions
+    public static partial class AdoxioTiedhouseassociationsExtensions
     {
             /// <summary>
-            /// Get entities from contacts
+            /// Get entities from adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -47,13 +47,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModelModelModelModel Get(this IContacts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static GetOKResponseModelModelModelModel Get(this IAdoxioTiedhouseassociations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entities from contacts
+            /// Get entities from adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModelModelModelModel> GetAsync(this IContacts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOKResponseModelModelModelModel> GetAsync(this IAdoxioTiedhouseassociations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Add new entity to contacts
+            /// Add new entity to adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -106,13 +106,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMcontact Create(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMadoxioTiedhouseassociation Create(this IAdoxioTiedhouseassociations operations, MicrosoftDynamicsCRMadoxioTiedhouseassociation body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to contacts
+            /// Add new entity to adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMcontact> CreateAsync(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseassociation> CreateAsync(this IAdoxioTiedhouseassociations operations, MicrosoftDynamicsCRMadoxioTiedhouseassociation body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -136,30 +136,30 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from contacts
+            /// Delete entity from adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioTiedhouseassociationid'>
+            /// key: adoxio_tiedhouseassociationid
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void Delete(this IContacts operations, string contactid, string ifMatch = default(string))
+            public static void Delete(this IAdoxioTiedhouseassociations operations, string adoxioTiedhouseassociationid, string ifMatch = default(string))
             {
-                operations.DeleteAsync(contactid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioTiedhouseassociationid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Delete entity from contacts
+            /// Delete entity from adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioTiedhouseassociationid'>
+            /// key: adoxio_tiedhouseassociationid
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
@@ -167,19 +167,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsync(this IContacts operations, string contactid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxioTiedhouseassociations operations, string adoxioTiedhouseassociationid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteWithHttpMessagesAsync(contactid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioTiedhouseassociationid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Get entity from contacts by key
+            /// Get entity from adoxio_tiedhouseassociations by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioTiedhouseassociationid'>
+            /// key: adoxio_tiedhouseassociationid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -187,19 +187,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMcontact GetByKey(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioTiedhouseassociation GetByKey(this IAdoxioTiedhouseassociations operations, string adoxioTiedhouseassociationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyAsync(contactid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioTiedhouseassociationid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from contacts by key
+            /// Get entity from adoxio_tiedhouseassociations by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioTiedhouseassociationid'>
+            /// key: adoxio_tiedhouseassociationid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -210,39 +210,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMcontact> GetByKeyAsync(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseassociation> GetByKeyAsync(this IAdoxioTiedhouseassociations operations, string adoxioTiedhouseassociationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(contactid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioTiedhouseassociationid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Update entity in contacts
+            /// Update entity in adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioTiedhouseassociationid'>
+            /// key: adoxio_tiedhouseassociationid
             /// </param>
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body)
+            public static void Update(this IAdoxioTiedhouseassociations operations, string adoxioTiedhouseassociationid, MicrosoftDynamicsCRMadoxioTiedhouseassociation body)
             {
-                operations.UpdateAsync(contactid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioTiedhouseassociationid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in contacts
+            /// Update entity in adoxio_tiedhouseassociations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioTiedhouseassociationid'>
+            /// key: adoxio_tiedhouseassociationid
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -250,9 +250,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxioTiedhouseassociations operations, string adoxioTiedhouseassociationid, MicrosoftDynamicsCRMadoxioTiedhouseassociation body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateWithHttpMessagesAsync(contactid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioTiedhouseassociationid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
