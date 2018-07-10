@@ -2,6 +2,7 @@
    <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+	<ProjectGuid>{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64}</ProjectGuid>
    </ItemGroup> 
 
   <PropertyGroup>
