@@ -9,9 +9,9 @@ export class TiedHouseConnectionsDataService {
    * Get legal entities from Dynamics filtered by position
    * @param positionType
    */
-  getTiedHouse(id: string) {
+  getTiedHouse(accountId: string) {
 
-    let apiPath = `api/tiedhouseconnections/${id}`;
+    let apiPath = `api/tiedhouseconnections/${accountId}`;
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
 

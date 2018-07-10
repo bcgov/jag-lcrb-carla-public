@@ -50,14 +50,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
             String accountfilter = null;
 
-            // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            // check that the session is setup correctly.
-            userSettings.Validate();
+            // // get the current user.
+            // string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            // UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // // check that the session is setup correctly.
+            // userSettings.Validate();
 
             // set account filter
-            accountfilter = "_adoxio_account_value eq " + accountId;
+            accountfilter = "_adoxio_accountid_value eq " + accountId;
             _logger.LogError("Account filter = " + accountfilter);
 
             tiedHouseConnections = _dynamicsClient.AdoxioTiedhouseconnections.Get(filter: accountfilter).Value;
@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.Add(tiedHouse.ToViewModel());
             }
 
-            return Json(result);
+            return Json(result.FirstOrDefault());
         }
 
                 /// <summary>
@@ -161,31 +161,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTiedHouse([FromBody] ViewModels.AdoxioLegalEntity item, string id)
+        public async Task<IActionResult> UpdateTiedHouse([FromBody] ViewModels.TiedHouseConnection item, string id)
         {
-            if (id != item.id)
+            if (item == null || id != item.id)
             {
                 return BadRequest();
             }
 
-            //// get the legal entity.
-            //Guid adoxio_legalentityid = new Guid(id);
+            // get the legal entity.
+            Guid tiedHouseId = new Guid(id);
 
-            //MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-            //if (adoxioLegalEntity == null)
-            //{
-            //    return new NotFoundResult();
-            //}
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection res = await _dynamicsClient.GetTiedHouseConnectionById(tiedHouseId);
+            if (res == null)
+            {
+               return new NotFoundResult();
+            }
 
-            //// we are doing a patch, so wipe out the record.
-            //adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+            // we are doing a patch, so wipe out the record.
+            var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
-            //// copy values over from the data provided
-            //adoxioLegalEntity.CopyValues(item);
+            // copy values over from the data provided
+            tiedHouse.CopyValues(item);
 
-            //await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(adoxio_legalentityid.ToString(), adoxioLegalEntity);
-            //return Json(adoxioLegalEntity.ToViewModel());
-            return Ok();
+            await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
+            return Json(tiedHouse.ToViewModel());
         }
 
         /// <summary>
