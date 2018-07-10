@@ -1,3 +1,59 @@
-<p>
-  store-information works!
-</p>
+<h1>Store Information</h1>
+
+<div [ngBusy]="busy">
+  <form [formGroup]='storeInformationForm' class="form-horizontal" (ngSubmit)="save()">
+
+    <section>
+      <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}">
+        <label for="">Proposed Store Name</label>
+        <br>
+        <p>Your store name must be approved, and cannot imply you are selling medicinal cannabis</p>
+        <input class="form-control" style="width: 500px;" type="text" id="establishmentName" formControlName="establishmentName">
+        <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="propertyDetailsForm.controls['establishmentName'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="row">
+      <div class="gray-background col-sm-12">
+        <p>Words related to medicinal products or similarly sounding words will not be approved such as:</p>
+        <ul>
+          <li>Pharmacy / Farmacy</li>
+          <li>Dispensary / Dispenzary</li>
+          <li>Clinic / Klinic</li>
+          <li>Apothecary / Apothekary</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <section>
+        <h2>Hours of Operation</h2>
+        <p>Cannabis stores can only operate between 9 a.m. and 11 p.m seven days a week. Your licence wil be given these hours of operation limits unless your local government or First Nation places further restrictions on the hours.</p>
+      </section>
+    </div>
+
+    <div class="row">
+      <section>
+        <h2>Exterior Views & Signage</h2>
+        <p>Upload photos or renderings of your store's proposed exterior signage and all exterior views around the store</p>
+        <p>Your signage must:</p>
+        <ul>
+          <li>Show the name of the store</li>
+          <li>Show all words and images used in the signage</li>
+          <li>Not contain any pictures, images, or symbols that imply that you sell medicinal cannabis. For example, a green cross</li>
+          <li>Not imply an association with another business. This applies to the store name, trademarks and any type of branding</li>
+          <li>Demonstrate that cannabis products are not visible from outside the store</li>
+        </ul>
+      </section>
+    </div>
+    <section>
+      <button class="btn btn-primary" type="submit">Save</button>
+    </section>
+  </form>
+</div>
+
+<app-file-uploader documentType="Store Information" [accountId]="accountId"></app-file-uploader>
