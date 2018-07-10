@@ -168,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public
             }
 
 
-            services.AddSingleton(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
+            services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
             {
                 
                 ServiceClientCredentials serviceClientCredentials = null;
