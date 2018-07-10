@@ -488,6 +488,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
                 adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+
+                //create tied house under account
+                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection(){
+                };
+                tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+                
+                var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
             } else {
                 adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
             }

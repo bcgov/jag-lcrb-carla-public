@@ -1,26 +1,24 @@
 export class TiedHouseConnection {
-
     id: string;
-    CorpConnectionFederalProducer: string;
-    CorpConnectionFederalProducerDetails: string;
-    FamilyMemberFederalProducer: string;
-    FamilyMemberFederalProducerDetails: string;
-    FederalProducerConnectionToCorp: string;
-    FederalProducerConnectionToCorpDetails: string;
-    IsConnection: Boolean;
-    Name: string;
-    OwnershipType: string;
-    PartnersConnectionFederalProducer: string;
-    PartnersConnectionFederalProducerDetails: string;
-    PercentageofOwnership: number;
-    Share20PlusConnectionProducer: string;
-    Share20PlusConnectionProducerDetails: string;
-    Share20PlusFamilyConnectionProducer: string;
-    Share20PlusFamilyConnectionProducerDetail: string;
-    ShareType: string;
-    SocietyConnectionFederalProducer: string;
-    SocietyConnectionFederalProducerDetails: string;
-    TiedHouse: string;
-    TiedHouseName: string;
-
+    corpConnectionFederalProducerString: string;
+    corpConnectionFederalProducerDetailsString: string;
+    familyMemberFederalProducerString: string;
+    familyMemberFederalProducerDetailsString: string;
+    federalProducerConnectionToCorpString: string;
+    federalProducerConnectionToCorpDetailsString: string;
+    isConnectionBoolean: Boolean;
+    nameString: string;
+    ownershipTypeString: string;
+    partnersConnectionFederalProducerString: string;
+    partnersConnectionFederalProducerDetailsString: string;
+    percentageofOwnershipNumber: number;
+    share20PlusConnectionProducerString: string;
+    share20PlusConnectionProducerDetailsString: string;
+    share20PlusFamilyConnectionProducerString: string;
+    share20PlusFamilyConnectionProducerDetailString: string;
+    shareTypeString: string;
+    societyConnectionFederalProducerString: string;
+    societyConnectionFederalProducerDetailsString: string;
+    tiedHouseString: string;
+    tiedHouseNameString: string;
 }

@@ -525,6 +525,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseconnection> GetTiedHouseConnectionById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.AdoxioTiedhouseconnections.GetByKeyAsync(id.ToString());
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            {
+                result = null;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Get a contact by their Guid
         /// </summary>
