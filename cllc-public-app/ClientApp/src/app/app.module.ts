@@ -112,6 +112,7 @@ import { DeclarationComponent } from './license-application/tabs/declaration/dec
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
 import {BsDatepickerModule} from 'ngx-bootstrap';
+import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 
 @NgModule({
   declarations: [
@@ -275,6 +276,7 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     AdoxioLicenseDataService,
     AccountDataService,
     PaymentDataService,
+    TiedHouseConnectionsDataService,
     NgbDropdown
   ],
   entryComponents: [
