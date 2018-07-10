@@ -23,23 +23,23 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioTiedhouseconnection to, ViewModels.TiedHouseConnection from)
         {
             to.AdoxioTiedhouseconnectionid = from.id;
-            //to.adoxio_corpconnectionfederalproducer = from.CorpConnectionFederalProducer;
-            //to.adoxio_corpconnectionfederalproducerdetails = from.CorpConnectionFederalProducerDetails;
-            //to.adoxio_familymemberfederalproducer = from.FamilyMemberFederalProducer;
-            //to.adoxio_familymemberfederalproducerdetails = from.FamilyMemberFederalProducerDetails;
-            //to.adoxio_federalproducerconnectiontocorp = from.FederalProducerConnectionToCorp;
-            //to.adoxio_federalproducerconnectiontocorpdetails = from.FederalProducerConnectionToCorpDetails;
-            //to.adoxio_IsConnection = from.IsConnection;
-            //to.adoxio_partnersconnectionfederalproducer = from.PartnersConnectionFederalProducer;
-            //to.adoxio_partnersconnectionfederalproducerdetails = from.PartnersConnectionFederalProducerDetails;
-            //to.adoxio_PercentageofOwnership = from.PercentageofOwnership;
-            //to.adoxio_share20plusconnectionproducer = from.Share20PlusConnectionProducer;
-            //to.adoxio_share20plusconnectionproducerdetails = from.Share20PlusConnectionProducerDetails;
-            //to.adoxio_share20plusfamilyconnectionproducer = from.Share20PlusFamilyConnectionProducer;
-            //to.adoxio_share20plusfamilyconnectionproducerdetail = from.Share20PlusFamilyConnectionProducerDetail;
-            //to.adoxio_ShareType = from.ShareType;
-            //to.adoxio_societyconnectionfederalproducer = from.SocietyConnectionFederalProducer;
-            //to.adoxio_societyconnectionfederalproducerdetails = from.SocietyConnectionFederalProducerDetails;
+            to.AdoxioCorpconnectionfederalproducer = from.CorpConnectionFederalProducer;
+            to.AdoxioCorpconnectionfederalproducerdetails = from.CorpConnectionFederalProducerDetails;
+            to.AdoxioFamilymemberfederalproducer = from.FamilyMemberFederalProducer;
+            to.AdoxioFamilymemberfederalproducerdetails = from.FamilyMemberFederalProducerDetails;
+            to.AdoxioFederalproducerconnectiontocorp = from.FederalProducerConnectionToCorp;
+            to.AdoxioFederalproducerconnectiontocorpdetails = from.FederalProducerConnectionToCorpDetails;
+            to.AdoxioIsconnection = from.IsConnection;
+            to.AdoxioPartnersConnectionFederalProducer = from.PartnersConnectionFederalProducer;
+            to.AdoxioPartnersconnectionfederalproducerdetails = from.PartnersConnectionFederalProducerDetails;
+            to.AdoxioPercentageofownership = from.PercentageofOwnership;
+            to.AdoxioShare20plusconnectionproducer = from.Share20PlusConnectionProducer;
+            to.AdoxioShare20plusconnectionproducerdetails = from.Share20PlusConnectionProducerDetails;
+            to.AdoxioShare20plusfamilyconnectionproducer = from.Share20PlusFamilyConnectionProducer;
+            to.AdoxioShare20plusfamilyconnectionproducerdetail = from.Share20PlusFamilyConnectionProducerDetail;
+            to.AdoxioSharetype = from.ShareType;
+            to.AdoxioSocietyconnectionfederalproducer = from.SocietyConnectionFederalProducer;
+            to.AdoxioSocietyconnectionfederalproducerdetails = from.SocietyConnectionFederalProducerDetails;
 
         }
 
@@ -58,23 +58,23 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.id = tiedHouse.AdoxioTiedhouseconnectionid.ToString();
                 }
 
-                // result.CorpConnectionFederalProducer = tiedHouse.adoxio_corpconnectionfederalproducer;
-                // result.CorpConnectionFederalProducerDetails = tiedHouse.adoxio_corpconnectionfederalproducerdetails;
-                // result.FamilyMemberFederalProducer = tiedHouse.adoxio_familymemberfederalproducer;
-                // result.FamilyMemberFederalProducerDetails = tiedHouse.adoxio_familymemberfederalproducerdetails;
-                // result.FederalProducerConnectionToCorp = tiedHouse.adoxio_federalproducerconnectiontocorp;
-                // result.FederalProducerConnectionToCorpDetails = tiedHouse.adoxio_federalproducerconnectiontocorpdetails;
-                // result.IsConnection = tiedHouse.adoxio_IsConnection;
-                // result.PartnersConnectionFederalProducer = tiedHouse.adoxio_partnersconnectionfederalproducer;
-                // result.PartnersConnectionFederalProducerDetails = tiedHouse.adoxio_partnersconnectionfederalproducerdetails;
-                // result.PercentageofOwnership = tiedHouse.adoxio_PercentageofOwnership;
-                // result.Share20PlusConnectionProducer = tiedHouse.adoxio_share20plusconnectionproducer;
-                // result.Share20PlusConnectionProducerDetails = tiedHouse.adoxio_share20plusconnectionproducerdetails;
-                // result.Share20PlusFamilyConnectionProducer = tiedHouse.adoxio_share20plusfamilyconnectionproducer;
-                // result.Share20PlusFamilyConnectionProducerDetail = tiedHouse.adoxio_share20plusfamilyconnectionproducerdetail;
-                // result.ShareType = tiedHouse.adoxio_ShareType;
-                // result.SocietyConnectionFederalProducer = tiedHouse.adoxio_societyconnectionfederalproducer;
-                // result.SocietyConnectionFederalProducerDetails = tiedHouse.adoxio_societyconnectionfederalproducerdetails;
+                result.CorpConnectionFederalProducer = tiedHouse.AdoxioCorpconnectionfederalproducer;
+                result.CorpConnectionFederalProducerDetails = tiedHouse.AdoxioCorpconnectionfederalproducerdetails;
+                result.FamilyMemberFederalProducer = tiedHouse.AdoxioFamilymemberfederalproducer;
+                result.FamilyMemberFederalProducerDetails = tiedHouse.AdoxioFamilymemberfederalproducerdetails;
+                result.FederalProducerConnectionToCorp = tiedHouse.AdoxioFederalproducerconnectiontocorp;
+                result.FederalProducerConnectionToCorpDetails = tiedHouse.AdoxioFederalproducerconnectiontocorpdetails;
+                result.IsConnection = tiedHouse.AdoxioIsconnection;
+                result.PartnersConnectionFederalProducer = tiedHouse.AdoxioPartnersConnectionFederalProducer;
+                result.PartnersConnectionFederalProducerDetails = tiedHouse.AdoxioPartnersconnectionfederalproducerdetails;
+                result.PercentageofOwnership = tiedHouse.AdoxioPercentageofownership;
+                result.Share20PlusConnectionProducer = tiedHouse.AdoxioShare20plusconnectionproducer;
+                result.Share20PlusConnectionProducerDetails = tiedHouse.AdoxioShare20plusconnectionproducerdetails;
+                result.Share20PlusFamilyConnectionProducer = tiedHouse.AdoxioShare20plusfamilyconnectionproducer;
+                result.Share20PlusFamilyConnectionProducerDetail = tiedHouse.AdoxioShare20plusfamilyconnectionproducerdetail;
+                result.ShareType = tiedHouse.AdoxioSharetype;
+                result.SocietyConnectionFederalProducer = tiedHouse.AdoxioSocietyconnectionfederalproducer;
+                result.SocietyConnectionFederalProducerDetails = tiedHouse.AdoxioSocietyconnectionfederalproducerdetails;
 
             }
             return result;
