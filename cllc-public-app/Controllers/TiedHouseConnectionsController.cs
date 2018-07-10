@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utility;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Microsoft.OData.Client;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using System.Linq;
-using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -39,22 +31,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get all Dynamics Legal Entities
+        /// Get TiedHouseConnection by accountId
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet("{accountId}")]
-        public async Task<JsonResult> GetTiedHouseConnections(string accountId)
+        public async Task<JsonResult> GetTiedHouseConnection(string accountId)
         {
             var result = new List<ViewModels.TiedHouseConnection>();
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
             String accountfilter = null;
-
-            // // get the current user.
-            // string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            // UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            // // check that the session is setup correctly.
-            // userSettings.Validate();
 
             // set account filter
             accountfilter = "_adoxio_accountid_value eq " + accountId;
@@ -70,92 +56,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result.FirstOrDefault());
         }
 
-                /// <summary>
-        /// Create a legal entity
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        [HttpPost()]
-        public async Task<IActionResult> CreateTiedHouse([FromBody] ViewModels.TiedHouseConnection item)
-        {
-
-            // create a new legal entity.
-            var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
-
-            // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            // check that the session is setup correctly.
-            userSettings.Validate();
-            // copy received values to Dynamics LegalEntity
-            tiedHouse.CopyValues(item);
-            try
-            {
-                tiedHouse = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error creating legal entity");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new Exception("Unable to create legal entity");
-            }
-
-            // setup navigation properties.
-            MicrosoftDynamicsCRMadoxioTiedhouseconnection patchEntity = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
-            Guid accountId = Guid.Parse(userSettings.AccountId);
-            var userAccount = await _dynamicsClient.GetAccountById(accountId);
-            //patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
-
-            // patch the record.
-            try
-            {
-                await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(tiedHouse.AdoxioTiedhouseconnectionid, patchEntity);
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error patching legal entity");
-                _logger.LogError(odee.Request.RequestUri.ToString());
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-            }
-
-            // TODO take the default for now from the parent account's legal entity record
-            // TODO likely will have to re-visit for shareholders that are corporations/organizations
-            //MicrosoftDynamicsCRMadoxioTiedhouseconnection tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
-            //if (tempLegalEntity != null)
-            //{
-            //    Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
-
-            //    // see https://msdn.microsoft.com/en-us/library/mt607875.aspx
-            //    patchEntity = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
-            //    patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
-
-            //    // patch the record.
-            //    try
-            //    {
-            //        await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(tiedHouse.AdoxioLegalentityid, patchEntity);
-            //    }
-            //    catch (OdataerrorException odee)
-            //    {
-            //        _logger.LogError("Error adding LegalEntityOwned reference to legal entity");
-            //        _logger.LogError(odee.Request.RequestUri.ToString());
-            //        _logger.LogError("Request:");
-            //        _logger.LogError(odee.Request.Content);
-            //        _logger.LogError("Response:");
-            //        _logger.LogError(odee.Response.Content);
-            //    }
-            //}
-
-            return Json(tiedHouse.ToViewModel());
-        }
 
         /// <summary>
-        /// Update a legal entity
+        /// Update a TiedHouseConnection
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
@@ -185,27 +88,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
             return Json(tiedHouse.ToViewModel());
-        }
-
-        /// <summary>
-        /// Delete a legal entity.  Using a HTTP Post to avoid Siteminder issues with DELETE
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPost("{id}/delete")]
-        public async Task<IActionResult> DeleteTiedHouse(string id)
-        {
-            //// get the legal entity.
-            //Guid adoxio_legalentityid = new Guid(id);
-            //MicrosoftDynamicsCRMadoxioTiedhouseconnection legalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-            //if (legalEntity == null)
-            //{
-            //    return new NotFoundResult();
-            //}
-
-            //await _dynamicsClient.AdoxioTiedhouseconnections.DeleteAsync(adoxio_legalentityid.ToString());
-
-            return NoContent(); // 204
         }
     }
 }
