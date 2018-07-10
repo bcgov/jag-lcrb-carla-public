@@ -23,7 +23,7 @@ export class ProfileSummary {
 })
 export class BusinessProfileSummaryComponent implements OnInit {
 
-  displayedColumns = ['organization', 'businessRelationship', 'profileComplete'];
+  displayedColumns = ['organization', 'businessRelationship'/*, 'profileComplete'*/];
   dataSource = new MatTableDataSource<ProfileSummary>();
   profileSummaryList: ProfileSummary[] = [];
   busy: Subscription;
