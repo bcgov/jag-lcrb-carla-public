@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             var bcep = new BCEPWrapper(svc_url, svc_svcid, svc_hashid,
                                        base_uri + base_path + conf_url);
-			var url = bcep.GetVerifyPaymentTransactionUrl(test_order, test_id).Result;
+			var url = bcep.GetVerifyPaymentTransactionUrl(test_order, test_id);
 
             Assert.IsNotNull(url);
             Assert.AreEqual(actual_url2, url.Substring(0, actual_url2.Length));
@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             var bcep = new BCEPWrapper(svc_url, svc_svcid, svc_hashid,
                                        base_uri + base_path + conf_url);
-            var url = bcep.GetVerifyPaymentTransactionUrl(test_order, test_id).Result;
+            var url = bcep.GetVerifyPaymentTransactionUrl(test_order, test_id);
 
             Assert.IsNotNull(url);
             Assert.AreEqual(actual_url2, url.Substring(0, actual_url2.Length));
@@ -77,5 +77,58 @@ namespace Gov.Lclb.Cllb.Interfaces
 			Assert.AreEqual("Not Found", validation_response["response_phrase"]);
         }
 
+        [TestMethod]
+        public void TestBCEPWrapperVerifyAPPROVEPayment()
+        {
+            var svc_url = Environment.GetEnvironmentVariable("BCEP_SERVICE_URL");
+            var svc_svcid = Environment.GetEnvironmentVariable("BCEP_MERCHANT_ID");
+            var svc_hashid = Environment.GetEnvironmentVariable("BCEP_HASH_KEY");
+            var base_uri = Environment.GetEnvironmentVariable("BASE_URI");
+            var base_path = Environment.GetEnvironmentVariable("BASE_PATH");
+            var conf_url = Environment.GetEnvironmentVariable("BCEP_CONF_PATH");
+
+            var bcep = new BCEPWrapper(svc_url, svc_svcid, svc_hashid,
+                                       base_uri + base_path + conf_url);
+			bcep.setHashKeyForUnitTesting("APPROVE");
+            var url = bcep.GetVerifyPaymentTransactionUrl(test_order, test_id);
+
+            Assert.IsNotNull(url);
+            Assert.AreEqual(actual_url2, url.Substring(0, actual_url2.Length));
+
+            var validation_response = bcep.ProcessPaymentResponse(test_order, test_id).Result;
+
+            Assert.IsNotNull(validation_response);
+			Assert.IsTrue(validation_response.ContainsKey("query_url"));
+			Assert.IsTrue(validation_response.ContainsKey("trnApproved"));
+
+			Assert.AreEqual("1", validation_response["trnApproved"]);
+        }
+
+		[TestMethod]
+		public void TestBCEPWrapperVerifyDECLINEPayment()
+		{
+			var svc_url = Environment.GetEnvironmentVariable("BCEP_SERVICE_URL");
+            var svc_svcid = Environment.GetEnvironmentVariable("BCEP_MERCHANT_ID");
+            var svc_hashid = Environment.GetEnvironmentVariable("BCEP_HASH_KEY");
+            var base_uri = Environment.GetEnvironmentVariable("BASE_URI");
+            var base_path = Environment.GetEnvironmentVariable("BASE_PATH");
+            var conf_url = Environment.GetEnvironmentVariable("BCEP_CONF_PATH");
+
+            var bcep = new BCEPWrapper(svc_url, svc_svcid, svc_hashid,
+                                       base_uri + base_path + conf_url);
+            bcep.setHashKeyForUnitTesting("DECLINE");
+            var url = bcep.GetVerifyPaymentTransactionUrl(test_order, test_id);
+
+            Assert.IsNotNull(url);
+            Assert.AreEqual(actual_url2, url.Substring(0, actual_url2.Length));
+
+            var validation_response = bcep.ProcessPaymentResponse(test_order, test_id).Result;
+
+            Assert.IsNotNull(validation_response);
+            Assert.IsTrue(validation_response.ContainsKey("query_url"));
+            Assert.IsTrue(validation_response.ContainsKey("trnApproved"));
+
+            Assert.AreEqual("0", validation_response["trnApproved"]);
+		}
     }
 }
