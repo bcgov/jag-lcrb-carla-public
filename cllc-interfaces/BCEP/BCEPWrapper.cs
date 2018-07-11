@@ -49,6 +49,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 		/// <summary>
+        /// This is used for unit testing
+		/// Set the Hash Key to APPROVED or DECLINED to bypass the payment verification process (in Verify) 
+		/// and return an APPROVEd or DECLINEd transaction
+        /// </summary>
+		public void setHashKeyForUnitTesting(string ut_hash_key)
+		{
+			this.bcep_hashkey = ut_hash_key;
+		}
+
+		/// <summary>
         /// GET a payment re-direct url for an Application
         /// </summary>
 		/// <param name="orderNum">Unique order number (transaction id from invoice)</param>
@@ -112,6 +122,18 @@ namespace Gov.Lclb.Cllb.Interfaces
 			var query_url = GetVerifyPaymentTransactionUrl(orderNum, txnId);
 			Dictionary<string, string> responseDict = new Dictionary<string, string>();
 			responseDict["query_url"] = query_url;
+
+            // special case for unit testing
+			if (bcep_hashkey.Equals("APPROVE"))
+			{
+				responseDict["trnApproved"] = "1";
+				return responseDict;
+			}
+			else if (bcep_hashkey.Equals("DECLINE"))
+			{
+				responseDict["trnApproved"] = "0";
+				return responseDict;
+			}
 
 			// build an HTTP client and fire off a GET request
             try
