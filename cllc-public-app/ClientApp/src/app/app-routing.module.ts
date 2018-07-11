@@ -22,6 +22,7 @@ import { EditShareholdersComponent } from './business-profile/tabs/edit-sharehol
 import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
 import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 
 const routes: Routes = [
   {
@@ -44,7 +45,8 @@ const routes: Routes = [
       },
       {
         path: 'corporate-details',
-        component: CorporateDetailsComponent
+        component: CorporateDetailsComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: 'organization-structure',
@@ -64,7 +66,8 @@ const routes: Routes = [
       },
       {
         path: 'connections-to-producers',
-        component: ConnectionToProducersComponent
+        component: ConnectionToProducersComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: 'finance-integrity',
