@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -280,6 +280,7 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
     PaymentDataService,
     TiedHouseConnectionsDataService,
     NgbDropdown,
+    Title,
     CanDeactivateGuard
   ],
   entryComponents: [

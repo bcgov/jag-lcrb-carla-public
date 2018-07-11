@@ -16,7 +16,7 @@
   <!-- <mat-form-field class="emailSignupForm"> -->
     <label class="body">Email</label>
     <input class="form-control" required placeholder="" [formControl]="emailFormControl"
-           [(ngModel)]="email">
+           [(ngModel)]="email" tabindex="3">
     <!--<mat-hint>Errors appear instantly!</mat-hint>-->
     <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
       Please enter a valid email address
@@ -26,7 +26,7 @@
     </mat-error>
   </mat-form-field> -->
   <p>
-    <button type="submit" class="btn btn-primary" (click)="signup()" [disabled]="!emailFormControl.valid">
+    <button type="submit" class="btn btn-primary" (click)="signup()" [disabled]="!emailFormControl.valid"  tabindex="3">
       Subscribe
     </button>
   </p>
