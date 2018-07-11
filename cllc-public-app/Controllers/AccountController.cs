@@ -227,6 +227,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     AdoxioIsapplicant = true
                 };
 
+
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogError("Legal Entity Before --> " + legalEntityString);
                 
@@ -249,6 +250,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogError("Legal Entity After --> " + legalEntityString);
+
+                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection(){
+                };
+                tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+                
+                var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
+
 
             }
             else // it is a new user only.
