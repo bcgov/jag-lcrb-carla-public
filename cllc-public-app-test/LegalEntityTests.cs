@@ -45,8 +45,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 		public async System.Threading.Tasks.Task TestNewAccountHasNoShareholdersOrDirectors()
 		{
 			string service = "adoxiolegalentity";
-			string shareholders = "shareholder";
-			string directors = "director-officer";
+			string shareholders = "/shareholders";
+			string directors = "/director-officer-shareholder";
 
 			var loginUser = randomNewUserName("TestLegalEntityUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
@@ -59,8 +59,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
             string accountId = user.accountid;
 
+
             // get shareholders
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + shareholders);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + user.accountid + shareholders);
 			response = await _client.SendAsync(request);
 			jsonString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
@@ -68,7 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal(0, responseViewModel.Count);
 
             // get directors
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + directors);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + user.accountid + directors);
             response = await _client.SendAsync(request);
 			jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();

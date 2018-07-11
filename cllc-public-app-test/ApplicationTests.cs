@@ -442,6 +442,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
+			// should get a 404 if we try a get now.
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
 			// logout and cleanup (deletes the account and contact created above ^^^)
             await LogoutAndCleanupTestUser(strId1);
 		}
@@ -542,6 +547,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
+
+			// should get a 404 if we try a get now.
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // logout and cleanup (deletes the account and contact created above ^^^)
             await LogoutAndCleanupTestUser(strId1);
