@@ -72,6 +72,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         // string form of the guid.
         public string id { get; set; } //adoxio_legalentityid (primary key)
         public string accountId { get; set; } //_adoxio_account_value
+        public string shareholderAccountId { get; set; } //_adoxio_shareholderaccountid_value
 
         public string parentLegalEntityId { get; set; }
         public string name { get; set; } //adoxio_name (text)
