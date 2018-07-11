@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
-import { AdoxioLegalEntityDataService } from "../services/adoxio-legal-entity-data.service";
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Subscription } from 'rxjs';
+import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
+import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-security-assessments',
@@ -24,19 +26,30 @@ export class SecurityAssessmentsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public toastr: ToastsManager,
-          vcr: ViewContainerRef) {
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
+    private route: ActivatedRoute,
+    private dynamicsDataService: DynamicsDataService,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
-    this.getDirectorsAndOfficersAndShareholders();
+    this.route.parent.params.subscribe(p => {
+      this.parentLegalEntityId = p.legalEntityId;
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+      this.getDirectorsAndOfficersAndShareholders();
+    });
     this.dataSource.paginator = this.paginator;
   }
 
   getDirectorsAndOfficersAndShareholders() {
     let legalEntitiesList = [];
-    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "director-officer-shareholder")
+    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'director-officer-shareholder')
       .subscribe((result) => {
         let data = result.json();
         data.forEach((entry) => {
@@ -54,7 +67,7 @@ export class SecurityAssessmentsComponent implements OnInit {
     let consentRequestList: string[] = [];
 
     this.dataSource.data.forEach((row) => {
-      //console.log("row values: ", row.id + " - " + row.sendConsentRequest + " - " + row.firstname);
+      // console.log("row values: ", row.id + " - " + row.sendConsentRequest + " - " + row.firstname);
       if (row.sendConsentRequest) {
         consentRequestList.push(row.id);
       }
@@ -63,13 +76,13 @@ export class SecurityAssessmentsComponent implements OnInit {
     if (consentRequestList) {
       this.busyObsv = this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
         .subscribe(
-        res => {
-          this.toastr.success('Consent Request(s) Sent ', 'Success!');
-        },
+          res => {
+            this.toastr.success('Consent Request(s) Sent ', 'Success!');
+          },
           err => {
             this.handleError(err);
           }
-      );
+        );
     }
 
   }
@@ -77,9 +90,9 @@ export class SecurityAssessmentsComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error.json() || "";
+      const body = error.json() || '';
       const err = body || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }

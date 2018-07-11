@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 				.CreateClient(new WebApplicationFactoryClientOptions
                 {
                     AllowAutoRedirect = false
-                });    
+                });
         }
 
         public async System.Threading.Tasks.Task Login(string userid)
