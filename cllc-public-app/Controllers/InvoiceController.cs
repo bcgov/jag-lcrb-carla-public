@@ -207,7 +207,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());                
+			await _dynamicsClient.Invoices.DeleteAsync(adoxio_legalentityid.ToString());                
             
             return NoContent(); // 204
         }
