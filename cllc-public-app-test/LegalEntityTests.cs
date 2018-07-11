@@ -615,9 +615,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 		{
             string service = "adoxiolegalentity";
             // Creating parent
+            var parentAccount = await AccountFactory();
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.GeneralPartnership,
                 firstname = "LETFirst",
                 middlename = "LETMiddle",
                 lastname = "LETLast",
@@ -626,7 +627,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 isindividual = true,
                 commonvotingshares = 2018,
                 commonnonvotingshares = 3000,
-                account = await AccountFactory()
+                account = parentAccount
             };
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -644,13 +645,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating child
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.Adoxio_applicanttypecodes.GeneralPartnership,
                 firstname = "Create",
                 middlename = "Dynamics",
                 lastname = "ShareholderLE",
 				name = "Create ShareholderLE",
                 commonvotingshares = 100,
-                account = await AccountFactory(),
+                account = parentAccount,
                 isShareholder = true,
                 isindividual = false,
                 // Parent's id must be populated
