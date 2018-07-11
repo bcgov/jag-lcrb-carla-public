@@ -116,6 +116,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
 
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 
 @NgModule({
   declarations: [
@@ -278,7 +279,8 @@ import { TiedHouseConnectionsDataService } from './services/tied-house-connectio
     AccountDataService,
     PaymentDataService,
     TiedHouseConnectionsDataService,
-    NgbDropdown
+    NgbDropdown,
+    CanDeactivateGuard
   ],
   entryComponents: [
     ShareholderPersonDialogComponent,
