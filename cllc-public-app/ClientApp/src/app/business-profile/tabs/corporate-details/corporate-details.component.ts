@@ -5,7 +5,7 @@ import { User } from '../../../models/user.model';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { auditTime } from 'rxjs/operators';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
@@ -32,7 +32,19 @@ export class CorporateDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    // get account data and then display form
+
+    this.route.parent.params.subscribe(p => {
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+      this.getFormData();
+    });
+
+  }
+
+  getFormData() {
     this.busy = this.accountDataService.getAccount(this.accountId).subscribe(
       res => {
         // let data = this.toFormModel(res.json());
@@ -48,15 +60,6 @@ export class CorporateDetailsComponent implements OnInit {
         console.log('Error occured');
       }
     );
-
-    this.route.parent.params.subscribe(p => {
-      this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('account', this.accountId)
-        .then((data) => {
-          this.businessType = data.businessType;
-        });
-    });
-
   }
 
   getLang() {
@@ -103,7 +106,11 @@ export class CorporateDetailsComponent implements OnInit {
     };
   }
 
-  save() {
+  canDeactivate(): Observable<boolean> | boolean {
+    return this.save();
+  }
+
+  save(): Subject<boolean> {
     // console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
     // if (!this.corporateDetailsForm.valid) {
     //   Object.keys(this.corporateDetailsForm.controls).forEach(field => {
@@ -111,17 +118,19 @@ export class CorporateDetailsComponent implements OnInit {
     //     control.markAsTouched({ onlySelf: true });
     //   });
     // }
-
+    const saveResult = new Subject<boolean>();
     this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
     this.accountDataService.updateAccount(this.accountModel).subscribe(
       res => {
         this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        saveResult.next(true);
       },
       err => {
         this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        saveResult.next(false);
         console.log('Error occured');
       });
-
+    return saveResult;
   }
 
   isFieldError(field: string) {
