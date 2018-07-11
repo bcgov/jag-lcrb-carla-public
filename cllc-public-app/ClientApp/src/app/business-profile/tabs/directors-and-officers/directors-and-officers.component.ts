@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-directors-and-officers',
@@ -25,15 +27,26 @@ export class DirectorsAndOfficersComponent implements OnInit {
   busy: Promise<any>;
   busyObsv: Subscription;
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public dialog: MatDialog,
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
+    public dialog: MatDialog,
+    private dynamicsDataService: DynamicsDataService,
+    private route: ActivatedRoute,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getDirectorsAndOfficers();
+    this.route.parent.params.subscribe(p => {
+      this.parentLegalEntityId = p.legalEntityId;
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+      this.getDirectorsAndOfficers();
+    });
   }
 
   getDirectorsAndOfficers() {
-    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, "directors-officers-management")
+    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'directors-officers-management')
       .subscribe((result) => {
         let data: AdoxioLegalEntity[] = result.json();
         let positionList: string[] = [];
@@ -42,10 +55,10 @@ export class DirectorsAndOfficersComponent implements OnInit {
             positionList.push('Director');
           }
           if (d.isOfficer) {
-            positionList.push("Officer");
+            positionList.push('Officer');
           }
           if (d.isSeniorManagement) {
-            positionList.push("Senior Manager")
+            positionList.push('Senior Manager')
           }
           d.position = positionList.join(', ');
         })
@@ -102,7 +115,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
           this.busyObsv = save.subscribe(
             res => {
               this.snackBar.open('Director / Officer Details have been saved', 'Success',
-                                  { duration: 2500, extraClasses: ['red-snackbar'] });
+                { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getDirectorsAndOfficers();
             },
             err => {
