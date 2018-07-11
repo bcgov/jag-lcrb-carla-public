@@ -13,6 +13,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
+import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
+import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
+import { DirectorsAndOfficersComponent } from './business-profile/tabs/directors-and-officers/directors-and-officers.component';
+import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key-personnel.component';
+import { EditShareholdersComponent } from './business-profile/tabs/edit-shareholders/edit-shareholders.component';
+import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
+import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 
 const routes: Routes = [
   {
@@ -28,6 +38,46 @@ const routes: Routes = [
   {
     path: 'business-profile/:accountId/:legalEntityId',
     component: BusinessProfileComponent,
+    children: [
+      {
+        path: 'before-you-start',
+        component: BeforeYouStartComponent
+      },
+      {
+        path: 'corporate-details',
+        component: CorporateDetailsComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'organization-structure',
+        component: OrganizationStructureComponent
+      },
+      {
+        path: 'directors-and-officers',
+        component: DirectorsAndOfficersComponent
+      },
+      {
+        path: 'key-personnel',
+        component: KeyPersonnelComponent
+      },
+      {
+        path: 'shareholders',
+        component: EditShareholdersComponent
+      },
+      {
+        path: 'connections-to-producers',
+        component: ConnectionToProducersComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'finance-integrity',
+        component: FinancialInformationComponent
+      },
+      {
+        path: 'security-assessment',
+        component: SecurityAssessmentsComponent
+      },
+    ]
   },
   {
     path: 'form-viewer/:id',
