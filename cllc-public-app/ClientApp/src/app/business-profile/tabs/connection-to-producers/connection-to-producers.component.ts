@@ -4,6 +4,8 @@ import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '../../../services/tied-house-connections-data.service';
 import { TiedHouseConnection } from '../../../models/tied-house-connection.model';
 import { auditTime } from 'rxjs/operators';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
 
 @Component({
   selector: 'app-connection-to-producers',
@@ -18,7 +20,11 @@ export class ConnectionToProducersComponent implements OnInit {
   form: any;
   _tiedHouseData: TiedHouseConnection;
 
-  constructor(private fb: FormBuilder, public snackBar: MatSnackBar, private tiedHouseService: TiedHouseConnectionsDataService) { }
+  constructor(private fb: FormBuilder,
+    public snackBar: MatSnackBar,
+    private tiedHouseService: TiedHouseConnectionsDataService,
+    private dynamicsDataService: DynamicsDataService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -45,6 +51,14 @@ export class ConnectionToProducersComponent implements OnInit {
       .subscribe(res => {
         this._tiedHouseData = res.json();
         this.form.patchValue(this._tiedHouseData);
+      });
+
+      this.route.parent.params.subscribe(p => {
+        this.accountId = p.accountId;
+        this.dynamicsDataService.getRecord('account', this.accountId)
+          .then((data) => {
+            this.businessType = data.businessType;
+          });
       });
   }
 

@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { auditTime } from 'rxjs/operators';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-corporate-details',
@@ -21,7 +23,10 @@ export class CorporateDetailsComponent implements OnInit {
   accountModel: DynamicsAccount;
   busy: Subscription;
 
-  constructor(private userDataService: UserDataService, private accountDataService: AccountDataService,
+  constructor(private userDataService: UserDataService,
+    private accountDataService: AccountDataService,
+    private dynamicsDataService: DynamicsDataService,
+    private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
   }
 
@@ -43,6 +48,14 @@ export class CorporateDetailsComponent implements OnInit {
         console.log('Error occured');
       }
     );
+
+    this.route.parent.params.subscribe(p => {
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+    });
 
   }
 
