@@ -417,9 +417,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		}
 
         private bool IsChildAccount(String parentAccountId, String childAccountId){
-            var accountfilter = "_adoxio_account_value eq " + parentAccountId;
-            var bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
-            var filter = accountfilter + " " + bpFilter;
+            var filter = $"_adoxio_account_value eq {parentAccountId}  and adoxio_isapplicant eq true";
             var result = false;
 
             var parentLegalEntity = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList().FirstOrDefault();
@@ -427,7 +425,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (parentLegalEntity != null)
             {
                 var childFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntity.AdoxioLegalentityid.ToString()}";
-                childFilter += $" and _adoxio_account_value eq {childAccountId}";
+                childFilter += $" and _adoxio_shareholderaccountid_value eq {childAccountId}";
 
                 var childEntity = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter).Value.ToList().FirstOrDefault();
                 result = (childEntity != null);

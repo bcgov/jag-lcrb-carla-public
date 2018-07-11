@@ -92,6 +92,7 @@ export class BusinessProfileComponent implements OnInit {
       currentTab = this.tabStructure.length - 1;
     }
     this.view_tab = this.tabStructure[currentTab];
+    this.router.navigate([`/business-profile/${this.accountId}/${this.legalEntityId}/${this.view_tab}`]);
   }
 
   next() {
@@ -101,6 +102,7 @@ export class BusinessProfileComponent implements OnInit {
       currentTab = 0;
     }
     this.view_tab = this.tabStructure[currentTab];
+    this.router.navigate([`/business-profile/${this.accountId}/${this.legalEntityId}/${this.view_tab}`]);
   }
 
   onBusinessTypeChange(value: string) {
