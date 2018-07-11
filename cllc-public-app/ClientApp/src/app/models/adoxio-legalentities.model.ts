@@ -27,6 +27,7 @@ export class AdoxioLegalEntity {
   email: string;
   dateofappointment: Date; //adoxio_dateofappointment
   accountId: string;
+  shareholderAccountId: string;
   // helper fields
   shareholderType: string;
   sendConsentRequest: boolean;

@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
-            bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
+            bpFilter = "and adoxio_isapplicant eq true";
             filter = accountfilter + " " + bpFilter;
 
 
@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (legalEntities.Count > 0)
                 {
                     var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].AdoxioLegalentityid.ToString()}";
-                    childFilter += " and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
+                    childFilter += " and adoxio_isapplicant ne true and adoxio_isindividual eq 0";
 
                     response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter);
                     var childEntities = response.Value.ToList();
@@ -472,7 +472,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Route("child-legal-entity")]
         public async Task<IActionResult> CreateDynamicsShareholderLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
-            if(item == null){
+            if (item == null)
+            {
                 return BadRequest();
             }
 
@@ -487,17 +488,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), item.legalentitytype);
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
-                adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-
                 //create tied house under account
-                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection(){
+                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
+                {
                 };
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-                
+                adoxioLegalEntity.AdoxioShareholderAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+
                 var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
-            } else {
-                adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
             }
+            adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
+
 
             adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", item.parentLegalEntityId);
 
