@@ -122,8 +122,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             
+			// should get a 404 if we try a get now.
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
 			// logout and cleanup (deletes the account and contact created above ^^^)
-            await LogoutAndCleanupTestUser(strId);
+            await Logout();
 		}
 
 		[Fact]
@@ -141,25 +146,25 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             ViewModels.User user1 = await GetCurrentUser();
             ViewModels.Account currentAccount1 = await GetAccountForCurrentUser();
-
+            
 			// create an application to test with (need a valid id)
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication");
 
             ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
             {
-                licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                name = "Test Application Name",
+				applyingPerson = "Applying Person", //contact
+				applicant = currentAccount1, //account
+				licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
                 applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation, //*Mandatory (label=business type)
+				jobNumber = "123",
                 registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
-                                                                     //,name = initialName
-                                                                     //,applyingPerson = "Applying Person" //contact
-                applicant = currentAccount1, //account
-                                           //,jobNumber = "123"
                 establishmentName = "Not a Dispensary",
                 establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
                 establishmentaddressstreet = "123 Any Street",
                 establishmentaddresscity = "Victoria, BC",
-                establishmentaddresspostalcode = "V1X 1X1"
-                //,applicationStatus = "0"
+                establishmentaddresspostalcode = "V1X 1X1",
+				applicationStatus = "845280000"
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -178,7 +183,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
             
             string id = responseViewModel.id;
-
+            
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/submit/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
@@ -186,7 +191,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string json = await response.Content.ReadAsStringAsync();
             Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
             Assert.True(values.ContainsKey("url"));
-
+            
 			// logout so we can test as another user
 			await Logout();
             
@@ -201,13 +206,18 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			// logout and cleanup (deletes the account and contact created above ^^^)
 			await Login(loginUser1);
-
+            
 			// delete application
             request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-			await LogoutAndCleanupTestUser(strId1);
+			// should get a 404 if we try a get now.
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            
+			await Logout();
 		}
 	}
 }
