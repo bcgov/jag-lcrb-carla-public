@@ -1,10 +1,10 @@
 node('master') {
 
    stage('SonarQube Scan') {
-        echo "Scanning..."        
+        echo "Running SonarQube static code analysis..."
+        openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'		
     }
 	
-
     stage('Build Image') {
         echo "Building..."
         openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
@@ -53,7 +53,7 @@ podTemplate(label: 'owasp-zap', name: 'owasp-zap', serviceAccount: 'jenkins', cl
 }	
 
 node('nodejs') {
-	stage('End to End test on Dev') {
+	stage('Smoke test on Dev') {
 		//the checkout is mandatory, otherwise functional test would fail
         echo "checking out source"
         echo "Build: ${BUILD_ID}"
