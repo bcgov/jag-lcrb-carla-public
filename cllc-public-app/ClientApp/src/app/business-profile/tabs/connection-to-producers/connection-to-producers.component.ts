@@ -51,7 +51,7 @@ export class ConnectionToProducersComponent implements OnInit {
   save() {
     const data = (<any>Object).assign(this._tiedHouseData, this.form.value);
     this.tiedHouseService.updateTiedHouse(data, data.id).subscribe(res => {
-      // this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
+      this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
     },
       err => {
         this.snackBar.open('Error saving Connections to producers', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
