@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Reflection;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -260,16 +261,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		[HttpGet("verify/{id}/APPROVE")]
 		public async Task<IActionResult> VerifyPaymentStatusAPPROVE(string id)
 		{
-			_bcep.setHashKeyForUnitTesting("APPROVE");
-			return await VerifyPaymentStatus(id);
+			foreach (var assem in Assembly.GetEntryAssembly().GetReferencedAssemblies())
+            {
+				if (assem.FullName.ToLowerInvariant().StartsWith("microsoft.testplatform"))
+				{
+					_bcep.setHashKeyForUnitTesting("APPROVE");
+                    return await VerifyPaymentStatus(id);
+				}
+			}
+			return NotFound();
 		}
 
 		// specific for unit testing and development
-        [HttpGet("verify/{id}/DECLINE")]
+		[HttpGet("verify/{id}/DECLINE")]
 		public async Task<IActionResult> VerifyPaymentStatusDECLINE(string id)
-        {
-			_bcep.setHashKeyForUnitTesting("DECLINE");
-			return await VerifyPaymentStatus(id);
-        }
-    }
+		{
+			foreach (var assem in Assembly.GetEntryAssembly().GetReferencedAssemblies())
+            {
+				if (assem.FullName.ToLowerInvariant().StartsWith("microsoft.testplatform"))
+                {
+					_bcep.setHashKeyForUnitTesting("DECLINE");
+                    return await VerifyPaymentStatus(id);
+                }
+            }
+            return NotFound();
+		}
+	}
 }

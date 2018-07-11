@@ -117,7 +117,22 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			Assert.Equal("1", values["trnApproved"]);
 
-            // delete application
+            // fetch updated application
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+			string invoiceId = responseViewModel.adoxioInvoiceId;
+
+			// delete invoice - note we can't delete an invoice created by Dynamics
+            //request = new HttpRequestMessage(HttpMethod.Post, "/api/invoice/" + invoiceId + "/delete");
+            //response = await _client.SendAsync(request);
+            //string responseText = await response.Content.ReadAsStringAsync();
+            //response.EnsureSuccessStatusCode();
+
+			// delete application
 			request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
@@ -128,7 +143,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
 			// logout and cleanup (deletes the account and contact created above ^^^)
-            await Logout();
+            // note we can't delete the account due to the dependency on the invoice created by Dynamics
+			await Logout(); // LogoutAndCleanupTestUser(strId); 
 		}
 
 		[Fact]
@@ -200,6 +216,13 @@ namespace Gov.Lclb.Cllb.Public.Test
 			var strId2 = await LoginAndRegisterAsNewUser(loginUser2);
 
             // try to access user 1's application
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/submit/" + id);
+            response = await _client.SendAsync(request);
+			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/verify/" + id);
+            response = await _client.SendAsync(request);
+			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // logout and cleanup (deletes the account and contact created above ^^^)
             await LogoutAndCleanupTestUser(strId2);
@@ -217,7 +240,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             
+			// note we can't delete the account due to the dependency on the invoice created by Dynamics
 			await Logout();
+		}
+
+		[Fact]
+		public async System.Threading.Tasks.Task PaymentSubmitDeclinedAndThenResubitApprovedWorks()
+		{
+			// TODO
 		}
 	}
 }
