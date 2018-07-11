@@ -370,6 +370,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 name = initialName,
                 applyingPerson = "Applying Person",
                 applicant = currentAccount1,
+				applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation //*Mandatory (label=business type)
+                ,
                 jobNumber = "123",
                 licenseType = "Cannabis Retail Store",
                 establishmentName = "Private Retail Store",
@@ -468,6 +470,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 name = initialName,
                 applyingPerson = "Applying Person",
                 applicant = currentAccount1,
+				applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation //*Mandatory (label=business type)
+                ,
                 jobNumber = "123",
                 licenseType = "Cannabis Retail Store",
                 establishmentName = "Shared Retail Store",
