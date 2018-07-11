@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatSnackBar } from '../../../../../node_modules/@angular/material';
 import { FormBuilder } from '../../../../../node_modules/@angular/forms';
+import { TiedHouseConnectionsDataService } from '../../../services/tied-house-connections-data.service';
+import { debug } from 'util';
+import { TiedHouseConnection } from '../../../models/tied-house-connection.model';
 
 @Component({
   selector: 'app-connection-to-producers',
@@ -13,24 +16,42 @@ export class ConnectionToProducersComponent implements OnInit {
 
   operatingForMoreThanOneYear: any;
   form: any;
-    
-  constructor(private fb: FormBuilder, public snackBar: MatSnackBar) { }
+  _tiedHouseData: TiedHouseConnection;
+
+  constructor(private fb: FormBuilder, public snackBar: MatSnackBar, private tiedHouseService: TiedHouseConnectionsDataService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      CorpConnectionFederalProducer : [''],
-      CorpConnectionFederalProducerDetails: [''],
-      FederalProducerConnectionToCorp: [''],
-      FederalProducerConnectionToCorpDetails: [''],
-      Share20PlusConnectionProducer: [''],
-      Share20PlusConnectionProducerDetails: [''],
-      Share20PlusFamilyConnectionProducer: [''],
-      Share20PlusFamilyConnectionProducerDetail: [''],
-      PartnersConnectionFederalProducer: [''],
-      PartnersConnectionFederalProducerDetails: [''],
-      SocietyConnectionFederalProducer: [''],
-      SocietyConnectionFederalProducerDetails: ['']
+      corpConnectionFederalProducer: [''],
+      corpConnectionFederalProducerDetails: [''],
+      federalProducerConnectionToCorp: [''],
+      federalProducerConnectionToCorpDetails: [''],
+      share20PlusConnectionProducer: [''],
+      share20PlusConnectionProducerDetails: [''],
+      share20PlusFamilyConnectionProducer: [''],
+      share20PlusFamilyConnectionProducerDetail: [''],
+      partnersConnectionFederalProducer: [''],
+      partnersConnectionFederalProducerDetails: [''],
+      societyConnectionFederalProducer: [''],
+      societyConnectionFederalProducerDetails: ['']
     });
+
+    this.tiedHouseService.getTiedHouse(this.accountId)
+      .subscribe(res => {
+        this._tiedHouseData = res.json();
+        this.form.patchValue(this._tiedHouseData);
+      });
   }
-  
+
+  save() {
+    const data = (<any>Object).assign(this._tiedHouseData, this.form.value);
+    this.tiedHouseService.updateTiedHouse(data, data.id).subscribe(res => {
+      this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
+    },
+      err => {
+        this.snackBar.open('Error saving Connections to producers', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log('Error occured');
+      });
+  }
+
 }
