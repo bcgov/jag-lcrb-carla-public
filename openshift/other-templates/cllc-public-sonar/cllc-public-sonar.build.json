@@ -1,0 +1,83 @@
+{
+    "kind": "BuildConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "cllc-public-sonar",
+        "creationTimestamp": null,
+        "labels": {
+            "app": "cllc-public-sonar"
+        }
+    },
+    "spec": {
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            }
+        ],
+        "runPolicy": "Serial",
+        "source": {
+            "type": "Git",
+            "git": {
+                "uri": "https://github.com/bcgov/ag-lclb-cllc-public.git",
+                "ref": "develop"
+            }
+        },
+        "strategy": {
+            "type": "Source",
+            "sourceStrategy": {
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "dotnet-sonar:latest"
+                },
+                "env": [
+                    {
+                        "name": "DOTNET_STARTUP_PROJECT",
+                        "value": "cllc-public-app/cllc-public-app.csproj"
+                    },
+                    {
+                        "name": "DOTNET_SDK_VERSION",
+                        "value": "latest"
+                    },
+                    {
+                        "name": "MSBuildEmitSolution",
+                        "value": "1"
+                    },
+                    {
+                        "name": "SONAR_TOKEN",
+                        "value": "CHANGEME"
+                    },
+                    {
+                        "name": "SONAR_PROJECT",
+                        "value": "CHANGEME"
+                    },
+                    {
+                        "name": "SONAR_URL",
+                        "value": "CHANGEME"
+                    }
+                ],
+                "forcePull": true
+            }
+        },
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "cllc-public:latest"
+            }
+        },
+        "resources": {
+            "limits": {
+                "cpu": "4",
+                "memory": "10Gi"
+            },
+            "requests": {
+                "cpu": "4",
+                "memory": "10Gi"
+            }
+        },
+        "postCommit": {},
+        "nodeSelector": null
+    },
+    "status": {
+        "lastVersion": 0
+    }
+}
