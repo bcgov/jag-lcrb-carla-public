@@ -10,6 +10,7 @@ import { User } from '../../../models/user.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { UserDataService } from '../../../services/user-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -31,12 +32,25 @@ export class EditShareholdersComponent implements OnInit {
   busyObsv: Subscription;
 
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, private route: ActivatedRoute,
-    public dialog: MatDialog, private userDataService: UserDataService, public snackBar: MatSnackBar) {
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
+    private route: ActivatedRoute,
+    private dynamicsDataService: DynamicsDataService,
+    public dialog: MatDialog,
+    private userDataService: UserDataService,
+    public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
-    this.getShareholders();
+    this.route.parent.params.subscribe(p => {
+      this.parentLegalEntityId = p.legalEntityId;
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+      this.getShareholders();
+    });
+
     this.userDataService.getCurrentUser().then(user => {
       this.user = user;
     });
@@ -45,7 +59,7 @@ export class EditShareholdersComponent implements OnInit {
   getShareholders() {
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'shareholders')
       .subscribe((response) => {
-        let data: AdoxioLegalEntity[]  = response.json();
+        let data: AdoxioLegalEntity[] = response.json();
         data.forEach(d => {
           d.position = this.getPosition(d);
         })
@@ -54,7 +68,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   getPosition(shareholder: AdoxioLegalEntity): string {
-    let position  = '';
+    let position = '';
     if (shareholder.isindividual) {
       position = 'Individual';
     } else {
@@ -328,9 +342,9 @@ export class ShareholderOrganizationDialogComponent {
         control.markAsTouched({ onlySelf: true });
       });
     }
-      let formData = this.data.shareholder || {};
-      formData = (<any>Object).assign(formData, this.form.value);
-      this.dialogRef.close(formData);
+    let formData = this.data.shareholder || {};
+    formData = (<any>Object).assign(formData, this.form.value);
+    this.dialogRef.close(formData);
   }
 
 

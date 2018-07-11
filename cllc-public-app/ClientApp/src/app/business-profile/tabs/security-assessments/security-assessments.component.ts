@@ -4,6 +4,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Subscription } from 'rxjs';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-security-assessments',
@@ -24,13 +26,24 @@ export class SecurityAssessmentsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService, public toastr: ToastsManager,
-          vcr: ViewContainerRef) {
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
+    private route: ActivatedRoute,
+    private dynamicsDataService: DynamicsDataService,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
-    this.getDirectorsAndOfficersAndShareholders();
+    this.route.parent.params.subscribe(p => {
+      this.parentLegalEntityId = p.legalEntityId;
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+      this.getDirectorsAndOfficersAndShareholders();
+    });
     this.dataSource.paginator = this.paginator;
   }
 
@@ -63,13 +76,13 @@ export class SecurityAssessmentsComponent implements OnInit {
     if (consentRequestList) {
       this.busyObsv = this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
         .subscribe(
-        res => {
-          this.toastr.success('Consent Request(s) Sent ', 'Success!');
-        },
+          res => {
+            this.toastr.success('Consent Request(s) Sent ', 'Success!');
+          },
           err => {
             this.handleError(err);
           }
-      );
+        );
     }
 
   }
