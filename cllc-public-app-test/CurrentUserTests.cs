@@ -172,33 +172,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var accountfilter = "_adoxio_account_value eq " + user1.accountid;
             var bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
             var filter = accountfilter + " " + bpFilter;
-            // ViewModels.Account vmAccount1 = new ViewModels.Account
-            // {
-            //     id = user1.accountid
-            // };
 
-            // create legal entity
-            // ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
-            // {
-            //     legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-            //     firstname = "LETFirst",
-            //     middlename = "LETMiddle",
-            //     lastname = "LETLast",
-            //     name = loginUser1,
-            //     dateofbirth = DateTime.Now,
-            //     isindividual = true,
-            //     commonvotingshares = 2018,
-            //     commonnonvotingshares = 3000,
-            //     account = vmAccount1
-            // };
-
-            //request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity");
-            //jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
-            //request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            //response = await _client.SendAsync(request);
-            //jsonString = await response.Content.ReadAsStringAsync();
-            //response.EnsureSuccessStatusCode();
-            //ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/business-profile-summary");
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
@@ -222,22 +196,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.Account retAccount1 = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 			Assert.Equal(user1.accountid, retAccount1.id);
 
-            // logout
-            // await Logout();
-
-			// register and login as our second user (child)
-			// var loginUser2 = randomNewUserName("TestUser-2-", 6);
-            // var strId2 = await LoginAndRegisterAsNewUser(loginUser2);
-            // request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
-            // response = await _client.SendAsync(request);
-            // jsonString = await response.Content.ReadAsStringAsync();
-            // response.EnsureSuccessStatusCode();
-            // ViewModels.User user2 = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
-            // ViewModels.Account vmAccount2 = new ViewModels.Account
-            // {
-            //     id = user2.accountid
-            // };
-
             var vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
@@ -249,7 +207,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 accountId = user1.accountid,
                 isShareholder = true,
                 isindividual = false,
-                // Parent's id must be populated
+                // Setting parentLegalEntityId from viewmodel id
                 parentLegalEntityId = parentLegalEntityId
             };
 
@@ -265,13 +223,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             ViewModels.Account account2 = await GetAccountForCurrentUser();
             Assert.NotNull(account2);
-
-            // await Logout();
-
-
-
-
-            // await Login(loginUser1);
 
             // as our second user, view the account of the first user
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/account/" + childAccountId);
