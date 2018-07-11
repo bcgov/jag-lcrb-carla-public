@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			jsonString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
 			var responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
-			Assert.Equal(0, responseViewModel.Count);
+			Assert.Empty(responseViewModel);
 
             // get directors
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + user.accountid + directors);
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 			responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
-			Assert.Equal(0, responseViewModel.Count);
+			Assert.Empty(responseViewModel);
 
 			await LogoutAndCleanupTestUser(strId);
 		}
