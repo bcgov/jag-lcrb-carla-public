@@ -79,7 +79,9 @@ export class ContactDetailsComponent implements OnInit {
       res => {
         saveResult.next(true);
         this.saveFormData = saveData;
-        // this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        if (showProgress === true) {
+          this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        }
       },
       err => {
         saveResult.next(false);

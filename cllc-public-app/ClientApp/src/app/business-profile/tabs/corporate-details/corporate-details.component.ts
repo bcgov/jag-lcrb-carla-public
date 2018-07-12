@@ -122,7 +122,9 @@ export class CorporateDetailsComponent implements OnInit {
     this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
     const sub = this.accountDataService.updateAccount(this.accountModel).subscribe(
       res => {
-        // this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        if (showProgress === true) {
+          this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        }
         saveResult.next(true);
         this.savedFormData = saveData;
       },

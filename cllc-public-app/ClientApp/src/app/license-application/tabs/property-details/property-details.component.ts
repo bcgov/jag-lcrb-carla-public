@@ -81,8 +81,9 @@ export class PropertyDetailsComponent implements OnInit {
       res => {
         saveResult.next(true);
         this.saveFormData = saveData;
-        // console.log("Application updated:", res.json());
-        // this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        if (showProgress === true) {
+          this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        }
       },
       err => {
         saveResult.next(false);
@@ -93,13 +94,6 @@ export class PropertyDetailsComponent implements OnInit {
     if (showProgress === true) {
       this.busy = subscription;
     }
-
-    // if (!this.propertyDetailsForm.valid) { {
-    //   Object.keys(this.propertyDetailsForm.controls).forEach(field => {
-    //     const control = this.propertyDetailsForm.get(field);
-    //     control.markAsTouched({ onlySelf: true });
-    //   });
-    // }
     return saveResult;
   }
 
