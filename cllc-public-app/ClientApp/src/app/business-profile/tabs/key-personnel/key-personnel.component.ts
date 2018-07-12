@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
 
 @Component({
   selector: 'app-key-personnel',
@@ -8,9 +10,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class KeyPersonnelComponent implements OnInit {
   @Input() accountId: string;
   @Input() businessType: string;
-  constructor() { }
+
+  constructor(private route: ActivatedRoute,
+    private dynamicsDataService: DynamicsDataService) { }
 
   ngOnInit() {
+    this.route.parent.params.subscribe(p => {
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+    });
   }
 
 }

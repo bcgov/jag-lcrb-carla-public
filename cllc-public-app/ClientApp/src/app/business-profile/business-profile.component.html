@@ -73,32 +73,8 @@
     -->
 
       <!-- Tab panes -->
-      <div *ngIf="view_tab =='before-you-start'">
-        <app-before-you-start [businessType]="businessType"></app-before-you-start>
-      </div>
-      <div *ngIf="view_tab =='corporate-details'">
-        <app-corporate-details [accountId]="accountId" [businessType]="businessType"></app-corporate-details>
-      </div>
-      <div *ngIf="view_tab =='organization-structure'">
-        <app-organization-structure [accountId]="accountId" [businessType]="businessType"></app-organization-structure>
-      </div>
-      <div *ngIf="view_tab =='directors-and-officers'">
-        <app-directors-and-officers [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-directors-and-officers>
-      </div>
-      <div *ngIf="view_tab =='key-personnel'">
-        <app-key-personnel [accountId]="accountId" [businessType]="businessType"></app-key-personnel>
-      </div>
-      <div *ngIf="view_tab =='shareholders'">
-        <app-edit-shareholders [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
-      </div>
-      <div *ngIf="view_tab =='connections-to-producers'">
-        <app-connection-to-producers [accountId]="accountId" [businessType]="businessType"></app-connection-to-producers>
-      </div>
-      <div *ngIf="view_tab =='finance-integrity'">
-        <app-financial-information [accountId]="accountId" [businessType]="businessType"></app-financial-information>
-      </div>
-      <div *ngIf="view_tab =='security-assessment'">
-        <app-security-assessments [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-security-assessments>
+      <div>
+        <router-outlet></router-outlet>
       </div>
       <p>&nbsp;</p>
       <div class="col-md-10 row">
@@ -108,7 +84,7 @@
         </a>
         &nbsp;
         <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
-          <strong *ngIf="view_tab != 'before-you-start'">Next</strong>
+          <strong *ngIf="view_tab != 'before-you-start'">Save and Continue</strong>
           <strong *ngIf="view_tab == 'before-you-start'">Start</strong>
           <br>
         </a>
