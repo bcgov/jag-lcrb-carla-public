@@ -1,20 +1,77 @@
 
 <div *ngIf="!isSubmitted">
-  <div *ngIf="prevPaymentFailed">
-    <p>
-      <strong>A previous Payment was declined or failed, please re-submit</strong>
-    </p>
-  </div>
+	<div id="u8565" class="ax_default" data-label="decline" style="visibility: inherit;">              
+	<div id="u8565_state0" class="panel_state" data-label="State1" style="">
+	    <div id="u8565_state0_content" class="panel_state_content">
+
+	      <!-- Application-Name (Rectangle) -->
+	      <div id="u8567" class="ax_default heading_1" data-label="Application-Name">
+	        <div id="u8567_div" class=""></div>
+	        <div id="u8567_text" class="text " >
+	          <p>Declined</p>
+	        </div>
+	      </div>
+
+	      <!-- Unnamed (Rectangle) -->
+	      <div id="u8568" class="ax_default paragraph">
+	        <div id="u8568_div" class=""></div>
+	        <div id="u8568_text" class="text ">
+	          <p>Your payment has been declined. Please contact your bank for more information.</p>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
+
 <div *ngIf="isSubmitted && !isPaid">
-  <p>
-    <strong>Application payment has been Submitted but Payment has not been verified</strong>
-  </p>
+	<div id="u8565" class="ax_default" data-label="inprogress" style="visibility: inherit;">              
+	<div id="u8565_state0" class="panel_state" data-label="State1" style="">
+	    <div id="u8565_state0_content" class="panel_state_content">
+
+	      <!-- Application-Name (Rectangle) -->
+	      <div id="u8567" class="ax_default heading_1" data-label="Application-Name">
+	        <div id="u8567_div" class=""></div>
+	        <div id="u8567_text" class="text " >
+	          <p>In Progress</p>
+	        </div>
+	      </div>
+
+	      <!-- Unnamed (Rectangle) -->
+	      <div id="u8568" class="ax_default paragraph">
+	        <div id="u8568_div" class=""></div>
+	        <div id="u8568_text" class="text ">
+	          <p>Your Application Payment has been Submitted, but Payment has not been verified.</p>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
+
 <div *ngIf="isSubmitted && isPaid">
-  <p>
-  	<strong>Application has been Submitted and Paid</strong>
-  </p>
+	<div id="u8565" class="ax_default" data-label="paid" style="visibility: inherit;">              
+	<div id="u8565_state0" class="panel_state" data-label="State1" style="">
+	    <div id="u8565_state0_content" class="panel_state_content">
+
+	      <!-- Application-Name (Rectangle) -->
+	      <div id="u8567" class="ax_default heading_1" data-label="Application-Name">
+	        <div id="u8567_div" class=""></div>
+	        <div id="u8567_text" class="text " >
+	          <p>Paid</p>
+	        </div>
+	      </div>
+
+	      <!-- Unnamed (Rectangle) -->
+	      <div id="u8568" class="ax_default paragraph">
+	        <div id="u8568_div" class=""></div>
+	        <div id="u8568_text" class="text ">
+	          <p>Your Application has been Submitted and Paid.</p>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <div *ngIf="!(isSubmitted && isPaid)">
