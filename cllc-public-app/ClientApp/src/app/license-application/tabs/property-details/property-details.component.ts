@@ -75,13 +75,12 @@ export class PropertyDetailsComponent implements OnInit {
    * Save data in Dynamics
    * */
   save(showProgress: boolean = false): Subject<boolean> {
-    // console.log('propertyDetailsForm valid, value: ', this.propertyDetailsForm.valid, this.propertyDetailsForm.value);
     const saveResult = new Subject<boolean>();
-
+    const saveData = this.propertyDetailsForm.value;
     const subscription = this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
       res => {
         saveResult.next(true);
-        this.saveFormData = this.propertyDetailsForm.value;
+        this.saveFormData = saveData;
         // console.log("Application updated:", res.json());
         // this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
       },

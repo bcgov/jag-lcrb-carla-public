@@ -74,11 +74,11 @@ export class ContactDetailsComponent implements OnInit {
    * */
   save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
-
+    const saveData = this.contactDetailsForm.value;
     const subscription = this.applicationDataService.updateApplication(this.contactDetailsForm.value).subscribe(
       res => {
         saveResult.next(true);
-        this.saveFormData = this.contactDetailsForm.value;
+        this.saveFormData = saveData;
         // this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
       },
       err => {

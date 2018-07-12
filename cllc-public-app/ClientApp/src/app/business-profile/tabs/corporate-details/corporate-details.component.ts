@@ -118,11 +118,13 @@ export class CorporateDetailsComponent implements OnInit {
 
   save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
+    const saveData = this.corporateDetailsForm.value;
     this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
     const sub = this.accountDataService.updateAccount(this.accountModel).subscribe(
       res => {
         // this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
         saveResult.next(true);
+        this.savedFormData = saveData;
       },
       err => {
         this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
