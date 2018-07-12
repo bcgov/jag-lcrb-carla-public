@@ -14,6 +14,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public double totalamount { get; set; }
         public Account customer { get; set; }
 		public string transactionId { get; set; }
+		public string returnedTransactionId { get; set; }
 		public int? statecode { get; set; }
 		public int? statuscode { get; set; }
     }
