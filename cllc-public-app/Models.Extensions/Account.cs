@@ -100,14 +100,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1_county = fromVM.mailingAddressCountry;
             }
-            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressProvince != null))
-            {
-                if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
+            if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
                 fromVM.mailingAddressProvince <= ViewModels.Adoxio_stateprovince.YT)
-                    toDynamics.Adoxio_stateprovince = (int?)fromVM.mailingAddressProvince;
-                else
-                    toDynamics.Adoxio_stateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
+            {
+                toDynamics.Adoxio_stateprovince = (int?)fromVM.mailingAddressProvince;
+            }                    
+            else
+            {
+                toDynamics.Adoxio_stateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
             }
+                
+            
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddresPostalCode != null))
             {
                 toDynamics.Address1_postalcode = fromVM.mailingAddresPostalCode;
@@ -176,14 +179,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1County = fromVM.mailingAddressCountry;
             }
-            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressProvince != null))
-            {
-                if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
+            if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
                 fromVM.mailingAddressProvince <= ViewModels.Adoxio_stateprovince.YT)
                     toDynamics.AdoxioStateprovince = (int?)fromVM.mailingAddressProvince;
                 else
                     toDynamics.AdoxioStateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
-            }
+            
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddresPostalCode != null))
             {
                 toDynamics.Address1Postalcode = fromVM.mailingAddresPostalCode;
