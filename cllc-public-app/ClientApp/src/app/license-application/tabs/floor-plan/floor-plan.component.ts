@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UserDataService } from '../../../services/user-data.service';
 
 @Component({
   selector: 'app-floor-plan',
@@ -6,13 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./floor-plan.component.scss']
 })
 export class FloorPlanComponent implements OnInit {
+  @Input() accountId: string;
 
-  @Input('accountId') accountId: string;
-  @Input('applicationId') applicationId: string;
-  
-  constructor() { }
+  constructor(private userDataService: UserDataService) { }
 
   ngOnInit() {
+    this.userDataService.getCurrentUser()
+      .then((data) => {
+        this.accountId = data.accountid;
+      });
   }
 
 }
