@@ -44,7 +44,7 @@ export class ConnectionToProducersComponent implements OnInit {
     });
 
     this.form.valueChanges
-      .pipe(auditTime(2000)).subscribe(formData => {
+      .pipe(auditTime(10000)).subscribe(formData => {
         this.save();
       });
 
