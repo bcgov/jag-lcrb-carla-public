@@ -86,7 +86,7 @@ export class CorporateDetailsComponent implements OnInit {
     });
 
     this.corporateDetailsForm.valueChanges
-      .pipe(auditTime(2000)).subscribe(formData => {
+      .pipe(auditTime(10000)).subscribe(formData => {
         this.save();
       });
 
