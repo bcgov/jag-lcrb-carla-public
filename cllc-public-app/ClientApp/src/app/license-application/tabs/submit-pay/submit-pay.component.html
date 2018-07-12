@@ -1,5 +1,6 @@
 
 <div *ngIf="!isSubmitted">
+  <div *ngIf="prevPaymentFailed">
 	<div id="u8565" class="ax_default" data-label="decline" style="visibility: inherit;">              
 	<div id="u8565_state0" class="panel_state" data-label="State1" style="">
 	    <div id="u8565_state0_content" class="panel_state_content">
@@ -22,6 +23,7 @@
 	    </div>
 	  </div>
 	</div>
+  </div>
 </div>
 
 <div *ngIf="isSubmitted && !isPaid">
