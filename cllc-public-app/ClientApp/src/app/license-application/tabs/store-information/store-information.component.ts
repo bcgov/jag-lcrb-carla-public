@@ -70,10 +70,11 @@ export class StoreInformationComponent implements OnInit {
 
   save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
+    const saveData = this.storeInformationForm.value;
     const subscription = this.applicationDataService.updateApplication(this.storeInformationForm.value).subscribe(
       res => {
         saveResult.next(true);
-        this.savedFormData = this.storeInformationForm.value;
+        this.savedFormData = saveData;
         // this.snackBar.open('Store Information has been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
       },
       err => {
