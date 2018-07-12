@@ -1,5 +1,28 @@
 
-<h1>{{messageText}}</h1>
+<div id="u8718" class="ax_default heading_1" data-label="Application-Name">
+    <div id="u8718_div" class=""></div>
+    <div id="u8718_text" class="text " style="left: 0px; width: 164px; transform-origin: 82px 10.5px 0px;">
+      <p>{{messageText}}</p>
+    </div>
+</div>
+
+<div id="u8715" class="ax_default" data-left="228" data-top="225" data-width="212" data-height="196">
+	<!-- Unnamed (Rectangle) -->
+	<div id="u8716" class="ax_default label">
+	  <div id="u8716_div" class=""></div>
+	  <div id="u8716_text" class="text " >
+	    <p>Card Type</p><p>Date/Time</p><p>Invoice Number</p><p>Transaction ID</p><p>Authorization</p><p>Amount</p>
+	  </div>
+	</div>
+
+	<!-- Unnamed (Rectangle) -->
+	<div id="u8717" class="ax_default label">
+	  <div id="u8717_div" class=""></div>
+	  <div id="u8717_text" class="text " >
+	    <p>{{cardType}}</p><p>{{trnDate}}</p><p>{{invoice}}</p><p>{{trnId}}</p><p>{{authCode}}</p><p>{{trnAmount}}</p>
+	  </div>
+	</div>
+</div>
 
 <p><strong>Card Type :</strong>&nbsp;{{cardType}}</p>
 <p><strong>Date/Time :</strong>&nbsp;{{trnDate}}</p>
@@ -8,15 +31,21 @@
 <p><strong>Authorization :</strong>&nbsp;{{authCode}}</p>
 <p><strong>Amount :</strong>&nbsp;{{trnAmount}}</p>
 
-<p>
-<strong>avsMessage:</strong>&nbsp;{{avsMessage}}<br/>
-<strong>avsAddrMatch:</strong>&nbsp;{{avsAddrMatch}}<br/>
-<strong>messageId:</strong>&nbsp;{{messageId}}<br/>
-<strong>messageText:</strong>&nbsp;{{messageText}}<br/>
-<strong>paymentMethod:</strong>&nbsp;{{paymentMethod}}<br/>
-<strong>trnApproved:</strong>&nbsp;{{trnApproved}}<br/>
-<strong>trnOrderNumber:</strong>&nbsp;{{trnOrderNumber}}<br/>
-</p>
+<div *ngIf="trnApproved == '1'">
+	<div id="u8678" class="ax_default paragraph">
+	    <div id="u8678_div" class=""></div>
+	    <div id="u8678_text" class="text ">
+	      <p style="font-size:16px;">Next steps</p>
+	      <p style="font-size:13px;"><br></p>
+	      <p style="font-size:13px;">1. The Liquor and Cannabis Regulation Branch will review your application and contact the local government or Indigenous nation for your proposed location to confirm they are accepting applications for cannabis stores.</p>
+	      <p style="font-size:13px;"><br></p>
+	      <p style="font-size:13px;">2. Associates of the applicant such as shareholders, directors, officers, and owners must authorize security screening and financial integrity checks. The requirements for submitting the authorizations are determined by where an individual lives based on residency either in B.C., out of province, or internationally. Instructions on how to submit authorizations are provided in the email sent to associates.</p>
+	      <p style="font-size:13px;"><br></p>
+	      <p style="font-size:13px;">You will be notified by the Branch if any information is missing, or if more information is required. If you need to make any changes to the business profile or the licence application, please contact lcrb@gov.bc.ca or 1-800-555-5555 [contact information TBD]. </p>
+	      <p style="font-size:13px;"><br></p>
+	    </div>
+	  </div>
+</div>
 
 <p>
   <a class="globalButton btn btn-primary" (click)="return_to_application()">
