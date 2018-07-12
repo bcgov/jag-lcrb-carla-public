@@ -17,12 +17,13 @@ export class ContactDetailsComponent implements OnInit {
   @Input() applicationId: string;
   contactDetailsForm: FormGroup;
   busy: Subscription;
+  saveFormData: any = {};
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
     private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
-      this.applicationId =  this.route.parent.snapshot.params.applicationId;
-    }
+    this.applicationId = this.route.parent.snapshot.params.applicationId;
+  }
 
   ngOnInit() {
     // create entry form and set retrieved values
@@ -32,6 +33,7 @@ export class ContactDetailsComponent implements OnInit {
       res => {
         const data = res.json();
         this.contactDetailsForm.patchValue(data);
+        this.saveFormData = this.contactDetailsForm.value;
       },
       err => {
         this.snackBar.open('Error getting Contact Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
@@ -54,39 +56,41 @@ export class ContactDetailsComponent implements OnInit {
     });
 
     this.contactDetailsForm.valueChanges
-    .pipe(auditTime(10000)).subscribe(formData => {
-      this.save();
-    });
+      .pipe(auditTime(10000)).subscribe(formData => {
+        this.save();
+      });
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    return this.save();
+    if (JSON.stringify(this.saveFormData) === JSON.stringify(this.contactDetailsForm.value)) {
+      return true;
+    } else {
+      return this.save(true);
+    }
   }
 
   /**
    * Save data in Dynamics
    * */
-  save(): Subject<boolean> {
-    // console.log('contactDetailsForm valid, value: ', this.contactDetailsForm.valid, this.contactDetailsForm.value);
+  save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
-    if (this.contactDetailsForm.valid) {
-      this.applicationDataService.updateApplication(this.contactDetailsForm.value).subscribe(
-        res => {
-          saveResult.next(true);
-          // console.log("Application updated:", res.json());
-          // this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
-        },
-        err => {
-          saveResult.next(false);
-          this.snackBar.open('Error saving Contact Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
-          console.log('Error occured saving Contact Details');
-        });
-    } else {
-      Object.keys(this.contactDetailsForm.controls).forEach(field => {
-        const control = this.contactDetailsForm.get(field);
-        control.markAsTouched({ onlySelf: true });
+    const saveData = this.contactDetailsForm.value;
+    const subscription = this.applicationDataService.updateApplication(this.contactDetailsForm.value).subscribe(
+      res => {
+        saveResult.next(true);
+        this.saveFormData = saveData;
+        // this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+      },
+      err => {
+        saveResult.next(false);
+        this.snackBar.open('Error saving Contact Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log('Error occured saving Contact Details');
       });
+
+    if (showProgress === true) {
+      this.busy = subscription;
     }
+
     return saveResult;
   }
 

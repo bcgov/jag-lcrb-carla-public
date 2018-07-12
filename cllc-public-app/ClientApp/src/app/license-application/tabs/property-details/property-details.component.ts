@@ -17,6 +17,7 @@ export class PropertyDetailsComponent implements OnInit {
   @Input() applicationId: string;
   propertyDetailsForm: FormGroup;
   busy: Subscription;
+  saveFormData: any = {};
 
   constructor(private applicationDataService: AdoxioApplicationDataService, private fb: FormBuilder,
     public snackBar: MatSnackBar, private route: ActivatedRoute) {
@@ -34,6 +35,7 @@ export class PropertyDetailsComponent implements OnInit {
       res => {
         const data = res.json();
         this.propertyDetailsForm.patchValue(data);
+        this.saveFormData = this.propertyDetailsForm.value;
       },
       err => {
         this.snackBar.open('Error getting Property Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
@@ -62,19 +64,23 @@ export class PropertyDetailsComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    return this.save();
+    if (JSON.stringify(this.saveFormData) === JSON.stringify(this.propertyDetailsForm.value)) {
+      return true;
+    } else {
+      return this.save(true);
+    }
   }
 
   /**
    * Save data in Dynamics
    * */
-  save(): Subject<boolean> {
-    // console.log('propertyDetailsForm valid, value: ', this.propertyDetailsForm.valid, this.propertyDetailsForm.value);
+  save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
-
-    this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
+    const saveData = this.propertyDetailsForm.value;
+    const subscription = this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
       res => {
         saveResult.next(true);
+        this.saveFormData = saveData;
         // console.log("Application updated:", res.json());
         // this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
       },
@@ -83,6 +89,10 @@ export class PropertyDetailsComponent implements OnInit {
         this.snackBar.open('Error saving Property Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
         console.log('Error occured saving Property Details');
       });
+
+    if (showProgress === true) {
+      this.busy = subscription;
+    }
 
     // if (!this.propertyDetailsForm.valid) { {
     //   Object.keys(this.propertyDetailsForm.controls).forEach(field => {
