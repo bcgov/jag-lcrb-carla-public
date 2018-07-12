@@ -2,8 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
+import { auditTime } from 'rxjs/operators';
+import { Observable } from '../../../../../node_modules/rxjs/Observable';
+import { Subject } from '../../../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-property-details',
@@ -11,32 +14,30 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./property-details.component.scss']
 })
 export class PropertyDetailsComponent implements OnInit {
-
-  @Input('accountId') accountId: string;
-  @Input('applicationId') applicationId: string;
+  @Input() applicationId: string;
   propertyDetailsForm: FormGroup;
   busy: Subscription;
-  
+
   constructor(private applicationDataService: AdoxioApplicationDataService, private fb: FormBuilder,
     public snackBar: MatSnackBar, private route: ActivatedRoute) {
-    //this.applicationId = route.snapshot.params.applicationId;
+    this.applicationId = this.route.parent.snapshot.params.applicationId;
   }
 
   /**
    *
    * */
   ngOnInit() {
-    //create entry form
+    // create entry form
     this.createForm();
     // get application data, display form
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
-        let data = res.json();
+        const data = res.json();
         this.propertyDetailsForm.patchValue(data);
       },
       err => {
-        this.snackBar.open('Error getting Property Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
-        console.log("Error occured getting Property Details");
+        this.snackBar.open('Error getting Property Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log('Error occured getting Property Details');
       }
     );
   }
@@ -47,36 +48,49 @@ export class PropertyDetailsComponent implements OnInit {
   createForm() {
     this.propertyDetailsForm = this.fb.group({
       id: [''],
-      establishmentaddressstreet: [''],//Validators.required
+      establishmentaddressstreet: [''], // Validators.required
       establishmentaddresscity: [''],
       establishmentaddresspostalcode: [''],
       establishmentparcelid: [''],
       additionalpropertyinformation: ['']
     });
+
+    this.propertyDetailsForm.valueChanges
+      .pipe(auditTime(10000)).subscribe(data => {
+        this.save();
+      });
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    return this.save();
   }
 
   /**
    * Save data in Dynamics
    * */
-  save() {
-    //console.log('propertyDetailsForm valid, value: ', this.propertyDetailsForm.valid, this.propertyDetailsForm.value);
+  save(): Subject<boolean> {
+    // console.log('propertyDetailsForm valid, value: ', this.propertyDetailsForm.valid, this.propertyDetailsForm.value);
+    const saveResult = new Subject<boolean>();
 
-    if (this.propertyDetailsForm.valid) {
-      this.busy = this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
-        res => {
-          //console.log("Application updated:", res.json());
-          this.snackBar.open('Property Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
-        },
-        err => {
-          this.snackBar.open('Error saving Property Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
-          console.log("Error occured saving Property Details");
-        });
-    } else {
-      Object.keys(this.propertyDetailsForm.controls).forEach(field => {
-        const control = this.propertyDetailsForm.get(field);
-        control.markAsTouched({ onlySelf: true });
+    this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
+      res => {
+        saveResult.next(true);
+        // console.log("Application updated:", res.json());
+        // this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+      },
+      err => {
+        saveResult.next(false);
+        this.snackBar.open('Error saving Property Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log('Error occured saving Property Details');
       });
-    }
+
+    // if (!this.propertyDetailsForm.valid) { {
+    //   Object.keys(this.propertyDetailsForm.controls).forEach(field => {
+    //     const control = this.propertyDetailsForm.get(field);
+    //     control.markAsTouched({ onlySelf: true });
+    //   });
+    // }
+    return saveResult;
   }
 
   /**

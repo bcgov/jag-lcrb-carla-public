@@ -7,7 +7,7 @@ import { ResultComponent } from './result/result.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
-import { SurveyResolver }   from './services/survey-resolver.service';
+import { SurveyResolver } from './services/survey-resolver.service';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
@@ -23,16 +23,21 @@ import { ConnectionToProducersComponent } from './business-profile/tabs/connecti
 import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
 import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
+import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
+import { FloorPlanComponent } from './license-application/tabs/floor-plan/floor-plan.component';
+import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
+import { SiteMapComponent } from './license-application/tabs/site-map/site-map.component';
+import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
+import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
 const routes: Routes = [
   {
     path: '',
-    //children: []
     component: HomeComponent
   },
   {
     path: 'dashboard',
-    //children: []
     component: DashboardComponent
   },
   {
@@ -93,7 +98,41 @@ const routes: Routes = [
   },
   {
     path: 'license-application/:applicationId',
-    component: LicenseApplicationComponent
+    component: LicenseApplicationComponent,
+    children: [
+      {
+        path: 'contact-details',
+        component: ContactDetailsComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'declaration',
+        component: DeclarationComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'floor-plan',
+        component: FloorPlanComponent
+      },
+      {
+        path: 'property-details',
+        component: PropertyDetailsComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'site-map',
+        component: SiteMapComponent
+      },
+      {
+        path: 'store-information',
+        component: StoreInformationComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'submit-pay',
+        component: SubmitPayComponent
+      },
+    ]
   },
   {
     path: 'payment-confirmation',
@@ -108,22 +147,18 @@ const routes: Routes = [
     },
     data: {
       // do not show breadcrumb
-      //breadcrumb: 'Potential Applicant Survey', 
+      // breadcrumb: 'Potential Applicant Survey', 
       survey_path: 'assets/survey-primary.json',
     }
   },
-
   {
     path: 'prv',
     redirectTo: 'prv/survey'
   },
-  
   {
     path: 'result/:data',
     component: ResultComponent,
-    data: { 
-      // do not show breadcrumb
-      //breadcrumb: 'Survey Results'
+    data: {
     }
   },
   {
@@ -133,7 +168,6 @@ const routes: Routes = [
       breadcrumb: 'Survey Test'
     }
   },
-  //{ path: '404', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
