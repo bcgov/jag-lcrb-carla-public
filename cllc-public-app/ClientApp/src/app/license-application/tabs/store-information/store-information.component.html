@@ -50,6 +50,6 @@
         </ul>
       </section>
     </div>
-    <app-file-uploader documentType="Store Information" [accountId]="accountId"></app-file-uploader>
+    <app-file-uploader *ngIf="accountId"  documentType="Store Information" [accountId]="accountId"></app-file-uploader>
   </form>
 </div>
