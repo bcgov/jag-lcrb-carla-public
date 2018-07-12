@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Reflection;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -174,6 +176,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 					// set the Application payment status
 					adoxioApplication2.AdoxioPaymentrecieved = (bool?)true;
 					adoxioApplication2.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
+					adoxioApplication2.AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes;
 
 					_dynamicsClient.Applications.Update(id, adoxioApplication2);
 					adoxioApplication2 = await GetDynamicsApplication(id);
@@ -260,16 +263,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		[HttpGet("verify/{id}/APPROVE")]
 		public async Task<IActionResult> VerifyPaymentStatusAPPROVE(string id)
 		{
-			_bcep.setHashKeyForUnitTesting("APPROVE");
-			return await VerifyPaymentStatus(id);
+			if (TestUtility.InUnitTestMode())
+            {
+				_bcep.setHashKeyForUnitTesting("APPROVE");
+                return await VerifyPaymentStatus(id);
+			}
+			return NotFound();
 		}
 
 		// specific for unit testing and development
-        [HttpGet("verify/{id}/DECLINE")]
+		[HttpGet("verify/{id}/DECLINE")]
 		public async Task<IActionResult> VerifyPaymentStatusDECLINE(string id)
-        {
-			_bcep.setHashKeyForUnitTesting("DECLINE");
-			return await VerifyPaymentStatus(id);
-        }
-    }
+		{
+			if (TestUtility.InUnitTestMode())
+            {
+				_bcep.setHashKeyForUnitTesting("DECLINE");
+                return await VerifyPaymentStatus(id);
+            }
+            return NotFound();
+		}
+	}
 }
