@@ -5,8 +5,11 @@ import { User } from '../../../models/user.model';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { auditTime } from 'rxjs/operators';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-corporate-details',
@@ -20,41 +23,56 @@ export class CorporateDetailsComponent implements OnInit {
   accountModel: DynamicsAccount;
   busy: Subscription;
 
-  constructor(private userDataService: UserDataService, private accountDataService: AccountDataService,
+  constructor(private userDataService: UserDataService,
+    private accountDataService: AccountDataService,
+    private dynamicsDataService: DynamicsDataService,
+    private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.createForm();
-    // get account data and then display form
+
+    this.route.parent.params.subscribe(p => {
+      this.accountId = p.accountId;
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
+          this.businessType = data.businessType;
+        });
+      this.getFormData();
+    });
+
+  }
+
+  getFormData() {
     this.busy = this.accountDataService.getAccount(this.accountId).subscribe(
       res => {
-        //let data = this.toFormModel(res.json());
+        // let data = this.toFormModel(res.json());
         let data = res.json();
         // format date based on user locale
         let dp = new DatePipe(this.getLang());
-        let dateFormat = 'y-MM-dd'; // YYYY-MM-DD
+        const dateFormat = 'y-MM-dd'; // YYYY-MM-DD
         let dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
         data.dateOfIncorporationInBC = dtr;
         this.corporateDetailsForm.patchValue(data);
       },
       err => {
-        console.log("Error occured");
+        console.log('Error occured');
       }
     );
-
   }
 
   getLang() {
-    if (navigator.languages != undefined)
+    if (navigator.languages !== undefined) {
       return navigator.languages[0];
-    else
+    } else {
       return navigator.language;
+    }
   }
 
   createForm() {
     this.corporateDetailsForm = this.fb.group({
-      bcIncorporationNumber: [''],//Validators.required
+      bcIncorporationNumber: [''], // Validators.required
       dateOfIncorporationInBC: [''],
       businessNumber: [''],
       contactEmail: [''],
@@ -65,8 +83,12 @@ export class CorporateDetailsComponent implements OnInit {
       mailingAddressCountry: [''],
       mailingAddressProvince: [''],
       mailingAddresPostalCode: ['']
-    }//, { validator: this.dateLessThanToday('dateOfIncorporationInBC') }
-    );
+    });
+
+    this.corporateDetailsForm.valueChanges
+      .pipe(auditTime(2000)).subscribe(formData => {
+        this.save();
+      });
 
   }
 
@@ -81,31 +103,34 @@ export class CorporateDetailsComponent implements OnInit {
         return { dateLessThanToday: true };
       }
       return {};
-    }
+    };
   }
 
-  save() {
-    //console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
-    if (!this.corporateDetailsForm.valid) {
-      Object.keys(this.corporateDetailsForm.controls).forEach(field => {
-        const control = this.corporateDetailsForm.get(field);
-        control.markAsTouched({ onlySelf: true });
-      });
-    }
+  canDeactivate(): Observable<boolean> | boolean {
+    return this.save();
+  }
 
-    //console.log("corporateDetailsForm value: ", this.corporateDetailsForm.value);
+  save(): Subject<boolean> {
+    // console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
+    // if (!this.corporateDetailsForm.valid) {
+    //   Object.keys(this.corporateDetailsForm.controls).forEach(field => {
+    //     const control = this.corporateDetailsForm.get(field);
+    //     control.markAsTouched({ onlySelf: true });
+    //   });
+    // }
+    const saveResult = new Subject<boolean>();
     this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
-    //console.log("this.accountModel", this.accountModel);
-    this.busy = this.accountDataService.updateAccount(this.accountModel).subscribe(
+    this.accountDataService.updateAccount(this.accountModel).subscribe(
       res => {
-        //console.log("Account updated:", res.json());
-        this.snackBar.open('Corporate Details have been saved', "Success", { duration: 2500, extraClasses: ['red-snackbar'] });
+        // this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        saveResult.next(true);
       },
       err => {
-        this.snackBar.open('Error saving Corporate Details', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
-        console.log("Error occured");
+        this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        saveResult.next(false);
+        console.log('Error occured');
       });
-
+    return saveResult;
   }
 
   isFieldError(field: string) {
@@ -116,29 +141,29 @@ export class CorporateDetailsComponent implements OnInit {
   getAccount(accountId: string) {
     this.accountDataService.getAccount(accountId).subscribe(
       res => {
-        //console.log("accountVM: ", res.json());
+        // console.log("accountVM: ", res.json());
         return res.json();
       },
       err => {
-        console.log("Error occured");
+        console.log('Error occured');
       }
     );
   }
 
   toAccountModel(formData) {
     formData.id = this.accountId;
-    //let date = formData.dateOfIncorporationInBC;
-    //formData.dateOfIncorporationInBC = new Date(date.year, date.month-1, date.day);
+    // let date = formData.dateOfIncorporationInBC;
+    // formData.dateOfIncorporationInBC = new Date(date.year, date.month-1, date.day);
     return formData;
   }
 
   toFormModel(dynamicsData) {
-    //let date: Date = new Date(dynamicsData.dateOfIncorporationInBC);
-    //dynamicsData.dateOfIncorporationInBC = {
+    // let date: Date = new Date(dynamicsData.dateOfIncorporationInBC);
+    // dynamicsData.dateOfIncorporationInBC = {
     //  year: date.getFullYear(),
     //  month: date.getMonth()+1,
     //  day: date.getDate()
-    //}
+    // }
     return dynamicsData;
   }
 
