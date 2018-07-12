@@ -20,6 +20,7 @@ export class StoreInformationComponent implements OnInit {
   @Input() applicationId: string;
   storeInformationForm: FormGroup;
   busy: Subscription;
+  savedFormData: any = {};
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
     private fb: FormBuilder,
@@ -40,6 +41,7 @@ export class StoreInformationComponent implements OnInit {
       res => {
         const data = res.json();
         this.storeInformationForm.patchValue(data);
+        this.savedFormData = this.storeInformationForm.value;
       },
       err => {
         console.log('Error occured');
@@ -59,16 +61,20 @@ export class StoreInformationComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    return this.save();
+    if (JSON.stringify(this.savedFormData) === JSON.stringify(this.storeInformationForm.value)) {
+      return true;
+    } else {
+      return this.save(true);
+    }
   }
 
-  save(): Subject<boolean> {
-    // console.log('storeInformationForm valid, value: ', this.storeInformationForm.valid, this.storeInformationForm.value);
+  save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
-    this.applicationDataService.updateApplication(this.storeInformationForm.value).subscribe(
+    const saveData = this.storeInformationForm.value;
+    const subscription = this.applicationDataService.updateApplication(this.storeInformationForm.value).subscribe(
       res => {
         saveResult.next(true);
-        // console.log("Application updated:", res.json());
+        this.savedFormData = saveData;
         // this.snackBar.open('Store Information has been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
       },
       err => {
@@ -76,12 +82,11 @@ export class StoreInformationComponent implements OnInit {
         this.snackBar.open('Error saving Store Information', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
         console.log('Error occured');
       });
-    // if (!this.storeInformationForm.valid) {
-    //   Object.keys(this.storeInformationForm.controls).forEach(field => {
-    //     const control = this.storeInformationForm.get(field);
-    //     control.markAsTouched({ onlySelf: true });
-    //   });
-    // }
+
+    if (showProgress === true) {
+      this.busy = subscription;
+    }
+
     return saveResult;
   }
 

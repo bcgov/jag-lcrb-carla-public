@@ -22,6 +22,7 @@ export class CorporateDetailsComponent implements OnInit {
   corporateDetailsForm: FormGroup;
   accountModel: DynamicsAccount;
   busy: Subscription;
+  savedFormData: any;
 
   constructor(private userDataService: UserDataService,
     private accountDataService: AccountDataService,
@@ -55,6 +56,7 @@ export class CorporateDetailsComponent implements OnInit {
         let dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
         data.dateOfIncorporationInBC = dtr;
         this.corporateDetailsForm.patchValue(data);
+        this.savedFormData = this.corporateDetailsForm.value;
       },
       err => {
         console.log('Error occured');
@@ -107,29 +109,32 @@ export class CorporateDetailsComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    return this.save();
+    if (JSON.stringify(this.savedFormData) === JSON.stringify(this.corporateDetailsForm.value)) {
+      return true;
+    } else {
+      return this.save(true);
+    }
   }
 
-  save(): Subject<boolean> {
-    // console.log('is corporateDetailsForm valid: ', this.corporateDetailsForm.valid, this.corporateDetailsForm.value);
-    // if (!this.corporateDetailsForm.valid) {
-    //   Object.keys(this.corporateDetailsForm.controls).forEach(field => {
-    //     const control = this.corporateDetailsForm.get(field);
-    //     control.markAsTouched({ onlySelf: true });
-    //   });
-    // }
+  save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
+    const saveData = this.corporateDetailsForm.value;
     this.accountModel = this.toAccountModel(this.corporateDetailsForm.value);
-    this.accountDataService.updateAccount(this.accountModel).subscribe(
+    const sub = this.accountDataService.updateAccount(this.accountModel).subscribe(
       res => {
         // this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
         saveResult.next(true);
+        this.savedFormData = saveData;
       },
       err => {
         this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
         saveResult.next(false);
         console.log('Error occured');
       });
+
+    if (showProgress === true) {
+      this.busy = sub;
+    }
     return saveResult;
   }
 
@@ -141,7 +146,6 @@ export class CorporateDetailsComponent implements OnInit {
   getAccount(accountId: string) {
     this.accountDataService.getAccount(accountId).subscribe(
       res => {
-        // console.log("accountVM: ", res.json());
         return res.json();
       },
       err => {
