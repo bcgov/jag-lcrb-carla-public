@@ -9,6 +9,7 @@ import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 export class ProfileSummary {
   legalEntityId: string;
   accountId: string;
+  shareholderAccountId: string;
   name: string;
   legalentitytype: string;
   profileComplete: string;
@@ -49,17 +50,18 @@ export class BusinessProfileSummaryComponent implements OnInit {
   getBusinessProfileData() {
     this.busy = this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
       res => {
-        let data:AdoxioLegalEntity[] = res.json();
+        let data: AdoxioLegalEntity[] = res.json();
         //console.log("getBusinessProfileSummary():", data);
         if (data) {
           //Change Business Releationship label when 
           data.forEach((entry) => {
             let profileSummary = new ProfileSummary();
             profileSummary.legalEntityId = entry.id;
-            profileSummary.accountId  = entry.accountId;
+            profileSummary.accountId = entry.accountId;
+            profileSummary.shareholderAccountId = entry.shareholderAccountId;
             profileSummary.name = entry.name;
             profileSummary.profileComplete = 'No';
-            if(entry.isShareholder){
+            if (entry.isShareholder) {
               profileSummary.businessRelationship = 'Shareholder';
             } else {
               profileSummary.businessRelationship = 'Applicant';

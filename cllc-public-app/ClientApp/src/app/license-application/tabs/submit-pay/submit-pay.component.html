@@ -23,6 +23,15 @@
 <p>
  	All required fields must be completed before you can submit the application. After you submit the application you will be directed to the payment screen to complete the application. An application is not complete until the payment has been approved.
 </p>
+<h2>Application Fee: $7,500</h2>
+<p>Payment types accepted:</p>
+  <ul>
+    <li>Visa</li>
+    <li>MasterCard</li>
+    <li>American Express</li>
+    <li>Visa Debit</li>
+    <li>Debit MasterCard</li>
+  </ul>
 
 <h2>Before you Submit</h2>
 
@@ -32,22 +41,16 @@
 <p>If you need to make any changes after submitting you must contact the Liquor and Cannabis Regulation Branch [Contact Information]</p>
 </div>
 
-<div>
-<p>&nbsp;</p>
-<div *ngIf="!isSubmitted">
-  <p>
-    <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="submit_application()">
-      <strong>Submit</strong>
-      <br>
-    </a>
-  </p>
-</div>
-<div *ngIf="isSubmitted && !isPaid">
-  <p>
-    <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="verify_payment()">
-      <strong>Verify Payment</strong>
-      <br>
-    </a>
-  </p>
-</div>
+<div  [ngBusy]="busy">
+  <p>&nbsp;</p>
+  <div *ngIf="!isSubmitted">
+    <p>
+      <a class="globalButton btn btn-primary" tabindex="2" (click)="submit_application()"><strong>Submit</strong></a>
+    </p>
+  </div>
+  <div *ngIf="isSubmitted && !isPaid">
+    <p>
+      <a class="globalButton btn btn-primary" tabindex="2" (click)="verify_payment()"><strong>Verify Payment</strong></a>
+    </p>
+  </div>
 </div>

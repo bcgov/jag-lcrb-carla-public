@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../../services/payment-data.service';
 import { Router, ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 
 
@@ -20,6 +20,8 @@ export class SubmitPayComponent implements OnInit {
   isSubmitted: boolean;
   isPaid: boolean;
   prevPaymentFailed: boolean;
+  //isApplicationValid: boolean;
+  validationMessage: string;
 
   constructor(private paymentDataService: PaymentDataService, private applicationDataService: AdoxioApplicationDataService, 
   				public snackBar: MatSnackBar, private router: Router) { }
@@ -40,20 +42,89 @@ export class SubmitPayComponent implements OnInit {
     );
   }
 
-  submit_application() 
-  {
-    this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
+  /**
+   * Validate the application before it can be submitted
+   * @param applicationId
+   */
+  validateApplication(applicationId: string): Subject<boolean> {
+    const result = new Subject<boolean>();
+    // get application data and validate all required fields are entered
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
-        //console.log("applicationVM: ", res.json());
-        var jsonUrl = res.json();
-        //window.alert(jsonUrl['url']);
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
+        let data = res.json();
+        let isApplicationValid = true;
+        this.validationMessage = "";
+        //validate contact details
+        if (this.isNullOrEmpty(data.contactpersonfirstname)
+          || this.isNullOrEmpty(data.contactpersonlastname)
+          || this.isNullOrEmpty(data.contactpersonrole)
+          || this.isNullOrEmpty(data.contactpersonemail)
+          || this.isNullOrEmpty(data.contactpersonphone)) {
+          isApplicationValid = false;
+          this.validationMessage = "Contact details are not complete.\r\n";
+        }
+        //validate property details
+        if (this.isNullOrEmpty(data.establishmentaddressstreet)
+          || this.isNullOrEmpty(data.establishmentaddresscity)
+          || this.isNullOrEmpty(data.establishmentaddresspostalcode)
+          || this.isNullOrEmpty(data.establishmentparcelid)) {
+          isApplicationValid = false;
+          this.validationMessage += "Property details are not complete.\r\n";
+        }
+         //validate store info
+        if (this.isNullOrEmpty(data.establishmentName)) {
+          isApplicationValid = false;
+          this.validationMessage += "Store Information is not complete.\r\n";
+        }
+        //validate declaration
+        if (this.isNullOrEmpty(data.authorizedtosubmit)
+          || this.isNullOrEmpty(data.signatureagreement)) {
+          isApplicationValid = false;
+          this.validationMessage += "Declarations are not complete.\r\n";
+        }
+        if (!isApplicationValid) {
+          alert(this.validationMessage + "Please complete the application before you can submit.");
+        }
+        result.next(isApplicationValid)
       },
       err => {
-        console.log("Error occured");
+        this.snackBar.open('Error getting Application Details for validation', "Fail", { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log("Error occured getting Application Details for validation");
+        result.next(false);
       }
     );
+    return result;
+  }
+
+  isNullOrEmpty(item: string): boolean {
+    if (!item || item.length < 1) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   *
+   * */
+  submit_application() 
+  {
+    this.validateApplication(this.applicationId).subscribe(isValid => {
+      if (isValid) {
+        this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
+          res => {
+            //console.log("applicationVM: ", res.json());
+            var jsonUrl = res.json();
+            //window.alert(jsonUrl['url']);
+            window.location.href = jsonUrl['url'];
+            return jsonUrl['url'];
+          },
+          err => {
+            console.log("Error occured");
+          }
+        );
+      }
+    })
+
   }
 
   verify_payment()
