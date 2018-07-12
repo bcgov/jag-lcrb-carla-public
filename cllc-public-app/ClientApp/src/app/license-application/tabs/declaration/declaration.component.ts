@@ -72,7 +72,9 @@ export class DeclarationComponent implements OnInit {
           authorizedtosubmit: declarationValues.authorizedtosubmit,
           signatureagreement: declarationValues.signatureagreement,
         };
-        // this.snackBar.open('Declaration Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        if (showProgress === true) {
+          this.snackBar.open('Declaration Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+        }
       },
       err => {
         saveResult.next(false);
