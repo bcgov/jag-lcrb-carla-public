@@ -111,11 +111,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			{
 				// verify the currently logged in user has access to this account
                 Guid accountId = new Guid(id);
-                //TODO: This permission check needs to be revised
-                // if (!CurrentUserHasAccessToAccount(accountId))
-                // {
-                //     return new NotFoundResult();
-                // }
+                if (!CurrentUserHasAccessToAccount(accountId))
+                {
+                    return new NotFoundResult();
+                }
 
                 MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
                 if (account == null)
@@ -408,15 +407,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            // For now, check if the account id matches the user's account.
-            // TODO there may be some account relationships in the future
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                return Guid.Parse(userSettings.AccountId) == id;
+                return Guid.Parse(userSettings.AccountId) == id || IsChildAccount(userSettings.AccountId, id.ToString());
             }
 
             // if current user doesn't have an account they are probably not logged in
             return false;
 		}
+
+        private bool IsChildAccount(String parentAccountId, String childAccountId){
+            var filter = $"_adoxio_account_value eq {parentAccountId}  and adoxio_isapplicant eq true";
+            var result = false;
+
+            var parentLegalEntity = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList().FirstOrDefault();
+
+            if (parentLegalEntity != null)
+            {
+                var childFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntity.AdoxioLegalentityid.ToString()}";
+                childFilter += $" and _adoxio_shareholderaccountid_value eq {childAccountId}";
+
+                var childEntity = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter).Value.ToList().FirstOrDefault();
+                result = (childEntity != null);
+            }
+            return result;
+        }
     }
 }

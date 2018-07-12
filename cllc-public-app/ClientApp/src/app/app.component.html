@@ -7,8 +7,8 @@
   <header class="app-header">
     <div class="nav-container top-menu row" style="padding-left: 30px; padding-right: 30px;">
       <section class="col-md-8 col-xs-12">
-        <a href="http://www2.gov.bc.ca/" tabindex="-1">
-          <img class="header-logo" tabindex="-1" alt="B.C. Government Logo" src="assets/bc-logo.svg">
+        <a href="http://www2.gov.bc.ca/" tabindex="1">
+          <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
         </a>
         <span class="title" role="banner">
           Cannabis Licensing&nbsp;
@@ -20,12 +20,12 @@
           <span>{{currentUser.name}}</span>
           &nbsp;
           <span class="text-right signin">
-            <a href="/login/cleartoken">Sign Out</a>
+            <a href="/login/cleartoken">Sign Out</a>    
           </span>
         </span>
         <span class="sign" *ngIf="!currentUser">
           <span class="text-right signin">
-            <a href="/login/token/default">Sign In</a>
+            <a href="/login/token/default"  tabindex="1">Sign In</a>
           </span>
         </span>
       </section>
@@ -51,22 +51,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a routerLink="/">Home</a>
+                  <a  tabindex="2" routerLink="/" title="asdfsadfsadfsad sadf sadf s">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a routerLink="/policy-document/cannabis-retail-licence">Licence Types</a>
+                  <a  tabindex="2" routerLink="/policy-document/cannabis-retail-licence">Licence Types</a>
                 </li>
                 <li class="nav-item">
-                  <a routerLink="/policy-document/eligibility">Application Requirements</a>
+                  <a  tabindex="2" routerLink="/policy-document/eligibility">Application Requirements</a>
                 </li>
                 <li class="nav-item">
-                  <a routerLink="/policy-document/employee-registration-training">Employees</a>
+                  <a  tabindex="2" routerLink="/policy-document/employee-registration-training">Employees</a>
                 </li>
                 <li class="nav-item">
-                  <a routerLink="/policy-document/ordering-cannabis">Ordering Cannabis</a>
+                  <a  tabindex="2" routerLink="/policy-document/ordering-cannabis">Ordering Cannabis</a>
                 </li>
                 <li class="nav-item">
-                  <a routerLink="/policy-document/reporting-sales">Reporting</a>
+                  <a  tabindex="2" routerLink="/policy-document/reporting-sales">Reporting</a>
                 </li>
               </ul>
             </div>
@@ -93,7 +93,7 @@
                   <div ngbDropdown class="d-inline-block">
                     <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
                     <div ngbDropdownMenu>
-                      <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile/' + profile.accountId + '/' + profile.id])">{{profile.name}}</button>
+                      <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile/' + profile.accountId + '/' + profile.id + '/before-you-start'])">{{profile.name}}</button>
                     </div>
                   </div>
                 </li>
