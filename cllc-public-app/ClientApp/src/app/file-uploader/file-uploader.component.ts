@@ -22,13 +22,21 @@ export class FileUploaderComponent implements OnInit {
   @Input() accountId: string;
   @Input() uploadUrl: string;
   @Input() documentType: string;
+  @Input() applicationId: string;
   busy: Subscription;
+  attachmentURL: string;
 
   //TODO: move http call to a service
   constructor(private http: Http) {
   }
 
   ngOnInit(): void {
+    //use application controller if application ID is passed, otherwise legal entity controller
+    if (this.applicationId) {
+      this.attachmentURL = "api/adoxioapplication/" + this.applicationId + "/attachments";
+    } else {
+      this.attachmentURL = "api/AdoxioLegalEntity/" + this.accountId + "/attachments";
+    }
     this.getUploadedFileData();
   }
 
@@ -64,8 +72,9 @@ export class FileUploaderComponent implements OnInit {
     formData.append('file', file, file.name);
     formData.append('documentType', this.documentType);
     let headers = new Headers();
-    let url = `api/AdoxioLegalEntity/${this.accountId}/attachments`;
-    this.busy = this.http.post(url, formData, { headers: headers }).subscribe(result => {
+    //let url = "";
+    //url = this.attachmentURL + this.applicationId + "/attachments";
+    this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     });
   }
@@ -74,7 +83,7 @@ export class FileUploaderComponent implements OnInit {
     const headers = new Headers({
       //'Content-Type': 'multipart/form-data'
     })
-    this.busy = this.http.get(`api/AdoxioLegalEntity/${this.accountId}/attachments/${this.documentType}`, { headers: headers })
+    this.busy = this.http.get(this.attachmentURL + "/" + this.documentType, { headers: headers })
       .map((data: Response) => { return <FileSystemItem[]>data.json() })
       .subscribe((data) => {
         // convert bytes to KB
