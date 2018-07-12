@@ -32,26 +32,8 @@
   </div>
     <div class="col-md-9 col-sm-9">
       <!-- Tab panes -->
-      <div [hidden]="view_tab != 'contact-details'">
-        <app-contact-details [applicationId]="applicationId" [accountId]="accountId"></app-contact-details>
-      </div>
-      <div [hidden]="view_tab != 'property-details'">
-        <app-property-details [applicationId]="applicationId" [accountId]="accountId"></app-property-details>
-      </div>
-      <div [hidden]="view_tab != 'store-information'">
-        <app-store-information [applicationId]="applicationId" [accountId]="accountId"></app-store-information>
-      </div>
-      <div [hidden]="view_tab != 'floor-plan'">
-        <app-floor-plan [applicationId]="applicationId" [accountId]="accountId"></app-floor-plan>
-      </div>
-      <div [hidden]="view_tab != 'site-map'">
-        <app-site-map [applicationId]="applicationId" [accountId]="accountId"></app-site-map>
-      </div>
-      <div [hidden]="view_tab != 'declaration'">
-        <app-declaration [applicationId]="applicationId" [accountId]="accountId"></app-declaration>
-      </div>
-      <div [hidden]="view_tab != 'submit-pay'">
-        <app-submit-pay [applicationId]="applicationId" [accountId]="accountId"></app-submit-pay>
+      <div>
+        <router-outlet></router-outlet>
       </div>
       <p>&nbsp;</p>
       <div class="col-md-10 row">
@@ -61,7 +43,7 @@
         </a>
         &nbsp;
         <a class="globalButton btn btn-primary" *ngIf="view_tab != 'submit-pay'" tabindex="2" (click)="next()">
-          <strong>Next</strong>
+          <strong>Save and Continue</strong>
           <br>
         </a>
       </div>
