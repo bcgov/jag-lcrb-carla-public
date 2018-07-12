@@ -176,6 +176,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 					// set the Application payment status
 					adoxioApplication2.AdoxioPaymentrecieved = (bool?)true;
 					adoxioApplication2.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
+					adoxioApplication2.AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes;
 
 					_dynamicsClient.Applications.Update(id, adoxioApplication2);
 					adoxioApplication2 = await GetDynamicsApplication(id);
