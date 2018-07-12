@@ -170,6 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 					// set invoice status to Complete
 					invoice2.Statecode = (int?)Adoxio_invoicestates.Paid;
 					invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Paid;
+					invoice2.AdoxioReturnedtransactionid = response["trnId"];
 
 					_dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
