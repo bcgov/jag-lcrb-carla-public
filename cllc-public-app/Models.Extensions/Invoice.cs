@@ -58,9 +58,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
 			if (dynamicsInvoice.AdoxioTransactionid != null)
-			{
-				result.transactionId = dynamicsInvoice.AdoxioTransactionid;
-			}
+            {
+                result.transactionId = dynamicsInvoice.AdoxioTransactionid;
+            }
+			if (dynamicsInvoice.AdoxioReturnedtransactionid != null)
+            {
+				result.returnedTransactionId = dynamicsInvoice.AdoxioReturnedtransactionid;
+            }
 
             return result;
         }
@@ -75,6 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Totaltax = from.totaltax;
             to.Totalamount = from.totalamount;
 			to.AdoxioTransactionid = from.transactionId;
+			to.AdoxioReturnedtransactionid = from.returnedTransactionId;
         }
 
     }
