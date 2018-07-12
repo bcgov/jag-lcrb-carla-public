@@ -79,7 +79,9 @@ export class ConnectionToProducersComponent implements OnInit {
     const saveData = this.form.value;
     const saveObservable = new Subject<boolean>();
     const subscription = this.tiedHouseService.updateTiedHouse(data, data.id).subscribe(res => {
-      // this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
+      if (showProgress === true) {
+        this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
+      }
       saveObservable.next(true);
       this.savedFormData = saveData;
     },
