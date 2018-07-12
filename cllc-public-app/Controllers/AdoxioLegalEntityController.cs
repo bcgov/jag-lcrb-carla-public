@@ -25,18 +25,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly IDynamicsClient _dynamicsClient;
-        private readonly SharePointFileManager _sharePointFileManager;
-        private readonly string _encryptionKey;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
-
+        private readonly string _encryptionKey;
+        private readonly SharePointFileManager _sharePointFileManager;
+        
         public AdoxioLegalEntityController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
-            this._sharePointFileManager = sharePointFileManager;
-            this._encryptionKey = Configuration["ENCRYPTION_KEY"];
-            this._httpContextAccessor = httpContextAccessor;
-            this._dynamicsClient = dynamicsClient;
+            _dynamicsClient = dynamicsClient;
+            _httpContextAccessor = httpContextAccessor;
+            _encryptionKey = Configuration["ENCRYPTION_KEY"];
+            _sharePointFileManager = sharePointFileManager;
             _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
         }
 
@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet()]
-        public async Task<JsonResult> GetDynamicsLegalEntities()
+        public JsonResult GetDynamicsLegalEntities()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet("business-profile-summary")]
-        public async Task<JsonResult> GetBusinessProfileSummary()
+        public JsonResult GetBusinessProfileSummary()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
@@ -96,7 +96,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
             bpFilter = "and adoxio_isapplicant eq true";
             filter = accountfilter + " " + bpFilter;
-
 
             var response = _dynamicsClient.Adoxiolegalentities.Get(filter: filter);
 
@@ -131,7 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpGet()]
         [Route("position/{parentLegalEntityId}/{positionType}")]
-        public async Task<IActionResult> GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
+        public IActionResult GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
@@ -201,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
             _logger.LogError("Find legal entity for applicant = " + userSettings.AccountId.ToString());
 
-            legalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            legalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
             if (legalEntity == null)
             {
@@ -369,14 +368,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _sharePointFileManager.GetFileById(fileId);
+                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
+                if (fileSystemItem != null)
+                {
+                    byte[] fileContents = await _sharePointFileManager.DownloadFile(fileSystemItem.Url);
+                    return new FileContentResult(fileContents, "application/octet-stream")
+                    {
+                        FileDownloadName = fileSystemItem.Name
+                    };
+                }
             }
-            string filename = "";
-            byte[] fileContents = new byte[10];
-            return new FileContentResult(fileContents, "application/octet-stream")
-            {
-                FileDownloadName = filename
-            };
+            return new NotFoundResult();
+
         }
 
         /// <summary>
@@ -435,7 +438,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
-            MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
             if (tempLegalEntity != null)
             {
                 Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
@@ -631,94 +634,87 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             userSettings.Validate();
 
             var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
-            MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
-            try
+            
+            // TODO verify that this is the current user's legal entity
+            var adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+
+            // now get each of the supplied ids and send an email to them.
+
+            foreach (string recipientId in recipientIds)
             {
-                // TODO verify that this is the current user's legal entity
-                var adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-
-                // now get each of the supplied ids and send an email to them.
-
-                foreach (string recipientId in recipientIds)
+                Guid recipientIdGuid = new Guid(recipientId);
+                try
                 {
-                    Guid recipientIdGuid = new Guid(recipientId);
-                    try
-                    {
-                        // TODO verify that each recipient is part of the current user's user set
-                        // TODO switch over to new AuthAPI framework
-                        var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
-                        string email = recipientEntity.AdoxioEmail;
-                        string firstname = recipientEntity.AdoxioFirstname;
-                        string lastname = recipientEntity.AdoxioLastname;
+                    // TODO verify that each recipient is part of the current user's user set
+                    // TODO switch over to new AuthAPI framework
+                    var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
+                    string email = recipientEntity.AdoxioEmail;
+                    string firstname = recipientEntity.AdoxioFirstname;
+                    string lastname = recipientEntity.AdoxioLastname;
 
-                        string confirmationEmailLink = GetConsentLink(email, recipientId, id);
-                        string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
-                        /* send the user an email confirmation. */
-                        string body =
-                              "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
-                            + "<p>"
-                            + "Dear " + firstname + " " + lastname + ","
-                            + "</p>"
-                            + "<p>"
-                            + "An application from " + "[TBD Company Name]"
-                            + " has been submitted for a non-medical retail cannabis licence in British Columbia. "
-                            + "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
-                            + " you are required to authorize a security screening — including criminal and police record checks—"
-                            + "and financial integrity checks as part of the application process. "
-                            + "</p>"
-                            + "<p>"
-                            + "Where you reside will determine how you are able to authorize the security screening."
-                            + "</p>"
-                            + "<p><strong>B.C. Residents</strong></p>"
-                            + "<p>"
-                            + "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
-                            + "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
-                            + "</p>"
-                            + "<p>"
-                            + "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
-                            + "</p>"
-                            + "<p>"
-                            + "After you receive your verified Photo B.C. Services Card, login through this unique link:"
-                            + "</p>"
-                            + "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
-                            + "<p><strong>Out of Province Residents</strong></p>"
-                            + "<p>TBD</p>"
-                            + "<p><strong>Residents Outside of Canada</strong></p>"
-                            + "<p>TBD</p>"
-                            + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
-                            + "<p>Do not reply to this email address</p>";
+                    string confirmationEmailLink = GetConsentLink(email, recipientId, id);
+                    string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
+                    /* send the user an email confirmation. */
+                    string body =
+                            "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
+                        + "<p>"
+                        + "Dear " + firstname + " " + lastname + ","
+                        + "</p>"
+                        + "<p>"
+                        + "An application from " + "[TBD Company Name]"
+                        + " has been submitted for a non-medical retail cannabis licence in British Columbia. "
+                        + "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
+                        + " you are required to authorize a security screening — including criminal and police record checks—"
+                        + "and financial integrity checks as part of the application process. "
+                        + "</p>"
+                        + "<p>"
+                        + "Where you reside will determine how you are able to authorize the security screening."
+                        + "</p>"
+                        + "<p><strong>B.C. Residents</strong></p>"
+                        + "<p>"
+                        + "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
+                        + "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
+                        + "</p>"
+                        + "<p>"
+                        + "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
+                        + "</p>"
+                        + "<p>"
+                        + "After you receive your verified Photo B.C. Services Card, login through this unique link:"
+                        + "</p>"
+                        + "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
+                        + "<p><strong>Out of Province Residents</strong></p>"
+                        + "<p>TBD</p>"
+                        + "<p><strong>Residents Outside of Canada</strong></p>"
+                        + "<p>TBD</p>"
+                        + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
+                        + "<p>Do not reply to this email address</p>";
 
-                        // send the email.
-                        SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
+                    // send the email.
+                    SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
 
-                        // Specify the message content.
-                        MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
-                        message.Subject = "BC LCLB Cannabis Licensing Security Consent";
-                        message.Body = body;
-                        message.IsBodyHtml = true;
-                        client.Send(message);
+                    // Specify the message content.
+                    MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
+                    message.Subject = "BC LCLB Cannabis Licensing Security Consent";
+                    message.Body = body;
+                    message.IsBodyHtml = true;
+                    client.Send(message);
 
-                        // save the consent link and the fact that the email has been sent
-                        recipientEntity.AdoxioDateemailsent = DateTime.Now;
-                        //await _dynamicsClient.Adoxiolegalentities.UpdateAsync(recipientEntity.Adoxio_legalentityid, recipientEntity);
-                    }
-                    catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-                    {
-                        // ignore any not found errors.
-                        _logger.LogError(dsqe.Message);
-                        _logger.LogError(dsqe.StackTrace);
-                    }
-
+                    // save the consent link and the fact that the email has been sent
+                    recipientEntity.AdoxioDateemailsent = DateTime.Now;
+                    //await _dynamicsClient.Adoxiolegalentities.UpdateAsync(recipientEntity.Adoxio_legalentityid, recipientEntity);
+                }
+                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                {
+                    // ignore any not found errors.
+                    _logger.LogError(dsqe.Message);
+                    _logger.LogError(dsqe.StackTrace);
                 }
 
-            }
-            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-            {
-                return new NotFoundResult();
-            }
+            }            
 
             return NoContent(); // 204
         }

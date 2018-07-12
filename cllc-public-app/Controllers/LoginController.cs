@@ -23,14 +23,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly AppDbContext db;
         private readonly IHostingEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
-        private readonly IDistributedCache _distributedCache;
 
-        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env, IDistributedCache distributedCache)
+        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
             _env = env;
-            this.db = db;
-            this._distributedCache = null; // distributedCache;
+            this.db = db;            
         }
 
         [HttpGet]

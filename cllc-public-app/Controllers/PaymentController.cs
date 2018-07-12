@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 			Dictionary<string, string> redirectUrl;
 			redirectUrl = new Dictionary<string, string>();
-			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
+			redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
 
 			_logger.LogError(">>>>>" + redirectUrl["url"]);
 
