@@ -19,7 +19,6 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string service = "payment";
 			string id = "SomeRandomId";
-			string ordernum = "SomeRandomO";
 
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
