@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 		/// <param name="applicationId">GUID of the Application to pay</param>
 		/// <param name="amount">amount to pay (from invoice)</param>
         /// <returns></returns>
-		public async Task<string> GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount) 
+		public string GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount) 
         {
             // build the param string for the re-direct url
 			string paramString = BCEP_P_MERCH_ID + "=" + bcep_merchid +
@@ -126,6 +126,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // special case for unit testing
 			if (bcep_hashkey.Equals("APPROVE"))
 			{
+				responseDict["trnId"] = "01234567";
 				responseDict["trnApproved"] = "1";
 				return responseDict;
 			}
