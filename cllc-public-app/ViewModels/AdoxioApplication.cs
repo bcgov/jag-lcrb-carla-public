@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
@@ -11,18 +12,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public enum AdoxioApplicationStatusCodes
     {
         Active = 1,
-        [Display(Name = "In Progress")]
+        [EnumMember(Value = "In Progress")]
         InProgress = 845280000,
         Intake = 845280001,
-        [Display(Name = "Pending for LG/FN/Police Feedback")]
+        [EnumMember(Value = "Pending for LG/FN/Police Feedback")]
         PendingForLGFNPFeedback = 845280006,
-        [Display(Name = "Under Review")]
+        [EnumMember(Value = "Under Review")]
         UnderReview = 845280003,
-        [Display(Name = "Pending for Licence Fee")]
+        [EnumMember(Value = "Pending for Licence Fee")]
         PendingForLicenceFee = 845280007,        
         Approved = 845280004,
         Denied = 845280005,
-        [Display(Name = "Approved in Principle")]
+        [EnumMember(Value = "Approved in Principle")]
         ApprovedInPrinciple = 845280008
     }
 
