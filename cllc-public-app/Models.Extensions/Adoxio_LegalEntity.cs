@@ -136,53 +136,53 @@ namespace Gov.Lclb.Cllb.Public.Models
         // /// <summary>
         // /// Convert a given voteQuestion to a ViewModel
         // /// </summary>        
-        // public static ViewModels.AdoxioLegalEntity ToViewModel(this Adoxio_legalentity adoxio_legalentity)
-        // {
-        //     ViewModels.AdoxioLegalEntity result = null;
-        //     if (adoxio_legalentity != null)
-        //     {
-        //         result = new ViewModels.AdoxioLegalEntity();
-        //         if (adoxio_legalentity.Adoxio_legalentityid != null)
-        //         {
-        //             result.id = adoxio_legalentity.Adoxio_legalentityid.ToString();
-        //         }
+        public static ViewModels.AdoxioLegalEntity ToViewModel(this Adoxio_legalentity adoxio_legalentity)
+        {
+            ViewModels.AdoxioLegalEntity result = null;
+            if (adoxio_legalentity != null)
+            {
+                result = new ViewModels.AdoxioLegalEntity();
+                if (adoxio_legalentity.Adoxio_legalentityid != null)
+                {
+                    result.id = adoxio_legalentity.Adoxio_legalentityid.ToString();
+                }
 
-        //         result.isDirector = (adoxio_legalentity.Adoxio_isdirector == true);
+                result.isDirector = (adoxio_legalentity.Adoxio_isdirector == true);
 
-        //         result.commonnonvotingshares = adoxio_legalentity.Adoxio_commonnonvotingshares;
-        //         result.commonvotingshares = adoxio_legalentity.Adoxio_commonvotingshares;
-        //         result.dateofbirth = adoxio_legalentity.Adoxio_dateofbirth;
-        //         result.firstname = adoxio_legalentity.Adoxio_firstname;
-        //         result.interestpercentage = adoxio_legalentity.Adoxio_interestpercentage;
-        //         // convert from int to bool.
-        //         result.isindividual = (adoxio_legalentity.Adoxio_isindividual != null && adoxio_legalentity.Adoxio_isindividual != 0);
-        //         result.lastname = adoxio_legalentity.Adoxio_lastname;
-        //         if (adoxio_legalentity.Adoxio_legalentitytype != null)
-        //         {
-        //             result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
-        //         }
+                result.commonnonvotingshares = adoxio_legalentity.Adoxio_commonnonvotingshares;
+                result.commonvotingshares = adoxio_legalentity.Adoxio_commonvotingshares;
+                result.dateofbirth = adoxio_legalentity.Adoxio_dateofbirth;
+                result.firstname = adoxio_legalentity.Adoxio_firstname;
+                result.interestpercentage = adoxio_legalentity.Adoxio_interestpercentage;
+                // convert from int to bool.
+                result.isindividual = (adoxio_legalentity.Adoxio_isindividual != null && adoxio_legalentity.Adoxio_isindividual != 0);
+                result.lastname = adoxio_legalentity.Adoxio_lastname;
+                if (adoxio_legalentity.Adoxio_legalentitytype != null)
+                {
+                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
+                }
 
-        //         result.middlename = adoxio_legalentity.Adoxio_middlename;
-        //         result.name = adoxio_legalentity.Adoxio_name;
-        //         result.email = adoxio_legalentity.Adoxio_email;
+                result.middlename = adoxio_legalentity.Adoxio_middlename;
+                result.name = adoxio_legalentity.Adoxio_name;
+                result.email = adoxio_legalentity.Adoxio_email;
 
-        //         result.preferrednonvotingshares = adoxio_legalentity.Adoxio_preferrednonvotingshares;
-        //         result.preferredvotingshares = adoxio_legalentity.Adoxio_preferredvotingshares;
-        //         // convert from int to bool.
-        //         result.sameasapplyingperson = (adoxio_legalentity.Adoxio_sameasapplyingperson != null && adoxio_legalentity.Adoxio_sameasapplyingperson != 0);
-        //         result.dateofappointment = adoxio_legalentity.Adoxio_dateofappointment;
+                result.preferrednonvotingshares = adoxio_legalentity.Adoxio_preferrednonvotingshares;
+                result.preferredvotingshares = adoxio_legalentity.Adoxio_preferredvotingshares;
+                // convert from int to bool.
+                result.sameasapplyingperson = (adoxio_legalentity.Adoxio_sameasapplyingperson != null && adoxio_legalentity.Adoxio_sameasapplyingperson != 0);
+                result.dateofappointment = adoxio_legalentity.Adoxio_dateofappointment;
 
-        //         // populate the account.
-        //         if (adoxio_legalentity.Adoxio_Account != null)
-        //         {
-        //             result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
-        //         }
+                // populate the account.
+                if (adoxio_legalentity.Adoxio_Account != null)
+                {
+                    result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
+                }
 
-        //         result.accountId = adoxio_legalentity._adoxio_account_value.ToString();
+                result.accountId = adoxio_legalentity._adoxio_account_value.ToString();
 
-        //     }
-        //     return result;
-        // }
+            }
+            return result;
+        }
 
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
