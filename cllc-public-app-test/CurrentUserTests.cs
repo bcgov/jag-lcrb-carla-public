@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		public async System.Threading.Tasks.Task ParentCanAccessChild()
 		{
             // register and login as our first user (parent)
-			var loginUser1 = randomNewUserName("TestUser-1-", 6);
+			var loginUser1 = randomNewUserName("ParentCanAccessChildTest", 6);
             var strId1 = await LoginAndRegisterAsNewUser(loginUser1);
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
@@ -199,12 +199,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             var vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                firstname = "Create",
-                middlename = "Dynamics",
-                lastname = "ShareholderLE",
 				name = "Create ShareholderLE",
                 commonvotingshares = 100,
-                accountId = user1.accountid,
+                account = account1,
                 isShareholder = true,
                 isindividual = false,
                 // Setting parentLegalEntityId from viewmodel id
