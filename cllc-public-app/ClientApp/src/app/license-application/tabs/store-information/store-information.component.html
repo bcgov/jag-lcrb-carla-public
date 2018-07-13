@@ -50,9 +50,6 @@
         </ul>
       </section>
     </div>
-    <app-file-uploader documentType="Store Information" [applicationId]="applicationId"></app-file-uploader>
-    <section>
-      <button class="btn btn-primary" type="submit">Save</button>
-    </section>
+    <app-file-uploader *ngIf="applicationId"  documentType="Store Information" [applicationId]="applicationId"></app-file-uploader>
   </form>
 </div>
