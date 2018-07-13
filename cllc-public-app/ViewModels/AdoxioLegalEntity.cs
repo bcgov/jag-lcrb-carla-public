@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -34,8 +32,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [Display(Name = "Co-op")]
         Coop = 845280011,
         Trust = 845280012,
-        Estate = 845280013,
-        [Display(Name = "Local Government")]
+        Estate = 845280013, [Display(Name = "Local Government")]
         LocalGovernment = 845280014,
         University = 845280016,
 
@@ -115,17 +112,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
 
-        public BusinessProfileCompletion CompletionStatus
-        {
-            get
-            {
-                var status = new BusinessProfileCompletion
-                {
-                    isCorporateDetailsComplete = isCorporateDetailsComplete()
-                };
-                return status;
-            }
-        }
         //adoxio_contact (lookup contact)
         //adoxio_correspondingpersonalhistorysummary (lookup personal history summary)
         //adoxio_dateemailsent (date time)
@@ -148,45 +134,68 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //adoxio_shareholderaccountid (lookup account)
         //adoxio_sharepointanchor (text)
         //adoxio_totalshares (whole number)
-        private bool isCorporateDetailsComplete()
+        public bool isShareholderComplete()
         {
+            if (isShareholder != true)
+            {
+                return true;
+            }
             var isComplete = false;
             switch (legalentitytype)
             {
                 case Adoxio_applicanttypecodes.PrivateCorporation:
-                case Adoxio_applicanttypecodes.PublicCorporation:
-                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
-                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
-                case Adoxio_applicanttypecodes.Society:
-                    isComplete = (account != null)
-                        && !string.IsNullOrEmpty(account.bcIncorporationNumber)
-                        && !string.IsNullOrEmpty(account.businessNumber)
-                        && (account.dateOfIncorporationInBC != null)
-                        && !string.IsNullOrEmpty(account.contactEmail)
-                        && !string.IsNullOrEmpty(account.contactPhone)
-                        && !string.IsNullOrEmpty(account.mailingAddressName)
-                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
-                        && !string.IsNullOrEmpty(account.mailingAddressCity)
-                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
-                        && (account.mailingAddressProvince != null) // TODO: This field should be a string(by Moffat)
-                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            commonvotingshares != null
+                        ) || (
+                            isindividual != true &&
+                            legalentitytype != null &&
+                            !String.IsNullOrEmpty(name) &&
+                            commonvotingshares != null
+                        );
                     break;
+                case Adoxio_applicanttypecodes.PublicCorporation:
+                case Adoxio_applicanttypecodes.Society:
                 case Adoxio_applicanttypecodes.SoleProprietor:
                     isComplete = true;
+                    break;
+                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
+                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            commonvotingshares != null //&&
+                                                       // dateIssued != null
+                        ) || (
+                            isindividual != true &&
+                            legalentitytype != null &&
+                            !String.IsNullOrEmpty(name) &&
+                            commonvotingshares != null &&
+                            commonnonvotingshares != null //&& 
+                                                          // dateIssued != null
+                        );
                     break;
                 case Adoxio_applicanttypecodes.GeneralPartnership:
                 case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
                 case Adoxio_applicanttypecodes.LimitedPartnership:
-                    isComplete = (account != null)
-                        && !string.IsNullOrEmpty(account.businessNumber)
-                        && !string.IsNullOrEmpty(account.contactEmail)
-                        && !string.IsNullOrEmpty(account.contactPhone)
-                        && !string.IsNullOrEmpty(account.mailingAddressName)
-                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
-                        && !string.IsNullOrEmpty(account.mailingAddressCity)
-                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
-                        && (account.mailingAddressProvince != null)
-                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email)
+                        ) || (
+                            isindividual != true &&
+                            legalentitytype != null &&
+                            !String.IsNullOrEmpty(name)
+                        );
                     break;
                 default:
                     isComplete = false;
@@ -196,52 +205,61 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             return isComplete;
 
         }
-
-        private bool isConnectionsToProducersComplete(){
+        public bool isDirectorOfficerComplete()
+        {
+            if (isShareholder == true || isApplicant == true)
+            {
+                return true;
+            }
             var isComplete = false;
-            var tiedHouse = new ViewModels.TiedHouseConnection();
             switch (legalentitytype)
             {
-                 case Adoxio_applicanttypecodes.PrivateCorporation:
+                case Adoxio_applicanttypecodes.PrivateCorporation:
                 case Adoxio_applicanttypecodes.PublicCorporation:
                 case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
                 case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            (isDirector == true || isOfficer == true)//&& 
+                                                                     // dateIssued != null
+                        );
+                    break;
                 case Adoxio_applicanttypecodes.Society:
-                    isComplete = (account != null)
-                        && !string.IsNullOrEmpty(account.bcIncorporationNumber)
-                        && !string.IsNullOrEmpty(account.businessNumber)
-                        && (account.dateOfIncorporationInBC != null)
-                        && !string.IsNullOrEmpty(account.contactEmail)
-                        && !string.IsNullOrEmpty(account.contactPhone)
-                        && !string.IsNullOrEmpty(account.mailingAddressName)
-                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
-                        && !string.IsNullOrEmpty(account.mailingAddressCity)
-                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
-                        && (account.mailingAddressProvince != null) // TODO: This field should be a string(by Moffat)
-                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            (isDirector == true || isOfficer == true || isSeniorManagement == true)//&& 
+                                                                                                   // dateIssued != null
+                        );
                     break;
                 case Adoxio_applicanttypecodes.SoleProprietor:
-                    isComplete = true;
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) // && 
+                                                         // dateIssued != null
+                        );
                     break;
                 case Adoxio_applicanttypecodes.GeneralPartnership:
                 case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
                 case Adoxio_applicanttypecodes.LimitedPartnership:
-                    isComplete = (account != null)
-                        && !string.IsNullOrEmpty(account.businessNumber)
-                        && !string.IsNullOrEmpty(account.contactEmail)
-                        && !string.IsNullOrEmpty(account.contactPhone)
-                        && !string.IsNullOrEmpty(account.mailingAddressName)
-                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
-                        && !string.IsNullOrEmpty(account.mailingAddressCity)
-                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
-                        && (account.mailingAddressProvince != null)
-                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    isComplete = true;
                     break;
                 default:
                     isComplete = false;
                     break;
             }
             return isComplete;
+
         }
     }
 
