@@ -107,8 +107,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].AdoxioLegalentityid.ToString()}";
                     childFilter += " and adoxio_isapplicant ne true and adoxio_isindividual eq 0";
-
-                    response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter);
+                    var expandList = new List<string>{"adoxio_Account"};
+                    response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter, expand: expandList);
                     var childEntities = response.Value.ToList();
                     legalEntities.AddRange(childEntities);
                 }
