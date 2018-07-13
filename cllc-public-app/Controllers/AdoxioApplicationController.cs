@@ -378,7 +378,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
-                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
+                        fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
+                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);                        
                         fileSystemItemVM.documenttype = fileDetails.DocumentType;
                         fileSystemItemVMList.Add(fileSystemItemVM);
                     }
@@ -397,27 +398,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Delete a file.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="fileId"></param>
+        /// <param name="id">Application ID</param>
+        /// <param name="serverRelativeUrl">The ServerRelativeUrl to delete</param>
         /// <returns></returns>
-        [HttpDelete("{id}/attachments/{fileId}")]
-        public async Task<IActionResult> DeleteFile([FromRoute] string id, [FromRoute] string fileId)
+        [HttpDelete("{id}/attachments")]
+        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string id)
         {
             // get the file.
-            if (fileId == null)
+            if (id == null || serverRelativeUrl == null)
             {
                 return BadRequest();
             }
             else
             {
-
-                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
-                if (fileSystemItem != null)
+                var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
+                if (result)
                 {
-                    string filename = fileSystemItem.Name;
-                    //await _sharePointFileManager.DeleteFile(DownloadFile(fileSystemItem);
                     return new OkResult();
-                }
+                }                
             }
             return new NotFoundResult();
         }
