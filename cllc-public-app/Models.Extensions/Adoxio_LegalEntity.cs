@@ -159,7 +159,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = adoxio_legalentity.Adoxio_lastname;
                 if (adoxio_legalentity.Adoxio_legalentitytype != null)
                 {
-                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
+                    result.legalentitytype = (AdoxioApplicantTypeCodes)adoxio_legalentity.Adoxio_legalentitytype;
                 }
 
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
@@ -219,7 +219,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = adoxio_legalentity.AdoxioLastname;
                 if (adoxio_legalentity.AdoxioLegalentitytype != null)
                 {
-                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.AdoxioLegalentitytype;
+                    result.legalentitytype = (AdoxioApplicantTypeCodes)adoxio_legalentity.AdoxioLegalentitytype;
                 }
 
                 result.middlename = adoxio_legalentity.AdoxioMiddlename;

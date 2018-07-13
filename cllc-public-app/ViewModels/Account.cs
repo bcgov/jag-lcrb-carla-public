@@ -63,17 +63,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string businessType { get; set; }
 
-        public bool isCorporateDetailsComplete(Adoxio_applicanttypecodes? legalentitytype)
+        public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {
             var isComplete = false;
             var tiedHouse = new ViewModels.TiedHouseConnection();
             switch (legalentitytype)
             {
-                case Adoxio_applicanttypecodes.PrivateCorporation:
-                case Adoxio_applicanttypecodes.PublicCorporation:
-                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
-                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
-                case Adoxio_applicanttypecodes.Society:
+                case AdoxioApplicantTypeCodes.PrivateCorporation:
+                case AdoxioApplicantTypeCodes.PublicCorporation:
+                case AdoxioApplicantTypeCodes.UnlimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.Society:
                     isComplete = !string.IsNullOrEmpty(bcIncorporationNumber) &&
                         !string.IsNullOrEmpty(businessNumber) &&
                         (dateOfIncorporationInBC != null) &&
@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         &&
                         !string.IsNullOrEmpty(mailingAddresPostalCode);
                     break;
-                case Adoxio_applicanttypecodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.SoleProprietor:
                     isComplete = !string.IsNullOrEmpty(businessNumber) &&
                         !string.IsNullOrEmpty(contactEmail) &&
                         !string.IsNullOrEmpty(contactPhone) &&
@@ -98,9 +98,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         (mailingAddressProvince != null) &&
                         !string.IsNullOrEmpty(mailingAddresPostalCode);
                     break;
-                case Adoxio_applicanttypecodes.GeneralPartnership:
-                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
-                case Adoxio_applicanttypecodes.LimitedPartnership:
+                case AdoxioApplicantTypeCodes.GeneralPartnership:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
+                case AdoxioApplicantTypeCodes.LimitedPartnership:
                     isComplete = !string.IsNullOrEmpty(businessNumber) &&
                         !string.IsNullOrEmpty(contactEmail) &&
                         !string.IsNullOrEmpty(contactPhone) &&

@@ -1,10 +1,31 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+    public enum AdoxioApplicationStatusCodes
+    {
+        Active = 1,
+        [Display(Name = "In Progress")]
+        InProgress = 845280000,
+        Intake = 845280001,
+        [Display(Name = "Pending for LG/FN/Police Feedback")]
+        PendingForLGFNPFeedback = 845280006,
+        [Display(Name = "Under Review")]
+        UnderReview = 845280003,
+        [Display(Name = "Pending for Licence Fee")]
+        PendingForLicenceFee = 845280007,        
+        Approved = 845280004,
+        Denied = 845280005,
+        [Display(Name = "Approved in Principle")]
+        ApprovedInPrinciple = 845280008
+    }
+
     public class AdoxioApplication
     {
 		public string id { get; set; } //adoxio_applicationid
@@ -17,8 +38,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string establishmentaddresscity { get; set; } //adoxio_establishmentaddresscity
         public string establishmentaddresspostalcode { get; set; } //adoxio_establishmentaddresspostalcode
         public string establishmentAddress { get; set; } //adoxio_establishmentaddress
-        public string applicationStatus { get; set; } //statuscode
-        public Adoxio_applicanttypecodes applicantType { get; set; } //adoxio_applicanttype
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AdoxioApplicationStatusCodes applicationStatus { get; set; } //statuscode
+        public AdoxioApplicantTypeCodes applicantType { get; set; } //adoxio_applicanttype
         public GeneralYesNo registeredEstablishment { get; set; } //adoxio_registeredestablishment
         public string establishmentparcelid { get; set; } //adoxio_establishmentparcelid
         public string additionalpropertyinformation { get; set; } //adoxio_additionalpropertyinformation
