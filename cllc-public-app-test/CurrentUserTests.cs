@@ -198,7 +198,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             var vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
 				name = "Create ShareholderLE",
                 commonvotingshares = 100,
                 account = account1,
