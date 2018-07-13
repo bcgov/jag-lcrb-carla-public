@@ -1,5 +1,5 @@
 <h1>Contact Details</h1>
-<p>Person we should contact if we have questions about your licence application</p>
+<p>Enter the details of the person we should contact if we have questions about your licence application.</p>
 
 <div [ngBusy]="busy">
   <form [formGroup]='contactDetailsForm' class="form-horizontal" (ngSubmit)="save()">
@@ -33,7 +33,7 @@
     <section>
       <div [ngClass]="{'has-error': this.isFieldError('contactpersonrole')}">
         <label for="">Role</label>
-        <br>
+        <p>What role do they have in relation to your business?</p>
         <input class="form-control" style="width: 200px;" type="text" id="contactpersonrole" formControlName="contactpersonrole">
         <div *ngIf="this.isFieldError('contactpersonrole')" class="alert alert-danger" style="width: 200px;">
           <div *ngIf="contactDetailsForm.controls['contactpersonrole'].hasError('required') ">
