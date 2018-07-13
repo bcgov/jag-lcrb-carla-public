@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -34,11 +32,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [Display(Name = "Co-op")]
         Coop = 845280011,
         Trust = 845280012,
-        Estate = 845280013,
-        [Display(Name = "Local Government")]
+        Estate = 845280013, [Display(Name = "Local Government")]
         LocalGovernment = 845280014,
         University = 845280016,
-        
+
     }
     public enum Adoxio_accounttypecodes
     {
@@ -66,7 +63,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Yes = 1
     }
 
-
+    public class BusinessProfileCompletion
+    {
+        public bool isCorporateDetailsComplete { get; set; }
+        public bool isConnectionsToProducersComplete { get; set; }
+        public bool isOrganizationStructureComplete { get; set; }
+        public bool isDirectorsAndOfficersComplete { get; set; }
+        public bool isKeyPersonnelComplete { get; set; }
+        public bool isShareholdersComplete { get; set; }
+        public bool isFinanceIntegrityComplete { get; set; }
+        public bool isSecurityAssessmentComplete { get; set; }
+    }
     public class AdoxioLegalEntity
     {
         // string form of the guid.
@@ -76,6 +83,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string parentLegalEntityId { get; set; }
         public string name { get; set; } //adoxio_name (text)
+
+        public bool isApplicant { get; set; } // adoxio_isapplicant
         public bool? isindividual { get; set; } //adoxio_isindividual (option set)
         public bool? sameasapplyingperson { get; set; } //adoxio_sameasapplyingperson (option set)
         [JsonConverter(typeof(StringEnumConverter))]
@@ -102,6 +111,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
+
         //adoxio_contact (lookup contact)
         //adoxio_correspondingpersonalhistorysummary (lookup personal history summary)
         //adoxio_dateemailsent (date time)
@@ -124,5 +134,133 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //adoxio_shareholderaccountid (lookup account)
         //adoxio_sharepointanchor (text)
         //adoxio_totalshares (whole number)
+        public bool isShareholderComplete()
+        {
+            if (isShareholder != true)
+            {
+                return true;
+            }
+            var isComplete = false;
+            switch (legalentitytype)
+            {
+                case Adoxio_applicanttypecodes.PrivateCorporation:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            commonvotingshares != null
+                        ) || (
+                            isindividual != true &&
+                            legalentitytype != null &&
+                            !String.IsNullOrEmpty(name) &&
+                            commonvotingshares != null
+                        );
+                    break;
+                case Adoxio_applicanttypecodes.PublicCorporation:
+                case Adoxio_applicanttypecodes.Society:
+                case Adoxio_applicanttypecodes.SoleProprietor:
+                    isComplete = true;
+                    break;
+                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
+                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            commonvotingshares != null //&&
+                                                       // dateIssued != null
+                        ) || (
+                            isindividual != true &&
+                            legalentitytype != null &&
+                            !String.IsNullOrEmpty(name) &&
+                            commonvotingshares != null &&
+                            commonnonvotingshares != null //&& 
+                                                          // dateIssued != null
+                        );
+                    break;
+                case Adoxio_applicanttypecodes.GeneralPartnership:
+                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
+                case Adoxio_applicanttypecodes.LimitedPartnership:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email)
+                        ) || (
+                            isindividual != true &&
+                            legalentitytype != null &&
+                            !String.IsNullOrEmpty(name)
+                        );
+                    break;
+                default:
+                    isComplete = false;
+                    break;
+            }
+
+            return isComplete;
+
+        }
+        public bool isDirectorOfficerComplete()
+        {
+            if (isShareholder == true || isApplicant == true)
+            {
+                return true;
+            }
+            var isComplete = false;
+            switch (legalentitytype)
+            {
+                case Adoxio_applicanttypecodes.PrivateCorporation:
+                case Adoxio_applicanttypecodes.PublicCorporation:
+                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
+                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            (isDirector == true || isOfficer == true)//&& 
+                                                                     // dateIssued != null
+                        );
+                    break;
+                case Adoxio_applicanttypecodes.Society:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) &&
+                            (isDirector == true || isOfficer == true || isSeniorManagement == true)//&& 
+                                                                                                   // dateIssued != null
+                        );
+                    break;
+                case Adoxio_applicanttypecodes.SoleProprietor:
+                    isComplete =
+                        (
+                            isindividual == true &&
+                            !String.IsNullOrEmpty(firstname) &&
+                            !String.IsNullOrEmpty(lastname) &&
+                            !String.IsNullOrEmpty(email) // && 
+                                                         // dateIssued != null
+                        );
+                    break;
+                case Adoxio_applicanttypecodes.GeneralPartnership:
+                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
+                case Adoxio_applicanttypecodes.LimitedPartnership:
+                    isComplete = true;
+                    break;
+                default:
+                    isComplete = false;
+                    break;
+            }
+            return isComplete;
+
+        }
     }
+
 }
