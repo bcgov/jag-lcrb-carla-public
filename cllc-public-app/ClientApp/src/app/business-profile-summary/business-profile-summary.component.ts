@@ -5,6 +5,7 @@ import { LicenseApplicationSummary } from '../models/license-application-summary
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
+import { AccountDataService } from '../services/account-data.service';
 
 export class ProfileSummary {
   legalEntityId: string;
@@ -24,7 +25,7 @@ export class ProfileSummary {
 })
 export class BusinessProfileSummaryComponent implements OnInit {
 
-  displayedColumns = ['organization', 'businessRelationship'/*, 'profileComplete'*/];
+  displayedColumns = ['organization', 'businessRelationship', 'profileComplete'];
   dataSource = new MatTableDataSource<ProfileSummary>();
   profileSummaryList: ProfileSummary[] = [];
   busy: Subscription;
@@ -38,7 +39,9 @@ export class BusinessProfileSummaryComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService, private router: Router) { }
+  constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService,
+    private accountDataService: AccountDataService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getBusinessProfileData();
@@ -65,6 +68,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
               profileSummary.businessRelationship = 'Shareholder';
             } else {
               profileSummary.businessRelationship = 'Applicant';
+              this.accountDataService.getAccount(entry.accountId);
             }
             this.profileSummaryList.push(profileSummary);
           });

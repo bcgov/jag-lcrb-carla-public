@@ -47,8 +47,8 @@ export class EditShareholdersComponent implements OnInit {
       this.dynamicsDataService.getRecord('account', this.accountId)
         .then((data) => {
           this.businessType = data.businessType;
+          this.getShareholders();
         });
-      this.getShareholders();
     });
 
     this.userDataService.getCurrentUser().then(user => {
@@ -57,12 +57,16 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   getShareholders() {
-    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'shareholders')
+    let position = 'shareholders';
+          if (['GeneralPartnership', 'LimitedLiabilityPartnership', 'LimitedPartnership'].indexOf(this.businessType) !== -1) {
+            position = 'partners';
+          }
+    this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, position)
       .subscribe((response) => {
-        let data: AdoxioLegalEntity[] = response.json();
+        const data: AdoxioLegalEntity[] = response.json();
         data.forEach(d => {
           d.position = this.getPosition(d);
-        })
+        });
         this.dataSource.data = data;
       });
   }
@@ -93,6 +97,9 @@ export class EditShareholdersComponent implements OnInit {
           break;
         case 'LimitedLiabilityPartnership':
           position = 'Limited Liability Partnership';
+          break;
+        case 'SoleProprietor':
+          position = 'Sole Proprietor';
           break;
         case 'Society':
           position = 'Society';
@@ -158,7 +165,7 @@ export class EditShareholdersComponent implements OnInit {
     if (confirm('Delete shareholer?')) {
       this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
         this.getShareholders();
-      })
+      });
     }
   }
 
