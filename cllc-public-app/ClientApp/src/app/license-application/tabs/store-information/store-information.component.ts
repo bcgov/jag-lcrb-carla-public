@@ -16,8 +16,7 @@ import { Subject } from '../../../../../node_modules/rxjs/Subject';
 })
 export class StoreInformationComponent implements OnInit {
 
-  @Input() accountId: string;
-  @Input() applicationId: string;
+  applicationId: string;
   storeInformationForm: FormGroup;
   busy: Subscription;
   savedFormData: any = {};
@@ -30,13 +29,8 @@ export class StoreInformationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userDataService.getCurrentUser()
-      .then((data) => {
-        this.accountId = data.accountid;
-      });
-
     this.createForm();
-    // get application data, display form
+    // get application data and display in form
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         const data = res.json();
@@ -49,6 +43,9 @@ export class StoreInformationComponent implements OnInit {
     );
   }
 
+  /**
+   * Create the entry form
+   * */
   createForm() {
     this.storeInformationForm = this.fb.group({
       id: [''],
@@ -68,6 +65,10 @@ export class StoreInformationComponent implements OnInit {
     }
   }
 
+  /**
+   * Save form data
+   * @param showProgress
+   */
   save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
     const saveData = this.storeInformationForm.value;
