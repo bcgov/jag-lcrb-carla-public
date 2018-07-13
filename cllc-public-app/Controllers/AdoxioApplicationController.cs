@@ -314,6 +314,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
+
                 var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
                 if (fileSystemItem != null)
                 {
@@ -322,6 +323,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         FileDownloadName = fileSystemItem.Name
                     };
+                }
+            }
+            return new NotFoundResult();
+        }
+
+        /// <summary>
+        /// Delete a file.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="fileId"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}/attachments/{fileId}")]
+        public async Task<IActionResult> DeleteFile([FromRoute] string id, [FromRoute] string fileId)
+        {
+            // get the file.
+            if (fileId == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+
+                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
+                if (fileSystemItem != null)
+                {
+                    string filename = fileSystemItem.Name;
+                    //await _sharePointFileManager.DeleteFile(DownloadFile(fileSystemItem);
+                    return new OkResult();
                 }
             }
             return new NotFoundResult();
