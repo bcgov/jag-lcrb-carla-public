@@ -460,7 +460,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 			// delete the associated LegalEntity
-			MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
+			MicrosoftDynamicsCRMadoxioLegalentity legalentity = _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
 			if (legalentity != null) 
 			{
 				_dynamicsClient.Adoxiolegalentities.Delete(legalentity.AdoxioLegalentityid);
