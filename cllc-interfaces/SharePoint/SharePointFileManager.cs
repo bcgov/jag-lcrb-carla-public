@@ -23,6 +23,8 @@ namespace Gov.Lclb.Cllb.Interfaces
     public class SharePointFileManager
     {
         public const string DefaultDocumentListTitle = "Account";
+        public const string ApplicationDocumentListTitle = "adoxio_application";
+
 
         private LCLBCannabisDEVDataContext listData;
         private ApiData apiData;
@@ -355,18 +357,26 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result.FirstOrDefault();
         }
 
-        public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
+
+        public async Task AddFile(String folderName, String fileName, Stream fileData, string contentType)
+        {
+            await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
+        }
+
+
+
+        public async Task AddFile(String documentLibrary, String folderName,  String fileName, Stream fileData, string contentType)
         {
 
-            bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
+            bool folderExists = await this.FolderExists(documentLibrary, folderName);
             if (! folderExists)
             {
-              var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
+              var folder =  await this.CreateFolder(documentLibrary, folderName);                
             }
 
             // now add the file to the folder.
             
-            await this.UploadFile(fileName, DefaultDocumentListTitle, folderName, fileData, contentType);
+            await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
 
         }
 
