@@ -514,8 +514,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var account = new MicrosoftDynamicsCRMaccount();
                 account.Name = item.name;
-                account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Shareholder;
-                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), item.legalentitytype);
+                account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Shareholder;
+                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
                 //create tied house under account
