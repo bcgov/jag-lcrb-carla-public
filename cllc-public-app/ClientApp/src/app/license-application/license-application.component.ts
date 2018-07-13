@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
@@ -15,11 +15,11 @@ export class LicenseApplicationComponent implements OnInit {
 
   applicationId: string;
   applicationName: string;
-  @Input('currentUser') currentUser: User;
-  @Input('accountId') accountId: string;
+  @Input() currentUser: User;
+  @Input() accountId: string;
   busy: Subscription;
 
-  public view_tab: string;
+  public view_tab = 'contact-details';
   public contactId: string;
   public componentLoaded: boolean;
 
@@ -28,13 +28,16 @@ export class LicenseApplicationComponent implements OnInit {
   };
   tabStructure: any[] = this.tabs.application;
 
-  constructor(private applicationDataService: AdoxioApplicationDataService, private userDataService: UserDataService, private route: ActivatedRoute) {
-    this.view_tab = "contact-details";
+  constructor(private applicationDataService: AdoxioApplicationDataService,
+    private userDataService: UserDataService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.applicationId = route.snapshot.params.applicationId;
   }
 
   ngOnInit(): void {
-
+    const urlParts = this.router.url.split('/');
+    this.view_tab = urlParts[urlParts.length - 1];
     // TODO - pass currentUser in as router data rather than doing another call to getCurrentUser.
     if (!this.currentUser) {
       this.userDataService.getCurrentUser()
@@ -51,11 +54,11 @@ export class LicenseApplicationComponent implements OnInit {
     if (!this.applicationName) {
       this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
         res => {
-          let data = res.json();
+          const data = res.json();
           this.applicationName = data.name;
         },
         err => {
-          console.log("Error occured");
+          console.log('Error occured');
         }
       );
     }
@@ -63,30 +66,33 @@ export class LicenseApplicationComponent implements OnInit {
   }
 
   getTab() {
-    let result = this.tabStructure.indexOf(this.view_tab);
+    const result = this.tabStructure.indexOf(this.view_tab);
     return result;
   }
 
   changeTab(tab) {
     this.view_tab = tab;
+    this.router.navigate([`/license-application/${this.applicationId}/${tab}`]);
   }
 
   back() {
-    var currentTab = this.getTab();
+    let currentTab = this.getTab();
     currentTab--;
     if (currentTab < 0) {
       currentTab = this.tabStructure.length - 1;
     }
     this.view_tab = this.tabStructure[currentTab];
+    this.router.navigate([`/license-application/${this.applicationId}/${this.view_tab}`]);
   }
 
   next() {
-    var currentTab = this.getTab();
+    let currentTab = this.getTab();
     currentTab++;
     if (currentTab >= this.tabStructure.length) {
       currentTab = 0;
     }
     this.view_tab = this.tabStructure[currentTab];
+    this.router.navigate([`/license-application/${this.applicationId}/${this.view_tab}`]);
   }
 
 }
