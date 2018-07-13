@@ -160,12 +160,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set license type relationship
 
-            var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType).Result;
-            patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
-            patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
             try
             {
-               _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
+                patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
+                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
+                _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
             }
             catch (OdataerrorException odee)
             {
@@ -314,14 +314,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _sharePointFileManager.GetFileById(fileId);
+                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
+                if (fileSystemItem != null)
+                {
+                    byte[] fileContents = await _sharePointFileManager.DownloadFile(fileSystemItem.Url);
+                    return new FileContentResult(fileContents, "application/octet-stream")
+                    {
+                        FileDownloadName = fileSystemItem.Name
+                    };
+                }
             }
-            string filename = "";
-            byte[] fileContents = new byte[10];
-            return new FileContentResult(fileContents, "application/octet-stream")
-            {
-                FileDownloadName = filename
-            };
+            return new NotFoundResult();
         }
 
         /// <summary>

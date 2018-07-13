@@ -723,7 +723,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static async Task<MicrosoftDynamicsCRMadoxioLegalentity> GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
+        public static MicrosoftDynamicsCRMadoxioLegalentity GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
 		{
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
 			string accountFilter = "_adoxio_account_value eq " + id.ToString();
@@ -752,7 +752,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-		public static async Task<MicrosoftDynamicsCRMadoxioLicencetype> GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
+		public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
 			MicrosoftDynamicsCRMadoxioLicencetype result = null;
 			string typeFilter = "adoxio_name eq '" + name + "'";
