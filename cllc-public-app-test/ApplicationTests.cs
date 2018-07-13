@@ -15,6 +15,7 @@ using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Interfaces;
 using System.Net.Http.Headers;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -60,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
             {
 				licenseType = "Cannabis Retail Store" //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                ,applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation //*Mandatory (label=business type)
+                ,applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,registeredEstablishment = ViewModels.GeneralYesNo.No //*Mandatory (Yes=1, No=0)
                 //,name = initialName
 				//,applyingPerson = "Applying Person" //contact
@@ -167,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 licenseType = "Cannabis Retail Store" //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
                 ,
-                applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation //*Mandatory (label=business type)
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
                 registeredEstablishment = ViewModels.GeneralYesNo.No //*Mandatory (Yes=1, No=0)
                                                                      //,name = initialName
@@ -272,7 +273,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
                 Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                Adoxio_legalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 Adoxio_position = (int?)ViewModels.PositionOptions.Director,
                 Adoxio_name = initialName
             };
@@ -370,7 +371,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 name = initialName,
                 applyingPerson = "Applying Person",
                 applicant = currentAccount1,
-				applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation //*Mandatory (label=business type)
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
                 jobNumber = "123",
                 licenseType = "Cannabis Retail Store",
@@ -379,7 +380,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 establishmentaddressstreet = "666 Any Street",
                 establishmentaddresscity = "Victoria, BC",
                 establishmentaddresspostalcode = "V1X 1X1",
-                applicationStatus = "0"
+                applicationStatus = AdoxioApplicationStatusCodes.Active
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -470,21 +471,21 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
-            {
-                name = initialName,
-                applyingPerson = "Applying Person",
-                applicant = currentAccount1,
-				applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation //*Mandatory (label=business type)
-                ,
-                jobNumber = "123",
-                licenseType = "Cannabis Retail Store",
-                establishmentName = "Shared Retail Store",
-                establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
-                establishmentaddressstreet = "666 Any Street",
-                establishmentaddresscity = "Victoria, BC",
-                establishmentaddresspostalcode = "V1X 1X1",
-				applicationStatus = "845280000"
+        ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+        {
+            name = initialName,
+            applyingPerson = "Applying Person",
+            applicant = currentAccount1,
+            applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
+            ,
+            jobNumber = "123",
+            licenseType = "Cannabis Retail Store",
+            establishmentName = "Shared Retail Store",
+            establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
+            establishmentaddressstreet = "666 Any Street",
+            establishmentaddresscity = "Victoria, BC",
+            establishmentaddresspostalcode = "V1X 1X1",
+            applicationStatus = AdoxioApplicationStatusCodes.InProgress
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
