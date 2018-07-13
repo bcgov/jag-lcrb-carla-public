@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [Display(Name = "Local Government")]
         LocalGovernment = 845280014,
         University = 845280016,
-        
+
     }
     public enum Adoxio_accounttypecodes
     {
@@ -66,7 +66,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Yes = 1
     }
 
-
+    public class BusinessProfileCompletion
+    {
+        public bool isCorporateDetailsComplete { get; set; }
+        public bool isConnectionsToProducersComplete { get; set; }
+        public bool isOrganizationStructureComplete { get; set; }
+        public bool isDirectorsAndOfficersComplete { get; set; }
+        public bool isKeyPersonnelComplete { get; set; }
+        public bool isShareholdersComplete { get; set; }
+        public bool isFinanceIntegrityComplete { get; set; }
+        public bool isSecurityAssessmentComplete { get; set; }
+    }
     public class AdoxioLegalEntity
     {
         // string form of the guid.
@@ -102,6 +112,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
+
+        public BusinessProfileCompletion CompletionStatus
+        {
+            get
+            {
+                var status = new BusinessProfileCompletion
+                {
+                    isCorporateDetailsComplete = isCorporateDetailsComplete()
+                };
+                return status;
+            }
+        }
         //adoxio_contact (lookup contact)
         //adoxio_correspondingpersonalhistorysummary (lookup personal history summary)
         //adoxio_dateemailsent (date time)
@@ -124,5 +146,101 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //adoxio_shareholderaccountid (lookup account)
         //adoxio_sharepointanchor (text)
         //adoxio_totalshares (whole number)
+        private bool isCorporateDetailsComplete()
+        {
+            var isComplete = false;
+            switch (legalentitytype)
+            {
+                case Adoxio_applicanttypecodes.PrivateCorporation:
+                case Adoxio_applicanttypecodes.PublicCorporation:
+                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
+                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                case Adoxio_applicanttypecodes.Society:
+                    isComplete = (account != null)
+                        && !string.IsNullOrEmpty(account.bcIncorporationNumber)
+                        && !string.IsNullOrEmpty(account.businessNumber)
+                        && (account.dateOfIncorporationInBC != null)
+                        && !string.IsNullOrEmpty(account.contactEmail)
+                        && !string.IsNullOrEmpty(account.contactPhone)
+                        && !string.IsNullOrEmpty(account.mailingAddressName)
+                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
+                        && !string.IsNullOrEmpty(account.mailingAddressCity)
+                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
+                        && (account.mailingAddressProvince != null) // TODO: This field should be a string(by Moffat)
+                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    break;
+                case Adoxio_applicanttypecodes.SoleProprietor:
+                    isComplete = true;
+                    break;
+                case Adoxio_applicanttypecodes.GeneralPartnership:
+                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
+                case Adoxio_applicanttypecodes.LimitedPartnership:
+                    isComplete = (account != null)
+                        && !string.IsNullOrEmpty(account.businessNumber)
+                        && !string.IsNullOrEmpty(account.contactEmail)
+                        && !string.IsNullOrEmpty(account.contactPhone)
+                        && !string.IsNullOrEmpty(account.mailingAddressName)
+                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
+                        && !string.IsNullOrEmpty(account.mailingAddressCity)
+                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
+                        && (account.mailingAddressProvince != null)
+                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    break;
+                default:
+                    isComplete = false;
+                    break;
+            }
+
+            return isComplete;
+
+        }
+
+        private bool isConnectionsToProducersComplete(){
+            var isComplete = false;
+            var tiedHouse = new ViewModels.TiedHouseConnection();
+            switch (legalentitytype)
+            {
+                 case Adoxio_applicanttypecodes.PrivateCorporation:
+                case Adoxio_applicanttypecodes.PublicCorporation:
+                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
+                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                case Adoxio_applicanttypecodes.Society:
+                    isComplete = (account != null)
+                        && !string.IsNullOrEmpty(account.bcIncorporationNumber)
+                        && !string.IsNullOrEmpty(account.businessNumber)
+                        && (account.dateOfIncorporationInBC != null)
+                        && !string.IsNullOrEmpty(account.contactEmail)
+                        && !string.IsNullOrEmpty(account.contactPhone)
+                        && !string.IsNullOrEmpty(account.mailingAddressName)
+                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
+                        && !string.IsNullOrEmpty(account.mailingAddressCity)
+                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
+                        && (account.mailingAddressProvince != null) // TODO: This field should be a string(by Moffat)
+                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    break;
+                case Adoxio_applicanttypecodes.SoleProprietor:
+                    isComplete = true;
+                    break;
+                case Adoxio_applicanttypecodes.GeneralPartnership:
+                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
+                case Adoxio_applicanttypecodes.LimitedPartnership:
+                    isComplete = (account != null)
+                        && !string.IsNullOrEmpty(account.businessNumber)
+                        && !string.IsNullOrEmpty(account.contactEmail)
+                        && !string.IsNullOrEmpty(account.contactPhone)
+                        && !string.IsNullOrEmpty(account.mailingAddressName)
+                        && !string.IsNullOrEmpty(account.mailingAddressStreet)
+                        && !string.IsNullOrEmpty(account.mailingAddressCity)
+                        && !string.IsNullOrEmpty(account.mailingAddressCountry)
+                        && (account.mailingAddressProvince != null)
+                        && !string.IsNullOrEmpty(account.mailingAddresPostalCode);
+                    break;
+                default:
+                    isComplete = false;
+                    break;
+            }
+            return isComplete;
+        }
     }
+
 }
