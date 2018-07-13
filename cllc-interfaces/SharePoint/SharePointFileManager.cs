@@ -127,6 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             public string TimeLastModified { get; set; }
             public string Length { get; set; }
             public string DocumentType { get; set; }
+            public string ServerRelativeUrl { get; set; }
         }
 
         /// <summary>
@@ -187,8 +188,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // JToken.ToObject is a helper method that uses JsonSerializer internally
                 FileDetailsList searchResult = responseResult.ToObject<FileDetailsList>();
                 //filter by parameter documentType
-                int fileDoctypeStart = searchResult.Name.IndexOf("__") + 2;
-                string fileDoctype = searchResult.Name.Substring(fileDoctypeStart);
+                int fileDoctypeEnd = searchResult.Name.IndexOf("__");
+                string fileDoctype = searchResult.Name.Substring(0, fileDoctypeEnd);
                 if (fileDoctype == documentType)
                 {
                     searchResult.DocumentType = documentType;
