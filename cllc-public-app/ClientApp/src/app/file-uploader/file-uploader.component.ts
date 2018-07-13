@@ -83,7 +83,8 @@ export class FileUploaderComponent implements OnInit {
     const headers = new Headers({
       //'Content-Type': 'multipart/form-data'
     })
-    this.busy = this.http.get(this.attachmentURL + "/" + this.documentType, { headers: headers })
+    let getFileURL = this.attachmentURL + "/" + this.documentType;
+    this.busy = this.http.get(getFileURL, { headers: headers })
       .map((data: Response) => { return <FileSystemItem[]>data.json() })
       .subscribe((data) => {
         // convert bytes to KB
