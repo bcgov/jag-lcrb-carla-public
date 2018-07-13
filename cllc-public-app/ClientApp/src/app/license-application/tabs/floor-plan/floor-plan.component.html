@@ -26,4 +26,4 @@
   </div>
 </div>
 
-<app-file-uploader documentType="Floor Plan" [applicationId]="applicationId"></app-file-uploader>
+<app-file-uploader *ngIf="applicationId" documentType="Floor Plan" [applicationId]="applicationId"></app-file-uploader>

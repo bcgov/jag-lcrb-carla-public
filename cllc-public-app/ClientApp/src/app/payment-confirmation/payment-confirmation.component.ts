@@ -49,14 +49,31 @@ export class PaymentConfirmationComponent {
         var json = res.json();
     	console.log(json);
 
-        // TODO do something with it!!!
+        switch (json.cardType) {
+        	case 'VI': 
+        		this.cardType = "Visa";
+        		break;
+        	case 'PV': 
+        		this.cardType = "Visa Debit";
+        		break;
+        	case 'MC': 
+        		this.cardType = "MasterCard";
+        		break;
+        	case 'AM': 
+        		this.cardType = "American Express";
+        		break;
+        	case 'MD': 
+        		this.cardType = "Debit MasterCard";
+        		break;
+        	default:
+        		this.cardType = json.cardType;
+        }
         this.authCode = json.authCode;
         this.avsMessage = json.avsMessage;
         this.avsAddrMatch = json.avsAddrMatch;
         this.messageId = json.messageId;
         this.messageText = json.messageText;
         this.paymentMethod = json.paymentMethod;
-        this.cardType = json.cardType;
         this.trnAmount = json.trnAmount;
         this.trnApproved = json.trnApproved;
         this.trnDate = json.trnDate;

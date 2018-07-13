@@ -126,6 +126,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // special case for unit testing
 			if (bcep_hashkey.Equals("APPROVE"))
 			{
+				responseDict["trnId"] = "01234567";
 				responseDict["trnApproved"] = "1";
 				return responseDict;
 			}

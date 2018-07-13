@@ -4,9 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '../../../services/tied-house-connections-data.service';
 import { TiedHouseConnection } from '../../../models/tied-house-connection.model';
 import { auditTime } from 'rxjs/operators';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
-import { Observable, Subject } from '../../../../../node_modules/rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-connection-to-producers',
@@ -16,6 +16,8 @@ import { Observable, Subject } from '../../../../../node_modules/rxjs';
 export class ConnectionToProducersComponent implements OnInit {
   @Input() accountId: string;
   @Input() businessType: string;
+  busy: Subscription;
+  savedFormData: any = {};
 
   operatingForMoreThanOneYear: any;
   form: any;
@@ -44,7 +46,7 @@ export class ConnectionToProducersComponent implements OnInit {
     });
 
     this.form.valueChanges
-      .pipe(auditTime(2000)).subscribe(formData => {
+      .pipe(auditTime(10000)).subscribe(formData => {
         this.save();
       });
 
@@ -55,30 +57,43 @@ export class ConnectionToProducersComponent implements OnInit {
           this.businessType = data.businessType;
         });
 
-      this.tiedHouseService.getTiedHouse(this.accountId)
+      this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
         .subscribe(res => {
           this._tiedHouseData = res.json();
           this.form.patchValue(this._tiedHouseData);
+          this.savedFormData = this.form.value;
         });
     });
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    return this.save();
+    if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
+      return true;
+    } else {
+      return this.save(true);
+    }
   }
 
-  save(): Subject<boolean> {
+  save(showProgress: boolean = false): Subject<boolean> {
     const data = (<any>Object).assign(this._tiedHouseData, this.form.value);
+    const saveData = this.form.value;
     const saveObservable = new Subject<boolean>();
-    this.tiedHouseService.updateTiedHouse(data, data.id).subscribe(res => {
-      // this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
+    const subscription = this.tiedHouseService.updateTiedHouse(data, data.id).subscribe(res => {
+      if (showProgress === true) {
+        this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
+      }
       saveObservable.next(true);
+      this.savedFormData = saveData;
     },
       err => {
         this.snackBar.open('Error saving Connections to producers', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
         saveObservable.next(false);
         console.log('Error occured');
       });
+
+    if (showProgress === true) {
+      this.busy = subscription;
+    }
     return saveObservable;
   }
 
