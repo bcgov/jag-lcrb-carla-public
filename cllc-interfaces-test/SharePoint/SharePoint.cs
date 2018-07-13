@@ -176,7 +176,6 @@ namespace SharePoint.Tests
         public async void GetFilesInPopulatedFolderTest()
         {
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
             object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);

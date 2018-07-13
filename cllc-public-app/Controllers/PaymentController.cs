@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 			Dictionary<string, string> redirectUrl;
 			redirectUrl = new Dictionary<string, string>();
-			redirectUrl["url"] = await _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
+			redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
 
 			_logger.LogError(">>>>>" + redirectUrl["url"]);
 
@@ -170,6 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 					// set invoice status to Complete
 					invoice2.Statecode = (int?)Adoxio_invoicestates.Paid;
 					invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Paid;
+					invoice2.AdoxioReturnedtransactionid = response["trnId"];
 
 					_dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 

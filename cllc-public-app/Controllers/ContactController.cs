@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
-using Gov.Lclb.Cllb.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -27,16 +18,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class ContactController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
-        private readonly IDistributedCache _distributedCache;
+        private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        
-        public ContactController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
+        private readonly ILogger _logger;
+
+        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;
-            this._system = context;
-            this._httpContextAccessor = httpContextAccessor;
-            this._distributedCache = null; // distributedCache;
+            Configuration = configuration;            
+            _dynamicsClient = dynamicsClient;
+            _httpContextAccessor = httpContextAccessor;
+            _logger = loggerFactory.CreateLogger(typeof(ContactController));
         }
 
 
@@ -49,21 +40,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> GetContact(string id)
         {
             ViewModels.Contact result = null;
-            // query the Dynamics system to get the contact record.
-
-            Guid? contactId = new Guid(id);
-            Interfaces.Microsoft.Dynamics.CRM.Contact contact = null;
-            if (contactId != null)
+                        
+            if (!string.IsNullOrEmpty (id))
             {
-                try
-                {
-                    contact = await _system.Contacts.ByKey(contactId).GetValueAsync();
+                Guid contactId = Guid.Parse(id);
+                // query the Dynamics system to get the contact record.
+                MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
+
+                if (contact != null)
+                {                    
                     result = contact.ToViewModel();
                 }
-                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
+                else
                 {
                     return new NotFoundResult();
                 }
+            }
+            else
+            {
+                return BadRequest();
             }
 
             return Json(result);
@@ -78,77 +73,63 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
-        {
-            /*
-            if (id != item.id)
+        {            
+            if (id != null && item.id != null && id != item.id)
             {
                 return BadRequest();
             }
-            */
-
-            // get the legal entity.
-            Guid contactId = new Guid(id);
-
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
-
-
-            Interfaces.Microsoft.Dynamics.CRM.Contact contact = await _system.Contacts.ByKey(contactId).GetValueAsync();
-
-            _system.UpdateObject(contact);
-            // copy values over from the data provided
-            contact.CopyValues(item);
-
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithIndependentOperations);
-            foreach (OperationResponse result in dsr)
+            
+            // get the contact
+            Guid contactId = Guid.Parse(id);
+            
+            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
+            if (contact == null)
             {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
+                return new NotFoundResult();
             }
+            MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+            patchContact.CopyValues(item);
+            try
+            {
+                await _dynamicsClient.Contacts.UpdateAsync(contactId.ToString(), patchContact);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error updating contact");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }            
+
+            contact = await _dynamicsClient.GetContactById(contactId);
             return Json(contact.ToViewModel());
         }
 
+        /// <summary>
+        /// Create a contact
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost()]
-        public async Task<IActionResult> CreateContact([FromBody] ViewModels.Contact viewModel)
+        public async Task<IActionResult> CreateContact([FromBody] ViewModels.Contact item)
         {
-            Interfaces.Microsoft.Dynamics.CRM.Contact item = viewModel.ToModel();
 
             // create a new contact.
-            Interfaces.Microsoft.Dynamics.CRM.Contact contact = new Interfaces.Microsoft.Dynamics.CRM.Contact();
-
-            // create a DataServiceCollection to add the record
-            DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact> ContactCollection = new DataServiceCollection<Interfaces.Microsoft.Dynamics.CRM.Contact>(_system);
-            // add a new contact.
-            ContactCollection.Add(contact);
-
-            // changes need to made after the add in order for them to be saved.
-            contact.CopyValues(item);            
-
-            // PostOnlySetProperties is used so that settings such as owner will get set properly by the dynamics server.
-
-            DataServiceResponse dsr = await _system.SaveChangesAsync(SaveChangesOptions.PostOnlySetProperties | SaveChangesOptions.BatchWithSingleChangeset);
-            foreach (OperationResponse result in dsr)
+            MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
+            contact.CopyValues(item);
+            try
             {
-                if (result.StatusCode == 500) // error
-                {
-                    return StatusCode(500, result.Error.Message);
-                }
+                contact = await _dynamicsClient.Contacts.CreateAsync(contact);
             }
-            contact.Contactid = dsr.GetAssignedId();
-            // if we have not yet authenticated, then this is the new record for the user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            if (userSettings.IsNewUserRegistration)
+            catch (OdataerrorException odee)
             {
-                if (string.IsNullOrEmpty (userSettings.ContactId))
-                {
-                    userSettings.ContactId = contact.Contactid.ToString();
-                    string userSettingsString = JsonConvert.SerializeObject(userSettings);
-                    // add the user to the session.
-                    _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
-                }
-            }            
+                _logger.LogError("Error updating contact");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
 
             return Json(contact.ToViewModel());
         }

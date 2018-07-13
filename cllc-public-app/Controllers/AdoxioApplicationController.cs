@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -160,12 +161,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set license type relationship
 
-            var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType).Result;
-            patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
-            patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
             try
             {
-               _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
+                patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
+                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
+                _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
             }
             catch (OdataerrorException odee)
             {
@@ -288,11 +289,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
                 var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
                 // Dynamics code for the name is {Code(Licence Type (Licence Type))} - {Business Type(Application)} - {Job Number(Application)} 
-                string folderName = $"{application.AdoxioLicenceType.AdoxioCode} - {application.AdoxioApplicant.AdoxioBusinesstype}_{applicationIdCleaned}";
-
+                //string folderName = $"{application.AdoxioLicenceType.AdoxioCode} - {application.AdoxioApplicant.AdoxioBusinesstype}_{applicationIdCleaned}";
+                string folderName = $"{application.AdoxioName}_{applicationIdCleaned}";
                 try
                 {
-                    await _sharePointFileManager.AddFile(folderName, fileName, file.OpenReadStream(), file.ContentType);
+                    await _sharePointFileManager.AddFile(ApplicationDocumentListTitle, folderName, fileName, file.OpenReadStream(), file.ContentType);
                 }
                 catch (Exception ex)
                 {
@@ -314,14 +315,82 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _sharePointFileManager.GetFileById(fileId);
+                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
+                if (fileSystemItem != null)
+                {
+                    byte[] fileContents = await _sharePointFileManager.DownloadFile(fileSystemItem.Url);
+                    return new FileContentResult(fileContents, "application/octet-stream")
+                    {
+                        FileDownloadName = fileSystemItem.Name
+                    };
+                }
             }
-            string filename = "";
-            byte[] fileContents = new byte[10];
-            return new FileContentResult(fileContents, "application/octet-stream")
+            return new NotFoundResult();
+        }
+
+        /// <summary>
+        /// Get the file details list in folder associated to the application folder and document type
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <param name="documentType"></param>
+        /// <returns></returns>
+        [HttpGet("{applicationId}/attachments/{documentType}")]
+        public async Task<IActionResult> GetFileDetailsListInFolder([FromRoute] string applicationId, [FromRoute] string documentType)
+        {
+            List<ViewModels.FileSystemItem> fileSystemItemVMList = new List<ViewModels.FileSystemItem>();
+
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
+
+            // validate that the user account id matches the applicant for this application
+            var applicationGUID = new Guid(applicationId);
+            var application = await _dynamicsClient.GetApplicationById(applicationGUID);
+            if (application != null)
             {
-                FileDownloadName = filename
-            };
+                var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
+                string folderName = $"{application.AdoxioName}_{applicationIdCleaned}";
+                // Get the file details list in folder
+                List<FileDetailsList> fileDetailsList = null;
+                try
+                {
+                    fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.ApplicationDocumentListTitle, folderName, documentType);
+                }
+                catch (SharePointRestException spre)
+                {
+                    _logger.LogError("Error getting SharePoint File List");
+                    _logger.LogError("Request URI:");
+                    _logger.LogError(spre.Request.RequestUri.ToString());
+                    _logger.LogError("Response:");
+                    _logger.LogError(spre.Response.Content);
+                    throw new Exception("Unable to get Sharepoint File List.");
+                }
+
+                if (fileDetailsList != null)
+                {
+                    foreach (FileDetailsList fileDetails in fileDetailsList)
+                    {
+                        ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
+                        // remove the document type text from file name
+                        fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
+                        // convert size from bytes (original) to KB
+                        fileSystemItemVM.size = int.Parse(fileDetails.Length);
+                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
+                        fileSystemItemVM.documenttype = fileDetails.DocumentType;
+                        fileSystemItemVMList.Add(fileSystemItemVM);
+                    }
+                }
+            }
+
+            else
+            {
+                _logger.LogError("Application not found.");
+                return new NotFoundResult();
+            }
+
+            return Json(fileSystemItemVMList);
         }
 
         /// <summary>
