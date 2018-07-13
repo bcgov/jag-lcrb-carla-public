@@ -477,6 +477,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Delete is very similar to a GET.
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName) + "/" + Uri.EscapeUriString(fileName);
 
+            result = await DeleteFile(serverRelativeUrl);
+
+            return result;
+        }
+
+        public async Task<bool> DeleteFile(string serverRelativeUrl)
+        {
+            bool result = false;
+            // Delete is very similar to a GET.
+            
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");
 
@@ -508,6 +518,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             return result;
-        }        
+        }
     }
 }
