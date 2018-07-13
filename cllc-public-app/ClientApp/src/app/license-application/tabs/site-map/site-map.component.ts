@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-site-map',
@@ -7,15 +8,13 @@ import { UserDataService } from '../../../services/user-data.service';
   styleUrls: ['./site-map.component.scss']
 })
 export class SiteMapComponent implements OnInit {
-  @Input() accountId: string;
+  applicationId: string;
 
-  constructor(private userDataService: UserDataService) { }
+  constructor(private userDataService: UserDataService, private route: ActivatedRoute) {
+    this.applicationId = route.parent.snapshot.params.applicationId;
+  }
 
   ngOnInit() {
-    this.userDataService.getCurrentUser()
-      .then((data) => {
-        this.accountId = data.accountid;
-      });
   }
 
 }
