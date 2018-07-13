@@ -127,6 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             public string TimeLastModified { get; set; }
             public string Length { get; set; }
             public string DocumentType { get; set; }
+            public string ServerRelativeUrl { get; set; }
         }
 
         /// <summary>
