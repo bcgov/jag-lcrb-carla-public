@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -15,12 +18,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.OData.Client;
 using Newtonsoft.Json;
-using Gov.Lclb.Cllb.Interfaces;
-using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using System.Net;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -31,11 +31,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
         private readonly IDistributedCache _distributedCache;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly SharePointFileManager _sharePointFileManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly BCeIDBusinessQuery _bceid;
         private readonly ILogger _logger;
 
-        public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, SharePointFileManager sharePointFileManager, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             this._system = context;
@@ -43,6 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             this._httpContextAccessor = httpContextAccessor;
             this._bceid = bceid;
             this._dynamicsClient = dynamicsClient;
+            this._sharePointFileManager = sharePointFileManager;
             _logger = loggerFactory.CreateLogger(typeof(AccountController));
         }
 
@@ -131,74 +133,101 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
-        [HttpGet("{accountId}")]
+        [HttpGet("business-profile/{accountId}")]
         public async Task<IActionResult> GetBusinessProfile(string accountId)
         {
             var account = (await _dynamicsClient.GetAccountById(new Guid(accountId))).ToViewModel();
-
             // get legal entities
-            var entityFilter = $"_adoxio_account_value eq {accountId} and (adoxio_isapplicant eq true or adoxio_isindividual eq 0) ";
-            var expandList = new List<string> { "adoxio_shareholderAccount" };
-            var applicant = _dynamicsClient.Adoxiolegalentities.Get(filter: entityFilter, expand: expandList).Value
-                            .Select(le =>
-                            {
-                                var legalEntity = le.ToViewModel();
-                                var entity = new ViewModels.LegalEntity
-                                {
-                                    AdoxioLegalEntity = legalEntity,
-                                    Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel()
-                                };
-                                var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
-                                                    .Get(filter: $"adoxio_AccountId eq {entity.Account.id}")
-                                                    .Value.FirstOrDefault();
-                                if (tiedHouse != null)
-                                {
-                                    entity.TiedHouse = tiedHouse.ToViewModel();
-                                }
-                                entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
-                                return entity;
-                            })
-                            .FirstOrDefault();
+            var entityFilter = $"_adoxio_account_value eq {accountId}";
+            var expandList = new List<string> { "adoxio_ShareholderAccountID" };
+            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: entityFilter, expand: expandList).Value
+                .Select(le =>
+                {
+                    var legalEntity = le.ToViewModel();
+                    var entity = new ViewModels.LegalEntity
+                    {
+                        AdoxioLegalEntity = legalEntity,
+                        Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel(),
+                    };
+                    entity.corporateDetailsFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Corporate Information").Result; ;
+                    entity.organizationStructureFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Organization Structure").Result;
+                    entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result; ;
+                    entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result; ;
+                    entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result; ;
+                    var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
+                        .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
+                        .Value.FirstOrDefault();
+                    if (tiedHouse != null)
+                    {
+                        entity.TiedHouse = tiedHouse.ToViewModel();
+                    }
+                    entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
+                    return entity;
+                })
+                .ToList();
 
             var profile = new BusinessProfile
             {
                 Account = account,
-                Applicant = applicant
+                LegalEntities = legalEntities
             };
 
-            return Json(profile);
+            var isComplete = legalEntities.Select(le =>
+            {
+                var valid = new ProfileValidation
+                {
+                    LegalEntityId = le.AdoxioLegalEntity.id,
+                    IsComplete = (le.IsComplete())
+                };
+                return valid;
+            }).ToList();
+
+            return Json(isComplete);
         }
 
         private List<ViewModels.LegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
         {
             List<ViewModels.LegalEntity> children = null;
             var childEntitiesFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntityId}";
-            var expandList = new List<string> { "adoxio_shareholderAccount", "adoxio_Account" };
+            var expandList = new List<string> { "adoxio_ShareholderAccountID", "adoxio_Account" };
             children = _dynamicsClient.Adoxiolegalentities
-                        .Get(filter: childEntitiesFilter, expand: expandList).Value
-                        .Select(le =>
-                        {
-                            var legalEntity = le.ToViewModel();
-                            var entity = new ViewModels.LegalEntity
-                            {
-                                AdoxioLegalEntity = legalEntity,
-                                Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
-                            };
-                            var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
-                                                .Get(filter: $"adoxio_AccountId eq {entity.Account.id}")
-                                                .Value.FirstOrDefault();
-                            if (tiedHouse != null)
-                            {
-                                entity.TiedHouse = tiedHouse.ToViewModel();
-                            }
-                            if (entity.AdoxioLegalEntity.isShareholder == true && entity.AdoxioLegalEntity.isindividual == false)
-                            {
-                                entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
-                            }
-                            return entity;
-                        })
-                        .ToList();
+                .Get(filter: childEntitiesFilter, expand: expandList).Value
+                .Select(le =>
+                {
+                    var legalEntity = le.ToViewModel();
+                    var entity = new ViewModels.LegalEntity
+                    {
+                        AdoxioLegalEntity = legalEntity,
+                        Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
+                    };
+                    var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
+                        .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
+                        .Value.FirstOrDefault();
+                    if (tiedHouse != null)
+                    {
+                        entity.TiedHouse = tiedHouse.ToViewModel();
+                    }
+                    if (entity.AdoxioLegalEntity.isShareholder == true && entity.AdoxioLegalEntity.isindividual == false)
+                    {
+                        entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
+                    }
+                    return entity;
+                })
+                .ToList();
             return children;
+        }
+
+        private async Task<bool> FileUploadExists(string accountId, string accountName, string documentType)
+        {
+            var exists = false;
+            var accountIdCleaned = accountId.ToUpper().Replace("-", "");
+            var folderName = $"{accountName}_{accountIdCleaned}";
+            var fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            if (fileDetailsList != null)
+            {
+                exists = fileDetailsList.Count() > 0;
+            }
+            return exists;
         }
 
         [HttpPost()]
@@ -297,7 +326,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     AdoxioIsapplicant = true
                 };
 
-
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogError("Legal Entity Before --> " + legalEntityString);
 
@@ -321,13 +349,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogError("Legal Entity After --> " + legalEntityString);
 
-                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
-                {
-                };
+                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection() { };
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
 
                 var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
-
 
             }
             else // it is a new user only.
@@ -353,7 +378,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
             }
-
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
@@ -387,7 +411,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             //account.accountId = id;
             result = account.ToViewModel();
-
 
             return Json(result);
         }

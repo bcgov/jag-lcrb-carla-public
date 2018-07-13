@@ -207,6 +207,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.shareholderAccountId = adoxio_legalentity._adoxioShareholderaccountidValue;
                 }
 
+                result.parentLegalEntityId = adoxio_legalentity._adoxioLegalentityownedValue;
+
                 result.commonnonvotingshares = adoxio_legalentity.AdoxioCommonnonvotingshares;
                 result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
                 result.dateofbirth = adoxio_legalentity.AdoxioDateofbirth;
