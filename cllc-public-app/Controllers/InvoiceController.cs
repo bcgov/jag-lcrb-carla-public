@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet()]
-		public async Task<IActionResult> GetInvoices()
+		public IActionResult GetInvoices()
         {
 			if (TestUtility.InUnitTestMode())
             {
@@ -225,10 +225,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     return new NotFoundResult();
                 }
-
-    			await _dynamicsClient.Invoices.DeleteAsync(adoxio_legalentityid.ToString());                
-                
-                return NoContent(); // 204
+                try
+                {
+                    await _dynamicsClient.Invoices.DeleteAsync(adoxio_legalentityid.ToString());
+                    return NoContent(); // 204
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error deleteing invoice");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }                
 			}
             return new NotFoundResult();
         }

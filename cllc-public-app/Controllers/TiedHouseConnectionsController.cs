@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet("{accountId}")]
-        public async Task<JsonResult> GetTiedHouseConnection(string accountId)
+        public JsonResult GetTiedHouseConnection(string accountId)
         {
             var result = new List<ViewModels.TiedHouseConnection>();
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;

@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using Gov.Lclb.Cllb.Interfaces;
+﻿﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
@@ -19,33 +8,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.OData.Client;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     public class AccountController : Controller
     {
+        private readonly BCeIDBusinessQuery _bceid;
         private readonly IConfiguration Configuration;
-        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
-        private readonly IDistributedCache _distributedCache;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly SharePointFileManager _sharePointFileManager;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly BCeIDBusinessQuery _bceid;
-        private readonly ILogger _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;        
+		private readonly ILogger _logger;        
 
-        public AccountController(Interfaces.Microsoft.Dynamics.CRM.System context, SharePointFileManager sharePointFileManager, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+
+
+		public AccountController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
-            this._system = context;
-            this._distributedCache = null; //distributedCache;                        
-            this._httpContextAccessor = httpContextAccessor;
-            this._bceid = bceid;
-            this._dynamicsClient = dynamicsClient;
+            _bceid = bceid;            
+			_dynamicsClient = dynamicsClient;
+            _httpContextAccessor = httpContextAccessor;
             this._sharePointFileManager = sharePointFileManager;
-            _logger = loggerFactory.CreateLogger(typeof(AccountController));
+            _logger = loggerFactory.CreateLogger(typeof(AccountController));            
         }
 
         /// GET account in Dynamics for the current user
@@ -87,9 +77,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // query the BCeID API to get the business record.
-            var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-            //var business = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
-
+			var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			
             if (business == null)
             {
                 return new NotFoundResult();
@@ -470,12 +459,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            // delete the associated LegalEntity
-            MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
-            if (legalentity != null)
-            {
-                _dynamicsClient.Adoxiolegalentities.Delete(legalentity.AdoxioLegalentityid);
-            }
+			// delete the associated LegalEntity
+			MicrosoftDynamicsCRMadoxioLegalentity legalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
+			if (legalentity != null) 
+			{
+				_dynamicsClient.Adoxiolegalentities.Delete(legalentity.AdoxioLegalentityid);
+			}
 
             await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
 
