@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<ViewModels.AdoxioLegalEntity> CreateDirectorOrShareholder(HttpClient _client, ViewModels.User user,
+		public static async Task<ViewModels.AdoxioLegalEntity> CreateDirectorOrShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId,
 		                                                                                  bool isDirectorFlag, bool isOfficerFlag, bool isShareholderFlag) 
 		{
 			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/child-legal-entity");
@@ -86,7 +86,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 				isDirector = isDirectorFlag,
 				isOfficer = isOfficerFlag,
 				isShareholder = isShareholderFlag,
-                account = vmAccount
+                account = vmAccount,
+				parentLegalEntityId = accountLegalEntityId
             };
             var jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -198,8 +199,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public static async Task<string> DownloadFileForAccount(HttpClient _client, string id, string fileId, bool expectSuccess)
         {
-			/* not sure if there is a way to download a file
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/" + id + "/attachments/" + fileId);
+            /*
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/" + id + "/attachment/" + fileId);
 			var response = await _client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
             if (expectSuccess)
@@ -213,13 +214,199 @@ namespace Gov.Lclb.Cllb.Public.Test
                 return null;
             }
             */
-			return null;
+            return null;
         }
 
         public static async Task<string> DeleteFileForAccount(HttpClient _client, string id)
         {
-            // TODO
+            /*
+			var request = new HttpRequestMessage(HttpMethod.Delete, "/api/adoxiolegalentity/" + id + "/attachments");
+			var response = await _client.SendAsync(request);
+            var responseString = await response.Content.ReadAsStringAsync();
+			*/
 			return null;
         }
+
+		public static async Task<ViewModels.AdoxioApplication> CreateLicenceApplication(HttpClient _client, ViewModels.Account currentAccount)
+		{
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication");
+
+            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+            {
+                licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
+                registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
+                applicant = currentAccount, //account
+                establishmentName = "Not a Dispensary",
+                establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
+                establishmentaddressstreet = "123 Any Street",
+                establishmentaddresscity = "Victoria, BC",
+                establishmentaddresspostalcode = "V1X 1X1"
+            };
+
+            var jsonString = JsonConvert.SerializeObject(viewmodel_application);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            // parse as JSON.
+            ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+
+            //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
+            Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
+            Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
+            Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+
+			return responseViewModel;
+		}
+
+		public static async Task<ViewModels.AdoxioApplication> GetLicenceApplication(HttpClient _client, string applicationId, bool expectSuccess)
+		{
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + applicationId);
+            var response = await _client.SendAsync(request);
+			if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                var jsonString = await response.Content.ReadAsStringAsync();
+				ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+                return responseViewModel;
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                var _discard = await response.Content.ReadAsStringAsync();
+                return null;
+            }
+		}
+
+		public static async Task<Dictionary<string, string>> PayLicenceApplicationFee(HttpClient _client, string applicationId, bool accepted, bool expectSuccess)
+		{
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/payment/submit/" + applicationId);
+            var response = await _client.SendAsync(request);
+			if (expectSuccess)
+			{
+				response.EnsureSuccessStatusCode();
+				string json = await response.Content.ReadAsStringAsync();
+                Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+			}
+			else
+			{
+				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+				string _discard = await response.Content.ReadAsStringAsync();
+			}
+
+			string accept = accepted ? "/ACCEPT" : "/DECLINE";
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/payment/verify/" + applicationId + accept);
+            response = await _client.SendAsync(request);
+            if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
+                Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+				return values;
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                string _discard = await response.Content.ReadAsStringAsync();
+				return null;
+            }
+		}
+
+		public static async Task<string> DeleteLicenceApplication(HttpClient _client, string applicationId)
+		{
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + applicationId + "/delete");
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+			return applicationId;
+		}
+        
+		public static async Task<string> UploadFileToApplication(HttpClient _client, string id, string docType)
+        {
+            // Attach a file
+            string testData = "This is just a test.";
+            byte[] bytes = Encoding.ASCII.GetBytes(testData);
+            string documentType = docType;
+
+            // Create random filename
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[9];
+            var random = new Random();
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+            var randomString = new String(stringChars);
+            string filename = randomString + ".txt";
+
+            MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
+            var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
+            fileContent.Headers.ContentDisposition.Name = "File";
+            fileContent.Headers.ContentDisposition.FileName = filename;
+            multiPartContent.Add(fileContent);
+            multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
+
+            // create a new request object for the upload, as we will be using multipart form submission.
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/attachments");
+            requestMessage.Content = multiPartContent;
+
+            var uploadResponse = await _client.SendAsync(requestMessage);
+            uploadResponse.EnsureSuccessStatusCode();
+
+            return filename;
+        }
+
+        public static async Task<List<ViewModels.FileSystemItem>> GetFileListForApplication(HttpClient _client, string id, string docType, bool expectSuccess)
+        {
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id + "/attachments/" + docType);
+            var response = await _client.SendAsync(request);
+            var jsonString = await response.Content.ReadAsStringAsync();
+            if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                List<ViewModels.FileSystemItem> files = JsonConvert.DeserializeObject<List<ViewModels.FileSystemItem>>(jsonString);
+                return files;
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                return null;
+            }
+        }
+
+        public static async Task<string> DownloadFileForApplication(HttpClient _client, string id, string fileId, bool expectSuccess)
+        {
+            /*
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id + "/attachment/" + fileId);
+            var response = await _client.SendAsync(request);
+            var responseString = await response.Content.ReadAsStringAsync();
+            if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                return responseString;
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                return null;
+            }
+            */
+            return null;
+        }
+
+        public static async Task<string> DeleteFileForApplication(HttpClient _client, string id)
+        {
+            /*
+            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/adoxioapplication/" + id + "/attachments");
+            var response = await _client.SendAsync(request);
+            var responseString = await response.Content.ReadAsStringAsync();
+            */
+            return null;
+        }
+
 	}
 }
