@@ -37,6 +37,28 @@ namespace Gov.Lclb.Cllb.Public.Test
 			}
 		}
 
+		public static async Task<ViewModels.Account> UpdateAccountRecord(HttpClient _client, string id, ViewModels.Account account, bool expectSuccess)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Put, "/api/account/" + id)
+			{
+                Content = new StringContent(JsonConvert.SerializeObject(account), Encoding.UTF8, "application/json")
+            };
+            var response = await _client.SendAsync(request);
+            if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                var jsonString = await response.Content.ReadAsStringAsync();
+                ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+                return responseViewModel;
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                var _discard = await response.Content.ReadAsStringAsync();
+                return null;
+            }
+        }
+
 		public static async Task<ViewModels.AdoxioLegalEntity> GetLegalEntityRecordForCurrent(HttpClient _client)
         {
 			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
