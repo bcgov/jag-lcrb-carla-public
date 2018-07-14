@@ -26,7 +26,8 @@ export class PaymentConfirmationComponent {
     trnDate: string;
     trnId: string;
     trnOrderNumber: string;
-    invoice: string;
+  invoice: string;
+  isApproved: boolean;
 
     /** payment-confirmation ctor */
     constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
@@ -81,6 +82,13 @@ export class PaymentConfirmationComponent {
         this.trnOrderNumber = json.trnOrderNumber;
         this.invoice = json.invoice;
 
+        if (this.trnApproved == "1") {
+          this.isApproved = true;
+        } else {
+          this.isApproved = false;
+        }
+
+
       },
       err => {
         console.log("Error occured");
@@ -90,6 +98,6 @@ export class PaymentConfirmationComponent {
 
   return_to_application()
   {
-     this.router.navigate(['./license-application/' + this.applicationId]);
+    this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
   }
 }
