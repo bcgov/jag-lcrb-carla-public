@@ -63,6 +63,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Null(secAccount);
 			var secLegalEntity = await SecurityHelper.GetLegalEntityRecord(_client, legalEntity1.id, false);
 			Assert.Null(secLegalEntity);
+
+			secAccount = await SecurityHelper.UpdateAccountRecord(_client, account1.id, account1, false);
+			Assert.Null(secAccount);
             // ***
 
             // logout and cleanup second test user
