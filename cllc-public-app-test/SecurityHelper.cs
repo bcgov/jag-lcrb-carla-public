@@ -88,6 +88,25 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
+		public static async Task<List<ViewModels.AdoxioLegalEntity>> GetLegalEntitiesByPosision(HttpClient _client, string parentAccountId, string positionType, bool expectSuccess)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/position/" + parentAccountId + "/" + positionType);
+            var response = await _client.SendAsync(request);
+			if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                var jsonString = await response.Content.ReadAsStringAsync();
+				List<ViewModels.AdoxioLegalEntity> responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+                return responseViewModel;
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                var _discard = await response.Content.ReadAsStringAsync();
+                return null;
+            }
+        }
+
 		public static async Task<ViewModels.AdoxioLegalEntity> CreateDirectorOrShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId,
 		                                                                                  bool isDirectorFlag, bool isOfficerFlag, bool isShareholderFlag) 
 		{
