@@ -1,18 +1,22 @@
 <mat-card class="mat-elevation-z0">
   <mat-card-title>
-    <h1>Security &amp; Financial Assessments</h1>
+    <h1>Security Screening &amp; Financial Check Authorizations</h1>
   </mat-card-title>
   <mat-card-subtitle>
 
     <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'Society', 
                'GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
-      The following people in your organization will need to provide their consent for a security assessment and financial check.
-      An email will be sent to each person with a unique login link to provide their consent.
+      The following people in your organization will need to provide an authorization for a security screening and financial integrity check.
+      Authorizations can only be provided by the individual themselves.
     </p>
 
     <p *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
-      You will need to provide consent for a security screening and financial assessment. An email will be sent to you with a unique
-      login link to provide consent.
+      You will need to provide an authorization for a security screening and financial integrity check.
+    </p>
+
+    <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'Society', 
+               'GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
+      <b>Send authorization requests for each individual listed below</b>
     </p>
 
   </mat-card-subtitle>
@@ -72,7 +76,7 @@
 
   <p></p>
   <a class="globalButton btn btn-primary" tabindex="1" (click)="sendConsentRequestEmail()">
-    <strong>Send Consent Request</strong>
+    <strong>Send Authorization Request</strong>
   </a>
 
 </mat-card>

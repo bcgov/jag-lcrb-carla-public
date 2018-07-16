@@ -106,8 +106,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].AdoxioLegalentityid.ToString()}";
                     childFilter += " and adoxio_isapplicant ne true and adoxio_isindividual eq 0";
-
-                    response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter);
+                    var expandList = new List<string>{"adoxio_Account"};
+                    response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter, expand: expandList);
                     var childEntities = response.Value.ToList();
                     legalEntities.AddRange(childEntities);
                 }
@@ -301,6 +301,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
+                        fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
                         fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
                         fileSystemItemVM.documenttype = fileDetails.DocumentType;
                         fileSystemItemVMList.Add(fileSystemItemVM);
@@ -316,6 +317,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return Json(fileSystemItemVMList);
         }
+
+        /// <summary>
+        /// Delete a file.
+        /// </summary>
+        /// <param name="id">Application ID</param>
+        /// <param name="serverRelativeUrl">The ServerRelativeUrl to delete</param>
+        /// <returns></returns>
+        [HttpDelete("{id}/attachments")]
+        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string id)
+        {
+            // get the file.
+            if (id == null || serverRelativeUrl == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
+                if (result)
+                {
+                    return new OkResult();
+                }
+            }
+            return new NotFoundResult();
+        }
+
 
         [HttpPost("{accountId}/attachments")]
         public async Task<IActionResult> UploadFile([FromRoute] string accountId, [FromForm]IFormFile file, [FromForm] string documentType)
@@ -487,8 +514,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var account = new MicrosoftDynamicsCRMaccount();
                 account.Name = item.name;
-                account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Shareholder;
-                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), item.legalentitytype);
+                account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Shareholder;
+                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
                 //create tied house under account

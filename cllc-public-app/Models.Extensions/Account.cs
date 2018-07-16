@@ -252,7 +252,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 				if (account.AdoxioBusinesstype != null)
 				{
-					accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), account.AdoxioBusinesstype).ToString();
+					accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), account.AdoxioBusinesstype).ToString();
 				}
             }
             return accountVM;

@@ -48,9 +48,9 @@ export class DirectorsAndOfficersComponent implements OnInit {
   getDirectorsAndOfficers() {
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'directors-officers-management')
       .subscribe((result) => {
-        let data: AdoxioLegalEntity[] = result.json();
-        let positionList: string[] = [];
+        const data: AdoxioLegalEntity[] = result.json();
         data.forEach(d => {
+          const positionList: string[] = [];
           if (d.isDirector) {
             positionList.push('Director');
           }
@@ -58,16 +58,16 @@ export class DirectorsAndOfficersComponent implements OnInit {
             positionList.push('Officer');
           }
           if (d.isSeniorManagement) {
-            positionList.push('Senior Manager')
+            positionList.push('Senior Manager');
           }
           d.position = positionList.join(', ');
-        })
+        });
         this.dataSource.data = data;
       });
   }
 
   formDataToModelData(formData: any): AdoxioLegalEntity {
-    let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+    const adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
     adoxioLegalEntity.isShareholder = false;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     adoxioLegalEntity.id = formData.id;
@@ -100,7 +100,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
         person: person,
         businessType: this.businessType
       }
-    }
+    };
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(DirectorAndOfficerPersonDialogComponent, dialogConfig);
