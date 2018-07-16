@@ -604,24 +604,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating parent
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-<<<<<<< HEAD
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 name = "LETFirst LETLast",
                 isShareholder = true,
                 isindividual = false,
                 account = await AccountFactory()
-=======
-                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.GeneralPartnership,
-                firstname = "LETFirst",
-                middlename = "LETMiddle",
-                lastname = "LETLast",
-                name = randomNewUserName("LETFirst LETLast", 6),
-                dateofbirth = DateTime.Now,
-                isindividual = true,
-                commonvotingshares = 2018,
-                commonnonvotingshares = 3000,
-                account = parentAccount
->>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
             };
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -638,14 +625,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating child
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-<<<<<<< HEAD
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-=======
-                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.GeneralPartnership,
-                firstname = "Create",
-                middlename = "Dynamics",
-                lastname = "ShareholderLE",
->>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
 				name = "Create ShareholderLE",
                 commonvotingshares = 100,
                 account = await AccountFactory(),
@@ -673,43 +653,33 @@ namespace Gov.Lclb.Cllb.Public.Test
             string service = "adoxiolegalentity";
 
             var loginUser = randomNewUserName("TestThreeTierShareholders", 6);
-            var strId = await LoginAndRegisterAsNewUser(loginUser);
+            var strId = await LoginAndRegisterAsNewUser(loginUser, "Cybertron Commercial Goods", "PrivateCorporation");
             // Creating parent
             var levelOneAccount = await AccountFactory();
-            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
-            {
-<<<<<<< HEAD
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                name = "Cybertron Commercial Goods",
-                dateofbirth = DateTime.Now,
-=======
-                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                firstname = "LETFirst",
-                middlename = "LETMiddle",
-                lastname = "LETLast",
-                name = randomNewUserName("LETFirst LETLast", 6),
-                isShareholder = true,
->>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
-                isindividual = false,
-                commonvotingshares = 2018,
-                commonnonvotingshares = 3000,
-                account = levelOneAccount
-            };
+            // ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            // {
+            //     legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+            //     name = "Cybertron Commercial Goods",
+            //     dateofbirth = DateTime.Now,
+            //     isindividual = false,
+            //     commonvotingshares = 2018,
+            //     commonnonvotingshares = 3000,
+            //     account = levelOneAccount
+            // };
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-            string jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/business-profile-summary");
+            // request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
             var response = await _client.SendAsync(request);
-            jsonString = await response.Content.ReadAsStringAsync();
+            String jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            var responseViewModelList = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
 
-            Assert.Equal("Cybertron Commercial Goods", responseViewModel.name);
-            var levelOneLegalEntityId = responseViewModel.id;
+            Assert.Equal("Cybertron Commercial Goods TestBusiness", responseViewModelList.First().name);
+            var levelOneLegalEntityId = responseViewModelList.First().id;
 
             // First tier director
-            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
                 firstname = "Ms.",
                 middlename = "Test",
@@ -729,7 +699,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal("Ms. Director", responseViewModel.name);
 
             // First tier officer
@@ -759,16 +729,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating child
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-<<<<<<< HEAD
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
-                name = "Cannabis Test Investor",
-=======
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                firstname = "Create",
-                middlename = "Dynamics",
-                lastname = "ShareholderLE",
-				name = "Create ShareholderLE",
->>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
+                name = "Cannabis Test Investor",
                 commonvotingshares = 100,
                 account = levelOneAccount,
                 isShareholder = true,
@@ -794,7 +756,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating child 2
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 name = "Green Group Investments",
                 commonvotingshares = 100,
                 account = levelTwoAccount,
