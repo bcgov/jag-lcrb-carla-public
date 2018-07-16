@@ -119,7 +119,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 //position = ViewModels.PositionOptions.Director,
                 firstname = firstName,
                 middlename = middleName,
@@ -236,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             };
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 //position = ViewModels.PositionOptions.Shareholder,
                 firstname = "Test",
                 middlename = "The",
@@ -277,7 +277,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             };
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
-                legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 //position = ViewModels.PositionOptions.Director,
                 firstname = "Test",
                 middlename = "The",
@@ -370,7 +370,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
                 Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                Adoxio_legalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 Adoxio_position = (int?)ViewModels.PositionOptions.Director,
                 Adoxio_name = initialName
             };
@@ -525,7 +525,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
             {
                 Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_legalentitytype = (int?)ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+                Adoxio_legalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 Adoxio_position = (int?)ViewModels.PositionOptions.Director,
                 Adoxio_name = initialName
             };
@@ -604,11 +604,24 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating parent
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
+<<<<<<< HEAD
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
                 name = "LETFirst LETLast",
                 isShareholder = true,
                 isindividual = false,
                 account = await AccountFactory()
+=======
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.GeneralPartnership,
+                firstname = "LETFirst",
+                middlename = "LETMiddle",
+                lastname = "LETLast",
+                name = randomNewUserName("LETFirst LETLast", 6),
+                dateofbirth = DateTime.Now,
+                isindividual = true,
+                commonvotingshares = 2018,
+                commonnonvotingshares = 3000,
+                account = parentAccount
+>>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
             };
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -625,7 +638,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating child
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
+<<<<<<< HEAD
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
+=======
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.GeneralPartnership,
+                firstname = "Create",
+                middlename = "Dynamics",
+                lastname = "ShareholderLE",
+>>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
 				name = "Create ShareholderLE",
                 commonvotingshares = 100,
                 account = await AccountFactory(),
@@ -658,9 +678,18 @@ namespace Gov.Lclb.Cllb.Public.Test
             var levelOneAccount = await AccountFactory();
             ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
+<<<<<<< HEAD
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
                 name = "Cybertron Commercial Goods",
                 dateofbirth = DateTime.Now,
+=======
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                firstname = "LETFirst",
+                middlename = "LETMiddle",
+                lastname = "LETLast",
+                name = randomNewUserName("LETFirst LETLast", 6),
+                isShareholder = true,
+>>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
                 isindividual = false,
                 commonvotingshares = 2018,
                 commonnonvotingshares = 3000,
@@ -730,8 +759,16 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Creating child
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
             {
+<<<<<<< HEAD
                 legalentitytype = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation,
                 name = "Cannabis Test Investor",
+=======
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                firstname = "Create",
+                middlename = "Dynamics",
+                lastname = "ShareholderLE",
+				name = "Create ShareholderLE",
+>>>>>>> 89eb0b42ab3a104fad64937a8417855dadda2cbd
                 commonvotingshares = 100,
                 account = levelOneAccount,
                 isShareholder = true,
