@@ -161,12 +161,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set license type relationship
 
-            var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType).Result;
-            patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
-            patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
             try
             {
-               _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
+                patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
+                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
+                _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
             }
             catch (OdataerrorException odee)
             {
@@ -315,14 +315,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _sharePointFileManager.GetFileById(fileId);
+
+                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
+                if (fileSystemItem != null)
+                {
+                    byte[] fileContents = await _sharePointFileManager.DownloadFile(fileSystemItem.Url);
+                    return new FileContentResult(fileContents, "application/octet-stream")
+                    {
+                        FileDownloadName = fileSystemItem.Name
+                    };
+                }
             }
-            string filename = "";
-            byte[] fileContents = new byte[10];
-            return new FileContentResult(fileContents, "application/octet-stream")
-            {
-                FileDownloadName = filename
-            };
+            return new NotFoundResult();
         }
 
         /// <summary>
@@ -374,7 +378,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
-                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
+                        fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
+                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);                        
                         fileSystemItemVM.documenttype = fileDetails.DocumentType;
                         fileSystemItemVMList.Add(fileSystemItemVM);
                     }
@@ -388,6 +393,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return Json(fileSystemItemVMList);
+        }
+
+        /// <summary>
+        /// Delete a file.
+        /// </summary>
+        /// <param name="id">Application ID</param>
+        /// <param name="serverRelativeUrl">The ServerRelativeUrl to delete</param>
+        /// <returns></returns>
+        [HttpDelete("{id}/attachments")]
+        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string id)
+        {
+            // get the file.
+            if (id == null || serverRelativeUrl == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
+                if (result)
+                {
+                    return new OkResult();
+                }                
+            }
+            return new NotFoundResult();
         }
 
         /// <summary>
