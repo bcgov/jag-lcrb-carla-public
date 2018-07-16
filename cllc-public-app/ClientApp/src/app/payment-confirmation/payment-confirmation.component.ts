@@ -11,26 +11,26 @@ import { Subscription } from 'rxjs';
 })
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
-    busy: Subscription;
-    transactionId: string;
-    applicationId: string;
-    authCode: string;
-    avsMessage: string;
-    avsAddrMatch: string;
-    messageId: string;
-    messageText: string;
-    paymentMethod: string;
-    cardType: string;
-    trnAmount: string;
-    trnApproved: string;
-    trnDate: string;
-    trnId: string;
-    trnOrderNumber: string;
+  busy: Subscription;
+  transactionId: string;
+  applicationId: string;
+  authCode: string;
+  avsMessage: string;
+  avsAddrMatch: string;
+  messageId: string;
+  messageText: string;
+  paymentMethod: string;
+  cardType: string;
+  trnAmount: string;
+  trnApproved: string;
+  trnDate: string;
+  trnId: string;
+  trnOrderNumber: string;
   invoice: string;
-  isApproved: boolean;
+  isApproved: boolean = false;
 
     /** payment-confirmation ctor */
-    constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
+  constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
 	    this.route.queryParams.subscribe(params => {
 	        this.transactionId = params['trnId'];
 	        this.applicationId = params['SessionKey'];
@@ -42,15 +42,17 @@ export class PaymentConfirmationComponent {
     	this.verify_payment();
     }
 
-  verify_payment() 
+  /**
+   * Payment verification
+   * */
+  verify_payment()
   {
-    this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
+    this.busy = this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
         //console.log("applicationVM: ", res.json());
-        var json = res.json();
-    	console.log(json);
-
-        switch (json.cardType) {
+        var verifyPayResponse = res.json();
+        //console.log(verifyPayResponse);
+        switch (verifyPayResponse.cardType) {
         	case 'VI': 
         		this.cardType = "Visa";
         		break;
@@ -67,20 +69,20 @@ export class PaymentConfirmationComponent {
         		this.cardType = "Debit MasterCard";
         		break;
         	default:
-        		this.cardType = json.cardType;
+        		this.cardType = verifyPayResponse.cardType;
         }
-        this.authCode = json.authCode;
-        this.avsMessage = json.avsMessage;
-        this.avsAddrMatch = json.avsAddrMatch;
-        this.messageId = json.messageId;
-        this.messageText = json.messageText;
-        this.paymentMethod = json.paymentMethod;
-        this.trnAmount = json.trnAmount;
-        this.trnApproved = json.trnApproved;
-        this.trnDate = json.trnDate;
-        this.trnId = json.trnId;
-        this.trnOrderNumber = json.trnOrderNumber;
-        this.invoice = json.invoice;
+        this.authCode = verifyPayResponse.authCode;
+        this.avsMessage = verifyPayResponse.avsMessage;
+        this.avsAddrMatch = verifyPayResponse.avsAddrMatch;
+        this.messageId = verifyPayResponse.messageId;
+        this.messageText = verifyPayResponse.messageText;
+        this.paymentMethod = verifyPayResponse.paymentMethod;
+        this.trnAmount = verifyPayResponse.trnAmount;
+        this.trnApproved = verifyPayResponse.trnApproved;
+        this.trnDate = verifyPayResponse.trnDate;
+        this.trnId = verifyPayResponse.trnId;
+        this.trnOrderNumber = verifyPayResponse.trnOrderNumber;
+        this.invoice = verifyPayResponse.invoice;
 
         if (this.trnApproved == "1") {
           this.isApproved = true;
