@@ -46,12 +46,12 @@
         </li>
         <li *ngIf="tabStructure.indexOf('finance-integrity') !== -1" [ngClass]="{'active': view_tab == 'finance-integrity'}">
           <a (click)="changeTab('finance-integrity')">
-            <span>Finance Information</span>
+            <span>Financial Information</span>
           </a>
         </li>
         <li *ngIf="tabStructure.indexOf('security-assessment') !== -1" [ngClass]="{'active': view_tab == 'security-assessment'}">
           <a (click)="changeTab('security-assessment')">
-            <span>Security Assessments</span>
+            <span>Authorizations</span>
           </a>
         </li>
       </ul>
@@ -84,8 +84,9 @@
         </a>
         &nbsp;
         <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
-          <strong *ngIf="view_tab != 'before-you-start'">Save and Continue</strong>
+          <strong *ngIf="view_tab != 'before-you-start' && view_tab != 'Authorizations'">Save and Continue</strong>
           <strong *ngIf="view_tab == 'before-you-start'">Start</strong>
+          <strong *ngIf="view_tab == 'Authorizations'">Done</strong>
           <br>
         </a>
       </div>
