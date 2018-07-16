@@ -110,9 +110,9 @@ export class SubmitPayComponent implements OnInit {
    *
    * */
   submit_application() {
-    this.validateApplication(this.applicationId).subscribe(isValid => {
+    this.busy = this.validateApplication(this.applicationId).subscribe(isValid => {
       if (isValid) {
-        this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
+        this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
           res => {
             // console.log("applicationVM: ", res.json());
             const jsonUrl = res.json();
