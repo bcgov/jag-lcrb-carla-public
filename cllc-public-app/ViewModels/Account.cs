@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -62,6 +62,61 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ViewModels.Contact primarycontact { get; set; }
 
         public string businessType { get; set; }
+
+        public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype)
+        {
+            var isComplete = false;
+            var tiedHouse = new ViewModels.TiedHouseConnection();
+            switch (legalentitytype)
+            {
+                case AdoxioApplicantTypeCodes.PrivateCorporation:
+                case AdoxioApplicantTypeCodes.PublicCorporation:
+                case AdoxioApplicantTypeCodes.UnlimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.Society:
+                    isComplete = !string.IsNullOrEmpty(bcIncorporationNumber) &&
+                        !string.IsNullOrEmpty(businessNumber) &&
+                        (dateOfIncorporationInBC != null) &&
+                        !string.IsNullOrEmpty(contactEmail) &&
+                        !string.IsNullOrEmpty(contactPhone) &&
+                        !string.IsNullOrEmpty(mailingAddressName) &&
+                        !string.IsNullOrEmpty(mailingAddressStreet) &&
+                        !string.IsNullOrEmpty(mailingAddressCity) &&
+                        !string.IsNullOrEmpty(mailingAddressCountry) &&
+                        (mailingAddressProvince != null) // TODO: This field should be a string(by Moffat)
+                        &&
+                        !string.IsNullOrEmpty(mailingAddresPostalCode);
+                    break;
+                case AdoxioApplicantTypeCodes.SoleProprietor:
+                    isComplete = !string.IsNullOrEmpty(businessNumber) &&
+                        !string.IsNullOrEmpty(contactEmail) &&
+                        !string.IsNullOrEmpty(contactPhone) &&
+                        !string.IsNullOrEmpty(mailingAddressName) &&
+                        !string.IsNullOrEmpty(mailingAddressStreet) &&
+                        !string.IsNullOrEmpty(mailingAddressCity) &&
+                        !string.IsNullOrEmpty(mailingAddressCountry) &&
+                        (mailingAddressProvince != null) &&
+                        !string.IsNullOrEmpty(mailingAddresPostalCode);
+                    break;
+                case AdoxioApplicantTypeCodes.GeneralPartnership:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
+                case AdoxioApplicantTypeCodes.LimitedPartnership:
+                    isComplete = !string.IsNullOrEmpty(businessNumber) &&
+                        !string.IsNullOrEmpty(contactEmail) &&
+                        !string.IsNullOrEmpty(contactPhone) &&
+                        !string.IsNullOrEmpty(mailingAddressName) &&
+                        !string.IsNullOrEmpty(mailingAddressStreet) &&
+                        !string.IsNullOrEmpty(mailingAddressCity) &&
+                        !string.IsNullOrEmpty(mailingAddressCountry) &&
+                        (mailingAddressProvince != null) &&
+                        !string.IsNullOrEmpty(mailingAddresPostalCode);
+                    break;
+                default:
+                    isComplete = false;
+                    break;
+            }
+            return isComplete;
+        }
 
     }
 }

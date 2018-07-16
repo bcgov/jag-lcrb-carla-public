@@ -133,9 +133,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             // adoxio_dateemailsent
         }
 
-        /// <summary>
-        /// Convert a given voteQuestion to a ViewModel
-        /// </summary>        
+        // /// <summary>
+        // /// Convert a given voteQuestion to a ViewModel
+        // /// </summary>        
         public static ViewModels.AdoxioLegalEntity ToViewModel(this Adoxio_legalentity adoxio_legalentity)
         {
             ViewModels.AdoxioLegalEntity result = null;
@@ -159,7 +159,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = adoxio_legalentity.Adoxio_lastname;
                 if (adoxio_legalentity.Adoxio_legalentitytype != null)
                 {
-                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
+                    result.legalentitytype = (AdoxioApplicantTypeCodes)adoxio_legalentity.Adoxio_legalentitytype;
                 }
 
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
@@ -207,6 +207,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.shareholderAccountId = adoxio_legalentity._adoxioShareholderaccountidValue;
                 }
 
+                result.parentLegalEntityId = adoxio_legalentity._adoxioLegalentityownedValue;
+
                 result.commonnonvotingshares = adoxio_legalentity.AdoxioCommonnonvotingshares;
                 result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
                 result.dateofbirth = adoxio_legalentity.AdoxioDateofbirth;
@@ -217,13 +219,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = adoxio_legalentity.AdoxioLastname;
                 if (adoxio_legalentity.AdoxioLegalentitytype != null)
                 {
-                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.AdoxioLegalentitytype;
+                    result.legalentitytype = (AdoxioApplicantTypeCodes)adoxio_legalentity.AdoxioLegalentitytype;
                 }
 
                 result.middlename = adoxio_legalentity.AdoxioMiddlename;
                 result.name = adoxio_legalentity.AdoxioName;
                 result.email = adoxio_legalentity.AdoxioEmail;
                 result.isPartner =  (adoxio_legalentity.AdoxioIspartner == true);
+                result.isApplicant =  (adoxio_legalentity.AdoxioIsapplicant == true);
                 result.isShareholder =  (adoxio_legalentity.AdoxioIsshareholder == true);
                 // result.isTrustee =  adoxio_legalentity.AdoxioIstrustee;
                 // result.isOwner =  adoxio_legalentity.AdoxioIsowner;
@@ -271,6 +274,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_middlename = from.middlename;
                 result.Adoxio_name = from.name;
 
+                result.Adoxio_isapplicant = (from.isApplicant == true);
                 result.Adoxio_ispartner = (from.isPartner == true);
                 result.Adoxio_isshareholder =  (from.isShareholder == true);
                 //result.AdoxioIstrustee = from.isTrustee;
