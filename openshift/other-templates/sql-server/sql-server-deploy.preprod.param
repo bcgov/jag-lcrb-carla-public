@@ -1,0 +1,7 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: mssql-preprod
+#=========================================================
+NAME=mssql-preprod
+DATABASE_SERVICE_NAME=mssql-preprod
+
