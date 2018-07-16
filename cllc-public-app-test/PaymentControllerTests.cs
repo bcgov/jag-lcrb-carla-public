@@ -99,11 +99,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string ordernum = values["url"].Substring(values["url"].IndexOf("trnOrderNumber=")+15, 10);
 			Assert.Equal(10, ordernum.Length);
 
-			string actual_url = "https://google.ca/Payment/Payment.asp?merchant_id=123456&trnType=P&trnOrderNumber=" + ordernum + 
-				"&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&ref3=" + id +
-				"&trnAmount=7500.00&hashExpiry=";
-			Assert.True(values["url"].Length > actual_url.Length);
-			Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
+            string actual_url = "https://web.na.bambora.com/scripts/Payment/Payment.asp?merchant_id=336660000&trnType=P&trnOrderNumber=" + ordernum +
+                "&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&ref3=" + id +
+                "&trnAmount=7500.00&hashExpiry=";
+            Assert.True(values["url"].Length > actual_url.Length);
+            Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
             
             // get a response
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/verify/" + id + "/APPROVE");
