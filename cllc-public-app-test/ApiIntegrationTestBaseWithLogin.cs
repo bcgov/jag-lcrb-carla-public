@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		}
 
         // this fellow returns the external id of the new account
-        public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser, string businessName)
+        public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser, string businessName, string businessType = "PublicCorporation")
 		{
 			string accountService = "account";
 
@@ -82,7 +82,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             };
 
             ViewModels.Account viewmodel_account = account.ToViewModel();
-			viewmodel_account.businessType = "PublicCorporation";
+
+			viewmodel_account.businessType = businessType;
 
             Assert.Equal(account.Adoxio_externalid, viewmodel_account.externalId);
 
