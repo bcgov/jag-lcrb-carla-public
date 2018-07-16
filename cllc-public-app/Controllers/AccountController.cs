@@ -241,8 +241,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Oops no ContactSiteminderGuid exernal id");
 
             // get BCeID record for the current user
-            //var bceidBusiness = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
-            var bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             // get the contact record.
             MicrosoftDynamicsCRMcontact userContact = null;
