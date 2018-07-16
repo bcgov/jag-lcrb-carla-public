@@ -136,10 +136,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //adoxio_totalshares (whole number)
         public bool isShareholderComplete(Adoxio_applicanttypecodes? businessType, bool shareholderFilesExists, bool shareholdersExist, bool partnersExist)
         {
-            if (isShareholder != true)
-            {
-                return true;
-            }
             var isComplete = false;
             switch (businessType)
             {
@@ -214,10 +210,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         }
         public bool isDirectorOfficerComplete(Adoxio_applicanttypecodes? businessType, bool directorsExist)
         {
-            if (isShareholder == true || isApplicant == true)
-            {
-                return true;
-            }
             var isComplete = false;
             switch (businessType)
             {
