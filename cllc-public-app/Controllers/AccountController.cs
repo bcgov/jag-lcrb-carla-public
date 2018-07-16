@@ -311,7 +311,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     AdoxioAccount = account,
                     AdoxioName = item.name,
                     AdoxioIsindividual = 0,
-                    AdoxioIsapplicant = true
+                    AdoxioIsapplicant = true,
+                    AdoxioLegalentitytype = account.AdoxioBusinesstype
                 };
 
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);
