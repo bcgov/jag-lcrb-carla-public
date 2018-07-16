@@ -93,7 +93,7 @@
                   <div ngbDropdown class="d-inline-block">
                     <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
                     <div ngbDropdownMenu>
-                      <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile/' + profile.accountId + '/' + profile.id + '/before-you-start'])">{{profile.name}}</button>
+                      <button class="dropdown-item" *ngFor="let profile of businessProfiles" (click)="router.navigate(['/business-profile/' + (profile.shareholderAccountId || profile.accountId) + '/' + profile.id + '/before-you-start'])">{{profile.name}}</button>
                     </div>
                   </div>
                 </li>
