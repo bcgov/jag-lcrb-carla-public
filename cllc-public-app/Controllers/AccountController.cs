@@ -1,4 +1,4 @@
-﻿﻿using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
@@ -23,19 +23,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration Configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly SharePointFileManager _sharePointFileManager;
-        private readonly IHttpContextAccessor _httpContextAccessor;        
-		private readonly ILogger _logger;        
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger _logger;
 
 
 
-		public AccountController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public AccountController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
-            _bceid = bceid;            
-			_dynamicsClient = dynamicsClient;
+            _bceid = bceid;
+            _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
-            this._sharePointFileManager = sharePointFileManager;
-            _logger = loggerFactory.CreateLogger(typeof(AccountController));            
+            _sharePointFileManager = sharePointFileManager;
+            _logger = loggerFactory.CreateLogger(typeof(AccountController));
         }
 
         /// GET account in Dynamics for the current user
@@ -77,8 +77,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // query the BCeID API to get the business record.
-			var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-			
+            var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+
             if (business == null)
             {
                 return new NotFoundResult();
@@ -138,11 +138,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         AdoxioLegalEntity = legalEntity,
                         Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel(),
                     };
-                    entity.corporateDetailsFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Corporate Information").Result; ;
+                    entity.corporateDetailsFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Corporate Information").Result;
                     entity.organizationStructureFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Organization Structure").Result;
-                    entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result; ;
-                    entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result; ;
-                    entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result; ;
+                    entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result;
+                    entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result;
+                    entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result;
                     var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
                         .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
                         .Value.FirstOrDefault();
@@ -459,12 +459,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-			// delete the associated LegalEntity
-			MicrosoftDynamicsCRMadoxioLegalentity legalentity = _dynamicsClient.GetAdoxioLegalentityByAccountId(accountId);
-			if (legalentity != null) 
-			{
-				_dynamicsClient.Adoxiolegalentities.Delete(legalentity.AdoxioLegalentityid);
-			}
+            // delete the associated LegalEntity
+            string accountFilter = "_adoxio_account_value eq " + id.ToString();
+            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value.ToList();
+            legalEntities.ForEach(le => {
+                _dynamicsClient.Adoxiolegalentities.Delete(le.AdoxioLegalentityid);
+            });
 
             await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
 

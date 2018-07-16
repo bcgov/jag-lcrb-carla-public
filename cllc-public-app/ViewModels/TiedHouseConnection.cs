@@ -56,8 +56,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels {
                     break;
                 case Adoxio_applicanttypecodes.Society:
                     isComplete =
-                        (CorpConnectionFederalProducer == 0 ||
-                            (CorpConnectionFederalProducer == 1 && !String.IsNullOrEmpty (CorpConnectionFederalProducerDetails)));
+                        (SocietyConnectionFederalProducer == 0 ||
+                            (SocietyConnectionFederalProducer == 1 && !String.IsNullOrEmpty (SocietyConnectionFederalProducerDetails)));
                     break;
                 case Adoxio_applicanttypecodes.SoleProprietor:
                     isComplete = true;
@@ -66,8 +66,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels {
                 case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
                 case Adoxio_applicanttypecodes.LimitedPartnership:
                     isComplete =
-                        (CorpConnectionFederalProducer == 0 ||
-                            (CorpConnectionFederalProducer == 1 && !String.IsNullOrEmpty (CorpConnectionFederalProducerDetails)));
+                        (PartnersConnectionFederalProducer == 0 ||
+                            (PartnersConnectionFederalProducer == 1 && !String.IsNullOrEmpty (PartnersConnectionFederalProducerDetails)));
                     break;
                 default:
                     isComplete = false;

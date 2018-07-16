@@ -134,14 +134,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //adoxio_shareholderaccountid (lookup account)
         //adoxio_sharepointanchor (text)
         //adoxio_totalshares (whole number)
-        public bool isShareholderComplete()
+        public bool isShareholderComplete(Adoxio_applicanttypecodes? businessType, bool shareholderFilesExists, bool shareholdersExist, bool partnersExist)
         {
             if (isShareholder != true)
             {
                 return true;
             }
             var isComplete = false;
-            switch (legalentitytype)
+            switch (businessType)
             {
                 case Adoxio_applicanttypecodes.PrivateCorporation:
                     isComplete =
@@ -157,8 +157,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             !String.IsNullOrEmpty(name) &&
                             commonvotingshares != null
                         );
+                    isComplete = isComplete && shareholderFilesExists;
+                    isComplete = isComplete && shareholdersExist;
                     break;
                 case Adoxio_applicanttypecodes.PublicCorporation:
+                    isComplete = shareholderFilesExists;
+                    break;
                 case Adoxio_applicanttypecodes.Society:
                 case Adoxio_applicanttypecodes.SoleProprietor:
                     isComplete = true;
@@ -181,6 +185,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             commonnonvotingshares != null //&& 
                                                           // dateIssued != null
                         );
+                    isComplete = isComplete && shareholderFilesExists;
+                    isComplete = isComplete && shareholdersExist;
                     break;
                 case Adoxio_applicanttypecodes.GeneralPartnership:
                 case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
@@ -196,6 +202,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             legalentitytype != null &&
                             !String.IsNullOrEmpty(name)
                         );
+                    isComplete = isComplete && partnersExist;
                     break;
                 default:
                     isComplete = false;
@@ -205,14 +212,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             return isComplete;
 
         }
-        public bool isDirectorOfficerComplete()
+        public bool isDirectorOfficerComplete(Adoxio_applicanttypecodes? businessType, bool directorsExist)
         {
             if (isShareholder == true || isApplicant == true)
             {
                 return true;
             }
             var isComplete = false;
-            switch (legalentitytype)
+            switch (businessType)
             {
                 case Adoxio_applicanttypecodes.PrivateCorporation:
                 case Adoxio_applicanttypecodes.PublicCorporation:
@@ -227,6 +234,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             (isDirector == true || isOfficer == true)//&& 
                                                                      // dateIssued != null
                         );
+                    isComplete = isComplete && directorsExist;
                     break;
                 case Adoxio_applicanttypecodes.Society:
                     isComplete =
@@ -238,6 +246,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             (isDirector == true || isOfficer == true || isSeniorManagement == true)//&& 
                                                                                                    // dateIssued != null
                         );
+                    isComplete = isComplete && directorsExist;
                     break;
                 case Adoxio_applicanttypecodes.SoleProprietor:
                     isComplete =
@@ -248,6 +257,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             !String.IsNullOrEmpty(email) // && 
                                                          // dateIssued != null
                         );
+                    isComplete = isComplete && directorsExist;
                     break;
                 case Adoxio_applicanttypecodes.GeneralPartnership:
                 case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:

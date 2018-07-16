@@ -88,7 +88,7 @@
     </div>
   </div>
   <p></p>
-  <div  *ngIf="['PublicCorporation'].indexOf(businessType) == -1" class="col-md-10 row" style="margin-bottom: 5px">
+  <div  *ngIf="['PublicCorporation'].indexOf(businessType) == -1" class="col-md-10 row" style="margin-bottom: 30px">
     <a class="btn btn-primary" tabindex="1" (click)="openPersonDialog()">
       <strong>Add Person</strong>
       <br>
@@ -98,11 +98,9 @@
       <strong>Add Organization</strong>
       <br>
     </a>
-    <p></p>
   </div>
 
   <div [ngBusy]="busy"></div>
 
-  <br>
   <label for="">Upload the corporation's Central Securities Register</label>
   <app-file-uploader documentType="Central Securities Register" [accountId]="accountId"></app-file-uploader>
