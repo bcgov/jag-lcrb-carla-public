@@ -1,8 +1,11 @@
-<div [ngBusy]="busy">
-  <div *ngIf="isApproved">
-    <p>You have successfully submitted a cannabis retail licence application</p>
-    <div>
-      <h1>Payment Approved</h1>
+<div [ngBusy]="busy" class="container" style="margin-left:15px;">
+  <div *ngIf="isApproved" class="row">
+    <div style="width:100%">
+      <h4>You have successfully submitted a cannabis retail licence application</h4>
+      <br />
+    </div>
+    <div class="border ">
+      <h1 style="color:green">Payment Approved</h1>
       <div class="table">
         <table>
           <tr>
@@ -32,21 +35,21 @@
         </table>
       </div>
     </div>
+    <div class="row">
+      <h2>Next steps</h2>
+      <p>1. The Liquor and Cannabis Regulation Branch will review your application and provide notice of the application to the local government or Indigenous nation for your proposed location to confirm they are accepting applications for cannabis stores.</p>
+      <p>2. Associates of the applicant such as shareholders, directors, officers, and owners must authorize security screening and financial integrity checks for themselves. The requirements for submitting the authorizations are determined by where an individual lives based on residency either in B.C., out of province, or internationally. Instructions on how to submit authorizations are provided in the email sent to associates.</p>
+      <p>You will be notified by the Branch if any information is missing, or if more information is required. If you need to make any changes to the business profile or the licence application, please contact cannabisregs@gov.bc.ca or 1-800-555-5555 [contact information TBD].</p>
+    </div>
   </div>
-  <h2>Next steps</h2>
-  <p>1. The Liquor and Cannabis Regulation Branch will review your application and provide notice of the application to the local government or Indigenous nation for your proposed location to confirm they are accepting applications for cannabis stores.</p>
-  <p>2. Associates of the applicant such as shareholders, directors, officers, and owners must authorize security screening and financial integrity checks for themselves. The requirements for submitting the authorizations are determined by where an individual lives based on residency either in B.C., out of province, or internationally. Instructions on how to submit authorizations are provided in the email sent to associates.</p>
-  <p>You will be notified by the Branch if any information is missing, or if more information is required. If you need to make any changes to the business profile or the licence application, please contact cannabisregs@gov.bc.ca or 1-800-555-5555 [contact information TBD].</p>
+
+  <div *ngIf="!isApproved" class="row">
+    <div class="border-red col-sm-6">
+      <h1 style="color:red">Declined</h1>
+      <p>Your payment has been declined. Please contact your bank for more information.</p>
+    </div>
+  </div>
 
   <p><a class="globalButton btn btn-primary" (click)="return_to_application()"><strong>Return to application</strong></a></p>
 
 </div>
-
-
-<div id="u8718" class="ax_default heading_1" data-label="Application-Name">
-  <div id="u8718_div" class=""></div>
-  <div id="u8718_text" class="text " style="left: 0px; width: 164px; transform-origin: 82px 10.5px 0px;">
-    <p>messageText: {{messageText}}</p>
-  </div>
-</div>
-
