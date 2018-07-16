@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                                                     + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode;
 
             //get application status
-            adoxioApplicationVM.applicationStatus = dynamicsApplication.Statuscode.ToString();
+            adoxioApplicationVM.applicationStatus = (AdoxioApplicationStatusCodes) dynamicsApplication.Statuscode;
 
             // set a couple of read-only flags to indicate status
 			adoxioApplicationVM.isPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved);

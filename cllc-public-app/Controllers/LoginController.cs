@@ -63,7 +63,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
-                return Redirect(basePath);
+                // we want to redirect to the dashboard.
+                return Redirect(basePath + "/dashboard");
             }
         }
 
