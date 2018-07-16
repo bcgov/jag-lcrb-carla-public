@@ -140,7 +140,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			tmp = await SecurityHelper.GetLegalEntityRecord(_client, dos3.id, false);
             Assert.Null(tmp);
 			List<ViewModels.AdoxioLegalEntity> dos2s = await SecurityHelper.GetLegalEntitiesByPosision(_client, legalEntity1.id, "director-officer-shareholder", false);
-			Assert.NotNull(dos2s);
+			Assert.Null(dos2s);
             // ***
 
             // logout and cleanup second test user
