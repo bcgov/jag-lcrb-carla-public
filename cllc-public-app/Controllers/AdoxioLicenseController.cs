@@ -19,14 +19,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
-        private readonly IDistributedCache _distributedCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AdoxioLicenseController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor)
+        public AdoxioLicenseController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             this._system = context;
-            this._distributedCache = null; // distributedCache;
             this._httpContextAccessor = httpContextAccessor;
         }
 

@@ -26,13 +26,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
-        private readonly IDistributedCache _distributedCache;
 
-        public AdoxioEstablishmentController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration, IDistributedCache distributedCache)
+        public AdoxioEstablishmentController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration)
         {
             Configuration = configuration;
-            this._system = context;
-            this._distributedCache = null;  // distributedCache;
+            this._system = context;        
         }
 
         /// <summary>

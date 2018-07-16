@@ -80,7 +80,9 @@
 <h1>Submit &amp; Pay</h1>
 
 <p>
- 	All required fields must be completed before you can submit the application. After you submit the application you will be directed to the payment screen to complete the application. An application is not complete until the payment has been approved.
+		All required fields must be completed before you can submit the application.
+		After you submit the application you will be directed to the payment screen to complete the application.
+		An application is not complete until the payment has been approved.
 </p>
 <h2>Application Fee: $7,500</h2>
 <p>Payment types accepted:</p>
@@ -93,23 +95,24 @@
   </ul>
 
 <h2>Before you Submit</h2>
-
-<p>Check that you sent all authorizations for individuals requiring security screenings and financial integrity checks. </p>
-<p>Check that the information in the business profile and licence application is complete and accurate.</p>
-<p>The information in your business profile and licence application cannot be changed or updated online after the application is submitted. You can still submit new applications for additional licences online.</p>
-<p>If you need to make any changes after submitting you must contact the Liquor and Cannabis Regulation Branch [Contact Information]</p>
+<ul>
+	<li>Check that you sent the authorizations for all individuals who require security screenings and financial integrity checks.</li>
+	<li>Check that the information in your business profile and licence application is complete and accurate.</li>		
+</ul>
+<br>
+<p>
+	Note: The information in your business profile and licence application cannot be changed or updated online after the application is submitted.
+	You can still submit new applications for additional licences online.
+</p>
+<p>If you need to make any changes to the business profile or licence application after submission, please contact the Liquor and Cannabis Regulation Branch [Contact Information]</p>
 </div>
 
-<div  [ngBusy]="busy">
+<div [ngBusy]="busy">
   <p>&nbsp;</p>
   <div *ngIf="!isSubmitted">
-    <p>
-      <a class="globalButton btn btn-primary" tabindex="2" (click)="submit_application()"><strong>Submit</strong></a>
-    </p>
+    <a class="globalButton btn btn-primary" tabindex="2" (click)="submit_application()"><strong>Submit</strong></a>
   </div>
   <div *ngIf="isSubmitted && !isPaid">
-    <p>
       <a class="globalButton btn btn-primary" tabindex="2" (click)="verify_payment()"><strong>Verify Payment</strong></a>
-    </p>
   </div>
 </div>
