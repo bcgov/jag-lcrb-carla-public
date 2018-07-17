@@ -456,12 +456,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                 user = await _dynamicsClient.GetUserByGuid(guid);
 
             if (user == null)
+                user = await _dynamicsClient.GetUserBySmUserId(userId);
+
+            if (user == null)
                 return null;
 
             if (guid == null)
                 return user;
-
-            
 
 
             if (!user.ContactId.ToString().Equals(guid, StringComparison.OrdinalIgnoreCase))
@@ -483,9 +484,32 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Guid id = new Guid(guid);
             User user = null;
-            var contact = await _dynamicsClient.GetContactBySiteminderGuid(guid);
+            var contact = await _dynamicsClient.GetContactById(id);
             if (contact != null)
             {
+                user = new User();
+                user.FromContact(contact);
+            }
+
+            return user;
+        }
+
+
+
+        /// <summary>
+        /// Returns a User based on the guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static async Task<User> GetUserBySmUserId(this IDynamicsClient _dynamicsClient, string guid)
+        {
+            Guid id = new Guid(guid);
+            User user = null;
+            var contact = await _dynamicsClient.GetContactBySiteminderGuid(id.ToString());
+            if (contact != null)
+            {
+                user = new User();
                 user.FromContact(contact);
             }
 
