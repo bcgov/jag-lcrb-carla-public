@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_istrustee = false;
             to.Adoxio_isdirector = from.isDirector;
             to.Adoxio_isofficer = from.isOfficer;
-            to.Adoxio_isowner = false;
+            to.Adoxio_isowner = from.isOwner;
             to.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsdirector = from.isDirector;
             to.AdoxioIsofficer = from.isOfficer;
             to.AdoxioIsseniormanagement = from.isSeniorManagement;
-            to.AdoxioIsowner = false;
+            to.AdoxioIsowner = from.isOwner;
             to.AdoxioPreferrednonvotingshares = from.preferrednonvotingshares;
             to.AdoxioPreferredvotingshares = from.preferredvotingshares;
             to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -156,6 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
                 result.isDirector = (adoxio_legalentity.Adoxio_isdirector == true);
+                result.isOwner = (adoxio_legalentity.Adoxio_isowner == true);
 
                 result.commonnonvotingshares = adoxio_legalentity.Adoxio_commonnonvotingshares;
                 result.commonvotingshares = adoxio_legalentity.Adoxio_commonvotingshares;
@@ -251,6 +252,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.isDirector = (adoxio_legalentity.AdoxioIsdirector == true);
                 result.isOfficer = (adoxio_legalentity.AdoxioIsofficer == true);
                 result.isSeniorManagement = (adoxio_legalentity.AdoxioIsseniormanagement == true);
+                result.isOwner = (adoxio_legalentity.AdoxioIsowner == true);
 
                 result.preferrednonvotingshares = adoxio_legalentity.AdoxioPreferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.AdoxioPreferredvotingshares;
@@ -298,7 +300,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_ispartner = (from.isPartner == true);
                 result.Adoxio_isshareholder = (from.isShareholder == true);
                 //result.AdoxioIstrustee = from.isTrustee;
-                //result.AdoxioIsowner = from.isOwner;
+                result.Adoxio_isowner = (from.isOwner == true);
                 result.Adoxio_isdirector = (from.isDirector == true);
                 result.Adoxio_isofficer = (from.isOfficer == true);
                 result.Adoxio_isseniormanagement = (from.isSeniorManagement == true);

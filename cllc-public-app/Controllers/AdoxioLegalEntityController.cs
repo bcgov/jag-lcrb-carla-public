@@ -152,7 +152,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     filter += " and adoxio_isshareholder ne true and adoxio_ispartner ne true";
                     break;
                 case "director-officer-shareholder":
-                    filter += " and (adoxio_isshareholder eq true or adoxio_isdirector eq true or adoxio_isofficer eq true)";
+                    filter += " and adoxio_isindividual eq 1";
                     break;
                 default:
                     break;
