@@ -1,18 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.OData.Client;
-using Gov.Lclb.Cllb.Public.ViewModels;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.AspNetCore.Http;
-using Gov.Lclb.Cllb.Public.Authentication;
-using Newtonsoft.Json;
-using System.Linq;
 using System;
-using Gov.Lclb.Cllb.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // TODO implement this with autorest
 
