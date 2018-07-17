@@ -24,8 +24,9 @@
         </li>
         <li *ngIf="tabStructure.indexOf('directors-and-officers') !== -1" [ngClass]="{'active': view_tab == 'directors-and-officers'}">
           <a (click)="changeTab('directors-and-officers')">
-            <span *ngIf="['Society'].indexOf(businessType) == -1">Directors &amp; Officers</span>
+            <span *ngIf="['Society', 'SoleProprietor'].indexOf(businessType) == -1">Directors &amp; Officers</span>
             <span *ngIf="['Society'].indexOf(businessType) !== -1">Directors &amp; Senior Managers</span>
+            <span *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Owner</span>
           </a>
         </li>
         <li *ngIf="tabStructure.indexOf('key-personnel') !== -1" [ngClass]="{'active': view_tab == 'key-personnel'}">

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { NewsletterDataService } from "../services/newsletter-data.service"
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastsManager } from 'ng2-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators, EmailValidator, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
