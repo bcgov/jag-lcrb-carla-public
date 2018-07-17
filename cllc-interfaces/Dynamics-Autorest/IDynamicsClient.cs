@@ -77,5 +77,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         IInvoices Invoices { get; }
 
+        IEstablishments Establishments { get; }
     }
 }

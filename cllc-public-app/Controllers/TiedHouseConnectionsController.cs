@@ -86,7 +86,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // copy values over from the data provided
             tiedHouse.CopyValues(item);
 
-            await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
+            try
+            {
+                await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error updating tied house connections");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new Exception("Unable to update tied house connections");
+            }
+
+            
             return Json(tiedHouse.ToViewModel());
         }
     }

@@ -16,6 +16,7 @@ export class AdoxioLegalEntity {
   isSeniorManagement: boolean;
   isShareholder: boolean;
   isPartner: boolean;
+  partnerType: string;
   dateofbirth: Date;
   interestpercentage: number;
   commonvotingshares: number;
@@ -25,7 +26,7 @@ export class AdoxioLegalEntity {
   account: DynamicsAccount;
   relatedentities: AdoxioLegalEntity[];
   email: string;
-  dateofappointment: Date; //adoxio_dateofappointment
+  dateofappointment: Date; // adoxio_dateofappointment
   accountId: string;
   shareholderAccountId: string;
   // helper fields
