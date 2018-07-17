@@ -135,6 +135,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String filter = null;
 
+            // Stops injections
+            try
+            {
+                new Guid(parentLegalEntityId);
+            }
+            catch
+            {
+                return NotFound();
+            }
+
             filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
             switch (positionType)
             {
@@ -246,7 +256,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Guid adoxio_legalentityid = new Guid(id);
                 MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
                 //prevent getting legal entity data if the user is not associated with the account
-                if (adoxioLegalEntity == null || adoxioLegalEntity._adoxioAccountValue != userSettings.AccountId)
+                if (adoxioLegalEntity == null || !AccountController.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
                 {
                     return new NotFoundResult();
                 }

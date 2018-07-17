@@ -421,6 +421,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the legal entity.
             Guid accountId = new Guid(id);
 
+            if (!CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+            {
+                return NotFound();
+            }
+
             MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountById(accountId);
             if (adoxioAccount == null)
             {
