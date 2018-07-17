@@ -20,6 +20,7 @@ export class SubmitPayComponent implements OnInit {
   isPaid: boolean;
   prevPaymentFailed: boolean;
   validationMessage: string;
+  isLoaded: boolean = false;
 
   constructor(private paymentDataService: PaymentDataService,
     private applicationDataService: AdoxioApplicationDataService,
@@ -37,6 +38,7 @@ export class SubmitPayComponent implements OnInit {
         this.isSubmitted = data.isSubmitted;
         this.isPaid = data.isPaid;
         this.prevPaymentFailed = data.prevPaymentFailed;
+        this.isLoaded = true;
       },
       err => {
         this.snackBar.open('Error getting Application Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
