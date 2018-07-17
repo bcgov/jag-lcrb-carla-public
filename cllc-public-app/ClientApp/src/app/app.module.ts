@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastModule } from 'ng2-toastr';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -117,6 +117,8 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { metaReducers, reducers } from './app-state/reducers/reducers';
+import { StoreModule } from '../../node_modules/@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -216,7 +218,8 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
     MatTooltipModule,
     FileDropModule,
     ToastModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    StoreModule.forRoot(reducers, {metaReducers})
   ],
   exports: [
     BrowserModule,

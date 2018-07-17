@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { User } from '../../../models/user.model';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
   selector: 'app-organization-structure',
@@ -14,16 +16,16 @@ export class OrganizationStructureComponent implements OnInit {
   @Input() businessType: string;
 
   constructor(private route: ActivatedRoute,
+    private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService) { }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(p => {
-      this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('account', this.accountId)
-        .then((data) => {
-          this.businessType = data.businessType;
-        });
-    });
+    this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.accountId = state.currentAccount.id;
+        this.businessType = state.currentAccount.businessType;
+      });
   }
 
 }
