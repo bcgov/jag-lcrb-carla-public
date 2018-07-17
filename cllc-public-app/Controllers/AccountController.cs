@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // verify the currently logged in user has access to this account
                 Guid accountId = new Guid(id);
-                if (!CurrentUserHasAccessToAccount(accountId))
+                if (!CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
                 {
                     return new NotFoundResult();
                 }
@@ -447,7 +447,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // verify the currently logged in user has access to this account
             Guid accountId = new Guid(id);
-            if (!CurrentUserHasAccessToAccount(accountId))
+            if (!CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
             {
                 return new NotFoundResult();
             }
@@ -477,14 +477,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>boolean</returns>
         private bool CurrentUserHasAccessToAccount(ViewModels.Account account)
         {
-            return CurrentUserHasAccessToAccount(Guid.Parse(account.id));
+            return CurrentUserHasAccessToAccount(Guid.Parse(account.id), _httpContextAccessor, _dynamicsClient);
         }
 
         /// <summary>
         /// Verify whether currently logged in user has access to this account id
         /// </summary>
         /// <returns>boolean</returns>
-        private bool CurrentUserHasAccessToAccount(Guid id)
+        public static bool CurrentUserHasAccessToAccount(Guid id, IHttpContextAccessor _httpContextAccessor, IDynamicsClient _dynamicsClient)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -492,14 +492,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                return Guid.Parse(userSettings.AccountId) == id || IsChildAccount(userSettings.AccountId, id.ToString());
+                return Guid.Parse(userSettings.AccountId) == id || IsChildAccount(userSettings.AccountId, id.ToString(), _dynamicsClient);
             }
 
             // if current user doesn't have an account they are probably not logged in
             return false;
         }
 
-        private bool IsChildAccount(String parentAccountId, String childAccountId)
+        private static bool IsChildAccount(String parentAccountId, String childAccountId, IDynamicsClient _dynamicsClient)
         {
             var filter = $"_adoxio_account_value eq {parentAccountId}  and adoxio_isapplicant eq true";
             var result = false;
