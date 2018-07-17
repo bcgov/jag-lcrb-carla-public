@@ -47,6 +47,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Municipality = 1
     }
 
+    public enum AdoxioPartnerType
+    {
+        General = 845280000,
+        Limited = 845280001,
+    }
+
     public enum PositionOptions
     {
         Partner,
@@ -87,8 +93,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool isApplicant { get; set; } // adoxio_isapplicant
         public bool? isindividual { get; set; } //adoxio_isindividual (option set)
         public bool? sameasapplyingperson { get; set; } //adoxio_sameasapplyingperson (option set)
+
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioApplicantTypeCodes? legalentitytype { get; set; } //adoxio_legalentitytype (option set)
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AdoxioPartnerType? partnerType { get; set; } //adoxio_legalentitytype (option set)
         public string otherlegalentitytype { get; set; } //adoxio_otherlegalentitytype (text)
         public string firstname { get; set; } //adoxio_firstname (text)
         public string middlename { get; set; } //adoxio_middlename (text)
@@ -111,10 +121,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
+        public DateTimeOffset? securityAssessmentEmailSentOn { get; set; } //adoxio_dateemailsent (date time)
 
         //adoxio_contact (lookup contact)
         //adoxio_correspondingpersonalhistorysummary (lookup personal history summary)
-        //adoxio_dateemailsent (date time)
         //adoxio_dateofsharesissued (date time)
         //adoxio_incorporationdate (date time)
         //adoxio_instructionsoninsertform ???
@@ -134,14 +144,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //adoxio_shareholderaccountid (lookup account)
         //adoxio_sharepointanchor (text)
         //adoxio_totalshares (whole number)
-        public bool isShareholderComplete()
+        public bool isShareholderComplete(AdoxioApplicantTypeCodes? businessType, bool shareholderFilesExists, bool shareholdersExist, bool partnersExist)
         {
-            if (isShareholder != true)
-            {
-                return true;
-            }
             var isComplete = false;
-            switch (legalentitytype)
+            switch (businessType)
             {
                 case AdoxioApplicantTypeCodes.PrivateCorporation:
                     isComplete =
@@ -157,8 +163,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             !String.IsNullOrEmpty(name) &&
                             commonvotingshares != null
                         );
+                    isComplete = isComplete && shareholderFilesExists;
+                    isComplete = isComplete && shareholdersExist;
                     break;
                 case AdoxioApplicantTypeCodes.PublicCorporation:
+                    isComplete = shareholderFilesExists;
+                    break;
                 case AdoxioApplicantTypeCodes.Society:
                 case AdoxioApplicantTypeCodes.SoleProprietor:
                     isComplete = true;
@@ -181,6 +191,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             commonnonvotingshares != null //&& 
                                                           // dateIssued != null
                         );
+                    isComplete = isComplete && shareholderFilesExists;
+                    isComplete = isComplete && shareholdersExist;
                     break;
                 case AdoxioApplicantTypeCodes.GeneralPartnership:
                 case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
@@ -196,6 +208,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             legalentitytype != null &&
                             !String.IsNullOrEmpty(name)
                         );
+                    isComplete = isComplete && partnersExist;
                     break;
                 default:
                     isComplete = false;
@@ -205,14 +218,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             return isComplete;
 
         }
-        public bool isDirectorOfficerComplete()
+        public bool isDirectorOfficerComplete(AdoxioApplicantTypeCodes? businessType, bool directorsExist)
         {
-            if (isShareholder == true || isApplicant == true)
-            {
-                return true;
-            }
             var isComplete = false;
-            switch (legalentitytype)
+            switch (businessType)
             {
                 case AdoxioApplicantTypeCodes.PrivateCorporation:
                 case AdoxioApplicantTypeCodes.PublicCorporation:
@@ -227,6 +236,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             (isDirector == true || isOfficer == true)//&& 
                                                                      // dateIssued != null
                         );
+                    isComplete = isComplete && directorsExist;
                     break;
                 case AdoxioApplicantTypeCodes.Society:
                     isComplete =
@@ -238,6 +248,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             (isDirector == true || isOfficer == true || isSeniorManagement == true)//&& 
                                                                                                    // dateIssued != null
                         );
+                    isComplete = isComplete && directorsExist;
                     break;
                 case AdoxioApplicantTypeCodes.SoleProprietor:
                     isComplete =
@@ -248,6 +259,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             !String.IsNullOrEmpty(email) // && 
                                                          // dateIssued != null
                         );
+                    isComplete = isComplete && directorsExist;
                     break;
                 case AdoxioApplicantTypeCodes.GeneralPartnership:
                 case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
