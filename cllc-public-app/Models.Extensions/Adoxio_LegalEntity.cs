@@ -31,6 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_isindividual = from.Adoxio_isindividual;
             to.Adoxio_lastname = from.Adoxio_lastname;
             to.Adoxio_legalentitytype = from.Adoxio_legalentitytype;
+            to.Adoxio_partnertype = from.Adoxio_partnertype;
             to.Adoxio_middlename = from.Adoxio_middlename;
             to.Adoxio_name = from.Adoxio_name;
             to.Adoxio_position = from.Adoxio_position;
@@ -62,6 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_isindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
             to.Adoxio_lastname = from.lastname;
             to.Adoxio_legalentitytype = (int?)from.legalentitytype;
+            to.Adoxio_partnertype = (int?)from.partnerType;
             to.Adoxio_middlename = from.middlename;
             to.Adoxio_name = from.name;
             to.Adoxio_ispartner = (from.isPartner == true);
@@ -106,6 +108,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (from.legalentitytype != null)
             {
                 to.AdoxioLegalentitytype = (int?)from.legalentitytype;
+            }
+            if (from.partnerType != null)
+            {
+                to.AdoxioPartnertype = (int?)from.partnerType;
             }
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioName = from.name;
@@ -160,6 +166,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (adoxio_legalentity.Adoxio_legalentitytype != null)
                 {
                     result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
+                }
+                  if (adoxio_legalentity.Adoxio_partnertype != null)
+                {
+                    result.partnerType = (AdoxioPartnerType)adoxio_legalentity.Adoxio_partnertype;
                 }
 
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
@@ -221,6 +231,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.AdoxioLegalentitytype;
                 }
+                if (adoxio_legalentity.AdoxioPartnertype != null)
+                {
+                    result.partnerType = (AdoxioPartnerType)adoxio_legalentity.AdoxioPartnertype;
+                }
 
                 result.middlename = adoxio_legalentity.AdoxioMiddlename;
                 result.name = adoxio_legalentity.AdoxioName;
@@ -271,6 +285,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_isindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
                 result.Adoxio_lastname = from.lastname;
                 result.Adoxio_legalentitytype = (int?)from.legalentitytype;
+                result.Adoxio_partnertype = (int?)from.partnerType;
                 result.Adoxio_middlename = from.middlename;
                 result.Adoxio_name = from.name;
 

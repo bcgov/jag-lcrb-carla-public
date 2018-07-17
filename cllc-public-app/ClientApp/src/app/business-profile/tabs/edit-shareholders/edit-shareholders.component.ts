@@ -48,6 +48,7 @@ export class EditShareholdersComponent implements OnInit {
         .then((data) => {
           this.businessType = data.businessType;
           this.getShareholders();
+          this.updateDisplayedColumns();
         });
     });
 
@@ -56,11 +57,19 @@ export class EditShareholdersComponent implements OnInit {
     });
   }
 
+  updateDisplayedColumns() {
+    if (['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(this.businessType) !== -1) {
+      this.displayedColumns = ['partnerType', 'name', 'email', 'edit', 'delete'];
+    } else {
+      this.displayedColumns = ['position', 'name', 'email', 'commonvotingshares', 'edit', 'delete'];
+    }
+  }
+
   getShareholders() {
     let position = 'shareholders';
-          if (['GeneralPartnership', 'LimitedLiabilityPartnership', 'LimitedPartnership'].indexOf(this.businessType) !== -1) {
-            position = 'partners';
-          }
+    if (['GeneralPartnership', 'LimitedLiabilityPartnership', 'LimitedPartnership'].indexOf(this.businessType) !== -1) {
+      position = 'partners';
+    }
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, position)
       .subscribe((response) => {
         const data: AdoxioLegalEntity[] = response.json();
@@ -70,6 +79,7 @@ export class EditShareholdersComponent implements OnInit {
         this.dataSource.data = data;
       });
   }
+
 
   getPosition(shareholder: AdoxioLegalEntity): string {
     let position = '';
@@ -121,10 +131,18 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   formDataToModelData(formData: any, shareholderType: string): AdoxioLegalEntity {
-    let adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+    const adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+    adoxioLegalEntity.id = formData.id;
     if (['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(this.businessType) !== -1) {
       adoxioLegalEntity.isPartner = true;
       adoxioLegalEntity.isShareholder = false;
+      if (this.businessType === 'GeneralPartnership') {
+        adoxioLegalEntity.partnerType = 'General';
+      } else if (this.businessType === 'LimitedLiabilityPartnership') {
+        adoxioLegalEntity.partnerType = 'Limited';
+      } else {
+        adoxioLegalEntity.partnerType = formData.partnerType;
+      }
     } else {
       adoxioLegalEntity.isShareholder = true;
       adoxioLegalEntity.isPartner = false;
@@ -187,11 +205,11 @@ export class EditShareholdersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       formData => {
         if (formData) {
-          let shareholderType = 'Person';
-          let adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
+          const shareholderType = 'Person';
+          const adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
           if (formData.id) {
-            save = this.legalEntityDataservice.updateLegalEntity(formData, formData.id);
+            save = this.legalEntityDataservice.updateLegalEntity(adoxioLegalEntity, formData.id);
           }
           this.busyObsv = save.subscribe(
             res => {
@@ -218,7 +236,7 @@ export class EditShareholdersComponent implements OnInit {
         businessType: this.businessType,
         shareholder: shareholder
       }
-    }
+    };
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ShareholderOrganizationDialogComponent, dialogConfig);
@@ -230,7 +248,7 @@ export class EditShareholdersComponent implements OnInit {
           const adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
           let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
           if (formData.id) {
-            save = this.legalEntityDataservice.updateLegalEntity(formData, formData.id);
+            save = this.legalEntityDataservice.updateLegalEntity(adoxioLegalEntity, formData.id);
           }
           this.busyObsv = save.subscribe(
             res => {
@@ -281,6 +299,7 @@ export class ShareholderPersonDialogComponent implements OnInit {
       lastname: ['', Validators.required],
       email: ['', Validators.email],
       commonvotingshares: ['', Validators.required],
+      partnerType: ['', Validators.required],
       dateIssued: ['']
     });
     if (this.data.shareholder) {
@@ -331,6 +350,7 @@ export class ShareholderOrganizationDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = frmbuilder.group({
       legalentitytype: ['', Validators.required],
+      partnerType: ['', Validators.required],
       name: ['', Validators.required],
       commonvotingshares: ['', Validators.required],
       commonnonvotingshares: ['', Validators.required],

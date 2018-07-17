@@ -47,6 +47,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Municipality = 1
     }
 
+    public enum AdoxioPartnerType
+    {
+        General = 845280000,
+        Limited = 845280001,
+    }
+
     public enum PositionOptions
     {
         Partner,
@@ -87,8 +93,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool isApplicant { get; set; } // adoxio_isapplicant
         public bool? isindividual { get; set; } //adoxio_isindividual (option set)
         public bool? sameasapplyingperson { get; set; } //adoxio_sameasapplyingperson (option set)
+
         [JsonConverter(typeof(StringEnumConverter))]
         public Adoxio_applicanttypecodes? legalentitytype { get; set; } //adoxio_legalentitytype (option set)
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AdoxioPartnerType? partnerType { get; set; } //adoxio_legalentitytype (option set)
         public string otherlegalentitytype { get; set; } //adoxio_otherlegalentitytype (text)
         public string firstname { get; set; } //adoxio_firstname (text)
         public string middlename { get; set; } //adoxio_middlename (text)

@@ -41,6 +41,12 @@
         </ng-container>
 
         <!-- Column -->
+        <ng-container matColumnDef="partnerType">
+          <mat-header-cell *matHeaderCellDef> Partner Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.position}} - {{element.partnerType}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
