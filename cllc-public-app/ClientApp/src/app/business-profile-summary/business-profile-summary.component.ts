@@ -97,7 +97,9 @@ export class BusinessProfileSummaryComponent implements OnInit {
         const data = response.json();
         data.forEach(element => {
           const d = this.profileSummaryList.filter(e => e.legalEntityId === element.legalEntityId)[0];
-          d.profileComplete = element.isComplete === true ? 'Yes' : 'No';
+          if (d) {
+            d.profileComplete = element.isComplete === true ? 'Yes' : 'No';
+          }
         });
       });
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { User } from '../../../models/user.model';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 
 @Component({

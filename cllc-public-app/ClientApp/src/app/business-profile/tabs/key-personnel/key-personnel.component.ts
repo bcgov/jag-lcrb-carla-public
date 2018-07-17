@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 
 @Component({

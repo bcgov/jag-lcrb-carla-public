@@ -6,6 +6,7 @@ import { UserDataService } from './services/user-data.service';
 import { User } from './models/user.model';
 import { isDevMode } from '@angular/core';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
+import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-dat
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  businessProfiles: any;
+  businessProfiles: AdoxioLegalEntity[];
   title = '';
   previousUrl: string;
   public currentUser: User;

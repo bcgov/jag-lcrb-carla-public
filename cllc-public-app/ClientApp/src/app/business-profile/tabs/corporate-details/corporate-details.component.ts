@@ -9,7 +9,7 @@ import { Subscription, Subject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { auditTime } from 'rxjs/operators';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-corporate-details',

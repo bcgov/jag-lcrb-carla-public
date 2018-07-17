@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? sameasapplyingperson { get; set; } //adoxio_sameasapplyingperson (option set)
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public Adoxio_applicanttypecodes? legalentitytype { get; set; } //adoxio_legalentitytype (option set)
+        public AdoxioApplicantTypeCodes? legalentitytype { get; set; } //adoxio_legalentitytype (option set)
 
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioPartnerType? partnerType { get; set; } //adoxio_legalentitytype (option set)
@@ -144,7 +144,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         //adoxio_shareholderaccountid (lookup account)
         //adoxio_sharepointanchor (text)
         //adoxio_totalshares (whole number)
-        public bool isShareholderComplete(Adoxio_applicanttypecodes? businessType, bool shareholderFilesExists, bool shareholdersExist, bool partnersExist)
+        public bool isShareholderComplete(AdoxioApplicantTypeCodes? businessType, bool shareholderFilesExists, bool shareholdersExist, bool partnersExist)
         {
             var isComplete = false;
             switch (businessType)
@@ -166,11 +166,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     isComplete = isComplete && shareholderFilesExists;
                     isComplete = isComplete && shareholdersExist;
                     break;
-                case Adoxio_applicanttypecodes.PublicCorporation:
+                case AdoxioApplicantTypeCodes.PublicCorporation:
                     isComplete = shareholderFilesExists;
                     break;
-                case Adoxio_applicanttypecodes.Society:
-                case Adoxio_applicanttypecodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.Society:
+                case AdoxioApplicantTypeCodes.SoleProprietor:
                     isComplete = true;
                     break;
                 case AdoxioApplicantTypeCodes.UnlimitedLiabilityCorporation:
@@ -218,7 +218,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             return isComplete;
 
         }
-        public bool isDirectorOfficerComplete(Adoxio_applicanttypecodes? businessType, bool directorsExist)
+        public bool isDirectorOfficerComplete(AdoxioApplicantTypeCodes? businessType, bool directorsExist)
         {
             var isComplete = false;
             switch (businessType)

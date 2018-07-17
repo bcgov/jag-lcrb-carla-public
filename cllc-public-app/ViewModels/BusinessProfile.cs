@@ -46,33 +46,33 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool IsComplete()
         {
-            Adoxio_applicanttypecodes? businessType = null;
+            AdoxioApplicantTypeCodes? businessType = null;
             if (Account.businessType != null)
             {
-                businessType = (Adoxio_applicanttypecodes?)Enum.Parse(typeof(Adoxio_applicanttypecodes), Account.businessType);
+                businessType = (AdoxioApplicantTypeCodes?)Enum.Parse(typeof(AdoxioApplicantTypeCodes), Account.businessType);
             }
 
             var directorsExist = ChildEntities.Any(c => c.AdoxioLegalEntity.isDirector == true
                                                 || c.AdoxioLegalEntity.isOfficer == true
                                                 || c.AdoxioLegalEntity.isSeniorManagement == true)
-                                || businessType == Adoxio_applicanttypecodes.SoleProprietor
-                                || businessType == Adoxio_applicanttypecodes.GeneralPartnership
-                                || businessType == Adoxio_applicanttypecodes.LimitedLiabilityPartnership
-                                || businessType == Adoxio_applicanttypecodes.LimitedPartnership;
+                                || businessType == AdoxioApplicantTypeCodes.SoleProprietor
+                                || businessType == AdoxioApplicantTypeCodes.GeneralPartnership
+                                || businessType == AdoxioApplicantTypeCodes.LimitedLiabilityPartnership
+                                || businessType == AdoxioApplicantTypeCodes.LimitedPartnership;
 
             var shareholdersExist = ChildEntities.Any(c => c.AdoxioLegalEntity.isShareholder == true)
-                                    || businessType == Adoxio_applicanttypecodes.GeneralPartnership
-                                    || businessType == Adoxio_applicanttypecodes.LimitedLiabilityPartnership
-                                    || businessType == Adoxio_applicanttypecodes.LimitedPartnership
-                                    || businessType == Adoxio_applicanttypecodes.SoleProprietor
-                                    || businessType == Adoxio_applicanttypecodes.Society
-                                    || businessType == Adoxio_applicanttypecodes.PublicCorporation;
+                                    || businessType == AdoxioApplicantTypeCodes.GeneralPartnership
+                                    || businessType == AdoxioApplicantTypeCodes.LimitedLiabilityPartnership
+                                    || businessType == AdoxioApplicantTypeCodes.LimitedPartnership
+                                    || businessType == AdoxioApplicantTypeCodes.SoleProprietor
+                                    || businessType == AdoxioApplicantTypeCodes.Society
+                                    || businessType == AdoxioApplicantTypeCodes.PublicCorporation;
             
             var partnersExist = ChildEntities.Any(c => c.AdoxioLegalEntity.isPartner == true)
                                 || (
-                                    businessType != Adoxio_applicanttypecodes.GeneralPartnership
-                                    && businessType != Adoxio_applicanttypecodes.LimitedLiabilityPartnership
-                                    && businessType != Adoxio_applicanttypecodes.LimitedPartnership
+                                    businessType != AdoxioApplicantTypeCodes.GeneralPartnership
+                                    && businessType != AdoxioApplicantTypeCodes.LimitedLiabilityPartnership
+                                    && businessType != AdoxioApplicantTypeCodes.LimitedPartnership
                                 );
 
             var isShareholderComplete = shareholdersExist &&  partnersExist &&

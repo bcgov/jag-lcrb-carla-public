@@ -8,7 +8,7 @@ import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-directors-and-officers',

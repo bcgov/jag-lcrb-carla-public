@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-financial-information',

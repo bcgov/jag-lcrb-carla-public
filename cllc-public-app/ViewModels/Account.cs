@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string businessType { get; set; }
 
-        public bool isCorporateDetailsComplete(Adoxio_applicanttypecodes? legalentitytype, bool corporateDetailsFilesExists)
+        public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype, bool corporateDetailsFilesExists)
         {
             var isComplete = false;
             var tiedHouse = new ViewModels.TiedHouseConnection();

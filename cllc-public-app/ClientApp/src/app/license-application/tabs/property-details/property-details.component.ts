@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { auditTime } from 'rxjs/operators';
 import { Observable } from '../../../../../node_modules/rxjs/Observable';
-import { Subject } from '../../../../../node_modules/rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-property-details',
