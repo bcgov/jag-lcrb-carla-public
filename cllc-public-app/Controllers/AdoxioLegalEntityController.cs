@@ -168,14 +168,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw;
             }
 
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
             if (legalEntities != null)
             {
                 foreach (var legalEntity in legalEntities)
                 {
                     // Users can't access other users legal entities.
-                    // if(AccountController.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient)){
-                    //     return NotFound();
-                    // }
+                    if(!AccountController.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient)){
+                        return NotFound();
+                    }
                     result.Add(legalEntity.ToViewModel());
                 }
             }
