@@ -241,8 +241,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Oops no ContactSiteminderGuid exernal id");
 
             // get BCeID record for the current user
-            //var bceidBusiness = await _bceid.ProcessBusinessQuery("44437132CF6B4E919FE6FBFC5594FC44");
-            var bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+			Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             // get the contact record.
             MicrosoftDynamicsCRMcontact userContact = null;
@@ -285,12 +284,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account = new MicrosoftDynamicsCRMaccount();
                 account.CopyValues(item, updateIfNull);
                 // business type must be set only during creation, not in update (removed from copyValues() )
-                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), item.businessType, true);
+                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.AdoxioApplicantTypeCodes), item.businessType, true);
                 // ensure that we create an account for the current user.				
                 account.AdoxioExternalid = accountSiteminderGuid;
 
                 account.Primarycontactid = userContact;
-                account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Applicant;
+                account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Applicant;
 
                 if (bceidBusiness != null)
                 {
@@ -305,14 +304,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // sets Business type with numerical value found in Adoxio_applicanttypecodes
                 // using account.businessType which is set in bceid-confirmation.component.ts
-                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(Adoxio_applicanttypecodes), item.businessType, true);
+                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true);
 
                 var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity()
                 {
                     AdoxioAccount = account,
                     AdoxioName = item.name,
                     AdoxioIsindividual = 0,
-                    AdoxioIsapplicant = true
+                    AdoxioIsapplicant = true,
+                    AdoxioLegalentitytype = account.AdoxioBusinesstype
                 };
 
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);

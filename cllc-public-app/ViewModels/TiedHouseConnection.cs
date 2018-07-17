@@ -31,10 +31,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels {
         public string TiedHouse { get; set; } //adoxio_TiedHouse (LookupType)
         public string TiedHouseName { get; set; } //adoxio_TiedHouseName (StringType)
 
-        public bool isConnectionToProducersComplete (Adoxio_applicanttypecodes? legalentitytype) {
+        public bool isConnectionToProducersComplete (AdoxioApplicantTypeCodes? legalentitytype) {
             var isComplete = false;
             switch (legalentitytype) {
-                case Adoxio_applicanttypecodes.PublicCorporation:
+                case AdoxioApplicantTypeCodes.PublicCorporation:
                     isComplete =
                         (CorpConnectionFederalProducer == 0 ||
                             (CorpConnectionFederalProducer == 1 && !String.IsNullOrEmpty (CorpConnectionFederalProducerDetails))) &&
@@ -45,26 +45,26 @@ namespace Gov.Lclb.Cllb.Public.ViewModels {
                         (Share20PlusFamilyConnectionProducer == 0 ||
                             (Share20PlusFamilyConnectionProducer == 1 && !String.IsNullOrEmpty (Share20PlusFamilyConnectionProducerDetail)));
                     break;
-                case Adoxio_applicanttypecodes.PrivateCorporation:
-                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
-                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.PrivateCorporation:
+                case AdoxioApplicantTypeCodes.UnlimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityCorporation:
                     isComplete =
                         (CorpConnectionFederalProducer == 0 ||
                             (CorpConnectionFederalProducer == 1 && !String.IsNullOrEmpty (CorpConnectionFederalProducerDetails))) &&
                         (FederalProducerConnectionToCorp == 0 ||
                             (FederalProducerConnectionToCorp == 1 && !String.IsNullOrEmpty (FederalProducerConnectionToCorpDetails)));
                     break;
-                case Adoxio_applicanttypecodes.Society:
+                case AdoxioApplicantTypeCodes.Society:
                     isComplete =
                         (SocietyConnectionFederalProducer == 0 ||
                             (SocietyConnectionFederalProducer == 1 && !String.IsNullOrEmpty (SocietyConnectionFederalProducerDetails)));
                     break;
-                case Adoxio_applicanttypecodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.SoleProprietor:
                     isComplete = true;
                     break;
-                case Adoxio_applicanttypecodes.GeneralPartnership:
-                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
-                case Adoxio_applicanttypecodes.LimitedPartnership:
+                case AdoxioApplicantTypeCodes.GeneralPartnership:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
+                case AdoxioApplicantTypeCodes.LimitedPartnership:
                     isComplete =
                         (PartnersConnectionFederalProducer == 0 ||
                             (PartnersConnectionFederalProducer == 1 && !String.IsNullOrEmpty (PartnersConnectionFederalProducerDetails)));

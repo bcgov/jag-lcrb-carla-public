@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Net;
 using System.Collections.Generic;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -56,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
             {
 				licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation, //*Mandatory (label=business type)
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
                 registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
                                                                      //,name = initialName
                                                                      //,applyingPerson = "Applying Person" //contact
@@ -66,8 +67,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
                 establishmentaddressstreet = "123 Any Street",
                 establishmentaddresscity = "Victoria, BC",
-                establishmentaddresspostalcode = "V1X 1X1"
-                //,applicationStatus = "0"
+                establishmentaddresspostalcode = "V1X 1X1",
+                applicationStatus = AdoxioApplicationStatusCodes.InProgress
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -98,11 +99,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string ordernum = values["url"].Substring(values["url"].IndexOf("trnOrderNumber=")+15, 10);
 			Assert.Equal(10, ordernum.Length);
 
-			string actual_url = "https://google.ca/Payment/Payment.asp?merchant_id=123456&trnType=P&trnOrderNumber=" + ordernum + 
-				"&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&ref3=" + id +
-				"&trnAmount=7500.00&hashExpiry=";
-			Assert.True(values["url"].Length > actual_url.Length);
-			Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
+            string actual_url = "https://web.na.bambora.com/scripts/Payment/Payment.asp?merchant_id=336660000&trnType=P&trnOrderNumber=" + ordernum +
+                "&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&ref3=" + id +
+                "&trnAmount=7500.00&hashExpiry=";
+            Assert.True(values["url"].Length > actual_url.Length);
+            Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
             
             // get a response
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/verify/" + id + "/APPROVE");
@@ -172,7 +173,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 				applyingPerson = "Applying Person", //contact
 				applicant = currentAccount1, //account
 				licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation, //*Mandatory (label=business type)
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
 				jobNumber = "123",
                 registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
                 establishmentName = "Not a Dispensary",
@@ -180,7 +181,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 establishmentaddressstreet = "123 Any Street",
                 establishmentaddresscity = "Victoria, BC",
                 establishmentaddresspostalcode = "V1X 1X1",
-				applicationStatus = "845280000"
+				applicationStatus = AdoxioApplicationStatusCodes.InProgress
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -265,7 +266,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
             {
                 licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                applicantType = ViewModels.Adoxio_applicanttypecodes.PrivateCorporation, //*Mandatory (label=business type)
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
                 registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
                                                                       //,name = initialName
                                                                       //,applyingPerson = "Applying Person" //contact

@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-    public enum Adoxio_applicanttypecodes
+    public enum AdoxioApplicantTypeCodes
     {
         [Display(Name = "Private Corporation")]
         PrivateCorporation = 845280000,
@@ -37,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         University = 845280016,
 
     }
-    public enum Adoxio_accounttypecodes
+    public enum AdoxioAccountTypeCodes
     {
         Applicant = 845280000,
         Licensee = 2,
@@ -149,7 +149,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             var isComplete = false;
             switch (businessType)
             {
-                case Adoxio_applicanttypecodes.PrivateCorporation:
+                case AdoxioApplicantTypeCodes.PrivateCorporation:
                     isComplete =
                         (
                             isindividual == true &&
@@ -173,8 +173,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 case Adoxio_applicanttypecodes.SoleProprietor:
                     isComplete = true;
                     break;
-                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
-                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.UnlimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityCorporation:
                     isComplete =
                         (
                             isindividual == true &&
@@ -194,9 +194,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     isComplete = isComplete && shareholderFilesExists;
                     isComplete = isComplete && shareholdersExist;
                     break;
-                case Adoxio_applicanttypecodes.GeneralPartnership:
-                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
-                case Adoxio_applicanttypecodes.LimitedPartnership:
+                case AdoxioApplicantTypeCodes.GeneralPartnership:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
+                case AdoxioApplicantTypeCodes.LimitedPartnership:
                     isComplete =
                         (
                             isindividual == true &&
@@ -223,10 +223,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             var isComplete = false;
             switch (businessType)
             {
-                case Adoxio_applicanttypecodes.PrivateCorporation:
-                case Adoxio_applicanttypecodes.PublicCorporation:
-                case Adoxio_applicanttypecodes.UnlimitedLiabilityCorporation:
-                case Adoxio_applicanttypecodes.LimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.PrivateCorporation:
+                case AdoxioApplicantTypeCodes.PublicCorporation:
+                case AdoxioApplicantTypeCodes.UnlimitedLiabilityCorporation:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityCorporation:
                     isComplete =
                         (
                             isindividual == true &&
@@ -238,7 +238,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         );
                     isComplete = isComplete && directorsExist;
                     break;
-                case Adoxio_applicanttypecodes.Society:
+                case AdoxioApplicantTypeCodes.Society:
                     isComplete =
                         (
                             isindividual == true &&
@@ -250,7 +250,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         );
                     isComplete = isComplete && directorsExist;
                     break;
-                case Adoxio_applicanttypecodes.SoleProprietor:
+                case AdoxioApplicantTypeCodes.SoleProprietor:
                     isComplete =
                         (
                             isindividual == true &&
@@ -261,9 +261,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         );
                     isComplete = isComplete && directorsExist;
                     break;
-                case Adoxio_applicanttypecodes.GeneralPartnership:
-                case Adoxio_applicanttypecodes.LimitedLiabilityPartnership:
-                case Adoxio_applicanttypecodes.LimitedPartnership:
+                case AdoxioApplicantTypeCodes.GeneralPartnership:
+                case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
+                case AdoxioApplicantTypeCodes.LimitedPartnership:
                     isComplete = true;
                     break;
                 default:

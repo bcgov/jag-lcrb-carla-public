@@ -298,7 +298,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
                         // remove the document type text from file name
-                        fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
+                        fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2 );
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
                         fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
@@ -514,8 +514,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var account = new MicrosoftDynamicsCRMaccount();
                 account.Name = item.name;
-                account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Shareholder;
-                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), item.legalentitytype);
+                account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Shareholder;
+                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
                 //create tied house under account
