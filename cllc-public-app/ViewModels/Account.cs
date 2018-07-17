@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string businessType { get; set; }
 
-        public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype)
+        public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype, bool corporateDetailsFilesExists)
         {
             var isComplete = false;
             var tiedHouse = new ViewModels.TiedHouseConnection();
@@ -83,9 +83,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         !string.IsNullOrEmpty(mailingAddressStreet) &&
                         !string.IsNullOrEmpty(mailingAddressCity) &&
                         !string.IsNullOrEmpty(mailingAddressCountry) &&
-                        (mailingAddressProvince != null) // TODO: This field should be a string(by Moffat)
-                        &&
-                        !string.IsNullOrEmpty(mailingAddresPostalCode);
+                        (mailingAddressProvince != null) &&// TODO: This field should be a string(by Moffat)
+                        !string.IsNullOrEmpty(mailingAddresPostalCode) &&
+                        corporateDetailsFilesExists;
+
                     break;
                 case AdoxioApplicantTypeCodes.SoleProprietor:
                     isComplete = !string.IsNullOrEmpty(businessNumber) &&
@@ -109,7 +110,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         !string.IsNullOrEmpty(mailingAddressCity) &&
                         !string.IsNullOrEmpty(mailingAddressCountry) &&
                         (mailingAddressProvince != null) &&
-                        !string.IsNullOrEmpty(mailingAddresPostalCode);
+                        !string.IsNullOrEmpty(mailingAddresPostalCode) &&
+                        corporateDetailsFilesExists;
                     break;
                 default:
                     isComplete = false;
