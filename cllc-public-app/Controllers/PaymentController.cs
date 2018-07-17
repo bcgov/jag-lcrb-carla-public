@@ -22,18 +22,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 		private static Random random = new Random();
 
 		private readonly IConfiguration Configuration;
-		private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ILogger _logger;
 		private readonly IDynamicsClient _dynamicsClient;
 		private readonly BCEPWrapper _bcep;
 
-		public PaymentController(Interfaces.Microsoft.Dynamics.CRM.System context, IConfiguration configuration,
+		public PaymentController(IConfiguration configuration,
 								 IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory,
 								 IDynamicsClient dynamicsClient, BCEPWrapper bcep)
 		{
-			Configuration = configuration;
-			this._system = context;
+			Configuration = configuration;			
 			this._httpContextAccessor = httpContextAccessor;
 			this._dynamicsClient = dynamicsClient;
 			this._bcep = bcep;

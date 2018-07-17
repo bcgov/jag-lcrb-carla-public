@@ -6,8 +6,8 @@
 
     <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'Society', 
                'GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
-      The following people in your organization will need to provide an authorization for a security screening and financial integrity check.
-      Authorizations can only be provided by the individual themselves.
+      The following people in your organization will need to provide an authorization for a security screening and financial integrity
+      check. Authorizations can only be provided by the individual themselves.
     </p>
 
     <p *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
@@ -31,7 +31,7 @@
       <ng-container matColumnDef="sendConsentRequest">
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <input type="checkbox" [(ngModel)]="element.sendConsentRequest"/>
+          <input type="checkbox" [(ngModel)]="element.sendConsentRequest" />
         </mat-cell>
       </ng-container>
 
@@ -56,7 +56,7 @@
       <!-- Column -->
       <ng-container matColumnDef="position">
         <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{ getRoles(element) }} </mat-cell>
       </ng-container>
 
       <!-- Column -->
