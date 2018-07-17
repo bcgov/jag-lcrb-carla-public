@@ -344,13 +344,13 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 
 
-        public static async Task<MicrosoftDynamicsCRMadoxioLicencetype> GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
+        public static async Task<MicrosoftDynamicsCRMadoxioEstablishment> GetEstablishmentById(this IDynamicsClient _dynamicsClient, Guid id)
         {
-            MicrosoftDynamicsCRMadoxioLicencetype result = null;
+            MicrosoftDynamicsCRMadoxioEstablishment result = null;
 
             try
             {
-                result = _dynamicsClient.AdoxioLicencetypes.GetByKey(id.ToString());
+                result = _dynamicsClient.Establishments.GetByKey(id.ToString());
             }
             catch (OdataerrorException dsqe)
             {
