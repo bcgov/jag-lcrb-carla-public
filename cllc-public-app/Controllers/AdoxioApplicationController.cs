@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Microsoft.OData.Client;
-using Newtonsoft.Json;
-using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Interfaces.Models;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -20,22 +18,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     public class AdoxioApplicationController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly Interfaces.Microsoft.Dynamics.CRM.System _system;
-        //private readonly IDistributedCache _distributedCache;
+        private readonly IConfiguration Configuration;        
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly SharePointFileManager _sharePointFileManager;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
-        public AdoxioApplicationController(Interfaces.Microsoft.Dynamics.CRM.System context, SharePointFileManager sharePointFileManager, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public AdoxioApplicationController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
-            Configuration = configuration;
-            this._system = context;
-            this._httpContextAccessor = httpContextAccessor;
-            this._sharePointFileManager = sharePointFileManager;
-            //this._distributedCache = null;
-            this._dynamicsClient = dynamicsClient;
+            Configuration = configuration;            
+            _httpContextAccessor = httpContextAccessor;
+            _sharePointFileManager = sharePointFileManager;            
+            _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
         }
 
@@ -375,7 +369,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
                         // remove the document type text from file name
-                        fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__")+2);
+                        fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2);
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
                         fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;

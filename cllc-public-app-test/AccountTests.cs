@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Net;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -46,10 +47,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-			Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account account = new Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.Account()
+            MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
 			{				
 				Name = initialName,
-				Adoxio_externalid = Guid.NewGuid().ToString()
+				AdoxioExternalid = Guid.NewGuid().ToString()
             };
 
             ViewModels.Account viewmodel_account = account.ToViewModel();
@@ -82,7 +83,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
 
-            account.Accountid = id;
+            account.Accountid = id.ToString();
 
             // get legal entity record for account
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");

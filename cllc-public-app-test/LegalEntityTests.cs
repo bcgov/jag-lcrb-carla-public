@@ -1,24 +1,20 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
+﻿using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Microsoft.Extensions.Configuration;
-using System.Text;
-using Newtonsoft.Json;
-using System.Net;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Public.Models;
-using System.Net.Http.Headers;
-using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-	public class LegalEntityTests : ApiIntegrationTestBaseWithLogin
+    public class LegalEntityTests : ApiIntegrationTestBaseWithLogin
     {
         private const string service = "adoxiolegalentity";
         public LegalEntityTests(CustomWebApplicationFactory<Startup> factory)
@@ -367,12 +363,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
+            MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity = new MicrosoftDynamicsCRMadoxioLegalentity()
             {
-                Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_legalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                Adoxio_position = (int?)ViewModels.PositionOptions.Director,
-                Adoxio_name = initialName
+                AdoxioLegalentityid = Guid.NewGuid().ToString(),
+                AdoxioLegalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                AdoxioPosition = (int?)ViewModels.PositionOptions.Director,
+                AdoxioName = initialName
             };
 
             ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
@@ -522,12 +518,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create a Legal Entity
 
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-            Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
+            MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity = new MicrosoftDynamicsCRMadoxioLegalentity()
             {
-                Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_legalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                Adoxio_position = (int?)ViewModels.PositionOptions.Director,
-                Adoxio_name = initialName
+                AdoxioLegalentityid = Guid.NewGuid().ToString(),
+                AdoxioLegalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                AdoxioPosition = (int?)ViewModels.PositionOptions.Director,
+                AdoxioName = initialName
             };
             ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_legalentity);
