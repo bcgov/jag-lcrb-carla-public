@@ -157,13 +157,13 @@ namespace Gov.Lclb.Cllb.Public.Test
 			// *** cleanup shareholders records
             tmp = await SecurityHelper.GetLegalEntityRecord(_client, dos3.id, true);
             Assert.NotNull(tmp);
-			SecurityHelper.DeleteLegalEntityRecord(_client, dos3.id);
+            await SecurityHelper.DeleteLegalEntityRecord(_client, dos3.id);
 			tmp = await SecurityHelper.GetLegalEntityRecord(_client, dos2.id, true);
             Assert.NotNull(tmp);
-			SecurityHelper.DeleteLegalEntityRecord(_client, dos2.id);
+            await SecurityHelper.DeleteLegalEntityRecord(_client, dos2.id);
 			tmp = await SecurityHelper.GetLegalEntityRecord(_client, dos1.id, true);
             Assert.NotNull(tmp);
-			SecurityHelper.DeleteLegalEntityRecord(_client, dos1.id);
+            await SecurityHelper.DeleteLegalEntityRecord(_client, dos1.id);
             // ***
 
             // logout and cleanup (deletes the account and contact created above ^^^)
@@ -238,9 +238,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 			tmp = await SecurityHelper.GetLegalEntityRecord(_client, org1.id, true);
             Assert.NotNull(tmp);
 
-			// TODO clean up sub-profile of org1 profile as well
-            
-            SecurityHelper.DeleteLegalEntityRecord(_client, org1.id);
+            // TODO clean up sub-profile of org1 profile as well
+
+            await SecurityHelper.DeleteLegalEntityRecord(_client, org1.id);
             // ***
 
             // logout and cleanup (deletes the account and contact created above ^^^)
@@ -273,7 +273,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string file1 = await SecurityHelper.UploadFileToAccount(_client, account1.id, "TestFileSecurity");
 			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForAccount(_client, account1.id, "TestFileSecurity", true);
 			Assert.NotNull(file1s);
-			Assert.Equal(1, file1s.Count);
+			Assert.Single(file1s);
 			//string _data1 = await SecurityHelper.DownloadFileForAccount(_client, account1.id, file1s[0].id, true);
             // ***
 
@@ -350,7 +350,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string file1 = await SecurityHelper.UploadFileToAccount(_client, org1Account.id, "TestFileSecurity");
 			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForAccount(_client, org1Account.id, "TestFileSecurity", true);
             Assert.NotNull(file1s);
-            Assert.Equal(1, file1s.Count);
+            Assert.Single(file1s);
 
 			// TODO add a sub-profile of org1 profile as well, and add some attachments for it
             
@@ -401,10 +401,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             tmp1 = await SecurityHelper.GetLegalEntityRecord(_client, org1.id, true);
             Assert.NotNull(tmp1);
 
-			// ... and delete files under org1
-			//await SecurityHelper.DeleteFileForAccount(_client, org1Account.id, file1s[0].id);
+            // ... and delete files under org1
+            //await SecurityHelper.DeleteFileForAccount(_client, org1Account.id, file1s[0].id);
 
-			SecurityHelper.DeleteLegalEntityRecord(_client, org1.id);
+            await SecurityHelper.DeleteLegalEntityRecord(_client, org1.id);
             // ***
 
             // logout and cleanup (deletes the account and contact created above ^^^)
@@ -511,7 +511,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			string file1 = await SecurityHelper.UploadFileToApplication(_client, application1.id, "TestAppFileSecurity");
 			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForApplication(_client, application1.id, "TestAppFileSecurity", true);
             Assert.NotNull(file1s);
-            Assert.Equal(1, file1s.Count);
+            Assert.Single(file1s);
 			//string _data1 = await SecurityHelper.DownloadFileForApplication(_client, application1.id, file1s[0].id, true);
             // ***
 

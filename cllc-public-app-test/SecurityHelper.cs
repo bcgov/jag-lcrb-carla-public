@@ -238,7 +238,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
 		}
 
-		public static async Task<string> DownloadFileForAccount(HttpClient _client, string id, string fileId, bool expectSuccess)
+        public static string DownloadFileForAccount(HttpClient _client, string id, string fileId, bool expectSuccess)
         {
             /*
 			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/" + id + "/attachment/" + fileId);
@@ -258,17 +258,17 @@ namespace Gov.Lclb.Cllb.Public.Test
             return null;
         }
 
-        public static async Task<string> DeleteFileForAccount(HttpClient _client, string id)
+        public static string DeleteFileForAccount(HttpClient _client, string id)
         {
             /*
 			var request = new HttpRequestMessage(HttpMethod.Delete, "/api/adoxiolegalentity/" + id + "/attachments");
 			var response = await _client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
 			*/
-			return null;
+            return null;
         }
 
-		public static async Task<ViewModels.AdoxioApplication> CreateLicenceApplication(HttpClient _client, ViewModels.Account currentAccount)
+        public static async Task<ViewModels.AdoxioApplication> CreateLicenceApplication(HttpClient _client, ViewModels.Account currentAccount)
 		{
 			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication");
 
@@ -419,7 +419,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-        public static async Task<string> DownloadFileForApplication(HttpClient _client, string id, string fileId, bool expectSuccess)
+        public static string DownloadFileForApplication(HttpClient _client, string id, string fileId, bool expectSuccess)
         {
             /*
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id + "/attachment/" + fileId);
@@ -439,7 +439,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             return null;
         }
 
-        public static async Task<string> DeleteFileForApplication(HttpClient _client, string id)
+        public static string DeleteFileForApplication(HttpClient _client, string id)
         {
             /*
             var request = new HttpRequestMessage(HttpMethod.Delete, "/api/adoxioapplication/" + id + "/attachments");
@@ -449,5 +449,5 @@ namespace Gov.Lclb.Cllb.Public.Test
             return null;
         }
 
-	}
+    }
 }

@@ -136,7 +136,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String filter = null;
 
-
             filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
             switch (positionType)
             {
@@ -169,11 +168,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw;
             }
 
-
             if (legalEntities != null)
             {
                 foreach (var legalEntity in legalEntities)
                 {
+                    // Users can't access other users legal entities.
+                    // if(AccountController.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient)){
+                    //     return NotFound();
+                    // }
                     result.Add(legalEntity.ToViewModel());
                 }
             }
@@ -268,9 +270,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // check that the session is setup correctly.
             userSettings.Validate();
-
-
             var accountGUID = new Guid(accountId);
+
+            // User should not be able to access accounts that they do not directly own
+            if(!AccountController.CurrentUserHasAccessToAccount(accountGUID, _httpContextAccessor, _dynamicsClient)){
+                return NotFound();
+            }
+            
             var account = await _dynamicsClient.GetAccountById(accountGUID);
             if (account != null)
             {
