@@ -108,5 +108,7 @@
 
   <div [ngBusy]="busy"></div>
 
-  <label for="">Upload the corporation's Central Securities Register</label>
-  <app-file-uploader documentType="Central Securities Register" [accountId]="accountId"></app-file-uploader>
+  <section *ngIf="['LimitedPartnership'].indexOf(data?.businessType) == -1" >
+    <label for="">Upload the corporation's Central Securities Register</label>
+    <app-file-uploader documentType="Central Securities Register" [accountId]="accountId"></app-file-uploader>
+  </section>
