@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<List<ViewModels.AdoxioLegalEntity>> GetLegalEntitiesByPosision(HttpClient _client, string parentAccountId, string positionType, bool expectSuccess)
+		public static async Task<List<ViewModels.AdoxioLegalEntity>> GetLegalEntitiesByPosition(HttpClient _client, string parentAccountId, string positionType, bool expectSuccess)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/position/" + parentAccountId + "/" + positionType);
             var response = await _client.SendAsync(request);
