@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -16,16 +17,16 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="to"></param>
         /// <param name="from"></param>
-        public static void FromContact(this User to, Contact from)
+        public static void FromContact(this User to, MicrosoftDynamicsCRMcontact from)
         {
             if (from.Contactid != null)
             {
-                to.ContactId = (Guid)from.Contactid;
+                to.ContactId = Guid.Parse(from.Contactid);
             }
             
-            if (from._parentcustomerid_value != null)
+            if (from._parentcustomeridValue != null)
             {
-                to.AccountId = (Guid)from._parentcustomerid_value;
+                to.AccountId = Guid.Parse(from._parentcustomeridValue);
             }
             
             to.GivenName = from.Firstname;

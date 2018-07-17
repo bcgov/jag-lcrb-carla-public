@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastsManager } from 'ng2-toastr';
 import { Subscription } from 'rxjs';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-security-assessments',
@@ -60,6 +60,20 @@ export class SecurityAssessmentsComponent implements OnInit {
         });
         this.dataSource.data = legalEntitiesList;
       });
+  }
+
+  getRoles(legalEntity: AdoxioLegalEntity): string {
+    const roles = [];
+    if (legalEntity.isDirector === true) {
+      roles.push('Director');
+    }
+    if (legalEntity.isOfficer === true) {
+      roles.push('Officer');
+    }
+    if (legalEntity.isShareholder === true) {
+      roles.push('Shareholder');
+    }
+    return roles.join(', ');
   }
 
   sendConsentRequestEmail() {
