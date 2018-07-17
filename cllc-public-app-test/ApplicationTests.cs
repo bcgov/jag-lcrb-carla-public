@@ -1,25 +1,17 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Xunit;
-
-using System.Text;
-using Newtonsoft.Json;
-using System.Net;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Interfaces;
-using System.Net.Http.Headers;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-	public class ApplicationTests : ApiIntegrationTestBaseWithLogin
+    public class ApplicationTests : ApiIntegrationTestBaseWithLogin
     {
         public ApplicationTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
@@ -270,12 +262,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            Adoxio_legalentity adoxio_legalentity = new Adoxio_legalentity()
+            MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity = new MicrosoftDynamicsCRMadoxioLegalentity()
             {
-                Adoxio_legalentityid = Guid.NewGuid(),
-                Adoxio_legalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                Adoxio_position = (int?)ViewModels.PositionOptions.Director,
-                Adoxio_name = initialName
+                AdoxioLegalentityid = Guid.NewGuid().ToString(),
+                AdoxioLegalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                AdoxioPosition = (int?)ViewModels.PositionOptions.Director,
+                AdoxioName = initialName
             };
 
             ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();

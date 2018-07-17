@@ -214,10 +214,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             {
                 ClaimsPrincipal principal;
                 HttpContext context = Request.HttpContext;
-                Interfaces.Microsoft.Dynamics.CRM.System _system = (Interfaces.Microsoft.Dynamics.CRM.System)context.RequestServices.GetService(typeof(Interfaces.Microsoft.Dynamics.CRM.System));
-
-                IDistributedCache _distributedCache = null; // (IDistributedCache) context.RequestServices.GetService(typeof(IDistributedCache));
-
+                IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
 
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
 
@@ -394,7 +391,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // so we just do a Dynamics lookup on the siteMinderGuid.
 
                 _logger.LogDebug("Loading user external id = " + siteMinderGuid);
-                userSettings.AuthenticatedUser = await _system.LoadUser(_distributedCache, siteMinderGuid);
+                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid);
                 _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
@@ -430,12 +427,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 				if (userSettings.AuthenticatedUser != null && siteMinderBusinessGuid != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
-                    var account = await _system.
-                        GetAccountBySiteminderBusinessGuid(_distributedCache, siteMinderBusinessGuid);
-                    if (account != null)
+                    var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                    if (account != null && account.Accountid != null)
                     {
                         userSettings.AccountId = account.Accountid.ToString();
-                        userSettings.AuthenticatedUser.AccountId = (Guid)account.Accountid;
+                        userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
                     }
                 }
 
