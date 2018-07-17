@@ -38,8 +38,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 			_client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
 			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + loginAs);
             var response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
+            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
+            
         }
 		
 		public string randomNewUserName(string userid, int len)
