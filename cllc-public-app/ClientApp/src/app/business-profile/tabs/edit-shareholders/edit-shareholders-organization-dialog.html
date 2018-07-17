@@ -1,8 +1,13 @@
-<h2 mat-dialog-title>Add Shareholder - Organization</h2>
+<h2  *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) == -1" mat-dialog-title>Add Shareholder - Organization</h2>
+<h2  *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) !== -1" mat-dialog-title>Add Partner</h2>
 <mat-dialog-content>
   <form [formGroup]='form' class="">
 
     <div class="row">
+      <div *ngIf="['LimitedPartnership'].indexOf(data?.businessType) !== -1" class="form-group col-md-12">
+        <input type="radio" group="partnerType" formControlName="partnerType" value="General"><span>General Partner</span>
+        <input type="radio" group="partnerType" formControlName="partnerType" value="Limited"><span>Limited Partner</span>
+      </div>
       <div class="form-group col-md-12">
         <label>Organization Type</label>
         <select class="form-control" style="width: 250px;" formControlName='legalentitytype' #orgType>
@@ -37,7 +42,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group  col-md-4">
+      <div *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) == -1" class="form-group  col-md-4">
         <label>Number of voting shares</label>
         <input style="width: 150px;" type="number" class="form-control" formControlName='commonvotingshares'>
         <div *ngIf="form.controls['commonvotingshares'].touched && !form.controls['commonvotingshares'].valid">
