@@ -76,6 +76,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacts Contacts { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishments.
+        /// </summary>
+        public virtual IEstablishments Establishments { get; private set; }
+
+        /// <summary>
         /// Gets the IInvoices.
         /// </summary>
         public virtual IInvoices Invoices { get; private set; }
@@ -288,6 +293,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
             AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
             Contacts = new Contacts(this);
+            Establishments = new Establishments(this);
             Invoices = new Invoices(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings

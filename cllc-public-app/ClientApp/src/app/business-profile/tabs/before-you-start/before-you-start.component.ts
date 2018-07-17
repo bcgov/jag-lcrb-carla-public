@@ -3,6 +3,8 @@ import { UserDataService } from '../../../services/user-data.service';
 import { User } from '../../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
   selector: 'app-before-you-start',
@@ -13,17 +15,14 @@ export class BeforeYouStartComponent implements OnInit {
   @Input() accountId: string;
   @Input() businessType: string;
 
-  constructor(private dynamicsDataService: DynamicsDataService, private route: ActivatedRoute) { }
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(p => {
-      this.accountId = p.accountId;
-
-      this.dynamicsDataService.getRecord('account', this.accountId)
-        .then((data) => {
-          this.businessType = data.businessType;
-        });
-    });
+    this.store.select(state => state.currentAccountState)
+      .filter(account => !!account)
+      .subscribe(account => {
+        this.businessType = account.currentAccount.businessType;
+      });
   }
 
 }
