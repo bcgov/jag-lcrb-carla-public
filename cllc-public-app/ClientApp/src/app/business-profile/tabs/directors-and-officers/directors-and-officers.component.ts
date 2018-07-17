@@ -28,6 +28,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   displayedColumns = ['name', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
+  subscriptions: Subscription[] = [];
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
     public dialog: MatDialog,
@@ -37,16 +38,18 @@ export class DirectorsAndOfficersComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState)
+    const sub =  this.store.select(state => state.currentAccountState)
     .filter(state => !!state)
     .subscribe(state => {
       this.accountId = state.currentAccount.id;
       this.businessType = state.currentAccount.businessType;
-      this.route.parent.params.subscribe(p => {
+      const sub2 = this.route.parent.params.subscribe(p => {
         this.parentLegalEntityId = p.legalEntityId;
         this.getDirectorsAndOfficers();
       });
+      this.subscriptions.push(sub2);
     });
+    this.subscriptions.push(sub);
   }
 
   getDirectorsAndOfficers() {
