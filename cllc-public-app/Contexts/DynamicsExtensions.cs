@@ -352,7 +352,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = _dynamicsClient.AdoxioLicencetypes.GetByKey(id.ToString());
             }
-            catch (DataServiceQueryException dsqe)
+            catch (OdataerrorException dsqe)
             {
                 result = null;
             }
@@ -369,7 +369,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = _dynamicsClient.Establishments.GetByKey(id.ToString());
             }
-            catch (DataServiceQueryException dsqe)
+            catch (OdataerrorException dsqe)
             {
                 result = null;
             }
