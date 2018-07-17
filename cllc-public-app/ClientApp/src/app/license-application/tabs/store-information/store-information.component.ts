@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { auditTime } from 'rxjs/operators';
 import { UserDataService } from '../../../services/user-data.service';
 import { Observable } from '../../../../../node_modules/rxjs/Observable';
-import { Subject } from '../../../../../node_modules/rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-store-information',
