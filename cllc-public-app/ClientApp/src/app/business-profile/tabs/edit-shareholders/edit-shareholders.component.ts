@@ -6,11 +6,12 @@ import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
-import { User } from '../../../models/user.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
-import { UserDataService } from '../../../services/user-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
+import * as LegalEntitiesActions from '../../../app-state/actions/legal-entities.action';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -27,34 +28,30 @@ export class EditShareholdersComponent implements OnInit {
   shareholderList: AdoxioLegalEntity[] = [];
   dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   displayedColumns = ['position', 'name', 'email', 'commonvotingshares', 'edit', 'delete'];
-  user: User;
   busy: Promise<any>;
   busyObsv: Subscription;
 
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
     private route: ActivatedRoute,
+    private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService,
     public dialog: MatDialog,
-    private userDataService: UserDataService,
     public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
-    this.route.parent.params.subscribe(p => {
-      this.parentLegalEntityId = p.legalEntityId;
-      this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('account', this.accountId)
-        .then((data) => {
-          this.businessType = data.businessType;
+    this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.accountId = state.currentAccount.id;
+        this.businessType = state.currentAccount.businessType;
+        this.route.parent.params.subscribe(p => {
+          this.parentLegalEntityId = p.legalEntityId;
           this.getShareholders();
           this.updateDisplayedColumns();
         });
-    });
-
-    this.userDataService.getCurrentUser().then(user => {
-      this.user = user;
-    });
+      });
   }
 
   updateDisplayedColumns() {
@@ -254,6 +251,9 @@ export class EditShareholdersComponent implements OnInit {
             res => {
               this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getShareholders();
+              this.legalEntityDataservice.getBusinessProfileSummary().subscribe(data => {
+                this.store.dispatch(new LegalEntitiesActions.SetLegalEntitiesAction(data.json()));
+              });
             },
             err => {
               // console.log("Error occured");

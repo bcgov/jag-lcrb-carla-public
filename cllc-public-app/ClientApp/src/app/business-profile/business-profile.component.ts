@@ -5,6 +5,9 @@ import { UserDataService } from '../services/user-data.service';
 import { DynamicsDataService } from '../services/dynamics-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { Store } from '../../../node_modules/@ngrx/store';
+import { AppState } from '../app-state/models/app-state';
+import * as CurrenAccountActions from '../app-state/actions/current-account.action';
 
 @Component({
   selector: 'app-business-profile',
@@ -47,6 +50,7 @@ export class BusinessProfileComponent implements OnInit {
   }
   /** BusinessProfile ctor */
   constructor(private userDataService: UserDataService,
+    private store: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute,
     private dynamicsDataService: DynamicsDataService) {
@@ -61,6 +65,7 @@ export class BusinessProfileComponent implements OnInit {
       this.accountId = p.accountId;
       this.dynamicsDataService.getRecord('account', this.accountId)
         .then((data) => {
+          this.store.dispatch(new CurrenAccountActions.SetCurrentAccountAction(data));
           if (data.primarycontact) {
             this.contactId = data.primarycontact.id;
           }

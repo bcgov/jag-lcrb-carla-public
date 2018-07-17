@@ -5,7 +5,7 @@ import { AdoxioApplication } from '../../models/adoxio-application.model';
 export interface AppState {
     legalEntitiesState: LegalEntitiesState;
     applicationsState: ApplicationsState;
-    currentAcccurrentAccountStateount: CurrentAccountState;
+    currentAccountState: CurrentAccountState;
     currentLegalEntityState: CurrentLegalEntityState;
 }
 

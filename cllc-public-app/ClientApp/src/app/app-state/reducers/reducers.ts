@@ -13,7 +13,7 @@ export const metaReducers: MetaReducer<AppState>[] = !environment.production
 export const reducers: ActionReducerMap<AppState> = {
     legalEntitiesState: legalEnityReducer.reducer,
     currentLegalEntityState: currentLegalEnityReducer.reducer,
-    currentAcccurrentAccountStateount: currentAccountReducer.reducer,
+    currentAccountState: currentAccountReducer.reducer,
     applicationsState:  applicationsStateReducer.reducer
 };
 

@@ -10,6 +10,9 @@ import { DatePipe } from '@angular/common';
 import { auditTime } from 'rxjs/operators';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
+import * as currentAccountActions from '../../../app-state/actions/current-account.action';
 
 @Component({
   selector: 'app-corporate-details',
@@ -27,6 +30,7 @@ export class CorporateDetailsComponent implements OnInit {
   constructor(private userDataService: UserDataService,
     private accountDataService: AccountDataService,
     private dynamicsDataService: DynamicsDataService,
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
   }
@@ -34,34 +38,24 @@ export class CorporateDetailsComponent implements OnInit {
   ngOnInit() {
     this.createForm();
 
-    this.route.parent.params.subscribe(p => {
-      this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('account', this.accountId)
-        .then((data) => {
-          this.businessType = data.businessType;
-        });
-      this.getFormData();
-    });
-
+    this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.accountId = state.currentAccount.id;
+        this.businessType = state.currentAccount.businessType;
+        this.setFormData(state.currentAccount);
+      });
   }
 
-  getFormData() {
-    this.busy = this.accountDataService.getAccount(this.accountId).subscribe(
-      res => {
-        // let data = this.toFormModel(res.json());
-        let data = res.json();
-        // format date based on user locale
-        let dp = new DatePipe(this.getLang());
-        const dateFormat = 'y-MM-dd'; // YYYY-MM-DD
-        let dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
-        data.dateOfIncorporationInBC = dtr;
-        this.corporateDetailsForm.patchValue(data);
-        this.savedFormData = this.corporateDetailsForm.value;
-      },
-      err => {
-        console.log('Error occured');
-      }
-    );
+  setFormData(data) {
+    // format date based on user locale
+    let dp = new DatePipe(this.getLang());
+    const dateFormat = 'y-MM-dd'; // YYYY-MM-DD
+    let dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
+    data.dateOfIncorporationInBC = dtr;
+    this.corporateDetailsForm.patchValue(data);
+    this.savedFormData = this.corporateDetailsForm.value;
+
   }
 
   getLang() {
@@ -127,6 +121,9 @@ export class CorporateDetailsComponent implements OnInit {
         }
         saveResult.next(true);
         this.savedFormData = saveData;
+        this.busy = this.accountDataService.getAccount(this.accountId).subscribe(data =>
+          this.store.dispatch(new currentAccountActions.SetCurrentAccountAction(data.json()))
+        );
       },
       err => {
         this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });

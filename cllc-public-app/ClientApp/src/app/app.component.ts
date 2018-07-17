@@ -7,6 +7,8 @@ import { User } from './models/user.model';
 import { isDevMode } from '@angular/core';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
 import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
+import { Store } from '../../node_modules/@ngrx/store';
+import { AppState } from './app-state/models/app-state';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +28,7 @@ export class AppComponent {
     private renderer: Renderer2,
     private router: Router,
     private userDataService: UserDataService,
+    private store: Store<AppState>,
     private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
   ) {
     this.isDevMode = isDevMode();
@@ -57,6 +60,12 @@ export class AppComponent {
               this.businessProfiles = res.json();
             });
         }
+      });
+
+      this.store.select(state => state.legalEntitiesState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.businessProfiles = state.legalEntities;
       });
 
   }
