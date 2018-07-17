@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyDocument } from '../models/policy-document.model';
 import { PolicyDocumentDataService } from '../services/policy-document-data.service';
-import { Title } from '../../../node_modules/@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-policy-document',

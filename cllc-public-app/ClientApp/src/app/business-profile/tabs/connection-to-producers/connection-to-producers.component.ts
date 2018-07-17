@@ -7,6 +7,8 @@ import { auditTime } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { Observable, Subject, Subscription } from 'rxjs';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
   selector: 'app-connection-to-producers',
@@ -25,6 +27,7 @@ export class ConnectionToProducersComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     public snackBar: MatSnackBar,
+    private store: Store<AppState>,
     private tiedHouseService: TiedHouseConnectionsDataService,
     private dynamicsDataService: DynamicsDataService,
     private route: ActivatedRoute) { }
@@ -50,20 +53,19 @@ export class ConnectionToProducersComponent implements OnInit {
         this.save();
       });
 
-    this.route.parent.params.subscribe(p => {
-      this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('account', this.accountId)
-        .then((data) => {
-          this.businessType = data.businessType;
-        });
-
-      this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
+      this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.accountId = state.currentAccount.id;
+        this.businessType = state.currentAccount.businessType;
+        this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
         .subscribe(res => {
           this._tiedHouseData = res.json();
           this.form.patchValue(this._tiedHouseData);
           this.savedFormData = this.form.value;
         });
-    });
+      });
+
   }
 
   canDeactivate(): Observable<boolean> | boolean {
