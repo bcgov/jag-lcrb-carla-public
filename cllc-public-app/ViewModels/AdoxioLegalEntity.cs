@@ -121,10 +121,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
+        public DateTimeOffset? securityAssessmentEmailSentOn { get; set; } //adoxio_dateemailsent (date time)
 
         //adoxio_contact (lookup contact)
         //adoxio_correspondingpersonalhistorysummary (lookup personal history summary)
-        //adoxio_dateemailsent (date time)
         //adoxio_dateofsharesissued (date time)
         //adoxio_incorporationdate (date time)
         //adoxio_instructionsoninsertform ???

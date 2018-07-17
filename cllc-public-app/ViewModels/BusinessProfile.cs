@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                                     || businessType == AdoxioApplicantTypeCodes.SoleProprietor
                                     || businessType == AdoxioApplicantTypeCodes.Society
                                     || businessType == AdoxioApplicantTypeCodes.PublicCorporation;
-            
+
             var partnersExist = ChildEntities.Any(c => c.AdoxioLegalEntity.isPartner == true)
                                 || (
                                     businessType != AdoxioApplicantTypeCodes.GeneralPartnership
@@ -75,16 +75,21 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                                     && businessType != AdoxioApplicantTypeCodes.LimitedPartnership
                                 );
 
-            var isShareholderComplete = shareholdersExist &&  partnersExist &&
+            var isShareholderComplete = shareholdersExist && partnersExist &&
                 ChildEntities.Where(c => c.AdoxioLegalEntity.isShareholder == true || c.AdoxioLegalEntity.isPartner == true)
-                    .Select( c => c.AdoxioLegalEntity.isShareholderComplete(businessType, shareholderFilesExists, shareholdersExist, partnersExist))
+                    .Select(c => c.AdoxioLegalEntity.isShareholderComplete(businessType, shareholderFilesExists, shareholdersExist, partnersExist))
                     .All(s => s == true);
-            var isDirectorAndOfficersComplete =  directorsExist &&
+            var isDirectorAndOfficersComplete = directorsExist &&
                 ChildEntities.Where(c => c.AdoxioLegalEntity.isDirector == true
                                                 || c.AdoxioLegalEntity.isOfficer == true
                                                 || c.AdoxioLegalEntity.isSeniorManagement == true)
-                    .Select( c => c.AdoxioLegalEntity.isDirectorOfficerComplete(businessType, directorsExist))
+                    .Select(c => c.AdoxioLegalEntity.isDirectorOfficerComplete(businessType, directorsExist))
                     .All(s => s == true);
+            var isSecurityAssessmentComplete = ChildEntities.Where(c => c.AdoxioLegalEntity.isDirector == true
+                                                || c.AdoxioLegalEntity.isOfficer == true
+                                                || c.AdoxioLegalEntity.isSeniorManagement == true
+                                                || (c.AdoxioLegalEntity.isindividual == true && c.AdoxioLegalEntity.isShareholder == true))
+                                                .All(c => c.AdoxioLegalEntity.securityAssessmentEmailSentOn != null);
 
 
             var result = Account.isCorporateDetailsComplete(businessType, corporateDetailsFilesExists)
@@ -93,7 +98,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         && TiedHouse.isConnectionToProducersComplete(businessType)
                         && organizationStructureFilesExists
                         && keyPersonnelFilesExists
-                        && financialInformationFilesExists;
+                        && financialInformationFilesExists
+                        && isSecurityAssessmentComplete;
             return result;
         }
 

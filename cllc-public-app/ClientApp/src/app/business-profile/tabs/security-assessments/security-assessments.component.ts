@@ -62,6 +62,20 @@ export class SecurityAssessmentsComponent implements OnInit {
       });
   }
 
+  getRoles(legalEntity: AdoxioLegalEntity): string {
+    const roles = [];
+    if (legalEntity.isDirector === true) {
+      roles.push('Director');
+    }
+    if (legalEntity.isOfficer === true) {
+      roles.push('Officer');
+    }
+    if (legalEntity.isShareholder === true) {
+      roles.push('Shareholder');
+    }
+    return roles.join(', ');
+  }
+
   sendConsentRequestEmail() {
 
     let consentRequestList: string[] = [];

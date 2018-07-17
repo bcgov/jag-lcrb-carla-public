@@ -3,7 +3,7 @@ import { DynamicsFormComponent } from '../dynamics-form/dynamics-form.component'
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
 import { DynamicsDataService } from '../services/dynamics-data.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppState } from '../app-state/models/app-state';
@@ -27,12 +27,13 @@ export class BusinessProfileComponent implements OnInit {
 
   tabs: any = {
     privateCorportation: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel',
-    'shareholders', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
+      'shareholders', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
     society: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel',
-    'connections-to-producers', 'finance-integrity', 'security-assessment'],
+      'connections-to-producers', 'finance-integrity', 'security-assessment'],
     partnership: ['before-you-start', 'corporate-details', 'organization-structure', 'key-personnel', 'shareholders',
-    'connections-to-producers', 'finance-integrity', 'security-assessment'],
-    soleProprietor: ['before-you-start', 'corporate-details', 'key-personnel', 'finance-integrity', 'security-assessment']
+      'connections-to-producers', 'finance-integrity', 'security-assessment'],
+    soleProprietor: ['before-you-start', 'corporate-details', 'directors-and-officers', 'key-personnel',
+      'finance-integrity', 'security-assessment']
   };
 
   tabStructure: any[] = this.tabs.privateCorportation;
@@ -54,12 +55,19 @@ export class BusinessProfileComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dynamicsDataService: DynamicsDataService) {
-    this.view_tab = 'before-you-start';
+    const urlParts = this.router.url.split('/');
+    this.view_tab = urlParts[urlParts.length - 1];
   }
 
   ngOnInit(): void {
-    const urlParts = this.router.url.split('/');
-    this.view_tab = urlParts[urlParts.length - 1];
+    this.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const urlParts = this.router.url.split('/');
+          this.view_tab = urlParts[urlParts.length - 1];
+        }
+      });
+
     this.route.params.subscribe(p => {
       this.legalEntityId = p.legalEntityId;
       this.accountId = p.accountId;

@@ -77,6 +77,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
             to.Adoxio_email = from.email;
             to.Adoxio_dateofappointment = from.dateofappointment;
+
+            to.Adoxio_dateemailsent = from.securityAssessmentEmailSentOn;
             // Assigning the account this way throws exception:
             // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
             //if (from.account.id != null)
@@ -136,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             //    getAccountTask.Wait();
             //    to.Adoxio_Account= getAccountTask.Result;
             //}
-            // adoxio_dateemailsent
+            to.AdoxioDateemailsent = from.securityAssessmentEmailSentOn;
         }
 
         // /// <summary>
@@ -167,7 +169,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.legalentitytype = (AdoxioApplicantTypeCodes)adoxio_legalentity.Adoxio_legalentitytype;
                 }
-                  if (adoxio_legalentity.Adoxio_partnertype != null)
+                if (adoxio_legalentity.Adoxio_partnertype != null)
                 {
                     result.partnerType = (AdoxioPartnerType)adoxio_legalentity.Adoxio_partnertype;
                 }
@@ -181,6 +183,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // convert from int to bool.
                 result.sameasapplyingperson = (adoxio_legalentity.Adoxio_sameasapplyingperson != null && adoxio_legalentity.Adoxio_sameasapplyingperson != 0);
                 result.dateofappointment = adoxio_legalentity.Adoxio_dateofappointment;
+
+                result.securityAssessmentEmailSentOn = adoxio_legalentity.Adoxio_dateemailsent;
 
                 // populate the account.
                 if (adoxio_legalentity.Adoxio_Account != null)
@@ -239,9 +243,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = adoxio_legalentity.AdoxioMiddlename;
                 result.name = adoxio_legalentity.AdoxioName;
                 result.email = adoxio_legalentity.AdoxioEmail;
-                result.isPartner =  (adoxio_legalentity.AdoxioIspartner == true);
-                result.isApplicant =  (adoxio_legalentity.AdoxioIsapplicant == true);
-                result.isShareholder =  (adoxio_legalentity.AdoxioIsshareholder == true);
+                result.isPartner = (adoxio_legalentity.AdoxioIspartner == true);
+                result.isApplicant = (adoxio_legalentity.AdoxioIsapplicant == true);
+                result.isShareholder = (adoxio_legalentity.AdoxioIsshareholder == true);
                 // result.isTrustee =  adoxio_legalentity.AdoxioIstrustee;
                 // result.isOwner =  adoxio_legalentity.AdoxioIsowner;
                 result.isDirector = (adoxio_legalentity.AdoxioIsdirector == true);
@@ -253,6 +257,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // convert from int to bool.
                 result.sameasapplyingperson = (adoxio_legalentity.AdoxioSameasapplyingperson != null && adoxio_legalentity.AdoxioSameasapplyingperson != 0);
                 result.dateofappointment = adoxio_legalentity.AdoxioDateofappointment;
+                result.securityAssessmentEmailSentOn = adoxio_legalentity.AdoxioDateemailsent;
 
                 // populate the account.
                 if (adoxio_legalentity.AdoxioAccount != null)
@@ -291,7 +296,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 result.Adoxio_isapplicant = (from.isApplicant == true);
                 result.Adoxio_ispartner = (from.isPartner == true);
-                result.Adoxio_isshareholder =  (from.isShareholder == true);
+                result.Adoxio_isshareholder = (from.isShareholder == true);
                 //result.AdoxioIstrustee = from.isTrustee;
                 //result.AdoxioIsowner = from.isOwner;
                 result.Adoxio_isdirector = (from.isDirector == true);
@@ -302,6 +307,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_preferredvotingshares = from.preferredvotingshares;
                 result.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
                 result.Adoxio_dateofappointment = from.dateofappointment;
+                result.Adoxio_dateemailsent = from.securityAssessmentEmailSentOn;
             }
             return result;
         }
