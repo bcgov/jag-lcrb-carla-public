@@ -114,7 +114,7 @@ import { SiteMapComponent } from './license-application/tabs/site-map/site-map.c
 import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
-import {BsDatepickerModule} from 'ngx-bootstrap';
+import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 
@@ -216,7 +216,8 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
     MatTooltipModule,
     FileDropModule,
     ToastModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    AlertModule.forRoot()
   ],
   exports: [
     BrowserModule,
