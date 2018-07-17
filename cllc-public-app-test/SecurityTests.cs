@@ -112,7 +112,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.NotNull(dos2);
 			ViewModels.AdoxioLegalEntity dos3 = await SecurityHelper.CreateDirectorOrShareholder(_client, user1, legalEntity1.id, false, false, true);
 			Assert.NotNull(dos3);
-			List<ViewModels.AdoxioLegalEntity> dos1s = await SecurityHelper.GetLegalEntitiesByPosision(_client, legalEntity1.id, "director-officer-shareholder", true);
+			List<ViewModels.AdoxioLegalEntity> dos1s = await SecurityHelper.GetLegalEntitiesByPosition(_client, legalEntity1.id, "director-officer-shareholder", true);
 			Assert.NotNull(dos1s);
 			Assert.Equal(3, dos1s.Count);
             // ***
@@ -139,7 +139,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Null(tmp);
 			tmp = await SecurityHelper.GetLegalEntityRecord(_client, dos3.id, false);
             Assert.Null(tmp);
-			List<ViewModels.AdoxioLegalEntity> dos2s = await SecurityHelper.GetLegalEntitiesByPosision(_client, legalEntity1.id, "director-officer-shareholder", false);
+			List<ViewModels.AdoxioLegalEntity> dos2s = await SecurityHelper.GetLegalEntitiesByPosition(_client, legalEntity1.id, "director-officer-shareholder", false);
 			Assert.Null(dos2s);
             // ***
 

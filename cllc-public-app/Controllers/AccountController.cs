@@ -484,7 +484,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Verify whether currently logged in user has access to this account id
         /// </summary>
         /// <returns>boolean</returns>
-        public static bool CurrentUserHasAccessToAccount(Guid id, IHttpContextAccessor _httpContextAccessor, IDynamicsClient _dynamicsClient)
+        public static bool CurrentUserHasAccessToAccount(Guid accountId, IHttpContextAccessor _httpContextAccessor, IDynamicsClient _dynamicsClient)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -492,7 +492,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                return Guid.Parse(userSettings.AccountId) == id || IsChildAccount(userSettings.AccountId, id.ToString(), _dynamicsClient);
+                return userSettings.AccountId == accountId.ToString()  || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
             }
 
             // if current user doesn't have an account they are probably not logged in
