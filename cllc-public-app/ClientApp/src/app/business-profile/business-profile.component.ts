@@ -93,6 +93,12 @@ export class BusinessProfileComponent implements OnInit {
     this.dynamicsFormComponent.onSubmit();
   }
 
+  isOnLastTab(): boolean {
+    const isLast = (this.tabStructure.indexOf(this.view_tab)  === (this.tabStructure.length - 1));
+    return isLast;
+
+  }
+
   changeTab(tab) {
     this.view_tab = tab;
     this.router.navigate([`/business-profile/${this.accountId}/${this.legalEntityId}/${tab}`]);

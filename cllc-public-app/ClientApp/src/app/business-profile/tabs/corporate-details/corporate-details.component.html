@@ -1,8 +1,8 @@
 <div>
-  <h1 *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</h1>
-  <h1 *ngIf="businessType == 'Society'">Society Details</h1>
-  <h1 *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" >Patnership Details</h1>
-  <h1 *ngIf="businessType == 'SoleProprietor'">Sole Proprietor Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="businessType == 'Society'">Society Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" >Patnership Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="businessType == 'SoleProprietor'">Sole Proprietor Details</h1>
 
   <div [ngBusy]="busy"></div>
 
