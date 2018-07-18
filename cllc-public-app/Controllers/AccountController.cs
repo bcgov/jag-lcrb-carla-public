@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // verify the currently logged in user has access to this account
                 Guid accountId = new Guid(id);
-                if (!CurrentUserHasAccessToAccount(accountId))
+                if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
                 {
                     return new NotFoundResult();
                 }
@@ -421,6 +421,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the legal entity.
             Guid accountId = new Guid(id);
 
+            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+            {
+                return NotFound();
+            }
+
             MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountById(accountId);
             if (adoxioAccount == null)
             {
@@ -447,7 +452,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // verify the currently logged in user has access to this account
             Guid accountId = new Guid(id);
-            if (!CurrentUserHasAccessToAccount(accountId))
+            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
             {
                 return new NotFoundResult();
             }
@@ -470,58 +475,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
 
             return NoContent(); // 204 
-        }
-
-        /// <summary>
-        /// Verify whether currently logged in user has access to this account
-        /// </summary>
-        /// <returns>boolean</returns>
-        private bool CurrentUserHasAccessToAccount(ViewModels.Account account)
-        {
-            return CurrentUserHasAccessToAccount(Guid.Parse(account.id));
-        }
-
-        /// <summary>
-        /// Verify whether currently logged in user has access to this account id
-        /// </summary>
-        /// <returns>boolean</returns>
-        private bool CurrentUserHasAccessToAccount(Guid id)
-        {
-            // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
-            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
-            {
-                return Guid.Parse(userSettings.AccountId) == id || IsChildAccount(userSettings.AccountId, id.ToString());
-            }
-
-            // if current user doesn't have an account they are probably not logged in
-            return false;
-        }
-
-        private bool IsChildAccount(String parentAccountId, String childAccountId)
-        {
-            var filter = $"_adoxio_account_value eq {parentAccountId}";
-            var result = false;
-
-            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList();
-            if (legalEntities.Any(e => e._adoxioShareholderaccountidValue == childAccountId))
-            {
-                result = true;
-            }
-            else
-            {
-                legalEntities = legalEntities.Where(e => !String.IsNullOrEmpty(e._adoxioShareholderaccountidValue)).ToList();
-                for (var i = 0; i < legalEntities.Count; i++)
-                {
-                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId)){
-                       result = true;
-                       break;
-                    }
-                }
-            }
-            return result;
         }
     }
 }
