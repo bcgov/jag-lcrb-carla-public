@@ -344,7 +344,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var applicationGUID = new Guid(applicationId);
             var application = await _dynamicsClient.GetApplicationById(applicationGUID);
 
-            if (!AccountController.CurrentUserHasAccessToAccount(new Guid(application._adoxioApplicantValue), _httpContextAccessor, _dynamicsClient))
+            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(application._adoxioApplicantValue), _httpContextAccessor, _dynamicsClient))
             {
                 return NotFound();
             }

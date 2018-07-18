@@ -188,17 +188,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.securityAssessmentEmailSentOn = adoxio_legalentity.Adoxio_dateemailsent;
 
                 // populate the account.
-<<<<<<< HEAD
-                if (adoxio_legalentity.Adoxio_Account != null)
-                {
-                    // result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
-                }
-=======
                 // if (adoxio_legalentity.Adoxio_Account != null)
                 // {
                 //     result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
                 // }
->>>>>>> f0027eefd1f15ea362c9766c20ddc03bab1633db
 
                 result.accountId = adoxio_legalentity._adoxio_account_value.ToString();
 
