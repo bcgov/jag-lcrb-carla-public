@@ -29,6 +29,21 @@
   <p>If you need to make any changes to the business profile or licence application after submission, please contact the Liquor and Cannabis Regulation Branch [Contact Information]</p>
 </div>
 
+<div *ngIf="validationMessage">
+  <alert type="danger">
+    <strong>Application Validation Failed.</strong><br />
+    <!--<div [innerHTML]="validationMessage"></div>-->
+    <br />
+    <ul>
+      <li *ngFor="let message of validationMessages">
+        {{message}}
+      </li>
+    </ul>
+    <br />
+    <p>Please complete the application before you can submit.</p>
+  </alert>
+</div>
+
 <div *ngIf="isPaid">
   <app-payment-confirmation [inputApplicationId]="applicationId"></app-payment-confirmation>
 </div>
