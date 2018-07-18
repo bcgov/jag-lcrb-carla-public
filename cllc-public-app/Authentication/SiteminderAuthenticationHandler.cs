@@ -9,10 +9,8 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Microsoft.Extensions.Caching.Distributed;
-using Logos.Utility;
 using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {    
@@ -430,7 +428,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
                     if (account != null && account.Accountid != null)
                     {
-                        userSettings.AccountId = account.Accountid.ToString();
+                        userSettings.AccountId = account.Accountid;
                         userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
                     }
                 }
