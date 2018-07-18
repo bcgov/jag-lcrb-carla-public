@@ -33,9 +33,9 @@ export class FileUploaderComponent implements OnInit {
   ngOnInit(): void {
     //use application controller if application ID is passed, otherwise legal entity controller
     if (this.applicationId) {
-      this.attachmentURL = "api/adoxioapplication/" + this.applicationId + "/attachments";
+      this.attachmentURL = 'api/adoxioapplication/' + this.applicationId + '/attachments';
     } else {
-      this.attachmentURL = "api/AdoxioLegalEntity/" + this.accountId + "/attachments";
+      this.attachmentURL = 'api/AdoxioLegalEntity/' + this.accountId + '/attachments';
     }
     this.getUploadedFileData();
   }
@@ -63,11 +63,11 @@ export class FileUploaderComponent implements OnInit {
   onBrowserFileSelect(event: any) {
     let uploadedFiles = event.target.files;
     for (const file of uploadedFiles) {
-     this.uploadFile(file);
+      this.uploadFile(file);
     }
   }
 
-  private uploadFile(file){
+  private uploadFile(file) {
     let formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('documentType', this.documentType);
@@ -81,18 +81,28 @@ export class FileUploaderComponent implements OnInit {
 
   getUploadedFileData() {
     const headers = new Headers({
-      //'Content-Type': 'multipart/form-data'
-    })
-    let getFileURL = this.attachmentURL + "/" + this.documentType;
+      // 'Content-Type': 'multipart/form-data'
+    });
+    const getFileURL = this.attachmentURL + '/' + this.documentType;
     this.busy = this.http.get(getFileURL, { headers: headers })
       .map((data: Response) => { return <FileSystemItem[]>data.json() })
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {
-          entry.size = entry.size /1024
+          entry.size = entry.size / 1024
         });
         this.files = data;
-      })
+      });
+  }
+
+  deleteFile(relativeUrl: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    const queryParams = `?serverRelativeUrl=${encodeURIComponent(relativeUrl)}`;
+    this.busy = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
+      this.getUploadedFileData();
+    });
   }
 
   public fileOver(event) {
