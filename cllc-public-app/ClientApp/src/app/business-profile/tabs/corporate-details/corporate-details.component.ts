@@ -63,11 +63,15 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
     // format date based on user locale
     const dp = new DatePipe(this.getLang());
     const dateFormat = 'y-MM-dd'; // YYYY-MM-DD
-    const dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
-    data.dateOfIncorporationInBC = dtr;
+
+    let dtr = '';
+    if (data.dateOfIncorporationInBC != null) {
+      dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
+      data.dateOfIncorporationInBC = dtr;
+    }
+
     this.corporateDetailsForm.patchValue(data);
     this.savedFormData = this.corporateDetailsForm.value;
-
   }
 
   getLang() {
