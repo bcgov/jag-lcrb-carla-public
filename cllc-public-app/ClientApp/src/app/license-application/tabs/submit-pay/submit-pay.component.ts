@@ -20,6 +20,7 @@ export class SubmitPayComponent implements OnInit {
   isPaid: boolean;
   prevPaymentFailed: boolean;
   validationMessage: string;
+  validationMessages = [];
   isLoaded: boolean = false;
 
   constructor(private paymentDataService: PaymentDataService,
@@ -67,6 +68,7 @@ export class SubmitPayComponent implements OnInit {
           || this.isNullOrEmpty(data.contactpersonphone)) {
           isApplicationValid = false;
           this.validationMessage = 'Contact details are not complete.\r\n';
+          this.validationMessages.push("Contact details are not complete.");
         }
         // validate property details
         if (this.isNullOrEmpty(data.establishmentaddressstreet)
@@ -75,20 +77,23 @@ export class SubmitPayComponent implements OnInit {
           || this.isNullOrEmpty(data.establishmentparcelid)) {
           isApplicationValid = false;
           this.validationMessage += 'Property details are not complete.\r\n';
+          this.validationMessages.push("Property details are not complete.");
         }
         // validate store info
         if (this.isNullOrEmpty(data.establishmentName)) {
           isApplicationValid = false;
           this.validationMessage += 'Store Information is not complete.\r\n';
+          this.validationMessages.push("Store Information is complete.");
         }
         // validate declaration
         if (this.isNullOrEmpty(data.authorizedtosubmit)
           || this.isNullOrEmpty(data.signatureagreement)) {
           isApplicationValid = false;
           this.validationMessage += 'Declarations are not complete.\r\n';
+          this.validationMessages.push("Declarations are not complete.");
         }
         if (!isApplicationValid) {
-          alert(this.validationMessage + 'Please complete the application before you can submit.');
+          //alert(this.validationMessage + 'Please complete the application before you can submit.');
         }
         result.next(isApplicationValid);
       },
