@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
 import { auditTime } from 'rxjs/operators';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '../../../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentAccountActions from '../../../app-state/actions/current-account.action';
 
