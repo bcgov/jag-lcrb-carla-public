@@ -64,7 +64,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
             profileSummary.shareholderAccountId = entry.shareholderAccountId;
             profileSummary.name = entry.name;
             profileSummary.profileComplete = '...';
-            if (entry.isShareholder) {
+            if (entry.shareholderAccountId) {
               profileSummary.businessRelationship = 'Shareholder';
             } else {
               profileSummary.businessRelationship = 'Applicant';

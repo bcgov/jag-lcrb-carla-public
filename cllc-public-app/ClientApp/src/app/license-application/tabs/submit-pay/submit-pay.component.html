@@ -1,84 +1,13 @@
+<div *ngIf="!(isSubmitted && isPaid) && isLoaded">
+  <h1>Submit &amp; Pay</h1>
+  <p>
+    All required fields must be completed before you can submit the application.
+    After you submit the application you will be directed to the payment screen to complete the application.
+    An application is not complete until the payment has been approved.
+  </p>
 
-<div *ngIf="!isSubmitted">
-  <div *ngIf="prevPaymentFailed">
-	<div id="u8565" class="ax_default" data-label="decline" style="visibility: inherit;">              
-	<div id="u8565_state0" class="panel_state" data-label="State1" style="">
-	    <div id="u8565_state0_content" class="panel_state_content">
-
-	      <!-- Application-Name (Rectangle) -->
-	      <div id="u8567" class="ax_default heading_1" data-label="Application-Name">
-	        <div id="u8567_div" class=""></div>
-	        <div id="u8567_text" class="text " >
-	          <p>Declined</p>
-	        </div>
-	      </div>
-
-	      <!-- Unnamed (Rectangle) -->
-	      <div id="u8568" class="ax_default paragraph">
-	        <div id="u8568_div" class=""></div>
-	        <div id="u8568_text" class="text ">
-	          <p>Your payment has been declined. Please contact your bank for more information.</p>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-  </div>
-</div>
-
-<div *ngIf="isSubmitted && !isPaid">
-	<div id="u8565" class="ax_default" data-label="inprogress" style="visibility: inherit;">              
-	<div id="u8565_state0" class="panel_state" data-label="State1" style="">
-	    <div id="u8565_state0_content" class="panel_state_content">
-
-	      <!-- Application-Name (Rectangle) -->
-	      <div id="u8567" class="ax_default heading_1" data-label="Application-Name">
-	        <div id="u8567_div" class=""></div>
-	        <div id="u8567_text" class="text " >
-	          <p>Payment Pending</p>
-	        </div>
-	      </div>
-
-	      <!-- Unnamed (Rectangle) -->
-	      <div id="u8568" class="ax_default paragraph">
-	        <div id="u8568_div" class=""></div>
-	        <div id="u8568_text" class="text ">
-	          <p>Your Application has been submitted, but payment has not been completed. Your application will not be processed until payment is received.</p>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-</div>
-
-<div *ngIf="isSubmitted && isPaid">
-	<div id="u8565" class="ax_default" data-label="paid" style="visibility: inherit;">              
-	<div id="u8565_state0" class="panel_state" data-label="State1" style="">
-	    <div id="u8565_state0_content" class="panel_state_content">
-
-
-	      <!-- Unnamed (Rectangle) -->
-	      <div id="u8568" class="ax_default paragraph">
-	        <div id="u8568_div" class=""></div>
-	        <div id="u8568_text" class="text ">
-	          <p>Your Application has been Submitted and Paid.</p>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-</div>
-
-<div *ngIf="!(isSubmitted && isPaid)">
-<h1>Submit &amp; Pay</h1>
-
-<p>
-		All required fields must be completed before you can submit the application.
-		After you submit the application you will be directed to the payment screen to complete the application.
-		An application is not complete until the payment has been approved.
-</p>
-<h2>Application Fee: $7,500</h2>
-<p>Payment types accepted:</p>
+  <h2>Application Fee: $7,500</h2>
+  <p>Payment types accepted:</p>
   <ul>
     <li>Visa</li>
     <li>MasterCard</li>
@@ -87,17 +16,21 @@
     <li>Debit MasterCard</li>
   </ul>
 
-<h2>Before you Submit</h2>
-<ul>
-	<li>Check that you sent the authorizations for all individuals who require security screenings and financial integrity checks.</li>
-	<li>Check that the information in your business profile and licence application is complete and accurate.</li>		
-</ul>
-<br>
-<p>
-	Note: The information in your business profile and licence application cannot be changed or updated online after the application is submitted.
-	You can still submit new applications for additional licences online.
-</p>
-<p>If you need to make any changes to the business profile or licence application after submission, please contact the Liquor and Cannabis Regulation Branch [Contact Information]</p>
+  <h2>Before you Submit</h2>
+  <ul>
+    <li>Check that you sent the authorizations for all individuals who require security screenings and financial integrity checks.</li>
+    <li>Check that the information in your business profile and licence application is complete and accurate.</li>
+  </ul>
+  <br>
+  <p>
+    Note: The information in your business profile and licence application cannot be changed or updated online after the application is submitted.
+    You can still submit new applications for additional licences online.
+  </p>
+  <p>If you need to make any changes to the business profile or licence application after submission, please contact the Liquor and Cannabis Regulation Branch [Contact Information]</p>
+</div>
+
+<div *ngIf="isPaid">
+  <app-payment-confirmation [inputApplicationId]="applicationId"></app-payment-confirmation>
 </div>
 
 <div [ngBusy]="busy">
@@ -106,6 +39,7 @@
     <a class="globalButton btn btn-primary" tabindex="2" (click)="submit_application()"><strong>Submit</strong></a>
   </div>
   <div *ngIf="isSubmitted && !isPaid">
-      <a class="globalButton btn btn-primary" tabindex="2" (click)="verify_payment()"><strong>Verify Payment</strong></a>
+    <a class="globalButton btn btn-primary" tabindex="2" (click)="verify_payment()"><strong>Verify Payment</strong></a>
   </div>
 </div>
+

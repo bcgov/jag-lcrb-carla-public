@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '../../../services/tied-house-connections-data.service';
@@ -15,10 +15,11 @@ import { AppState } from '../../../app-state/models/app-state';
   templateUrl: './connection-to-producers.component.html',
   styleUrls: ['./connection-to-producers.component.css']
 })
-export class ConnectionToProducersComponent implements OnInit {
+export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   @Input() accountId: string;
   @Input() businessType: string;
   busy: Subscription;
+  subscriptions: Subscription[] = [];
   savedFormData: any = {};
 
   operatingForMoreThanOneYear: any;
@@ -48,24 +49,32 @@ export class ConnectionToProducersComponent implements OnInit {
       societyConnectionFederalProducerDetails: ['']
     });
 
-    this.form.valueChanges
-      .pipe(auditTime(10000)).subscribe(formData => {
-        this.save();
-      });
 
-      this.store.select(state => state.currentAccountState)
+
+    const sub = this.store.select(state => state.currentAccountState)
       .filter(state => !!state)
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
         this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
-        .subscribe(res => {
-          this._tiedHouseData = res.json();
-          this.form.patchValue(this._tiedHouseData);
-          this.savedFormData = this.form.value;
-        });
+          .subscribe(res => {
+            this._tiedHouseData = res.json();
+            this.form.patchValue(this._tiedHouseData);
+            this.savedFormData = this.form.value;
+            this.form.valueChanges
+              .pipe(auditTime(10000)).subscribe(formData => {
+                if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
+                  this.save();
+                }
+              });
+          });
       });
+    this.subscriptions.push(sub);
 
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   canDeactivate(): Observable<boolean> | boolean {

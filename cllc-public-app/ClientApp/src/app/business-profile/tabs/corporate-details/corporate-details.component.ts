@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { AccountDataService } from '../../../services/account-data.service';
 import { User } from '../../../models/user.model';
@@ -19,12 +19,13 @@ import * as currentAccountActions from '../../../app-state/actions/current-accou
   templateUrl: './corporate-details.component.html',
   styleUrls: ['./corporate-details.component.scss']
 })
-export class CorporateDetailsComponent implements OnInit {
+export class CorporateDetailsComponent implements OnInit, OnDestroy {
   @Input() accountId: string;
   @Input() businessType: string;
   corporateDetailsForm: FormGroup;
   accountModel: DynamicsAccount;
   busy: Subscription;
+  subscriptions: Subscription[] = [];
   savedFormData: any;
 
   constructor(private userDataService: UserDataService,
@@ -38,20 +39,31 @@ export class CorporateDetailsComponent implements OnInit {
   ngOnInit() {
     this.createForm();
 
-    this.store.select(state => state.currentAccountState)
+    const sub = this.store.select(state => state.currentAccountState)
       .filter(state => !!state)
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
         this.setFormData(state.currentAccount);
+        this.corporateDetailsForm.valueChanges
+          .pipe(auditTime(10000)).subscribe(formData => {
+            if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
+              this.save();
+            }
+          });
       });
+    this.subscriptions.push(sub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   setFormData(data) {
     // format date based on user locale
-    let dp = new DatePipe(this.getLang());
+    const dp = new DatePipe(this.getLang());
     const dateFormat = 'y-MM-dd'; // YYYY-MM-DD
-    let dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
+    const dtr = dp.transform(new Date(data.dateOfIncorporationInBC), dateFormat);
     data.dateOfIncorporationInBC = dtr;
     this.corporateDetailsForm.patchValue(data);
     this.savedFormData = this.corporateDetailsForm.value;
@@ -80,12 +92,6 @@ export class CorporateDetailsComponent implements OnInit {
       mailingAddressProvince: [''],
       mailingAddresPostalCode: ['']
     });
-
-    this.corporateDetailsForm.valueChanges
-      .pipe(auditTime(10000)).subscribe(formData => {
-        this.save();
-      });
-
   }
 
   dateLessThanToday(field1) {

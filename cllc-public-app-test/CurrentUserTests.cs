@@ -77,8 +77,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
             user = JsonConvert.DeserializeObject<ViewModels.User>(jsonString);
 
-            // The Default development user should not be a new user.
-            Assert.False(user.isNewUser);
             Assert.NotNull(user.accountid);
             Assert.NotEmpty(user.accountid);
 

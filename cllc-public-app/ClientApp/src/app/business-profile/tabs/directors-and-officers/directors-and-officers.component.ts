@@ -28,6 +28,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   displayedColumns = ['name', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
+  subscriptions: Subscription[] = [];
 
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
     public dialog: MatDialog,
@@ -37,16 +38,18 @@ export class DirectorsAndOfficersComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState)
-    .filter(state => !!state)
-    .subscribe(state => {
-      this.accountId = state.currentAccount.id;
-      this.businessType = state.currentAccount.businessType;
-      this.route.parent.params.subscribe(p => {
-        this.parentLegalEntityId = p.legalEntityId;
-        this.getDirectorsAndOfficers();
+    const sub = this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.accountId = state.currentAccount.id;
+        this.businessType = state.currentAccount.businessType;
+        const sub2 = this.route.parent.params.subscribe(p => {
+          this.parentLegalEntityId = p.legalEntityId;
+          this.getDirectorsAndOfficers();
+        });
+        this.subscriptions.push(sub2);
       });
-    });
+    this.subscriptions.push(sub);
   }
 
   getDirectorsAndOfficers() {
@@ -82,9 +85,13 @@ export class DirectorsAndOfficersComponent implements OnInit {
     adoxioLegalEntity.email = formData.email;
     adoxioLegalEntity.dateofappointment = formData.dateofappointment; // adoxio_dateofappointment
     // adoxioLegalEntity.legalentitytype = "PrivateCorporation";
-    adoxioLegalEntity.isOfficer = formData.isOfficer;
-    adoxioLegalEntity.isDirector = formData.isDirector;
-    adoxioLegalEntity.isSeniorManagement = formData.isSeniorManagement;
+    if (this.businessType === 'SoleProprietor') {
+      adoxioLegalEntity.isOwner = true;
+    } else {
+      adoxioLegalEntity.isOfficer = formData.isOfficer;
+      adoxioLegalEntity.isDirector = formData.isDirector;
+      adoxioLegalEntity.isSeniorManagement = formData.isSeniorManagement;
+    }
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
       adoxioLegalEntity.account = new DynamicsAccount();

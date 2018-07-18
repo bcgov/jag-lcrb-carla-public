@@ -1,55 +1,54 @@
-<div [ngBusy]="busy" class="container" style="margin-left:15px;">
-  <div *ngIf="isApproved" class="row">
-    <div style="width:100%">
-      <h4>You have successfully submitted a cannabis retail licence application</h4>
-      <br />
-    </div>
-    <div class="border ">
-      <h1 style="color:green">Payment Approved</h1>
-      <div class="table">
-        <table>
-          <tr>
-            <td>Card Type:</td>
-            <td>{{cardType}}</td>
-          </tr>
-          <tr>
-            <td>Date/Time :</td>
-            <td>{{trnDate}}</td>
-          </tr>
-          <tr>
-            <td>Invoice Number :</td>
-            <td>{{invoice}}</td>
-          </tr>
-          <tr>
-            <td>Transaction Id :</td>
-            <td>{{trnId}}</td>
-          </tr>
-          <tr>
-            <td>Authorization :</td>
-            <td>{{authCode}}</td>
-          </tr>
-          <tr>
-            <td>Amount :</td>
-            <td>{{trnAmount | currency}}</td>
-          </tr>
-        </table>
+<mat-card class="mat-elevation-z0">
+  <div [ngBusy]="busy" class="container" style="margin-left:0px;">
+    <div *ngIf="isApproved" class="row">
+      <div style="width:100%">
+        <h4>You have successfully submitted a cannabis retail licence application</h4>
+      </div>
+      <div>
+        <h1 style="color:green">Payment Approved</h1>
+        <div class="table" style="padding:0px;">
+          <table>
+            <tr>
+              <td>Card Type:</td>
+              <td>{{cardType}}</td>
+            </tr>
+            <tr>
+              <td>Date/Time :</td>
+              <td>{{trnDate}}</td>
+            </tr>
+            <tr>
+              <td>Invoice Number :</td>
+              <td>{{invoice}}</td>
+            </tr>
+            <tr>
+              <td>Transaction Id :</td>
+              <td>{{trnId}}</td>
+            </tr>
+            <tr>
+              <td>Authorization :</td>
+              <td>{{authCode}}</td>
+            </tr>
+            <tr>
+              <td>Amount :</td>
+              <td>{{trnAmount | currency}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row" style="margin-left:5px;">
+        <h2>Next steps</h2>
+        <p>1. The Liquor and Cannabis Regulation Branch will review your application and provide notice of the application to the local government or Indigenous nation for your proposed location to confirm they are accepting applications for cannabis stores.</p>
+        <p>2. Associates of the applicant such as shareholders, directors, officers, and owners must authorize security screening and financial integrity checks for themselves. The requirements for submitting the authorizations are determined by where an individual lives based on residency either in B.C., out of province, or internationally. Instructions on how to submit authorizations are provided in the email sent to associates.</p>
+        <p>You will be notified by the Branch if any information is missing, or if more information is required. If you need to make any changes to the business profile or the licence application, please contact cannabisregs@gov.bc.ca or 1-800-555-5555 [contact information TBD].</p>
       </div>
     </div>
-    <div class="row">
-      <h2>Next steps</h2>
-      <p>1. The Liquor and Cannabis Regulation Branch will review your application and provide notice of the application to the local government or Indigenous nation for your proposed location to confirm they are accepting applications for cannabis stores.</p>
-      <p>2. Associates of the applicant such as shareholders, directors, officers, and owners must authorize security screening and financial integrity checks for themselves. The requirements for submitting the authorizations are determined by where an individual lives based on residency either in B.C., out of province, or internationally. Instructions on how to submit authorizations are provided in the email sent to associates.</p>
-      <p>You will be notified by the Branch if any information is missing, or if more information is required. If you need to make any changes to the business profile or the licence application, please contact cannabisregs@gov.bc.ca or 1-800-555-5555 [contact information TBD].</p>
+
+    <div *ngIf="!isApproved && loaded">
+      <br />
+      <alert type="danger"><strong>{{paymentTransactionTitle}}</strong><br /><br />{{paymentTransactionMessage}}</alert>
+    </div>
+    <div *ngIf="loaded">
+      <p><a class="globalButton btn btn-primary" style="color:white" (click)="return_to_application()"><strong>Return</strong></a></p>
     </div>
   </div>
-
-  <div *ngIf="!isApproved" class="row">
-    <div class="border-red col-sm-6">
-      <h1 style="color:red">Declined</h1>
-      <p>Your payment has been declined. Please contact your bank for more information.</p>
-    </div>
-  </div>
-
-  <p><a class="globalButton btn btn-primary" (click)="return_to_application()"><strong>Return to application</strong></a></p>
-
-</div>
+</mat-card>
