@@ -9,7 +9,7 @@ import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
-import { Store } from '../../../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as LegalEntitiesActions from '../../../app-state/actions/legal-entities.action';
 

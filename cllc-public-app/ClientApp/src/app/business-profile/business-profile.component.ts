@@ -5,7 +5,7 @@ import { UserDataService } from '../services/user-data.service';
 import { DynamicsDataService } from '../services/dynamics-data.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Store } from '../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../app-state/models/app-state';
 import * as CurrenAccountActions from '../app-state/actions/current-account.action';
 

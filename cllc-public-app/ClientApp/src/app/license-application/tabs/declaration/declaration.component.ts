@@ -5,6 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
+import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 
 @Component({
   selector: 'app-declaration',
@@ -16,37 +19,29 @@ export class DeclarationComponent implements OnInit {
   authorizedtosubmit: boolean;
   signatureagreement: boolean;
   busy: Subscription;
+  subscriptions: Subscription[] = [];
   application: any;
   savedFormData: any = {};
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     public snackBar: MatSnackBar) {
     this.applicationId = this.route.parent.snapshot.params.applicationId;
   }
 
   ngOnInit() {
-    this.getApplication();
-  }
-
-  getApplication() {
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
-        // TODO add to autorest
-        this.authorizedtosubmit = data.authorizedtosubmit;
-        this.signatureagreement = data.signatureagreement;
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
+      .filter(state => !!state)
+      .subscribe(currentApplication => {
+        this.signatureagreement = currentApplication.signatureagreement;
+        this.authorizedtosubmit = currentApplication.authorizedtosubmit;
         this.savedFormData = {
-          authorizedtosubmit: data.authorizedtosubmit,
-          signatureagreement: data.signatureagreement,
+          authorizedtosubmit: currentApplication.authorizedtosubmit,
+          signatureagreement: currentApplication.signatureagreement,
         };
-
-      },
-      err => {
-        this.snackBar.open('Error getting Declaration Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
-        console.log('Error occured getting Declaration Details');
-      }
-    );
+      });
+    this.subscriptions.push(sub);
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -68,6 +63,7 @@ export class DeclarationComponent implements OnInit {
     const subscription = this.applicationDataService.updateApplication(declarationValues).subscribe(
       res => {
         saveResult.next(true);
+        this.updateApplicationInStore();
         this.savedFormData = {
           authorizedtosubmit: declarationValues.authorizedtosubmit,
           signatureagreement: declarationValues.signatureagreement,
@@ -85,6 +81,15 @@ export class DeclarationComponent implements OnInit {
       this.busy = subscription;
     }
     return saveResult;
+  }
+
+  updateApplicationInStore() {
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      res => {
+        const data = res.json();
+        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+      }
+    );
   }
 
 }
