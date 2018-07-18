@@ -805,7 +805,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
             Assert.Equal("Doug Baldwin", responseViewModel.name);
 
-            //await LogoutAndCleanupTestUser(strId);
+            await LogoutAndCleanupTestUser(strId);
         }
 
         private async Task<ViewModels.Account> AccountFactory()
