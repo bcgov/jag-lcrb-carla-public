@@ -114,7 +114,7 @@ import { SiteMapComponent } from './license-application/tabs/site-map/site-map.c
 import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
-import {BsDatepickerModule} from 'ngx-bootstrap';
+import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
@@ -219,7 +219,8 @@ import { StoreModule } from '../../node_modules/@ngrx/store';
     FileDropModule,
     ToastModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    StoreModule.forRoot(reducers, {metaReducers})
+    StoreModule.forRoot(reducers, { metaReducers }),
+    AlertModule.forRoot()
   ],
   exports: [
     BrowserModule,
