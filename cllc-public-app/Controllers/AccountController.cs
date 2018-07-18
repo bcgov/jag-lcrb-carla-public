@@ -498,7 +498,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                return userSettings.AccountId == accountId.ToString()  || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
+                return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
             }
 
             // if current user doesn't have an account they are probably not logged in
@@ -520,7 +520,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 legalEntities = legalEntities.Where(e => !String.IsNullOrEmpty(e._adoxioShareholderaccountidValue)).ToList();
                 for (var i = 0; i < legalEntities.Count; i++)
                 {
-                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId)){
+                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId, _dynamicsClient)){
                        result = true;
                        break;
                     }
