@@ -198,6 +198,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             return result;
         }
+        
 
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
@@ -248,7 +249,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.isApplicant = (adoxio_legalentity.AdoxioIsapplicant == true);
                 result.isShareholder = (adoxio_legalentity.AdoxioIsshareholder == true);
                 // result.isTrustee =  adoxio_legalentity.AdoxioIstrustee;
-                // result.isOwner =  adoxio_legalentity.AdoxioIsowner;
                 result.isDirector = (adoxio_legalentity.AdoxioIsdirector == true);
                 result.isOfficer = (adoxio_legalentity.AdoxioIsofficer == true);
                 result.isSeniorManagement = (adoxio_legalentity.AdoxioIsseniormanagement == true);

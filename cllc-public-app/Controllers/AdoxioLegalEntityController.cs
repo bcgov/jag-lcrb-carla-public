@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
@@ -11,11 +8,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Microsoft.OData.Client;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Interfaces.Models;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -569,6 +568,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioLegalEntity.CopyValues(item);
 
             await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxio_legalentityid.ToString(), adoxioLegalEntity);
+
+            adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+
             return Json(adoxioLegalEntity.ToViewModel());
         }
 
@@ -588,7 +590,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());
+            try
+            {
+                await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error deleting legal entity");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new Exception("Unable to delete legal entity");
+            }
 
             return NoContent(); // 204
         }
@@ -676,51 +690,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             foreach (string recipientId in recipientIds)
             {
                 Guid recipientIdGuid = new Guid(recipientId);
-                try
-                {
-                    // TODO verify that each recipient is part of the current user's user set
-                    // TODO switch over to new AuthAPI framework
-                    var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
-                    string email = recipientEntity.AdoxioEmail;
-                    string firstname = recipientEntity.AdoxioFirstname;
-                    string lastname = recipientEntity.AdoxioLastname;
+                // TODO verify that each recipient is part of the current user's user set
+                // TODO switch over to new AuthAPI framework
+                var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
+                string email = recipientEntity.AdoxioEmail;
+                string firstname = recipientEntity.AdoxioFirstname;
+                string lastname = recipientEntity.AdoxioLastname;
 
-                    string confirmationEmailLink = GetConsentLink(email, recipientId, id);
-                    string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
-                    /* send the user an email confirmation. */
-                    string body =
-                            "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
-                        + "<p>"
-                        + "Dear " + firstname + " " + lastname + ","
-                        + "</p>"
-                        + "<p>"
-                        + "An application from " + "[TBD Company Name]"
-                        + " has been submitted for a non-medical retail cannabis licence in British Columbia. "
-                        + "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
-                        + " you are required to authorize a security screening — including criminal and police record checks—"
-                        + "and financial integrity checks as part of the application process. "
-                        + "</p>"
-                        + "<p>"
-                        + "Where you reside will determine how you are able to authorize the security screening."
-                        + "</p>"
-                        + "<p><strong>B.C. Residents</strong></p>"
-                        + "<p>"
-                        + "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
-                        + "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
-                        + "</p>"
-                        + "<p>"
-                        + "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
-                        + "</p>"
-                        + "<p>"
-                        + "After you receive your verified Photo B.C. Services Card, login through this unique link:"
-                        + "</p>"
-                        + "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
-                        + "<p><strong>Out of Province Residents</strong></p>"
-                        + "<p>TBD</p>"
-                        + "<p><strong>Residents Outside of Canada</strong></p>"
-                        + "<p>TBD</p>"
-                        + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
-                        + "<p>Do not reply to this email address</p>";
+                string confirmationEmailLink = GetConsentLink(email, recipientId, id);
+                string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
+                /* send the user an email confirmation. */
+                string body =
+                        "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
+                    + "<p>"
+                    + "Dear " + firstname + " " + lastname + ","
+                    + "</p>"
+                    + "<p>"
+                    + "An application from " + "[TBD Company Name]"
+                    + " has been submitted for a non-medical retail cannabis licence in British Columbia. "
+                    + "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
+                    + " you are required to authorize a security screening — including criminal and police record checks—"
+                    + "and financial integrity checks as part of the application process. "
+                    + "</p>"
+                    + "<p>"
+                    + "Where you reside will determine how you are able to authorize the security screening."
+                    + "</p>"
+                    + "<p><strong>B.C. Residents</strong></p>"
+                    + "<p>"
+                    + "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
+                    + "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
+                    + "</p>"
+                    + "<p>"
+                    + "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
+                    + "</p>"
+                    + "<p>"
+                    + "After you receive your verified Photo B.C. Services Card, login through this unique link:"
+                    + "</p>"
+                    + "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
+                    + "<p><strong>Out of Province Residents</strong></p>"
+                    + "<p>TBD</p>"
+                    + "<p><strong>Residents Outside of Canada</strong></p>"
+                    + "<p>TBD</p>"
+                    + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
+                    + "<p>Do not reply to this email address</p>";
 
                     // send the email.
                     SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
@@ -732,18 +744,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     message.IsBodyHtml = true;
                     client.Send(message);
 
-                    // save the consent link and the fact that the email has been sent
-                    recipientEntity.AdoxioDateemailsent = DateTime.Now;
-                    //await _dynamicsClient.Adoxiolegalentities.UpdateAsync(recipientEntity.Adoxio_legalentityid, recipientEntity);
-                }
-                catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-                {
-                    // ignore any not found errors.
-                    _logger.LogError(dsqe.Message);
-                    _logger.LogError(dsqe.StackTrace);
-                }
 
-            }
+                // save the consent link and the fact that the email has been sent
+                MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+                patchEntity.AdoxioDateemailsent = DateTime.Now;
+
+                // patch the record.
+                try
+                {
+                    await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error updating date email sent.");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }                
+            }            
 
             return NoContent(); // 204
         }

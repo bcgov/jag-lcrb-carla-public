@@ -68,7 +68,6 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
     this.corporateDetailsForm.patchValue(data);
     this.savedFormData = this.corporateDetailsForm.value;
 
-
   }
 
   getLang() {
