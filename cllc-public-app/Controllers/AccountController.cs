@@ -241,7 +241,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Oops no ContactSiteminderGuid exernal id");
 
             // get BCeID record for the current user
-			Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+            Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             // get the contact record.
             MicrosoftDynamicsCRMcontact userContact = null;
@@ -467,7 +467,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // delete the associated LegalEntity
             string accountFilter = "_adoxio_account_value eq " + id.ToString();
             var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value.ToList();
-            legalEntities.ForEach(le => {
+            legalEntities.ForEach(le =>
+            {
                 _dynamicsClient.Adoxiolegalentities.Delete(le.AdoxioLegalentityid);
             });
 
@@ -506,18 +507,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private static bool IsChildAccount(String parentAccountId, String childAccountId, IDynamicsClient _dynamicsClient)
         {
-            var filter = $"_adoxio_account_value eq {parentAccountId}  and adoxio_isapplicant eq true";
+            var filter = $"_adoxio_account_value eq {parentAccountId}";
             var result = false;
 
-            var parentLegalEntity = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList().FirstOrDefault();
-
-            if (parentLegalEntity != null)
+            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList();
+            if (legalEntities.Any(e => e._adoxioShareholderaccountidValue == childAccountId))
             {
-                var childFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntity.AdoxioLegalentityid.ToString()}";
-                childFilter += $" and _adoxio_shareholderaccountid_value eq {childAccountId}";
-
-                var childEntity = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter).Value.ToList().FirstOrDefault();
-                result = (childEntity != null);
+                result = true;
+            }
+            else
+            {
+                legalEntities = legalEntities.Where(e => !String.IsNullOrEmpty(e._adoxioShareholderaccountidValue)).ToList();
+                for (var i = 0; i < legalEntities.Count; i++)
+                {
+                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId)){
+                       result = true;
+                       break;
+                    }
+                }
             }
             return result;
         }

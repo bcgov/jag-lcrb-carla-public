@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router'
 import { PaymentDataService } from '../services/payment-data.service';
 import { Subscription } from 'rxjs';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @Component({
     selector: 'app-payment-confirmation',
@@ -29,16 +30,23 @@ export class PaymentConfirmationComponent {
   invoice: string;
   isApproved: boolean = false;
 
+  paymentTransactionTitle: string;
+  paymentTransactionMessage: string;
+  loaded: boolean = false;
+  @Input() inputApplicationId: string;
+
     /** payment-confirmation ctor */
   constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
 	    this.route.queryParams.subscribe(params => {
 	        this.transactionId = params['trnId'];
-	        this.applicationId = params['SessionKey'];
+          this.applicationId = params['SessionKey'];
 	    });
     }
 
     ngOnInit() {
-    	// TODO get slug from URL parameters and find associated Application
+      if (!this.applicationId) {
+        this.applicationId = this.inputApplicationId;
+      }
     	this.verify_payment();
     }
 
@@ -49,7 +57,6 @@ export class PaymentConfirmationComponent {
   {
     this.busy = this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
-        //console.log("applicationVM: ", res.json());
         var verifyPayResponse = res.json();
         //console.log(verifyPayResponse);
         switch (verifyPayResponse.cardType) {
@@ -88,9 +95,19 @@ export class PaymentConfirmationComponent {
           this.isApproved = true;
         } else {
           this.isApproved = false;
+          if (this.messageId == "559") {
+            this.paymentTransactionTitle = "Cancelled";
+            this.paymentTransactionMessage = "Your payment transaction was cancelled."
+          } else if (this.messageId == "7") {
+            this.paymentTransactionTitle = "Declined";
+            this.paymentTransactionMessage = "Your payment transaction was declined."
+          } else {
+            this.paymentTransactionTitle = "Declined";
+            this.paymentTransactionMessage = "Your payment transaction was declined. Please contact your bank for more information."
+          }
         }
 
-
+        this.loaded = true;
       },
       err => {
         console.log("Error occured");
@@ -100,6 +117,10 @@ export class PaymentConfirmationComponent {
 
   return_to_application()
   {
-    this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
+    if (this.trnApproved == "1") {
+      this.router.navigate(['./dashboard']);
+    } else {
+      this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
+    }
   }
 }
