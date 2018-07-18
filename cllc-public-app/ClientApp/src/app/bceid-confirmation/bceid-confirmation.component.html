@@ -17,13 +17,13 @@
 
   <div *ngIf="bceidConfirmBusinessType">
     <h1>Confirm Business BCeID Information</h1>
-    <p><b>What type of business is {{currentUser.businessname}} applying for a license?</b></p>
+    <p><b>What type of business is {{currentUser.businessname}}?</b></p>
     <section>
         <input type="radio" name="businessRadio" value="Corporation" [(ngModel)]="businessType"> <span>Corporation</span><br>
         <input type="radio" name="businessRadio" value="Partnership" [(ngModel)]="businessType"> <span>Partnership</span><br>
         <input type="radio" name="businessRadio" value="Sole Proprietor" [(ngModel)]="businessType"> <span>Sole Proprietor</span><br>
         <input type="radio" name="businessRadio" value="Society" [(ngModel)]="businessType"> <span>Society</span><br>
-        <input type="radio" name="businessRadio" value="Indigenous Nation" [(ngModel)]="businessType"> <span>Indigenous Nation</span><br>
+        <input type="radio" name="businessRadio" value="Indigenous nation" [(ngModel)]="businessType"> <span>Indigenous nation</span><br>
         <input type="radio" name="businessRadio" value="Not Listed" [(ngModel)]="businessType"> <span>Not Listed</span><br>
         <br>
     </section>
@@ -45,7 +45,7 @@
       <input type="radio" name="businessRadio" value="LimitedLiabilityPartnership" [(ngModel)]="finalBusinessType"> <span>Limited liability partnership</span><br><br>
     </section>
     
-    <section *ngIf="bceidConfirmBusinessType && businessType == 'Indigenous Nation'">
+    <section *ngIf="bceidConfirmBusinessType && businessType == 'Indigenous nation'">
       <p>If the applicant is applying as an Indigenous nation under the nation's name, please contact the Liquor and Cannabis Regulation Branch for assistance.</p>
       <br><i>
         <p>Phone:</p>
@@ -66,7 +66,7 @@
       </i><br>
     </section>
 
-    <section *ngIf="bceidConfirmBusinessType && businessType != 'IndigenousNation' && businessType != 'NotListed'">
+    <section *ngIf="bceidConfirmBusinessType && businessType != 'Indigenous nation' && businessType != 'Not Listed'">
       <a class="globalButton" mat-button color="accent" tabindex="1" (click)="confirmCorpType()"><strong>Next</strong><br></a>
     </section>
   </div>
