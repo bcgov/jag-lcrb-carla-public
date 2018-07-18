@@ -28,7 +28,7 @@
               <strong>{{item.timelastmodified | date:'yyyy-MM-dd' }}</strong>
             </td>
             <td>
-              <button class="btn btn-primary">Delete</button>
+              <button (click)="deleteFile(item.serverrelativeurl)" class="btn btn-primary">Delete</button>
             </td>
           </tr>
         </tbody>
