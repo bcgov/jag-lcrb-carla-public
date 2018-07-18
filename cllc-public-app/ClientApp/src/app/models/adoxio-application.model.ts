@@ -11,4 +11,6 @@ export class AdoxioApplication {
   applicationStatus: string;
   applicantType: string;
   account: DynamicsAccount;
+  signatureagreement: boolean;
+  authorizedtosubmit: boolean;
 }

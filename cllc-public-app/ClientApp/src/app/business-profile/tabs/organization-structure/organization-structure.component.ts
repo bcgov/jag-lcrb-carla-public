@@ -3,7 +3,7 @@ import { UserDataService } from '../../../services/user-data.service';
 import { User } from '../../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
-import { Store } from '../../../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
