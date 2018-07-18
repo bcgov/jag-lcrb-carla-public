@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // populate the account.
                 if (adoxio_legalentity.Adoxio_Account != null)
                 {
-                    result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
+                    // result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
                 }
 
                 result.accountId = adoxio_legalentity._adoxio_account_value.ToString();
