@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			// try to "hack" the query
 			string hackId = legalEntity1.id + " or (adoxio_isshareholder eq true)";
-			List<ViewModels.AdoxioLegalEntity> doss = await SecurityHelper.GetLegalEntitiesByPosision(_client, hackId, "director-officer-shareholder", false);
+			List<ViewModels.AdoxioLegalEntity> doss = await SecurityHelper.GetLegalEntitiesByPosition(_client, hackId, "director-officer-shareholder", false);
             Assert.Null(doss);
 
             // logout and cleanup (deletes the account and contact created above ^^^)
