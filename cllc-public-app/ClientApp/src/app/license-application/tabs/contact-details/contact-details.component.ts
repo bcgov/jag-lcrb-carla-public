@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -7,19 +7,24 @@ import { auditTime } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
+import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 
 @Component({
   selector: 'app-contact-details',
   templateUrl: './contact-details.component.html',
   styleUrls: ['./contact-details.component.scss']
 })
-export class ContactDetailsComponent implements OnInit {
+export class ContactDetailsComponent implements OnInit, OnDestroy {
   @Input() applicationId: string;
   contactDetailsForm: FormGroup;
   busy: Subscription;
+  subscriptions: Subscription[] = [];
   saveFormData: any = {};
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
     this.applicationId = this.route.parent.snapshot.params.applicationId;
@@ -28,18 +33,26 @@ export class ContactDetailsComponent implements OnInit {
   ngOnInit() {
     // create entry form and set retrieved values
     this.createForm();
-    // get application data, display form
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
-        this.contactDetailsForm.patchValue(data);
+
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
+      .filter(state => !!state)
+      .subscribe(currentApplication => {
+        this.contactDetailsForm.patchValue(currentApplication);
         this.saveFormData = this.contactDetailsForm.value;
-      },
-      err => {
-        this.snackBar.open('Error getting Contact Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
-        console.log('Error occured getting Contact Details');
-      }
-    );
+      });
+    this.subscriptions.push(sub);
+
+    const sub2 = this.contactDetailsForm.valueChanges
+      .pipe(auditTime(10000))
+      .filter(formData => (JSON.stringify(formData) !== JSON.stringify(this.saveFormData)))
+      .subscribe(formData => {
+        this.save();
+      });
+    this.subscriptions.push(sub2);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   /**
@@ -54,11 +67,6 @@ export class ContactDetailsComponent implements OnInit {
       contactpersonemail: ['', Validators.email],
       contactpersonphone: ['']
     });
-
-    this.contactDetailsForm.valueChanges
-      .pipe(auditTime(10000)).subscribe(formData => {
-        this.save();
-      });
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -79,6 +87,7 @@ export class ContactDetailsComponent implements OnInit {
       res => {
         saveResult.next(true);
         this.saveFormData = saveData;
+        this.updateApplicationInStore();
         if (showProgress === true) {
           this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
         }
@@ -94,6 +103,15 @@ export class ContactDetailsComponent implements OnInit {
     }
 
     return saveResult;
+  }
+
+  updateApplicationInStore() {
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      res => {
+        const data = res.json();
+        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+      }
+    );
   }
 
   /**

@@ -2,9 +2,12 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import * as currentApplicatioActions from '../app-state/actions/current-application.action';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app-state/models/app-state';
 
 @Component({
   selector: 'app-license-application',
@@ -29,15 +32,24 @@ export class LicenseApplicationComponent implements OnInit {
   tabStructure: any[] = this.tabs.application;
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
+    private store: Store<AppState>,
     private userDataService: UserDataService,
     private router: Router,
     private route: ActivatedRoute) {
     this.applicationId = route.snapshot.params.applicationId;
+    const urlParts = this.router.url.split('/');
+    this.view_tab = urlParts[urlParts.length - 1];
   }
 
   ngOnInit(): void {
-    const urlParts = this.router.url.split('/');
-    this.view_tab = urlParts[urlParts.length - 1];
+    this.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const urlParts = this.router.url.split('/');
+          this.view_tab = urlParts[urlParts.length - 1];
+        }
+      });
+
     // TODO - pass currentUser in as router data rather than doing another call to getCurrentUser.
     if (!this.currentUser) {
       this.userDataService.getCurrentUser()
@@ -56,6 +68,7 @@ export class LicenseApplicationComponent implements OnInit {
         res => {
           const data = res.json();
           this.applicationName = data.name;
+          this.store.dispatch(new currentApplicatioActions.SetCurrentApplicationAction(data));
         },
         err => {
           console.log('Error occured');

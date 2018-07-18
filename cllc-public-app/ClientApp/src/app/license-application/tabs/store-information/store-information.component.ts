@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -8,20 +8,25 @@ import { auditTime } from 'rxjs/operators';
 import { UserDataService } from '../../../services/user-data.service';
 import { Observable } from '../../../../../node_modules/rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
   selector: 'app-store-information',
   templateUrl: './store-information.component.html',
   styleUrls: ['./store-information.component.scss']
 })
-export class StoreInformationComponent implements OnInit {
+export class StoreInformationComponent implements OnInit, OnDestroy {
 
   applicationId: string;
   storeInformationForm: FormGroup;
   busy: Subscription;
+  subscriptions: Subscription[] = [];
   savedFormData: any = {};
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
+    private store: Store<AppState>,
     private fb: FormBuilder,
     private userDataService: UserDataService,
     public snackBar: MatSnackBar, private route: ActivatedRoute) {
@@ -30,17 +35,26 @@ export class StoreInformationComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    // get application data and display in form
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
-        this.storeInformationForm.patchValue(data);
+
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
+      .filter(state => !!state)
+      .subscribe(currentApplication => {
+        this.storeInformationForm.patchValue(currentApplication);
         this.savedFormData = this.storeInformationForm.value;
-      },
-      err => {
-        console.log('Error occured');
-      }
-    );
+      });
+    this.subscriptions.push(sub);
+
+    const sub2 = this.storeInformationForm.valueChanges
+      .pipe(auditTime(10000))
+      .filter(formData => (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)))
+      .subscribe(formData => {
+        this.save();
+      });
+    this.subscriptions.push(sub2);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   /**
@@ -51,10 +65,6 @@ export class StoreInformationComponent implements OnInit {
       id: [''],
       establishmentName: [''], // Validators.required
     });
-    this.storeInformationForm.valueChanges
-      .pipe(auditTime(10000)).subscribe(data => {
-        this.save();
-      });
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -76,6 +86,7 @@ export class StoreInformationComponent implements OnInit {
       res => {
         saveResult.next(true);
         this.savedFormData = saveData;
+        this.updateApplicationInStore();
         if (showProgress === true) {
           this.snackBar.open('Store Information has been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
         }
@@ -91,6 +102,15 @@ export class StoreInformationComponent implements OnInit {
     }
 
     return saveResult;
+  }
+
+  updateApplicationInStore() {
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      res => {
+        const data = res.json();
+        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+      }
+    );
   }
 
   isFieldError(field: string) {

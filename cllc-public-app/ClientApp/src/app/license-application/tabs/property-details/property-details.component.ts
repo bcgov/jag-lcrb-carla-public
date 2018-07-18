@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -7,19 +7,25 @@ import { ActivatedRoute } from '@angular/router';
 import { auditTime } from 'rxjs/operators';
 import { Observable } from '../../../../../node_modules/rxjs/Observable';
 import { Subject } from 'rxjs';
+import { Store } from '../../../../../node_modules/@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
+import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
   styleUrls: ['./property-details.component.scss']
 })
-export class PropertyDetailsComponent implements OnInit {
+export class PropertyDetailsComponent implements OnInit, OnDestroy {
   @Input() applicationId: string;
   propertyDetailsForm: FormGroup;
   busy: Subscription;
+  subscriptions: Subscription[] = [];
   saveFormData: any = {};
 
-  constructor(private applicationDataService: AdoxioApplicationDataService, private fb: FormBuilder,
+  constructor(private applicationDataService: AdoxioApplicationDataService,
+    private store: Store<AppState>,
+    private fb: FormBuilder,
     public snackBar: MatSnackBar, private route: ActivatedRoute) {
     this.applicationId = this.route.parent.snapshot.params.applicationId;
   }
@@ -30,18 +36,26 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit() {
     // create entry form
     this.createForm();
-    // get application data, display form
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
-        this.propertyDetailsForm.patchValue(data);
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
+      .filter(state => !!state)
+      .subscribe(currentApplication => {
+        this.propertyDetailsForm.patchValue(currentApplication);
         this.saveFormData = this.propertyDetailsForm.value;
-      },
-      err => {
-        this.snackBar.open('Error getting Property Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
-        console.log('Error occured getting Property Details');
-      }
-    );
+      });
+    this.subscriptions.push(sub);
+
+    const sub2 = this.propertyDetailsForm.valueChanges
+      .pipe(auditTime(10000))
+      .filter(formData => (JSON.stringify(formData) !== JSON.stringify(this.saveFormData)))
+      .subscribe(formData => {
+        this.save();
+      });
+    this.subscriptions.push(sub2);
+
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   /**
@@ -57,10 +71,16 @@ export class PropertyDetailsComponent implements OnInit {
       additionalpropertyinformation: ['']
     });
 
-    this.propertyDetailsForm.valueChanges
-      .pipe(auditTime(10000)).subscribe(data => {
-        this.save();
-      });
+
+  }
+
+  updateApplicationInStore() {
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      res => {
+        const data = res.json();
+        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+      }
+    );
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -80,6 +100,7 @@ export class PropertyDetailsComponent implements OnInit {
     const subscription = this.applicationDataService.updateApplication(this.propertyDetailsForm.value).subscribe(
       res => {
         saveResult.next(true);
+        this.updateApplicationInStore();
         this.saveFormData = saveData;
         if (showProgress === true) {
           this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });

@@ -9,7 +9,7 @@ import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-ent
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '../../../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
@@ -207,11 +207,11 @@ export class DirectorAndOfficerPersonDialogComponent {
   }
 
   save() {
-    if (this.directorOfficerForm.valid) {
-      let formData = this.data.person || {};
-      formData = (<any>Object).assign(formData, this.directorOfficerForm.value);
-      this.dialogRef.close(formData);
-    } else {
+    let formData = this.data.person || {};
+    formData = (<any>Object).assign(formData, this.directorOfficerForm.value);
+    this.dialogRef.close(formData);
+
+    if (!this.directorOfficerForm.valid) {
       Object.keys(this.directorOfficerForm.controls).forEach(field => {
         const control = this.directorOfficerForm.get(field);
         control.markAsTouched({ onlySelf: true });
