@@ -755,7 +755,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("Green Group Investments", responseViewModel.name);
             var levelThreeLegalEntityId = responseViewModel.id;
             var levelThreeAccountId = responseViewModel.shareholderAccountId;
-            var levelThreeAccount = new ViewModels.Account { id = levelTwoAccountId };
+            var levelThreeAccount = new ViewModels.Account { id = levelThreeAccountId };
 
             // Second tier Officer
             vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity

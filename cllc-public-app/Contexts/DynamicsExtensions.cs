@@ -12,6 +12,8 @@ using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
 using Microsoft.OData.Client;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Microsoft.AspNetCore.Http;
+using Gov.Lclb.Cllb.Public.Authentication;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -516,6 +518,48 @@ namespace Gov.Lclb.Cllb.Interfaces
             return user;
         }
 
+        /// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        public static bool CurrentUserHasAccessToAccount(Guid accountId, IHttpContextAccessor _httpContextAccessor, IDynamicsClient _dynamicsClient)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
+        }
+
+        private static bool IsChildAccount(String parentAccountId, String childAccountId, IDynamicsClient _dynamicsClient)
+        {
+            var filter = $"_adoxio_account_value eq {parentAccountId}";
+            var result = false;
+
+            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList();
+            if (legalEntities.Any(e => e._adoxioShareholderaccountidValue == childAccountId))
+            {
+                result = true;
+            }
+            else
+            {
+                legalEntities = legalEntities.Where(e => !String.IsNullOrEmpty(e._adoxioShareholderaccountidValue)).ToList();
+                for (var i = 0; i < legalEntities.Count; i++)
+                {
+                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId, _dynamicsClient)){
+                       result = true;
+                       break;
+                    }
+                }
+            }
+            return result;
+        }
         
     }
 }
