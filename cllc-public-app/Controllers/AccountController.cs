@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -254,7 +255,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create the user contact record.
                 userContact = new MicrosoftDynamicsCRMcontact();
                 // Adoxio_externalid is where we will store the guid from siteminder.
-                userContact.AdoxioExternalid = contactSiteminderGuid;
+                string sanitizedContactSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
+                userContact.AdoxioExternalid = sanitizedContactSiteminderId;
                 userContact.Fullname = userSettings.UserDisplayName;
                 userContact.Nickname = userSettings.UserDisplayName;
                 userContact.Employeeid = userSettings.UserId;
@@ -285,9 +287,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 account.CopyValues(item, updateIfNull);
                 // business type must be set only during creation, not in update (removed from copyValues() )
                 account.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.AdoxioApplicantTypeCodes), item.businessType, true);
-                // ensure that we create an account for the current user.				
-                account.AdoxioExternalid = accountSiteminderGuid;
+                // ensure that we create an account for the current user.
 
+                // by convention we strip out any dashes present in the guid, and force it to uppercase.
+                string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(accountSiteminderGuid); 
+
+                account.AdoxioExternalid = sanitizedAccountSiteminderId;
                 account.Primarycontactid = userContact;
                 account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Applicant;
 
