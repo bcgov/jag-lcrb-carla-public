@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly ILogger _logger;
         private readonly string _encryptionKey;
         private readonly SharePointFileManager _sharePointFileManager;
-        
+
         public AdoxioLegalEntityController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
@@ -80,10 +80,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetBusinessProfileSummary()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
-            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
-            String accountfilter = null;
-            String bpFilter = null;
-            String filter = null;
 
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -91,33 +87,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check that the session is setup correctly.
             userSettings.Validate();
 
-            // set account filter
-            accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
-            bpFilter = "and adoxio_isapplicant eq true";
-            filter = accountfilter + " " + bpFilter;
+            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = GetAccountLegalEntities(userSettings.AccountId);
+
+            foreach (var legalEntity in legalEntities)
+            {
+                result.Add(legalEntity.ToViewModel());
+            }
+
+            return Json(result);
+        }
+
+        private List<MicrosoftDynamicsCRMadoxioLegalentity> GetAccountLegalEntities(string accountId)
+        {
+            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
+            var filter = "_adoxio_account_value eq " + accountId;
+            filter += " and adoxio_isindividual eq 0";
 
             var response = _dynamicsClient.Adoxiolegalentities.Get(filter: filter);
 
             if (response != null && response.Value != null)
             {
                 legalEntities = response.Value.ToList();
-                if (legalEntities.Count > 0)
-                {
-                    var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].AdoxioLegalentityid.ToString()}";
-                    childFilter += " and adoxio_isapplicant ne true and adoxio_isindividual eq 0";
-                    var expandList = new List<string>{"adoxio_Account"};
-                    response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter, expand: expandList);
-                    var childEntities = response.Value.ToList();
-                    legalEntities.AddRange(childEntities);
-                }
-
+                var children = new List<MicrosoftDynamicsCRMadoxioLegalentity>();
                 foreach (var legalEntity in legalEntities)
                 {
-                    result.Add(legalEntity.ToViewModel());
+                    if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue))
+                    {
+                        children.AddRange(GetAccountLegalEntities(legalEntity._adoxioShareholderaccountidValue));
+                    }
                 }
+                legalEntities.AddRange(children);
             }
+            return legalEntities.Distinct().ToList();
 
-            return Json(result);
         }
 
         /// <summary>
@@ -149,7 +151,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     filter += " and adoxio_isshareholder ne true and adoxio_ispartner ne true";
                     break;
                 case "director-officer-shareholder":
-                    filter += " and (adoxio_isshareholder eq true or adoxio_isdirector eq true or adoxio_isofficer eq true)";
+                    filter += " and adoxio_isindividual eq 1";
                     break;
                 default:
                     break;
@@ -297,7 +299,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
                         // remove the document type text from file name
-                        fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2 );
+                        fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2);
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
                         fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
@@ -509,7 +511,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
             adoxioLegalEntity.CopyValues(item);
 
-            if (item.isShareholder == true && item.isindividual != true)
+            if (item.isindividual != true)
             {
                 var account = new MicrosoftDynamicsCRMaccount();
                 account.Name = item.name;
@@ -679,7 +681,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
-            
+
             // TODO verify that this is the current user's legal entity
             var adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
 
