@@ -187,7 +187,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var legalEntity in legalEntities)
                 {
                     // Users can't access other users legal entities.
-                    if(!AccountController.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient)){
+                    if(!DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient)){
                         return NotFound();
                     }
                     result.Add(legalEntity.ToViewModel());
@@ -258,7 +258,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Guid adoxio_legalentityid = new Guid(id);
                 MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
                 //prevent getting legal entity data if the user is not associated with the account
-                if (adoxioLegalEntity == null || !AccountController.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
                 {
                     return new NotFoundResult();
                 }
@@ -287,7 +287,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var accountGUID = new Guid(accountId);
 
             // User should not be able to access accounts that they do not directly own
-            if(!AccountController.CurrentUserHasAccessToAccount(accountGUID, _httpContextAccessor, _dynamicsClient)){
+            if(!DynamicsExtensions.CurrentUserHasAccessToAccount(accountGUID, _httpContextAccessor, _dynamicsClient)){
                 return NotFound();
             }
             
