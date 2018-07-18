@@ -8,7 +8,7 @@
           <label>Position</label>
           <br>
 
-          <section>
+          <section  *ngIf="businessType !== 'SoleProprietor'"> 
             <input type="checkbox" formControlName="isDirector"> <label style="padding-right: 10px;" for="">Director</label>
             <input type="checkbox" formControlName="isOfficer"> <label style="padding-right: 10px;" for="">Officer</label>
             <span *ngIf="businessType == 'Society'">
