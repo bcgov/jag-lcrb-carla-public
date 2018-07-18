@@ -1,14 +1,13 @@
 <div>
-  <h1 *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Directors and Officers</h1>
-  <h1 *ngIf="['Society'].indexOf(businessType) !== -1">Directors &amp; Senior Managers</h1>
-  <h1 *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Owner</h1>
+  <h1 style="margin-top: 0" *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Directors and Officers</h1>
+  <h1 style="margin-top: 0" *ngIf="['Society'].indexOf(businessType) !== -1">Directors, Officers, &amp; Senior Managers</h1>
+  <h1 style="margin-top: 0" *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Owner</h1>
 
   <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">
     Enter all directors and officers for the corporation
   </p>
   <p *ngIf="['Society'].indexOf(businessType) !== -1">
-    Add all directors and senior managers for the society. Any members on the board of directors are considered directors regardless
-    of the title given to the individual.
+    Add all directors, officers and senior managers for the society.
   </p>
   <p *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
     Enter owner details
