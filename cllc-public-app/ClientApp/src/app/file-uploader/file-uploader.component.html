@@ -16,7 +16,7 @@
           <tr>
             <th>Filename</th>
             <th>Uploaded On</th>
-            <th>Delete</th>
+            <th></th>
           </tr>
         </thead>
         <tbody class="upload-name-style">
@@ -28,7 +28,7 @@
               <strong>{{item.timelastmodified | date:'yyyy-MM-dd' }}</strong>
             </td>
             <td>
-              <button (click)="deleteFile(item.serverrelativeurl)" class="btn btn-primary">Delete</button>
+              <a href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a> 
             </td>
           </tr>
         </tbody>
