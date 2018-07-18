@@ -6,6 +6,7 @@ export interface AppState {
     legalEntitiesState: LegalEntitiesState;
     applicationsState: ApplicationsState;
     currentAccountState: CurrentAccountState;
+    currentApplicaitonState: CurrentApplicationState;
     currentLegalEntityState: CurrentLegalEntityState;
 }
 
@@ -19,6 +20,9 @@ export interface ApplicationsState {
 
 export interface CurrentAccountState {
     currentAccount: DynamicsAccount;
+}
+export interface CurrentApplicationState {
+    currentApplication: AdoxioApplication;
 }
 
 export interface CurrentLegalEntityState {
