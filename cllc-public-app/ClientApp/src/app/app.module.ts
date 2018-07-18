@@ -118,7 +118,7 @@ import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
-import { StoreModule } from '../../node_modules/@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
