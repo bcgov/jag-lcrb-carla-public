@@ -5,7 +5,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
     public class TestUtilities
     {
-		private static Random random = new Random();
+		private static Random random = new Random(Guid.NewGuid().GetHashCode());
 
         public static string RandomAlphaString(int length)
         {
