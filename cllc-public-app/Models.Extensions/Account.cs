@@ -72,17 +72,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1County = fromVM.mailingAddressCountry;
             }
-            if (fromVM.mailingAddressProvince >= ViewModels.Adoxio_stateprovince.AB &&
-                fromVM.mailingAddressProvince <= ViewModels.Adoxio_stateprovince.YT)
-                    toDynamics.AdoxioStateprovince = (int?)fromVM.mailingAddressProvince;
-                else
-                    toDynamics.AdoxioStateprovince = (int?)ViewModels.Adoxio_stateprovince.BC;
-            
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
+            {
+                toDynamics.Address1Stateorprovince = fromVM.mailingAddressProvince;
+            }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddresPostalCode != null))
             {
                 toDynamics.Address1Postalcode = fromVM.mailingAddresPostalCode;
             }
-            
+
             // business type must be set only during creation, not in update (removed from copyValues() )
             //	toDynamics.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), fromVM.businessType, true);
         }
@@ -98,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM)
         {
             bool copyIfNull = true;
-            toDynamics.CopyValues(fromVM, copyIfNull);            
+            toDynamics.CopyValues(fromVM, copyIfNull);
         }
 
         /// <summary>
@@ -129,10 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.mailingAddressStreet = account.Address1Line1;
                 accountVM.mailingAddressCity = account.Address1City;
                 accountVM.mailingAddressCountry = account.Address1County;
-                if (account.AdoxioStateprovince != null)
-                    accountVM.mailingAddressProvince = (ViewModels.Adoxio_stateprovince)account.AdoxioStateprovince;
-                else
-                    accountVM.mailingAddressProvince = ViewModels.Adoxio_stateprovince.BC;
+                accountVM.mailingAddressProvince = account.Address1Stateorprovince;
                 accountVM.mailingAddresPostalCode = account.Address1Postalcode;
 
                 if (account.Primarycontactid != null)
@@ -143,14 +138,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                     // TODO - load other fields (if necessary)
                 }
 
-				if (account.AdoxioBusinesstype != null)
-				{
-					accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), account.AdoxioBusinesstype).ToString();
-				}
+                if (account.AdoxioBusinesstype != null)
+                {
+                    accountVM.businessType = Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), account.AdoxioBusinesstype).ToString();
+                }
             }
             return accountVM;
         }
 
-        
+
     }
 }
