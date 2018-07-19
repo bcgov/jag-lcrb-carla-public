@@ -10,6 +10,7 @@ import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
+import { AdoxioApplication } from '../../../models/adoxio-application.model';
 
 @Component({
   selector: 'app-contact-details',
@@ -38,6 +39,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       .filter(state => !!state)
       .subscribe(currentApplication => {
         this.contactDetailsForm.patchValue(currentApplication);
+        if (currentApplication.isPaid) {
+          this.contactDetailsForm.disable();
+        }
         this.saveFormData = this.contactDetailsForm.value;
       });
     this.subscriptions.push(sub);
