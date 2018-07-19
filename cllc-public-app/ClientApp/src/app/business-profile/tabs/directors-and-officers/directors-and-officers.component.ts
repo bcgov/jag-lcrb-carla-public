@@ -107,6 +107,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
+      width: '500px',
       data: {
         person: person,
         businessType: this.businessType

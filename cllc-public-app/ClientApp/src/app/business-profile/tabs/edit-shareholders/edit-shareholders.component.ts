@@ -190,6 +190,7 @@ export class EditShareholdersComponent implements OnInit {
     const dialogConfig: any = {
       disableClose: true,
       autoFocus: true,
+      maxWidth: '400px',
       data: {
         businessType: this.businessType,
         shareholder: shareholder
@@ -229,6 +230,7 @@ export class EditShareholdersComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
+      maxWidth: '400px',
       data: {
         businessType: this.businessType,
         shareholder: shareholder
