@@ -76,9 +76,8 @@
       </div> -->
       <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="col-md-12"
         [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
-        <label for="dateIssued">Date of Shares
-          <br />Issued</label>
-        <input type="date" class="form-control" formControlName="dateIssued">
+        <label for="dateIssued">Date of Shares Issued</label>
+        <input type="text" formControlName='dateIssued' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
         <div *ngIf="this.isFieldError('dateIssued')">
           <div *ngIf="form.controls['dateIssued'].hasError('dateLessThanToday') ">
             Date Issued must be before today
