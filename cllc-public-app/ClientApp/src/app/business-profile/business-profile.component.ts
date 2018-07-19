@@ -136,9 +136,12 @@ export class BusinessProfileComponent implements OnInit {
       case 'SoleProprietor':
         this.tabStructure = this.tabs.soleProprietor;
         break;
+      case 'LimitedPartnership':
+      case 'LimitedLiabilityPartnership':
       case 'GeneralPartnership':
         this.tabStructure = this.tabs.partnership;
         break;
+        
       case 'Society':
         this.tabStructure = this.tabs.society;
         break;

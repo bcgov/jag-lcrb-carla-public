@@ -4,11 +4,10 @@
 
     <div class="form-group row">
       <div class="col-md-12">
-        <fieldset>
+        <fieldset *ngIf="businessType !== 'SoleProprietor'">
           <label>Position</label>
           <br>
-
-          <section  *ngIf="businessType !== 'SoleProprietor'"> 
+          <section> 
             <input type="checkbox" formControlName="isDirector"> <label style="padding-right: 10px;" for="">Director</label>
             <input type="checkbox" formControlName="isOfficer"> <label style="padding-right: 10px;" for="">Officer</label>
             <span *ngIf="businessType == 'Society'">
@@ -59,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateofappointment')}">
+      <div *ngIf="businessType !== 'SoleProprietor'" class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateofappointment')}">
         <label for="dateIssued">Date of Appointment</label>
         <input type="text" formControlName='dateofappointment' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
         <div *ngIf="this.isFieldError('dateofappointment')">
