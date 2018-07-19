@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Logos.Utility
+namespace Gov.Lclb.Cllb.Public.Utils
 {
 	/// <summary>
 	/// Helper methods for working with <see cref="Guid"/>.
@@ -105,5 +105,43 @@ namespace Logos.Utility
 			guid[left] = guid[right];
 			guid[right] = temp;
 		}
-	}
+
+        public static string SanitizeGuidString(string guid)
+        {
+            string result = null;
+            if (!string.IsNullOrEmpty(guid))
+            {
+                result = guid.Replace("-","");
+                result = result.ToUpper();
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Covert a string to a nullable guid.  
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Guid? SafeNullableGuidConvert(string id)
+        {
+            Guid? result = null;
+            if (!string.IsNullOrEmpty(id))
+            {
+                result = (Guid?)SafeGuidConvert(id);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Convert a string to a guid.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Guid or Guid.empty if the string is invalid.</returns>
+        public static Guid SafeGuidConvert(string id)
+        {
+            Guid result = new Guid();
+            Guid.TryParse(id, out result);
+            return result;
+        }
+    }
 }
