@@ -177,7 +177,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   deleteShareholder(shareholder: AdoxioLegalEntity) {
-    if (confirm('Delete shareholer?')) {
+    if (confirm('Delete shareholder?')) {
       this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
         this.getShareholders();
       });
