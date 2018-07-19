@@ -13,4 +13,5 @@ export class AdoxioApplication {
   account: DynamicsAccount;
   signatureagreement: boolean;
   authorizedtosubmit: boolean;
+  isPaid: boolean;
 }
