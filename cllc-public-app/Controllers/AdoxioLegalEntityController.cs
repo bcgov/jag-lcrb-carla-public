@@ -187,7 +187,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var legalEntity in legalEntities)
                 {
                     // Users can't access other users legal entities.
-                    if(!DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient)){
+                    if (!DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+                    {
                         return NotFound();
                     }
                     result.Add(legalEntity.ToViewModel());
@@ -287,10 +288,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var accountGUID = new Guid(accountId);
 
             // User should not be able to access accounts that they do not directly own
-            if(!DynamicsExtensions.CurrentUserHasAccessToAccount(accountGUID, _httpContextAccessor, _dynamicsClient)){
+            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountGUID, _httpContextAccessor, _dynamicsClient))
+            {
                 return NotFound();
             }
-            
+
             var account = await _dynamicsClient.GetAccountById(accountGUID);
             if (account != null)
             {
@@ -534,7 +536,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var account = new MicrosoftDynamicsCRMaccount();
                 account.Name = item.name;
-                account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Shareholder;
+                if (item.isShareholder == true)
+                {
+                    account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Shareholder;
+                }
+                else if (item.isPartner == true)
+                {
+                    account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Partner;
+                }
                 account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
@@ -753,15 +762,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
                     + "<p>Do not reply to this email address</p>";
 
-                    // send the email.
-                    SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
+                // send the email.
+                SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
 
-                    // Specify the message content.
-                    MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
-                    message.Subject = "BC LCLB Cannabis Licensing Security Consent";
-                    message.Body = body;
-                    message.IsBodyHtml = true;
-                    client.Send(message);
+                // Specify the message content.
+                MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
+                message.Subject = "BC LCLB Cannabis Licensing Security Consent";
+                message.Body = body;
+                message.IsBodyHtml = true;
+                client.Send(message);
 
 
                 // save the consent link and the fact that the email has been sent
@@ -781,8 +790,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Request.Content);
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
-                }                
-            }            
+                }
+            }
 
             return NoContent(); // 204
         }
