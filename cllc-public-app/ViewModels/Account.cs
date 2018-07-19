@@ -55,8 +55,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string mailingAddressStreet { get; set; } //dynamics = address1_line1
         public string mailingAddressCity { get; set; } //dynamics = address1_city
         public string mailingAddressCountry { get; set; } //dynamics = address1_country
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Adoxio_stateprovince mailingAddressProvince { get; set; } //dynamics = adoxio_stateprovince
+        public string mailingAddressProvince { get; set; } //dynamics = address1_stateorprovince
         public string mailingAddresPostalCode { get; set; } //dynamics = address1_postalcode
 
         public ViewModels.Contact primarycontact { get; set; }
