@@ -9,7 +9,7 @@
     <div class="form-group row">
       <div *ngIf="['LimitedPartnership'].indexOf(data?.businessType) !== -1" class="form-group col-md-12">
         <input type="radio" group="partnerType" formControlName="partnerType" value="General">
-        <span>General Partner</span>
+        <span>General Partner</span> &nbsp;
         <input type="radio" group="partnerType" formControlName="partnerType" value="Limited">
         <span>Limited Partner</span>
       </div>
