@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
+import { FileSystemItem } from '../models/file-system-item.model';
 
 import { AdoxioApplication } from "../models/adoxio-application.model";
 
@@ -8,6 +9,7 @@ import { AdoxioApplication } from "../models/adoxio-application.model";
 export class AdoxioApplicationDataService {
 
   apiPath = "api/adoxioapplication/";
+  public files: FileSystemItem[] = [];
 
   constructor(private http: Http) { }
 
@@ -43,7 +45,7 @@ export class AdoxioApplicationDataService {
   }
 
   /**
-   * Get a Dynamics Application
+   * Get a Dynamics Application by application ID
    * @param applicationId
    */
   getApplicationById(applicationId: string) {
@@ -90,5 +92,26 @@ export class AdoxioApplicationDataService {
      }
      console.error(errMsg);
      return Promise.reject(errMsg);
-   }
+  }
+
+  /**
+   * Get a file list of documents attached to the application by ID and document type
+   * @param applicationId
+   * @param documentType
+   */
+  getFileListAttachedToApplication(applicationId: string, documentType: string) {
+    const headers = new Headers({});
+    const attachmentURL = 'api/adoxioapplication/' + applicationId + '/attachments';
+    const getFileURL = attachmentURL + '/' + documentType;
+    return this.http.get(getFileURL, { headers: headers });
+      //.map((data: Response) => { return <FileSystemItem[]>data.json() })
+      //.subscribe((data) => {
+      //  // convert bytes to KB
+      //  data.forEach((entry) => {
+      //    entry.size = entry.size / 1024
+      //  });
+      //  this.files = data;
+      //});
+
+  }
 }
