@@ -4,6 +4,8 @@ import { PaymentDataService } from '../../../services/payment-data.service';
 import { Router, ActivatedRoute } from '@angular/router'
 import { Subscription, Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { zip } from 'rxjs/observable/zip';
 
 
 @Component({
@@ -19,9 +21,10 @@ export class SubmitPayComponent implements OnInit {
   isSubmitted: boolean;
   isPaid: boolean;
   prevPaymentFailed: boolean;
-  validationMessage: string;
   validationMessages = [];
   isLoaded: boolean = false;
+  isApplicationValid: boolean = true;
+  displayValidationMessages: boolean = false;
 
   constructor(private paymentDataService: PaymentDataService,
     private applicationDataService: AdoxioApplicationDataService,
@@ -58,16 +61,13 @@ export class SubmitPayComponent implements OnInit {
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         const data = res.json();
-        let isApplicationValid = true;
-        this.validationMessage = '';
         // validate contact details
         if (this.isNullOrEmpty(data.contactpersonfirstname)
           || this.isNullOrEmpty(data.contactpersonlastname)
           || this.isNullOrEmpty(data.contactpersonrole)
           || this.isNullOrEmpty(data.contactpersonemail)
           || this.isNullOrEmpty(data.contactpersonphone)) {
-          isApplicationValid = false;
-          this.validationMessage = 'Contact details are not complete.\r\n';
+          this.isApplicationValid = false;
           this.validationMessages.push("Contact details are not complete.");
         }
         // validate property details
@@ -75,27 +75,43 @@ export class SubmitPayComponent implements OnInit {
           || this.isNullOrEmpty(data.establishmentaddresscity)
           || this.isNullOrEmpty(data.establishmentaddresspostalcode)
           || this.isNullOrEmpty(data.establishmentparcelid)) {
-          isApplicationValid = false;
-          this.validationMessage += 'Property details are not complete.\r\n';
+          this.isApplicationValid = false;
           this.validationMessages.push("Property details are not complete.");
         }
         // validate store info
         if (this.isNullOrEmpty(data.establishmentName)) {
-          isApplicationValid = false;
-          this.validationMessage += 'Store Information is not complete.\r\n';
-          this.validationMessages.push("Store Information is complete.");
+          this.isApplicationValid = false;
+          this.validationMessages.push("Store Information details are not complete.");
         }
         // validate declaration
         if (this.isNullOrEmpty(data.authorizedtosubmit)
           || this.isNullOrEmpty(data.signatureagreement)) {
-          isApplicationValid = false;
-          this.validationMessage += 'Declarations are not complete.\r\n';
-          this.validationMessages.push("Declarations are not complete.");
+          this.isApplicationValid = false;
+          this.validationMessages.push("Declaration details are not complete.");
         }
-        if (!isApplicationValid) {
-          //alert(this.validationMessage + 'Please complete the application before you can submit.');
-        }
-        result.next(isApplicationValid);
+
+        let fileList: Observable<any>[] = [];
+        // get application documents and verify that at least one file has been uploaded per screen
+        fileList.push(this.applicationDataService.getFileListAttachedToApplication(this.applicationId, "Store Information"));
+        fileList.push(this.applicationDataService.getFileListAttachedToApplication(this.applicationId, "Floor Plan"));
+        fileList.push(this.applicationDataService.getFileListAttachedToApplication(this.applicationId, "Site Map"));
+        this.busy = zip(...fileList).subscribe(
+          response => {
+            response.forEach((resp, i) => {
+            const files = resp.json();
+            if (files && files.length < 1) {
+              this.isApplicationValid = false;
+              if (i === 0) {
+                this.validationMessages.push("Store Information documents have not been uploaded.");
+              } else if (i === 1) {
+                this.validationMessages.push("Floor Plan documents have not been uploaded.");
+              } else if (i === 2) {
+                this.validationMessages.push("Site Plan documents have not been uploaded");
+              }
+            }
+            })
+            result.next(this.isApplicationValid);
+          });
       },
       err => {
         this.snackBar.open('Error getting Application Details for validation', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
@@ -117,7 +133,7 @@ export class SubmitPayComponent implements OnInit {
    *
    * */
   submit_application() {
-    this.busy = this.validateApplication(this.applicationId).subscribe(isValid => {
+    this.validateApplication(this.applicationId).subscribe(isValid => {
       if (isValid) {
         this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
           res => {
@@ -131,6 +147,8 @@ export class SubmitPayComponent implements OnInit {
             console.log('Error occured');
           }
         );
+      } else {
+        this.displayValidationMessages = true;
       }
     });
 
