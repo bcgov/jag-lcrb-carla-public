@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ToastsManager } from 'ng2-toastr';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
@@ -48,10 +48,10 @@ export class SecurityAssessmentsComponent implements OnInit {
   }
 
   getDirectorsAndOfficersAndShareholders() {
-    let legalEntitiesList = [];
+    const legalEntitiesList = [];
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'director-officer-shareholder')
       .subscribe((result) => {
-        let data = result.json();
+        const data = result.json();
         data.forEach((entry) => {
           entry.sendConsentRequest = false;
           if (entry.isindividual) {
@@ -70,6 +70,12 @@ export class SecurityAssessmentsComponent implements OnInit {
     if (legalEntity.isOfficer === true) {
       roles.push('Officer');
     }
+    if (legalEntity.isOwner === true) {
+      roles.push('Owner');
+    }
+    if (legalEntity.isSeniorManagement === true) {
+      roles.push('Senior Manager');
+    }
     if (legalEntity.isShareholder === true) {
       roles.push('Shareholder');
     }
@@ -77,11 +83,9 @@ export class SecurityAssessmentsComponent implements OnInit {
   }
 
   sendConsentRequestEmail() {
-
-    let consentRequestList: string[] = [];
+    const consentRequestList: string[] = [];
 
     this.dataSource.data.forEach((row) => {
-      // console.log("row values: ", row.id + " - " + row.sendConsentRequest + " - " + row.firstname);
       if (row.sendConsentRequest) {
         consentRequestList.push(row.id);
       }

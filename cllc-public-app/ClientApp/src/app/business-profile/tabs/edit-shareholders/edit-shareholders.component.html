@@ -1,6 +1,6 @@
-<h1 *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Shareholders</h1>
-<h1 *ngIf="['Society'].indexOf(businessType) !== -1">Directors & Senior Managers</h1>
-<h1 *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partners</h1>
+<h1 style="margin-top: 0;" *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Shareholders</h1>
+<h1 style="margin-top: 0;" *ngIf="['Society'].indexOf(businessType) !== -1">Directors & Senior Managers</h1>
+<h1 style="margin-top: 0;" *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partners</h1>
 
 <p *ngIf="['PrivateCorporation'].indexOf(businessType) !== -1">
     Enter all voting shareholders for the corporation
@@ -109,6 +109,7 @@
   <div [ngBusy]="busy"></div>
 
   <section *ngIf="['LimitedPartnership', 'GeneralPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) == -1" >
-    <label for="">Upload the corporation's Central Securities Register</label>
+    <label *ngIf="['PublicCorporation'].indexOf(businessType) === -1" for="">Upload the corporation's Central Securities Register</label>
+    <label *ngIf="['PublicCorporation'].indexOf(businessType) !== -1" for="">Upload a document showing the shareholders with a 10% or greater interest in the company</label>
     <app-file-uploader documentType="Central Securities Register" [accountId]="accountId"></app-file-uploader>
   </section>
