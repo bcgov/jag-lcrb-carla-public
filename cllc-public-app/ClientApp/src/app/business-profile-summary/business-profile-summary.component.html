@@ -2,14 +2,14 @@
 
     <mat-card-title><h1>Business Profile</h1></mat-card-title>
     <div *ngIf="dataSource.data.length == 0 ">
-        <mat-card-subtitle><p>Your business profile represents all the legal entities that make up your organization's structure. 
-          Complete your business profile before starting a licence application.
+        <mat-card-subtitle><p>
+          Your business profile represents all the legal entities that make up your organization's structure.
         </p></mat-card-subtitle>
     </div>
     <div *ngIf="dataSource.data.length > 0 ">
-      <mat-card-subtitle><p>Your business profile represents all the legal entities that make up your organizations structure</p></mat-card-subtitle>
+      <mat-card-subtitle><p>Your business profile represents all the legal entities that make up your organizations structure.</p></mat-card-subtitle>
     </div>
-    
+    <mat-card-subtitle>Complete your business profile before starting a licence application.</mat-card-subtitle>
     <mat-card  class="mat-elevation-z0">
 
       <div [ngBusy]="busy"></div>
