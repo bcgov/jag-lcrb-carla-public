@@ -177,7 +177,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   deleteShareholder(shareholder: AdoxioLegalEntity) {
-    if (confirm('Delete shareholer?')) {
+    if (confirm('Delete shareholder?')) {
       this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
         this.getShareholders();
       });
@@ -190,6 +190,7 @@ export class EditShareholdersComponent implements OnInit {
     const dialogConfig: any = {
       disableClose: true,
       autoFocus: true,
+      maxWidth: '400px',
       data: {
         businessType: this.businessType,
         shareholder: shareholder
@@ -229,6 +230,7 @@ export class EditShareholdersComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
+      maxWidth: '400px',
       data: {
         businessType: this.businessType,
         shareholder: shareholder
