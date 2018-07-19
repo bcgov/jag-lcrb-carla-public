@@ -8,16 +8,16 @@ import { ReadVarExpr } from '@angular/compiler';
 import { AccountDataService } from '../services/account-data.service';
 
 @Component({
-    selector: 'app-bceid-confirmation',
-    templateUrl: './bceid-confirmation.component.html',
-    styleUrls: ['./bceid-confirmation.component.scss']
+  selector: 'app-bceid-confirmation',
+  templateUrl: './bceid-confirmation.component.html',
+  styleUrls: ['./bceid-confirmation.component.scss']
 })
 /** bceid-confirmation component*/
 export class BceidConfirmationComponent {
   @Input('currentUser') currentUser: User;
-  public bceidConfirmAccount: boolean=true;
-  public bceidConfirmBusinessType: boolean=false;
-  public bceidConfirmContact: boolean=false;
+  public bceidConfirmAccount: boolean = true;
+  public bceidConfirmBusinessType: boolean = false;
+  public bceidConfirmContact: boolean = false;
   public showBceidCorrection: boolean;
   public showBceidUserContinue: boolean;
   businessType: string = "";
@@ -30,34 +30,32 @@ export class BceidConfirmationComponent {
     this.accountDataService.getBCeID().subscribe((data) => {
       let temp = data.json();
       this.businessType = temp.businessTypeCode;
-    }, err =>{
+    }, err => {
       console.log(err);
     });
   }
 
   confirmBceidAccountYes() {
     // confirm BCeID
-    if (this.businessType !== "Proprietorship" && this.businessType !== "Partnership" )
-    {
+    if (this.businessType !== "Proprietorship" && this.businessType !== "Partnership") {
       this.bceidConfirmAccount = false;
       this.bceidConfirmBusinessType = true;
     }
-    else
-    {
+    else {
       this.bceidConfirmAccount = false;
       this.confirmCorpType(this.businessType);
     }
   }
 
   confirmBceidAccountNo() {
-     // confirm BCeID
-     this.showBceidCorrection = true;
-   }
+    // confirm BCeID
+    this.showBceidCorrection = true;
+  }
 
-    confirmBceidUser() {
-      // confirm BCeID
-      this.bceidConfirmContact = true;
-    }
+  confirmBceidUser() {
+    // confirm BCeID
+    this.bceidConfirmContact = true;
+  }
 
   confirmCorpType(propOrPartner) {
     this.bceidConfirmBusinessType = false;
@@ -74,30 +72,30 @@ export class BceidConfirmationComponent {
       }
     }
 
-    }
+  }
 
-    confirmContactYes() {
-      // create a contact
-      let account = new DynamicsAccount();
-      account.name = this.currentUser.businessname;
-      account.id = this.currentUser.accountid;
-      let contact = new DynamicsContact();
-      contact.fullname = this.currentUser.name;
-      contact.id = this.currentUser.contactid;
-      account.primarycontact = contact;
-        
-      // Submit selected company type and sub-type to the account service
-      account.businessType = this.finalBusinessType;
-      let payload = JSON.stringify(account);
-      this.busy = this.dynamicsDataService.createRecord('account', payload)
-        .then((data) => {
-          window.location.reload();
-        });          
-    }
+  confirmContactYes() {
+    // create a contact
+    let account = new DynamicsAccount();
+    account.name = this.currentUser.businessname;
+    account.id = this.currentUser.accountid;
+    let contact = new DynamicsContact();
+    contact.fullname = this.currentUser.name;
+    contact.id = this.currentUser.contactid;
+    account.primarycontact = contact;
 
-    confirmContactNo() {
-      // confirm Contact
-      this.showBceidUserContinue = true;
-    }
-    
+    // Submit selected company type and sub-type to the account service
+    account.businessType = this.finalBusinessType;
+    let payload = JSON.stringify(account);
+    this.busy = this.dynamicsDataService.createRecord('account', payload)
+      .then((data) => {
+        window.location.reload();
+      });
+  }
+
+  confirmContactNo() {
+    // confirm Contact
+    this.showBceidUserContinue = true;
+  }
+
 }
