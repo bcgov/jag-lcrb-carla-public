@@ -10,7 +10,7 @@
       </div>
       <div class="form-group col-md-12">
         <label>Organization Type</label>
-        <select class="form-control" style="width: 250px;" formControlName='legalentitytype' #orgType>
+        <select class="form-control"  formControlName='legalentitytype' #orgType>
           <option value="PrivateCorporation">Private Corporation</option>
           <option value="PublicCorporation">Public Corporation</option>
           <option value="UnlimitedLiabilityCorporation">Unlimited Liability Corporation</option>
@@ -33,7 +33,7 @@
 
       <div class="form-group  col-md-12">
         <label>Organization Name</label>
-        <input style="width: 250px;" type="text" class="form-control" formControlName="name" placeholder="Organization Name">
+        <input  type="text" class="form-control" formControlName="name" placeholder="Organization Name">
         <div *ngIf="form.controls['name'].touched && !form.controls['name'].valid">
           <span *ngIf="form.controls['name'].hasError('required') ">
             Organization name is required
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="row">
-      <div *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) == -1" class="form-group  col-md-4">
+      <div *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) == -1" class="form-group  col-md-12">
         <label>Number of voting shares</label>
         <input style="width: 150px;" type="number" class="form-control" formControlName='commonvotingshares'>
         <div *ngIf="form.controls['commonvotingshares'].touched && !form.controls['commonvotingshares'].valid">
@@ -51,7 +51,7 @@
           </span>
         </div>
       </div>
-      <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="form-group  col-md-5">
+      <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="form-group  col-md-12">
         <label>Number of non voting shares</label>
         <input style="width: 150px;" type="number" class="form-control" formControlName='commonnonvotingshares'>
         <div *ngIf="form.controls['commonnonvotingshares'].touched && !form.controls['commonnonvotingshares'].valid">
