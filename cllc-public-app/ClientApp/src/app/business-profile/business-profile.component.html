@@ -84,10 +84,14 @@
           <br>
         </a>
         &nbsp;
-        <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
-          <strong *ngIf="view_tab != 'before-you-start' && view_tab != 'Authorizations'">Save and Continue</strong>
+        <a *ngIf="!isOnLastTab()" class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
+          <strong *ngIf="view_tab != 'before-you-start'">Save and Continue</strong>
           <strong *ngIf="view_tab == 'before-you-start'">Start</strong>
           <strong *ngIf="view_tab == 'Authorizations'">Done</strong>
+          <br>
+        </a>
+        <a *ngIf="isOnLastTab()" class="globalButton" class="btn btn-primary" tabindex="2" routerLink="/dashboard">
+          <strong>Go To Dashboard</strong>
           <br>
         </a>
       </div>
@@ -99,12 +103,15 @@
       This organization type is not available on the beta version of the Cannabis Licensing application.
       <br> Please contact the Liquor Control and Licensing Branch for assistance in completing this business profile
     </p>
-    <label for="">Email</label>
     <br>
-    <a href="javascript: void(0)">cannabisregs@gov.bc.ca</a>
+    <span>Contact Phone #:</span>
     <br>
-    <label for="">Phone</label>
+    <span>Victoria 250 952-5787</span>
     <br>
-    <span>(250) 555-5555</span>
+    <span>Toll Free 1 866 209-2111</span>
+    <br>
+    <br>
+    <span>Email:</span>
+    <span class="email">LCLBHelpDesk@gov.bc.ca</span>
   </section>
 </div>

@@ -14,6 +14,7 @@ using Microsoft.OData.Client;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.AspNetCore.Http;
 using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -175,8 +176,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountBySiteminderBusinessGuid(this IDynamicsClient system, string siteminderId)
         {
+            // ensure that the siteminderId does not have any dashes.
+            string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
+
             MicrosoftDynamicsCRMaccount result = null;
-            var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + siteminderId + "'");
+            var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
             result = accountResponse.Value.FirstOrDefault();
             // get the primary contact.
             if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
@@ -327,8 +331,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactBySiteminderGuid(this IDynamicsClient system, string siteminderId)
         {
+            string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
-            var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + siteminderId + "'");
+            var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
             result = contactsResponse.Value.FirstOrDefault();			
             return result;
         }
@@ -337,11 +342,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 		{
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
 			string accountFilter = "_adoxio_account_value eq " + id.ToString();
-
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value;
-
-            result = legalEntities.FirstOrDefault();
-            
+            result = legalEntities.FirstOrDefault();            
 			return result;
 		}
 
