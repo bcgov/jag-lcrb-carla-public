@@ -43,6 +43,9 @@ export class DirectorsAndOfficersComponent implements OnInit {
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
+        if(this.businessType == 'SoleProprietor'){
+          this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
+        }
         const sub2 = this.route.parent.params.subscribe(p => {
           this.parentLegalEntityId = p.legalEntityId;
           this.getDirectorsAndOfficers();
@@ -107,6 +110,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
+      width: '500px',
       data: {
         person: person,
         businessType: this.businessType

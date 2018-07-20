@@ -26,7 +26,12 @@
         <li *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
           List of all shareholders, with their email addresses
         </li>
-        <li>Central Securities Register document</li>
+        <li *ngIf="businessType == 'PublicCorporation'">
+          Document of shareholders with a 10% or greater interest in the company
+        </li>
+        <li *ngIf="businessType !== 'PublicCorporation'">
+          Central Securities Register document
+        </li>
         <li>Document of key personnel of the corporation</li>
       </ul>
 

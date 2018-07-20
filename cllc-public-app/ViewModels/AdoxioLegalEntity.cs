@@ -42,6 +42,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Applicant = 845280000,
         Licensee = 2,
         Shareholder = 845280001,
+        Partner = 845280002,
         [Display(Name = "Police Jurisdiction")]
         PoliceJurisdiction = 0,
         Municipality = 1
