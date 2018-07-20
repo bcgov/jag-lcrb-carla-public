@@ -61,12 +61,12 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
             this._tiedHouseData = res.json();
             this.form.patchValue(this._tiedHouseData);
             this.savedFormData = this.form.value;
-            this.form.valueChanges
-              .pipe(auditTime(10000)).subscribe(formData => {
-                if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
-                  this.save();
-                }
-              });
+            // this.form.valueChanges
+            //   .pipe(auditTime(10000)).subscribe(formData => {
+            //     if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
+            //       this.save();
+            //     }
+            //   });
           });
       });
     this.subscriptions.push(sub);
