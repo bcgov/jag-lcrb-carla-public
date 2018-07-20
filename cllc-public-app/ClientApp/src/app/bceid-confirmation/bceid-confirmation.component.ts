@@ -4,7 +4,6 @@ import { DynamicsDataService } from "../services/dynamics-data.service";
 import { DynamicsAccount } from "../models/dynamics-account.model";
 import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
-import { ReadVarExpr } from '@angular/compiler';
 import { AccountDataService } from '../services/account-data.service';
 
 @Component({
@@ -27,24 +26,26 @@ export class BceidConfirmationComponent {
   /** bceid-confirmation ctor */
   constructor(private router: Router, private accountDataService: AccountDataService, private dynamicsDataService: DynamicsDataService) {
     // Load BCeID data from service
-    this.accountDataService.getBCeID().subscribe((data) => {
-      let temp = data.json();
-      this.businessType = temp.businessTypeCode;
-    }, err => {
-      console.log(err);
-    });
+    // this.accountDataService.getBCeID().subscribe((data) => {
+    //   let temp = data.json();
+    //   this.businessType = temp.businessTypeCode;
+    // }, err => {
+    //   console.log(err);
+    // });
   }
 
   confirmBceidAccountYes() {
     // confirm BCeID
-    if (this.businessType !== "Proprietorship" && this.businessType !== "Partnership") {
-      this.bceidConfirmAccount = false;
-      this.bceidConfirmBusinessType = true;
-    }
-    else {
-      this.bceidConfirmAccount = false;
-      this.confirmCorpType(this.businessType);
-    }
+    // if (this.businessType !== "Proprietorship" && this.businessType !== "Partnership") {
+    //   this.bceidConfirmAccount = false;
+    //   this.bceidConfirmBusinessType = true;
+    // }
+    // else {
+    //   this.bceidConfirmAccount = false;
+    //   this.confirmCorpType(this.businessType);
+    // }
+    this.bceidConfirmAccount = false;
+    this.bceidConfirmBusinessType = true;
   }
 
   confirmBceidAccountNo() {
@@ -57,21 +58,9 @@ export class BceidConfirmationComponent {
     this.bceidConfirmContact = true;
   }
 
-  confirmCorpType(propOrPartner) {
+  confirmCorpType() {
     this.bceidConfirmBusinessType = false;
     this.bceidConfirmContact = true;
-
-    // Proprietorship and Partnership do not have radio buttons to chane the value of finalBusienssType
-    if (propOrPartner) {
-      this.finalBusinessType = propOrPartner;
-    } else {
-      if (!this.finalBusinessType) {
-        if (this.businessType == "Proprietorship" || this.businessType == "Partnership") {
-          this.finalBusinessType = this.businessType;
-        }
-      }
-    }
-
   }
 
   confirmContactYes() {

@@ -48,6 +48,7 @@ export class BusinessProfileComponent implements OnInit {
   set businessType(value: string) {
     this._businessType = value;
     this.onBusinessTypeChange(value);
+    console.log(`Business Type: ${value}`);
   }
   /** BusinessProfile ctor */
   constructor(private userDataService: UserDataService,
@@ -135,9 +136,12 @@ export class BusinessProfileComponent implements OnInit {
       case 'SoleProprietor':
         this.tabStructure = this.tabs.soleProprietor;
         break;
+      case 'LimitedPartnership':
+      case 'LimitedLiabilityPartnership':
       case 'GeneralPartnership':
         this.tabStructure = this.tabs.partnership;
         break;
+        
       case 'Society':
         this.tabStructure = this.tabs.society;
         break;
