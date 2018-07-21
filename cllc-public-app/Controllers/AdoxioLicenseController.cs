@@ -54,16 +54,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return adoxioLiceseVMList;
         }
 
-        /// GET all licenses in Dynamics
-        [HttpGet()]
-        public async Task<JsonResult> GetDynamicsLicenses()
-        {
-            // get all licenses in Dynamics
-            List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(null);
-
-            return Json(adoxioLicenses);
-        }
-
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
         public async Task<JsonResult> GetCurrentUserDyanamicsApplications()
@@ -78,6 +68,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // For Demo Only, hardcode the account id !!!
             //string accountId = "f3310e39-e352-e811-8140-480fcfeac941";
             //List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(accountId);
+
+            return Json(adoxioLicenses);
+        }
+
+        /// GET all licenses in Dynamics
+        [HttpGet()]
+        public async Task<JsonResult> GetDynamicsLicenses()
+        {
+            // get all licenses in Dynamics
+            List<AdoxioLicense> adoxioLicenses = await GetLicensesByLicencee(null);
 
             return Json(adoxioLicenses);
         }
