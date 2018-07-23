@@ -61,6 +61,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAdoxioLicencetypes AdoxioLicencetypes { get; private set; }
 
         /// <summary>
+        /// Gets the ILicenses.
+        /// </summary>
+        public virtual ILicenses Licenses { get; private set; }
+
+        /// <summary>
         /// Gets the IAdoxioTiedhouseassociations.
         /// </summary>
         public virtual IAdoxioTiedhouseassociations AdoxioTiedhouseassociations { get; private set; }
@@ -76,14 +81,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacts Contacts { get; private set; }
 
         /// <summary>
-        /// Gets the IEstablishments.
-        /// </summary>
-        public virtual IEstablishments Establishments { get; private set; }
-
-        /// <summary>
         /// Gets the IInvoices.
         /// </summary>
         public virtual IInvoices Invoices { get; private set; }
+
+        /// <summary>
+        /// Gets the IEstablishment
+        /// </summary>
+        public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -290,11 +295,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applications = new Applications(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
+            Licenses = new Licenses(this);
             AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
             AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
             Contacts = new Contacts(this);
-            Establishments = new Establishments(this);
             Invoices = new Invoices(this);
+            Establishments = new Establishments(this);
+
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
