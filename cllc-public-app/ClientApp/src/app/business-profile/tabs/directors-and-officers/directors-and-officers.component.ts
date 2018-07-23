@@ -43,7 +43,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
-        if(this.businessType == 'SoleProprietor'){
+        if (this.businessType === 'SoleProprietor') {
           this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
         }
         const sub2 = this.route.parent.params.subscribe(p => {
@@ -57,8 +57,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   getDirectorsAndOfficers() {
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'directors-officers-management')
-      .subscribe((result) => {
-        const data: AdoxioLegalEntity[] = result.json();
+      .subscribe((data) => {
         data.forEach(d => {
           const positionList: string[] = [];
           if (d.isDirector) {
@@ -66,6 +65,9 @@ export class DirectorsAndOfficersComponent implements OnInit {
           }
           if (d.isOfficer) {
             positionList.push('Officer');
+          }
+          if (d.isOwner) {
+            positionList.push('Owner');
           }
           if (d.isSeniorManagement) {
             positionList.push('Senior Manager');
