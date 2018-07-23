@@ -52,8 +52,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
    * */
   getBusinessProfileData() {
     this.busy = this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
-      res => {
-        const data: AdoxioLegalEntity[] = res.json();
+      data => {
         // console.log("getBusinessProfileSummary():", data);
         if (data) {
           // Change Business Releationship label when
