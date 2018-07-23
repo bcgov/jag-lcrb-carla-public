@@ -15,7 +15,7 @@ import { AppState } from './app-state/models/app-state';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   businessProfiles: AdoxioLegalEntity[];
   title = '';
   previousUrl: string;
@@ -50,14 +50,14 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.userDataService.getCurrentUser()
-      .then((data) => {
+      .subscribe((data: User) => {
         this.currentUser = data;
         this.isNewUser = this.currentUser.isNewUser;
         this.isAssociate = (this.currentUser.businessname == null);
         if (!this.isAssociate) {
           this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
             res => {
-              this.businessProfiles = res.json();
+              this.businessProfiles = res;
             });
         }
       });
@@ -74,7 +74,7 @@ export class AppComponent {
     let result, jscriptVersion;
     result = false;
 
-    jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
+    jscriptVersion = new Function('/*@cc_on return @_jscript_version; @*/')();
 
     if (jscriptVersion !== undefined) {
       result = true;

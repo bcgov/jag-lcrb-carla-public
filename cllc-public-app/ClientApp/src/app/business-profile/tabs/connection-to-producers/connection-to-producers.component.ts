@@ -57,8 +57,8 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
         this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
-          .subscribe(res => {
-            this._tiedHouseData = res.json();
+          .subscribe(tiedHouse => {
+            this._tiedHouseData = tiedHouse;
             this.form.patchValue(this._tiedHouseData);
             this.savedFormData = this.form.value;
             // this.form.valueChanges

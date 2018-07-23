@@ -73,8 +73,7 @@
   </div>
 
   <p></p>
-  <a class="globalButton btn btn-primary" tabindex="1" (click)="sendConsentRequestEmail()">
-    <strong>Send Authorization Request</strong>
-  </a>
-
+  <button class="globalButton btn btn-primary" tabindex="1" [disabled]=" !anySelected()" (click)="sendConsentRequestEmail()">
+    <strong>Send Request to Selected</strong>
+  </button>
 </div>
