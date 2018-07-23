@@ -40,6 +40,9 @@ export class StoreInformationComponent implements OnInit, OnDestroy {
       .filter(state => !!state)
       .subscribe(currentApplication => {
         this.storeInformationForm.patchValue(currentApplication);
+        if (currentApplication.isPaid) {
+          this.storeInformationForm.disable();
+        }
         this.savedFormData = this.storeInformationForm.value;
       });
     this.subscriptions.push(sub);

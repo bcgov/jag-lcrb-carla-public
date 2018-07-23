@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -13,19 +11,23 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class Adoxio_LicenseExtensions
     {
 
-        public async static Task<AdoxioLicense> ToViewModel(this Adoxio_licences dynamicsLicense, Interfaces.Microsoft.Dynamics.CRM.System _system)
+        public static AdoxioLicense ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
         {
             AdoxioLicense adoxioLicenseVM = new AdoxioLicense();
 
             // fetch the establishment and get name and address
-            Guid? adoxioEstablishmentId = dynamicsLicense._adoxio_establishment_value;
+            Guid? adoxioEstablishmentId = null;
+            if (!string.IsNullOrEmpty(dynamicsLicense._adoxioEstablishmentValue))
+            {
+                adoxioEstablishmentId = Guid.Parse(dynamicsLicense._adoxioEstablishmentValue);
+            }
             if (adoxioEstablishmentId != null)
             {
-                Interfaces.Microsoft.Dynamics.CRM.Adoxio_establishment establishment = await _system.Adoxio_establishments.ByKey(adoxio_establishmentid: adoxioEstablishmentId).GetValueAsync();
-                adoxioLicenseVM.establishmentName = establishment.Adoxio_name;
-                adoxioLicenseVM.establishmentAddress = establishment.Adoxio_addressstreet
-                                                    + ", " + establishment.Adoxio_addresscity
-                                                    + " " + establishment.Adoxio_addresspostalcode;
+                var establishment = dynamicsClient.Establishments.GetByKey(adoxioEstablishmentId.ToString());
+                adoxioLicenseVM.establishmentName = establishment.AdoxioName;
+                adoxioLicenseVM.establishmentAddress = establishment.AdoxioAddressstreet
+                                                    + ", " + establishment.AdoxioAddresscity
+                                                    + " " + establishment.AdoxioAddresspostalcode;
             }
 
             // fetch the licence status
@@ -36,15 +38,22 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             // fetch the licence type
-            Guid? adoxio_licencetypeId = dynamicsLicense._adoxio_licencetype_value;
+            Guid? adoxio_licencetypeId = null;
+            if (!string.IsNullOrEmpty(dynamicsLicense._adoxioLicencetypeValue))
+            {
+                adoxio_licencetypeId = Guid.Parse(dynamicsLicense._adoxioLicencetypeValue);
+            }
             if (adoxio_licencetypeId != null)
             {
-                Adoxio_licencetype adoxio_licencetype = await _system.Adoxio_licencetypes.ByKey(adoxio_licencetypeid: adoxio_licencetypeId).GetValueAsync();
-                adoxioLicenseVM.licenseType = adoxio_licencetype.Adoxio_name;
+                var adoxio_licencetype = dynamicsClient.AdoxioLicencetypes.GetByKey(adoxio_licencetypeId.ToString());
+                if (adoxio_licencetype != null)
+                {
+                    adoxioLicenseVM.licenseType = adoxio_licencetype.AdoxioName;
+                }                
             }
 
             // fetch license number
-            adoxioLicenseVM.licenseNumber = dynamicsLicense.Adoxio_licencenumber;
+            adoxioLicenseVM.licenseNumber = dynamicsLicense.AdoxioLicencenumber;
 
             return adoxioLicenseVM;
         }
