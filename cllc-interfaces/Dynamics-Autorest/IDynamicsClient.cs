@@ -58,6 +58,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAdoxioLicencetypes AdoxioLicencetypes { get; }
 
         /// <summary>
+        /// Gets the ILicenses.
+        /// </summary>
+        ILicenses Licenses { get; }
+
+        /// <summary>
         /// Gets the IAdoxioTiedhouseassociations.
         /// </summary>
         IAdoxioTiedhouseassociations AdoxioTiedhouseassociations { get; }
@@ -77,6 +82,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         IInvoices Invoices { get; }
 
+        /// <summary>
+        /// Gets the IEstablishments.
+        /// </summary>
         IEstablishments Establishments { get; }
+
     }
 }
