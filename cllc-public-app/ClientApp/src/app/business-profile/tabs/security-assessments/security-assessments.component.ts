@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 import { ToastsManager } from 'ng2-toastr';
 import { Subscription } from 'rxjs/Subscription';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
@@ -29,9 +29,8 @@ export class SecurityAssessmentsComponent implements OnInit {
   constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
     private route: ActivatedRoute,
     private dynamicsDataService: DynamicsDataService,
-    public toastr: ToastsManager,
+    public snackBar: MatSnackBar,
     vcr: ViewContainerRef) {
-    this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
@@ -50,10 +49,9 @@ export class SecurityAssessmentsComponent implements OnInit {
   getDirectorsAndOfficersAndShareholders() {
     const legalEntitiesList = [];
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, 'director-officer-shareholder')
-      .subscribe((result) => {
-        const data = result.json();
+      .subscribe((data) => {
         data.forEach((entry) => {
-          entry.sendConsentRequest = false;
+          entry.sendConsentRequest = !entry.securityAssessmentEmailSentOn;
           if (entry.isindividual) {
             legalEntitiesList.push(entry);
           }
@@ -73,6 +71,9 @@ export class SecurityAssessmentsComponent implements OnInit {
     if (legalEntity.isOwner === true) {
       roles.push('Owner');
     }
+    if (legalEntity.isPartner === true) {
+      roles.push('Partner');
+    }
     if (legalEntity.isSeniorManagement === true) {
       roles.push('Senior Manager');
     }
@@ -80,6 +81,11 @@ export class SecurityAssessmentsComponent implements OnInit {
       roles.push('Shareholder');
     }
     return roles.join(', ');
+  }
+
+  anySelected(): boolean {
+    const selected = this.dataSource.data.filter(i => i.sendConsentRequest === true);
+    return selected.length > 0;
   }
 
   sendConsentRequestEmail() {
@@ -95,10 +101,12 @@ export class SecurityAssessmentsComponent implements OnInit {
       this.busyObsv = this.legalEntityDataservice.sendConsentRequestEmail(consentRequestList)
         .subscribe(
           res => {
-            this.toastr.success('Consent Request(s) Sent ', 'Success!');
+            this.snackBar.open('Consent Request(s) Sent', 'Success',
+            { duration: 2500, extraClasses: ['red-snackbar'] });
           },
           err => {
-            this.handleError(err);
+            this.snackBar.open('Consent Request(s) Sent', 'Failed',
+            { duration: 4500, extraClasses: ['red-snackbar'] });
           }
         );
     }
