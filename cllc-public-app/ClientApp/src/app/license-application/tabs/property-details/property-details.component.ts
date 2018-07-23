@@ -40,6 +40,9 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
       .filter(state => !!state)
       .subscribe(currentApplication => {
         this.propertyDetailsForm.patchValue(currentApplication);
+        if (currentApplication.isPaid) {
+          this.propertyDetailsForm.disable();
+        }
         this.saveFormData = this.propertyDetailsForm.value;
       });
     this.subscriptions.push(sub);
