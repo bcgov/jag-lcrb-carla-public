@@ -463,21 +463,21 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-        ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
-        {
-            name = initialName,
-            applyingPerson = "Applying Person",
-            applicant = currentAccount1,
-            applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
-            ,
-            jobNumber = "123",
-            licenseType = "Cannabis Retail Store",
-            establishmentName = "Shared Retail Store",
-            establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
-            establishmentaddressstreet = "666 Any Street",
-            establishmentaddresscity = "Victoria, BC",
-            establishmentaddresspostalcode = "V1X 1X1",
-            applicationStatus = AdoxioApplicationStatusCodes.InProgress
+            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+            {
+                name = initialName,
+                applyingPerson = "Applying Person",
+                applicant = currentAccount1,
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
+                ,
+                jobNumber = "123",
+                licenseType = "Cannabis Retail Store",
+                establishmentName = "Shared Retail Store",
+                establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
+                establishmentaddressstreet = "666 Any Street",
+                establishmentaddresscity = "Victoria, BC",
+                establishmentaddresspostalcode = "V1X 1X1",
+                applicationStatus = AdoxioApplicationStatusCodes.InProgress
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
