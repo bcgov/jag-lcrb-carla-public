@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// AdoxioTiedhouseconnections operations.
+    /// Licenses operations.
     /// </summary>
-    public partial interface IAdoxioTiedhouseconnections
+    public partial interface ILicenses
     {
         /// <summary>
-        /// Get entities from adoxio_tiedhouseconnections
+        /// Get entities from adoxio_licenceses
         /// </summary>
         /// <param name='top'>
         /// Show only the first n items
@@ -57,9 +57,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetOKResponseModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Add new entity to adoxio_tiedhouseconnections
+        /// Add new entity to adoxio_licenceses
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -83,12 +83,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioTiedhouseconnection body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioLicences body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_tiedhouseconnections
+        /// Delete entity from adoxio_licenceses
         /// </summary>
-        /// <param name='adoxioTiedhouseconnectionid'>
-        /// key: adoxio_tiedhouseconnectionid
+        /// <param name='adoxioLicencesid'>
+        /// key: adoxio_licencesid
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -105,12 +105,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioLicencesid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get entity from adoxio_tiedhouseconnections by key
+        /// Get entity from adoxio_licenceses by key
         /// </summary>
-        /// <param name='adoxioTiedhouseconnectionid'>
-        /// key: adoxio_tiedhouseconnectionid
+        /// <param name='adoxioLicencesid'>
+        /// key: adoxio_licencesid
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -133,12 +133,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>> GetByKeyWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicences>> GetByKeyWithHttpMessagesAsync(string adoxioLicencesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Update entity in adoxio_tiedhouseconnections
+        /// Update entity in adoxio_licenceses
         /// </summary>
-        /// <param name='adoxioTiedhouseconnectionid'>
-        /// key: adoxio_tiedhouseconnectionid
+        /// <param name='adoxioLicencesid'>
+        /// key: adoxio_licencesid
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -155,6 +155,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, MicrosoftDynamicsCRMadoxioTiedhouseconnection body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioLicencesid, MicrosoftDynamicsCRMadoxioLicences body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

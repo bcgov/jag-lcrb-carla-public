@@ -22,6 +22,7 @@ export class DeclarationComponent implements OnInit {
   subscriptions: Subscription[] = [];
   application: any;
   savedFormData: any = {};
+  isReadOnly: boolean = false;
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
     private store: Store<AppState>,
@@ -36,6 +37,9 @@ export class DeclarationComponent implements OnInit {
       .subscribe(currentApplication => {
         this.signatureagreement = currentApplication.signatureagreement;
         this.authorizedtosubmit = currentApplication.authorizedtosubmit;
+        if (currentApplication.isPaid) {
+          this.isReadOnly = true;
+        }
         this.savedFormData = {
           authorizedtosubmit: currentApplication.authorizedtosubmit,
           signatureagreement: currentApplication.signatureagreement,
