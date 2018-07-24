@@ -30,6 +30,7 @@
 <!--<div class="example-container mat-elevation-z0">-->
 
   <div [ngBusy]="busy">
+  <div [ngBusy]="busyObsv">
 
     <div *ngIf="['PublicCorporation'].indexOf(businessType) == -1">
       <mat-table #table [dataSource]="dataSource">

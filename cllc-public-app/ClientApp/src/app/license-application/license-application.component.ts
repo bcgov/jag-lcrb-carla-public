@@ -53,7 +53,7 @@ export class LicenseApplicationComponent implements OnInit {
     // TODO - pass currentUser in as router data rather than doing another call to getCurrentUser.
     if (!this.currentUser) {
       this.userDataService.getCurrentUser()
-        .then((data) => {
+        .subscribe((data: User) => {
           this.currentUser = data;
           if (!this.accountId) {
             this.accountId = this.currentUser.accountid;

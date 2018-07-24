@@ -32,7 +32,7 @@ ngOnInit(): void {
   // TODO - pass currentUser in as router data rather than doing another call to getCurrentUser.
   if (!this.user) {
     this.userDataService.getCurrentUser()
-      .then((data) => {
+      .subscribe((data: User) => {
         this.user = data;
 
         this.isApplicant = (this.user.businessname != null);

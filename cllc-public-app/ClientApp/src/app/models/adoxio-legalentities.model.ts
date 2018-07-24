@@ -27,6 +27,7 @@ export class AdoxioLegalEntity {
   relatedentities: AdoxioLegalEntity[];
   email: string;
   dateofappointment: Date;
+  securityAssessmentEmailSentOn: Date;
   accountId: string;
   shareholderAccountId: string;
   // helper fields
