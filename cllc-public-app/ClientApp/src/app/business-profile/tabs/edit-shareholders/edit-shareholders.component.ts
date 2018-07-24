@@ -68,8 +68,7 @@ export class EditShareholdersComponent implements OnInit {
       position = 'partners';
     }
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, position)
-      .subscribe((response) => {
-        const data: AdoxioLegalEntity[] = response.json();
+      .subscribe((data: AdoxioLegalEntity[]) => {
         data.forEach(d => {
           d.position = this.getPosition(d);
         });
@@ -254,7 +253,7 @@ export class EditShareholdersComponent implements OnInit {
               this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
               this.getShareholders();
               this.legalEntityDataservice.getBusinessProfileSummary().subscribe(data => {
-                this.store.dispatch(new LegalEntitiesActions.SetLegalEntitiesAction(data.json()));
+                this.store.dispatch(new LegalEntitiesActions.SetLegalEntitiesAction(data));
               });
             },
             err => {
