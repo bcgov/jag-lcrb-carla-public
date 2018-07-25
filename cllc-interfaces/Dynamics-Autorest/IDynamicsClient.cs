@@ -82,10 +82,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         IInvoices Invoices { get; }
 
-        /// <summary>
-        /// Gets the IEstablishments.
-        /// </summary>
         IEstablishments Establishments { get; }
+
+        /// <summary>
+        /// Gets the ISharepointDocumentLocations.
+        /// </summary>
+        ISharepointDocumentLocations SharepointDocumentLocations { get; }
 
     }
 }

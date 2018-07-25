@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                var accountId = Guid.Parse(userSettings.AccountId);
+                var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
                 MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
                 if (account == null)
                 {
