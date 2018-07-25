@@ -13,12 +13,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for AdoxioTiedhouseconnections.
+    /// Extension methods for Licenses.
     /// </summary>
-    public static partial class AdoxioTiedhouseconnectionsExtensions
+    public static partial class LicensesExtensions
     {
             /// <summary>
-            /// Get entities from adoxio_tiedhouseconnections
+            /// Get entities from adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -47,13 +47,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModelModelModelModel Get(this IAdoxioTiedhouseconnections operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static GetOKResponseModelModelModelModel Get(this ILicenses operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entities from adoxio_tiedhouseconnections
+            /// Get entities from adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModelModelModelModel> GetAsync(this IAdoxioTiedhouseconnections operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOKResponseModelModelModelModel> GetAsync(this ILicenses operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Add new entity to adoxio_tiedhouseconnections
+            /// Add new entity to adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -106,13 +106,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioTiedhouseconnection Create(this IAdoxioTiedhouseconnections operations, MicrosoftDynamicsCRMadoxioTiedhouseconnection body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMadoxioLicences Create(this ILicenses operations, MicrosoftDynamicsCRMadoxioLicences body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to adoxio_tiedhouseconnections
+            /// Add new entity to adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseconnection> CreateAsync(this IAdoxioTiedhouseconnections operations, MicrosoftDynamicsCRMadoxioTiedhouseconnection body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicences> CreateAsync(this ILicenses operations, MicrosoftDynamicsCRMadoxioLicences body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -136,30 +136,30 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from adoxio_tiedhouseconnections
+            /// Delete entity from adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioTiedhouseconnectionid'>
-            /// key: adoxio_tiedhouseconnectionid
+            /// <param name='adoxioLicencesid'>
+            /// key: adoxio_licencesid
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void Delete(this IAdoxioTiedhouseconnections operations, string adoxioTiedhouseconnectionid, string ifMatch = default(string))
+            public static void Delete(this ILicenses operations, string adoxioLicencesid, string ifMatch = default(string))
             {
-                operations.DeleteAsync(adoxioTiedhouseconnectionid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioLicencesid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Delete entity from adoxio_tiedhouseconnections
+            /// Delete entity from adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioTiedhouseconnectionid'>
-            /// key: adoxio_tiedhouseconnectionid
+            /// <param name='adoxioLicencesid'>
+            /// key: adoxio_licencesid
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
@@ -167,19 +167,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsync(this IAdoxioTiedhouseconnections operations, string adoxioTiedhouseconnectionid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this ILicenses operations, string adoxioLicencesid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteWithHttpMessagesAsync(adoxioTiedhouseconnectionid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioLicencesid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Get entity from adoxio_tiedhouseconnections by key
+            /// Get entity from adoxio_licenceses by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioTiedhouseconnectionid'>
-            /// key: adoxio_tiedhouseconnectionid
+            /// <param name='adoxioLicencesid'>
+            /// key: adoxio_licencesid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -187,19 +187,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioTiedhouseconnection GetByKey(this IAdoxioTiedhouseconnections operations, string adoxioTiedhouseconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicences GetByKey(this ILicenses operations, string adoxioLicencesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyAsync(adoxioTiedhouseconnectionid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioLicencesid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from adoxio_tiedhouseconnections by key
+            /// Get entity from adoxio_licenceses by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioTiedhouseconnectionid'>
-            /// key: adoxio_tiedhouseconnectionid
+            /// <param name='adoxioLicencesid'>
+            /// key: adoxio_licencesid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -210,39 +210,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseconnection> GetByKeyAsync(this IAdoxioTiedhouseconnections operations, string adoxioTiedhouseconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicences> GetByKeyAsync(this ILicenses operations, string adoxioLicencesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioTiedhouseconnectionid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioLicencesid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Update entity in adoxio_tiedhouseconnections
+            /// Update entity in adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioTiedhouseconnectionid'>
-            /// key: adoxio_tiedhouseconnectionid
+            /// <param name='adoxioLicencesid'>
+            /// key: adoxio_licencesid
             /// </param>
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this IAdoxioTiedhouseconnections operations, string adoxioTiedhouseconnectionid, MicrosoftDynamicsCRMadoxioTiedhouseconnection body)
+            public static void Update(this ILicenses operations, string adoxioLicencesid, MicrosoftDynamicsCRMadoxioLicences body)
             {
-                operations.UpdateAsync(adoxioTiedhouseconnectionid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioLicencesid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in adoxio_tiedhouseconnections
+            /// Update entity in adoxio_licenceses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioTiedhouseconnectionid'>
-            /// key: adoxio_tiedhouseconnectionid
+            /// <param name='adoxioLicencesid'>
+            /// key: adoxio_licencesid
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -250,9 +250,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this IAdoxioTiedhouseconnections operations, string adoxioTiedhouseconnectionid, MicrosoftDynamicsCRMadoxioTiedhouseconnection body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this ILicenses operations, string adoxioLicencesid, MicrosoftDynamicsCRMadoxioLicences body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateWithHttpMessagesAsync(adoxioTiedhouseconnectionid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioLicencesid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
