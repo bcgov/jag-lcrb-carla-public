@@ -30,6 +30,8 @@ import { PropertyDetailsComponent } from './license-application/tabs/property-de
 import { SiteMapComponent } from './license-application/tabs/site-map/site-map.component';
 import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
+import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -38,7 +40,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: environment.lite === true ? DashboardLiteComponent : DashboardComponent
+  },
+  {
+    path: 'dashboard-lite',
+    component: DashboardLiteComponent
   },
   {
     path: 'business-profile/:accountId/:legalEntityId',
@@ -147,7 +153,7 @@ const routes: Routes = [
     },
     data: {
       // do not show breadcrumb
-      // breadcrumb: 'Potential Applicant Survey', 
+      // breadcrumb: 'Potential Applicant Survey',
       survey_path: 'assets/survey-primary.json',
     }
   },
