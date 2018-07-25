@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   public isDevMode: boolean;
   isAssociate = false;
   showLogin: boolean;
-  isLiteVersion: boolean;
+  isLiteVersion = true;
 
   constructor(
     private renderer: Renderer2,
