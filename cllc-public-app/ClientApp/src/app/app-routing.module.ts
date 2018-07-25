@@ -40,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: environment.lite === true ? DashboardLiteComponent : DashboardComponent
+    component: DashboardComponent
   },
   {
     path: 'dashboard-lite',
