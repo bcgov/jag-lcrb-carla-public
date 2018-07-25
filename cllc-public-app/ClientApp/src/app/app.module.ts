@@ -119,6 +119,7 @@ import { TiedHouseConnectionsDataService } from './services/tied-house-connectio
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule } from '@ngrx/store';
+import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 
 @NgModule({
   declarations: [
@@ -170,7 +171,8 @@ import { StoreModule } from '@ngrx/store';
     FloorPlanComponent,
     SiteMapComponent,
     DeclarationComponent,
-    SubmitPayComponent
+    SubmitPayComponent,
+    DashboardLiteComponent
   ],
   imports: [
     BrowserModule,
