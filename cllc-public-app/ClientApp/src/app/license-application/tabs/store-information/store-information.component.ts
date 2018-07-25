@@ -9,7 +9,7 @@ import { UserDataService } from '../../../services/user-data.service';
 import { Observable } from '../../../../../node_modules/rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
-import { Store } from '../../../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
