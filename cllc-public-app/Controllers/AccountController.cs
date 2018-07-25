@@ -52,11 +52,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                var accountId = Guid.Parse(userSettings.AccountId);
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(new Guid(accountId));
                 if (account == null)
                 {
-                    return new NotFoundResult();
+                    // Sometimes we receive the siteminderbusienssguid instead of the account id. 
+                    account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(accountId);
+                    if(account == null)
+                    {
+                        return new NotFoundResult();
+                    }
                 }
 
                 result = account.ToViewModel();

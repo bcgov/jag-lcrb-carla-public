@@ -1,10 +1,11 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
 import { DynamicsDataService } from "../services/dynamics-data.service";
 import { DynamicsAccount } from "../models/dynamics-account.model";
 import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
-import { AccountDataService } from '../services/account-data.service';
+import { UserDataService } from '../services/user-data.service';
+import { AccountDataService } from '../services/account-data.service'
+import { Observable, Subscription } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-bceid-confirmation',
@@ -22,28 +23,24 @@ export class BceidConfirmationComponent {
   businessType: string = "";
   finalBusinessType: string = "";
   busy: Promise<any>;
+  busySubscription: Subscription;
+  accountExists: boolean = true;
 
-  /** bceid-confirmation ctor */
-  constructor(private router: Router, private accountDataService: AccountDataService, private dynamicsDataService: DynamicsDataService) {
-    // Load BCeID data from service
-    // this.accountDataService.getBCeID().subscribe((data) => {
-    //   let temp = data.json();
-    //   this.businessType = temp.businessTypeCode;
-    // }, err => {
-    //   console.log(err);
-    // });
+  constructor(private dynamicsDataService: DynamicsDataService, private userDataService: UserDataService, private accountDataService: AccountDataService) {
+    // if this passes, this means the user's account exists but it's contact information has not been created.
+    // user will skip the BCeid confirmation.
+    this.busySubscription = this.accountDataService.getCurrentAccount().subscribe((data) => {
+      let account = data.json();
+      this.createContact(account);
+    },
+    error => {
+      // continue as normal
+      this.accountExists = false
+    });
+
   }
 
   confirmBceidAccountYes() {
-    // confirm BCeID
-    // if (this.businessType !== "Proprietorship" && this.businessType !== "Partnership") {
-    //   this.bceidConfirmAccount = false;
-    //   this.bceidConfirmBusinessType = true;
-    // }
-    // else {
-    //   this.bceidConfirmAccount = false;
-    //   this.confirmCorpType(this.businessType);
-    // }
     this.bceidConfirmAccount = false;
     this.bceidConfirmBusinessType = true;
   }
@@ -64,10 +61,13 @@ export class BceidConfirmationComponent {
   }
 
   confirmContactYes() {
-    // create a contact
     let account = new DynamicsAccount();
     account.name = this.currentUser.businessname;
     account.id = this.currentUser.accountid;
+    this.createContact(account);
+  }
+
+  createContact(account) {
     let contact = new DynamicsContact();
     contact.fullname = this.currentUser.name;
     contact.id = this.currentUser.contactid;

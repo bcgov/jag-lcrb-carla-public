@@ -12,9 +12,13 @@ export class AccountDataService {
   });
 
   constructor(private http: Http) { }
-
+  
   public getAccount(accountId: string) {
     return this.http.get(this.apiPath + accountId, { headers: this.jsonHeaders });
+  }
+
+  public getCurrentAccount() {
+    return this.http.get(this.apiPath + 'current', { headers: this.jsonHeaders });
   }
 
   public getBusinessProfile(accountId: string) {
