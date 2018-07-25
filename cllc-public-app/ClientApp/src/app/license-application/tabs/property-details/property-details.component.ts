@@ -47,13 +47,13 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
       });
     this.subscriptions.push(sub);
 
-    const sub2 = this.propertyDetailsForm.valueChanges
-      .pipe(auditTime(10000))
-      .filter(formData => (JSON.stringify(formData) !== JSON.stringify(this.saveFormData)))
-      .subscribe(formData => {
-        this.save();
-      });
-    this.subscriptions.push(sub2);
+    // const sub2 = this.propertyDetailsForm.valueChanges
+    //   .pipe(auditTime(10000))
+    //   .filter(formData => (JSON.stringify(formData) !== JSON.stringify(this.saveFormData)))
+    //   .subscribe(formData => {
+    //     this.save();
+    //   });
+    // this.subscriptions.push(sub2);
 
   }
 
