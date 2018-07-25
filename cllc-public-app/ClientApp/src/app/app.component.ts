@@ -52,15 +52,20 @@ export class AppComponent implements OnInit {
       }
     });
 
-    Observable.interval(20000).subscribe(_ => {
-      clientConfigDataService.getConfig().subscribe(data => {
-        this.showLogin = data.showLogin;
-        this.isLiteVersion = data.isLiteVersion;
-      });
+    clientConfigDataService.getConfig().subscribe(data => {
+      this.showLogin = data.showLogin;
+      this.isLiteVersion = data.isLiteVersion;
     });
   }
 
   ngOnInit(): void {
+    Observable.interval(20000).subscribe(_ => {
+      this.clientConfigDataService.getConfig().subscribe(data => {
+        this.showLogin = data.showLogin;
+        this.isLiteVersion = data.isLiteVersion;
+      });
+    });
+
     this.userDataService.getCurrentUser()
       .subscribe((data: User) => {
         this.currentUser = data;
