@@ -120,6 +120,7 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule } from '@ngrx/store';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
+import { ClientConfigDataService } from './services/client-config.service';
 
 @NgModule({
   declarations: [
@@ -271,6 +272,7 @@ import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.componen
   ],
   providers: [
     CookieService,
+    ClientConfigDataService,
     DynamicsDataService,
     InsertService,
     GeneralDataService,

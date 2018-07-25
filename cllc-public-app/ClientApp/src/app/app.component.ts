@@ -9,7 +9,8 @@ import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-dat
 import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
-import { environment } from '../environments/environment';
+import { ClientConfigDataService } from './services/client-config.service';
+import { Observable } from '../../node_modules/rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,13 +25,15 @@ export class AppComponent implements OnInit {
   public isNewUser: boolean;
   public isDevMode: boolean;
   isAssociate = false;
-  environment = environment;
+  showLogin: boolean;
+  isLiteVersion: boolean;
 
   constructor(
     private renderer: Renderer2,
     private router: Router,
     private userDataService: UserDataService,
     private store: Store<AppState>,
+    private clientConfigDataService: ClientConfigDataService,
     private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
   ) {
     this.isDevMode = isDevMode();
@@ -48,6 +51,13 @@ export class AppComponent implements OnInit {
         this.previousUrl = nextSlug;
       }
     });
+
+    Observable.interval(20000).subscribe(_ => {
+      clientConfigDataService.getConfig().subscribe(data => {
+        this.showLogin = data.showLogin;
+        this.isLiteVersion = data.isLiteVersion;
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -64,7 +74,7 @@ export class AppComponent implements OnInit {
         }
       });
 
-      this.store.select(state => state.legalEntitiesState)
+    this.store.select(state => state.legalEntitiesState)
       .filter(state => !!state)
       .subscribe(state => {
         this.businessProfiles = state.legalEntities;
