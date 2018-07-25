@@ -5,6 +5,7 @@ import { DynamicsContact } from "../models/dynamics-contact.model";
 import { User } from "../models/user.model";
 import { UserDataService } from '../services/user-data.service';
 import { AccountDataService } from '../services/account-data.service'
+import { Observable, Subscription } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-bceid-confirmation',
@@ -22,14 +23,21 @@ export class BceidConfirmationComponent {
   businessType: string = "";
   finalBusinessType: string = "";
   busy: Promise<any>;
+  busySubscription: Subscription;
+  accountExists: boolean = true;
 
   constructor(private dynamicsDataService: DynamicsDataService, private userDataService: UserDataService, private accountDataService: AccountDataService) {
     // if this passes, this means the user's account exists but it's contact information has not been created.
     // user will skip the BCeid confirmation.
-    this.accountDataService.getCurrentAccount().subscribe((data) => {
+    this.busySubscription = this.accountDataService.getCurrentAccount().subscribe((data) => {
       let account = data.json();
       this.createContact(account);
+    },
+    error => {
+      // continue as normal
+      this.accountExists = false
     });
+
   }
 
   confirmBceidAccountYes() {
