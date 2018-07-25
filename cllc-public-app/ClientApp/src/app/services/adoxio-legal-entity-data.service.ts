@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { Observable } from 'rxjs/Observable';
-import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
-import { debounce, catchError } from '../../../node_modules/rxjs/operators';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { debounce, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AdoxioLegalEntityDataService {
