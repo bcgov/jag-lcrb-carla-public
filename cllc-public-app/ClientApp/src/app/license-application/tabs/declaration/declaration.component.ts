@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '../../../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 

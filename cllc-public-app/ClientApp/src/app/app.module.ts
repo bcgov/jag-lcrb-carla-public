@@ -119,6 +119,8 @@ import { TiedHouseConnectionsDataService } from './services/tied-house-connectio
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule } from '@ngrx/store';
+import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
+import { ClientConfigDataService } from './services/client-config.service';
 import { LiteApplicationDashboardComponent } from './lite-application-dashboard/lite-application-dashboard.component';
 
 @NgModule({
@@ -172,6 +174,7 @@ import { LiteApplicationDashboardComponent } from './lite-application-dashboard/
     SiteMapComponent,
     DeclarationComponent,
     SubmitPayComponent,
+    DashboardLiteComponent
     LiteApplicationDashboardComponent
   ],
   imports: [
@@ -271,6 +274,7 @@ import { LiteApplicationDashboardComponent } from './lite-application-dashboard/
   ],
   providers: [
     CookieService,
+    ClientConfigDataService,
     DynamicsDataService,
     InsertService,
     GeneralDataService,
