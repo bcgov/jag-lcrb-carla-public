@@ -45,12 +45,12 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
         this.setFormData(state.currentAccount);
-        this.corporateDetailsForm.valueChanges
-          .pipe(auditTime(10000)).subscribe(formData => {
-            if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
-              this.save();
-            }
-          });
+        // this.corporateDetailsForm.valueChanges
+        //   .pipe(auditTime(10000)).subscribe(formData => {
+        //     if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
+        //       this.save();
+        //     }
+        //   });
       });
     this.subscriptions.push(sub);
   }
