@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --sourcemaps --host 0.0.0.0 --env=lite",
+    "start": "ng serve --sourcemaps --host 0.0.0.0",
     "build": "ng build --extract-css --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
     "builduat": "ng build --extract-css --base-href /uat/cannabislicensing/ --deploy-url /uat/cannabislicensing/",
     "buildprod": "ng build --extract-css --base-href / --deploy-url /",
