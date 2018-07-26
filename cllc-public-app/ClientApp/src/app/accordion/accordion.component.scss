@@ -42,7 +42,7 @@ h3 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 24px 0 0
+    padding: 0 24px 0 0;
 
 }
 
@@ -100,11 +100,10 @@ h3 {
 }
 
 
-accordion-btn {
-  background-color: #f1f1f3;
+.accordion-btn {
   border: none;
   padding: 5px 8px;
   color: #1c5a97;
   text-decoration: none !important;
+  text-align: right;
 }
-
