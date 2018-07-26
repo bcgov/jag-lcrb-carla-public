@@ -1,0 +1,38 @@
+.dashboard-title {
+  border-width: 0px;
+  /*position: absolute;*/
+  left: 0px;
+  top: 0px;
+  /*width: 430px;
+  height: 40px;*/
+  background: inherit;
+  background-color: rgba(56, 89, 138, 1);
+  border: none;
+  border-radius: 5px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-family: 'myriad-pro', 'sans serif';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  text-align: left;
+}
+
+.dashboard-content {
+  border-width: 0px;
+  /*position: absolute;*/
+  left: 0px;
+  top: 0px;
+  /*width: 430px;
+  height: 375px;*/
+  background: inherit;
+  background-color: rgba(242, 242, 242, 1);
+  border: none;
+  border-radius: 0px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
