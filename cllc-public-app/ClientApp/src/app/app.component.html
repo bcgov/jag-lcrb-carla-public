@@ -89,9 +89,10 @@
               <div class="collapse navbar-collapse" id="loggedInMenu">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+                    <a *ngIf="!isLiteVersion" class="nav-link" routerLink="/dashboard">Dashboard</a>
+                    <a *ngIf="isLiteVersion" class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
                   </li>
-                  <li class="nav-item dropdown">
+                  <li *ngIf="!isLiteVersion" class="nav-item dropdown">
                     <div ngbDropdown class="d-inline-block">
                       <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
                       <div ngbDropdownMenu>
@@ -99,7 +100,7 @@
                       </div>
                     </div>
                   </li>
-                  <li class="nav-item dropdown">
+                  <li  *ngIf="!isLiteVersion" class="nav-item dropdown">
                     <div ngbDropdown class="d-inline-block">
                       <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Licences</a>
                       <div ngbDropdownMenu>

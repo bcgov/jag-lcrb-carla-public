@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { catchError, retry } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
-import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class UserDataService {
