@@ -1,0 +1,64 @@
+<div>
+  <div class="dashboard-title">
+    <h3>My Submitted Applications</h3>
+  </div>
+  <!--<mat-card-subtitle></mat-card-subtitle>-->
+  <!--<mat-card-content>-->
+    <div [ngBusy]="busy"></div>
+
+    <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
+      No licence applications have been started
+    </div>
+
+    <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
+
+      <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
+
+        <!-- Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a routerLink="/license-application/{{element.id}}/contact-details" skipLocationChange>{{element.name}}</a>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="establishmentName">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Store Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <!--<ng-container matColumnDef="establishmentAddress">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Address </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.establishmentAddress}} </mat-cell>
+        </ng-container>-->
+        <!-- Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <!--<ng-container matColumnDef="licenseType">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.licenseType}} </mat-cell>
+        </ng-container>-->
+        <!-- Column -->
+        <!--<ng-container matColumnDef="licenseNumber">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Licence Number </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.licenseNumber}} </mat-cell>
+        </ng-container>-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <!--<mat-paginator #paginator
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 15]"
+                   [showFirstLastButtons]="true">
+      </mat-paginator>-->
+    </div>
+  <!--</mat-card-content>-->
+</div>
