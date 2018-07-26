@@ -174,7 +174,7 @@ import { LiteApplicationDashboardComponent } from './lite-application-dashboard/
     SiteMapComponent,
     DeclarationComponent,
     SubmitPayComponent,
-    DashboardLiteComponent
+    DashboardLiteComponent,
     LiteApplicationDashboardComponent
   ],
   imports: [
