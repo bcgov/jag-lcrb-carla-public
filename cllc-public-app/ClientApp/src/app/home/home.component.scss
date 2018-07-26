@@ -4,8 +4,17 @@
   max-width: 840px;
 }
 
-h1, h2 {
-  font-weight: 600;
+.home-header {
+  background-color: rgba(242, 242, 242, 1);
+  padding-left: 50px;
+  padding-right: 60px;
+}
+
+.home-body {
+  background-color: rgba(255, 255, 255, 1);
+  padding-left: 50px;
+  padding-top: 75px;
+  padding-right: 60px;
 }
 
 .intro {
@@ -15,15 +24,6 @@ h1, h2 {
   margin: 3rem auto 4rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-
-h3 {
-    font-size: 21px;
-    font-weight: 600;
-    padding-top: 10px;
-    color: #494949;
-
-}
-
 
 .steps {
   .step {
@@ -75,15 +75,11 @@ h3 {
 }
 
 .jumbotron {
-  background-color: rgba(248, 186, 50, 0.13);
-  border-left-color: rgb(248,186,50);
-  border-left-width: 7px;
-  border-left-style: solid;
-  border-radius:0;
+  background-color: rgba(242, 242, 242, 1);
   margin-top: 15px;
-  h1 {
-    font-size: 45px;
-    font-weight: 600;
+  h2 {
+    font-weight: 400;
+    font-size: 36px;
   }
 }
 
@@ -102,9 +98,8 @@ h3 {
   }
 }
 
-
 .globalButton {
-    background-color: #003366;
+    background-color: rgba(0, 51, 102, 1);;
     border: #003366 1px solid;
     color: #ffffff;
     min-width: 120px;
@@ -124,6 +119,20 @@ h3 {
 }
 
 .newsletter {
-        margin-top: 30px
-    }
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 30px;
+  background-color: rgba(56, 89, 138, 1);
+  border-bottom: 3px solid #fcba19 !important;
+}
 
+.survey {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 30px;
+  background-color: rgba(56, 89, 138, 1);
+  border-bottom: 3px solid #fcba19 !important;
+  h2, h3 {
+    color: white;
+  }
+}
