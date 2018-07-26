@@ -1,12 +1,16 @@
-<mat-card class="mat-elevation-z0">
-  <mat-card-title><h1>Applications in Progress</h1></mat-card-title>
-  <mat-card class="mat-elevation-z0">
-
+<div>
+  <div class="dashboard-title">
+    <h3>My Submitted Applications</h3>
+  </div>
+  <!--<mat-card-subtitle></mat-card-subtitle>-->
+  <!--<mat-card-content>-->
     <div [ngBusy]="busy"></div>
 
-    <div *ngIf="dataSource.data && dataSource.data.length == 0">No licence applications have been started</div>
+    <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
+      No licence applications have been started
+    </div>
 
-    <div *ngIf="dataSource.data.length > 0">
+    <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
 
       <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
@@ -29,7 +33,6 @@
           <mat-header-cell mat-sort-header *matHeaderCellDef> Address </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.establishmentAddress}} </mat-cell>
         </ng-container>-->
-
         <!-- Column -->
         <ng-container matColumnDef="status">
           <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
@@ -41,7 +44,6 @@
           <mat-header-cell mat-sort-header *matHeaderCellDef> Type </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.licenseType}} </mat-cell>
         </ng-container>-->
-
         <!-- Column -->
         <!--<ng-container matColumnDef="licenseNumber">
           <mat-header-cell mat-sort-header *matHeaderCellDef> Licence Number </mat-header-cell>
@@ -53,10 +55,10 @@
       </mat-table>
 
       <!--<mat-paginator #paginator
-                     [pageSize]="5"
-                     [pageSizeOptions]="[5, 10, 15]"
-                     [showFirstLastButtons]="true">
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 15]"
+                   [showFirstLastButtons]="true">
       </mat-paginator>-->
     </div>
-  </mat-card>
-</mat-card>
+  <!--</mat-card-content>-->
+</div>
