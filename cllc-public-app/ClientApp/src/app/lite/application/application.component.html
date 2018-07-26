@@ -1,0 +1,49 @@
+<div [formGroup]="form" style="max-width: 700px; padding-left: 15px;">
+  <h1>Cannabis License Application</h1>
+
+  <p>
+    Please make sure that you have filled out the application in its entirety. Refer to the application guide for assistance.
+    Check your checklist to make sure all forms have been filled before submitting.
+  </p>
+
+  <p>Begin by entering the name of your establishment.</p>
+
+  <section>
+    <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}">
+      <label for="">Establishment Name</label>
+      <br>
+      <input class="form-control" style="width: 500px;" type="text" id="establishmentName" formControlName="establishmentName">
+      <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
+        <div *ngIf="form.controls['establishmentName'].hasError('required') ">
+          This is required
+        </div>
+      </div>
+    </div>
+  </section>
+  <p>&nbsp;</p>
+
+  <label for="">Upload Your Application Form</label>
+  <br>
+  <p>Upload your completed
+    <strong>application form</strong> and
+    <strong>required documents</strong> below.</p>
+  <section>
+    <app-file-uploader *ngIf="applicationId" documentType="Licence Application" [applicationId]="applicationId"></app-file-uploader>
+  </section>
+  <br>
+
+  <label for="">Attach Supporting Documents</label>
+  <br>
+  <p>Upload your completed
+    <strong>application form</strong> and
+    <strong>required documents</strong> below.</p>
+  <section>
+    <app-file-uploader *ngIf="applicationId" documentType="Licence Application" [applicationId]="applicationId"></app-file-uploader>
+  </section>
+  <br>
+  <p>Once you are ready to submit, the next page will take you to the payment process.</p>
+  <br>
+  <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+  <p>&nbsp;</p>
+  <p>Application processing time will take approximately two to four months and are subjected to AGLC application review policies.</p>
+</div>
