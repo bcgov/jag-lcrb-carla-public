@@ -122,6 +122,7 @@ import { StoreModule } from '@ngrx/store';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 import { ClientConfigDataService } from './services/client-config.service';
 import { ApplicationComponent } from './lite/application/application.component';
+import { LiteApplicationDashboardComponent } from './lite-application-dashboard/lite-application-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -175,7 +176,8 @@ import { ApplicationComponent } from './lite/application/application.component';
     DeclarationComponent,
     SubmitPayComponent,
     DashboardLiteComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    LiteApplicationDashboardComponent
   ],
   imports: [
     BrowserModule,
