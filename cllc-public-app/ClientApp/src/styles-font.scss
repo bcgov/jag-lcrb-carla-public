@@ -27,8 +27,8 @@ body {
 
 
 .btn.btn-primary {
-    background-color: #003366;
-    border: #003366 1px solid;
+    background-color: #38598a;
+    border: #357ebd 1px solid;
     color: #ffffff;
     min-width: 120px;
     font-size: 16px;
@@ -87,14 +87,32 @@ body {
     border-top: none;
 }
 
-h2 {
+p {
+    font-weight: Regular;
+    font-size: 14px #494949
+}
+
+h1 {
+    font-weight: Semi-bold;
+    font-size: 42px;
     color: #494949;
 }
 
+h2 {
+    font-weight: Semi-bold;
+    font-size: 24px;
+    color: #494949; 
+}
 
 h3 {
-    font-size: 21px;
-    font-weight: 500;
+    font-weight: Semi-bold;
+    font-size: 20px;
+    color: #494949;
+}
+
+h4 {
+    font-weight: Semi-bold;
+    font-size: 16px;
     color: #494949;
 }
 
