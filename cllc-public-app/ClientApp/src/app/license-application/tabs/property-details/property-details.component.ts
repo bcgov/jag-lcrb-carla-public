@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { auditTime } from 'rxjs/operators';
 import { Observable } from '../../../../../node_modules/rxjs/Observable';
 import { Subject } from 'rxjs';
-import { Store } from '../../../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 
