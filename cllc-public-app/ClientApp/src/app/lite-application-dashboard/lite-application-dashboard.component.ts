@@ -12,7 +12,7 @@ import { LicenseApplicationSummary } from '../models/license-application-summary
 export class LiteApplicationDashboardComponent implements OnInit {
 
   busy: Subscription;
-  @Input() applicationStatus: string;
+  @Input() applicationSubmitted: boolean;
 
   //displayedColumns = ['name', 'establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
   displayedColumns = ['name', 'establishmentName', 'status'];
@@ -35,6 +35,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
           licAppSum.establishmentAddress = entry.establishmentAddress;
           licAppSum.licenseType = entry.licenseType;
           licAppSum.status = entry.applicationStatus;
+          licAppSum.applicationSubmitDate = entry.applicationSubmitDate;
           licenseApplicationSummary.push(licAppSum);
         });
         this.dataSource.data = licenseApplicationSummary;
