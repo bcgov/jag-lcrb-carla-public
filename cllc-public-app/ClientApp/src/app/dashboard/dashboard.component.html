@@ -1,8 +1,7 @@
 <div class="row extra-padding" *ngIf="isApplicant">
   <section class="col-md-9">
-    <!--<app-business-profile-summary></app-business-profile-summary>
-    <app-license-application-summary></app-license-application-summary>-->
-    <app-lite-application-dashboard></app-lite-application-dashboard>
+    <app-business-profile-summary></app-business-profile-summary>
+    <app-license-application-summary></app-license-application-summary>
     <mat-card class="mat-elevation-z0">
       <div [ngBusy]="busy">
         <button class="btn btn-primary" (click)="startNewLicenceApplication()">Start New Licence Application</button>
