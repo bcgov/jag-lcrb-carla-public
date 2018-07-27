@@ -37,7 +37,7 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
       </mat-table>
 
     </div>
@@ -52,18 +52,12 @@
 
     <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
 
-      <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
+      <mat-table style="background-color: #eee;" class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
-        <!-- Column -->
-        <!--<ng-container matColumnDef="establishmentName">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
-        </ng-container>-->
-        <!-- Column -->
         <ng-container matColumnDef="name">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> </mat-header-cell>
+          <mat-header-cell mat-sort-header *matHeaderCellDef > </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a routerLink="/application-lite/{{element.id}}" skipLocationChange>{{element.establishmentName}}</a>
+            <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.id)" skipLocationChange>{{element.establishmentName}}</a>
             <br />
             Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
             <br />
@@ -71,17 +65,9 @@
           </mat-cell>
         </ng-container>
 
-        <!-- Column -->
-        <!--<ng-container matColumnDef="status">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
-        </ng-container>-->
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
       </mat-table>
-
-      <mat-paginator #paginator [pageSize]="4" [showFirstLastButtons]="true"> </mat-paginator>
+      <mat-paginator style="background-color: #eee;" #paginator [pageSize]="4" [showFirstLastButtons]="true"> </mat-paginator>
 
     </div>
 
