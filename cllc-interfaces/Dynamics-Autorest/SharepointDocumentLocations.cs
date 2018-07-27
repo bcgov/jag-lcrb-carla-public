@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// AdoxioTiedhouseconnections operations.
+    /// SharepointDocumentLocations operations.
     /// </summary>
-    public partial class AdoxioTiedhouseconnections : IServiceOperations<DynamicsClient>, IAdoxioTiedhouseconnections
+    public partial class SharepointDocumentLocations : IServiceOperations<DynamicsClient>, ISharepointDocumentLocations
     {
         /// <summary>
-        /// Initializes a new instance of the AdoxioTiedhouseconnections class.
+        /// Initializes a new instance of the SharepointDocumentLocations class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AdoxioTiedhouseconnections(DynamicsClient client)
+        public SharepointDocumentLocations(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get entities from adoxio_tiedhouseconnections
+        /// Get entities from sharepointdocumentlocations
         /// </summary>
         /// <param name='top'>
         /// Show only the first n items
@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -110,7 +110,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "sharepointdocumentlocations").ToString();
             List<string> _queryParameters = new List<string>();
             if (top != null)
             {
@@ -220,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModel>();
+            var _result = new HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModelModelModelModel>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -229,7 +229,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseModelModelModelModelModelModelModel>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<GetOKResponseModelModelModelModelModelModelModelModelModelModel>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -249,7 +249,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Add new entity to adoxio_tiedhouseconnections
+        /// Add new entity to sharepointdocumentlocations
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -279,7 +279,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioTiedhouseconnection body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocation>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -292,14 +292,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("body", body);
                 tracingParameters.Add("prefer", prefer);
+                tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Create", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "sharepointdocumentlocations").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocation>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioTiedhouseconnection>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMsharepointdocumentlocation>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -415,10 +415,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Delete entity from adoxio_tiedhouseconnections
+        /// Delete entity from sharepointdocumentlocations
         /// </summary>
-        /// <param name='adoxioTiedhouseconnectionid'>
-        /// key: adoxio_tiedhouseconnectionid
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -441,11 +441,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string sharepointdocumentlocationid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioTiedhouseconnectionid == null)
+            if (sharepointdocumentlocationid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioTiedhouseconnectionid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "sharepointdocumentlocationid");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -454,15 +454,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioTiedhouseconnectionid", adoxioTiedhouseconnectionid);
+                tracingParameters.Add("sharepointdocumentlocationid", sharepointdocumentlocationid);
                 tracingParameters.Add("ifMatch", ifMatch);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Delete", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections({adoxio_tiedhouseconnectionid})").ToString();
-            _url = _url.Replace("{adoxio_tiedhouseconnectionid}", System.Uri.EscapeDataString(adoxioTiedhouseconnectionid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "sharepointdocumentlocations({sharepointdocumentlocationid})").ToString();
+            _url = _url.Replace("{sharepointdocumentlocationid}", System.Uri.EscapeDataString(sharepointdocumentlocationid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -554,10 +554,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get entity from adoxio_tiedhouseconnections by key
+        /// Get entity from sharepointdocumentlocations by key
         /// </summary>
-        /// <param name='adoxioTiedhouseconnectionid'>
-        /// key: adoxio_tiedhouseconnectionid
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -586,11 +586,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>> GetByKeyWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocation>> GetByKeyWithHttpMessagesAsync(string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioTiedhouseconnectionid == null)
+            if (sharepointdocumentlocationid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioTiedhouseconnectionid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "sharepointdocumentlocationid");
             }
             if (select != null)
             {
@@ -613,7 +613,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioTiedhouseconnectionid", adoxioTiedhouseconnectionid);
+                tracingParameters.Add("sharepointdocumentlocationid", sharepointdocumentlocationid);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -621,8 +621,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections({adoxio_tiedhouseconnectionid})").ToString();
-            _url = _url.Replace("{adoxio_tiedhouseconnectionid}", System.Uri.EscapeDataString(adoxioTiedhouseconnectionid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "sharepointdocumentlocations({sharepointdocumentlocationid})").ToString();
+            _url = _url.Replace("{sharepointdocumentlocationid}", System.Uri.EscapeDataString(sharepointdocumentlocationid));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -708,7 +708,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseconnection>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocation>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -717,7 +717,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMadoxioTiedhouseconnection>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMsharepointdocumentlocation>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -737,10 +737,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Update entity in adoxio_tiedhouseconnections
+        /// Update entity in sharepointdocumentlocations
         /// </summary>
-        /// <param name='adoxioTiedhouseconnectionid'>
-        /// key: adoxio_tiedhouseconnectionid
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -763,11 +763,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, MicrosoftDynamicsCRMadoxioTiedhouseconnection body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (adoxioTiedhouseconnectionid == null)
+            if (sharepointdocumentlocationid == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "adoxioTiedhouseconnectionid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "sharepointdocumentlocationid");
             }
             if (body == null)
             {
@@ -780,15 +780,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("adoxioTiedhouseconnectionid", adoxioTiedhouseconnectionid);
+                tracingParameters.Add("sharepointdocumentlocationid", sharepointdocumentlocationid);
                 tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Update", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_tiedhouseconnections({adoxio_tiedhouseconnectionid})").ToString();
-            _url = _url.Replace("{adoxio_tiedhouseconnectionid}", System.Uri.EscapeDataString(adoxioTiedhouseconnectionid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "sharepointdocumentlocations({sharepointdocumentlocationid})").ToString();
+            _url = _url.Replace("{sharepointdocumentlocationid}", System.Uri.EscapeDataString(sharepointdocumentlocationid));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -870,6 +870,153 @@ namespace Gov.Lclb.Cllb.Interfaces
             var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Invoke function RetrieveAbsoluteAndSiteCollectionUrl
+        /// </summary>
+        /// <param name='entity'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="OdataerrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse>> RetrieveAbsoluteAndSiteCollectionUrlWithHttpMessagesAsync(string entity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (entity == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "entity");
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("entity", entity);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "RetrieveAbsoluteAndSiteCollectionUrl", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "sharepointdocumentlocations({sharepointdocumentlocationid})/RetrieveAbsoluteAndSiteCollectionUrl(entity={entity})").ToString();
+            _url = _url.Replace("{entity}", System.Uri.EscapeDataString(entity));
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+
+
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            // Set Credentials
+            if (Client.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            }
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200)
+            {
+                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
+                    if (_errorBody != null)
+                    {
+                        ex.Body = _errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse>(_responseContent, Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
