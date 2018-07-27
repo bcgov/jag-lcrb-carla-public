@@ -59,11 +59,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 		public bool isPaid { get; set; }
 		public bool prevPaymentFailed { get; set; }
         public DateTimeOffset? paymentreceiveddate { get; set; }
+        public DateTimeOffset? modifiedOn { get; set; }
 
         public DateTimeOffset? createdon { get; set; }
         public DateTimeOffset? modifiedon { get; set; }
 
 
         public ViewModels.Account applicant { get; set; }
+    
+
     }
 }
