@@ -12,24 +12,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of legal entities
+    /// Collection of sharepointdocumentlocations
     /// </summary>
-    public partial class GetOKResponseModelModelModel
+    public partial class GetOKResponseModelModelModelModelModelModelModelModelModelModel
     {
         /// <summary>
-        /// Initializes a new instance of the GetOKResponseModelModelModel
+        /// Initializes a new instance of the
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModel
         /// class.
         /// </summary>
-        public GetOKResponseModelModelModel()
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModel()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the GetOKResponseModelModelModel
+        /// Initializes a new instance of the
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModel
         /// class.
         /// </summary>
-        public GetOKResponseModelModelModel(IList<MicrosoftDynamicsCRMadoxioLegalentity> value = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMsharepointdocumentlocation> value = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioLegalentity> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> Value { get; set; }
 
     }
 }

@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetEstablishment(string id)
+        public IActionResult GetEstablishment(string id)
         {
 
             Guid adoxio_establishment_id;
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // get the establishment
-            var establishment = await _dynamicsClient.GetEstablishmentById(adoxio_establishment_id);
+            var establishment = _dynamicsClient.GetEstablishmentById(adoxio_establishment_id);
             if (establishment == null)
             {
                 return new NotFoundResult();
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the legal entity.
             Guid adoxio_establishmentid = GuidUtility.SafeGuidConvert(id);
 
-            MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = await _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
+            MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
             if (adoxioEstablishment == null)
             {
                 return new NotFoundResult();
@@ -130,7 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                adoxioEstablishment = await _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
+                adoxioEstablishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
             }
             catch (OdataerrorException odee)
             {
@@ -155,7 +155,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get the legal entity.
             Guid adoxio_establishmentid = new Guid(id);
-            MicrosoftDynamicsCRMadoxioEstablishment establishment = await _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
+            MicrosoftDynamicsCRMadoxioEstablishment establishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
             if (establishment == null)
             {
                 return new NotFoundResult();

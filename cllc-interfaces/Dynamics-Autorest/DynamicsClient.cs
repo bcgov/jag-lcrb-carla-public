@@ -51,6 +51,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplications Applications { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishments.
+        /// </summary>
+        public virtual IEstablishments Establishments { get; private set; }
+
+        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
@@ -86,9 +91,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvoices Invoices { get; private set; }
 
         /// <summary>
-        /// Gets the IEstablishment
+        /// Gets the ISharepointDocumentLocations.
         /// </summary>
-        public virtual IEstablishments Establishments { get; private set; }
+        public virtual ISharepointDocumentLocations SharepointDocumentLocations { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -293,6 +298,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Accounts = new Accounts(this);
             Applications = new Applications(this);
+            Establishments = new Establishments(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
             Licenses = new Licenses(this);
@@ -300,8 +306,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
             Contacts = new Contacts(this);
             Invoices = new Invoices(this);
-            Establishments = new Establishments(this);
-
+            SharepointDocumentLocations = new SharepointDocumentLocations(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

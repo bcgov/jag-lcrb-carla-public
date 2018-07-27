@@ -7,7 +7,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { MatSnackBar } from '@angular/material';
 import * as currentApplicationActions from '../../app-state/actions/current-application.action';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdoxioApplicationDataService } from '../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../services/payment-data.service';
 
@@ -24,10 +24,12 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   applicationId: string;
   busy: Subscription;
   accountId: string;
+  payMethod: string;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
+    public router: Router,
     private applicationDataService: AdoxioApplicationDataService,
     private route: ActivatedRoute,
     private fb: FormBuilder) {
@@ -72,7 +74,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  anDeactivate(): Observable<boolean> | boolean {
+  canDeactivate(): Observable<boolean> | boolean {
     if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
@@ -93,12 +95,12 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Store Information has been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
         }
       },
       err => {
         saveResult.next(false);
-        this.snackBar.open('Error saving Store Information', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
         console.log('Error occured');
       });
 
