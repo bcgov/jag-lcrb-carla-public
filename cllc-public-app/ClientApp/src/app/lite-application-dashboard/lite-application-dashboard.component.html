@@ -6,11 +6,12 @@
   <!--display application in progress or submitted base on input parameter-->
   <div *ngIf="applicationInProgress" class="dashboard-title">
 
-    <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
-      No applications in progress
-    </div>
+    <!--<div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
+    No applications in progress
+    </div>-->
 
-    <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
+    <!--<div *ngIf="dataSource.data.length > 0" class="dashboard-content">-->
+    <div class="dashboard-content">
 
       <mat-table class="mat-elevation-z0" #table [dataSource]="dataSource">
 
