@@ -356,6 +356,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
+                // get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+                Guid adoxio_legalentityid = new Guid(id);
+                MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+                //prevent getting legal entity data if the user is not associated with the account
+                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+                {
+                    return new NotFoundResult();
+                }
+
                 var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
                 if (result)
                 {
@@ -366,8 +378,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        [HttpPost("{accountId}/attachments")]
-        public async Task<IActionResult> UploadFile([FromRoute] string accountId, [FromForm]IFormFile file, [FromForm] string documentType)
+        [HttpPost("{id}/attachments")]
+        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file, [FromForm] string documentType)
         {
             ViewModels.FileSystemItem result = null;
             // get the LegalEntity.
@@ -379,9 +391,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check that the session is setup correctly.
             userSettings.Validate();
 
-            if (accountId != null)
+            Guid adoxio_legalentityid = new Guid(id);
+            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+            //prevent getting legal entity data if the user is not associated with the account
+            if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
             {
-                var accountIdGUID = Guid.Parse(accountId);
+                return new NotFoundResult();
+            }
+
+            if (id != null)
+            {
+                var accountIdGUID = Guid.Parse(adoxioLegalEntity._adoxioAccountValue);
                 var account = await _dynamicsClient.GetAccountById(accountIdGUID);
 
                 if (account == null)
@@ -417,6 +437,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
+                // get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+                Guid adoxio_legalentityid = new Guid(id);
+                MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+                //prevent getting legal entity data if the user is not associated with the account
+                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+                {
+                    return new NotFoundResult();
+                }
+
                 var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
                 if (fileSystemItem != null)
                 {
