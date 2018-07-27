@@ -1,30 +1,5 @@
 <div class="">
   <h1>Dashboard</h1>
-  <app-lite-application-dashboard></app-lite-application-dashboard>
-  <section>
-    <label>
-      Upload the completed form here.
-    </label>
-  </section>
-  <p></p>
-  <section>
-    <app-file-uploader *ngIf="currentUser" documentType="Licence Application" [accountId]="currentUser.accountid"></app-file-uploader>
-  </section>
-
-  <h2>Application Fee: $7,500</h2>
-  <p>Payment types accepted:</p>
-  <ul>
-    <li>Visa</li>
-    <li>MasterCard</li>
-    <li>American Express</li>
-    <li>Visa Debit</li>
-    <li>Debit MasterCard</li>
-  </ul>
-
-  <div *ngIf="!isPaid">
-    <a class="globalButton btn btn-primary" tabindex="2" (click)="verify_payment()"><strong>Verify Payment</strong></a>
-  </div>
-
-
-
+  <app-lite-application-dashboard [applicationInProgress]="true"></app-lite-application-dashboard>
+  <app-lite-application-dashboard [applicationInProgress]="false"></app-lite-application-dashboard>
 </div>
