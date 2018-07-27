@@ -1,0 +1,35 @@
+<div class="body">
+  <section>
+    <h1>Terms and Conditions</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus
+      accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
+      pronin sapien nunc accuan eget.
+    </p>
+    <h1>Subheader</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus
+      accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
+      pronin sapien nunc accuan eget.
+    </p>
+    <h1>Subheader</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus
+      accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
+      pronin sapien nunc accuan eget.
+    </p>
+
+  </section>
+  <section>
+    <input type="checkbox" [checked]="termsAccepted" (change)="termsAccepted = !termsAccepted" />&nbsp;I have read and accept the above terms and conditions.
+    <br>
+  </section>
+  <section class="buttons">
+    <span *ngIf="termsAccepted"><a class="globalButton" class="btn btn-primary" tabindex="3" href="login">Continue</a>&nbsp;</span>
+    <span *ngIf="!termsAccepted"><a class="globalButton" class="btn btn-primary" tabindex="3">Continue</a>&nbsp;</span>
+    <a href="" tabindex="1">Cancel and Exit</a>
+  </section>
+</div>

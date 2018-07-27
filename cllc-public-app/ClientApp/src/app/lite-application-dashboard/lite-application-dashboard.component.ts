@@ -65,4 +65,8 @@ export class LiteApplicationDashboardComponent implements OnInit {
       });
   }
 
+  downloadApplicationPDF(id: string) {
+    debugger;
+  }
+
 }

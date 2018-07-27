@@ -25,6 +25,10 @@ mat-header-row {
   background-color: rgba(56, 89, 138, 1);
 }
 
+.grey-background {
+  background-color: #eee;
+}
+
 .mat-header-cell{
   color: #fff;
 }
@@ -47,4 +51,10 @@ mat-header-row {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+hr.style-one {
+  border: 0;
+  height: 1px;
+  background: #333;
 }
