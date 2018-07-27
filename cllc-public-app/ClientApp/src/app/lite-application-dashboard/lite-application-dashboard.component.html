@@ -1,0 +1,94 @@
+<div *ngIf="dataLoaded">
+
+  <!--display spiiner if data no loaded-->
+  <div [ngBusy]="busy"></div>
+
+  <!--display application in progress or submitted base on input parameter-->
+  <div *ngIf="applicationInProgress" class="dashboard-title">
+
+    <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
+      No applications in progress
+    </div>
+
+    <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
+
+      <h2>Applications In Progress</h2>
+
+      <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
+
+        <!-- Column -->
+        <ng-container matColumnDef="establishmentName">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> LAST UPDATED </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.paymentreceiveddate | date:'mediumDate'}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a routerLink="/application-lite/{{element.id}}" skipLocationChange>{{element.establishmentName}} (Ref. {{element.name}})</a>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a routerLink="/application-lite/{{element.id}}" skipLocationChange>Cancel Application</a>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="!applicationInProgress" class="dashboard-title">
+    
+    <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
+      No submitted applications
+    </div>
+
+    <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
+
+      <h2>My Submitted Applications</h2>
+
+      <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
+
+        <!-- Column -->
+        <!--<ng-container matColumnDef="establishmentName">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
+    </ng-container>-->
+        <!-- Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a routerLink="/application-lite/{{element.id}}" skipLocationChange>{{element.establishmentName}}</a>
+            <br />
+            Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
+            <br />
+            Ref. {{element.name}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <!--<ng-container matColumnDef="status">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    </ng-container>-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <mat-paginator #paginator [pageSize]="4" [showFirstLastButtons]="true"> </mat-paginator>
+
+    </div>
+
+  </div>
+
+</div>

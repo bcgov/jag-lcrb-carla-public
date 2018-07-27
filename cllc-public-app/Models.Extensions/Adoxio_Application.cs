@@ -113,6 +113,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             //get additional property info
             adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
 
+            //get payment info
             if (dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.Yes;
@@ -124,8 +125,9 @@ namespace Gov.Lclb.Cllb.Public.Models
 				adoxioApplicationVM.isSubmitted = false;
 			}
 			adoxioApplicationVM.adoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue;
-
-			adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
+            //TODO set in autorest
+            adoxioApplicationVM.paymentreceiveddate = DateTime.Now; //dynamicsApplication.AdoxioPaymentreceiveddate;
+            adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
 
             //get declarations
             adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
