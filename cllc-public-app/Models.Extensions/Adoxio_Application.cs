@@ -139,6 +139,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioApplicationVM.contactpersonrole = dynamicsApplication.AdoxioRole;
             adoxioApplicationVM.contactpersonemail = dynamicsApplication.AdoxioEmail;
             adoxioApplicationVM.contactpersonphone = dynamicsApplication.AdoxioContactpersonphone;
+            
+            adoxioApplicationVM.modifiedOn = dynamicsApplication.Modifiedon;
 
             //get record audit info
             adoxioApplicationVM.createdon = dynamicsApplication.Createdon; 

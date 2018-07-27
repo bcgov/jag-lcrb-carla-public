@@ -123,6 +123,7 @@ import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.componen
 import { ClientConfigDataService } from './services/client-config.service';
 import { ApplicationComponent } from './lite/application/application.component';
 import { LiteApplicationDashboardComponent } from './lite-application-dashboard/lite-application-dashboard.component';
+import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -177,7 +178,8 @@ import { LiteApplicationDashboardComponent } from './lite-application-dashboard/
     SubmitPayComponent,
     DashboardLiteComponent,
     ApplicationComponent,
-    LiteApplicationDashboardComponent
+    LiteApplicationDashboardComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     BrowserModule,
