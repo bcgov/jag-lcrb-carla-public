@@ -208,7 +208,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Accounts.GetByKeyAsync(id.ToString());
             }            
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -220,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result.Primarycontactid = await system.GetContactById(Guid.Parse(result._primarycontactidValue));
                 }
-                catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+                catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
                 {
                     result.Primarycontactid = null;
                 }
@@ -243,7 +243,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Invoices.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -259,7 +259,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Adoxiolegalentities.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -274,7 +274,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.AdoxioTiedhouseconnections.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -290,7 +290,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Contacts.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -307,7 +307,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioLicencetypeValue != null)
                 {
-                    result.AdoxioLicenceType = await system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));                    
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));                    
                 }
 
                 if (result._adoxioApplicantValue != null)
@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
                 }
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -348,7 +348,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 
 
-        public static async Task<MicrosoftDynamicsCRMadoxioLicencetype> GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
+        public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
         {
             MicrosoftDynamicsCRMadoxioLicencetype result = null;
 
@@ -356,7 +356,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = _dynamicsClient.AdoxioLicencetypes.GetByKey(id.ToString());
             }
-            catch (OdataerrorException dsqe)
+            catch (OdataerrorException)
             {
                 result = null;
             }
@@ -365,7 +365,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
-        public static async Task<MicrosoftDynamicsCRMadoxioEstablishment> GetEstablishmentById(this IDynamicsClient _dynamicsClient, Guid id)
+        public static MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(this IDynamicsClient _dynamicsClient, Guid id)
         {
             MicrosoftDynamicsCRMadoxioEstablishment result = null;
 
@@ -373,7 +373,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = _dynamicsClient.Establishments.GetByKey(id.ToString());
             }
-            catch (OdataerrorException dsqe)
+            catch (OdataerrorException)
             {
                 result = null;
             }

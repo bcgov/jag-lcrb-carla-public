@@ -253,27 +253,34 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = randomNewUserName("LETest InitialName", 6);
             string changedName = randomNewUserName("LETest ChangedName", 6);
-            string service = "adoxiolegalentity";
+            string service = "adoxioapplication";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             ViewModels.User user = await GetCurrentUser();
+
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-
-            MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity = new MicrosoftDynamicsCRMadoxioLegalentity()
+            ViewModels.Account currentAccount1 = await GetAccountForCurrentUser();
+            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
             {
-                AdoxioLegalentityid = Guid.NewGuid().ToString(),
-                AdoxioLegalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                AdoxioPosition = (int?)ViewModels.PositionOptions.Director,
-                AdoxioName = initialName
+                name = initialName,
+                applyingPerson = "Applying Person",
+                applicant = currentAccount1,
+                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
+                ,
+                jobNumber = "123",
+                licenseType = "Cannabis Retail Store",
+                establishmentName = "Private Retail Store",
+                establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
+                establishmentaddressstreet = "666 Any Street",
+                establishmentaddresscity = "Victoria, BC",
+                establishmentaddresspostalcode = "V1X 1X1",
+                applicationStatus = AdoxioApplicationStatusCodes.Active
             };
 
-            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
-
-            string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_legalentity);
-
+            var jsonString = JsonConvert.SerializeObject(viewmodel_application);
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
             var response = await _client.SendAsync(request);
@@ -281,10 +288,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
-
-            // name should match.
-            Assert.Equal(initialName, responseViewModel.name);
+            ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+            
             string id = responseViewModel.id;
 
             // Attach a file
@@ -313,10 +318,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(fileContent);
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
-            string accountId = user.accountid;
+            string applicationId = responseViewModel.id;
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + accountId + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + applicationId + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);

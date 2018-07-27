@@ -151,15 +151,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (odee);
             }
 
+
+
             MicrosoftDynamicsCRMadoxioApplication patchAdoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
 
-            // set license type relationship
+            // set license type relationship 
 
             try
             {
                 var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
                 patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
                 patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
+                //patchAdoxioApplication.AdoxioApplicationSharePointDocumentLocationsODataBind = sharePointLocationData;
                 _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
             }
             catch (OdataerrorException odee)
@@ -172,6 +175,58 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fail if we can't create.
                 throw (odee);
             }
+
+            // create a SharePointDocumentLocation link
+
+            var applicationIdCleaned = adoxioApplication.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
+            string folderName = $"{adoxioApplication.AdoxioJobnumber}_{applicationIdCleaned}";
+            string absoluteUrl = _sharePointFileManager.NativeBaseUri + _sharePointFileManager.GetServerRelativeURL(
+                ApplicationDocumentListTitle, folderName);
+
+            string name = adoxioApplication.AdoxioJobnumber + " Files";
+
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Absoluteurl = absoluteUrl,
+                Description = "Application Files",
+                Name = name
+            };
+
+            try
+            {
+                mdcsdl = _dynamicsClient.SharepointDocumentLocations.Create(mdcsdl);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error creating SharepointDocumentLocation");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                mdcsdl = null;    
+            }
+            if (mdcsdl != null)
+            {
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+                // update the sharePointLocationData.
+                Odataid oDataId = new Odataid()
+                {
+                    OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Applications.AddReference(adoxioApplication.AdoxioApplicationid, "adoxio_application_SharePointDocumentLocations");
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error creating SharepointDocumentLocation");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+            }            
+
             return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
             
         }
@@ -280,6 +335,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
+                
+                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                {
+                    return new NotFoundResult();
+                }
+
                 string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
                 var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
                 // Dynamics code for the name is {Code(Licence Type (Licence Type))} - {Business Type(Application)} - {Job Number(Application)} 
@@ -303,12 +364,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> DownloadFile([FromRoute] string id, [FromRoute] string fileId)
         {
             // get the file.
-            if (fileId == null)
+            if (string.IsNullOrEmpty(fileId) || string.IsNullOrEmpty(id))
             {
                 return BadRequest();
             }
             else
             {
+
+                // get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                // check that the session is setup correctly.
+                userSettings.Validate();
+
+                // validate that the user account id matches the applicant for this application
+                var applicationGUID = Guid.Parse(id);
+                var application = await _dynamicsClient.GetApplicationById(applicationGUID);
+
+                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                {
+                    return new NotFoundResult();
+                }
 
                 var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
                 if (fileSystemItem != null)
@@ -401,16 +477,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id">Application ID</param>
         /// <param name="serverRelativeUrl">The ServerRelativeUrl to delete</param>
         /// <returns></returns>
-        [HttpDelete("{id}/attachments")]
-        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string id)
+        [HttpDelete("{applicationId}/attachments")]
+        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string applicationId)
         {
             // get the file.
-            if (id == null || serverRelativeUrl == null)
+            if (applicationId == null || serverRelativeUrl == null)
             {
                 return BadRequest();
             }
             else
             {
+                // get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                // check that the session is setup correctly.
+                userSettings.Validate();
+
+                // validate that the user account id matches the applicant for this application
+                var applicationGUID = new Guid(applicationId);
+                var application = await _dynamicsClient.GetApplicationById(applicationGUID);
+
+                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                {
+                    return new NotFoundResult();
+                }
+
+
                 var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
                 if (result)
                 {

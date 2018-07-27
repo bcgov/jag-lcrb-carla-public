@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (dynamicsApplication._adoxioLicencetypeValue != null)
             {
                 Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
-				var adoxio_licencetype = await dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
+				var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
                 adoxioApplicationVM.licenseType = adoxio_licencetype.AdoxioName;
             }
 
