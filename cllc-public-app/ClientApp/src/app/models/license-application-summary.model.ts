@@ -6,4 +6,6 @@ export class LicenseApplicationSummary {
   licenseType: string;
   licenseNumber: string;
   name: string;
+  isPaid: boolean;
+  paymentreceiveddate: Date;
 }
