@@ -357,6 +357,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     throw (odee);
                 }     
 
+                
+                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                {
+                    return new NotFoundResult();
+                }
+
                 string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
                 var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
                 // Dynamics code for the name is {Code(Licence Type (Licence Type))} - {Business Type(Application)} - {Job Number(Application)} 
@@ -386,6 +392,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
+
+                // get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                // check that the session is setup correctly.
+                userSettings.Validate();
+
+                // validate that the user account id matches the applicant for this application
+                var applicationGUID = Guid.Parse(id);
+                var application = await _dynamicsClient.GetApplicationById(applicationGUID);
+
+                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                {
+                    return new NotFoundResult();
+                }
 
                 // get the current user.
                 string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
