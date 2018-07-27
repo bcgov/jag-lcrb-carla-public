@@ -1,7 +1,7 @@
-<div *ngIf="dataLoaded">
+<!--display spiiner if data no loaded-->
+<div [ngBusy]="busy"></div>
 
-  <!--display spiiner if data no loaded-->
-  <div [ngBusy]="busy"></div>
+<div *ngIf="dataLoaded">
 
   <!--display application in progress or submitted base on input parameter-->
   <div *ngIf="applicationInProgress" class="dashboard-title">
@@ -47,7 +47,7 @@
   </div>
 
   <div *ngIf="!applicationInProgress" class="dashboard-title">
-    
+
     <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
       No submitted applications
     </div>
@@ -60,9 +60,9 @@
 
         <!-- Column -->
         <!--<ng-container matColumnDef="establishmentName">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
-    </ng-container>-->
+          <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
+        </ng-container>-->
         <!-- Column -->
         <ng-container matColumnDef="name">
           <mat-header-cell mat-sort-header *matHeaderCellDef> </mat-header-cell>
@@ -77,9 +77,9 @@
 
         <!-- Column -->
         <!--<ng-container matColumnDef="status">
-      <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
-    </ng-container>-->
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>-->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
