@@ -38,6 +38,8 @@ export class LiteApplicationDashboardComponent implements OnInit {
           licAppSum.status = entry.applicationStatus;
           licAppSum.isPaid = entry.isPaid;
           licAppSum.paymentreceiveddate = entry.paymentreceiveddate;
+          licAppSum.createdon = entry.createdon;
+          licAppSum.modifiedon = entry.modifiedon;
           // Applications in progress display the ones not paid
           // Applications submitted display the ones paid
           if (this.applicationInProgress) {
@@ -51,7 +53,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
           }
         });
         if (this.applicationInProgress) {
-          this.displayedColumns = ['establishmentName', 'name', 'status'];
+          this.displayedColumns = ['lastUpdated', 'establishmentName', 'status'];
         } else {
           this.displayedColumns = ['name'];
         }
