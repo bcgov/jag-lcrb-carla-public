@@ -271,10 +271,11 @@ a:active {
     display: flex;
     flex: 1 0 auto;
     flex-flow: row nowrap;
-    width: 99%;
-    max-width: 1600px;
-    // min-width: 910px;
-    margin: auto;
+    padding-right: 60px !important;
+    // width: 99%;
+    // max-width: 1600px;
+    // // min-width: 910px;
+    // margin: auto;
 }
 
 .top-menu{
