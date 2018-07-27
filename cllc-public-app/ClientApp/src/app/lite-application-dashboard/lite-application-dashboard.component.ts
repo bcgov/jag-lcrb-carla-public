@@ -18,7 +18,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
   //displayedColumns = ['name', 'establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
   displayedColumns = ['establishmentName', 'name', 'status'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
-  //@ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
 
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService) { }
@@ -59,6 +59,9 @@ export class LiteApplicationDashboardComponent implements OnInit {
         }
         this.dataSource.data = licenseApplicationSummary;
         this.dataLoaded = true;
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        });
       });
   }
 
