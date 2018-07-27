@@ -1,13 +1,55 @@
-<div class="col-md-8 col-xs-12">
+<div style="padding-left: 50px;">
   <h1>Welcome to Cannabis Licensing</h1>
-  <p>A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.  Begin by selecting your organization type below.</p>
+  <div class="row">
+    <div class="col-md-7">
+      <p>A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.
+        Begin by selecting your organization type below.</p>
 
-  <h2>Download the Application Form</h2>
-  <p>Identify your type of organization to download the Application package.</p>
+      <h2>Download the Application Form</h2>
+      <p>Identify your type of organization to download the Application package.</p>
+      <select class="form-control" style="width: 300px;" [(ngModel)]="orgType">
+        <option value="">Choose your organization type</option>
+        <option value="Private Corporation">Private Corporation</option>
+        <option value="Public Corporation">Public Corporation</option>
+        <option value="Unlimited Liability Corporation">Unlimited Liability Corporation</option>
+        <option value="Limited Liability Corporation">Limited Liability Corporation</option>
+        <option value="Partnership">Partnership</option>
+        <option value="Sole Proprietor">Sole Proprietor</option>
+        <option value="Other">Other</option>
+      </select>
+      <p></p>
 
-  <h2>Submit Your Application</h2>
-  <p>Once you have downloaded the correct application form for your organization and completed it, you may proceed to submit your application by clicking Ready to Submit.</p>
+      <section *ngIf="orgType">
+        <p>
+          The checklist below will outline all the documents that need to be submitted by a {{orgType}}
+        </p>
+        <button class="btn btn-primary">DOWNLOAD APPLICATION FORM</button>
+        <p></p>
+      </section>
 
-  <app-lite-application-dashboard [applicationInProgress]="true"></app-lite-application-dashboard>
-  <app-lite-application-dashboard [applicationInProgress]="false"></app-lite-application-dashboard>
+      <h2>Applications In Progress</h2>
+      <app-lite-application-dashboard [applicationInProgress]="true"></app-lite-application-dashboard>
+    </div>
+    <div class="col-md-4">
+      <section>
+        <div class="submit-header">
+          <h2>Submit Your Application</h2>
+        </div>
+        <div class="submit-content">
+          <p>Once you have downloaded the correct application form for your organization and completed it, you may proceed to
+            submit your application by clicking Ready to Submit.</p>
+          <button class="btn btn-primary" (click)="startNewLicenceApplication()">READY TO SUBMIT</button>
+        </div>
+      </section>
+      <section>
+        <div class="submit-header">
+          <h2>My Submitted Applicaitons</h2>
+        </div>
+        <div class="submit-content">
+          <app-lite-application-dashboard [applicationInProgress]="false"></app-lite-application-dashboard>
+        </div>
+      </section>
+
+    </div>
+  </div>
 </div>
