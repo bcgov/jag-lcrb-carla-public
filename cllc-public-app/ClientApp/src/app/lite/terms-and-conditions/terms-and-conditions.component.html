@@ -28,7 +28,8 @@
     <br>
   </section>
   <section class="buttons">
-    <a class="globalButton" class="btn btn-primary" tabindex="3" href="login">Continue</a>&nbsp;
+    <span *ngIf="termsAccepted"><a class="globalButton" class="btn btn-primary" tabindex="3" href="login">Continue</a>&nbsp;</span>
+    <span *ngIf="!termsAccepted"><a class="globalButton" class="btn btn-primary" tabindex="3">Continue</a>&nbsp;</span>
     <a href="" tabindex="1">Cancel and Exit</a>
   </section>
 </div>
