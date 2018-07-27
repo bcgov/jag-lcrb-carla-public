@@ -12,8 +12,6 @@
 
     <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
 
-      <h2>Applications In Progress</h2>
-
       <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
         <!-- Column -->
@@ -46,15 +44,13 @@
 
   </div>
 
-  <div *ngIf="!applicationInProgress" class="dashboard-title">
+  <div *ngIf="!applicationInProgress">
 
-    <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
+    <div *ngIf="dataSource.data && dataSource.data.length == 0">
       No submitted applications
     </div>
 
     <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
-
-      <h2>My Submitted Applications</h2>
 
       <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
