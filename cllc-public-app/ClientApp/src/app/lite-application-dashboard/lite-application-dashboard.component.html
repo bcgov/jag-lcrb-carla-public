@@ -17,13 +17,13 @@
       <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
         <!-- Column -->
-        <ng-container matColumnDef="establishmentName">
+        <ng-container matColumnDef="lastUpdated">
           <mat-header-cell mat-sort-header *matHeaderCellDef> LAST UPDATED </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.paymentreceiveddate | date:'mediumDate'}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.modifiedon | date:'mediumDate'}} </mat-cell>
         </ng-container>
 
         <!-- Column -->
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="establishmentName">
           <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <a routerLink="/application-lite/{{element.id}}" skipLocationChange>{{element.establishmentName}} (Ref. {{element.name}})</a>

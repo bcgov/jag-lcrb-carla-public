@@ -8,4 +8,6 @@ export class LicenseApplicationSummary {
   name: string;
   isPaid: boolean;
   paymentreceiveddate: Date;
+  createdon: Date;
+  modifiedon: Date;
 }
