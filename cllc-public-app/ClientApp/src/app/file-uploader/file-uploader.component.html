@@ -2,9 +2,9 @@
   <p></p>
   <file-drop (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
     <div>
-      <h3 style="text-align: center">Upload Files</h3>
-      <span>Drop your files here or &nbsp;</span>
-      <button class="btn btn-primary" (click)="fileBrowser.click()">browse for files</button>
+      <h3 style="text-align: center"></h3>
+      <span>TO UPLOAD DOCUMENTS DRAG FILE(S) HERE OR </span>
+      <a href="javascript:void(0)" (click)="fileBrowser.click()">BROWSE</a>
       <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowser>
     </div>
   </file-drop>
