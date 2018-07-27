@@ -12,10 +12,11 @@ import { LicenseApplicationSummary } from '../models/license-application-summary
 export class LiteApplicationDashboardComponent implements OnInit {
 
   busy: Subscription;
-  @Input() applicationSubmitted: boolean;
+  @Input() applicationInProgress: boolean;
+  dataLoaded: boolean = false;
 
   //displayedColumns = ['name', 'establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
-  displayedColumns = ['name', 'establishmentName', 'status'];
+  displayedColumns = ['establishmentName', 'name', 'status'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
   //@ViewChild(MatPaginator) paginator: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
@@ -35,10 +36,27 @@ export class LiteApplicationDashboardComponent implements OnInit {
           licAppSum.establishmentAddress = entry.establishmentAddress;
           licAppSum.licenseType = entry.licenseType;
           licAppSum.status = entry.applicationStatus;
-          licAppSum.applicationSubmitDate = entry.applicationSubmitDate;
-          licenseApplicationSummary.push(licAppSum);
+          licAppSum.isPaid = entry.isPaid;
+          licAppSum.paymentreceiveddate = entry.paymentreceiveddate;
+          // Applications in progress display the ones not paid
+          // Applications submitted display the ones paid
+          if (this.applicationInProgress) {
+            if (!licAppSum.isPaid) {
+              licenseApplicationSummary.push(licAppSum);
+            }
+          } else {
+            if (licAppSum.isPaid) {
+              licenseApplicationSummary.push(licAppSum);
+            }
+          }
         });
+        if (this.applicationInProgress) {
+          this.displayedColumns = ['establishmentName', 'name', 'status'];
+        } else {
+          this.displayedColumns = ['name'];
+        }
         this.dataSource.data = licenseApplicationSummary;
+        this.dataLoaded = true;
       });
   }
 
