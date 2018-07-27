@@ -90,27 +90,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </return>
         public async Task<HttpOperationResponse<GetOKResponseModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (orderby != null)
-            {
-                if (orderby.Count != orderby.Distinct().Count())
-                {
-                    throw new ValidationException(ValidationRules.UniqueItems, "orderby");
-                }
-            }
-            if (select != null)
-            {
-                if (select.Count != select.Distinct().Count())
-                {
-                    throw new ValidationException(ValidationRules.UniqueItems, "select");
-                }
-            }
-            if (expand != null)
-            {
-                if (expand.Count != expand.Distinct().Count())
-                {
-                    throw new ValidationException(ValidationRules.UniqueItems, "expand");
-                }
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -313,8 +292,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("prefer", prefer);
                 tracingParameters.Add("body", body);
+                tracingParameters.Add("prefer", prefer);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Create", tracingParameters);
             }
@@ -612,20 +591,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (adoxioEstablishmentid == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "adoxioEstablishmentid");
-            }
-            if (select != null)
-            {
-                if (select.Count != select.Distinct().Count())
-                {
-                    throw new ValidationException(ValidationRules.UniqueItems, "select");
-                }
-            }
-            if (expand != null)
-            {
-                if (expand.Count != expand.Distinct().Count())
-                {
-                    throw new ValidationException(ValidationRules.UniqueItems, "expand");
-                }
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
