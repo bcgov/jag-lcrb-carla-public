@@ -408,21 +408,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
-                // get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-                // check that the session is setup correctly.
-                userSettings.Validate();
-
-                // validate that the user account id matches the applicant for this application
-                var applicationGUID = Guid.Parse(id);
-                var application = await _dynamicsClient.GetApplicationById(applicationGUID);
-
-                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
-                {
-                    return new NotFoundResult();
-                }
-
                 var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
                 if (fileSystemItem != null)
                 {
