@@ -14,10 +14,9 @@
   <h2 style="padding-left: 0;">{{title}}</h2>
   <h3 style="padding-left: 0;">{{description}}</h3>
   <!-- <mat-form-field class="emailSignupForm"> -->
-  <div style="display: flex;">
+  <div class="email-field">
 
     <input class="form-control" style="flex: 1 0;" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email" tabindex="3">
-    &nbsp;
     <!--<mat-hint>Errors appear instantly!</mat-hint>-->
     <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
         Please enter a valid email address
