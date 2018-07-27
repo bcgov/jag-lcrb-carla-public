@@ -40,8 +40,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
     }
-
-
     public class ClientConfig {
         public bool IsLiteVersion { get; set; }
         public bool ShowLogin { get; set; }
