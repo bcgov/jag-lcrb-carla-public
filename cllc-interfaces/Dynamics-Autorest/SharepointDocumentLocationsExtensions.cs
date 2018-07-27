@@ -13,12 +13,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for Licenses.
+    /// Extension methods for SharepointDocumentLocations.
     /// </summary>
-    public static partial class LicensesExtensions
+    public static partial class SharepointDocumentLocationsExtensions
     {
             /// <summary>
-            /// Get entities from adoxio_licenceses
+            /// Get entities from sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -47,13 +47,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModelModelModel Get(this ILicenses operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static GetOKResponseModelModelModelModelModelModelModelModelModelModel Get(this ISharepointDocumentLocations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entities from adoxio_licenceses
+            /// Get entities from sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModelModelModel> GetAsync(this ILicenses operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOKResponseModelModelModelModelModelModelModelModelModelModel> GetAsync(this ISharepointDocumentLocations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Add new entity to adoxio_licenceses
+            /// Add new entity to sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -106,13 +106,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicences Create(this ILicenses operations, MicrosoftDynamicsCRMadoxioLicences body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMsharepointdocumentlocation Create(this ISharepointDocumentLocations operations, MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to adoxio_licenceses
+            /// Add new entity to sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicences> CreateAsync(this ILicenses operations, MicrosoftDynamicsCRMadoxioLicences body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMsharepointdocumentlocation> CreateAsync(this ISharepointDocumentLocations operations, MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -136,30 +136,30 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from adoxio_licenceses
+            /// Delete entity from sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioLicencesid'>
-            /// key: adoxio_licencesid
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void Delete(this ILicenses operations, string adoxioLicencesid, string ifMatch = default(string))
+            public static void Delete(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, string ifMatch = default(string))
             {
-                operations.DeleteAsync(adoxioLicencesid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(sharepointdocumentlocationid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Delete entity from adoxio_licenceses
+            /// Delete entity from sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioLicencesid'>
-            /// key: adoxio_licencesid
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
@@ -167,19 +167,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsync(this ILicenses operations, string adoxioLicencesid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteWithHttpMessagesAsync(adoxioLicencesid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(sharepointdocumentlocationid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Get entity from adoxio_licenceses by key
+            /// Get entity from sharepointdocumentlocations by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioLicencesid'>
-            /// key: adoxio_licencesid
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -187,19 +187,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicences GetByKey(this ILicenses operations, string adoxioLicencesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMsharepointdocumentlocation GetByKey(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyAsync(adoxioLicencesid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(sharepointdocumentlocationid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from adoxio_licenceses by key
+            /// Get entity from sharepointdocumentlocations by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioLicencesid'>
-            /// key: adoxio_licencesid
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -210,39 +210,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicences> GetByKeyAsync(this ILicenses operations, string adoxioLicencesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMsharepointdocumentlocation> GetByKeyAsync(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioLicencesid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(sharepointdocumentlocationid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Update entity in adoxio_licenceses
+            /// Update entity in sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioLicencesid'>
-            /// key: adoxio_licencesid
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
             /// </param>
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this ILicenses operations, string adoxioLicencesid, MicrosoftDynamicsCRMadoxioLicences body)
+            public static void Update(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body)
             {
-                operations.UpdateAsync(adoxioLicencesid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(sharepointdocumentlocationid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in adoxio_licenceses
+            /// Update entity in sharepointdocumentlocations
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioLicencesid'>
-            /// key: adoxio_licencesid
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -250,9 +250,41 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this ILicenses operations, string adoxioLicencesid, MicrosoftDynamicsCRMadoxioLicences body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateWithHttpMessagesAsync(adoxioLicencesid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(sharepointdocumentlocationid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Invoke function RetrieveAbsoluteAndSiteCollectionUrl
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='entity'>
+            /// </param>
+            public static MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse RetrieveAbsoluteAndSiteCollectionUrl(this ISharepointDocumentLocations operations, string entity)
+            {
+                return operations.RetrieveAbsoluteAndSiteCollectionUrlAsync(entity).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Invoke function RetrieveAbsoluteAndSiteCollectionUrl
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='entity'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse> RetrieveAbsoluteAndSiteCollectionUrlAsync(this ISharepointDocumentLocations operations, string entity, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.RetrieveAbsoluteAndSiteCollectionUrlWithHttpMessagesAsync(entity, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }
