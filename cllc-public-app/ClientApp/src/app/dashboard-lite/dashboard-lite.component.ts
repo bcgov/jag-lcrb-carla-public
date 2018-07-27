@@ -16,13 +16,6 @@ import { PaymentDataService } from '../services/payment-data.service';
   styleUrls: ['./dashboard-lite.component.css']
 })
 export class DashboardLiteComponent implements OnInit {
-
-  constructor(private paymentDataService: PaymentDataService,
-    private userDataService: UserDataService, private router: Router,
-    private dynamicsDataService: DynamicsDataService,
-    private applicationDataService: AdoxioApplicationDataService,
-    public snackBar: MatSnackBar) { }
-
   public currentUser: User;
   applicationId: string;
 
@@ -30,12 +23,18 @@ export class DashboardLiteComponent implements OnInit {
   account: DynamicsAccount;
   busy: Subscription;
   isPaid: Boolean;
+  orgType = '';
+
+  constructor(private paymentDataService: PaymentDataService,
+    private userDataService: UserDataService, private router: Router,
+    private dynamicsDataService: DynamicsDataService,
+    private applicationDataService: AdoxioApplicationDataService,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.userDataService.getCurrentUser()
       .subscribe((data) => {
         this.currentUser = data;
-
         if (this.currentUser.accountid != null) {
           // fetch the account to get the primary contact.
           this.dynamicsDataService.getRecord('account', this.currentUser.accountid)
@@ -51,10 +50,7 @@ export class DashboardLiteComponent implements OnInit {
   }
 
   verify_payment() {
-
-
-
-    let newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
+    const newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
     newLicenceApplicationData.licenseType = 'Cannabis Retail Store';
     newLicenceApplicationData.applicantType = this.account.businessType;
     newLicenceApplicationData.account = this.account;
@@ -64,9 +60,9 @@ export class DashboardLiteComponent implements OnInit {
         const data = res.json();
 
         this.busy = this.paymentDataService.getPaymentSubmissionUrl(data.id).subscribe(
-          res => {
+          res2 => {
             // console.log("applicationVM: ", res.json());
-            const jsonUrl = res.json();
+            const jsonUrl = res2.json();
             // window.alert(jsonUrl['url']);
             window.location.href = jsonUrl['url'];
             return jsonUrl['url'];
@@ -84,5 +80,23 @@ export class DashboardLiteComponent implements OnInit {
       }
     );
 
+  }
+
+  startNewLicenceApplication() {
+    const newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
+    newLicenceApplicationData.licenseType = 'Cannabis Retail Store';
+    newLicenceApplicationData.applicantType = this.account.businessType;
+    newLicenceApplicationData.account = this.account;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      res => {
+        const data = res.json();
+        this.router.navigateByUrl(`/application-lite/${data.id}`);
+      },
+      err => {
+        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        console.log('Error starting a New Licence Application');
+      }
+    );
   }
 }
