@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// AdoxioLicencetypes operations.
+    /// SharepointDocumentLocations operations.
     /// </summary>
-    public partial interface IAdoxioLicencetypes
+    public partial interface ISharepointDocumentLocations
     {
         /// <summary>
-        /// Get entities from adoxio_licencetypes
+        /// Get entities from sharepointdocumentlocations
         /// </summary>
         /// <param name='top'>
         /// Show only the first n items
@@ -57,12 +57,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<GetOKResponseModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Add new entity to adoxio_licencetypes
+        /// Add new entity to sharepointdocumentlocations
         /// </summary>
         /// <param name='body'>
         /// New entity
+        /// </param>
+        /// <param name='prefer'>
+        /// Required in order for the service to return a JSON representation
+        /// of the object.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -79,12 +83,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetype>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioLicencetype body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocation>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_licencetypes
+        /// Delete entity from sharepointdocumentlocations
         /// </summary>
-        /// <param name='adoxioLicencetypeid'>
-        /// key: adoxio_licencetypeid
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -101,12 +105,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioLicencetypeid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string sharepointdocumentlocationid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get entity from adoxio_licencetypes by key
+        /// Get entity from sharepointdocumentlocations by key
         /// </summary>
-        /// <param name='adoxioLicencetypeid'>
-        /// key: adoxio_licencetypeid
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -129,12 +133,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetype>> GetByKeyWithHttpMessagesAsync(string adoxioLicencetypeid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMsharepointdocumentlocation>> GetByKeyWithHttpMessagesAsync(string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Update entity in adoxio_licencetypes
+        /// Update entity in sharepointdocumentlocations
         /// </summary>
-        /// <param name='adoxioLicencetypeid'>
-        /// key: adoxio_licencetypeid
+        /// <param name='sharepointdocumentlocationid'>
+        /// key: sharepointdocumentlocationid
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -151,6 +155,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioLicencetypeid, MicrosoftDynamicsCRMadoxioLicencetype body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Invoke function RetrieveAbsoluteAndSiteCollectionUrl
+        /// </summary>
+        /// <param name='entity'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="OdataerrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse>> RetrieveAbsoluteAndSiteCollectionUrlWithHttpMessagesAsync(string entity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

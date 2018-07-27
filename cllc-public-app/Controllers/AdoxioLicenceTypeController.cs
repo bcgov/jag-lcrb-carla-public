@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET a specific licence type
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetDynamicsLicenseType(string id)
+        public ActionResult GetDynamicsLicenseType(string id)
         {
             Guid licenceTypeId;
             if (string.IsNullOrEmpty (id) || !Guid.TryParse(id, out licenceTypeId))
@@ -54,7 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // get all licenses in Dynamics by Licencee Id
-            var adoxioLicenceType = await _dynamicsClient.GetAdoxioLicencetypeById(licenceTypeId);
+            var adoxioLicenceType =_dynamicsClient.GetAdoxioLicencetypeById(licenceTypeId);
             if (adoxioLicenceType == null)
             {
                 return new NotFoundResult();

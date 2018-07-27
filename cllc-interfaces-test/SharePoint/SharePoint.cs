@@ -39,7 +39,7 @@ namespace SharePoint.Tests
             string certFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string certPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            sharePointFileManager = new SharePointFileManager(serverAppIdUri, odataUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null);
+            sharePointFileManager = new SharePointFileManager(serverAppIdUri, odataUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null, serverAppIdUri);
 
         }
 

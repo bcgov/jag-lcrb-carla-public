@@ -1,22 +1,21 @@
 ﻿using Microsoft.AppServices;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Rest;
 using Microsoft.SharePoint.DataService;
 using MS.FileServices;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Services.Client;
-using System.Data.Services.Common;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
-using Microsoft.Rest;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -34,13 +33,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public string ServerAppIdUri { get; set; }
         public string WebName { get; set; }
         public string apiEndpoint { get; set; }
+        public string NativeBaseUri { get; set; }
         string authorization { get; set; }
         private HttpClient client;
 
-        public SharePointFileManager(string serverAppIdUri, string odataUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword, string ssgUsername, string ssgPassword)
+        public SharePointFileManager(string serverAppIdUri, 
+                                     string odataUri, 
+                                     string webname, 
+                                     string aadTenantId, 
+                                     string clientId, 
+                                     string certFileName, 
+                                     string certPassword, 
+                                     string ssgUsername, 
+                                     string ssgPassword, 
+                                     string nativeBaseUri)
         {
             OdataUri = odataUri;
             ServerAppIdUri = serverAppIdUri;
+            NativeBaseUri = nativeBaseUri;
             WebName = webname;
 
             // ensure the webname has a slash.
@@ -381,6 +391,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         }
 
+        public string GetServerRelativeURL(string listTitle, string folderName)
+        {
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            return serverRelativeUrl;
+        }
+
         /// <summary>
         /// Upload a file
         /// </summary>
@@ -394,7 +410,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='" 

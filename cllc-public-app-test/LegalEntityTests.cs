@@ -414,10 +414,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(fileContent);
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
-            string accountId = user.accountid;
+            
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + accountId + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
@@ -562,10 +562,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(fileContent);
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
-            string accountId = user.accountid;
-
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + accountId + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
