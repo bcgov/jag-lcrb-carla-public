@@ -21,6 +21,7 @@ export interface DropdownOption {
 export class FileUploaderComponent implements OnInit {
   @Input() accountId: string;
   @Input() uploadUrl: string;
+  @Input() fileTypes = "";
   @Input() documentType: string;
   @Input() applicationId: string;
   busy: Subscription;
