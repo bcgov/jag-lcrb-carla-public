@@ -215,7 +215,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
-            uploadResponse.EnsureSuccessStatusCode();
+            
 
 			return filename;
 		}

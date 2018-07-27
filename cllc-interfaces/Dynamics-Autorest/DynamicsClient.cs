@@ -51,6 +51,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplications Applications { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishments.
+        /// </summary>
+        public virtual IEstablishments Establishments { get; private set; }
+
+        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
@@ -84,8 +89,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInvoices.
         /// </summary>
         public virtual IInvoices Invoices { get; private set; }
-
-        public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
         /// Gets the ISharepointDocumentLocations.
@@ -295,9 +298,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Accounts = new Accounts(this);
             Applications = new Applications(this);
+            Establishments = new Establishments(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
-            Establishments = new Establishments(this);
             Licenses = new Licenses(this);
             AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
             AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
