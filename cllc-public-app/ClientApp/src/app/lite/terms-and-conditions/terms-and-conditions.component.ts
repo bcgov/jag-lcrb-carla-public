@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsAndConditionsComponent implements OnInit {
 
-  termsAccepted: number = 0;
+  termsAccepted = false;
 
   constructor() { }
 
