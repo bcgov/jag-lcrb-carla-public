@@ -50,8 +50,11 @@ p {
     margin-top: 10px;
 }
 
-// .emailSignupForm {
-//     padding-top: 20px;
-// }
+.btn-primary {
+  background-color: rgba(0, 51, 102, 1);
+}
 
-
+.email-field {
+    display: flex;
+    margin-top: 20px;
+}
