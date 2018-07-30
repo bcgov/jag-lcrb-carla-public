@@ -1,17 +1,51 @@
 <div [formGroup]="form" style="max-width: 700px; padding-left: 15px;">
   <h1>Cannabis License Application</h1>
 
-  <p>
-    Please make sure that you have filled out the application in its entirety. Refer to the application guide for assistance.
-    Check your checklist to make sure all forms have been filled before submitting.
-  </p>
+  <p>Congratulations, you are now ready to submit your application for a B.C. cannabis retail store licence for the sale of
+    approved non-medical cannabis and accessories.</p>
+  <br>
 
-  <p>Begin by entering the name of your establishment.</p>
+  <p>Please make sure that you include all of the required forms and compile the supporting documentation for your licence type.
+    A $7500 application fee will be required at the time of application submission. If deemed eligible, a $1500 first year
+    licensing fee will be required prior to licence issuance.</p>
+  <br>
 
+  <p>Please note that applications which are submitted without all required information or documents will stop being processed.
+    The Liquor and Cannabis Regulation Branch will be assessing complete applications as a priority. Other applications that
+    are received before the applicant provides the branch with missing information will be prioritized. The application checklist
+    is a helpful guide that can assist you. </p>
+  <br>
+
+  <p>Please Note: A proposed store must have:</p>
+  <ul>
+    <li>If in the area of a local government, all required local government approvals, such as being a permitted use under the
+      zoning bylaw or meeting the requirements of business licensing bylaw, or</li>
+    <li>If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a proposed store will
+      be located the zoning approval and a business permit or licence from the Indigenous nation to sell cannabis.</li>
+  </ul>
+  <hr>
   <section>
     <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}">
       <label for="">Establishment Name</label>
       <br>
+
+      <p>Begin by entering the name of your establishment.</p>
+      <br>
+
+      <p>A name cannot mislead the public about what kind of business it operates. The name cannot imply a licensee is selling
+        medical cannabis, and cannot include words in any form or combination or manner the words "apothecary", "pharmacy",
+        "medicines", "drugs", "drug store", "drug department", "dispensary" or any other words of similar meaning that imply
+        licensing under the Pharmacy Operations and Drug Scheduling Act. Store names cannot also use language that encourages
+        intoxication.
+      </p>
+      <br>
+
+      <p>Additionally, a name cannot imply an association with another business. This applies to signs, trademarks and any type
+        of branding.</p>
+      <br>
+
+      <p>Establishment names will be reviewed for approval during the application process.</p>
+
       <input class="form-control" style="width: 500px;" type="text" id="establishmentName" formControlName="establishmentName">
       <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
         <div *ngIf="form.controls['establishmentName'].hasError('required') ">
@@ -21,15 +55,19 @@
     </div>
   </section>
   <p>&nbsp;</p>
+  <hr>
+  <p>&nbsp;</p>
 
   <label for="">Upload Your Application Form</label>
   <br>
   <p>Upload your completed
     <strong>application form</strong> below.</p>
   <section>
-    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-      [applicationId]="applicationId"></app-file-uploader>
+    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+      [multipleFiles]="false" [applicationId]="applicationId" #mainForm></app-file-uploader>
   </section>
+  <br>
+  <hr>
   <br>
 
   <label for="">Attach Supporting Documents</label>
@@ -41,22 +79,10 @@
       [applicationId]="applicationId"></app-file-uploader>
   </section>
   <br>
-  <p>Once you are ready to submit, the next page will take you to the payment process.</p>
-  <br>
-  <label for="">Select a Method of Payment</label>
-  <br>
-  <p>
-    Applicants must pay a $7500 fee to apply for a cannabis retail store licence. The fee includes the cost of the initial required
-    security screening and financial integrity checks. It is not refundable.
-  </p>
-  <p>&nbsp;</p>
+  <hr>
+  <p>Proceed to pay online using your credit card through the Liquor and Cannabis Regulation Branch (LCRB) secure web portal.</p>
 
-  <p>
-    Proceed to pay online using your credit card through the Liquor and Cannabis Regulation Branch (LCRB) secure web portal.
-  </p>
-  <p>&nbsp;</p>
-
-  <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+  <button class="btn btn-primary" (click)="submit_application()" [disabled]="!isValid()">SUBMIT &amp; PAY</button>
   <span style="float: right">
 
     <a routerLink="/dashboard-lite">
@@ -67,6 +93,19 @@
       Cancel Application</a>
   </span>
   <p>&nbsp;</p>
-  <p>Application processing time will take approximately two to four months and are subjected to AGLC application review policies.</p>
+  <p>The province does not know how many application for a cannabis retail store license will be recieved. Therefore, it is
+    difficult to predict how long applications will take to process. To minimize delays in processing, applicants must make
+    sure the application is complete before submitting it.</p>
+  <br>
+
+  <p>The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that once an
+    application is submitted you will be unable to upload additional documentation. For questions on the LCRB application
+    process please contact:
+    <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.</p>
+  <br>
+
+  <p>MPORTANT: Application which are submitted without required information or documents will stop being processed. The Liquor
+    and Cannabis Regulation Branch will be assessing complete applications as a priority. Other applications that are recieved
+    before the applicant provides the branch with missing information will be prioritized.</p>
 </div>
 <div [ngBusy]="busy"></div>
