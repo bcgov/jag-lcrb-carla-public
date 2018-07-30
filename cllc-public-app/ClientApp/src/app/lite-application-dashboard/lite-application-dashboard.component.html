@@ -69,17 +69,11 @@
 
         <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
       </mat-table>
-<<<<<<< HEAD
-      <mat-paginator style="background-color: #eee;" #paginator [pageSize]="4" [showFirstLastButtons]="true"> </mat-paginator>
-=======
-
       <mat-paginator #paginator style="background-color: #eee;"
                      [pageSize]="4"
                      [pageSizeOptions]="[4, 8, 12]"
                      [showFirstLastButtons]="true">
       </mat-paginator>
->>>>>>> upstream/develop
-
     </div>
 
   </div>
