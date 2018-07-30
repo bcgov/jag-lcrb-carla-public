@@ -35,6 +35,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Estate = 845280013, [Display(Name = "Local Government")]
         LocalGovernment = 845280014,
         University = 845280016,
+        Partnership = 845280005,
 
     }
     public enum AdoxioAccountTypeCodes
