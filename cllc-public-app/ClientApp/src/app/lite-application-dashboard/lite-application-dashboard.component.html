@@ -6,10 +6,6 @@
   <!--display application in progress or submitted base on input parameter-->
   <div *ngIf="applicationInProgress" class="dashboard-title">
 
-    <!--<div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
-    No applications in progress
-    </div>-->
-
     <!--<div *ngIf="dataSource.data.length > 0" class="dashboard-content">-->
     <div class="dashboard-content">
 
@@ -41,6 +37,10 @@
         <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
       </mat-table>
 
+      <div *ngIf="dataSource.data && dataSource.data.length == 0" class="no-application">
+        No applications in Progress.
+      </div>
+
     </div>
 
   </div>
@@ -48,7 +48,7 @@
   <div *ngIf="!applicationInProgress">
 
     <div *ngIf="dataSource.data && dataSource.data.length == 0">
-      No submitted applications
+      No previously submitted applications.
     </div>
 
     <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
