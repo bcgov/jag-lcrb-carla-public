@@ -28,6 +28,7 @@ export class FileUploaderComponent implements OnInit {
   busy: Subscription;
   attachmentURL: string;
   Math = Math;
+  public files: FileSystemItem[] = [];
 
   //TODO: move http call to a service
   constructor(private http: Http) {
@@ -43,7 +44,6 @@ export class FileUploaderComponent implements OnInit {
     this.getUploadedFileData();
   }
 
-  public files: FileSystemItem[] = [];
 
 
   public dropped(event: UploadEvent) {

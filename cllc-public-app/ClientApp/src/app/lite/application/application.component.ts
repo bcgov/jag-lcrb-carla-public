@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app-state/models/app-state';
@@ -10,6 +10,7 @@ import * as currentApplicationActions from '../../app-state/actions/current-appl
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdoxioApplicationDataService } from '../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../services/payment-data.service';
+import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
 
 @Component({
   selector: 'app-application',
@@ -17,7 +18,7 @@ import { PaymentDataService } from '../../services/payment-data.service';
   styleUrls: ['./application.component.css']
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
-
+  @ViewChild(FileUploaderComponent) mainForm: FileUploaderComponent;
   form: FormGroup;
   savedFormData: any;
   subscriptions: Subscription[] = [];
@@ -140,5 +141,16 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     );
 
 
+  }
+
+  isValid(): boolean {
+    let valid = true;
+    if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1){
+      valid = false;
+    }
+    if(!this.form.get('establishmentName').value){
+      valid = false;
+    }
+    return valid;
   }
 }
