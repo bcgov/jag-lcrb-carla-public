@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
+import { FileSystemItem } from '../models/file-system-item.model';
+import {saveAs } from "file-saver";
 
 @Component({
   selector: 'app-lite-application-dashboard',
@@ -42,6 +44,14 @@ export class LiteApplicationDashboardComponent implements OnInit {
           licAppSum.modifiedon = entry.modifiedon;
           // Applications in progress display the ones not paid
           // Applications submitted display the ones paid
+          this.busy = this.adoxioApplicationDataService.getFileListAttachedToApplication(entry.id, 'Licence Application Main')
+            .subscribe(res => {
+              var files: FileSystemItem[] = res.json();
+              if (files && files.length) {
+                licAppSum.applicationFormFileUrl = files[0].serverrelativeurl;
+                licAppSum.fileName = files[0].name;
+              }
+            });
           if (this.applicationInProgress) {
             if (!licAppSum.isPaid) {
               licenseApplicationSummary.push(licAppSum);
@@ -65,8 +75,11 @@ export class LiteApplicationDashboardComponent implements OnInit {
       });
   }
 
-  downloadApplicationPDF(id: string) {
-    debugger;
+  downloadApplicationPDF(url: string, fileName: string) {
+    this.adoxioApplicationDataService.downloadFile(url)
+    .subscribe((res: Blob) => {
+      saveAs(res, fileName);
+    });
   }
 
   cancelApplication(id: string) {

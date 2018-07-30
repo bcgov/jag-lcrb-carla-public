@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from "@angular/http";
+import { Http, Headers, Response, ResponseContentType } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import { FileSystemItem } from '../models/file-system-item.model';
 import { AdoxioApplication } from "../models/adoxio-application.model";
@@ -115,6 +115,13 @@ export class AdoxioApplicationDataService {
       //  });
       //  this.files = data;
       //});
+
+  }
+  downloadFile(serverRelativeUrl: string) {
+    const headers = new Headers({});
+    const attachmentURL = `api/adoxioapplication/download-file/${encodeURIComponent(serverRelativeUrl)}`;
+    return this.http.get(attachmentURL, { responseType: ResponseContentType.Blob })
+          .map(res => res.blob());
 
   }
 }

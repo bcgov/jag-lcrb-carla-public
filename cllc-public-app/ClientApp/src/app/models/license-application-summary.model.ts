@@ -10,4 +10,6 @@ export class LicenseApplicationSummary {
   paymentreceiveddate: Date;
   createdon: Date;
   modifiedon: Date;
+  applicationFormFileUrl: string;
+  fileName: string;
 }

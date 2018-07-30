@@ -21,7 +21,7 @@
         <ng-container matColumnDef="establishmentName">
           <mat-header-cell *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a routerLink="/application-lite/{{element.id}}" skipLocationChange>{{element.establishmentName}} (Ref. {{element.name}})</a>
+            <a routerLink="/application-lite/{{element.id}}">{{element.establishmentName}} (Ref. {{element.name}})</a>
           </mat-cell>
         </ng-container>
 
@@ -59,7 +59,7 @@
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.id)" skipLocationChange>{{element.establishmentName}}</a>
+            <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.applicationFormFileUrl, element.fileName)">{{element.establishmentName}}</a>
             <br />
             Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
             <br />
