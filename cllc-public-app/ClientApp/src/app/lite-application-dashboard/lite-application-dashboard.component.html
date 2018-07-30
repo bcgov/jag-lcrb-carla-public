@@ -6,23 +6,24 @@
   <!--display application in progress or submitted base on input parameter-->
   <div *ngIf="applicationInProgress" class="dashboard-title">
 
-    <div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
-      No applications in progress
-    </div>
+    <!--<div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
+    No applications in progress
+    </div>-->
 
-    <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
+    <!--<div *ngIf="dataSource.data.length > 0" class="dashboard-content">-->
+    <div class="dashboard-content">
 
-      <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
+      <mat-table class="mat-elevation-z0" #table [dataSource]="dataSource">
 
         <!-- Column -->
-        <ng-container matColumnDef="establishmentName">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> LAST UPDATED </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.paymentreceiveddate | date:'mediumDate'}} </mat-cell>
+        <ng-container matColumnDef="lastUpdated">
+          <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.modifiedon | date:'mediumDate'}} </mat-cell>
         </ng-container>
 
         <!-- Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
+        <ng-container matColumnDef="establishmentName">
+          <mat-header-cell *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <a routerLink="/application-lite/{{element.id}}" skipLocationChange>{{element.establishmentName}} (Ref. {{element.name}})</a>
           </mat-cell>
@@ -30,7 +31,7 @@
 
         <!-- Column -->
         <ng-container matColumnDef="status">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <a routerLink="/application-lite/{{element.id}}" skipLocationChange>Cancel Application</a>
           </mat-cell>
@@ -52,10 +53,11 @@
 
     <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
 
-      <mat-table style="background-color: #eee;" class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
+      <mat-table style="background-color: #eee;" class="mat-elevation-z0" #table [dataSource]="dataSource">
 
+        <!-- Column -->
         <ng-container matColumnDef="name">
-          <mat-header-cell mat-sort-header *matHeaderCellDef > </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.id)" skipLocationChange>{{element.establishmentName}}</a>
             <br />
@@ -67,7 +69,16 @@
 
         <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
       </mat-table>
+<<<<<<< HEAD
       <mat-paginator style="background-color: #eee;" #paginator [pageSize]="4" [showFirstLastButtons]="true"> </mat-paginator>
+=======
+
+      <mat-paginator #paginator style="background-color: #eee;"
+                     [pageSize]="4"
+                     [pageSizeOptions]="[4, 8, 12]"
+                     [showFirstLastButtons]="true">
+      </mat-paginator>
+>>>>>>> upstream/develop
 
     </div>
 
