@@ -329,9 +329,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // Verify that the file Meta Data matches
 
+
+
             // Verify that the file can be downloaded and the contents match            
 
-            // Cleanup the Legal Entity
+            // Cleanup the Application
 
 
 
