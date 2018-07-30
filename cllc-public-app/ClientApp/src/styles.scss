@@ -272,18 +272,20 @@ $indicator-thickness: 0.2em;
 }
 
 .btn.btn-primary {
-    background-color: #003366;
-    border: #003366 1px solid;
-    color: #ffffff;
-    min-width: 120px;
-    font-size: 16px;
-    border-radius: 0px;
+    display: inline-block;
+    padding: 6px 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    background-color: #38598a;
+    border: #357ebd 1px solid;
+    color: #fff;
+    border-radius:4px;
 }
 
 .btn-primary:hover {
-    background-color: #2f567b !important;
+    background-color: #003366 !important;
     color: #ffffff;
-    border-color: #204d74;
+    border-color: #003366;
     border-radius: 0px;
 }
 

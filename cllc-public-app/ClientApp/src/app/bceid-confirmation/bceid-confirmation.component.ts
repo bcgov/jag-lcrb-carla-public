@@ -19,7 +19,7 @@ export class BceidConfirmationComponent {
   public bceidConfirmBusinessType: boolean = false;
   public bceidConfirmContact: boolean = false;
   public showBceidCorrection: boolean;
-  public showBceidUserContinue: boolean;
+  public showBceidUserContinue: boolean = true;
   businessType: string = "";
   finalBusinessType: string = "";
   busy: Promise<any>;
@@ -74,7 +74,7 @@ export class BceidConfirmationComponent {
     account.primarycontact = contact;
 
     // Submit selected company type and sub-type to the account service
-    account.businessType = this.finalBusinessType;
+    account.businessType = this.businessType;
     let payload = JSON.stringify(account);
     this.busy = this.dynamicsDataService.createRecord('account', payload)
       .then((data) => {
@@ -84,7 +84,7 @@ export class BceidConfirmationComponent {
 
   confirmContactNo() {
     // confirm Contact
-    this.showBceidUserContinue = true;
+    this.showBceidUserContinue = false;
   }
 
 }
