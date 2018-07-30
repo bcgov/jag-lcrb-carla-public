@@ -334,6 +334,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     return new NotFoundResult();
                 }
+                
+                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                {
+                    return new NotFoundResult();
+                }
+
+                // Update modifiedon to current time
+                application.Modifiedon = DateTime.Now;
+                try
+                {
+                    _dynamicsClient.Applications.Update(id, application);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error updating application");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    // fail if we can't create.
+                    throw (odee);
+                }     
 
                 
                 if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
@@ -502,6 +524,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
+                // Update modifiedon to current time
+                application.Modifiedon = DateTime.Now;
+                try
+                {
+                    _dynamicsClient.Applications.Update(applicationId, application);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error updating application");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    // fail if we can't create.
+                    throw (odee);
+                }
 
                 var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
                 if (result)

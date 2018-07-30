@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { PaymentDataService } from '../services/payment-data.service';
 import { Subscription } from 'rxjs';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { ClientConfigDataService } from '../services/client-config.service';
 
 @Component({
     selector: 'app-payment-confirmation',
@@ -12,6 +13,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 })
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
+  isLiteVersion: boolean;
   busy: Subscription;
   transactionId: string;
   applicationId: string;
@@ -36,14 +38,18 @@ export class PaymentConfirmationComponent {
   @Input() inputApplicationId: string;
 
     /** payment-confirmation ctor */
-  constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
+  constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService,
+    private clientConfigDataService: ClientConfigDataService) {
 	    this.route.queryParams.subscribe(params => {
 	        this.transactionId = params['trnId'];
           this.applicationId = params['SessionKey'];
 	    });
     }
 
-    ngOnInit() {
+  ngOnInit() {
+    this.clientConfigDataService.getConfig().subscribe(data => {
+      this.isLiteVersion = data.isLiteVersion;
+    });
       if (!this.applicationId) {
         this.applicationId = this.inputApplicationId;
       }
@@ -117,10 +123,18 @@ export class PaymentConfirmationComponent {
 
   return_to_application()
   {
-    if (this.trnApproved == "1") {
-      this.router.navigate(['./dashboard']);
+    if (this.isLiteVersion) {
+      if (this.trnApproved == "1") {
+        this.router.navigate(['./dashboard-lite']);
+      } else {
+        this.router.navigate(['./application-lite/' + this.applicationId]);
+      }
     } else {
-      this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
+      if (this.trnApproved == "1") {
+        this.router.navigate(['./dashboard']);
+      } else {
+        this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
+      }
     }
   }
 }
