@@ -6,10 +6,6 @@
   <!--display application in progress or submitted base on input parameter-->
   <div *ngIf="applicationInProgress" class="dashboard-title">
 
-    <!--<div *ngIf="dataSource.data && dataSource.data.length == 0" class="dashboard-content">
-    No applications in progress
-    </div>-->
-
     <!--<div *ngIf="dataSource.data.length > 0" class="dashboard-content">-->
     <div class="dashboard-content">
 
@@ -25,7 +21,7 @@
         <ng-container matColumnDef="establishmentName">
           <mat-header-cell *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a routerLink="/application-lite/{{element.id}}" skipLocationChange>{{element.establishmentName}} (Ref. {{element.name}})</a>
+            <a routerLink="/application-lite/{{element.id}}">{{element.establishmentName}} (Ref. {{element.name}})</a>
           </mat-cell>
         </ng-container>
 
@@ -33,13 +29,17 @@
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a routerLink="/application-lite/{{element.id}}" skipLocationChange>Cancel Application</a>
+            <a (click)="cancelApplication(element.id)" skipLocationChange>Cancel Application</a>
           </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
       </mat-table>
+
+      <div *ngIf="dataSource.data && dataSource.data.length == 0" class="no-application">
+        No applications in Progress.
+      </div>
 
     </div>
 
@@ -48,7 +48,7 @@
   <div *ngIf="!applicationInProgress">
 
     <div *ngIf="dataSource.data && dataSource.data.length == 0">
-      No submitted applications
+      No previously submitted applications.
     </div>
 
     <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
@@ -59,7 +59,7 @@
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.id)" skipLocationChange>{{element.establishmentName}}</a>
+            <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.applicationFormFileUrl, element.fileName)">{{element.establishmentName}}</a>
             <br />
             Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
             <br />

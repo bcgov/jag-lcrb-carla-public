@@ -1,4 +1,5 @@
 <div style="padding-left: 50px;">
+  <div [ngBusy]="busy"></div>
   <h1>Welcome to Cannabis Licensing</h1>
   <div class="row">
     <div class="col-md-7">
@@ -27,6 +28,8 @@
         <p></p>
       </section>
 
+      <br />
+
       <h2>Applications In Progress</h2>
       <app-lite-application-dashboard [applicationInProgress]="true"></app-lite-application-dashboard>
     </div>
@@ -43,7 +46,7 @@
       </section>
       <section>
         <div class="submit-header">
-          <h2>My Submitted Applicaitons</h2>
+          <h2>My Submitted Applications</h2>
         </div>
         <div class="submit-content">
           <app-lite-application-dashboard [applicationInProgress]="false"></app-lite-application-dashboard>

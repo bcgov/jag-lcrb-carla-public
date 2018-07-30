@@ -27,7 +27,7 @@
   <p>Upload your completed
     <strong>application form</strong> below.</p>
   <section>
-    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
       [applicationId]="applicationId"></app-file-uploader>
   </section>
   <br>
@@ -57,12 +57,15 @@
   <p>&nbsp;</p>
 
   <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
-  <a routerLink="/dashboard-lite">
-    <mat-icon aria-label="Save Applicaiton">save</mat-icon>
-    Save for Later</a> &nbsp;
-  <a href="javascript:void(0);">
-    <mat-icon aria-label="Cancel Applicaiton">delete</mat-icon>
-    Cancel Application</a>
+  <span style="float: right">
+
+    <a routerLink="/dashboard-lite">
+      <mat-icon aria-label="Save Applicaiton">save</mat-icon>
+      Save for Later</a> &nbsp;
+    <a href="javascript:void(0);">
+      <mat-icon aria-label="Cancel Applicaiton">delete</mat-icon>
+      Cancel Application</a>
+  </span>
   <p>&nbsp;</p>
   <p>Application processing time will take approximately two to four months and are subjected to AGLC application review policies.</p>
 </div>
