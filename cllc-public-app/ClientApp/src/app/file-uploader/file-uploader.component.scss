@@ -8,3 +8,16 @@
 ::ng-deep  .content {
     color: #424242 !important;
 }
+
+.file-list{
+    background-color: #eee; 
+    margin-bottom: 3px; 
+    display: flex; 
+    justify-content: space-between;
+    padding: 3px 7px;
+    margin-right: 10px;
+}
+
+.no-drop{
+    cursor: no-drop;
+}

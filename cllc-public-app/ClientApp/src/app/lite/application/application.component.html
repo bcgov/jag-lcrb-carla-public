@@ -27,7 +27,7 @@
   <p>Upload your completed
     <strong>application form</strong> below.</p>
   <section>
-    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
       [applicationId]="applicationId"></app-file-uploader>
   </section>
   <br>
