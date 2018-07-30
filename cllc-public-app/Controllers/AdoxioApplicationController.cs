@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     public class AdoxioApplicationController : Controller
     {
-        private readonly IConfiguration Configuration;        
+        private readonly IConfiguration Configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly SharePointFileManager _sharePointFileManager;
         private readonly ILogger _logger;
@@ -26,11 +26,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public AdoxioApplicationController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
-            Configuration = configuration;            
+            Configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
-            _sharePointFileManager = sharePointFileManager;            
+            _sharePointFileManager = sharePointFileManager;
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
+            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
         }
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
-            if (string.IsNullOrEmpty (applicantId))
+            if (string.IsNullOrEmpty(applicantId))
             {
                 dynamicsApplicationList = _dynamicsClient.Applications.Get().Value;
             }
             else
             {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get(filter:"_adoxio_applicant_value eq " + applicantId).Value;
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: "_adoxio_applicant_value eq " + applicantId).Value;
             }
 
             if (dynamicsApplicationList != null)
@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="applicantId"></param>
         /// <returns></returns>
         [HttpGet()]
-        public async Task<JsonResult> GetDynamicsApplications (string applicantId)
+        public async Task<JsonResult> GetDynamicsApplications(string applicantId)
         {
             List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByApplicant(applicantId);
             return Json(adoxioApplications);
@@ -94,14 +94,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDynamicsApplication(string id)
         {
-			// get the current user.
+            // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-			_logger.LogError("Application id = " + id);
-			_logger.LogError("User id = " + userSettings.AccountId);
+            _logger.LogError("Application id = " + id);
+            _logger.LogError("User id = " + userSettings.AccountId);
 
-			ViewModels.AdoxioApplication result = null;
+            ViewModels.AdoxioApplication result = null;
             var dynamicsApplication = await _dynamicsClient.GetApplicationById(Guid.Parse(id));
             if (dynamicsApplication == null)
             {
@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-				if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
+                if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
                 {
                     return new NotFoundResult();
                 }
@@ -125,16 +125,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost()]
-		public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
-        {			
+        public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
+        {
 
-			// for association with current user
+            // for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-			UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);			
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
-            
+
             // copy received values to Dynamics Application
-			adoxioApplication.CopyValues(item);
+            adoxioApplication.CopyValues(item);
             adoxioApplication.AdoxioApplicanttype = (int?)item.applicantType;
             try
             {
@@ -209,7 +209,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
-                mdcsdl = null;    
+                mdcsdl = null;
             }
             if (mdcsdl != null)
             {
@@ -248,10 +248,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
                 }
-            }            
+            }
 
             return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
-            
+
         }
 
         /// <summary>
@@ -268,24 +268,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-			// for association with current user
+            // for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
-            
 
-			//Prepare application for update
+
+            //Prepare application for update
             Guid adoxio_applicationId = new Guid(id);
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
 
-			if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
-			{
-				return new NotFoundResult();
-			}
-            
+            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            {
+                return new NotFoundResult();
+            }
+
 
             adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
 
-			adoxioApplication.CopyValues(item);
+            adoxioApplication.CopyValues(item);
 
             try
             {
@@ -357,7 +357,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     return new NotFoundResult();
                 }
-                
+
                 if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
                 {
                     return new NotFoundResult();
@@ -378,8 +378,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                     // fail if we can't create.
                     throw (odee);
-                }     
-                
+                }
+
                 string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
                 var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
                 // Dynamics code for the name is {Code(Licence Type (Licence Type))} - {Business Type(Application)} - {Job Number(Application)} 
@@ -399,43 +399,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
-        [HttpGet("{id}/attachments/{fileId}")]
-        public async Task<IActionResult> DownloadFile([FromRoute] string id, [FromRoute] string fileId)
+        [HttpGet("download-file/{serverRelativeUrl}")]
+        public async Task<IActionResult> DownloadFile(string serverRelativeUrl)
         {
             // get the file.
-            if (string.IsNullOrEmpty(fileId) || string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(serverRelativeUrl))
             {
                 return BadRequest();
             }
             else
             {
 
-                // get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-                // check that the session is setup correctly.
-                userSettings.Validate();
-
-                // validate that the user account id matches the applicant for this application
-                var applicationGUID = Guid.Parse(id);
-                var application = await _dynamicsClient.GetApplicationById(applicationGUID);
-
-                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                byte[] fileContents = await _sharePointFileManager.DownloadFile(serverRelativeUrl);
+                return new FileContentResult(fileContents, "application/octet-stream")
                 {
-                    return new NotFoundResult();
-                }
-
-                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
-                if (fileSystemItem != null)
-                {
-                    byte[] fileContents = await _sharePointFileManager.DownloadFile(fileSystemItem.Url);
-                    return new FileContentResult(fileContents, "application/octet-stream")
-                    {
-                        FileDownloadName = fileSystemItem.Name
-                    };
-                }
+                };
             }
-            return new NotFoundResult();
         }
 
         /// <summary>
@@ -494,7 +473,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
                         fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
-                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);                        
+                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
                         fileSystemItemVM.documenttype = fileDetails.DocumentType;
                         fileSystemItemVMList.Add(fileSystemItemVM);
                     }
@@ -542,10 +521,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // Update modifiedon to current time
-                application.Modifiedon = DateTime.Now;
+               var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
                 try
                 {
-                    _dynamicsClient.Applications.Update(applicationId, application);
+                    _dynamicsClient.Applications.Update(applicationId, patchApplication);
                 }
                 catch (OdataerrorException odee)
                 {
@@ -562,7 +541,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (result)
                 {
                     return new OkResult();
-                }                
+                }
             }
             return new NotFoundResult();
         }
@@ -581,7 +560,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // TODO there may be some account relationships in the future
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-				return userSettings.AccountId == accountId;
+                return userSettings.AccountId == accountId;
             }
 
             // if current user doesn't have an account they are probably not logged in
