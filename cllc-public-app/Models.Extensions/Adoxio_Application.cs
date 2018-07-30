@@ -126,7 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 			}
 			adoxioApplicationVM.adoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue;
             //TODO set in autorest
-            adoxioApplicationVM.paymentreceiveddate = DateTime.Now; //dynamicsApplication.AdoxioPaymentreceiveddate;
+            adoxioApplicationVM.paymentreceiveddate = dynamicsApplication.AdoxioPaymentreceiveddate; //DateTime.Now;
             adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
 
             //get declarations
@@ -139,6 +139,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioApplicationVM.contactpersonrole = dynamicsApplication.AdoxioRole;
             adoxioApplicationVM.contactpersonemail = dynamicsApplication.AdoxioEmail;
             adoxioApplicationVM.contactpersonphone = dynamicsApplication.AdoxioContactpersonphone;
+            
+            adoxioApplicationVM.modifiedOn = dynamicsApplication.Modifiedon;
+
+            //get record audit info
+            adoxioApplicationVM.createdon = dynamicsApplication.Createdon; 
+            adoxioApplicationVM.modifiedon = dynamicsApplication.Modifiedon;
 
             return adoxioApplicationVM;
         }
