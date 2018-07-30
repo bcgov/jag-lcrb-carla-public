@@ -9,8 +9,8 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { Subscription } from 'rxjs';
 
 export interface DropdownOption {
-  id: string,
-  name: string
+  id: string;
+  name: string;
 }
 
 @Component({
@@ -21,11 +21,13 @@ export interface DropdownOption {
 export class FileUploaderComponent implements OnInit {
   @Input() accountId: string;
   @Input() uploadUrl: string;
-  @Input() fileTypes = "";
+  @Input() fileTypes = '';
   @Input() documentType: string;
   @Input() applicationId: string;
+  @Input() multipleFiles: boolean = true;
   busy: Subscription;
   attachmentURL: string;
+  Math = Math;
 
   //TODO: move http call to a service
   constructor(private http: Http) {
@@ -104,6 +106,10 @@ export class FileUploaderComponent implements OnInit {
     this.busy = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     });
+  }
+
+  disableFileUpload(): boolean {
+    return !this.multipleFiles && (this.files && this.files.length > 0);
   }
 
   public fileOver(event) {
