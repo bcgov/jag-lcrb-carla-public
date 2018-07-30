@@ -29,7 +29,7 @@
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a routerLink="/application-lite/{{element.id}}">Cancel Application</a>
+            <a (click)="cancelApplication(element.id)" skipLocationChange>Cancel Application</a>
           </mat-cell>
         </ng-container>
 
