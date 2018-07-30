@@ -152,7 +152,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
-
             MicrosoftDynamicsCRMadoxioApplication patchAdoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
 
             // set license type relationship 
@@ -161,7 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
                 patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
-                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", userSettings.AccountId);
+                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
                 //patchAdoxioApplication.AdoxioApplicationSharePointDocumentLocationsODataBind = sharePointLocationData;
                 _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
             }
@@ -185,13 +184,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             string name = adoxioApplication.AdoxioJobnumber + " Files";
 
+            // create the folder.
+            bool folderExists = await _sharePointFileManager.FolderExists(ApplicationDocumentListTitle, folderName);
+            if (!folderExists)
+            {
+                var folder = await _sharePointFileManager.CreateFolder(ApplicationDocumentListTitle, folderName);
+            }
+
+            // create the SharePointDocumentLocation
             MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
             {
                 Absoluteurl = absoluteUrl,
                 Description = "Application Files",
-                Name = name
+                Name = name                
             };
-
             try
             {
                 mdcsdl = _dynamicsClient.SharepointDocumentLocations.Create(mdcsdl);
@@ -207,6 +213,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             if (mdcsdl != null)
             {
+                // add a regardingobjectid.
+                string applicationReference = _dynamicsClient.GetEntityURI("adoxio_applications", adoxioApplication.AdoxioApplicationid);
+                var patchSharePointDocumentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation();
+                patchSharePointDocumentLocation.RegardingobjectidAdoxioApplicationODataBind = applicationReference;
+                try
+                {
+                    _dynamicsClient.SharepointDocumentLocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error adding reference SharepointDocumentLocation to application");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+
                 string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
                 // update the sharePointLocationData.
                 Odataid oDataId = new Odataid()
@@ -219,7 +242,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error creating SharepointDocumentLocation");
+                    _logger.LogError("Error adding reference to SharepointDocumentLocation");
                     _logger.LogError("Request:");
                     _logger.LogError(odee.Request.Content);
                     _logger.LogError("Response:");
