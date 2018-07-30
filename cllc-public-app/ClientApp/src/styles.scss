@@ -279,14 +279,14 @@ $indicator-thickness: 0.2em;
     background-color: #38598a;
     border: #357ebd 1px solid;
     color: #fff;
-    border-radius:4px;
+    border-radius: 4px;
 }
 
 .btn-primary:hover {
     background-color: #003366 !important;
     color: #ffffff;
     border-color: #003366;
-    border-radius: 0px;
+    border-radius: 4px;
 }
 
 .btn.btn-primary.sv_prev_btn {
@@ -295,14 +295,28 @@ $indicator-thickness: 0.2em;
     color: #000;
     min-width: 120px;
     font-size: 16px;
-    border-radius: 0px
-
 }
 
 .btn.btn-primary.sv_prev_btn:hover {
     background-color: #2f567b !important;
     color: #ffffff;
     border-color: #204d74;
-    border-radius: 0px
 
+}
+
+.btn.btn-secondary {
+    display: inline-block;
+    padding: 6px 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    background-color: #494949;
+    border: #494949 1px solid;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.btn-secondary:hover {
+  background-color: #bcbec5 !important;
+  color: #ffffff;
+  border-color: #bcbec5;
 }
