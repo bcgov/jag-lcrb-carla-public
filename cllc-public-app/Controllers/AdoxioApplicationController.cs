@@ -215,7 +215,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
                 try
                 {
-                    _dynamicsClient.Applications.AddReference(adoxioApplication.AdoxioApplicationid, "adoxio_application_SharePointDocumentLocations");
+                    _dynamicsClient.Applications.AddReference(adoxioApplication.AdoxioApplicationid, "adoxio_application_SharePointDocumentLocations", oDataId);
                 }
                 catch (OdataerrorException odee)
                 {
@@ -341,10 +341,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // Update modifiedon to current time
-                application.Modifiedon = DateTime.Now;
+                var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
                 try
                 {
-                    _dynamicsClient.Applications.Update(id, application);
+                    _dynamicsClient.Applications.Update(id, patchApplication);
                 }
                 catch (OdataerrorException odee)
                 {
@@ -356,13 +356,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // fail if we can't create.
                     throw (odee);
                 }     
-
                 
-                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
-                {
-                    return new NotFoundResult();
-                }
-
                 string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
                 var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
                 // Dynamics code for the name is {Code(Licence Type (Licence Type))} - {Business Type(Application)} - {Job Number(Application)} 
