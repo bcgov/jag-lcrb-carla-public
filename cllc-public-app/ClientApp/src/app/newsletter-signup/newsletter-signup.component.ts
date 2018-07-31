@@ -32,7 +32,7 @@ export class NewsletterSignupComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.clientConfigDataService.getConfig().subscribe(data => {
       this.isLiteVersion = data.isLiteVersion;
     });
