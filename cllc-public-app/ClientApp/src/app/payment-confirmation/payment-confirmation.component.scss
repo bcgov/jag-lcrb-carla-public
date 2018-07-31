@@ -1,6 +1,10 @@
 .table {
   padding: 15px;
   text-align: left;
+
+  td {
+    border: none;
+  }
 }
 
 .border {
@@ -13,3 +17,4 @@
   border-color: red;
   background-color: #ff9999
 }
+
