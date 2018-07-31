@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-terms-and-conditions',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsAndConditionsComponent implements OnInit {
 
-  termsAccepted = false;
+  @Output() termsAccepted = new EventEmitter<boolean>();
+  window = window
+  _termsAccepted: boolean;
 
   constructor() { }
 
