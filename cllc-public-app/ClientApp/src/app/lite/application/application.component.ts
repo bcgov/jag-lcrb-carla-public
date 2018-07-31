@@ -46,8 +46,6 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         const data = res.json();
-        // this.applicationName = data.name;
-        // this.store.dispatch(new currentApplicatioActions.SetCurrentApplicationAction(data));
         this.form.patchValue(data);
         if (data.isPaid) {
           this.form.disable();
@@ -127,20 +125,20 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   }
 
   submit_application() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
-      res => {
-        // console.log("applicationVM: ", res.json());
-        const jsonUrl = res.json();
-        // window.alert(jsonUrl['url']);
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      },
-      err => {
-        console.log('Error occured');
+    this.save(true).subscribe((result: boolean) => {
+      if (result) {
+        this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
+          res => {
+            const jsonUrl = res.json();
+            window.location.href = jsonUrl['url'];
+            return jsonUrl['url'];
+          },
+          err => {
+            console.log('Error occured');
+          }
+        );
       }
-    );
-
-
+    });
   }
 
   isValid(): boolean {
@@ -158,7 +156,6 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     // start by showing a confirmation dialog.
     if (confirm("Are you sure you want to cancel this application?")) {
       // delete the application.
-
       this.busy = this.applicationDataService.deleteApplication(this.applicationId).subscribe(
         res => {
           this.router.navigate(['/dashboard-lite']);
