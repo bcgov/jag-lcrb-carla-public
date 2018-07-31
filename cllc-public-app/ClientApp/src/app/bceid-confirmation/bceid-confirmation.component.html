@@ -1,101 +1,101 @@
+
 <div class="container" *ngIf="!currentUser.isBceidConfirmed">
+  <img style="margin-left: -18px;" *ngIf="termsAccepted" src="../../assets/bceid_default_logo.jpg" alt="BCeID Logo">
   <div [ngBusy]="busySubscription"></div>
   <app-terms-and-conditions (termsAccepted)="termsAccepted=$event" *ngIf="bceidConfirmAccount && !accountExists && !termsAccepted"></app-terms-and-conditions>
   <div *ngIf="bceidConfirmAccount && !accountExists && termsAccepted">
-    <h2>Confirm Business BCeID Information</h2>
-    <p>Do we have the correct information?</p>
-    <p><b>Company Name: {{currentUser.businessname}}{{businessType}}</b></p>
-    <div class="row">
-      <div class="col-md-12 text-left" *ngIf="!showBceidCorrection">
-        <button class="btn btn-primary" (click)="confirmBceidAccountYes()"><strong>Yes</strong><br></button>
-        <button class="btn btn-secondary" (click)="confirmBceidAccountNo()"><strong>No</strong><br></button>
-      </div>
-      <div class="col-md-12 text-left" *ngIf="showBceidCorrection">
-        <p>Before you continue, update your information with <a href="https://www.bceid.ca">Business BCeID</a> or log in with a different account.</p>
+    <h2>Please confirm the business or organization name associated to the Business BCeID.</h2>
+    <div *ngIf="!showBceidCorrection">
+      <p>
+        <b>{{currentUser.businessname}}</b>
+      </p>
+      <p>Is this correct?</p>
+      <div class="row">
+        <div class="col-md-12 text-left" *ngIf="!showBceidCorrection">
+          <button class="btn btn-primary" (click)="confirmBceidAccountYes()">
+            <strong>Yes</strong>
+          </button>
+          <button class="btn btn-secondary" (click)="confirmBceidAccountNo()">
+            <strong>No</strong>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  
+
   <div *ngIf="bceidConfirmBusinessType">
-    <h2>Confirm Business BCeID Information</h2>
-    <p><b>What type of business is {{currentUser.businessname}}?</b></p>
-    <!-- <section>
-        <input type="radio" name="InitialBusinessType" value="Corporation" [(ngModel)]="businessType"> <span>Corporation</span><br>
-        <input type="radio" name="InitialBusinessType" value="Partnership" [(ngModel)]="businessType"> <span>Partnership</span><br>
-        <input type="radio" name="InitialBusinessType" value="SoleProprietor" [(ngModel)]="finalBusinessType"> <span>Sole Proprietor</span><br>
-        <input type="radio" name="InitialBusinessType" value="Society" [(ngModel)]="finalBusinessType"> <span>Society</span><br>
-        <input type="radio" name="InitialBusinessType" value="Indigenous nation" [(ngModel)]="businessType"> <span>Indigenous nation</span><br>
-        <input type="radio" name="InitialBusinessType" value="Not Listed" [(ngModel)]="businessType"> <span>Not Listed</span><br>
-        <br> -->
-      <section>
-        <input type="radio" name="InitialBusinessType" value="PrivateCorporation" [(ngModel)]="businessType"> <span>Private Corporation</span><br>
-        <input type="radio" name="InitialBusinessType" value="PublicCorporation" [(ngModel)]="businessType"> <span>Public Corporation</span><br>
-        <input type="radio" name="InitialBusinessType" value="SoleProprietor" [(ngModel)]="businessType"> <span>Sole Proprietorship</span><br>
-        <input type="radio" name="InitialBusinessType" value="Partnership" [(ngModel)]="businessType"> <span>Partnership</span><br>
-        <input type="radio" name="InitialBusinessType" value="Society" [(ngModel)]="businessType"> <span>Society</span><br>
-        <input type="radio" name="InitialBusinessType" value="Indigenous nation" [(ngModel)]="businessType"> <span>Indigenous nation</span><br>
-        <br>
-      </section>
+    <h2>Please confirm the organization type associated with the Business BCeID:</h2>
 
-    <!-- <section *ngIf="businessType != '' && businessType == 'Corporation' || businessType == 'Partnership'">
-      <p><b>{{businessType}} type:</b></p>
+    <section class="radio-buttons">
+      <input type="radio" name="InitialBusinessType" value="PrivateCorporation" [(ngModel)]="businessType">
+      <span>Private Corporation</span>
+      <br>
+      <br>
+      <input type="radio" name="InitialBusinessType" value="PublicCorporation" [(ngModel)]="businessType">
+      <span>Public Corporation</span>
+      <br>
+      <br>
+      <input type="radio" name="InitialBusinessType" value="SoleProprietor" [(ngModel)]="businessType">
+      <span>Sole Proprietorship</span>
+      <br>
+      <br>
+      <input type="radio" name="InitialBusinessType" value="Partnership" [(ngModel)]="businessType">
+      <span>Partnership</span>
+      <br>
+      <br>
+      <input type="radio" name="InitialBusinessType" value="Society" [(ngModel)]="businessType">
+      <span>Society</span>
+      <br>
+      <br>
+      <input type="radio" name="InitialBusinessType" value="Indigenous nation" [(ngModel)]="businessType">
+      <span>Indigenous nation</span>
     </section>
 
-    <section *ngIf="bceidConfirmBusinessType && businessType == 'Corporation'">
-      <input type="radio" name="businessRadio" value="PrivateCorporation" [(ngModel)]="finalBusinessType"> <span>Private corporation</span><br>
-      <input type="radio" name="businessRadio" value="PublicCorporation" [(ngModel)]="finalBusinessType"> <span>Public corporation</span><br>
-      <input type="radio" name="businessRadio" value="UnlimitedLiabilityCorporation" [(ngModel)]="finalBusinessType"> <span>Unlimited liability corporation</span><br>
-      <input type="radio" name="businessRadio" value="LimitedLiabilityCorporation" [(ngModel)]="finalBusinessType"> <span>Limited liability corporation</span><br><br>
+    <section *ngIf="bceidConfirmBusinessType">
+      <button class="btn btn-primary" (click)="confirmCorpType()" [disabled]="businessType == 'Indigenous nation'">
+        <strong>Next</strong>
+      </button>
     </section>
 
-    <section *ngIf="bceidConfirmBusinessType && businessType == 'Partnership'">
-      <input type="radio" name="businessRadio" value="GeneralPartnership" [(ngModel)]="finalBusinessType"> <span>General Partnership</span><br>
-      <input type="radio" name="businessRadio" value="LimitedPartnership" [(ngModel)]="finalBusinessType"> <span>Limited partnership</span><br>
-      <input type="radio" name="businessRadio" value="LimitedLiabilityPartnership" [(ngModel)]="finalBusinessType"> <span>Limited liability partnership</span><br><br>
-    </section> -->
-    
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Indigenous nation'">
-      <p>If the applicant is applying as an Indigenous nation under the nation's name, please contact the Liquor and Cannabis Regulation Branch for assistance.</p>
-      <br><i>
-        <p>Phone:</p>
-        <p>Victoria: (250) 952-5787</p>
-        <p>Toll Free: 1 866 209-2111</p>
-        <br>
-        <p>Email: LCLBHelpDesk@gov.bc.ca</p>
-      </i><br>
-    </section>
-    <!-- <section *ngIf="bceidConfirmBusinessType && businessType == 'Not Listed'">
-      <p>Legal entities not listed above are not available on the beta version of the Cannabis Licensing application. Please contact the Liquor and Cannabis Regulation Branch for assistance.</p>
-      <br><i>
-        <p>Phone:</p>
-        <p>Victoria: (250) 952-5787</p>
-        <p>Toll Free: 1 866 209-2111</p>
-        <br>
-        <p>Email: LCLBHelpDesk@gov.bc.ca</p>
-      </i><br>
-    </section> -->
-
-    <section *ngIf="bceidConfirmBusinessType && businessType != 'Indigenous nation' && businessType != 'Not Listed'">
-      <button class="btn btn-primary" (click)="confirmCorpType()"><strong>Next</strong><br></button>
+      <p>For Indigenous nations please contact the LCRB directly.
+        <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a>
+      </p>
+      <a href="">&lt;&lt; Return to Information Portal Homepage</a>
+      <br>
     </section>
   </div>
 
   <div *ngIf="bceidConfirmContact">
-    <h2>Confirm Business BCeID Information</h2>
-    <p>Are you {{currentUser.name}}?</p>
-    <div class="row">
-      <div class="col-md-12 text-left" *ngIf="showBceidUserContinue">
-        <button class="btn btn-primary" (click)="confirmContactYes()"><strong>Yes</strong></button>
-        <button class="btn btn-secondary" (click)="confirmContactNo()"><strong>No</strong></button>
-        <br>
-        <div [ngBusy]="busy"></div>
-      </div>
-      <div class="col-md-12 text-left" *ngIf="!showBceidUserContinue">
-        <p>Each user should have their own user account to fill out the application. Contact the BCeID primary user to add your account to the Business BCeID.</p>
-        <!-- <button class="btn btn-primary" (click)="confirmContactYes()"><strong>Continue</strong></button> -->
-        <br>
-        <div [ngBusy]="busy"></div>
+    <h2>Please confirm the name associated with the Business BCeID login provided.</h2>
+    <div *ngIf="showBceidUserContinue">
+      <p>
+        <b>{{currentUser.name}}</b>
+      </p>
+      <p>
+        Is this correct?
+      </p>
+      <div class="row">
+        <div class="col-md-12 text-left">
+          <button class="btn btn-primary" (click)="confirmContactYes()">
+            <strong>Yes</strong>
+          </button>
+          <button class="btn btn-secondary" (click)="confirmContactNo()">
+            <strong>No</strong>
+          </button>
+          <br>
+          <div [ngBusy]="busy"></div>
+        </div>
       </div>
     </div>
   </div>
+  <div *ngIf="!showBceidUserContinue || showBceidCorrection">
+    <p>Before continuing, please update your information with
+      <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx">Business BCeID</a> or
+      <br>login with a different account.</p>
+    <br>
+    <div [ngBusy]="busy"></div>
+    <a href="">&lt;&lt; Return to Information Portal Homepage</a>
+  </div>
+  <div *ngIf="termsAccepted" style="margin-bottom: 40%;"></div>
 </div>
