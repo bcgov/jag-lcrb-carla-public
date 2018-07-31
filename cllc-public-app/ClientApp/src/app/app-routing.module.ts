@@ -31,9 +31,7 @@ import { SiteMapComponent } from './license-application/tabs/site-map/site-map.c
 import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
-import { environment } from '../environments/environment';
 import { ApplicationComponent } from './lite/application/application.component';
-import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
@@ -47,10 +45,6 @@ const routes: Routes = [
   {
     path: 'dashboard-lite',
     component: DashboardLiteComponent
-  },
-  {
-    path: 'terms-and-conditions',
-    component: TermsAndConditionsComponent
   },
   {
     path: 'application-lite/:applicationId',
