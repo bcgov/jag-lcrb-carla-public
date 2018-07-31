@@ -78,14 +78,18 @@
   <p>Proceed to pay online using a credit card through the secure web portal.</p>
 
   <button class="btn btn-primary" (click)="submit_application()" [disabled]="!isValid()">SUBMIT &amp; PAY</button>
-  <span style="float: right">
-
-    <a routerLink="/dashboard-lite">
-      <mat-icon aria-label="Save Application">save</mat-icon>
-      Save for Later</a> &nbsp;
-    <a href="javascript:void(0);">
-      <mat-icon aria-label="Cancel Application">delete</mat-icon>
-      Cancel Application</a>
+  <span style="float: right; color: #1a5a96">
+    <span class="app-save" (click)="router.navigate(['/dashboard-lite'])">
+      <mat-icon aria-label="Save Application" style="text-decoration: solid">save</mat-icon>
+      <a href="javascript: void(0)">
+        Save for Later</a>
+    </span>
+     &nbsp;
+     <span class="app-cancel" (click)="cancelApplication()">
+        <mat-icon aria-label="Save Application" style="text-decoration: solid">delete</mat-icon>
+        <a href="javascript: void(0)">
+          Cancel Application</a>
+      </span>
   </span>
   <p>&nbsp;</p>
   <p>The province does not know how many application for a cannabis retail store license will be recieved. Therefore, it is
