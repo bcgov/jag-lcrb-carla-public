@@ -1,4 +1,4 @@
-<div class="row home-header">
+<div *ngIf="isLiteVersion" class="row home-header lite">
   <div class="jumbotron col-md-8 col-xs-12">
     <h2>
       Apply for a cannabis retail store license
@@ -28,7 +28,7 @@
     </section>
   </div>
 </div>
-<div class="row home-body">
+<div *ngIf="isLiteVersion" class="row home-body">
   <div class="col-md-8 col-xs-12">
     <!-- Accordion -->
     <app-accordion></app-accordion>
@@ -42,5 +42,39 @@
         <a class="btn btn-primary" routerLink="prv" tabindex="3">START</a>
       </div>
     </section>
+  </div>
+</div>
+
+
+<div *ngIf="!isLiteVersion" class="extra-padding-left">
+  <div class="row">
+    <div class="col-md-8 col-xs-12">
+      <!-- What you need message and survey button -->
+      <div class="jumbotron">
+        <h1>
+          What does an applicant need to apply for a cannabis licence?
+        </h1>
+        <h3>
+          Answer questions about the proposed business to receive a customized to-do list to prepare an application.
+        </h3>
+        <div class="row">
+          <div class="col-md-12 text-left">
+            <a class="globalButton" class="btn btn-primary" routerLink="prv" tabindex="3">
+              <strong>Start</strong>
+              <br>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <app-accordion></app-accordion>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="col-md-4 newsletter">
+      <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
+    </div>
+
   </div>
 </div>
