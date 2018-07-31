@@ -15,7 +15,7 @@
             <span class="label label-beta">Beta</span>
           </span>
         </section>
-        <section class="col-md-4 col-xs-12 sign-container">
+        <section class="col-md-4 col-xs-12 sign-container" *ngIf="showLogin">
           <span class="sign" *ngIf="currentUser">
             <span>{{currentUser.name}}</span>
             &nbsp;
