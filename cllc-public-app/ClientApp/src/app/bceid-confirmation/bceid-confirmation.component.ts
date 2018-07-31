@@ -25,6 +25,7 @@ export class BceidConfirmationComponent {
   busy: Promise<any>;
   busySubscription: Subscription;
   accountExists: boolean = true;
+  termsAccepted: boolean = false;
 
   constructor(private dynamicsDataService: DynamicsDataService, private userDataService: UserDataService, private accountDataService: AccountDataService) {
     // if this passes, this means the user's account exists but it's contact information has not been created.
