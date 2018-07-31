@@ -13,7 +13,7 @@
   <div style="margin-top: 5px;">
     <div [ngBusy]="busy"></div>
     <section *ngFor="let item of files; let i=index" class="file-list">
-      <a href="javascript: void(0)">{{ item.name }}</a>
+      <span>{{ item.name }}</span>
       <span>
         <span style="margin-right: 20px;">{{Math.ceil(2090671/1024)}} kb</span>
         <a href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
