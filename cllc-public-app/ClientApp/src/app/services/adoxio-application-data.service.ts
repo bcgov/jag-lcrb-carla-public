@@ -56,11 +56,11 @@ export class AdoxioApplicationDataService {
 
   /**
    * Delete the Dynamics Application
-   * @param applicationData
+   * @param id
    */
   deleteApplication(id: string) {
     //call API    
-    return this.http.delete(this.apiPath + id, { headers: this.jsonHeaders });
+    return this.http.post(this.apiPath + id + "/delete", { headers: this.jsonHeaders });
   }
 
 

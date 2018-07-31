@@ -1,46 +1,82 @@
-<div class="row home-header">
-  <div class="jumbotron col-md-8 col-xs-12">
-    <h2>
-      Apply for a cannabis retail store license
-    </h2>
-    <p>
-      A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.
-      To use the online application service, you must have a registered Business BCeID.
-    </p>
-    <div class="row">
-      <div class="col-md-12 text-left">
-        <button class="btn btn-primary" (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
-          <strong>REGISTER FOR A BUSINESS BCeID</strong>
-          <br>
-        </button>
-        <span style="padding: 10px;">OR</span>
-        <button class="btn btn-primary" routerLink="terms-and-conditions" tabindex="3">
-          <strong>LOG IN</strong>
-          <br>
-        </button>
+<div *ngIf="isLiteVersion" class="lite">
+  <div class="row home-header">
+    <div class="jumbotron col-md-8 col-xs-12">
+      <h2>
+        Apply for a cannabis retail store license
+      </h2>
+      <p>
+        A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.
+        To use the online application service, you must have a registered Business BCeID.
+      </p>
+      <div class="row">
+        <div class="col-md-12 text-left">
+          <button class="btn btn-primary" (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
+            <strong>REGISTER FOR A BUSINESS BCeID</strong>
+            <br>
+          </button>
+          <span style="padding: 10px;">OR</span>
+          <button class="btn btn-primary" routerLink="login" tabindex="3">
+            <strong>LOG IN</strong>
+            <br>
+          </button>
+        </div>
       </div>
     </div>
+    <!-- Newsletter -->
+    <div class="col-md-4">
+      <section class="newsletter">
+        <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
+      </section>
+    </div>
   </div>
-  <!-- Newsletter -->
-  <div class="col-md-4">
-    <section class="newsletter">
-      <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
-    </section>
+  <div class="row home-body">
+    <div class="col-md-8 col-xs-12">
+      <!-- Accordion -->
+      <app-accordion></app-accordion>
+    </div>
+    <!-- Survey -->
+    <div class="col-md-4">
+      <section class="survey">
+        <h2>What does an applicant need to apply for a cannabis license?</h2>
+        <h3>Answer questions about the proposed business to receive a customized to-do list to prepare an application.</h3>
+        <div style="text-align: right">
+          <a class="btn btn-primary" routerLink="prv" tabindex="3">START</a>
+        </div>
+      </section>
+    </div>
   </div>
 </div>
-<div class="row home-body">
-  <div class="col-md-8 col-xs-12">
-    <!-- Accordion -->
-    <app-accordion></app-accordion>
-  </div>
-  <!-- Survey -->
-  <div class="col-md-4">
-    <section class="survey">
-      <h2>What does an applicant need to apply for a cannabis license?</h2>
-      <h3>Answer questions about the proposed business to receive a customized to-do list to prepare an application.</h3>
-      <div style="text-align: right">
-        <a class="btn btn-primary" routerLink="prv" tabindex="3">START</a>
+
+
+<div *ngIf="!isLiteVersion" class="extra-padding-left notlite">
+  <div class="row">
+    <div class="col-md-8 col-xs-12">
+      <!-- What you need message and survey button -->
+      <div class="jumbotron">
+        <h1>
+          What does an applicant need to apply for a cannabis licence?
+        </h1>
+        <h3>
+          Answer questions about the proposed business to receive a customized to-do list to prepare an application.
+        </h3>
+        <div class="row">
+          <div class="col-md-12 text-left">
+            <a class="globalButton" class="btn btn-primary" routerLink="prv" tabindex="3">
+              <strong>Start</strong>
+              <br>
+            </a>
+          </div>
+        </div>
       </div>
-    </section>
+
+      <!-- Accordion -->
+      <app-accordion></app-accordion>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="col-md-4 newsletter">
+      <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
+    </div>
+
   </div>
 </div>

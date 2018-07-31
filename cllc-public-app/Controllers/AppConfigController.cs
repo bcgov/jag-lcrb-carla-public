@@ -35,8 +35,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult ShowLogin()
         {
             var result = new ClientConfig{
-                IsLiteVersion = ! String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]),
-                ShowLogin = ! String.IsNullOrEmpty(Configuration["SHOW_LOGIN"]),
+                IsLiteVersion = !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]),
+                ShowLogin = !String.IsNullOrEmpty(Configuration["SHOW_LOGIN"])
             };
             return Json(result);
         }
