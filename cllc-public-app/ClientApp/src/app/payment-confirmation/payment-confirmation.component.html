@@ -1,54 +1,77 @@
 <mat-card class="mat-elevation-z0">
   <div [ngBusy]="busy" class="container" style="margin-left:0px;">
-    <div *ngIf="isApproved" class="row">
-      <div style="width:100%">
-        <h4>You have successfully submitted a cannabis retail licence application</h4>
-      </div>
+    <div *ngIf="isApproved">
       <div>
         <h1 style="color:green">Payment Approved</h1>
+        <p></p>
         <div class="table" style="padding:0px;">
           <table>
             <tr>
-              <td>Card Type:</td>
+              <td>Card Type</td>
               <td>{{cardType}}</td>
             </tr>
             <tr>
-              <td>Date/Time :</td>
+              <td>Date/Time</td>
               <td>{{trnDate}}</td>
             </tr>
             <tr>
-              <td>Invoice Number :</td>
+              <td>Invoice Number</td>
               <td>{{invoice}}</td>
             </tr>
             <tr>
-              <td>Transaction Id :</td>
+              <td>Transaction ID</td>
               <td>{{trnId}}</td>
             </tr>
             <tr>
-              <td>Authorization :</td>
+              <td>Authorization</td>
               <td>{{authCode}}</td>
             </tr>
             <tr>
-              <td>Amount :</td>
+              <td>Amount</td>
               <td>{{trnAmount | currency}}</td>
             </tr>
           </table>
         </div>
       </div>
-      <div class="row" style="margin-left:5px;">
-        <h2>Next steps</h2>
-        <p>1. The liquor and Cannabis Regulation Branch will review your application and provide notice of the application to the local government or indigenous nation for your proposed location to confirm they are accepting applications for cannabis stores.</p>
-        <p>2. Associates of the applicant such as shareholders, directores, etc. etc. must authorize security screening and finacial integrity checks themselves. Instructions on how to provide the security checks are in the email.</p>
-        <p>You will be notified by the Branch if any information is missing or ig more information is required. If you need to make any changes please contact cannabisregs@gov.bc.ca or 1-800-420-0420.</p>
-      </div>
+
+      <hr>
+
+      <p>As a reminder, associates of the applicant must consent to a background check and financial integrity assessments.
+        Applicants are required to provide associates with the Parcel Identifier (PID) or address of the proposed cannabis
+        retail store.</p>
+      <br>
+
+      <span style="font-style: italic;">Parcel Identifier (PID):</span>
+      <p></p>
+      <ul>
+        <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+        <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents, on your
+          lease, or obtained from your landlord.</li>
+      </ul>
+
+      <p>Applicants should direct associates to the
+        <a href="javascript: void(0);">LCRB non-medical cannabis webpage</a>
+        to download the required forms and instructions for submitting documentation.</p>
+
+      <p>The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is missing, or if more
+        information is required. If the applicant wishes to make any changes to the application, please contact
+        <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.</p>
+
     </div>
 
     <div *ngIf="!isApproved && loaded">
       <br />
-      <alert type="danger"><strong>{{paymentTransactionTitle}}</strong><br /><br />{{paymentTransactionMessage}}</alert>
+      <alert type="danger">
+        <strong>{{paymentTransactionTitle}}</strong>
+        <br />
+        <br />{{paymentTransactionMessage}}</alert>
     </div>
     <div *ngIf="loaded">
-      <p><a class="globalButton btn btn-primary" style="color:white" (click)="return_to_application()"><strong>Return to Dashboard</strong></a></p>
+      <p>
+        <a class="globalButton btn btn-primary" style="color:white" routerLink="/dashboard-lite">
+          <strong>Return to Dashboard</strong>
+        </a>
+      </p>
     </div>
   </div>
 </mat-card>
