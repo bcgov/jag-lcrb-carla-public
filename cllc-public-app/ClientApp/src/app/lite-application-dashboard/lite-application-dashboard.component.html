@@ -26,10 +26,10 @@
         </ng-container>
 
         <!-- Column -->
-        <ng-container matColumnDef="status">
+        <ng-container matColumnDef="cancel">
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a (click)="cancelApplication(element.id)" skipLocationChange>Cancel Application</a>
+            <a href="javascript:void(0);" (click)="cancelApplication(element.id)" skipLocationChange> <mat-icon aria-label="Cancel Application">delete</mat-icon> Cancel Application </a>
           </mat-cell>
         </ng-container>
 

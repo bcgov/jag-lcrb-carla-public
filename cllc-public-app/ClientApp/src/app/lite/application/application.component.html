@@ -1,4 +1,4 @@
-<div [formGroup]="form" style="max-width: 700px; padding-left: 15px;">
+<div [formGroup]="form" style="max-width: 700px; padding-left: 45px;">
   <h1>Submit the Cannabis Retail Store Licence Application</h1>
 
   <p>Please make sure that all of the required forms and supporting documentation is included. A $7,500.00 application fee will
@@ -43,7 +43,7 @@
       <p>Establishment names will be reviewed for approval during the application process.</p>
 
       <input class="form-control" style="width: 500px;" type="text" id="establishmentName" formControlName="establishmentName"
-        placeholder="Establishment names will be reviewed for approval during the application process.">
+        placeholder="Begin by entering the name of the proposed establishment.">
       <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
         <div *ngIf="form.controls['establishmentName'].hasError('required') ">
           This is required
@@ -81,10 +81,10 @@
   <span style="float: right">
 
     <a routerLink="/dashboard-lite">
-      <mat-icon aria-label="Save Applicaiton">save</mat-icon>
+      <mat-icon aria-label="Save Application">save</mat-icon>
       Save for Later</a> &nbsp;
     <a href="javascript:void(0);">
-      <mat-icon aria-label="Cancel Applicaiton">delete</mat-icon>
+      <mat-icon aria-label="Cancel Application">delete</mat-icon>
       Cancel Application</a>
   </span>
   <p>&nbsp;</p>
