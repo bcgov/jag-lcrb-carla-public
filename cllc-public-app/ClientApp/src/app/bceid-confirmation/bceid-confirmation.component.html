@@ -1,6 +1,7 @@
 <div class="container" *ngIf="!currentUser.isBceidConfirmed">
   <div [ngBusy]="busySubscription"></div>
-  <div *ngIf="bceidConfirmAccount && !accountExists">
+  <app-terms-and-conditions (termsAccepted)="termsAccepted=$event" *ngIf="bceidConfirmAccount && !accountExists && !termsAccepted"></app-terms-and-conditions>
+  <div *ngIf="bceidConfirmAccount && !accountExists && termsAccepted">
     <h2>Confirm Business BCeID Information</h2>
     <p>Do we have the correct information?</p>
     <p><b>Company Name: {{currentUser.businessname}}{{businessType}}</b></p>
