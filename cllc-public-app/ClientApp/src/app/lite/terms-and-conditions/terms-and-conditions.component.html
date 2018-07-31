@@ -185,13 +185,13 @@
 
   </section>
   <section>
-    <input type="checkbox" [checked]="termsAccepted" (change)="termsAccepted = !termsAccepted" />&nbsp;I have read and accept the above terms and conditions.
+    <input type="checkbox" [checked]="_termsAccepted" (change)="_termsAccepted = !_termsAccepted" />&nbsp;I have read and accept the above terms and conditions.
     <br>
   </section>
   <section class="buttons">
-    <span *ngIf="termsAccepted">
-      <button class="btn btn-primary" (click)="window.location.href='login'">Continue</button>&nbsp;</span>
-    <span *ngIf="!termsAccepted">
+    <span *ngIf="_termsAccepted">
+      <button class="btn btn-primary" (click)="termsAccepted.emit(true);">Continue</button>&nbsp;</span>
+    <span *ngIf="!_termsAccepted">
       <button class="btn btn-primary" (click)="window.alert('You must check the checkbox above to proceed.');">Continue</button>&nbsp;</span>
     <a href="" tabindex="1">Cancel and Exit</a>
   </section>
