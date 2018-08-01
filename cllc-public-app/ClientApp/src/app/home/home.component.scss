@@ -1,10 +1,22 @@
 .lite{
+  p {
+    font-size: 16px;
+  }
+
+  .btn {
+    background-color: #003366;
+  }
+
   .home-header {
-    background-color: rgba(242, 242, 242, 1);
     padding-left: 50px;
     padding-right: 60px;
     padding-top: 60px;
     padding-bottom: 60px;
+    width: 775px;
+  }
+
+  .home-header-wrapper {
+    background-color: rgba(242, 242, 242, 1);
   }
 
   .home-body {
@@ -12,6 +24,8 @@
     padding-left: 50px;
     padding-right: 60px;
     padding-top: 60px;
+    width: 775px;
+    display: flex;
   }
 
   .intro {
@@ -95,25 +109,37 @@
     }
   }
 
-  .newsletter {
-    margin-top: 30px;
+  .side-box {
+    width: 400px;
+    margin-top: 40px;
     margin-bottom: 30px;
     margin-left: 50px;
-    padding: 40px;
+    padding: 30px;
     background-color: rgba(56, 89, 138, 1);
     border-bottom: 3px solid #fcba19 !important;
-  }
-
-  .survey {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 50px;
-    padding: 40px;
-    background-color: rgba(56, 89, 138, 1);
-    border-bottom: 3px solid #fcba19 !important;
-    h2, h3 {
+    h2, p {
       color: white;
     }
+    h2{
+      margin-top: 0;
+    }
+  }
+
+  .side-box-wrapper {
+    margin-left: 90px;
+  }
+  
+  .fab-button {
+    background-color: #7596C8;
+    margin-right: 20px;
+    cursor: default;
+  }
+
+  .icon {
+    font-size: 30px;
+    color: #fff;
+    margin-left: -5px;
+    margin-top: -5px;
   }
 }
 
@@ -144,7 +170,6 @@
       color: #494949;
   
   }
-  
   
   .steps {
     .step {
