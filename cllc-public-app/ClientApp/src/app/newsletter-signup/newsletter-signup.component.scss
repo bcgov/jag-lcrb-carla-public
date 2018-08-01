@@ -58,6 +58,19 @@
         display: flex;
         margin-top: 20px;
     }
+
+    .fab-button {
+        background-color: #7596C8;
+        margin-right: 20px;
+        cursor: default;
+      }
+    
+      .icon {
+        font-size: 30px;
+        color: #fff;
+        margin-left: -5px;
+        margin-top: -5px;
+      }
 }
 
 .notlite{
