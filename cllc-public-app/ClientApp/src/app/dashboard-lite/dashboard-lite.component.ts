@@ -13,7 +13,7 @@ import { PaymentDataService } from '../services/payment-data.service';
 @Component({
   selector: 'app-dashboard-lite',
   templateUrl: './dashboard-lite.component.html',
-  styleUrls: ['./dashboard-lite.component.css']
+  styleUrls: ['./dashboard-lite.component.scss']
 })
 export class DashboardLiteComponent implements OnInit {
   public currentUser: User;
