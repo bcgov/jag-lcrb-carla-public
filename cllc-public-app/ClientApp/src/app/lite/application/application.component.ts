@@ -26,6 +26,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   busy: Subscription;
   accountId: string;
   payMethod: string;
+  validationMessages: any[];
+  showValidationMessages: boolean;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -125,29 +127,38 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   }
 
   submit_application() {
-    this.save(true).subscribe((result: boolean) => {
-      if (result) {
-        this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
-          res => {
-            const jsonUrl = res.json();
-            window.location.href = jsonUrl['url'];
-            return jsonUrl['url'];
-          },
-          err => {
-            console.log('Error occured');
-          }
-        );
-      }
-    });
+    if (!this.isValid()) {
+      this.showValidationMessages = true;
+    }
+    else {
+      this.save(true).subscribe((result: boolean) => {
+        if (result) {
+          this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
+            res => {
+              const jsonUrl = res.json();
+              window.location.href = jsonUrl['url'];
+              return jsonUrl['url'];
+            },
+            err => {
+              console.log('Error occured');
+            }
+          );
+        }
+      });
+    }
   }
 
   isValid(): boolean {
+    this.showValidationMessages = false;
     let valid = true;
+    this.validationMessages = [];
     if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
       valid = false;
+      this.validationMessages.push("Application form is required.")
     }
     if (!this.form.get('establishmentName').value) {
       valid = false;
+      this.validationMessages.push("Establishment name is required.")
     }
     return valid;
   }
