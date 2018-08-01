@@ -1,276 +1,191 @@
-.lite{
-  p {
-    font-size: 16px;
-  }
-
-  .btn {
-    background-color: #003366;
-  }
-
-  .home-header {
-    padding-left: 50px;
-    padding-right: 60px;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    width: 775px;
-  }
-
-  .home-header-wrapper {
-    background-color: rgba(242, 242, 242, 1);
-  }
-
-  .home-body {
-    background-color: rgba(255, 255, 255, 1);
-    padding-left: 50px;
-    padding-right: 60px;
-    padding-top: 60px;
-    width: 775px;
-    display: flex;
-  }
-
-  .intro {
-    font-size: 24px;
-    line-height: 1.6;
-    max-width: 80%;
-    margin: 3rem auto 4rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  .steps {
-    .step {
-      background-color: rgba(#000, 0.35);
-      border-radius: 10px;
-      margin-top: 10px;
-      padding: 10px 10px 5px;
+.lite {
+    .btn-primary {
+        font-family: 'myriad-pro', 'sans serif';
+        font-weight: 700;
+        font-style: normal;
+        font-size: 14px;
     }
-  }
-
-  .step-info {
-    color: #f6f6f6;
-    font-size: 18px;
-  }
-
-  .ordinal {
-    baseline-shift: -.2em;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    display: inline-block;
-    height: 1.75em;
-    line-height: 1.2;
-    margin-right: 0.25em;
-    padding: 0.3em;
-    text-align: center;
-    width: 1.75em;
-  }
-
-  .survey-button {
-    border: 2px solid rgba(#f8fcff, 0.3);
-    margin-top: 2.5rem;
-    &:active {
-      border: 2px solid rgba(#fff, 0.8);
-    }
-  }
-
-  .login-button {
-    background-color: #fcba19;
-    border: 2px solid rgba(#f8fcff, 0.4);
-    color: #38598a;
-    margin-top: 2.5rem;
-    &:hover, &:focus {
-      background-color: darken(#fcba19, 8%);
-      color: #222;
-    }
-    &:active {
-      border: 2px solid rgba(#fff, 0.8);
-    }
-  }
-
-  .jumbotron {
-    background-color: rgba(242, 242, 242, 1);
-    margin-top: 15px;
-    h2 {
-      font-weight: 400;
-      font-size: 36px;
-    }
-  }
-
-  .returning {
-    color: #fff;
-    margin-top: 2rem;
     p {
-      margin-bottom: 0.4rem;
+        font-size: 16px;
     }
-    a {
-      color: #fff;
-      text-decoration: none;
-      &:hover, &:active, &:focus {
-        text-decoration: underline;
-      }
+    .home-header {
+        padding-left: 50px;
+        padding-right: 60px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        width: 775px;
     }
-  }
-
-  .side-box {
-    width: 400px;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    margin-left: 50px;
-    padding: 30px;
-    background-color: rgba(56, 89, 138, 1);
-    border-bottom: 3px solid #fcba19 !important;
-    h2, p {
-      color: white;
+    .home-header-wrapper {
+        background-color: rgba(242, 242, 242, 1);
     }
-    h2{
-      margin-top: 0;
+    .home-body {
+        background-color: rgba(255, 255, 255, 1);
+        padding-left: 50px;
+        padding-right: 60px;
+        padding-top: 60px;
+        width: 775px;
+        display: flex;
     }
-  }
-
-  .side-box-wrapper {
-    margin-left: 90px;
-  }
-  
-  .fab-button {
-    background-color: #7596C8;
-    margin-right: 20px;
-    cursor: default;
-  }
-
-  .icon {
-    font-size: 30px;
-    color: #fff;
-    margin-left: -5px;
-    margin-top: -5px;
-  }
+    .jumbotron {
+        background-color: rgba(242, 242, 242, 1);
+        margin-top: 15px;
+        margin-bottom: 90px;
+        h2 {
+            font-weight: 400;
+            font-size: 36px;
+        }
+    }
+    .side-box {
+        width: 400px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        margin-left: 50px;
+        padding: 45px;
+        background-color: rgba(56, 89, 138, 1);
+        border-bottom: 3px solid #fcba19 !important;
+        h2,
+        p {
+            color: white;
+        }
+        h2 {
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background-color: #003366;
+        }
+    }
+    .side-box-wrapper {
+        margin-left: 90px;
+    }
+    .fab-button {
+        background-color: #7596C8;
+        margin-right: 20px;
+        cursor: default;
+    }
+    .icon {
+        font-size: 30px;
+        color: #fff;
+        margin-left: -5px;
+        margin-top: -5px;
+    }
 }
 
 // This is old home scss
-.notlite{
-  .home-content {
-    padding-bottom: 20px;
-    padding-top: 8rem;
-    max-width: 840px;
-  }
-  
-  h1, h2 {
-    font-weight: 600;
-  }
-  
-  .intro {
-    font-size: 24px;
-    line-height: 1.6;
-    max-width: 80%;
-    margin: 3rem auto 4rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  
-  h3 {
-      font-size: 21px;
-      font-weight: 600;
-      padding-top: 10px;
-      color: #494949;
-  
-  }
-  
-  .steps {
-    .step {
-      background-color: rgba(#000, 0.35);
-      border-radius: 10px;
-      margin-top: 10px;
-      padding: 10px 10px 5px;
+.notlite {
+    .home-content {
+        padding-bottom: 20px;
+        padding-top: 8rem;
+        max-width: 840px;
     }
-  }
-  
-  .step-info {
-    color: #f6f6f6;
-    font-size: 18px;
-  }
-  
-  .ordinal {
-    baseline-shift: -.2em;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    display: inline-block;
-    height: 1.75em;
-    line-height: 1.2;
-    margin-right: 0.25em;
-    padding: 0.3em;
-    text-align: center;
-    width: 1.75em;
-  }
-  
-  .survey-button {
-    border: 2px solid rgba(#f8fcff, 0.3);
-    margin-top: 2.5rem;
-    &:active {
-      border: 2px solid rgba(#fff, 0.8);
+    h1,
+    h2 {
+        font-weight: 600;
     }
-  }
-  
-  .login-button {
-    background-color: #fcba19;
-    border: 2px solid rgba(#f8fcff, 0.4);
-    color: #38598a;
-    margin-top: 2.5rem;
-    &:hover, &:focus {
-      background-color: darken(#fcba19, 8%);
-      color: #222;
+    .intro {
+        font-size: 24px;
+        line-height: 1.6;
+        max-width: 80%;
+        margin: 3rem auto 4rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
-    &:active {
-      border: 2px solid rgba(#fff, 0.8);
+    h3 {
+        font-size: 21px;
+        font-weight: 600;
+        padding-top: 10px;
+        color: #494949;
     }
-  }
-  
-  .jumbotron {
-    background-color: rgba(248, 186, 50, 0.13);
-    border-left-color: rgb(248,186,50);
-    border-left-width: 7px;
-    border-left-style: solid;
-    border-radius:0;
-    margin-top: 15px;
-    h1 {
-      font-size: 45px;
-      font-weight: 600;
+    .steps {
+        .step {
+            background-color: rgba(#000, 0.35);
+            border-radius: 10px;
+            margin-top: 10px;
+            padding: 10px 10px 5px;
+        }
     }
-  }
-  
-  .returning {
-    color: #fff;
-    margin-top: 2rem;
-    p {
-      margin-bottom: 0.4rem;
+    .step-info {
+        color: #f6f6f6;
+        font-size: 18px;
     }
-    a {
-      color: #fff;
-      text-decoration: none;
-      &:hover, &:active, &:focus {
-        text-decoration: underline;
-      }
+    .ordinal {
+        baseline-shift: -.2em;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        display: inline-block;
+        height: 1.75em;
+        line-height: 1.2;
+        margin-right: 0.25em;
+        padding: 0.3em;
+        text-align: center;
+        width: 1.75em;
     }
-  }
-  
-  
-  .globalButton {
-      background-color: #003366;
-      border: #003366 1px solid;
-      color: #ffffff;
-      min-width: 120px;
-      font-size: 16px;
-      box-shadow: 0px 0px 0px 0px;
-      margin-top: 25px;
-  
-  
-  }
-  
-  .globalButton:hover {
-      background-color: #2f567b !important;
-      color: #ffffff;
-      border-color: #204d74;
-      text-decoration: none;
-      box-shadow: 0px 0px 0px 0px
-  }
-  
-  .newsletter {
-          margin-top: 30px
-      }
-  
+    .survey-button {
+        border: 2px solid rgba(#f8fcff, 0.3);
+        margin-top: 2.5rem;
+        &:active {
+            border: 2px solid rgba(#fff, 0.8);
+        }
+    }
+    .login-button {
+        background-color: #fcba19;
+        border: 2px solid rgba(#f8fcff, 0.4);
+        color: #38598a;
+        margin-top: 2.5rem;
+        &:hover,
+        &:focus {
+            background-color: darken(#fcba19, 8%);
+            color: #222;
+        }
+        &:active {
+            border: 2px solid rgba(#fff, 0.8);
+        }
+    }
+    .jumbotron {
+        background-color: rgba(248, 186, 50, 0.13);
+        border-left-color: rgb(248, 186, 50);
+        border-left-width: 7px;
+        border-left-style: solid;
+        border-radius: 0;
+        margin-top: 15px;
+        h1 {
+            font-size: 45px;
+            font-weight: 600;
+        }
+    }
+    .returning {
+        color: #fff;
+        margin-top: 2rem;
+        p {
+            margin-bottom: 0.4rem;
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+            &:hover,
+            &:active,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+    .globalButton {
+        background-color: #003366;
+        border: #003366 1px solid;
+        color: #ffffff;
+        min-width: 120px;
+        font-size: 16px;
+        box-shadow: 0px 0px 0px 0px;
+        margin-top: 25px;
+    }
+    .globalButton:hover {
+        background-color: #2f567b !important;
+        color: #ffffff;
+        border-color: #204d74;
+        text-decoration: none;
+        box-shadow: 0px 0px 0px 0px
+    }
+    .newsletter {
+        margin-top: 30px
+    }
 }
