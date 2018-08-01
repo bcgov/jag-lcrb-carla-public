@@ -25,6 +25,7 @@ export class FileUploaderComponent implements OnInit {
   @Input() documentType: string;
   @Input() applicationId: string;
   @Input() multipleFiles: boolean = true;
+  @Input() extensions: string[] = ['pdf'];
   busy: Subscription;
   attachmentURL: string;
   Math = Math;
@@ -48,7 +49,6 @@ export class FileUploaderComponent implements OnInit {
 
   public dropped(event: UploadEvent) {
     let files = event.files;
-
     for (var droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         let fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -71,6 +71,11 @@ export class FileUploaderComponent implements OnInit {
   }
 
   private uploadFile(file) {
+    let validExt = this.extensions.filter(ex => file.name.toLowerCase().endsWith(ex)).length > 0;
+    if (!validExt) {
+      alert("File type not supported.")
+      return;
+    }
     let formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('documentType', this.documentType);

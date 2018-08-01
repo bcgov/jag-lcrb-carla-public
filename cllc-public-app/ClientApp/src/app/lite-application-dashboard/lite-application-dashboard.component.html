@@ -1,85 +1,82 @@
-<!--display spiiner if data no loaded-->
-<div [ngBusy]="busy"></div>
+<div style="position: relative;">
+  <!--display spiiner if data no loaded-->
+  <div [ngBusy]="busy"></div>
 
-<div *ngIf="dataLoaded">
+  <div *ngIf="dataLoaded">
 
-  <!--display application in progress or submitted base on input parameter-->
-  <div *ngIf="applicationInProgress" class="dashboard-title">
+    <!--display application in progress or submitted base on input parameter-->
+    <div *ngIf="applicationInProgress" class="dashboard-title">
 
-    <!--<div *ngIf="dataSource.data.length > 0" class="dashboard-content">-->
-    <div class="dashboard-content">
+      <!--<div *ngIf="dataSource.data.length > 0" class="dashboard-content">-->
+      <div class="dashboard-content">
 
-      <mat-table class="mat-elevation-z0" #table [dataSource]="dataSource">
+        <mat-table class="mat-elevation-z0" #table [dataSource]="dataSource">
 
-        <!-- Column -->
-        <ng-container matColumnDef="lastUpdated">
-          <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.modifiedon | date:'mediumDate'}} </mat-cell>
-        </ng-container>
+          <!-- Column -->
+          <ng-container matColumnDef="lastUpdated">
+            <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.modifiedon | date:'mediumDate'}} </mat-cell>
+          </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="establishmentName">
-          <mat-header-cell *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <a routerLink="/application-lite/{{element.id}}">{{element.establishmentName}} (Ref. {{element.name}})</a>
-          </mat-cell>
-        </ng-container>
+          <!-- Column -->
+          <ng-container matColumnDef="establishmentName">
+            <mat-header-cell *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a routerLink="/application-lite/{{element.id}}">{{element.establishmentName}} (Ref. {{element.name}})</a>
+            </mat-cell>
+          </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="cancel">
-          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span class="cancel-app" (click)="cancelApplication(element.id)">
-                <mat-icon aria-label="Save Application" style="text-decoration: solid">delete</mat-icon>
+          <!-- Column -->
+          <ng-container matColumnDef="cancel">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <span (click)="cancelApplication(element.id)">
+                <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
                 <a href="javascript: void(0)">
                   Cancel Application</a>
               </span>
-          </mat-cell>
-        </ng-container>
+            </mat-cell>
+          </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
-      </mat-table>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
+        </mat-table>
 
-      <div *ngIf="dataSource.data && dataSource.data.length == 0" class="no-application">
-        No applications in Progress.
+        <div *ngIf="dataSource.data && dataSource.data.length == 0" class="no-application">
+          No applications in Progress.
+        </div>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="!applicationInProgress">
+
+      <div *ngIf="dataSource.data && dataSource.data.length == 0">
+        No previously submitted applications.
+      </div>
+
+      <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
+
+        <mat-table style="background-color: #eee;" class="mat-elevation-z0" #table [dataSource]="dataSource">
+
+          <!-- Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.applicationFormFileUrl, element.fileName)">{{element.establishmentName}}</a>
+              <br /> Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
+              <br /> Ref. {{element.name}}
+            </mat-cell>
+          </ng-container>
+
+          <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator style="background-color: #eee;" [pageSize]="4" [pageSizeOptions]="[4, 8, 12]" [showFirstLastButtons]="true">
+        </mat-paginator>
       </div>
 
     </div>
 
   </div>
-
-  <div *ngIf="!applicationInProgress">
-
-    <div *ngIf="dataSource.data && dataSource.data.length == 0">
-      No previously submitted applications.
-    </div>
-
-    <div *ngIf="dataSource.data.length > 0" class="dashboard-content">
-
-      <mat-table style="background-color: #eee;" class="mat-elevation-z0" #table [dataSource]="dataSource">
-
-        <!-- Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.applicationFormFileUrl, element.fileName)">{{element.establishmentName}}</a>
-            <br />
-            Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
-            <br />
-            Ref. {{element.name}}
-          </mat-cell>
-        </ng-container>
-
-        <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
-      </mat-table>
-      <mat-paginator #paginator style="background-color: #eee;"
-                     [pageSize]="4"
-                     [pageSizeOptions]="[4, 8, 12]"
-                     [showFirstLastButtons]="true">
-      </mat-paginator>
-    </div>
-
-  </div>
-
 </div>
