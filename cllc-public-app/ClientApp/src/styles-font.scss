@@ -1,20 +1,15 @@
 ﻿/* You can add global styles to this file, and also import other style files */
+
 /* Controls Survey styles */
+
 @import '~@angular/material/theming';
-
 @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
-
 @include mat-core();
-
 $primary: mat-palette($mat-grey, 400);
 $accent: mat-palette($mat-indigo, 500, A200, A400);
 $warn: mat-palette($mat-red, 500);
-
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
-
-
-
 body {
     color: #494949;
     background: #f2f2f2;
@@ -22,9 +17,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: #494949;
     font: MyriadWebPro, Calibri, Arial, "sans serif"
-
 }
-
 
 .btn.btn-primary {
     background-color: #38598a;
@@ -36,12 +29,17 @@ body {
 }
 
 .btn.btn-secondary {
-    color: #003366;
+    color: #fff;
     border: #003366 1px solid;
-    background-color: #ffffff;
+    background-color: #666666;
     min-width: 120px;
     font-size: 16px;
     border-radius: 3px;
+    display: inline-block;
+    padding: 6px 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: #494949 1px solid;
 }
 
 .btn-primary:hover {
@@ -52,9 +50,9 @@ body {
 }
 
 .btn-secondary:hover {
-    background-color: #eceff1;
+    background-color: rgba(153,153,153,1);
     border-color: #ccc;
-    color: #2f567b;
+    color: #ffffff;
 }
 
 .btn-secondary:focus {
@@ -80,7 +78,7 @@ body {
 
 .ctx-home {
     background: #f2f2f2
-    }
+}
 
 .panel-footer {
     background-color: #fff;
@@ -101,7 +99,7 @@ h1 {
 h2 {
     font-weight: Semi-bold;
     font-size: 24px;
-    color: #494949; 
+    color: #494949;
 }
 
 h3 {
@@ -123,32 +121,24 @@ h5 {
 
 select.form-control:not([size]):not([multiple]) {
     height: auto;
-  }
+}
 
-.form-control{
+.form-control {
     border-radius: 5px;
 }
 
-
-.extra-padding-left{
-    padding-left: 15px; 
+.extra-padding-left {
+    padding-left: 15px;
     padding-right: 15px;
 }
 
-
-
-@media (max-width: 575.98px) { 
-    .extra-padding-left{
-        margin-left: 0; 
+@media (max-width: 575.98px) {
+    .extra-padding-left {
+        margin-left: 0;
     }
 }
 
-.alert{
+.alert {
     padding: 3px 5px 3px;
-    margin-top: -9px; 
+    margin-top: -9px;
 }
-
-
-
-
-
