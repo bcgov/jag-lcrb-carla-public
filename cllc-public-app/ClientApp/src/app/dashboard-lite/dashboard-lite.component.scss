@@ -44,10 +44,12 @@ li::before {
     line-height: 0;
     vertical-align: middle;
     width: 0.5em;
+    margin-left: -16px;
 }
 
 li {
     margin: 10px auto;
+    margin-left: 16px;
 }
 
 .li-header {
