@@ -1,18 +1,15 @@
 @import "../../../node_modules/ng2-toastr/bundles/ng2-toastr.min.css";
-.lite{
+.lite {
     h2 {
         margin-top: 0;
         color: #ffffff;
     }
-
     h3 {
         color: #ffffff;
     }
-
     p {
         padding-top: 10px;
     }
-
     .globalButton {
         background-color: #ffffff;
         margin-left: 0;
@@ -40,7 +37,6 @@
         box-shadow: 0px 0px 0px 0px;
         margin-top: 10px;
     }
-
     .globalButton:hover {
         background-color: rgba(0, 51, 102, 1);
         color: #ffffff;
@@ -49,52 +45,47 @@
         box-shadow: 0px 0px 0px 0px;
         margin-top: 10px;
     }
-
     .btn-primary {
-    background-color: rgba(0, 51, 102, 1);
+        background-color: rgba(0, 51, 102, 1);
+        font-family: 'myriad-pro', 'sans serif';
+        font-weight: 700;
+        font-style: normal;
+        font-size: 14px;
     }
-
     .email-field {
         display: flex;
         margin-top: 20px;
     }
-
     .fab-button {
         background-color: #7596C8;
         margin-right: 20px;
         cursor: default;
-      }
-    
-      .icon {
+    }
+    .icon {
         font-size: 30px;
         color: #fff;
         margin-left: -5px;
         margin-top: -5px;
-      }
+    }
 }
 
-.notlite{
+.notlite {
     h1 {
         font-size: 36px;
         color: #494949;
     }
-    
     h2 {
         font-size: 28px;
         color: #494949;
     }
-    
     p {
         padding-top: 10px;
-        
     }
-    
     h3 {
         font-size: 18px;
         color: #494949;
-         font-weight: 400;
+        font-weight: 400;
     }
-    
     .globalButton {
         background-color: #ccc;
         margin-left: 0;
@@ -122,7 +113,6 @@
         box-shadow: 0px 0px 0px 0px;
         margin-top: 10px;
     }
-    
     .globalButton:hover {
         background-color: #2f567b;
         color: #ffffff;
@@ -131,8 +121,6 @@
         box-shadow: 0px 0px 0px 0px;
         margin-top: 10px;
     }
-    
-    
     .emailSignupForm {
         padding-top: 20px;
     }
