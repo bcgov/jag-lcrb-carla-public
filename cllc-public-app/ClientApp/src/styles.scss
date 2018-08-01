@@ -303,20 +303,3 @@ $indicator-thickness: 0.2em;
     border-color: #204d74;
 
 }
-
-.btn.btn-secondary {
-    display: inline-block;
-    padding: 6px 12px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    background-color: #494949;
-    border: #494949 1px solid;
-    color: #fff;
-    border-radius: 4px;
-}
-
-.btn-secondary:hover {
-  background-color: #bcbec5 !important;
-  color: #ffffff;
-  border-color: #bcbec5;
-}

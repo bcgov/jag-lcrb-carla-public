@@ -1,6 +1,36 @@
 .app-cancel,
-.app-save{
-    display: inline-flex; 
+.app-save {
+    display: inline-flex;
     justify-content: center;
     cursor: pointer;
+}
+
+.error {
+    background-color: #F2DEDE;
+    border-radius: 5px;
+    border: 2px solid #EBCCD1;
+    color: #A12622;
+    padding-top: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li::before {
+    color: #1E4176;
+    content: "\25AA";
+    display: inline-block;
+    font-size: 34px;
+    line-height: 0;
+    vertical-align: middle;
+    width: 0.5em;
+    margin-left: -16px;
+}
+
+li {
+    margin: 10px 0;
+    margin-left: -26px;
 }
