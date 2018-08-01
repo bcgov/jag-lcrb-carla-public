@@ -1,9 +1,9 @@
 <div [formGroup]="form" style="max-width: 700px; padding-left: 45px;">
   <h1>Submit the Cannabis Retail Store Licence Application</h1>
 
-  <p>Please make sure that all of the required forms and supporting documentation is included. A $7,500.00 application fee will
-    be required at the time of application submission. If deemed eligible, a $1,500.00 first year licensing fee will be required
-    prior to licence issuance.</p>
+  <p>Please make sure that all of the required forms and supporting documentation for your application is included. A $7,500.00
+    application fee will be required at the time of application submission. If your application for a licence is approved,
+    a $1,500.00 first year licensing fee will be required prior to the licence being issued.</p>
   <br>
 
   <p>Please note that applications which are submitted without all required information or documents will stop being processed.
@@ -12,12 +12,12 @@
     all the required documentation.</p>
   <br>
 
-  <p>A proposed store must have:</p>
+  <p class="li-header">A proposed store must have:</p>
   <ul>
     <li>If in the area of a local government, have all required local government approvals, such as being a permitted use under
       the zoning bylaw or meeting the requirements of business licensing bylaw, or</li>
     <li>If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a proposed store will
-      be located, have the zoning approval and a business permit or licence from the Indigenous nation to sell cannabis.</li>
+      be located, the zoning approval and a business permit or licence from the Indigenous nation to sell cannabis.</li>
   </ul>
   <hr>
   <section>
@@ -77,19 +77,28 @@
   <hr>
   <p>Proceed to pay online using a credit card through the secure web portal.</p>
 
-  <button class="btn btn-primary" (click)="submit_application()" [disabled]="!isValid()">SUBMIT &amp; PAY</button>
-  <span style="float: right; color: #1a5a96">
-    <span class="app-save" (click)="router.navigate(['/dashboard-lite'])">
-      <mat-icon aria-label="Save Application" style="text-decoration: solid">save</mat-icon>
-      <a href="javascript: void(0)">
-        Save for Later</a>
-    </span>
-     &nbsp;
-     <span class="app-cancel" (click)="cancelApplication()">
-        <mat-icon aria-label="Save Application" style="text-decoration: solid">delete</mat-icon>
-        <a href="javascript: void(0)">
-          Cancel Application</a>
+  <section class="error" *ngIf="showValidationMessages">
+    <p *ngFor="let message of validationMessages">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
       </span>
+    </p>
+  </section>
+
+  <button class="btn btn-primary" style="padding-bottom: 0;" (click)="router.navigate(['/dashboard-lite'])">
+    <span class="app-cancel">
+      <mat-icon aria-label="Save Application" style="font-size: 21px;">save</mat-icon>
+      SAVE FOR LATER
+    </span>
+  </button>
+  <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+  <span style="float: right; color: #1a5a96">
+    <span class="app-cancel" (click)="cancelApplication()">
+      <mat-icon aria-label="Save Application" style="font-size: 21px;">delete</mat-icon>
+      <a href="javascript: void(0)">
+        Cancel Application</a>
+    </span>
   </span>
   <p>&nbsp;</p>
   <p>The province does not know how many application for a cannabis retail store license will be recieved. Therefore, it is
