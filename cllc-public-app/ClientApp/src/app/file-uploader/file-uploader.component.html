@@ -1,6 +1,7 @@
-<div style="max-width: 700px;">
+<div style="max-width: 700px; position: relative;">
   <p></p>
-  <file-drop [disableIf]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+  <file-drop [disableIf]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)"
+    customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
     <div style="text-align: center">
       <h3></h3>
       <span>TO UPLOAD DOCUMENTS DRAG FILE(S) HERE OR </span>

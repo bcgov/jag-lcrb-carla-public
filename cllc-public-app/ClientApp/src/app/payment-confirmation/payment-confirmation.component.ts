@@ -7,9 +7,9 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ClientConfigDataService } from '../services/client-config.service';
 
 @Component({
-    selector: 'app-payment-confirmation',
-    templateUrl: './payment-confirmation.component.html',
-    styleUrls: ['./payment-confirmation.component.scss']
+  selector: 'app-payment-confirmation',
+  templateUrl: './payment-confirmation.component.html',
+  styleUrls: ['./payment-confirmation.component.scss']
 })
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
@@ -37,52 +37,51 @@ export class PaymentConfirmationComponent {
   loaded: boolean = false;
   @Input() inputApplicationId: string;
 
-    /** payment-confirmation ctor */
+  /** payment-confirmation ctor */
   constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService,
     private clientConfigDataService: ClientConfigDataService) {
-	    this.route.queryParams.subscribe(params => {
-	        this.transactionId = params['trnId'];
-          this.applicationId = params['SessionKey'];
-	    });
-    }
+    this.route.queryParams.subscribe(params => {
+      this.transactionId = params['trnId'];
+      this.applicationId = params['SessionKey'];
+    });
+  }
 
   ngOnInit() {
     this.clientConfigDataService.getConfig().subscribe(data => {
       this.isLiteVersion = data.isLiteVersion;
     });
-      if (!this.applicationId) {
-        this.applicationId = this.inputApplicationId;
-      }
-    	this.verify_payment();
+    if (!this.applicationId) {
+      this.applicationId = this.inputApplicationId;
     }
+    this.verify_payment();
+  }
 
   /**
    * Payment verification
    * */
-  verify_payment()
-  {
+  verify_payment() {
     this.busy = this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
         var verifyPayResponse = res.json();
         //console.log(verifyPayResponse);
         switch (verifyPayResponse.cardType) {
-        	case 'VI': 
-        		this.cardType = "Visa";
-        		break;
-        	case 'PV': 
-        		this.cardType = "Visa Debit";
-        		break;
-        	case 'MC': 
-        		this.cardType = "MasterCard";
-        		break;
-        	case 'AM': 
-        		this.cardType = "American Express";
-        		break;
-        	case 'MD': 
-        		this.cardType = "Debit MasterCard";
-        		break;
-        	default:
-        		this.cardType = verifyPayResponse.cardType;
+          case 'VI':
+            this.cardType = "Visa";
+            break;
+          case 'PV':
+            this.cardType = "Visa Debit";
+            break;
+          case 'MC':
+            this.cardType = "MasterCard";
+            break;
+          case 'AM':
+            this.cardType = "American Express";
+            break;
+          case 'MD':
+            this.cardType = "Debit MasterCard";
+            break;
+          default:
+            this.cardType = verifyPayResponse.cardType;
         }
         this.authCode = verifyPayResponse.authCode;
         this.avsMessage = verifyPayResponse.avsMessage;
@@ -121,20 +120,19 @@ export class PaymentConfirmationComponent {
     );
   }
 
-  return_to_application()
-  {
-    if (this.isLiteVersion) {
-      if (this.trnApproved == "1") {
-        this.router.navigate(['./dashboard-lite']);
-      } else {
-        this.router.navigate(['./application-lite/' + this.applicationId]);
-      }
+  return_to_application() {
+    // if (this.isLiteVersion) {
+    if (this.trnApproved == "1") {
+      this.router.navigate(['./dashboard-lite']);
     } else {
-      if (this.trnApproved == "1") {
-        this.router.navigate(['./dashboard']);
-      } else {
-        this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
-      }
+      this.router.navigate(['./application-lite/' + this.applicationId]);
     }
+    // } else {
+    //   if (this.trnApproved == "1") {
+    //     this.router.navigate(['./dashboard']);
+    //   } else {
+    //     this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
+    //   }
+    // }
   }
 }
