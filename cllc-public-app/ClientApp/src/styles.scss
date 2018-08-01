@@ -270,37 +270,3 @@ $indicator-thickness: 0.2em;
     border: 1px solid #e9e0e0;
   }
 }
-
-.btn.btn-primary {
-    background-color: #003366;
-    border: #003366 1px solid;
-    color: #ffffff;
-    min-width: 120px;
-    font-size: 16px;
-    border-radius: 0px;
-}
-
-.btn-primary:hover {
-    background-color: #2f567b !important;
-    color: #ffffff;
-    border-color: #204d74;
-    border-radius: 0px;
-}
-
-.btn.btn-primary.sv_prev_btn {
-    background-color: #ccc;
-    border: #ccc 1px solid;
-    color: #000;
-    min-width: 120px;
-    font-size: 16px;
-    border-radius: 0px
-
-}
-
-.btn.btn-primary.sv_prev_btn:hover {
-    background-color: #2f567b !important;
-    color: #ffffff;
-    border-color: #204d74;
-    border-radius: 0px
-
-}

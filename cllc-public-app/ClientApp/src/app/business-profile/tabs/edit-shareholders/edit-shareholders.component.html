@@ -1,0 +1,116 @@
+<h1 style="margin-top: 0;" *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Shareholders</h1>
+<h1 style="margin-top: 0;" *ngIf="['Society'].indexOf(businessType) !== -1">Directors & Senior Managers</h1>
+<h1 style="margin-top: 0;" *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partners</h1>
+
+<p *ngIf="['PrivateCorporation'].indexOf(businessType) !== -1">
+    Enter all voting shareholders for the corporation
+</p>
+
+<p *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
+  Enter all shareholders for the corporation
+</p>
+
+<p *ngIf="['Society'].indexOf(businessType) !== -1">
+  Add all directors and senior managers for the society. Any members on the board of directors are considered directors regardless
+  of the title given to the individual.
+</p>
+
+<p *ngIf="['GeneralPartnership'].indexOf(businessType) !== -1">
+  Add all general partners
+</p>
+
+<p *ngIf="['LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
+  Add all partners
+</p>
+
+<p *ngIf="['LimitedPartnership'].indexOf(businessType) !== -1">
+  Add all general partners as well as all limited partners holding at least 10% interest in the partnership
+</p>
+
+<!--<div class="example-container mat-elevation-z0">-->
+
+  <div [ngBusy]="busy">
+  <div [ngBusy]="busyObsv">
+
+    <div *ngIf="['PublicCorporation'].indexOf(businessType) == -1">
+      <mat-table #table [dataSource]="dataSource">
+
+        <!-- Column -->
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef> Shareholder Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="partnerType">
+          <mat-header-cell *matHeaderCellDef> Partner Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.position}} - {{element.partnerType}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="commonnonvotingshares">
+          <mat-header-cell *matHeaderCellDef> Number of Non-voting Shares </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.commonnonvotingshares}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="commonvotingshares">
+          <mat-header-cell *matHeaderCellDef> Number of Voting Shares </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.commonvotingshares}} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="dateIssued">
+          <mat-header-cell *matHeaderCellDef> Date Issued </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateIssued | date:'yyyy-MM-dd' }} </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+          <mat-cell *matCellDef="let element"> <a href="javascript: void(0)" (click)="editShareholder(element)">Edit</a> </mat-cell>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <a href="javascript: void(0)" (click)="deleteShareholder(element)">Delete</a>  </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+  <p></p>
+  <div  *ngIf="['PublicCorporation'].indexOf(businessType) == -1" class="col-md-10 row" style="margin-bottom: 30px">
+    <a class="btn btn-primary" tabindex="1" (click)="openPersonDialog()">
+      <strong>Add Person</strong>
+      <br>
+    </a>
+    &nbsp;
+    <a class="btn btn-primary" tabindex="1" (click)="openOrganizationDialog()">
+      <strong>Add Organization</strong>
+      <br>
+    </a>
+  </div>
+
+  <div [ngBusy]="busy"></div>
+
+  <section *ngIf="['LimitedPartnership', 'GeneralPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) == -1" >
+    <label *ngIf="['PublicCorporation'].indexOf(businessType) === -1" for="">Upload the corporation's Central Securities Register</label>
+    <label *ngIf="['PublicCorporation'].indexOf(businessType) !== -1" for="">Upload a document showing the shareholders with a 10% or greater interest in the company</label>
+    <app-file-uploader documentType="Central Securities Register" [accountId]="accountId"></app-file-uploader>
+  </section>

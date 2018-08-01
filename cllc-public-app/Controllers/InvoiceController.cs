@@ -17,6 +17,8 @@ using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using System.Linq;
 using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
+using System.Reflection;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -42,19 +44,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet()]
-        public async Task<JsonResult> GetInvoices()
+		public IActionResult GetInvoices()
         {
-            List<ViewModels.Invoice> result = new List<Invoice>();
-            IEnumerable<MicrosoftDynamicsCRMinvoice> invoices = null;
-
-            invoices = _dynamicsClient.Invoices.Get().Value;
-
-            foreach (var invoice in invoices)
+			if (TestUtility.InUnitTestMode())
             {
-                result.Add(invoice.ToViewModel());
-            }
+				List<ViewModels.Invoice> result = new List<Invoice>();
+                IEnumerable<MicrosoftDynamicsCRMinvoice> invoices = null;
 
-            return Json(result);
+                invoices = _dynamicsClient.Invoices.Get().Value;
+
+                foreach (var invoice in invoices)
+                {
+                    result.Add(invoice.ToViewModel());
+                }
+
+                return Json(result);
+            }
+            return new NotFoundResult();
         }
 
 
@@ -66,36 +72,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInvoice(string id)
         {
-            ViewModels.Invoice result = null;
-            // query the Dynamics system to get the invoice record.
-            if (string.IsNullOrEmpty(id))
+			if (TestUtility.InUnitTestMode())
             {
-                return new NotFoundResult();
-            }
-            else
-            {
-				// get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
-				Guid adoxio_legalentityid = new Guid(id);
-                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);                
-                if (invoice == null)
+                ViewModels.Invoice result = null;
+                // query the Dynamics system to get the invoice record.
+                if (string.IsNullOrEmpty(id))
                 {
                     return new NotFoundResult();
-                }      
-                
-                // setup the related account.
-                if (invoice._accountidValue != null)
+                }
+                else
                 {
-                    Guid accountId = Guid.Parse(invoice._accountidValue);
-                    invoice.CustomeridAccount = await _dynamicsClient.GetAccountById(accountId);
+    				// get the current user.
+                    string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                    UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+    				Guid adoxio_legalentityid = new Guid(id);
+                    MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);                
+                    if (invoice == null)
+                    {
+                        return new NotFoundResult();
+                    }      
+                    
+                    // setup the related account.
+                    if (invoice._accountidValue != null)
+                    {
+                        Guid accountId = Guid.Parse(invoice._accountidValue);
+                        invoice.CustomeridAccount = await _dynamicsClient.GetAccountById(accountId);
+                    }
+
+                    result = invoice.ToViewModel();                
                 }
 
-                result = invoice.ToViewModel();                
-            }
-
-            return Json(result);
+                return Json(result);
+			}
+            return new NotFoundResult();
         }
 
 
@@ -107,55 +117,58 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateInvoice([FromBody] ViewModels.Invoice item)
         {
-
-            // create a new invoice.
-            MicrosoftDynamicsCRMinvoice invoice = new MicrosoftDynamicsCRMinvoice();
-
-			// get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            // check that the session is setup correctly.
-            userSettings.Validate();
-            // copy received values to Dynamics LegalEntity
-            invoice.CopyValues(item);
-            try
+			if (TestUtility.InUnitTestMode())
             {
-                invoice = await _dynamicsClient.Invoices.CreateAsync(invoice);
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error creating invoice");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new Exception("Unable to create invoice");
-            }
+                // create a new invoice.
+                MicrosoftDynamicsCRMinvoice invoice = new MicrosoftDynamicsCRMinvoice();
 
-            // setup navigation properties.
-            MicrosoftDynamicsCRMinvoice patchEntity = new MicrosoftDynamicsCRMinvoice();
-            Guid accountId = Guid.Parse(userSettings.AccountId);
-            var userAccount = await _dynamicsClient.GetAccountById(accountId);
-            patchEntity.CustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
+    			// get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                // check that the session is setup correctly.
+                userSettings.Validate();
+                // copy received values to Dynamics LegalEntity
+                invoice.CopyValues(item);
+                try
+                {
+                    invoice = await _dynamicsClient.Invoices.CreateAsync(invoice);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error creating invoice");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw new Exception("Unable to create invoice");
+                }
 
-            // patch the record.
-            try
-            {
-                await _dynamicsClient.Invoices.UpdateAsync(invoice.Invoiceid, patchEntity);
-                // setup the view model.
-                invoice.CustomeridAccount = userAccount;
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error patching invoice");
-                _logger.LogError(odee.Request.RequestUri.ToString());
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-            }
+                // setup navigation properties.
+                MicrosoftDynamicsCRMinvoice patchEntity = new MicrosoftDynamicsCRMinvoice();
+                Guid accountId = Guid.Parse(userSettings.AccountId);
+                var userAccount = await _dynamicsClient.GetAccountById(accountId);
+                patchEntity.CustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
 
-            return Json(invoice.ToViewModel());
+                // patch the record.
+                try
+                {
+                    await _dynamicsClient.Invoices.UpdateAsync(invoice.Invoiceid, patchEntity);
+                    // setup the view model.
+                    invoice.CustomeridAccount = userAccount;
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error patching invoice");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+
+                return Json(invoice.ToViewModel());
+			}
+            return new NotFoundResult();
         }
 
         /// <summary>
@@ -167,28 +180,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateInvoice([FromBody] ViewModels.Invoice item, string id)
         {
-            if (id != item.id)
+			if (TestUtility.InUnitTestMode())
             {
-                return BadRequest();
-            }
+                if (id != item.id)
+                {
+                    return BadRequest();
+                }
 
-            // get the invoice.
-            Guid adoxio_legalentityid = new Guid(id);
+                // get the invoice.
+                Guid adoxio_legalentityid = new Guid(id);
 
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
-            if (invoice == null)
-            {
-                return new NotFoundResult();
-            }
+                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
+                if (invoice == null)
+                {
+                    return new NotFoundResult();
+                }
 
-            // we are doing a patch, so wipe out the record.
-            invoice = new MicrosoftDynamicsCRMinvoice();
+                // we are doing a patch, so wipe out the record.
+                invoice = new MicrosoftDynamicsCRMinvoice();
 
-            // copy values over from the data provided
-            invoice.CopyValues(item);
+                // copy values over from the data provided
+                invoice.CopyValues(item);
 
-            await _dynamicsClient.Invoices.UpdateAsync(adoxio_legalentityid.ToString(), invoice);
-            return Json(invoice.ToViewModel());
+                await _dynamicsClient.Invoices.UpdateAsync(adoxio_legalentityid.ToString(), invoice);
+                return Json(invoice.ToViewModel());
+			}
+            return new NotFoundResult();
         }
 
         /// <summary>
@@ -199,18 +216,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteInvoice(string id)
         {
-            // get the invoice.
-            Guid adoxio_legalentityid = new Guid(id);
-            MicrosoftDynamicsCRMinvoice legalEntity = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
-            if (legalEntity == null)
+			if (TestUtility.InUnitTestMode())
             {
-                return new NotFoundResult();
-            }
-
-            await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());                
-            
-            return NoContent(); // 204
+                // get the invoice.
+                Guid adoxio_legalentityid = new Guid(id);
+                MicrosoftDynamicsCRMinvoice legalEntity = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
+                if (legalEntity == null)
+                {
+                    return new NotFoundResult();
+                }
+                try
+                {
+                    await _dynamicsClient.Invoices.DeleteAsync(adoxio_legalentityid.ToString());
+                    return NoContent(); // 204
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error deleteing invoice");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }                
+			}
+            return new NotFoundResult();
         }
-        
     }
 }

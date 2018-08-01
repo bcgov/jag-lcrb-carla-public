@@ -1,19 +1,53 @@
-<h1>Site Map</h1>
+<h1>Site Plan</h1>
 
-<h2>Site Map</h2>
-<p>Upload a site map of the area surrounding your store</p>
+<p>A site plan shows any existing and proposed building footprints, pathways of travel, parking, landscaping elements, and the surrounding area of the store</p>
+
+<h2>Submitting a Site Plan</h2>
+<p>Upload a site plan of the area surrounding your store. The plan must be clear and legible in PDF format.</p>
+<p>Your site plan must reflect what your store will look like at the time of your licence being issued.</p>
 
 <div class="row">
-  <div class="gray-background">
-    <p><strong>Your site map must show:</strong></p>
+  <div class="gray-background col-sm-6">
+    <p><strong>Your site plan must show:</strong></p>
     <ul>
       <li>The location of the building and where it's located on the property</li>
-      <li>The location of all entrances to the store</li>
+      <li>The location of all entrances and exits to the store</li>
       <li>The locations of other buildings and businesses nearby, the entrances to those buildings, and their names or a description of what they are (e.g. gas station, office building)</li>
+      <li>A description of the type of separation proposed for any adjoining businesses</li>
       <li>Relevant street names nearby</li>
-      <li>Road access to the property, including the locations of any driveways and parking spots</li>
+      <li>Road access to the property, including the locations of any driveways and parking lots</li>
+    </ul>
+  </div>
+
+  <div class="col-sm-6">
+    <mat-card>
+      <div class="img-container">
+        <img src="assets/site-map-sample.jpg" style="max-height:90%; max-width:90%" alt="Site Plan Sample">
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<h2>Stores Located Inside a Building with other Businesses</h2>
+<div class="row">
+  <div class="gray-background col-sm-6">
+    <p>If the store is located inside a building with other businesses (for example, a mall), provide two site plans:</p>
+
+    <p>One site plan showing the location of any other buildings and businesses on the same site including:</p>
+    <ul>
+      <li>Each building footprint, building name and a list of businesses operating inside the building</li>
+      <li>Relevant street names nearby</li>
+      <li>Road access to the property, including the locations of any driveways and parking lots</li>
+    </ul>
+
+    <p>A second site plan showing the location of the store inside the building’s foot print</p>
+    <ul>
+      <li>All entrances and exits for the building</li>
+      <li>The location, name and type of businesses operating inside the building</li>
+      <li>The store foot print with all entrances and exits for the store</li>
+      <li>A description of the type of separation proposed for any adjoining businesses</li>
     </ul>
   </div>
 </div>
 
-<app-file-uploader documentType="Site Map" [accountId]="accountId"></app-file-uploader>
+<app-file-uploader *ngIf="applicationId" documentType="Site Map" [applicationId]="applicationId"></app-file-uploader>

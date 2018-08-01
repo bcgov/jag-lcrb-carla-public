@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public
     public class Program
     {
         public static void Main(string[] args)
-        {            
+        {
             var host = CreateWebHostBuilder(args).Build();
             host.Run();
         }
@@ -25,6 +25,14 @@ namespace Gov.Lclb.Cllb.Public
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseHealthChecks("/hc")
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                    config.AddEnvironmentVariables();
+                })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
                     logging.AddConsole(options => options.IncludeScopes = true);

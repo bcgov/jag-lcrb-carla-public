@@ -1,8 +1,8 @@
 <div>
-  <h1 *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</h1>
-  <h1 *ngIf="businessType == 'Society'">Society Details</h1>
-  <h1 *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" >Patnership Details</h1>
-  <h1 *ngIf="businessType == 'SoleProprietor'">Sole Proprietor Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="businessType == 'Society'">Society Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" >Patnership Details</h1>
+  <h1 style="margin-top: 0;" *ngIf="businessType == 'SoleProprietor'">Sole Proprietor Details</h1>
 
   <div [ngBusy]="busy"></div>
 
@@ -41,7 +41,7 @@
           <div [ngClass]="{'has-error': this.isFieldError('businessNumber')}">
             <label for="">Business Number</label>
             <br>
-            <span style="margin-top: -3px;">9 digit number from Canada Revenue Agency</span>
+            <span style="margin-top: -3px;">Nine digit number from Canada Revenue Agency</span>
             <br>
             <input required class="form-control" style="width: 250px;" type="text" id="businessNumber" formControlName="businessNumber">
             <div *ngIf="this.isFieldError('businessNumber')" class="alert alert-danger" style="width: 250px;">
@@ -162,24 +162,24 @@
 
         <section>
           <div [ngClass]="{'has-error': this.isFieldError('mailingAddressProvince')}">
-            <label for="">Province</label>
+            <label for="">Province/State</label>
             <br>
             <!--<input class="form-control" style="width: 250px;" type="text" id="mailProvince" formControlName="mailProvince">-->
             <select *ngIf="(corporateDetailsForm.get('mailingAddressCountry').value||'').trim().toLowerCase() == 'canada'" required class="form-control" id="mailingAddressProvince" formControlName="mailingAddressProvince" style="width: 250px;">
               <option value=""></option>
-              <option value="AB">Alberta</option>
-              <option value="BC">British Columbia</option>
-              <option value="MN">Manitoba</option>
-              <option value="NB">New Brunswick</option>
-              <option value="NL">Newfoundland and Labrador</option>
-              <option value="NS">Nova Scotia</option>
-              <option value="ON">Ontario</option>
-              <option value="PE">Prince Edward Island</option>
-              <option value="QC">Quebec</option>
-              <option value="SK">Saskatchewan</option>
-              <option value="NT">Northwest Territories</option>
-              <option value="NU">Nunavut</option>
-              <option value="YT">Yukon</option>
+              <option value="Alberta">Alberta</option>
+              <option value="British Columbia">British Columbia</option>
+              <option value="Manitoba">Manitoba</option>
+              <option value="New Brunswick">New Brunswick</option>
+              <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+              <option value="Nova Scotia">Nova Scotia</option>
+              <option value="Ontario">Ontario</option>
+              <option value="Prince Edward Island">Prince Edward Island</option>
+              <option value="Quebec">Quebec</option>
+              <option value="Saskatchewan">Saskatchewan</option>
+              <option value="Northwest Territories">Northwest Territories</option>
+              <option value="Nunavut">Nunavut</option>
+              <option value="Yukon">Yukon</option>
             </select>
             <input *ngIf="(corporateDetailsForm.get('mailingAddressCountry').value||'').trim().toLowerCase() !== 'canada'" type="text" class="form-control" formControlName="mailingAddressProvince" style="width: 250px;">
             <div *ngIf="this.isFieldError('mailingAddressProvince')" class="alert alert-danger" style="width: 250px;">
@@ -202,10 +202,7 @@
             </div>
           </div>
         </section>
-
-        <section>
-          <button class="btn btn-primary" (click)="save()">Save</button>
-        </section>
+        
       </div>
     </form>
   </div>

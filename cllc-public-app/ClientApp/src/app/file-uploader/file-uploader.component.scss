@@ -1,10 +1,23 @@
 ::ng-deep .drop-zone{
-    border: 3px dashed #757575 !important;
-    background-color: #eee;
-    border-radius: 0 !important;
+    border: 1px dashed #CCC !important;
+    background-color: #F2F2F2;
+    border-radius: 5PX !important;
     padding-bottom: 20px;
 }
 
 ::ng-deep  .content {
     color: #424242 !important;
+}
+
+.file-list{
+    background-color: #eee; 
+    margin-bottom: 3px; 
+    display: flex; 
+    justify-content: space-between;
+    padding: 3px 7px;
+    margin-right: 10px;
+}
+
+.no-drop{
+    cursor: no-drop;
 }

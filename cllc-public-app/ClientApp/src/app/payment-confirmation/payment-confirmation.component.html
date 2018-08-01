@@ -1,26 +1,79 @@
+<mat-card class="mat-elevation-z0">
+  <div [ngBusy]="busy" class="container" style="margin-left:0px;">
+    <div *ngIf="isApproved">
+      <div>
+        <span class="print-page" (click)="printPage()">
+          <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
+          <i class="fas fa-print fa-lg"></i>
+          <a href="javascript: void(0)">  Print Page</a>
+        </span>
+        <h1 style="color:green">Payment Approved</h1>
+        <p></p>
+        <div class="table" style="padding:0px;">
+          <table>
+            <tr>
+              <td>Card Type</td>
+              <td>{{cardType}}</td>
+            </tr>
+            <tr>
+              <td>Date/Time</td>
+              <td>{{trnDate}}</td>
+            </tr>
+            <tr>
+              <td>Invoice Number</td>
+              <td>{{invoice}}</td>
+            </tr>
+            <tr>
+              <td>Transaction ID</td>
+              <td>{{trnId}}</td>
+            </tr>
+            <tr>
+              <td>Authorization</td>
+              <td>{{authCode}}</td>
+            </tr>
+            <tr>
+              <td>Amount</td>
+              <td>{{trnAmount | currency}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
-<h1>{{messageText}}</h1>
+      <hr>
 
-<p><strong>Card Type :</strong>&nbsp;{{cardType}}</p>
-<p><strong>Date/Time :</strong>&nbsp;{{trnDate}}</p>
-<p><strong>Invoice Number :</strong>&nbsp;{{invoice}}</p>
-<p><strong>Transaction Id :</strong>&nbsp;{{trnId}}</p>
-<p><strong>Authorization :</strong>&nbsp;{{authCode}}</p>
-<p><strong>Amount :</strong>&nbsp;{{trnAmount}}</p>
+      <p>As a reminder, associates of the applicant must consent to security screening and a financial integrity assessment. Applicants are required to provide associates with the Parcel Identifier (PID) or address of the proposed cannabis retail store.</p>
+      <br>
 
-<p>
-<strong>avsMessage:</strong>&nbsp;{{avsMessage}}<br/>
-<strong>avsAddrMatch:</strong>&nbsp;{{avsAddrMatch}}<br/>
-<strong>messageId:</strong>&nbsp;{{messageId}}<br/>
-<strong>messageText:</strong>&nbsp;{{messageText}}<br/>
-<strong>paymentMethod:</strong>&nbsp;{{paymentMethod}}<br/>
-<strong>trnApproved:</strong>&nbsp;{{trnApproved}}<br/>
-<strong>trnOrderNumber:</strong>&nbsp;{{trnOrderNumber}}<br/>
-</p>
+      <span style="font-style: italic;">Parcel Identifier (PID):</span>
+      <p></p>
+      <ul>
+        <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+        <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents, on the lease, or obtained from the landlord.</li>
+      </ul>
 
-<p>
-  <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="return_to_application()">
-    <strong>Continue</strong>
-    <br>
-  </a>
-</p>
+      <p>Applicants should direct associates to the
+        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation" target="_blank">LCRB non-medical cannabis webpage</a>
+        to download the required forms and instructions for submitting documentation.</p>
+
+      <p>
+        The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is missing, or if more information is required. If the applicant wishes to make any changes to the application, please contact LCRB at
+        <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a>.
+      </p>
+
+    </div>
+
+    <div *ngIf="!isApproved && loaded">
+      <br />
+      <alert type="danger">
+        <strong>{{paymentTransactionTitle}}</strong>
+        <br />
+        <br />{{paymentTransactionMessage}}</alert>
+    </div>
+    <div *ngIf="loaded" style="padding-top:20px">
+      <p><a class="" routerLink="/dashboard-lite">
+          <i class="fa fa-angle-double-left fa-lg" style="margin-right:5px" aria-hidden="true"></i>Return to Dashboard
+        </a>
+      </p>
+    </div>
+  </div>
+</mat-card>
