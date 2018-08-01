@@ -38,10 +38,10 @@ const routes: Routes = [
     path: '',
     component: HomeComponent
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
+  // {
+  //   path: 'dashboard',
+  //   component: DashboardComponent
+  // },
   {
     path: 'dashboard-lite',
     component: DashboardLiteComponent
@@ -51,50 +51,50 @@ const routes: Routes = [
     component: ApplicationComponent,
     canDeactivate: [CanDeactivateGuard]
   },
-  {
-    path: 'business-profile/:accountId/:legalEntityId',
-    component: BusinessProfileComponent,
-    children: [
-      {
-        path: 'before-you-start',
-        component: BeforeYouStartComponent
-      },
-      {
-        path: 'corporate-details',
-        component: CorporateDetailsComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'organization-structure',
-        component: OrganizationStructureComponent
-      },
-      {
-        path: 'directors-and-officers',
-        component: DirectorsAndOfficersComponent
-      },
-      {
-        path: 'key-personnel',
-        component: KeyPersonnelComponent
-      },
-      {
-        path: 'shareholders',
-        component: EditShareholdersComponent
-      },
-      {
-        path: 'connections-to-producers',
-        component: ConnectionToProducersComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'finance-integrity',
-        component: FinancialInformationComponent
-      },
-      {
-        path: 'security-assessment',
-        component: SecurityAssessmentsComponent
-      },
-    ]
-  },
+  // {
+  //   path: 'business-profile/:accountId/:legalEntityId',
+  //   component: BusinessProfileComponent,
+  //   children: [
+  //     {
+  //       path: 'before-you-start',
+  //       component: BeforeYouStartComponent
+  //     },
+  //     {
+  //       path: 'corporate-details',
+  //       component: CorporateDetailsComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'organization-structure',
+  //       component: OrganizationStructureComponent
+  //     },
+  //     {
+  //       path: 'directors-and-officers',
+  //       component: DirectorsAndOfficersComponent
+  //     },
+  //     {
+  //       path: 'key-personnel',
+  //       component: KeyPersonnelComponent
+  //     },
+  //     {
+  //       path: 'shareholders',
+  //       component: EditShareholdersComponent
+  //     },
+  //     {
+  //       path: 'connections-to-producers',
+  //       component: ConnectionToProducersComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'finance-integrity',
+  //       component: FinancialInformationComponent
+  //     },
+  //     {
+  //       path: 'security-assessment',
+  //       component: SecurityAssessmentsComponent
+  //     },
+  //   ]
+  // },
   {
     path: 'form-viewer/:id',
     component: FormViewerComponent
@@ -107,44 +107,44 @@ const routes: Routes = [
     path: 'newsletter-confirm/:slug',
     component: NewsletterConfirmationComponent
   },
-  {
-    path: 'license-application/:applicationId',
-    component: LicenseApplicationComponent,
-    children: [
-      {
-        path: 'contact-details',
-        component: ContactDetailsComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'declaration',
-        component: DeclarationComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'floor-plan',
-        component: FloorPlanComponent
-      },
-      {
-        path: 'property-details',
-        component: PropertyDetailsComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'site-map',
-        component: SiteMapComponent
-      },
-      {
-        path: 'store-information',
-        component: StoreInformationComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'submit-pay',
-        component: SubmitPayComponent
-      },
-    ]
-  },
+  // {
+  //   path: 'license-application/:applicationId',
+  //   component: LicenseApplicationComponent,
+  //   children: [
+  //     {
+  //       path: 'contact-details',
+  //       component: ContactDetailsComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'declaration',
+  //       component: DeclarationComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'floor-plan',
+  //       component: FloorPlanComponent
+  //     },
+  //     {
+  //       path: 'property-details',
+  //       component: PropertyDetailsComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'site-map',
+  //       component: SiteMapComponent
+  //     },
+  //     {
+  //       path: 'store-information',
+  //       component: StoreInformationComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'submit-pay',
+  //       component: SubmitPayComponent
+  //     },
+  //   ]
+  // },
   {
     path: 'payment-confirmation',
     component: PaymentConfirmationComponent
