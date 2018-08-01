@@ -89,7 +89,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     				return business;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // ignore errors and just return null
             }

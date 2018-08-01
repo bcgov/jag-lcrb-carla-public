@@ -39,7 +39,7 @@ namespace SharePoint.Tests
             string certFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string certPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            sharePointFileManager = new SharePointFileManager(serverAppIdUri, odataUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null);
+            sharePointFileManager = new SharePointFileManager(serverAppIdUri, odataUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null, serverAppIdUri);
 
         }
 
@@ -78,7 +78,7 @@ namespace SharePoint.Tests
 
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string documentType = "Document Type";
-            string fileName = "test-file-name" + rnd.Next() + ".txt" + "__" + documentType;
+            string fileName = documentType + "__" + "test-file-name" + rnd.Next() + ".txt";
             string folderName = "test-folder-name" + rnd.Next();
             string path = "/" + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
             string url = serverAppIdUri + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
@@ -176,14 +176,36 @@ namespace SharePoint.Tests
         public async void GetFilesInPopulatedFolderTest()
         {
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            string documentList = "Documents";
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
             object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
             Assert.True(folder != null);
-            var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
-            Assert.True(files != null);
-            Assert.True(files.Count == 0);
+            string fileName = documentType + "__" + "test-file-name" + rnd.Next() + ".txt";
+            string contentType = "text/plain";
+
+            string testData = "This is just a test.";
+            MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
+
+            // add file to SP
+
+            await sharePointFileManager.AddFile(folderName, fileName, fileData, contentType);
+
+            // get file details list in SP folder
+
+            List<FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            //only one file should be returned
+            Assert.Single(fileDetailsList);
+            // validate that file name uploaded and listed are the same
+            foreach (FileDetailsList fileDetails in fileDetailsList)
+            {
+                Assert.Equal(fileName, fileDetails.Name);
+            }                        
+
+            // delete file from SP
+
+            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentListTitle, folderName, fileName);
+
+
             await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
         }
 

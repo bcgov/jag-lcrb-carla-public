@@ -1,28 +1,29 @@
 ﻿using Microsoft.AppServices;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Rest;
 using Microsoft.SharePoint.DataService;
 using MS.FileServices;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Services.Client;
-using System.Data.Services.Common;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
-using Microsoft.Rest;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
     public class SharePointFileManager
     {
         public const string DefaultDocumentListTitle = "Account";
+        public const string ApplicationDocumentListTitle = "adoxio_application";
+
 
         private LCLBCannabisDEVDataContext listData;
         private ApiData apiData;
@@ -32,13 +33,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public string ServerAppIdUri { get; set; }
         public string WebName { get; set; }
         public string apiEndpoint { get; set; }
+        public string NativeBaseUri { get; set; }
         string authorization { get; set; }
         private HttpClient client;
 
-        public SharePointFileManager(string serverAppIdUri, string odataUri, string webname, string aadTenantId, string clientId, string certFileName, string certPassword, string ssgUsername, string ssgPassword)
+        public SharePointFileManager(string serverAppIdUri, 
+                                     string odataUri, 
+                                     string webname, 
+                                     string aadTenantId, 
+                                     string clientId, 
+                                     string certFileName, 
+                                     string certPassword, 
+                                     string ssgUsername, 
+                                     string ssgPassword, 
+                                     string nativeBaseUri)
         {
             OdataUri = odataUri;
             ServerAppIdUri = serverAppIdUri;
+            NativeBaseUri = nativeBaseUri;
             WebName = webname;
 
             // ensure the webname has a slash.
@@ -125,6 +137,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             public string TimeLastModified { get; set; }
             public string Length { get; set; }
             public string DocumentType { get; set; }
+            public string ServerRelativeUrl { get; set; }
         }
 
         /// <summary>
@@ -185,8 +198,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // JToken.ToObject is a helper method that uses JsonSerializer internally
                 FileDetailsList searchResult = responseResult.ToObject<FileDetailsList>();
                 //filter by parameter documentType
-                int fileDoctypeStart = searchResult.Name.IndexOf("__") + 2;
-                string fileDoctype = searchResult.Name.Substring(fileDoctypeStart);
+                int fileDoctypeEnd = searchResult.Name.IndexOf("__");
+                string fileDoctype = searchResult.Name.Substring(0, fileDoctypeEnd);
                 if (fileDoctype == documentType)
                 {
                     searchResult.DocumentType = documentType;
@@ -355,19 +368,33 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result.FirstOrDefault();
         }
 
-        public async Task AddFile(String folderName,  String fileName, Stream fileData, string contentType)
+
+        public async Task AddFile(String folderName, String fileName, Stream fileData, string contentType)
+        {
+            await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
+        }
+
+
+
+        public async Task AddFile(String documentLibrary, String folderName,  String fileName, Stream fileData, string contentType)
         {
 
-            bool folderExists = await this.FolderExists(DefaultDocumentListTitle, folderName);
+            bool folderExists = await this.FolderExists(documentLibrary, folderName);
             if (! folderExists)
             {
-              var folder =  await this.CreateFolder(DefaultDocumentListTitle, folderName);                
+              var folder =  await this.CreateFolder(documentLibrary, folderName);                
             }
 
             // now add the file to the folder.
             
-            await this.UploadFile(fileName, DefaultDocumentListTitle, folderName, fileData, contentType);
+            await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
 
+        }
+
+        public string GetServerRelativeURL(string listTitle, string folderName)
+        {
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            return serverRelativeUrl;
         }
 
         /// <summary>
@@ -383,7 +410,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='" 
@@ -477,6 +504,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Delete is very similar to a GET.
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName) + "/" + Uri.EscapeUriString(fileName);
 
+            result = await DeleteFile(serverRelativeUrl);
+
+            return result;
+        }
+
+        public async Task<bool> DeleteFile(string serverRelativeUrl)
+        {
+            bool result = false;
+            // Delete is very similar to a GET.
+            
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");
 
@@ -508,6 +545,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             return result;
-        }        
+        }
     }
 }

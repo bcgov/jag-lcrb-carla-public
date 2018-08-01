@@ -42,7 +42,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static string CombineNameDocumentType (string name, string documentType)
         {
-            string result = name + NameDocumentTypeSeparator + documentType;
+            // 2018-7-13:  GW changed order of document type and name to fix problems downloading files.
+            string result = documentType + NameDocumentTypeSeparator + name;
             return result;
         }
 

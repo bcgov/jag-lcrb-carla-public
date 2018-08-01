@@ -28,7 +28,6 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToGetAllByAnonymousUser()
         {
-            string id = "SomeRandomId";
 
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();

@@ -23,7 +23,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly AppDbContext db;
-        private readonly IHostingEnvironment _env;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 

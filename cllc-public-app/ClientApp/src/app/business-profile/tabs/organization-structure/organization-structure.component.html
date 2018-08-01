@@ -1,17 +1,20 @@
 <div class="">
-  <h1>Organization Structure</h1>
+  <h1 style="margin-top: 0">Organization Structure</h1>
   <section>
     <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1" for="">
-      Upload a document that shows the business relationships for your corporation including all parent and holding companies, subsidiaries,
-      and partnerships including the following information:
+      Upload a document that shows the legal entities that make up your organization’s structure and the relationships between them,
+      including all parent and holding companies, subsidiaries, and partnerships.
+      Include the following information:
     </label>
     <label *ngIf="['Society'].indexOf(businessType) !== -1" for="">
-      Upload a document that shows the business relationships for your society including all parent and holding companies, subsidiaries,
-      and partnerships including the following information:
+      Upload a document that shows the legal entities that make up your organization’s structure and the relationships between them,
+      including all parent and holding companies, subsidiaries, and partnerships.
+      Include the following information:
     </label>
     <label *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" for="">
-      Upload a document that shows the business relationships for your partnership including all parent and holding companies,
-      subsidiaries, and partnerships including the following information:
+      Upload a document that shows the legal entities that make up your organization’s structure and the relationships between them,
+      including all parent and holding companies, subsidiaries, and partnerships.
+      Include the following information:
     </label>
     <ul>
       <li>Company name</li>

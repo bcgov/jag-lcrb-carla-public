@@ -1,10 +1,13 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import { DynamicsFormComponent } from '../dynamics-form/dynamics-form.component';
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
 import { DynamicsDataService } from '../services/dynamics-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app-state/models/app-state';
+import * as CurrenAccountActions from '../app-state/actions/current-account.action';
 
 @Component({
   selector: 'app-business-profile',
@@ -12,9 +15,9 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./business-profile.component.scss']
 })
 /** BusinessProfile component*/
-export class BusinessProfileComponent {
+export class BusinessProfileComponent implements OnInit {
   @ViewChild(DynamicsFormComponent) dynamicsFormComponent: DynamicsFormComponent;
-  @Input('currentUser') currentUser: User;
+  @Input() currentUser: User;
   // GUID for the account we want to edit the profile for.  If blank then it will be the current user's account.
   legalEntityId: string;
 
@@ -23,10 +26,14 @@ export class BusinessProfileComponent {
   public componentLoaded: boolean;
 
   tabs: any = {
-    privateCorportation: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel', 'shareholders', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
-    society: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
-    partnership: ['before-you-start', 'corporate-details', 'organization-structure', 'key-personnel', 'shareholders', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
-    soleProprietor: ['before-you-start', 'corporate-details', 'key-personnel', 'finance-integrity', 'security-assessment']
+    privateCorportation: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel',
+      'shareholders', 'connections-to-producers', 'finance-integrity', 'security-assessment'],
+    society: ['before-you-start', 'corporate-details', 'organization-structure', 'directors-and-officers', 'key-personnel',
+      'connections-to-producers', 'finance-integrity', 'security-assessment'],
+    partnership: ['before-you-start', 'corporate-details', 'organization-structure', 'key-personnel', 'shareholders',
+      'connections-to-producers', 'finance-integrity', 'security-assessment'],
+    soleProprietor: ['before-you-start', 'corporate-details', 'directors-and-officers', 'key-personnel',
+      'finance-integrity', 'security-assessment']
   };
 
   tabStructure: any[] = this.tabs.privateCorportation;
@@ -41,20 +48,33 @@ export class BusinessProfileComponent {
   set businessType(value: string) {
     this._businessType = value;
     this.onBusinessTypeChange(value);
+    console.log(`Business Type: ${value}`);
   }
   /** BusinessProfile ctor */
-  constructor(private userDataService: UserDataService, private route: ActivatedRoute,
+  constructor(private userDataService: UserDataService,
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
     private dynamicsDataService: DynamicsDataService) {
-    this.view_tab = "before-you-start";
+    const urlParts = this.router.url.split('/');
+    this.view_tab = urlParts[urlParts.length - 1];
   }
 
   ngOnInit(): void {
+    this.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const urlParts = this.router.url.split('/');
+          this.view_tab = urlParts[urlParts.length - 1];
+        }
+      });
+
     this.route.params.subscribe(p => {
       this.legalEntityId = p.legalEntityId;
       this.accountId = p.accountId;
-
-      this.dynamicsDataService.getRecord("account", this.accountId)
+      this.dynamicsDataService.getRecord('account', this.accountId)
         .then((data) => {
+          this.store.dispatch(new CurrenAccountActions.SetCurrentAccountAction(data));
           if (data.primarycontact) {
             this.contactId = data.primarycontact.id;
           }
@@ -66,7 +86,7 @@ export class BusinessProfileComponent {
   }
 
   getTab() {
-    let result = this.tabStructure.indexOf(this.view_tab);
+    const result = this.tabStructure.indexOf(this.view_tab);
     return result;
   }
 
@@ -74,26 +94,35 @@ export class BusinessProfileComponent {
     this.dynamicsFormComponent.onSubmit();
   }
 
+  isOnLastTab(): boolean {
+    const isLast = (this.tabStructure.indexOf(this.view_tab)  === (this.tabStructure.length - 1));
+    return isLast;
+
+  }
+
   changeTab(tab) {
     this.view_tab = tab;
+    this.router.navigate([`/business-profile/${this.accountId}/${this.legalEntityId}/${tab}`]);
   }
 
   back() {
-    var currentTab = this.getTab();
+    let currentTab = this.getTab();
     currentTab--;
     if (currentTab < 0) {
       currentTab = this.tabStructure.length - 1;
     }
     this.view_tab = this.tabStructure[currentTab];
+    this.router.navigate([`/business-profile/${this.accountId}/${this.legalEntityId}/${this.view_tab}`]);
   }
 
   next() {
-    var currentTab = this.getTab();
+    let currentTab = this.getTab();
     currentTab++;
     if (currentTab >= this.tabStructure.length) {
       currentTab = 0;
     }
     this.view_tab = this.tabStructure[currentTab];
+    this.router.navigate([`/business-profile/${this.accountId}/${this.legalEntityId}/${this.view_tab}`]);
   }
 
   onBusinessTypeChange(value: string) {
@@ -107,9 +136,12 @@ export class BusinessProfileComponent {
       case 'SoleProprietor':
         this.tabStructure = this.tabs.soleProprietor;
         break;
+      case 'LimitedPartnership':
+      case 'LimitedLiabilityPartnership':
       case 'GeneralPartnership':
         this.tabStructure = this.tabs.partnership;
         break;
+        
       case 'Society':
         this.tabStructure = this.tabs.society;
         break;

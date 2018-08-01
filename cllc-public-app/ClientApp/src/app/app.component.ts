@@ -6,25 +6,34 @@ import { UserDataService } from './services/user-data.service';
 import { User } from './models/user.model';
 import { isDevMode } from '@angular/core';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
+import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
+import { Store } from '@ngrx/store';
+import { AppState } from './app-state/models/app-state';
+import { ClientConfigDataService } from './services/client-config.service';
+import { Observable } from '../../node_modules/rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  businessProfiles: any;
+export class AppComponent implements OnInit {
+  businessProfiles: AdoxioLegalEntity[];
   title = '';
   previousUrl: string;
   public currentUser: User;
   public isNewUser: boolean;
   public isDevMode: boolean;
-  isAssociate: boolean = false;
+  isAssociate = false;
+  showLogin: boolean;
+  isLiteVersion = true;
 
   constructor(
     private renderer: Renderer2,
     private router: Router,
     private userDataService: UserDataService,
+    private store: Store<AppState>,
+    private clientConfigDataService: ClientConfigDataService,
     private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
   ) {
     this.isDevMode = isDevMode();
@@ -42,20 +51,38 @@ export class AppComponent {
         this.previousUrl = nextSlug;
       }
     });
+
+    clientConfigDataService.getConfig().subscribe(data => {
+      this.showLogin = data.showLogin;
+      this.isLiteVersion = data.isLiteVersion;
+    });
   }
 
   ngOnInit(): void {
+    Observable.interval(20000).subscribe(_ => {
+      this.clientConfigDataService.getConfig().subscribe(data => {
+        this.showLogin = data.showLogin;
+        this.isLiteVersion = data.isLiteVersion;
+      });
+    });
+
     this.userDataService.getCurrentUser()
-      .then((data) => {
+      .subscribe((data: User) => {
         this.currentUser = data;
         this.isNewUser = this.currentUser.isNewUser;
         this.isAssociate = (this.currentUser.businessname == null);
         if (!this.isAssociate) {
           this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
             res => {
-              this.businessProfiles = res.json();
+              this.businessProfiles = res;
             });
         }
+      });
+
+    this.store.select(state => state.legalEntitiesState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.businessProfiles = state.legalEntities;
       });
 
   }
@@ -64,7 +91,7 @@ export class AppComponent {
     let result, jscriptVersion;
     result = false;
 
-    jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
+    jscriptVersion = new Function('/*@cc_on return @_jscript_version; @*/')();
 
     if (jscriptVersion !== undefined) {
       result = true;
