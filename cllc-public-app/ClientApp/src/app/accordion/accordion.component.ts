@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 
@@ -8,6 +8,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
   styleUrls: ['./accordion.component.scss']
 })
 export class AccordionComponent implements OnInit {
+
+  @Input() isLiteVersion: boolean;
 
   constructor() { }
 

@@ -1,7 +1,12 @@
 <div *ngIf="isLiteVersion" class="lite">
   <form class="emailSignupForm">
-    <h2 style="padding-left: 0;">{{title}}</h2>
-    <h3 style="padding-left: 0;">{{description}}</h3>
+    <section style="display: flex">
+      <button mat-fab class="fab-button mat-elevation-z0">
+        <mat-icon class="icon" aria-label="email icon">email</mat-icon>
+      </button>
+      <h2 style="padding-left: 0;">{{title}}</h2>
+    </section>
+    <p style="padding-left: 0; color: #fff;">{{description}}</p>
     <div class="email-field">
 
       <input class="form-control" style="flex: 1 0;" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email"
