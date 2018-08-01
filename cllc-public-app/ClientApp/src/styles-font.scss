@@ -21,11 +21,11 @@ body {
 
 .btn.btn-primary {
     background-color: #38598a;
-    border: #357ebd 1px solid;
+    border: #38598a 1px solid;
     color: #ffffff;
     min-width: 120px;
     font-size: 16px;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .btn.btn-secondary {
@@ -43,14 +43,14 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #2f567b !important;
+    background-color: rgba(0, 51, 102, 1) !important;
     color: #ffffff;
     border-color: #204d74;
     border-radius: 0px;
 }
 
 .btn-secondary:hover {
-    background-color: rgba(153,153,153,1);
+    background-color: rgba(153, 153, 153, 1);
     border-color: #ccc;
     color: #ffffff;
 }
