@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -56,7 +57,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
-                    result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
+                    // hide terminated applications from view.
+                    if (dynamicsApplication.Statuscode == null || dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated)
+                    {
+                        result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
+                    }                    
                 }
             }
             return result;
@@ -365,6 +370,53 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpPost("{id}/cancel")]
+        public async Task<IActionResult> CancelApplication(string id)
+        {
+            // get the application.
+            Guid adoxio_applicationid = new Guid(id);
+
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationid);
+            if (adoxioApplication == null)
+            {
+                return new NotFoundResult();
+            }
+
+            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            {
+                return new NotFoundResult();
+            }
+
+            // set the status to Terminated.
+            MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
+            {
+                Statuscode = (int)AdoxioApplicationStatusCodes.Terminated
+            };
+
+            try
+            {
+                _dynamicsClient.Applications.Update(id, adoxioApplication);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error cancelling application");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
+
+
+            return NoContent(); // 204
+        }
+
+        /// <summary>
+        /// Delete an Application.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteApplication(string id)
         {
@@ -389,6 +441,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("{id}/attachments")]
+        // allow large uploads
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file, [FromForm] string documentType)
         {
             ViewModels.FileSystemItem result = null;
@@ -442,10 +496,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     await _sharePointFileManager.AddFile(ApplicationDocumentListTitle, folderName, fileName, file.OpenReadStream(), file.ContentType);
                 }
-                catch (Exception ex)
+                catch (SharePointRestException ex)
                 {
+                    _logger.LogError("Error uploading file to SharePoint");
+                    _logger.LogError(ex.Response.Content);
                     _logger.LogError(ex.Message);
-                    _logger.LogError(ex.StackTrace);
                     return new NotFoundResult();
                 }
             }
