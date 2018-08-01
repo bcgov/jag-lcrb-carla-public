@@ -1,4 +1,6 @@
-<div *ngIf="isLiteVersion" class="lite">
+<div [ngBusy]="busy"></div>
+
+<div *ngIf="isLiteVersion && isDataLoaded" class="lite">
   <div class="row home-header-wrapper">
     <div [ngClass]="{'col-md-8 col-xs-12': !isLiteVersion, 'home-header': true}" class="jumbotron">
       <h2>
@@ -66,7 +68,7 @@
 </div>
 
 
-<div *ngIf="!isLiteVersion" class="extra-padding-left notlite">
+<div *ngIf="!isLiteVersion && isDataLoaded" class="extra-padding-left notlite">
   <div class="row">
     <div class="col-md-8 col-xs-12">
       <!-- What you need message and survey button -->
