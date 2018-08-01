@@ -89,10 +89,10 @@
               <div class="collapse navbar-collapse" id="loggedInMenu">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a *ngIf="!isLiteVersion" class="nav-link" routerLink="/dashboard">Dashboard</a>
-                    <a *ngIf="isLiteVersion" class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
+                    <!-- <a *ngIf="!isLiteVersion" class="nav-link" routerLink="/dashboard">Dashboard</a> -->
+                    <a class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
                   </li>
-                  <li *ngIf="!isLiteVersion" class="nav-item dropdown">
+                  <!-- <li *ngIf="!isLiteVersion" class="nav-item dropdown">
                     <div ngbDropdown class="d-inline-block">
                       <a class="nav-link dropdown-toggle" style="font-weight: 600" ngbDropdownToggle>Business Profile</a>
                       <div ngbDropdownMenu>
@@ -109,7 +109,7 @@
                         <button class="dropdown-item" routerLink="/lic-app-summary">License 2</button>
                       </div>
                     </div>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </nav>
