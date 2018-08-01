@@ -15,7 +15,7 @@ import { FileUploaderComponent } from '../../file-uploader/file-uploader.compone
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.css']
+  styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
   @ViewChild(FileUploaderComponent) mainForm: FileUploaderComponent;
@@ -46,8 +46,6 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         const data = res.json();
-        // this.applicationName = data.name;
-        // this.store.dispatch(new currentApplicatioActions.SetCurrentApplicationAction(data));
         this.form.patchValue(data);
         if (data.isPaid) {
           this.form.disable();
@@ -127,30 +125,42 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   }
 
   submit_application() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
-      res => {
-        // console.log("applicationVM: ", res.json());
-        const jsonUrl = res.json();
-        // window.alert(jsonUrl['url']);
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      },
-      err => {
-        console.log('Error occured');
+    this.save(true).subscribe((result: boolean) => {
+      if (result) {
+        this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
+          res => {
+            const jsonUrl = res.json();
+            window.location.href = jsonUrl['url'];
+            return jsonUrl['url'];
+          },
+          err => {
+            console.log('Error occured');
+          }
+        );
       }
-    );
-
-
+    });
   }
 
   isValid(): boolean {
     let valid = true;
-    if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1){
+    if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
       valid = false;
     }
-    if(!this.form.get('establishmentName').value){
+    if (!this.form.get('establishmentName').value) {
       valid = false;
     }
     return valid;
+  }
+
+  cancelApplication() {
+    // start by showing a confirmation dialog.
+    if (confirm("Are you sure you want to cancel this application?")) {
+      // delete the application.
+      this.busy = this.applicationDataService.deleteApplication(this.applicationId).subscribe(
+        res => {
+          this.router.navigate(['/dashboard-lite']);
+        });
+
+    }
   }
 }
