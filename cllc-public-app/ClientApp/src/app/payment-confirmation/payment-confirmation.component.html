@@ -2,6 +2,11 @@
   <div [ngBusy]="busy" class="container" style="margin-left:0px;">
     <div *ngIf="isApproved">
       <div>
+        <span class="print-page" (click)="printPage()">
+          <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
+          <i class="fas fa-print"></i>
+          <a href="javascript: void(0)">  Print Page</a>
+        </span>
         <h1 style="color:green">Payment Approved</h1>
         <p></p>
         <div class="table" style="padding:0px;">
@@ -36,26 +41,24 @@
 
       <hr>
 
-      <p>As a reminder, associates of the applicant must consent to a background check and financial integrity assessments.
-        Applicants are required to provide associates with the Parcel Identifier (PID) or address of the proposed cannabis
-        retail store.</p>
+      <p>As a reminder, associates of the applicant must consent to security screening and a financial integrity assessment. Applicants are required to provide associates with the Parcel Identifier (PID) or address of the proposed cannabis retail store.</p>
       <br>
 
       <span style="font-style: italic;">Parcel Identifier (PID):</span>
       <p></p>
       <ul>
         <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
-        <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents, on your
-          lease, or obtained from your landlord.</li>
+        <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents, on the lease, or obtained from the landlord.</li>
       </ul>
 
       <p>Applicants should direct associates to the
-        <a href="javascript: void(0);">LCRB non-medical cannabis webpage</a>
+        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation">LCRB non-medical cannabis webpage</a>
         to download the required forms and instructions for submitting documentation.</p>
 
-      <p>The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is missing, or if more
-        information is required. If the applicant wishes to make any changes to the application, please contact
-        <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.</p>
+      <p>
+        The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is missing, or if more information is required. If the applicant wishes to make any changes to the application, please contact LCRB at
+        <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a>.
+      </p>
 
     </div>
 
