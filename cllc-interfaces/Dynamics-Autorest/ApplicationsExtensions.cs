@@ -255,5 +255,128 @@ namespace Gov.Lclb.Cllb.Interfaces
                 (await operations.UpdateWithHttpMessagesAsync(adoxioApplicationid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Delete entity from adoxio_applications
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationid'>
+            /// key: adoxio_applicationid
+            /// </param>
+            /// <param name='fieldname'>
+            /// key: fieldname
+            /// </param>
+            public static void DeleteReference(this IApplications operations, string adoxioApplicationid, string fieldname)
+            {
+                operations.DeleteReferenceAsync(adoxioApplicationid, fieldname).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_applications
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationid'>
+            /// key: adoxio_applicationid
+            /// </param>
+            /// <param name='fieldname'>
+            /// key: fieldname
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteReferenceWithHttpMessagesAsync(adoxioApplicationid, fieldname, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Add reference to adoxio_applications
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationid'>
+            /// key: adoxio_applicationid
+            /// </param>
+            /// <param name='fieldname'>
+            /// key: fieldname
+            /// </param>
+            /// <param name='odataid'>
+            /// reference value
+            /// </param>
+            public static void AddReference(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid))
+            {
+                operations.AddReferenceAsync(adoxioApplicationid, fieldname, odataid).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Add reference to adoxio_applications
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationid'>
+            /// key: adoxio_applicationid
+            /// </param>
+            /// <param name='fieldname'>
+            /// key: fieldname
+            /// </param>
+            /// <param name='odataid'>
+            /// reference value
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task AddReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.AddReferenceWithHttpMessagesAsync(adoxioApplicationid, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Change reference to adoxio_applications
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationid'>
+            /// key: adoxio_applicationid
+            /// </param>
+            /// <param name='fieldname'>
+            /// key: fieldname
+            /// </param>
+            /// <param name='odataid'>
+            /// reference value
+            /// </param>
+            public static void ChangeReference(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid))
+            {
+                operations.ChangeReferenceAsync(adoxioApplicationid, fieldname, odataid).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Change reference to adoxio_applications
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioApplicationid'>
+            /// key: adoxio_applicationid
+            /// </param>
+            /// <param name='fieldname'>
+            /// key: fieldname
+            /// </param>
+            /// <param name='odataid'>
+            /// reference value
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ChangeReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.ChangeReferenceWithHttpMessagesAsync(adoxioApplicationid, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
     }
 }

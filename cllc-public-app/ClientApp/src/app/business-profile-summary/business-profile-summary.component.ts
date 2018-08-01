@@ -2,18 +2,20 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
+import { AccountDataService } from '../services/account-data.service';
 
 export class ProfileSummary {
   legalEntityId: string;
   accountId: string;
+  shareholderAccountId: string;
   name: string;
   legalentitytype: string;
   profileComplete: string;
   businessRelationship: string;
-
+  isComplete: boolean;
 }
 
 @Component({
@@ -37,7 +39,9 @@ export class BusinessProfileSummaryComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService, private router: Router) { }
+  constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService,
+    private accountDataService: AccountDataService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getBusinessProfileData();
@@ -48,41 +52,55 @@ export class BusinessProfileSummaryComponent implements OnInit {
    * */
   getBusinessProfileData() {
     this.busy = this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
-      res => {
-        let data:AdoxioLegalEntity[] = res.json();
-        //console.log("getBusinessProfileSummary():", data);
+      data => {
+        // console.log("getBusinessProfileSummary():", data);
         if (data) {
-          //Change Business Releationship label when 
+          // Change Business Releationship label when
           data.forEach((entry) => {
-            let profileSummary = new ProfileSummary();
+            const profileSummary = new ProfileSummary();
             profileSummary.legalEntityId = entry.id;
-            profileSummary.accountId  = entry.accountId;
+            profileSummary.accountId = entry.accountId;
+            profileSummary.shareholderAccountId = entry.shareholderAccountId;
             profileSummary.name = entry.name;
-            profileSummary.profileComplete = 'No';
-            if(entry.isShareholder){
+            profileSummary.profileComplete = '...';
+            if (entry.shareholderAccountId) {
               profileSummary.businessRelationship = 'Shareholder';
             } else {
               profileSummary.businessRelationship = 'Applicant';
+              this.getIsCompleteStatus(entry.accountId);
             }
             this.profileSummaryList.push(profileSummary);
           });
-          //console.log("this.profileSummaryList:", this.profileSummaryList);
+          // console.log("this.profileSummaryList:", this.profileSummaryList);
         }
         // sort the array
-        this.profileSummaryList = this.sortbyProperty(this.profileSummaryList, "legalentitytype");
-        //console.log("profileSummaryList sorted:", this.profileSummaryList);
+        this.profileSummaryList = this.sortbyProperty(this.profileSummaryList, 'legalentitytype');
+        // console.log("profileSummaryList sorted:", this.profileSummaryList);
         // set table data source
         this.dataSource.data = this.profileSummaryList;
-        // set 
+        // set
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }, 0);
       },
       err => {
-        console.error("Error", err);
+        console.error('Error', err);
       });
 
+  }
+
+  getIsCompleteStatus(accountId: string) {
+    this.accountDataService.getBusinessProfile(accountId)
+      .subscribe(response => {
+        const data = response.json();
+        data.forEach(element => {
+          const d = this.profileSummaryList.filter(e => e.legalEntityId === element.legalEntityId)[0];
+          if (d) {
+            d.profileComplete = element.isComplete === true ? 'Yes' : 'No';
+          }
+        });
+      });
   }
 
   /**
@@ -91,9 +109,13 @@ export class BusinessProfileSummaryComponent implements OnInit {
    * @param property
    */
   sortbyProperty(array: any[], property: string) {
-    let res = array.sort((leftSide, rightSide): number => {
-      if (leftSide[property] < rightSide[property]) return -1;
-      if (leftSide[property] > rightSide[property]) return 1;
+    const res = array.sort((leftSide, rightSide): number => {
+      if (leftSide[property] < rightSide[property]) {
+        return -1;
+      }
+      if (leftSide[property] > rightSide[property]) {
+        return 1;
+      }
       return 0;
     });
     return res;

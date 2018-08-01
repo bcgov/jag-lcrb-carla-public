@@ -23,14 +23,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly AppDbContext db;
         private readonly IHostingEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
-        private readonly IDistributedCache _distributedCache;
 
-        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env, IDistributedCache distributedCache)
+        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
             _env = env;
-            this.db = db;
-            this._distributedCache = null; // distributedCache;
+            this.db = db;            
         }
 
         [HttpGet]
@@ -65,7 +63,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
-                return Redirect(basePath);
+                // we want to redirect to the dashboard.
+                // string dashboard = !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
+                string dashboard = "dashboard-lite";
+
+                return Redirect(basePath + "/" + dashboard);
             }
         }
 
@@ -137,56 +139,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             );
 
             string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-            basePath += "/dashboard";
+
+            // string dashboard = !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"])? "dashboard" : "dashboard-lite";
+            string dashboard = "dashboard-lite";
+
+            basePath += "/" + dashboard;
+
             return Redirect(basePath);
         }
 
         /// <summary>
-        /// Clear out any existing dev authentication tokens
+        /// Clear out any existing authentication tokens
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("cleartoken")]
         [AllowAnonymous]
-        public virtual IActionResult ClearDevAuthenticationCookie()
-        {
-            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
-
-            string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
-            if (temp == null)
-            {
-                temp = "";
-            }
+        public virtual IActionResult ClearAuthenticationCookie()
+        {            
             // clear session
             HttpContext.Session.Clear();
-
-            // expire "dev" user cookie
-            Response.Cookies.Append(
-                _options.DevAuthenticationTokenKey,
-                temp,
-                new CookieOptions
-                {
-                    Path = "/",
-                    SameSite = SameSiteMode.None,
-                    Expires = DateTime.UtcNow.AddDays(-1)
-                }
-            );
-			// expire "dev" user cookie
-			temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
-            if (temp == null)
+            if (! _env.IsProduction()) // clear dev tokens
             {
-                temp = "";
-            }
-            Response.Cookies.Append(
-                _options.DevBCSCAuthenticationTokenKey,
-                temp,
-                new CookieOptions
+                string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
+                if (temp == null)
                 {
-                    Path = "/",
-                    SameSite = SameSiteMode.None,
-                    Expires = DateTime.UtcNow.AddDays(-1)
+                    temp = "";
                 }
-            );
+                // expire "dev" user cookie
+                Response.Cookies.Append(
+                    _options.DevAuthenticationTokenKey,
+                    temp,
+                    new CookieOptions
+                    {
+                        Path = "/",
+                        SameSite = SameSiteMode.None,
+                        Expires = DateTime.UtcNow.AddDays(-1)
+                    }
+                );
+                // expire "dev" user cookie
+                temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+                if (temp == null)
+                {
+                    temp = "";
+                }
+                Response.Cookies.Append(
+                    _options.DevBCSCAuthenticationTokenKey,
+                    temp,
+                    new CookieOptions
+                    {
+                        Path = "/",
+                        SameSite = SameSiteMode.None,
+                        Expires = DateTime.UtcNow.AddDays(-1)
+                    }
+                );
+
+            }
 
             string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
             return Redirect(basePath);

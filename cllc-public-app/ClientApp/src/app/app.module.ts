@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastModule } from 'ng2-toastr';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,17 +48,20 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { AccountDataService } from './services/account-data.service';
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
-import { AdoxioLicenseDataService } from './services/adoxio-license-data.service'; 
-import { PaymentDataService } from './services/payment-data.service'; 
+import { AdoxioLicenseDataService } from './services/adoxio-license-data.service';
+import { PaymentDataService } from './services/payment-data.service';
 import { AppComponent } from './app.component';
-import { BceidConfirmationComponent } from "./bceid-confirmation/bceid-confirmation.component";
+import { BceidConfirmationComponent } from './bceid-confirmation/bceid-confirmation.component';
 import { SearchBoxDirective } from './search-box/search-box.directive';
 import { GeneralDataService } from './general-data.service';
 import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
-import { EditShareholdersComponent, ShareholderPersonDialog, ShareholderOrganizationDialog } from './edit-shareholders/edit-shareholders.component';
+import {
+  EditShareholdersComponent,
+  ShareholderPersonDialogComponent,
+  ShareholderOrganizationDialogComponent } from './business-profile/tabs/edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -72,15 +75,15 @@ import { SurveyComponent } from './survey/survey.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
 import { SurveySidebarComponent } from './survey/sidebar.component';
-import { SurveyDataService } from "./services/survey-data.service";
+import { SurveyDataService } from './services/survey-data.service';
 import { ResultComponent } from './result/result.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { VoteComponent } from './vote/vote.component';
-import { VoteDataService } from "./services/vote-data.service";
+import { VoteDataService } from './services/vote-data.service';
 import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup.component';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
-import { NewsletterDataService } from "./services/newsletter-data.service";
-import { UserDataService } from "./services/user-data.service";
+import { NewsletterDataService } from './services/newsletter-data.service';
+import { UserDataService } from './services/user-data.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
@@ -89,8 +92,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
-import { DirectorsAndOfficersComponent, DirectorAndOfficerPersonDialog } from './directors-and-officers/directors-and-officers.component';
-import { SecurityAssessmentsComponent } from './security-assessments/security-assessments.component';
+import {
+  DirectorsAndOfficersComponent,
+  DirectorAndOfficerPersonDialogComponent } from './business-profile/tabs/directors-and-officers/directors-and-officers.component';
+import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
 import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
 import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
 import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
@@ -99,8 +104,6 @@ import { BusinessProfileSummaryComponent } from './business-profile-summary/busi
 import {NgBusyModule} from 'ng-busy';
 import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key-personnel.component';
 import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
-import { ShareholdersPublicComponent } from './business-profile/tabs/shareholders-public/shareholders-public.component';
-import { ShareholdersUclLlcComponent } from './business-profile/tabs/shareholders-ucl-llc/shareholders-ucl-llc.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
@@ -111,7 +114,16 @@ import { SiteMapComponent } from './license-application/tabs/site-map/site-map.c
 import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
-import {BsDatepickerModule} from 'ngx-bootstrap';
+import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
+import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { metaReducers, reducers } from './app-state/reducers/reducers';
+import { StoreModule } from '@ngrx/store';
+import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
+import { ClientConfigDataService } from './services/client-config.service';
+import { ApplicationComponent } from './lite/application/application.component';
+import { LiteApplicationDashboardComponent } from './lite-application-dashboard/lite-application-dashboard.component';
+import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -123,8 +135,8 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     BreadcrumbComponent,
     DynamicsFormComponent,
     EditShareholdersComponent,
-    ShareholderPersonDialog,
-    ShareholderOrganizationDialog,
+    ShareholderPersonDialogComponent,
+    ShareholderOrganizationDialogComponent,
     FormViewerComponent,
     HomeComponent,
     InsertComponent,
@@ -148,15 +160,13 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     CorporateDetailsComponent,
     OrganizationStructureComponent,
     DirectorsAndOfficersComponent,
-    DirectorAndOfficerPersonDialog,
+    DirectorAndOfficerPersonDialogComponent,
     SecurityAssessmentsComponent,
     BeforeYouStartComponent,
     FinancialInformationComponent,
     BusinessProfileSummaryComponent,
     KeyPersonnelComponent,
     ConnectionToProducersComponent,
-    ShareholdersPublicComponent,
-    ShareholdersUclLlcComponent,
     LicenseApplicationComponent,
     PaymentConfirmationComponent,
     ContactDetailsComponent,
@@ -165,7 +175,11 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     FloorPlanComponent,
     SiteMapComponent,
     DeclarationComponent,
-    SubmitPayComponent
+    SubmitPayComponent,
+    DashboardLiteComponent,
+    ApplicationComponent,
+    LiteApplicationDashboardComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     BrowserModule,
@@ -213,7 +227,9 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     MatTooltipModule,
     FileDropModule,
     ToastModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    AlertModule.forRoot()
   ],
   exports: [
     BrowserModule,
@@ -262,12 +278,13 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
   ],
   providers: [
     CookieService,
+    ClientConfigDataService,
     DynamicsDataService,
     InsertService,
     GeneralDataService,
     NewsletterDataService,
     PolicyDocumentDataService,
-    SurveyDataService,        
+    SurveyDataService,
     VoteDataService,
     UserDataService,
     AdoxioApplicationDataService,
@@ -275,12 +292,15 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     AdoxioLicenseDataService,
     AccountDataService,
     PaymentDataService,
-    NgbDropdown
+    TiedHouseConnectionsDataService,
+    NgbDropdown,
+    Title,
+    CanDeactivateGuard
   ],
   entryComponents: [
-    ShareholderPersonDialog,
-    ShareholderOrganizationDialog,
-    DirectorAndOfficerPersonDialog
+    ShareholderPersonDialogComponent,
+    ShareholderOrganizationDialogComponent,
+    DirectorAndOfficerPersonDialogComponent
   ],
   bootstrap: [AppComponent]
 })

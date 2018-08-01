@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../app-state/models/app-state';
 
 @Component({
   selector: 'app-financial-information',
@@ -10,9 +14,17 @@ export class FinancialInformationComponent implements OnInit {
   @Input() businessType: string;
   operatingForMoreThanOneYear: string = '';
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private store: Store<AppState>,
+    private dynamicsDataService: DynamicsDataService) { }
 
   ngOnInit() {
+    this.store.select(state => state.currentAccountState)
+    .filter(state => !!state)
+    .subscribe(state => {
+      this.accountId = state.currentAccount.id;
+      this.businessType = state.currentAccount.businessType;
+    });
   }
 
 }

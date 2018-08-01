@@ -51,6 +51,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplications Applications { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishments.
+        /// </summary>
+        public virtual IEstablishments Establishments { get; private set; }
+
+        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
@@ -59,6 +64,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAdoxioLicencetypes.
         /// </summary>
         public virtual IAdoxioLicencetypes AdoxioLicencetypes { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenses.
+        /// </summary>
+        public virtual ILicenses Licenses { get; private set; }
 
         /// <summary>
         /// Gets the IAdoxioTiedhouseassociations.
@@ -79,6 +89,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInvoices.
         /// </summary>
         public virtual IInvoices Invoices { get; private set; }
+
+        /// <summary>
+        /// Gets the ISharepointDocumentLocations.
+        /// </summary>
+        public virtual ISharepointDocumentLocations SharepointDocumentLocations { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -283,12 +298,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Accounts = new Accounts(this);
             Applications = new Applications(this);
+            Establishments = new Establishments(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
+            Licenses = new Licenses(this);
             AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
             AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
             Contacts = new Contacts(this);
             Invoices = new Invoices(this);
+            SharepointDocumentLocations = new SharepointDocumentLocations(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

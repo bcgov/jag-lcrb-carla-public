@@ -12,6 +12,9 @@ using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
 using Microsoft.OData.Client;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Microsoft.AspNetCore.Http;
+using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -24,179 +27,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             result = client.NativeBaseUri + entityType + "(" + id.Trim() + ")";
             return result;
         }
-		/// <summary>
-        /// Utility method to call Dynamics <see langword="async"/>, with a delay to compensate for timing issues.
-        /// </summary>
-        /// <param name="system"></param>
-        /// <returns>dsr</returns>
-        public static DataServiceResponse SaveChangesSynchronous(this Microsoft.Dynamics.CRM.System system)
-        {
-            Task<DataServiceResponse> t = system.SaveChangesAsync();
-            System.Threading.Thread.Sleep(5000);
-            t.Wait();
-            if (t.IsFaulted)
-            {
-                throw new Exception("Error save changes failed:" + t.Exception.Message);
-            }
-            else if (!t.IsCompletedSuccessfully)
-            {
-                throw new Exception("Error save changes failed with no message");
-            }
-            DataServiceResponse dsr = t.Result;
-            return dsr;
-        }
-
-		/// <summary>
-        /// Utility method to call Dynamics <see langword="async"/>, with a delay to compensate for timing issues.
-        /// </summary>
-		/// <param name="system"></param>
-		/// <param name="options"></param>
-        /// <returns>dsr</returns>
-		public static DataServiceResponse SaveChangesSynchronous(this Microsoft.Dynamics.CRM.System system, SaveChangesOptions options)
-		{
-			Task<DataServiceResponse> t = system.SaveChangesAsync(options);
-            System.Threading.Thread.Sleep(5000);
-            t.Wait();
-            if (t.IsFaulted)
-            {
-                throw new Exception("Error save changes failed:" + t.Exception.Message);
-            }
-            else if (!t.IsCompletedSuccessfully)
-            {
-                throw new Exception("Error save changes failed with no message");
-            }
-            DataServiceResponse dsr = t.Result;
-			return dsr;
-		}
-
-        /// <summary>
-        /// Return the ID assigned by dynamics, or NULL if none.
-        /// </summary>
-        /// <param name="dsr"></param>
-        /// <returns></returns>
-        public static Guid? GetAssignedId(this DataServiceResponse dsr)
-        {
-            Guid? result = null;
-            if (dsr != null)
-            {
-				var ienum = dsr.GetEnumerator();
-                while (ienum.MoveNext())
-                {
-                    ChangeOperationResponse cor = (ChangeOperationResponse)ienum.Current;
-                    if (cor.Descriptor is EntityDescriptor)
-                    {
-                        EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
-                        string identity = ed.Identity.ToString();
-                        // convert the identity to a guid.
-                        int endpos = identity.LastIndexOf(")");
-                        int startpos = identity.LastIndexOf("(") + 1;
-                        string guid = identity.Substring(startpos, endpos - startpos);
-                        result = Guid.ParseExact(guid, "D");
-						return result;
-                    }
-                }
-            }            
-            return result;
-        }
-
-		public static Guid? GetAssignedIdOfType(this DataServiceResponse dsr, string entityType)
-		{
-			Guid? result = null;
-			if (dsr != null)
-			{
-				var ienum = dsr.GetEnumerator();
-				while (ienum.MoveNext())
-				{
-					ChangeOperationResponse cor = (ChangeOperationResponse)ienum.Current;
-					if (cor.Descriptor is EntityDescriptor)
-					{
-						EntityDescriptor ed = (EntityDescriptor)cor.Descriptor;
-						string identity = ed.Identity.ToString();
-						// convert the identity to a guid.
-						if (identity.Contains(entityType))
-						{
-							int endpos = identity.LastIndexOf(")");
-							int startpos = identity.LastIndexOf("(") + 1;
-							string guid = identity.Substring(startpos, endpos - startpos);
-							result = Guid.ParseExact(guid, "D");
-							return result;
-						}
-					}
-				}
-			}
-			return result;
-		}
-
-        /// <summary>
-        /// Load User from database using their userId and guid
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="userId"></param>
-        /// <param name="guid"></param>
-        /// <returns></returns>
-        public static async Task<User> LoadUser(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string userId, string guid = null)
-        {
-            User user = null;
-
-            if (!string.IsNullOrEmpty(guid))
-                user = await system.GetUserByGuid(distributedCache, guid);
-
-            if (user == null)
-                user = await system.GetUserBySmUserId(distributedCache, userId);
-
-            if (user == null)
-                return null;
-
-            if (guid == null)
-                return user;
-
-            
-            if (!user.ContactId.ToString().Equals(guid, StringComparison.OrdinalIgnoreCase))
-            {
-                // invalid account - guid doesn't match user credential
-                return null;
-            }
-
-            return user;
-        }
-
-        /// <summary>
-        /// Returns a User based on the guid
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="guid"></param>
-        /// <returns></returns>
-        public static async Task<User> GetUserByGuid(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string guid)
-        {
-            Guid id = new Guid(guid);
-            User user = null;
-            Contact contact = await system.GetContactById(distributedCache, id);
-            if (contact != null)
-            {
-                user.FromContact(contact);
-            }
-
-            return user;
-        }
-
-        /// <summary>
-        /// Returns a User based on the Siteminder ID
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="smUserId"></param>
-        /// <returns></returns>
-        public static async Task<User> GetUserBySmUserId(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string smUserId)
-        {
-            User user = null;
-            Contact contact = await system.GetContactBySiteminderGuid(distributedCache, smUserId);
-            if (contact != null)
-            {
-                user = new User();
-                user.FromContact(contact);
-            }
-
-            return user;
-        }
+		
+        
 
         /// <summary>
         /// Convert a Dynamics attribute to boolean
@@ -334,74 +166,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
-
-        /// <summary>
-        /// Get a Account by their Guid
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static async Task<Account> GetAccountBySiteminderBusinessGuid(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
-        {
-            Account result = null;
-            string key = "Account_" + siteminderId;
-            // first look in the cache.
-            string temp = null;
-            if (distributedCache != null)
-            {
-                temp = distributedCache.GetString(key);
-            }
-            if (!string.IsNullOrEmpty(temp))
-            {
-                result = JsonConvert.DeserializeObject<Account>(temp);
-            }
-            else
-            {
-                // fetch from Dynamics.
-                try
-                {
-					var accounts = await system.Accounts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
-					if (accounts != null)
-                    {
-                        List<Account> results = new List<Account>();
-                        foreach (var accountEntity in accounts)
-                        {
-                            results.Add(accountEntity);
-                        }
-						if (results.Count == 0)
-						{
-							result = null;
-						}
-						else
-						{
-							result = results.First();
-						}
-                    }
-                    else
-                    {
-                        result = null;
-                    }
-                }
-                catch (DataServiceQueryException dsqe)
-                {
-					if (dsqe.Message.Contains("Does Not Exist"))
-						result = null;
-					else
-						throw;
-                }
-                
-                if (result != null && distributedCache != null)
-                {
-                    // store the contact data.
-                    string cacheValue = JsonConvert.SerializeObject(result);
-                    distributedCache.SetString(key, cacheValue);
-                }
-            }
-
-            return result;
-        }
-
         
         /// <summary>
         /// Get a Account by their Guid
@@ -412,8 +176,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountBySiteminderBusinessGuid(this IDynamicsClient system, string siteminderId)
         {
+            // ensure that the siteminderId does not have any dashes.
+            string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
+
             MicrosoftDynamicsCRMaccount result = null;
-            var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + siteminderId + "'");
+            var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
             result = accountResponse.Value.FirstOrDefault();
             // get the primary contact.
             if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
@@ -433,32 +200,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<Account> GetAccountById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
-        {
-            Account result = null;
-
-            // fetch from Dynamics.
-            try
-            {
-                result = await system.Accounts.ByKey(id).GetValueAsync();                
-            }
-            catch (DataServiceQueryException dsqe)
-            {
-				if (dsqe.Message.Contains("Does Not Exist") || dsqe.InnerException.Message.Contains("Does Not Exist"))
-                    result = null;
-                else
-                    throw;
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// Get a Account by their Guid
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountById(this IDynamicsClient system, Guid id)
         {
             MicrosoftDynamicsCRMaccount result;
@@ -467,7 +208,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Accounts.GetByKeyAsync(id.ToString());
             }            
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -479,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result.Primarycontactid = await system.GetContactById(Guid.Parse(result._primarycontactidValue));
                 }
-                catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+                catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
                 {
                     result.Primarycontactid = null;
                 }
@@ -502,7 +243,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Invoices.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -518,40 +259,28 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Adoxiolegalentities.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
             return result;
         }
 
-        /// <summary>
-        /// Get a contact by their Guid
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static async Task<Adoxio_licencetype> GetLicenceTypeById(this Microsoft.Dynamics.CRM.System system, Guid id)
+        public static async Task<MicrosoftDynamicsCRMadoxioTiedhouseconnection> GetTiedHouseConnectionById(this IDynamicsClient system, Guid id)
         {
-            Adoxio_licencetype result = null;
-            
-            // fetch from Dynamics.
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection result;
             try
             {
-                result = await system.Adoxio_licencetypes.ByKey(id).GetValueAsync();
+                // fetch from Dynamics.
+                result = await system.AdoxioTiedhouseconnections.GetByKeyAsync(id.ToString());
             }
-            catch (DataServiceQueryException dsqe)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
-                if (dsqe.Message.Contains("Does Not Exist"))
-                    result = null;
-                else
-                    throw;
+                result = null;
             }
-
             return result;
         }
-
+    
 
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactById(this IDynamicsClient system, Guid id)
         {
@@ -561,7 +290,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Contacts.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
@@ -578,7 +307,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioLicencetypeValue != null)
                 {
-                    result.AdoxioLicenceType = await system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));                    
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));                    
                 }
 
                 if (result._adoxioApplicantValue != null)
@@ -586,61 +315,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
                 }
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
             return result;
-        }
-
-
-        /// <summary>
-        /// Get a contact by their Guid
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static async Task<Contact> GetContactById(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, Guid id)
-        {
-            Contact result = null;
-            string key = "Contact_" + id.ToString();
-            // first look in the cache.
-            string temp = null;
-            if (distributedCache != null)
-            {
-                temp = distributedCache.GetString(key);
-            }
-
-            if (!string.IsNullOrEmpty(temp))
-            {
-                result = JsonConvert.DeserializeObject<Contact>(temp);
-            }
-            else
-            {
-                // fetch from Dynamics.
-                try
-                {
-                    result = await system.Contacts.ByKey(id).GetValueAsync();
-                }
-                catch (DataServiceQueryException dsqe)
-                {
-					if (dsqe.Message.Contains("Does Not Exist"))
-                        result = null;
-                    else
-                        throw;
-                }
-
-                if (result != null && distributedCache != null)
-                {
-                    // store the contact data.
-                    string cacheValue = JsonConvert.SerializeObject(result);
-                    distributedCache.SetString(key, cacheValue);
-                }
-            }
-
-            return result;
-        }
+        }       
 
         /// <summary>
         /// Get a contact by their Siteminder ID
@@ -651,77 +331,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactBySiteminderGuid(this IDynamicsClient system, string siteminderId)
         {
+            string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
-            var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + siteminderId + "'");
+            var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
             result = contactsResponse.Value.FirstOrDefault();			
             return result;
         }
 
-
-        /// <summary>
-        /// Get a contact by their Siteminder ID
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="siteminderId"></param>
-        /// <returns></returns>
-        public static async Task<Contact> GetContactBySiteminderGuid(this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string siteminderId)
-        {
-            Contact result = null;
-            string key = "Contact_" + siteminderId;
-            // first look in the cache.
-            string temp = null;
-            if (distributedCache != null)
-            {
-                temp = distributedCache.GetString(key);
-            }
-
-            if (!string.IsNullOrEmpty(temp))
-            {
-                Guid id = new Guid(temp);
-                result = await system.GetContactById(distributedCache, id);
-            }
-            else
-            {
-                try
-                {                    
-                    var contacts = await system.Contacts.AddQueryOption("$filter", "adoxio_externalid eq '" + siteminderId + "'").ExecuteAsync();
-
-                    result = contacts.FirstOrDefault();
-                    if (result != null && distributedCache != null)
-                    {
-                        // store the contact data.
-                        Guid id = (Guid)result.Contactid;
-                        distributedCache.SetString(key, id.ToString());
-                        // update the cache for the contact.
-                        string contact_key = "Contact_" + id.ToString();
-                        string cacheValue = JsonConvert.SerializeObject(result);
-                        distributedCache.SetString(contact_key, cacheValue);
-                    }
-                }
-                catch (DataServiceQueryException dsqe)
-                {                    
-                    result = null;                    
-                }
-            }
-
-            return result;
-        }
-
-        public static async Task<MicrosoftDynamicsCRMadoxioLegalentity> GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
+        public static MicrosoftDynamicsCRMadoxioLegalentity GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
 		{
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
 			string accountFilter = "_adoxio_account_value eq " + id.ToString();
-
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value;
-
-            result = legalEntities.FirstOrDefault();
-            
+            result = legalEntities.FirstOrDefault();            
 			return result;
 		}
 
 
-        public static async Task<MicrosoftDynamicsCRMadoxioLicencetype> GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
+        public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
         {
             MicrosoftDynamicsCRMadoxioLicencetype result = null;
 
@@ -729,7 +356,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = _dynamicsClient.AdoxioLicencetypes.GetByKey(id.ToString());
             }
-            catch (DataServiceQueryException dsqe)
+            catch (OdataerrorException)
             {
                 result = null;
             }
@@ -737,7 +364,25 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-		public static async Task<MicrosoftDynamicsCRMadoxioLicencetype> GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
+
+        public static MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(this IDynamicsClient _dynamicsClient, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioEstablishment result = null;
+
+            try
+            {
+                result = _dynamicsClient.Establishments.GetByKey(id.ToString());
+            }
+            catch (OdataerrorException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+
+        public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
 			MicrosoftDynamicsCRMadoxioLicencetype result = null;
 			string typeFilter = "adoxio_name eq '" + name + "'";
@@ -749,27 +394,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        /// <summary>
-        /// Get a dynamics application by their Guid
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static async Task<MicrosoftDynamicsCRMadoxioapplication> GetAdoxioApplicationById(this Microsoft.Dynamics.CRM.System system, Guid id)
-        {
-			MicrosoftDynamicsCRMadoxioapplication result = null;
-            // fetch from Dynamics.
-            try
-            {
-				result = await system.Adoxio_applications.ByKey(id).GetValueAsync();
-            }
-            catch (DataServiceQueryException dsqe)
-            {
-                result = null;
-            }
-            return result;
-        }
 
         /// <summary>
         /// Get picklist options for a given field
@@ -820,5 +444,124 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return result;
         }
+
+        /// <summary>
+        /// Load User from database using their userId and guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="userId"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient,  string userId, string guid = null)
+        {
+            User user = null;
+
+            if (!string.IsNullOrEmpty(guid))
+                user = await _dynamicsClient.GetUserByGuid(guid);
+
+            if (user == null)
+                user = await _dynamicsClient.GetUserBySmUserId(userId);
+
+            if (user == null)
+                return null;
+
+            if (guid == null)
+                return user;
+
+
+            if (!user.ContactId.ToString().Equals(guid, StringComparison.OrdinalIgnoreCase))
+            {
+                // invalid account - guid doesn't match user credential
+                return null;
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Returns a User based on the guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static async Task<User> GetUserByGuid(this IDynamicsClient _dynamicsClient, string guid)
+        {
+            Guid id = new Guid(guid);
+            User user = null;
+            var contact = await _dynamicsClient.GetContactById(id);
+            if (contact != null)
+            {
+                user = new User();
+                user.FromContact(contact);
+            }
+
+            return user;
+        }
+
+
+
+        /// <summary>
+        /// Returns a User based on the guid
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static async Task<User> GetUserBySmUserId(this IDynamicsClient _dynamicsClient, string guid)
+        {
+            Guid id = new Guid(guid);
+            User user = null;
+            var contact = await _dynamicsClient.GetContactBySiteminderGuid(id.ToString());
+            if (contact != null)
+            {
+                user = new User();
+                user.FromContact(contact);
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        public static bool CurrentUserHasAccessToAccount(Guid accountId, IHttpContextAccessor _httpContextAccessor, IDynamicsClient _dynamicsClient)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return userSettings.AccountId == accountId.ToString() || IsChildAccount(userSettings.AccountId, accountId.ToString(), _dynamicsClient);
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
+        }
+
+        private static bool IsChildAccount(String parentAccountId, String childAccountId, IDynamicsClient _dynamicsClient)
+        {
+            var filter = $"_adoxio_account_value eq {parentAccountId}";
+            var result = false;
+
+            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList();
+            if (legalEntities.Any(e => e._adoxioShareholderaccountidValue == childAccountId))
+            {
+                result = true;
+            }
+            else
+            {
+                legalEntities = legalEntities.Where(e => !String.IsNullOrEmpty(e._adoxioShareholderaccountidValue)).ToList();
+                for (var i = 0; i < legalEntities.Count; i++)
+                {
+                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId, _dynamicsClient)){
+                       result = true;
+                       break;
+                    }
+                }
+            }
+            return result;
+        }
+        
     }
 }

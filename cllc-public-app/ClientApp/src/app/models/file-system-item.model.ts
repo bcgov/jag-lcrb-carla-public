@@ -4,6 +4,7 @@ export class FileSystemItem
     name: string;
     documenttype: string;
     size: number;
+    serverrelativeurl: string;
     timecreated: Date;
     timelastmodified: Date;
 }

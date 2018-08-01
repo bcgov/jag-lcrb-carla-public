@@ -63,7 +63,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-                basePath += "/dashboard";
+                // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
+                basePath += "dashboard-lite";
                 return Redirect(basePath);
             }
         }
@@ -137,7 +138,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             );
 
             string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-            basePath += "/dashboard";
+            // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
+            basePath += "dashboard-lite";
             return Redirect(basePath);
         }
 

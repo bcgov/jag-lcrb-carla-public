@@ -31,6 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_isindividual = from.Adoxio_isindividual;
             to.Adoxio_lastname = from.Adoxio_lastname;
             to.Adoxio_legalentitytype = from.Adoxio_legalentitytype;
+            to.Adoxio_partnertype = from.Adoxio_partnertype;
             to.Adoxio_middlename = from.Adoxio_middlename;
             to.Adoxio_name = from.Adoxio_name;
             to.Adoxio_position = from.Adoxio_position;
@@ -62,6 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_isindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
             to.Adoxio_lastname = from.lastname;
             to.Adoxio_legalentitytype = (int?)from.legalentitytype;
+            to.Adoxio_partnertype = (int?)from.partnerType;
             to.Adoxio_middlename = from.middlename;
             to.Adoxio_name = from.name;
             to.Adoxio_ispartner = (from.isPartner == true);
@@ -69,12 +71,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Adoxio_istrustee = false;
             to.Adoxio_isdirector = from.isDirector;
             to.Adoxio_isofficer = from.isOfficer;
-            to.Adoxio_isowner = false;
+            to.Adoxio_isowner = from.isOwner;
             to.Adoxio_preferrednonvotingshares = from.preferrednonvotingshares;
             to.Adoxio_preferredvotingshares = from.preferredvotingshares;
             to.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
             to.Adoxio_email = from.email;
             to.Adoxio_dateofappointment = from.dateofappointment;
+
+            to.Adoxio_dateemailsent = from.securityAssessmentEmailSentOn;
             // Assigning the account this way throws exception:
             // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
             //if (from.account.id != null)
@@ -107,6 +111,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.AdoxioLegalentitytype = (int?)from.legalentitytype;
             }
+            if (from.partnerType != null)
+            {
+                to.AdoxioPartnertype = (int?)from.partnerType;
+            }
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioName = from.name;
             to.AdoxioIspartner = from.isPartner;
@@ -115,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsdirector = from.isDirector;
             to.AdoxioIsofficer = from.isOfficer;
             to.AdoxioIsseniormanagement = from.isSeniorManagement;
-            to.AdoxioIsowner = false;
+            to.AdoxioIsowner = from.isOwner;
             to.AdoxioPreferrednonvotingshares = from.preferrednonvotingshares;
             to.AdoxioPreferredvotingshares = from.preferredvotingshares;
             to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -130,12 +138,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             //    getAccountTask.Wait();
             //    to.Adoxio_Account= getAccountTask.Result;
             //}
-            // adoxio_dateemailsent
+            to.AdoxioDateemailsent = from.securityAssessmentEmailSentOn;
         }
 
-        /// <summary>
-        /// Convert a given voteQuestion to a ViewModel
-        /// </summary>        
+        // /// <summary>
+        // /// Convert a given voteQuestion to a ViewModel
+        // /// </summary>        
         public static ViewModels.AdoxioLegalEntity ToViewModel(this Adoxio_legalentity adoxio_legalentity)
         {
             ViewModels.AdoxioLegalEntity result = null;
@@ -148,6 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
                 result.isDirector = (adoxio_legalentity.Adoxio_isdirector == true);
+                result.isOwner = (adoxio_legalentity.Adoxio_isowner == true);
 
                 result.commonnonvotingshares = adoxio_legalentity.Adoxio_commonnonvotingshares;
                 result.commonvotingshares = adoxio_legalentity.Adoxio_commonvotingshares;
@@ -159,7 +168,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = adoxio_legalentity.Adoxio_lastname;
                 if (adoxio_legalentity.Adoxio_legalentitytype != null)
                 {
-                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.Adoxio_legalentitytype;
+                    result.legalentitytype = (AdoxioApplicantTypeCodes)adoxio_legalentity.Adoxio_legalentitytype;
+                }
+                if (adoxio_legalentity.Adoxio_partnertype != null)
+                {
+                    result.partnerType = (AdoxioPartnerType)adoxio_legalentity.Adoxio_partnertype;
                 }
 
                 result.middlename = adoxio_legalentity.Adoxio_middlename;
@@ -172,17 +185,20 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.sameasapplyingperson = (adoxio_legalentity.Adoxio_sameasapplyingperson != null && adoxio_legalentity.Adoxio_sameasapplyingperson != 0);
                 result.dateofappointment = adoxio_legalentity.Adoxio_dateofappointment;
 
+                result.securityAssessmentEmailSentOn = adoxio_legalentity.Adoxio_dateemailsent;
+
                 // populate the account.
-                if (adoxio_legalentity.Adoxio_Account != null)
-                {
-                    result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
-                }
+                // if (adoxio_legalentity.Adoxio_Account != null)
+                // {
+                //     result.account = adoxio_legalentity.Adoxio_Account.ToViewModel();
+                // }
 
                 result.accountId = adoxio_legalentity._adoxio_account_value.ToString();
 
             }
             return result;
         }
+        
 
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
@@ -202,6 +218,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.accountId = adoxio_legalentity._adoxioAccountValue;
                 }
+                if (adoxio_legalentity._adoxioShareholderaccountidValue != null)
+                {
+                    result.shareholderAccountId = adoxio_legalentity._adoxioShareholderaccountidValue;
+                }
+
+                result.parentLegalEntityId = adoxio_legalentity._adoxioLegalentityownedValue;
 
                 result.commonnonvotingshares = adoxio_legalentity.AdoxioCommonnonvotingshares;
                 result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
@@ -213,25 +235,31 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = adoxio_legalentity.AdoxioLastname;
                 if (adoxio_legalentity.AdoxioLegalentitytype != null)
                 {
-                    result.legalentitytype = (Adoxio_applicanttypecodes)adoxio_legalentity.AdoxioLegalentitytype;
+                    result.legalentitytype = (AdoxioApplicantTypeCodes)adoxio_legalentity.AdoxioLegalentitytype;
+                }
+                if (adoxio_legalentity.AdoxioPartnertype != null)
+                {
+                    result.partnerType = (AdoxioPartnerType)adoxio_legalentity.AdoxioPartnertype;
                 }
 
                 result.middlename = adoxio_legalentity.AdoxioMiddlename;
                 result.name = adoxio_legalentity.AdoxioName;
                 result.email = adoxio_legalentity.AdoxioEmail;
-                result.isPartner =  (adoxio_legalentity.AdoxioIspartner == true);
-                result.isShareholder =  (adoxio_legalentity.AdoxioIsshareholder == true);
+                result.isPartner = (adoxio_legalentity.AdoxioIspartner == true);
+                result.isApplicant = (adoxio_legalentity.AdoxioIsapplicant == true);
+                result.isShareholder = (adoxio_legalentity.AdoxioIsshareholder == true);
                 // result.isTrustee =  adoxio_legalentity.AdoxioIstrustee;
-                // result.isOwner =  adoxio_legalentity.AdoxioIsowner;
                 result.isDirector = (adoxio_legalentity.AdoxioIsdirector == true);
                 result.isOfficer = (adoxio_legalentity.AdoxioIsofficer == true);
                 result.isSeniorManagement = (adoxio_legalentity.AdoxioIsseniormanagement == true);
+                result.isOwner = (adoxio_legalentity.AdoxioIsowner == true);
 
                 result.preferrednonvotingshares = adoxio_legalentity.AdoxioPreferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.AdoxioPreferredvotingshares;
                 // convert from int to bool.
                 result.sameasapplyingperson = (adoxio_legalentity.AdoxioSameasapplyingperson != null && adoxio_legalentity.AdoxioSameasapplyingperson != 0);
                 result.dateofappointment = adoxio_legalentity.AdoxioDateofappointment;
+                result.securityAssessmentEmailSentOn = adoxio_legalentity.AdoxioDateemailsent;
 
                 // populate the account.
                 if (adoxio_legalentity.AdoxioAccount != null)
@@ -264,13 +292,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_isindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
                 result.Adoxio_lastname = from.lastname;
                 result.Adoxio_legalentitytype = (int?)from.legalentitytype;
+                result.Adoxio_partnertype = (int?)from.partnerType;
                 result.Adoxio_middlename = from.middlename;
                 result.Adoxio_name = from.name;
 
+                result.Adoxio_isapplicant = (from.isApplicant == true);
                 result.Adoxio_ispartner = (from.isPartner == true);
-                result.Adoxio_isshareholder =  (from.isShareholder == true);
+                result.Adoxio_isshareholder = (from.isShareholder == true);
                 //result.AdoxioIstrustee = from.isTrustee;
-                //result.AdoxioIsowner = from.isOwner;
+                result.Adoxio_isowner = (from.isOwner == true);
                 result.Adoxio_isdirector = (from.isDirector == true);
                 result.Adoxio_isofficer = (from.isOfficer == true);
                 result.Adoxio_isseniormanagement = (from.isSeniorManagement == true);
@@ -279,6 +309,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Adoxio_preferredvotingshares = from.preferredvotingshares;
                 result.Adoxio_sameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
                 result.Adoxio_dateofappointment = from.dateofappointment;
+                result.Adoxio_dateemailsent = from.securityAssessmentEmailSentOn;
             }
             return result;
         }
