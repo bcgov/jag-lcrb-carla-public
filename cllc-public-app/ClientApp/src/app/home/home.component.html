@@ -1,6 +1,6 @@
 <div *ngIf="isLiteVersion" class="lite">
-  <div class="row home-header">
-    <div class="jumbotron col-md-8 col-xs-12">
+  <div class="row home-header-wrapper">
+    <div [ngClass]="{'col-md-8 col-xs-12': !isLiteVersion, 'home-header': true}" class="jumbotron">
       <h2>
         Apply for a cannabis retail store license
       </h2>
@@ -15,33 +15,51 @@
             <br>
           </button>
           <span style="padding: 10px;">OR</span>
-          <button class="btn btn-primary" routerLink="login" tabindex="3">
+          <button class="btn btn-primary" (click)="window.location.href='login'" tabindex="3">
             <strong>LOG IN</strong>
             <br>
           </button>
         </div>
       </div>
     </div>
-    <!-- Newsletter -->
-    <div class="col-md-4">
-      <section class="newsletter">
-        <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
+
+    <div [ngClass]="{'col-md-4': !isLiteVersion}" class="side-box-wrapper">
+      <section class="side-box">
+        <section style="display: flex">
+          <button mat-fab class="fab-button mat-elevation-z0">
+            <mat-icon class="icon" aria-label="description icon">description</mat-icon>
+          </button>
+          <h2>Forms for associates of licence applicants</h2>
+        </section>
+        <div style="text-align: right">
+          <button class="btn btn-primary" (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation'"
+            tabindex="3">GO TO FORMS FOR ASSOCIATES</button>
+        </div>
       </section>
     </div>
   </div>
-  <div class="row home-body">
-    <div class="col-md-8 col-xs-12">
+  <div class="row">
+    <div [ngClass]="{'col-md-8 col-xs-12': !isLiteVersion, 'home-body': true}">
       <!-- Accordion -->
-      <app-accordion></app-accordion>
+      <app-accordion [isLiteVersion]="isLiteVersion"></app-accordion>
     </div>
-    <!-- Survey -->
-    <div class="col-md-4">
-      <section class="survey">
-        <h2>What does an applicant need to apply for a cannabis license?</h2>
-        <h3>Answer questions about the proposed business to receive a customized to-do list to prepare an application.</h3>
+    <!-- Newsletter -->
+    <div [ngClass]="{'col-md-4': !isLiteVersion}" class="side-box-wrapper">
+      <!-- Survey -->
+      <section class="side-box">
+        <section style="display: flex">
+          <button mat-fab class="fab-button mat-elevation-z0">
+            <mat-icon class="icon" aria-label="help icon">help</mat-icon>
+          </button>
+          <h2>What does an applicant need to apply for a cannabis license?</h2>
+        </section>
+        <p>Answer questions about the proposed business to receive a customized to-do list to prepare an application.</p>
         <div style="text-align: right">
-          <a class="btn btn-primary" routerLink="prv" tabindex="3">START</a>
+          <button class="btn btn-primary" routerLink="prv" tabindex="3">START</button>
         </div>
+      </section>
+      <section class="side-box">
+        <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
       </section>
     </div>
   </div>
