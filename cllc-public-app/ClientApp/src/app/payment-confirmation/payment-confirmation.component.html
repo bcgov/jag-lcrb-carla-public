@@ -4,7 +4,7 @@
       <div>
         <span class="print-page" (click)="printPage()">
           <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
-          <i class="fas fa-print"></i>
+          <i class="fas fa-print fa-lg"></i>
           <a href="javascript: void(0)">  Print Page</a>
         </span>
         <h1 style="color:green">Payment Approved</h1>
@@ -52,7 +52,7 @@
       </ul>
 
       <p>Applicants should direct associates to the
-        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation">LCRB non-medical cannabis webpage</a>
+        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation" target="_blank">LCRB non-medical cannabis webpage</a>
         to download the required forms and instructions for submitting documentation.</p>
 
       <p>
@@ -69,10 +69,9 @@
         <br />
         <br />{{paymentTransactionMessage}}</alert>
     </div>
-    <div *ngIf="loaded">
-      <p>
-        <a class="globalButton btn btn-primary" style="color:white" routerLink="/dashboard-lite">
-          <strong>Return to Dashboard</strong>
+    <div *ngIf="loaded" style="padding-top:20px">
+      <p><a class="" routerLink="/dashboard-lite">
+          <i class="fa fa-angle-double-left fa-lg" style="margin-right:5px" aria-hidden="true"></i>Return to Dashboard
         </a>
       </p>
     </div>
