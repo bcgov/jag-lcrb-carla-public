@@ -14,3 +14,23 @@
     padding-left: 15px;
     margin-bottom: 20px;
 }
+
+ul {
+    list-style-type: none;
+}
+
+li::before {
+    color: #1E4176;
+    content: "\25AA";
+    display: inline-block;
+    font-size: 34px;
+    line-height: 0;
+    vertical-align: middle;
+    width: 0.5em;
+    margin-left: -16px;
+}
+
+li {
+    margin: 10px 0;
+    margin-left: -26px;
+}
