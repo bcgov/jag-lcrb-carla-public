@@ -1,29 +1,42 @@
 <h1>Floor Plan</h1>
-<p>Your floor plan must reflect what your store will look like at the time of your licence being issued. If you plan on making renovations, submit the floor plan you are developing.</p>
-<p>After you receive conditional approval, the province will inspect your store to make sure it matches the information you submitted in your plans.</p>
+<p>A floor plan shows a view from above of the store layout, with the dimensions and relationships between rooms, spaces and other physical features. </p>
 
-<h2>Floor Plan</h2>
-<p>Upload a floor plan of your store layout. The plans must be clear and legible, in PDF format that is still legible when zoomed in.</p>
+<p>A floor plan is required to:</p>
+  <ul>
+    <li>Identify public and non-public access areas</li>
+    <li>Demonstrate all cannabis products are securely stored in locked display cases or behind the sales counter</li>
+  </ul>
+
+<h2>Submitting a Floor Plan</h2>
+
+<p>
+  Upload a floor plan of your store layout. The plan must be clear and legible in PDF format.
+  It must not be submitted on graph paper or paper with gridlines. If the store has more than one level, you must submit a plan for each level.
+</p>
+<p>Your floor plan must reflect what your store will look like at the time of your licence being issued. If you plan on making renovations, submit the floor plan you are developing.</p>
+<p>After you receive conditional approval, your store will be inspected to make sure it matches the information you submitted.</p>
 
 <div class="row">
   <div class="gray-background col-sm-6">
-    <p><strong>Your floor plan must show:</strong></p>
+    <p><strong>The floor plan must show:</strong></p>
     <ul>
-      <li>All doors leading into/out of the sales area</li>
-      <li>All entrances to the store (including back doors)</li>
-      <li>The locations of all fixed shelving or display cases</li>
-      <li>The locations of all cash registers</li>
-      <li>Which areas are public and which are for staff only</li>
-      <li>The locations of all storage areas</li>
+      <li>Each room or area labeled with its intended use</li>
+      <li>Dimensions of each room or area</li>
+      <li>Any washrooms, stairs and elevators</li>
+      <li>All entrances and exits (including those used by staff only and back doors)</li>
+      <li>Cannabis storage areas</li>
+      <li>The sales counter and cash register locations</li>
+      <li>The locations of all fixed shelving and display cases</li>
+      <li>Identification of the security system or security features that secure the store</li>
     </ul>
   </div>
   <div class="col-sm-6">
     <mat-card>
       <div class="img-container">
-        <img src="assets/floor-plan-sample.jpg" style="max-height:70%; max-width:70%" alt="Floor Plan Sample">
+        <img src="assets/floor-plan-sample.jpg" style="max-height:90%; max-width:90%" alt="Floor Plan Sample">
       </div>
     </mat-card>
   </div>
 </div>
 
-<app-file-uploader documentType="Floor Plan" [accountId]="accountId"></app-file-uploader>
+<app-file-uploader *ngIf="applicationId" documentType="Floor Plan" [applicationId]="applicationId"></app-file-uploader>

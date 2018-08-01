@@ -1,7 +1,7 @@
 ﻿
+using Gov.Lclb.Cllb.Public.Utils;
 using System;
 using Xunit;
-using Logos.Utility;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {

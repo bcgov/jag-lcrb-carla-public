@@ -2341,6 +2341,691 @@
         "summary": "Update entity in adoxio_applications"
       }
     },
+	"/adoxio_applications({adoxio_applicationid})/{fieldname}/$ref": {
+	"delete": {
+		"operationId": "Applications_DeleteReference",
+        "parameters": [
+          {
+            "description": "key: adoxio_applicationid",
+            "in": "path",
+            "name": "adoxio_applicationid",
+            "required": true,
+			"type": "string"
+          },
+		  {
+            "description": "key: fieldname",
+            "in": "path",
+            "name": "fieldname",
+            "required": true,
+			"type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_applications"
+        ],
+        "summary": "Delete entity from adoxio_applications"
+      },
+	  "post": {
+		"operationId": "Applications_AddReference",
+        "parameters": [
+          {
+            "description": "key: adoxio_applicationid",
+            "in": "path",
+            "name": "adoxio_applicationid",
+            "required": true,
+			"type": "string"
+          },
+		  {
+            "description": "key: fieldname",
+            "in": "path",
+            "name": "fieldname",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "description": "reference value",
+            "in": "body",
+            "name": "odata.id",            	
+			"schema": {
+              "$ref": "#/definitions/odata.id"
+            }		
+            
+          }
+		  
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_applications"
+        ],
+        "summary": "Add reference to adoxio_applications"
+      },
+	  "put": {
+		"operationId": "Applications_ChangeReference",
+        "parameters": [
+          {
+            "description": "key: adoxio_applicationid",
+            "in": "path",
+            "name": "adoxio_applicationid",
+            "required": true,
+			"type": "string"
+          },
+		  {
+            "description": "key: fieldname",
+            "in": "path",
+            "name": "fieldname",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "description": "reference value",
+            "in": "body",
+			"name": "odata.id",
+			"schema": {
+              "$ref": "#/definitions/odata.id"
+            }		
+            
+          }
+		  
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_applications"
+        ],
+        "summary": "Change reference to adoxio_applications"
+      }
+	},	
+	"/adoxio_establishments": {
+      "get": {
+	    "operationId": "Establishments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Show only the first n items",
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "x-example": {
+              "example": 50
+            }
+          },
+          {
+            "description": "Skip only the first n items",
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "description": "Search items by search phrases",
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "description": "Filter items by property values",
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "description": "Include count of items",
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "description": "Order items by property values",
+            "in": "query",
+            "items": {
+              "enum": [
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_thursdayopen",
+                "adoxio_thursdayopen desc",
+                "adoxio_mondayclose",
+                "adoxio_mondayclose desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "adoxio_addresscity",
+                "adoxio_addresscity desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "adoxio_wednesdayclose",
+                "adoxio_wednesdayclose desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_isstandalonepatio",
+                "adoxio_isstandalonepatio desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "adoxio_occupantload",
+                "adoxio_occupantload desc",
+                "adoxio_sundayopen",
+                "adoxio_sundayopen desc",
+                "adoxio_alreadyopen",
+                "adoxio_alreadyopen desc",
+                "_adoxio_policejurisdiction_value",
+                "_adoxio_policejurisdiction_value desc",
+                "adoxio_locatedonfirstnationland",
+                "adoxio_locatedonfirstnationland desc",
+                "adoxio_isrural",
+                "adoxio_isrural desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "createdon",
+                "createdon desc",
+                "adoxio_locatedatwinery",
+                "adoxio_locatedatwinery desc",
+                "statuscode",
+                "statuscode desc",
+                "adoxio_mailsenttorestaurant",
+                "adoxio_mailsenttorestaurant desc",
+                "modifiedon",
+                "modifiedon desc",
+                "adoxio_patronparticipation",
+                "adoxio_patronparticipation desc",
+                "adoxio_parcelid",
+                "adoxio_parcelid desc",
+                "adoxio_occupantcapacity",
+                "adoxio_occupantcapacity desc",
+                "versionnumber",
+                "versionnumber desc",
+                "_adoxio_licencee_value",
+                "_adoxio_licencee_value desc",
+                "adoxio_addresspostalcode",
+                "adoxio_addresspostalcode desc",
+                "statecode",
+                "statecode desc",
+                "adoxio_establishmentid",
+                "adoxio_establishmentid desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "adoxio_standardhours",
+                "adoxio_standardhours desc",
+                "_adoxio_municipality_value",
+                "_adoxio_municipality_value desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_sendmailtoestablishmentuponapproval",
+                "adoxio_sendmailtoestablishmentuponapproval desc",
+                "adoxio_tuesdayclose",
+                "adoxio_tuesdayclose desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_fridayclose",
+                "adoxio_fridayclose desc",
+                "adoxio_fridayopen",
+                "adoxio_fridayopen desc",
+                "_adoxio_licencetypeid_value",
+                "_adoxio_licencetypeid_value desc",
+                "_adoxio_primaryinspectorid_value",
+                "_adoxio_primaryinspectorid_value desc",
+                "adoxio_expectedopendate",
+                "adoxio_expectedopendate desc",
+                "adoxio_thursdayclose",
+                "adoxio_thursdayclose desc",
+                "adoxio_saturdayclose",
+                "adoxio_saturdayclose desc",
+                "adoxio_addressstreet",
+                "adoxio_addressstreet desc",
+                "adoxio_sundayclose",
+                "adoxio_sundayclose desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "_adoxio_territory_value",
+                "_adoxio_territory_value desc",
+                "adoxio_mondayopen",
+                "adoxio_mondayopen desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_phone",
+                "adoxio_phone desc",
+                "adoxio_email",
+                "adoxio_email desc",
+                "adoxio_wednesdayopen",
+                "adoxio_wednesdayopen desc",
+                "adoxio_tuesdayopen",
+                "adoxio_tuesdayopen desc",
+                "adoxio_hasduallicence",
+                "adoxio_hasduallicence desc",
+                "adoxio_saturdayopen",
+                "adoxio_saturdayopen desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc"
+              ],
+              "type": "string"
+            },
+            "name": "$orderby",
+            "type": "array"
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "_ownerid_value",
+                "adoxio_thursdayopen",
+                "adoxio_mondayclose",
+                "_owningteam_value",
+                "adoxio_addresscity",
+                "_modifiedonbehalfby_value",
+                "adoxio_wednesdayclose",
+                "_owningbusinessunit_value",
+                "adoxio_isstandalonepatio",
+                "adoxio_name",
+                "adoxio_occupantload",
+                "adoxio_sundayopen",
+                "adoxio_alreadyopen",
+                "_adoxio_policejurisdiction_value",
+                "adoxio_locatedonfirstnationland",
+                "adoxio_isrural",
+                "_createdonbehalfby_value",
+                "createdon",
+                "adoxio_locatedatwinery",
+                "statuscode",
+                "adoxio_mailsenttorestaurant",
+                "modifiedon",
+                "adoxio_patronparticipation",
+                "adoxio_parcelid",
+                "adoxio_occupantcapacity",
+                "versionnumber",
+                "_adoxio_licencee_value",
+                "adoxio_addresspostalcode",
+                "statecode",
+                "adoxio_establishmentid",
+                "_owninguser_value",
+                "adoxio_standardhours",
+                "_adoxio_municipality_value",
+                "overriddencreatedon",
+                "adoxio_sendmailtoestablishmentuponapproval",
+                "adoxio_tuesdayclose",
+                "timezoneruleversionnumber",
+                "adoxio_fridayclose",
+                "adoxio_fridayopen",
+                "_adoxio_licencetypeid_value",
+                "_adoxio_primaryinspectorid_value",
+                "adoxio_expectedopendate",
+                "adoxio_thursdayclose",
+                "adoxio_saturdayclose",
+                "adoxio_addressstreet",
+                "adoxio_sundayclose",
+                "utcconversiontimezonecode",
+                "_adoxio_territory_value",
+                "adoxio_mondayopen",
+                "importsequencenumber",
+                "_createdby_value",
+                "adoxio_phone",
+                "adoxio_email",
+                "adoxio_wednesdayopen",
+                "adoxio_tuesdayopen",
+                "adoxio_hasduallicence",
+                "adoxio_saturdayopen",
+                "_modifiedby_value"
+              ],
+              "type": "string"
+            },
+            "name": "$select",
+            "type": "array"
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_establishment_SyncErrors",
+                "adoxio_establishment_DuplicateMatchingRecord",
+                "adoxio_establishment_DuplicateBaseRecord",
+                "adoxio_establishment_AsyncOperations",
+                "adoxio_establishment_BulkDeleteFailures",
+                "adoxio_Licencee",
+                "adoxio_Municipality",
+                "adoxio_PoliceJurisdiction",
+                "adoxio_adoxio_establishment_adoxio_application_Establishment",
+                "adoxio_adoxio_establishment_adoxio_licences_establishment",
+                "adoxio_adoxio_establishment_contact_Establishment",
+                "adoxio_adoxio_establishment_incident_Establishment",
+                "adoxio_Territory",
+                "adoxio_adoxio_establishment_adoxio_complaint_Establishment",
+                "adoxio_adoxio_establishment_adoxio_investigation_Establishment",
+                "adoxio_LicenceTypeId",
+                "adoxio_PrimaryInspectorId"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+                  },
+                  "type": "array"
+                }
+              },
+              "title": "Collection of adoxio_establishments",
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_establishments"
+        ],
+        "summary": "Get entities from adoxio_establishments"
+      },
+      "post": {
+	    "operationId": "Establishments_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "New entity",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+            }
+          },
+		  {
+		  "in": "header",
+		  "name": "Prefer",
+		  "default": "return=representation",
+		  "type": "string",
+		  "description": "Required in order for the service to return a JSON representation of the object."		  
+		  }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_establishments"
+        ],
+        "summary": "Add new entity to adoxio_establishments"
+      }
+    },
+    "/adoxio_establishments({adoxio_establishmentid})": {
+      "delete": {
+	    "operationId": "Establishments_Delete",
+        "parameters": [
+          {
+            "description": "key: adoxio_establishmentid",
+            "in": "path",
+            "name": "adoxio_establishmentid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ETag",
+            "in": "header",
+            "name": "If-Match",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_establishments"
+        ],
+        "summary": "Delete entity from adoxio_establishments"
+      },
+      "get": {
+	    "operationId": "Establishments_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: adoxio_establishmentid",
+            "in": "path",
+            "name": "adoxio_establishmentid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "_ownerid_value",
+                "adoxio_thursdayopen",
+                "adoxio_mondayclose",
+                "_owningteam_value",
+                "adoxio_addresscity",
+                "_modifiedonbehalfby_value",
+                "adoxio_wednesdayclose",
+                "_owningbusinessunit_value",
+                "adoxio_isstandalonepatio",
+                "adoxio_name",
+                "adoxio_occupantload",
+                "adoxio_sundayopen",
+                "adoxio_alreadyopen",
+                "_adoxio_policejurisdiction_value",
+                "adoxio_locatedonfirstnationland",
+                "adoxio_isrural",
+                "_createdonbehalfby_value",
+                "createdon",
+                "adoxio_locatedatwinery",
+                "statuscode",
+                "adoxio_mailsenttorestaurant",
+                "modifiedon",
+                "adoxio_patronparticipation",
+                "adoxio_parcelid",
+                "adoxio_occupantcapacity",
+                "versionnumber",
+                "_adoxio_licencee_value",
+                "adoxio_addresspostalcode",
+                "statecode",
+                "adoxio_establishmentid",
+                "_owninguser_value",
+                "adoxio_standardhours",
+                "_adoxio_municipality_value",
+                "overriddencreatedon",
+                "adoxio_sendmailtoestablishmentuponapproval",
+                "adoxio_tuesdayclose",
+                "timezoneruleversionnumber",
+                "adoxio_fridayclose",
+                "adoxio_fridayopen",
+                "_adoxio_licencetypeid_value",
+                "_adoxio_primaryinspectorid_value",
+                "adoxio_expectedopendate",
+                "adoxio_thursdayclose",
+                "adoxio_saturdayclose",
+                "adoxio_addressstreet",
+                "adoxio_sundayclose",
+                "utcconversiontimezonecode",
+                "_adoxio_territory_value",
+                "adoxio_mondayopen",
+                "importsequencenumber",
+                "_createdby_value",
+                "adoxio_phone",
+                "adoxio_email",
+                "adoxio_wednesdayopen",
+                "adoxio_tuesdayopen",
+                "adoxio_hasduallicence",
+                "adoxio_saturdayopen",
+                "_modifiedby_value"
+              ],
+              "type": "string"
+            },
+            "name": "$select",
+            "type": "array"
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_establishment_SyncErrors",
+                "adoxio_establishment_DuplicateMatchingRecord",
+                "adoxio_establishment_DuplicateBaseRecord",
+                "adoxio_establishment_AsyncOperations",
+                "adoxio_establishment_BulkDeleteFailures",
+                "adoxio_Licencee",
+                "adoxio_Municipality",
+                "adoxio_PoliceJurisdiction",
+                "adoxio_adoxio_establishment_adoxio_application_Establishment",
+                "adoxio_adoxio_establishment_adoxio_licences_establishment",
+                "adoxio_adoxio_establishment_contact_Establishment",
+                "adoxio_adoxio_establishment_incident_Establishment",
+                "adoxio_Territory",
+                "adoxio_adoxio_establishment_adoxio_complaint_Establishment",
+                "adoxio_adoxio_establishment_adoxio_investigation_Establishment",
+                "adoxio_LicenceTypeId",
+                "adoxio_PrimaryInspectorId"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_establishments"
+        ],
+        "summary": "Get entity from adoxio_establishments by key"
+      },
+      "patch": {
+	    "operationId": "Establishments_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: adoxio_establishmentid",
+            "in": "path",
+            "name": "adoxio_establishmentid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "New property values",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_establishments"
+        ],
+        "summary": "Update entity in adoxio_establishments"
+      }
+    },
 	"/adoxio_legalentities": { 
       "get": {
         "summary": "Get entities from adoxio_legalentities",
@@ -3301,6 +3986,518 @@
           "adoxio_licencetypes"
         ],
         "summary": "Update entity in adoxio_licencetypes"
+      }
+    },
+    "/adoxio_licenceses": {
+      "get": {
+	    "operationId": "Licenses_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Show only the first n items",
+            "in": "query",
+            "name": "$top",            
+            "type": "integer",
+            "x-example": {
+              "example": 50
+            }
+          },
+          {
+            "description": "Skip only the first n items",
+            "in": "query",
+            "name": "$skip",            
+            "type": "integer"
+          },
+          {
+            "description": "Search items by search phrases",
+            "in": "query",
+            "name": "$search",            
+            "type": "string"
+          },
+          {
+            "description": "Filter items by property values",
+            "in": "query",
+            "name": "$filter",            
+            "type": "string"
+          },
+          {
+            "description": "Include count of items",
+            "in": "query",
+            "name": "$count",            
+            "type": "boolean"
+          },
+          {
+            "description": "Order items by property values",
+            "in": "query",
+            "items": {
+              "enum": [
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "adoxio_expirydate",
+                "adoxio_expirydate desc",
+                "adoxio_licenceprintname",
+                "adoxio_licenceprintname desc",
+                "versionnumber",
+                "versionnumber desc",
+                "modifiedon",
+                "modifiedon desc",
+                "_adoxio_licencetype_value",
+                "_adoxio_licencetype_value desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "_adoxio_licencee_value",
+                "_adoxio_licencee_value desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_expirymonthname",
+                "adoxio_expirymonthname desc",
+                "adoxio_licencenumber",
+                "adoxio_licencenumber desc",
+                "_adoxio_establishment_value",
+                "_adoxio_establishment_value desc",
+                "adoxio_effectivedate",
+                "adoxio_effectivedate desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_expirydayofmonth",
+                "adoxio_expirydayofmonth desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "_adoxio_territory_value",
+                "_adoxio_territory_value desc",
+                "statuscode",
+                "statuscode desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_licencesid",
+                "adoxio_licencesid desc",
+                "_adoxio_region_value",
+                "_adoxio_region_value desc",
+                "_adoxio_municipality_value",
+                "_adoxio_municipality_value desc",
+                "adoxio_establishmentnametemp",
+                "adoxio_establishmentnametemp desc",
+                "adoxio_expiryyear",
+                "adoxio_expiryyear desc",
+                "statecode",
+                "statecode desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_expiryyeartext",
+                "adoxio_expiryyeartext desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "createdon",
+                "createdon desc",
+                "_adoxio_accountid_value",
+                "_adoxio_accountid_value desc",
+                "_adoxio_policejurisdiction_value",
+                "_adoxio_policejurisdiction_value desc"
+              ],
+              "type": "string"
+            },
+            "name": "$orderby",            
+            "type": "array"            
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "utcconversiontimezonecode",
+                "_modifiedonbehalfby_value",
+                "adoxio_expirydate",
+                "adoxio_licenceprintname",
+                "versionnumber",
+                "modifiedon",
+                "_adoxio_licencetype_value",
+                "_createdonbehalfby_value",
+                "_adoxio_licencee_value",
+                "_ownerid_value",
+                "adoxio_expirymonthname",
+                "adoxio_licencenumber",
+                "_adoxio_establishment_value",
+                "adoxio_effectivedate",
+                "_createdby_value",
+                "adoxio_expirydayofmonth",
+                "_owningteam_value",
+                "_adoxio_territory_value",
+                "statuscode",
+                "_owninguser_value",
+                "overriddencreatedon",
+                "adoxio_licencesid",
+                "_adoxio_region_value",
+                "_adoxio_municipality_value",
+                "adoxio_establishmentnametemp",
+                "adoxio_expiryyear",
+                "statecode",
+                "adoxio_name",
+                "_owningbusinessunit_value",
+                "adoxio_expiryyeartext",
+                "_modifiedby_value",
+                "importsequencenumber",
+                "timezoneruleversionnumber",
+                "createdon",
+                "_adoxio_accountid_value",
+                "_adoxio_policejurisdiction_value"
+              ],
+              "type": "string"
+            },
+            "name": "$select",            
+            "type": "array"
+            
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_licences_ActivityPointers",
+                "adoxio_licences_Appointments",
+                "adoxio_licences_Emails",
+                "adoxio_licences_Faxes",
+                "adoxio_licences_Letters",
+                "adoxio_licences_PhoneCalls",
+                "adoxio_licences_ServiceAppointments",
+                "adoxio_licences_Tasks",
+                "adoxio_licences_RecurringAppointmentMasters",
+                "adoxio_licences_SocialActivities",
+                "adoxio_licences_SyncErrors",
+                "adoxio_licences_DuplicateMatchingRecord",
+                "adoxio_licences_DuplicateBaseRecord",
+                "adoxio_licences_Annotations",
+                "adoxio_licences_AsyncOperations",
+                "adoxio_licences_BulkDeleteFailures",
+                "adoxio_AccountId",
+                "adoxio_Licencee",
+                "adoxio_Municipality",
+                "adoxio_PoliceJurisdiction",
+                "adoxio_establishment",
+                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
+                "adoxio_adoxio_licences_adoxio_complaincemeeting_Licence",
+                "adoxio_adoxio_licences_adoxio_complaintsubject_Licence",
+                "adoxio_adoxio_licences_adoxio_contravention_Licence",
+                "adoxio_adoxio_licences_adoxio_legalentity_RelatedLicence",
+                "adoxio_adoxio_licences_adoxio_violationnotification_Licence",
+                "adoxio_adoxio_licences_contact_RelatedLicence",
+                "adoxio_adoxio_licences_incident_Licence",
+                "adoxio_LicenceType",
+                "adoxio_Region",
+                "adoxio_Territory",
+                "adoxio_adoxio_licences_adoxio_complaint_Licence",
+                "adoxio_adoxio_licences_adoxio_investigation_Licence"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",            
+            "type": "array"            
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+                  },
+                  "type": "array"
+                }
+              },
+              "title": "Collection of adoxio_licenceses",
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_licenceses"
+        ],
+        "summary": "Get entities from adoxio_licenceses"
+      },
+      "post": {
+	    "operationId": "Licenses_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "New entity",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
+          },
+		  {
+			  "in": "header",
+			  "name": "Prefer",
+			  "default": "return=representation",
+			  "type": "string",
+			  "description": "Required in order for the service to return a JSON representation of the object."		  
+		  }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_licenceses"
+        ],
+        "summary": "Add new entity to adoxio_licenceses"
+      }
+    },
+    "/adoxio_licenceses({adoxio_licencesid})": {
+      "delete": {
+	    "operationId": "Licenses_Delete",
+        "parameters": [
+          {
+		    "name": "adoxio_licencesid",
+			"in": "path",
+            "description": "key: adoxio_licencesid",                        
+            "required": true,
+			"type": "string"            
+          },
+          {
+            "description": "ETag",
+            "in": "header",
+            "name": "If-Match",            
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_licenceses"
+        ],
+        "summary": "Delete entity from adoxio_licenceses"
+      },
+      "get": {
+	    "operationId": "Licenses_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: adoxio_licencesid",
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "required": true,
+			"type": "string"            
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "utcconversiontimezonecode",
+                "_modifiedonbehalfby_value",
+                "adoxio_expirydate",
+                "adoxio_licenceprintname",
+                "versionnumber",
+                "modifiedon",
+                "_adoxio_licencetype_value",
+                "_createdonbehalfby_value",
+                "_adoxio_licencee_value",
+                "_ownerid_value",
+                "adoxio_expirymonthname",
+                "adoxio_licencenumber",
+                "_adoxio_establishment_value",
+                "adoxio_effectivedate",
+                "_createdby_value",
+                "adoxio_expirydayofmonth",
+                "_owningteam_value",
+                "_adoxio_territory_value",
+                "statuscode",
+                "_owninguser_value",
+                "overriddencreatedon",
+                "adoxio_licencesid",
+                "_adoxio_region_value",
+                "_adoxio_municipality_value",
+                "adoxio_establishmentnametemp",
+                "adoxio_expiryyear",
+                "statecode",
+                "adoxio_name",
+                "_owningbusinessunit_value",
+                "adoxio_expiryyeartext",
+                "_modifiedby_value",
+                "importsequencenumber",
+                "timezoneruleversionnumber",
+                "createdon",
+                "_adoxio_accountid_value",
+                "_adoxio_policejurisdiction_value"
+              ],
+              "type": "string"
+            },
+            "name": "$select",            
+            "type": "array"            
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_licences_ActivityPointers",
+                "adoxio_licences_Appointments",
+                "adoxio_licences_Emails",
+                "adoxio_licences_Faxes",
+                "adoxio_licences_Letters",
+                "adoxio_licences_PhoneCalls",
+                "adoxio_licences_ServiceAppointments",
+                "adoxio_licences_Tasks",
+                "adoxio_licences_RecurringAppointmentMasters",
+                "adoxio_licences_SocialActivities",
+                "adoxio_licences_SyncErrors",
+                "adoxio_licences_DuplicateMatchingRecord",
+                "adoxio_licences_DuplicateBaseRecord",
+                "adoxio_licences_Annotations",
+                "adoxio_licences_AsyncOperations",
+                "adoxio_licences_BulkDeleteFailures",
+                "adoxio_AccountId",
+                "adoxio_Licencee",
+                "adoxio_Municipality",
+                "adoxio_PoliceJurisdiction",
+                "adoxio_establishment",
+                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
+                "adoxio_adoxio_licences_adoxio_complaincemeeting_Licence",
+                "adoxio_adoxio_licences_adoxio_complaintsubject_Licence",
+                "adoxio_adoxio_licences_adoxio_contravention_Licence",
+                "adoxio_adoxio_licences_adoxio_legalentity_RelatedLicence",
+                "adoxio_adoxio_licences_adoxio_violationnotification_Licence",
+                "adoxio_adoxio_licences_contact_RelatedLicence",
+                "adoxio_adoxio_licences_incident_Licence",
+                "adoxio_LicenceType",
+                "adoxio_Region",
+                "adoxio_Territory",
+                "adoxio_adoxio_licences_adoxio_complaint_Licence",
+                "adoxio_adoxio_licences_adoxio_investigation_Licence"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",
+            
+            "type": "array"
+            
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_licenceses"
+        ],
+        "summary": "Get entity from adoxio_licenceses by key"
+      },
+      "patch": {
+	    "operationId": "Licenses_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: adoxio_licencesid",
+            "in": "path",
+            "name": "adoxio_licencesid",
+            "required": true,
+            "type":"string"
+          },
+          {
+            "description": "New property values",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "adoxio_licenceses"
+        ],
+        "summary": "Update entity in adoxio_licenceses"
       }
     },
 	"/adoxio_tiedhouseassociations": {
@@ -6328,8 +7525,504 @@
         },
         "summary": "Invoke action LockInvoicePricing"
       }
-    }  
-  },
+    },
+    "/sharepointdocumentlocations": {
+      "get": {
+	    "operationId": "SharepointDocumentLocations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Show only the first n items",
+            "in": "query",
+            "name": "$top",            
+            "type": "integer",
+            "x-example": {
+              "example": 50
+            }
+          },
+          {
+            "description": "Skip only the first n items",
+            "in": "query",
+            "name": "$skip",           
+            "type": "integer"
+          },
+          {
+            "description": "Search items by search phrases",
+            "in": "query",
+            "name": "$search",            
+            "type": "string"
+          },
+          {
+            "description": "Filter items by property values",
+            "in": "query",
+            "name": "$filter",            
+            "type": "string"
+          },
+          {
+            "description": "Include count of items",
+            "in": "query",
+            "name": "$count",            
+            "type": "boolean"
+          },
+          {
+            "description": "Order items by property values",
+            "in": "query",
+            "items": {
+              "enum": [
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "description",
+                "description desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "createdon",
+                "createdon desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "modifiedon",
+                "modifiedon desc",
+                "_transactioncurrencyid_value",
+                "_transactioncurrencyid_value desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "absoluteurl",
+                "absoluteurl desc",
+                "name",
+                "name desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "locationtype",
+                "locationtype desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "_regardingobjectid_value",
+                "_regardingobjectid_value desc",
+                "_parentsiteorlocation_value",
+                "_parentsiteorlocation_value desc",
+                "versionnumber",
+                "versionnumber desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "exchangerate",
+                "exchangerate desc",
+                "statecode",
+                "statecode desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "sitecollectionid",
+                "sitecollectionid desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "relativeurl",
+                "relativeurl desc",
+                "userid",
+                "userid desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "sharepointdocumentlocationid",
+                "sharepointdocumentlocationid desc",
+                "servicetype",
+                "servicetype desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "statuscode",
+                "statuscode desc"
+              ],
+              "type": "string"
+            },
+            "name": "$orderby",            
+            "type": "array"
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "importsequencenumber",
+                "description",
+                "_ownerid_value",
+                "createdon",
+                "_owningbusinessunit_value",
+                "modifiedon",
+                "_transactioncurrencyid_value",
+                "_owninguser_value",
+                "absoluteurl",
+                "name",
+                "_createdby_value",
+                "locationtype",
+                "_modifiedonbehalfby_value",
+                "_regardingobjectid_value",
+                "_parentsiteorlocation_value",
+                "versionnumber",
+                "timezoneruleversionnumber",
+                "exchangerate",
+                "statecode",
+                "_owningteam_value",
+                "sitecollectionid",
+                "utcconversiontimezonecode",
+                "overriddencreatedon",
+                "relativeurl",
+                "userid",
+                "_modifiedby_value",
+                "sharepointdocumentlocationid",
+                "servicetype",
+                "_createdonbehalfby_value",
+                "statuscode"
+              ],
+              "type": "string"
+            },
+            "name": "$select",            
+            "type": "array"            
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "regardingobjectid_knowledgearticle",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "regardingobjectid_account",
+                "regardingobjectid_quote",
+                "regardingobjectid_product",
+                "parentsiteorlocation_sharepointdocumentlocation",
+                "sharepointdocumentlocation_parent_sharepointdocumentlocation",
+                "createdonbehalfby",
+                "modifiedby",
+                "regardingobjectid_lead",
+                "SharePointDocumentLocation_DuplicateBaseRecord",
+                "createdby",
+                "regardingobjectid_salesliterature",
+                "regardingobjectid_opportunity",
+                "parentsiteorlocation_sharepointsite",
+                "modifiedonbehalfby",
+                "regardingobjectid_kbarticle",
+                "SharePointDocumentLocation_DuplicateMatchingRecord",
+                "transactioncurrencyid",
+                "SharePointDocumentLocation_SyncErrors",
+                "SharePointDocumentLocation_AsyncOperations",
+                "regardingobjectid_adoxio_application",
+                "regardingobjectid_adoxio_exhibit",
+                "regardingobjectid_adoxio_legalentity",
+                "regardingobjectid_adoxio_personalhistorysummary",
+                "regardingobjectid_incident",
+                "regardingobjectid_adoxio_complaint"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",
+            
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+                  },
+                  "type": "array"
+                }
+              },
+              "title": "Collection of sharepointdocumentlocations",
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "sharepointdocumentlocations"
+        ],
+        "summary": "Get entities from sharepointdocumentlocations"
+      },
+      "post": {
+	  "operationId": "SharepointDocumentLocations_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+		 {
+		  "in": "header",
+		  "name": "Prefer",
+		  "default": "return=representation",
+		  "type": "string",
+		  "description": "Required in order for the service to return a JSON representation of the object."		  
+		  },
+          {
+            "description": "New entity",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "sharepointdocumentlocations"
+        ],
+        "summary": "Add new entity to sharepointdocumentlocations"
+      }
+    },
+    "/sharepointdocumentlocations({sharepointdocumentlocationid})": {
+      "delete": {
+	    "operationId": "SharepointDocumentLocations_Delete",
+        "parameters": [
+          {
+            "description": "key: sharepointdocumentlocationid",
+            "in": "path",
+            "name": "sharepointdocumentlocationid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ETag",
+            "in": "header",
+            "name": "If-Match",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "sharepointdocumentlocations"
+        ],
+        "summary": "Delete entity from sharepointdocumentlocations"
+      },
+      "get": {
+	  "operationId": "SharepointDocumentLocations_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: sharepointdocumentlocationid",
+            "in": "path",
+            "name": "sharepointdocumentlocationid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Select properties to be returned",
+            "in": "query",
+            "items": {
+              "enum": [
+                "importsequencenumber",
+                "description",
+                "_ownerid_value",
+                "createdon",
+                "_owningbusinessunit_value",
+                "modifiedon",
+                "_transactioncurrencyid_value",
+                "_owninguser_value",
+                "absoluteurl",
+                "name",
+                "_createdby_value",
+                "locationtype",
+                "_modifiedonbehalfby_value",
+                "_regardingobjectid_value",
+                "_parentsiteorlocation_value",
+                "versionnumber",
+                "timezoneruleversionnumber",
+                "exchangerate",
+                "statecode",
+                "_owningteam_value",
+                "sitecollectionid",
+                "utcconversiontimezonecode",
+                "overriddencreatedon",
+                "relativeurl",
+                "userid",
+                "_modifiedby_value",
+                "sharepointdocumentlocationid",
+                "servicetype",
+                "_createdonbehalfby_value",
+                "statuscode"
+              ],
+              "type": "string"
+            },
+            "name": "$select",
+            
+            "type": "array",
+            "uniqueItems": true
+          },
+          {
+            "description": "Expand related entities",
+            "in": "query",
+            "items": {
+              "enum": [
+                "*",
+                "regardingobjectid_knowledgearticle",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "regardingobjectid_account",
+                "regardingobjectid_quote",
+                "regardingobjectid_product",
+                "parentsiteorlocation_sharepointdocumentlocation",
+                "sharepointdocumentlocation_parent_sharepointdocumentlocation",
+                "createdonbehalfby",
+                "modifiedby",
+                "regardingobjectid_lead",
+                "SharePointDocumentLocation_DuplicateBaseRecord",
+                "createdby",
+                "regardingobjectid_salesliterature",
+                "regardingobjectid_opportunity",
+                "parentsiteorlocation_sharepointsite",
+                "modifiedonbehalfby",
+                "regardingobjectid_kbarticle",
+                "SharePointDocumentLocation_DuplicateMatchingRecord",
+                "transactioncurrencyid",
+                "SharePointDocumentLocation_SyncErrors",
+                "SharePointDocumentLocation_AsyncOperations",
+                "regardingobjectid_adoxio_application",
+                "regardingobjectid_adoxio_exhibit",
+                "regardingobjectid_adoxio_legalentity",
+                "regardingobjectid_adoxio_personalhistorysummary",
+                "regardingobjectid_incident",
+                "regardingobjectid_adoxio_complaint"
+              ],
+              "type": "string"
+            },
+            "name": "$expand",
+            
+            "type": "array",
+            "uniqueItems": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "sharepointdocumentlocations"
+        ],
+        "summary": "Get entity from sharepointdocumentlocations by key"
+      },
+      "patch": {
+	    "operationId": "SharepointDocumentLocations_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "key: sharepointdocumentlocationid",
+            "in": "path",
+            "name": "sharepointdocumentlocationid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "New property values",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "tags": [
+          "sharepointdocumentlocations"
+        ],
+        "summary": "Update entity in sharepointdocumentlocations"
+      }
+    },
+    "/sharepointdocumentlocations({sharepointdocumentlocationid})/RetrieveAbsoluteAndSiteCollectionUrl(entity={entity})": {
+      "get": {
+	    "operationId": "SharepointDocumentLocations_RetrieveAbsoluteAndSiteCollectionUrl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.RetrieveAbsoluteAndSiteCollectionUrlResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        },
+        "summary": "Invoke function RetrieveAbsoluteAndSiteCollectionUrl"
+      }
+    }
+
+	},
   "definitions": {
     "Microsoft.Dynamics.CRM.AccessRights": {
       "title": "AccessRights",
@@ -15050,6 +16743,11 @@
               "type": "integer",
               "x-nullable": true
             },
+			"adoxio_paymentreceiveddate": {
+              "x-nullable": true,
+              "type": "string",
+			  "format": "date-time"
+            },
             "adoxio_paymentrecieved": {
               "type": "boolean",
               "x-nullable": true
@@ -22809,6 +24507,10 @@
               "type": "string",
               "x-nullable": true
             },
+			"_adoxio_contactid_value": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "_adoxio_tiedhouse_value": {
               "type": "string",
               "x-nullable": true
@@ -22851,8 +24553,55 @@
             "adoxio_Application": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
             },
+			"adoxio_ContactId": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+            },
             "adoxio_TiedHouse": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
+            },
+			"adoxio_additionaldetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_associateconnectionfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_associateconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_connectiontype": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_corpconnectionfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_corpconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_familymemberfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_familymemberfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_federalproducerconnectiontocorp": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_federalproducerconnectiontocorpdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_isconnection": {
+              "x-nullable": true,
+              "type": "integer"
             },
             "adoxio_name": {
               "type": "string",
@@ -22862,13 +24611,41 @@
               "type": "integer",
               "x-nullable": true
             },
+			"adoxio_partnersconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "adoxio_percentageofownership": {
               "type": "integer",
               "x-nullable": true
             },
+			"adoxio_share20plusconnectionproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_share20plusconnectionproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
+            },
+            "adoxio_share20plusfamilyconnectionproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_share20plusfamilyconnectionproducerdetail": {
+              "x-nullable": true,
+              "type": "string"
+            },
             "adoxio_sharetype": {
               "type": "string",
               "x-nullable": true
+            },
+			"adoxio_societyconnectionfederalproducer": {
+              "x-nullable": true,
+              "type": "integer"
+            },
+            "adoxio_societyconnectionfederalproducerdetails": {
+              "x-nullable": true,
+              "type": "string"
             },
             "adoxio_tiedhouseconnection_AsyncOperations": {
               "type": "array",

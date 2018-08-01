@@ -1,10 +1,7 @@
 <div class="row extra-padding" *ngIf="isApplicant">
   <section class="col-md-9">
-    <br>
     <app-business-profile-summary></app-business-profile-summary>
-    <br>
     <app-license-application-summary></app-license-application-summary>
-    <br>
     <mat-card class="mat-elevation-z0">
       <div [ngBusy]="busy">
         <button class="btn btn-primary" (click)="startNewLicenceApplication()">Start New Licence Application</button>
@@ -15,24 +12,40 @@
 
   <section class="col-md-3">
     <div class="help-container">
-      <strong>Need help?</strong>
-      <br>
-      <span>Contact us for help with your application:</span>
-      <br>
-      <span>Email:</span>
-      <span class="email">cannabisregs@gov.bc.ca</span>
+      <h1 class="blue-heading-bar">Need help?</h1>
+      <section class="container">
+        <span>Contact us for help with your application:</span>
+        <br>
+        <br>
+        <span>Contact Phone #:</span>
+        <br>
+        <span>Victoria 250 952-5787</span>
+        <br>
+        <span>Toll Free 1 866 209-2111</span>
+        <br>
+        <br>
+        <span>Email:</span>
+        <span class="email">LCLBHelpDesk@gov.bc.ca</span>
+      </section>
     </div>
   </section>
 </div>
 <div class="row extra-padding" *ngIf="isAssociate">
   <section class="col-md-3">
-    <div class="help-container">
-      <strong>Hello Associate!</strong>
-      <br>
-      <span>Contact us for help with your consent for CBC:</span>
-      <br>
-      <span>Email:</span>
-      <span class="email">cannabisregs@gov.bc.ca</span>
-    </div>
+      <div class="help-container">
+          <h1 class="blue-heading-bar">Hello Associate</h1>
+          <section class="container">
+            <br>
+            <span>Contact Phone #:</span>
+            <br>
+            <span>Victoria 250 952-5787</span>
+            <br>
+            <span>Toll Free 1 866 209-2111</span>
+            <br>
+            <br>
+            <span>Email:</span>
+            <span class="email">LCLBHelpDesk@gov.bc.ca</span>
+          </section>
+        </div>
   </section>
 </div>

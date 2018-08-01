@@ -3,8 +3,11 @@ $bootstrap-sass-asset-helper: true;
 
 
 .title {
-  font-size: 30px;
+    font-weight: Semi-bold;
+    font-size: 42px;
+    color: #fff; 
 }
+
 @media (max-width: 575.98px) { 
     .title {
         font-size: 20px;
@@ -52,10 +55,6 @@ $bootstrap-sass-asset-helper: true;
     display: flex;
     flex: 1 0 auto;
     flex-flow: row nowrap;
-    width: 99%;
-    max-width: 1600px;
-    margin: auto;
-
 }
 
 
@@ -272,10 +271,11 @@ a:active {
     display: flex;
     flex: 1 0 auto;
     flex-flow: row nowrap;
-    width: 99%;
-    max-width: 1600px;
-    // min-width: 910px;
-    margin: auto;
+    padding-right: 60px !important;
+    // width: 99%;
+    // max-width: 1600px;
+    // // min-width: 910px;
+    // margin: auto;
 }
 
 .top-menu{

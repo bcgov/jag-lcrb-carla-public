@@ -1,19 +1,12 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.IO;
-using System.Net.Http;
-using Microsoft.Extensions.Configuration;
-using System.Text;
-using System.Net;
-using System;
-using Xunit;
-using Newtonsoft.Json;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.Extensions.DependencyInjection;
-using Logos.Utility;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -31,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 				.CreateClient(new WebApplicationFactoryClientOptions
                 {
                     AllowAutoRedirect = false
-                });    
+                });
         }
 
         public async System.Threading.Tasks.Task Login(string userid)
@@ -45,8 +38,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 			_client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
 			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + loginAs);
             var response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
+            Assert.Equal(HttpStatusCode.Found, response.StatusCode);
+            
         }
 		
 		public string randomNewUserName(string userid, int len)
@@ -61,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		}
 
         // this fellow returns the external id of the new account
-        public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser, string businessName)
+        public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser, string businessName, string businessType = "PublicCorporation")
 		{
 			string accountService = "account";
 
@@ -75,16 +69,17 @@ namespace Gov.Lclb.Cllb.Public.Test
             // create a new account and contact in Dynamics
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
-            Account account = new Account()
+            MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
             {
                 Name = user.businessname,
-                Adoxio_externalid = user.accountid,
+                AdoxioExternalid = user.accountid
             };
 
             ViewModels.Account viewmodel_account = account.ToViewModel();
-			viewmodel_account.businessType = "PublicCorporation";
 
-            Assert.Equal(account.Adoxio_externalid, viewmodel_account.externalId);
+			viewmodel_account.businessType = businessType;
+
+            Assert.Equal(account.AdoxioExternalid, viewmodel_account.externalId);
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");

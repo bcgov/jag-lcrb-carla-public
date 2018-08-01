@@ -1,37 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import { DynamicsAccount } from "../models/dynamics-account.model";
+import { Http, Headers, Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { DynamicsAccount } from '../models/dynamics-account.model';
 
 @Injectable()
 export class AccountDataService {
 
-  apiPath = "api/account/";
+  apiPath = 'api/account/';
+  jsonHeaders: Headers = new Headers({
+    'Content-Type': 'application/json'
+  });
 
   constructor(private http: Http) { }
-
-  getAccount(accountId: string) {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    //call API
-    //console.log("===== AccountDataService.getAccount: ", accountId);
-    return this.http.get(this.apiPath + accountId, { headers: headers });
+  
+  public getAccount(accountId: string) {
+    return this.http.get(this.apiPath + accountId, { headers: this.jsonHeaders });
   }
 
-  getBCeID(){
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    return this.http.get(this.apiPath + "bceid", { headers: headers });
+  public getCurrentAccount() {
+    return this.http.get(this.apiPath + 'current', { headers: this.jsonHeaders });
   }
 
-  updateAccount(accountModel: DynamicsAccount) {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
+  public getBusinessProfile(accountId: string) {
+    return this.http.get(`${this.apiPath}business-profile/${accountId}`, { headers: this.jsonHeaders });
+  }
 
-    //call API
-    //console.log("===== AccountDataService.updateAccount: ", accountModel);
-    return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: headers });
+  public getBCeID() {
+    return this.http.get(this.apiPath + 'bceid', { headers: this.jsonHeaders });
+  }
+
+  public updateAccount(accountModel: DynamicsAccount) {
+    return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: this.jsonHeaders });
   }
 
 }

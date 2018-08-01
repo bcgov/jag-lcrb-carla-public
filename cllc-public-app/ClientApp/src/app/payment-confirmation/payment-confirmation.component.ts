@@ -3,67 +3,116 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router'
 import { PaymentDataService } from '../services/payment-data.service';
 import { Subscription } from 'rxjs';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { ClientConfigDataService } from '../services/client-config.service';
 
 @Component({
-    selector: 'app-payment-confirmation',
-    templateUrl: './payment-confirmation.component.html',
-    styleUrls: ['./payment-confirmation.component.scss']
+  selector: 'app-payment-confirmation',
+  templateUrl: './payment-confirmation.component.html',
+  styleUrls: ['./payment-confirmation.component.scss']
 })
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
-    busy: Subscription;
-    transactionId: string;
-    applicationId: string;
-    authCode: string;
-    avsMessage: string;
-    avsAddrMatch: string;
-    messageId: string;
-    messageText: string;
-    paymentMethod: string;
-    cardType: string;
-    trnAmount: string;
-    trnApproved: string;
-    trnDate: string;
-    trnId: string;
-    trnOrderNumber: string;
-    invoice: string;
+  isLiteVersion: boolean;
+  busy: Subscription;
+  transactionId: string;
+  applicationId: string;
+  authCode: string;
+  avsMessage: string;
+  avsAddrMatch: string;
+  messageId: string;
+  messageText: string;
+  paymentMethod: string;
+  cardType: string;
+  trnAmount: string;
+  trnApproved: string;
+  trnDate: string;
+  trnId: string;
+  trnOrderNumber: string;
+  invoice: string;
+  isApproved: boolean = false;
 
-    /** payment-confirmation ctor */
-    constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService) {
-	    this.route.queryParams.subscribe(params => {
-	        this.transactionId = params['trnId'];
-	        this.applicationId = params['SessionKey'];
-	    });
+  paymentTransactionTitle: string;
+  paymentTransactionMessage: string;
+  loaded: boolean = false;
+  @Input() inputApplicationId: string;
+
+  /** payment-confirmation ctor */
+  constructor(private router: Router, private route: ActivatedRoute, private paymentDataService: PaymentDataService,
+    private clientConfigDataService: ClientConfigDataService) {
+    this.route.queryParams.subscribe(params => {
+      this.transactionId = params['trnId'];
+      this.applicationId = params['SessionKey'];
+    });
+  }
+
+  ngOnInit() {
+    this.clientConfigDataService.getConfig().subscribe(data => {
+      this.isLiteVersion = data.isLiteVersion;
+    });
+    if (!this.applicationId) {
+      this.applicationId = this.inputApplicationId;
     }
+    this.verify_payment();
+  }
 
-    ngOnInit() {
-    	// TODO get slug from URL parameters and find associated Application
-    	this.verify_payment();
-    }
-
-  verify_payment() 
-  {
-    this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
+  /**
+   * Payment verification
+   * */
+  verify_payment() {
+    this.busy = this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
-        //console.log("applicationVM: ", res.json());
-        var json = res.json();
-    	console.log(json);
+        var verifyPayResponse = res.json();
+        //console.log(verifyPayResponse);
+        switch (verifyPayResponse.cardType) {
+          case 'VI':
+            this.cardType = "Visa";
+            break;
+          case 'PV':
+            this.cardType = "Visa Debit";
+            break;
+          case 'MC':
+            this.cardType = "MasterCard";
+            break;
+          case 'AM':
+            this.cardType = "American Express";
+            break;
+          case 'MD':
+            this.cardType = "Debit MasterCard";
+            break;
+          default:
+            this.cardType = verifyPayResponse.cardType;
+        }
+        this.authCode = verifyPayResponse.authCode;
+        this.avsMessage = verifyPayResponse.avsMessage;
+        this.avsAddrMatch = verifyPayResponse.avsAddrMatch;
+        this.messageId = verifyPayResponse.messageId;
+        this.messageText = verifyPayResponse.messageText;
+        this.paymentMethod = verifyPayResponse.paymentMethod;
+        this.trnAmount = verifyPayResponse.trnAmount;
+        this.trnApproved = verifyPayResponse.trnApproved;
+        this.trnDate = verifyPayResponse.trnDate;
+        this.trnId = verifyPayResponse.trnId;
+        this.trnOrderNumber = verifyPayResponse.trnOrderNumber;
+        this.invoice = verifyPayResponse.invoice;
 
-        // TODO do something with it!!!
-        this.authCode = json.authCode;
-        this.avsMessage = json.avsMessage;
-        this.avsAddrMatch = json.avsAddrMatch;
-        this.messageId = json.messageId;
-        this.messageText = json.messageText;
-        this.paymentMethod = json.paymentMethod;
-        this.cardType = json.cardType;
-        this.trnAmount = json.trnAmount;
-        this.trnApproved = json.trnApproved;
-        this.trnDate = json.trnDate;
-        this.trnId = json.trnId;
-        this.trnOrderNumber = json.trnOrderNumber;
-        this.invoice = json.invoice;
+        if (this.trnApproved == "1") {
+          this.isApproved = true;
+        } else {
+          this.isApproved = false;
+          if (this.messageId == "559") {
+            this.paymentTransactionTitle = "Cancelled";
+            this.paymentTransactionMessage = "Your payment transaction was cancelled."
+          } else if (this.messageId == "7") {
+            this.paymentTransactionTitle = "Declined";
+            this.paymentTransactionMessage = "Your payment transaction was declined."
+          } else {
+            this.paymentTransactionTitle = "Declined";
+            this.paymentTransactionMessage = "Your payment transaction was declined. Please contact your bank for more information."
+          }
+        }
 
+        this.loaded = true;
       },
       err => {
         console.log("Error occured");
@@ -71,8 +120,29 @@ export class PaymentConfirmationComponent {
     );
   }
 
-  return_to_application()
-  {
-     this.router.navigate(['./license-application/' + this.applicationId]);
+  /**
+   * Return to dashboard
+   * */
+  return_to_application() {
+    // if (this.isLiteVersion) {
+    if (this.trnApproved == "1") {
+      this.router.navigate(['./dashboard-lite']);
+    } else {
+      this.router.navigate(['./application-lite/' + this.applicationId]);
+    }
+    // } else {
+    //   if (this.trnApproved == "1") {
+    //     this.router.navigate(['./dashboard']);
+    //   } else {
+    //     this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
+    //   }
+    // }
+  }
+
+  /**
+   * Print current page
+   * */
+  printPage() {
+    window.print();
   }
 }

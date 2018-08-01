@@ -1,38 +1,24 @@
-<div style="max-width: 500px;">
+<div style="max-width: 700px; position: relative;">
   <p></p>
-  <file-drop (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-    <div>
-      <h3 style="text-align: center">Upload Files</h3>
-      <span>Drop your files here or &nbsp;</span>
-      <button class="btn btn-primary" (click)="fileBrowser.click()">browse for files</button>
+  <file-drop [disableIf]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)"
+    customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+    <div style="text-align: center">
+      <h3></h3>
+      <span>TO UPLOAD DOCUMENTS DRAG FILE(S) HERE OR </span>
+      <a href="javascript:void(0)" [ngClass]="{'no-drop': disableFileUpload()}" (click)="disableFileUpload() || fileBrowser.click()">BROWSE</a>.
+      <br>
+      <span style="color: #A9A9A9">{{fileTypes}}</span>
       <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowser>
     </div>
   </file-drop>
-  <br>
-  <div class="upload-table">
-    <div [ngBusy]="busy">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Filename</th>
-            <th>Uploaded On</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody class="upload-name-style">
-          <tr *ngFor="let item of files; let i=index">
-            <td>
-              <strong>{{ item.name }}</strong>
-            </td>
-            <td>
-              <strong>{{item.timelastmodified | date:'yyyy-MM-dd' }}</strong>
-            </td>
-            <td>
-              <button class="btn btn-primary">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div style="margin-top: 5px;">
+    <div [ngBusy]="busy"></div>
+    <section *ngFor="let item of files; let i=index" class="file-list">
+      <span>{{ item.name }}</span>
+      <span>
+        <span style="margin-right: 20px;">{{Math.ceil(2090671/1024)}} kb</span>
+        <a href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
+      </span>
+    </section>
   </div>
 </div>

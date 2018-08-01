@@ -1,7 +1,6 @@
 import { DynamicsAccount } from './dynamics-account.model';
 
 export class AdoxioLegalEntity {
-  
   id: string; // guid
   name: string;
   isindividual: boolean;
@@ -16,6 +15,8 @@ export class AdoxioLegalEntity {
   isSeniorManagement: boolean;
   isShareholder: boolean;
   isPartner: boolean;
+  partnerType: string;
+  isOwner: boolean;
   dateofbirth: Date;
   interestpercentage: number;
   commonvotingshares: number;
@@ -25,12 +26,13 @@ export class AdoxioLegalEntity {
   account: DynamicsAccount;
   relatedentities: AdoxioLegalEntity[];
   email: string;
-  dateofappointment: Date; //adoxio_dateofappointment
+  dateofappointment: Date;
+  securityAssessmentEmailSentOn: Date;
   accountId: string;
+  shareholderAccountId: string;
   // helper fields
   shareholderType: string;
   sendConsentRequest: boolean;
   parentLegalEntityId: string;
   position: string;
-
 }

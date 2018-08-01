@@ -26,7 +26,12 @@
         <li *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
           List of all shareholders, with their email addresses
         </li>
-        <li>Central Securities Register document</li>
+        <li *ngIf="businessType == 'PublicCorporation'">
+          Document of shareholders with a 10% or greater interest in the company
+        </li>
+        <li *ngIf="businessType !== 'PublicCorporation'">
+          Central Securities Register document
+        </li>
         <li>Document of key personnel of the corporation</li>
       </ul>
 
@@ -111,7 +116,7 @@
         </ul>
         <li>Contact information and mailing address</li>
         <li>Organization structure of your society relationships</li>
-        <li>List of directors and senior managers, with their email addresses</li>
+        <li>List of directors, officers, and senior managers, with their email addresses</li>
         <li>Document of key personnel of the society</li>
       </ul>
     </section>
@@ -188,11 +193,11 @@
   <section>
     <label for="">Privacy Collection Notice</label>
     <p>
-      The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Sections 26 (a) and
-      (c) of the Freedom of Information and Protection of Privacy Act for the purpose of cannabis licensing, compliance and
-      enforcement matters in accordance with the Cannabis Control and Licensing Act. Should you have any questions about
-      the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO
-      Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
+      The Liquor and Cannabis Regulation Branch will collect your personal information for the purpose of fulfilling the requirements
+      of the Cannabis Control and Licensing Act and associated regulations in cannabis licensing, compliance and enforcement
+      matters in accordance with Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act. Should
+      you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom
+      of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
     </p>
   </section>
 </div>

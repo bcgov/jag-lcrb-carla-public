@@ -7,28 +7,94 @@ import { ResultComponent } from './result/result.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { SurveyPrimaryComponent } from './survey/primary.component';
 import { SurveyTestComponent } from './survey/test.component';
-import { SurveyResolver }   from './services/survey-resolver.service';
+import { SurveyResolver } from './services/survey-resolver.service';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
+import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
+import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
+import { DirectorsAndOfficersComponent } from './business-profile/tabs/directors-and-officers/directors-and-officers.component';
+import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key-personnel.component';
+import { EditShareholdersComponent } from './business-profile/tabs/edit-shareholders/edit-shareholders.component';
+import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
+import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
+import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
+import { FloorPlanComponent } from './license-application/tabs/floor-plan/floor-plan.component';
+import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
+import { SiteMapComponent } from './license-application/tabs/site-map/site-map.component';
+import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
+import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
+import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
+import { ApplicationComponent } from './lite/application/application.component';
 
 const routes: Routes = [
   {
     path: '',
-    //children: []
     component: HomeComponent
   },
   {
     path: 'dashboard',
-    //children: []
-    component: DashboardComponent
+    component: DashboardLiteComponent
   },
   {
-    path: 'business-profile/:accountId/:legalEntityId',
-    component: BusinessProfileComponent,
+    path: 'dashboard-lite',
+    component: DashboardLiteComponent
   },
+  {
+    path: 'application-lite/:applicationId',
+    component: ApplicationComponent,
+    canDeactivate: [CanDeactivateGuard]
+  },
+  // {
+  //   path: 'business-profile/:accountId/:legalEntityId',
+  //   component: BusinessProfileComponent,
+  //   children: [
+  //     {
+  //       path: 'before-you-start',
+  //       component: BeforeYouStartComponent
+  //     },
+  //     {
+  //       path: 'corporate-details',
+  //       component: CorporateDetailsComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'organization-structure',
+  //       component: OrganizationStructureComponent
+  //     },
+  //     {
+  //       path: 'directors-and-officers',
+  //       component: DirectorsAndOfficersComponent
+  //     },
+  //     {
+  //       path: 'key-personnel',
+  //       component: KeyPersonnelComponent
+  //     },
+  //     {
+  //       path: 'shareholders',
+  //       component: EditShareholdersComponent
+  //     },
+  //     {
+  //       path: 'connections-to-producers',
+  //       component: ConnectionToProducersComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'finance-integrity',
+  //       component: FinancialInformationComponent
+  //     },
+  //     {
+  //       path: 'security-assessment',
+  //       component: SecurityAssessmentsComponent
+  //     },
+  //   ]
+  // },
   {
     path: 'form-viewer/:id',
     component: FormViewerComponent
@@ -41,10 +107,44 @@ const routes: Routes = [
     path: 'newsletter-confirm/:slug',
     component: NewsletterConfirmationComponent
   },
-  {
-    path: 'license-application/:applicationId',
-    component: LicenseApplicationComponent
-  },
+  // {
+  //   path: 'license-application/:applicationId',
+  //   component: LicenseApplicationComponent,
+  //   children: [
+  //     {
+  //       path: 'contact-details',
+  //       component: ContactDetailsComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'declaration',
+  //       component: DeclarationComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'floor-plan',
+  //       component: FloorPlanComponent
+  //     },
+  //     {
+  //       path: 'property-details',
+  //       component: PropertyDetailsComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'site-map',
+  //       component: SiteMapComponent
+  //     },
+  //     {
+  //       path: 'store-information',
+  //       component: StoreInformationComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'submit-pay',
+  //       component: SubmitPayComponent
+  //     },
+  //   ]
+  // },
   {
     path: 'payment-confirmation',
     component: PaymentConfirmationComponent
@@ -58,22 +158,18 @@ const routes: Routes = [
     },
     data: {
       // do not show breadcrumb
-      //breadcrumb: 'Potential Applicant Survey', 
+      // breadcrumb: 'Potential Applicant Survey',
       survey_path: 'assets/survey-primary.json',
     }
   },
-
   {
     path: 'prv',
     redirectTo: 'prv/survey'
   },
-  
   {
     path: 'result/:data',
     component: ResultComponent,
-    data: { 
-      // do not show breadcrumb
-      //breadcrumb: 'Survey Results'
+    data: {
     }
   },
   {
@@ -83,7 +179,6 @@ const routes: Routes = [
       breadcrumb: 'Survey Test'
     }
   },
-  //{ path: '404', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

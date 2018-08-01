@@ -1,11 +1,9 @@
 <div class="">
-  <h1>Key Personnel &amp; Senior Employees</h1>
+  <h1 style="margin-top: 0">Key Personnel &amp; Senior Employees</h1>
   <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
-    Key personnel are those people having authority and responsibility for planning, directing, and controlling the activities
-    of the corporation, either directly or indirectly. This designation typically includes the following positions:
+      Key personnel are those people having authority and responsibility for planning, directing, and controlling the activities of the corporation, either directly or indirectly.
+      This designation typically includes the following positions:
   </p>
-
-
 
   <ul *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
     <li>Chief executive officer, chief operating officer, and chief financial officer</li>
@@ -24,17 +22,17 @@
   </p>
   <section>
     <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1" for="">
-      Upload an organization chart of the corporation's key personnel and senior employees:
+      Upload an organization chart of the corporation's key personnel and senior employees, including name and position:
     </label>
     <label *ngIf="['SoleProprietor'].indexOf(businessType) !== -1" for="">
-      Upload an organization chart of the business's key personnel and senior employees:
+      Upload an organization chart of the business's key personnel and senior employees, including name and position:
     </label>
     <label *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" for="">
-      Upload an organization chart of the corporation's key personnel and senior employees:
+      Upload an organization chart of the corporation's key personnel and senior employees, including name and position:
     </label>
   </section>
   <p></p>
   <section>
-    <app-file-uploader documentType="Organization Structure" [accountId]="accountId"></app-file-uploader>
+    <app-file-uploader documentType="Key Personnel" [accountId]="accountId"></app-file-uploader>
   </section>
 </div>

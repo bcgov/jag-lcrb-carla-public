@@ -1,11 +1,11 @@
 <div>
-  <h1>Financial Information</h1>
+  <h1 style="margin-top: 0">Financial Information</h1>
 
   <section>
-    <label  *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Has the corporation been operating for more than one year?</label>
-    <label  *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Has the business been operating for more than one year?</label>
-    <label  *ngIf="['Society'].indexOf(businessType) !== -1">Has the society been operating for more than one year?</label>
-    <label  *ngIf="['GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Has the partnership been operating for more than one year?</label>
+    <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Has the corporation been operating for more than one year?</label>
+    <label *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Has the business been operating for more than one year?</label>
+    <label *ngIf="['Society'].indexOf(businessType) !== -1">Has the society been operating for more than one year?</label>
+    <label *ngIf="['GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Has the partnership been operating for more than one year?</label>
     <br>
     <input type="radio" group="moreThanAYear" value='yes' [(ngModel)]="operatingForMoreThanOneYear"> Yes
     <br>
@@ -14,7 +14,7 @@
 
   <section *ngIf="operatingForMoreThanOneYear =='yes' || operatingForMoreThanOneYear == 'no'">
     <h2>Upload the following documents</h2>
-    <label for="">1. Financial integrity form including required supporting documents</label>
+    <label for="">1. A Financial Integrity Form, including required supporting documents identified in the form</label>
     <br>
 
     <a href="/documents/example.txt" download>
@@ -23,21 +23,22 @@
   </section>
 
   <section *ngIf="operatingForMoreThanOneYear =='yes' || operatingForMoreThanOneYear == 'no'">
-    <p></p>
-    <label for="">2. Annual financial statements for the past three years including:</label>
     <br>
+    <div *ngIf="operatingForMoreThanOneYear =='yes'"><label for="">2. Annual financial statements for the past three years including:</label></div>
+    <div *ngIf="operatingForMoreThanOneYear =='no'"><label for="">2. Projected financial statements, including:</label></div>
     <ul>
       <li>Balance sheet</li>
       <li>Profit and loss statement</li>
       <li>Cash flows</li>
-      <li>Notes to the financial statements describing related party transactions, debt agreements, commitments, and other material
-        agreement
+      <li *ngIf="operatingForMoreThanOneYear =='yes'">Notes to the financial statements describing related party transactions, debt agreements, commitments, and other material
+        agreements
       </li>
+      <li *ngIf="operatingForMoreThanOneYear == 'no'">Assumptions used for projections</li>
     </ul>
   </section>
 
   <section *ngIf="operatingForMoreThanOneYear =='yes'">
-    <label for="">3. Tax statement for the past three years including:</label>
+    <label for="">3. Tax statement for the past three years, including:</label>
     <br>
     <ul>
       <li>Income tax submissions</li>

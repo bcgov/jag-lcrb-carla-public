@@ -2,7 +2,9 @@
   <h1>Declarations</h1>
 
   <h2>Signing Authority</h2>
-  <p>This application should be submitted by an individual with the authority to bind the applicant. The Branch relies on the applicant to ensure that the individual who submits this application is authorized to do so. Typically, an appropriate individual will be as follows:</p>
+  <p>This application should be submitted by an individual with the authority to bind the applicant.
+    The Branch relies on the applicant to ensure that the individual who submits this application is authorized to do so.
+    Typically, an appropriate individual will be as follows:</p>
 
   <ul>
     <li>If the applicant is an individual or sole proprietor, the individual himself/herself</li>
@@ -14,16 +16,13 @@
 
   <p>Note: An agent, lawyer, licensee representative or third party operator may not submit this application on behalf of the applicant.</p>
   <p>
-    <mat-checkbox [(ngModel)]="authorizedtosubmit">I understand and affirm that I am authorized to submit the application</mat-checkbox>
+    <mat-checkbox [(ngModel)]="authorizedtosubmit" [disabled]="isReadOnly">I understand and affirm that I am authorized to submit the application</mat-checkbox>
   </p>
 
   <p>Section 22(2) of the Cannabis Control and Licensing Act states: &ldquo;A person must not submit to the general manager an application, or information or a record included as part of the application, that contains false or misleading information, or fails to disclose a material fact&rdquo;.</p>
   <p>
-    <mat-checkbox [(ngModel)]="signatureagreement">I understand and affirm that all of the information provided for this application is true and complete</mat-checkbox>
+    <mat-checkbox [(ngModel)]="signatureagreement" [disabled]="isReadOnly">I understand and affirm that all of the information provided for this application is true and complete</mat-checkbox>
   </p>
 
-  <div>
-    <button class="btn btn-primary" (click)="save()">Save</button>
-  </div>
 
 </div>

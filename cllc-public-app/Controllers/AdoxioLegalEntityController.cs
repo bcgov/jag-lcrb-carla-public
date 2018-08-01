@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
@@ -11,11 +8,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Microsoft.OData.Client;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Interfaces.Models;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -25,18 +24,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly IDynamicsClient _dynamicsClient;
-        private readonly SharePointFileManager _sharePointFileManager;
-        private readonly string _encryptionKey;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly string _encryptionKey;
+        private readonly SharePointFileManager _sharePointFileManager;
 
         public AdoxioLegalEntityController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
-            this._sharePointFileManager = sharePointFileManager;
-            this._encryptionKey = Configuration["ENCRYPTION_KEY"];
-            this._httpContextAccessor = httpContextAccessor;
-            this._dynamicsClient = dynamicsClient;
+            _dynamicsClient = dynamicsClient;
+            _httpContextAccessor = httpContextAccessor;
+            _encryptionKey = Configuration["ENCRYPTION_KEY"];
+            _sharePointFileManager = sharePointFileManager;
             _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
         }
 
@@ -46,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet()]
-        public async Task<JsonResult> GetDynamicsLegalEntities()
+        public JsonResult GetDynamicsLegalEntities()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
@@ -78,13 +77,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet("business-profile-summary")]
-        public async Task<JsonResult> GetBusinessProfileSummary()
+        public JsonResult GetBusinessProfileSummary()
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
-            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
-            String accountfilter = null;
-            String bpFilter = null;
-            String filter = null;
 
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -92,34 +87,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check that the session is setup correctly.
             userSettings.Validate();
 
-            // set account filter
-            accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
-            bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
-            filter = accountfilter + " " + bpFilter;
+            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = GetAccountLegalEntities(userSettings.AccountId);
 
+            foreach (var legalEntity in legalEntities)
+            {
+                result.Add(legalEntity.ToViewModel());
+            }
+
+            return Json(result);
+        }
+
+        private List<MicrosoftDynamicsCRMadoxioLegalentity> GetAccountLegalEntities(string accountId)
+        {
+            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
+            var filter = "_adoxio_account_value eq " + accountId;
+            filter += " and adoxio_isindividual eq 0";
 
             var response = _dynamicsClient.Adoxiolegalentities.Get(filter: filter);
 
             if (response != null && response.Value != null)
             {
                 legalEntities = response.Value.ToList();
-                if (legalEntities.Count > 0)
-                {
-                    var childFilter = $"_adoxio_legalentityowned_value eq {legalEntities[0].AdoxioLegalentityid.ToString()}";
-                    childFilter += " and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
-
-                    response = _dynamicsClient.Adoxiolegalentities.Get(filter: childFilter);
-                    var childEntities = response.Value.ToList();
-                    legalEntities.AddRange(childEntities);
-                }
-
+                var children = new List<MicrosoftDynamicsCRMadoxioLegalentity>();
                 foreach (var legalEntity in legalEntities)
                 {
-                    result.Add(legalEntity.ToViewModel());
+                    if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue))
+                    {
+                        children.AddRange(GetAccountLegalEntities(legalEntity._adoxioShareholderaccountidValue));
+                    }
                 }
+                legalEntities.AddRange(children);
             }
+            return legalEntities.Distinct().ToList();
 
-            return Json(result);
         }
 
         /// <summary>
@@ -131,12 +131,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpGet()]
         [Route("position/{parentLegalEntityId}/{positionType}")]
-        public async Task<IActionResult> GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
+        public IActionResult GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
         {
             List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String filter = null;
 
+            // Stops injections
+            try
+            {
+                new Guid(parentLegalEntityId);
+            }
+            catch
+            {
+                return NotFound();
+            }
 
             filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
             switch (positionType)
@@ -151,7 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     filter += " and adoxio_isshareholder ne true and adoxio_ispartner ne true";
                     break;
                 case "director-officer-shareholder":
-                    filter += " and (adoxio_isshareholder eq true or adoxio_isdirector eq true or adoxio_isofficer eq true)";
+                    filter += " and adoxio_isindividual eq 1";
                     break;
                 default:
                     break;
@@ -170,11 +179,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw;
             }
 
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             if (legalEntities != null)
             {
                 foreach (var legalEntity in legalEntities)
                 {
+                    // Users can't access other users legal entities.
+                    if (!DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+                    {
+                        return NotFound();
+                    }
                     result.Add(legalEntity.ToViewModel());
                 }
             }
@@ -201,7 +217,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
             _logger.LogError("Find legal entity for applicant = " + userSettings.AccountId.ToString());
 
-            legalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            legalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
             if (legalEntity == null)
             {
@@ -243,7 +259,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Guid adoxio_legalentityid = new Guid(id);
                 MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
                 //prevent getting legal entity data if the user is not associated with the account
-                if (adoxioLegalEntity == null || adoxioLegalEntity._adoxioAccountValue != userSettings.AccountId)
+                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
                 {
                     return new NotFoundResult();
                 }
@@ -269,9 +285,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // check that the session is setup correctly.
             userSettings.Validate();
-
-
             var accountGUID = new Guid(accountId);
+
+            // User should not be able to access accounts that they do not directly own
+            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountGUID, _httpContextAccessor, _dynamicsClient))
+            {
+                return NotFound();
+            }
+
             var account = await _dynamicsClient.GetAccountById(accountGUID);
             if (account != null)
             {
@@ -299,9 +320,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
                         // remove the document type text from file name
-                        fileSystemItemVM.name = fileDetails.Name.Substring(0, fileDetails.Name.IndexOf("__"));
+                        fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2);
                         // convert size from bytes (original) to KB
                         fileSystemItemVM.size = int.Parse(fileDetails.Length);
+                        fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
                         fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
                         fileSystemItemVM.documenttype = fileDetails.DocumentType;
                         fileSystemItemVMList.Add(fileSystemItemVM);
@@ -318,8 +340,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(fileSystemItemVMList);
         }
 
-        [HttpPost("{accountId}/attachments")]
-        public async Task<IActionResult> UploadFile([FromRoute] string accountId, [FromForm]IFormFile file, [FromForm] string documentType)
+        /// <summary>
+        /// Delete a file.
+        /// </summary>
+        /// <param name="id">Application ID</param>
+        /// <param name="serverRelativeUrl">The ServerRelativeUrl to delete</param>
+        /// <returns></returns>
+        [HttpDelete("{id}/attachments")]
+        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string id)
+        {
+            // get the file.
+            if (id == null || serverRelativeUrl == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                // get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+                Guid adoxio_legalentityid = new Guid(id);
+                MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+                //prevent getting legal entity data if the user is not associated with the account
+                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+                {
+                    return new NotFoundResult();
+                }
+
+                var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
+                if (result)
+                {
+                    return new OkResult();
+                }
+            }
+            return new NotFoundResult();
+        }
+
+
+        [HttpPost("{id}/attachments")]
+        public async Task<IActionResult> UploadFile([FromRoute] string id, [FromForm]IFormFile file, [FromForm] string documentType)
         {
             ViewModels.FileSystemItem result = null;
             // get the LegalEntity.
@@ -331,9 +391,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check that the session is setup correctly.
             userSettings.Validate();
 
-            if (accountId != null)
+            Guid adoxio_legalentityid = new Guid(id);
+            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+            //prevent getting legal entity data if the user is not associated with the account
+            if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
             {
-                var accountIdGUID = Guid.Parse(accountId);
+                return new NotFoundResult();
+            }
+
+            if (id != null)
+            {
+                var accountIdGUID = Guid.Parse(adoxioLegalEntity._adoxioAccountValue);
                 var account = await _dynamicsClient.GetAccountById(accountIdGUID);
 
                 if (account == null)
@@ -369,14 +437,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _sharePointFileManager.GetFileById(fileId);
+                // get the current user.
+                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+                Guid adoxio_legalentityid = new Guid(id);
+                MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+                //prevent getting legal entity data if the user is not associated with the account
+                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
+                {
+                    return new NotFoundResult();
+                }
+
+                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
+                if (fileSystemItem != null)
+                {
+                    byte[] fileContents = await _sharePointFileManager.DownloadFile(fileSystemItem.Url);
+                    return new FileContentResult(fileContents, "application/octet-stream")
+                    {
+                        FileDownloadName = fileSystemItem.Name
+                    };
+                }
             }
-            string filename = "";
-            byte[] fileContents = new byte[10];
-            return new FileContentResult(fileContents, "application/octet-stream")
-            {
-                FileDownloadName = filename
-            };
+            return new NotFoundResult();
+
         }
 
         /// <summary>
@@ -435,7 +519,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // TODO take the default for now from the parent account's legal entity record
             // TODO likely will have to re-visit for shareholders that are corporations/organizations
-            MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
             if (tempLegalEntity != null)
             {
                 Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
@@ -472,25 +556,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Route("child-legal-entity")]
         public async Task<IActionResult> CreateDynamicsShareholderLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
         {
-            if(item == null){
+            if (item == null)
+            {
                 return BadRequest();
             }
 
             var adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
             adoxioLegalEntity.CopyValues(item);
 
-            if (item.isShareholder == true && item.isindividual != true)
+            if (item.isindividual != true)
             {
                 var account = new MicrosoftDynamicsCRMaccount();
                 account.Name = item.name;
-                account.AdoxioAccounttype = (int)Adoxio_accounttypecodes.Shareholder;
-                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), item.legalentitytype);
+                if (item.isShareholder == true)
+                {
+                    account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Shareholder;
+                }
+                else if (item.isPartner == true)
+                {
+                    account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Partner;
+                }
+                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
-                adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-            } else {
-                adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
+                //create tied house under account
+                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
+                {
+                };
+                tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+                adoxioLegalEntity.AdoxioShareholderAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+
+                var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
             }
+            adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
+
 
             adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", item.parentLegalEntityId);
 
@@ -529,6 +628,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioLegalEntity.CopyValues(item);
 
             await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxio_legalentityid.ToString(), adoxioLegalEntity);
+
+            adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+
             return Json(adoxioLegalEntity.ToViewModel());
         }
 
@@ -548,7 +650,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());
+            try
+            {
+                await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error deleting legal entity");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new Exception("Unable to delete legal entity");
+            }
 
             return NoContent(); // 204
         }
@@ -623,93 +737,92 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             userSettings.Validate();
 
             var userAccount = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
-            MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = await _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
+            MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
             // get the legal entity.
             Guid adoxio_legalentityid = new Guid(id);
-            try
+
+            // TODO verify that this is the current user's legal entity
+            var adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+
+            // now get each of the supplied ids and send an email to them.
+
+            foreach (string recipientId in recipientIds)
             {
-                // TODO verify that this is the current user's legal entity
-                var adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
+                Guid recipientIdGuid = new Guid(recipientId);
+                // TODO verify that each recipient is part of the current user's user set
+                // TODO switch over to new AuthAPI framework
+                var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
+                string email = recipientEntity.AdoxioEmail;
+                string firstname = recipientEntity.AdoxioFirstname;
+                string lastname = recipientEntity.AdoxioLastname;
 
-                // now get each of the supplied ids and send an email to them.
+                string confirmationEmailLink = GetConsentLink(email, recipientId, id);
+                string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
+                /* send the user an email confirmation. */
+                string body =
+                        "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
+                    + "<p>"
+                    + "Dear " + firstname + " " + lastname + ","
+                    + "</p>"
+                    + "<p>"
+                    + "An application from " + "[TBD Company Name]"
+                    + " has been submitted for a non-medical retail cannabis licence in British Columbia. "
+                    + "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
+                    + " you are required to authorize a security screening — including criminal and police record checks—"
+                    + "and financial integrity checks as part of the application process. "
+                    + "</p>"
+                    + "<p>"
+                    + "Where you reside will determine how you are able to authorize the security screening."
+                    + "</p>"
+                    + "<p><strong>B.C. Residents</strong></p>"
+                    + "<p>"
+                    + "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
+                    + "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
+                    + "</p>"
+                    + "<p>"
+                    + "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
+                    + "</p>"
+                    + "<p>"
+                    + "After you receive your verified Photo B.C. Services Card, login through this unique link:"
+                    + "</p>"
+                    + "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
+                    + "<p><strong>Out of Province Residents</strong></p>"
+                    + "<p>TBD</p>"
+                    + "<p><strong>Residents Outside of Canada</strong></p>"
+                    + "<p>TBD</p>"
+                    + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
+                    + "<p>Do not reply to this email address</p>";
 
-                foreach (string recipientId in recipientIds)
+                // send the email.
+                SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
+
+                // Specify the message content.
+                MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
+                message.Subject = "BC LCLB Cannabis Licensing Security Consent";
+                message.Body = body;
+                message.IsBodyHtml = true;
+                client.Send(message);
+
+
+                // save the consent link and the fact that the email has been sent
+                MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+                patchEntity.AdoxioDateemailsent = DateTime.Now;
+
+                // patch the record.
+                try
                 {
-                    Guid recipientIdGuid = new Guid(recipientId);
-                    try
-                    {
-                        // TODO verify that each recipient is part of the current user's user set
-                        // TODO switch over to new AuthAPI framework
-                        var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
-                        string email = recipientEntity.AdoxioEmail;
-                        string firstname = recipientEntity.AdoxioFirstname;
-                        string lastname = recipientEntity.AdoxioLastname;
-
-                        string confirmationEmailLink = GetConsentLink(email, recipientId, id);
-                        string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
-                        /* send the user an email confirmation. */
-                        string body =
-                              "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
-                            + "<p>"
-                            + "Dear " + firstname + " " + lastname + ","
-                            + "</p>"
-                            + "<p>"
-                            + "An application from " + "[TBD Company Name]"
-                            + " has been submitted for a non-medical retail cannabis licence in British Columbia. "
-                            + "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
-                            + " you are required to authorize a security screening — including criminal and police record checks—"
-                            + "and financial integrity checks as part of the application process. "
-                            + "</p>"
-                            + "<p>"
-                            + "Where you reside will determine how you are able to authorize the security screening."
-                            + "</p>"
-                            + "<p><strong>B.C. Residents</strong></p>"
-                            + "<p>"
-                            + "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
-                            + "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
-                            + "</p>"
-                            + "<p>"
-                            + "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
-                            + "</p>"
-                            + "<p>"
-                            + "After you receive your verified Photo B.C. Services Card, login through this unique link:"
-                            + "</p>"
-                            + "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
-                            + "<p><strong>Out of Province Residents</strong></p>"
-                            + "<p>TBD</p>"
-                            + "<p><strong>Residents Outside of Canada</strong></p>"
-                            + "<p>TBD</p>"
-                            + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
-                            + "<p>Do not reply to this email address</p>";
-
-                        // send the email.
-                        SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
-
-                        // Specify the message content.
-                        MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
-                        message.Subject = "BC LCLB Cannabis Licensing Security Consent";
-                        message.Body = body;
-                        message.IsBodyHtml = true;
-                        client.Send(message);
-
-                        // save the consent link and the fact that the email has been sent
-                        recipientEntity.AdoxioDateemailsent = DateTime.Now;
-                        //await _dynamicsClient.Adoxiolegalentities.UpdateAsync(recipientEntity.Adoxio_legalentityid, recipientEntity);
-                    }
-                    catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-                    {
-                        // ignore any not found errors.
-                        _logger.LogError(dsqe.Message);
-                        _logger.LogError(dsqe.StackTrace);
-                    }
-
+                    await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
-
-            }
-            catch (Microsoft.OData.Client.DataServiceQueryException dsqe)
-            {
-                return new NotFoundResult();
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error updating date email sent.");
+                    _logger.LogError(odee.Request.RequestUri.ToString());
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
             }
 
             return NoContent(); // 204

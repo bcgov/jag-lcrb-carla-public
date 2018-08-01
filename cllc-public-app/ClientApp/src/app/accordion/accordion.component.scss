@@ -42,7 +42,7 @@ h3 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 24px 0 0
+    padding: 0 24px 0 0;
 
 }
 
@@ -100,11 +100,54 @@ h3 {
 }
 
 
-accordion-btn {
-  background-color: #f1f1f3;
+.accordion-btn {
   border: none;
   padding: 5px 8px;
   color: #1c5a97;
   text-decoration: none !important;
+  text-align: right;
 }
 
+.accordion_heading {
+  padding-right: 50px;
+}
+
+.lite{
+  .accordion-item {
+    background-color: #E1E8F2;
+    padding: 35px 25px 35px 15px;
+    border-radius: 10px;
+  }
+
+  .mat-expansion-panel {
+    padding-bottom: 5px;
+  } 
+
+  .ordinal {
+    baseline-shift: -.2em;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    height: 1.85em;
+    line-height: 1.2;
+    margin-right: 0.72em;
+    background-color: #7596C8;
+    padding: 0.4em;
+    text-align: center;
+    width: 1.85em;
+    color: #fff;
+  }
+
+  .detail-step {
+    padding-top: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+  
+  .accordion_heading {
+    font-weight: normal;
+    width: 735px;
+  }
+}

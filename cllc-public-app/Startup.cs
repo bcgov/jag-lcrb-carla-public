@@ -241,8 +241,9 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
             string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
-           
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword));
+            string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
+
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword, sharePointNativeBaseURI));
 
             // add BCeID Web Services
 
@@ -253,16 +254,23 @@ namespace Gov.Lclb.Cllb.Public
 
 			services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
-			// add BCEP services
+            // add BCEP services
 
-			var bcep_svc_url    = Environment.GetEnvironmentVariable("BCEP_SERVICE_URL");
-			var bcep_svc_svcid  = Environment.GetEnvironmentVariable("BCEP_MERCHANT_ID");
-			var bcep_svc_hashid = Environment.GetEnvironmentVariable("BCEP_HASH_KEY");
-			var bcep_base_uri   = Environment.GetEnvironmentVariable("BASE_URI");
-			var bcep_base_path  = Environment.GetEnvironmentVariable("BASE_PATH");
-			var bcep_conf_path  = Environment.GetEnvironmentVariable("BCEP_CONF_PATH");
+            //var bcep_svc_url = Environment.GetEnvironmentVariable("BCEP_SERVICE_URL");
+            //var bcep_svc_svcid = Environment.GetEnvironmentVariable("BCEP_MERCHANT_ID");
+            //var bcep_svc_hashid = Environment.GetEnvironmentVariable("BCEP_HASH_KEY");
+            //var bcep_base_uri = Environment.GetEnvironmentVariable("BASE_URI");
+            //var bcep_base_path = Environment.GetEnvironmentVariable("BASE_PATH");
+            //var bcep_conf_path = Environment.GetEnvironmentVariable("BCEP_CONF_PATH");
 
-			services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid, 
+            var bcep_svc_url = Configuration["BCEP_SERVICE_URL"];
+            var bcep_svc_svcid = Configuration["BCEP_MERCHANT_ID"];
+            var bcep_svc_hashid = Configuration["BCEP_HASH_KEY"];
+            var bcep_base_uri = Configuration["BASE_URI"];
+            var bcep_base_path = Configuration["BASE_PATH"];
+            var bcep_conf_path = Configuration["BCEP_CONF_PATH"];
+
+            services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid, 
 			                                                        bcep_base_uri + bcep_base_path + bcep_conf_path));
         }
 

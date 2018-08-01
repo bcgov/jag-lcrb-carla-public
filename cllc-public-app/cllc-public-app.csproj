@@ -13,6 +13,7 @@
     <RootNamespace>Gov.Lclb.Cllb.Public</RootNamespace>
     <UserSecretsId>39a46bda-223e-4ee4-9dbc-2b7c477888c7</UserSecretsId>
     <StartupObject>Gov.Lclb.Cllb.Public.Program</StartupObject>
+	<ProjectGuid>{8FE0A3D0-B466-41E3-91A9-3AB6207C15E5}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,10 +39,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
-  </ItemGroup>
-  
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->

@@ -1,7 +1,15 @@
 <mat-card class="mat-elevation-z0">
 
     <mat-card-title><h1>Business Profile</h1></mat-card-title>
-    <mat-card-subtitle><p>Your business profile represents all the legal entities that make up your organizations structure</p></mat-card-subtitle>
+    <div *ngIf="dataSource.data.length == 0 ">
+        <mat-card-subtitle><p>
+          Your business profile represents all the legal entities that make up your organization's structure.
+        </p></mat-card-subtitle>
+    </div>
+    <div *ngIf="dataSource.data.length > 0 ">
+      <mat-card-subtitle><p>Your business profile represents all the legal entities that make up your organizations structure.</p></mat-card-subtitle>
+    </div>
+    <mat-card-subtitle>Complete your business profile before starting a licence application.</mat-card-subtitle>
     <mat-card  class="mat-elevation-z0">
 
       <div [ngBusy]="busy"></div>
@@ -22,9 +30,7 @@
           <ng-container matColumnDef="organization">
             <mat-header-cell mat-sort-header *matHeaderCellDef> Organization </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <!--<button (click)="router.navigate(['/business-profile', {id: element.id}], {skipLocationChange: true})">{{element.name}}</button>-->
-              <!--<a [routerLink]="['/business-profile', element.id]"> {{element.name}}</a>-->
-              <a routerLink="/business-profile/{{element.accountId}}/{{element.legalEntityId}}">{{element.name}}</a>
+              <a routerLink="/business-profile/{{ element.shareholderAccountId || element.accountId}}/{{element.legalEntityId}}/before-you-start">{{element.name}}</a>
             </mat-cell> 
           </ng-container>
 

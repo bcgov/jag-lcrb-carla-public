@@ -14,6 +14,7 @@ using System.Net;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
 using Microsoft.Extensions.DependencyInjection;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -51,10 +52,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            Adoxio_establishment adoxio_establishment = new Adoxio_establishment()
+            MicrosoftDynamicsCRMadoxioEstablishment adoxio_establishment = new MicrosoftDynamicsCRMadoxioEstablishment()
             {
-                Adoxio_establishmentid = Guid.NewGuid(),
-                Adoxio_name = initialName
+                AdoxioEstablishmentid = Guid.NewGuid().ToString(),
+                AdoxioName = initialName
             };
 
 
@@ -86,8 +87,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(initialName, responseViewModel.Name);
 
             // U - Update            
-            adoxio_establishment.Adoxio_name = changedName;
-            adoxio_establishment.Adoxio_establishmentid = id;
+            adoxio_establishment.AdoxioName = changedName;
+            adoxio_establishment.AdoxioEstablishmentid = id.ToString();
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {

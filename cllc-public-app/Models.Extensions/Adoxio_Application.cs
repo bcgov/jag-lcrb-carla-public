@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (dynamicsApplication._adoxioLicencetypeValue != null)
             {
                 Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
-				var adoxio_licencetype = await dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
+				var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
                 adoxioApplicationVM.licenseType = adoxio_licencetype.AdoxioName;
             }
 
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                                                     + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode;
 
             //get application status
-            adoxioApplicationVM.applicationStatus = dynamicsApplication.Statuscode.ToString();
+            adoxioApplicationVM.applicationStatus = (AdoxioApplicationStatusCodes) dynamicsApplication.Statuscode;
 
             // set a couple of read-only flags to indicate status
 			adoxioApplicationVM.isPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved);
@@ -113,6 +113,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             //get additional property info
             adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
 
+            //get payment info
             if (dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.Yes;
@@ -123,8 +124,10 @@ namespace Gov.Lclb.Cllb.Public.Models
 				adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.No;
 				adoxioApplicationVM.isSubmitted = false;
 			}
-
-			adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
+			adoxioApplicationVM.adoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue;
+            //TODO set in autorest
+            adoxioApplicationVM.paymentreceiveddate = dynamicsApplication.AdoxioPaymentreceiveddate; //DateTime.Now;
+            adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
 
             //get declarations
             adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
@@ -136,48 +139,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioApplicationVM.contactpersonrole = dynamicsApplication.AdoxioRole;
             adoxioApplicationVM.contactpersonemail = dynamicsApplication.AdoxioEmail;
             adoxioApplicationVM.contactpersonphone = dynamicsApplication.AdoxioContactpersonphone;
+            
+            adoxioApplicationVM.modifiedOn = dynamicsApplication.Modifiedon;
+
+            //get record audit info
+            adoxioApplicationVM.createdon = dynamicsApplication.Createdon; 
+            adoxioApplicationVM.modifiedon = dynamicsApplication.Modifiedon;
 
             return adoxioApplicationVM;
         }
-
-        /***** 
-         * To be disabled (Odata) 
-         * ****/
-        //     public async static Task<MicrosoftDynamicsCRMadoxioapplication> ToModel(this AdoxioApplication adoxioApplicationVM, Interfaces.Microsoft.Dynamics.CRM.System _system)
-        //     {
-        //MicrosoftDynamicsCRMadoxioapplication result = null;
-        //if (adoxioApplicationVM != null)
-        //         {
-        //	result = new MicrosoftDynamicsCRMadoxioapplication();
-        //	if (adoxioApplicationVM.id != null)
-        //		result.Adoxio_applicationid = Guid.Parse(adoxioApplicationVM.id);
-        //	result.Adoxio_name = adoxioApplicationVM.name;
-        //	result.Adoxio_Applicant = adoxioApplicationVM.applicant.ToModel();
-        //	result.Adoxio_nameofapplicant = adoxioApplicationVM.applyingPerson;
-        //	result.Adoxio_jobnumber = adoxioApplicationVM.jobNumber;
-        //	//result._adoxio_licencetype_value = adoxioApplicationVM.licenseType;
-        //	result.Adoxio_establishmentpropsedname = adoxioApplicationVM.establishmentName;
-        //	result.Adoxio_establishmentaddressstreet = adoxioApplicationVM.establishmentaddressstreet;
-        //	result.Adoxio_establishmentaddresscity = adoxioApplicationVM.establishmentaddresscity;
-        //	result.Adoxio_establishmentaddresspostalcode = adoxioApplicationVM.establishmentaddresspostalcode;
-        //             result.Adoxio_establishmentparcelid = adoxioApplicationVM.establishmentparcelid;
-        //             //TODO add to autorest
-        //             //result.Adoxio_additionalpropertyinformation = adoxioApplicationVM.additionalpropertyinformation;
-        //             //TODO add to autorest
-        //             //result.Adoxio_authorizedtosubmit = adoxioApplicationVM.authorizedtosubmit;
-        //             result.Adoxio_signatureagreement = adoxioApplicationVM.signatureagreement;
-        //             result.Adoxio_contactpersonfirstname = adoxioApplicationVM.contactpersonfirstname;
-        //             result.Adoxio_contactpersonlastname = adoxioApplicationVM.contactpersonlastname;
-        //             //TODO add to autorest
-        //             //result.AdoxioRole = adoxioApplicationVM.contactpersonrole;
-        //             result.Adoxio_email = adoxioApplicationVM.contactpersonemail;
-        //             result.Adoxio_contactpersonphone = adoxioApplicationVM.contactpersonphone;
-
-
-        //             // ??? result.Statuscode = adoxioApplicationVM.Statuscode;
-        //         }
-        //         return result;
-        //     }
-
     }
 }

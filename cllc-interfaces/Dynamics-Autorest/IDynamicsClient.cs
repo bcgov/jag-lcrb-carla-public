@@ -48,6 +48,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplications Applications { get; }
 
         /// <summary>
+        /// Gets the IEstablishments.
+        /// </summary>
+        IEstablishments Establishments { get; }
+
+        /// <summary>
         /// Gets the IAdoxiolegalentities.
         /// </summary>
         IAdoxiolegalentities Adoxiolegalentities { get; }
@@ -56,6 +61,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAdoxioLicencetypes.
         /// </summary>
         IAdoxioLicencetypes AdoxioLicencetypes { get; }
+
+        /// <summary>
+        /// Gets the ILicenses.
+        /// </summary>
+        ILicenses Licenses { get; }
 
         /// <summary>
         /// Gets the IAdoxioTiedhouseassociations.
@@ -76,6 +86,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInvoices.
         /// </summary>
         IInvoices Invoices { get; }
+
+        /// <summary>
+        /// Gets the ISharepointDocumentLocations.
+        /// </summary>
+        ISharepointDocumentLocations SharepointDocumentLocations { get; }
 
     }
 }

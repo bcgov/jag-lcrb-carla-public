@@ -14,7 +14,7 @@
             <span *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</span>
             <span *ngIf="businessType == 'Society'">Society Details</span>
             <span *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partnership Details</span>
-            <span *ngIf="businessType == 'SoleProprietor'">Sole-Prop Details</span>
+            <span *ngIf="businessType == 'SoleProprietor'">Sole Proprietorship Details</span>
           </a>
         </li>
         <li *ngIf="tabStructure.indexOf('organization-structure') !== -1" [ngClass]="{'active': view_tab == 'organization-structure'}">
@@ -24,8 +24,9 @@
         </li>
         <li *ngIf="tabStructure.indexOf('directors-and-officers') !== -1" [ngClass]="{'active': view_tab == 'directors-and-officers'}">
           <a (click)="changeTab('directors-and-officers')">
-            <span *ngIf="['Society'].indexOf(businessType) == -1">Directors &amp; Officers</span>
+            <span *ngIf="['Society', 'SoleProprietor'].indexOf(businessType) == -1">Directors &amp; Officers</span>
             <span *ngIf="['Society'].indexOf(businessType) !== -1">Directors &amp; Senior Managers</span>
+            <span *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Owner</span>
           </a>
         </li>
         <li *ngIf="tabStructure.indexOf('key-personnel') !== -1" [ngClass]="{'active': view_tab == 'key-personnel'}">
@@ -46,12 +47,12 @@
         </li>
         <li *ngIf="tabStructure.indexOf('finance-integrity') !== -1" [ngClass]="{'active': view_tab == 'finance-integrity'}">
           <a (click)="changeTab('finance-integrity')">
-            <span>Finance Information</span>
+            <span>Financial Information</span>
           </a>
         </li>
         <li *ngIf="tabStructure.indexOf('security-assessment') !== -1" [ngClass]="{'active': view_tab == 'security-assessment'}">
           <a (click)="changeTab('security-assessment')">
-            <span>Security Assessments</span>
+            <span>Authorizations</span>
           </a>
         </li>
       </ul>
@@ -73,32 +74,8 @@
     -->
 
       <!-- Tab panes -->
-      <div *ngIf="view_tab =='before-you-start'">
-        <app-before-you-start [businessType]="businessType"></app-before-you-start>
-      </div>
-      <div *ngIf="view_tab =='corporate-details'">
-        <app-corporate-details [accountId]="accountId" [businessType]="businessType"></app-corporate-details>
-      </div>
-      <div *ngIf="view_tab =='organization-structure'">
-        <app-organization-structure [accountId]="accountId" [businessType]="businessType"></app-organization-structure>
-      </div>
-      <div *ngIf="view_tab =='directors-and-officers'">
-        <app-directors-and-officers [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-directors-and-officers>
-      </div>
-      <div *ngIf="view_tab =='key-personnel'">
-        <app-key-personnel [accountId]="accountId" [businessType]="businessType"></app-key-personnel>
-      </div>
-      <div *ngIf="view_tab =='shareholders'">
-        <app-edit-shareholders [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
-      </div>
-      <div *ngIf="view_tab =='connections-to-producers'">
-        <app-connection-to-producers [accountId]="accountId" [businessType]="businessType"></app-connection-to-producers>
-      </div>
-      <div *ngIf="view_tab =='finance-integrity'">
-        <app-financial-information [accountId]="accountId" [businessType]="businessType"></app-financial-information>
-      </div>
-      <div *ngIf="view_tab =='security-assessment'">
-        <app-security-assessments [accountId]="accountId" [businessType]="businessType" [parentLegalEntityId]="legalEntityId"></app-security-assessments>
+      <div>
+        <router-outlet></router-outlet>
       </div>
       <p>&nbsp;</p>
       <div class="col-md-10 row">
@@ -107,9 +84,14 @@
           <br>
         </a>
         &nbsp;
-        <a class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
-          <strong *ngIf="view_tab != 'before-you-start'">Next</strong>
+        <a *ngIf="!isOnLastTab()" class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
+          <strong *ngIf="view_tab != 'before-you-start'">Save and Continue</strong>
           <strong *ngIf="view_tab == 'before-you-start'">Start</strong>
+          <strong *ngIf="view_tab == 'Authorizations'">Done</strong>
+          <br>
+        </a>
+        <a *ngIf="isOnLastTab()" class="globalButton" class="btn btn-primary" tabindex="2" routerLink="/dashboard">
+          <strong>Go To Dashboard</strong>
           <br>
         </a>
       </div>
@@ -121,12 +103,15 @@
       This organization type is not available on the beta version of the Cannabis Licensing application.
       <br> Please contact the Liquor Control and Licensing Branch for assistance in completing this business profile
     </p>
-    <label for="">Email</label>
     <br>
-    <a href="javascript: void(0)">cannabisregs@gov.bc.ca</a>
+    <span>Contact Phone #:</span>
     <br>
-    <label for="">Phone</label>
+    <span>Victoria 250 952-5787</span>
     <br>
-    <span>(250) 555-5555</span>
+    <span>Toll Free 1 866 209-2111</span>
+    <br>
+    <br>
+    <span>Email:</span>
+    <span class="email">LCLBHelpDesk@gov.bc.ca</span>
   </section>
 </div>

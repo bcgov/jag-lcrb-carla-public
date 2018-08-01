@@ -1,0 +1,79 @@
+<div>
+  <h1 style="margin-top: 0">Security Screening &amp; Financial Check Authorizations</h1>
+  <section>
+
+    <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'Society', 
+               'GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
+      The following people in your organization will need to provide an authorization for a security screening and financial integrity
+      check. Authorizations can only be provided by the individual themselves.
+    </p>
+
+    <p *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
+      You will need to provide an authorization for a security screening and financial integrity check.
+    </p>
+
+    <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'Society', 
+               'GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
+      <b>Send authorization requests for each individual listed below</b>
+    </p>
+
+  </section>
+
+  <div [ngBusy]="busy"></div>
+  <div [ngBusy]="busyObsv"></div>
+
+  <div>
+    <mat-table #table [dataSource]="dataSource">
+
+      <!-- Column -->
+      <ng-container matColumnDef="sendConsentRequest">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <input type="checkbox" [(ngModel)]="element.sendConsentRequest" />
+        </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="firstname">
+        <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ getRoles(element) }} </mat-cell>
+      </ng-container>
+
+      <!-- Column -->
+      <ng-container matColumnDef="emailsent">
+        <mat-header-cell *matHeaderCellDef> Email Sent </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.securityAssessmentEmailSentOn | date:'yyyy-MM-dd' }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[3, 5, 10]" [showFirstLastButtons]="true">
+    </mat-paginator>
+
+  </div>
+
+  <p></p>
+  <button class="globalButton btn btn-primary" tabindex="1" [disabled]=" !anySelected()" (click)="sendConsentRequestEmail()">
+    <strong>Send Request to Selected</strong>
+  </button>
+</div>
