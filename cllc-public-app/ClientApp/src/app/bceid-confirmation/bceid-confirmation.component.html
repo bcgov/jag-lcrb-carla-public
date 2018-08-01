@@ -1,4 +1,3 @@
-
 <div class="container" *ngIf="!currentUser.isBceidConfirmed">
   <img style="margin-left: -18px;" *ngIf="termsAccepted" src="../../assets/bceid_default_logo.jpg" alt="BCeID Logo">
   <div [ngBusy]="busySubscription"></div>
@@ -58,8 +57,9 @@
     </section>
 
     <section *ngIf="bceidConfirmBusinessType && businessType == 'Indigenous nation'">
-      <p>For Indigenous nations please contact the LCRB directly.
+      <p>For Indigenous nations please contact the LCRB directly at
         <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a>
+        to obtain the application form.
       </p>
       <a href="">&lt;&lt; Return to Information Portal Homepage</a>
       <br>
