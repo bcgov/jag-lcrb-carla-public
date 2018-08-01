@@ -29,11 +29,11 @@
         <ng-container matColumnDef="cancel">
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span class="cancel-app" (click)="cancelApplication(element.id)">
-                <mat-icon aria-label="Save Application" style="text-decoration: solid">delete</mat-icon>
-                <a href="javascript: void(0)">
-                  Cancel Application</a>
-              </span>
+            <span (click)="cancelApplication(element.id)">
+              <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+              <a href="javascript: void(0)">
+                Cancel Application</a>
+            </span>
           </mat-cell>
         </ng-container>
 
@@ -64,19 +64,14 @@
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.applicationFormFileUrl, element.fileName)">{{element.establishmentName}}</a>
-            <br />
-            Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
-            <br />
-            Ref. {{element.name}}
+            <br /> Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
+            <br /> Ref. {{element.name}}
           </mat-cell>
         </ng-container>
 
         <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
       </mat-table>
-      <mat-paginator #paginator style="background-color: #eee;"
-                     [pageSize]="4"
-                     [pageSizeOptions]="[4, 8, 12]"
-                     [showFirstLastButtons]="true">
+      <mat-paginator #paginator style="background-color: #eee;" [pageSize]="4" [pageSizeOptions]="[4, 8, 12]" [showFirstLastButtons]="true">
       </mat-paginator>
     </div>
 
