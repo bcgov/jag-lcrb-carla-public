@@ -24,7 +24,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Approved = 845280004,
         Denied = 845280005,
         [EnumMember(Value = "Approved in Principle")]
-        ApprovedInPrinciple = 845280008
+        ApprovedInPrinciple = 845280008,
+        Terminated = 845280009
     }
 
     public class AdoxioApplication
