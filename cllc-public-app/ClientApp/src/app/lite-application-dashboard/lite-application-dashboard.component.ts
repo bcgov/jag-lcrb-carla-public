@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
 import { FileSystemItem } from '../models/file-system-item.model';
@@ -23,12 +23,15 @@ export class LiteApplicationDashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
 
-  constructor(private adoxioApplicationDataService: AdoxioApplicationDataService) { }
+  constructor(private adoxioApplicationDataService: AdoxioApplicationDataService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.displayApplications();
   }
 
+  /**
+   *
+   * */
   private displayApplications() {
     let licenseApplicationSummary: LicenseApplicationSummary[] = [];
     this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe(res => {
@@ -84,6 +87,11 @@ export class LiteApplicationDashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param url
+   * @param fileName
+   */
   downloadApplicationPDF(url: string, fileName: string) {
     this.adoxioApplicationDataService.downloadFile(url)
     .subscribe((res: Blob) => {
@@ -91,17 +99,56 @@ export class LiteApplicationDashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param applicationId
+   * @param establishmentName
+   * @param applicationName
+   */
   cancelApplication(applicationId: string, establishmentName: string, applicationName: string) {
-    // start by showing a confirmation dialog.
-    if (confirm("Are you sure you want to cancel this application? \n\r " + establishmentName + "\n\r Ref. " + applicationName)) {
-      // delete the application.
 
-      this.busy = this.adoxioApplicationDataService.deleteApplication(applicationId).subscribe(
-        res => {
-          this.displayApplications();
-        });
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: '200px',
+      data: {
+        establishmentName: establishmentName,
+        applicationName: applicationName
+      }
+    };
 
-    }
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(ConfirmationDialog, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      formData => {
+
+      }
+    );
+
+    //// start by showing a confirmation dialog.
+    //if (confirm("Are you sure you want to cancel this application? \n\r " + establishmentName + "\n\r Ref. " + applicationName)) {
+    //  // delete the application.
+    //  this.busy = this.adoxioApplicationDataService.deleteApplication(applicationId).subscribe(
+    //    res => {
+    //      this.displayApplications();
+    //    });
+    //}
+  }
+
+}
+
+@Component({
+  selector: 'app-lite-application-dashboard-dialog',
+  templateUrl: 'lite-application-dashboard-dialog.html',
+})
+export class ConfirmationDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmationDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }
