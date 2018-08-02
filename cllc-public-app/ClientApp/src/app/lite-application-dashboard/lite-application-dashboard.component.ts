@@ -91,12 +91,12 @@ export class LiteApplicationDashboardComponent implements OnInit {
     });
   }
 
-  cancelApplication(id: string) {
+  cancelApplication(applicationId: string, establishmentName: string, applicationName: string) {
     // start by showing a confirmation dialog.
-    if (confirm("Are you sure you want to cancel this application?")) {
+    if (confirm("Are you sure you want to cancel this application? \n\r " + establishmentName + "\n\r Ref. " + applicationName)) {
       // delete the application.
 
-      this.busy = this.adoxioApplicationDataService.deleteApplication(id).subscribe(
+      this.busy = this.adoxioApplicationDataService.cancelApplication(applicationId).subscribe(
         res => {
           this.displayApplications();
         });
