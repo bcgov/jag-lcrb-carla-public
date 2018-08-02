@@ -28,21 +28,39 @@
       <p></p>
 
       <section *ngIf="orgType">
-        <button class="btn btn-primary">
+        <a *ngIf="orgType === 'Sole Proprietorship'" href="https://www2.gov.bc.ca/assets/download/5A4BABAFCEF6481AB318949BA12CF842"
+          download class="btn btn-primary" target="_blank">
           <i class="fa fa-download"></i>
-          CANNABIS RETAIL STORE LICENCE APPLICATION</button>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
+        <a *ngIf="orgType === 'Society'" href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download
+          class="btn btn-primary" target="_blank">
+          <i class="fa fa-download"></i>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
+        <a *ngIf="orgType === 'Partnership'" href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download
+          class="btn btn-primary" target="_blank">
+          <i class="fa fa-download"></i>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
+        <a *ngIf="orgType === 'Private Corporation' || orgType === 'Public Corporation'" href="https://www2.gov.bc.ca/assets/download/B8A522CB3E8D4595A970F6331F4667A8"
+          download class="btn btn-primary" target="_blank">
+          <i class="fa fa-download"></i>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
         <p></p>
         <label for="">FINANCIAL INTEGRITY</label>
         <p>
           An applicant that is a {{orgType}} must submit a completed business financial integrity form. Please download and submit
           the business financial integrity form with the completed application for a non-medical cannabis retail store licence.
         </p>
-        <a href="#">
+        <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download target="_blank">
           <i class="fa fa-file-pdf" style="margin-right: 5px;"></i>DOWNLOAD the Business Financial Integrity form</a>
         <p></p>
         <br>
 
-        <label for="">ASSOCIATES</label>
+        <label *ngIf="orgType !== 'Sole Proprietorship'" for="">ASSOCIATES</label>
+        <label *ngIf="orgType === 'Sole Proprietorship'" for="">SECURITY SCREENING</label>
         <br>
         <section *ngIf="orgType === 'Private Corporation'">
           <p>An applicant that is a Private Corporation may have associates that are required to consent to security screening
@@ -139,33 +157,13 @@
             of the Applicant and are required to submit an associate organization assessment form.</p>
         </section>
         <section *ngIf="orgType === 'Sole Proprietorship'">
-          <p>An applicant that is a Sole Proprietorship may have associates that are required to consent to security screening
-            and financial integrity assessments as part of the application for a non-medical cannabis retail store licence.
-            Applicants are required to provide associates with the Parcel Identifier (PID) or proposed retail store location
-            address.
+          <p>An applicant that is a Sole Proprietorship must consent to a security screening as part of the application for
+            a non-medical cannabis retail store licence.
           </p>
-          <span style="font-style: italic;" class="li-header">Parcel Identifier (PID):</span>
-          <br>
-          <ul>
-            <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
-            <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents,
-              on the lease, or obtained from thelandlord.</li>
-          </ul>
-          <p>Applicants should direct associates to the
+          <p>Please visit the
             <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions for submitting documentation.</p>
-
-          <p>Associates will submit documentation for security screening and financial integrity assessments directly to the
-            LCRB. Applicants should not delay submitting a completed application form and business financial integrity form.
-            It is the applicants responsibility to direct all associates to
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">the link provided</a>.</p>
-
-          <span class="li-header">Associates of Sole Proprietorship include:</span>
-          <br>
-          <ul>
-            <li>Sole Proprietorship</li>
-          </ul>
+              target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions for submitting documentation
+            for the security screening directly to the LCRB.</p>
         </section>
         <section *ngIf="orgType === 'Society'">
           <p>An applicant that is a Society may have associates that are required to consent to security screening and financial
@@ -194,6 +192,10 @@
             <li>Directors and officers</li>
             <li>Senior management</li>
           </ul>
+          <br>
+          <p>Please note: While they are not normally required as part of the licence application process, the Liquor and Cannabis
+            Regulation Branch reserves the right to ask for a society’s membership lists.
+          </p>
         </section>
       </section>
 
