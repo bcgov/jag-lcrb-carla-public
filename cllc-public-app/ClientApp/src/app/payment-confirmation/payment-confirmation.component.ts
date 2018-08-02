@@ -120,6 +120,9 @@ export class PaymentConfirmationComponent {
     );
   }
 
+  /**
+   * Return to dashboard
+   * */
   return_to_application() {
     // if (this.isLiteVersion) {
     if (this.trnApproved == "1") {
@@ -134,5 +137,12 @@ export class PaymentConfirmationComponent {
     //     this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
     //   }
     // }
+  }
+
+  /**
+   * Print current page
+   * */
+  printPage() {
+    window.print();
   }
 }
