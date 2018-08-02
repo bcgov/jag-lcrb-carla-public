@@ -55,6 +55,15 @@ export class AdoxioApplicationDataService {
 
 
   /**
+   * Cancel the Dynamics Application
+   * @param id
+   */
+  cancelApplication(id: string) {
+    //call API    
+    return this.http.post(this.apiPath + id + "/cancel", { headers: this.jsonHeaders });
+  }
+
+  /**
    * Delete the Dynamics Application
    * @param id
    */
