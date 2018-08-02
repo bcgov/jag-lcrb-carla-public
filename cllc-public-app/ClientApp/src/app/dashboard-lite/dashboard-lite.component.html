@@ -28,16 +28,33 @@
       <p></p>
 
       <section *ngIf="orgType">
-        <button class="btn btn-primary">
+        <a *ngIf="orgType === 'Sole Proprietorship'" href="https://www2.gov.bc.ca/assets/download/5A4BABAFCEF6481AB318949BA12CF842"
+          download class="btn btn-primary">
           <i class="fa fa-download"></i>
-          CANNABIS RETAIL STORE LICENCE APPLICATION</button>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
+        <a *ngIf="orgType === 'Society'" href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download
+          class="btn btn-primary">
+          <i class="fa fa-download"></i>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
+        <a *ngIf="orgType === 'Partnership'" href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download
+          class="btn btn-primary">
+          <i class="fa fa-download"></i>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
+        <a *ngIf="orgType === 'Private Corporation' || orgType === 'Public Corporation'" href="https://www2.gov.bc.ca/assets/download/B8A522CB3E8D4595A970F6331F4667A8"
+          download class="btn btn-primary">
+          <i class="fa fa-download"></i>
+          CANNABIS RETAIL STORE LICENCE APPLICATION
+        </a>
         <p></p>
         <label for="">FINANCIAL INTEGRITY</label>
         <p>
           An applicant that is a {{orgType}} must submit a completed business financial integrity form. Please download and submit
           the business financial integrity form with the completed application for a non-medical cannabis retail store licence.
         </p>
-        <a href="#">
+        <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download>
           <i class="fa fa-file-pdf" style="margin-right: 5px;"></i>DOWNLOAD the Business Financial Integrity form</a>
         <p></p>
         <br>
