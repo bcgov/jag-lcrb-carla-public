@@ -122,7 +122,7 @@ import { StoreModule } from '@ngrx/store';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 import { ClientConfigDataService } from './services/client-config.service';
 import { ApplicationComponent } from './lite/application/application.component';
-import { LiteApplicationDashboardComponent } from './lite-application-dashboard/lite-application-dashboard.component';
+import { LiteApplicationDashboardComponent, ConfirmationDialog } from './lite-application-dashboard/lite-application-dashboard.component';
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
@@ -179,6 +179,7 @@ import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-a
     DashboardLiteComponent,
     ApplicationComponent,
     LiteApplicationDashboardComponent,
+    ConfirmationDialog,
     TermsAndConditionsComponent
   ],
   imports: [
@@ -300,7 +301,8 @@ import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-a
   entryComponents: [
     ShareholderPersonDialogComponent,
     ShareholderOrganizationDialogComponent,
-    DirectorAndOfficerPersonDialogComponent
+    DirectorAndOfficerPersonDialogComponent,
+    ConfirmationDialog
   ],
   bootstrap: [AppComponent]
 })
