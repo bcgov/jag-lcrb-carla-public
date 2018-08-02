@@ -30,7 +30,7 @@
           <ng-container matColumnDef="cancel">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <span (click)="cancelApplication(element.id)">
+              <span (click)="cancelApplication(element.id, element.establishmentName, element.name)">
                 <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
                 <a href="javascript: void(0)">
                   Cancel Application</a>
