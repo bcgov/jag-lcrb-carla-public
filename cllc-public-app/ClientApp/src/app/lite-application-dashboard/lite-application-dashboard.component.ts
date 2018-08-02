@@ -110,7 +110,8 @@ export class LiteApplicationDashboardComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '200px',
+      width: '400px',
+      height: '200px',
       data: {
         establishmentName: establishmentName,
         applicationName: applicationName
@@ -120,8 +121,14 @@ export class LiteApplicationDashboardComponent implements OnInit {
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ConfirmationDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      formData => {
-
+      cancelApplication => {
+        if (cancelApplication) {
+          // delete the application.
+          this.busy = this.adoxioApplicationDataService.deleteApplication(applicationId).subscribe(
+            res => {
+              this.displayApplications();
+            });
+        }
       }
     );
 
@@ -143,12 +150,22 @@ export class LiteApplicationDashboardComponent implements OnInit {
 })
 export class ConfirmationDialog {
 
+  establishmentName: string;
+  applicationName: string;
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.applicationName = data.applicationName;
+    this.establishmentName = data.establishmentName;
+  }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
+  }
+
+  cancel() {
+    this.dialogRef.close(true);
   }
 
 }
