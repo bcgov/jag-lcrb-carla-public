@@ -1,15 +1,19 @@
 <mat-dialog-content>
-
   <div>
     <p>Are you sure you want to cancel this application?</p>
-    <p>{{establishmentName}}</p>
-    <p>Ref. {{applicationName}}</p>
+    <div>
+      <strong>
+        <p style="margin-bottom:0px">{{establishmentName}}</p>
+        <p>Ref. {{applicationName}}</p>
+      </strong>
+    </div>
   </div>
-
 </mat-dialog-content>
+
 <mat-dialog-actions>
-  <button class="btn btn-secondary" (click)="close()">Close</button>
-  &nbsp;
-  <button class="btn btn-primary" (click)="save()">Save</button>
+  <button class="btn btn-primary" (click)="cancel()">Yes</button>
+  <div style="float:right">
+    <button class="btn" (click)="close()">No</button>
+  </div>
 </mat-dialog-actions>
 
