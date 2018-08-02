@@ -270,8 +270,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user1.accountid, account1.id);
 
 			// *** upload some legal entity attachments
-			string file1 = await SecurityHelper.UploadFileToAccount(_client, legalEntity1.id, "TestFileSecurity");
-			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForAccount(_client, legalEntity1.id, "TestFileSecurity", true);
+			string file1 = await SecurityHelper.UploadFileToLegalEntity(_client, legalEntity1.id, "TestFileSecurity");
+			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForAccount(_client, user1.accountid.ToString(), "TestFileSecurity", true);
 			Assert.NotNull(file1s);
 			Assert.Single(file1s);
 			//string _data1 = await SecurityHelper.DownloadFileForAccount(_client, account1.id, file1s[0].id, true);
@@ -338,6 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Account account1 = await GetAccountForCurrentUser();
             ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
+            Assert.Equal(user1.accountid, legalEntity1.accountId);
 
             // *** create some org shareholders and child business profiles
             ViewModels.AdoxioLegalEntity org1 = await SecurityHelper.CreateOrganizationalShareholder(_client, user1, legalEntity1.id);
@@ -347,8 +348,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.Account org1Account = await SecurityHelper.GetAccountRecord(_client, org1.shareholderAccountId, true);
 			Assert.NotNull(org1Account);
 
-			string file1 = await SecurityHelper.UploadFileToAccount(_client, org1Account.id, "TestFileSecurity");
-			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForAccount(_client, org1Account.id, "TestFileSecurity", true);
+			string file1 = await SecurityHelper.UploadFileToLegalEntity(_client, org1.id, "TestFileSecurity");
+			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForAccount(_client, org1.shareholderAccountId, "TestFileSecurity", true);
             Assert.NotNull(file1s);
             Assert.Single(file1s);
 

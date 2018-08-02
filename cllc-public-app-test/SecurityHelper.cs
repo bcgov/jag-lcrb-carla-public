@@ -183,7 +183,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			return id;
 		}
 
-        public static async Task<string> UploadFileToAccount(HttpClient _client, string id, string docType)
+        public static async Task<string> UploadFileToLegalEntity(HttpClient _client, string legalentityid, string docType)
 		{
 			// Attach a file
             string testData = "This is just a test.";
@@ -211,7 +211,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/" + id + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/" + legalentityid + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
