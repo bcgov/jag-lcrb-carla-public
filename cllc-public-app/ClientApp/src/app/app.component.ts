@@ -66,18 +66,7 @@ export class AppComponent implements OnInit {
       });
     });
 
-    this.userDataService.getCurrentUser()
-      .subscribe((data: User) => {
-        this.currentUser = data;
-        this.isNewUser = this.currentUser.isNewUser;
-        this.isAssociate = (this.currentUser.businessname == null);
-        if (!this.isAssociate) {
-          this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
-            res => {
-              this.businessProfiles = res;
-            });
-        }
-      });
+    this.reloadUser();
 
     this.store.select(state => state.legalEntitiesState)
       .filter(state => !!state)
@@ -85,6 +74,21 @@ export class AppComponent implements OnInit {
         this.businessProfiles = state.legalEntities;
       });
 
+  }
+
+  reloadUser() {
+    this.userDataService.getCurrentUser()
+      .subscribe((data: User) => {
+        this.currentUser = data;
+        this.isNewUser = this.currentUser.isNewUser;
+        // this.isAssociate = (this.currentUser.businessname == null);
+        // if (!this.isAssociate) {
+        //   this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
+        //     res => {
+        //       this.businessProfiles = res;
+        //     });
+        // }
+      });
   }
 
   isIE10orLower() {

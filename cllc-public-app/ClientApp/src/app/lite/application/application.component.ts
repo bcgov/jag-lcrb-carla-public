@@ -5,12 +5,14 @@ import { AppState } from '../../app-state/models/app-state';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '../../app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdoxioApplicationDataService } from '../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../services/payment-data.service';
 import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
+import { ConfirmationDialog } from '../../lite-application-dashboard/lite-application-dashboard.component';
+import { AdoxioApplication } from '../../models/adoxio-application.model';
 
 @Component({
   selector: 'app-application',
@@ -18,6 +20,7 @@ import { FileUploaderComponent } from '../../file-uploader/file-uploader.compone
   styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
+  application: AdoxioApplication;
   @ViewChild(FileUploaderComponent) mainForm: FileUploaderComponent;
   form: FormGroup;
   savedFormData: any;
@@ -35,7 +38,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     public router: Router,
     private applicationDataService: AdoxioApplicationDataService,
     private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public dialog: MatDialog) {
     this.applicationId = this.route.snapshot.params.applicationId;
   }
 
@@ -45,9 +49,11 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       establishmentName: [''], // Validators.required
     });
 
+    
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         const data = res.json();
+        this.application = data;
         this.form.patchValue(data);
         if (data.isPaid) {
           this.form.disable();
@@ -163,15 +169,39 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     return valid;
   }
 
+  /**
+   * 
+   */
   cancelApplication() {
-    // start by showing a confirmation dialog.
-    if (confirm("Are you sure you want to cancel this application?")) {
-      // delete the application.
-      this.busy = this.applicationDataService.deleteApplication(this.applicationId).subscribe(
-        res => {
-          this.router.navigate(['/dashboard-lite']);
-        });
 
-    }
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: '400px',
+      height: '200px',
+      data: {
+        establishmentName: this.application.establishmentName,
+        applicationName: this.application.name
+      }
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(ConfirmationDialog, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      cancelApplication => {
+        if (cancelApplication) {
+          // delete the application.
+          this.busy = this.applicationDataService.cancelApplication(this.applicationId).subscribe(
+            res => {
+              this.savedFormData = this.form.value;
+              this.router.navigate(['/dashboard-lite']);
+            },
+            err => {
+              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+              console.error('Error cancelling the application');
+            });
+        }
+      });
   }
+
 }
