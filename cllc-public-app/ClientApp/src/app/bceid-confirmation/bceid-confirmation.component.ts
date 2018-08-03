@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { DynamicsDataService } from "../services/dynamics-data.service";
 import { DynamicsAccount } from "../models/dynamics-account.model";
 import { DynamicsContact } from "../models/dynamics-contact.model";
@@ -7,6 +7,7 @@ import { UserDataService } from '../services/user-data.service';
 import { AccountDataService } from '../services/account-data.service'
 import { Observable, Subscription } from '../../../node_modules/rxjs';
 
+
 @Component({
   selector: 'app-bceid-confirmation',
   templateUrl: './bceid-confirmation.component.html',
@@ -14,7 +15,8 @@ import { Observable, Subscription } from '../../../node_modules/rxjs';
 })
 /** bceid-confirmation component*/
 export class BceidConfirmationComponent {
-  @Input('currentUser') currentUser: User;
+  @Input() currentUser: User;
+  @Output() reloadUser = new EventEmitter();
   public bceidConfirmAccount: boolean = true;
   public bceidConfirmBusinessType: boolean = false;
   public bceidConfirmContact: boolean = false;
@@ -79,7 +81,7 @@ export class BceidConfirmationComponent {
     let payload = JSON.stringify(account);
     this.busy = this.dynamicsDataService.createRecord('account', payload)
       .then((data) => {
-        window.location.reload();
+        this.reloadUser.emit();
       });
   }
 
