@@ -49,6 +49,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       establishmentName: [''], // Validators.required
     });
 
+    
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       res => {
         const data = res.json();
@@ -190,15 +191,17 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.applicationDataService.deleteApplication(this.applicationId).subscribe(
+          this.busy = this.applicationDataService.cancelApplication(this.applicationId).subscribe(
             res => {
               this.savedFormData = this.form.value;
               this.router.navigate(['/dashboard-lite']);
+            },
+            err => {
+              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+              console.error('Error cancelling the application');
             });
         }
-      }
-    );
-
+      });
   }
 
 }
