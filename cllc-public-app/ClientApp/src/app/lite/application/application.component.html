@@ -101,43 +101,44 @@
     </p>
   </section>
 
-  <button class="btn btn-primary" (click)="router.navigate(['/dashboard-lite'])">
-    <span>
-      <i class="fa fa-save" style="color: #fff;"></i>
-      SAVE FOR LATER
-    </span>
-  </button>
-  <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
-  <span style="float: right; color: #1a5a96; padding-top: 10px;">
-    <span (click)="cancelApplication()">
-      <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-      <a href="javascript: void(0)">
-        Cancel Application
-      </a>
-    </span>
-  </span>
-  <p>&nbsp;</p>
-  <p>
-    The province does not know how many application for a cannabis retail store license will be recieved. Therefore, it is
-    difficult to predict how long applications will take to process. To minimize delays in processing, applicants must make
-    sure the application is complete before submitting it.
-  </p>
-  <br>
-
-  <p>
-    The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that once an
-    application is submitted you will be unable to upload additional documentation. For questions on the LCRB application
-    process please contact:
-    <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
-  </p>
-  <br>
-
-  <p>
-    IMPORTANT: Applications which are submitted without required information or documents will stop being processed. The Liquor
-    and Cannabis Regulation Branch will be assessing complete applications as a priority. Other applications that are received
-    before the applicant provides the branch with missing information will be prioritized.
-  </p>
   <section style="position: relative">
+    <button class="btn btn-primary" (click)="router.navigate(['/dashboard-lite'])">
+      <span>
+        <i class="fa fa-save" style="color: #fff;"></i>
+        SAVE FOR LATER
+      </span>
+    </button>
+    <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+    <span style="float: right; color: #1a5a96; padding-top: 10px;">
+      <span (click)="cancelApplication()">
+        <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+        <a href="javascript: void(0)">
+          Cancel Application
+        </a>
+      </span>
+    </span>
+    <p>&nbsp;</p>
+    <p>
+      The province does not know how many application for a cannabis retail store license will be recieved. Therefore, it is
+      difficult to predict how long applications will take to process. To minimize delays in processing, applicants must make
+      sure the application is complete before submitting it.
+    </p>
+    <br>
+
+    <p>
+      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that once an
+      application is submitted you will be unable to upload additional documentation. For questions on the LCRB application
+      process please contact:
+      <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+    </p>
+    <br>
+
+    <p>
+      IMPORTANT: Applications which are submitted without required information or documents will stop being processed. The Liquor
+      and Cannabis Regulation Branch will be assessing complete applications as a priority. Other applications that are received
+      before the applicant provides the branch with missing information will be prioritized.
+    </p>
+
     <div [ngBusy]="busy"></div>
   </section>
 
