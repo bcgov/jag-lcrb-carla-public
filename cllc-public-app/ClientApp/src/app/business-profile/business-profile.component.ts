@@ -48,7 +48,7 @@ export class BusinessProfileComponent implements OnInit {
   set businessType(value: string) {
     this._businessType = value;
     this.onBusinessTypeChange(value);
-    console.log(`Business Type: ${value}`);
+    //console.log(`Business Type: ${value}`);
   }
   /** BusinessProfile ctor */
   constructor(private userDataService: UserDataService,
