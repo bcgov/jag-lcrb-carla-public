@@ -401,7 +401,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (id != null)
             {
-                var accountIdGUID = Guid.Parse(adoxioLegalEntity._adoxioAccountValue);
+                var effectiveAccountId = adoxioLegalEntity._adoxioShareholderaccountidValue ?? adoxioLegalEntity._adoxioAccountValue;
+                var accountIdGUID = Guid.Parse(effectiveAccountId);
                 var account = await _dynamicsClient.GetAccountById(accountIdGUID);
 
                 if (account == null)
