@@ -58,7 +58,7 @@ export class FileUploaderComponent implements OnInit {
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         let fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
+        //console.log(droppedFile.relativePath, fileEntry);
       }
     }
   }
@@ -118,11 +118,11 @@ export class FileUploaderComponent implements OnInit {
   }
 
   public fileOver(event) {
-    console.log(event);
+    //console.log(event);
   }
 
   public fileLeave(event) {
-    console.log(event);
+    //console.log(event);
   }
 
   downloadApplicationPDF(url: string, fileName: string) {
