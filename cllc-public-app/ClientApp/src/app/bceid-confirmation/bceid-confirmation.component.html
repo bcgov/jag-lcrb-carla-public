@@ -51,7 +51,7 @@
     </section>
 
     <section *ngIf="bceidConfirmBusinessType">
-      <button class="btn btn-primary" (click)="confirmCorpType()" [disabled]="businessType == 'Indigenous nation'">
+      <button class="btn btn-primary" (click)="confirmCorpType()" [disabled]="!businessType || businessType == 'Indigenous nation'">
         <strong>Next</strong>
       </button>
     </section>
