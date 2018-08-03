@@ -79,7 +79,7 @@ export class BceidConfirmationComponent {
     let payload = JSON.stringify(account);
     this.busy = this.dynamicsDataService.createRecord('account', payload)
       .then((data) => {
-        window.location.reload();
+        this.currentUser.isNewUser = false;
       });
   }
 
