@@ -3,6 +3,7 @@ import { Http, Headers, Response, ResponseContentType } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import { FileSystemItem } from '../models/file-system-item.model';
 import { AdoxioApplication } from "../models/adoxio-application.model";
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AdoxioApplicationDataService {
@@ -42,7 +43,8 @@ export class AdoxioApplicationDataService {
   }
 
   getAllCurrentApplications() {
-    return this.http.get(this.apiPath + "current", { headers: this.jsonHeaders });
+    return this.http.get(this.apiPath + "current", { headers: this.jsonHeaders })
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -50,7 +52,8 @@ export class AdoxioApplicationDataService {
    * @param applicationId
    */
   getApplicationById(applicationId: string) {
-    return this.http.get(this.apiPath + applicationId, { headers: this.jsonHeaders });
+    return this.http.get(this.apiPath + applicationId, { headers: this.jsonHeaders })
+      .pipe(catchError(this.handleError));
   }
 
 
@@ -60,7 +63,8 @@ export class AdoxioApplicationDataService {
    */
   cancelApplication(id: string) {
     //call API    
-    return this.http.post(this.apiPath + id + "/cancel", { headers: this.jsonHeaders });
+    return this.http.post(this.apiPath + id + "/cancel", { headers: this.jsonHeaders })
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -69,7 +73,8 @@ export class AdoxioApplicationDataService {
    */
   deleteApplication(id: string) {
     //call API    
-    return this.http.post(this.apiPath + id + "/delete", { headers: this.jsonHeaders });
+    return this.http.post(this.apiPath + id + "/delete", { headers: this.jsonHeaders })
+      .pipe(catchError(this.handleError));
   }
 
 
@@ -80,7 +85,8 @@ export class AdoxioApplicationDataService {
   updateApplication(applicationData: any) {
     //call API
     //console.log("===== AdoxioApplicationDataService.updateApplication: ", applicationData);
-    return this.http.put(this.apiPath + applicationData.id, applicationData, { headers: this.jsonHeaders });
+    return this.http.put(this.apiPath + applicationData.id, applicationData, { headers: this.jsonHeaders })
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -90,7 +96,8 @@ export class AdoxioApplicationDataService {
   createApplication(applicationData: any) {
     //call API
     //console.log("===== AdoxioApplicationDataService.createApplication: ", applicationData);
-    return this.http.post(this.apiPath, applicationData, { headers: this.jsonHeaders });
+    return this.http.post(this.apiPath, applicationData, { headers: this.jsonHeaders })
+      .pipe(catchError(this.handleError));
   }
 
    private handleError(error: Response | any) {
@@ -115,7 +122,8 @@ export class AdoxioApplicationDataService {
     const headers = new Headers({});
     const attachmentURL = 'api/adoxioapplication/' + applicationId + '/attachments';
     const getFileURL = attachmentURL + '/' + documentType;
-    return this.http.get(getFileURL, { headers: headers });
+    return this.http.get(getFileURL, { headers: headers })
+      .pipe(catchError(this.handleError));
       //.map((data: Response) => { return <FileSystemItem[]>data.json() })
       //.subscribe((data) => {
       //  // convert bytes to KB
@@ -130,7 +138,8 @@ export class AdoxioApplicationDataService {
     const headers = new Headers({});
     const attachmentURL = `api/adoxioapplication/download-file/${encodeURIComponent(serverRelativeUrl)}`;
     return this.http.get(attachmentURL, { responseType: ResponseContentType.Blob })
-          .map(res => res.blob());
+      .map(res => res.blob())
+      .pipe(catchError(this.handleError));
 
   }
 }

@@ -7,6 +7,8 @@ import { throttleTime } from 'rxjs/operators';
 import { debug } from 'util';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Subscription } from 'rxjs';
+import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
+import { saveAs } from "file-saver";
 
 export interface DropdownOption {
   id: string;
@@ -32,7 +34,7 @@ export class FileUploaderComponent implements OnInit {
   public files: FileSystemItem[] = [];
 
   //TODO: move http call to a service
-  constructor(private http: Http) {
+  constructor(private http: Http, private adoxioApplicationDataService: AdoxioApplicationDataService) {
   }
 
   ngOnInit(): void {
@@ -45,8 +47,6 @@ export class FileUploaderComponent implements OnInit {
     this.getUploadedFileData();
   }
 
-
-
   public dropped(event: UploadEvent) {
     let files = event.files;
     for (var droppedFile of files) {
@@ -58,7 +58,7 @@ export class FileUploaderComponent implements OnInit {
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         let fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
+        //console.log(droppedFile.relativePath, fileEntry);
       }
     }
   }
@@ -118,11 +118,20 @@ export class FileUploaderComponent implements OnInit {
   }
 
   public fileOver(event) {
-    console.log(event);
+    //console.log(event);
   }
 
   public fileLeave(event) {
-    console.log(event);
+    //console.log(event);
   }
 
+  downloadApplicationPDF(url: string, fileName: string) {
+    if (this.applicationId) {
+      this.adoxioApplicationDataService.downloadFile(url)
+        .subscribe((res: Blob) => {
+          saveAs(res, fileName);
+        });
+    }
+  }
 }
+

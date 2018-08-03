@@ -390,12 +390,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // set the status to Terminated.
             MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
             {
+                //StatusCodeODataBind = ((int)AdoxioApplicationStatusCodes.Terminated).ToString()
                 Statuscode = (int)AdoxioApplicationStatusCodes.Terminated
             };
 
             try
             {
-                _dynamicsClient.Applications.Update(id, adoxioApplication);
+                _dynamicsClient.Applications.Update(id, patchRecord);
             }
             catch (OdataerrorException odee)
             {
