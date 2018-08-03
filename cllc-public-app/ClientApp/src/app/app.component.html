@@ -3,7 +3,7 @@
     <p>Please use Google Chrome, Firefox, Edge or IE 11</p>
   </section>
   
-  <div class="app-outer" *ngIf="!isIE10orLower()">
+  <div [ngClass]="{'not-lite': !isLiteVersion}" class="app-outer" *ngIf="!isIE10orLower()">
     <header class="app-header">
       <div class="nav-container top-menu row" style="padding-left: 30px; padding-right: 30px;">
         <section class="col-md-8 col-xs-12">
