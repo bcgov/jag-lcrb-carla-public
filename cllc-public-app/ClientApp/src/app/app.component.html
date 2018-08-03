@@ -36,7 +36,7 @@
   
     <div *ngIf="currentUser && currentUser.businessname && currentUser.isNewUser == true">
       <main class="app-content">
-        <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" [currentUser]="currentUser"></app-bceid-confirmation>
+        <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
       </main>
     </div>
   
