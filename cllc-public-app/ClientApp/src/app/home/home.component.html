@@ -67,36 +67,38 @@
   </div>
 </div>
 
-
-<div *ngIf="!isLiteVersion && isDataLoaded" class="extra-padding-left notlite">
-  <div class="row">
-    <div class="col-md-8 col-xs-12">
-      <!-- What you need message and survey button -->
-      <div class="jumbotron">
-        <h1>
-          What does an applicant need to apply for a cannabis licence?
-        </h1>
-        <h3>
-          Answer questions about the proposed business to receive a customized to-do list to prepare an application.
-        </h3>
-        <div class="row">
-          <div class="col-md-12 text-left">
-            <a class="globalButton" class="btn btn-primary" routerLink="prv" tabindex="3">
-              <strong>Start</strong>
-              <br>
-            </a>
+<div *ngIf="!isLiteVersion && isDataLoaded" style="background-color:#F2F2F2;">
+  <div class="extra-padding-left notlite" style="width: 99%; max-width: 1600px; margin: auto; background-color: #fff;">
+    <div class="row">
+      <div class="col-md-8 col-xs-12">
+        <!-- What you need message and survey button -->
+        <div class="jumbotron">
+          <h1>
+            What does an applicant need to apply for a cannabis licence?
+          </h1>
+          <h3>
+            Answer questions about the proposed business to receive a customized to-do list to prepare an application.
+          </h3>
+          <div class="row">
+            <div class="col-md-12 text-left">
+              <a class="globalButton" class="btn btn-primary" routerLink="prv" tabindex="3">
+                <strong>Start</strong>
+                <br>
+              </a>
+            </div>
           </div>
         </div>
+
+        <!-- Accordion -->
+        <app-accordion></app-accordion>
       </div>
 
-      <!-- Accordion -->
-      <app-accordion></app-accordion>
-    </div>
+      <!-- Newsletter -->
+      <div class="col-md-4 newsletter">
+        <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
+      </div>
 
-    <!-- Newsletter -->
-    <div class="col-md-4 newsletter">
-      <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
     </div>
-
   </div>
+
 </div>
