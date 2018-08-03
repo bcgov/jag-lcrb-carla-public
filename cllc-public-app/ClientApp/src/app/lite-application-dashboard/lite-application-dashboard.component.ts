@@ -124,7 +124,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
       cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.adoxioApplicationDataService.deleteApplication(applicationId).subscribe(
+          this.busy = this.adoxioApplicationDataService.cancelApplication(applicationId).subscribe(
             res => {
               this.displayApplications();
             });
