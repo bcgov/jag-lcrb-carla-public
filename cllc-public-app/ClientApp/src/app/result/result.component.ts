@@ -16,8 +16,8 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((data) => {
       this.clientId = data.data;
-      console.log(data);
-      console.log(this.clientId);
+      //console.log(data);
+      //console.log(this.clientId);
       if (this.clientId != null) {
         this.surveyDataService.getSurveyData(this.clientId)
           .then((surveyResult) => {
