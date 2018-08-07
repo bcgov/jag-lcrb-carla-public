@@ -231,10 +231,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (odee);
             }
 
+            // in case the job number is not there, try getting the record from the server.
+            if (adoxioApplication.AdoxioJobnumber == null)
+            {
+                _logger.LogError("AdoxioJobnumber is null, fetching record again.");
+                Guid id = Guid.Parse(adoxioApplication.AdoxioApplicationid);
+                adoxioApplication = await _dynamicsClient.GetApplicationById(id);
+            }
+
+            if (adoxioApplication.AdoxioJobnumber == null)
+            {
+                _logger.LogError("Unable to get the Job Number for the Application.");
+                throw new Exception("Error creating Licence Application.");
+            }
+
             // create a SharePointDocumentLocation link
-
             string folderName = GetApplicationFolderName(adoxioApplication);
-
             string name = adoxioApplication.AdoxioJobnumber + " Files";
 
             // Create the folder
@@ -249,7 +261,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 Relativeurl = folderName,
                 Description = "Application Files",
-                Name = name                
+                Name = name
             };
            
 
