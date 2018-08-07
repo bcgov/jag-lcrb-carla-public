@@ -33,7 +33,8 @@
   </ul>
   <hr>
   <section>
-    <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}">
+    <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
+      <div [ngBusy]="busy"></div>
       <label for="">Establishment Name</label>
       <br>
 
