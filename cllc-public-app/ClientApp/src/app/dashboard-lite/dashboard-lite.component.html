@@ -62,139 +62,17 @@
         <label *ngIf="orgType !== 'Sole Proprietorship'" for="">ASSOCIATES</label>
         <label *ngIf="orgType === 'Sole Proprietorship'" for="">SECURITY SCREENING</label>
         <br>
-        <section *ngIf="orgType === 'Private Corporation'">
-          <p>An applicant that is a Private Corporation may have associates that are required to consent to security screening
-            and financial integrity assessments as part of the application for a non-medical cannabis retail store licence.
-            Applicants are required to provide associates with the Parcel Identifier (PID) or proposed retail store location
-            address.
+        <section *ngIf="orgType !== 'Sole Proprietorship'">
+          <p>
+            On or after August 16th, you will be contacted to reach out to your associates with instructions to begin their security screening and financial integrity assessment.
           </p>
-          <span style="font-style: italic;" class="li-header">Parcel Identifier (PID):</span>
-          <br>
-          <ul>
-            <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
-            <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents,
-              on the lease, or obtained from the landlord.</li>
-          </ul>
-          <p>Applicants should direct associates to the
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions for submitting documentation.</p>
-          <p>Associates will submit documentation for security screening and financial integrity assessments directly to the
-            LCRB. Applicants should not delay submitting a completed application form and business financial integrity form.
-            It is the applicants responsibility to direct all associates to
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">the link provided</a>.</p>
-          <span class="li-header">Associates of Private Corporation include:</span>
-          <br>
-          <ul>
-            <li>Directors and officers</li>
-            <li>Generally, shareholders holding at least 10% or more of voting shares (the Liquor and Cannabis Regulation Branch
-              has the discretion to screen shareholders holding less than 10%)</li>
-          </ul>
-          <p>Corporations, societies and/or partnerships that are shareholders in the Private Corporation are considered associates
-            of the Applicant and are required to submit an associate organization assessment form.</p>
-        </section>
-        <section *ngIf="orgType === 'Public Corporation'">
-          <p>An applicant that is a Public Corporation must submit a completed business financial integrity form. Please download
-            and submit the business financial integrity form with the completed application for a non-medical cannabis retail
-            store licence.
-          </p>
-          <span style="font-style: italic;" class="li-header">Parcel Identifier (PID):</span>
-          <br>
-          <ul>
-            <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
-            <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents,
-              on the lease, or obtained from the landlord.</li>
-          </ul>
-
-          <p>Applicants should direct associates to the
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions for submitting documentation.</p>
-
-          <p>Associates will submit documentation for security screening and financial integrity assessments directly to the
-            LCRB. Applicants should not delay submitting a completed application form and business financial integrity form.
-            It is the applicants responsibility to direct all associates to
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">the link provided</a>.</p>
-          <span class="li-header">Associates of Public Corporation include:</span>
-          <br>
-          <ul>
-            <li>Directors and officers</li>
-            <li>Shareholders with a 10% or greater interest in the company</li>
-          </ul>
-          <p>Corporations, societies and/or partnerships that are shareholders in the Public Corporation are considered associates
-            of the Applicant and are required to submit an associate organization assessment form.
-          </p>
-        </section>
-        <section *ngIf="orgType === 'Partnership'">
-          <p>An applicant that is a Partnership may have associates that are required to consent to security screening and financial
-            integrity assessments as part of the application for a non-medical cannabis retail store licence. Applicants
-            are required to provide associates with the Parcel Identifier (PID) or proposed retail store location address.
-          </p>
-          <span style="font-style: italic;" class="li-header">Parcel Identifier (PID):</span>
-          <br>
-          <ul>
-            <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
-            <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents,
-              on the lease, or obtained from the landlord.</li>
-          </ul>
-          <p>Applicants should direct associates to the
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions for submitting documentation.</p>
-
-          <p>Associates will submit documentation for security screening and financial integrity assessments directly to the
-            LCRB. Applicants should not delay submitting a completed application form and business financial integrity form.
-            It is the applicants responsibility to direct all associates to
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">the link provided</a>.</p>
-          <span class="li-header">Associates of Partnership include:</span>
-          <br>
-          <ul>
-            <li>All partners</li>
-            <li>If limited partnership, limited partners holding at least a 10% interest in the partnership (the Liquor and Cannabis
-              Regulation Branch has the discretion to screen partners holding less than 10%)</li>
-          </ul>
-          <p>Corporations, societies and/or partnerships that are themselves partners in the Partnership are considered associates
-            of the Applicant and are required to submit an associate organization assessment form.</p>
         </section>
         <section *ngIf="orgType === 'Sole Proprietorship'">
           <p>An applicant that is a Sole Proprietorship must consent to a security screening as part of the application for
             a non-medical cannabis retail store licence.
           </p>
-          <p>Please visit the
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions for submitting documentation
-            for the security screening directly to the LCRB.</p>
-        </section>
-        <section *ngIf="orgType === 'Society'">
-          <p>An applicant that is a Society may have associates that are required to consent to security screening and financial
-            integrity assessments as part of the application for a non-medical cannabis retail store licence. Applicants
-            are required to provide associates with the Parcel Identifier (PID) or proposed retail store location address.
-          </p>
-          <span style="font-style: italic;" class="li-header">Parcel Identifier (PID):</span>
-          <br>
-          <ul>
-            <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
-            <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents,
-              on the lease, or obtained from the landlord.</li>
-          </ul>
-          <p>Applicants should direct associates to the
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions for submitting documentation.</p>
-
-          <p>Associates will submit documentation for security screening and financial integrity assessments directly to the
-            LCRB. Applicants should not delay submitting a completed application form and business financial integrity form.
-            It is the applicants responsibility to direct all associates to
-            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-              target="_blank">the link provided</a>.</p>
-          <span class="li-header">Associates of Society include:</span>
-          <br>
-          <ul>
-            <li>Directors and officers</li>
-            <li>Senior management</li>
-          </ul>
-          <br>
-          <p>Please note: While they are not normally required as part of the licence application process, the Liquor and Cannabis
-            Regulation Branch reserves the right to ask for a society’s membership lists.
+          <p>
+            On or after August 16th, you will be contacted with instructions to commence with your individual security screening.
           </p>
         </section>
       </section>
