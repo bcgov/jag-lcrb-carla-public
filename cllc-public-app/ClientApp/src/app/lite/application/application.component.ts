@@ -13,6 +13,7 @@ import { PaymentDataService } from '../../services/payment-data.service';
 import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
 import { ConfirmationDialog } from '../../lite-application-dashboard/lite-application-dashboard.component';
 import { AdoxioApplication } from '../../models/adoxio-application.model';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-application',
@@ -132,26 +133,35 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     return isError;
   }
 
+  /**
+   * Submit the application for payment
+   * */
   submit_application() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
+    } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
+      this.submitPayment();
     }
     else {
       this.save(true).subscribe((result: boolean) => {
         if (result) {
-          this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
-            res => {
-              const jsonUrl = res.json();
-              window.location.href = jsonUrl['url'];
-              return jsonUrl['url'];
-            },
-            err => {
-              console.log('Error occured');
-            }
-          );
+          this.submitPayment();
         }
       });
     }
+  }
+
+  /**
+   * Redirect to payment processing page (Express Pay / Bambora service)
+   * */
+  private submitPayment() {
+    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(res => {
+      const jsonUrl = res.json();
+      window.location.href = jsonUrl['url'];
+      return jsonUrl['url'];
+    }, err => {
+      console.log('Error occured');
+    });
   }
 
   isValid(): boolean {
@@ -170,7 +180,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * 
+   * Dialog to confirm the application cancellation (status changed to "Termindated")
    */
   cancelApplication() {
 
