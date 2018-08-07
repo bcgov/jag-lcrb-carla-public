@@ -419,8 +419,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             MemoryStream ms = new MemoryStream();
             fileData.CopyTo(ms);
             Byte[] data = ms.ToArray();
-
-            endpointRequest.Content = new ByteArrayContent(data);
+            ByteArrayContent byteArrayContent = new ByteArrayContent(data);
+            byteArrayContent.Headers.Add(@"content-length", data.Length.ToString());
+            endpointRequest.Content = byteArrayContent;
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
