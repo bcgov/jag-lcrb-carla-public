@@ -32,6 +32,7 @@ import { StoreInformationComponent } from './license-application/tabs/store-info
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 import { ApplicationComponent } from './lite/application/application.component';
+import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'dashboard-lite',
     component: DashboardLiteComponent
+  },
+  {
+    path: 'associates-lite',
+    component: AssociatesDashboardComponent
   },
   {
     path: 'application-lite/:applicationId',
