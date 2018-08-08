@@ -520,16 +520,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
-        [HttpGet("download-file/{serverRelativeUrl}")]
-        public async Task<IActionResult> DownloadFile(string serverRelativeUrl)
+        [HttpGet("download-file/{applicationId}")]
+        public async Task<IActionResult> DownloadFile(string applicationId, [FromQuery]string serverRelativeUrl)
         {
             // get the file.
-            if (string.IsNullOrEmpty(serverRelativeUrl))
+            if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(applicationId))
             {
                 return BadRequest();
             }
             else
             {
+                var application = await _dynamicsClient.GetApplicationById(Guid.Parse(applicationId));
+
+                if (application == null)
+                {
+                    return new NotFoundResult();
+                }
+
+                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
+                {
+                    return new NotFoundResult();
+                }
 
                 byte[] fileContents = await _sharePointFileManager.DownloadFile(serverRelativeUrl);
                 return new FileContentResult(fileContents, "application/octet-stream")
