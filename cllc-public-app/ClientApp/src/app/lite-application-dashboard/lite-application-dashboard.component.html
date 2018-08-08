@@ -64,7 +64,7 @@
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.applicationFormFileUrl, element.fileName)">{{element.establishmentName}}</a>
+              <a href="javascript: void(0)" (click)="downloadApplicationPDF(element.id, element.applicationFormFileUrl, element.fileName)">{{element.establishmentName}}</a>
               <br /> Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
               <br /> Ref. {{element.name}}
             </mat-cell>
