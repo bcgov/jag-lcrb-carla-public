@@ -67,7 +67,9 @@
       <alert type="danger">
         <strong>{{paymentTransactionTitle}}</strong>
         <br />
-        <br />{{paymentTransactionMessage}}</alert>
+        <br />
+        <div [innerHTML]="paymentTransactionMessage"></div>
+      </alert>
     </div>
     <div *ngIf="loaded" style="padding-top:20px">
       <p><a class="" routerLink="/dashboard-lite">
