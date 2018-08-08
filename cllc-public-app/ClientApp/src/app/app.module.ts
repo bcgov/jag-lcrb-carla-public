@@ -124,6 +124,7 @@ import { ClientConfigDataService } from './services/client-config.service';
 import { ApplicationComponent } from './lite/application/application.component';
 import { LiteApplicationDashboardComponent, ConfirmationDialog } from './lite-application-dashboard/lite-application-dashboard.component';
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
+import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -180,7 +181,8 @@ import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-a
     ApplicationComponent,
     LiteApplicationDashboardComponent,
     ConfirmationDialog,
-    TermsAndConditionsComponent
+    TermsAndConditionsComponent,
+    AssociatesDashboardComponent
   ],
   imports: [
     BrowserModule,
