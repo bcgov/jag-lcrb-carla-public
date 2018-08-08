@@ -8,6 +8,8 @@
       <a href="javascript:void(0)" [ngClass]="{'no-drop': disableFileUpload()}" (click)="disableFileUpload() || fileBrowser.click()">BROWSE</a>.
       <br>
       <span style="color: #A9A9A9">{{fileTypes}}</span>
+      <br>
+      <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
       <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowser>
     </div>
   </file-drop>

@@ -3,7 +3,7 @@ import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry 
 import { Http, Headers, Response } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Observable, Subject } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
+import { throttleTime, catchError } from 'rxjs/operators';
 import { debug } from 'util';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Subscription } from 'rxjs';
@@ -84,7 +84,8 @@ export class FileUploaderComponent implements OnInit {
     //url = this.attachmentURL + this.applicationId + "/attachments";
     this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
-    });
+    },
+      err => alert('Failed to upload file'));
   }
 
   getUploadedFileData() {
@@ -97,10 +98,11 @@ export class FileUploaderComponent implements OnInit {
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {
-          entry.size = entry.size / 1024
+          entry.size = Math.ceil(entry.size / 1024)
         });
         this.files = data;
-      });
+      },
+        err => alert('Failed to get files'));
   }
 
   deleteFile(relativeUrl: string) {
@@ -110,7 +112,8 @@ export class FileUploaderComponent implements OnInit {
     const queryParams = `?serverRelativeUrl=${encodeURIComponent(relativeUrl)}`;
     this.busy = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
-    });
+    },
+      err => alert('Failed to delete file'));
   }
 
   disableFileUpload(): boolean {
@@ -127,10 +130,11 @@ export class FileUploaderComponent implements OnInit {
 
   downloadApplicationPDF(url: string, fileName: string) {
     if (this.applicationId) {
-      this.adoxioApplicationDataService.downloadFile(url)
+      this.adoxioApplicationDataService.downloadFile(url, this.applicationId)
         .subscribe((res: Blob) => {
           saveAs(res, fileName);
-        });
+        },
+          err => alert('Failed to download file'));
     }
   }
 }
