@@ -127,7 +127,7 @@ export class FileUploaderComponent implements OnInit {
 
   downloadApplicationPDF(url: string, fileName: string) {
     if (this.applicationId) {
-      this.adoxioApplicationDataService.downloadFile(url)
+      this.adoxioApplicationDataService.downloadFile(url, this.applicationId)
         .subscribe((res: Blob) => {
           saveAs(res, fileName);
         });
