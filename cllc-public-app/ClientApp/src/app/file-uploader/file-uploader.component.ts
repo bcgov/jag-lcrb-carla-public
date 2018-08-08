@@ -97,7 +97,7 @@ export class FileUploaderComponent implements OnInit {
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {
-          entry.size = entry.size / 1024
+          entry.size = Math.ceil(entry.size / 1024)
         });
         this.files = data;
       });
