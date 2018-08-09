@@ -199,12 +199,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                 FileDetailsList searchResult = responseResult.ToObject<FileDetailsList>();
                 //filter by parameter documentType
                 int fileDoctypeEnd = searchResult.Name.IndexOf("__");
-                string fileDoctype = searchResult.Name.Substring(0, fileDoctypeEnd);
-                if (fileDoctype == documentType)
+                if (fileDoctypeEnd > -1)
                 {
-                    searchResult.DocumentType = documentType;
-                    fileDetailsList.Add(searchResult);
-                }
+                    string fileDoctype = searchResult.Name.Substring(0, fileDoctypeEnd);
+                    if (fileDoctype == documentType)
+                    {
+                        searchResult.DocumentType = documentType;
+                        fileDetailsList.Add(searchResult);
+                    }
+                }                    
             }
 
             return fileDetailsList;
@@ -460,7 +463,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             var webRequest = System.Net.WebRequest.Create(apiEndpoint + "web/GetFileByServerRelativeUrl('" + url +"')/$value");            
             HttpWebRequest request = (HttpWebRequest)webRequest;
             request.PreAuthenticate = true;
-            request.Headers.Add ("Authorization", authenticationResult.CreateAuthorizationHeader());
+            request.Headers.Add ("Authorization", authorization);
             request.Accept = "*";
                         
             // we need to add authentication to a HTTP Client to fetch the file.
