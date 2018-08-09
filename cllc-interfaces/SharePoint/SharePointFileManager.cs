@@ -199,12 +199,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                 FileDetailsList searchResult = responseResult.ToObject<FileDetailsList>();
                 //filter by parameter documentType
                 int fileDoctypeEnd = searchResult.Name.IndexOf("__");
-                string fileDoctype = searchResult.Name.Substring(0, fileDoctypeEnd);
-                if (fileDoctype == documentType)
+                if (fileDoctypeEnd > -1)
                 {
-                    searchResult.DocumentType = documentType;
-                    fileDetailsList.Add(searchResult);
-                }
+                    string fileDoctype = searchResult.Name.Substring(0, fileDoctypeEnd);
+                    if (fileDoctype == documentType)
+                    {
+                        searchResult.DocumentType = documentType;
+                        fileDetailsList.Add(searchResult);
+                    }
+                }                    
             }
 
             return fileDetailsList;
