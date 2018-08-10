@@ -49,6 +49,10 @@ export class FileUploaderComponent implements OnInit {
 
   public dropped(event: UploadEvent) {
     let files = event.files;
+    if (files.length > 1 && !this.multipleFiles) {
+      alert('Only one file can be uploaded here');
+      return;
+    }
     for (var droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         let fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -135,6 +139,16 @@ export class FileUploaderComponent implements OnInit {
           saveAs(res, fileName);
         },
           err => alert('Failed to download file'));
+    }
+  }
+
+  browseFiles(browserMultiple, browserSingle) {
+    if (!this.disableFileUpload()) {
+      if (this.multipleFiles) {
+        browserMultiple.click()
+      } else {
+        browserSingle.click();
+      }
     }
   }
 }
