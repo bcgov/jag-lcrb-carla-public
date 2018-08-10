@@ -106,39 +106,84 @@
                   },
                   {
                     "name": "DATABASE_SERVICE_NAME",
-                    "value": "${DATABASE_SERVICE_NAME}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "database-service-name",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_NATIVE_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-native-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
                     "name": "PathBase",
-                    "value": "${BASE_PATH}"
-                  },
-                  {
-                    "name": "testEmail",
-                    "value": "${TEST_EMAIL}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "base-path",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
                     "name": "SMTP_HOST",
-                    "value": "${SMTP_HOST}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "smtp-host",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SSG_USERNAME",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "ssg-username",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SSG_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "ssg-password",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
                     "name": "ENCRYPTION_KEY",
-                    "value": "${ENCRYPTION_KEY}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "encryption-key",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
                     "name": "BASE_URI",
-                    "value": "${BASE_URI}"
-                  },
-                  {
-                    "name": "BASE_PATH",
-                    "value": "${BASE_PATH}"
-                  },
-                  {
-                    "name": "DYNAMICS_ODATA_URI1",
-                    "value": "${DYNAMICS_ODATA_URI1}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "base-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
                     "name": "SHAREPOINT_SERVER_APPID_URI",
-                    "value": "${SHAREPOINT_SERVER_APPID_URI}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-server-appid-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
                     "name": "SHAREPOINT_WEBNAME",
@@ -161,20 +206,124 @@
                     "value": "${SHAREPOINT_CERTIFICATE_FILENAME}"
                   },
                   {
-                    "name": "SSG_USERNAME1",
-                    "value": "${SSG_USERNAME1}"
-                  },
-                  {
-                    "name": "SSG_PASSWORD1",
-                    "value": "${SSG_PASSWORD1}"
-                  },
-                  {
                     "name": "REDIS_SERVER",
-                    "value": "${REDIS_SERVER}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "redis-server",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
                   },
                   {
                     "name": "DYNAMICS_ODATA_URI",
-                    "value": "${DYNAMICS_ODATA_URI}"
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEID_SERVICE_SVCID",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bceid-service-svcid",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEID_SERVICE_URL",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bceid-service-url",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEID_SERVICE_USER",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bceid-service-user",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEID_SERVICE_PASSWD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bceid-service-passwd",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEP_SERVICE_URL",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bcep-service-url",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEP_MERCHANT_ID",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bcep-merchant-id",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEP_HASH_KEY",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bcep-hash-key",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "BCEP_CONF_PATH",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "bcep-conf-path",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SHAREPOINT_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SHAREPOINT_NATIVE_BASE_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-native-base-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SHOW_LOGIN",
+                    "value": "${SHOW_LOGIN}"
+                  },
+                  {
+                    "name": "IS_LITE_VERSION",
+                    "value": "${IS_LITE_VERSION}"
+                  },
+                  {
+                    "name": "DASHBOARD_LITE",
+                    "value": "${DASHBOARD_LITE}"
                   }
                 ],
                 "resources": {
@@ -371,19 +520,6 @@
       "value": "2Gi"
     },
     {
-      "name": "DATABASE_SERVICE_NAME",
-      "displayName": "Database service name",
-      "description": "Database service name",
-      "value": "mssql"
-    },
-    {
-      "description": "OpenShift cluster private IP range in CIDR notation, used by Nginx ngx_http_realip_module.",
-      "displayName": "OpenShift Cluster IP Range",
-      "name": "REAL_IP_FROM",
-      "required": true,
-      "value": "172.51.0.0/16"
-    },
-    {
       "description": "The endpoint used for SiteMinder routed access to the application.",
       "displayName": "SiteMinder Application Domain",
       "name": "SITEMINDER_APPLICATION_DOMAIN",
@@ -396,110 +532,71 @@
       "value": "lclb-cllc-dev.pathfinder.gov.bc.ca"
     },
     {
-      "description": "The base path for the application, e.g., /cannabislicensing, if left blank a value will be defaulted.",
-      "displayName": "Base Path",
-      "name": "BASE_PATH",
-      "required": true,
-      "value": "/cannabislicensing"
-    },
-    {
-      "description": "Field for a test email.",
-      "displayName": "Test Email",
-      "name": "TEST_EMAIL"
-    },
-    {
-      "description": "URL for SMTP Host, e.g., apps.smtp.gov.bc.ca, if left blank a value will be defaulted.",
-      "displayName": "SMTP Host",
-      "name": "SMTP_HOST",
-      "required": true,
-      "value": "apps.smtp.gov.bc.ca"
-    },
-    {
-      "description": "Encryption key",
-      "displayName": "Encryption Key",
-      "name": "ENCRYPTION_KEY",
-      "required": true
-    },
-    {
-      "description": "The base URI for the application, e.g., https://dev.justice.gov.bc.ca, if left blank a value will be defaulted.",
-      "displayName": "Base URI",
-      "name": "BASE_URI",
-      "required": true,
-      "value": "https://dev.justice.gov.bc.ca"
-    },
-    {
-      "description": "URI for Dynamics OData, e.g., https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/, if left blank a value will be defaulted.",
-      "displayName": "Dynamics OData URI",
-      "name": "DYNAMICS_ODATA_URI1",
-      "required": true,
-      "value": "https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/"
-    },
-    {
-      "description": "URI for Sharepoint server, e.g., https://bcgovtrial.sharepoint.com/, if left blank a value will be defaulted.",
-      "displayName": "Sharepoint Server URI",
-      "name": "SHAREPOINT_SERVER_APPID_URI",
-      "required": true,
-      "value": "https://bcgovtrial.sharepoint.com/"
-    },
-    {
       "description": "Webname for Sharepoint, e.g., cannabisdev, if left blank a value will be defaulted.",
       "displayName": "Sharepoint Webname",
       "name": "SHAREPOINT_WEBNAME",
-      "required": true,
+      "required": false,
       "value": "cannabisdev"
     },
     {
-      "description": "Sharepoint Tennant ID, e.g., bcgovtrial.onmicrosoft.com, if left blank a value will be defaulted.",
-      "displayName": "Sharepoint AAD Tennant ID",
+      "description": "Sharepoint Tenant ID and Dynamics Tenant ID, e.g., bcgovtrial.onmicrosoft.com, if left blank a value will be defaulted.",
+      "displayName": "AAD Tennant ID",
       "name": "SHAREPOINT_AAD_TENANTID",
-      "required": true,
+      "required": false,
       "value": "bcgovtrial.onmicrosoft.com"
     },
     {
       "description": "Sharepoint Clien ID",
       "displayName": "Sharepoint Client ID",
       "name": "SHAREPOINT_CLIENT_ID",
-      "required": true
+      "required": false
     },
     {
       "description": "Sharepoint Certificate Password",
       "displayName": "Sharepoint Certificate Password",
       "name": "SHAREPOINT_CERTIFICATE_PASSWORD",
-      "required": true
+      "required": false
     },
     {
       "description": "Filename for BCGovTrial.pfx, e.g., /sharepointcert/BCGovTrial.pfx, if left blank a value will be defaulted.",
       "displayName": "Sharepoint Certificate Filename",
       "name": "SHAREPOINT_CERTIFICATE_FILENAME",
-      "required": true,
+      "required": false,
       "value": "/sharepointcert/BCGovTrial.pfx"
     },
     {
-      "description": "Username for SSG, e.g., clb_uat, if left blank a value will be defaulted.",
-      "displayName": "SSG Username",
-      "name": "SSG_USERNAME1",
+      "description": "Boolean that shows login, e.g., true, if left blank a value will be defaulted.",
+      "displayName": "Show login",
+      "name": "SHOW_LOGIN",
       "required": true,
-      "value": "clb_uat"
+      "value": "true"
     },
     {
-      "description": "Password for SSG.",
-      "displayName": "SSG Password",
-      "name": "SSG_PASSWORD1",
-      "required": true
+      "description": "Boolean that shows CARLA Lite, e.g., false, if left blank a value will be defaulted.",
+      "displayName": "Is lite version",
+      "name": "IS_LITE_VERSION",
+      "required": true,
+      "value": "false"
     },
     {
-      "description": "URL for redis server, e.g., localhost:6379, if left blank a value will be defaulted.",
-      "displayName": "Redis Server",
-      "name": "REDIS_SERVER",
+      "description": "Boolean that shows Dashboard Lite for CARLA lite, e.g., false, if left blank a value will be defaulted.",
+      "displayName": "Dashboard lite",
+      "name": "DASHBOARD_LITE",
       "required": true,
-      "value": "localhost:6379"
+      "value": "false"
     },
     {
-      "description": "URI for Dynamics OData, e.g., https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/, if left blank a value will be defaulted.",
-      "displayName": "Dynamics OData URI",
-      "name": "DYNAMICS_ODATA_URI",
+      "name": "DATABASE_SERVICE_NAME",
+      "displayName": "Database service name",
+      "description": "Database service name",
+      "value": "mssql"
+    },
+    {
+      "name": "SECRET_RESOURCE_NAME",
+      "displayName": "Secret resource name",
+      "description": "Secret resource name",
       "required": true,
-      "value": "https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"
+      "value": "cllc-public-preprod"
     }
   ]
 }
