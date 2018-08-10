@@ -18,6 +18,7 @@ import { PaymentDataService } from '../services/payment-data.service';
 export class DashboardLiteComponent implements OnInit {
   public currentUser: User;
   applicationId: string;
+  submittedApplications = 8;
 
   contactId: string = null;
   account: DynamicsAccount;
@@ -47,6 +48,9 @@ export class DashboardLiteComponent implements OnInit {
         }
 
       });
+
+    this.applicationDataService.getSubmittedApplicationCount()
+      .then(value => this.submittedApplications = value);
   }
 
   verify_payment() {
