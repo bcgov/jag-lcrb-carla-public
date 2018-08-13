@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-
-namespace Gov.Lclb.Cllb.Public.Models
+﻿namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// ViewModel transforms.

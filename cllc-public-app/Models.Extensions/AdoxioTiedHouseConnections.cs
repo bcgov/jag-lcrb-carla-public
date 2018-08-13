@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.ViewModels;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
