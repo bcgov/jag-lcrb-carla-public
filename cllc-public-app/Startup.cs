@@ -208,30 +208,7 @@ namespace Gov.Lclb.Cllb.Public
                 return client;
             }));
 
-
-            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
-
-            // determine if we have a SSG connection.
-
-            if (string.IsNullOrEmpty (ssgUsername) || string.IsNullOrEmpty(ssgPassword))
-            {
-                
-                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", authenticationResult.CreateAuthorizationHeader());
-            }
-            else
-            {
-                // authenticate using the SSG.                
-                string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(ssgUsername + ":" + ssgPassword));
-
-                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", "Basic " + credentials);
-            }
-
-            
-
-            services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
-
+           
             // add SharePoint.
 
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
@@ -287,8 +264,7 @@ namespace Gov.Lclb.Cllb.Public
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
-                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>();
-                    Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System>();
+                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>();                    
 
                     connectionString = context.Database.GetDbConnection().ConnectionString;
 
@@ -299,7 +275,7 @@ namespace Gov.Lclb.Cllb.Public
                     // run the database seeders
                     log.LogInformation("Adding/Updating seed data ...");
 
-                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, system, distributedCache);
+                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, distributedCache);
                     seederFactory.Seed((AppDbContext)context);
                     log.LogInformation("Seeding operations are complete.");
                 }

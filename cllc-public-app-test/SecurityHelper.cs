@@ -1,22 +1,16 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using Xunit;
 using System.Net.Http.Headers;
 using System.Text;
-using Newtonsoft.Json;
-using System.Net;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Public.Models;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-	public class SecurityHelper
+    public class SecurityHelper
 	{
 		public static async Task<ViewModels.Account> GetAccountRecord(HttpClient _client, string id, bool expectSuccess)
 		{
