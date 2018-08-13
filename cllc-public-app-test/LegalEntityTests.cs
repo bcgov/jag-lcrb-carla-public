@@ -1,5 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
 using System;
@@ -363,15 +362,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity = new MicrosoftDynamicsCRMadoxioLegalentity()
+            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = new ViewModels.AdoxioLegalEntity()
             {
-                AdoxioLegalentityid = Guid.NewGuid().ToString(),
-                AdoxioLegalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                AdoxioPosition = (int?)ViewModels.PositionOptions.Director,
-                AdoxioName = initialName
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                isDirector = true,
+                name = initialName
             };
-
-            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
+            
 
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_legalentity);
 
@@ -518,14 +515,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create a Legal Entity
 
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-            MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity = new MicrosoftDynamicsCRMadoxioLegalentity()
+            
+            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = new ViewModels.AdoxioLegalEntity()
             {
-                AdoxioLegalentityid = Guid.NewGuid().ToString(),
-                AdoxioLegalentitytype = (int?)ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                AdoxioPosition = (int?)ViewModels.PositionOptions.Director,
-                AdoxioName = initialName
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                isDirector = true,
+                name = initialName
             };
-            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = adoxio_legalentity.ToViewModel();
+
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_legalentity);
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
             var response = await _client.SendAsync(request);
