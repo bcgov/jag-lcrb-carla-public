@@ -13,6 +13,9 @@ namespace Gov.Lclb.Cllb.Public.Utils
         public const int HttpDelete = 1003;
 
         public const int Get = 2000;
+        public const int Save = 2001;
+        public const int Update = 2002;
+        public const int Delete = 2003;
 
         public const int NotFound = 4000;
 
