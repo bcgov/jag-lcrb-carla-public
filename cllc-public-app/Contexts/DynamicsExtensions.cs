@@ -176,8 +176,17 @@ namespace Gov.Lclb.Cllb.Interfaces
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
 
             MicrosoftDynamicsCRMaccount result = null;
-            var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-            result = accountResponse.Value.FirstOrDefault();
+            try
+            {
+                var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
+                result = accountResponse.Value.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                result = null;
+            }
+
             // get the primary contact.
             if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
             {
