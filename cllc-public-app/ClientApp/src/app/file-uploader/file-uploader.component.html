@@ -5,12 +5,14 @@
     <div style="text-align: center">
       <h3></h3>
       <br>
+      <br>
       <span>TO UPLOAD DOCUMENTS DRAG FILE(S) HERE OR </span>
       <a href="javascript:void(0)" [ngClass]="{'no-drop': disableFileUpload()}" (click)="browseFiles(fileBrowserM, fileBrowser)">BROWSE</a>.
       <br>
       <span style="color: #A9A9A9">{{fileTypes}}</span>
       <br>
       <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
+      <br>
       <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowserM>
       <input (change)="onBrowserFileSelect($event)" type="file" style="visibility: hidden;" #fileBrowser>
     </div>

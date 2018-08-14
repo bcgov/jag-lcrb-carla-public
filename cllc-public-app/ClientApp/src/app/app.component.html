@@ -5,7 +5,7 @@
   
   <div [ngClass]="{'not-lite': !isLiteVersion}" class="app-outer" *ngIf="!isIE10orLower()">
     <header class="app-header">
-      <div class="nav-container top-menu row" style="padding-left: 30px; padding-right: 30px;">
+      <div class="top-menu row" style="padding-left: 30px; padding-right: 30px;">
         <section class="col-md-8 col-xs-12">
           <a href="http://www2.gov.bc.ca/" tabindex="1">
             <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
@@ -44,7 +44,7 @@
       <!-- /NAVBAR -->
       <div class="navigationRibbon" *ngIf="!currentUser">
         <div class="level2Navigation">
-          <div class="nav-container">
+          <div class="">
             <nav class="navbar navbar-expand-md navbar-light justify-content-end" style="margin-bottom: 0; width: 100%;">
               <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" #toggleButton>
@@ -80,17 +80,17 @@
   
       <section *ngIf="currentUser && !isAssociate" class="navigationRibbon">
         <div class="level2Navigation ">
-          <div class="nav-container">
+          <div class="">
             <nav class="navbar navbar-expand-md navbar-light justify-content-end" style="margin-bottom: 0;  width: 100%;">
               <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#loggedInMenu" aria-controls="loggedInMenu"
-                aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation" #toggleButtonLoggedIn>
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="loggedInMenu">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                     <!-- <a *ngIf="!isLiteVersion" class="nav-link" routerLink="/dashboard">Dashboard</a> -->
-                    <a class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
+                    <a (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
                   </li>
                   <!-- <li *ngIf="!isLiteVersion" class="nav-item dropdown">
                     <div ngbDropdown class="d-inline-block">
