@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + loginAs);
             var response = await _client.SendAsync(request);
             string _discard = await response.Content.ReadAsStringAsync();
-            //Assert.Equal(HttpStatusCode.Found, response.StatusCode);
+            Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
             
         }
 		
@@ -121,7 +121,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			var request = new HttpRequestMessage(HttpMethod.Get, "/login/cleartoken");
             var response = await _client.SendAsync(request);
 			string _discard = await response.Content.ReadAsStringAsync();
-            // Assert.Equal(HttpStatusCode.Found, response.StatusCode);
+			Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
 			_client.DefaultRequestHeaders.Remove("DEV-USER");
 		}
 
