@@ -44,20 +44,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current")]
         public async Task<IActionResult> GetCurrentAccount()
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             ViewModels.Account result = null;
 
             // get the current user.
             string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
-            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + Json(userSettings));
+            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
 
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
                 MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(new Guid(accountId));
-                _logger.LogDebug(LoggingEvents.HttpGet, "Dynamics Account: " + Json(account));
+                _logger.LogDebug(LoggingEvents.HttpGet, "Dynamics Account: " + JsonConvert.SerializeObject(account));
 
                 if (account == null)
                 {
@@ -77,7 +77,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            _logger.LogDebug(LoggingEvents.HttpGet, "Current Account Result: " + Json(result));
+            _logger.LogDebug(LoggingEvents.HttpGet, "Current Account Result: " +
+               JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return Json(result);
         }
 
@@ -85,12 +86,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("bceid")]
         public async Task<IActionResult> GetCurrentBCeIDBusiness()
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + Json(userSettings));
+            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
 
             // query the BCeID API to get the business record.
             var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
@@ -101,7 +102,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            _logger.LogDebug(LoggingEvents.HttpGet, "BCeID business record: " + Json(business));
+            _logger.LogDebug(LoggingEvents.HttpGet, "BCeID business record: " +
+                JsonConvert.SerializeObject(business, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return Json(business);
         }
 
@@ -113,8 +115,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccount(string id)
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
-            _logger.LogDebug(LoggingEvents.HttpGet, "id: {id}");
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "id: " + id);
 
             Boolean userAccessToAccount = false;
             ViewModels.Account result = null;
@@ -129,10 +131,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     userAccessToAccount = DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient);
                 }
-                catch (Exception e)
+                catch (OdataerrorException odee)
                 {
                     _logger.LogError(LoggingEvents.Error, "Error while checking if current user has access to account.");
-                    _logger.LogError(LoggingEvents.Error, e.StackTrace);
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
                 }
 
                 if (!userAccessToAccount)
@@ -155,21 +160,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-
-            _logger.LogDebug(LoggingEvents.HttpGet, "Account result: " + Json(result));
+            _logger.LogDebug(LoggingEvents.HttpGet, "Account result: " +
+                JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return Json(result);
         }
 
         [HttpGet("business-profile/{accountId}")]
         public async Task<IActionResult> GetBusinessProfile(string accountId)
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "accountId: {accountId}");
 
             List<LegalEntity> legalEntities;
 
             var account = (await _dynamicsClient.GetAccountById(new Guid(accountId))).ToViewModel();
-            _logger.LogDebug(LoggingEvents.HttpGet, "Account details: " + Json(account));
+            _logger.LogDebug(LoggingEvents.HttpGet, "Account details: " + JsonConvert.SerializeObject(account));
 
             // get legal entities
             var entityFilter = $"_adoxio_account_value eq {accountId}";
@@ -202,10 +207,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         })
                         .ToList();
             }
-            catch (Exception e)
+            catch (OdataerrorException odee)
             {
                 _logger.LogError(LoggingEvents.Error, "Error getting legal entities for the account {accountId}.");
-                _logger.LogError(LoggingEvents.Error, e.StackTrace);
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
                 return null;
             }
 
@@ -225,13 +233,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return valid;
             }).ToList();
 
-            _logger.LogDebug(LoggingEvents.HttpGet, "BusinessProfile.isComplete: " + Json(isComplete));
+            _logger.LogDebug(LoggingEvents.HttpGet, "BusinessProfile.isComplete: " +
+                JsonConvert.SerializeObject(isComplete, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return Json(isComplete);
         }
 
         private List<ViewModels.LegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
         {
-            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.Get, "parentLegalEntityId: {accouparentLegalEntityIdntId}");
 
             List<ViewModels.LegalEntity> children = null;
@@ -265,20 +274,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         })
                         .ToList();
             }
-            catch (Exception e)
+            catch (OdataerrorException odee)
             {
                 _logger.LogError(LoggingEvents.Error, "Error getting legal entity children for parentLegalEntityId {parentLegalEntityId}.");
-                _logger.LogError(LoggingEvents.Error, e.StackTrace);
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
                 return null;
             }
 
-            _logger.LogDebug(LoggingEvents.Get, "LegalEntityChildren: " + Json(children));
+            _logger.LogDebug(LoggingEvents.Get, "LegalEntityChildren: " +
+                JsonConvert.SerializeObject(children, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return children;
         }
 
         private async Task<bool> FileUploadExists(string accountId, string accountName, string documentType)
         {
-            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.Get, "accountId: {accountId}, accountName: {accountName}, documentType: {documentType}");
 
             var exists = false;
@@ -297,8 +310,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
-            _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + Json(item));
+            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + JsonConvert.SerializeObject(item));
 
             ViewModels.Account result = null;
             Boolean updateIfNull = true;
@@ -306,7 +319,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            _logger.LogDebug(LoggingEvents.HttpPost, "UserSettings: " + Json(userSettings));
+            _logger.LogDebug(LoggingEvents.HttpPost, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
 
             // get account Siteminder GUID
             string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
@@ -326,7 +339,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-            _logger.LogDebug(LoggingEvents.HttpGet, "BCeId business: " + Json(bceidBusiness));
+            _logger.LogDebug(LoggingEvents.HttpGet, "BCeId business: " + JsonConvert.SerializeObject(bceidBusiness));
 
             // get the contact record.
             MicrosoftDynamicsCRMcontact userContact = null;
@@ -336,11 +349,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
             }
-            catch (Exception e)
+            catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid");
-                _logger.LogError(LoggingEvents.Error, e.StackTrace);
-                throw new Exception("Error getting contact by Siteminder Guid");
+                _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid.");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new OdataerrorException("Error getting contact by Siteminder Guid");
             }
 
             if (userContact == null)
@@ -372,9 +388,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             // this may be an existing account, as this service is used during the account confirmation process.
             MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(accountSiteminderGuid);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Account by siteminder business guid: " + JsonConvert.SerializeObject(account));
 
             if (account == null) // do a deep create.  create 3 objects at once.
             {
+                _logger.LogDebug(LoggingEvents.HttpGet, "Account is null. Do a deep create of 3 objects at once.");
                 // create a new account
                 account = new MicrosoftDynamicsCRMaccount();
                 account.CopyValues(item, updateIfNull);
@@ -414,9 +432,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogDebug("Legal Entity Before --> " + legalEntityString);
+                _logger.LogDebug("Legal Entity before creation in dynamics --> " + legalEntityString);
 
-                legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
+                try
+                {
+                    legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError(LoggingEvents.Error, "Error creating legal entity.");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw new OdataerrorException("Error creating legal entity");
+                }
 
                 account.Accountid = legalEntity._adoxioAccountValue;
 
@@ -434,21 +464,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Contactid = legalEntity.AdoxioAccount._primarycontactidValue;
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogDebug("Legal Entity After --> " + legalEntityString);
+                _logger.LogDebug("Legal Entity after creation in dynamics --> " + legalEntityString);
 
                 var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection() { };
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
 
-                var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
+                try
+                {
+                    var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError(LoggingEvents.Error, "Error creating Tied house connection.");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw new OdataerrorException("Error creating Tied house connection.");
+                }
 
             }
             else // it is a new user only.
             {
-                userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
+                _logger.LogDebug(LoggingEvents.HttpGet, "Account is NOT null. Only a new user.");
+                try
+                {
+                    userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError(LoggingEvents.Error, "Error creating user contact.");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw new OdataerrorException("Error creating user contact.");
+                }
             }
 
             // always patch the userContact so it relates to the account.
-
+            _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
             // parent customer id relationship will be created using the method here:
             //https://msdn.microsoft.com/en-us/library/mt607875.aspx
             MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
@@ -459,11 +514,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error binding contact to account");
+                _logger.LogError(LoggingEvents.Error, "Error binding contact to account");
                 _logger.LogError("Request:");
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
+                throw new OdataerrorException("Error binding contact to account");
             }
 
             // if we have not yet authenticated, then this is the new record for the user.
@@ -486,19 +542,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userSettings.IsNewUserRegistration = false;
 
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
-                _logger.LogDebug("AccountController --> " + userSettingsString);
+                _logger.LogDebug("userSettingsString --> " + userSettingsString);
 
                 // add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
+                _logger.LogDebug("user added to session. ");
             }
             else
             {
-                throw new Exception("Oops not a new user registration");
+                _logger.LogError(LoggingEvents.Error, "Invalid user registration.");
+                throw new Exception("Invalid user registration.");
             }
 
             //account.accountId = id;
             result = account.ToViewModel();
 
+            _logger.LogDebug(LoggingEvents.HttpPost, "result: " +
+                JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return Json(result);
         }
 
@@ -511,10 +571,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
         {
-            _logger.LogInformation(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogInformation(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPut, "Account parameter: " + JsonConvert.SerializeObject(item));
+            _logger.LogDebug(LoggingEvents.HttpPut, "id parameter: " + id);
 
             if (id != item.id)
             {
+                _logger.LogWarning(LoggingEvents.BadRequest, "Bad Request. Id doesn't match the account id.");
                 return BadRequest();
             }
 
@@ -523,12 +586,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
             {
+                _logger.LogWarning(LoggingEvents.NotFound, "Current user has NO access to the account.");
                 return NotFound();
             }
 
             MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountById(accountId);
             if (adoxioAccount == null)
             {
+                _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
                 return new NotFoundResult();
             }
 
@@ -538,8 +603,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // copy values over from the data provided
             adoxioAccount.CopyValues(item);
 
-            await _dynamicsClient.Accounts.UpdateAsync(accountId.ToString(), adoxioAccount);
-            return Json(adoxioAccount.ToViewModel());
+            try
+            {
+                await _dynamicsClient.Accounts.UpdateAsync(accountId.ToString(), adoxioAccount);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError(LoggingEvents.Error, "Error updating the account.");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new OdataerrorException("Error updating the account.");
+            }
+
+            var updatedAccount = adoxioAccount.ToViewModel();
+            _logger.LogDebug(LoggingEvents.HttpPut, "updatedAccount: " +
+                JsonConvert.SerializeObject(updatedAccount, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+
+            return Json(updatedAccount);
         }
 
         /// <summary>
@@ -550,12 +632,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteDynamicsAccount(string id)
         {
-            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // verify the currently logged in user has access to this account
             Guid accountId = new Guid(id);
             if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
             {
+                _logger.LogWarning(LoggingEvents.NotFound, "Current user has NO access to the account.");
                 return new NotFoundResult();
             }
 
@@ -563,6 +646,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
             if (account == null)
             {
+                _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
                 return new NotFoundResult();
             }
 
@@ -571,11 +655,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value.ToList();
             legalEntities.ForEach(le =>
             {
-                _dynamicsClient.Adoxiolegalentities.Delete(le.AdoxioLegalentityid);
+                try
+                {
+                    _dynamicsClient.Adoxiolegalentities.Delete(le.AdoxioLegalentityid);
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Legal Entity deleted: " + le.AdoxioLegalentityid);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError(LoggingEvents.Error, "Error deleting the Legal Entity: " + le.AdoxioLegalentityid);
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw new OdataerrorException("Error deleting the Legal Entity: " + le.AdoxioLegalentityid);
+                }
             });
 
-            await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+            try
+            {
+                await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+                _logger.LogDebug(LoggingEvents.HttpDelete, "Account deleted: " + accountId.ToString());
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError(LoggingEvents.Error, "Error deleting the account: " + accountId.ToString());
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new OdataerrorException("Error deleting the account: " + accountId.ToString());
+            }
 
+            _logger.LogDebug(LoggingEvents.HttpDelete, "No content returned.");
             return NoContent(); // 204 
         }
     }
