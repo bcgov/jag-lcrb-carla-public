@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -43,34 +44,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current")]
         public async Task<IActionResult> GetCurrentAccount()
         {
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
             ViewModels.Account result = null;
 
             // get the current user.
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + Json(userSettings));
 
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
                 MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(new Guid(accountId));
+                _logger.LogDebug(LoggingEvents.HttpGet, "Dynamics Account: " + Json(account));
+
                 if (account == null)
                 {
                     // Sometimes we receive the siteminderbusienssguid instead of the account id. 
                     account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(accountId);
                     if(account == null)
                     {
+                        _logger.LogWarning(LoggingEvents.NotFound, "No Account Found.");
                         return new NotFoundResult();
                     }
                 }
-
                 result = account.ToViewModel();
             }
             else
             {
+                _logger.LogWarning(LoggingEvents.NotFound, "No Account Found.");
                 return new NotFoundResult();
             }
 
+            _logger.LogDebug(LoggingEvents.HttpGet, "Current Account Result: " + Json(result));
             return Json(result);
         }
 
@@ -78,18 +85,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("bceid")]
         public async Task<IActionResult> GetCurrentBCeIDBusiness()
         {
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + Json(userSettings));
 
             // query the BCeID API to get the business record.
             var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
             if (business == null)
             {
+                _logger.LogWarning(LoggingEvents.NotFound, "No Business Found.");
                 return new NotFoundResult();
             }
 
+            _logger.LogDebug(LoggingEvents.HttpGet, "BCeID business record: " + Json(business));
             return Json(business);
         }
 
@@ -101,6 +113,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccount(string id)
         {
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "id: {id}");
+
+            Boolean userAccessToAccount = false;
             ViewModels.Account result = null;
 
             // query the Dynamics system to get the account record.
@@ -108,58 +124,90 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // verify the currently logged in user has access to this account
                 Guid accountId = new Guid(id);
-                if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+
+                try
                 {
+                    userAccessToAccount = DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(LoggingEvents.Error, "Error while checking if current user has access to account.");
+                    _logger.LogError(LoggingEvents.Error, e.StackTrace);
+                }
+
+                if (!userAccessToAccount)
+                {
+                    _logger.LogWarning(LoggingEvents.NotFound, "Current user has NO access to account.");
                     return new NotFoundResult();
                 }
 
                 MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
                 if (account == null)
                 {
+                    _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
                     return new NotFoundResult();
                 }
                 result = account.ToViewModel();
             }
             else
             {
+                _logger.LogWarning(LoggingEvents.BadRequest, "Bad Request.");
                 return BadRequest();
             }
 
+
+            _logger.LogDebug(LoggingEvents.HttpGet, "Account result: " + Json(result));
             return Json(result);
         }
 
         [HttpGet("business-profile/{accountId}")]
         public async Task<IActionResult> GetBusinessProfile(string accountId)
         {
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "accountId: {accountId}");
+
+            List<LegalEntity> legalEntities;
+
             var account = (await _dynamicsClient.GetAccountById(new Guid(accountId))).ToViewModel();
+            _logger.LogDebug(LoggingEvents.HttpGet, "Account details: " + Json(account));
+
             // get legal entities
             var entityFilter = $"_adoxio_account_value eq {accountId}";
             var expandList = new List<string> { "adoxio_ShareholderAccountID" };
-            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: entityFilter, expand: expandList).Value
-                .Select(le =>
-                {
-                    var legalEntity = le.ToViewModel();
-                    var entity = new ViewModels.LegalEntity
-                    {
-                        AdoxioLegalEntity = legalEntity,
-                        Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel(),
-                    };
-                    entity.corporateDetailsFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Corporate Information").Result;
-                    entity.organizationStructureFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Organization Structure").Result;
-                    entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result;
-                    entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result;
-                    entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result;
-                    var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
-                        .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
-                        .Value.FirstOrDefault();
-                    if (tiedHouse != null)
-                    {
-                        entity.TiedHouse = tiedHouse.ToViewModel();
-                    }
-                    entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
-                    return entity;
-                })
-                .ToList();
+            try
+            {
+                legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: entityFilter, expand: expandList).Value
+                        .Select(le =>
+                        {
+                            var legalEntity = le.ToViewModel();
+                            var entity = new ViewModels.LegalEntity
+                            {
+                                AdoxioLegalEntity = legalEntity,
+                                Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel(),
+                            };
+                            entity.corporateDetailsFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Corporate Information").Result;
+                            entity.organizationStructureFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Organization Structure").Result;
+                            entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result;
+                            entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result;
+                            entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result;
+                            var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
+                                .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
+                                .Value.FirstOrDefault();
+                            if (tiedHouse != null)
+                            {
+                                entity.TiedHouse = tiedHouse.ToViewModel();
+                            }
+                            entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
+                            return entity;
+                        })
+                        .ToList();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(LoggingEvents.Error, "Error getting legal entities for the account {accountId}.");
+                _logger.LogError(LoggingEvents.Error, e.StackTrace);
+                return null;
+            }
 
             var profile = new BusinessProfile
             {
@@ -177,43 +225,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return valid;
             }).ToList();
 
+            _logger.LogDebug(LoggingEvents.HttpGet, "BusinessProfile.isComplete: " + Json(isComplete));
             return Json(isComplete);
         }
 
         private List<ViewModels.LegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
         {
+            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogDebug(LoggingEvents.Get, "parentLegalEntityId: {accouparentLegalEntityIdntId}");
+
             List<ViewModels.LegalEntity> children = null;
             var childEntitiesFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntityId}";
             var expandList = new List<string> { "adoxio_ShareholderAccountID", "adoxio_Account" };
-            children = _dynamicsClient.Adoxiolegalentities
-                .Get(filter: childEntitiesFilter, expand: expandList).Value
-                .Select(le =>
-                {
-                    var legalEntity = le.ToViewModel();
-                    var entity = new ViewModels.LegalEntity
-                    {
-                        AdoxioLegalEntity = legalEntity,
-                        Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
-                    };
-                    var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
-                        .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
-                        .Value.FirstOrDefault();
-                    if (tiedHouse != null)
-                    {
-                        entity.TiedHouse = tiedHouse.ToViewModel();
-                    }
-                    if (entity.AdoxioLegalEntity.isShareholder == true && entity.AdoxioLegalEntity.isindividual == false)
-                    {
-                        entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
-                    }
-                    return entity;
-                })
-                .ToList();
+
+            try
+            {
+                children = _dynamicsClient.Adoxiolegalentities
+                        .Get(filter: childEntitiesFilter, expand: expandList).Value
+                        .Select(le =>
+                        {
+                            var legalEntity = le.ToViewModel();
+                            var entity = new ViewModels.LegalEntity
+                            {
+                                AdoxioLegalEntity = legalEntity,
+                                Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
+                            };
+                            var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
+                                .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
+                                .Value.FirstOrDefault();
+                            if (tiedHouse != null)
+                            {
+                                entity.TiedHouse = tiedHouse.ToViewModel();
+                            }
+                            if (entity.AdoxioLegalEntity.isShareholder == true && entity.AdoxioLegalEntity.isindividual == false)
+                            {
+                                entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
+                            }
+                            return entity;
+                        })
+                        .ToList();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(LoggingEvents.Error, "Error getting legal entity children for parentLegalEntityId {parentLegalEntityId}.");
+                _logger.LogError(LoggingEvents.Error, e.StackTrace);
+                return null;
+            }
+
+            _logger.LogDebug(LoggingEvents.Get, "LegalEntityChildren: " + Json(children));
             return children;
         }
 
         private async Task<bool> FileUploadExists(string accountId, string accountName, string documentType)
         {
+            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogDebug(LoggingEvents.Get, "accountId: {accountId}, accountName: {accountName}, documentType: {documentType}");
+
             var exists = false;
             var accountIdCleaned = accountId.ToUpper().Replace("-", "");
             var folderName = $"{accountName}_{accountIdCleaned}";
@@ -222,12 +289,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 exists = fileDetailsList.Count() > 0;
             }
+
+            _logger.LogDebug(LoggingEvents.Get, "FileUploadExists: " + exists);
             return exists;
         }
 
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
+            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+            _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + Json(item));
 
             ViewModels.Account result = null;
             Boolean updateIfNull = true;
@@ -235,25 +306,42 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            _logger.LogDebug(LoggingEvents.HttpPost, "UserSettings: " + Json(userSettings));
 
             // get account Siteminder GUID
             string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
             if (accountSiteminderGuid == null || accountSiteminderGuid.Length == 0)
-                throw new Exception("Oops no accountSiteminderGuid exernal id");
+            {
+                _logger.LogError(LoggingEvents.Error, "No account Siteminder Guid exernal id");
+                throw new Exception("Error. No accountSiteminderGuid exernal id");
+            }
 
             // first check to see that a contact exists.
             string contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
-                throw new Exception("Oops no ContactSiteminderGuid exernal id");
+            {
+                _logger.LogError(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
+                throw new Exception("Error. No ContactSiteminderGuid exernal id");
+            }
 
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+            _logger.LogDebug(LoggingEvents.HttpGet, "BCeId business: " + Json(bceidBusiness));
 
             // get the contact record.
             MicrosoftDynamicsCRMcontact userContact = null;
 
             // see if the contact exists.
-            userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
+            try
+            {
+                userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid");
+                _logger.LogError(LoggingEvents.Error, e.StackTrace);
+                throw new Exception("Error getting contact by Siteminder Guid");
+            }
 
             if (userContact == null)
             {
@@ -326,7 +414,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
 
                 string legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogError("Legal Entity Before --> " + legalEntityString);
+                _logger.LogDebug("Legal Entity Before --> " + legalEntityString);
 
                 legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
 
@@ -346,7 +434,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.Contactid = legalEntity.AdoxioAccount._primarycontactidValue;
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogError("Legal Entity After --> " + legalEntityString);
+                _logger.LogDebug("Legal Entity After --> " + legalEntityString);
 
                 var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection() { };
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
@@ -398,7 +486,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userSettings.IsNewUserRegistration = false;
 
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
-                _logger.LogError("AccountController --> " + userSettingsString);
+                _logger.LogDebug("AccountController --> " + userSettingsString);
 
                 // add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
@@ -423,6 +511,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
         {
+            _logger.LogInformation(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+
             if (id != item.id)
             {
                 return BadRequest();
@@ -460,6 +550,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteDynamicsAccount(string id)
         {
+            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name);
+
             // verify the currently logged in user has access to this account
             Guid accountId = new Guid(id);
             if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
