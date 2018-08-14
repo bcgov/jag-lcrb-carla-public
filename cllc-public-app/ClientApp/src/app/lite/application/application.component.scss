@@ -34,3 +34,15 @@ li {
     margin: 10px 0;
     margin-left: -26px;
 }
+
+.application-wrapper {
+    max-width: 700px;
+    padding-left: 45px;
+}
+
+@media (max-width: 575.98px) {
+    .application-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
