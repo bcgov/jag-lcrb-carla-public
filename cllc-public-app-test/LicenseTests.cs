@@ -1,20 +1,10 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
+using Gov.Lclb.Cllb.Public.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
-using Xunit;
-
 using System.Text;
-using Newtonsoft.Json;
-using System.Net;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utility;
-using Gov.Lclb.Cllb.Public.ViewModels;
+using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
