@@ -1,15 +1,29 @@
 node('master') {
 
-   stage('SonarQube Scan') {
+  stage('Startup') {
+  // stop pending builds.
+	def jobname = env.JOB_NAME
+	def buildnum = env.BUILD_NUMBER.toInteger()
+
+	def job = Jenkins.instance.getItemByFullName(jobname)
+	for (build in job.builds) {
+		if (!build.isBuilding()) { continue; }
+		if (buildnum == build.getNumber().toInteger()) { continue; println "equals" } 
+		build.doStop();
+	}
+  }
+   stage ('Build') {
+     steps {
+	   parallel ('SonarQube Scan' : {
         echo "Running SonarQube static code analysis..."
         openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'		
-    }
-	
-    stage('Build Image') {
-        echo "Building..."
+    },'Application Image') : {
+        echo "Building Application image..."
         openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
         openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
     }
+	}
+	}
 	
     stage('Deploy on Dev') {
         echo "Deploying to dev..."
