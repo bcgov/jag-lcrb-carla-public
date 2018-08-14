@@ -350,18 +350,18 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     // **************************************************
                     if (string.IsNullOrEmpty(userId))
                     {
-                        _logger.LogError(options.MissingSiteMinderUserIdError);
+                        _logger.LogDebug(options.MissingSiteMinderUserIdError);
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
 
                     if (string.IsNullOrEmpty(siteMinderGuid))
                     {
-                        _logger.LogError(options.MissingSiteMinderGuidError);
+                        _logger.LogDebug(options.MissingSiteMinderGuidError);
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
                     if (string.IsNullOrEmpty(siteMinderUserType))
                     {
-                        _logger.LogError(options.MissingSiteMinderUserTypeError);
+                        _logger.LogDebug(options.MissingSiteMinderUserTypeError);
                         return AuthenticateResult.Fail(options.MissingSiteMinderUserTypeError);
                     }
                 }
