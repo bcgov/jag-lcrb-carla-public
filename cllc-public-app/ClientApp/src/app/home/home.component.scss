@@ -1,4 +1,9 @@
 .lite {
+    .home-margins {
+        max-width: 1200px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
     .btn-primary {
         font-family: 'myriad-pro', 'sans serif';
         font-weight: 700;
@@ -9,37 +14,29 @@
         font-size: 16px;
     }
     .home-header {
-        padding-left: 50px;
-        padding-right: 60px;
-        padding-top: 60px;
-        padding-bottom: 60px;
-        width: 775px;
+        max-width: 775px;
     }
     .home-header-wrapper {
         background-color: rgba(242, 242, 242, 1);
     }
     .home-body {
         background-color: rgba(255, 255, 255, 1);
-        padding-left: 50px;
-        padding-right: 60px;
         padding-top: 60px;
-        width: 775px;
+        max-width: 775px;
         display: flex;
     }
     .jumbotron {
         background-color: rgba(242, 242, 242, 1);
         margin-top: 15px;
-        margin-bottom: 90px;
         h2 {
             font-weight: 400;
             font-size: 36px;
         }
     }
     .side-box {
-        width: 400px;
+        max-width: 400px;
         margin-top: 40px;
         margin-bottom: 30px;
-        margin-left: 50px;
         padding: 45px;
         background-color: rgba(56, 89, 138, 1);
         border-bottom: 3px solid #fcba19 !important;
@@ -57,7 +54,7 @@
         }
     }
     .side-box-wrapper {
-        margin-left: 90px;
+        // margin-left: 90px;
     }
     .fab-button {
         background-color: #7596C8;
@@ -69,6 +66,15 @@
         color: #fff;
         margin-left: -5px;
         margin-top: -5px;
+    }
+    @media (max-width: 575.98px) {
+        .home-margins {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .side-box {
+            padding: 25px;
+        }
     }
 }
 

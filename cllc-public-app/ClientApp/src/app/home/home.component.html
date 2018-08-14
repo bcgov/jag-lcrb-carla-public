@@ -1,53 +1,52 @@
 <div [ngBusy]="busy"></div>
 
 <div *ngIf="isLiteVersion && isDataLoaded" class="lite">
-  <div class="row home-header-wrapper">
-    <div [ngClass]="{'col-md-8 col-xs-12': !isLiteVersion, 'home-header': true}" class="jumbotron">
-      <h2>
-        Apply for a cannabis retail store licence
-      </h2>
-      <p>
-        A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.
-        To use the online application service, you must have a registered Business BCeID.
-      </p>
-      <div class="row">
-        <div class="col-md-12 text-left">
-          <button class="btn btn-primary" (click)="window.location.href='https://www.bceid.ca/register/'" tabindex="3">
+  <div class="home-header-wrapper">
+    <div class="row home-margins">
+
+      <div class="jumbotron home-header col-md-7 col-sm-12">
+        <h2>
+          Apply for a cannabis retail store licence
+        </h2>
+        <p>
+          A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.
+          To use the online application service, you must have a registered Business BCeID.
+        </p>
+        <div class="text-left">
+          <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="window.location.href='https://www.bceid.ca/register/'"
+            tabindex="3">
             <strong>REGISTER FOR A BUSINESS BCeID</strong>
             <br>
           </button>
           <span style="padding: 10px;">OR</span>
-          <button class="btn btn-primary" (click)="window.location.href='login'" tabindex="3">
+          <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="window.location.href='login'" tabindex="3">
             <strong>LOG IN</strong>
             <br>
           </button>
         </div>
       </div>
-    </div>
 
-    <div [ngClass]="{'col-md-4': !isLiteVersion}" class="side-box-wrapper">
-      <section class="side-box" style="margin-top: 105px;">
-        <section style="display: flex">
-          <button mat-fab class="fab-button mat-elevation-z0">
-            <mat-icon class="icon" aria-label="description icon">description</mat-icon>
-          </button>
-          <h2>Forms for associates of licence applicants</h2>
+      <div class="col-md-5 side-box-wrapper">
+        <section class="side-box" style="">
+          <section style="display: flex">
+            <button mat-fab class="fab-button mat-elevation-z0">
+              <mat-icon class="icon" aria-label="description icon">description</mat-icon>
+            </button>
+            <h2>Forms for associates of licence applicants</h2>
+          </section>
+          <div style="text-align: right;">
+            <button class="btn btn-primary" (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation'"
+              tabindex="3">GO TO FORMS FOR ASSOCIATES</button>
+          </div>
         </section>
-        <div style="text-align: right">
-          <button class="btn btn-primary" (click)="window.location.href='https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation'"
-            tabindex="3">GO TO FORMS FOR ASSOCIATES</button>
-        </div>
-      </section>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div [ngClass]="{'col-md-8 col-xs-12': !isLiteVersion, 'home-body': true}">
-      <!-- Accordion -->
+  <div class="row home-margins">
+    <div class="col-md-7 col-sm-12 home-body">
       <app-accordion [isLiteVersion]="isLiteVersion"></app-accordion>
     </div>
-    <!-- Newsletter -->
-    <div [ngClass]="{'col-md-4': !isLiteVersion}" class="side-box-wrapper">
-      <!-- Survey -->
+    <div  class="side-box-wrapper col-md-5 col-sm-12">
       <section class="side-box" style="margin-top: 65px;">
         <section style="display: flex;">
           <button mat-fab class="fab-button mat-elevation-z0">
@@ -70,8 +69,7 @@
 <div *ngIf="!isLiteVersion && isDataLoaded" style="background-color:#F2F2F2;">
   <div class="extra-padding-left notlite" style="width: 99%; max-width: 1600px; margin: auto; background-color: #fff;">
     <div class="row">
-      <div class="col-md-8 col-xs-12">
-        <!-- What you need message and survey button -->
+      <div class="col-md-7 col-sm-12">
         <div class="jumbotron">
           <h1>
             What does an applicant need to apply for a cannabis licence?
@@ -89,12 +87,10 @@
           </div>
         </div>
 
-        <!-- Accordion -->
         <app-accordion></app-accordion>
       </div>
 
-      <!-- Newsletter -->
-      <div class="col-md-4 newsletter">
+      <div class="col-md-5 newsletter">
         <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
       </div>
 
