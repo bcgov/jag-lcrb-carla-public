@@ -7,9 +7,9 @@ node('master') {
 
         def job = Jenkins.instance.getItemByFullName(jobname)
         for (build in job.builds) {
-            if (!build.isBuilding()) { continue; }
-            if (buildnum == build.getNumber().toInteger()) { continue; println "equals" }
-            build.doStop();
+            if (!build.isBuilding()) { continue }
+            if (buildnum == build.getNumber().toInteger()) { continue }
+            build.doStop()
         }
     }
     stage('Build') {
@@ -21,7 +21,7 @@ node('master') {
                 echo "Building Application image..."
                 openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
                 openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
-            }
+            })
         }
     }
 
