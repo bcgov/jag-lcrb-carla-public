@@ -61,8 +61,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (dynamicsApplication.Statuscode == null || dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated)
                     {
                         result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
-                    }                    
+                    }
                 }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the number of applications that are submitted
+        /// </summary>
+        /// <param name="applicantId"></param>
+        /// <returns></returns>
+        private int GetSubmittedCountByApplicant(string applicantId)
+        {
+            var result = 0;            
+            if (!string.IsNullOrEmpty(applicantId))
+            {
+                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true";
+                result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
             }
             return result;
         }
@@ -90,6 +106,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByApplicant(userSettings.AccountId);
             return Json(adoxioApplications);
+        }
+
+        /// GET submitted applications in Dynamics for the current user
+        [HttpGet("current/submitted-count")]
+        public JsonResult GetCountForCurrentUserSubmittedApplications()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
+            var count = GetSubmittedCountByApplicant(userSettings.AccountId);
+            return Json(count);
         }
 
         /// <summary>
@@ -163,7 +192,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError("Request:");
                     _logger.LogError(odee.Request.Content);
                     _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);                    
+                    _logger.LogError(odee.Response.Content);
                 }
             }
 
@@ -188,8 +217,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+            int count = GetSubmittedCountByApplicant(userSettings.AccountId);
+            if (count >= 8)
+            {
+                return BadRequest("8 applications have already been submitted. Can not create more");
+            }
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
-
             // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
             adoxioApplication.AdoxioApplicanttype = (int?)item.applicantType;
@@ -217,7 +250,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
                 patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
-                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);                
+                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
                 _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
             }
             catch (OdataerrorException odee)
@@ -263,7 +296,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Description = "Application Files",
                 Name = name
             };
-           
+
 
             try
             {
@@ -577,7 +610,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (application != null)
             {
-                string folderName = GetApplicationFolderName( application );
+                string folderName = GetApplicationFolderName(application);
                 // Get the file details list in folder
                 List<FileDetailsList> fileDetailsList = null;
                 try
@@ -652,7 +685,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // Update modifiedon to current time
-               var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
+                var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
                 try
                 {
                     _dynamicsClient.Applications.Update(applicationId, patchApplication);

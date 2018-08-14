@@ -1,16 +1,14 @@
-﻿using System;
-using System.Net.Http;
-using Xunit;
-
-using System.Text;
+﻿using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
+using System;
 using System.Net;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Public.Models;
+using System.Net.Http;
+using System.Text;
+using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-	public class InvoiceTests : ApiIntegrationTestBaseWithLogin
+    public class InvoiceTests : ApiIntegrationTestBaseWithLogin
     {
         public InvoiceTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
