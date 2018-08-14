@@ -3,7 +3,7 @@
 
   <h1>Submit the Cannabis Retail Store Licence Application</h1>
 </div>
-<div [formGroup]="form" style="max-width: 700px; padding-left: 45px;">
+<div [formGroup]="form" class="application-wrapper">
 
   <p>
     Please make sure that all of the required forms and supporting documentation for your application are included. A $7,500.00
@@ -57,7 +57,7 @@
 
       <p>Establishment names will be reviewed for approval during the application process.</p>
 
-      <input class="form-control" style="width: 500px;" type="text" id="establishmentName" formControlName="establishmentName"
+      <input class="form-control" style="max-width: 500px;" type="text" id="establishmentName" formControlName="establishmentName"
         placeholder="Begin by entering the name of the proposed establishment.">
       <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
         <div *ngIf="form.controls['establishmentName'].hasError('required') ">
