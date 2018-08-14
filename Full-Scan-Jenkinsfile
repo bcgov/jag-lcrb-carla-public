@@ -17,7 +17,7 @@ node('master') {
             parallel('SonarQube Scan' : {
                 echo "Running SonarQube static code analysis..."
         openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
-            }, 'Application Image') : {
+            }, 'Application Image' : {
                 echo "Building Application image..."
                 openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
                 openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
