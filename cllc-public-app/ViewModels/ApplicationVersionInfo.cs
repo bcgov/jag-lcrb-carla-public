@@ -27,6 +27,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string FileCreationTime { get; set; }
 
         /// <summary>
+        /// File version for the running assembly
+        /// </summary>
+        public string FileVersion { get; set; }
+
+        /// <summary>
         /// Git commit used to build the application
         /// </summary>
         public string SourceCommit { get; set; }

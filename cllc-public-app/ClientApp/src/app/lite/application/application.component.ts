@@ -32,6 +32,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
+  submittedApplications = 8;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -49,6 +50,9 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       id: [''],
       establishmentName: [''], // Validators.required
     });
+
+    this.applicationDataService.getSubmittedApplicationCount()
+      .then(value => this.submittedApplications = value);
 
     
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
@@ -175,6 +179,10 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     if (!this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push("Establishment name is required.")
+    }
+    if (this.submittedApplications >= 8) {
+      valid = false;
+      this.validationMessages.push("Only 8 applications can be submitted");
     }
     return valid;
   }
