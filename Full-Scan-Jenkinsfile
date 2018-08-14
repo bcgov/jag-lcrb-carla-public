@@ -5,17 +5,15 @@ node('master') {
         sh 'oc cancel-build bc/cllc-public'
         sh 'oc cancel-build bc/cllc-public-sonar'
     }
-    stage('Build') {
-        steps {
-            parallel('SonarQube Scan' : {
-                echo "Running SonarQube static code analysis..."
-        openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
-            }, 'Application Image' : {
-                echo "Building Application image..."
-                openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
-                openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
-            })
-        }
+    stage('Build') {        
+        parallel('SonarQube Scan' : {
+            echo "Running SonarQube static code analysis..."
+    openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
+        }, 'Application Image' : {
+            echo "Building Application image..."
+            openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
+            openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
+        })
     }
 
     stage('Deploy on Dev') {
