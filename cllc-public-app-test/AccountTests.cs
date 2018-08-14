@@ -136,6 +136,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             await Logout();
         }
 
+        // To disable this test run:
+        // dotnet test --filter Category!=StressTests
+        [Trait("Category", "StressTests")]
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD100Times()
         {
