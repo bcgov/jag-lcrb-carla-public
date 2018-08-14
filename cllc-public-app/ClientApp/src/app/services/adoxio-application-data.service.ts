@@ -42,6 +42,18 @@ export class AdoxioApplicationDataService {
        .catch(this.handleError);
   }
 
+  /**
+   * Gets the number of submitted Applications for the current user
+   * */
+  getSubmittedApplicationCount() {
+    return this.http.get(this.apiPath + "current/submitted-count", { headers: this.jsonHeaders })
+       .toPromise()
+       .then((res: Response) => {
+         return res.json();
+       })
+       .catch(this.handleError);
+  }
+
   getAllCurrentApplications() {
     return this.http.get(this.apiPath + "current", { headers: this.jsonHeaders })
       .pipe(catchError(this.handleError));

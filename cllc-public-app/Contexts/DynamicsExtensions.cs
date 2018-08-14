@@ -1,20 +1,16 @@
 ﻿
+using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.EntityFrameworkCore;
+using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
-using Microsoft.OData.Client;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Microsoft.AspNetCore.Http;
-using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -399,57 +395,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 			IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.AdoxioLicencetypes.Get(filter: typeFilter).Value;
 
 			result = licenceTypes.FirstOrDefault();
-
-            return result;
-        }
-
-
-        /// <summary>
-        /// Get picklist options for a given field
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="datafield"></param>
-        /// <returns></returns>
-        public static async Task<List<Public.ViewModels.OptionMetadata>> GetPicklistOptions (this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string datafield)
-        {
-            List<Public.ViewModels.OptionMetadata> result = null;
-            string key = "GlobalOptionSetDefinition_" + datafield;
-            // first look in the cache.
-            string temp = null;
-            if (distributedCache != null)
-            {
-                temp = distributedCache.GetString(key);
-            }
-            if (!string.IsNullOrEmpty(temp))
-            {
-                result = JsonConvert.DeserializeObject<List<Public.ViewModels.OptionMetadata>>(temp);
-            }
-            else
-            {
-                // fetch from dynamics
-                var source = system.GlobalOptionSetDefinitions;
-                OptionSetMetadataBaseSingle optionSetMetadataBaseSingle = new OptionSetMetadataBaseSingle (source.Context, source.GetKeyPath("Name='"+datafield+"'"));
-
-                OptionSetMetadata optionSetMetadata = (OptionSetMetadata) await optionSetMetadataBaseSingle.GetValueAsync();
-
-                if (optionSetMetadata != null)
-                {
-                    // convert it to a list.
-                    result = new List<Public.ViewModels.OptionMetadata>();
-                    foreach (Microsoft.Dynamics.CRM.OptionMetadata option in optionSetMetadata.Options)
-                    {
-                        result.Add(option.ToViewModel());
-                    }
-
-                }
-                if (distributedCache != null)
-                {
-                    // store the picklist data.
-                    string cacheValue = JsonConvert.SerializeObject(result);
-                    distributedCache.SetString(key, cacheValue);
-                }
-            }
 
             return result;
         }

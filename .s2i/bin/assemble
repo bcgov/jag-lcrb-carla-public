@@ -150,7 +150,7 @@ else
 	# Build and publish the application for production usage
 	echo "---> Publishing application..."
 	dotnet publish /m:1 "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" \
-		 --self-contained false /p:PublishWithAspNetCoreTargetManifest=$DOTNET_ASPNET_STORE -o "$DOTNET_APP_PATH"
+		 --self-contained false /p:AssemblyVersion=$VERSION_PREFIX$BUILDNUMBER /p:FileVersion=$VERSION_PREFIX$BUILDNUMBER /p:PublishWithAspNetCoreTargetManifest=$DOTNET_ASPNET_STORE -o "$DOTNET_APP_PATH"
 
 	# check if the assembly used by the script exists
 	if [ ! -f "$DOTNET_APP_PATH/${APP_DLL_NAME}" ]; then
