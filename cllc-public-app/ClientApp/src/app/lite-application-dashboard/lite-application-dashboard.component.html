@@ -10,7 +10,7 @@
       <!--<div *ngIf="dataSource.data.length > 0" class="dashboard-content">-->
       <div class="dashboard-content">
 
-        <mat-table class="mat-elevation-z0" #table [dataSource]="dataSource">
+        <mat-table class="mat-elevation-z0 detail-table" #table [dataSource]="dataSource">
 
           <!-- Column -->
           <ng-container matColumnDef="lastUpdated">
@@ -40,6 +40,29 @@
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-table class="mat-elevation-z0 summary-table" #table [dataSource]="dataSource">
+
+          <!-- Column -->
+          <ng-container matColumnDef="summary">
+            <mat-cell *matCellDef="let element">
+              <span>LAST UPDATED: </span>
+              <span>{{element.modifiedon | date:'mediumDate'}}</span>
+              <p></p>
+              <span>ESTABLISHMENT NAME: </span>
+              <a routerLink="/application-lite/{{element.id}}">{{element.establishmentName}} (Ref. {{element.name}})</a>
+              <p></p>
+              <span (click)="cancelApplication(element.id, element.establishmentName, element.name)">
+                <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+                <a href="javascript: void(0)">
+                  Cancel Application</a>
+              </span>
+              <p></p>
+            </mat-cell>
+          </ng-container>
+
+          <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: ['summary'];"></mat-row>
         </mat-table>
 
         <div *ngIf="dataSource.data && dataSource.data.length == 0" class="no-application">
