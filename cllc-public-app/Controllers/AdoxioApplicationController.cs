@@ -72,10 +72,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private async Task<int> GetSumittedCountByApplicant(string applicantId)
+        private int GetSubmittedCountByApplicant(string applicantId)
         {
-            var result = 0;
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
+            var result = 0;            
             if (!string.IsNullOrEmpty(applicantId))
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true";
@@ -111,14 +110,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET submitted applications in Dynamics for the current user
         [HttpGet("current/submitted-count")]
-        public async Task<JsonResult> GetCountForCurrentUserSubmittedApplications()
+        public JsonResult GetCountForCurrentUserSubmittedApplications()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            var count = await GetSumittedCountByApplicant(userSettings.AccountId);
+            var count = GetSubmittedCountByApplicant(userSettings.AccountId);
             return Json(count);
         }
 
@@ -218,7 +217,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
-            var count = await GetSumittedCountByApplicant(userSettings.AccountId);
+            int count = GetSubmittedCountByApplicant(userSettings.AccountId);
             if (count >= 8)
             {
                 return BadRequest("8 applications have already been submitted. Can not create more");

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -25,7 +26,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             Assembly assembly = this.GetType().GetTypeInfo().Assembly;
             DateTime creationTime = System.IO.File.GetLastWriteTimeUtc(assembly.Location);
-
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string fileVersion = fvi.FileVersion;
+            
             ApplicationVersionInfo avi = new ApplicationVersionInfo()
             {
                 BaseUri = Configuration["BASE_URI"],
@@ -35,6 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 SourceRepository = Configuration["OPENSHIFT_BUILD_SOURCE"],
                 SourceReference = Configuration["OPENSHIFT_BUILD_REFERENCE"],
                 FileCreationTime = creationTime.ToString("O"), // Use the round trip format as it includes the time zone.
+                FileVersion = fileVersion
             };
 
             return Json(avi);
