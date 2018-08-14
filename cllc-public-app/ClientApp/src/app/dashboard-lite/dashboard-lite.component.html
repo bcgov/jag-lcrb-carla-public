@@ -1,8 +1,8 @@
-<div style="padding-left: 50px;">
+<div class="dashboard-spacing">
   <div [ngBusy]="busy"></div>
   <h1>Welcome to Cannabis Retail Store Licensing</h1>
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-lg-7 col-sm-12">
       <p>
         A non-medical cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories
         in British Columbia.
@@ -24,7 +24,7 @@
         be included in the application form. Please refer to this checklist when completing the application.
       </p>
 
-      <select class="form-control" style="width: 300px;" [(ngModel)]="orgType">
+      <select class="form-control" style="max-width: 300px;" [(ngModel)]="orgType">
         <option value="">Choose your organization type</option>
         <option value="Private Corporation">Private Corporation</option>
         <option value="Public Corporation">Public Corporation</option>
@@ -92,8 +92,9 @@
 
       <h2>Applications In Progress</h2>
       <app-lite-application-dashboard [applicationInProgress]="true"></app-lite-application-dashboard>
+      <p></p>
     </div>
-    <div class="col-md-4" style="position: relative"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       >
+    <div class="col-lg-4 col-sm-12" style="position: relative"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       >
       <div [ngBusy]="busy"></div>
       <section class="submit-container">
         <div>
