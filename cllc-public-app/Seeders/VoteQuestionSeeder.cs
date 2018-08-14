@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
+        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDistributedCache distributedCache) 
             : base(configuration, env, loggerFactory)
         { }
 
