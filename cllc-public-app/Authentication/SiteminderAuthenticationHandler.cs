@@ -471,11 +471,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                             userSettings.ContactId = null;
 						}
 
-                        _logger.LogError("New user registration:" + userSettings.UserDisplayName);
-                        _logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
-                        _logger.LogError("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
-                        _logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
-                        _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
+                        _logger.LogDebug("New user registration:" + userSettings.UserDisplayName);
+                        _logger.LogDebug("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
+                        _logger.LogDebug("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
+                        _logger.LogDebug("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
                     }
                     // Set account ID from authenticated user
                     else if (userSettings.AuthenticatedUser != null)
@@ -489,9 +489,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         {
                             userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
                         }
-                        _logger.LogError("Returning user:" + userSettings.UserDisplayName);
-                        _logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
-                        _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
+                        _logger.LogDebug("Returning user:" + userSettings.UserDisplayName);
+                        _logger.LogDebug("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
                     }
                 }
 				else if (!hostingEnv.IsProduction() && isBCSCDeveloperLogin)
