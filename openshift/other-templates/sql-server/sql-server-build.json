@@ -109,7 +109,7 @@
       "displayName": "Git Repo URL",
       "description": "The URL to your GIT repo.",
       "required": true,
-      "value": "https://github.com/bcgov/ag-lclb-cllc-public.git"
+      "value": "https://github.com/bcgov/jag-lcrb-carla-public.git"
     },
     {
       "name": "GIT_REF",

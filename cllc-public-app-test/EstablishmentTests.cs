@@ -1,20 +1,11 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Xunit;
-
-using System.Text;
-using Newtonsoft.Json;
-using System.Net;
-using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Microsoft.Extensions.DependencyInjection;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Models;
+using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
@@ -52,15 +43,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            MicrosoftDynamicsCRMadoxioEstablishment adoxio_establishment = new MicrosoftDynamicsCRMadoxioEstablishment()
+            ViewModels.AdoxioEstablishment viewmodel_adoxio_establishment = new ViewModels.AdoxioEstablishment()
             {
-                AdoxioEstablishmentid = Guid.NewGuid().ToString(),
-                AdoxioName = initialName
+                Name = initialName
             };
-
-
-            ViewModels.AdoxioEstablishment viewmodel_adoxio_establishment = adoxio_establishment.ToViewModel();
-
+            
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_establishment);
 
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -87,12 +74,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(initialName, responseViewModel.Name);
 
             // U - Update            
-            adoxio_establishment.AdoxioName = changedName;
-            adoxio_establishment.AdoxioEstablishmentid = id.ToString();
+            ViewModels.AdoxioEstablishment patchModel = new ViewModels.AdoxioEstablishment()
+            {
+                Name = changedName
+            };            
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(adoxio_establishment.ToViewModel()), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(patchModel), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();

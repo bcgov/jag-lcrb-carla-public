@@ -6,7 +6,7 @@ export PROJECT_OS_DIR=${PROJECT_OS_DIR:-../../openshift}
 # Templates NOT in this list will have they GIT referances over-ridden
 # with the values of GIT_URI and GIT_REF
 export skip_git_overrides=""
-export GIT_URI="https://github.com/bcgov/ag-lclb-cllc-public.git"
+export GIT_URI="https://github.com/bcgov/jag-lcrb-carla-public.git"
 export GIT_REF="master"
 
 # The project components

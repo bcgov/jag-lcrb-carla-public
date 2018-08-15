@@ -7,10 +7,11 @@
       <h2 style="padding-left: 0;">{{title}}</h2>
     </section>
     <p style="padding-left: 0; color: #fff;">{{description}}</p>
-    <div class="email-field">
+    <div>
 
-      <input class="form-control" style="flex: 1 0;" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email"
+      <input class="form-control" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email"
         tabindex="3">
+        <br>
       <button type="submit" class="btn btn-primary" (click)="signup()" [disabled]="!emailFormControl.valid" tabindex="3">
         SUBSCRIBE
       </button>
