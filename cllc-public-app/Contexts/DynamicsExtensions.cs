@@ -23,8 +23,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             result = client.NativeBaseUri + entityType + "(" + id.Trim() + ")";
             return result;
         }
-		
-        
+
+
 
         /// <summary>
         /// Convert a Dynamics attribute to boolean
@@ -41,8 +41,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result = (value.Equals("1") || value.ToLower().Equals("true"));
                 }
-            }            
-            
+            }
+
             return result;
         }
 
@@ -162,7 +162,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
-        
+
         /// <summary>
         /// Get a Account by their Guid
         /// </summary>
@@ -194,7 +194,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             return result;
-            
+
         }
 
 
@@ -212,7 +212,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // fetch from Dynamics.
                 result = await system.Accounts.GetByKeyAsync(id.ToString());
-            }            
+            }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
@@ -285,7 +285,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
-    
+
 
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactById(this IDynamicsClient system, Guid id)
         {
@@ -312,7 +312,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioLicencetypeValue != null)
                 {
-                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));                    
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
                 }
 
                 if (result._adoxioApplicantValue != null)
@@ -325,7 +325,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = null;
             }
             return result;
-        }       
+        }
 
         /// <summary>
         /// Get a contact by their Siteminder ID
@@ -339,18 +339,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
             var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-            result = contactsResponse.Value.FirstOrDefault();			
+            result = contactsResponse.Value.FirstOrDefault();
             return result;
         }
 
         public static MicrosoftDynamicsCRMadoxioLegalentity GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
-		{
+        {
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
-			string accountFilter = "_adoxio_account_value eq " + id.ToString();
+            string accountFilter = "_adoxio_account_value eq " + id.ToString();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value;
-            result = legalEntities.FirstOrDefault();            
-			return result;
-		}
+            result = legalEntities.FirstOrDefault();
+            return result;
+        }
 
 
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
@@ -389,12 +389,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
-			MicrosoftDynamicsCRMadoxioLicencetype result = null;
-			string typeFilter = "adoxio_name eq '" + name + "'";
+            MicrosoftDynamicsCRMadoxioLicencetype result = null;
+            string typeFilter = "adoxio_name eq '" + name + "'";
 
-			IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.AdoxioLicencetypes.Get(filter: typeFilter).Value;
+            IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.AdoxioLicencetypes.Get(filter: typeFilter).Value;
 
-			result = licenceTypes.FirstOrDefault();
+            result = licenceTypes.FirstOrDefault();
 
             return result;
         }
@@ -406,15 +406,33 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="userId"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient,  string userId, string guid = null)
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string userId, string guid = null)
         {
             User user = null;
+            Guid userGuid;
 
             if (!string.IsNullOrEmpty(guid))
+            {
                 user = await _dynamicsClient.GetUserByGuid(guid);
+            }
 
             if (user == null)
-                user = await _dynamicsClient.GetUserBySmUserId(userId);
+            {
+                if (Guid.TryParse(userId, out userGuid))
+                {
+                    user = await _dynamicsClient.GetUserBySmUserId(userId);
+                }
+                else
+                { //BC service card login
+                    var filter = "externaluseridentifier eq " + userId;
+                    var contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
+                    if (contact != null)
+                    {
+                        user = new User();
+                        user.FromContact(contact);
+                    }
+                }
+            }
 
             if (user == null)
                 return null;
@@ -508,14 +526,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                 legalEntities = legalEntities.Where(e => !String.IsNullOrEmpty(e._adoxioShareholderaccountidValue)).ToList();
                 for (var i = 0; i < legalEntities.Count; i++)
                 {
-                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId, _dynamicsClient)){
-                       result = true;
-                       break;
+                    if (IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId, _dynamicsClient))
+                    {
+                        result = true;
+                        break;
                     }
                 }
             }
             return result;
         }
-        
+
     }
 }
