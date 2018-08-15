@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // Sometimes we receive the siteminderbusienssguid instead of the account id. 
                     account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(accountId);
-                    if(account == null)
+                    if (account == null)
                     {
                         _logger.LogWarning(LoggingEvents.NotFound, "No Account Found.");
                         return new NotFoundResult();
@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> GetCurrentBCeIDBusiness()
         {
             _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
-            
+
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -315,6 +315,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             ViewModels.Account result = null;
             Boolean updateIfNull = true;
+            Guid tryParseOutGuid;
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -368,7 +369,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userContact.AdoxioExternalid = sanitizedContactSiteminderId;
                 userContact.Fullname = userSettings.UserDisplayName;
                 userContact.Nickname = userSettings.UserDisplayName;
-                userContact.Employeeid = userSettings.UserId;
+                if (Guid.TryParse(userSettings.UserId, out tryParseOutGuid)) // BCeid id goes here
+                {
+                    userContact.Employeeid = userSettings.UserId;
+                }
+                else // Store the BC service card id here
+                {
+                    userContact.Externaluseridentifier = userSettings.UserId;
+                }
 
                 if (bceidBusiness != null)
                 {
@@ -401,7 +409,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // ensure that we create an account for the current user.
 
                 // by convention we strip out any dashes present in the guid, and force it to uppercase.
-                string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(accountSiteminderGuid); 
+                string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(accountSiteminderGuid);
 
                 account.AdoxioExternalid = sanitizedAccountSiteminderId;
                 account.Primarycontactid = userContact;
