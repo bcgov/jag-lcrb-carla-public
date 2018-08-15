@@ -50,7 +50,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: "_adoxio_applicant_value eq " + applicantId).Value;
+                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                try
+                {
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter).Value;
+                }
+                catch (OdataerrorException)
+                {
+                    dynamicsApplicationList = null;
+                }
             }
 
             if (dynamicsApplicationList != null)
@@ -74,11 +82,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private int GetSubmittedCountByApplicant(string applicantId)
         {
-            var result = 0;            
+            var result = 0;
             if (!string.IsNullOrEmpty(applicantId))
             {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true";
-                result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
+                var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                try
+                {
+                    result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
+                }
+                catch (OdataerrorException)
+                {
+                    result = 0;
+                }
             }
             return result;
         }
