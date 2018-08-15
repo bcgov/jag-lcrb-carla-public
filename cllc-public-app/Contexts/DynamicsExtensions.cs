@@ -409,6 +409,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string userId, string guid = null)
         {
             User user = null;
+            MicrosoftDynamicsCRMcontact contact = null;
             Guid userGuid;
 
             if (!string.IsNullOrEmpty(guid))
@@ -424,8 +425,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 else
                 { //BC service card login
-                    var filter = "externaluseridentifier eq " + userId;
-                    var contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
+                    var filter = "externaluseridentifier eq " + userId;                    
+                    try
+                    {
+                        contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
+                    }
+                    catch (OdataerrorException)
+                    {
+                        contact = null;
+                    }
                     if (contact != null)
                     {
                         user = new User();
