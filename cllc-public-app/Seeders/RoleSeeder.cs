@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gov.Lclb.Cllb.Public.Contexts;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public RoleSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDistributedCache distributedCache) 
+        public RoleSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory) 
             : base(configuration, env, loggerFactory)
         { }
 
