@@ -5,7 +5,6 @@ using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -26,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
-        public AdoxioApplicationController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public AdoxioApplicationController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             _httpContextAccessor = httpContextAccessor;

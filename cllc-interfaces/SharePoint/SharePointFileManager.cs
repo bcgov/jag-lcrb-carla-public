@@ -1,7 +1,6 @@
 ﻿using Microsoft.AppServices;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-using Microsoft.SharePoint.DataService;
 using MS.FileServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,8 +23,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string DefaultDocumentListTitle = "Account";
         public const string ApplicationDocumentListTitle = "adoxio_application";
 
-
-        private LCLBCannabisDEVDataContext listData;
         private ApiData apiData;
         private AuthenticationResult authenticationResult;
 
@@ -62,7 +59,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             string listDataEndpoint = odataUri + "/_vti_bin/listdata.svc/";
             apiEndpoint = odataUri + "/_api/";
 
-            this.listData = new LCLBCannabisDEVDataContext(new Uri(listDataEndpoint));
             this.apiData = new ApiData(new Uri(apiEndpoint));
             
             if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
@@ -93,9 +89,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
                 "Authorization", authorization);
-
-            listData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-            "Authorization", authorization);
 
             // create the HttpClient that is used for our direct REST calls.
             client = new HttpClient();
@@ -458,7 +451,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<byte[]> DownloadFile(string url)
         {
-            var file = await this.GetFile(url);
             byte[] result = null;
             var webRequest = System.Net.WebRequest.Create(apiEndpoint + "web/GetFileByServerRelativeUrl('" + url +"')/$value");            
             HttpWebRequest request = (HttpWebRequest)webRequest;
