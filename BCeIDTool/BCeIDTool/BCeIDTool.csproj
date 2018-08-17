@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\repo\ag-lclb-cllc-public\cllc-interfaces\BCeID\BCeID.csproj" />
+    <ProjectReference Include="..\..\..\repo\ag-lclb-cllc-public\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
+  </ItemGroup>
+
+</Project>
