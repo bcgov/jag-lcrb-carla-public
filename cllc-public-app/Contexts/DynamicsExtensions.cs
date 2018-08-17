@@ -4,7 +4,6 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -167,7 +166,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Get a Account by their Guid
         /// </summary>
         /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountBySiteminderBusinessGuid(this IDynamicsClient system, string siteminderId)
@@ -202,7 +200,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Get a Account by their Guid
         /// </summary>
         /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountById(this IDynamicsClient system, Guid id)
@@ -331,7 +328,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Get a contact by their Siteminder ID
         /// </summary>
         /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactBySiteminderGuid(this IDynamicsClient system, string siteminderId)
