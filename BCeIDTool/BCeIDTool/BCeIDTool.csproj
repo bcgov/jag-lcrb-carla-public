@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\repo\ag-lclb-cllc-public\cllc-interfaces\BCeID\BCeID.csproj" />
-    <ProjectReference Include="..\..\..\repo\ag-lclb-cllc-public\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
+    <ProjectReference Include="..\..\cllc-interfaces\BCeID\BCeID.csproj" />
+    <ProjectReference Include="..\..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
   </ItemGroup>
 
 </Project>
