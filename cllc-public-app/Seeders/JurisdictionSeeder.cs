@@ -6,7 +6,6 @@ using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
 using Gov.Lclb.Cllb.Public.Contexts;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public JurisdictionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory  loggerFactory, IDistributedCache distributedCache) 
+        public JurisdictionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory  loggerFactory) 
             : base(configuration, env, loggerFactory)
         { }
 
