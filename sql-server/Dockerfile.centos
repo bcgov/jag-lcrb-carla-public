@@ -7,11 +7,10 @@ FROM centos:7
 
 
 ### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
-LABEL name="microsoft/mssql-server-linux" \
-      vendor="Microsoft" \
+LABEL name="mssql-server-linux" \
       version="14.0" \
       release="1" \
-      summary="MS SQL Server" \
+      summary="MS SQL Server Developer Edition" \
       description="MS SQL Server is ....." \
 ### Required labels above - recommended below
       url="https://www.microsoft.com/en-us/sql-server/" \
