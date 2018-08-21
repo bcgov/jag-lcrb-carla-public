@@ -18,7 +18,6 @@ export class NewsletterSignupComponent implements OnInit {
   public title: string;
   public email: string;
   public signupSuccess = false;
-  isLiteVersion: boolean;
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -33,10 +32,6 @@ export class NewsletterSignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientConfigDataService.getConfig().subscribe(data => {
-      this.isLiteVersion = data.isLiteVersion;
-    });
-
     if (this.slug != null) {
       this.newsletterDataService.getNewsletter(this.slug)
         .then((newsletter) => {
