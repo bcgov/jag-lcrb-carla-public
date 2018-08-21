@@ -140,4 +140,8 @@ Change directory to the directory containing the mssql server template, and exec
 
 ### Mssql deployment on local ###
 
+<<<<<<< HEAD
 To build an image for Mssql on a local instance of Openshift, Dockerfile.centos should be used. In jag-lcrb-carla-public/sql-server Dockerfile.centos should be renamed to Dockerfile. 
+=======
+To build an image for Mssql on a local instance of Openshift, Dockerfile.centos should be used. In jag-lcrb-carla-public/sql-server Dockerfile.centos should be renamed to Dockerfile. 
+>>>>>>> 353d5dfe6a58d8dfc47169d6cc30a2e4666b41b8
