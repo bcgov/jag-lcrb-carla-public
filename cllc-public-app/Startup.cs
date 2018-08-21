@@ -74,9 +74,6 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(typeof(XDownloadOptionsAttribute));
                 opts.Filters.Add(typeof(XFrameOptionsAttribute));
                 opts.Filters.Add(typeof(XXssProtectionAttribute));
-                opts.Filters.Add(typeof(CspAttribute));
-                opts.Filters.Add(new CspDefaultSrcAttribute { Self = true });
-                opts.Filters.Add(new CspScriptSrcAttribute { Self = true });
                 //CSPReportOnly
                 opts.Filters.Add(typeof(CspReportOnlyAttribute));
                 opts.Filters.Add(new CspScriptSrcReportOnlyAttribute { None = true });
@@ -310,7 +307,6 @@ namespace Gov.Lclb.Cllb.Public
                 ctx.Context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
                 ctx.Context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
                 ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com";
             };
 
             app.UseStaticFiles(staticFileOptions);
