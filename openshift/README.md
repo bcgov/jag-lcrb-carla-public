@@ -88,7 +88,7 @@ genBuilds.sh
 ```
 , and follow the instructions.
 
-Note: The script will stop mid-way through. Ensure all your images have been built before continuing.
+Note that the script will stop mid-way through. Ensure builds are complete in the tools project. Also, cllc-public may hang without error. This is likely due to insufficient resources in your local. 
 
 All of the builds should start automatically as their dependencies are available, starting with builds with only docker image and source dependencies.
 
