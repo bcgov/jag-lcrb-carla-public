@@ -3,7 +3,6 @@ import { NewsletterDataService } from "../services/newsletter-data.service"
 import { ToastsManager } from 'ng2-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators, EmailValidator, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ClientConfigDataService } from '../services/client-config.service';
 
 @Component({
   selector: 'app-newsletter-signup',
@@ -27,7 +26,7 @@ export class NewsletterSignupComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   /** newsletter-signup ctor */
-  constructor(private newsletterDataService: NewsletterDataService, public toastr: ToastsManager, vcr: ViewContainerRef, private clientConfigDataService: ClientConfigDataService) {
+  constructor(private newsletterDataService: NewsletterDataService, public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 

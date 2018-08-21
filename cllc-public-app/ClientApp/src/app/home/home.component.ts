@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ClientConfigDataService } from '../services/client-config.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,15 +9,10 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   window = window;
-  isDataLoaded: boolean = false;
   busy: Subscription;
 
-  constructor(private titleService: Title, private clientConfigDataService: ClientConfigDataService) {}
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
     this.titleService.setTitle('Home - Liquor and Cannabis Regulation Branch');
-    this.busy = this.clientConfigDataService.getConfig().subscribe(data => {
-      this.isDataLoaded = true;
-    });
   }
-}
