@@ -54,6 +54,8 @@ SOURCE_IMAGE_KIND=ImageStreamTag
 SOURCE_IMAGE_NAME=dotnet-20-centos7
 ```
 
+Note that you may have to comment out variables in the .param files found in jag-lcrb-carla-public-openshift\openshift.
+
 ### Preparing for local deployment
 
 1. Install the oc cli.  
@@ -131,3 +133,6 @@ Change directory to the directory containing the mssql server template, and exec
 
 `oc process -f sql-server-deploy.json --param-file=sql-server-deploy.uat.param | oc create -f -`
 
+### Mssql deployment on local ###
+
+To build an image for Mssql on a local instance of Openshift, Dockerfile.centos should be used. In jag-lcrb-carla-public/sql-server Dockerfile.centos should be renamed to Dockerfile. 
