@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
   public isDevMode: boolean;
   isAssociate = false;
   showLogin: boolean;
-  isLiteVersion = true;
 
   constructor(
     private renderer: Renderer2,
@@ -54,14 +53,12 @@ export class AppComponent implements OnInit {
 
     clientConfigDataService.getConfig().subscribe(data => {
       this.showLogin = data.showLogin;
-      this.isLiteVersion = data.isLiteVersion;
     });
   }
 
   ngOnInit(): void {
     this.clientConfigDataService.getConfig().subscribe(data => {
       this.showLogin = data.showLogin;
-      this.isLiteVersion = data.isLiteVersion;
     });
 
     this.reloadUser();

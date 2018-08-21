@@ -13,7 +13,6 @@ import { ClientConfigDataService } from '../services/client-config.service';
 })
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent {
-  isLiteVersion: boolean;
   busy: Subscription;
   transactionId: string;
   applicationId: string;
@@ -47,9 +46,6 @@ export class PaymentConfirmationComponent {
   }
 
   ngOnInit() {
-    this.clientConfigDataService.getConfig().subscribe(data => {
-      this.isLiteVersion = data.isLiteVersion;
-    });
     if (!this.applicationId) {
       this.applicationId = this.inputApplicationId;
     }
@@ -124,19 +120,11 @@ export class PaymentConfirmationComponent {
    * Return to dashboard
    * */
   return_to_application() {
-    // if (this.isLiteVersion) {
     if (this.trnApproved == "1") {
       this.router.navigate(['./dashboard-lite']);
     } else {
       this.router.navigate(['./application-lite/' + this.applicationId]);
     }
-    // } else {
-    //   if (this.trnApproved == "1") {
-    //     this.router.navigate(['./dashboard']);
-    //   } else {
-    //     this.router.navigate(['./license-application/' + this.applicationId + '/submit-pay']);
-    //   }
-    // }
   }
 
   /**

@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration Configuration;
         private readonly ILogger _logger;
 
-        public AppConfigController(IConfiguration configuration,  ILoggerFactory loggerFactory)
+        public AppConfigController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             _logger = loggerFactory.CreateLogger(this.GetType());
@@ -34,16 +34,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         public IActionResult ShowLogin()
         {
-            var result = new ClientConfig{
-                IsLiteVersion = !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]),
+            var result = new ClientConfig
+            {
                 ShowLogin = !String.IsNullOrEmpty(Configuration["SHOW_LOGIN"])
             };
             return Json(result);
         }
 
     }
-    public class ClientConfig {
-        public bool IsLiteVersion { get; set; }
+    public class ClientConfig
+    {
         public bool ShowLogin { get; set; }
     }
 }
