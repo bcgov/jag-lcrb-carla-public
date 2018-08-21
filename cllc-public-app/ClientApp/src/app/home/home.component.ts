@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   window = window;
-  isLiteVersion: boolean;
   isDataLoaded: boolean = false;
   busy: Subscription;
 
@@ -19,9 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Home - Liquor and Cannabis Regulation Branch');
     this.busy = this.clientConfigDataService.getConfig().subscribe(data => {
-      this.isLiteVersion = data.isLiteVersion;
       this.isDataLoaded = true;
     });
   }
-
 }
