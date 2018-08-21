@@ -25,14 +25,13 @@ export class AppComponent implements OnInit {
   public isNewUser: boolean;
   public isDevMode: boolean;
   isAssociate = false;
-  showLogin: boolean;
+
 
   constructor(
     private renderer: Renderer2,
     private router: Router,
     private userDataService: UserDataService,
     private store: Store<AppState>,
-    private clientConfigDataService: ClientConfigDataService,
     private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
   ) {
     this.isDevMode = isDevMode();
@@ -50,17 +49,9 @@ export class AppComponent implements OnInit {
         this.previousUrl = nextSlug;
       }
     });
-
-    clientConfigDataService.getConfig().subscribe(data => {
-      this.showLogin = data.showLogin;
-    });
   }
 
   ngOnInit(): void {
-    this.clientConfigDataService.getConfig().subscribe(data => {
-      this.showLogin = data.showLogin;
-    });
-
     this.reloadUser();
 
     this.store.select(state => state.legalEntitiesState)
