@@ -88,9 +88,12 @@ genBuilds.sh
 ```
 , and follow the instructions.
 
+Note: The script will stop mid-way through. Ensure all your images have been built before continuing.
+
 All of the builds should start automatically as their dependencies are available, starting with builds with only docker image and source dependencies.
 
 The process of deploying the Jenkins pipelines will automatically provision a Jenkins instance if one does not already exist.  This makes it easy to start fresh; you can simply delete the existing instance along with it's associated PVC, and fresh instances will be provisioned.
+
 
 ### Generate the Deployment Configurations and Deploy the Components
 
