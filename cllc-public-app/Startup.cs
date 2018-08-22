@@ -293,6 +293,7 @@ namespace Gov.Lclb.Cllb.Public
             {
                 ctx.Response.Headers.Add("Content-Security-Policy",
                                          "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
+                ctx.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
                 await next();
             });
             app.UseXContentTypeOptions();
