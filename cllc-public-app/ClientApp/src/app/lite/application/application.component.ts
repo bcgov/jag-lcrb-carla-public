@@ -22,7 +22,8 @@ import { debug } from 'util';
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
   application: AdoxioApplication;
-  @ViewChild(FileUploaderComponent) mainForm: FileUploaderComponent;
+  @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
   form: FormGroup;
   savedFormData: any;
   subscriptions: Subscription[] = [];
@@ -175,6 +176,10 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
       valid = false;
       this.validationMessages.push("Application form is required.")
+    }
+    if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
+      valid = false;
+      this.validationMessages.push("At least one supporting document is required.")
     }
     if (!this.form.get('establishmentName').value) {
       valid = false;
