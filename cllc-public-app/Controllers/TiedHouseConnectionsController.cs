@@ -9,10 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    // [Authorize(Policy = "Business-User")]
     public class TiedHouseConnectionsController : Controller
     {
         private readonly IConfiguration Configuration;

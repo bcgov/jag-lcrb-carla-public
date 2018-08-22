@@ -39,6 +39,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 		[Fact]
 		public async System.Threading.Tasks.Task PaymentSubmitReturnsValidRedirectUrlAndCanBePaid()
 		{
+            if (_client.BaseAddress.ToString() != "http://localhost/")
+            {
+                return;
+            }
+
 			string service = "payment";
             
             // first confirm we are not logged in

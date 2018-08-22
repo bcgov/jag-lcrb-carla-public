@@ -15,10 +15,12 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    // [Authorize(Policy = "Business-User")]
     public class AdoxioLegalEntityController : Controller
     {
         private readonly IConfiguration Configuration;
