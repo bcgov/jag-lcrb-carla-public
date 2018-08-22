@@ -9,7 +9,6 @@ import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-dat
 import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
-import { ClientConfigDataService } from './services/client-config.service';
 import { Observable } from '../../node_modules/rxjs';
 
 @Component({
@@ -25,15 +24,13 @@ export class AppComponent implements OnInit {
   public isNewUser: boolean;
   public isDevMode: boolean;
   isAssociate = false;
-  showLogin: boolean;
-  isLiteVersion = true;
+
 
   constructor(
     private renderer: Renderer2,
     private router: Router,
     private userDataService: UserDataService,
     private store: Store<AppState>,
-    private clientConfigDataService: ClientConfigDataService,
     private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
   ) {
     this.isDevMode = isDevMode();
@@ -51,19 +48,9 @@ export class AppComponent implements OnInit {
         this.previousUrl = nextSlug;
       }
     });
-
-    clientConfigDataService.getConfig().subscribe(data => {
-      this.showLogin = data.showLogin;
-      this.isLiteVersion = data.isLiteVersion;
-    });
   }
 
   ngOnInit(): void {
-    this.clientConfigDataService.getConfig().subscribe(data => {
-      this.showLogin = data.showLogin;
-      this.isLiteVersion = data.isLiteVersion;
-    });
-
     this.reloadUser();
 
     this.store.select(state => state.legalEntitiesState)

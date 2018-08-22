@@ -9,8 +9,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 })
 export class AccordionComponent implements OnInit {
 
-  @Input() isLiteVersion: boolean;
-
   constructor() { }
 
   ngOnInit() {
