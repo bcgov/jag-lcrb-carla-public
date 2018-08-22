@@ -16,3 +16,4 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Home - Liquor and Cannabis Regulation Branch');
   }
+}
