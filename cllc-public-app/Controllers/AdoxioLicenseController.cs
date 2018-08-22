@@ -10,11 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
+    // [Authorize(Policy = "Business-User")]
     public class AdoxioLicenseController : Controller
     {
         private readonly IConfiguration Configuration;        

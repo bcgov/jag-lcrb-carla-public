@@ -1,127 +1,76 @@
 @import "../../../node_modules/ng2-toastr/bundles/ng2-toastr.min.css";
-.lite {
-    h2 {
-        margin-top: 0;
-        color: #ffffff;
-    }
-    h3 {
-        color: #ffffff;
-    }
-    p {
-        padding-top: 10px;
-    }
-    .globalButton {
-        background-color: #ffffff;
-        margin-left: 0;
-        margin-right: 0;
-        color: #000;
-        font-size: 14px;
-        display: inline-block;
-        padding: 10px 24px;
-        margin-bottom: 0;
-        font-weight: 400;
-        line-height: 1.42857143;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        -ms-touch-action: manipulation;
-        touch-action: manipulation;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 0px;
-        box-shadow: 0px 0px 0px 0px;
-        margin-top: 10px;
-    }
-    .globalButton:hover {
-        background-color: rgba(0, 51, 102, 1);
-        color: #ffffff;
-        border-color: #204d74;
-        text-decoration: none;
-        box-shadow: 0px 0px 0px 0px;
-        margin-top: 10px;
-    }
-    .btn-primary {
-        background-color: rgba(0, 51, 102, 1);
-        font-family: 'myriad-pro', 'sans serif';
-        font-weight: 700;
-        font-style: normal;
-        font-size: 14px;
-    }
-    .email-field {
-        display: flex;
-        margin-top: 20px;
-    }
-    .fab-button {
-        background-color: #7596C8;
-        margin-right: 20px;
-        cursor: default;
-    }
-    .icon {
-        font-size: 30px;
-        color: #fff;
-        margin-left: -5px;
-        margin-top: -5px;
-    }
+h2 {
+    margin-top: 0;
+    color: #ffffff;
 }
 
-.notlite {
-    h1 {
-        font-size: 36px;
-        color: #494949;
-    }
-    h2 {
-        font-size: 28px;
-        color: #494949;
-    }
-    p {
-        padding-top: 10px;
-    }
-    h3 {
-        font-size: 18px;
-        color: #494949;
-        font-weight: 400;
-    }
-    .globalButton {
-        background-color: #ccc;
-        margin-left: 0;
-        margin-right: 0;
-        color: #000;
-        font-size: 14px;
-        display: inline-block;
-        padding: 10px 24px;
-        margin-bottom: 0;
-        font-weight: 400;
-        line-height: 1.42857143;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        -ms-touch-action: manipulation;
-        touch-action: manipulation;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 0px;
-        box-shadow: 0px 0px 0px 0px;
-        margin-top: 10px;
-    }
-    .globalButton:hover {
-        background-color: #2f567b;
-        color: #ffffff;
-        border-color: #204d74;
-        text-decoration: none;
-        box-shadow: 0px 0px 0px 0px;
-        margin-top: 10px;
-    }
-    .emailSignupForm {
-        padding-top: 20px;
-    }
+h3 {
+    color: #ffffff;
+}
+
+p {
+    padding-top: 10px;
+}
+
+.globalButton {
+    background-color: #ffffff;
+    margin-left: 0;
+    margin-right: 0;
+    color: #000;
+    font-size: 14px;
+    display: inline-block;
+    padding: 10px 24px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px 0px;
+    margin-top: 10px;
+}
+
+.globalButton:hover {
+    background-color: rgba(0, 51, 102, 1);
+    color: #ffffff;
+    border-color: #204d74;
+    text-decoration: none;
+    box-shadow: 0px 0px 0px 0px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: rgba(0, 51, 102, 1);
+    font-family: 'myriad-pro', 'sans serif';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.email-field {
+    display: flex;
+    margin-top: 20px;
+}
+
+.fab-button {
+    background-color: #7596C8;
+    margin-right: 20px;
+    cursor: default;
+}
+
+.icon {
+    font-size: 30px;
+    color: #fff;
+    margin-left: -5px;
+    margin-top: -5px;
 }
