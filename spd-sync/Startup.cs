@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
                                  .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
+                //config.Filters.Add(new AuthorizeFilter(policy));
             });
 
             // Other ConfigureServices() code...
@@ -56,21 +56,21 @@ namespace Gov.Lclb.Cllb.SpdSync
                 .AddDefaultTokenProviders();
 
             // Configure JWT authentication
-            services.AddAuthentication(o =>
-            {
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
-            {
-                o.SaveToken = true;
-                o.RequireHttpsMetadata = false;
-                o.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidIssuer = Configuration["ISSUER_TOKEN"],
-                    ValidAudience = Configuration["ISSUER_TOKEN"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TOKEN_KEY"]))
-                };                
-            });
+            //services.AddAuthentication(o =>
+            //{
+            //    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(o =>
+            //{
+            //    o.SaveToken = true;
+            //    o.RequireHttpsMetadata = false;
+            //    o.TokenValidationParameters = new TokenValidationParameters()
+            //    {
+            //        ValidIssuer = Configuration["ISSUER_TOKEN"],
+            //        ValidAudience = Configuration["ISSUER_TOKEN"],
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TOKEN_KEY"]))
+            //    };                
+            //});
 
             services.AddHangfire(config =>
             {
