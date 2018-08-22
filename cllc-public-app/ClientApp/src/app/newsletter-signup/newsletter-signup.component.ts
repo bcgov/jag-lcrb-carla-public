@@ -3,7 +3,6 @@ import { NewsletterDataService } from "../services/newsletter-data.service"
 import { ToastsManager } from 'ng2-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators, EmailValidator, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ClientConfigDataService } from '../services/client-config.service';
 
 @Component({
   selector: 'app-newsletter-signup',
@@ -18,7 +17,6 @@ export class NewsletterSignupComponent implements OnInit {
   public title: string;
   public email: string;
   public signupSuccess = false;
-  isLiteVersion: boolean;
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -28,15 +26,11 @@ export class NewsletterSignupComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   /** newsletter-signup ctor */
-  constructor(private newsletterDataService: NewsletterDataService, public toastr: ToastsManager, vcr: ViewContainerRef, private clientConfigDataService: ClientConfigDataService) {
+  constructor(private newsletterDataService: NewsletterDataService, public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit(): void {
-    this.clientConfigDataService.getConfig().subscribe(data => {
-      this.isLiteVersion = data.isLiteVersion;
-    });
-
     if (this.slug != null) {
       this.newsletterDataService.getNewsletter(this.slug)
         .then((newsletter) => {
