@@ -314,16 +314,8 @@
                     }
                   },
                   {
-                    "name": "SHOW_LOGIN",
-                    "value": "${SHOW_LOGIN}"
-                  },
-                  {
-                    "name": "IS_LITE_VERSION",
-                    "value": "${IS_LITE_VERSION}"
-                  },
-                  {
-                    "name": "DASHBOARD_LITE",
-                    "value": "${DASHBOARD_LITE}"
+                    "name": "SITEMINDER_LOGOUT_URL",
+                    "value": "${SITEMINDER_LOGOUT_URL}"
                   }
                 ],
                 "resources": {
@@ -597,6 +589,13 @@
       "description": "Secret resource name",
       "required": true,
       "value": "cllc-public-preprod"
+    },
+    {
+      "name": "SITEMINDER_LOGOUT_URL",
+      "displayName": "Siteminder logout URL",
+      "description": "Siteminder logout URL, e.g., https://logon.gov.bc.ca/clp-cgi/logoff.cgi, if left blank a value will be defaulted. Note this url is for prod and should be changed for dev and test.",
+      "required": true,
+      "value": "https://logon.gov.bc.ca/clp-cgi/logoff.cgi"
     }
   ]
 }
