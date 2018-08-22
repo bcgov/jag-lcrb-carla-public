@@ -86,7 +86,7 @@
   <p>Upload all required documentation that will support the licence application.</p>
   <section>
     <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILE MUST BE IN PDF, JPEG, PNG, DOC(X), XLS(X), FORMAT."
-      [applicationId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx']"></app-file-uploader>
+      [applicationId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx']" #supportingDocuments></app-file-uploader>
   </section>
   <br>
   <hr>
