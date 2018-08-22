@@ -101,7 +101,11 @@ namespace Gov.Lclb.Cllb.Public
             });
 
             // setup authorization
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Business-User", policy =>
+                                  policy.RequireClaim(User.UserTypeClaim, "Business"));
+            });
             services.RegisterPermissionHandler();
 
             // In production, the Angular files will be served from this directory
