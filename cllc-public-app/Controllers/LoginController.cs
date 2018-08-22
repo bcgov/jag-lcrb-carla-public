@@ -196,8 +196,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             }
 
-            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
-            return Redirect(basePath);
+            string logoutPath = string.IsNullOrEmpty(Configuration["SITEMINDER_LOGOUT_URL"]) ? "/" : Configuration["SITEMINDER_LOGOUT_URL"];
+            return Redirect(logoutPath);
         }
     }
 }
