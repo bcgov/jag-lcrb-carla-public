@@ -9,7 +9,6 @@ import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-dat
 import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
-import { ClientConfigDataService } from './services/client-config.service';
 import { Observable } from '../../node_modules/rxjs';
 
 @Component({
