@@ -309,7 +309,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost()]
-        [AllowAnonymous]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
             _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
