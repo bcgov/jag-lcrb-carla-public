@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             string logoutPath = string.IsNullOrEmpty(Configuration["SITEMINDER_LOGOUT_URL"]) ? "/" : Configuration["SITEMINDER_LOGOUT_URL"];
-            return Redirect(logoutPath);
+            return Redirect(logoutPath + $"?returl={Configuration["BASE_URI"]}{Configuration["BASE_PATH"]}&retnow=1");
         }
     }
 }
