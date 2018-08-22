@@ -88,9 +88,14 @@ genBuilds.sh
 ```
 , and follow the instructions.
 
+Note that the script will stop mid-way through. Ensure builds are complete in the tools project. Also, cllc-public may hang without error. This is likely due to insufficient resources in your local.
+
+IMPORTANT: Sometimes cllc-public will fail while trying to build its image. The error will say that npm install failed. This is due to npm timing out. To fix this resources must be increased. Try increasing requested CPU to 2 cores and RAM to 2 GB.
+
 All of the builds should start automatically as their dependencies are available, starting with builds with only docker image and source dependencies.
 
 The process of deploying the Jenkins pipelines will automatically provision a Jenkins instance if one does not already exist.  This makes it easy to start fresh; you can simply delete the existing instance along with it's associated PVC, and fresh instances will be provisioned.
+
 
 ### Generate the Deployment Configurations and Deploy the Components
 
