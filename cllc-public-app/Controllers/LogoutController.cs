@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class LogoutController : Controller
     {
         private readonly IConfiguration Configuration;
