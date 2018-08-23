@@ -307,7 +307,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
                     _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
-                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
+                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
 
@@ -403,8 +403,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     userSettings.AuthenticatedUser.UserType = siteMinderUserType;
                 }
+                userSettings.UserType = siteMinderUserType;
+
                 // This line gets the various claims for the current user.
-                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
+                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
 
                 // **************************************************
                 // Create authenticated user

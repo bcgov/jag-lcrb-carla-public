@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public
 
             // setup authorization
             services.AddAuthorization(options =>
-            {
+            {    
                 options.AddPolicy("Business-User", policy =>
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Public
         }
 
         private void SetupDynamics(IServiceCollection services)
-        {            
+        {
 
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
             string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];

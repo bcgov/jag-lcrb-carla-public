@@ -118,7 +118,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public async System.Threading.Tasks.Task Logout() 
 		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/login/cleartoken");
+			var request = new HttpRequestMessage(HttpMethod.Get, "/logout");
             var response = await _client.SendAsync(request);
 			string _discard = await response.Content.ReadAsStringAsync();
 			Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
