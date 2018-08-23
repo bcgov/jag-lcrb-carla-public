@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    // [Authorize(Policy = "Business-User")]
+    [Authorize(Policy = "Business-User")]
     public class AdoxioLicenseController : Controller
     {
         private readonly IConfiguration Configuration;        
