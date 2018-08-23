@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEstablishment([FromBody] ViewModels.AdoxioEstablishment item, string id)
         {
-            if (!string.IsNullOrEmpty(id) && id != item.id)
+            if (string.IsNullOrEmpty(id) && id != item.id)
             {
                 return BadRequest();
             }
