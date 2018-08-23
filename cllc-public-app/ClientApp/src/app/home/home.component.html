@@ -1,6 +1,5 @@
-<div [ngBusy]="busy"></div>
-
-<div *ngIf="isLiteVersion && isDataLoaded" class="lite">
+<div style="position: relative;">
+  <div [ngBusy]="busy"></div>
   <div class="home-header-wrapper">
     <div class="home-margins">
       <div class="row">
@@ -52,7 +51,7 @@
   <div class="row home-margins">
     <div class="col-md-7 col-sm-12">
       <div class="home-body">
-        <app-accordion [isLiteVersion]="isLiteVersion"></app-accordion>
+        <app-accordion></app-accordion>
       </div>
     </div>
     <div class="col-md-5 col-sm-12">
@@ -75,37 +74,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="!isLiteVersion && isDataLoaded" style="background-color:#F2F2F2;">
-  <div class="extra-padding-left notlite" style="width: 99%; max-width: 1600px; margin: auto; background-color: #fff;">
-    <div class="row">
-      <div class="col-md-7 col-sm-12">
-        <div class="jumbotron">
-          <h1>
-            What does an applicant need to apply for a cannabis licence?
-          </h1>
-          <h3>
-            Answer questions about the proposed business to receive a customized to-do list to prepare an application.
-          </h3>
-          <div class="row">
-            <div class="col-md-12 text-left">
-              <a class="globalButton" class="btn btn-primary" routerLink="prv" tabindex="3">
-                <strong>Start</strong>
-                <br>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <app-accordion></app-accordion>
-      </div>
-
-      <div class="col-md-5 newsletter">
-        <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
-      </div>
-
-    </div>
-  </div>
-
 </div>
