@@ -21,11 +21,11 @@ export interface DropdownOption {
   styleUrls: ['./file-uploader.component.scss']
 })
 export class FileUploaderComponent implements OnInit {
-  @Input() accountId: string;
   @Input() uploadUrl: string;
   @Input() fileTypes = '';
   @Input() documentType: string;
-  @Input() applicationId: string;
+  @Input() entityName: string;
+  @Input() entityId: string;
   @Input() multipleFiles: boolean = true;
   @Input() extensions: string[] = ['pdf'];
   busy: Subscription;
@@ -38,12 +38,8 @@ export class FileUploaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //use application controller if application ID is passed, otherwise legal entity controller
-    if (this.applicationId) {
-      this.attachmentURL = 'api/adoxioapplication/' + this.applicationId + '/attachments';
-    } else {
-      this.attachmentURL = 'api/AdoxioLegalEntity/' + this.accountId + '/attachments';
-    }
+    this.attachmentURL =`api/file/${this.entityId}/attachments/${this.entityName}`;
+
     this.getUploadedFileData();
   }
 
@@ -133,8 +129,8 @@ export class FileUploaderComponent implements OnInit {
   }
 
   downloadApplicationPDF(url: string, fileName: string) {
-    if (this.applicationId) {
-      this.adoxioApplicationDataService.downloadFile(url, this.applicationId)
+    if (this.entityId) {
+      this.adoxioApplicationDataService.downloadFile(url, this.entityId)
         .subscribe((res: Blob) => {
           saveAs(res, fileName);
         },

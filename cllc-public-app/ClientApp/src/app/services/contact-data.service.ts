@@ -19,10 +19,10 @@ export class ContactDataService {
   }
 
   public createContact(contact: DynamicsContact) {
-    return this.http.post(this.apiPath, contact, { headers: this.headers });
+    return this.http.post<DynamicsContact>(this.apiPath, contact, { headers: this.headers });
   }
   public updateAccount(contact: DynamicsContact) {
-    return this.http.put(this.apiPath + contact.id, contact, { headers: this.headers });
+    return this.http.put<DynamicsContact>(this.apiPath + contact.id, contact, { headers: this.headers });
   }
 
 }

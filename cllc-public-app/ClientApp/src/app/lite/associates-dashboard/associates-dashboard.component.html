@@ -7,6 +7,10 @@
     <p>
       This is a placeholder landing page for BC Service Card.
     </p>
+    <section>
+        <app-file-uploader *ngIf="contact && contact.id" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+          [multipleFiles]="false" entityName="contact" [entityId]="contact.id" #mainForm></app-file-uploader>
+      </section>
   </section>
 
   <section *ngIf="isNewUser">

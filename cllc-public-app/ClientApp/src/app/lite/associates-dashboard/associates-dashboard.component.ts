@@ -13,6 +13,7 @@ export class AssociatesDashboardComponent implements OnInit {
   currentUser: User;
   isNewUser: boolean;
   dataLoaded = false;
+  contact: DynamicsContact;
 
   constructor(private userDataService: UserDataService,
     private contactDataService: ContactDataService) { }
@@ -39,6 +40,7 @@ export class AssociatesDashboardComponent implements OnInit {
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
       this.contactDataService.createContact(contact).subscribe(res => {
+        this.contact = res;
         this.reloadUser();
       })
     } else {
