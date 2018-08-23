@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    // [Authorize(Policy = "Business-User")]
+    [Authorize(Policy = "Business-User")]
     public class AccountController : Controller
     {
         private readonly BCeIDBusinessQuery _bceid;
