@@ -16,22 +16,23 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="user"></param>
         /// <param name="authenticationType"></param>
         /// <returns></returns>
-        public static ClaimsPrincipal ToClaimsPrincipal(this User user, string authenticationType)
+        public static ClaimsPrincipal ToClaimsPrincipal(this User user, string authenticationType, string userType)
         {
-            return new ClaimsPrincipal(user.ToClaimsIdentity(authenticationType));
+            return new ClaimsPrincipal(user.ToClaimsIdentity(authenticationType, userType));
         }
 
-        private static ClaimsIdentity ToClaimsIdentity(this User user, string authenticationType)
+        private static ClaimsIdentity ToClaimsIdentity(this User user, string authenticationType, string userType)
         {
-            return new ClaimsIdentity(user.GetClaims(), authenticationType);
+            return new ClaimsIdentity(user.GetClaims(userType), authenticationType);
         }
 
-        private static List<Claim> GetClaims(this User user)
+        private static List<Claim> GetClaims(this User user, string userType)
         {
             List<Claim> claims = new List<Claim>();
-            if (user == null ) //a user is only a new users if they are a BCeID user
+            if (user == null ) //a user is only a new users if they are a BCeID user or BC service card
             {
                 claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
+                claims.Add(new Claim(User.UserTypeClaim, userType));
             }
             else
             {
