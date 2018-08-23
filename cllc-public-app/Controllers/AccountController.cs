@@ -544,6 +544,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     user.Active = true;
                     user.AccountId = Guid.Parse(userSettings.AccountId);
                     user.ContactId = Guid.Parse(userSettings.ContactId);
+                    user.UserType = userSettings.UserType;
                     user.SmUserId = userSettings.UserId;
                     userSettings.AuthenticatedUser = user;
                 }
