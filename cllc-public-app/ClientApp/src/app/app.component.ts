@@ -10,6 +10,7 @@ import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
 import { Observable } from '../../node_modules/rxjs';
+import * as CurrentUserActions from './app-state/actions/current-user.action';
 
 @Component({
   selector: 'app-root',
@@ -66,6 +67,8 @@ export class AppComponent implements OnInit {
       .subscribe((data: User) => {
         this.currentUser = data;
         this.isNewUser = this.currentUser.isNewUser;
+
+        this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
         // this.isAssociate = (this.currentUser.businessname == null);
         // if (!this.isAssociate) {
         //   this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(

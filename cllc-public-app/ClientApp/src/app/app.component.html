@@ -93,7 +93,8 @@
             <div class="collapse navbar-collapse" id="loggedInMenu">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
+                  <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
+                  <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/associates-lite">Associates</a>
                 </li>
               </ul>
             </div>

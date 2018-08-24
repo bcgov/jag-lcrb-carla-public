@@ -45,6 +45,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return folderName;
         }
 
+        private string GetContactFolderName(MicrosoftDynamicsCRMcontact contact)
+        {
+            string applicationIdCleaned = contact.Contactid.ToString().ToUpper().Replace("-", "");
+            string folderName = $"{contact.Fullname}_{applicationIdCleaned}";
+            return folderName;
+        }
+
         /// <summary>
         /// Get a document location by reference
         /// </summary>
@@ -130,12 +137,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> CanAccessEntity(string entityName, string entityId)
         {
             var result = false;
+            var id = Guid.Parse(entityId);
             switch(entityName.ToLower())
             {
                 case "application":
-                    var applicationId = Guid.Parse(entityId);
-                    var application = await _dynamicsClient.GetApplicationById(applicationId);
+                    var application = await _dynamicsClient.GetApplicationById(id);
                     result = application != null && CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue);
+                    break;
+                    case "contact":
+                    var contact = await _dynamicsClient.GetContactById(id);
+                    result = contact != null && CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
                     break;
                 default:
                     break;
@@ -153,11 +164,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
                     folderName = GetApplicationFolderName(application);
                     break;
+                case "contact":
+                    var contact = await _dynamicsClient.GetContactById(Guid.Parse(entityId));
+                    var cleanId= contact.Contactid.ToString().ToUpper().Replace("-", "");
+                    folderName = GetContactFolderName(contact);
+                    break;
                 default:
                     break;
             }
-
-            return "";
+            return folderName;
         }
 
         private void UpdateEntityModifiedOnDate(string entityName, string entityId)
@@ -181,21 +196,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (odee);
                     }
                     break;
+                case "contact":
+                    var patchContact = new MicrosoftDynamicsCRMcontact();
+                    try
+                    {
+                        _dynamicsClient.Contacts.Update(entityId, patchContact);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating Contact");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        // fail if we can't create.
+                        throw (odee);
+                    }
+                    break;
+
                 default:
                     break;
             }
         }
 
-        private string GetDocumentListTitle(string entityName)
-        {
-            switch (entityName.ToLower())
-            {
-                case "application":
-                    return "adoxio_application";
-                default:
-                    return null;
-            }
-        }
 
         private void ValidateSession()
         {
@@ -206,33 +229,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             userSettings.Validate();
         }
 
-        [HttpGet("download-file/{applicationId}")]
-        public async Task<IActionResult> DownloadFile(string applicationId, [FromQuery]string serverRelativeUrl)
+        [HttpGet("{entityId}/download-file/{entityName}")]
+        public async Task<IActionResult> DownloadFile(string entityId, string entityName, [FromQuery]string serverRelativeUrl)
         {
             // get the file.
-            if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(applicationId))
+            if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName))
             {
                 return BadRequest();
             }
-            else
+
+            ValidateSession();
+
+            var hasAccess = await CanAccessEntity(entityName, entityId);
+            if (!hasAccess)
             {
-                var application = await _dynamicsClient.GetApplicationById(Guid.Parse(applicationId));
-
-                if (application == null)
-                {
-                    return new NotFoundResult();
-                }
-
-                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
-                {
-                    return new NotFoundResult();
-                }
-
-                byte[] fileContents = await _sharePointFileManager.DownloadFile(serverRelativeUrl);
-                return new FileContentResult(fileContents, "application/octet-stream")
-                {
-                };
+                return new NotFoundResult();
             }
+
+            // Update modifiedon to current time
+            UpdateEntityModifiedOnDate(entityName, entityId);
+
+            byte[] fileContents = await _sharePointFileManager.DownloadFile(serverRelativeUrl);
+            return new FileContentResult(fileContents, "application/octet-stream")
+            {
+            };
+
         }
 
         /// <summary>
@@ -264,7 +285,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 List<FileDetailsList> fileDetailsList = null;
                 try
                 {
-                    fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.ApplicationDocumentListTitle, folderName, documentType);
+                    fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentListTitle(entityName), folderName, documentType);
                 }
                 catch (SharePointRestException spre)
                 {
@@ -302,60 +323,56 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(fileSystemItemVMList);
         }
 
+
+        private string GetDocumentListTitle(string entityName)
+        {
+            var listTitle = "";
+            switch (entityName.ToLower())
+            {
+                case "application":
+                    listTitle = SharePointFileManager.ApplicationDocumentListTitle;
+                    break;
+                case "contact":
+                    listTitle = SharePointFileManager.ContactDocumentListTitle;
+                    break;
+                default:
+                    break;
+            }
+            return listTitle;
+        }
+
         /// <summary>
         /// Delete a file.
         /// </summary>
         /// <param name="id">Application ID</param>
         /// <param name="serverRelativeUrl">The ServerRelativeUrl to delete</param>
         /// <returns></returns>
-        [HttpDelete("{applicationId}/attachments/{entityName}")]
-        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string applicationId, [FromRoute] string entityName)
+        [HttpDelete("{entityId}/attachments/{entityName}")]
+        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string entityId, [FromRoute] string entityName)
         {
             // get the file.
-            if (applicationId == null || serverRelativeUrl == null)
+            if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(serverRelativeUrl))
             {
                 return BadRequest();
             }
-            else
+
+            ValidateSession();
+
+            var hasAccess = await CanAccessEntity(entityName, entityId);
+            if (!hasAccess)
             {
-                // get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-                // check that the session is setup correctly.
-                userSettings.Validate();
-
-                // validate that the user account id matches the applicant for this application
-                var applicationGUID = new Guid(applicationId);
-                var application = await _dynamicsClient.GetApplicationById(applicationGUID);
-
-                if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue))
-                {
-                    return new NotFoundResult();
-                }
-
-                // Update modifiedon to current time
-                var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
-                try
-                {
-                    _dynamicsClient.Applications.Update(applicationId, patchApplication);
-                }
-                catch (OdataerrorException odee)
-                {
-                    _logger.LogError("Error updating application");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    // fail if we can't create.
-                    throw (odee);
-                }
-
-                var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
-                if (result)
-                {
-                    return new OkResult();
-                }
+                return new NotFoundResult();
             }
+
+            // Update modifiedon to current time
+            UpdateEntityModifiedOnDate(entityName, entityId);
+
+            var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
+            if (result)
+            {
+                return new OkResult();
+            }
+
             return new NotFoundResult();
         }
 
@@ -374,6 +391,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 return userSettings.AccountId == accountId;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
+        }
+
+        /// <summary>
+        /// Verify whether currently logged in user has access to this contact id
+        /// </summary>
+        /// <returns>boolean</returns>
+        private bool CurrentUserHasAccessToContactOwnedBy(string contactId)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
+            // TODO there may be some account relationships in the future
+            if (userSettings.ContactId != null && userSettings.ContactId.Length > 0)
+            {
+                return userSettings.ContactId == contactId;
             }
 
             // if current user doesn't have an account they are probably not logged in
