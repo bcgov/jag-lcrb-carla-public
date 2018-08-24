@@ -143,5 +143,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Redirect(basePath);
         }
 
+        [HttpGet]
+        [Route("devlogin")]
+        [AllowAnonymous]
+        public IActionResult DevLogin()
+        {
+            return Redirect($"https://logontest.gov.bc.ca/clp-cgi/fed/fedLaunch.cgi?TARGET=$SM${Configuration["BASE_URI"]}{Configuration["BASE_PATH"]}bcservice&retnow=1");
+        }
+
 	}
 }
