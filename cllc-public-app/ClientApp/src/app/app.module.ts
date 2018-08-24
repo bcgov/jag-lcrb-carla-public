@@ -118,6 +118,8 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
 import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
+import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule } from '@ngrx/store';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
@@ -298,7 +300,9 @@ import { AssociatesDashboardComponent } from './lite/associates-dashboard/associ
     TiedHouseConnectionsDataService,
     NgbDropdown,
     Title,
-    CanDeactivateGuard
+    CanDeactivateGuard,
+    BCeidAuthGuard,
+    ServiceCardAuthGuard,
   ],
   entryComponents: [
     ShareholderPersonDialogComponent,

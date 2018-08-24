@@ -152,6 +152,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
             contact.CopyValues(item);
+            string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
+            contact.Externaluseridentifier = userSettings.UserId;
+
+            contact.AdoxioExternalid = sanitizedAccountSiteminderId;
             try
             {
                 contact = await _dynamicsClient.Contacts.CreateAsync(contact);
