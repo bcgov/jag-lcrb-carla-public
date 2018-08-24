@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Observable, Subject } from 'rxjs';
 import { throttleTime, catchError } from 'rxjs/operators';
@@ -130,12 +130,20 @@ export class FileUploaderComponent implements OnInit {
 
   downloadApplicationPDF(url: string, fileName: string) {
     if (this.entityId) {
-      this.adoxioApplicationDataService.downloadFile(url, this.entityId)
+      this.downloadFile(url, this.entityId)
         .subscribe((res: Blob) => {
           saveAs(res, fileName);
         },
           err => alert('Failed to download file'));
     }
+  }
+
+  downloadFile(serverRelativeUrl: string, applicationId: string) {
+    const headers = new Headers({});
+    const attachmentURL = `api/file/${this.entityId}/download-file/${this.entityName}?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
+    return this.http.get(attachmentURL, { responseType: ResponseContentType.Blob })
+      .map(res => res.blob());
+
   }
 
   browseFiles(browserMultiple, browserSingle) {
