@@ -148,7 +148,7 @@ export class AdoxioApplicationDataService {
   }
   downloadFile(serverRelativeUrl: string, applicationId: string) {
     const headers = new Headers({});
-    const attachmentURL = `api/adoxioapplication/download-file/${applicationId}?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
+    const attachmentURL = `api/file/${applicationId}/download-file/application?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
     return this.http.get(attachmentURL, { responseType: ResponseContentType.Blob })
       .map(res => res.blob())
       .pipe(catchError(this.handleError));

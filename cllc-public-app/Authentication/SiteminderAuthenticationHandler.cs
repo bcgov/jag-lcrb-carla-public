@@ -381,7 +381,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         userSettings.UserDisplayName = userId + " Associate";
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
 						siteMinderBusinessGuid = null;
-                        siteMinderUserType = "BC Services Card";
+                        siteMinderUserType = "VerifiedIndividual";
 					}
                 }
 
