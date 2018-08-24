@@ -11,6 +11,7 @@ export class User {
   isBceidConfirmed: boolean;
   contactid: string;
   accountid: string;
+  userType: string;
 
   constructor() { }
 }
