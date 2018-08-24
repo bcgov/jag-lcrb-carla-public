@@ -24,6 +24,9 @@ export class BCeidAuthGuard implements CanActivate {
                     this.router.navigate(['/']);
                 }
                 result.next(allowAccess);
+            }, error => {
+                this.router.navigate(['/']);
+                result.next(false);
             });
         return result;
     }
