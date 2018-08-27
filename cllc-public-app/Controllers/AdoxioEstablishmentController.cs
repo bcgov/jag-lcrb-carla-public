@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    // [Authorize(Policy = "Business-User")]
+    [Authorize(Policy = "Business-User")]
     public class AdoxioEstablishmentController : Controller
     {
         private readonly IConfiguration Configuration;
@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEstablishment([FromBody] ViewModels.AdoxioEstablishment item, string id)
         {
-            if (!string.IsNullOrEmpty(id) && id != item.id)
+            if (string.IsNullOrEmpty(id) || id != item.id)
             {
                 return BadRequest();
             }
