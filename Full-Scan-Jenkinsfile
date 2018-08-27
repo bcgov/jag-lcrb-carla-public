@@ -26,7 +26,6 @@ node('master') {
 
 // ZAP security scan. commented out due to issues with Pathfinder OpenShift
 
-/*
 podTemplate(label: 'owasp-zap', name: 'owasp-zap', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
         name: 'jnlp',
@@ -58,7 +57,6 @@ podTemplate(label: 'owasp-zap', name: 'owasp-zap', serviceAccount: 'jenkins', cl
         }
     }
 }
-*/
 
 node('nodejs') {
     stage('Smoke test on Dev') {
