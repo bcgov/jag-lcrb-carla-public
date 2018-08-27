@@ -26,7 +26,7 @@ node('master') {
 
 // ZAP security scan. commented out due to issues with Pathfinder OpenShift
 
-podTemplate(label: 'owasp-zap', name: 'owasp-zap', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
+podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
         name: 'jnlp',
         image: '172.50.0.2:5000/openshift/jenkins-slave-zap',
@@ -42,7 +42,7 @@ podTemplate(label: 'owasp-zap', name: 'owasp-zap', serviceAccount: 'jenkins', cl
 {
     stage('ZAP Security Scan')
     {
-        node('owasp-zap') {
+        node('owasp-zap2') {
             //the checkout is mandatory
             echo "checking out source"
             echo "Build: ${BUILD_ID}"
