@@ -18,7 +18,7 @@ using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    // [Authorize(Policy = "Business-User")]
+    [Authorize(Policy = "Business-User")]
     public class AdoxioApplicationController : Controller
     {
         private readonly IConfiguration Configuration;

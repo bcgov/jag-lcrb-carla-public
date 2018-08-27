@@ -52,6 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.accountid = userSettings.AccountId;
             user.businessname = userSettings.BusinessLegalName;
             user.name = userSettings.UserDisplayName;
+            user.UserType = userSettings.UserType;
 
             if (userSettings.IsNewUserRegistration)
             {

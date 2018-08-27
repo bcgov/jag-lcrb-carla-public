@@ -112,5 +112,5 @@
   <section *ngIf="['LimitedPartnership', 'GeneralPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) == -1" >
     <label *ngIf="['PublicCorporation'].indexOf(businessType) === -1" for="">Upload the corporation's Central Securities Register</label>
     <label *ngIf="['PublicCorporation'].indexOf(businessType) !== -1" for="">Upload a document showing the shareholders with a 10% or greater interest in the company</label>
-    <app-file-uploader documentType="Central Securities Register" [accountId]="accountId"></app-file-uploader>
+    <app-file-uploader documentType="Central Securities Register" entityName="account" [entityId]="accountId"></app-file-uploader>
   </section>

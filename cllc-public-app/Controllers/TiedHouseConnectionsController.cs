@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    // [Authorize(Policy = "Business-User")]
+    [Authorize(Policy = "Business-User")]
     public class TiedHouseConnectionsController : Controller
     {
         private readonly IConfiguration Configuration;

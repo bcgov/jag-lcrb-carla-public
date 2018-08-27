@@ -22,6 +22,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         public const string DefaultDocumentListTitle = "Account";
         public const string ApplicationDocumentListTitle = "adoxio_application";
+        public const string ContactDocumentListTitle = "contact";
 
         private ApiData apiData;
         private AuthenticationResult authenticationResult;
