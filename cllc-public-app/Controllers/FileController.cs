@@ -104,6 +104,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.FileSystemItem result = null;
             ValidateSession();
 
+            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName));
+
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
                 return BadRequest();
@@ -269,6 +271,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             ValidateSession();
 
+            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName));
+
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
                 return BadRequest();
@@ -416,6 +420,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // if current user doesn't have an account they are probably not logged in
             return false;
+        }
+
+
+        private async void CreateDocumentLibraryIfMissing(string listTitle)
+        {
+            var exists = await _sharePointFileManager.DocumentLibraryExists(listTitle);
+            if (!exists)
+            {
+                await _sharePointFileManager.CreateDocumentLibrary(listTitle);
+            }
         }
     }
 }
