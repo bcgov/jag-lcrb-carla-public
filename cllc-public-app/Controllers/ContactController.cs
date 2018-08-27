@@ -155,7 +155,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
             contact.Externaluseridentifier = userSettings.UserId;
 
-            contact.AdoxioExternalid = sanitizedAccountSiteminderId;
+            //clean externalId    
+            var externalId = "";
+            var tokens = sanitizedAccountSiteminderId.Split('|');
+            if(tokens.Length > 0) {
+                externalId = tokens[0];
+            }
+
+            if(!string.IsNullOrEmpty(externalId)) {
+                tokens = externalId.Split(':');
+                externalId  = tokens[tokens.Length -1];
+            }
+
+            contact.AdoxioExternalid = externalId;
             try
             {
                 contact = await _dynamicsClient.Contacts.CreateAsync(contact);
