@@ -22,6 +22,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool isBceidConfirmed { get; set; }
         public string contactid { get; set; }
         public string accountid { get; set; }
+        public string  UserType { get; set; }
 
     }
 }
