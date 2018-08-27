@@ -6,6 +6,7 @@ import { DynamicsContact } from '../../models/dynamics-contact.model';
 import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-associate-dashboard',
@@ -17,6 +18,7 @@ export class AssociatesDashboardComponent implements OnInit {
   isNewUser: boolean;
   dataLoaded = false;
   contact: DynamicsContact;
+  busy:  Subscription;
 
   constructor(private userDataService: UserDataService,
     private store: Store<AppState>,
@@ -51,9 +53,9 @@ export class AssociatesDashboardComponent implements OnInit {
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
-      this.contactDataService.createContact(contact).subscribe(res => {
+      this.busy = this.contactDataService.createContact(contact).subscribe(res => {
         this.reloadUser();
-      })
+      }, error => alert('Failed to create contact'));
     } else {
       window.location.href = 'logout';
     }
