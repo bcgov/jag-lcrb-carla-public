@@ -1,12 +1,9 @@
-﻿using Microsoft.AppServices;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-using MS.FileServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Data.Services.Client;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,7 +21,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string ApplicationDocumentListTitle = "adoxio_application";
         public const string ContactDocumentListTitle = "contact";
 
-        private ApiData apiData;
         private AuthenticationResult authenticationResult;
 
         public string OdataUri { get; set; }
@@ -60,8 +56,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             string listDataEndpoint = odataUri + "/_vti_bin/listdata.svc/";
             apiEndpoint = odataUri + "/_api/";
 
-            this.apiData = new ApiData(new Uri(apiEndpoint));
-
             if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
             {
 
@@ -87,10 +81,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             }
 
-
-            apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", authorization);
-
             // create the HttpClient that is used for our direct REST calls.
             client = new HttpClient();
 
@@ -103,20 +93,20 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         }
 
-        public async Task<List<FileSystemItem>> GetFiles()
-        {
-            DataServiceQuery<MS.FileServices.FileSystemItem> query = (DataServiceQuery<MS.FileServices.FileSystemItem>)
-                from file in apiData.Files
-                select file;
-
-            TaskFactory<IEnumerable<FileSystemItem>> taskFactory = new TaskFactory<IEnumerable<FileSystemItem>>();
-            IEnumerable<FileSystemItem> result = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            return result.ToList();
-        }
-
         public class FileFolderResults
         {
             public List<FileSystemItem> results { get; set; }
+        }
+
+        public class FileSystemItem
+        {
+            public string Id { get; set; }
+            public string Name { get; set; }
+            public string Documenttype { get; set; }
+            public int Size { get; set; }
+            public string serverrelativeurl { get; set; }
+            public DateTime Timecreated { get; set; }
+            public DateTime Timelastmodified { get; set; }
         }
 
 
@@ -253,7 +243,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return folder;
         }
         /// <summary>
-        /// Create Document Library
+        /// Create Folder
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -357,21 +347,21 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<bool> FolderExists(string listTitle, string folderName)
         {
-            SP.Folder folder = await GetFolder(listTitle, folderName);
+            Object folder = await GetFolder(listTitle, folderName);
 
             return (folder != null);
         }
 
         public async Task<bool> DocumentLibraryExists(string listTitle)
         {
-            SP.List lisbrary = await GetDocumentLibrary(listTitle);
+            Object lisbrary = await GetDocumentLibrary(listTitle);
 
             return (lisbrary != null);
         }
 
-        public async Task<SP.Folder> GetFolder(string listTitle, string folderName)
+        public async Task<Object> GetFolder(string listTitle, string folderName)
         {
-            SP.Folder result = null;
+            Object result = null;
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
@@ -384,15 +374,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.OK)
             {
 
-                result = JsonConvert.DeserializeObject<SP.Folder>(jsonString);
+                result = JsonConvert.DeserializeObject(jsonString);
             }
 
             return result;
         }
 
-        public async Task<SP.List> GetDocumentLibrary(string listTitle)
+        public async Task<Object> GetDocumentLibrary(string listTitle)
         {
-            SP.List result = null;
+            Object result = null;
             string title = Uri.EscapeUriString(listTitle);
             string query = $"web/lists/GetByTitle('{title}')";
 
@@ -406,47 +396,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.OK)
             {
 
-                result = JsonConvert.DeserializeObject<SP.List>(jsonString);
+                result = JsonConvert.DeserializeObject(jsonString);
             }
 
             return result;
         }
-
-
-        /// <summary>
-        /// Get File
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public async Task<FileSystemItem> GetFile(string url)
-        {
-            DataServiceQuery<MS.FileServices.FileSystemItem> query = (DataServiceQuery<MS.FileServices.FileSystemItem>)
-                from file in apiData.Files
-                where file.Url == url
-                select file;
-
-            TaskFactory<IEnumerable<FileSystemItem>> taskFactory = new TaskFactory<IEnumerable<FileSystemItem>>();
-            IEnumerable<FileSystemItem> result = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            return result.FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Get File By ID
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public async Task<FileSystemItem> GetFileById(string id)
-        {
-            DataServiceQuery<MS.FileServices.FileSystemItem> query = (DataServiceQuery<MS.FileServices.FileSystemItem>)
-                from file in apiData.Files
-                where file.Id == id
-                select file;
-
-            TaskFactory<IEnumerable<FileSystemItem>> taskFactory = new TaskFactory<IEnumerable<FileSystemItem>>();
-            IEnumerable<FileSystemItem> result = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            return result.FirstOrDefault();
-        }
-
 
         public async Task AddFile(String folderName, String fileName, Stream fileData, string contentType)
         {
