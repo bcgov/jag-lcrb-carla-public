@@ -231,7 +231,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             userSettings.Validate();
         }
 
-        [HttpGet("{entityId}/download-file/{entityName}")]
+        [HttpGet("{entityId}/download-file/{entityName}/{fileName}")]
         public async Task<IActionResult> DownloadFile(string entityId, string entityName, [FromQuery]string serverRelativeUrl)
         {
             // get the file.
