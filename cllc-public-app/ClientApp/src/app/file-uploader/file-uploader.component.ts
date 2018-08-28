@@ -98,7 +98,8 @@ export class FileUploaderComponent implements OnInit {
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {
-          entry.size = Math.ceil(entry.size / 1024)
+          entry.size = Math.ceil(entry.size / 1024);
+          entry.downloadUrl = `api/file/${this.entityId}/download-file/${this.entityName}/${entry.name}?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}`;
         });
         this.files = data;
       },
@@ -126,24 +127,6 @@ export class FileUploaderComponent implements OnInit {
 
   public fileLeave(event) {
     //console.log(event);
-  }
-
-  downloadApplicationPDF(url: string, fileName: string) {
-    if (this.entityId) {
-      this.downloadFile(url, this.entityId)
-        .subscribe((res: Blob) => {
-          saveAs(res, fileName);
-        },
-          err => alert('Failed to download file'));
-    }
-  }
-
-  downloadFile(serverRelativeUrl: string, applicationId: string) {
-    const headers = new Headers({});
-    const attachmentURL = `api/file/${this.entityId}/download-file/${this.entityName}?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
-    return this.http.get(attachmentURL, { responseType: ResponseContentType.Blob })
-      .map(res => res.blob());
-
   }
 
   browseFiles(browserMultiple, browserSingle) {
