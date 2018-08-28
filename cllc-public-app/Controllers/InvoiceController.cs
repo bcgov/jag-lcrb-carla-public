@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utility;
+using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Microsoft.OData.Client;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using System.Linq;
-using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
-using System.Reflection;
-using Gov.Lclb.Cllb.Public.Utils;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
