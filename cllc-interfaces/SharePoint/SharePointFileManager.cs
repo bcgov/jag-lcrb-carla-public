@@ -1,12 +1,9 @@
-﻿using Microsoft.AppServices;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-using MS.FileServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Data.Services.Client;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,7 +21,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string ApplicationDocumentListTitle = "adoxio_application";
         public const string ContactDocumentListTitle = "contact";
 
-        private ApiData apiData;
         private AuthenticationResult authenticationResult;
 
         public string OdataUri { get; set; }
@@ -35,15 +31,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         string authorization { get; set; }
         private HttpClient client;
 
-        public SharePointFileManager(string serverAppIdUri, 
-                                     string odataUri, 
-                                     string webname, 
-                                     string aadTenantId, 
-                                     string clientId, 
-                                     string certFileName, 
-                                     string certPassword, 
-                                     string ssgUsername, 
-                                     string ssgPassword, 
+        public SharePointFileManager(string serverAppIdUri,
+                                     string odataUri,
+                                     string webname,
+                                     string aadTenantId,
+                                     string clientId,
+                                     string certFileName,
+                                     string certPassword,
+                                     string ssgUsername,
+                                     string ssgPassword,
                                      string nativeBaseUri)
         {
             OdataUri = odataUri;
@@ -60,8 +56,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             string listDataEndpoint = odataUri + "/_vti_bin/listdata.svc/";
             apiEndpoint = odataUri + "/_api/";
 
-            this.apiData = new ApiData(new Uri(apiEndpoint));
-            
             if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
             {
 
@@ -84,16 +78,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // authenticate using the SSG.                
                 string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(ssgUsername + ":" + ssgPassword));
                 authorization = "Basic " + credentials;
-                
+
             }
-
-
-            apiData.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", authorization);
 
             // create the HttpClient that is used for our direct REST calls.
             client = new HttpClient();
-            
+
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             client.DefaultRequestHeaders.Add("Authorization", authorization);
             var digestTask = GetDigest(client);
@@ -103,20 +93,20 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         }
 
-        public async Task<List<FileSystemItem>> GetFiles ()
-        {            
-            DataServiceQuery<MS.FileServices.FileSystemItem> query = (DataServiceQuery<MS.FileServices.FileSystemItem>)
-                from file in apiData.Files
-                select file;
-
-            TaskFactory<IEnumerable<FileSystemItem>> taskFactory = new TaskFactory<IEnumerable<FileSystemItem>>();
-            IEnumerable<FileSystemItem> result = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            return result.ToList();
-        }
-
         public class FileFolderResults
         {
             public List<FileSystemItem> results { get; set; }
+        }
+
+        public class FileSystemItem
+        {
+            public string Id { get; set; }
+            public string Name { get; set; }
+            public string Documenttype { get; set; }
+            public int Size { get; set; }
+            public string serverrelativeurl { get; set; }
+            public DateTime Timecreated { get; set; }
+            public DateTime Timelastmodified { get; set; }
         }
 
 
@@ -143,8 +133,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
         {
-            string serverRelativeUrl = $"{WebName}/"+ Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
-            string _responseContent = null; 
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            string _responseContent = null;
             HttpRequestMessage _httpRequest =
                             new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/files");
             // make the request.
@@ -155,10 +145,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                
+
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                
+
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
                 {
@@ -201,25 +191,25 @@ namespace Gov.Lclb.Cllb.Interfaces
                         searchResult.DocumentType = documentType;
                         fileDetailsList.Add(searchResult);
                     }
-                }                    
+                }
             }
 
             return fileDetailsList;
         }
 
-            /// <summary>
-            /// Create Folder
-            /// </summary>
-            /// <param name="name"></param>
-            /// <returns></returns>
-            public async Task<Object> CreateFolder(string listTitle, string folderName)
+        /// <summary>
+        /// Create Folder
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<Object> CreateFolder(string listTitle, string folderName)
         {
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/folders");
 
 
             var folder = CreateNewFolderRequest($"{WebName}/{listTitle}/{folderName}");
-           
+
 
             string jsonString = JsonConvert.SerializeObject(folder);
             StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
@@ -229,7 +219,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // make the request.
             var response = await client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
-            
+
             if (_statusCode != HttpStatusCode.Created)
             {
                 string _responseContent = null;
@@ -249,14 +239,68 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 jsonString = await response.Content.ReadAsStringAsync();
             }
-            
+
             return folder;
+        }
+        /// <summary>
+        /// Create Folder
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<Object> CreateDocumentLibrary(string listTitle)
+        {
+            HttpRequestMessage endpointRequest =
+                new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/Lists");
+
+
+            var library = CreateNewDocumentLibraryRequest($"{listTitle}");
+
+
+            string jsonString = JsonConvert.SerializeObject(library);
+            StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            endpointRequest.Content = strContent;
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+            HttpStatusCode _statusCode = response.StatusCode;
+
+            if (_statusCode != HttpStatusCode.Created)
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
+            else
+            {
+                jsonString = await response.Content.ReadAsStringAsync();
+            }
+
+            return library;
         }
 
         private object CreateNewFolderRequest(string serverRelativeUri)
         {
             var type = new { type = "SP.Folder" };
             var request = new { __metadata = type, ServerRelativeUrl = serverRelativeUri };
+            return request;
+        }
+
+        private object CreateNewDocumentLibraryRequest(string listName)
+        {
+            var type = new { type = "SP.List" };
+            var request = new { __metadata = type,
+                BaseTemplate = 101,
+                Title = listName };
             return request;
         }
 
@@ -269,7 +313,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
-            
+
 
             // We want to delete this folder.
             endpointRequest.Headers.Add("IF-MATCH", "*");
@@ -303,19 +347,25 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<bool> FolderExists(string listTitle, string folderName)
         {
-            SP.Folder folder = await GetFolder(listTitle, folderName);
+            Object folder = await GetFolder(listTitle, folderName);
 
-            return (folder != null);            
+            return (folder != null);
         }
 
-        public async Task<SP.Folder> GetFolder(string listTitle, string folderName)
+        public async Task<bool> DocumentLibraryExists(string listTitle)
         {
-            SP.Folder result = null;
+            Object lisbrary = await GetDocumentLibrary(listTitle);
+
+            return (lisbrary != null);
+        }
+
+        public async Task<Object> GetFolder(string listTitle, string folderName)
+        {
+            Object result = null;
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
-            HttpRequestMessage endpointRequest =
-    new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
-            
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
+
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
@@ -323,48 +373,34 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                
-                result = JsonConvert.DeserializeObject<SP.Folder>(jsonString);
+
+                result = JsonConvert.DeserializeObject(jsonString);
             }
 
             return result;
         }
 
-
-        /// <summary>
-        /// Get File
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public async Task<FileSystemItem> GetFile(string url)
+        public async Task<Object> GetDocumentLibrary(string listTitle)
         {
-            DataServiceQuery<MS.FileServices.FileSystemItem> query = (DataServiceQuery<MS.FileServices.FileSystemItem>)
-                from file in apiData.Files
-                where file.Url == url
-                select file;
+            Object result = null;
+            string title = Uri.EscapeUriString(listTitle);
+            string query = $"web/lists/GetByTitle('{title}')";
 
-            TaskFactory<IEnumerable<FileSystemItem>> taskFactory = new TaskFactory<IEnumerable<FileSystemItem>>();
-            IEnumerable<FileSystemItem> result = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            return result.FirstOrDefault();           
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, apiEndpoint + query);
+
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+
+                result = JsonConvert.DeserializeObject(jsonString);
+            }
+
+            return result;
         }
-
-        /// <summary>
-        /// Get File By ID
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public async Task<FileSystemItem> GetFileById(string id)
-        {
-            DataServiceQuery<MS.FileServices.FileSystemItem> query = (DataServiceQuery<MS.FileServices.FileSystemItem>)
-                from file in apiData.Files
-                where file.Id == id
-                select file;
-
-            TaskFactory<IEnumerable<FileSystemItem>> taskFactory = new TaskFactory<IEnumerable<FileSystemItem>>();
-            IEnumerable<FileSystemItem> result = await taskFactory.FromAsync(query.BeginExecute(null, null), iar => query.EndExecute(iar));
-            return result.FirstOrDefault();
-        }
-
 
         public async Task AddFile(String folderName, String fileName, Stream fileData, string contentType)
         {
@@ -373,17 +409,17 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
 
-        public async Task AddFile(String documentLibrary, String folderName,  String fileName, Stream fileData, string contentType)
+        public async Task AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
         {
 
             bool folderExists = await this.FolderExists(documentLibrary, folderName);
-            if (! folderExists)
+            if (!folderExists)
             {
-              var folder =  await this.CreateFolder(documentLibrary, folderName);                
+                var folder = await this.CreateFolder(documentLibrary, folderName);
             }
 
             // now add the file to the folder.
-            
+
             await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
 
         }
@@ -410,7 +446,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
             HttpRequestMessage endpointRequest =
-    new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='" 
+    new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='"
     + name + "',overwrite=true)");
             // convert the stream into a byte array.
             MemoryStream ms = new MemoryStream();
@@ -453,12 +489,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<byte[]> DownloadFile(string url)
         {
             byte[] result = null;
-            var webRequest = System.Net.WebRequest.Create(apiEndpoint + "web/GetFileByServerRelativeUrl('" + url +"')/$value");            
+            var webRequest = System.Net.WebRequest.Create(apiEndpoint + "web/GetFileByServerRelativeUrl('" + url + "')/$value");
             HttpWebRequest request = (HttpWebRequest)webRequest;
             request.PreAuthenticate = true;
-            request.Headers.Add ("Authorization", authorization);
+            request.Headers.Add("Authorization", authorization);
             request.Accept = "*";
-                        
+
             // we need to add authentication to a HTTP Client to fetch the file.
             using (
                 MemoryStream ms = new MemoryStream())
@@ -466,7 +502,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 await request.GetResponse().GetResponseStream().CopyToAsync(ms);
                 result = ms.ToArray();
             }
-            
+
             return result;
         }
 
@@ -510,7 +546,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            
+
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, apiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");
 
