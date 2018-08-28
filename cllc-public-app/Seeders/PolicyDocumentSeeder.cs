@@ -6,6 +6,7 @@ using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -13,31 +14,24 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public PolicyDocumentSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory) 
-            : base(configuration, env, loggerFactory)
+        public PolicyDocumentSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient) 
+            : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 
         protected override IEnumerable<string> TriggerProfiles => _profileTriggers;
 
         protected override void Invoke(AppDbContext context)
         {
-            UpdatePolicyDocuments(context);
+            UpdatePolicyDocuments(_dynamicsClient);
             
         }
 
-        private void UpdatePolicyDocuments(AppDbContext context)
+        private void UpdatePolicyDocuments(IDynamicsClient dynamicsClient)
         {
-            List<PolicyDocument> seedPolicyDocuments = GetSeedPolicyDocuments();
-
-            foreach (PolicyDocument PolicyDocument in seedPolicyDocuments)
-            {
-                context.UpdateSeedPolicyDocumentInfo(PolicyDocument);                
-            }
-
-            AddInitialPolicyDocuments(context);            
+            AddInitialPolicyDocuments(dynamicsClient);            
         }
 
-        private void AddInitialPolicyDocuments(AppDbContext context)
+        private void AddInitialPolicyDocuments(IDynamicsClient dynamicsClient)
         {
             string PolicyDocumentInitializationFile = Configuration["PolicyDocumentInitializationFile"];
             if (string.IsNullOrEmpty(PolicyDocumentInitializationFile))
@@ -45,7 +39,12 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                 // default to sample data, which is stored in the "SeedData" directory.
                 PolicyDocumentInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "PolicyDocuments.json"); 
             }
-            context.AddInitialPolicyDocumentsFromFile(PolicyDocumentInitializationFile);
+            bool forceupdate = false;
+            if (! string.IsNullOrEmpty(Configuration["FORCE_POLICY_UPDATE"]))
+            {
+                forceupdate = true;
+            }
+            dynamicsClient.AddInitialPolicyDocumentsFromFile(PolicyDocumentInitializationFile, forceupdate);
         }
 
         private List<PolicyDocument> GetSeedPolicyDocuments()

@@ -20,7 +20,7 @@
   <div style="margin-top: 5px;">
     <div [ngBusy]="busy"></div>
     <section *ngFor="let item of files; let i=index" class="file-list">
-      <a href="javscript: void(0)" (click)="downloadApplicationPDF(item.serverrelativeurl, item.name)">{{ item.name }}</a>
+    <a href="{{item.downloadUrl}}" >{{ item.name }}</a>
       <span>
         <span style="margin-right: 20px;">{{item.size}} kb</span>
         <a href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
