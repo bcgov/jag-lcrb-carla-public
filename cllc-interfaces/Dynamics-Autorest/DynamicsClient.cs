@@ -71,6 +71,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenses Licenses { get; private set; }
 
         /// <summary>
+        /// Gets the IPolicydocuments.
+        /// </summary>
+        public virtual IPolicydocuments Policydocuments { get; private set; }
+
+        /// <summary>
+        /// Gets the IPreviousaddresses.
+        /// </summary>
+        public virtual IPreviousaddresses Previousaddresses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpddatarows.
+        /// </summary>
+        public virtual ISpddatarows Spddatarows { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpdexportses.
+        /// </summary>
+        public virtual ISpdexportses Spdexportses { get; private set; }
+
+        /// <summary>
         /// Gets the IAdoxioTiedhouseassociations.
         /// </summary>
         public virtual IAdoxioTiedhouseassociations AdoxioTiedhouseassociations { get; private set; }
@@ -94,6 +114,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointDocumentLocations.
         /// </summary>
         public virtual ISharepointDocumentLocations SharepointDocumentLocations { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of the DynamicsClient class.
+        /// </summary>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling DynamicsClient.Dispose(). False: will not dispose provided httpClient</param>
+        protected DynamicsClient(HttpClient httpClient, bool disposeHttpClient) : base(httpClient, disposeHttpClient)
+        {
+            Initialize();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -178,6 +211,33 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         public DynamicsClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (credentials == null)
+            {
+                throw new System.ArgumentNullException("credentials");
+            }
+            Credentials = credentials;
+            if (Credentials != null)
+            {
+                Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the DynamicsClient class.
+        /// </summary>
+        /// <param name='credentials'>
+        /// Required. Subscription credentials which uniquely identify client subscription.
+        /// </param>
+        /// <param name='httpClient'>
+        /// HttpClient to be used
+        /// </param>
+        /// <param name='disposeHttpClient'>
+        /// True: will dispose the provided httpClient on calling DynamicsClient.Dispose(). False: will not dispose provided httpClient</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        public DynamicsClient(ServiceClientCredentials credentials, HttpClient httpClient, bool disposeHttpClient) : this(httpClient, disposeHttpClient)
         {
             if (credentials == null)
             {
@@ -302,6 +362,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
             Licenses = new Licenses(this);
+            Policydocuments = new Policydocuments(this);
+            Previousaddresses = new Previousaddresses(this);
+            Spddatarows = new Spddatarows(this);
+            Spdexportses = new Spdexportses(this);
             AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
             AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
             Contacts = new Contacts(this);
