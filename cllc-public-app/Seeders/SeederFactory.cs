@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Public.Contexts;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -19,8 +20,10 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
+        private readonly IDynamicsClient _dynamicsClient;
 
         private readonly List<Seeder<T>> _seederInstances = new List<Seeder<T>>();
+        
 
         /// <summary>
         /// SeedFactory Constructor
@@ -28,13 +31,15 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// <param name="configuration"></param>
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
-        public SeedFactory(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public SeedFactory(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _env = env;
             _loggerFactory = loggerFactory;
             _logger = _loggerFactory.CreateLogger(typeof(SeedFactory<T>));
             _configuration = configuration;
-        
+            _dynamicsClient = dynamicsClient;
+
+
             LoadSeeders();
             _seederInstances.Sort(new SeederComparer<T>());
         }
@@ -48,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             foreach (Type type in types)
             {
                 _logger.LogDebug($"\tCreating instance of {type.Name}...");
-                _seederInstances.Add((Seeder<T>)Activator.CreateInstance(type, _configuration, _env, _loggerFactory));
+                _seederInstances.Add((Seeder<T>)Activator.CreateInstance(type, _configuration, _env, _loggerFactory, _dynamicsClient));
             }
 
             _logger.LogDebug($"\tA total of {types.Count} seeders loaded.");

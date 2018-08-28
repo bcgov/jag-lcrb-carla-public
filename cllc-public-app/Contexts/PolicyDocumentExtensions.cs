@@ -1,22 +1,33 @@
 ﻿
-using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.EntityFrameworkCore;
+using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
     public static class PolicyDocumentExtensions
     {
 
-        public static PolicyDocument GetPolicyDocumentBySlug(this AppDbContext context, string slug)
+        public static MicrosoftDynamicsCRMadoxioPolicydocument GetPolicyDocumentBySlug(this IDynamicsClient dynamicsClient, string slug)
         {
-            Models.PolicyDocument PolicyDocument = context.PolicyDocuments.FirstOrDefault(x => x.Slug == slug);
-            return PolicyDocument;
+
+            MicrosoftDynamicsCRMadoxioPolicydocument result = null;
+            try
+            {
+                slug = slug.Replace("'", "''");
+                string filter = "adoxio_slug eq '" + slug + "'";
+                result = dynamicsClient.Policydocuments.Get(filter: filter).Value
+                .FirstOrDefault();
+
+            }
+            catch (OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
         }
         
 
@@ -25,12 +36,18 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// </summary>
         /// <param name="context"></param>
         /// <param name="PolicyDocument"></param>
-        public static void AddPolicyDocument(this AppDbContext context, PolicyDocument PolicyDocument)
+        public static void AddPolicyDocument(this IDynamicsClient dynamicsClient, MicrosoftDynamicsCRMadoxioPolicydocument PolicyDocument)
         {
             if (PolicyDocument != null)
             {
-                context.PolicyDocuments.Add(PolicyDocument);
-                context.SaveChanges();
+                try
+                {
+                    dynamicsClient.Policydocuments.Create(PolicyDocument);                    
+                }
+                catch (OdataerrorException)
+                {
+                    
+                }                
             }
         }
 
@@ -39,80 +56,74 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// </summary>
         /// <param name="context"></param>
         /// <param name="PolicyDocumentJsonPath"></param>
-        public static void AddInitialPolicyDocumentsFromFile(this AppDbContext context, string PolicyDocumentJsonPath)
+        public static void AddInitialPolicyDocumentsFromFile(this IDynamicsClient dynamicsClient, string PolicyDocumentJsonPath, bool forceUpdate)
         {
-            // temporary step - clear the policy documents each time we start the app.
-            context.PolicyDocuments.RemoveRange(context.PolicyDocuments);
-            context.SaveChanges();
-            if (!string.IsNullOrEmpty(PolicyDocumentJsonPath) && File.Exists(PolicyDocumentJsonPath))
+            // only add policy documents if they are empty.
+            bool addPolicyDocuments = true;
+            if (! forceUpdate)
+            {
+                try
+                {
+                    var temp = dynamicsClient.Policydocuments.Get();
+                    if (temp != null && temp.Value != null && temp.Value.Count > 0)
+                    {
+                        addPolicyDocuments = false;
+                    }
+                }
+                catch (OdataerrorException)
+                {
+                    addPolicyDocuments = true;
+                }
+            }
+            
+            
+            if (addPolicyDocuments && !string.IsNullOrEmpty(PolicyDocumentJsonPath) && File.Exists(PolicyDocumentJsonPath))
             {
                 string PolicyDocumentJson = File.ReadAllText(PolicyDocumentJsonPath);
-                context.AddInitialPolicyDocuments(PolicyDocumentJson);
+                dynamicsClient.AddInitialPolicyDocuments(PolicyDocumentJson);
             }
         }
 
-        private static void AddInitialPolicyDocuments(this AppDbContext context, string PolicyDocumentJson)
+        private static void AddInitialPolicyDocuments(this IDynamicsClient dynamicsClient, string PolicyDocumentJson)
         {
             List<ViewModels.PolicyDocument> PolicyDocuments = JsonConvert.DeserializeObject<List<ViewModels.PolicyDocument>>(PolicyDocumentJson);
 
             if (PolicyDocuments != null)
             {
-                context.AddInitialPolicyDocuments(PolicyDocuments);
+                dynamicsClient.AddInitialPolicyDocuments(PolicyDocuments);
             }
         }
 
-        private static void AddInitialPolicyDocuments(this AppDbContext context, List<ViewModels.PolicyDocument> PolicyDocuments)
+        private static void AddInitialPolicyDocuments(this IDynamicsClient dynamicsClient, List<ViewModels.PolicyDocument> PolicyDocuments)
         {
-            PolicyDocuments.ForEach(context.AddInitialPolicyDocument);
+            PolicyDocuments.ForEach(dynamicsClient.AddInitialPolicyDocument);
         }
 
         /// <summary>
         /// Adds a jurisdiction to the system, only if it does not exist.
         /// </summary>
-        private static void AddInitialPolicyDocument(this AppDbContext context, ViewModels.PolicyDocument initialPolicyDocument)
+        private static void AddInitialPolicyDocument(this IDynamicsClient dynamicsClient, ViewModels.PolicyDocument initialPolicyDocument)
         {
-            PolicyDocument PolicyDocument = context.GetPolicyDocumentBySlug(initialPolicyDocument.slug);
+            MicrosoftDynamicsCRMadoxioPolicydocument PolicyDocument = dynamicsClient.GetPolicyDocumentBySlug(initialPolicyDocument.slug);
             if (PolicyDocument != null)
             {
                 return;
             }
 
-            PolicyDocument = new PolicyDocument
-            (                
-                initialPolicyDocument.slug,
-                initialPolicyDocument.title,
-                initialPolicyDocument.menuText,
-                initialPolicyDocument.category,
-                initialPolicyDocument.body,
-                initialPolicyDocument.displayOrder
-            );
+            PolicyDocument = new MicrosoftDynamicsCRMadoxioPolicydocument()
+            {
+                AdoxioSlug = initialPolicyDocument.slug,
+                AdoxioName = initialPolicyDocument.title,
+                AdoxioMenutext = initialPolicyDocument.menuText,
+                AdoxioCategory = initialPolicyDocument.category,
+                AdoxioBody = initialPolicyDocument.body,
+                AdoxioDisplayorder = initialPolicyDocument.displayOrder
+            };
 
-            context.AddPolicyDocument(PolicyDocument);
+
+            dynamicsClient.AddPolicyDocument(PolicyDocument);
         }
 
 
-        /// <summary>
-        /// Update region
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="regionInfo"></param>
-        public static void UpdateSeedPolicyDocumentInfo(this AppDbContext context, Models.PolicyDocument PolicyDocumentInfo)
-        {
-            PolicyDocument PolicyDocument = context.GetPolicyDocumentBySlug(PolicyDocumentInfo.Slug);
-            if (PolicyDocument == null)
-            {
-                context.AddInitialPolicyDocument(PolicyDocumentInfo.ToViewModel());
-            }
-            else
-            {
-                PolicyDocument.Body = PolicyDocumentInfo.Body;
-                PolicyDocument.Title = PolicyDocumentInfo.Title;
-                PolicyDocument.Category = PolicyDocumentInfo.Category;
-                PolicyDocument.MenuText = PolicyDocumentInfo.MenuText;
-                PolicyDocument.DisplayOrder = PolicyDocumentInfo.DisplayOrder;
-                context.PolicyDocuments.Update(PolicyDocument);
-                context.SaveChanges();
-            }
-        }
     }
 }
