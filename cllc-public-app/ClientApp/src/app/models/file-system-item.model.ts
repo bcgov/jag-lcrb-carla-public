@@ -7,4 +7,5 @@ export class FileSystemItem
     serverrelativeurl: string;
     timecreated: Date;
     timelastmodified: Date;
+    downloadUrl: string;
 }
