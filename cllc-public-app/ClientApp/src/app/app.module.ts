@@ -127,6 +127,7 @@ import { ApplicationComponent } from './lite/application/application.component';
 import { LiteApplicationDashboardComponent, ConfirmationDialog } from './lite-application-dashboard/lite-application-dashboard.component';
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
+import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 
 @NgModule({
   declarations: [
@@ -184,7 +185,8 @@ import { AssociatesDashboardComponent } from './lite/associates-dashboard/associ
     LiteApplicationDashboardComponent,
     ConfirmationDialog,
     TermsAndConditionsComponent,
-    AssociatesDashboardComponent
+    AssociatesDashboardComponent,
+    WorkerRegistrationComponent
   ],
   imports: [
     BrowserModule,

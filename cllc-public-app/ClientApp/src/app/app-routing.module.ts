@@ -35,6 +35,7 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 import { ApplicationComponent } from './lite/application/application.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
+import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 
 const routes: Routes = [
   {
@@ -177,6 +178,10 @@ const routes: Routes = [
   {
     path: 'prv',
     redirectTo: 'prv/survey'
+  },
+  {
+    path: 'worker-registration',
+    component: WorkerRegistrationComponent
   },
   {
     path: 'result/:data',
