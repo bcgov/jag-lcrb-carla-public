@@ -12,24 +12,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_spdexportses
+    /// Collection of sharepointdocumentlocations
     /// </summary>
-    public partial class GetOKResponseModelModelModelModelModelModelModelModelModel
+    public partial class GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// GetOKResponseModelModelModelModelModelModelModelModelModel class.
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel
+        /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModel()
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel()
         {
             CustomInit();
         }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// GetOKResponseModelModelModelModelModelModelModelModelModel class.
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel
+        /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioSpdexports> value = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMsharepointdocumentlocation> value = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> Value { get; set; }
 
     }
 }
