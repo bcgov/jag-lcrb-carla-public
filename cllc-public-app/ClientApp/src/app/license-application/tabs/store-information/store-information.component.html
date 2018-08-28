@@ -10,7 +10,7 @@
         <p>Your store name must be approved, and cannot imply you are selling medical cannabis</p>
         <input class="form-control" style="width: 500px;" type="text" id="establishmentName" formControlName="establishmentName">
         <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
-          <div *ngIf="propertyDetailsForm.controls['establishmentName'].hasError('required') ">
+          <div *ngIf="storeInformationForm.controls['establishmentName'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -54,6 +54,6 @@
         </ul>
       </section>
     </div>
-    <app-file-uploader *ngIf="applicationId"  documentType="Store Information" [applicationId]="applicationId"></app-file-uploader>
+    <app-file-uploader *ngIf="applicationId"  documentType="Store Information" entityName="application" [entityId]="applicationId"></app-file-uploader>
   </form>
 </div>

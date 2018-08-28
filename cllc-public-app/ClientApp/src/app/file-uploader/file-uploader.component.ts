@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Observable, Subject } from 'rxjs';
 import { throttleTime, catchError } from 'rxjs/operators';
@@ -21,11 +21,11 @@ export interface DropdownOption {
   styleUrls: ['./file-uploader.component.scss']
 })
 export class FileUploaderComponent implements OnInit {
-  @Input() accountId: string;
   @Input() uploadUrl: string;
   @Input() fileTypes = '';
   @Input() documentType: string;
-  @Input() applicationId: string;
+  @Input() entityName: string;
+  @Input() entityId: string;
   @Input() multipleFiles: boolean = true;
   @Input() extensions: string[] = ['pdf'];
   busy: Subscription;
@@ -38,12 +38,8 @@ export class FileUploaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //use application controller if application ID is passed, otherwise legal entity controller
-    if (this.applicationId) {
-      this.attachmentURL = 'api/adoxioapplication/' + this.applicationId + '/attachments';
-    } else {
-      this.attachmentURL = 'api/AdoxioLegalEntity/' + this.accountId + '/attachments';
-    }
+    this.attachmentURL =`api/file/${this.entityId}/attachments/${this.entityName}`;
+
     this.getUploadedFileData();
   }
 
@@ -102,7 +98,8 @@ export class FileUploaderComponent implements OnInit {
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {
-          entry.size = Math.ceil(entry.size / 1024)
+          entry.size = Math.ceil(entry.size / 1024);
+          entry.downloadUrl = `api/file/${this.entityId}/download-file/${this.entityName}/${entry.name}?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}`;
         });
         this.files = data;
       },
@@ -130,16 +127,6 @@ export class FileUploaderComponent implements OnInit {
 
   public fileLeave(event) {
     //console.log(event);
-  }
-
-  downloadApplicationPDF(url: string, fileName: string) {
-    if (this.applicationId) {
-      this.adoxioApplicationDataService.downloadFile(url, this.applicationId)
-        .subscribe((res: Blob) => {
-          saveAs(res, fileName);
-        },
-          err => alert('Failed to download file'));
-    }
   }
 
   browseFiles(browserMultiple, browserSingle) {

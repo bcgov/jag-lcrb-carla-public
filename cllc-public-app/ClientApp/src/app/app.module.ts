@@ -46,6 +46,7 @@ import {
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { AccountDataService } from './services/account-data.service';
+import { ContactDataService } from './services/contact-data.service';
 import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
 import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
 import { AdoxioLicenseDataService } from './services/adoxio-license-data.service';
@@ -117,14 +118,16 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
 import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
+import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule } from '@ngrx/store';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
-import { ClientConfigDataService } from './services/client-config.service';
 import { ApplicationComponent } from './lite/application/application.component';
 import { LiteApplicationDashboardComponent, ConfirmationDialog } from './lite-application-dashboard/lite-application-dashboard.component';
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
+import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 
 @NgModule({
   declarations: [
@@ -182,7 +185,8 @@ import { AssociatesDashboardComponent } from './lite/associates-dashboard/associ
     LiteApplicationDashboardComponent,
     ConfirmationDialog,
     TermsAndConditionsComponent,
-    AssociatesDashboardComponent
+    AssociatesDashboardComponent,
+    WorkerRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -281,7 +285,6 @@ import { AssociatesDashboardComponent } from './lite/associates-dashboard/associ
   ],
   providers: [
     CookieService,
-    ClientConfigDataService,
     DynamicsDataService,
     InsertService,
     GeneralDataService,
@@ -294,11 +297,14 @@ import { AssociatesDashboardComponent } from './lite/associates-dashboard/associ
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
     AccountDataService,
+    ContactDataService,
     PaymentDataService,
     TiedHouseConnectionsDataService,
     NgbDropdown,
     Title,
-    CanDeactivateGuard
+    CanDeactivateGuard,
+    BCeidAuthGuard,
+    ServiceCardAuthGuard,
   ],
   entryComponents: [
     ShareholderPersonDialogComponent,

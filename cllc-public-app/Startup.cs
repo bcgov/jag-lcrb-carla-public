@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public
 
             // setup authorization
             services.AddAuthorization(options =>
-            {
+            {    
                 options.AddPolicy("Business-User", policy =>
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Public
         }
 
         private void SetupDynamics(IServiceCollection services)
-        {            
+        {
 
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
             string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];
@@ -297,6 +297,7 @@ namespace Gov.Lclb.Cllb.Public
             {
                 ctx.Response.Headers.Add("Content-Security-Policy",
                                          "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
+                ctx.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
                 await next();
             });
             app.UseXContentTypeOptions();
