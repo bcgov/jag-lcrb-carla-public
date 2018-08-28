@@ -1,6 +1,14 @@
 # lclb_public_app
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+
+- Npm version - 5.6.0
+- Node version - 8.1.1.3
+- Angular version - 5.2.11
+
+## Installing prerequisite
+
+Run `npm install` in `jag-lcrb-carla-public\cllc-public-app\ClientApp`. To reinstall, delete the `node_modules` directory and re-run `npm install`.
 
 ## Development server
 
