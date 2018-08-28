@@ -1,0 +1,507 @@
+<div class="wrapper" [formGroup]="form">
+  <div [ngBusy]="busy"></div>
+  <div *ngIf="dataLoaded && !isNewUser">
+    <section>
+      <h1>
+        Worker Registration
+      </h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada convallis ultrices. Proin blandit convallis vulputate.
+        Sed erat eros, aliquam et finibus nec, aliquam et ante. Phasellus pretium justo nunc, sed vulputate orci dictum id.
+        Donec et pretium lorem, quis pretium tortor. Donec ac justo mattis, condimentum ex semper, tempor orci. Ut a nunc
+        diam. Aliquam pretium at eros a euismod. Mauris sapien odio, facilisis placerat luctus non, finibus pulvinar lorem.
+        Sed risus mi, ultricies ultrices vehicula id, condimentum ac turpis. In consectetur sem velit, sit amet blandit dui
+        rutrum quis.
+      </p>
+      <section>
+        <app-file-uploader *ngIf="contact && contact.id" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+          [multipleFiles]="false" entityName="contact" [entityId]="contact.id" #mainForm></app-file-uploader>
+      </section>
+    </section>
+
+    {{form.value | json}}
+
+    <div formGroupName="contact">
+      <h2>Contact</h2>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.firstname').valid && this.form.get('contact.firstname').touched}">
+          <label>First Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
+          <div *ngIf="!this.form.get('contact.firstname').valid && this.form.get('contact.firstname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.firstname').valid && this.form.get('contact.firstname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.middlename').valid && this.form.get('contact.middlename').touched}">
+          <label>Middle Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
+          <div *ngIf="!this.form.get('contact.middlename').valid && this.form.get('contact.middlename').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.middlename').valid && this.form.get('contact.middlename').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.lastname').valid && this.form.get('contact.lastname').touched}">
+          <label>Last Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
+          <div *ngIf="!this.form.get('contact.lastname').valid && this.form.get('contact.lastname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.lastname').valid && this.form.get('contact.lastname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched}">
+          <label>Email</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1">
+          <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.telephone1').valid && this.form.get('contact.telephone1').touched}">
+          <label>Phone Number</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="telephone1">
+          <div *ngIf="!this.form.get('contact.telephone1').valid && this.form.get('contact.telephone1').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.telephone1').valid && this.form.get('contact.telephone1').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_street1').valid && this.form.get('contact.address1_street1').touched}">
+          <label>Street Address</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_street1">
+          <div *ngIf="!this.form.get('contact.address1_street1').valid && this.form.get('contact.address1_street1').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_street1').valid && this.form.get('contact.address1_street1').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched}">
+          <label>City</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_city">
+          <div *ngIf="!this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched}">
+          <label>Province / State</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_stateorprovince">
+          <div *ngIf="!this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched}">
+          <label>Country</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country">
+          <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched}">
+          <label>Postal / Zip Code</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_postalcode">
+          <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div formGroupName="worker">
+      <h2>Worker</h2>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_isldbworker').valid && this.form.get('worker.adoxio_isldbworker').touched}">
+          <label>Is LDB Worker?</label>
+          <br />
+          <input type="checkbox" formControlName="adoxio_isldbworker">
+          <div *ngIf="!this.form.get('worker.adoxio_isldbworker').valid && this.form.get('worker.adoxio_isldbworker').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_isldbworker').valid && this.form.get('worker.adoxio_isldbworker').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_firstname').valid && this.form.get('worker.adoxio_firstname').touched}">
+          <label>First Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_firstname">
+          <div *ngIf="!this.form.get('worker.adoxio_firstname').valid && this.form.get('worker.adoxio_firstname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_firstname').valid && this.form.get('worker.adoxio_firstname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_middlename').valid && this.form.get('worker.adoxio_middlename').touched}">
+          <label>Second Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_middlename">
+          <div *ngIf="!this.form.get('worker.adoxio_middlename').valid && this.form.get('worker.adoxio_middlename').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_middlename').valid && this.form.get('worker.adoxio_middlename').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_lastname').valid && this.form.get('worker.adoxio_lastname').touched}">
+          <label>Last Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_lastname">
+          <div *ngIf="!this.form.get('worker.adoxio_lastname').valid && this.form.get('worker.adoxio_lastname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_lastname').valid && this.form.get('worker.adoxio_lastname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_dateofbirth').valid && this.form.get('worker.adoxio_dateofbirth').touched}">
+          <label>Birth Date</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_dateofbirth">
+          <div *ngIf="!this.form.get('worker.adoxio_dateofbirth').valid && this.form.get('worker.adoxio_dateofbirth').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_dateofbirth').valid && this.form.get('worker.adoxio_dateofbirth').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_gender').valid && this.form.get('worker.adoxio_gender').touched}">
+          <label>Gender</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_gender">
+          <div *ngIf="!this.form.get('worker.adoxio_gender').valid && this.form.get('worker.adoxio_gender').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_gender').valid && this.form.get('worker.adoxio_gender').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_birthplace').valid && this.form.get('worker.adoxio_birthplace').touched}">
+          <label>Birthplace</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_birthplace">
+          <div *ngIf="!this.form.get('worker.adoxio_birthplace').valid && this.form.get('worker.adoxio_birthplace').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_birthplace').valid && this.form.get('worker.adoxio_birthplace').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_driverslicencenumber').valid && this.form.get('worker.adoxio_driverslicencenumber').touched}">
+          <label>Driver's License No.</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_driverslicencenumber">
+          <div *ngIf="!this.form.get('worker.adoxio_driverslicencenumber').valid && this.form.get('worker.adoxio_driverslicencenumber').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_driverslicencenumber').valid && this.form.get('worker.adoxio_driverslicencenumber').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_bcidcardnumber').valid && this.form.get('worker.adoxio_bcidcardnumber').touched}">
+          <label>BC ID Card Number</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_bcidcardnumber">
+          <div *ngIf="!this.form.get('worker.adoxio_bcidcardnumber').valid && this.form.get('worker.adoxio_bcidcardnumber').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_bcidcardnumber').valid && this.form.get('worker.adoxio_bcidcardnumber').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_phonenumber').valid && this.form.get('worker.adoxio_phonenumber').touched}">
+          <label>Phone Number</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_phonenumber">
+          <div *ngIf="!this.form.get('worker.adoxio_phonenumber').valid && this.form.get('worker.adoxio_phonenumber').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_phonenumber').valid && this.form.get('worker.adoxio_phonenumber').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_email').valid && this.form.get('worker.adoxio_email').touched}">
+          <label>Email</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_email">
+          <div *ngIf="!this.form.get('worker.adoxio_email').valid && this.form.get('worker.adoxio_email').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_email').valid && this.form.get('worker.adoxio_email').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_selfdisclosure').valid && this.form.get('worker.adoxio_selfdisclosure').touched}">
+          <label>Self Disclosure</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_selfdisclosure">
+          <div *ngIf="!this.form.get('worker.adoxio_selfdisclosure').valid && this.form.get('worker.adoxio_selfdisclosure').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_selfdisclosure').valid && this.form.get('worker.adoxio_selfdisclosure').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.adoxio_triggerphs').valid && this.form.get('worker.adoxio_triggerphs').touched}">
+          <label>Trigger PHS Creation</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_triggerphs">
+          <div *ngIf="!this.form.get('worker.adoxio_triggerphs').valid && this.form.get('worker.adoxio_triggerphs').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.adoxio_triggerphs').valid && this.form.get('worker.adoxio_triggerphs').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div formGroupName="alias">
+      <h2>Alias</h2>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('alias.adoxio_firstname').valid && this.form.get('alias.adoxio_firstname').touched}">
+          <label>First Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_firstname">
+          <div *ngIf="!this.form.get('alias.adoxio_firstname').valid && this.form.get('alias.adoxio_firstname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('alias.adoxio_firstname').valid && this.form.get('alias.adoxio_firstname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('alias.adoxio_middlename').valid && this.form.get('alias.adoxio_middlename').touched}">
+          <label>Second Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_middlename">
+          <div *ngIf="!this.form.get('alias.adoxio_middlename').valid && this.form.get('alias.adoxio_middlename').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('alias.adoxio_middlename').valid && this.form.get('alias.adoxio_middlename').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('alias.adoxio_lastname').valid && this.form.get('alias.adoxio_lastname').touched}">
+          <label>Last Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_lastname">
+          <div *ngIf="!this.form.get('alias.adoxio_lastname').valid && this.form.get('alias.adoxio_lastname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('alias.adoxio_lastname').valid && this.form.get('alias.adoxio_lastname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div formArrayName="previous_address">
+      <h2>Previous Addresses</h2>
+      <button class="btn btn-primary" (click)="addAddress()">Add previous address</button>
+      <div *ngFor="let address of addresses.controls; let i = index">
+        <div [formGroupName]="i">
+          <h3>Address {{i + 1}}</h3>
+          <section>
+            <button *ngIf="addresses.controls.length > 1" class="btn btn-primary" (click)="deleteAddress(i)">Delete previous address</button>
+            <div [ngClass]="{'has-error': !address.get('adoxio_name').valid && address.get('adoxio_name').touched}">
+              <label>Name</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_name">
+              <div *ngIf="!address.get('adoxio_name').valid && address.get('adoxio_name').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_name').valid && address.get('adoxio_name').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('adoxio_streetaddress').valid && address.get('adoxio_streetaddress').touched}">
+              <label>Street Address</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_streetaddress">
+              <div *ngIf="!address.get('adoxio_streetaddress').valid && address.get('adoxio_streetaddress').touched" class="alert alert-danger"
+                style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_streetaddress').valid && address.get('adoxio_streetaddress').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('adoxio_city').valid && address.get('adoxio_city').touched}">
+              <label>City</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_city">
+              <div *ngIf="!address.get('adoxio_city').valid && address.get('adoxio_city').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_city').valid && address.get('adoxio_city').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('adoxio_provstate').valid && address.get('adoxio_provstate').touched}">
+              <label>Province / State</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_provstate">
+              <div *ngIf="!address.get('adoxio_provstate').valid && address.get('adoxio_provstate').touched" class="alert alert-danger"
+                style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_provstate').valid && address.get('adoxio_provstate').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('adoxio_country').valid && address.get('adoxio_country').touched}">
+              <label>Country</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_country">
+              <div *ngIf="!address.get('adoxio_country').valid && address.get('adoxio_country').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_country').valid && address.get('adoxio_country').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('adoxio_postalcode').valid && address.get('adoxio_postalcode').touched}">
+              <label>Postal / Zip Code</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_postalcode">
+              <div *ngIf="!address.get('adoxio_postalcode').valid && address.get('adoxio_postalcode').touched" class="alert alert-danger"
+                style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_postalcode').valid && address.get('adoxio_postalcode').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('adoxio_fromdate').valid && address.get('adoxio_fromdate').touched}">
+              <label>From</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_fromdate">
+              <div *ngIf="!address.get('adoxio_fromdate').valid && address.get('adoxio_fromdate').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_fromdate').valid && address.get('adoxio_fromdate').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('adoxio_todate').valid && address.get('adoxio_todate').touched}">
+              <label>To</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="adoxio_todate">
+              <div *ngIf="!address.get('adoxio_todate').valid && address.get('adoxio_todate').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('adoxio_todate').valid && address.get('adoxio_todate').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <section *ngIf="isNewUser">
+      <h2>Please confirm the name associated with the BC Service card login provided.</h2>
+      <div>
+        <p>
+          <b>{{currentUser.name}}</b>
+        </p>
+        <p>
+          Is this correct?
+        </p>
+        <div class="row">
+          <!-- <div class="col-md-12 text-left">
+            <button class="btn btn-primary" (click)="confirmContact(true)">
+              <strong>Yes</strong>
+            </button>
+            <button class="btn btn-secondary" (click)="confirmContact(false)">
+              <strong>No</strong>
+            </button>
+            <br>
+          </div> -->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
