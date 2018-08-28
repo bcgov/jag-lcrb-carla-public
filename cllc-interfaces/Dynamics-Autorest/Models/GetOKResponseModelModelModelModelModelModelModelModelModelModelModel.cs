@@ -12,24 +12,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_spdexportses
+    /// Collection of adoxio_tiedhouseconnections
     /// </summary>
-    public partial class GetOKResponseModelModelModelModelModelModelModelModelModel
+    public partial class GetOKResponseModelModelModelModelModelModelModelModelModelModelModel
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// GetOKResponseModelModelModelModelModelModelModelModelModel class.
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModel
+        /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModel()
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModel()
         {
             CustomInit();
         }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// GetOKResponseModelModelModelModelModelModelModelModelModel class.
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModel
+        /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioSpdexports> value = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> value = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> Value { get; set; }
 
     }
 }

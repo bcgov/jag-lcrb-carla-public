@@ -10,6 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     using Models;
     using Newtonsoft.Json;
 
+
     /// <summary>
     /// Auto Generated
     /// </summary>
@@ -66,6 +67,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicenses.
         /// </summary>
         ILicenses Licenses { get; }
+
+        /// <summary>
+        /// Gets the IPolicydocuments.
+        /// </summary>
+        IPolicydocuments Policydocuments { get; }
+
+        /// <summary>
+        /// Gets the IPreviousaddresses.
+        /// </summary>
+        IPreviousaddresses Previousaddresses { get; }
+
+        /// <summary>
+        /// Gets the ISpddatarows.
+        /// </summary>
+        ISpddatarows Spddatarows { get; }
+
+        /// <summary>
+        /// Gets the ISpdexportses.
+        /// </summary>
+        ISpdexportses Spdexportses { get; }
 
         /// <summary>
         /// Gets the IAdoxioTiedhouseassociations.

@@ -13,30 +13,25 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for Contacts.
+    /// Extension methods for Policydocuments.
     /// </summary>
-    public static partial class ContactsExtensions
+    public static partial class PolicydocumentsExtensions
     {
             /// <summary>
-            /// Get entities from contacts
+            /// Get entities from adoxio_policydocuments
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -47,31 +42,26 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel Get(this IContacts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static GetOKResponseModelModelModelModelModelModel Get(this IPolicydocuments operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entities from contacts
+            /// Get entities from adoxio_policydocuments
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -85,7 +75,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel> GetAsync(this IContacts operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOKResponseModelModelModelModelModelModel> GetAsync(this IPolicydocuments operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +84,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Add new entity to contacts
+            /// Add new entity to adoxio_policydocuments
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -106,13 +96,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMcontact Create(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMadoxioPolicydocument Create(this IPolicydocuments operations, MicrosoftDynamicsCRMadoxioPolicydocument body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to contacts
+            /// Add new entity to adoxio_policydocuments
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -127,7 +117,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMcontact> CreateAsync(this IContacts operations, MicrosoftDynamicsCRMcontact body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioPolicydocument> CreateAsync(this IPolicydocuments operations, MicrosoftDynamicsCRMadoxioPolicydocument body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -136,50 +126,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from contacts
+            /// Get entity from adoxio_policydocuments by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            public static void Delete(this IContacts operations, string contactid, string ifMatch = default(string))
-            {
-                operations.DeleteAsync(contactid, ifMatch).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Delete entity from contacts
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task DeleteAsync(this IContacts operations, string contactid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.DeleteWithHttpMessagesAsync(contactid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Get entity from contacts by key
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioPolicydocumentid'>
+            /// key: adoxio_policydocumentid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -187,19 +140,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMcontact GetByKey(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioPolicydocument GetByKey(this IPolicydocuments operations, string adoxioPolicydocumentid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyAsync(contactid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioPolicydocumentid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from contacts by key
+            /// Get entity from adoxio_policydocuments by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioPolicydocumentid'>
+            /// key: adoxio_policydocumentid
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -210,39 +163,76 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMcontact> GetByKeyAsync(this IContacts operations, string contactid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioPolicydocument> GetByKeyAsync(this IPolicydocuments operations, string adoxioPolicydocumentid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(contactid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioPolicydocumentid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Update entity in contacts
+            /// Delete entity from adoxio_policydocuments
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioPolicydocumentid'>
+            /// key: adoxio_policydocumentid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            public static void Delete(this IPolicydocuments operations, string adoxioPolicydocumentid, string ifMatch = default(string))
+            {
+                operations.DeleteAsync(adoxioPolicydocumentid, ifMatch).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_policydocuments
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioPolicydocumentid'>
+            /// key: adoxio_policydocumentid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAsync(this IPolicydocuments operations, string adoxioPolicydocumentid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteWithHttpMessagesAsync(adoxioPolicydocumentid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Update entity in adoxio_policydocuments
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioPolicydocumentid'>
+            /// key: adoxio_policydocumentid
             /// </param>
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body)
+            public static void Update(this IPolicydocuments operations, string adoxioPolicydocumentid, MicrosoftDynamicsCRMadoxioPolicydocument body)
             {
-                operations.UpdateAsync(contactid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioPolicydocumentid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in contacts
+            /// Update entity in adoxio_policydocuments
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='contactid'>
-            /// key: contactid
+            /// <param name='adoxioPolicydocumentid'>
+            /// key: adoxio_policydocumentid
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -250,9 +240,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this IContacts operations, string contactid, MicrosoftDynamicsCRMcontact body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IPolicydocuments operations, string adoxioPolicydocumentid, MicrosoftDynamicsCRMadoxioPolicydocument body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateWithHttpMessagesAsync(contactid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioPolicydocumentid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
