@@ -4500,6 +4500,1808 @@
         "summary": "Update entity in adoxio_licenceses"
       }
     },
+    "/adoxio_policydocuments": {
+      "get": {
+        "tags": [
+          "policydocuments"
+        ],
+        "summary": "Get entities from adoxio_policydocuments",
+        "operationId": "Policydocuments_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "_createdby_value",
+                "_createdby_value desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "adoxio_policydocumentid",
+                "adoxio_policydocumentid desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_menutext",
+                "adoxio_menutext desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "statecode",
+                "statecode desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_displayorder",
+                "adoxio_displayorder desc",
+                "adoxio_body",
+                "adoxio_body desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "adoxio_slug",
+                "adoxio_slug desc",
+                "createdon",
+                "createdon desc",
+                "versionnumber",
+                "versionnumber desc",
+                "statuscode",
+                "statuscode desc",
+                "adoxio_category",
+                "adoxio_category desc",
+                "modifiedon",
+                "modifiedon desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "_createdby_value",
+                "importsequencenumber",
+                "adoxio_policydocumentid",
+                "_ownerid_value",
+                "adoxio_name",
+                "overriddencreatedon",
+                "_owningteam_value",
+                "timezoneruleversionnumber",
+                "adoxio_menutext",
+                "utcconversiontimezonecode",
+                "statecode",
+                "_createdonbehalfby_value",
+                "_owningbusinessunit_value",
+                "adoxio_displayorder",
+                "adoxio_body",
+                "_modifiedonbehalfby_value",
+                "adoxio_slug",
+                "createdon",
+                "versionnumber",
+                "statuscode",
+                "adoxio_category",
+                "modifiedon",
+                "_owninguser_value",
+                "_modifiedby_value"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_policydocument_SyncErrors",
+                "adoxio_policydocument_DuplicateMatchingRecord",
+                "adoxio_policydocument_DuplicateBaseRecord",
+                "adoxio_policydocument_AsyncOperations",
+                "adoxio_policydocument_BulkDeleteFailures"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Collection of adoxio_policydocuments",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "policydocuments"
+        ],
+        "summary": "Add new entity to adoxio_policydocuments",
+        "operationId": "Policydocuments_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_policydocuments({adoxio_policydocumentid})": {
+      "get": {
+        "tags": [
+          "policydocuments"
+        ],
+        "summary": "Get entity from adoxio_policydocuments by key",
+        "operationId": "Policydocuments_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_policydocumentid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_policydocumentid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "_createdby_value",
+                "importsequencenumber",
+                "adoxio_policydocumentid",
+                "_ownerid_value",
+                "adoxio_name",
+                "overriddencreatedon",
+                "_owningteam_value",
+                "timezoneruleversionnumber",
+                "adoxio_menutext",
+                "utcconversiontimezonecode",
+                "statecode",
+                "_createdonbehalfby_value",
+                "_owningbusinessunit_value",
+                "adoxio_displayorder",
+                "adoxio_body",
+                "_modifiedonbehalfby_value",
+                "adoxio_slug",
+                "createdon",
+                "versionnumber",
+                "statuscode",
+                "adoxio_category",
+                "modifiedon",
+                "_owninguser_value",
+                "_modifiedby_value"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_policydocument_SyncErrors",
+                "adoxio_policydocument_DuplicateMatchingRecord",
+                "adoxio_policydocument_DuplicateBaseRecord",
+                "adoxio_policydocument_AsyncOperations",
+                "adoxio_policydocument_BulkDeleteFailures"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "policydocuments"
+        ],
+        "summary": "Delete entity from adoxio_policydocuments",
+        "operationId": "Policydocuments_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_policydocumentid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_policydocumentid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "policydocuments"
+        ],
+        "summary": "Update entity in adoxio_policydocuments",
+        "operationId": "Policydocuments_Update",
+        "parameters": [
+          {
+            "name": "adoxio_policydocumentid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_policydocumentid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+	    "/adoxio_previousaddresses": {
+      "get": {
+        "tags": [
+          "previousaddresses"
+        ],
+        "summary": "Get entities from adoxio_previousaddresses",
+        "operationId": "Previousaddresses_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "versionnumber desc",
+                "statuscode",
+                "statuscode desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_streetaddress",
+                "adoxio_streetaddress desc",
+                "adoxio_postalcode",
+                "adoxio_postalcode desc",
+                "adoxio_city",
+                "adoxio_city desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "modifiedon",
+                "modifiedon desc",
+                "adoxio_country",
+                "adoxio_country desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "statecode",
+                "statecode desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "createdon",
+                "createdon desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "adoxio_provstate",
+                "adoxio_provstate desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "adoxio_previousaddressid",
+                "adoxio_previousaddressid desc",
+                "_adoxio_legalentityid_value",
+                "_adoxio_legalentityid_value desc",
+                "adoxio_todate",
+                "adoxio_todate desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "adoxio_fromdate",
+                "adoxio_fromdate desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "statuscode",
+                "_modifiedonbehalfby_value",
+                "_ownerid_value",
+                "adoxio_streetaddress",
+                "adoxio_postalcode",
+                "adoxio_city",
+                "timezoneruleversionnumber",
+                "_createdonbehalfby_value",
+                "_modifiedby_value",
+                "modifiedon",
+                "adoxio_country",
+                "overriddencreatedon",
+                "_createdby_value",
+                "_owningbusinessunit_value",
+                "adoxio_name",
+                "statecode",
+                "importsequencenumber",
+                "createdon",
+                "utcconversiontimezonecode",
+                "adoxio_provstate",
+                "_owningteam_value",
+                "adoxio_previousaddressid",
+                "_adoxio_legalentityid_value",
+                "adoxio_todate",
+                "_owninguser_value",
+                "adoxio_fromdate"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_previousaddress_SyncErrors",
+                "adoxio_previousaddress_AsyncOperations",
+                "adoxio_previousaddress_BulkDeleteFailures",
+                "adoxio_LegalEntityId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Collection of adoxio_previousaddresses",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_previousaddress"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "previousaddresses"
+        ],
+        "summary": "Add new entity to adoxio_previousaddresses",
+        "operationId": "Previousaddresses_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_previousaddress"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_previousaddress"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_previousaddresses({adoxio_previousaddressid})": {
+      "get": {
+        "tags": [
+          "previousaddresses"
+        ],
+        "summary": "Get entity from adoxio_previousaddresses by key",
+        "operationId": "Previousaddresses_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_previousaddressid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_previousaddressid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "statuscode",
+                "_modifiedonbehalfby_value",
+                "_ownerid_value",
+                "adoxio_streetaddress",
+                "adoxio_postalcode",
+                "adoxio_city",
+                "timezoneruleversionnumber",
+                "_createdonbehalfby_value",
+                "_modifiedby_value",
+                "modifiedon",
+                "adoxio_country",
+                "overriddencreatedon",
+                "_createdby_value",
+                "_owningbusinessunit_value",
+                "adoxio_name",
+                "statecode",
+                "importsequencenumber",
+                "createdon",
+                "utcconversiontimezonecode",
+                "adoxio_provstate",
+                "_owningteam_value",
+                "adoxio_previousaddressid",
+                "_adoxio_legalentityid_value",
+                "adoxio_todate",
+                "_owninguser_value",
+                "adoxio_fromdate"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_previousaddress_SyncErrors",
+                "adoxio_previousaddress_AsyncOperations",
+                "adoxio_previousaddress_BulkDeleteFailures",
+                "adoxio_LegalEntityId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_previousaddress"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "previousaddresses"
+        ],
+        "summary": "Delete entity from adoxio_previousaddresses",
+        "operationId": "Previousaddresses_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_previousaddressid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_previousaddressid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "previousaddresses"
+        ],
+        "summary": "Update entity in adoxio_previousaddresses",
+        "operationId": "Previousaddresses_Update",
+        "parameters": [
+          {
+            "name": "adoxio_previousaddressid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_previousaddressid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_previousaddress"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+	    "/adoxio_spddatarows": {
+      "get": {
+        "tags": [
+          "spddatarows"
+        ],
+        "summary": "Get entities from adoxio_spddatarows",
+        "operationId": "Spddatarows_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_name",
+                "adoxio_name desc",
+                "adoxio_exporteddate",
+                "adoxio_exporteddate desc",
+                "adoxio_previousprovstate1",
+                "adoxio_previousprovstate1 desc",
+                "adoxio_previousprovstate6",
+                "adoxio_previousprovstate6 desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "createdon",
+                "createdon desc",
+                "adoxio_alias4middlename",
+                "adoxio_alias4middlename desc",
+                "adoxio_previouspostalcode7",
+                "adoxio_previouspostalcode7 desc",
+                "adoxio_previousstreetaddress4",
+                "adoxio_previousstreetaddress4 desc",
+                "adoxio_isexport",
+                "adoxio_isexport desc",
+                "adoxio_previousstreetaddressx",
+                "adoxio_previousstreetaddressx desc",
+                "adoxio_addressprovstate",
+                "adoxio_addressprovstate desc",
+                "adoxio_previousprovstate2",
+                "adoxio_previousprovstate2 desc",
+                "adoxio_lcrbbusinessjobid",
+                "adoxio_lcrbbusinessjobid desc",
+                "adoxio_previouscity2",
+                "adoxio_previouscity2 desc",
+                "adoxio_alias5firstname",
+                "adoxio_alias5firstname desc",
+                "adoxio_previouscountry6",
+                "adoxio_previouscountry6 desc",
+                "adoxio_alias3firstname",
+                "adoxio_alias3firstname desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_previouscountry2",
+                "adoxio_previouscountry2 desc",
+                "adoxio_alias5surname",
+                "adoxio_alias5surname desc",
+                "adoxio_previousprovstate3",
+                "adoxio_previousprovstate3 desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "adoxio_previousprovstate4",
+                "adoxio_previousprovstate4 desc",
+                "adoxio_alias1surname",
+                "adoxio_alias1surname desc",
+                "adoxio_previousprovstate7",
+                "adoxio_previousprovstate7 desc",
+                "adoxio_legalmiddlename",
+                "adoxio_legalmiddlename desc",
+                "adoxio_previouspostalcode3",
+                "adoxio_previouspostalcode3 desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "adoxio_birthplacecity",
+                "adoxio_birthplacecity desc",
+                "adoxio_addressline1",
+                "adoxio_addressline1 desc",
+                "adoxio_previousstreetaddress9",
+                "adoxio_previousstreetaddress9 desc",
+                "adoxio_previouscountry3",
+                "adoxio_previouscountry3 desc",
+                "adoxio_bcidentificationcardnumber",
+                "adoxio_bcidentificationcardnumber desc",
+                "statuscode",
+                "statuscode desc",
+                "versionnumber",
+                "versionnumber desc",
+                "adoxio_addresspostalcode",
+                "adoxio_addresspostalcode desc",
+                "adoxio_previouspostalcode2",
+                "adoxio_previouspostalcode2 desc",
+                "adoxio_previouscountry5",
+                "adoxio_previouscountry5 desc",
+                "adoxio_parcelidnumber",
+                "adoxio_parcelidnumber desc",
+                "adoxio_previouscountry9",
+                "adoxio_previouscountry9 desc",
+                "statecode",
+                "statecode desc",
+                "adoxio_previouscountry8",
+                "adoxio_previouscountry8 desc",
+                "adoxio_previouscityx",
+                "adoxio_previouscityx desc",
+                "adoxio_gendermf",
+                "adoxio_gendermf desc",
+                "adoxio_alias2surname",
+                "adoxio_alias2surname desc",
+                "adoxio_alias5middlename",
+                "adoxio_alias5middlename desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "adoxio_legalsurname",
+                "adoxio_legalsurname desc",
+                "adoxio_previousprovstate8",
+                "adoxio_previousprovstate8 desc",
+                "adoxio_previouscountry1",
+                "adoxio_previouscountry1 desc",
+                "adoxio_alias1firstname",
+                "adoxio_alias1firstname desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_previousprovstate9",
+                "adoxio_previousprovstate9 desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_previouscity8",
+                "adoxio_previouscity8 desc",
+                "adoxio_alias2middlename",
+                "adoxio_alias2middlename desc",
+                "adoxio_previousstreetaddress8",
+                "adoxio_previousstreetaddress8 desc",
+                "adoxio_previouspostalcodex",
+                "adoxio_previouspostalcodex desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "adoxio_lcrbassociatejobid",
+                "adoxio_lcrbassociatejobid desc",
+                "adoxio_driverslicence",
+                "adoxio_driverslicence desc",
+                "adoxio_alias1middlename",
+                "adoxio_alias1middlename desc",
+                "adoxio_alias3surname",
+                "adoxio_alias3surname desc",
+                "adoxio_alias4surname",
+                "adoxio_alias4surname desc",
+                "adoxio_previousstreetaddress2",
+                "adoxio_previousstreetaddress2 desc",
+                "adoxio_previouscity4",
+                "adoxio_previouscity4 desc",
+                "adoxio_previouspostalcode5",
+                "adoxio_previouspostalcode5 desc",
+                "adoxio_spddatarowid",
+                "adoxio_spddatarowid desc",
+                "adoxio_legalfirstname",
+                "adoxio_legalfirstname desc",
+                "adoxio_previousprovstate5",
+                "adoxio_previousprovstate5 desc",
+                "adoxio_alias3middlename",
+                "adoxio_alias3middlename desc",
+                "adoxio_previousstreetaddress3",
+                "adoxio_previousstreetaddress3 desc",
+                "modifiedon",
+                "modifiedon desc",
+                "_adoxio_spdexport_value",
+                "_adoxio_spdexport_value desc",
+                "adoxio_previouscountry4",
+                "adoxio_previouscountry4 desc",
+                "adoxio_previouscountry7",
+                "adoxio_previouscountry7 desc",
+                "adoxio_addresscity",
+                "adoxio_addresscity desc",
+                "adoxio_previouscity6",
+                "adoxio_previouscity6 desc",
+                "adoxio_previouspostalcode8",
+                "adoxio_previouspostalcode8 desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_previousstreetaddress5",
+                "adoxio_previousstreetaddress5 desc",
+                "adoxio_previouscity1",
+                "adoxio_previouscity1 desc",
+                "adoxio_previouscountryx",
+                "adoxio_previouscountryx desc",
+                "adoxio_selfdisclosure",
+                "adoxio_selfdisclosure desc",
+                "adoxio_previousprovstatex",
+                "adoxio_previousprovstatex desc",
+                "adoxio_birthdate",
+                "adoxio_birthdate desc",
+                "adoxio_alias2firstname",
+                "adoxio_alias2firstname desc",
+                "adoxio_previouscity9",
+                "adoxio_previouscity9 desc",
+                "adoxio_previouscity7",
+                "adoxio_previouscity7 desc",
+                "adoxio_previousstreetaddress1",
+                "adoxio_previousstreetaddress1 desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "adoxio_alias4firstname",
+                "adoxio_alias4firstname desc",
+                "adoxio_previouspostalcode6",
+                "adoxio_previouspostalcode6 desc",
+                "adoxio_personalemailaddress",
+                "adoxio_personalemailaddress desc",
+                "adoxio_contactphone",
+                "adoxio_contactphone desc",
+                "adoxio_previousstreetaddress6",
+                "adoxio_previousstreetaddress6 desc",
+                "adoxio_previousstreetaddress7",
+                "adoxio_previousstreetaddress7 desc",
+                "adoxio_previouspostalcode4",
+                "adoxio_previouspostalcode4 desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "adoxio_previouscity3",
+                "adoxio_previouscity3 desc",
+                "adoxio_addresscountry",
+                "adoxio_addresscountry desc",
+                "adoxio_previouscity5",
+                "adoxio_previouscity5 desc",
+                "adoxio_previouspostalcode9",
+                "adoxio_previouspostalcode9 desc",
+                "adoxio_previouspostalcode1",
+                "adoxio_previouspostalcode1 desc",
+                "adoxio_bcregistriesnumber",
+                "adoxio_bcregistriesnumber desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_name",
+                "adoxio_exporteddate",
+                "adoxio_previousprovstate1",
+                "adoxio_previousprovstate6",
+                "_owningteam_value",
+                "createdon",
+                "adoxio_alias4middlename",
+                "adoxio_previouspostalcode7",
+                "adoxio_previousstreetaddress4",
+                "adoxio_isexport",
+                "adoxio_previousstreetaddressx",
+                "adoxio_addressprovstate",
+                "adoxio_previousprovstate2",
+                "adoxio_lcrbbusinessjobid",
+                "adoxio_previouscity2",
+                "adoxio_alias5firstname",
+                "adoxio_previouscountry6",
+                "adoxio_alias3firstname",
+                "_ownerid_value",
+                "adoxio_previouscountry2",
+                "adoxio_alias5surname",
+                "adoxio_previousprovstate3",
+                "importsequencenumber",
+                "adoxio_previousprovstate4",
+                "adoxio_alias1surname",
+                "adoxio_previousprovstate7",
+                "adoxio_legalmiddlename",
+                "adoxio_previouspostalcode3",
+                "_modifiedby_value",
+                "adoxio_birthplacecity",
+                "adoxio_addressline1",
+                "adoxio_previousstreetaddress9",
+                "adoxio_previouscountry3",
+                "adoxio_bcidentificationcardnumber",
+                "statuscode",
+                "versionnumber",
+                "adoxio_addresspostalcode",
+                "adoxio_previouspostalcode2",
+                "adoxio_previouscountry5",
+                "adoxio_parcelidnumber",
+                "adoxio_previouscountry9",
+                "statecode",
+                "adoxio_previouscountry8",
+                "adoxio_previouscityx",
+                "adoxio_gendermf",
+                "adoxio_alias2surname",
+                "adoxio_alias5middlename",
+                "utcconversiontimezonecode",
+                "adoxio_legalsurname",
+                "adoxio_previousprovstate8",
+                "adoxio_previouscountry1",
+                "adoxio_alias1firstname",
+                "overriddencreatedon",
+                "adoxio_previousprovstate9",
+                "_owningbusinessunit_value",
+                "_createdby_value",
+                "adoxio_previouscity8",
+                "adoxio_alias2middlename",
+                "adoxio_previousstreetaddress8",
+                "adoxio_previouspostalcodex",
+                "_createdonbehalfby_value",
+                "adoxio_lcrbassociatejobid",
+                "adoxio_driverslicence",
+                "adoxio_alias1middlename",
+                "adoxio_alias3surname",
+                "adoxio_alias4surname",
+                "adoxio_previousstreetaddress2",
+                "adoxio_previouscity4",
+                "adoxio_previouspostalcode5",
+                "adoxio_spddatarowid",
+                "adoxio_legalfirstname",
+                "adoxio_previousprovstate5",
+                "adoxio_alias3middlename",
+                "adoxio_previousstreetaddress3",
+                "modifiedon",
+                "_adoxio_spdexport_value",
+                "adoxio_previouscountry4",
+                "adoxio_previouscountry7",
+                "adoxio_addresscity",
+                "adoxio_previouscity6",
+                "adoxio_previouspostalcode8",
+                "timezoneruleversionnumber",
+                "adoxio_previousstreetaddress5",
+                "adoxio_previouscity1",
+                "adoxio_previouscountryx",
+                "adoxio_selfdisclosure",
+                "adoxio_previousprovstatex",
+                "adoxio_birthdate",
+                "adoxio_alias2firstname",
+                "adoxio_previouscity9",
+                "adoxio_previouscity7",
+                "adoxio_previousstreetaddress1",
+                "_modifiedonbehalfby_value",
+                "adoxio_alias4firstname",
+                "adoxio_previouspostalcode6",
+                "adoxio_personalemailaddress",
+                "adoxio_contactphone",
+                "adoxio_previousstreetaddress6",
+                "adoxio_previousstreetaddress7",
+                "adoxio_previouspostalcode4",
+                "_owninguser_value",
+                "adoxio_previouscity3",
+                "adoxio_addresscountry",
+                "adoxio_previouscity5",
+                "adoxio_previouspostalcode9",
+                "adoxio_previouspostalcode1",
+                "adoxio_bcregistriesnumber"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_spddatarow_SyncErrors",
+                "adoxio_spddatarow_SharePointDocumentLocations",
+                "adoxio_spddatarow_AsyncOperations",
+                "adoxio_spddatarow_BulkDeleteFailures",
+                "adoxio_SPDExport"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Collection of adoxio_spddatarows",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spddatarow"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "spddatarows"
+        ],
+        "summary": "Add new entity to adoxio_spddatarows",
+        "operationId": "Spddatarows_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spddatarow"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spddatarow"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_spddatarows({adoxio_spddatarowid})": {
+      "get": {
+        "tags": [
+          "spddatarows"
+        ],
+        "summary": "Get entity from adoxio_spddatarows by key",
+        "operationId": "Spddatarows_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_spddatarowid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_spddatarowid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_name",
+                "adoxio_exporteddate",
+                "adoxio_previousprovstate1",
+                "adoxio_previousprovstate6",
+                "_owningteam_value",
+                "createdon",
+                "adoxio_alias4middlename",
+                "adoxio_previouspostalcode7",
+                "adoxio_previousstreetaddress4",
+                "adoxio_isexport",
+                "adoxio_previousstreetaddressx",
+                "adoxio_addressprovstate",
+                "adoxio_previousprovstate2",
+                "adoxio_lcrbbusinessjobid",
+                "adoxio_previouscity2",
+                "adoxio_alias5firstname",
+                "adoxio_previouscountry6",
+                "adoxio_alias3firstname",
+                "_ownerid_value",
+                "adoxio_previouscountry2",
+                "adoxio_alias5surname",
+                "adoxio_previousprovstate3",
+                "importsequencenumber",
+                "adoxio_previousprovstate4",
+                "adoxio_alias1surname",
+                "adoxio_previousprovstate7",
+                "adoxio_legalmiddlename",
+                "adoxio_previouspostalcode3",
+                "_modifiedby_value",
+                "adoxio_birthplacecity",
+                "adoxio_addressline1",
+                "adoxio_previousstreetaddress9",
+                "adoxio_previouscountry3",
+                "adoxio_bcidentificationcardnumber",
+                "statuscode",
+                "versionnumber",
+                "adoxio_addresspostalcode",
+                "adoxio_previouspostalcode2",
+                "adoxio_previouscountry5",
+                "adoxio_parcelidnumber",
+                "adoxio_previouscountry9",
+                "statecode",
+                "adoxio_previouscountry8",
+                "adoxio_previouscityx",
+                "adoxio_gendermf",
+                "adoxio_alias2surname",
+                "adoxio_alias5middlename",
+                "utcconversiontimezonecode",
+                "adoxio_legalsurname",
+                "adoxio_previousprovstate8",
+                "adoxio_previouscountry1",
+                "adoxio_alias1firstname",
+                "overriddencreatedon",
+                "adoxio_previousprovstate9",
+                "_owningbusinessunit_value",
+                "_createdby_value",
+                "adoxio_previouscity8",
+                "adoxio_alias2middlename",
+                "adoxio_previousstreetaddress8",
+                "adoxio_previouspostalcodex",
+                "_createdonbehalfby_value",
+                "adoxio_lcrbassociatejobid",
+                "adoxio_driverslicence",
+                "adoxio_alias1middlename",
+                "adoxio_alias3surname",
+                "adoxio_alias4surname",
+                "adoxio_previousstreetaddress2",
+                "adoxio_previouscity4",
+                "adoxio_previouspostalcode5",
+                "adoxio_spddatarowid",
+                "adoxio_legalfirstname",
+                "adoxio_previousprovstate5",
+                "adoxio_alias3middlename",
+                "adoxio_previousstreetaddress3",
+                "modifiedon",
+                "_adoxio_spdexport_value",
+                "adoxio_previouscountry4",
+                "adoxio_previouscountry7",
+                "adoxio_addresscity",
+                "adoxio_previouscity6",
+                "adoxio_previouspostalcode8",
+                "timezoneruleversionnumber",
+                "adoxio_previousstreetaddress5",
+                "adoxio_previouscity1",
+                "adoxio_previouscountryx",
+                "adoxio_selfdisclosure",
+                "adoxio_previousprovstatex",
+                "adoxio_birthdate",
+                "adoxio_alias2firstname",
+                "adoxio_previouscity9",
+                "adoxio_previouscity7",
+                "adoxio_previousstreetaddress1",
+                "_modifiedonbehalfby_value",
+                "adoxio_alias4firstname",
+                "adoxio_previouspostalcode6",
+                "adoxio_personalemailaddress",
+                "adoxio_contactphone",
+                "adoxio_previousstreetaddress6",
+                "adoxio_previousstreetaddress7",
+                "adoxio_previouspostalcode4",
+                "_owninguser_value",
+                "adoxio_previouscity3",
+                "adoxio_addresscountry",
+                "adoxio_previouscity5",
+                "adoxio_previouspostalcode9",
+                "adoxio_previouspostalcode1",
+                "adoxio_bcregistriesnumber"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_spddatarow_SyncErrors",
+                "adoxio_spddatarow_SharePointDocumentLocations",
+                "adoxio_spddatarow_AsyncOperations",
+                "adoxio_spddatarow_BulkDeleteFailures",
+                "adoxio_SPDExport"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spddatarow"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "spddatarows"
+        ],
+        "summary": "Delete entity from adoxio_spddatarows",
+        "operationId": "Spddatarows_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_spddatarowid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_spddatarowid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "spddatarows"
+        ],
+        "summary": "Update entity in adoxio_spddatarows",
+        "operationId": "Spddatarows_Update",
+        "parameters": [
+          {
+            "name": "adoxio_spddatarowid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_spddatarowid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spddatarow"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_spdexportses": {
+      "get": {
+        "tags": [
+          "spdexportses"
+        ],
+        "summary": "Get entities from adoxio_spdexportses",
+        "operationId": "Spdexportses_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_spdexportsid",
+                "adoxio_spdexportsid desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "versionnumber",
+                "versionnumber desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "createdon",
+                "createdon desc",
+                "adoxio_iscompleted",
+                "adoxio_iscompleted desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "statuscode",
+                "statuscode desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "statecode",
+                "statecode desc",
+                "modifiedon",
+                "modifiedon desc",
+                "adoxio_exportedon",
+                "adoxio_exportedon desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_spdexportsid",
+                "overriddencreatedon",
+                "adoxio_name",
+                "_ownerid_value",
+                "timezoneruleversionnumber",
+                "_modifiedby_value",
+                "_createdby_value",
+                "versionnumber",
+                "_modifiedonbehalfby_value",
+                "importsequencenumber",
+                "_owningteam_value",
+                "utcconversiontimezonecode",
+                "_createdonbehalfby_value",
+                "createdon",
+                "adoxio_iscompleted",
+                "_owninguser_value",
+                "statuscode",
+                "_owningbusinessunit_value",
+                "statecode",
+                "modifiedon",
+                "adoxio_exportedon"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_spdexports_SyncErrors",
+                "adoxio_spdexports_SharePointDocumentLocations",
+                "adoxio_spdexports_AsyncOperations",
+                "adoxio_spdexports_BulkDeleteFailures",
+                "adoxio_spdexports_adoxio_spddatarow_SPDExport"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Collection of adoxio_spdexportses",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spdexports"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "spdexportses"
+        ],
+        "summary": "Add new entity to adoxio_spdexportses",
+        "operationId": "Spdexportses_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spdexports"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spdexports"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_spdexportses({adoxio_spdexportsid})": {
+      "get": {
+        "tags": [
+          "spdexportses"
+        ],
+        "summary": "Get entity from adoxio_spdexportses by key",
+        "operationId": "Spdexportses_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_spdexportsid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_spdexportsid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_spdexportsid",
+                "overriddencreatedon",
+                "adoxio_name",
+                "_ownerid_value",
+                "timezoneruleversionnumber",
+                "_modifiedby_value",
+                "_createdby_value",
+                "versionnumber",
+                "_modifiedonbehalfby_value",
+                "importsequencenumber",
+                "_owningteam_value",
+                "utcconversiontimezonecode",
+                "_createdonbehalfby_value",
+                "createdon",
+                "adoxio_iscompleted",
+                "_owninguser_value",
+                "statuscode",
+                "_owningbusinessunit_value",
+                "statecode",
+                "modifiedon",
+                "adoxio_exportedon"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_spdexports_SyncErrors",
+                "adoxio_spdexports_SharePointDocumentLocations",
+                "adoxio_spdexports_AsyncOperations",
+                "adoxio_spdexports_BulkDeleteFailures",
+                "adoxio_spdexports_adoxio_spddatarow_SPDExport"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spdexports"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "spdexportses"
+        ],
+        "summary": "Delete entity from adoxio_spdexportses",
+        "operationId": "Spdexportses_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_spdexportsid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_spdexportsid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "spdexportses"
+        ],
+        "summary": "Update entity in adoxio_spdexportses",
+        "operationId": "Spdexportses_Update",
+        "parameters": [
+          {
+            "name": "adoxio_spdexportsid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_spdexportsid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spdexports"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },    
 	"/adoxio_tiedhouseassociations": {
       "get": {
 	    "operationId": "AdoxioTiedhouseassociations_Get",
@@ -23095,6 +24897,166 @@
         }
       ]
     },
+	    "Microsoft.Dynamics.CRM.adoxio_policydocument": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.crmbaseentity"
+        },
+        {
+          "title": "adoxio_policydocument",
+          "type": "object",
+          "properties": {
+            "_createdby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "importsequencenumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_policydocumentid": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_ownerid_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_name": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "overriddencreatedon": {
+              "x-nullable": true
+            },
+            "_owningteam_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "timezoneruleversionnumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_menutext": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "utcconversiontimezonecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "statecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "_createdonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_owningbusinessunit_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_displayorder": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_body": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_modifiedonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_slug": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "createdon": {
+              "x-nullable": true
+            },
+            "versionnumber": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "statuscode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_category": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "modifiedon": {
+              "x-nullable": true
+            },
+            "_owninguser_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_modifiedby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "createdbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "createdonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owninguser": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owningteam": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+            },
+            "ownerid": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+            },
+            "owningbusinessunit": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+            },
+            "adoxio_policydocument_SyncErrors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+              }
+            },
+            "adoxio_policydocument_DuplicateMatchingRecord": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+              }
+            },
+            "adoxio_policydocument_DuplicateBaseRecord": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+              }
+            },
+            "adoxio_policydocument_AsyncOperations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+              }
+            },
+            "adoxio_policydocument_BulkDeleteFailures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+              }
+            }
+          }
+        }
+      ]
+    },
     "Microsoft.Dynamics.CRM.adoxio_postalcode": {
       "allOf": [
         {
@@ -23259,7 +25221,803 @@
         }
       ]
     },
-    "Microsoft.Dynamics.CRM.adoxio_region": {
+    "Microsoft.Dynamics.CRM.adoxio_previousaddress": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.crmbaseentity"
+        },
+        {
+          "title": "adoxio_previousaddress",
+          "type": "object",
+          "properties": {
+            "versionnumber": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "statuscode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "_modifiedonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_ownerid_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_streetaddress": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_postalcode": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_city": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "timezoneruleversionnumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "_createdonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_modifiedby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "modifiedon": {
+              "x-nullable": true
+            },
+            "adoxio_country": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "overriddencreatedon": {
+              "x-nullable": true
+            },
+            "_createdby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_owningbusinessunit_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_name": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "statecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "importsequencenumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "createdon": {
+              "x-nullable": true
+            },
+            "utcconversiontimezonecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_provstate": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_owningteam_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousaddressid": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_adoxio_legalentityid_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_todate": {
+              "x-nullable": true
+            },
+            "_owninguser_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_fromdate": {
+              "x-nullable": true
+            },
+            "createdbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "createdonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owninguser": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owningteam": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+            },
+            "ownerid": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+            },
+            "owningbusinessunit": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+            },
+            "adoxio_previousaddress_SyncErrors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+              }
+            },
+            "adoxio_previousaddress_AsyncOperations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+              }
+            },
+            "adoxio_previousaddress_BulkDeleteFailures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+              }
+            },
+            "adoxio_LegalEntityId": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+            }
+          }
+        }
+      ]
+    },
+	"Microsoft.Dynamics.CRM.adoxio_spddatarow": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.crmbaseentity"
+        },
+        {
+          "title": "adoxio_spddatarow",
+          "type": "object",
+          "properties": {
+            "adoxio_name": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_exporteddate": {
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate1": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate6": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_owningteam_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "createdon": {
+              "x-nullable": true
+            },
+            "adoxio_alias4middlename": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode7": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress4": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_isexport": {
+              "type": "boolean",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddressx": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_addressprovstate": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate2": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_lcrbbusinessjobid": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity2": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias5firstname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry6": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias3firstname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_ownerid_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry2": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias5surname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate3": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "importsequencenumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate4": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias1surname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate7": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_legalmiddlename": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode3": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_modifiedby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_birthplacecity": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_addressline1": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress9": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry3": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_bcidentificationcardnumber": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "statuscode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "versionnumber": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_addresspostalcode": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode2": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry5": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_parcelidnumber": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry9": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "statecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry8": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscityx": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_gendermf": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias2surname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias5middlename": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "utcconversiontimezonecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_legalsurname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate8": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry1": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias1firstname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "overriddencreatedon": {
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate9": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_owningbusinessunit_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_createdby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity8": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias2middlename": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress8": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcodex": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_createdonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_lcrbassociatejobid": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_driverslicence": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias1middlename": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias3surname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias4surname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress2": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity4": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode5": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_spddatarowid": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_legalfirstname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstate5": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias3middlename": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress3": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "modifiedon": {
+              "x-nullable": true
+            },
+            "_adoxio_spdexport_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry4": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountry7": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_addresscity": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity6": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode8": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "timezoneruleversionnumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress5": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity1": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscountryx": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_selfdisclosure": {
+              "type": "boolean",
+              "x-nullable": true
+            },
+            "adoxio_previousprovstatex": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_birthdate": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias2firstname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity9": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity7": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress1": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_modifiedonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_alias4firstname": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode6": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_personalemailaddress": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_contactphone": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress6": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previousstreetaddress7": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode4": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_owninguser_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity3": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_addresscountry": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouscity5": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode9": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_previouspostalcode1": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "adoxio_bcregistriesnumber": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "createdbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "createdonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owninguser": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owningteam": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+            },
+            "ownerid": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+            },
+            "owningbusinessunit": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+            },
+            "adoxio_spddatarow_SyncErrors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+              }
+            },
+            "adoxio_spddatarow_SharePointDocumentLocations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+              }
+            },
+            "adoxio_spddatarow_AsyncOperations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+              }
+            },
+            "adoxio_spddatarow_BulkDeleteFailures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+              }
+            },
+            "adoxio_SPDExport": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spdexports"
+            }
+          }
+        }
+      ]
+    },
+    "Microsoft.Dynamics.CRM.adoxio_spdexports": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.crmbaseentity"
+        },
+        {
+          "title": "adoxio_spdexports",
+          "type": "object",
+          "properties": {
+            "adoxio_spdexportsid": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "overriddencreatedon": {
+              "x-nullable": true
+            },
+            "adoxio_name": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_ownerid_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "timezoneruleversionnumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "_modifiedby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_createdby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "versionnumber": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "_modifiedonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "importsequencenumber": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "_owningteam_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "utcconversiontimezonecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "_createdonbehalfby_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "createdon": {
+              "x-nullable": true
+            },
+            "adoxio_iscompleted": {
+              "type": "boolean",
+              "x-nullable": true
+            },
+            "_owninguser_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "statuscode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "_owningbusinessunit_value": {
+              "type": "string",
+              "x-nullable": true
+            },
+            "statecode": {
+              "type": "integer",
+              "x-nullable": true
+            },
+            "modifiedon": {
+              "x-nullable": true
+            },
+            "adoxio_exportedon": {
+              "x-nullable": true
+            },
+            "createdbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "createdonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "modifiedonbehalfbyname": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owninguser": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+            },
+            "owningteam": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+            },
+            "ownerid": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+            },
+            "owningbusinessunit": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+            },
+            "adoxio_spdexports_SyncErrors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+              }
+            },
+            "adoxio_spdexports_SharePointDocumentLocations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+              }
+            },
+            "adoxio_spdexports_AsyncOperations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+              }
+            },
+            "adoxio_spdexports_BulkDeleteFailures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+              }
+            },
+            "adoxio_spdexports_adoxio_spddatarow_SPDExport": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spddatarow"
+              }
+            }
+          }
+        }
+      ]
+    },
+	"Microsoft.Dynamics.CRM.adoxio_region": {
       "allOf": [
         {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.crmbaseentity"
