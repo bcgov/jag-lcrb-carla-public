@@ -6,6 +6,7 @@ using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -13,8 +14,8 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public JurisdictionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory  loggerFactory) 
-            : base(configuration, env, loggerFactory)
+        public JurisdictionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory  loggerFactory, IDynamicsClient dynamicsClient) 
+            : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 
         protected override IEnumerable<string> TriggerProfiles => _profileTriggers;
