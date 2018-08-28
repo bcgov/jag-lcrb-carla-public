@@ -421,7 +421,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 else
                 { //BC service card login
-                    var filter = "externaluseridentifier eq " + userId;                    
+                    var filter = "externaluseridentifier eq " + userId;
                     try
                     {
                         contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
@@ -494,6 +494,28 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             return user;
+        }
+
+        /// <summary>
+        /// Get an Invoice by the Id
+        /// </summary>
+        /// <param name="system">Re</param>
+        /// <param name="id"></param>
+        /// <returns>The Invoice, or null if it does not exist</returns>
+        public static async Task<List<MicrosoftDynamicsCRMadoxioPreviousaddress>> GetPreviousAddressByContactId(this IDynamicsClient system, string guid)
+        {
+            List<MicrosoftDynamicsCRMadoxioPreviousaddress> result;
+            try
+            {
+                // fetch from Dynamics.
+                var filter = "_adoxio_account_value eq " + guid;
+                result = system.Previousaddresses.Get(filter: filter).Value.ToList();
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
         }
 
         /// <summary>
