@@ -14,27 +14,22 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// AdoxioTiedhouseassociations operations.
+    /// Spddatarows operations.
     /// </summary>
-    public partial interface IAdoxioTiedhouseassociations
+    public partial interface ISpddatarows
     {
         /// <summary>
-        /// Get entities from adoxio_tiedhouseassociations
+        /// Get entities from adoxio_spddatarows
         /// </summary>
         /// <param name='top'>
-        /// Show only the first n items
         /// </param>
         /// <param name='skip'>
-        /// Skip only the first n items
         /// </param>
         /// <param name='search'>
-        /// Search items by search phrases
         /// </param>
         /// <param name='filter'>
-        /// Filter items by property values
         /// </param>
         /// <param name='count'>
-        /// Include count of items
         /// </param>
         /// <param name='orderby'>
         /// Order items by property values
@@ -57,9 +52,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Add new entity to adoxio_tiedhouseassociations
+        /// Add new entity to adoxio_spddatarows
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -83,34 +78,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseassociation>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioTiedhouseassociation body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarow>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioSpddatarow body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_tiedhouseassociations
+        /// Get entity from adoxio_spddatarows by key
         /// </summary>
-        /// <param name='adoxioTiedhouseassociationid'>
-        /// key: adoxio_tiedhouseassociationid
-        /// </param>
-        /// <param name='ifMatch'>
-        /// ETag
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioTiedhouseassociationid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get entity from adoxio_tiedhouseassociations by key
-        /// </summary>
-        /// <param name='adoxioTiedhouseassociationid'>
-        /// key: adoxio_tiedhouseassociationid
+        /// <param name='adoxioSpddatarowid'>
+        /// key: adoxio_spddatarowid
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -133,12 +106,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioTiedhouseassociation>> GetByKeyWithHttpMessagesAsync(string adoxioTiedhouseassociationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarow>> GetByKeyWithHttpMessagesAsync(string adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Update entity in adoxio_tiedhouseassociations
+        /// Delete entity from adoxio_spddatarows
         /// </summary>
-        /// <param name='adoxioTiedhouseassociationid'>
-        /// key: adoxio_tiedhouseassociationid
+        /// <param name='adoxioSpddatarowid'>
+        /// key: adoxio_spddatarowid
+        /// </param>
+        /// <param name='ifMatch'>
+        /// ETag
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="OdataerrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioSpddatarowid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Update entity in adoxio_spddatarows
+        /// </summary>
+        /// <param name='adoxioSpddatarowid'>
+        /// key: adoxio_spddatarowid
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -155,6 +150,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioTiedhouseassociationid, MicrosoftDynamicsCRMadoxioTiedhouseassociation body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
