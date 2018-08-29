@@ -24,11 +24,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgebaserec class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgebaserec(string adoxioApplicationid = default(string), string knowledgebaserecordid = default(string), string msdynAdoxioApplicationKnowledgebaserecid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgebaserec(string adoxioApplicationid = default(string), string msdynAdoxioApplicationKnowledgebaserecid = default(string), string knowledgebaserecordid = default(string), string versionnumber = default(string))
         {
             AdoxioApplicationid = adoxioApplicationid;
-            Knowledgebaserecordid = knowledgebaserecordid;
             MsdynAdoxioApplicationKnowledgebaserecid = msdynAdoxioApplicationKnowledgebaserecid;
+            Knowledgebaserecordid = knowledgebaserecordid;
             Versionnumber = versionnumber;
             CustomInit();
         }
@@ -45,18 +45,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "knowledgebaserecordid")]
-        public string Knowledgebaserecordid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "msdyn_adoxio_application_knowledgebaserecid")]
         public string MsdynAdoxioApplicationKnowledgebaserecid { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "knowledgebaserecordid")]
+        public string Knowledgebaserecordid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
     }
 }

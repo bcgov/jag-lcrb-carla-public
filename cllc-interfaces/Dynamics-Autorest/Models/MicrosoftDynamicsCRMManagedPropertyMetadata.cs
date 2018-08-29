@@ -24,27 +24,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMManagedPropertyMetadata class.
         /// </summary>
-        /// <param name="evaluationPriority">Possible values include: 'None',
-        /// 'Low', 'Normal', 'High', 'Essential'</param>
         /// <param name="managedPropertyType">Possible values include:
         /// 'Operation', 'Attribute', 'CustomEvaluator', 'Custom'</param>
         /// <param name="operation">Possible values include: 'None', 'Create',
         /// 'Update', 'CreateUpdate', 'Delete', 'UpdateDelete', 'All'</param>
-        public MicrosoftDynamicsCRMManagedPropertyMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string enablesAttributeName = default(string), string enablesEntityName = default(string), int? errorCode = default(int?), string evaluationPriority = default(string), string introducedVersion = default(string), bool? isGlobalForOperation = default(bool?), bool? isPrivate = default(bool?), string logicalName = default(string), string managedPropertyType = default(string), string operation = default(string))
-            : base(hasChanged, metadataId)
+        /// <param name="evaluationPriority">Possible values include: 'None',
+        /// 'Low', 'Normal', 'High', 'Essential'</param>
+        public MicrosoftDynamicsCRMManagedPropertyMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), string logicalName = default(string), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string managedPropertyType = default(string), string operation = default(string), bool? isGlobalForOperation = default(bool?), string evaluationPriority = default(string), bool? isPrivate = default(bool?), int? errorCode = default(int?), string enablesEntityName = default(string), string enablesAttributeName = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string introducedVersion = default(string))
+            : base(metadataId, hasChanged)
         {
-            Description = description;
-            DisplayName = displayName;
-            EnablesAttributeName = enablesAttributeName;
-            EnablesEntityName = enablesEntityName;
-            ErrorCode = errorCode;
-            EvaluationPriority = evaluationPriority;
-            IntroducedVersion = introducedVersion;
-            IsGlobalForOperation = isGlobalForOperation;
-            IsPrivate = isPrivate;
             LogicalName = logicalName;
+            DisplayName = displayName;
             ManagedPropertyType = managedPropertyType;
             Operation = operation;
+            IsGlobalForOperation = isGlobalForOperation;
+            EvaluationPriority = evaluationPriority;
+            IsPrivate = isPrivate;
+            ErrorCode = errorCode;
+            EnablesEntityName = enablesEntityName;
+            EnablesAttributeName = enablesAttributeName;
+            Description = description;
+            IntroducedVersion = introducedVersion;
             CustomInit();
         }
 
@@ -55,55 +55,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Description")]
-        public MicrosoftDynamicsCRMLabel Description { get; set; }
+        [JsonProperty(PropertyName = "LogicalName")]
+        public string LogicalName { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
         public MicrosoftDynamicsCRMLabel DisplayName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "EnablesAttributeName")]
-        public string EnablesAttributeName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "EnablesEntityName")]
-        public string EnablesEntityName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ErrorCode")]
-        public int? ErrorCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'None', 'Low', 'Normal',
-        /// 'High', 'Essential'
-        /// </summary>
-        [JsonProperty(PropertyName = "EvaluationPriority")]
-        public string EvaluationPriority { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IntroducedVersion")]
-        public string IntroducedVersion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsGlobalForOperation")]
-        public bool? IsGlobalForOperation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsPrivate")]
-        public bool? IsPrivate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "LogicalName")]
-        public string LogicalName { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Operation', 'Attribute',
@@ -118,6 +76,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Operation")]
         public string Operation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsGlobalForOperation")]
+        public bool? IsGlobalForOperation { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'None', 'Low', 'Normal',
+        /// 'High', 'Essential'
+        /// </summary>
+        [JsonProperty(PropertyName = "EvaluationPriority")]
+        public string EvaluationPriority { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsPrivate")]
+        public bool? IsPrivate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ErrorCode")]
+        public int? ErrorCode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "EnablesEntityName")]
+        public string EnablesEntityName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "EnablesAttributeName")]
+        public string EnablesAttributeName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Description")]
+        public MicrosoftDynamicsCRMLabel Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IntroducedVersion")]
+        public string IntroducedVersion { get; set; }
 
     }
 }

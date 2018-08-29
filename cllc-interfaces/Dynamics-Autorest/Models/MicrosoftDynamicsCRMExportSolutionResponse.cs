@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMExportSolutionResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMExportSolutionResponse(string exportSolutionFile = default(string))
+        public MicrosoftDynamicsCRMExportSolutionResponse(object exportSolutionFile = default(object))
         {
             ExportSolutionFile = exportSolutionFile;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ExportSolutionFile")]
-        public string ExportSolutionFile { get; set; }
+        public object ExportSolutionFile { get; set; }
 
     }
 }

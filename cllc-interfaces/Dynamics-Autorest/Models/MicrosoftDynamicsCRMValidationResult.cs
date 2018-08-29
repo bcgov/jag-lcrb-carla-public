@@ -27,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMValidationResult class.
         /// </summary>
-        public MicrosoftDynamicsCRMValidationResult(string activityId = default(string), MicrosoftDynamicsCRMTraceInfo traceInfo = default(MicrosoftDynamicsCRMTraceInfo), bool? validationSuccess = default(bool?))
+        public MicrosoftDynamicsCRMValidationResult(bool? validationSuccess = default(bool?), MicrosoftDynamicsCRMTraceInfo traceInfo = default(MicrosoftDynamicsCRMTraceInfo), string activityId = default(string))
         {
-            ActivityId = activityId;
-            TraceInfo = traceInfo;
             ValidationSuccess = validationSuccess;
+            TraceInfo = traceInfo;
+            ActivityId = activityId;
             CustomInit();
         }
 
@@ -42,8 +42,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ActivityId")]
-        public string ActivityId { get; set; }
+        [JsonProperty(PropertyName = "ValidationSuccess")]
+        public bool? ValidationSuccess { get; set; }
 
         /// <summary>
         /// </summary>
@@ -52,8 +52,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ValidationSuccess")]
-        public bool? ValidationSuccess { get; set; }
+        [JsonProperty(PropertyName = "ActivityId")]
+        public string ActivityId { get; set; }
 
     }
 }

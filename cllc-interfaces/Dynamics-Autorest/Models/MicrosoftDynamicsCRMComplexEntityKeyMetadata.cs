@@ -31,19 +31,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="entityKeyIndexStatus">Possible values include:
         /// 'Pending', 'InProgress', 'Active', 'Failed'</param>
-        public MicrosoftDynamicsCRMComplexEntityKeyMetadata(MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string entityKeyIndexStatus = default(string), string entityLogicalName = default(string), bool? hasChanged = default(bool?), string introducedVersion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), IList<string> keyAttributes = default(IList<string>), string logicalName = default(string), string metadataId = default(string), string schemaName = default(string))
+        public MicrosoftDynamicsCRMComplexEntityKeyMetadata(MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
             DisplayName = displayName;
-            EntityKeyIndexStatus = entityKeyIndexStatus;
+            LogicalName = logicalName;
+            SchemaName = schemaName;
             EntityLogicalName = entityLogicalName;
-            HasChanged = hasChanged;
-            IntroducedVersion = introducedVersion;
+            KeyAttributes = keyAttributes;
             IsCustomizable = isCustomizable;
             IsManaged = isManaged;
-            KeyAttributes = keyAttributes;
-            LogicalName = logicalName;
+            IntroducedVersion = introducedVersion;
+            EntityKeyIndexStatus = entityKeyIndexStatus;
             MetadataId = metadataId;
-            SchemaName = schemaName;
+            HasChanged = hasChanged;
             CustomInit();
         }
 
@@ -58,11 +58,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public MicrosoftDynamicsCRMLabel DisplayName { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Pending', 'InProgress',
-        /// 'Active', 'Failed'
         /// </summary>
-        [JsonProperty(PropertyName = "EntityKeyIndexStatus")]
-        public string EntityKeyIndexStatus { get; set; }
+        [JsonProperty(PropertyName = "LogicalName")]
+        public string LogicalName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SchemaName")]
+        public string SchemaName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -71,13 +74,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "HasChanged")]
-        public bool? HasChanged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IntroducedVersion")]
-        public string IntroducedVersion { get; set; }
+        [JsonProperty(PropertyName = "KeyAttributes")]
+        public IList<string> KeyAttributes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,13 +89,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "KeyAttributes")]
-        public IList<string> KeyAttributes { get; set; }
+        [JsonProperty(PropertyName = "IntroducedVersion")]
+        public string IntroducedVersion { get; set; }
 
         /// <summary>
+        /// Gets or sets possible values include: 'Pending', 'InProgress',
+        /// 'Active', 'Failed'
         /// </summary>
-        [JsonProperty(PropertyName = "LogicalName")]
-        public string LogicalName { get; set; }
+        [JsonProperty(PropertyName = "EntityKeyIndexStatus")]
+        public string EntityKeyIndexStatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -106,8 +106,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SchemaName")]
-        public string SchemaName { get; set; }
+        [JsonProperty(PropertyName = "HasChanged")]
+        public bool? HasChanged { get; set; }
 
     }
 }

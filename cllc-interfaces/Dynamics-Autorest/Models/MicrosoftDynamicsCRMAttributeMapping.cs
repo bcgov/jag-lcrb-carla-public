@@ -29,20 +29,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAttributeMapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMAttributeMapping(int? allowedSyncDirection = default(int?), string attributeCrmDisplayName = default(string), string attributeCrmName = default(string), string attributeExchangeDisplayName = default(string), string attributeExchangeName = default(string), string attributeMappingId = default(string), IList<string> computedProperties = default(IList<string>), int? defaultSyncDirection = default(int?), int? entityTypeCode = default(int?), bool? isComputed = default(bool?), string mappingName = default(string), int? syncDirection = default(int?))
+        public MicrosoftDynamicsCRMAttributeMapping(string attributeMappingId = default(string), string mappingName = default(string), string attributeCrmName = default(string), string attributeExchangeName = default(string), int? syncDirection = default(int?), int? defaultSyncDirection = default(int?), int? allowedSyncDirection = default(int?), bool? isComputed = default(bool?), int? entityTypeCode = default(int?), IList<string> computedProperties = default(IList<string>), string attributeCrmDisplayName = default(string), string attributeExchangeDisplayName = default(string))
         {
-            AllowedSyncDirection = allowedSyncDirection;
-            AttributeCrmDisplayName = attributeCrmDisplayName;
-            AttributeCrmName = attributeCrmName;
-            AttributeExchangeDisplayName = attributeExchangeDisplayName;
-            AttributeExchangeName = attributeExchangeName;
             AttributeMappingId = attributeMappingId;
-            ComputedProperties = computedProperties;
-            DefaultSyncDirection = defaultSyncDirection;
-            EntityTypeCode = entityTypeCode;
-            IsComputed = isComputed;
             MappingName = mappingName;
+            AttributeCrmName = attributeCrmName;
+            AttributeExchangeName = attributeExchangeName;
             SyncDirection = syncDirection;
+            DefaultSyncDirection = defaultSyncDirection;
+            AllowedSyncDirection = allowedSyncDirection;
+            IsComputed = isComputed;
+            EntityTypeCode = entityTypeCode;
+            ComputedProperties = computedProperties;
+            AttributeCrmDisplayName = attributeCrmDisplayName;
+            AttributeExchangeDisplayName = attributeExchangeDisplayName;
             CustomInit();
         }
 
@@ -53,53 +53,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "AllowedSyncDirection")]
-        public int? AllowedSyncDirection { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "AttributeCrmDisplayName")]
-        public string AttributeCrmDisplayName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "AttributeCrmName")]
-        public string AttributeCrmName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "AttributeExchangeDisplayName")]
-        public string AttributeExchangeDisplayName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "AttributeExchangeName")]
-        public string AttributeExchangeName { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "AttributeMappingId")]
         public string AttributeMappingId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ComputedProperties")]
-        public IList<string> ComputedProperties { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "DefaultSyncDirection")]
-        public int? DefaultSyncDirection { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "EntityTypeCode")]
-        public int? EntityTypeCode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsComputed")]
-        public bool? IsComputed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,8 +63,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "AttributeCrmName")]
+        public string AttributeCrmName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AttributeExchangeName")]
+        public string AttributeExchangeName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "SyncDirection")]
         public int? SyncDirection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DefaultSyncDirection")]
+        public int? DefaultSyncDirection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AllowedSyncDirection")]
+        public int? AllowedSyncDirection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsComputed")]
+        public bool? IsComputed { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "EntityTypeCode")]
+        public int? EntityTypeCode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ComputedProperties")]
+        public IList<string> ComputedProperties { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AttributeCrmDisplayName")]
+        public string AttributeCrmDisplayName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "AttributeExchangeDisplayName")]
+        public string AttributeExchangeDisplayName { get; set; }
 
     }
 }

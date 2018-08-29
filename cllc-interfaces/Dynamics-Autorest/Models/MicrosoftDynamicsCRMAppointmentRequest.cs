@@ -31,25 +31,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="direction">Possible values include: 'Forward',
         /// 'Backward'</param>
-        public MicrosoftDynamicsCRMAppointmentRequest(int? anchorOffset = default(int?), IList<MicrosoftDynamicsCRMAppointmentsToIgnore> appointmentsToIgnore = default(IList<MicrosoftDynamicsCRMAppointmentsToIgnore>), IList<MicrosoftDynamicsCRMConstraintRelation> constraints = default(IList<MicrosoftDynamicsCRMConstraintRelation>), string direction = default(string), int? duration = default(int?), int? numberOfResults = default(int?), IList<MicrosoftDynamicsCRMObjectiveRelation> objectives = default(IList<MicrosoftDynamicsCRMObjectiveRelation>), int? recurrenceDuration = default(int?), int? recurrenceTimeZoneCode = default(int?), IList<MicrosoftDynamicsCRMRequiredResource> requiredResources = default(IList<MicrosoftDynamicsCRMRequiredResource>), string searchRecurrenceRule = default(string), System.DateTimeOffset? searchRecurrenceStart = default(System.DateTimeOffset?), System.DateTimeOffset? searchWindowEnd = default(System.DateTimeOffset?), System.DateTimeOffset? searchWindowStart = default(System.DateTimeOffset?), string serviceId = default(string), IList<string> sites = default(IList<string>), int? userTimeZoneCode = default(int?))
+        public MicrosoftDynamicsCRMAppointmentRequest(string serviceId = default(string), int? anchorOffset = default(int?), int? userTimeZoneCode = default(int?), int? recurrenceDuration = default(int?), int? recurrenceTimeZoneCode = default(int?), IList<MicrosoftDynamicsCRMAppointmentsToIgnore> appointmentsToIgnore = default(IList<MicrosoftDynamicsCRMAppointmentsToIgnore>), IList<MicrosoftDynamicsCRMRequiredResource> requiredResources = default(IList<MicrosoftDynamicsCRMRequiredResource>), object searchWindowStart = default(object), object searchWindowEnd = default(object), object searchRecurrenceStart = default(object), string searchRecurrenceRule = default(string), int? duration = default(int?), IList<MicrosoftDynamicsCRMConstraintRelation> constraints = default(IList<MicrosoftDynamicsCRMConstraintRelation>), IList<MicrosoftDynamicsCRMObjectiveRelation> objectives = default(IList<MicrosoftDynamicsCRMObjectiveRelation>), string direction = default(string), int? numberOfResults = default(int?), IList<string> sites = default(IList<string>))
         {
+            ServiceId = serviceId;
             AnchorOffset = anchorOffset;
-            AppointmentsToIgnore = appointmentsToIgnore;
-            Constraints = constraints;
-            Direction = direction;
-            Duration = duration;
-            NumberOfResults = numberOfResults;
-            Objectives = objectives;
+            UserTimeZoneCode = userTimeZoneCode;
             RecurrenceDuration = recurrenceDuration;
             RecurrenceTimeZoneCode = recurrenceTimeZoneCode;
+            AppointmentsToIgnore = appointmentsToIgnore;
             RequiredResources = requiredResources;
-            SearchRecurrenceRule = searchRecurrenceRule;
-            SearchRecurrenceStart = searchRecurrenceStart;
-            SearchWindowEnd = searchWindowEnd;
             SearchWindowStart = searchWindowStart;
-            ServiceId = serviceId;
+            SearchWindowEnd = searchWindowEnd;
+            SearchRecurrenceStart = searchRecurrenceStart;
+            SearchRecurrenceRule = searchRecurrenceRule;
+            Duration = duration;
+            Constraints = constraints;
+            Objectives = objectives;
+            Direction = direction;
+            NumberOfResults = numberOfResults;
             Sites = sites;
-            UserTimeZoneCode = userTimeZoneCode;
             CustomInit();
         }
 
@@ -60,39 +60,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ServiceId")]
+        public string ServiceId { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "AnchorOffset")]
         public int? AnchorOffset { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "AppointmentsToIgnore")]
-        public IList<MicrosoftDynamicsCRMAppointmentsToIgnore> AppointmentsToIgnore { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Constraints")]
-        public IList<MicrosoftDynamicsCRMConstraintRelation> Constraints { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'Forward', 'Backward'
-        /// </summary>
-        [JsonProperty(PropertyName = "Direction")]
-        public string Direction { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Duration")]
-        public int? Duration { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "NumberOfResults")]
-        public int? NumberOfResults { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Objectives")]
-        public IList<MicrosoftDynamicsCRMObjectiveRelation> Objectives { get; set; }
+        [JsonProperty(PropertyName = "UserTimeZoneCode")]
+        public int? UserTimeZoneCode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -106,8 +85,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "AppointmentsToIgnore")]
+        public IList<MicrosoftDynamicsCRMAppointmentsToIgnore> AppointmentsToIgnore { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "RequiredResources")]
         public IList<MicrosoftDynamicsCRMRequiredResource> RequiredResources { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SearchWindowStart")]
+        public object SearchWindowStart { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SearchWindowEnd")]
+        public object SearchWindowEnd { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SearchRecurrenceStart")]
+        public object SearchRecurrenceStart { get; set; }
 
         /// <summary>
         /// </summary>
@@ -116,33 +115,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SearchRecurrenceStart")]
-        public System.DateTimeOffset? SearchRecurrenceStart { get; set; }
+        [JsonProperty(PropertyName = "Duration")]
+        public int? Duration { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SearchWindowEnd")]
-        public System.DateTimeOffset? SearchWindowEnd { get; set; }
+        [JsonProperty(PropertyName = "Constraints")]
+        public IList<MicrosoftDynamicsCRMConstraintRelation> Constraints { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SearchWindowStart")]
-        public System.DateTimeOffset? SearchWindowStart { get; set; }
+        [JsonProperty(PropertyName = "Objectives")]
+        public IList<MicrosoftDynamicsCRMObjectiveRelation> Objectives { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'Forward', 'Backward'
+        /// </summary>
+        [JsonProperty(PropertyName = "Direction")]
+        public string Direction { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ServiceId")]
-        public string ServiceId { get; set; }
+        [JsonProperty(PropertyName = "NumberOfResults")]
+        public int? NumberOfResults { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Sites")]
         public IList<string> Sites { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "UserTimeZoneCode")]
-        public int? UserTimeZoneCode { get; set; }
 
     }
 }

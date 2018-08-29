@@ -27,15 +27,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOptionMetadata(string color = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), bool? hasChanged = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMLabel label = default(MicrosoftDynamicsCRMLabel), string metadataId = default(string), int? value = default(int?))
+        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), MicrosoftDynamicsCRMLabel label = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
-            Color = color;
-            Description = description;
-            HasChanged = hasChanged;
-            IsManaged = isManaged;
-            Label = label;
-            MetadataId = metadataId;
             Value = value;
+            Label = label;
+            Description = description;
+            Color = color;
+            IsManaged = isManaged;
+            MetadataId = metadataId;
+            HasChanged = hasChanged;
             CustomInit();
         }
 
@@ -46,23 +46,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Color")]
-        public string Color { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Description")]
-        public MicrosoftDynamicsCRMLabel Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "HasChanged")]
-        public bool? HasChanged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsManaged")]
-        public bool? IsManaged { get; set; }
+        [JsonProperty(PropertyName = "Value")]
+        public int? Value { get; set; }
 
         /// <summary>
         /// </summary>
@@ -71,13 +56,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "Description")]
+        public MicrosoftDynamicsCRMLabel Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Color")]
+        public string Color { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsManaged")]
+        public bool? IsManaged { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "MetadataId")]
         public string MetadataId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Value")]
-        public int? Value { get; set; }
+        [JsonProperty(PropertyName = "HasChanged")]
+        public bool? HasChanged { get; set; }
 
     }
 }
