@@ -24,11 +24,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMaccountleads
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMaccountleads(string accountid = default(string), string accountleadid = default(string), string leadid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMaccountleads(string accountleadid = default(string), string leadid = default(string), string accountid = default(string), string versionnumber = default(string))
         {
-            Accountid = accountid;
             Accountleadid = accountleadid;
             Leadid = leadid;
+            Accountid = accountid;
             Versionnumber = versionnumber;
             CustomInit();
         }
@@ -37,11 +37,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "accountid")]
-        public string Accountid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +50,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "accountid")]
+        public string Accountid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
     }
 }

@@ -24,52 +24,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMworkflowlog
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMworkflowlog(MicrosoftDynamicsCRMexpiredprocess expiredProcessAsyncoperationid = default(MicrosoftDynamicsCRMexpiredprocess), MicrosoftDynamicsCRMleadtoopportunitysalesprocess leadToOpportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMleadtoopportunitysalesprocess), MicrosoftDynamicsCRMnewprocess newProcessAsyncoperationid = default(MicrosoftDynamicsCRMnewprocess), MicrosoftDynamicsCRMopportunitysalesprocess opportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMopportunitysalesprocess), MicrosoftDynamicsCRMphonetocaseprocess phoneToCaseProcessAsyncoperationid = default(MicrosoftDynamicsCRMphonetocaseprocess), MicrosoftDynamicsCRMtranslationprocess translationProcessAsyncoperationid = default(MicrosoftDynamicsCRMtranslationprocess), string _asyncoperationidValue = default(string), string _childworkflowinstanceidValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), string activityname = default(string), MicrosoftDynamicsCRMadoxioApplicationbpf asyncoperationidAdoxioApplicationbpf = default(MicrosoftDynamicsCRMadoxioApplicationbpf), MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2 asyncoperationidAdoxioApplicationbpfmvpv2 = default(MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2), MicrosoftDynamicsCRMadoxioComplaintpublicbpf asyncoperationidAdoxioComplaintpublicbpf = default(MicrosoftDynamicsCRMadoxioComplaintpublicbpf), MicrosoftDynamicsCRMasyncoperation asyncoperationidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMnewBpf839d33d7035a4f2bbe2150f27b500af6 asyncoperationidNewBpf839d33d7035a4f2bbe2150f27b500af6 = default(MicrosoftDynamicsCRMnewBpf839d33d7035a4f2bbe2150f27b500af6), MicrosoftDynamicsCRMnewBpfA5f48dac03e04d1498b374c0638698a2 asyncoperationidNewBpfA5f48dac03e04d1498b374c0638698a2 = default(MicrosoftDynamicsCRMnewBpfA5f48dac03e04d1498b374c0638698a2), MicrosoftDynamicsCRMasyncoperation childworkflowinstanceidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), int? duration = default(int?), int? errorcode = default(int?), string interactionactivityresult = default(string), string message = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), string stagename = default(string), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), int? status = default(int?), string stepname = default(string), string workflowlogid = default(string))
+        public MicrosoftDynamicsCRMworkflowlog(string stepname = default(string), string _childworkflowinstanceidValue = default(string), string _owneridValue = default(string), string message = default(string), int? duration = default(int?), string activityname = default(string), string _owningbusinessunitValue = default(string), string interactionactivityresult = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), object completedon = default(object), string workflowlogid = default(string), string stagename = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? status = default(int?), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), string description = default(string), string _regardingobjectidValue = default(string), object modifiedon = default(object), object startedon = default(object), object createdon = default(object), string _asyncoperationidValue = default(string), int? errorcode = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMasyncoperation childworkflowinstanceidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMleadtoopportunitysalesprocess leadToOpportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMleadtoopportunitysalesprocess), MicrosoftDynamicsCRMexpiredprocess expiredProcessAsyncoperationid = default(MicrosoftDynamicsCRMexpiredprocess), MicrosoftDynamicsCRMtranslationprocess translationProcessAsyncoperationid = default(MicrosoftDynamicsCRMtranslationprocess), MicrosoftDynamicsCRMopportunitysalesprocess opportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMopportunitysalesprocess), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMphonetocaseprocess phoneToCaseProcessAsyncoperationid = default(MicrosoftDynamicsCRMphonetocaseprocess), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMnewprocess newProcessAsyncoperationid = default(MicrosoftDynamicsCRMnewprocess), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2 asyncoperationidAdoxioApplicationbpfmvpv2 = default(MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2), MicrosoftDynamicsCRMadoxioComplaintpublicbpf asyncoperationidAdoxioComplaintpublicbpf = default(MicrosoftDynamicsCRMadoxioComplaintpublicbpf))
         {
-            ExpiredProcessAsyncoperationid = expiredProcessAsyncoperationid;
-            LeadToOpportunitySalesProcessAsyncoperationid = leadToOpportunitySalesProcessAsyncoperationid;
-            NewProcessAsyncoperationid = newProcessAsyncoperationid;
-            OpportunitySalesProcessAsyncoperationid = opportunitySalesProcessAsyncoperationid;
-            PhoneToCaseProcessAsyncoperationid = phoneToCaseProcessAsyncoperationid;
-            TranslationProcessAsyncoperationid = translationProcessAsyncoperationid;
-            this._asyncoperationidValue = _asyncoperationidValue;
+            Stepname = stepname;
             this._childworkflowinstanceidValue = _childworkflowinstanceidValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            this._regardingobjectidValue = _regardingobjectidValue;
+            Message = message;
+            Duration = duration;
             Activityname = activityname;
-            AsyncoperationidAdoxioApplicationbpf = asyncoperationidAdoxioApplicationbpf;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Interactionactivityresult = interactionactivityresult;
+            this._owninguserValue = _owninguserValue;
+            this._createdbyValue = _createdbyValue;
+            Completedon = completedon;
+            Workflowlogid = workflowlogid;
+            Stagename = stagename;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Status = status;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owningteamValue = _owningteamValue;
+            Description = description;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            Modifiedon = modifiedon;
+            Startedon = startedon;
+            Createdon = createdon;
+            this._asyncoperationidValue = _asyncoperationidValue;
+            Errorcode = errorcode;
+            Owningteam = owningteam;
+            Createdonbehalfby = createdonbehalfby;
+            ChildworkflowinstanceidAsyncoperation = childworkflowinstanceidAsyncoperation;
+            LeadToOpportunitySalesProcessAsyncoperationid = leadToOpportunitySalesProcessAsyncoperationid;
+            ExpiredProcessAsyncoperationid = expiredProcessAsyncoperationid;
+            TranslationProcessAsyncoperationid = translationProcessAsyncoperationid;
+            OpportunitySalesProcessAsyncoperationid = opportunitySalesProcessAsyncoperationid;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Modifiedby = modifiedby;
+            PhoneToCaseProcessAsyncoperationid = phoneToCaseProcessAsyncoperationid;
+            Owningbusinessunit = owningbusinessunit;
+            AsyncoperationidAsyncoperation = asyncoperationidAsyncoperation;
+            NewProcessAsyncoperationid = newProcessAsyncoperationid;
+            Createdby = createdby;
             AsyncoperationidAdoxioApplicationbpfmvpv2 = asyncoperationidAdoxioApplicationbpfmvpv2;
             AsyncoperationidAdoxioComplaintpublicbpf = asyncoperationidAdoxioComplaintpublicbpf;
-            AsyncoperationidAsyncoperation = asyncoperationidAsyncoperation;
-            AsyncoperationidNewBpf839d33d7035a4f2bbe2150f27b500af6 = asyncoperationidNewBpf839d33d7035a4f2bbe2150f27b500af6;
-            AsyncoperationidNewBpfA5f48dac03e04d1498b374c0638698a2 = asyncoperationidNewBpfA5f48dac03e04d1498b374c0638698a2;
-            ChildworkflowinstanceidAsyncoperation = childworkflowinstanceidAsyncoperation;
-            Completedon = completedon;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
-            Duration = duration;
-            Errorcode = errorcode;
-            Interactionactivityresult = interactionactivityresult;
-            Message = message;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Stagename = stagename;
-            Startedon = startedon;
-            Status = status;
-            Stepname = stepname;
-            Workflowlogid = workflowlogid;
             CustomInit();
         }
 
@@ -80,38 +77,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ExpiredProcess_asyncoperationid")]
-        public MicrosoftDynamicsCRMexpiredprocess ExpiredProcessAsyncoperationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "LeadToOpportunitySalesProcess_asyncoperationid")]
-        public MicrosoftDynamicsCRMleadtoopportunitysalesprocess LeadToOpportunitySalesProcessAsyncoperationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "NewProcess_asyncoperationid")]
-        public MicrosoftDynamicsCRMnewprocess NewProcessAsyncoperationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "OpportunitySalesProcess_asyncoperationid")]
-        public MicrosoftDynamicsCRMopportunitysalesprocess OpportunitySalesProcessAsyncoperationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "PhoneToCaseProcess_asyncoperationid")]
-        public MicrosoftDynamicsCRMphonetocaseprocess PhoneToCaseProcessAsyncoperationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "TranslationProcess_asyncoperationid")]
-        public MicrosoftDynamicsCRMtranslationprocess TranslationProcessAsyncoperationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_asyncoperationid_value")]
-        public string _asyncoperationidValue { get; set; }
+        [JsonProperty(PropertyName = "stepname")]
+        public string Stepname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,48 +87,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "message")]
+        public string Message { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        [JsonProperty(PropertyName = "duration")]
+        public int? Duration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,8 +107,168 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationbpf")]
-        public MicrosoftDynamicsCRMadoxioApplicationbpf AsyncoperationidAdoxioApplicationbpf { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "interactionactivityresult")]
+        public string Interactionactivityresult { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "completedon")]
+        public object Completedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "workflowlogid")]
+        public string Workflowlogid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stagename")]
+        public string Stagename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "status")]
+        public int? Status { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public object Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "startedon")]
+        public object Startedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_asyncoperationid_value")]
+        public string _asyncoperationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "errorcode")]
+        public int? Errorcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "childworkflowinstanceid_asyncoperation")]
+        public MicrosoftDynamicsCRMasyncoperation ChildworkflowinstanceidAsyncoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "LeadToOpportunitySalesProcess_asyncoperationid")]
+        public MicrosoftDynamicsCRMleadtoopportunitysalesprocess LeadToOpportunitySalesProcessAsyncoperationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ExpiredProcess_asyncoperationid")]
+        public MicrosoftDynamicsCRMexpiredprocess ExpiredProcessAsyncoperationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "TranslationProcess_asyncoperationid")]
+        public MicrosoftDynamicsCRMtranslationprocess TranslationProcessAsyncoperationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "OpportunitySalesProcess_asyncoperationid")]
+        public MicrosoftDynamicsCRMopportunitysalesprocess OpportunitySalesProcessAsyncoperationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "PhoneToCaseProcess_asyncoperationid")]
+        public MicrosoftDynamicsCRMphonetocaseprocess PhoneToCaseProcessAsyncoperationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "asyncoperationid_asyncoperation")]
+        public MicrosoftDynamicsCRMasyncoperation AsyncoperationidAsyncoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "NewProcess_asyncoperationid")]
+        public MicrosoftDynamicsCRMnewprocess NewProcessAsyncoperationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,121 +279,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "asyncoperationid_adoxio_complaintpublicbpf")]
         public MicrosoftDynamicsCRMadoxioComplaintpublicbpf AsyncoperationidAdoxioComplaintpublicbpf { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "asyncoperationid_asyncoperation")]
-        public MicrosoftDynamicsCRMasyncoperation AsyncoperationidAsyncoperation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "asyncoperationid_new_bpf_839d33d7035a4f2bbe2150f27b500af6")]
-        public MicrosoftDynamicsCRMnewBpf839d33d7035a4f2bbe2150f27b500af6 AsyncoperationidNewBpf839d33d7035a4f2bbe2150f27b500af6 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "asyncoperationid_new_bpf_a5f48dac03e04d1498b374c0638698a2")]
-        public MicrosoftDynamicsCRMnewBpfA5f48dac03e04d1498b374c0638698a2 AsyncoperationidNewBpfA5f48dac03e04d1498b374c0638698a2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "childworkflowinstanceid_asyncoperation")]
-        public MicrosoftDynamicsCRMasyncoperation ChildworkflowinstanceidAsyncoperation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "completedon")]
-        public System.DateTimeOffset? Completedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]
-        public int? Duration { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "errorcode")]
-        public int? Errorcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "interactionactivityresult")]
-        public string Interactionactivityresult { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stagename")]
-        public string Stagename { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "startedon")]
-        public System.DateTimeOffset? Startedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "status")]
-        public int? Status { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stepname")]
-        public string Stepname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "workflowlogid")]
-        public string Workflowlogid { get; set; }
 
     }
 }

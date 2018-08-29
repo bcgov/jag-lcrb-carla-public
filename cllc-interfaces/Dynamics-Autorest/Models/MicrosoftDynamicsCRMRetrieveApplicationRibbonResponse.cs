@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMRetrieveApplicationRibbonResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMRetrieveApplicationRibbonResponse(string compressedApplicationRibbonXml = default(string))
+        public MicrosoftDynamicsCRMRetrieveApplicationRibbonResponse(object compressedApplicationRibbonXml = default(object))
         {
             CompressedApplicationRibbonXml = compressedApplicationRibbonXml;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "CompressedApplicationRibbonXml")]
-        public string CompressedApplicationRibbonXml { get; set; }
+        public object CompressedApplicationRibbonXml { get; set; }
 
     }
 }

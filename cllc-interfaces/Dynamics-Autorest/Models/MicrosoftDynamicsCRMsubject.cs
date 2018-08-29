@@ -26,40 +26,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsubject
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubject(IList<MicrosoftDynamicsCRMasyncoperation> subjectAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> subjectBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> subjectSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdbyexternalpartyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedbyexternalpartyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _parentsubjectValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), int? featuremask = default(int?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsubject parentsubject = default(MicrosoftDynamicsCRMsubject), IList<MicrosoftDynamicsCRMincident> subjectIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMkbarticle> subjectKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMknowledgearticle> subjectKnowledgearticles = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMsubject> subjectParentSubject = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMproduct> subjectProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMsalesliterature> subjectSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), string subjectid = default(string), string title = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsubject(string _createdbyValue = default(string), object overriddencreatedon = default(object), object createdon = default(object), string versionnumber = default(string), string _modifiedbyValue = default(string), string description = default(string), int? featuremask = default(int?), object modifiedon = default(object), string _organizationidValue = default(string), string _createdbyexternalpartyValue = default(string), string _parentsubjectValue = default(string), string _modifiedbyexternalpartyValue = default(string), string title = default(string), string subjectid = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), IList<MicrosoftDynamicsCRMsalesliterature> subjectSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsubject parentsubject = default(MicrosoftDynamicsCRMsubject), IList<MicrosoftDynamicsCRMsubject> subjectParentSubject = default(IList<MicrosoftDynamicsCRMsubject>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> subjectIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMasyncoperation> subjectAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> subjectSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMkbarticle> subjectKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMproduct> subjectProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMknowledgearticle> subjectKnowledgearticles = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMbulkdeletefailure> subjectBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
-            SubjectAsyncOperations = subjectAsyncOperations;
-            SubjectBulkDeleteFailures = subjectBulkDeleteFailures;
-            SubjectSyncErrors = subjectSyncErrors;
             this._createdbyValue = _createdbyValue;
-            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._parentsubjectValue = _parentsubjectValue;
-            Createdby = createdby;
+            Overriddencreatedon = overriddencreatedon;
             Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
+            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
             Description = description;
             Featuremask = featuremask;
-            Importsequencenumber = importsequencenumber;
-            Modifiedby = modifiedby;
             Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Organizationid = organizationid;
-            Overriddencreatedon = overriddencreatedon;
-            Parentsubject = parentsubject;
-            SubjectIncidents = subjectIncidents;
-            SubjectKbArticles = subjectKbArticles;
-            SubjectKnowledgearticles = subjectKnowledgearticles;
-            SubjectParentSubject = subjectParentSubject;
-            SubjectProducts = subjectProducts;
-            SubjectSalesLiterature = subjectSalesLiterature;
-            Subjectid = subjectid;
+            this._organizationidValue = _organizationidValue;
+            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
+            this._parentsubjectValue = _parentsubjectValue;
+            this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
             Title = title;
-            Versionnumber = versionnumber;
+            Subjectid = subjectid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
+            SubjectSalesLiterature = subjectSalesLiterature;
+            Createdby = createdby;
+            Modifiedby = modifiedby;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Parentsubject = parentsubject;
+            SubjectParentSubject = subjectParentSubject;
+            Createdonbehalfby = createdonbehalfby;
+            SubjectIncidents = subjectIncidents;
+            SubjectAsyncOperations = subjectAsyncOperations;
+            SubjectSyncErrors = subjectSyncErrors;
+            SubjectKbArticles = subjectKbArticles;
+            SubjectProducts = subjectProducts;
+            SubjectKnowledgearticles = subjectKnowledgearticles;
+            Organizationid = organizationid;
+            SubjectBulkDeleteFailures = subjectBulkDeleteFailures;
             CustomInit();
         }
 
@@ -70,73 +70,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Subject_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> SubjectAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Subject_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> SubjectBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Subject_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> SubjectSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
-        public string _createdbyexternalpartyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public object Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
-        public string _modifiedbyexternalpartyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentsubject_value")]
-        public string _parentsubjectValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,73 +105,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        public object Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
+        public string _createdbyexternalpartyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "_parentsubject_value")]
+        public string _parentsubjectValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "parentsubject")]
-        public MicrosoftDynamicsCRMsubject Parentsubject { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject_incidents")]
-        public IList<MicrosoftDynamicsCRMincident> SubjectIncidents { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject_kb_articles")]
-        public IList<MicrosoftDynamicsCRMkbarticle> SubjectKbArticles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject_knowledgearticles")]
-        public IList<MicrosoftDynamicsCRMknowledgearticle> SubjectKnowledgearticles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject_parent_subject")]
-        public IList<MicrosoftDynamicsCRMsubject> SubjectParentSubject { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject_products")]
-        public IList<MicrosoftDynamicsCRMproduct> SubjectProducts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject_sales_literature")]
-        public IList<MicrosoftDynamicsCRMsalesliterature> SubjectSalesLiterature { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subjectid")]
-        public string Subjectid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
+        public string _modifiedbyexternalpartyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -225,8 +135,98 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "subjectid")]
+        public string Subjectid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject_sales_literature")]
+        public IList<MicrosoftDynamicsCRMsalesliterature> SubjectSalesLiterature { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentsubject")]
+        public MicrosoftDynamicsCRMsubject Parentsubject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject_parent_subject")]
+        public IList<MicrosoftDynamicsCRMsubject> SubjectParentSubject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject_incidents")]
+        public IList<MicrosoftDynamicsCRMincident> SubjectIncidents { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Subject_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> SubjectAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Subject_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> SubjectSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject_kb_articles")]
+        public IList<MicrosoftDynamicsCRMkbarticle> SubjectKbArticles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject_products")]
+        public IList<MicrosoftDynamicsCRMproduct> SubjectProducts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject_knowledgearticles")]
+        public IList<MicrosoftDynamicsCRMknowledgearticle> SubjectKnowledgearticles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Subject_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> SubjectBulkDeleteFailures { get; set; }
 
     }
 }
