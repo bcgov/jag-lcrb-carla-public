@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of invoices
+    /// Collection of adoxio_spdexportses
     /// </summary>
     public partial class GetOKResponseModelModelModelModelModelModelModelModelModel
     {
@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// GetOKResponseModelModelModelModelModelModelModelModelModel class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMinvoice> value = default(IList<MicrosoftDynamicsCRMinvoice>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioSpdexports> value = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMinvoice> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> Value { get; set; }
 
     }
 }
