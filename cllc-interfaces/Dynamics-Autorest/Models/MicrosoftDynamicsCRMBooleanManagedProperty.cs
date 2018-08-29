@@ -27,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMBooleanManagedProperty class.
         /// </summary>
-        public MicrosoftDynamicsCRMBooleanManagedProperty(bool? canBeChanged = default(bool?), string managedPropertyLogicalName = default(string), bool? value = default(bool?))
+        public MicrosoftDynamicsCRMBooleanManagedProperty(bool? value = default(bool?), bool? canBeChanged = default(bool?), string managedPropertyLogicalName = default(string))
         {
+            Value = value;
             CanBeChanged = canBeChanged;
             ManagedPropertyLogicalName = managedPropertyLogicalName;
-            Value = value;
             CustomInit();
         }
 
@@ -42,6 +42,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "Value")]
+        public bool? Value { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "CanBeChanged")]
         public bool? CanBeChanged { get; set; }
 
@@ -49,11 +54,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ManagedPropertyLogicalName")]
         public string ManagedPropertyLogicalName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Value")]
-        public bool? Value { get; set; }
 
     }
 }

@@ -29,18 +29,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMChannelAccessProfileWithPrivileges class.
         /// </summary>
-        public MicrosoftDynamicsCRMChannelAccessProfileWithPrivileges(IList<MicrosoftDynamicsCRMChannelAccessProfilePrivilege> channelAccessProfilePrivilegeList = default(IList<MicrosoftDynamicsCRMChannelAccessProfilePrivilege>), bool? emailAccess = default(bool?), bool? facebookAccess = default(bool?), bool? phoneAccess = default(bool?), bool? rateKnowledgeArticles = default(bool?), bool? submitFeedback = default(bool?), bool? twitterAccess = default(bool?), bool? viewArticleRating = default(bool?), bool? viewKnowledgeArticles = default(bool?), bool? webAccess = default(bool?))
+        public MicrosoftDynamicsCRMChannelAccessProfileWithPrivileges(bool? emailAccess = default(bool?), bool? facebookAccess = default(bool?), bool? phoneAccess = default(bool?), bool? twitterAccess = default(bool?), bool? webAccess = default(bool?), bool? viewKnowledgeArticles = default(bool?), bool? viewArticleRating = default(bool?), bool? rateKnowledgeArticles = default(bool?), bool? submitFeedback = default(bool?), IList<MicrosoftDynamicsCRMChannelAccessProfilePrivilege> channelAccessProfilePrivilegeList = default(IList<MicrosoftDynamicsCRMChannelAccessProfilePrivilege>))
         {
-            ChannelAccessProfilePrivilegeList = channelAccessProfilePrivilegeList;
             EmailAccess = emailAccess;
             FacebookAccess = facebookAccess;
             PhoneAccess = phoneAccess;
+            TwitterAccess = twitterAccess;
+            WebAccess = webAccess;
+            ViewKnowledgeArticles = viewKnowledgeArticles;
+            ViewArticleRating = viewArticleRating;
             RateKnowledgeArticles = rateKnowledgeArticles;
             SubmitFeedback = submitFeedback;
-            TwitterAccess = twitterAccess;
-            ViewArticleRating = viewArticleRating;
-            ViewKnowledgeArticles = viewKnowledgeArticles;
-            WebAccess = webAccess;
+            ChannelAccessProfilePrivilegeList = channelAccessProfilePrivilegeList;
             CustomInit();
         }
 
@@ -48,11 +48,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ChannelAccessProfilePrivilegeList")]
-        public IList<MicrosoftDynamicsCRMChannelAccessProfilePrivilege> ChannelAccessProfilePrivilegeList { get; set; }
 
         /// <summary>
         /// </summary>
@@ -71,6 +66,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "TwitterAccess")]
+        public bool? TwitterAccess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "WebAccess")]
+        public bool? WebAccess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ViewKnowledgeArticles")]
+        public bool? ViewKnowledgeArticles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ViewArticleRating")]
+        public bool? ViewArticleRating { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "RateKnowledgeArticles")]
         public bool? RateKnowledgeArticles { get; set; }
 
@@ -81,23 +96,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "TwitterAccess")]
-        public bool? TwitterAccess { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ViewArticleRating")]
-        public bool? ViewArticleRating { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ViewKnowledgeArticles")]
-        public bool? ViewKnowledgeArticles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "WebAccess")]
-        public bool? WebAccess { get; set; }
+        [JsonProperty(PropertyName = "ChannelAccessProfilePrivilegeList")]
+        public IList<MicrosoftDynamicsCRMChannelAccessProfilePrivilege> ChannelAccessProfilePrivilegeList { get; set; }
 
     }
 }

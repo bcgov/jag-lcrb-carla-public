@@ -27,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMWhoAmIResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMWhoAmIResponse(string businessUnitId = default(string), string organizationId = default(string), string userId = default(string))
+        public MicrosoftDynamicsCRMWhoAmIResponse(string businessUnitId = default(string), string userId = default(string), string organizationId = default(string))
         {
             BusinessUnitId = businessUnitId;
-            OrganizationId = organizationId;
             UserId = userId;
+            OrganizationId = organizationId;
             CustomInit();
         }
 
@@ -47,13 +47,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "OrganizationId")]
-        public string OrganizationId { get; set; }
+        [JsonProperty(PropertyName = "UserId")]
+        public string UserId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "UserId")]
-        public string UserId { get; set; }
+        [JsonProperty(PropertyName = "OrganizationId")]
+        public string OrganizationId { get; set; }
 
     }
 }

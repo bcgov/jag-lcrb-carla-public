@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_previousaddresses
+    /// Collection of adoxio_licencetypes
     /// </summary>
     public partial class GetOKResponseModelModelModelModelModelModelModel
     {
@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// GetOKResponseModelModelModelModelModelModelModel class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioPreviousaddress> value = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>))
+        public GetOKResponseModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioLicencetype> value = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioLicencetype> Value { get; set; }
 
     }
 }

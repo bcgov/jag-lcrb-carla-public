@@ -26,12 +26,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), string adoxioInvestigationid = default(string), string adoxioLicencetypeid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), string adoxioInvestigationid = default(string), string versionnumber = default(string), string adoxioLicencetypeid = default(string))
         {
             AdoxioAdoxioLicencetypeAdoxioInvestigationid = adoxioAdoxioLicencetypeAdoxioInvestigationid;
             AdoxioInvestigationid = adoxioInvestigationid;
-            AdoxioLicencetypeid = adoxioLicencetypeid;
             Versionnumber = versionnumber;
+            AdoxioLicencetypeid = adoxioLicencetypeid;
             CustomInit();
         }
 
@@ -52,13 +52,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
     }
 }

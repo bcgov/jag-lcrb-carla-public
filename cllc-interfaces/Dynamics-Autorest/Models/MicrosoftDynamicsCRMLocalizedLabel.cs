@@ -27,13 +27,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMLocalizedLabel class.
         /// </summary>
-        public MicrosoftDynamicsCRMLocalizedLabel(bool? hasChanged = default(bool?), bool? isManaged = default(bool?), string label = default(string), int? languageCode = default(int?), string metadataId = default(string))
+        public MicrosoftDynamicsCRMLocalizedLabel(string label = default(string), int? languageCode = default(int?), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
-            HasChanged = hasChanged;
-            IsManaged = isManaged;
             Label = label;
             LanguageCode = languageCode;
+            IsManaged = isManaged;
             MetadataId = metadataId;
+            HasChanged = hasChanged;
             CustomInit();
         }
 
@@ -41,16 +41,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "HasChanged")]
-        public bool? HasChanged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsManaged")]
-        public bool? IsManaged { get; set; }
 
         /// <summary>
         /// </summary>
@@ -64,8 +54,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "IsManaged")]
+        public bool? IsManaged { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "MetadataId")]
         public string MetadataId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "HasChanged")]
+        public bool? HasChanged { get; set; }
 
     }
 }

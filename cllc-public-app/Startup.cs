@@ -125,8 +125,7 @@ namespace Gov.Lclb.Cllb.Public
             {
                 options.MultipartBodyLengthLimit = 1073741824; // 1 GB
             });
-
-
+            
             // health checks
             services.AddHealthChecks(checks =>
             {
@@ -205,9 +204,6 @@ namespace Gov.Lclb.Cllb.Public
 
                 return client;
             }));
-
-
-
 
             // add SharePoint.
 

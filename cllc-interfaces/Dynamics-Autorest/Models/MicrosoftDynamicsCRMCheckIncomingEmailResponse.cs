@@ -27,10 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMCheckIncomingEmailResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMCheckIncomingEmailResponse(int? reasonCode = default(int?), bool? shouldDeliver = default(bool?))
+        public MicrosoftDynamicsCRMCheckIncomingEmailResponse(bool? shouldDeliver = default(bool?), int? reasonCode = default(int?))
         {
-            ReasonCode = reasonCode;
             ShouldDeliver = shouldDeliver;
+            ReasonCode = reasonCode;
             CustomInit();
         }
 
@@ -41,13 +41,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ReasonCode")]
-        public int? ReasonCode { get; set; }
+        [JsonProperty(PropertyName = "ShouldDeliver")]
+        public bool? ShouldDeliver { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ShouldDeliver")]
-        public bool? ShouldDeliver { get; set; }
+        [JsonProperty(PropertyName = "ReasonCode")]
+        public int? ReasonCode { get; set; }
 
     }
 }

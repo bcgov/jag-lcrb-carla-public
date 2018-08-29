@@ -24,10 +24,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsystemuserlicenses class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemuserlicenses(string licenseid = default(string), string systemuserid = default(string), string systemuserlicenseid = default(string))
+        public MicrosoftDynamicsCRMsystemuserlicenses(string systemuserid = default(string), string licenseid = default(string), string systemuserlicenseid = default(string))
         {
-            Licenseid = licenseid;
             Systemuserid = systemuserid;
+            Licenseid = licenseid;
             Systemuserlicenseid = systemuserlicenseid;
             CustomInit();
         }
@@ -39,13 +39,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "licenseid")]
-        public string Licenseid { get; set; }
+        [JsonProperty(PropertyName = "systemuserid")]
+        public string Systemuserid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "systemuserid")]
-        public string Systemuserid { get; set; }
+        [JsonProperty(PropertyName = "licenseid")]
+        public string Licenseid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -31,10 +31,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="filterOperator">Possible values include: 'And',
         /// 'Or'</param>
-        public MicrosoftDynamicsCRMFilterExpression(IList<MicrosoftDynamicsCRMConditionExpression> conditions = default(IList<MicrosoftDynamicsCRMConditionExpression>), string filterOperator = default(string), IList<MicrosoftDynamicsCRMFilterExpression> filters = default(IList<MicrosoftDynamicsCRMFilterExpression>), bool? isQuickFindFilter = default(bool?))
+        public MicrosoftDynamicsCRMFilterExpression(string filterOperator = default(string), IList<MicrosoftDynamicsCRMConditionExpression> conditions = default(IList<MicrosoftDynamicsCRMConditionExpression>), IList<MicrosoftDynamicsCRMFilterExpression> filters = default(IList<MicrosoftDynamicsCRMFilterExpression>), bool? isQuickFindFilter = default(bool?))
         {
-            Conditions = conditions;
             FilterOperator = filterOperator;
+            Conditions = conditions;
             Filters = filters;
             IsQuickFindFilter = isQuickFindFilter;
             CustomInit();
@@ -46,15 +46,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Conditions")]
-        public IList<MicrosoftDynamicsCRMConditionExpression> Conditions { get; set; }
-
-        /// <summary>
         /// Gets or sets possible values include: 'And', 'Or'
         /// </summary>
         [JsonProperty(PropertyName = "FilterOperator")]
         public string FilterOperator { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Conditions")]
+        public IList<MicrosoftDynamicsCRMConditionExpression> Conditions { get; set; }
 
         /// <summary>
         /// </summary>

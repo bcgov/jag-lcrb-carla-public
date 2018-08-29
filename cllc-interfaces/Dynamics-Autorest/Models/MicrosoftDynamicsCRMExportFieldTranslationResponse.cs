@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMExportFieldTranslationResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMExportFieldTranslationResponse(string exportTranslationFile = default(string))
+        public MicrosoftDynamicsCRMExportFieldTranslationResponse(object exportTranslationFile = default(object))
         {
             ExportTranslationFile = exportTranslationFile;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ExportTranslationFile")]
-        public string ExportTranslationFile { get; set; }
+        public object ExportTranslationFile { get; set; }
 
     }
 }

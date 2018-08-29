@@ -24,18 +24,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMchannelaccessprofileentityaccesslevel class.
         /// </summary>
-        public MicrosoftDynamicsCRMchannelaccessprofileentityaccesslevel(string channelaccessprofileentityaccesslevelid = default(string), string channelaccessprofileentityaccesslevelidunique = default(string), string channelaccessprofileid = default(string), int? componentstate = default(int?), int? entityaccessleveldepthmask = default(int?), string entityaccesslevelid = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMchannelaccessprofileentityaccesslevel(string channelaccessprofileentityaccesslevelid = default(string), object overwritetime = default(object), string versionnumber = default(string), string entityaccesslevelid = default(string), string channelaccessprofileid = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), string channelaccessprofileentityaccesslevelidunique = default(string), int? componentstate = default(int?), int? entityaccessleveldepthmask = default(int?))
         {
             Channelaccessprofileentityaccesslevelid = channelaccessprofileentityaccesslevelid;
-            Channelaccessprofileentityaccesslevelidunique = channelaccessprofileentityaccesslevelidunique;
+            Overwritetime = overwritetime;
+            Versionnumber = versionnumber;
+            Entityaccesslevelid = entityaccesslevelid;
             Channelaccessprofileid = channelaccessprofileid;
+            Solutionid = solutionid;
+            Ismanaged = ismanaged;
+            Channelaccessprofileentityaccesslevelidunique = channelaccessprofileentityaccesslevelidunique;
             Componentstate = componentstate;
             Entityaccessleveldepthmask = entityaccessleveldepthmask;
-            Entityaccesslevelid = entityaccesslevelid;
-            Ismanaged = ismanaged;
-            Overwritetime = overwritetime;
-            Solutionid = solutionid;
-            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -51,13 +51,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "channelaccessprofileentityaccesslevelidunique")]
-        public string Channelaccessprofileentityaccesslevelidunique { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public object Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityaccesslevelid")]
+        public string Entityaccesslevelid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "channelaccessprofileid")]
         public string Channelaccessprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "channelaccessprofileentityaccesslevelidunique")]
+        public string Channelaccessprofileentityaccesslevelidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -68,31 +93,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "entityaccessleveldepthmask")]
         public int? Entityaccessleveldepthmask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityaccesslevelid")]
-        public string Entityaccesslevelid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
 
     }
 }

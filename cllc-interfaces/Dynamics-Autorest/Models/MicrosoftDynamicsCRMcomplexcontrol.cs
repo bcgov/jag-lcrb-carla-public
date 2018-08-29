@@ -24,18 +24,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcomplexcontrol class.
         /// </summary>
-        public MicrosoftDynamicsCRMcomplexcontrol(string _organizationidValue = default(string), string complexcontrolid = default(string), string complexcontrolidunique = default(string), string complexcontrolxml = default(string), string description = default(string), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), int? type = default(int?), int? version = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcomplexcontrol(string versionnumber = default(string), string complexcontrolxml = default(string), string complexcontrolid = default(string), string _organizationidValue = default(string), int? type = default(int?), string complexcontrolidunique = default(string), int? version = default(int?), string name = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
-            this._organizationidValue = _organizationidValue;
-            Complexcontrolid = complexcontrolid;
-            Complexcontrolidunique = complexcontrolidunique;
-            Complexcontrolxml = complexcontrolxml;
-            Description = description;
-            Name = name;
-            Organizationid = organizationid;
-            Type = type;
-            Version = version;
             Versionnumber = versionnumber;
+            Complexcontrolxml = complexcontrolxml;
+            Complexcontrolid = complexcontrolid;
+            this._organizationidValue = _organizationidValue;
+            Type = type;
+            Complexcontrolidunique = complexcontrolidunique;
+            Version = version;
+            Name = name;
+            Description = description;
+            Organizationid = organizationid;
             CustomInit();
         }
 
@@ -46,18 +46,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "complexcontrolid")]
-        public string Complexcontrolid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "complexcontrolidunique")]
-        public string Complexcontrolidunique { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -66,18 +56,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "complexcontrolid")]
+        public string Complexcontrolid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -86,13 +71,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "complexcontrolidunique")]
+        public string Complexcontrolidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "version")]
         public int? Version { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
 
     }
 }

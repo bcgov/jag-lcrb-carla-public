@@ -24,17 +24,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignactivityitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignactivityitem(string _campaignactivityidValue = default(string), string _owneridValue = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer), string campaignactivityitemid = default(string), string itemid = default(string), string itemobjecttypecode = default(string), string owningbusinessunit = default(string), string owninguser = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcampaignactivityitem(string owningbusinessunit = default(string), string _owneridValue = default(string), string itemid = default(string), string versionnumber = default(string), string owninguser = default(string), string _campaignactivityidValue = default(string), string itemobjecttypecode = default(string), string campaignactivityitemid = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
         {
-            this._campaignactivityidValue = _campaignactivityidValue;
-            this._owneridValue = _owneridValue;
-            Campaignactivityid = campaignactivityid;
-            Campaignactivityitemid = campaignactivityitemid;
-            Itemid = itemid;
-            Itemobjecttypecode = itemobjecttypecode;
             Owningbusinessunit = owningbusinessunit;
-            Owninguser = owninguser;
+            this._owneridValue = _owneridValue;
+            Itemid = itemid;
             Versionnumber = versionnumber;
+            Owninguser = owninguser;
+            this._campaignactivityidValue = _campaignactivityidValue;
+            Itemobjecttypecode = itemobjecttypecode;
+            Campaignactivityitemid = campaignactivityitemid;
+            Campaignactivityid = campaignactivityid;
             CustomInit();
         }
 
@@ -45,8 +45,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_campaignactivityid_value")]
-        public string _campaignactivityidValue { get; set; }
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,28 +55,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "campaignactivityid")]
-        public MicrosoftDynamicsCRMactivitypointer Campaignactivityid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignactivityitemid")]
-        public string Campaignactivityitemid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "itemid")]
         public string Itemid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "itemobjecttypecode")]
-        public string Itemobjecttypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,8 +70,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_campaignactivityid_value")]
+        public string _campaignactivityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "itemobjecttypecode")]
+        public string Itemobjecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivityitemid")]
+        public string Campaignactivityitemid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivityid")]
+        public MicrosoftDynamicsCRMactivitypointer Campaignactivityid { get; set; }
 
     }
 }

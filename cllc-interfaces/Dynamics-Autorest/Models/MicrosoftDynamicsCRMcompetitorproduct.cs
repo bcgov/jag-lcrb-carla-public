@@ -24,10 +24,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcompetitorproduct class.
         /// </summary>
-        public MicrosoftDynamicsCRMcompetitorproduct(string competitorid = default(string), string competitorproductid = default(string), string productid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcompetitorproduct(string competitorproductid = default(string), string competitorid = default(string), string productid = default(string), string versionnumber = default(string))
         {
-            Competitorid = competitorid;
             Competitorproductid = competitorproductid;
+            Competitorid = competitorid;
             Productid = productid;
             Versionnumber = versionnumber;
             CustomInit();
@@ -40,13 +40,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "competitorid")]
-        public string Competitorid { get; set; }
+        [JsonProperty(PropertyName = "competitorproductid")]
+        public string Competitorproductid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "competitorproductid")]
-        public string Competitorproductid { get; set; }
+        [JsonProperty(PropertyName = "competitorid")]
+        public string Competitorid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
     }
 }
