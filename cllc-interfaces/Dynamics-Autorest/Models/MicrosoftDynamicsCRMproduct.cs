@@ -26,109 +26,109 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMproduct
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMproduct(IList<MicrosoftDynamicsCRMannotation> productAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> productAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMdynamicproperty> productDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> productDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMproductassociation> productProductAssociationAssocProd = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMproductassociation> productProductAssociationProd = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> productSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsyncerror> productSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdbyexternalpartyValue = default(string), string _createdonbehalfbyValue = default(string), string _defaultuomidValue = default(string), string _defaultuomscheduleidValue = default(string), string _modifiedbyValue = default(string), string _modifiedbyexternalpartyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _parentproductidValue = default(string), string _pricelevelidValue = default(string), string _subjectidValue = default(string), string _transactioncurrencyidValue = default(string), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioProductAdoxioContraventionViolationProduct = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioProductAdoxioLicencetypeApplicationFeeProduct = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioProductAdoxioLicencetypeLicenceFeeProduct = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioViolationtype> adoxioProductAdoxioViolationtypePenaltyProduct = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMcampaign> campaignproductAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcompetitor> competitorproductAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), double? currentcost = default(double?), double? currentcostBase = default(double?), MicrosoftDynamicsCRMuom defaultuomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMuomschedule defaultuomscheduleid = default(MicrosoftDynamicsCRMuomschedule), string description = default(string), int? dmtimportstate = default(int?), string entityimage = default(string), object entityimageTimestamp = default(object), string entityimageUrl = default(string), string entityimageid = default(string), double? exchangerate = default(double?), string hierarchypath = default(string), int? importsequencenumber = default(int?), bool? iskit = default(bool?), bool? isstockitem = default(bool?), IList<MicrosoftDynamicsCRMlead> leadproductAssociation = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), IList<MicrosoftDynamicsCRMopportunityproduct> opportunityProducts = default(IList<MicrosoftDynamicsCRMopportunityproduct>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMproduct parentproductid = default(MicrosoftDynamicsCRMproduct), double? price = default(double?), double? priceBase = default(double?), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), string processid = default(string), IList<MicrosoftDynamicsCRMproductsubstitute> productProductSubstituteProductid = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> productProductSubstituteSubstitutedproductid = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMconnection> productConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> productConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMcontractdetail> productContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMentitlement> productEntitlementAssociation = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlementtemplate> productEntitlementtemplateAssociation = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMincident> productIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMinvoicedetail> productInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMsalesorderdetail> productOrderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMproduct> productParentProduct = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMproductpricelevel> productPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMquotedetail> productQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), string productid = default(string), string productnumber = default(string), IList<MicrosoftDynamicsCRMsalesliterature> productsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), int? productstructure = default(int?), int? producttypecode = default(int?), string producturl = default(string), int? quantitydecimal = default(int?), double? quantityonhand = default(double?), string size = default(string), string stageid = default(string), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), double? standardcost = default(double?), double? standardcostBase = default(double?), int? statecode = default(int?), int? statuscode = default(int?), double? stockvolume = default(double?), double? stockweight = default(double?), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject), string suppliername = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), string traversedpath = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? validfromdate = default(System.DateTimeOffset?), System.DateTimeOffset? validtodate = default(System.DateTimeOffset?), string vendorid = default(string), string vendorname = default(string), string vendorpartnumber = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMproduct(string _modifiedbyexternalpartyValue = default(string), string description = default(string), int? productstructure = default(int?), string productnumber = default(string), string _subjectidValue = default(string), string vendorname = default(string), object entityimage = default(object), object quantityonhand = default(object), string _createdonbehalfbyValue = default(string), object validtodate = default(object), string _modifiedonbehalfbyValue = default(string), object validfromdate = default(object), string vendorpartnumber = default(string), int? statecode = default(int?), object exchangerate = default(object), object modifiedon = default(object), string productid = default(string), string vendorid = default(string), int? utcconversiontimezonecode = default(int?), int? quantitydecimal = default(int?), string _createdbyexternalpartyValue = default(string), int? statuscode = default(int?), int? producttypecode = default(int?), string entityimageTimestamp = default(string), string producturl = default(string), string _modifiedbyValue = default(string), string traversedpath = default(string), object currentcost = default(object), object price = default(object), string _parentproductidValue = default(string), string _createdbyValue = default(string), object createdon = default(object), bool? isstockitem = default(bool?), object overriddencreatedon = default(object), string name = default(string), object stockweight = default(object), string suppliername = default(string), object priceBase = default(object), object currentcostBase = default(object), string _defaultuomidValue = default(string), string _organizationidValue = default(string), string entityimageid = default(string), string entityimageUrl = default(string), object standardcost = default(object), int? importsequencenumber = default(int?), int? dmtimportstate = default(int?), bool? iskit = default(bool?), string stageid = default(string), object stockvolume = default(object), string size = default(string), string hierarchypath = default(string), string versionnumber = default(string), string _pricelevelidValue = default(string), string _defaultuomscheduleidValue = default(string), object standardcostBase = default(object), string processid = default(string), string _transactioncurrencyidValue = default(string), int? timezoneruleversionnumber = default(int?), IList<MicrosoftDynamicsCRMcampaign> campaignproductAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMlead> leadproductAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcompetitor> competitorproductAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMsalesliterature> productsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMproductassociation> productProductAssociationAssocProd = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMproductsubstitute> productProductSubstituteProductid = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> productProductSubstituteSubstitutedproductid = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMentitlement> productEntitlementAssociation = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMopportunityproduct> opportunityProducts = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> productSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMincident> productIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMquotedetail> productQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), MicrosoftDynamicsCRMuomschedule defaultuomscheduleid = default(MicrosoftDynamicsCRMuomschedule), IList<MicrosoftDynamicsCRMbulkdeletefailure> productBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMentitlementtemplate> productEntitlementtemplateAssociation = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMinvoicedetail> productInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMproductassociation> productProductAssociationProd = default(IList<MicrosoftDynamicsCRMproductassociation>), MicrosoftDynamicsCRMuom defaultuomid = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMdynamicproperty> productDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMconnection> productConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> productSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMconnection> productConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> productAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMproduct parentproductid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMproduct> productParentProduct = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMcontractdetail> productContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsalesorderdetail> productOrderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMproductpricelevel> productPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> productAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> productDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioProductAdoxioContraventionViolationProduct = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioProductAdoxioLicencetypeApplicationFeeProduct = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioProductAdoxioLicencetypeLicenceFeeProduct = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioViolationtype> adoxioProductAdoxioViolationtypePenaltyProduct = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>))
         {
-            ProductAnnotation = productAnnotation;
-            ProductAsyncOperations = productAsyncOperations;
-            ProductBulkDeleteFailures = productBulkDeleteFailures;
-            ProductDynamicProperty = productDynamicProperty;
-            ProductDynamicPropertyAssociation = productDynamicPropertyAssociation;
-            ProductProductAssociationAssocProd = productProductAssociationAssocProd;
-            ProductProductAssociationProd = productProductAssociationProd;
-            ProductSharepointDocumentLocation = productSharepointDocumentLocation;
-            ProductSyncErrors = productSyncErrors;
-            this._createdbyValue = _createdbyValue;
-            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._defaultuomidValue = _defaultuomidValue;
-            this._defaultuomscheduleidValue = _defaultuomscheduleidValue;
-            this._modifiedbyValue = _modifiedbyValue;
             this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._parentproductidValue = _parentproductidValue;
-            this._pricelevelidValue = _pricelevelidValue;
+            Description = description;
+            Productstructure = productstructure;
+            Productnumber = productnumber;
             this._subjectidValue = _subjectidValue;
+            Vendorname = vendorname;
+            Entityimage = entityimage;
+            Quantityonhand = quantityonhand;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Validtodate = validtodate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Validfromdate = validfromdate;
+            Vendorpartnumber = vendorpartnumber;
+            Statecode = statecode;
+            Exchangerate = exchangerate;
+            Modifiedon = modifiedon;
+            Productid = productid;
+            Vendorid = vendorid;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Quantitydecimal = quantitydecimal;
+            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
+            Statuscode = statuscode;
+            Producttypecode = producttypecode;
+            EntityimageTimestamp = entityimageTimestamp;
+            Producturl = producturl;
+            this._modifiedbyValue = _modifiedbyValue;
+            Traversedpath = traversedpath;
+            Currentcost = currentcost;
+            Price = price;
+            this._parentproductidValue = _parentproductidValue;
+            this._createdbyValue = _createdbyValue;
+            Createdon = createdon;
+            Isstockitem = isstockitem;
+            Overriddencreatedon = overriddencreatedon;
+            Name = name;
+            Stockweight = stockweight;
+            Suppliername = suppliername;
+            PriceBase = priceBase;
+            CurrentcostBase = currentcostBase;
+            this._defaultuomidValue = _defaultuomidValue;
+            this._organizationidValue = _organizationidValue;
+            Entityimageid = entityimageid;
+            EntityimageUrl = entityimageUrl;
+            Standardcost = standardcost;
+            Importsequencenumber = importsequencenumber;
+            Dmtimportstate = dmtimportstate;
+            Iskit = iskit;
+            Stageid = stageid;
+            Stockvolume = stockvolume;
+            Size = size;
+            Hierarchypath = hierarchypath;
+            Versionnumber = versionnumber;
+            this._pricelevelidValue = _pricelevelidValue;
+            this._defaultuomscheduleidValue = _defaultuomscheduleidValue;
+            StandardcostBase = standardcostBase;
+            Processid = processid;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            CampaignproductAssociation = campaignproductAssociation;
+            LeadproductAssociation = leadproductAssociation;
+            CompetitorproductAssociation = competitorproductAssociation;
+            ProductsalesliteratureAssociation = productsalesliteratureAssociation;
+            ProductProductAssociationAssocProd = productProductAssociationAssocProd;
+            ProductProductSubstituteProductid = productProductSubstituteProductid;
+            ProductProductSubstituteSubstitutedproductid = productProductSubstituteSubstitutedproductid;
+            ProductEntitlementAssociation = productEntitlementAssociation;
+            OpportunityProducts = opportunityProducts;
+            ProductSharepointDocumentLocation = productSharepointDocumentLocation;
+            ProductIncidents = productIncidents;
+            ProductQuoteDetails = productQuoteDetails;
+            Defaultuomscheduleid = defaultuomscheduleid;
+            ProductBulkDeleteFailures = productBulkDeleteFailures;
+            ProductEntitlementtemplateAssociation = productEntitlementtemplateAssociation;
+            Createdby = createdby;
+            ProductInvoiceDetails = productInvoiceDetails;
+            ProductProductAssociationProd = productProductAssociationProd;
+            Defaultuomid = defaultuomid;
+            ProductDynamicProperty = productDynamicProperty;
+            ProductConnections2 = productConnections2;
+            Pricelevelid = pricelevelid;
+            Createdonbehalfby = createdonbehalfby;
+            ProductSyncErrors = productSyncErrors;
+            ProductConnections1 = productConnections1;
+            ProductAsyncOperations = productAsyncOperations;
+            StageidProcessstage = stageidProcessstage;
+            Parentproductid = parentproductid;
+            ProductParentProduct = productParentProduct;
+            ProductContractLineItems = productContractLineItems;
+            Transactioncurrencyid = transactioncurrencyid;
+            ProductOrderDetails = productOrderDetails;
+            ProductPriceLevels = productPriceLevels;
+            Subjectid = subjectid;
+            Modifiedby = modifiedby;
+            ProductAnnotation = productAnnotation;
+            ProductDynamicPropertyAssociation = productDynamicPropertyAssociation;
+            Organizationid = organizationid;
+            Modifiedonbehalfby = modifiedonbehalfby;
             AdoxioProductAdoxioContraventionViolationProduct = adoxioProductAdoxioContraventionViolationProduct;
             AdoxioProductAdoxioLicencetypeApplicationFeeProduct = adoxioProductAdoxioLicencetypeApplicationFeeProduct;
             AdoxioProductAdoxioLicencetypeLicenceFeeProduct = adoxioProductAdoxioLicencetypeLicenceFeeProduct;
             AdoxioProductAdoxioViolationtypePenaltyProduct = adoxioProductAdoxioViolationtypePenaltyProduct;
-            CampaignproductAssociation = campaignproductAssociation;
-            CompetitorproductAssociation = competitorproductAssociation;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Currentcost = currentcost;
-            CurrentcostBase = currentcostBase;
-            Defaultuomid = defaultuomid;
-            Defaultuomscheduleid = defaultuomscheduleid;
-            Description = description;
-            Dmtimportstate = dmtimportstate;
-            Entityimage = entityimage;
-            EntityimageTimestamp = entityimageTimestamp;
-            EntityimageUrl = entityimageUrl;
-            Entityimageid = entityimageid;
-            Exchangerate = exchangerate;
-            Hierarchypath = hierarchypath;
-            Importsequencenumber = importsequencenumber;
-            Iskit = iskit;
-            Isstockitem = isstockitem;
-            LeadproductAssociation = leadproductAssociation;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
-            OpportunityProducts = opportunityProducts;
-            Organizationid = organizationid;
-            Overriddencreatedon = overriddencreatedon;
-            Parentproductid = parentproductid;
-            Price = price;
-            PriceBase = priceBase;
-            Pricelevelid = pricelevelid;
-            Processid = processid;
-            ProductProductSubstituteProductid = productProductSubstituteProductid;
-            ProductProductSubstituteSubstitutedproductid = productProductSubstituteSubstitutedproductid;
-            ProductConnections1 = productConnections1;
-            ProductConnections2 = productConnections2;
-            ProductContractLineItems = productContractLineItems;
-            ProductEntitlementAssociation = productEntitlementAssociation;
-            ProductEntitlementtemplateAssociation = productEntitlementtemplateAssociation;
-            ProductIncidents = productIncidents;
-            ProductInvoiceDetails = productInvoiceDetails;
-            ProductOrderDetails = productOrderDetails;
-            ProductParentProduct = productParentProduct;
-            ProductPriceLevels = productPriceLevels;
-            ProductQuoteDetails = productQuoteDetails;
-            Productid = productid;
-            Productnumber = productnumber;
-            ProductsalesliteratureAssociation = productsalesliteratureAssociation;
-            Productstructure = productstructure;
-            Producttypecode = producttypecode;
-            Producturl = producturl;
-            Quantitydecimal = quantitydecimal;
-            Quantityonhand = quantityonhand;
-            Size = size;
-            Stageid = stageid;
-            StageidProcessstage = stageidProcessstage;
-            Standardcost = standardcost;
-            StandardcostBase = standardcostBase;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Stockvolume = stockvolume;
-            Stockweight = stockweight;
-            Subjectid = subjectid;
-            Suppliername = suppliername;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Transactioncurrencyid = transactioncurrencyid;
-            Traversedpath = traversedpath;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Validfromdate = validfromdate;
-            Validtodate = validtodate;
-            Vendorid = vendorid;
-            Vendorname = vendorname;
-            Vendorpartnumber = vendorpartnumber;
-            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -139,103 +139,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Product_Annotation")]
-        public IList<MicrosoftDynamicsCRMannotation> ProductAnnotation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> ProductAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ProductBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_DynamicProperty")]
-        public IList<MicrosoftDynamicsCRMdynamicproperty> ProductDynamicProperty { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_DynamicPropertyAssociation")]
-        public IList<MicrosoftDynamicsCRMdynamicpropertyassociation> ProductDynamicPropertyAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_ProductAssociation_AssocProd")]
-        public IList<MicrosoftDynamicsCRMproductassociation> ProductProductAssociationAssocProd { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_ProductAssociation_Prod")]
-        public IList<MicrosoftDynamicsCRMproductassociation> ProductProductAssociationProd { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_SharepointDocumentLocation")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> ProductSharepointDocumentLocation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Product_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> ProductSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
-        public string _createdbyexternalpartyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_defaultuomid_value")]
-        public string _defaultuomidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_defaultuomscheduleid_value")]
-        public string _defaultuomscheduleidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
         public string _modifiedbyexternalpartyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "productstructure")]
+        public int? Productstructure { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parentproductid_value")]
-        public string _parentproductidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_pricelevelid_value")]
-        public string _pricelevelidValue { get; set; }
+        [JsonProperty(PropertyName = "productnumber")]
+        public string Productnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -244,8 +164,463 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "vendorname")]
+        public string Vendorname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage")]
+        public object Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quantityonhand")]
+        public object Quantityonhand { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "validtodate")]
+        public object Validtodate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "validfromdate")]
+        public object Validfromdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "vendorpartnumber")]
+        public string Vendorpartnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public object Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productid")]
+        public string Productid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "vendorid")]
+        public string Vendorid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quantitydecimal")]
+        public int? Quantitydecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
+        public string _createdbyexternalpartyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "producttypecode")]
+        public int? Producttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_timestamp")]
+        public string EntityimageTimestamp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "producturl")]
+        public string Producturl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "currentcost")]
+        public object Currentcost { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price")]
+        public object Price { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentproductid_value")]
+        public string _parentproductidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isstockitem")]
+        public bool? Isstockitem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public object Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stockweight")]
+        public object Stockweight { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "suppliername")]
+        public string Suppliername { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price_base")]
+        public object PriceBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "currentcost_base")]
+        public object CurrentcostBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_defaultuomid_value")]
+        public string _defaultuomidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_url")]
+        public string EntityimageUrl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "standardcost")]
+        public object Standardcost { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dmtimportstate")]
+        public int? Dmtimportstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iskit")]
+        public bool? Iskit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stockvolume")]
+        public object Stockvolume { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "size")]
+        public string Size { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "hierarchypath")]
+        public string Hierarchypath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_pricelevelid_value")]
+        public string _pricelevelidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_defaultuomscheduleid_value")]
+        public string _defaultuomscheduleidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "standardcost_base")]
+        public object StandardcostBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignproduct_association")]
+        public IList<MicrosoftDynamicsCRMcampaign> CampaignproductAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadproduct_association")]
+        public IList<MicrosoftDynamicsCRMlead> LeadproductAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitorproduct_association")]
+        public IList<MicrosoftDynamicsCRMcompetitor> CompetitorproductAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productsalesliterature_association")]
+        public IList<MicrosoftDynamicsCRMsalesliterature> ProductsalesliteratureAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_ProductAssociation_AssocProd")]
+        public IList<MicrosoftDynamicsCRMproductassociation> ProductProductAssociationAssocProd { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_ProductSubstitute_productid")]
+        public IList<MicrosoftDynamicsCRMproductsubstitute> ProductProductSubstituteProductid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_ProductSubstitute_substitutedproductid")]
+        public IList<MicrosoftDynamicsCRMproductsubstitute> ProductProductSubstituteSubstitutedproductid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_entitlement_association")]
+        public IList<MicrosoftDynamicsCRMentitlement> ProductEntitlementAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "opportunity_products")]
+        public IList<MicrosoftDynamicsCRMopportunityproduct> OpportunityProducts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_SharepointDocumentLocation")]
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> ProductSharepointDocumentLocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_incidents")]
+        public IList<MicrosoftDynamicsCRMincident> ProductIncidents { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_quote_details")]
+        public IList<MicrosoftDynamicsCRMquotedetail> ProductQuoteDetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "defaultuomscheduleid")]
+        public MicrosoftDynamicsCRMuomschedule Defaultuomscheduleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ProductBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_entitlementtemplate_association")]
+        public IList<MicrosoftDynamicsCRMentitlementtemplate> ProductEntitlementtemplateAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_invoice_details")]
+        public IList<MicrosoftDynamicsCRMinvoicedetail> ProductInvoiceDetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_ProductAssociation_Prod")]
+        public IList<MicrosoftDynamicsCRMproductassociation> ProductProductAssociationProd { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "defaultuomid")]
+        public MicrosoftDynamicsCRMuom Defaultuomid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_DynamicProperty")]
+        public IList<MicrosoftDynamicsCRMdynamicproperty> ProductDynamicProperty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_connections2")]
+        public IList<MicrosoftDynamicsCRMconnection> ProductConnections2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pricelevelid")]
+        public MicrosoftDynamicsCRMpricelevel Pricelevelid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> ProductSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_connections1")]
+        public IList<MicrosoftDynamicsCRMconnection> ProductConnections1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> ProductAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stageid_processstage")]
+        public MicrosoftDynamicsCRMprocessstage StageidProcessstage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentproductid")]
+        public MicrosoftDynamicsCRMproduct Parentproductid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_parent_product")]
+        public IList<MicrosoftDynamicsCRMproduct> ProductParentProduct { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_contract_line_items")]
+        public IList<MicrosoftDynamicsCRMcontractdetail> ProductContractLineItems { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_order_details")]
+        public IList<MicrosoftDynamicsCRMsalesorderdetail> ProductOrderDetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "product_price_levels")]
+        public IList<MicrosoftDynamicsCRMproductpricelevel> ProductPriceLevels { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subjectid")]
+        public MicrosoftDynamicsCRMsubject Subjectid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_Annotation")]
+        public IList<MicrosoftDynamicsCRMannotation> ProductAnnotation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Product_DynamicPropertyAssociation")]
+        public IList<MicrosoftDynamicsCRMdynamicpropertyassociation> ProductDynamicPropertyAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -266,381 +641,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_product_adoxio_violationtype_PenaltyProduct")]
         public IList<MicrosoftDynamicsCRMadoxioViolationtype> AdoxioProductAdoxioViolationtypePenaltyProduct { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignproduct_association")]
-        public IList<MicrosoftDynamicsCRMcampaign> CampaignproductAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "competitorproduct_association")]
-        public IList<MicrosoftDynamicsCRMcompetitor> CompetitorproductAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "currentcost")]
-        public double? Currentcost { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "currentcost_base")]
-        public double? CurrentcostBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "defaultuomid")]
-        public MicrosoftDynamicsCRMuom Defaultuomid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "defaultuomscheduleid")]
-        public MicrosoftDynamicsCRMuomschedule Defaultuomscheduleid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dmtimportstate")]
-        public int? Dmtimportstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage")]
-        public string Entityimage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public object EntityimageTimestamp { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_url")]
-        public string EntityimageUrl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "hierarchypath")]
-        public string Hierarchypath { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "iskit")]
-        public bool? Iskit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isstockitem")]
-        public bool? Isstockitem { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "leadproduct_association")]
-        public IList<MicrosoftDynamicsCRMlead> LeadproductAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "opportunity_products")]
-        public IList<MicrosoftDynamicsCRMopportunityproduct> OpportunityProducts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "parentproductid")]
-        public MicrosoftDynamicsCRMproduct Parentproductid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "price")]
-        public double? Price { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "price_base")]
-        public double? PriceBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "pricelevelid")]
-        public MicrosoftDynamicsCRMpricelevel Pricelevelid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_ProductSubstitute_productid")]
-        public IList<MicrosoftDynamicsCRMproductsubstitute> ProductProductSubstituteProductid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_ProductSubstitute_substitutedproductid")]
-        public IList<MicrosoftDynamicsCRMproductsubstitute> ProductProductSubstituteSubstitutedproductid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_connections1")]
-        public IList<MicrosoftDynamicsCRMconnection> ProductConnections1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_connections2")]
-        public IList<MicrosoftDynamicsCRMconnection> ProductConnections2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_contract_line_items")]
-        public IList<MicrosoftDynamicsCRMcontractdetail> ProductContractLineItems { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_entitlement_association")]
-        public IList<MicrosoftDynamicsCRMentitlement> ProductEntitlementAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_entitlementtemplate_association")]
-        public IList<MicrosoftDynamicsCRMentitlementtemplate> ProductEntitlementtemplateAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_incidents")]
-        public IList<MicrosoftDynamicsCRMincident> ProductIncidents { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_invoice_details")]
-        public IList<MicrosoftDynamicsCRMinvoicedetail> ProductInvoiceDetails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_order_details")]
-        public IList<MicrosoftDynamicsCRMsalesorderdetail> ProductOrderDetails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_parent_product")]
-        public IList<MicrosoftDynamicsCRMproduct> ProductParentProduct { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_price_levels")]
-        public IList<MicrosoftDynamicsCRMproductpricelevel> ProductPriceLevels { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "product_quote_details")]
-        public IList<MicrosoftDynamicsCRMquotedetail> ProductQuoteDetails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productid")]
-        public string Productid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productnumber")]
-        public string Productnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productsalesliterature_association")]
-        public IList<MicrosoftDynamicsCRMsalesliterature> ProductsalesliteratureAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productstructure")]
-        public int? Productstructure { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "producttypecode")]
-        public int? Producttypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "producturl")]
-        public string Producturl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "quantitydecimal")]
-        public int? Quantitydecimal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "quantityonhand")]
-        public double? Quantityonhand { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "size")]
-        public string Size { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stageid_processstage")]
-        public MicrosoftDynamicsCRMprocessstage StageidProcessstage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "standardcost")]
-        public double? Standardcost { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "standardcost_base")]
-        public double? StandardcostBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stockvolume")]
-        public double? Stockvolume { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stockweight")]
-        public double? Stockweight { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subjectid")]
-        public MicrosoftDynamicsCRMsubject Subjectid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "suppliername")]
-        public string Suppliername { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "validfromdate")]
-        public System.DateTimeOffset? Validfromdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "validtodate")]
-        public System.DateTimeOffset? Validtodate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "vendorid")]
-        public string Vendorid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "vendorname")]
-        public string Vendorname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "vendorpartnumber")]
-        public string Vendorpartnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
 
     }
 }

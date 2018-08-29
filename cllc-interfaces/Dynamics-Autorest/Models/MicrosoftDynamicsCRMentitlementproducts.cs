@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementproducts class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementproducts(string entitlementid = default(string), string entitlementproductid = default(string), string productid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMentitlementproducts(string entitlementid = default(string), string productid = default(string), string versionnumber = default(string), string entitlementproductid = default(string))
         {
             Entitlementid = entitlementid;
-            Entitlementproductid = entitlementproductid;
             Productid = productid;
             Versionnumber = versionnumber;
+            Entitlementproductid = entitlementproductid;
             CustomInit();
         }
 
@@ -45,18 +45,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entitlementproductid")]
-        public string Entitlementproductid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "productid")]
         public string Productid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementproductid")]
+        public string Entitlementproductid { get; set; }
 
     }
 }

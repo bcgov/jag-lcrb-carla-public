@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMconnectionroleassociation class.
         /// </summary>
-        public MicrosoftDynamicsCRMconnectionroleassociation(string associatedconnectionroleid = default(string), string connectionroleassociationid = default(string), string connectionroleid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMconnectionroleassociation(string associatedconnectionroleid = default(string), string connectionroleassociationid = default(string), string connectionroleid = default(string), string versionnumber = default(string))
         {
             Associatedconnectionroleid = associatedconnectionroleid;
             Connectionroleassociationid = connectionroleassociationid;
@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
     }
 }
