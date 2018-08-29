@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,9 +12,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Rest;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -21,6 +27,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 {
     public class Startup
     {
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -29,7 +36,14 @@ namespace Gov.Lclb.Cllb.SpdSync
             if (!System.Diagnostics.Debugger.IsAttached)
                 builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
             builder.AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
             Configuration = builder.Build();
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -56,21 +70,21 @@ namespace Gov.Lclb.Cllb.SpdSync
                 .AddDefaultTokenProviders();
 
             // Configure JWT authentication
-            services.AddAuthentication(o =>
-            {
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
-            {
-                o.SaveToken = true;
-                o.RequireHttpsMetadata = false;
-                o.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidIssuer = Configuration["ISSUER_TOKEN"],
-                    ValidAudience = Configuration["ISSUER_TOKEN"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TOKEN_KEY"]))
-                };                
-            });
+            //services.AddAuthentication(o =>
+            //{
+            //    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(o =>
+            //{
+            //    o.SaveToken = true;
+            //    o.RequireHttpsMetadata = false;
+            //    o.TokenValidationParameters = new TokenValidationParameters()
+            //    {
+            //        ValidIssuer = Configuration["ISSUER_TOKEN"],
+            //        ValidAudience = Configuration["ISSUER_TOKEN"],
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TOKEN_KEY"]))
+            //    };                
+            //});
 
             services.AddHangfire(config =>
             {
@@ -121,14 +135,14 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 dashboardOptions.AppPath = null;
 
-                app.UseHangfireDashboard("/hangfire", dashboardOptions); 
+                app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
 
             // this should be set as an environment variable
-            if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_INDEX"]))
-            {
-                SetupHangfireJobs(app, loggerFactory);
-            }
+            //if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_INDEX"]))
+            //{
+            SetupHangfireJobs(app, loggerFactory);
+            //}
 
             app.UseAuthentication();
             app.UseMvc();
@@ -155,12 +169,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                 {
                     string accessToken = Configuration["SearchService:AccessToken"];
                     string baseUri = Configuration["SearchService:BaseUri"];
-                    
+
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
                     // every 60 seconds we see if a file needs to be indexed.
-                    RecurringJob.AddOrUpdate(() => SpdUtils.SendExportJob(baseUri, null), Cron.Daily);
+                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration).SendExportJob(null), Cron.Minutely);
                     log.LogInformation("Hangfire Send Export job done.");
-                    
+
                 }
             }
             catch (Exception e)
@@ -171,6 +185,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
             }
         }
+
+
 
     }
 }

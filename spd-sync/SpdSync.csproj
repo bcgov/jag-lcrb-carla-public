@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <StartupObject>Gov.Lclb.Cllb.SpdSync.Program</StartupObject>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <UserSecretsId>e01b8a3f-2545-470e-84fc-ae1a3393b2f3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
