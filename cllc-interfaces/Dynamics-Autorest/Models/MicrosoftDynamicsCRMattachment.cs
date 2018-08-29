@@ -26,18 +26,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMattachment
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMattachment(IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), string attachmentid = default(string), string body = default(string), string bodyBinary = default(string), string filename = default(string), int? filesize = default(int?), string mimetype = default(string), string subject = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMattachment(string mimetype = default(string), string filename = default(string), string attachmentid = default(string), string body = default(string), object bodyBinary = default(object), int? filesize = default(int?), string subject = default(string), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
         {
-            AttachmentSyncErrors = attachmentSyncErrors;
-            AttachmentActivityMimeAttachments = attachmentActivityMimeAttachments;
+            Mimetype = mimetype;
+            Filename = filename;
             Attachmentid = attachmentid;
             Body = body;
             BodyBinary = bodyBinary;
-            Filename = filename;
             Filesize = filesize;
-            Mimetype = mimetype;
             Subject = subject;
             Versionnumber = versionnumber;
+            AttachmentSyncErrors = attachmentSyncErrors;
+            AttachmentActivityMimeAttachments = attachmentActivityMimeAttachments;
             CustomInit();
         }
 
@@ -48,13 +48,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Attachment_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> AttachmentSyncErrors { get; set; }
+        [JsonProperty(PropertyName = "mimetype")]
+        public string Mimetype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "attachment_activity_mime_attachments")]
-        public IList<MicrosoftDynamicsCRMactivitymimeattachment> AttachmentActivityMimeAttachments { get; set; }
+        [JsonProperty(PropertyName = "filename")]
+        public string Filename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -69,22 +69,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "body_binary")]
-        public string BodyBinary { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "filename")]
-        public string Filename { get; set; }
+        public object BodyBinary { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "filesize")]
         public int? Filesize { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "mimetype")]
-        public string Mimetype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -94,7 +84,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Attachment_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> AttachmentSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "attachment_activity_mime_attachments")]
+        public IList<MicrosoftDynamicsCRMactivitymimeattachment> AttachmentActivityMimeAttachments { get; set; }
 
     }
 }

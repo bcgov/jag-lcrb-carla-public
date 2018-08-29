@@ -26,52 +26,52 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsavedquery
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsavedquery(IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string advancedgroupby = default(string), MicrosoftDynamicsCRMBooleanManagedProperty canbedeleted = default(MicrosoftDynamicsCRMBooleanManagedProperty), string columnsetxml = default(string), int? componentstate = default(int?), string conditionalformatting = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), string fetchxml = default(string), string introducedversion = default(string), bool? iscustom = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isdefault = default(bool?), bool? ismanaged = default(bool?), bool? isquickfindquery = default(bool?), bool? isuserdefined = default(bool?), string layoutxml = default(string), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), int? organizationtaborder = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string queryapi = default(string), int? queryappusage = default(int?), int? querytype = default(int?), string returnedtypecode = default(string), string savedqueryid = default(string), string savedqueryidunique = default(string), string solutionid = default(string), int? statecode = default(int?), int? statuscode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsavedquery(int? organizationtaborder = default(int?), int? statecode = default(int?), string _createdbyValue = default(string), bool? isuserdefined = default(bool?), string columnsetxml = default(string), MicrosoftDynamicsCRMBooleanManagedProperty canbedeleted = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? querytype = default(int?), string conditionalformatting = default(string), string _modifiedbyValue = default(string), string queryapi = default(string), string advancedgroupby = default(string), string returnedtypecode = default(string), bool? isquickfindquery = default(bool?), string _organizationidValue = default(string), string solutionid = default(string), string name = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), object createdon = default(object), string layoutxml = default(string), string fetchxml = default(string), string description = default(string), string versionnumber = default(string), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string savedqueryid = default(string), object overwritetime = default(object), string introducedversion = default(string), bool? iscustom = default(bool?), int? statuscode = default(int?), int? queryappusage = default(int?), string savedqueryidunique = default(string), string _createdonbehalfbyValue = default(string), object modifiedon = default(object), bool? isdefault = default(bool?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>))
         {
-            SavedQueryAsyncOperations = savedQueryAsyncOperations;
-            SavedQueryBulkDeleteFailures = savedQueryBulkDeleteFailures;
-            SavedQuerySyncErrors = savedQuerySyncErrors;
+            Organizationtaborder = organizationtaborder;
+            Statecode = statecode;
             this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            Advancedgroupby = advancedgroupby;
-            Canbedeleted = canbedeleted;
+            Isuserdefined = isuserdefined;
             Columnsetxml = columnsetxml;
-            Componentstate = componentstate;
+            Canbedeleted = canbedeleted;
+            Querytype = querytype;
             Conditionalformatting = conditionalformatting;
-            Createdby = createdby;
+            this._modifiedbyValue = _modifiedbyValue;
+            Queryapi = queryapi;
+            Advancedgroupby = advancedgroupby;
+            Returnedtypecode = returnedtypecode;
+            Isquickfindquery = isquickfindquery;
+            this._organizationidValue = _organizationidValue;
+            Solutionid = solutionid;
+            Name = name;
+            Iscustomizable = iscustomizable;
             Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
+            Layoutxml = layoutxml;
             Fetchxml = fetchxml;
+            Description = description;
+            Versionnumber = versionnumber;
+            Componentstate = componentstate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Savedqueryid = savedqueryid;
+            Overwritetime = overwritetime;
             Introducedversion = introducedversion;
             Iscustom = iscustom;
-            Iscustomizable = iscustomizable;
+            Statuscode = statuscode;
+            Queryappusage = queryappusage;
+            Savedqueryidunique = savedqueryidunique;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedon = modifiedon;
             Isdefault = isdefault;
             Ismanaged = ismanaged;
-            Isquickfindquery = isquickfindquery;
-            Isuserdefined = isuserdefined;
-            Layoutxml = layoutxml;
-            LkMobileofflineprofileitemSavedquery = lkMobileofflineprofileitemSavedquery;
             Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
+            Createdonbehalfby = createdonbehalfby;
             Organizationid = organizationid;
-            Organizationtaborder = organizationtaborder;
-            Overwritetime = overwritetime;
-            Queryapi = queryapi;
-            Queryappusage = queryappusage;
-            Querytype = querytype;
-            Returnedtypecode = returnedtypecode;
-            Savedqueryid = savedqueryid;
-            Savedqueryidunique = savedqueryidunique;
-            Solutionid = solutionid;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Versionnumber = versionnumber;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            SavedQuerySyncErrors = savedQuerySyncErrors;
+            SavedQueryAsyncOperations = savedQueryAsyncOperations;
+            SavedQueryBulkDeleteFailures = savedQueryBulkDeleteFailures;
+            Createdby = createdby;
+            LkMobileofflineprofileitemSavedquery = lkMobileofflineprofileitemSavedquery;
             CustomInit();
         }
 
@@ -82,18 +82,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SavedQuery_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> SavedQueryAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "organizationtaborder")]
+        public int? Organizationtaborder { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SavedQuery_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> SavedQueryBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "SavedQuery_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> SavedQuerySyncErrors { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -102,33 +97,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "advancedgroupby")]
-        public string Advancedgroupby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "canbedeleted")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty Canbedeleted { get; set; }
+        [JsonProperty(PropertyName = "isuserdefined")]
+        public bool? Isuserdefined { get; set; }
 
         /// <summary>
         /// </summary>
@@ -137,8 +107,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "canbedeleted")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty Canbedeleted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "querytype")]
+        public int? Querytype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,18 +122,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "queryapi")]
+        public string Queryapi { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "advancedgroupby")]
+        public string Advancedgroupby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "returnedtypecode")]
+        public string Returnedtypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isquickfindquery")]
+        public bool? Isquickfindquery { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        public object Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "layoutxml")]
+        public string Layoutxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fetchxml")]
+        public string Fetchxml { get; set; }
 
         /// <summary>
         /// </summary>
@@ -167,8 +187,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fetchxml")]
-        public string Fetchxml { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "savedqueryid")]
+        public string Savedqueryid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public object Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,8 +222,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "queryappusage")]
+        public int? Queryappusage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "savedqueryidunique")]
+        public string Savedqueryidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public object Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -197,43 +257,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isquickfindquery")]
-        public bool? Isquickfindquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isuserdefined")]
-        public bool? Isuserdefined { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "layoutxml")]
-        public string Layoutxml { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_mobileofflineprofileitem_savedquery")]
-        public IList<MicrosoftDynamicsCRMmobileofflineprofileitem> LkMobileofflineprofileitemSavedquery { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -242,63 +272,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationtaborder")]
-        public int? Organizationtaborder { get; set; }
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "SavedQuery_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> SavedQuerySyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "queryapi")]
-        public string Queryapi { get; set; }
+        [JsonProperty(PropertyName = "SavedQuery_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> SavedQueryAsyncOperations { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "queryappusage")]
-        public int? Queryappusage { get; set; }
+        [JsonProperty(PropertyName = "SavedQuery_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> SavedQueryBulkDeleteFailures { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "querytype")]
-        public int? Querytype { get; set; }
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "returnedtypecode")]
-        public string Returnedtypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "savedqueryid")]
-        public string Savedqueryid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "savedqueryidunique")]
-        public string Savedqueryidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "lk_mobileofflineprofileitem_savedquery")]
+        public IList<MicrosoftDynamicsCRMmobileofflineprofileitem> LkMobileofflineprofileitemSavedquery { get; set; }
 
     }
 }

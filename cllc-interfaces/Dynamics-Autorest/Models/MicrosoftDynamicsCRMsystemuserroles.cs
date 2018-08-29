@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsystemuserroles class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemuserroles(string roleid = default(string), string systemuserid = default(string), string systemuserroleid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsystemuserroles(string versionnumber = default(string), string systemuserroleid = default(string), string roleid = default(string), string systemuserid = default(string))
         {
+            Versionnumber = versionnumber;
+            Systemuserroleid = systemuserroleid;
             Roleid = roleid;
             Systemuserid = systemuserid;
-            Systemuserroleid = systemuserroleid;
-            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -40,13 +40,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "roleid")]
-        public string Roleid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "systemuserid")]
-        public string Systemuserid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +50,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "roleid")]
+        public string Roleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "systemuserid")]
+        public string Systemuserid { get; set; }
 
     }
 }

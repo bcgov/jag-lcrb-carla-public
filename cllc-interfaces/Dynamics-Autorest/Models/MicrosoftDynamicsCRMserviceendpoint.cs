@@ -26,45 +26,45 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMserviceendpoint class.
         /// </summary>
-        public MicrosoftDynamicsCRMserviceendpoint(string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), int? authtype = default(int?), int? componentstate = default(int?), int? connectionmode = default(int?), int? contract = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), string introducedversion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? ismanaged = default(bool?), bool? issaskeyset = default(bool?), bool? issastokenset = default(bool?), int? messageformat = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), string namespaceaddress = default(string), int? namespaceformat = default(int?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string path = default(string), string saskey = default(string), string saskeyname = default(string), string sastoken = default(string), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> serviceendpointSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), string serviceendpointid = default(string), string serviceendpointidunique = default(string), string solutionid = default(string), string solutionnamespace = default(string), int? userclaim = default(int?))
+        public MicrosoftDynamicsCRMserviceendpoint(int? connectionmode = default(int?), bool? ismanaged = default(bool?), string solutionid = default(string), int? messageformat = default(int?), string introducedversion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? issastokenset = default(bool?), string _modifiedonbehalfbyValue = default(string), bool? issaskeyset = default(bool?), object modifiedon = default(object), string sastoken = default(string), string serviceendpointidunique = default(string), int? componentstate = default(int?), string path = default(string), string description = default(string), string _modifiedbyValue = default(string), int? namespaceformat = default(int?), string _organizationidValue = default(string), int? contract = default(int?), string _createdbyValue = default(string), string serviceendpointid = default(string), int? authtype = default(int?), string solutionnamespace = default(string), object overwritetime = default(object), string namespaceaddress = default(string), int? userclaim = default(int?), object createdon = default(object), string _createdonbehalfbyValue = default(string), string saskeyname = default(string), string name = default(string), string saskey = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> serviceendpointSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            Authtype = authtype;
-            Componentstate = componentstate;
             Connectionmode = connectionmode;
-            Contract = contract;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
+            Ismanaged = ismanaged;
+            Solutionid = solutionid;
+            Messageformat = messageformat;
             Introducedversion = introducedversion;
             Iscustomizable = iscustomizable;
-            Ismanaged = ismanaged;
-            Issaskeyset = issaskeyset;
             Issastokenset = issastokenset;
-            Messageformat = messageformat;
-            Modifiedby = modifiedby;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Issaskeyset = issaskeyset;
             Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
-            Namespaceaddress = namespaceaddress;
-            Namespaceformat = namespaceformat;
-            Organizationid = organizationid;
-            Overwritetime = overwritetime;
-            Path = path;
-            Saskey = saskey;
-            Saskeyname = saskeyname;
             Sastoken = sastoken;
-            ServiceendpointSdkmessageprocessingstep = serviceendpointSdkmessageprocessingstep;
-            Serviceendpointid = serviceendpointid;
             Serviceendpointidunique = serviceendpointidunique;
-            Solutionid = solutionid;
+            Componentstate = componentstate;
+            Path = path;
+            Description = description;
+            this._modifiedbyValue = _modifiedbyValue;
+            Namespaceformat = namespaceformat;
+            this._organizationidValue = _organizationidValue;
+            Contract = contract;
+            this._createdbyValue = _createdbyValue;
+            Serviceendpointid = serviceendpointid;
+            Authtype = authtype;
             Solutionnamespace = solutionnamespace;
+            Overwritetime = overwritetime;
+            Namespaceaddress = namespaceaddress;
             Userclaim = userclaim;
+            Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Saskeyname = saskeyname;
+            Name = name;
+            Saskey = saskey;
+            Createdonbehalfby = createdonbehalfby;
+            Createdby = createdby;
+            Modifiedby = modifiedby;
+            Organizationid = organizationid;
+            ServiceendpointSdkmessageprocessingstep = serviceendpointSdkmessageprocessingstep;
+            Modifiedonbehalfby = modifiedonbehalfby;
             CustomInit();
         }
 
@@ -75,68 +75,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "authtype")]
-        public int? Authtype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "connectionmode")]
         public int? Connectionmode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contract")]
-        public int? Contract { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "messageformat")]
+        public int? Messageformat { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,8 +105,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "issastokenset")]
+        public bool? Issastokenset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,68 +120,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "issastokenset")]
-        public bool? Issastokenset { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "messageformat")]
-        public int? Messageformat { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "namespaceaddress")]
-        public string Namespaceaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "namespaceformat")]
-        public int? Namespaceformat { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "path")]
-        public string Path { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "saskey")]
-        public string Saskey { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "saskeyname")]
-        public string Saskeyname { get; set; }
+        public object Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -230,8 +130,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "serviceendpoint_sdkmessageprocessingstep")]
-        public IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> ServiceendpointSdkmessageprocessingstep { get; set; }
+        [JsonProperty(PropertyName = "serviceendpointidunique")]
+        public string Serviceendpointidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "path")]
+        public string Path { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "namespaceformat")]
+        public int? Namespaceformat { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contract")]
+        public int? Contract { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -240,13 +180,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "serviceendpointidunique")]
-        public string Serviceendpointidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "authtype")]
+        public int? Authtype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -255,8 +190,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public object Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "namespaceaddress")]
+        public string Namespaceaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "userclaim")]
         public int? Userclaim { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "saskeyname")]
+        public string Saskeyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "saskey")]
+        public string Saskey { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceendpoint_sdkmessageprocessingstep")]
+        public IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> ServiceendpointSdkmessageprocessingstep { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
     }
 }

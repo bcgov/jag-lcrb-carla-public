@@ -29,12 +29,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMBusinessEntityChanges class.
         /// </summary>
-        public MicrosoftDynamicsCRMBusinessEntityChanges(IList<object> changes = default(IList<object>), string dataToken = default(string), bool? moreRecords = default(bool?), string pagingCookie = default(string))
+        public MicrosoftDynamicsCRMBusinessEntityChanges(bool? moreRecords = default(bool?), string pagingCookie = default(string), string dataToken = default(string), IList<object> changes = default(IList<object>))
         {
-            Changes = changes;
-            DataToken = dataToken;
             MoreRecords = moreRecords;
             PagingCookie = pagingCookie;
+            DataToken = dataToken;
+            Changes = changes;
             CustomInit();
         }
 
@@ -45,8 +45,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Changes")]
-        public IList<object> Changes { get; set; }
+        [JsonProperty(PropertyName = "MoreRecords")]
+        public bool? MoreRecords { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "PagingCookie")]
+        public string PagingCookie { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,13 +60,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "MoreRecords")]
-        public bool? MoreRecords { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "PagingCookie")]
-        public string PagingCookie { get; set; }
+        [JsonProperty(PropertyName = "Changes")]
+        public IList<object> Changes { get; set; }
 
     }
 }

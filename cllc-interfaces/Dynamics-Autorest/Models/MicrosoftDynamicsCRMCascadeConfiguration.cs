@@ -35,21 +35,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 'Cascade', 'Active', 'UserOwned', 'RemoveLink', 'Restrict'</param>
         /// <param name="reparent">Possible values include: 'NoCascade',
         /// 'Cascade', 'Active', 'UserOwned', 'RemoveLink', 'Restrict'</param>
-        /// <param name="rollupView">Possible values include: 'NoCascade',
-        /// 'Cascade', 'Active', 'UserOwned', 'RemoveLink', 'Restrict'</param>
         /// <param name="share">Possible values include: 'NoCascade',
         /// 'Cascade', 'Active', 'UserOwned', 'RemoveLink', 'Restrict'</param>
         /// <param name="unshare">Possible values include: 'NoCascade',
         /// 'Cascade', 'Active', 'UserOwned', 'RemoveLink', 'Restrict'</param>
-        public MicrosoftDynamicsCRMCascadeConfiguration(string assign = default(string), string delete = default(string), string merge = default(string), string reparent = default(string), string rollupView = default(string), string share = default(string), string unshare = default(string))
+        /// <param name="rollupView">Possible values include: 'NoCascade',
+        /// 'Cascade', 'Active', 'UserOwned', 'RemoveLink', 'Restrict'</param>
+        public MicrosoftDynamicsCRMCascadeConfiguration(string assign = default(string), string delete = default(string), string merge = default(string), string reparent = default(string), string share = default(string), string unshare = default(string), string rollupView = default(string))
         {
             Assign = assign;
             Delete = delete;
             Merge = merge;
             Reparent = reparent;
-            RollupView = rollupView;
             Share = share;
             Unshare = unshare;
+            RollupView = rollupView;
             CustomInit();
         }
 
@@ -90,13 +90,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets possible values include: 'NoCascade', 'Cascade',
         /// 'Active', 'UserOwned', 'RemoveLink', 'Restrict'
         /// </summary>
-        [JsonProperty(PropertyName = "RollupView")]
-        public string RollupView { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'NoCascade', 'Cascade',
-        /// 'Active', 'UserOwned', 'RemoveLink', 'Restrict'
-        /// </summary>
         [JsonProperty(PropertyName = "Share")]
         public string Share { get; set; }
 
@@ -106,6 +99,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Unshare")]
         public string Unshare { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'NoCascade', 'Cascade',
+        /// 'Active', 'UserOwned', 'RemoveLink', 'Restrict'
+        /// </summary>
+        [JsonProperty(PropertyName = "RollupView")]
+        public string RollupView { get; set; }
 
     }
 }

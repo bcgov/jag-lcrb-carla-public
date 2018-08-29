@@ -185,7 +185,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.Utcconversiontimezonecode = from.Utcconversiontimezonecode;
             }
-            to.Versionnumber = from.Versionnumber;            
+            to.Versionnumber = "" + from.Versionnumber;            
         }
 
         /// <summary>
@@ -258,8 +258,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.StateCode = adoxio_establishment.Statecode;
                 result.Timezoneruleversionnumber = adoxio_establishment.Timezoneruleversionnumber;
                 result.Utcconversiontimezonecode = adoxio_establishment.Utcconversiontimezonecode;
-                result.Versionnumber = (long?) adoxio_establishment.Versionnumber;
-
+                if (adoxio_establishment.Versionnumber != null)
+                {
+                    result.Versionnumber = (long?)long.Parse(adoxio_establishment.Versionnumber);
+                }
+                
             }
             return result;
         }
@@ -333,7 +336,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Statecode = from.StateCode;
                 result.Timezoneruleversionnumber = from.Timezoneruleversionnumber;
                 result.Utcconversiontimezonecode = from.Utcconversiontimezonecode;
-                result.Versionnumber = from.Versionnumber;
+                result.Versionnumber = from.Versionnumber.ToString();
             }
             return result;
         }

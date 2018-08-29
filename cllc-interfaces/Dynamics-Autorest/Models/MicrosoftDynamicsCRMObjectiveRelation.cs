@@ -27,10 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMObjectiveRelation class.
         /// </summary>
-        public MicrosoftDynamicsCRMObjectiveRelation(string objectiveExpression = default(string), string resourceSpecId = default(string))
+        public MicrosoftDynamicsCRMObjectiveRelation(string resourceSpecId = default(string), string objectiveExpression = default(string))
         {
-            ObjectiveExpression = objectiveExpression;
             ResourceSpecId = resourceSpecId;
+            ObjectiveExpression = objectiveExpression;
             CustomInit();
         }
 
@@ -41,13 +41,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ObjectiveExpression")]
-        public string ObjectiveExpression { get; set; }
+        [JsonProperty(PropertyName = "ResourceSpecId")]
+        public string ResourceSpecId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ResourceSpecId")]
-        public string ResourceSpecId { get; set; }
+        [JsonProperty(PropertyName = "ObjectiveExpression")]
+        public string ObjectiveExpression { get; set; }
 
     }
 }

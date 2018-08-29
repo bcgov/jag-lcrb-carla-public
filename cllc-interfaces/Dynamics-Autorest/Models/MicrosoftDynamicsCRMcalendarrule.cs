@@ -24,48 +24,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcalendarrule
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcalendarrule(string _calendaridValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _innercalendaridValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _serviceidValue = default(string), string businessunitid = default(string), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), string calendarruleid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), int? duration = default(int?), System.DateTimeOffset? effectiveintervalend = default(System.DateTimeOffset?), System.DateTimeOffset? effectiveintervalstart = default(System.DateTimeOffset?), double? effort = default(double?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), int? extentcode = default(int?), string groupdesignator = default(string), MicrosoftDynamicsCRMcalendar innercalendarid = default(MicrosoftDynamicsCRMcalendar), bool? ismodified = default(bool?), bool? isselected = default(bool?), bool? issimple = default(bool?), bool? isvaried = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), int? offset = default(int?), string organizationid = default(string), string pattern = default(string), int? rank = default(int?), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), int? subcode = default(int?), int? timecode = default(int?), int? timezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcalendarrule(object effectiveintervalend = default(object), bool? ismodified = default(bool?), int? offset = default(int?), string _createdonbehalfbyValue = default(string), string _serviceidValue = default(string), string versionnumber = default(string), object createdon = default(object), string name = default(string), string _createdbyValue = default(string), string groupdesignator = default(string), int? duration = default(int?), int? extentcode = default(int?), string description = default(string), object effort = default(object), object starttime = default(object), string _modifiedonbehalfbyValue = default(string), int? timecode = default(int?), object modifiedon = default(object), string _calendaridValue = default(string), object endtime = default(object), bool? isvaried = default(bool?), string _modifiedbyValue = default(string), string calendarruleid = default(string), int? timezonecode = default(int?), int? subcode = default(int?), string pattern = default(string), string businessunitid = default(string), string _innercalendaridValue = default(string), bool? issimple = default(bool?), object effectiveintervalstart = default(object), int? rank = default(int?), bool? isselected = default(bool?), string organizationid = default(string), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcalendar innercalendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice))
         {
-            this._calendaridValue = _calendaridValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._innercalendaridValue = _innercalendaridValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._serviceidValue = _serviceidValue;
-            Businessunitid = businessunitid;
-            Calendarid = calendarid;
-            Calendarruleid = calendarruleid;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
-            Duration = duration;
             Effectiveintervalend = effectiveintervalend;
-            Effectiveintervalstart = effectiveintervalstart;
-            Effort = effort;
-            Endtime = endtime;
-            Extentcode = extentcode;
-            Groupdesignator = groupdesignator;
-            Innercalendarid = innercalendarid;
             Ismodified = ismodified;
-            Isselected = isselected;
-            Issimple = issimple;
-            Isvaried = isvaried;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
             Offset = offset;
-            Organizationid = organizationid;
-            Pattern = pattern;
-            Rank = rank;
-            Serviceid = serviceid;
-            Starttime = starttime;
-            Subcode = subcode;
-            Timecode = timecode;
-            Timezonecode = timezonecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._serviceidValue = _serviceidValue;
             Versionnumber = versionnumber;
+            Createdon = createdon;
+            Name = name;
+            this._createdbyValue = _createdbyValue;
+            Groupdesignator = groupdesignator;
+            Duration = duration;
+            Extentcode = extentcode;
+            Description = description;
+            Effort = effort;
+            Starttime = starttime;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Timecode = timecode;
+            Modifiedon = modifiedon;
+            this._calendaridValue = _calendaridValue;
+            Endtime = endtime;
+            Isvaried = isvaried;
+            this._modifiedbyValue = _modifiedbyValue;
+            Calendarruleid = calendarruleid;
+            Timezonecode = timezonecode;
+            Subcode = subcode;
+            Pattern = pattern;
+            Businessunitid = businessunitid;
+            this._innercalendaridValue = _innercalendaridValue;
+            Issimple = issimple;
+            Effectiveintervalstart = effectiveintervalstart;
+            Rank = rank;
+            Isselected = isselected;
+            Organizationid = organizationid;
+            Calendarid = calendarid;
+            Modifiedby = modifiedby;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Innercalendarid = innercalendarid;
+            Createdby = createdby;
+            Createdonbehalfby = createdonbehalfby;
+            Serviceid = serviceid;
             CustomInit();
         }
 
@@ -76,113 +76,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_calendarid_value")]
-        public string _calendaridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_innercalendarid_value")]
-        public string _innercalendaridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_serviceid_value")]
-        public string _serviceidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "businessunitid")]
-        public string Businessunitid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendarid")]
-        public MicrosoftDynamicsCRMcalendar Calendarid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendarruleid")]
-        public string Calendarruleid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]
-        public int? Duration { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "effectiveintervalend")]
-        public System.DateTimeOffset? Effectiveintervalend { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "effectiveintervalstart")]
-        public System.DateTimeOffset? Effectiveintervalstart { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "effort")]
-        public double? Effort { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "endtime")]
-        public System.DateTimeOffset? Endtime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "extentcode")]
-        public int? Extentcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "groupdesignator")]
-        public string Groupdesignator { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "innercalendarid")]
-        public MicrosoftDynamicsCRMcalendar Innercalendarid { get; set; }
+        public object Effectiveintervalend { get; set; }
 
         /// <summary>
         /// </summary>
@@ -191,33 +86,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isselected")]
-        public bool? Isselected { get; set; }
+        [JsonProperty(PropertyName = "offset")]
+        public int? Offset { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "issimple")]
-        public bool? Issimple { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isvaried")]
-        public bool? Isvaried { get; set; }
+        [JsonProperty(PropertyName = "_serviceid_value")]
+        public string _serviceidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -226,38 +116,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "offset")]
-        public int? Offset { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
+        [JsonProperty(PropertyName = "groupdesignator")]
+        public string Groupdesignator { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pattern")]
-        public string Pattern { get; set; }
+        [JsonProperty(PropertyName = "duration")]
+        public int? Duration { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "rank")]
-        public int? Rank { get; set; }
+        [JsonProperty(PropertyName = "extentcode")]
+        public int? Extentcode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "serviceid")]
-        public MicrosoftDynamicsCRMservice Serviceid { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effort")]
+        public object Effort { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "starttime")]
-        public System.DateTimeOffset? Starttime { get; set; }
+        public object Starttime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "subcode")]
-        public int? Subcode { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -266,13 +161,118 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public object Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_calendarid_value")]
+        public string _calendaridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "endtime")]
+        public object Endtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isvaried")]
+        public bool? Isvaried { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendarruleid")]
+        public string Calendarruleid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "timezonecode")]
         public int? Timezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "subcode")]
+        public int? Subcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pattern")]
+        public string Pattern { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "businessunitid")]
+        public string Businessunitid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_innercalendarid_value")]
+        public string _innercalendaridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "issimple")]
+        public bool? Issimple { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effectiveintervalstart")]
+        public object Effectiveintervalstart { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rank")]
+        public int? Rank { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isselected")]
+        public bool? Isselected { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public string Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendarid")]
+        public MicrosoftDynamicsCRMcalendar Calendarid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "innercalendarid")]
+        public MicrosoftDynamicsCRMcalendar Innercalendarid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceid")]
+        public MicrosoftDynamicsCRMservice Serviceid { get; set; }
 
     }
 }

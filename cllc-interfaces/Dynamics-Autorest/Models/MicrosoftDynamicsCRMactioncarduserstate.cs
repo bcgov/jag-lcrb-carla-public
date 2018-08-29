@@ -24,22 +24,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactioncarduserstate class.
         /// </summary>
-        public MicrosoftDynamicsCRMactioncarduserstate(string _actioncardidValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), string actioncarduserstateid = default(string), double? exchangerate = default(double?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? state = default(int?), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMactioncarduserstate(object exchangerate = default(object), int? state = default(int?), string _owneridValue = default(string), string actioncarduserstateid = default(string), string _actioncardidValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), object startdate = default(object), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
-            this._actioncardidValue = _actioncardidValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Actioncardid = actioncardid;
-            Actioncarduserstateid = actioncarduserstateid;
             Exchangerate = exchangerate;
-            Ownerid = ownerid;
-            Startdate = startdate;
             State = state;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Transactioncurrencyid = transactioncurrencyid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owneridValue = _owneridValue;
+            Actioncarduserstateid = actioncarduserstateid;
+            this._actioncardidValue = _actioncardidValue;
             Versionnumber = versionnumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Startdate = startdate;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Ownerid = ownerid;
+            Actioncardid = actioncardid;
+            Transactioncurrencyid = transactioncurrencyid;
             CustomInit();
         }
 
@@ -50,48 +50,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_actioncardid_value")]
-        public string _actioncardidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actioncardid")]
-        public MicrosoftDynamicsCRMactioncard Actioncardid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actioncarduserstateid")]
-        public string Actioncarduserstateid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "startdate")]
-        public System.DateTimeOffset? Startdate { get; set; }
+        public object Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -100,13 +60,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actioncarduserstateid")]
+        public string Actioncarduserstateid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_actioncardid_value")]
+        public string _actioncardidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "startdate")]
+        public object Startdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,8 +100,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actioncardid")]
+        public MicrosoftDynamicsCRMactioncard Actioncardid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
     }
 }
