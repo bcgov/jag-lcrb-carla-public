@@ -144,7 +144,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             var emailSentSuccessfully = false;
             var datePart = DateTime.Now.ToString().Replace('/', '-').Replace(':', '_');
             var attachmentName = $@"batch_1_worker_{datePart}.csv";
-            var email = "msehudi@gmail.com";
+            var email = Configuration["SPD_EXPORT_EMAIL"];
             string body = $@"";
 
             using (var stream = new MemoryStream())
