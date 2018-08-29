@@ -19,8 +19,12 @@ export class LoginPage {
 
     build(): any { return <any>(new XMLHttpRequest()); }
 
-    navigateTo(user) {
+    navigateToBusinessLogin(user) {
         return browser.get('/login/token/' + user);
+    }
+
+    navigateToBCServiceLogin(user) {
+        return browser.get('/bcservice/token/' + user);
     }
 
     logoutAndDelete() {
@@ -62,6 +66,12 @@ export class LoginPage {
 
     waitForDashboard() {
         var elem = element(by.xpath('/html/body/app-root/div/div/main/div/app-dashboard-lite'));
+        var until = protractor.ExpectedConditions;
+        browser.wait(until.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
+    }
+
+    waitForWorkerDashboard() {
+        var elem = element(by.xpath('/html/body/app-root/div/div/main/div/app-associate-dashboard'));
         var until = protractor.ExpectedConditions;
         browser.wait(until.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
     }

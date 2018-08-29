@@ -5,7 +5,6 @@ describe('Login component test', () => {
 
     beforeEach(async () => {
         page = new LoginPage();
-        await page.navigateTo("protractorTestUser");
     });
 
     afterEach(async () => {
@@ -13,6 +12,7 @@ describe('Login component test', () => {
     });
 
     it('should finish login process and redirect to dashboard', async () => {
+        await page.navigateToBusinessLogin("protractorBusinessTestUser");
         expect(page.getHeading('h1')).toEqual('Terms of Use');
         page.getCheckbox().click();
         page.getButton().click();
@@ -27,9 +27,14 @@ describe('Login component test', () => {
         expect(page.getHeading('h1')).toEqual('Welcome to Cannabis Retail Store Licensing');
     });
 
-    // it('should finish login process and redirect to dashboard', async () => {
-        // page.getCheckbox().click();
-        // page.getButton().click();
-        // 
+
+    // Uncomment this when BC Service dashboard is ready.
+
+    // it('should finish login (worker) process and redirect to worker registration page', async () => {
+    //     await page.navigateToBCServiceLogin("protractorServiceTestUser");
+    //     expect(page.getHeading('h2')).toEqual('Please confirm the name associated with the BC Service card login provided.');
+    //     page.getButtonByClass("btn-primary").click();
+    //     page.waitForDashboard();
+    //     expect(page.getHeading('h1')).toEqual('BC Service Card Dashboard');
     // });
 });
