@@ -26,38 +26,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioPenaltysubtype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioPenaltysubtype(string _adoxioPenaltytypeValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), MicrosoftDynamicsCRMadoxioPenaltytype adoxioPenaltyType = default(MicrosoftDynamicsCRMadoxioPenaltytype), IList<MicrosoftDynamicsCRMadoxioViolationtype> adoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), string adoxioDescription = default(string), string adoxioName = default(string), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPenaltysubtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPenaltysubtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPenaltysubtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPenaltysubtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> adoxioPenaltysubtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string adoxioPenaltysubtypeid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMadoxioPenaltysubtype(string _createdbyValue = default(string), string adoxioName = default(string), string _modifiedbyValue = default(string), object overriddencreatedon = default(object), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioPenaltysubtypeid = default(string), string _organizationidValue = default(string), object modifiedon = default(object), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string _adoxioPenaltytypeValue = default(string), int? statecode = default(int?), object createdon = default(object), string adoxioDescription = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioPenaltysubtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPenaltysubtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPenaltysubtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPenaltysubtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPenaltysubtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioViolationtype> adoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), MicrosoftDynamicsCRMadoxioPenaltytype adoxioPenaltyType = default(MicrosoftDynamicsCRMadoxioPenaltytype))
         {
-            this._adoxioPenaltytypeValue = _adoxioPenaltytypeValue;
             this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            AdoxioPenaltyType = adoxioPenaltyType;
-            AdoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType = adoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType;
-            AdoxioDescription = adoxioDescription;
             AdoxioName = adoxioName;
-            AdoxioPenaltysubtypeAsyncOperations = adoxioPenaltysubtypeAsyncOperations;
-            AdoxioPenaltysubtypeBulkDeleteFailures = adoxioPenaltysubtypeBulkDeleteFailures;
-            AdoxioPenaltysubtypeDuplicateBaseRecord = adoxioPenaltysubtypeDuplicateBaseRecord;
-            AdoxioPenaltysubtypeDuplicateMatchingRecord = adoxioPenaltysubtypeDuplicateMatchingRecord;
-            AdoxioPenaltysubtypeSyncErrors = adoxioPenaltysubtypeSyncErrors;
-            AdoxioPenaltysubtypeid = adoxioPenaltysubtypeid;
-            Createdbyname = createdbyname;
-            Createdon = createdon;
-            Createdonbehalfbyname = createdonbehalfbyname;
-            Importsequencenumber = importsequencenumber;
-            Modifiedbyname = modifiedbyname;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfbyname = modifiedonbehalfbyname;
-            Organizationid = organizationid;
+            this._modifiedbyValue = _modifiedbyValue;
             Overriddencreatedon = overriddencreatedon;
-            Statecode = statecode;
             Statuscode = statuscode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioPenaltysubtypeid = adoxioPenaltysubtypeid;
+            this._organizationidValue = _organizationidValue;
+            Modifiedon = modifiedon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Versionnumber = versionnumber;
+            this._adoxioPenaltytypeValue = _adoxioPenaltytypeValue;
+            Statecode = statecode;
+            Createdon = createdon;
+            AdoxioDescription = adoxioDescription;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Createdbyname = createdbyname;
+            Createdonbehalfbyname = createdonbehalfbyname;
+            Modifiedbyname = modifiedbyname;
+            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            Organizationid = organizationid;
+            AdoxioPenaltysubtypeSyncErrors = adoxioPenaltysubtypeSyncErrors;
+            AdoxioPenaltysubtypeDuplicateMatchingRecord = adoxioPenaltysubtypeDuplicateMatchingRecord;
+            AdoxioPenaltysubtypeDuplicateBaseRecord = adoxioPenaltysubtypeDuplicateBaseRecord;
+            AdoxioPenaltysubtypeAsyncOperations = adoxioPenaltysubtypeAsyncOperations;
+            AdoxioPenaltysubtypeBulkDeleteFailures = adoxioPenaltysubtypeBulkDeleteFailures;
+            AdoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType = adoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType;
+            AdoxioPenaltyType = adoxioPenaltyType;
             CustomInit();
         }
 
@@ -68,48 +68,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_penaltytype_value")]
-        public string _adoxioPenaltytypeValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_PenaltyType")]
-        public MicrosoftDynamicsCRMadoxioPenaltytype AdoxioPenaltyType { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_penaltysubtype_adoxio_violationtype_PenaltySubType")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> AdoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_description")]
-        public string AdoxioDescription { get; set; }
 
         /// <summary>
         /// </summary>
@@ -118,83 +78,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltysubtype_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioPenaltysubtypeAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltysubtype_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioPenaltysubtypeBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltysubtype_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioPenaltysubtypeDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltysubtype_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioPenaltysubtypeDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltysubtype_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioPenaltysubtypeSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltysubtypeid")]
-        public string AdoxioPenaltysubtypeid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        public object Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -208,13 +98,123 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltysubtypeid")]
+        public string AdoxioPenaltysubtypeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public object Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_penaltytype_value")]
+        public string _adoxioPenaltytypeValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_description")]
+        public string AdoxioDescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltysubtype_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioPenaltysubtypeSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltysubtype_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioPenaltysubtypeDuplicateMatchingRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltysubtype_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioPenaltysubtypeDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltysubtype_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioPenaltysubtypeAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_penaltysubtype_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioPenaltysubtypeBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_adoxio_penaltysubtype_adoxio_violationtype_PenaltySubType")]
+        public IList<MicrosoftDynamicsCRMadoxioViolationtype> AdoxioAdoxioPenaltysubtypeAdoxioViolationtypePenaltySubType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_PenaltyType")]
+        public MicrosoftDynamicsCRMadoxioPenaltytype AdoxioPenaltyType { get; set; }
 
     }
 }

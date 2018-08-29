@@ -27,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMResourceInfo
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMResourceInfo(string displayName = default(string), string entityName = default(string), string id = default(string))
+        public MicrosoftDynamicsCRMResourceInfo(string id = default(string), string displayName = default(string), string entityName = default(string))
         {
+            Id = id;
             DisplayName = displayName;
             EntityName = entityName;
-            Id = id;
             CustomInit();
         }
 
@@ -42,6 +42,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "Id")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
         public string DisplayName { get; set; }
 
@@ -49,11 +54,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "EntityName")]
         public string EntityName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Id")]
-        public string Id { get; set; }
 
     }
 }

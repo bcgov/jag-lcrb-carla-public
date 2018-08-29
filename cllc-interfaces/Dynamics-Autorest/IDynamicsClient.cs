@@ -10,7 +10,6 @@ namespace Gov.Lclb.Cllb.Interfaces
     using Models;
     using Newtonsoft.Json;
 
-
     /// <summary>
     /// Auto Generated
     /// </summary>
@@ -44,9 +43,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccounts Accounts { get; }
 
         /// <summary>
+        /// Gets the IAliases.
+        /// </summary>
+        IAliases Aliases { get; }
+
+        /// <summary>
         /// Gets the IApplications.
         /// </summary>
         IApplications Applications { get; }
+
+        /// <summary>
+        /// Gets the ICorporatehistorysummaries.
+        /// </summary>
+        ICorporatehistorysummaries Corporatehistorysummaries { get; }
+
+        /// <summary>
+        /// Gets the ICorporateroles.
+        /// </summary>
+        ICorporateroles Corporateroles { get; }
 
         /// <summary>
         /// Gets the IEstablishments.
@@ -97,6 +111,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAdoxioTiedhouseconnections.
         /// </summary>
         IAdoxioTiedhouseconnections AdoxioTiedhouseconnections { get; }
+
+        /// <summary>
+        /// Gets the IWorkers.
+        /// </summary>
+        IWorkers Workers { get; }
 
         /// <summary>
         /// Gets the IContacts.

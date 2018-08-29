@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcontactorders
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontactorders(string contactid = default(string), string contactorderid = default(string), string salesorderid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcontactorders(string contactorderid = default(string), string contactid = default(string), string versionnumber = default(string), string salesorderid = default(string))
         {
-            Contactid = contactid;
             Contactorderid = contactorderid;
-            Salesorderid = salesorderid;
+            Contactid = contactid;
             Versionnumber = versionnumber;
+            Salesorderid = salesorderid;
             CustomInit();
         }
 
@@ -40,23 +40,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactid")]
-        public string Contactid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "contactorderid")]
         public string Contactorderid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "salesorderid")]
-        public string Salesorderid { get; set; }
+        [JsonProperty(PropertyName = "contactid")]
+        public string Contactid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "salesorderid")]
+        public string Salesorderid { get; set; }
 
     }
 }
