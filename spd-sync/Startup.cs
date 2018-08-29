@@ -172,7 +172,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
                     // every 60 seconds we see if a file needs to be indexed.
-                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration).SendExportJob(null), Cron.Minutely);
+                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration).SendExportJob(null), Cron.Hourly);
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }

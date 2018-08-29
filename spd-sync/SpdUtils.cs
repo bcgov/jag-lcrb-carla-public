@@ -13,6 +13,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using System.Reflection;
 using System.Text;
 using System.IO;
+using System.Net.Mail;
 
 namespace Gov.Lclb.Cllb.SpdSync
 {
@@ -41,7 +42,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             hangfireContext.WriteLine("Starting SPD Export Job.");
 
             Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
-            //List<PropertyInfo> propertyInfo = type.GetProperties().ToList();
 
             var csvList = new List<List<string>>();
             var headers = new List<string>();
@@ -49,10 +49,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             headerDefinition.ForEach(h => {
                 headers.Add($"\"{h.Value}\"");
             });
-            //propertyInfo.ForEach(p =>
-            //{
-            //    headers.Add(p.Name);
-            //});
+           
             csvList.Add(headers);
 
             string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
@@ -62,9 +59,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 AdoxioAddresscity = "Victoria",
                 AdoxioAddressline1 = "645 Tyee rd"
             });
-
-
-
 
             foreach (var row in result)
             {
@@ -99,7 +93,36 @@ namespace Gov.Lclb.Cllb.SpdSync
                 var line = String.Join(",", row);
                 csv.AppendLine(line);
             });
-            File.WriteAllText(@".\sdp.csv", csv.ToString());
+            var datePart = DateTime.Now.ToString().Replace('/', '-').Replace(':', '_');
+            File.WriteAllText($@".\batch_1_worker_{datePart}.csv", csv.ToString());
+
+            if (SendSPDEmail(csv.ToString()))
+            {
+                //update exporteddate in dynamics
+                result.ForEach(row =>
+                {
+                    var patchApplication = new MicrosoftDynamicsCRMadoxioSpddatarow() {
+                        AdoxioExporteddate = DateTime.Now
+                    };
+                    try
+                    {
+                        if (row.AdoxioSpddatarowid != null) // skip test data
+                        {
+                            _dynamics.Spddatarows.Update(row.AdoxioSpddatarowid, patchApplication);
+                        }
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        hangfireContext.WriteLine("Error updating application");
+                        hangfireContext.WriteLine("Request:");
+                        hangfireContext.WriteLine(odee.Request.Content);
+                        hangfireContext.WriteLine("Response:");
+                        hangfireContext.WriteLine(odee.Response.Content);
+                        // fail if we can't create.
+                        throw (odee);
+                    }
+                });
+            }
 
             hangfireContext.WriteLine("Done.");
         }
@@ -114,6 +137,42 @@ namespace Gov.Lclb.Cllb.SpdSync
             hangfireContext.WriteLine("Starting SPD Import Job.");
 
             hangfireContext.WriteLine("Done.");
+        }
+
+        private bool SendSPDEmail(string attachmentContent)
+        {
+            var emailSentSuccessfully = false;
+            var datePart = DateTime.Now.ToString().Replace('/', '-').Replace(':', '_');
+            var attachmentName = $@"batch_1_worker_{datePart}.csv";
+            var email = "msehudi@gmail.com";
+            string body = $@"";
+
+            using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream))    // using UTF-8 encoding by default
+            using (var mailClient = new SmtpClient("localhost", 25))
+            using (var message = new MailMessage("no-reply@gov.bc.ca", email))
+            {
+                writer.WriteLine(attachmentContent);
+                writer.Flush();
+                stream.Position = 0;     // read from the start of what was written
+
+                message.Subject = $"{attachmentName}";
+                message.Body = body;
+                message.IsBodyHtml = true;
+
+                message.Attachments.Add(new Attachment(stream, attachmentName, "text/csv"));
+
+                try
+                {
+                    mailClient.Send(message);
+                    emailSentSuccessfully = true;
+                } catch(Exception e)
+                {
+                    emailSentSuccessfully = false;
+                }
+
+            }
+            return emailSentSuccessfully;
         }
 
         private List<KeyValuePair<string, string>> GetExportHeaders()
