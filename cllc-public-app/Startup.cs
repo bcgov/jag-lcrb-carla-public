@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -59,6 +61,9 @@ namespace Gov.Lclb.Cllb.Public
                 SetupDynamics(services);
             }
 
+            // Add a memory cache
+            services.AddMemoryCache();
+
             // for security reasons, the following headers are set.
             services.AddMvc(opts =>
             {
@@ -78,16 +83,17 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(typeof(CspReportOnlyAttribute));
                 opts.Filters.Add(new CspScriptSrcReportOnlyAttribute { None = true });
             })
-                .AddJsonOptions(
-                    opts =>
-                    {
-                        opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                        opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
-                        opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddJsonOptions(
+                opts =>
+                {
+                    opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                    opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+                    opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
 
-                        // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
-                        opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                    });
+                    // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
+                    opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
 
             // setup siteminder authentication (core 2.0)
@@ -124,6 +130,8 @@ namespace Gov.Lclb.Cllb.Public
             // health checks
             services.AddHealthChecks(checks =>
             {
+                checks.AddValueTaskCheck("HTTP Endpoint", () => new ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
+                
                 checks.AddSqlCheck(DatabaseTools.GetDatabaseName(Configuration), DatabaseTools.GetConnectionString(Configuration));
             });
 
@@ -155,6 +163,7 @@ namespace Gov.Lclb.Cllb.Public
                 authenticationResult = task.Result;
             }
 
+            
 
             services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
             {
@@ -183,6 +192,7 @@ namespace Gov.Lclb.Cllb.Public
 
                 IDynamicsClient client = new DynamicsClient(new Uri(Configuration["DYNAMICS_ODATA_URI"]), serviceClientCredentials);
 
+
                 // set the native client URI
                 if (string.IsNullOrEmpty(Configuration["DYNAMICS_NATIVE_ODATA_URI"]))
                 {
@@ -195,6 +205,8 @@ namespace Gov.Lclb.Cllb.Public
 
                 return client;
             }));
+
+
 
 
             // add SharePoint.
@@ -221,13 +233,6 @@ namespace Gov.Lclb.Cllb.Public
 
             // add BCEP services
 
-            //var bcep_svc_url = Environment.GetEnvironmentVariable("BCEP_SERVICE_URL");
-            //var bcep_svc_svcid = Environment.GetEnvironmentVariable("BCEP_MERCHANT_ID");
-            //var bcep_svc_hashid = Environment.GetEnvironmentVariable("BCEP_HASH_KEY");
-            //var bcep_base_uri = Environment.GetEnvironmentVariable("BASE_URI");
-            //var bcep_base_path = Environment.GetEnvironmentVariable("BASE_PATH");
-            //var bcep_conf_path = Environment.GetEnvironmentVariable("BCEP_CONF_PATH");
-
             var bcep_svc_url = Configuration["BCEP_SERVICE_URL"];
             var bcep_svc_svcid = Configuration["BCEP_MERCHANT_ID"];
             var bcep_svc_hashid = Configuration["BCEP_HASH_KEY"];
@@ -251,7 +256,8 @@ namespace Gov.Lclb.Cllb.Public
                 {
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-
+                    IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
+                    
                     connectionString = context.Database.GetDbConnection().ConnectionString;
 
                     log.LogInformation("Migrating the database ...");
@@ -261,7 +267,7 @@ namespace Gov.Lclb.Cllb.Public
                     // run the database seeders
                     log.LogInformation("Adding/Updating seed data ...");
 
-                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory);
+                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, dynamicsClient);
                     seederFactory.Seed((AppDbContext)context);
                     log.LogInformation("Seeding operations are complete.");
                 }

@@ -6,11 +6,15 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -19,12 +23,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class PolicyDocumentController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly AppDbContext db;
+        private readonly IDynamicsClient _dynamicsClient;
+        private readonly ILogger _logger;
+        private IMemoryCache _cache;
 
-        public PolicyDocumentController(AppDbContext db, IConfiguration configuration)
+        public PolicyDocumentController(IDynamicsClient dynamicsClient, IConfiguration configuration, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
         {
             Configuration = configuration;
-            this.db = db;
+            this._dynamicsClient = dynamicsClient;
+            _logger = loggerFactory.CreateLogger(typeof(PolicyDocumentController));
+            _cache = memoryCache;
         }
 
         /// <summary>
@@ -36,23 +44,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public JsonResult GetPolicyDocuments(string category)
         {
+            string cacheKey = CacheKeys.PolicyDocumentCategoryPrefix + category;
             List<ViewModels.PolicyDocumentSummary> PolicyDocuments = null;
-            if (string.IsNullOrEmpty(category))
+
+            if (!_cache.TryGetValue(cacheKey, out PolicyDocuments))
             {
-                PolicyDocuments = db.PolicyDocuments                
-                .OrderBy(x => x.DisplayOrder)
-                .Select(x => x.ToSummaryViewModel())
-                .ToList();
-            }
-            else
-            {
-                PolicyDocuments = db.PolicyDocuments
-                .Where(x => x.Category == category)
-                .OrderBy(x => x.DisplayOrder)
-                .Select(x => x.ToSummaryViewModel())
-                .ToList();
+                // Key not in cache, so get data.
+                try
+                {
+                    if (string.IsNullOrEmpty(category))
+                    {
+                        PolicyDocuments = _dynamicsClient.Policydocuments.Get().Value
+                        .OrderBy(x => x.AdoxioDisplayorder)
+                        .Select(x => x.ToSummaryViewModel())
+                        .ToList();
+                    }
+                    else
+                    {
+                        category = category.Replace("'", "''");
+                        string filter = "adoxio_category eq '" + category + "'";
+                        PolicyDocuments = _dynamicsClient.Policydocuments.Get(filter: filter).Value
+                        .OrderBy(x => x.AdoxioDisplayorder)
+                        .Select(x => x.ToSummaryViewModel())
+                        .ToList();
+                    }
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error getting policy documents by category");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+
+                // Set cache options.
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    // Keep in cache for this time, reset time if accessed.
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+
+                // Save data in cache.
+                _cache.Set(cacheKey, PolicyDocuments, cacheEntryOptions);
             }
             
+
             return Json(PolicyDocuments);
         }
 
@@ -65,7 +100,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public ActionResult GetPolicy(string slug)
         {
-            PolicyDocument policyDocument = db.GetPolicyDocumentBySlug(slug);
+            MicrosoftDynamicsCRMadoxioPolicydocument policyDocument = null;
+
+            string cacheKey = CacheKeys.PolicyDocumentPrefix + slug;
+            if (!_cache.TryGetValue(cacheKey, out policyDocument))
+            {
+                // Key not in cache, so get data.
+                policyDocument = _dynamicsClient.GetPolicyDocumentBySlug(slug);
+
+                // Set cache options.
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    // Keep in cache for this time, reset time if accessed.
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+
+                // Save data in cache.
+                _cache.Set(cacheKey, policyDocument, cacheEntryOptions);
+
+            }
 
             if (policyDocument == null)
             {
