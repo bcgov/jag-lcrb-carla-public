@@ -26,63 +26,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioAgencycommunication class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAgencycommunication(string _adoxioApplicantValue = default(string), string _adoxioApplicationValue = default(string), string _adoxioLgorfnorpoliceValue = default(string), string _adoxioLgorfnorpoliceprimarycontactValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMaccount adoxioApplicant = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMaccount adoxioLGorFNorPolice = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioLGorFNorPolicePrimaryContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMactivitypointer> adoxioAgencycommunicationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMannotation> adoxioAgencycommunicationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMappointment> adoxioAgencycommunicationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAgencycommunicationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAgencycommunicationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAgencycommunicationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAgencycommunicationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMemail> adoxioAgencycommunicationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioAgencycommunicationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioAgencycommunicationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioAgencycommunicationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioAgencycommunicationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioAgencycommunicationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioAgencycommunicationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> adoxioAgencycommunicationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMtask> adoxioAgencycommunicationTasks = default(IList<MicrosoftDynamicsCRMtask>), string adoxioAgencycommunicationid = default(string), int? adoxioCommunicationtype = default(int?), int? adoxioDecision = default(int?), System.DateTimeOffset? adoxioDecisiondate = default(System.DateTimeOffset?), string adoxioDenyreason = default(string), string adoxioName = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMadoxioAgencycommunication(string _owninguserValue = default(string), object overriddencreatedon = default(object), string _adoxioApplicationValue = default(string), int? adoxioCommunicationtype = default(int?), string _createdbyValue = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _adoxioApplicantValue = default(string), string _owneridValue = default(string), object modifiedon = default(object), string _adoxioLgorfnorpoliceValue = default(string), string _modifiedbyValue = default(string), string adoxioName = default(string), string _owningbusinessunitValue = default(string), string adoxioAgencycommunicationid = default(string), int? adoxioDecision = default(int?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), int? importsequencenumber = default(int?), object adoxioDecisiondate = default(object), object createdon = default(object), string _adoxioLgorfnorpoliceprimarycontactValue = default(string), string adoxioDenyreason = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioAgencycommunicationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioAgencycommunicationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioAgencycommunicationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioAgencycommunicationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioAgencycommunicationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioAgencycommunicationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioAgencycommunicationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioAgencycommunicationTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioAgencycommunicationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioAgencycommunicationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> adoxioAgencycommunicationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAgencycommunicationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAgencycommunicationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> adoxioAgencycommunicationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAgencycommunicationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAgencycommunicationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioApplicant = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioLGorFNorPolice = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMcontact adoxioLGorFNorPolicePrimaryContact = default(MicrosoftDynamicsCRMcontact))
         {
-            this._adoxioApplicantValue = _adoxioApplicantValue;
-            this._adoxioApplicationValue = _adoxioApplicationValue;
-            this._adoxioLgorfnorpoliceValue = _adoxioLgorfnorpoliceValue;
-            this._adoxioLgorfnorpoliceprimarycontactValue = _adoxioLgorfnorpoliceprimarycontactValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
             this._owninguserValue = _owninguserValue;
-            AdoxioApplicant = adoxioApplicant;
-            AdoxioApplication = adoxioApplication;
-            AdoxioLGorFNorPolice = adoxioLGorFNorPolice;
-            AdoxioLGorFNorPolicePrimaryContact = adoxioLGorFNorPolicePrimaryContact;
+            Overriddencreatedon = overriddencreatedon;
+            this._adoxioApplicationValue = _adoxioApplicationValue;
+            AdoxioCommunicationtype = adoxioCommunicationtype;
+            this._createdbyValue = _createdbyValue;
+            Statecode = statecode;
+            Statuscode = statuscode;
+            this._adoxioApplicantValue = _adoxioApplicantValue;
+            this._owneridValue = _owneridValue;
+            Modifiedon = modifiedon;
+            this._adoxioLgorfnorpoliceValue = _adoxioLgorfnorpoliceValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioName = adoxioName;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioAgencycommunicationid = adoxioAgencycommunicationid;
+            AdoxioDecision = adoxioDecision;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Versionnumber = versionnumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._owningteamValue = _owningteamValue;
+            Importsequencenumber = importsequencenumber;
+            AdoxioDecisiondate = adoxioDecisiondate;
+            Createdon = createdon;
+            this._adoxioLgorfnorpoliceprimarycontactValue = _adoxioLgorfnorpoliceprimarycontactValue;
+            AdoxioDenyreason = adoxioDenyreason;
+            Createdbyname = createdbyname;
+            Createdonbehalfbyname = createdonbehalfbyname;
+            Modifiedbyname = modifiedbyname;
+            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            Owninguser = owninguser;
+            Owningteam = owningteam;
+            Ownerid = ownerid;
+            Owningbusinessunit = owningbusinessunit;
             AdoxioAgencycommunicationActivityPointers = adoxioAgencycommunicationActivityPointers;
-            AdoxioAgencycommunicationAnnotations = adoxioAgencycommunicationAnnotations;
             AdoxioAgencycommunicationAppointments = adoxioAgencycommunicationAppointments;
-            AdoxioAgencycommunicationAsyncOperations = adoxioAgencycommunicationAsyncOperations;
-            AdoxioAgencycommunicationBulkDeleteFailures = adoxioAgencycommunicationBulkDeleteFailures;
-            AdoxioAgencycommunicationDuplicateBaseRecord = adoxioAgencycommunicationDuplicateBaseRecord;
-            AdoxioAgencycommunicationDuplicateMatchingRecord = adoxioAgencycommunicationDuplicateMatchingRecord;
             AdoxioAgencycommunicationEmails = adoxioAgencycommunicationEmails;
             AdoxioAgencycommunicationFaxes = adoxioAgencycommunicationFaxes;
             AdoxioAgencycommunicationLetters = adoxioAgencycommunicationLetters;
             AdoxioAgencycommunicationPhoneCalls = adoxioAgencycommunicationPhoneCalls;
-            AdoxioAgencycommunicationRecurringAppointmentMasters = adoxioAgencycommunicationRecurringAppointmentMasters;
             AdoxioAgencycommunicationServiceAppointments = adoxioAgencycommunicationServiceAppointments;
+            AdoxioAgencycommunicationTasks = adoxioAgencycommunicationTasks;
+            AdoxioAgencycommunicationRecurringAppointmentMasters = adoxioAgencycommunicationRecurringAppointmentMasters;
             AdoxioAgencycommunicationSocialActivities = adoxioAgencycommunicationSocialActivities;
             AdoxioAgencycommunicationSyncErrors = adoxioAgencycommunicationSyncErrors;
-            AdoxioAgencycommunicationTasks = adoxioAgencycommunicationTasks;
-            AdoxioAgencycommunicationid = adoxioAgencycommunicationid;
-            AdoxioCommunicationtype = adoxioCommunicationtype;
-            AdoxioDecision = adoxioDecision;
-            AdoxioDecisiondate = adoxioDecisiondate;
-            AdoxioDenyreason = adoxioDenyreason;
-            AdoxioName = adoxioName;
-            Createdbyname = createdbyname;
-            Createdon = createdon;
-            Createdonbehalfbyname = createdonbehalfbyname;
-            Importsequencenumber = importsequencenumber;
-            Modifiedbyname = modifiedbyname;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfbyname = modifiedonbehalfbyname;
-            Overriddencreatedon = overriddencreatedon;
-            Ownerid = ownerid;
-            Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            AdoxioAgencycommunicationDuplicateMatchingRecord = adoxioAgencycommunicationDuplicateMatchingRecord;
+            AdoxioAgencycommunicationDuplicateBaseRecord = adoxioAgencycommunicationDuplicateBaseRecord;
+            AdoxioAgencycommunicationAnnotations = adoxioAgencycommunicationAnnotations;
+            AdoxioAgencycommunicationAsyncOperations = adoxioAgencycommunicationAsyncOperations;
+            AdoxioAgencycommunicationBulkDeleteFailures = adoxioAgencycommunicationBulkDeleteFailures;
+            AdoxioApplicant = adoxioApplicant;
+            AdoxioLGorFNorPolice = adoxioLGorFNorPolice;
+            AdoxioApplication = adoxioApplication;
+            AdoxioLGorFNorPolicePrimaryContact = adoxioLGorFNorPolicePrimaryContact;
             CustomInit();
         }
 
@@ -93,8 +93,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_applicant_value")]
-        public string _adoxioApplicantValue { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public object Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,13 +108,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_lgorfnorpolice_value")]
-        public string _adoxioLgorfnorpoliceValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_lgorfnorpoliceprimarycontact_value")]
-        public string _adoxioLgorfnorpoliceprimarycontactValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_communicationtype")]
+        public int? AdoxioCommunicationtype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -118,18 +118,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_applicant_value")]
+        public string _adoxioApplicantValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,8 +138,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public object Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_lgorfnorpolice_value")]
+        public string _adoxioLgorfnorpoliceValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_agencycommunicationid")]
+        public string AdoxioAgencycommunicationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_decision")]
+        public int? AdoxioDecision { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,28 +203,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Applicant")]
-        public MicrosoftDynamicsCRMaccount AdoxioApplicant { get; set; }
+        [JsonProperty(PropertyName = "adoxio_decisiondate")]
+        public object AdoxioDecisiondate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Application")]
-        public MicrosoftDynamicsCRMadoxioApplication AdoxioApplication { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_LGorFNorPolice")]
-        public MicrosoftDynamicsCRMaccount AdoxioLGorFNorPolice { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_lgorfnorpoliceprimarycontact_value")]
+        public string _adoxioLgorfnorpoliceprimarycontactValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_LGorFNorPolicePrimaryContact")]
-        public MicrosoftDynamicsCRMcontact AdoxioLGorFNorPolicePrimaryContact { get; set; }
+        [JsonProperty(PropertyName = "adoxio_denyreason")]
+        public string AdoxioDenyreason { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
 
         /// <summary>
         /// </summary>
@@ -178,33 +273,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_Annotations")]
-        public IList<MicrosoftDynamicsCRMannotation> AdoxioAgencycommunicationAnnotations { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_agencycommunication_Appointments")]
         public IList<MicrosoftDynamicsCRMappointment> AdoxioAgencycommunicationAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioAgencycommunicationAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioAgencycommunicationBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioAgencycommunicationDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioAgencycommunicationDuplicateMatchingRecord { get; set; }
 
         /// <summary>
         /// </summary>
@@ -228,13 +298,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_RecurringAppointmentMasters")]
-        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> AdoxioAgencycommunicationRecurringAppointmentMasters { get; set; }
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_ServiceAppointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> AdoxioAgencycommunicationServiceAppointments { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_ServiceAppointments")]
-        public IList<MicrosoftDynamicsCRMserviceappointment> AdoxioAgencycommunicationServiceAppointments { get; set; }
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_Tasks")]
+        public IList<MicrosoftDynamicsCRMtask> AdoxioAgencycommunicationTasks { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_RecurringAppointmentMasters")]
+        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> AdoxioAgencycommunicationRecurringAppointmentMasters { get; set; }
 
         /// <summary>
         /// </summary>
@@ -248,123 +323,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunication_Tasks")]
-        public IList<MicrosoftDynamicsCRMtask> AdoxioAgencycommunicationTasks { get; set; }
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioAgencycommunicationDuplicateMatchingRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_agencycommunicationid")]
-        public string AdoxioAgencycommunicationid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioAgencycommunicationDuplicateBaseRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_communicationtype")]
-        public int? AdoxioCommunicationtype { get; set; }
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_Annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> AdoxioAgencycommunicationAnnotations { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_decision")]
-        public int? AdoxioDecision { get; set; }
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioAgencycommunicationAsyncOperations { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_decisiondate")]
-        public System.DateTimeOffset? AdoxioDecisiondate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_agencycommunication_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioAgencycommunicationBulkDeleteFailures { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_denyreason")]
-        public string AdoxioDenyreason { get; set; }
+        [JsonProperty(PropertyName = "adoxio_Applicant")]
+        public MicrosoftDynamicsCRMaccount AdoxioApplicant { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "adoxio_LGorFNorPolice")]
+        public MicrosoftDynamicsCRMaccount AdoxioLGorFNorPolice { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+        [JsonProperty(PropertyName = "adoxio_Application")]
+        public MicrosoftDynamicsCRMadoxioApplication AdoxioApplication { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_LGorFNorPolicePrimaryContact")]
+        public MicrosoftDynamicsCRMcontact AdoxioLGorFNorPolicePrimaryContact { get; set; }
 
     }
 }

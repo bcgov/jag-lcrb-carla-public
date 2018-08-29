@@ -27,31 +27,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMComplexOneToManyRelationshipMetadata class.
         /// </summary>
-        /// <param name="relationshipType">Possible values include:
-        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
         /// <param name="securityTypes">Possible values include: 'None',
         /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
-        public MicrosoftDynamicsCRMComplexOneToManyRelationshipMetadata(MicrosoftDynamicsCRMAssociatedMenuConfiguration associatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMCascadeConfiguration cascadeConfiguration = default(MicrosoftDynamicsCRMCascadeConfiguration), bool? hasChanged = default(bool?), string introducedVersion = default(string), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isHierarchical = default(bool?), bool? isManaged = default(bool?), bool? isValidForAdvancedFind = default(bool?), string metadataId = default(string), string referencedAttribute = default(string), string referencedEntity = default(string), string referencedEntityNavigationPropertyName = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), string referencingEntityNavigationPropertyName = default(string), string relationshipType = default(string), string schemaName = default(string), string securityTypes = default(string))
+        /// <param name="relationshipType">Possible values include:
+        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
+        public MicrosoftDynamicsCRMComplexOneToManyRelationshipMetadata(MicrosoftDynamicsCRMAssociatedMenuConfiguration associatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMCascadeConfiguration cascadeConfiguration = default(MicrosoftDynamicsCRMCascadeConfiguration), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
             AssociatedMenuConfiguration = associatedMenuConfiguration;
             CascadeConfiguration = cascadeConfiguration;
-            HasChanged = hasChanged;
-            IntroducedVersion = introducedVersion;
-            IsCustomRelationship = isCustomRelationship;
-            IsCustomizable = isCustomizable;
-            IsHierarchical = isHierarchical;
-            IsManaged = isManaged;
-            IsValidForAdvancedFind = isValidForAdvancedFind;
-            MetadataId = metadataId;
             ReferencedAttribute = referencedAttribute;
             ReferencedEntity = referencedEntity;
-            ReferencedEntityNavigationPropertyName = referencedEntityNavigationPropertyName;
             ReferencingAttribute = referencingAttribute;
             ReferencingEntity = referencingEntity;
+            IsHierarchical = isHierarchical;
+            ReferencedEntityNavigationPropertyName = referencedEntityNavigationPropertyName;
             ReferencingEntityNavigationPropertyName = referencingEntityNavigationPropertyName;
-            RelationshipType = relationshipType;
+            IsCustomRelationship = isCustomRelationship;
+            IsCustomizable = isCustomizable;
+            IsValidForAdvancedFind = isValidForAdvancedFind;
             SchemaName = schemaName;
             SecurityTypes = securityTypes;
+            IsManaged = isManaged;
+            RelationshipType = relationshipType;
+            IntroducedVersion = introducedVersion;
+            MetadataId = metadataId;
+            HasChanged = hasChanged;
             CustomInit();
         }
 
@@ -72,46 +72,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "HasChanged")]
-        public bool? HasChanged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IntroducedVersion")]
-        public string IntroducedVersion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsCustomRelationship")]
-        public bool? IsCustomRelationship { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsCustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsHierarchical")]
-        public bool? IsHierarchical { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsManaged")]
-        public bool? IsManaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsValidForAdvancedFind")]
-        public bool? IsValidForAdvancedFind { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "MetadataId")]
-        public string MetadataId { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ReferencedAttribute")]
         public string ReferencedAttribute { get; set; }
 
@@ -119,11 +79,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ReferencedEntity")]
         public string ReferencedEntity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ReferencedEntityNavigationPropertyName")]
-        public string ReferencedEntityNavigationPropertyName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -137,15 +92,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "IsHierarchical")]
+        public bool? IsHierarchical { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ReferencedEntityNavigationPropertyName")]
+        public string ReferencedEntityNavigationPropertyName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ReferencingEntityNavigationPropertyName")]
         public string ReferencingEntityNavigationPropertyName { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'OneToManyRelationship',
-        /// 'ManyToManyRelationship'
         /// </summary>
-        [JsonProperty(PropertyName = "RelationshipType")]
-        public string RelationshipType { get; set; }
+        [JsonProperty(PropertyName = "IsCustomRelationship")]
+        public bool? IsCustomRelationship { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsCustomizable")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsValidForAdvancedFind")]
+        public bool? IsValidForAdvancedFind { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,6 +131,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "SecurityTypes")]
         public string SecurityTypes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsManaged")]
+        public bool? IsManaged { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'OneToManyRelationship',
+        /// 'ManyToManyRelationship'
+        /// </summary>
+        [JsonProperty(PropertyName = "RelationshipType")]
+        public string RelationshipType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IntroducedVersion")]
+        public string IntroducedVersion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "MetadataId")]
+        public string MetadataId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "HasChanged")]
+        public bool? HasChanged { get; set; }
 
     }
 }

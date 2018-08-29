@@ -26,63 +26,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMactivityparty
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMactivityparty(IList<MicrosoftDynamicsCRMsyncerror> activityPartySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _activityidValue = default(string), string _owneridValue = default(string), string _partyidValue = default(string), string _resourcespecidValue = default(string), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMappointment activityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMcampaignactivity activityidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcampaignresponse activityidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMemail activityidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMfax activityidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMincidentresolution activityidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMletter activityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMopportunityclose activityidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMorderclose activityidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMphonecall activityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMquoteclose activityidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMrecurringappointmentmaster activityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMserviceappointment activityidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMsocialactivity activityidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMtask activityidTask = default(MicrosoftDynamicsCRMtask), string activitypartyid = default(string), string addressused = default(string), int? addressusedemailcolumnnumber = default(int?), bool? donotemail = default(bool?), bool? donotfax = default(bool?), bool? donotphone = default(bool?), bool? donotpostalmail = default(bool?), double? effort = default(double?), string exchangeentryid = default(string), int? instancetypecode = default(int?), bool? ispartydeleted = default(bool?), int? participationtypemask = default(int?), MicrosoftDynamicsCRMaccount partyidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication partyidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigationstakeholder partyidAdoxioInvestigationstakeholder = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder), MicrosoftDynamicsCRMbulkoperation partyidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaign partyidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity partyidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcontact partyidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontract partyidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMequipment partyidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMincident partyidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMinvoice partyidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMknowledgearticle partyidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead partyidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity partyidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMqueue partyidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMquote partyidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder partyidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMsystemuser partyidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMactivityparty(bool? donotemail = default(bool?), object scheduledend = default(object), string _partyidValue = default(string), string _activityidValue = default(string), string exchangeentryid = default(string), string activitypartyid = default(string), bool? donotpostalmail = default(bool?), string versionnumber = default(string), int? participationtypemask = default(int?), object scheduledstart = default(object), string _owneridValue = default(string), object effort = default(object), int? instancetypecode = default(int?), bool? donotphone = default(bool?), bool? ispartydeleted = default(bool?), int? addressusedemailcolumnnumber = default(int?), bool? donotfax = default(bool?), string addressused = default(string), string _resourcespecidValue = default(string), MicrosoftDynamicsCRMcampaignactivity partyidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMincident partyidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMserviceappointment activityidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), IList<MicrosoftDynamicsCRMsyncerror> activityPartySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMrecurringappointmentmaster activityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMinvoice partyidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMcontract partyidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMcampaignactivity activityidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsocialactivity activityidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMappointment activityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMqueue partyidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMsystemuser partyidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfax activityidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMsalesorder partyidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMphonecall activityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMtask activityidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMcampaignresponse activityidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMquoteclose activityidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMletter activityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMorderclose activityidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMbulkoperation partyidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMquote partyidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMemail activityidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMknowledgearticle partyidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead partyidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunityclose activityidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMequipment partyidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMopportunity partyidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcampaign partyidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMaccount partyidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMincidentresolution activityidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontact partyidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioApplication partyidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigationstakeholder partyidAdoxioInvestigationstakeholder = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder))
         {
-            ActivityPartySyncErrors = activityPartySyncErrors;
-            this._activityidValue = _activityidValue;
-            this._owneridValue = _owneridValue;
-            this._partyidValue = _partyidValue;
-            this._resourcespecidValue = _resourcespecidValue;
-            ActivityidActivitypointer = activityidActivitypointer;
-            ActivityidAppointment = activityidAppointment;
-            ActivityidCampaignactivity = activityidCampaignactivity;
-            ActivityidCampaignresponse = activityidCampaignresponse;
-            ActivityidEmail = activityidEmail;
-            ActivityidFax = activityidFax;
-            ActivityidIncidentresolution = activityidIncidentresolution;
-            ActivityidLetter = activityidLetter;
-            ActivityidOpportunityclose = activityidOpportunityclose;
-            ActivityidOrderclose = activityidOrderclose;
-            ActivityidPhonecall = activityidPhonecall;
-            ActivityidQuoteclose = activityidQuoteclose;
-            ActivityidRecurringappointmentmaster = activityidRecurringappointmentmaster;
-            ActivityidServiceappointment = activityidServiceappointment;
-            ActivityidSocialactivity = activityidSocialactivity;
-            ActivityidTask = activityidTask;
-            Activitypartyid = activitypartyid;
-            Addressused = addressused;
-            Addressusedemailcolumnnumber = addressusedemailcolumnnumber;
             Donotemail = donotemail;
-            Donotfax = donotfax;
-            Donotphone = donotphone;
-            Donotpostalmail = donotpostalmail;
-            Effort = effort;
+            Scheduledend = scheduledend;
+            this._partyidValue = _partyidValue;
+            this._activityidValue = _activityidValue;
             Exchangeentryid = exchangeentryid;
-            Instancetypecode = instancetypecode;
-            Ispartydeleted = ispartydeleted;
+            Activitypartyid = activitypartyid;
+            Donotpostalmail = donotpostalmail;
+            Versionnumber = versionnumber;
             Participationtypemask = participationtypemask;
-            PartyidAccount = partyidAccount;
-            PartyidAdoxioApplication = partyidAdoxioApplication;
-            PartyidAdoxioInvestigationstakeholder = partyidAdoxioInvestigationstakeholder;
-            PartyidBulkoperation = partyidBulkoperation;
-            PartyidCampaign = partyidCampaign;
+            Scheduledstart = scheduledstart;
+            this._owneridValue = _owneridValue;
+            Effort = effort;
+            Instancetypecode = instancetypecode;
+            Donotphone = donotphone;
+            Ispartydeleted = ispartydeleted;
+            Addressusedemailcolumnnumber = addressusedemailcolumnnumber;
+            Donotfax = donotfax;
+            Addressused = addressused;
+            this._resourcespecidValue = _resourcespecidValue;
             PartyidCampaignactivity = partyidCampaignactivity;
-            PartyidContact = partyidContact;
-            PartyidContract = partyidContract;
-            PartyidEquipment = partyidEquipment;
             PartyidIncident = partyidIncident;
+            ActivityidServiceappointment = activityidServiceappointment;
+            ActivityPartySyncErrors = activityPartySyncErrors;
+            ActivityidRecurringappointmentmaster = activityidRecurringappointmentmaster;
             PartyidInvoice = partyidInvoice;
+            PartyidContract = partyidContract;
+            ActivityidCampaignactivity = activityidCampaignactivity;
+            ActivityidSocialactivity = activityidSocialactivity;
+            ActivityidAppointment = activityidAppointment;
+            PartyidQueue = partyidQueue;
+            PartyidSystemuser = partyidSystemuser;
+            ActivityidFax = activityidFax;
+            PartyidSalesorder = partyidSalesorder;
+            ActivityidPhonecall = activityidPhonecall;
+            ActivityidTask = activityidTask;
+            ActivityidCampaignresponse = activityidCampaignresponse;
+            ActivityidQuoteclose = activityidQuoteclose;
+            Resourcespecid = resourcespecid;
+            ActivityidLetter = activityidLetter;
+            ActivityidOrderclose = activityidOrderclose;
+            PartyidBulkoperation = partyidBulkoperation;
+            PartyidQuote = partyidQuote;
+            ActivityidEmail = activityidEmail;
             PartyidKnowledgearticle = partyidKnowledgearticle;
             PartyidLead = partyidLead;
+            ActivityidOpportunityclose = activityidOpportunityclose;
+            PartyidEquipment = partyidEquipment;
             PartyidOpportunity = partyidOpportunity;
-            PartyidQueue = partyidQueue;
-            PartyidQuote = partyidQuote;
-            PartyidSalesorder = partyidSalesorder;
-            PartyidSystemuser = partyidSystemuser;
-            Resourcespecid = resourcespecid;
-            Scheduledend = scheduledend;
-            Scheduledstart = scheduledstart;
-            Versionnumber = versionnumber;
+            PartyidCampaign = partyidCampaign;
+            PartyidAccount = partyidAccount;
+            ActivityidIncidentresolution = activityidIncidentresolution;
+            ActivityidActivitypointer = activityidActivitypointer;
+            PartyidContact = partyidContact;
+            PartyidAdoxioApplication = partyidAdoxioApplication;
+            PartyidAdoxioInvestigationstakeholder = partyidAdoxioInvestigationstakeholder;
             CustomInit();
         }
 
@@ -93,18 +93,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ActivityParty_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> ActivityPartySyncErrors { get; set; }
+        [JsonProperty(PropertyName = "donotemail")]
+        public bool? Donotemail { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_activityid_value")]
-        public string _activityidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "scheduledend")]
+        public object Scheduledend { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,128 +108,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_resourcespecid_value")]
-        public string _resourcespecidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_activitypointer")]
-        public MicrosoftDynamicsCRMactivitypointer ActivityidActivitypointer { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_appointment")]
-        public MicrosoftDynamicsCRMappointment ActivityidAppointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_campaignactivity")]
-        public MicrosoftDynamicsCRMcampaignactivity ActivityidCampaignactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_campaignresponse")]
-        public MicrosoftDynamicsCRMcampaignresponse ActivityidCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_email")]
-        public MicrosoftDynamicsCRMemail ActivityidEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_fax")]
-        public MicrosoftDynamicsCRMfax ActivityidFax { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_incidentresolution")]
-        public MicrosoftDynamicsCRMincidentresolution ActivityidIncidentresolution { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_letter")]
-        public MicrosoftDynamicsCRMletter ActivityidLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_opportunityclose")]
-        public MicrosoftDynamicsCRMopportunityclose ActivityidOpportunityclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_orderclose")]
-        public MicrosoftDynamicsCRMorderclose ActivityidOrderclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_phonecall")]
-        public MicrosoftDynamicsCRMphonecall ActivityidPhonecall { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_quoteclose")]
-        public MicrosoftDynamicsCRMquoteclose ActivityidQuoteclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMrecurringappointmentmaster ActivityidRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_serviceappointment")]
-        public MicrosoftDynamicsCRMserviceappointment ActivityidServiceappointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_socialactivity")]
-        public MicrosoftDynamicsCRMsocialactivity ActivityidSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_task")]
-        public MicrosoftDynamicsCRMtask ActivityidTask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activitypartyid")]
-        public string Activitypartyid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "addressused")]
-        public string Addressused { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "addressusedemailcolumnnumber")]
-        public int? Addressusedemailcolumnnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "donotemail")]
-        public bool? Donotemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "donotfax")]
-        public bool? Donotfax { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "donotphone")]
-        public bool? Donotphone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "donotpostalmail")]
-        public bool? Donotpostalmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "effort")]
-        public double? Effort { get; set; }
+        [JsonProperty(PropertyName = "_activityid_value")]
+        public string _activityidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -243,13 +118,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "instancetypecode")]
-        public int? Instancetypecode { get; set; }
+        [JsonProperty(PropertyName = "activitypartyid")]
+        public string Activitypartyid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ispartydeleted")]
-        public bool? Ispartydeleted { get; set; }
+        [JsonProperty(PropertyName = "donotpostalmail")]
+        public bool? Donotpostalmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -258,28 +138,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_account")]
-        public MicrosoftDynamicsCRMaccount PartyidAccount { get; set; }
+        [JsonProperty(PropertyName = "scheduledstart")]
+        public object Scheduledstart { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_adoxio_application")]
-        public MicrosoftDynamicsCRMadoxioApplication PartyidAdoxioApplication { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_adoxio_investigationstakeholder")]
-        public MicrosoftDynamicsCRMadoxioInvestigationstakeholder PartyidAdoxioInvestigationstakeholder { get; set; }
+        [JsonProperty(PropertyName = "effort")]
+        public object Effort { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_bulkoperation")]
-        public MicrosoftDynamicsCRMbulkoperation PartyidBulkoperation { get; set; }
+        [JsonProperty(PropertyName = "instancetypecode")]
+        public int? Instancetypecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_campaign")]
-        public MicrosoftDynamicsCRMcampaign PartyidCampaign { get; set; }
+        [JsonProperty(PropertyName = "donotphone")]
+        public bool? Donotphone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ispartydeleted")]
+        public bool? Ispartydeleted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "addressusedemailcolumnnumber")]
+        public int? Addressusedemailcolumnnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotfax")]
+        public bool? Donotfax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "addressused")]
+        public string Addressused { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_resourcespecid_value")]
+        public string _resourcespecidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -288,8 +193,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_contact")]
-        public MicrosoftDynamicsCRMcontact PartyidContact { get; set; }
+        [JsonProperty(PropertyName = "partyid_incident")]
+        public MicrosoftDynamicsCRMincident PartyidIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_serviceappointment")]
+        public MicrosoftDynamicsCRMserviceappointment ActivityidServiceappointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ActivityParty_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> ActivityPartySyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMrecurringappointmentmaster ActivityidRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "partyid_invoice")]
+        public MicrosoftDynamicsCRMinvoice PartyidInvoice { get; set; }
 
         /// <summary>
         /// </summary>
@@ -298,18 +223,88 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_equipment")]
-        public MicrosoftDynamicsCRMequipment PartyidEquipment { get; set; }
+        [JsonProperty(PropertyName = "activityid_campaignactivity")]
+        public MicrosoftDynamicsCRMcampaignactivity ActivityidCampaignactivity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_incident")]
-        public MicrosoftDynamicsCRMincident PartyidIncident { get; set; }
+        [JsonProperty(PropertyName = "activityid_socialactivity")]
+        public MicrosoftDynamicsCRMsocialactivity ActivityidSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_invoice")]
-        public MicrosoftDynamicsCRMinvoice PartyidInvoice { get; set; }
+        [JsonProperty(PropertyName = "activityid_appointment")]
+        public MicrosoftDynamicsCRMappointment ActivityidAppointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "partyid_queue")]
+        public MicrosoftDynamicsCRMqueue PartyidQueue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "partyid_systemuser")]
+        public MicrosoftDynamicsCRMsystemuser PartyidSystemuser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_fax")]
+        public MicrosoftDynamicsCRMfax ActivityidFax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "partyid_salesorder")]
+        public MicrosoftDynamicsCRMsalesorder PartyidSalesorder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_phonecall")]
+        public MicrosoftDynamicsCRMphonecall ActivityidPhonecall { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_task")]
+        public MicrosoftDynamicsCRMtask ActivityidTask { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_campaignresponse")]
+        public MicrosoftDynamicsCRMcampaignresponse ActivityidCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_quoteclose")]
+        public MicrosoftDynamicsCRMquoteclose ActivityidQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resourcespecid")]
+        public MicrosoftDynamicsCRMresourcespec Resourcespecid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_letter")]
+        public MicrosoftDynamicsCRMletter ActivityidLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_orderclose")]
+        public MicrosoftDynamicsCRMorderclose ActivityidOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "partyid_bulkoperation")]
+        public MicrosoftDynamicsCRMbulkoperation PartyidBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "partyid_quote")]
+        public MicrosoftDynamicsCRMquote PartyidQuote { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_email")]
+        public MicrosoftDynamicsCRMemail ActivityidEmail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -323,48 +318,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "activityid_opportunityclose")]
+        public MicrosoftDynamicsCRMopportunityclose ActivityidOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "partyid_equipment")]
+        public MicrosoftDynamicsCRMequipment PartyidEquipment { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "partyid_opportunity")]
         public MicrosoftDynamicsCRMopportunity PartyidOpportunity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_queue")]
-        public MicrosoftDynamicsCRMqueue PartyidQueue { get; set; }
+        [JsonProperty(PropertyName = "partyid_campaign")]
+        public MicrosoftDynamicsCRMcampaign PartyidCampaign { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_quote")]
-        public MicrosoftDynamicsCRMquote PartyidQuote { get; set; }
+        [JsonProperty(PropertyName = "partyid_account")]
+        public MicrosoftDynamicsCRMaccount PartyidAccount { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_salesorder")]
-        public MicrosoftDynamicsCRMsalesorder PartyidSalesorder { get; set; }
+        [JsonProperty(PropertyName = "activityid_incidentresolution")]
+        public MicrosoftDynamicsCRMincidentresolution ActivityidIncidentresolution { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "partyid_systemuser")]
-        public MicrosoftDynamicsCRMsystemuser PartyidSystemuser { get; set; }
+        [JsonProperty(PropertyName = "activityid_activitypointer")]
+        public MicrosoftDynamicsCRMactivitypointer ActivityidActivitypointer { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "resourcespecid")]
-        public MicrosoftDynamicsCRMresourcespec Resourcespecid { get; set; }
+        [JsonProperty(PropertyName = "partyid_contact")]
+        public MicrosoftDynamicsCRMcontact PartyidContact { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "scheduledend")]
-        public System.DateTimeOffset? Scheduledend { get; set; }
+        [JsonProperty(PropertyName = "partyid_adoxio_application")]
+        public MicrosoftDynamicsCRMadoxioApplication PartyidAdoxioApplication { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "scheduledstart")]
-        public System.DateTimeOffset? Scheduledstart { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "partyid_adoxio_investigationstakeholder")]
+        public MicrosoftDynamicsCRMadoxioInvestigationstakeholder PartyidAdoxioInvestigationstakeholder { get; set; }
 
     }
 }
