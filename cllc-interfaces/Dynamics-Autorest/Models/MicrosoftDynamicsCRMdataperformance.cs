@@ -24,29 +24,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdataperformance class.
         /// </summary>
-        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), bool? anyoptimizationapplied = default(bool?), bool? anyoptimizationavailable = default(bool?), string component = default(string), int? count = default(int?), string dataperformanceid = default(string), string entity = default(string), double? estimatedoptimizationimpact = default(double?), string executionperiod = default(string), string lastactionresult = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), double? maxtime = default(double?), double? mediantime = default(double?), double? mintime = default(double?), string operation = default(string), string optimizationstatus = default(string), double? optimizationstorage = default(double?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), string realizedoptimizationimpact = default(string), string solution = default(string), double? weight = default(double?))
+        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), int? count = default(int?), object optimizationstorage = default(object), bool? anyoptimizationavailable = default(bool?), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), object weight = default(object), string entity = default(string), object mediantime = default(object), object estimatedoptimizationimpact = default(object), string solution = default(string), string executionperiod = default(string), object mintime = default(object), string optimizationstatus = default(string), object maxtime = default(object), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), object lastoptimizationdate = default(object), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
-            Anyoptimizationapplied = anyoptimizationapplied;
-            Anyoptimizationavailable = anyoptimizationavailable;
-            Component = component;
             Count = count;
-            Dataperformanceid = dataperformanceid;
-            Entity = entity;
-            Estimatedoptimizationimpact = estimatedoptimizationimpact;
-            Executionperiod = executionperiod;
-            Lastactionresult = lastactionresult;
-            Lastoptimizationdate = lastoptimizationdate;
-            Maxtime = maxtime;
-            Mediantime = mediantime;
-            Mintime = mintime;
-            Operation = operation;
-            Optimizationstatus = optimizationstatus;
             Optimizationstorage = optimizationstorage;
-            Organizationid = organizationid;
-            Realizedoptimizationimpact = realizedoptimizationimpact;
-            Solution = solution;
+            Anyoptimizationavailable = anyoptimizationavailable;
+            Dataperformanceid = dataperformanceid;
+            Lastactionresult = lastactionresult;
+            Component = component;
             Weight = weight;
+            Entity = entity;
+            Mediantime = mediantime;
+            Estimatedoptimizationimpact = estimatedoptimizationimpact;
+            Solution = solution;
+            Executionperiod = executionperiod;
+            Mintime = mintime;
+            Optimizationstatus = optimizationstatus;
+            Maxtime = maxtime;
+            Anyoptimizationapplied = anyoptimizationapplied;
+            Realizedoptimizationimpact = realizedoptimizationimpact;
+            Lastoptimizationdate = lastoptimizationdate;
+            Operation = operation;
+            Organizationid = organizationid;
             CustomInit();
         }
 
@@ -62,8 +62,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "anyoptimizationapplied")]
-        public bool? Anyoptimizationapplied { get; set; }
+        [JsonProperty(PropertyName = "count")]
+        public int? Count { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "optimizationstorage")]
+        public object Optimizationstorage { get; set; }
 
         /// <summary>
         /// </summary>
@@ -72,33 +77,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "component")]
-        public string Component { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "count")]
-        public int? Count { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "dataperformanceid")]
         public string Dataperformanceid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entity")]
-        public string Entity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "estimatedoptimizationimpact")]
-        public double? Estimatedoptimizationimpact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "executionperiod")]
-        public string Executionperiod { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,48 +87,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastoptimizationdate")]
-        public System.DateTimeOffset? Lastoptimizationdate { get; set; }
+        [JsonProperty(PropertyName = "component")]
+        public string Component { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "maxtime")]
-        public double? Maxtime { get; set; }
+        [JsonProperty(PropertyName = "weight")]
+        public object Weight { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entity")]
+        public string Entity { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "mediantime")]
-        public double? Mediantime { get; set; }
+        public object Mediantime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mintime")]
-        public double? Mintime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "operation")]
-        public string Operation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "optimizationstatus")]
-        public string Optimizationstatus { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "optimizationstorage")]
-        public double? Optimizationstorage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "realizedoptimizationimpact")]
-        public string Realizedoptimizationimpact { get; set; }
+        [JsonProperty(PropertyName = "estimatedoptimizationimpact")]
+        public object Estimatedoptimizationimpact { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,8 +117,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "weight")]
-        public double? Weight { get; set; }
+        [JsonProperty(PropertyName = "executionperiod")]
+        public string Executionperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mintime")]
+        public object Mintime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "optimizationstatus")]
+        public string Optimizationstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "maxtime")]
+        public object Maxtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "anyoptimizationapplied")]
+        public bool? Anyoptimizationapplied { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "realizedoptimizationimpact")]
+        public string Realizedoptimizationimpact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastoptimizationdate")]
+        public object Lastoptimizationdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operation")]
+        public string Operation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
 
     }
 }
