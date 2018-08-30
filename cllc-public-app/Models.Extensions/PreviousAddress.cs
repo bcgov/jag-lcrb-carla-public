@@ -24,14 +24,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                     result.id = address.AdoxioPreviousaddressid;
                 }
 
-                result.adoxio_name = address.AdoxioName;
-                result.adoxio_streetaddress = address.AdoxioStreetaddress;
-                result.adoxio_city = address.AdoxioCity;
-                result.adoxio_provstate = address.AdoxioProvstate;
-                result.adoxio_country = address.AdoxioCountry;
-                result.adoxio_postalcode = address.AdoxioPostalcode;
-                result.adoxio_fromdate = (DateTime) address.AdoxioFromdate;
-                result.adoxio_todate = (DateTime) address.AdoxioTodate;
+                result.name = address.AdoxioName;
+                result.streetaddress = address.AdoxioStreetaddress;
+                result.city = address.AdoxioCity;
+                result.provstate = address.AdoxioProvstate;
+                result.country = address.AdoxioCountry;
+                result.postalcode = address.AdoxioPostalcode;
+                result.fromdate = (DateTime) address.AdoxioFromdate;
+                result.todate = (DateTime) address.AdoxioTodate;
             }
             return result;
         }
@@ -39,14 +39,14 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioPreviousaddress to, ViewModels.PreviousAddress from)
         {
-            to.AdoxioName = from.adoxio_name;
-            to.AdoxioStreetaddress = from.adoxio_streetaddress;
-            to.AdoxioCity = from.adoxio_city;
-            to.AdoxioProvstate = from.adoxio_provstate;
-            to.AdoxioCountry = from.adoxio_country;
-            to.AdoxioPostalcode = from.adoxio_postalcode;
-            to.AdoxioFromdate = from.adoxio_fromdate;
-            to.AdoxioTodate = from.adoxio_todate;
+            to.AdoxioName = from.name;
+            to.AdoxioStreetaddress = from.streetaddress;
+            to.AdoxioCity = from.city;
+            to.AdoxioProvstate = from.provstate;
+            to.AdoxioCountry = from.country;
+            to.AdoxioPostalcode = from.postalcode;
+            to.AdoxioFromdate = from.fromdate;
+            to.AdoxioTodate = from.todate;
         }
     }
 }
