@@ -10,7 +10,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Gov.Lclb.Cllb.Interfaces.Models;
-using System.Reflection;
 using System.Text;
 using System.IO;
 using System.Net.Mail;
@@ -36,7 +35,6 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <summary>
         /// Hangfire job to send an export to SPD.
         /// </summary>
-        
         public  async Task SendExportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Export Job.");
@@ -55,78 +53,100 @@ namespace Gov.Lclb.Cllb.SpdSync
             string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
             List<MicrosoftDynamicsCRMadoxioSpddatarow> result = _dynamics.Spddatarows.Get(filter: filter).Value.ToList();
 
-            result.Add(new MicrosoftDynamicsCRMadoxioSpddatarow() {
-                AdoxioAddresscity = "Victoria",
-                AdoxioAddressline1 = "645 Tyee rd"
-            });
-
-            foreach (var row in result)
+            if (result.Count > 0)
             {
-                var item = new List<string>();
-
-                foreach (var h in headerDefinition)
+                foreach (var row in result)
                 {
-                    try
-                    {
-                        object value = row[h.Key];
-                        if (value != null)
-                        {
-                            item.Add($"\"{value.ToString()}\"");
-                        }
-                        else
-                        {
-                            item.Add("\"\"");
-                        }
+                    var item = new List<string>();
 
-                    } catch(Exception e)
+                    foreach (var h in headerDefinition)
                     {
-                        item.Add("\"\""); ;
+                        try
+                        {
+                            object value = row[h.Key];
+                            if (value != null)
+                            {
+                                item.Add($"\"{value.ToString()}\"");
+                            }
+                            else
+                            {
+                                item.Add("\"\"");
+                            }
+
+                        }
+                        catch (Exception e)
+                        {
+                            item.Add("\"\""); ;
+                        }
                     }
+                    csvList.Add(item);
+
                 }
-                csvList.Add(item);
-                
-            }
 
-            var csv = new StringBuilder();
-            csvList.ForEach(row =>
-            {
-                var line = String.Join(",", row);
-                csv.AppendLine(line);
-            });
-            var datePart = DateTime.Now.ToString().Replace('/', '-').Replace(':', '_');
-            File.WriteAllText($@".\batch_1_worker_{datePart}.csv", csv.ToString());
-
-            if (SendSPDEmail(csv.ToString()))
-            {
-                //update exporteddate in dynamics
-                result.ForEach(row =>
+                var csv = new StringBuilder();
+                csvList.ForEach(row =>
                 {
-                    var patchApplication = new MicrosoftDynamicsCRMadoxioSpddatarow() {
-                        AdoxioExporteddate = DateTime.Now
-                    };
-                    try
+                    var line = String.Join(",", row);
+                    csv.AppendLine(line);
+                });
+                var datePart = DateTime.Now.ToString("yyyyMMdd_HH-mm-ss");
+                var batch = GetBatchNumber().ToString();
+                batch = AddZeroPadding(batch);
+                var attachmentName = $@"{batch}_Worker_{datePart}.csv";
+                File.WriteAllText($@".\{attachmentName}", csv.ToString());
+
+                if (SendSPDEmail(csv.ToString(), attachmentName))
+                {
+                    //update exporteddate in dynamics
+                    result.ForEach(row =>
                     {
-                        if (row.AdoxioSpddatarowid != null) // skip test data
+                        var patchApplication = new MicrosoftDynamicsCRMadoxioSpddatarow()
                         {
-                            _dynamics.Spddatarows.Update(row.AdoxioSpddatarowid, patchApplication);
+                            AdoxioExporteddate = DateTime.Now
+                        };
+                        try
+                        {
+                            if (row.AdoxioSpddatarowid != null) // skip test data
+                        {
+                                _dynamics.Spddatarows.Update(row.AdoxioSpddatarowid, patchApplication);
+                            }
                         }
-                    }
-                    catch (OdataerrorException odee)
-                    {
-                        hangfireContext.WriteLine("Error updating application");
-                        hangfireContext.WriteLine("Request:");
-                        hangfireContext.WriteLine(odee.Request.Content);
-                        hangfireContext.WriteLine("Response:");
-                        hangfireContext.WriteLine(odee.Response.Content);
+                        catch (OdataerrorException odee)
+                        {
+                            hangfireContext.WriteLine("Error updating application");
+                            hangfireContext.WriteLine("Request:");
+                            hangfireContext.WriteLine(odee.Request.Content);
+                            hangfireContext.WriteLine("Response:");
+                            hangfireContext.WriteLine(odee.Response.Content);
                         // fail if we can't create.
                         throw (odee);
-                    }
-                });
+                        }
+                    });
+                }
             }
-
-            hangfireContext.WriteLine("Done.");
         }
-        
+
+        private long GetBatchNumber()
+        {
+            string filter = $"adoxio_isexport eq true and adoxio_exporteddate ne null";
+            var select = new List<string>() { "adoxio_exporteddate" };
+            var batchesRun = _dynamics.Spddatarows.Get(filter: filter, select: select)
+                                .Value.ToList()
+                                .Select(r => r.AdoxioExporteddate)
+                                .Distinct()
+                                .Count();
+
+            return batchesRun + 1;
+        }
+
+        private string AddZeroPadding(string input, int maxLength = 8)
+        {
+            while(input.Length < maxLength)
+            {
+                input = "0" + input;
+            }
+            return input;
+        }
 
         /// <summary>
         /// Hangfire job to receive an import from SPD.
@@ -139,11 +159,10 @@ namespace Gov.Lclb.Cllb.SpdSync
             hangfireContext.WriteLine("Done.");
         }
 
-        private bool SendSPDEmail(string attachmentContent)
+        private bool SendSPDEmail(string attachmentContent, string attachmentName)
         {
             var emailSentSuccessfully = false;
             var datePart = DateTime.Now.ToString().Replace('/', '-').Replace(':', '_');
-            var attachmentName = $@"batch_1_worker_{datePart}.csv";
             var email = Configuration["SPD_EXPORT_EMAIL"];
             string body = $@"";
 
@@ -266,7 +285,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             };
             return result;
         }
-
 
         private IDynamicsClient SetupDynamics()
         {

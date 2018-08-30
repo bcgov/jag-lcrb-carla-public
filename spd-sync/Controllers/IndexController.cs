@@ -1,11 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
-using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -21,6 +17,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             Configuration = configuration;
             accessToken = Configuration["ACCESS_TOKEN"];
             baseUri = Configuration["BASE_URI"];
+;
         }
 
         /// <summary>
@@ -30,10 +27,11 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// <param name="_skip">Search Result Offset</param>
         /// <param name="_limit">Maximum number of search results to return</param>
         /// <returns>List of GUID id fields for requests matching the query.</returns>
-        [HttpGet("send")]
+        [HttpGet("run-export")]
         public ActionResult Send()
         {
-            return NoContent();
+            BackgroundJob.Enqueue(() => new SpdUtils(Configuration).SendExportJob(null));
+            return Ok();
         }
 
         [HttpGet("receive")]
