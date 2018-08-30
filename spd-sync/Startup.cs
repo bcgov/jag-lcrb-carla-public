@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
                                  .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
+                //config.Filters.Add(new AuthorizeFilter(policy));
             });
 
             // Other ConfigureServices() code...
