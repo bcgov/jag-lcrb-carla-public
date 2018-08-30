@@ -24,10 +24,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMtimestampdatemapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMtimestampdatemapping(System.DateTimeOffset? date = default(System.DateTimeOffset?), object timestamp = default(object), string timestampdatemappingid = default(string))
+        public MicrosoftDynamicsCRMtimestampdatemapping(string timestamp = default(string), object date = default(object), string timestampdatemappingid = default(string))
         {
-            Date = date;
             Timestamp = timestamp;
+            Date = date;
             Timestampdatemappingid = timestampdatemappingid;
             CustomInit();
         }
@@ -39,13 +39,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "date")]
-        public System.DateTimeOffset? Date { get; set; }
+        [JsonProperty(PropertyName = "timestamp")]
+        public string Timestamp { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timestamp")]
-        public object Timestamp { get; set; }
+        [JsonProperty(PropertyName = "date")]
+        public object Date { get; set; }
 
         /// <summary>
         /// </summary>

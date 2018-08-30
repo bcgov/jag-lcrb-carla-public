@@ -24,11 +24,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsubscriptionstatisticsoutlook class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubscriptionstatisticsoutlook(bool? fullsyncrequired = default(bool?), int? objecttypecode = default(int?), string subscriptionid = default(string))
+        public MicrosoftDynamicsCRMsubscriptionstatisticsoutlook(bool? fullsyncrequired = default(bool?), string subscriptionid = default(string), int? objecttypecode = default(int?))
         {
             Fullsyncrequired = fullsyncrequired;
-            Objecttypecode = objecttypecode;
             Subscriptionid = subscriptionid;
+            Objecttypecode = objecttypecode;
             CustomInit();
         }
 
@@ -44,13 +44,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public int? Objecttypecode { get; set; }
+        [JsonProperty(PropertyName = "subscriptionid")]
+        public string Subscriptionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "subscriptionid")]
-        public string Subscriptionid { get; set; }
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public int? Objecttypecode { get; set; }
 
     }
 }

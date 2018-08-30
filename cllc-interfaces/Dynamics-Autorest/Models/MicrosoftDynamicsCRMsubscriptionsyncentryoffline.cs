@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsubscriptionsyncentryoffline class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubscriptionsyncentryoffline(string objectid = default(string), int? objecttypecode = default(int?), string subscriptionid = default(string), int? syncstate = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsubscriptionsyncentryoffline(int? syncstate = default(int?), int? objecttypecode = default(int?), string objectid = default(string), string subscriptionid = default(string), string versionnumber = default(string))
         {
-            Objectid = objectid;
-            Objecttypecode = objecttypecode;
-            Subscriptionid = subscriptionid;
             Syncstate = syncstate;
+            Objecttypecode = objecttypecode;
+            Objectid = objectid;
+            Subscriptionid = subscriptionid;
             Versionnumber = versionnumber;
             CustomInit();
         }
@@ -41,8 +41,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objectid")]
-        public string Objectid { get; set; }
+        [JsonProperty(PropertyName = "syncstate")]
+        public int? Syncstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -51,18 +51,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "objectid")]
+        public string Objectid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "subscriptionid")]
         public string Subscriptionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "syncstate")]
-        public int? Syncstate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
     }
 }

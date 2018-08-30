@@ -27,17 +27,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOrganizationResources class.
         /// </summary>
-        public MicrosoftDynamicsCRMOrganizationResources(int? currentNumberOfActiveUsers = default(int?), int? currentNumberOfCustomEntities = default(int?), int? currentNumberOfNonInteractiveUsers = default(int?), int? currentNumberOfPublishedWorkflows = default(int?), int? currentStorage = default(int?), int? maxNumberOfActiveUsers = default(int?), int? maxNumberOfCustomEntities = default(int?), int? maxNumberOfNonInteractiveUsers = default(int?), int? maxNumberOfPublishedWorkflows = default(int?), int? maxStorage = default(int?))
+        public MicrosoftDynamicsCRMOrganizationResources(int? currentNumberOfActiveUsers = default(int?), int? maxNumberOfActiveUsers = default(int?), int? currentNumberOfNonInteractiveUsers = default(int?), int? maxNumberOfNonInteractiveUsers = default(int?), int? currentNumberOfCustomEntities = default(int?), int? maxNumberOfCustomEntities = default(int?), int? currentNumberOfPublishedWorkflows = default(int?), int? maxNumberOfPublishedWorkflows = default(int?), int? currentStorage = default(int?), int? maxStorage = default(int?))
         {
             CurrentNumberOfActiveUsers = currentNumberOfActiveUsers;
-            CurrentNumberOfCustomEntities = currentNumberOfCustomEntities;
-            CurrentNumberOfNonInteractiveUsers = currentNumberOfNonInteractiveUsers;
-            CurrentNumberOfPublishedWorkflows = currentNumberOfPublishedWorkflows;
-            CurrentStorage = currentStorage;
             MaxNumberOfActiveUsers = maxNumberOfActiveUsers;
-            MaxNumberOfCustomEntities = maxNumberOfCustomEntities;
+            CurrentNumberOfNonInteractiveUsers = currentNumberOfNonInteractiveUsers;
             MaxNumberOfNonInteractiveUsers = maxNumberOfNonInteractiveUsers;
+            CurrentNumberOfCustomEntities = currentNumberOfCustomEntities;
+            MaxNumberOfCustomEntities = maxNumberOfCustomEntities;
+            CurrentNumberOfPublishedWorkflows = currentNumberOfPublishedWorkflows;
             MaxNumberOfPublishedWorkflows = maxNumberOfPublishedWorkflows;
+            CurrentStorage = currentStorage;
             MaxStorage = maxStorage;
             CustomInit();
         }
@@ -54,8 +54,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CurrentNumberOfCustomEntities")]
-        public int? CurrentNumberOfCustomEntities { get; set; }
+        [JsonProperty(PropertyName = "MaxNumberOfActiveUsers")]
+        public int? MaxNumberOfActiveUsers { get; set; }
 
         /// <summary>
         /// </summary>
@@ -64,18 +64,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CurrentNumberOfPublishedWorkflows")]
-        public int? CurrentNumberOfPublishedWorkflows { get; set; }
+        [JsonProperty(PropertyName = "MaxNumberOfNonInteractiveUsers")]
+        public int? MaxNumberOfNonInteractiveUsers { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CurrentStorage")]
-        public int? CurrentStorage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "MaxNumberOfActiveUsers")]
-        public int? MaxNumberOfActiveUsers { get; set; }
+        [JsonProperty(PropertyName = "CurrentNumberOfCustomEntities")]
+        public int? CurrentNumberOfCustomEntities { get; set; }
 
         /// <summary>
         /// </summary>
@@ -84,13 +79,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "MaxNumberOfNonInteractiveUsers")]
-        public int? MaxNumberOfNonInteractiveUsers { get; set; }
+        [JsonProperty(PropertyName = "CurrentNumberOfPublishedWorkflows")]
+        public int? CurrentNumberOfPublishedWorkflows { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "MaxNumberOfPublishedWorkflows")]
         public int? MaxNumberOfPublishedWorkflows { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CurrentStorage")]
+        public int? CurrentStorage { get; set; }
 
         /// <summary>
         /// </summary>

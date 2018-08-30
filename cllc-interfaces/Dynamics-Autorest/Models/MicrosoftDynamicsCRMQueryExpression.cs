@@ -26,16 +26,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMQueryExpression class.
         /// </summary>
-        public MicrosoftDynamicsCRMQueryExpression(MicrosoftDynamicsCRMColumnSet columnSet = default(MicrosoftDynamicsCRMColumnSet), MicrosoftDynamicsCRMFilterExpression criteria = default(MicrosoftDynamicsCRMFilterExpression), bool? distinct = default(bool?), string entityName = default(string), IList<MicrosoftDynamicsCRMLinkEntity> linkEntities = default(IList<MicrosoftDynamicsCRMLinkEntity>), bool? noLock = default(bool?), IList<MicrosoftDynamicsCRMOrderExpression> orders = default(IList<MicrosoftDynamicsCRMOrderExpression>), MicrosoftDynamicsCRMPagingInfo pageInfo = default(MicrosoftDynamicsCRMPagingInfo), int? topCount = default(int?))
+        public MicrosoftDynamicsCRMQueryExpression(bool? distinct = default(bool?), bool? noLock = default(bool?), MicrosoftDynamicsCRMPagingInfo pageInfo = default(MicrosoftDynamicsCRMPagingInfo), IList<MicrosoftDynamicsCRMLinkEntity> linkEntities = default(IList<MicrosoftDynamicsCRMLinkEntity>), MicrosoftDynamicsCRMFilterExpression criteria = default(MicrosoftDynamicsCRMFilterExpression), IList<MicrosoftDynamicsCRMOrderExpression> orders = default(IList<MicrosoftDynamicsCRMOrderExpression>), string entityName = default(string), MicrosoftDynamicsCRMColumnSet columnSet = default(MicrosoftDynamicsCRMColumnSet), int? topCount = default(int?))
         {
-            ColumnSet = columnSet;
-            Criteria = criteria;
             Distinct = distinct;
-            EntityName = entityName;
-            LinkEntities = linkEntities;
             NoLock = noLock;
-            Orders = orders;
             PageInfo = pageInfo;
+            LinkEntities = linkEntities;
+            Criteria = criteria;
+            Orders = orders;
+            EntityName = entityName;
+            ColumnSet = columnSet;
             TopCount = topCount;
             CustomInit();
         }
@@ -47,28 +47,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ColumnSet")]
-        public MicrosoftDynamicsCRMColumnSet ColumnSet { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Criteria")]
-        public MicrosoftDynamicsCRMFilterExpression Criteria { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "Distinct")]
         public bool? Distinct { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "EntityName")]
-        public string EntityName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "LinkEntities")]
-        public IList<MicrosoftDynamicsCRMLinkEntity> LinkEntities { get; set; }
 
         /// <summary>
         /// </summary>
@@ -77,13 +57,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "PageInfo")]
+        public MicrosoftDynamicsCRMPagingInfo PageInfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "LinkEntities")]
+        public IList<MicrosoftDynamicsCRMLinkEntity> LinkEntities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Criteria")]
+        public MicrosoftDynamicsCRMFilterExpression Criteria { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "Orders")]
         public IList<MicrosoftDynamicsCRMOrderExpression> Orders { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "PageInfo")]
-        public MicrosoftDynamicsCRMPagingInfo PageInfo { get; set; }
+        [JsonProperty(PropertyName = "EntityName")]
+        public string EntityName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ColumnSet")]
+        public MicrosoftDynamicsCRMColumnSet ColumnSet { get; set; }
 
         /// <summary>
         /// </summary>

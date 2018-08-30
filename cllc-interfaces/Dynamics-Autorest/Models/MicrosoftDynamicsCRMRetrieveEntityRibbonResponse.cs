@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMRetrieveEntityRibbonResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMRetrieveEntityRibbonResponse(string compressedEntityXml = default(string))
+        public MicrosoftDynamicsCRMRetrieveEntityRibbonResponse(object compressedEntityXml = default(object))
         {
             CompressedEntityXml = compressedEntityXml;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "CompressedEntityXml")]
-        public string CompressedEntityXml { get; set; }
+        public object CompressedEntityXml { get; set; }
 
     }
 }

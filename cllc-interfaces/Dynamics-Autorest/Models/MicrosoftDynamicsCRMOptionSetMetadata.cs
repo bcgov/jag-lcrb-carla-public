@@ -28,8 +28,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="optionSetType">Possible values include: 'Picklist',
         /// 'State', 'Status', 'Boolean'</param>
-        public MicrosoftDynamicsCRMOptionSetMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string introducedVersion = default(string), bool? isCustomOptionSet = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), string name = default(string), string optionSetType = default(string), IList<MicrosoftDynamicsCRMOptionMetadata> options = default(IList<MicrosoftDynamicsCRMOptionMetadata>))
-            : base(hasChanged, metadataId, description, displayName, introducedVersion, isCustomOptionSet, isCustomizable, isGlobal, isManaged, name, optionSetType)
+        public MicrosoftDynamicsCRMOptionSetMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string name = default(string), string optionSetType = default(string), string introducedVersion = default(string), IList<MicrosoftDynamicsCRMOptionMetadata> options = default(IList<MicrosoftDynamicsCRMOptionMetadata>))
+            : base(metadataId, hasChanged, description, displayName, isCustomOptionSet, isGlobal, isManaged, isCustomizable, name, optionSetType, introducedVersion)
         {
             Options = options;
             CustomInit();
