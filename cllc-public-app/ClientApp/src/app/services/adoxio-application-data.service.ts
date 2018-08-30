@@ -42,6 +42,18 @@ export class AdoxioApplicationDataService {
        .catch(this.handleError);
   }
 
+  /**
+   * Gets the number of submitted Applications for the current user
+   * */
+  getSubmittedApplicationCount() {
+    return this.http.get(this.apiPath + "current/submitted-count", { headers: this.jsonHeaders })
+       .toPromise()
+       .then((res: Response) => {
+         return res.json();
+       })
+       .catch(this.handleError);
+  }
+
   getAllCurrentApplications() {
     return this.http.get(this.apiPath + "current", { headers: this.jsonHeaders })
       .pipe(catchError(this.handleError));
@@ -134,9 +146,9 @@ export class AdoxioApplicationDataService {
       //});
 
   }
-  downloadFile(serverRelativeUrl: string) {
+  downloadFile(serverRelativeUrl: string, applicationId: string) {
     const headers = new Headers({});
-    const attachmentURL = `api/adoxioapplication/download-file/${encodeURIComponent(serverRelativeUrl)}`;
+    const attachmentURL = `api/file/${applicationId}/download-file/application?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
     return this.http.get(attachmentURL, { responseType: ResponseContentType.Blob })
       .map(res => res.blob())
       .pipe(catchError(this.handleError));

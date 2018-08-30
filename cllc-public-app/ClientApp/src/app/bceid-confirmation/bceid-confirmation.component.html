@@ -1,5 +1,5 @@
 <div class="container" *ngIf="!currentUser.isBceidConfirmed">
-  <img style="margin-left: -18px;" *ngIf="termsAccepted" src="/assets/bceid_default_logo.jpg" alt="BCeID Logo">
+  <img style="margin-left: -18px;" *ngIf="termsAccepted" src="assets/bceid_default_logo.jpg" alt="BCeID Logo">
   <div [ngBusy]="busySubscription"></div>
   <app-terms-and-conditions (termsAccepted)="termsAccepted=$event" *ngIf="bceidConfirmAccount && !accountExists && !termsAccepted"></app-terms-and-conditions>
   <div *ngIf="bceidConfirmAccount && !accountExists && termsAccepted">
@@ -61,7 +61,7 @@
         <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a>
         to obtain the application form.
       </p>
-      <a href="">&lt;&lt; Return to Information Portal Homepage</a>
+      <a href="logout">&lt;&lt; Return to Information Portal Homepage</a>
       <br>
     </section>
   </div>
@@ -95,7 +95,7 @@
       <br>login with a different account.</p>
     <br>
     <div [ngBusy]="busy"></div>
-    <a href="">&lt;&lt; Return to Information Portal Homepage</a>
+    <a href="logout">&lt;&lt; Return to Information Portal Homepage</a>
   </div>
   <div *ngIf="termsAccepted" style="margin-bottom: 40%;"></div>
 </div>

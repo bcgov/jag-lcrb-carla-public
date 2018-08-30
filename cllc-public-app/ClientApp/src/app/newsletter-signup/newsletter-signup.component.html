@@ -1,4 +1,4 @@
-<div *ngIf="isLiteVersion" class="lite">
+<div>
   <form class="emailSignupForm">
     <section style="display: flex">
       <button mat-fab class="fab-button mat-elevation-z0">
@@ -7,56 +7,14 @@
       <h2 style="padding-left: 0;">{{title}}</h2>
     </section>
     <p style="padding-left: 0; color: #fff;">{{description}}</p>
-    <div class="email-field">
+    <div>
 
-      <input class="form-control" style="flex: 1 0;" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email"
-        tabindex="3">
+      <input class="form-control" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email" tabindex="3">
+      <br>
       <button type="submit" class="btn btn-primary" (click)="signup()" [disabled]="!emailFormControl.valid" tabindex="3">
         SUBSCRIBE
       </button>
     </div>
-  </form>
-
-  <div *ngIf="signupSuccess==true">
-    <h3>Confirm your subscription</h3>
-    <p>Thank you for subscribing to updates for cannabis retail licensing. A confirmation email has been sent from no-reply@gov.bc.ca</p>
-    <p>Click on the link in the email to activate your subscription.</p>
-  </div>
-</div>
-
-
-<div *ngIf="!isLiteVersion" class="notlite">
-  <!--<form class="emailSignupForm">
-  <h2>{{title}}</h2>
-  <h3>{{description}}</h3>
-  <div class="form-group">
-    <p>
-      <label class="control-label">Email</label>
-      <input id="inputEmail" class="form-control" type="email" name="newsletterSignupEmail" required [email]="true" [(ngModel)]="email" #newsletterSignupEmail="ngModel">
-    </p>
-    <a class="globalButton" href="#" mat-raised-button color="primary" (click)="signup()">Subscribe</a>
-  </div>
-</form>-->
-
-  <form class="emailSignupForm">
-    <h2>{{title}}</h2>
-    <h3>{{description}}</h3>
-    <!-- <mat-form-field class="emailSignupForm"> -->
-    <label class="body">Email</label>
-    <input class="form-control" required placeholder="" [formControl]="emailFormControl" [(ngModel)]="email">
-    <!--<mat-hint>Errors appear instantly!</mat-hint>-->
-    <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field> -->
-    <p>
-      <button type="submit" class="btn btn-primary" (click)="signup()" [disabled]="!emailFormControl.valid">
-        Subscribe
-      </button>
-    </p>
   </form>
 
   <div *ngIf="signupSuccess==true">

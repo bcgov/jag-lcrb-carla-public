@@ -23,6 +23,8 @@ import { ConnectionToProducersComponent } from './business-profile/tabs/connecti
 import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
 import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
+import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
 import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
 import { FloorPlanComponent } from './license-application/tabs/floor-plan/floor-plan.component';
@@ -32,6 +34,8 @@ import { StoreInformationComponent } from './license-application/tabs/store-info
 import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 import { ApplicationComponent } from './lite/application/application.component';
+import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
+import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 
 const routes: Routes = [
   {
@@ -40,16 +44,24 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardLiteComponent
+    component: DashboardLiteComponent,
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'dashboard-lite',
-    component: DashboardLiteComponent
+    component: DashboardLiteComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'associates-lite',
+    component: AssociatesDashboardComponent,
+    canActivate: [ServiceCardAuthGuard]
   },
   {
     path: 'application-lite/:applicationId',
     component: ApplicationComponent,
-    canDeactivate: [CanDeactivateGuard]
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [BCeidAuthGuard]
   },
   // {
   //   path: 'business-profile/:accountId/:legalEntityId',
@@ -147,7 +159,8 @@ const routes: Routes = [
   // },
   {
     path: 'payment-confirmation',
-    component: PaymentConfirmationComponent
+    component: PaymentConfirmationComponent,
+    canActivate: [BCeidAuthGuard]
   },
 
   {
@@ -165,6 +178,10 @@ const routes: Routes = [
   {
     path: 'prv',
     redirectTo: 'prv/survey'
+  },
+  {
+    path: 'worker-registration',
+    component: WorkerRegistrationComponent
   },
   {
     path: 'result/:data',

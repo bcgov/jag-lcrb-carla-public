@@ -6,7 +6,6 @@ using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.IO;
 using Gov.Lclb.Cllb.Public.Contexts;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache) 
+        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory) 
             : base(configuration, env, loggerFactory)
         { }
 

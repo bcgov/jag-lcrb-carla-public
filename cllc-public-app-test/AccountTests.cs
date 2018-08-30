@@ -1,17 +1,15 @@
-﻿using System;
-using System.Net.Http;
-using Xunit;
-
-using System.Text;
-using Newtonsoft.Json;
-using System.Net;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Interfaces.Models;
+using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-	public class AccountTests : ApiIntegrationTestBaseWithLogin
+    public class AccountTests : ApiIntegrationTestBaseWithLogin
     {
         public AccountTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
@@ -36,25 +34,26 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
+
             string initialName = "InitialName";
             string changedName = "ChangedName";
             string service = "account";
 
-			// register and login as our first user
+            // register and login as our first user
             var loginUser1 = randomNewUserName("TestAccountUser", 6);
             await Login(loginUser1);
 
-			// C - Create
+            // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
             MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
-			{				
-				Name = initialName,
-				AdoxioExternalid = Guid.NewGuid().ToString()
+            {
+                Name = initialName,
+                AdoxioExternalid = Guid.NewGuid().ToString()
             };
 
             ViewModels.Account viewmodel_account = account.ToViewModel();
-			viewmodel_account.businessType = "PublicCorporation";
+            viewmodel_account.businessType = "PublicCorporation";
 
             string jsonString = JsonConvert.SerializeObject(viewmodel_account);
 
@@ -70,8 +69,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
             Guid id = new Guid(responseViewModel.id);
-			//String strid = responseViewModel.externalId;
-			//Assert.Equal(strid, viewmodel_account.externalId);
+            //String strid = responseViewModel.externalId;
+            //Assert.Equal(strid, viewmodel_account.externalId);
 
             // R - Read
 
@@ -86,17 +85,17 @@ namespace Gov.Lclb.Cllb.Public.Test
             account.Accountid = id.ToString();
 
             // get legal entity record for account
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-			ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
-			Assert.Equal(id.ToString(), legalentityViewModel.account.id);
+            ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            Assert.Equal(id.ToString(), legalentityViewModel.account.id);
 
             // U - Update            
             account.Name = changedName;
-            
+
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
@@ -119,22 +118,239 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // D - Delete
 
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             string responseText = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // second delete should return a 404.
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-			await Logout();
+            await Logout();
+        }
+
+        // To disable this test run:
+        // dotnet test --filter Category!=StressTests
+        [Trait("Category", "StressTests")]
+        [Fact]
+        public async System.Threading.Tasks.Task TestCRUD100Times()
+        {
+            int i = 100;
+            while (i > 0)
+            {
+                string initialName = "InitialName";
+                string changedName = "ChangedName";
+                string service = "account";
+
+                // register and login as our first user
+                var loginUser1 = randomNewUserName("TestAccountUser", 6);
+                await Login(loginUser1);
+
+                // C - Create
+                var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+
+                MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
+                {
+                    Name = initialName,
+                    AdoxioExternalid = Guid.NewGuid().ToString()
+                };
+
+                ViewModels.Account viewmodel_account = account.ToViewModel();
+                viewmodel_account.businessType = "PublicCorporation";
+
+                string jsonString = JsonConvert.SerializeObject(viewmodel_account);
+
+                request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var response = await _client.SendAsync(request);
+                jsonString = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
+
+                // parse as JSON.            
+                ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+
+                // name should match.
+                Assert.Equal(initialName, responseViewModel.name);
+                Guid id = new Guid(responseViewModel.id);
+                //String strid = responseViewModel.externalId;
+                //Assert.Equal(strid, viewmodel_account.externalId);
+
+                // R - Read
+
+                request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+                response = await _client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                jsonString = await response.Content.ReadAsStringAsync();
+                responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+                Assert.Equal(initialName, responseViewModel.name);
+
+                account.Accountid = id.ToString();
+
+                // get legal entity record for account
+                request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+                response = await _client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                jsonString = await response.Content.ReadAsStringAsync();
+                ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+                Assert.Equal(id.ToString(), legalentityViewModel.account.id);
+
+                // U - Update            
+                account.Name = changedName;
+
+
+                request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
+                };
+                response = await _client.SendAsync(request);
+                jsonString = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
+
+                // verify that the update persisted.
+
+                request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+                response = await _client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                jsonString = await response.Content.ReadAsStringAsync();
+
+                responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+                Assert.Equal(changedName, responseViewModel.name);
+
+                // D - Delete
+
+                request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+                response = await _client.SendAsync(request);
+                string responseText = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
+
+                // second delete should return a 404.
+                request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+                response = await _client.SendAsync(request);
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+                // should get a 404 if we try a get now.
+                request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+                response = await _client.SendAsync(request);
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+                i--;
+                await Logout();
+            }
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task TestCRUDLongName()
+        {
+
+            string initialName = randomNewUserName("Test", 246);
+            string changedName = randomNewUserName("Test", 246);
+            string service = "account";
+
+            // register and login as our first user
+            var loginUser1 = randomNewUserName("TestAccountUser", 6);
+            await Login(loginUser1);
+
+            // C - Create
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+
+            MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
+            {
+                Name = initialName,
+                AdoxioExternalid = Guid.NewGuid().ToString()
+            };
+
+            ViewModels.Account viewmodel_account = account.ToViewModel();
+            viewmodel_account.businessType = "PublicCorporation";
+
+            string jsonString = JsonConvert.SerializeObject(viewmodel_account);
+
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            // parse as JSON.            
+            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+
+            // name should match.
+            Assert.Equal(initialName, responseViewModel.name);
+            Guid id = new Guid(responseViewModel.id);
+            //String strid = responseViewModel.externalId;
+            //Assert.Equal(strid, viewmodel_account.externalId);
+
+            // R - Read
+
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+            Assert.Equal(initialName, responseViewModel.name);
+
+            account.Accountid = id.ToString();
+
+            // get legal entity record for account
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            Assert.Equal(id.ToString(), legalentityViewModel.account.id);
+
+            // U - Update            
+            account.Name = changedName;
+
+
+            request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
+            };
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            // verify that the update persisted.
+
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+            Assert.Equal(changedName, responseViewModel.name);
+
+            // D - Delete
+
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            string responseText = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            // second delete should return a 404.
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            // should get a 404 if we try a get now.
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            await Logout();
         }
     }
 }

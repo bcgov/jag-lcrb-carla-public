@@ -89,18 +89,6 @@ export class LiteApplicationDashboardComponent implements OnInit {
 
   /**
    * 
-   * @param url
-   * @param fileName
-   */
-  downloadApplicationPDF(url: string, fileName: string) {
-    this.adoxioApplicationDataService.downloadFile(url)
-    .subscribe((res: Blob) => {
-      saveAs(res, fileName);
-    });
-  }
-
-  /**
-   * 
    * @param applicationId
    * @param establishmentName
    * @param applicationName

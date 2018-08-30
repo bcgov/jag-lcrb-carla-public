@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.OData.Client;
-using Gov.Lclb.Cllb.Public.ViewModels;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.AspNetCore.Http;
-using Gov.Lclb.Cllb.Public.Authentication;
-using Newtonsoft.Json;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize(Policy = "Business-User")]
     public class AdoxioLicenseController : Controller
     {
         private readonly IConfiguration Configuration;        

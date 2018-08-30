@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <div [ngBusy]="busy"></div>
+  <div *ngIf="dataLoaded">
+    <section *ngIf="!isNewUser">
+      <h1>
+        BC Service Card Dashboard
+      </h1>
+
+      <p>
+        This is a placeholder landing page for BC Service Card.
+      </p>
+      <section>
+        <app-file-uploader *ngIf="contact && contact.id" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+          [multipleFiles]="false" entityName="contact" [entityId]="contact.id" #mainForm></app-file-uploader>
+      </section>
+    </section>
+
+    <section *ngIf="isNewUser">
+      <h2>Please confirm the name associated with the BC Service card login provided.</h2>
+      <div>
+        <p>
+          <b>{{currentUser.name}}</b>
+        </p>
+        <p>
+          Is this correct?
+        </p>
+        <div class="row">
+          <div class="col-md-12 text-left">
+            <button class="btn btn-primary" (click)="confirmContact(true)">
+              <strong>Yes</strong>
+            </button>
+            <button class="btn btn-secondary" (click)="confirmContact(false)">
+              <strong>No</strong>
+            </button>
+            <br>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

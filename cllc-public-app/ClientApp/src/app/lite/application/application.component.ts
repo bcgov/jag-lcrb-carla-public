@@ -13,6 +13,7 @@ import { PaymentDataService } from '../../services/payment-data.service';
 import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
 import { ConfirmationDialog } from '../../lite-application-dashboard/lite-application-dashboard.component';
 import { AdoxioApplication } from '../../models/adoxio-application.model';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-application',
@@ -21,7 +22,8 @@ import { AdoxioApplication } from '../../models/adoxio-application.model';
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
   application: AdoxioApplication;
-  @ViewChild(FileUploaderComponent) mainForm: FileUploaderComponent;
+  @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
   form: FormGroup;
   savedFormData: any;
   subscriptions: Subscription[] = [];
@@ -31,6 +33,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
+  submittedApplications = 8;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -48,6 +51,9 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       id: [''],
       establishmentName: [''], // Validators.required
     });
+
+    this.applicationDataService.getSubmittedApplicationCount()
+      .then(value => this.submittedApplications = value);
 
     
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
@@ -132,26 +138,35 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     return isError;
   }
 
+  /**
+   * Submit the application for payment
+   * */
   submit_application() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
+    } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
+      this.submitPayment();
     }
     else {
       this.save(true).subscribe((result: boolean) => {
         if (result) {
-          this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
-            res => {
-              const jsonUrl = res.json();
-              window.location.href = jsonUrl['url'];
-              return jsonUrl['url'];
-            },
-            err => {
-              console.log('Error occured');
-            }
-          );
+          this.submitPayment();
         }
       });
     }
+  }
+
+  /**
+   * Redirect to payment processing page (Express Pay / Bambora service)
+   * */
+  private submitPayment() {
+    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(res => {
+      const jsonUrl = res.json();
+      window.location.href = jsonUrl['url'];
+      return jsonUrl['url'];
+    }, err => {
+      console.log('Error occured');
+    });
   }
 
   isValid(): boolean {
@@ -162,15 +177,23 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       valid = false;
       this.validationMessages.push("Application form is required.")
     }
+    if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
+      valid = false;
+      this.validationMessages.push("At least one supporting document is required.")
+    }
     if (!this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push("Establishment name is required.")
+    }
+    if (this.submittedApplications >= 8) {
+      valid = false;
+      this.validationMessages.push("Only 8 applications can be submitted");
     }
     return valid;
   }
 
   /**
-   * 
+   * Dialog to confirm the application cancellation (status changed to "Termindated")
    */
   cancelApplication() {
 

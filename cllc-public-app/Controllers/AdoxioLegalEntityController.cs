@@ -6,7 +6,6 @@ using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -16,10 +15,12 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Policy = "Business-User")]
     public class AdoxioLegalEntityController : Controller
     {
         private readonly IConfiguration Configuration;
@@ -428,41 +429,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(result);
         }
 
-        [HttpGet("{id}/attachments/{fileId}")]
-        public async Task<IActionResult> DownloadFile([FromRoute] string id, [FromRoute] string fileId)
-        {
-            // get the file.
-            if (fileId == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                // get the current user.
-                string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
-                Guid adoxio_legalentityid = new Guid(id);
-                MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-                //prevent getting legal entity data if the user is not associated with the account
-                if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
-                {
-                    return new NotFoundResult();
-                }
-
-                var fileSystemItem = await _sharePointFileManager.GetFileById(fileId);
-                if (fileSystemItem != null)
-                {
-                    byte[] fileContents = await _sharePointFileManager.DownloadFile(fileSystemItem.Url);
-                    return new FileContentResult(fileContents, "application/octet-stream")
-                    {
-                        FileDownloadName = fileSystemItem.Name
-                    };
-                }
-            }
-            return new NotFoundResult();
-
-        }
 
         /// <summary>
         /// Create a legal entity

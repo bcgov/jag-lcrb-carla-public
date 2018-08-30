@@ -1,20 +1,15 @@
 ﻿
+using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.EntityFrameworkCore;
+using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM;
-using Microsoft.Extensions.Caching.Distributed;
 using System.Xml.Linq;
-using Microsoft.OData.Client;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Microsoft.AspNetCore.Http;
-using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -27,8 +22,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             result = client.NativeBaseUri + entityType + "(" + id.Trim() + ")";
             return result;
         }
-		
-        
+
+
 
         /// <summary>
         /// Convert a Dynamics attribute to boolean
@@ -45,8 +40,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result = (value.Equals("1") || value.ToLower().Equals("true"));
                 }
-            }            
-            
+            }
+
             return result;
         }
 
@@ -166,12 +161,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
-        
+
         /// <summary>
         /// Get a Account by their Guid
         /// </summary>
         /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountBySiteminderBusinessGuid(this IDynamicsClient system, string siteminderId)
@@ -180,8 +174,17 @@ namespace Gov.Lclb.Cllb.Interfaces
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
 
             MicrosoftDynamicsCRMaccount result = null;
-            var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-            result = accountResponse.Value.FirstOrDefault();
+            try
+            {
+                var accountResponse = await system.Accounts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
+                result = accountResponse.Value.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                result = null;
+            }
+
             // get the primary contact.
             if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
             {
@@ -189,7 +192,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             return result;
-            
+
         }
 
 
@@ -197,7 +200,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Get a Account by their Guid
         /// </summary>
         /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMaccount> GetAccountById(this IDynamicsClient system, Guid id)
@@ -207,7 +209,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // fetch from Dynamics.
                 result = await system.Accounts.GetByKeyAsync(id.ToString());
-            }            
+            }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
@@ -280,7 +282,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
-    
+
 
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactById(this IDynamicsClient system, Guid id)
         {
@@ -307,7 +309,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioLicencetypeValue != null)
                 {
-                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));                    
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
                 }
 
                 if (result._adoxioApplicantValue != null)
@@ -320,13 +322,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = null;
             }
             return result;
-        }       
+        }
 
         /// <summary>
         /// Get a contact by their Siteminder ID
         /// </summary>
         /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
         public static async Task<MicrosoftDynamicsCRMcontact> GetContactBySiteminderGuid(this IDynamicsClient system, string siteminderId)
@@ -334,18 +335,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
             var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-            result = contactsResponse.Value.FirstOrDefault();			
+            result = contactsResponse.Value.FirstOrDefault();
             return result;
         }
 
         public static MicrosoftDynamicsCRMadoxioLegalentity GetAdoxioLegalentityByAccountId(this IDynamicsClient _dynamicsClient, Guid id)
-		{
+        {
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
-			string accountFilter = "_adoxio_account_value eq " + id.ToString();
+            string accountFilter = "_adoxio_account_value eq " + id.ToString();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value;
-            result = legalEntities.FirstOrDefault();            
-			return result;
-		}
+            result = legalEntities.FirstOrDefault();
+            return result;
+        }
 
 
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
@@ -384,63 +385,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
-			MicrosoftDynamicsCRMadoxioLicencetype result = null;
-			string typeFilter = "adoxio_name eq '" + name + "'";
+            MicrosoftDynamicsCRMadoxioLicencetype result = null;
+            string typeFilter = "adoxio_name eq '" + name + "'";
 
-			IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.AdoxioLicencetypes.Get(filter: typeFilter).Value;
+            IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.AdoxioLicencetypes.Get(filter: typeFilter).Value;
 
-			result = licenceTypes.FirstOrDefault();
-
-            return result;
-        }
-
-
-        /// <summary>
-        /// Get picklist options for a given field
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="distributedCache"></param>
-        /// <param name="datafield"></param>
-        /// <returns></returns>
-        public static async Task<List<Public.ViewModels.OptionMetadata>> GetPicklistOptions (this Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache, string datafield)
-        {
-            List<Public.ViewModels.OptionMetadata> result = null;
-            string key = "GlobalOptionSetDefinition_" + datafield;
-            // first look in the cache.
-            string temp = null;
-            if (distributedCache != null)
-            {
-                temp = distributedCache.GetString(key);
-            }
-            if (!string.IsNullOrEmpty(temp))
-            {
-                result = JsonConvert.DeserializeObject<List<Public.ViewModels.OptionMetadata>>(temp);
-            }
-            else
-            {
-                // fetch from dynamics
-                var source = system.GlobalOptionSetDefinitions;
-                OptionSetMetadataBaseSingle optionSetMetadataBaseSingle = new OptionSetMetadataBaseSingle (source.Context, source.GetKeyPath("Name='"+datafield+"'"));
-
-                OptionSetMetadata optionSetMetadata = (OptionSetMetadata) await optionSetMetadataBaseSingle.GetValueAsync();
-
-                if (optionSetMetadata != null)
-                {
-                    // convert it to a list.
-                    result = new List<Public.ViewModels.OptionMetadata>();
-                    foreach (Microsoft.Dynamics.CRM.OptionMetadata option in optionSetMetadata.Options)
-                    {
-                        result.Add(option.ToViewModel());
-                    }
-
-                }
-                if (distributedCache != null)
-                {
-                    // store the picklist data.
-                    string cacheValue = JsonConvert.SerializeObject(result);
-                    distributedCache.SetString(key, cacheValue);
-                }
-            }
+            result = licenceTypes.FirstOrDefault();
 
             return result;
         }
@@ -452,15 +402,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="userId"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient,  string userId, string guid = null)
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string userId, string guid = null)
         {
             User user = null;
+            MicrosoftDynamicsCRMcontact contact = null;
+            Guid userGuid;
 
             if (!string.IsNullOrEmpty(guid))
+            {
                 user = await _dynamicsClient.GetUserByGuid(guid);
+            }
 
             if (user == null)
-                user = await _dynamicsClient.GetUserBySmUserId(userId);
+            {
+                if (Guid.TryParse(userId, out userGuid))
+                {
+                    user = await _dynamicsClient.GetUserBySmUserId(userId);
+                }
+                else
+                { //BC service card login
+                    var filter = "externaluseridentifier eq " + userId;                    
+                    try
+                    {
+                        contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
+                    }
+                    catch (OdataerrorException)
+                    {
+                        contact = null;
+                    }
+                    if (contact != null)
+                    {
+                        user = new User();
+                        user.FromContact(contact);
+                    }
+                }
+            }
 
             if (user == null)
                 return null;
@@ -554,14 +530,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                 legalEntities = legalEntities.Where(e => !String.IsNullOrEmpty(e._adoxioShareholderaccountidValue)).ToList();
                 for (var i = 0; i < legalEntities.Count; i++)
                 {
-                    if(IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId, _dynamicsClient)){
-                       result = true;
-                       break;
+                    if (IsChildAccount(legalEntities[i]._adoxioShareholderaccountidValue, childAccountId, _dynamicsClient))
+                    {
+                        result = true;
+                        break;
                     }
                 }
             }
             return result;
         }
-        
+
     }
 }

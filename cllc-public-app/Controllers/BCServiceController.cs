@@ -64,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
                 // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
-                basePath += "dashboard-lite";
+                basePath += "/worker-registration";
                 return Redirect(basePath);
             }
         }
@@ -139,59 +139,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
             // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
-            basePath += "dashboard-lite";
+            basePath += "associates-lite";
             return Redirect(basePath);
         }
 
-        /// <summary>
-        /// Clear out any existing dev authentication tokens
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("cleartoken")]
-        [AllowAnonymous]
-        public virtual IActionResult ClearDevAuthenticationCookie()
-        {
-            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
-
-            string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
-            if (temp == null)
-            {
-                temp = "";
-            }
-            // clear session
-            HttpContext.Session.Clear();
-
-            // expire "dev" user cookie
-            Response.Cookies.Append(
-                _options.DevAuthenticationTokenKey,
-                temp,
-                new CookieOptions
-                {
-                    Path = "/",
-                    SameSite = SameSiteMode.None,
-                    Expires = DateTime.UtcNow.AddDays(-1)
-                }
-            );
-			// expire "dev" user cookie
-			temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
-            if (temp == null)
-            {
-                temp = "";
-            }
-            Response.Cookies.Append(
-                _options.DevBCSCAuthenticationTokenKey,
-                temp,
-                new CookieOptions
-                {
-                    Path = "/",
-                    SameSite = SameSiteMode.None,
-                    Expires = DateTime.UtcNow.AddDays(-1)
-                }
-            );
-
-            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
-            return Redirect(basePath);
-        }
 	}
 }

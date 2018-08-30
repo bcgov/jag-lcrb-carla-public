@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Observable, Subject } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
+import { throttleTime, catchError } from 'rxjs/operators';
 import { debug } from 'util';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Subscription } from 'rxjs';
@@ -21,11 +21,11 @@ export interface DropdownOption {
   styleUrls: ['./file-uploader.component.scss']
 })
 export class FileUploaderComponent implements OnInit {
-  @Input() accountId: string;
   @Input() uploadUrl: string;
   @Input() fileTypes = '';
   @Input() documentType: string;
-  @Input() applicationId: string;
+  @Input() entityName: string;
+  @Input() entityId: string;
   @Input() multipleFiles: boolean = true;
   @Input() extensions: string[] = ['pdf'];
   busy: Subscription;
@@ -38,17 +38,17 @@ export class FileUploaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //use application controller if application ID is passed, otherwise legal entity controller
-    if (this.applicationId) {
-      this.attachmentURL = 'api/adoxioapplication/' + this.applicationId + '/attachments';
-    } else {
-      this.attachmentURL = 'api/AdoxioLegalEntity/' + this.accountId + '/attachments';
-    }
+    this.attachmentURL =`api/file/${this.entityId}/attachments/${this.entityName}`;
+
     this.getUploadedFileData();
   }
 
   public dropped(event: UploadEvent) {
     let files = event.files;
+    if (files.length > 1 && !this.multipleFiles) {
+      alert('Only one file can be uploaded here');
+      return;
+    }
     for (var droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         let fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -84,7 +84,8 @@ export class FileUploaderComponent implements OnInit {
     //url = this.attachmentURL + this.applicationId + "/attachments";
     this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
-    });
+    },
+      err => alert('Failed to upload file'));
   }
 
   getUploadedFileData() {
@@ -97,10 +98,12 @@ export class FileUploaderComponent implements OnInit {
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {
-          entry.size = entry.size / 1024
+          entry.size = Math.ceil(entry.size / 1024);
+          entry.downloadUrl = `api/file/${this.entityId}/download-file/${this.entityName}/${entry.name}?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}`;
         });
         this.files = data;
-      });
+      },
+        err => alert('Failed to get files'));
   }
 
   deleteFile(relativeUrl: string) {
@@ -110,7 +113,8 @@ export class FileUploaderComponent implements OnInit {
     const queryParams = `?serverRelativeUrl=${encodeURIComponent(relativeUrl)}`;
     this.busy = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
-    });
+    },
+      err => alert('Failed to delete file'));
   }
 
   disableFileUpload(): boolean {
@@ -125,12 +129,13 @@ export class FileUploaderComponent implements OnInit {
     //console.log(event);
   }
 
-  downloadApplicationPDF(url: string, fileName: string) {
-    if (this.applicationId) {
-      this.adoxioApplicationDataService.downloadFile(url)
-        .subscribe((res: Blob) => {
-          saveAs(res, fileName);
-        });
+  browseFiles(browserMultiple, browserSingle) {
+    if (!this.disableFileUpload()) {
+      if (this.multipleFiles) {
+        browserMultiple.click()
+      } else {
+        browserSingle.click();
+      }
     }
   }
 }

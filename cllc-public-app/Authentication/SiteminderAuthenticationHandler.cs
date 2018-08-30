@@ -307,7 +307,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
                     _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
-                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
+                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
 
@@ -350,18 +350,18 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     // **************************************************
                     if (string.IsNullOrEmpty(userId))
                     {
-                        _logger.LogError(options.MissingSiteMinderUserIdError);
+                        _logger.LogDebug(options.MissingSiteMinderUserIdError);
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
 
                     if (string.IsNullOrEmpty(siteMinderGuid))
                     {
-                        _logger.LogError(options.MissingSiteMinderGuidError);
+                        _logger.LogDebug(options.MissingSiteMinderGuidError);
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
                     if (string.IsNullOrEmpty(siteMinderUserType))
                     {
-                        _logger.LogError(options.MissingSiteMinderUserTypeError);
+                        _logger.LogDebug(options.MissingSiteMinderUserTypeError);
                         return AuthenticateResult.Fail(options.MissingSiteMinderUserTypeError);
                     }
                 }
@@ -381,7 +381,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         userSettings.UserDisplayName = userId + " Associate";
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
 						siteMinderBusinessGuid = null;
-                        siteMinderUserType = "BC Services Card";
+                        siteMinderUserType = "VerifiedIndividual";
 					}
                 }
 
@@ -403,8 +403,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     userSettings.AuthenticatedUser.UserType = siteMinderUserType;
                 }
+                userSettings.UserType = siteMinderUserType;
+
                 // This line gets the various claims for the current user.
-                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme);
+                ClaimsPrincipal userPrincipal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
 
                 // **************************************************
                 // Create authenticated user
@@ -471,11 +473,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                             userSettings.ContactId = null;
 						}
 
-                        _logger.LogError("New user registration:" + userSettings.UserDisplayName);
-                        _logger.LogError("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
-                        _logger.LogError("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
-                        _logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
-                        _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
+                        _logger.LogDebug("New user registration:" + userSettings.UserDisplayName);
+                        _logger.LogDebug("userSettings.SiteMinderBusinessGuid:" + userSettings.SiteMinderBusinessGuid);
+                        _logger.LogDebug("userSettings.SiteMinderGuid:" + userSettings.SiteMinderGuid);
+                        _logger.LogDebug("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
                     }
                     // Set account ID from authenticated user
                     else if (userSettings.AuthenticatedUser != null)
@@ -489,9 +491,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         {
                             userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
                         }
-                        _logger.LogError("Returning user:" + userSettings.UserDisplayName);
-                        _logger.LogError("userSettings.AccountId:" + userSettings.AccountId);
-                        _logger.LogError("userSettings.ContactId:" + userSettings.ContactId);
+                        _logger.LogDebug("Returning user:" + userSettings.UserDisplayName);
+                        _logger.LogDebug("userSettings.AccountId:" + userSettings.AccountId);
+                        _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
                     }
                 }
 				else if (!hostingEnv.IsProduction() && isBCSCDeveloperLogin)

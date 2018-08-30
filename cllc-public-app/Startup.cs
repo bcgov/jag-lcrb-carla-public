@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
@@ -36,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }        
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -60,8 +59,6 @@ namespace Gov.Lclb.Cllb.Public
                 SetupDynamics(services);
             }
 
-
-
             // for security reasons, the following headers are set.
             services.AddMvc(opts =>
             {
@@ -77,15 +74,13 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(typeof(XDownloadOptionsAttribute));
                 opts.Filters.Add(typeof(XFrameOptionsAttribute));
                 opts.Filters.Add(typeof(XXssProtectionAttribute));
-                opts.Filters.Add(typeof(CspAttribute));
-                opts.Filters.Add(new CspDefaultSrcAttribute { Self = true });
-                opts.Filters.Add(new CspScriptSrcAttribute { Self = true });
                 //CSPReportOnly
                 opts.Filters.Add(typeof(CspReportOnlyAttribute));
                 opts.Filters.Add(new CspScriptSrcReportOnlyAttribute { None = true });
             })
                 .AddJsonOptions(
-                    opts => {
+                    opts =>
+                    {
                         opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
                         opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
                         opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
@@ -106,7 +101,11 @@ namespace Gov.Lclb.Cllb.Public
             });
 
             // setup authorization
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {    
+                options.AddPolicy("Business-User", policy =>
+                                  policy.RequireClaim(User.UserTypeClaim, "Business"));
+            });
             services.RegisterPermissionHandler();
 
             // In production, the Angular files will be served from this directory
@@ -114,9 +113,6 @@ namespace Gov.Lclb.Cllb.Public
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-
-
-
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>
@@ -137,7 +133,6 @@ namespace Gov.Lclb.Cllb.Public
 
         private void SetupDynamics(IServiceCollection services)
         {
-            string redisServer = Configuration["REDIS_SERVER"];
 
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
             string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];
@@ -148,13 +143,6 @@ namespace Gov.Lclb.Cllb.Public
             string ssgUsername = Configuration["SSG_USERNAME"];
             string ssgPassword = Configuration["SSG_PASSWORD"];
 
-            if (string.IsNullOrEmpty(redisServer))            
-            {
-                services.AddDistributedRedisCache(options =>
-                {
-                    options.Configuration = redisServer;
-                });
-            }
             AuthenticationResult authenticationResult = null;
             // authenticate using ADFS.
             if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
@@ -170,7 +158,7 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
             {
-                
+
                 ServiceClientCredentials serviceClientCredentials = null;
 
                 if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
@@ -182,7 +170,7 @@ namespace Gov.Lclb.Cllb.Public
                     task.Wait();
                     authenticationResult = task.Result;
                     string token = authenticationResult.CreateAuthorizationHeader().Substring("Bearer ".Length);
-                    serviceClientCredentials = new TokenCredentials(token);                    
+                    serviceClientCredentials = new TokenCredentials(token);
                 }
                 else
                 {
@@ -190,9 +178,9 @@ namespace Gov.Lclb.Cllb.Public
                     {
                         UserName = ssgUsername,
                         Password = ssgPassword
-                    };                    
+                    };
                 }
-                                
+
                 IDynamicsClient client = new DynamicsClient(new Uri(Configuration["DYNAMICS_ODATA_URI"]), serviceClientCredentials);
 
                 // set the native client URI
@@ -209,29 +197,6 @@ namespace Gov.Lclb.Cllb.Public
             }));
 
 
-            Interfaces.Microsoft.Dynamics.CRM.System context = new Interfaces.Microsoft.Dynamics.CRM.System(new Uri(Configuration["DYNAMICS_ODATA_URI"]));
-
-            // determine if we have a SSG connection.
-
-            if (string.IsNullOrEmpty (ssgUsername) || string.IsNullOrEmpty(ssgPassword))
-            {
-                
-                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", authenticationResult.CreateAuthorizationHeader());
-            }
-            else
-            {
-                // authenticate using the SSG.                
-                string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(ssgUsername + ":" + ssgPassword));
-
-                context.BuildingRequest += (sender, eventArgs) => eventArgs.Headers.Add(
-                "Authorization", "Basic " + credentials);
-            }
-
-            
-
-            services.AddSingleton<Interfaces.Microsoft.Dynamics.CRM.System>(context);
-
             // add SharePoint.
 
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
@@ -247,12 +212,12 @@ namespace Gov.Lclb.Cllb.Public
 
             // add BCeID Web Services
 
-            string bceidUrl    = Configuration["BCEID_SERVICE_URL"];
-			string bceidSvcId  = Configuration["BCEID_SERVICE_SVCID"];
-			string bceidUserid = Configuration["BCEID_SERVICE_USER"];
-			string bceidPasswd = Configuration["BCEID_SERVICE_PASSWD"];
+            string bceidUrl = Configuration["BCEID_SERVICE_URL"];
+            string bceidSvcId = Configuration["BCEID_SERVICE_SVCID"];
+            string bceidUserid = Configuration["BCEID_SERVICE_USER"];
+            string bceidPasswd = Configuration["BCEID_SERVICE_PASSWD"];
 
-			services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
+            services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
             // add BCEP services
 
@@ -270,8 +235,8 @@ namespace Gov.Lclb.Cllb.Public
             var bcep_base_path = Configuration["BASE_PATH"];
             var bcep_conf_path = Configuration["BCEP_CONF_PATH"];
 
-            services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid, 
-			                                                        bcep_base_uri + bcep_base_path + bcep_conf_path));
+            services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid,
+                                                                    bcep_base_uri + bcep_base_path + bcep_conf_path));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -287,9 +252,6 @@ namespace Gov.Lclb.Cllb.Public
                     log.LogInformation("Fetching the application's database context ...");
                     AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
-                    IDistributedCache distributedCache = serviceScope.ServiceProvider.GetService<IDistributedCache>();
-                    Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system = serviceScope.ServiceProvider.GetService<Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System>();
-
                     connectionString = context.Database.GetDbConnection().ConnectionString;
 
                     log.LogInformation("Migrating the database ...");
@@ -299,7 +261,7 @@ namespace Gov.Lclb.Cllb.Public
                     // run the database seeders
                     log.LogInformation("Adding/Updating seed data ...");
 
-                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, system, distributedCache);
+                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory);
                     seederFactory.Seed((AppDbContext)context);
                     log.LogInformation("Seeding operations are complete.");
                 }
@@ -315,29 +277,29 @@ namespace Gov.Lclb.Cllb.Public
                 log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
             }
 
-            
+
             string pathBase = Configuration["BASE_PATH"];
-            if (! string.IsNullOrEmpty(pathBase))
+
+            if (!string.IsNullOrEmpty(pathBase))
             {
                 app.UsePathBase(pathBase);
-            }            
-            if (! env.IsProduction())
+            }
+            if (!env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-
-                app.Use(async (ctx, next) =>
-                {
-                    ctx.Response.Headers.Add("Content-Security-Policy",
-                                             "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
-                    await next();
-                });
-                //"script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
                 app.UseExceptionHandler("/Home/Error");
             }
-            
+
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Content-Security-Policy",
+                                         "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
+                ctx.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+                await next();
+            });
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());
 
@@ -350,9 +312,8 @@ namespace Gov.Lclb.Cllb.Public
                 ctx.Context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
                 ctx.Context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
                 ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-                ctx.Context.Response.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com";
             };
-            
+
             app.UseStaticFiles(staticFileOptions);
             app.UseSpaStaticFiles(staticFileOptions);
             app.UseXXssProtection(options => options.EnabledWithBlockMode());
@@ -366,7 +327,6 @@ namespace Gov.Lclb.Cllb.Public
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
-            
 
             app.UseSpa(spa =>
             {
@@ -380,7 +340,7 @@ namespace Gov.Lclb.Cllb.Public
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
-            });                        
+            });
 
         }
     }

@@ -1,8 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,8 +19,6 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
-        private readonly Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System _system;
-        private readonly IDistributedCache _distributedCache;
 
         private readonly List<Seeder<T>> _seederInstances = new List<Seeder<T>>();
 
@@ -33,16 +28,13 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// <param name="configuration"></param>
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
-        public SeedFactory(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, Gov.Lclb.Cllb.Interfaces.Microsoft.Dynamics.CRM.System system, IDistributedCache distributedCache)
+        public SeedFactory(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             _env = env;
             _loggerFactory = loggerFactory;
             _logger = _loggerFactory.CreateLogger(typeof(SeedFactory<T>));
             _configuration = configuration;
-
-            _system = system;
-            _distributedCache = distributedCache;
-
+        
             LoadSeeders();
             _seederInstances.Sort(new SeederComparer<T>());
         }
@@ -56,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             foreach (Type type in types)
             {
                 _logger.LogDebug($"\tCreating instance of {type.Name}...");
-                _seederInstances.Add((Seeder<T>)Activator.CreateInstance(type, _configuration, _env, _loggerFactory, _system, _distributedCache));
+                _seederInstances.Add((Seeder<T>)Activator.CreateInstance(type, _configuration, _env, _loggerFactory));
             }
 
             _logger.LogDebug($"\tA total of {types.Count} seeders loaded.");
