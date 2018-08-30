@@ -12,4 +12,9 @@ export interface Worker {
     email: string;
     selfdisclosure: string;
     triggerphs: string;
+    bCIDCardNumber: string;
+    contactId: string;
+    paymentReceived: boolean;
+    paymentReceivedDate: Date;
+    workerId: string;
 }
