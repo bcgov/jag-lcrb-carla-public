@@ -27,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMConstraintRelation class.
         /// </summary>
-        public MicrosoftDynamicsCRMConstraintRelation(string constraintType = default(string), string constraints = default(string), string objectId = default(string))
+        public MicrosoftDynamicsCRMConstraintRelation(string objectId = default(string), string constraintType = default(string), string constraints = default(string))
         {
+            ObjectId = objectId;
             ConstraintType = constraintType;
             Constraints = constraints;
-            ObjectId = objectId;
             CustomInit();
         }
 
@@ -42,6 +42,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ObjectId")]
+        public string ObjectId { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ConstraintType")]
         public string ConstraintType { get; set; }
 
@@ -49,11 +54,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Constraints")]
         public string Constraints { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ObjectId")]
-        public string ObjectId { get; set; }
 
     }
 }

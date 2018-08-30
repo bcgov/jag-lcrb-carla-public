@@ -24,22 +24,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMManyToManyRelationshipMetadata class.
         /// </summary>
-        /// <param name="relationshipType">Possible values include:
-        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
         /// <param name="securityTypes">Possible values include: 'None',
         /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
-        public MicrosoftDynamicsCRMManyToManyRelationshipMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), string introducedVersion = default(string), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), bool? isValidForAdvancedFind = default(bool?), string relationshipType = default(string), string schemaName = default(string), string securityTypes = default(string), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity1AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), string entity1IntersectAttribute = default(string), string entity1LogicalName = default(string), string entity1NavigationPropertyName = default(string), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity2AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), string entity2IntersectAttribute = default(string), string entity2LogicalName = default(string), string entity2NavigationPropertyName = default(string), string intersectEntityName = default(string))
-            : base(hasChanged, metadataId, introducedVersion, isCustomRelationship, isCustomizable, isManaged, isValidForAdvancedFind, relationshipType, schemaName, securityTypes)
+        /// <param name="relationshipType">Possible values include:
+        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
+        public MicrosoftDynamicsCRMManyToManyRelationshipMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity1AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity2AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), string entity1LogicalName = default(string), string entity2LogicalName = default(string), string intersectEntityName = default(string), string entity1IntersectAttribute = default(string), string entity2IntersectAttribute = default(string), string entity1NavigationPropertyName = default(string), string entity2NavigationPropertyName = default(string))
+            : base(metadataId, hasChanged, isCustomRelationship, isCustomizable, isValidForAdvancedFind, schemaName, securityTypes, isManaged, relationshipType, introducedVersion)
         {
             Entity1AssociatedMenuConfiguration = entity1AssociatedMenuConfiguration;
-            Entity1IntersectAttribute = entity1IntersectAttribute;
-            Entity1LogicalName = entity1LogicalName;
-            Entity1NavigationPropertyName = entity1NavigationPropertyName;
             Entity2AssociatedMenuConfiguration = entity2AssociatedMenuConfiguration;
-            Entity2IntersectAttribute = entity2IntersectAttribute;
+            Entity1LogicalName = entity1LogicalName;
             Entity2LogicalName = entity2LogicalName;
-            Entity2NavigationPropertyName = entity2NavigationPropertyName;
             IntersectEntityName = intersectEntityName;
+            Entity1IntersectAttribute = entity1IntersectAttribute;
+            Entity2IntersectAttribute = entity2IntersectAttribute;
+            Entity1NavigationPropertyName = entity1NavigationPropertyName;
+            Entity2NavigationPropertyName = entity2NavigationPropertyName;
             CustomInit();
         }
 
@@ -55,8 +55,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Entity1IntersectAttribute")]
-        public string Entity1IntersectAttribute { get; set; }
+        [JsonProperty(PropertyName = "Entity2AssociatedMenuConfiguration")]
+        public MicrosoftDynamicsCRMAssociatedMenuConfiguration Entity2AssociatedMenuConfiguration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -65,13 +65,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Entity1NavigationPropertyName")]
-        public string Entity1NavigationPropertyName { get; set; }
+        [JsonProperty(PropertyName = "Entity2LogicalName")]
+        public string Entity2LogicalName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Entity2AssociatedMenuConfiguration")]
-        public MicrosoftDynamicsCRMAssociatedMenuConfiguration Entity2AssociatedMenuConfiguration { get; set; }
+        [JsonProperty(PropertyName = "IntersectEntityName")]
+        public string IntersectEntityName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Entity1IntersectAttribute")]
+        public string Entity1IntersectAttribute { get; set; }
 
         /// <summary>
         /// </summary>
@@ -80,18 +85,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Entity2LogicalName")]
-        public string Entity2LogicalName { get; set; }
+        [JsonProperty(PropertyName = "Entity1NavigationPropertyName")]
+        public string Entity1NavigationPropertyName { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Entity2NavigationPropertyName")]
         public string Entity2NavigationPropertyName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IntersectEntityName")]
-        public string IntersectEntityName { get; set; }
 
     }
 }

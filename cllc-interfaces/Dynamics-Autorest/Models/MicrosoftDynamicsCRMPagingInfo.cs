@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMPagingInfo
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMPagingInfo(int? count = default(int?), int? pageNumber = default(int?), string pagingCookie = default(string), bool? returnTotalRecordCount = default(bool?))
+        public MicrosoftDynamicsCRMPagingInfo(int? pageNumber = default(int?), int? count = default(int?), bool? returnTotalRecordCount = default(bool?), string pagingCookie = default(string))
         {
-            Count = count;
             PageNumber = pageNumber;
-            PagingCookie = pagingCookie;
+            Count = count;
             ReturnTotalRecordCount = returnTotalRecordCount;
+            PagingCookie = pagingCookie;
             CustomInit();
         }
 
@@ -43,23 +43,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Count")]
-        public int? Count { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "PageNumber")]
         public int? PageNumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "PagingCookie")]
-        public string PagingCookie { get; set; }
+        [JsonProperty(PropertyName = "Count")]
+        public int? Count { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ReturnTotalRecordCount")]
         public bool? ReturnTotalRecordCount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "PagingCookie")]
+        public string PagingCookie { get; set; }
 
     }
 }

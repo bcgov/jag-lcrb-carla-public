@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle(string adoxioLicencetypeid = default(string), string knowledgearticleid = default(string), string msdynAdoxioLicencetypeKnowledgearticleid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle(string versionnumber = default(string), string msdynAdoxioLicencetypeKnowledgearticleid = default(string), string knowledgearticleid = default(string), string adoxioLicencetypeid = default(string))
         {
-            AdoxioLicencetypeid = adoxioLicencetypeid;
-            Knowledgearticleid = knowledgearticleid;
-            MsdynAdoxioLicencetypeKnowledgearticleid = msdynAdoxioLicencetypeKnowledgearticleid;
             Versionnumber = versionnumber;
+            MsdynAdoxioLicencetypeKnowledgearticleid = msdynAdoxioLicencetypeKnowledgearticleid;
+            Knowledgearticleid = knowledgearticleid;
+            AdoxioLicencetypeid = adoxioLicencetypeid;
             CustomInit();
         }
 
@@ -40,13 +40,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticleid")]
-        public string Knowledgearticleid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +50,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "knowledgearticleid")]
+        public string Knowledgearticleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
     }
 }

@@ -24,8 +24,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMStatusOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMStatusOptionMetadata(string color = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), bool? hasChanged = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMLabel label = default(MicrosoftDynamicsCRMLabel), string metadataId = default(string), int? value = default(int?), int? state = default(int?), string transitionData = default(string))
-            : base(color, description, hasChanged, isManaged, label, metadataId, value)
+        public MicrosoftDynamicsCRMStatusOptionMetadata(int? value = default(int?), MicrosoftDynamicsCRMLabel label = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?), int? state = default(int?), string transitionData = default(string))
+            : base(value, label, description, color, isManaged, metadataId, hasChanged)
         {
             State = state;
             TransitionData = transitionData;

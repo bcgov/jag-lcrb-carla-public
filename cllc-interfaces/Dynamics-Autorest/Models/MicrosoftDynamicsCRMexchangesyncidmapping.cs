@@ -24,33 +24,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMexchangesyncidmapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMexchangesyncidmapping(string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string exchangeentryid = default(string), string exchangesyncidmappingid = default(string), int? fromcrmchangetype = default(int?), bool? isdeletedinexchange = default(bool?), bool? isunlinkedincrm = default(bool?), string itemsubject = default(string), string lastsyncerror = default(string), int? lastsyncerrorcode = default(int?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string objectid = default(string), int? objecttypecode = default(int?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), int? retries = default(int?), int? tocrmchangetype = default(int?), int? userdecision = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMexchangesyncidmapping(int? objecttypecode = default(int?), object modifiedon = default(object), object lastsyncerroroccurredon = default(object), string objectid = default(string), string _owninguserValue = default(string), int? tocrmchangetype = default(int?), int? retries = default(int?), string itemsubject = default(string), bool? isdeletedinexchange = default(bool?), string versionnumber = default(string), int? lastsyncerrorcode = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? isunlinkedincrm = default(bool?), string _owningteamValue = default(string), string exchangesyncidmappingid = default(string), int? fromcrmchangetype = default(int?), int? userdecision = default(int?), string exchangeentryid = default(string), string lastsyncerror = default(string), object createdon = default(object), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
+            Objecttypecode = objecttypecode;
+            Modifiedon = modifiedon;
+            Lastsyncerroroccurredon = lastsyncerroroccurredon;
+            Objectid = objectid;
             this._owninguserValue = _owninguserValue;
-            Createdon = createdon;
-            Exchangeentryid = exchangeentryid;
+            Tocrmchangetype = tocrmchangetype;
+            Retries = retries;
+            Itemsubject = itemsubject;
+            Isdeletedinexchange = isdeletedinexchange;
+            Versionnumber = versionnumber;
+            Lastsyncerrorcode = lastsyncerrorcode;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._owneridValue = _owneridValue;
+            Isunlinkedincrm = isunlinkedincrm;
+            this._owningteamValue = _owningteamValue;
             Exchangesyncidmappingid = exchangesyncidmappingid;
             Fromcrmchangetype = fromcrmchangetype;
-            Isdeletedinexchange = isdeletedinexchange;
-            Isunlinkedincrm = isunlinkedincrm;
-            Itemsubject = itemsubject;
+            Userdecision = userdecision;
+            Exchangeentryid = exchangeentryid;
             Lastsyncerror = lastsyncerror;
-            Lastsyncerrorcode = lastsyncerrorcode;
-            Lastsyncerroroccurredon = lastsyncerroroccurredon;
-            Modifiedon = modifiedon;
-            Objectid = objectid;
-            Objecttypecode = objecttypecode;
+            Createdon = createdon;
+            Owninguser = owninguser;
+            Owningteam = owningteam;
             Ownerid = ownerid;
             Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Retries = retries;
-            Tocrmchangetype = tocrmchangetype;
-            Userdecision = userdecision;
-            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -61,18 +61,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public int? Objecttypecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public object Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "lastsyncerroroccurredon")]
+        public object Lastsyncerroroccurredon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid")]
+        public string Objectid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -81,13 +86,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "tocrmchangetype")]
+        public int? Tocrmchangetype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangeentryid")]
-        public string Exchangeentryid { get; set; }
+        [JsonProperty(PropertyName = "retries")]
+        public int? Retries { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "itemsubject")]
+        public string Itemsubject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isdeletedinexchange")]
+        public bool? Isdeletedinexchange { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastsyncerrorcode")]
+        public int? Lastsyncerrorcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isunlinkedincrm")]
+        public bool? Isunlinkedincrm { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -101,18 +146,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isdeletedinexchange")]
-        public bool? Isdeletedinexchange { get; set; }
+        [JsonProperty(PropertyName = "userdecision")]
+        public int? Userdecision { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isunlinkedincrm")]
-        public bool? Isunlinkedincrm { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "itemsubject")]
-        public string Itemsubject { get; set; }
+        [JsonProperty(PropertyName = "exchangeentryid")]
+        public string Exchangeentryid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -121,28 +161,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastsyncerrorcode")]
-        public int? Lastsyncerrorcode { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastsyncerroroccurredon")]
-        public System.DateTimeOffset? Lastsyncerroroccurredon { get; set; }
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid")]
-        public string Objectid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public int? Objecttypecode { get; set; }
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
 
         /// <summary>
         /// </summary>
@@ -153,36 +183,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
         public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "retries")]
-        public int? Retries { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "tocrmchangetype")]
-        public int? Tocrmchangetype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "userdecision")]
-        public int? Userdecision { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
 
     }
 }
