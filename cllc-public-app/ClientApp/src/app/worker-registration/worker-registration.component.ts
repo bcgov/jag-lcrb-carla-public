@@ -107,14 +107,14 @@ export class WorkerRegistrationComponent implements OnInit {
 
   createAddress() {
     return this.fb.group({
-      adoxio_name: ['', Validators.required],
-      adoxio_streetaddress: ['', Validators.required],
-      adoxio_city: ['', Validators.required],
-      adoxio_provstate: ['', Validators.required],
-      adoxio_country: ['', Validators.required],
-      adoxio_postalcode: ['', Validators.required],
-      adoxio_fromdate: ['', Validators.required],
-      adoxio_todate: ['', Validators.required]
+      name: ['', Validators.required],
+      streetaddress: ['', Validators.required],
+      city: ['', Validators.required],
+      provstate: ['', Validators.required],
+      country: ['', Validators.required],
+      postalcode: ['', Validators.required],
+      fromdate: ['', Validators.required],
+      todate: ['', Validators.required]
     });
   }
 
