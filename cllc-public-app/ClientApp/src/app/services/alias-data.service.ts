@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { AdoxioAlias } from '../models/adoxio-alias.model';
+import { Alias } from '../models/alias.model';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 
@@ -21,7 +21,7 @@ export class AliasDataService {
    */
   getAlias(accountId: string) {
     const apiPath = `api/alias/${accountId}`;
-    return this.http.get<AdoxioAlias>(apiPath, { headers: this.headers })
+    return this.http.get<Alias>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError("getAlias", null)));
   }
 
@@ -30,7 +30,7 @@ export class AliasDataService {
    * @param data - legal entity data
    */
   createAlias(data: any) {
-    return this.http.post<AdoxioAlias>('api/alias/', data, { headers: this.headers })
+    return this.http.post<Alias>('api/alias/', data, { headers: this.headers })
       .pipe(catchError(this.handleError("createAlias", null)));
   }
 
@@ -39,7 +39,7 @@ export class AliasDataService {
    * @param data - legal entity data
    */
   updateAlias(data: any, id: string) {
-    return this.http.put<AdoxioAlias>(`api/alias/${id}`, data, { headers: this.headers })
+    return this.http.put<Alias>(`api/alias/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError("updateAlias", null)));
   }
 
@@ -48,7 +48,7 @@ export class AliasDataService {
    * @param data - legal entity data
    */
   deleteAlias(id: string) {
-    return this.http.post<AdoxioAlias>(`api/alias/${id}/delete`, {}, { headers: this.headers })
+    return this.http.post<Alias>(`api/alias/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError("deleteAlias", null)));
   }
 

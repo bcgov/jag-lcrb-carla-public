@@ -26,7 +26,7 @@ describe('Submit application component test', () => {
         
         submitApplicationPage.waitForApplicationPage();
         expect(submitApplicationPage.getHeading('h1')).toEqual('Submit the Cannabis Retail Store Licence Application');
-
+ 
         /*
         Ticket LCSD-107
         Test plan/results of manual test:
