@@ -97,7 +97,7 @@ export class WorkerRegistrationComponent implements OnInit {
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
-      this.busy = this.contactDataService.createContact(contact).subscribe(res => {
+      this.busy = this.contactDataService.createWorkerContact(contact).subscribe(res => {
         this.reloadUser();
       }, error => alert('Failed to create contact'));
     } else {
