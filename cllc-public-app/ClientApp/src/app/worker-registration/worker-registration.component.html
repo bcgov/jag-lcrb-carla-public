@@ -225,8 +225,7 @@
           <label>Gender</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="gender">
-          <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched" class="alert alert-danger"
-            style="width: 250px;">
+          <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched" class="alert alert-danger" style="width: 250px;">
             <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched ">
               This is required
             </div>
@@ -264,8 +263,8 @@
           <label>BC ID Card Number</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="bcidcardnumber">
-          <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched"
-            class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched" class="alert alert-danger"
+            style="width: 250px;">
             <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched ">
               This is required
             </div>
@@ -290,8 +289,7 @@
           <label>Email</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="email">
-          <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="alert alert-danger"
-            style="width: 250px;">
+          <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="alert alert-danger" style="width: 250px;">
             <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched ">
               This is required
             </div>
@@ -303,8 +301,8 @@
           <label>Self Disclosure</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="selfdisclosure">
-          <div *ngIf="!this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched"
-            class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="!this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched" class="alert alert-danger"
+            style="width: 250px;">
             <div *ngIf="!this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched ">
               This is required
             </div>
@@ -376,7 +374,8 @@
         <div [formGroupName]="i">
           <h3>Address {{i + 1}}</h3>
           <section>
-            <button *ngIf="addresses.controls.length > 1" class="btn btn-primary" (click)="deleteAddress(i)">Delete previous address</button>
+            <button *ngIf="addresses.controls.length > 1" class="btn btn-primary" (click)="deleteAddress(i)">Delete previous
+              address</button>
             <div [ngClass]="{'has-error': !address.get('name').valid && address.get('name').touched}">
               <label>Name</label>
               <br />
@@ -393,8 +392,7 @@
               <label>Street Address</label>
               <br />
               <input class="form-control" style="width: 250px;" type="text" formControlName="streetaddress">
-              <div *ngIf="!address.get('streetaddress').valid && address.get('streetaddress').touched" class="alert alert-danger"
-                style="width: 250px;">
+              <div *ngIf="!address.get('streetaddress').valid && address.get('streetaddress').touched" class="alert alert-danger" style="width: 250px;">
                 <div *ngIf="!address.get('streetaddress').valid && address.get('streetaddress').touched ">
                   This is required
                 </div>
@@ -418,8 +416,7 @@
               <label>Province / State</label>
               <br />
               <input class="form-control" style="width: 250px;" type="text" formControlName="provstate">
-              <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched" class="alert alert-danger"
-                style="width: 250px;">
+              <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched" class="alert alert-danger" style="width: 250px;">
                 <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched ">
                   This is required
                 </div>
@@ -443,8 +440,7 @@
               <label>Postal / Zip Code</label>
               <br />
               <input class="form-control" style="width: 250px;" type="text" formControlName="postalcode">
-              <div *ngIf="!address.get('postalcode').valid && address.get('postalcode').touched" class="alert alert-danger"
-                style="width: 250px;">
+              <div *ngIf="!address.get('postalcode').valid && address.get('postalcode').touched" class="alert alert-danger" style="width: 250px;">
                 <div *ngIf="!address.get('postalcode').valid && address.get('postalcode').touched ">
                   This is required
                 </div>
@@ -489,7 +485,7 @@
           Is this correct?
         </p>
         <div class="row">
-          <!-- <div class="col-md-12 text-left">
+          <div class="col-md-12 text-left">
             <button class="btn btn-primary" (click)="confirmContact(true)">
               <strong>Yes</strong>
             </button>
@@ -497,9 +493,31 @@
               <strong>No</strong>
             </button>
             <br>
-          </div> -->
+          </div>
         </div>
       </div>
     </section>
   </div>
+  <section *ngIf="isNewUser">
+    <h2>Please confirm the name associated with the BC Service card login provided.</h2>
+    <div>
+      <p>
+        <b>{{currentUser.name}}</b>
+      </p>
+      <p>
+        Is this correct?
+      </p>
+      <div class="row">
+        <div class="col-md-12 text-left">
+          <button class="btn btn-primary" (click)="confirmContact(true)">
+            <strong>Yes</strong>
+          </button>
+          <button class="btn btn-secondary" (click)="confirmContact(false)">
+            <strong>No</strong>
+          </button>
+          <br>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
