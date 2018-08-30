@@ -27,16 +27,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMComponentDetail class.
         /// </summary>
-        public MicrosoftDynamicsCRMComponentDetail(string displayName = default(string), string id = default(string), string parentDisplayName = default(string), string parentId = default(string), string parentSchemaName = default(string), string schemaName = default(string), string solution = default(string), int? type = default(int?))
+        public MicrosoftDynamicsCRMComponentDetail(int? type = default(int?), string schemaName = default(string), string displayName = default(string), string id = default(string), string parentSchemaName = default(string), string parentDisplayName = default(string), string parentId = default(string), string solution = default(string))
         {
+            Type = type;
+            SchemaName = schemaName;
             DisplayName = displayName;
             Id = id;
+            ParentSchemaName = parentSchemaName;
             ParentDisplayName = parentDisplayName;
             ParentId = parentId;
-            ParentSchemaName = parentSchemaName;
-            SchemaName = schemaName;
             Solution = solution;
-            Type = type;
             CustomInit();
         }
 
@@ -44,6 +44,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Type")]
+        public int? Type { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SchemaName")]
+        public string SchemaName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -57,6 +67,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ParentSchemaName")]
+        public string ParentSchemaName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ParentDisplayName")]
         public string ParentDisplayName { get; set; }
 
@@ -67,23 +82,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ParentSchemaName")]
-        public string ParentSchemaName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "SchemaName")]
-        public string SchemaName { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "Solution")]
         public string Solution { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Type")]
-        public int? Type { get; set; }
 
     }
 }

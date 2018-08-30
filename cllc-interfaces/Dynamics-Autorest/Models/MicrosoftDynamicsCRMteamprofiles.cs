@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMteamprofiles
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMteamprofiles(string fieldsecurityprofileid = default(string), string teamid = default(string), string teamprofileid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMteamprofiles(string teamprofileid = default(string), string versionnumber = default(string), string teamid = default(string), string fieldsecurityprofileid = default(string))
         {
-            Fieldsecurityprofileid = fieldsecurityprofileid;
-            Teamid = teamid;
             Teamprofileid = teamprofileid;
             Versionnumber = versionnumber;
+            Teamid = teamid;
+            Fieldsecurityprofileid = fieldsecurityprofileid;
             CustomInit();
         }
 
@@ -40,8 +40,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fieldsecurityprofileid")]
-        public string Fieldsecurityprofileid { get; set; }
+        [JsonProperty(PropertyName = "teamprofileid")]
+        public string Teamprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -50,13 +55,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "teamprofileid")]
-        public string Teamprofileid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "fieldsecurityprofileid")]
+        public string Fieldsecurityprofileid { get; set; }
 
     }
 }

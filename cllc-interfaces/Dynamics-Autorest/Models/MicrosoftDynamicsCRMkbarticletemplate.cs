@@ -26,41 +26,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMkbarticletemplate class.
         /// </summary>
-        public MicrosoftDynamicsCRMkbarticletemplate(IList<MicrosoftDynamicsCRMasyncoperation> kbArticleTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> kbArticleTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), string formatxml = default(string), int? importsequencenumber = default(int?), string introducedversion = default(string), bool? isactive = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMkbarticle> kbArticleTemplateKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), string kbarticletemplateid = default(string), string kbarticletemplateidunique = default(string), int? languagecode = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string structurexml = default(string), string title = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMkbarticletemplate(int? componentstate = default(int?), object overriddencreatedon = default(object), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string description = default(string), string introducedversion = default(string), string _modifiedbyValue = default(string), object modifiedon = default(object), object overwritetime = default(object), string solutionid = default(string), string structurexml = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string title = default(string), object createdon = default(object), int? importsequencenumber = default(int?), string kbarticletemplateidunique = default(string), int? languagecode = default(int?), string kbarticletemplateid = default(string), bool? isactive = default(bool?), string formatxml = default(string), bool? ismanaged = default(bool?), string _organizationidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMkbarticle> kbArticleTemplateKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> kbArticleTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            KbArticleTemplateAsyncOperations = kbArticleTemplateAsyncOperations;
-            KbArticleTemplateBulkDeleteFailures = kbArticleTemplateBulkDeleteFailures;
-            KbArticleTemplateSyncErrors = kbArticleTemplateSyncErrors;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
             Componentstate = componentstate;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
-            Formatxml = formatxml;
-            Importsequencenumber = importsequencenumber;
-            Introducedversion = introducedversion;
-            Isactive = isactive;
-            Iscustomizable = iscustomizable;
-            Ismanaged = ismanaged;
-            KbArticleTemplateKbArticles = kbArticleTemplateKbArticles;
-            Kbarticletemplateid = kbarticletemplateid;
-            Kbarticletemplateidunique = kbarticletemplateidunique;
-            Languagecode = languagecode;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Organizationid = organizationid;
             Overriddencreatedon = overriddencreatedon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Iscustomizable = iscustomizable;
+            Description = description;
+            Introducedversion = introducedversion;
+            this._modifiedbyValue = _modifiedbyValue;
+            Modifiedon = modifiedon;
             Overwritetime = overwritetime;
             Solutionid = solutionid;
             Structurexml = structurexml;
-            Title = title;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
+            Title = title;
+            Createdon = createdon;
+            Importsequencenumber = importsequencenumber;
+            Kbarticletemplateidunique = kbarticletemplateidunique;
+            Languagecode = languagecode;
+            Kbarticletemplateid = kbarticletemplateid;
+            Isactive = isactive;
+            Formatxml = formatxml;
+            Ismanaged = ismanaged;
+            this._organizationidValue = _organizationidValue;
+            this._createdbyValue = _createdbyValue;
+            Createdby = createdby;
+            KbArticleTemplateAsyncOperations = kbArticleTemplateAsyncOperations;
+            KbArticleTemplateKbArticles = kbArticleTemplateKbArticles;
+            Createdonbehalfby = createdonbehalfby;
+            KbArticleTemplateSyncErrors = kbArticleTemplateSyncErrors;
+            KbArticleTemplateBulkDeleteFailures = kbArticleTemplateBulkDeleteFailures;
+            Organizationid = organizationid;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Modifiedby = modifiedby;
             CustomInit();
         }
 
@@ -71,23 +71,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "KbArticleTemplate_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> KbArticleTemplateAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "KbArticleTemplate_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> KbArticleTemplateBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "KbArticleTemplate_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> KbArticleTemplateSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public object Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -96,38 +86,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -136,83 +96,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "formatxml")]
-        public string Formatxml { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isactive")]
-        public bool? Isactive { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "kb_article_template_kb_articles")]
-        public IList<MicrosoftDynamicsCRMkbarticle> KbArticleTemplateKbArticles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "kbarticletemplateid")]
-        public string Kbarticletemplateid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "kbarticletemplateidunique")]
-        public string Kbarticletemplateidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "languagecode")]
-        public int? Languagecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        public object Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        public object Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -226,13 +126,113 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public object Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "kbarticletemplateidunique")]
+        public string Kbarticletemplateidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "languagecode")]
+        public int? Languagecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "kbarticletemplateid")]
+        public string Kbarticletemplateid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isactive")]
+        public bool? Isactive { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "formatxml")]
+        public string Formatxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "KbArticleTemplate_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> KbArticleTemplateAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "kb_article_template_kb_articles")]
+        public IList<MicrosoftDynamicsCRMkbarticle> KbArticleTemplateKbArticles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "KbArticleTemplate_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> KbArticleTemplateSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "KbArticleTemplate_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> KbArticleTemplateBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
     }
 }

@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMincidentknowledgebaserecord class.
         /// </summary>
-        public MicrosoftDynamicsCRMincidentknowledgebaserecord(string incidentid = default(string), string incidentknowledgebaserecordid = default(string), string knowledgebaserecordid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMincidentknowledgebaserecord(string knowledgebaserecordid = default(string), string incidentid = default(string), string versionnumber = default(string), string incidentknowledgebaserecordid = default(string))
         {
-            Incidentid = incidentid;
-            Incidentknowledgebaserecordid = incidentknowledgebaserecordid;
             Knowledgebaserecordid = knowledgebaserecordid;
+            Incidentid = incidentid;
             Versionnumber = versionnumber;
+            Incidentknowledgebaserecordid = incidentknowledgebaserecordid;
             CustomInit();
         }
 
@@ -40,23 +40,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "incidentid")]
-        public string Incidentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "incidentknowledgebaserecordid")]
-        public string Incidentknowledgebaserecordid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "knowledgebaserecordid")]
         public string Knowledgebaserecordid { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "incidentid")]
+        public string Incidentid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "incidentknowledgebaserecordid")]
+        public string Incidentknowledgebaserecordid { get; set; }
 
     }
 }

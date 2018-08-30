@@ -31,11 +31,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="severity">Possible values include: 'None', 'Error',
         /// 'Warning', 'Information', 'UserDefined'</param>
-        public MicrosoftDynamicsCRMBusinessNotification(string message = default(string), IList<MicrosoftDynamicsCRMBusinessNotificationParameter> parameters = default(IList<MicrosoftDynamicsCRMBusinessNotificationParameter>), string severity = default(string))
+        public MicrosoftDynamicsCRMBusinessNotification(string severity = default(string), string message = default(string), IList<MicrosoftDynamicsCRMBusinessNotificationParameter> parameters = default(IList<MicrosoftDynamicsCRMBusinessNotificationParameter>))
         {
+            Severity = severity;
             Message = message;
             Parameters = parameters;
-            Severity = severity;
             CustomInit();
         }
 
@@ -43,6 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// Gets or sets possible values include: 'None', 'Error', 'Warning',
+        /// 'Information', 'UserDefined'
+        /// </summary>
+        [JsonProperty(PropertyName = "Severity")]
+        public string Severity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,13 +60,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Parameters")]
         public IList<MicrosoftDynamicsCRMBusinessNotificationParameter> Parameters { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'None', 'Error', 'Warning',
-        /// 'Information', 'UserDefined'
-        /// </summary>
-        [JsonProperty(PropertyName = "Severity")]
-        public string Severity { get; set; }
 
     }
 }
