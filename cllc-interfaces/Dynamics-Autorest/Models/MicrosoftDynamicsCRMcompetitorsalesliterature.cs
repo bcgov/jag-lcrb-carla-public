@@ -24,12 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcompetitorsalesliterature class.
         /// </summary>
-        public MicrosoftDynamicsCRMcompetitorsalesliterature(string competitorid = default(string), string competitorsalesliteratureid = default(string), string salesliteratureid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcompetitorsalesliterature(string competitorid = default(string), string salesliteratureid = default(string), string versionnumber = default(string), string competitorsalesliteratureid = default(string))
         {
             Competitorid = competitorid;
-            Competitorsalesliteratureid = competitorsalesliteratureid;
             Salesliteratureid = salesliteratureid;
             Versionnumber = versionnumber;
+            Competitorsalesliteratureid = competitorsalesliteratureid;
             CustomInit();
         }
 
@@ -45,18 +45,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "competitorsalesliteratureid")]
-        public string Competitorsalesliteratureid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "salesliteratureid")]
         public string Salesliteratureid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitorsalesliteratureid")]
+        public string Competitorsalesliteratureid { get; set; }
 
     }
 }

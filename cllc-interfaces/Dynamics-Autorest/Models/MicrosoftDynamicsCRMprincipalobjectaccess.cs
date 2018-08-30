@@ -24,19 +24,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMprincipalobjectaccess class.
         /// </summary>
-        public MicrosoftDynamicsCRMprincipalobjectaccess(int? accessrightsmask = default(int?), System.DateTimeOffset? changedon = default(System.DateTimeOffset?), int? inheritedaccessrightsmask = default(int?), string objectid = default(string), string objecttypecode = default(string), string principalid = default(string), string principalobjectaccessid = default(string), string principaltypecode = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMprincipalobjectaccess(int? inheritedaccessrightsmask = default(int?), string versionnumber = default(string), int? accessrightsmask = default(int?), string principaltypecode = default(string), int? timezoneruleversionnumber = default(int?), object changedon = default(object), string objecttypecode = default(string), string principalid = default(string), int? utcconversiontimezonecode = default(int?), string principalobjectaccessid = default(string), string objectid = default(string))
         {
-            Accessrightsmask = accessrightsmask;
-            Changedon = changedon;
             Inheritedaccessrightsmask = inheritedaccessrightsmask;
-            Objectid = objectid;
-            Objecttypecode = objecttypecode;
-            Principalid = principalid;
-            Principalobjectaccessid = principalobjectaccessid;
+            Versionnumber = versionnumber;
+            Accessrightsmask = accessrightsmask;
             Principaltypecode = principaltypecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            Changedon = changedon;
+            Objecttypecode = objecttypecode;
+            Principalid = principalid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            Principalobjectaccessid = principalobjectaccessid;
+            Objectid = objectid;
             CustomInit();
         }
 
@@ -47,38 +47,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "accessrightsmask")]
-        public int? Accessrightsmask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "changedon")]
-        public System.DateTimeOffset? Changedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "inheritedaccessrightsmask")]
         public int? Inheritedaccessrightsmask { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objectid")]
-        public string Objectid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public string Objecttypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "principalid")]
-        public string Principalid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "principalobjectaccessid")]
-        public string Principalobjectaccessid { get; set; }
+        [JsonProperty(PropertyName = "accessrightsmask")]
+        public int? Accessrightsmask { get; set; }
 
         /// <summary>
         /// </summary>
@@ -92,13 +72,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "changedon")]
+        public object Changedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "principalid")]
+        public string Principalid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "principalobjectaccessid")]
+        public string Principalobjectaccessid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid")]
+        public string Objectid { get; set; }
 
     }
 }

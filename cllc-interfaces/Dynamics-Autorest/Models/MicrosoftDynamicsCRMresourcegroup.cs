@@ -26,26 +26,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMresourcegroup
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMresourcegroup(IList<MicrosoftDynamicsCRMasyncoperation> resourceGroupAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceGroupBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> resourceGroupSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _businessunitidValue = default(string), string _organizationidValue = default(string), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), int? grouptypecode = default(int?), string name = default(string), string objecttypecode = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), string resourcegroupid = default(string), MicrosoftDynamicsCRMconstraintbasedgroup resourcegroupidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMteam resourcegroupidTeam = default(MicrosoftDynamicsCRMteam), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMresourcegroup(string resourcegroupid = default(string), string name = default(string), string _organizationidValue = default(string), string versionnumber = default(string), string _businessunitidValue = default(string), string objecttypecode = default(string), int? grouptypecode = default(int?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMconstraintbasedgroup resourcegroupidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceGroupBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMteam resourcegroupidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> resourceGroupSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> resourceGroupAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
-            ResourceGroupAsyncOperations = resourceGroupAsyncOperations;
+            Resourcegroupid = resourcegroupid;
+            Name = name;
+            this._organizationidValue = _organizationidValue;
+            Versionnumber = versionnumber;
+            this._businessunitidValue = _businessunitidValue;
+            Objecttypecode = objecttypecode;
+            Grouptypecode = grouptypecode;
+            Organizationid = organizationid;
+            ResourcegroupConnections2 = resourcegroupConnections2;
+            ResourcegroupConnections1 = resourcegroupConnections1;
+            Businessunitid = businessunitid;
+            ResourcegroupidConstraintbasedgroup = resourcegroupidConstraintbasedgroup;
             ResourceGroupBulkDeleteFailures = resourceGroupBulkDeleteFailures;
             ResourceGroupDuplicateBaseRecord = resourceGroupDuplicateBaseRecord;
+            ResourcegroupidTeam = resourcegroupidTeam;
             ResourceGroupDuplicateMatchingRecord = resourceGroupDuplicateMatchingRecord;
             ResourceGroupSyncErrors = resourceGroupSyncErrors;
-            this._businessunitidValue = _businessunitidValue;
-            this._organizationidValue = _organizationidValue;
-            Businessunitid = businessunitid;
-            Grouptypecode = grouptypecode;
-            Name = name;
-            Objecttypecode = objecttypecode;
-            Organizationid = organizationid;
-            ResourcegroupConnections1 = resourcegroupConnections1;
-            ResourcegroupConnections2 = resourcegroupConnections2;
-            Resourcegroupid = resourcegroupid;
-            ResourcegroupidConstraintbasedgroup = resourcegroupidConstraintbasedgroup;
-            ResourcegroupidTeam = resourcegroupidTeam;
-            Versionnumber = versionnumber;
+            ResourceGroupAsyncOperations = resourceGroupAsyncOperations;
             CustomInit();
         }
 
@@ -56,8 +56,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ResourceGroup_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> ResourceGroupAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "resourcegroupid")]
+        public string Resourcegroupid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_businessunitid_value")]
+        public string _businessunitidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "grouptypecode")]
+        public int? Grouptypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resourcegroup_connections2")]
+        public IList<MicrosoftDynamicsCRMconnection> ResourcegroupConnections2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resourcegroup_connections1")]
+        public IList<MicrosoftDynamicsCRMconnection> ResourcegroupConnections1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "businessunitid")]
+        public MicrosoftDynamicsCRMbusinessunit Businessunitid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resourcegroupid_constraintbasedgroup")]
+        public MicrosoftDynamicsCRMconstraintbasedgroup ResourcegroupidConstraintbasedgroup { get; set; }
 
         /// <summary>
         /// </summary>
@@ -71,6 +126,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "resourcegroupid_team")]
+        public MicrosoftDynamicsCRMteam ResourcegroupidTeam { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ResourceGroup_DuplicateMatchingRecord")]
         public IList<MicrosoftDynamicsCRMduplicaterecord> ResourceGroupDuplicateMatchingRecord { get; set; }
 
@@ -81,68 +141,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "businessunitid")]
-        public MicrosoftDynamicsCRMbusinessunit Businessunitid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "grouptypecode")]
-        public int? Grouptypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public string Objecttypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "resourcegroup_connections1")]
-        public IList<MicrosoftDynamicsCRMconnection> ResourcegroupConnections1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "resourcegroup_connections2")]
-        public IList<MicrosoftDynamicsCRMconnection> ResourcegroupConnections2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "resourcegroupid")]
-        public string Resourcegroupid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "resourcegroupid_constraintbasedgroup")]
-        public MicrosoftDynamicsCRMconstraintbasedgroup ResourcegroupidConstraintbasedgroup { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "resourcegroupid_team")]
-        public MicrosoftDynamicsCRMteam ResourcegroupidTeam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "ResourceGroup_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> ResourceGroupAsyncOperations { get; set; }
 
     }
 }

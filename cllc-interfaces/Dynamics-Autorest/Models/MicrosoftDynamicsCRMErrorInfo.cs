@@ -29,10 +29,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMErrorInfo
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMErrorInfo(string errorCode = default(string), IList<MicrosoftDynamicsCRMResourceInfo> resourceList = default(IList<MicrosoftDynamicsCRMResourceInfo>))
+        public MicrosoftDynamicsCRMErrorInfo(IList<MicrosoftDynamicsCRMResourceInfo> resourceList = default(IList<MicrosoftDynamicsCRMResourceInfo>), string errorCode = default(string))
         {
-            ErrorCode = errorCode;
             ResourceList = resourceList;
+            ErrorCode = errorCode;
             CustomInit();
         }
 
@@ -43,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ErrorCode")]
-        public string ErrorCode { get; set; }
+        [JsonProperty(PropertyName = "ResourceList")]
+        public IList<MicrosoftDynamicsCRMResourceInfo> ResourceList { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ResourceList")]
-        public IList<MicrosoftDynamicsCRMResourceInfo> ResourceList { get; set; }
+        [JsonProperty(PropertyName = "ErrorCode")]
+        public string ErrorCode { get; set; }
 
     }
 }

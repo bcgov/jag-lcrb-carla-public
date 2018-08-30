@@ -24,10 +24,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMMetadataBase
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMMetadataBase(bool? hasChanged = default(bool?), string metadataId = default(string))
+        public MicrosoftDynamicsCRMMetadataBase(string metadataId = default(string), bool? hasChanged = default(bool?))
         {
-            HasChanged = hasChanged;
             MetadataId = metadataId;
+            HasChanged = hasChanged;
             CustomInit();
         }
 
@@ -38,13 +38,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "HasChanged")]
-        public bool? HasChanged { get; set; }
+        [JsonProperty(PropertyName = "MetadataId")]
+        public string MetadataId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "MetadataId")]
-        public string MetadataId { get; set; }
+        [JsonProperty(PropertyName = "HasChanged")]
+        public bool? HasChanged { get; set; }
 
     }
 }

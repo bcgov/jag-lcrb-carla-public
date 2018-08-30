@@ -27,26 +27,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMTimeInfo
         /// class.
         /// </summary>
+        /// <param name="timeCode">Possible values include: 'Available',
+        /// 'Busy', 'Unavailable', 'Filter'</param>
         /// <param name="subCode">Possible values include: 'Unspecified',
         /// 'Schedulable', 'Committed', 'Uncommitted', 'Break', 'Holiday',
         /// 'Vacation', 'Appointment', 'ResourceStartTime',
         /// 'ResourceServiceRestriction', 'ResourceCapacity',
         /// 'ServiceRestriction', 'ServiceCost'</param>
-        /// <param name="timeCode">Possible values include: 'Available',
-        /// 'Busy', 'Unavailable', 'Filter'</param>
-        public MicrosoftDynamicsCRMTimeInfo(int? activityStatusCode = default(int?), string calendarId = default(string), string displayText = default(string), double? effort = default(double?), System.DateTimeOffset? end = default(System.DateTimeOffset?), bool? isActivity = default(bool?), string sourceId = default(string), int? sourceTypeCode = default(int?), System.DateTimeOffset? start = default(System.DateTimeOffset?), string subCode = default(string), string timeCode = default(string))
+        public MicrosoftDynamicsCRMTimeInfo(object start = default(object), object end = default(object), string timeCode = default(string), string subCode = default(string), string sourceId = default(string), string calendarId = default(string), int? sourceTypeCode = default(int?), bool? isActivity = default(bool?), int? activityStatusCode = default(int?), object effort = default(object), string displayText = default(string))
         {
-            ActivityStatusCode = activityStatusCode;
-            CalendarId = calendarId;
-            DisplayText = displayText;
-            Effort = effort;
-            End = end;
-            IsActivity = isActivity;
-            SourceId = sourceId;
-            SourceTypeCode = sourceTypeCode;
             Start = start;
-            SubCode = subCode;
+            End = end;
             TimeCode = timeCode;
+            SubCode = subCode;
+            SourceId = sourceId;
+            CalendarId = calendarId;
+            SourceTypeCode = sourceTypeCode;
+            IsActivity = isActivity;
+            ActivityStatusCode = activityStatusCode;
+            Effort = effort;
+            DisplayText = displayText;
             CustomInit();
         }
 
@@ -57,48 +57,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ActivityStatusCode")]
-        public int? ActivityStatusCode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CalendarId")]
-        public string CalendarId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "DisplayText")]
-        public string DisplayText { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Effort")]
-        public double? Effort { get; set; }
+        [JsonProperty(PropertyName = "Start")]
+        public object Start { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "End")]
-        public System.DateTimeOffset? End { get; set; }
+        public object End { get; set; }
 
         /// <summary>
+        /// Gets or sets possible values include: 'Available', 'Busy',
+        /// 'Unavailable', 'Filter'
         /// </summary>
-        [JsonProperty(PropertyName = "IsActivity")]
-        public bool? IsActivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "SourceId")]
-        public string SourceId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "SourceTypeCode")]
-        public int? SourceTypeCode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Start")]
-        public System.DateTimeOffset? Start { get; set; }
+        [JsonProperty(PropertyName = "TimeCode")]
+        public string TimeCode { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Unspecified', 'Schedulable',
@@ -110,11 +82,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string SubCode { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Available', 'Busy',
-        /// 'Unavailable', 'Filter'
         /// </summary>
-        [JsonProperty(PropertyName = "TimeCode")]
-        public string TimeCode { get; set; }
+        [JsonProperty(PropertyName = "SourceId")]
+        public string SourceId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CalendarId")]
+        public string CalendarId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SourceTypeCode")]
+        public int? SourceTypeCode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsActivity")]
+        public bool? IsActivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ActivityStatusCode")]
+        public int? ActivityStatusCode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Effort")]
+        public object Effort { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DisplayText")]
+        public string DisplayText { get; set; }
 
     }
 }
