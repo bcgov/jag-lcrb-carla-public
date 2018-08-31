@@ -16,5 +16,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string postalcode {get; set;}
         public DateTime fromdate {get; set;}
         public DateTime todate {get; set;}
+        public string contactId { get; set; }
+        public string workerId { get; set; }
     }
 }

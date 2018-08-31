@@ -1,5 +1,5 @@
 export interface PreviousAddress { 
-    name: string;
+    id: string;
     streetaddress: string;
     city: string;
     provstate: string;
