@@ -1,7 +1,10 @@
+import { DynamicsAccount } from "./dynamics-account.model";
+import { Worker } from "./worker.model";
+
 export interface Alias { 
     firstname: string;
     middlename: string;
     lastname: string;
-    workerId: string;
-    contactId: string;
+    worker: Worker;
+    contact: DynamicsAccount;
 }

@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -24,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;            
+            Configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(WorkerController));
@@ -34,22 +36,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Get a specific legal entity
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="contactId"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetContact(string id)
+        [HttpGet("{contactId}")]
+        public async Task<IActionResult> GetWorker(string contactId)
         {
-            ViewModels.Contact result = null;
-                        
-            if (!string.IsNullOrEmpty (id))
-            {
-                Guid contactId = Guid.Parse(id);
-                // query the Dynamics system to get the contact record.
-                MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
+            ViewModels.Worker result = null;
 
-                if (contact != null)
-                {                    
-                    result = contact.ToViewModel();
+            if (!string.IsNullOrEmpty(contactId))
+            {
+                Guid id = Guid.Parse(contactId);
+                // query the Dynamics system to get the contact record.
+                string filter = $"_adoxio_contactid_value eq {contactId}";
+                var fields = new List<string> { "adoxio_ContactId", "" };
+                MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter).Value.FirstOrDefault();
+
+                if (worker != null)
+                {
+                    result = worker.ToViewModel();
                 }
                 else
                 {
@@ -73,15 +77,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
-        {            
+        {
             if (id != null && item.id != null && id != item.id)
             {
                 return BadRequest();
             }
-            
+
             // get the contact
             Guid contactId = Guid.Parse(id);
-            
+
             MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
             if (contact == null)
             {
@@ -100,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
-            }            
+            }
 
             contact = await _dynamicsClient.GetContactById(contactId);
             return Json(contact.ToViewModel());
@@ -119,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-             // first check to see that a contact exists.
+            // first check to see that a contact exists.
             string contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
@@ -134,7 +138,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
-                if(userContact != null){
+                if (userContact != null)
+                {
                     throw new Exception("Contact already Exists");
                 }
             }
@@ -157,13 +162,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //clean externalId    
             var externalId = "";
             var tokens = sanitizedAccountSiteminderId.Split('|');
-            if(tokens.Length > 0) {
+            if (tokens.Length > 0)
+            {
                 externalId = tokens[0];
             }
 
-            if(!string.IsNullOrEmpty(externalId)) {
+            if (!string.IsNullOrEmpty(externalId))
+            {
                 tokens = externalId.Split(':');
-                externalId  = tokens[tokens.Length -1];
+                externalId = tokens[tokens.Length - 1];
             }
 
             contact.AdoxioExternalid = externalId;

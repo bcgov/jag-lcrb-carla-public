@@ -25,9 +25,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
                 result.firstname = alias.AdoxioFirstname;
+                result.middleName = alias.AdoxioMiddlename;
                 result.lastname = alias.AdoxioLastname;
-                result.workerId = alias._adoxioWorkeridValue;
-                result.contactId = alias._adoxioContactidValue;
+                if(alias.AdoxioContactId != null){
+                    result.contact = alias.AdoxioContactId.ToViewModel();
+                }
+                if(alias.AdoxioWorkerId != null){
+                    result.worker = alias.AdoxioWorkerId.ToViewModel();
+                }
             }
             return result;
         }

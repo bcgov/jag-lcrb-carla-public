@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -34,22 +36,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Get a specific legal entity
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="contactId"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetContact(string id)
+        [HttpGet("by-contactid/{contactId}")]
+        public async Task<IActionResult> GetAliasByContactId(string contactId)
         {
-            ViewModels.Contact result = null;
-                        
-            if (!string.IsNullOrEmpty (id))
-            {
-                Guid contactId = Guid.Parse(id);
-                // query the Dynamics system to get the contact record.
-                MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
+             ViewModels.Alias result = null;
 
-                if (contact != null)
-                {                    
-                    result = contact.ToViewModel();
+            if (!string.IsNullOrEmpty(contactId))
+            {
+                // query the Dynamics system to get the contact record.
+                string filter = $"_adoxio_contactid_value eq {contactId}";
+                var fields = new List<string> { "adoxio_ContactId", "adoxio_WorkerId" };
+                MicrosoftDynamicsCRMadoxioAlias alias = _dynamicsClient.Aliases.Get(filter: filter, expand: fields).Value.FirstOrDefault();
+
+                if (alias != null)
+                {
+                    result = alias.ToViewModel();
                 }
                 else
                 {

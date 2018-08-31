@@ -8,6 +8,8 @@ import * as CurrentUserActions from '../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 import { Form, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { AliasDataService } from '../services/alias-data.service';
+import { Alias } from '../models/alias.model';
 
 @Component({
   selector: 'app-worker-registration',
@@ -18,7 +20,7 @@ export class WorkerRegistrationComponent implements OnInit {
   currentUser: User;
   isNewUser: boolean;
   dataLoaded = false;
-  contact: DynamicsContact;
+  alias: Alias;
   busy: Subscription;
   form: FormGroup;
 
@@ -28,6 +30,7 @@ export class WorkerRegistrationComponent implements OnInit {
 
   constructor(private userDataService: UserDataService,
     private store: Store<AppState>,
+    private aliasDataService: AliasDataService,
     private contactDataService: ContactDataService,
     private fb: FormBuilder
   ) { }
@@ -81,9 +84,14 @@ export class WorkerRegistrationComponent implements OnInit {
         this.isNewUser = this.currentUser.isNewUser;
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-          this.contactDataService.getContact(this.currentUser.contactid).
+          this.aliasDataService.getAlias(this.currentUser.contactid).
             subscribe(res => {
-              this.contact = res;
+              this.alias = res;
+              this.form.patchValue({
+                alias: this.alias,
+                contact: this.alias.contact,
+                worker: this.alias.worker
+              })
             });
         }
       });
