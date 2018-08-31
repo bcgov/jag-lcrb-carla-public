@@ -263,6 +263,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
             MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
+            MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias();
             contact.CopyValues(item);
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
             contact.Externaluseridentifier = userSettings.UserId;
@@ -285,13 +286,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 worker.AdoxioContactId = contact;
-                MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias()
-                {
-                    AdoxioContactId = contact,
-                    AdoxioWorkerId = worker
-                };
-                worker = await _dynamicsClient.Workers.CreateAsync(worker);
-                contact = await _dynamicsClient.GetContactById(Guid.Parse(worker._adoxioContactidValue.ToString()));
+
+                alias.AdoxioContactId = contact;
+                alias.AdoxioWorkerId = worker;
+                alias = await _dynamicsClient.Aliases.CreateAsync(alias);
+                contact = await _dynamicsClient.GetContactById(Guid.Parse(alias._adoxioContactidValue.ToString()));
             }
             catch (OdataerrorException odee)
             {
@@ -305,7 +304,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
             {
-                userSettings.ContactId = worker._adoxioContactidValue.ToString();
+                userSettings.ContactId = contact.Contactid.ToString();
 
                 // we can now authenticate.
                 if (userSettings.AuthenticatedUser == null)
