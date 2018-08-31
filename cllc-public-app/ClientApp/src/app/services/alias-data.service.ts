@@ -19,8 +19,8 @@ export class AliasDataService {
    * Get legal entities from Dynamics filtered by position
    * @param positionType
    */
-  getAlias(accountId: string) {
-    const apiPath = `api/alias/${accountId}`;
+  getAlias(contactId: string) {
+    const apiPath = `api/alias/by-contactid/${contactId}`;
     return this.http.get<Alias>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError("getAlias", null)));
   }
