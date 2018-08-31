@@ -285,12 +285,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             contact.AdoxioExternalid = externalId;
             try
             {
-                worker.AdoxioContactId = contact;
+                //worker.AdoxioContactId = contact;
 
                 alias.AdoxioContactId = contact;
                 alias.AdoxioWorkerId = worker;
                 alias = await _dynamicsClient.Aliases.CreateAsync(alias);
                 contact = await _dynamicsClient.GetContactById(Guid.Parse(alias._adoxioContactidValue.ToString()));
+                worker = await _dynamicsClient.GetWorkerById(Guid.Parse(alias._adoxioWorkeridValue.ToString()));
+                var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
+                patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contact", contact.Contactid.ToString());
+                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
             catch (OdataerrorException odee)
             {

@@ -299,6 +299,36 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioWorker result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Workers.GetByKeyAsync(id.ToString());
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
+        public static async Task<MicrosoftDynamicsCRMadoxioAlias> GetAliasById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioAlias result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Aliases.GetByKeyAsync(id.ToString());
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
         public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(this IDynamicsClient system, Guid id)
         {
             MicrosoftDynamicsCRMadoxioApplication result;
@@ -510,6 +540,27 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 var filter = "_adoxio_account_value eq " + guid;
                 result = system.Previousaddresses.Get(filter: filter).Value.ToList();
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Get an Invoice by the Id
+        /// </summary>
+        /// <param name="system">Re</param>
+        /// <param name="id"></param>
+        /// <returns>The Invoice, or null if it does not exist</returns>
+        public static async Task<MicrosoftDynamicsCRMadoxioPreviousaddress> GetPreviousAddressById(this IDynamicsClient system, string guid)
+        {
+            MicrosoftDynamicsCRMadoxioPreviousaddress result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Previousaddresses.GetByKeyAsync(guid);
             }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {

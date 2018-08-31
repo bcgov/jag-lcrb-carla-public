@@ -21,11 +21,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.Alias();
                 if (alias.AdoxioAliasid != null)
                 {
-                    result.Id = alias.AdoxioAliasid;
+                    result.id = alias.AdoxioAliasid;
                 }
 
                 result.firstname = alias.AdoxioFirstname;
-                result.middleName = alias.AdoxioMiddlename;
+                result.middlename = alias.AdoxioMiddlename;
                 result.lastname = alias.AdoxioLastname;
                 if(alias.AdoxioContactId != null){
                     result.contact = alias.AdoxioContactId.ToViewModel();
@@ -38,12 +38,11 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
 
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioWorker to, ViewModels.Worker from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioAlias to, ViewModels.Alias from)
         {
             to.AdoxioFirstname = from.firstname;
+            to.AdoxioMiddlename = from.middlename;
             to.AdoxioLastname = from.lastname;
-            // to._adoxioWorkeridValue = from.workerId;
-            // to._adoxioContactidValue = from.contactId;
         }
     }
 }
