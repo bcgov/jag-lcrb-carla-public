@@ -20,9 +20,9 @@ export class PreviousAddressDataService {
    * Get legal entities from Dynamics filtered by position
    * @param positionType
    */
-  getPreviousAdderess(accountId: string) {
-    const apiPath = `api/previous-address/${accountId}`;
-    return this.http.get<PreviousAddress>(apiPath, { headers: this.headers })
+  getPreviousAdderess(contactId: string): Observable<PreviousAddress[]> {
+    const apiPath = `api/previousaddress/by-contactid/${contactId}`;
+    return this.http.get<PreviousAddress[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError("getPreviousAddress", null)));
   }
 
@@ -31,7 +31,7 @@ export class PreviousAddressDataService {
    * @param data - legal entity data
    */
   createPreviousAdderess(data: any) {
-    return this.http.post<PreviousAddress>('api/previous-address/', data, { headers: this.headers })
+    return this.http.post<PreviousAddress>('api/previousaddress/', data, { headers: this.headers })
       .pipe(catchError(this.handleError("createPreviousAddress", null)));
   }
 
@@ -40,7 +40,7 @@ export class PreviousAddressDataService {
    * @param data - legal entity data
    */
   updatePreviousAdderess(data: any, id: string) {
-    return this.http.put<PreviousAddress>(`api/previous-address/${id}`, data, { headers: this.headers })
+    return this.http.put<PreviousAddress>(`api/previousaddress/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError("updatePreviousAddress", null)));
   }
 
@@ -49,7 +49,7 @@ export class PreviousAddressDataService {
    * @param data - legal entity data
    */
   deletePreviousAdderess(id: string) {
-    return this.http.post<PreviousAddress>(`api/previous-address/${id}/delete`, {}, { headers: this.headers })
+    return this.http.post<PreviousAddress>(`api/previousaddress/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError("deletePreviousAddress", null)));
   }
 
