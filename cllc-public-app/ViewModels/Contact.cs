@@ -12,6 +12,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string firstname { get; set; }
 
+        public string middlename { get; set; }
+
         public string lastname { get; set; }
 
         public string emailaddress1 { get; set; }
@@ -21,6 +23,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string address1_line1 { get; set; }
 
         public string address1_city { get; set; }
+
+        public string address1_country { get; set; }
 
         public string address1_stateorprovince { get; set; }
 

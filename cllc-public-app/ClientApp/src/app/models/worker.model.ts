@@ -1,4 +1,5 @@
 export interface Worker { 
+    id: string;
     isldbworker: boolean;
     firstname: string;
     middlename: string;

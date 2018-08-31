@@ -1,4 +1,4 @@
-<div class="wrapper" [formGroup]="form">
+<div class="wrapper" [formGroup]="form" style="max-width: 700px;">
   <div [ngBusy]="busy"></div>
   <div *ngIf="dataLoaded && !isNewUser">
     <section>
@@ -13,10 +13,10 @@
         Sed risus mi, ultricies ultrices vehicula id, condimentum ac turpis. In consectetur sem velit, sit amet blandit dui
         rutrum quis.
       </p>
-      <section>
+      <!-- <section>
         <app-file-uploader *ngIf="contact && contact.id" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
           [multipleFiles]="false" entityName="contact" [entityId]="contact.id" #mainForm></app-file-uploader>
-      </section>
+      </section> -->
     </section>
 
     <div formGroupName="contact">
@@ -87,13 +87,13 @@
         </div>
       </section>
       <section>
-        <div [ngClass]="{'has-error': !this.form.get('contact.address1_street1').valid && this.form.get('contact.address1_street1').touched}">
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched}">
           <label>Street Address</label>
           <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_street1">
-          <div *ngIf="!this.form.get('contact.address1_street1').valid && this.form.get('contact.address1_street1').touched" class="alert alert-danger"
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_line1">
+          <div *ngIf="!this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched" class="alert alert-danger"
             style="width: 250px;">
-            <div *ngIf="!this.form.get('contact.address1_street1').valid && this.form.get('contact.address1_street1').touched ">
+            <div *ngIf="!this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched ">
               This is required
             </div>
           </div>
@@ -270,7 +270,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> 
       <section>
         <div [ngClass]="{'has-error': !this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched}">
           <label>Phone Number</label>
@@ -324,42 +324,42 @@
       </section>
     </div>
 
-    <div formGroupName="alias">
+    <div>
       <h2>Alias</h2>
       <section>
-        <div [ngClass]="{'has-error': !this.form.get('alias.firstname').valid && this.form.get('alias.firstname').touched}">
+        <div [ngClass]="{'has-error': !this.form.get('firstname').valid && this.form.get('firstname').touched}">
           <label>First Name</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
-          <div *ngIf="!this.form.get('alias.firstname').valid && this.form.get('alias.firstname').touched" class="alert alert-danger"
+          <div *ngIf="!this.form.get('firstname').valid && this.form.get('firstname').touched" class="alert alert-danger"
             style="width: 250px;">
-            <div *ngIf="!this.form.get('alias.firstname').valid && this.form.get('alias.firstname').touched ">
+            <div *ngIf="!this.form.get('firstname').valid && this.form.get('firstname').touched ">
               This is required
             </div>
           </div>
         </div>
       </section>
       <section>
-        <div [ngClass]="{'has-error': !this.form.get('alias.middlename').valid && this.form.get('alias.middlename').touched}">
+        <div [ngClass]="{'has-error': !this.form.get('middlename').valid && this.form.get('middlename').touched}">
           <label>Second Name</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
-          <div *ngIf="!this.form.get('alias.middlename').valid && this.form.get('alias.middlename').touched" class="alert alert-danger"
+          <div *ngIf="!this.form.get('middlename').valid && this.form.get('middlename').touched" class="alert alert-danger"
             style="width: 250px;">
-            <div *ngIf="!this.form.get('alias.middlename').valid && this.form.get('alias.middlename').touched ">
+            <div *ngIf="!this.form.get('middlename').valid && this.form.get('middlename').touched ">
               This is required
             </div>
           </div>
         </div>
       </section>
       <section>
-        <div [ngClass]="{'has-error': !this.form.get('alias.lastname').valid && this.form.get('alias.lastname').touched}">
+        <div [ngClass]="{'has-error': !this.form.get('lastname').valid && this.form.get('lastname').touched}">
           <label>Last Name</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
-          <div *ngIf="!this.form.get('alias.lastname').valid && this.form.get('alias.lastname').touched" class="alert alert-danger"
+          <div *ngIf="!this.form.get('lastname').valid && this.form.get('lastname').touched" class="alert alert-danger"
             style="width: 250px;">
-            <div *ngIf="!this.form.get('alias.lastname').valid && this.form.get('alias.lastname').touched ">
+            <div *ngIf="!this.form.get('lastname').valid && this.form.get('lastname').touched ">
               This is required
             </div>
           </div>
@@ -375,8 +375,9 @@
           <h3>Address {{i + 1}}</h3>
           <section>
             <button *ngIf="addresses.controls.length > 1" class="btn btn-primary" (click)="deleteAddress(i)">Delete previous
-              address</button>
-            <div [ngClass]="{'has-error': !address.get('name').valid && address.get('name').touched}">
+              address
+            </button>
+            <!-- <div [ngClass]="{'has-error': !address.get('name').valid && address.get('name').touched}">
               <label>Name</label>
               <br />
               <input class="form-control" style="width: 250px;" type="text" formControlName="name">
@@ -385,7 +386,7 @@
                   This is required
                 </div>
               </div>
-            </div>
+            </div> -->
           </section>
           <section>
             <div [ngClass]="{'has-error': !address.get('streetaddress').valid && address.get('streetaddress').touched}">
@@ -473,6 +474,9 @@
           </section>
         </div>
       </div>
+      <button class="btn btn-primary" (click)="save()">
+        Save
+      </button>
     </div>
 
     <section *ngIf="isNewUser">

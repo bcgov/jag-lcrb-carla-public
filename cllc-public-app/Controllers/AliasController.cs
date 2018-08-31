@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="contactId"></param>
         /// <returns></returns>
         [HttpGet("by-contactid/{contactId}")]
-        public async Task<IActionResult> GetAliasByContactId(string contactId)
+        public IActionResult GetAliasByContactId(string contactId)
         {
              ViewModels.Alias result = null;
 
@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
+        public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Alias item, string id)
         {            
             if (id != null && item.id != null && id != item.id)
             {
@@ -83,18 +83,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             
             // get the contact
-            Guid contactId = Guid.Parse(id);
+            Guid aliasId = Guid.Parse(id);
             
-            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
-            if (contact == null)
+            MicrosoftDynamicsCRMadoxioAlias alias = await _dynamicsClient.GetAliasById(aliasId);
+            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(Guid.Parse(item.contact.id));
+            MicrosoftDynamicsCRMadoxioWorker worker = await _dynamicsClient.GetWorkerById(Guid.Parse(item.worker.id));
+
+            if (alias == null)
             {
                 return new NotFoundResult();
             }
+            MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
             MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
-            patchContact.CopyValues(item);
+            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
+            patchAlias.CopyValues(item);
             try
             {
-                await _dynamicsClient.Contacts.UpdateAsync(contactId.ToString(), patchContact);
+                await _dynamicsClient.Aliases.UpdateAsync(aliasId.ToString(), patchAlias);
+                if (contact != null)
+                {
+                    patchContact.CopyValues(item.contact);
+                    await _dynamicsClient.Contacts.UpdateAsync(contact.Contactid.ToString(), patchContact);
+                }
+                if (worker != null)
+                {
+                    patchWorker.CopyValues(item.worker);
+                    await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
+                }
             }
             catch (OdataerrorException odee)
             {
@@ -105,8 +120,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Response.Content);
             }            
 
-            contact = await _dynamicsClient.GetContactById(contactId);
-            return Json(contact.ToViewModel());
+            alias = await _dynamicsClient.GetAliasById(aliasId);
+            return Json(alias.ToViewModel());
         }
 
         /// <summary>

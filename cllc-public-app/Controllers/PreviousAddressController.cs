@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -34,35 +35,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         // /// <summary>
         // /// Get a specific previous address
         // /// </summary>
-        // /// <param name="id"></param>
+        // /// <param name="contactId"></param>
         // /// <returns></returns>
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetAddress(string id)
-        // {
-        //     ViewModels.PreviousAddress result = null;
+        [HttpGet("by-contactid/{contactId}")]
+        public async Task<IActionResult> GetAddressesByContactId(string contactId)
+        {
+            List<ViewModels.PreviousAddress> result = new List<ViewModels.PreviousAddress>();
 
-        //     if (!string.IsNullOrEmpty(id))
-        //     {
-        //         Guid AddressId = Guid.Parse(id);
-        //         // query the Dynamics system to get the Address record.
-        //         MicrosoftDynamicsCRMadoxioPreviousaddress Address = await _dynamicsClient.GetAccountById(AddressId);
+            if (!string.IsNullOrEmpty(contactId))
+            {
+                // query the Dynamics system to get the Address record.
+                List<MicrosoftDynamicsCRMadoxioPreviousaddress> addresses = await _dynamicsClient.GetPreviousAddressByContactId(contactId);
 
-        //         if (Address != null)
-        //         {
-        //             result = Address.ToViewModel();
-        //         }
-        //         else
-        //         {
-        //             return new NotFoundResult();
-        //         }
-        //     }
-        //     else
-        //     {
-        //         return BadRequest();
-        //     }
+                if (addresses != null)
+                {
+                    addresses.ForEach(a =>
+                    {
+                        result.Add(a.ToViewModel());
+                    });
+                    
+                }
+                else
+                {
+                    return new NotFoundResult();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
 
-        //     return Json(result);
-        // }
+            return Json(result);
+        }
 
 
         // /// <summary>
@@ -71,150 +75,115 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         // /// <param name="item"></param>
         // /// <param name="id"></param>
         // /// <returns></returns>
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> UpdateAddress([FromBody] ViewModels.Address item, string id)
-        // {
-        //     if (id != null && item.id != null && id != item.id)
-        //     {
-        //         return BadRequest();
-        //     }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAddress([FromBody] ViewModels.PreviousAddress item, string id)
+        {
+            if (id != null && item.id != null && id != item.id)
+            {
+                return BadRequest();
+            }
 
-        //     // get the Address
-        //     Guid AddressId = Guid.Parse(id);
+            // get the Address
+            MicrosoftDynamicsCRMadoxioPreviousaddress Address = await _dynamicsClient.GetPreviousAddressById(id);
+            if (Address == null)
+            {
+                return new NotFoundResult();
+            }
+            MicrosoftDynamicsCRMadoxioPreviousaddress patchAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress();
+            patchAddress.CopyValues(item);
+            try
+            {
+                await _dynamicsClient.Previousaddresses.UpdateAsync(id, patchAddress);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error updating Address");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
 
-        //     MicrosoftDynamicsCRMAddress Address = await _dynamicsClient.GetAddressById(AddressId);
-        //     if (Address == null)
-        //     {
-        //         return new NotFoundResult();
-        //     }
-        //     MicrosoftDynamicsCRMAddress patchAddress = new MicrosoftDynamicsCRMAddress();
-        //     patchAddress.CopyValues(item);
-        //     try
-        //     {
-        //         await _dynamicsClient.Addresss.UpdateAsync(AddressId.ToString(), patchAddress);
-        //     }
-        //     catch (OdataerrorException odee)
-        //     {
-        //         _logger.LogError("Error updating Address");
-        //         _logger.LogError("Request:");
-        //         _logger.LogError(odee.Request.Content);
-        //         _logger.LogError("Response:");
-        //         _logger.LogError(odee.Response.Content);
-        //     }
-
-        //     Address = await _dynamicsClient.GetAddressById(AddressId);
-        //     return Json(Address.ToViewModel());
-        // }
+            Address = await _dynamicsClient.GetPreviousAddressById(id);
+            return Json(Address.ToViewModel());
+        }
 
         // /// <summary>
         // /// Create a Address
         // /// </summary>
         // /// <param name="viewModel"></param>
         // /// <returns></returns>
-        // [HttpPost()]
-        // public async Task<IActionResult> CreateAddress([FromBody] ViewModels.Address item)
-        // {
+        [HttpPost()]
+        public async Task<IActionResult> CreateAddress([FromBody] ViewModels.PreviousAddress item)
+        {
 
-        //     // get UserSettings from the session
-        //     string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-        //     UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // for association with current user
+            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
 
-        //     // first check to see that a Address exists.
-        //     string AddressSiteminderGuid = userSettings.SiteMinderGuid;
-        //     if (AddressSiteminderGuid == null || AddressSiteminderGuid.Length == 0)
-        //     {
-        //         _logger.LogError(LoggingEvents.Error, "No Address Siteminder Guid exernal id");
-        //         throw new Exception("Error. No AddressSiteminderGuid exernal id");
-        //     }
+            MicrosoftDynamicsCRMadoxioPreviousaddress address = new MicrosoftDynamicsCRMadoxioPreviousaddress();
+            // copy received values to Dynamics Application
+            address.CopyValues(item);
+            try
+            {
+                address = _dynamicsClient.Previousaddresses.Create(address);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error creating application");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
 
-        //     // get the Address record.
-        //     MicrosoftDynamicsCRMAddress userAddress = null;
 
-        //     // see if the Address exists.
-        //     try
-        //     {
-        //         userAddress = await _dynamicsClient.GetAddressBySiteminderGuid(AddressSiteminderGuid);
-        //         if (userAddress != null)
-        //         {
-        //             throw new Exception("Address already Exists");
-        //         }
-        //     }
-        //     catch (OdataerrorException odee)
-        //     {
-        //         _logger.LogError(LoggingEvents.Error, "Error getting Address by Siteminder Guid.");
-        //         _logger.LogError("Request:");
-        //         _logger.LogError(odee.Request.Content);
-        //         _logger.LogError("Response:");
-        //         _logger.LogError(odee.Response.Content);
-        //         throw new OdataerrorException("Error getting Address by Siteminder Guid");
-        //     }
+            MicrosoftDynamicsCRMadoxioPreviousaddress patchAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress();
 
-        //     // create a new Address.
-        //     MicrosoftDynamicsCRMAddress Address = new MicrosoftDynamicsCRMAddress();
-        //     Address.CopyValues(item);
-        //     string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(AddressSiteminderGuid);
-        //     Address.Externaluseridentifier = userSettings.UserId;
+            // set contact and worker associations
+            try
+            {
+                var contact = _dynamicsClient.GetContactById(Guid.Parse(item.contactId));
+                patchAddress.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contact", item.contactId);
 
-        //     //clean externalId    
-        //     var externalId = "";
-        //     var tokens = sanitizedAccountSiteminderId.Split('|');
-        //     if (tokens.Length > 0)
-        //     {
-        //         externalId = tokens[0];
-        //     }
+                var worker = _dynamicsClient.GetWorkerById(Guid.Parse(item.workerId));
+                patchAddress.WorkerIdAccountODataBind = _dynamicsClient.GetEntityURI("worker", item.workerId);
 
-        //     if (!string.IsNullOrEmpty(externalId))
-        //     {
-        //         tokens = externalId.Split(':');
-        //         externalId = tokens[tokens.Length - 1];
-        //     }
+                await _dynamicsClient.Previousaddresses.UpdateAsync(address.AdoxioPreviousaddressid, patchAddress);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error updating application");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
 
-        //     Address.AdoxioExternalid = externalId;
-        //     try
-        //     {
-        //         Address = await _dynamicsClient.Addresss.CreateAsync(Address);
-        //     }
-        //     catch (OdataerrorException odee)
-        //     {
-        //         _logger.LogError("Error updating Address");
-        //         _logger.LogError("Request:");
-        //         _logger.LogError(odee.Request.Content);
-        //         _logger.LogError("Response:");
-        //         _logger.LogError(odee.Response.Content);
-        //     }
+            return Json(address.ToViewModel());
+        }
 
-        //     // if we have not yet authenticated, then this is the new record for the user.
-        //     if (userSettings.IsNewUserRegistration)
-        //     {
-        //         userSettings.AddressId = Address.Addressid.ToString();
+        /// <summary>
+        /// Delete an Address.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost("{id}/delete")]
+        public async Task<IActionResult> DeleteAddress(string id)
+        {
+            MicrosoftDynamicsCRMadoxioPreviousaddress address = await _dynamicsClient.GetPreviousAddressById(id);
+            if (address == null)
+            {
+                return new NotFoundResult();
+            }
 
-        //         // we can now authenticate.
-        //         if (userSettings.AuthenticatedUser == null)
-        //         {
-        //             Models.User user = new Models.User();
-        //             user.Active = true;
-        //             user.AddressId = Guid.Parse(userSettings.AddressId);
-        //             user.UserType = userSettings.UserType;
-        //             user.SmUserId = userSettings.UserId;
-        //             userSettings.AuthenticatedUser = user;
-        //         }
+            await _dynamicsClient.Previousaddresses.DeleteAsync(id);
 
-        //         userSettings.IsNewUserRegistration = false;
-
-        //         string userSettingsString = JsonConvert.SerializeObject(userSettings);
-        //         _logger.LogDebug("userSettingsString --> " + userSettingsString);
-
-        //         // add the user to the session.
-        //         _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
-        //         _logger.LogDebug("user added to session. ");
-        //     }
-        //     else
-        //     {
-        //         _logger.LogError(LoggingEvents.Error, "Invalid user registration.");
-        //         throw new Exception("Invalid user registration.");
-        //     }
-
-        //     return Json(Address.ToViewModel());
-        // }
+            return NoContent(); // 204
+        }
     }
 }

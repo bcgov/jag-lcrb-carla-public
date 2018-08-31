@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.Worker();
                 if (worker.AdoxioWorkerid != null)
                 {
-                    result.Id = worker.AdoxioWorkerid;
+                    result.id = worker.AdoxioWorkerid;
                 }
 
                 result.isldbworker = worker.AdoxioIsldbworker == 1;
@@ -31,13 +31,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.dateofbirth = (DateTime?)worker.AdoxioDateofbirth;
                 //result.gender = worker.AdoxioGendercode;
                 result.birthplace = worker.AdoxioBirthplace;
-                result.driverslicensenumber = worker.AdoxioDriverslicencenumber;
+                result.driverslicencenumber = worker.AdoxioDriverslicencenumber;
                 result.bcidcardnumber = worker.AdoxioBcidcardnumber;
                 result.phonenumber = worker.AdoxioPhonenumber;
                 result.email = worker.AdoxioEmail;
                 result.selfdisclosure = worker.AdoxioSelfdisclosure == 1;
                 result.triggerphs = worker.AdoxioTriggerphs == 1;
-                result.bCIDCardNumber = worker.AdoxioBcidcardnumber;
                 result.contactId = worker._adoxioContactidValue;
                 result.paymentReceived = worker.AdoxioPaymentreceived == 1;
                 result.paymentRecievedDate = (DateTime?)worker.AdoxioPaymentreceiveddate;
@@ -56,13 +55,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDateofbirth = from.dateofbirth;
             // to.AdoxioGendercode = from.gender;
             to.AdoxioBirthplace = from.birthplace;
-            to.AdoxioDriverslicencenumber = from.driverslicensenumber;
+            to.AdoxioDriverslicencenumber = from.driverslicencenumber;
             to.AdoxioBcidcardnumber = from.bcidcardnumber;
             to.AdoxioPhonenumber = from.phonenumber;
             to.AdoxioEmail = from.email;
             to.AdoxioSelfdisclosure = from.selfdisclosure ? 1 : 0;
             to.AdoxioTriggerphs = from.triggerphs ? 1 : 0;
-            to.AdoxioBcidcardnumber = from.bCIDCardNumber;
             to._adoxioContactidValue = from.contactId;
             to.AdoxioPaymentreceived = from.paymentReceived ? 1 : 0;
             to.AdoxioPaymentreceiveddate = from.paymentRecievedDate;
