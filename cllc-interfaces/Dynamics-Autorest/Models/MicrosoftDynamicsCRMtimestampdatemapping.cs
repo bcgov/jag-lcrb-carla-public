@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// timestampdatemapping
+    /// </summary>
     public partial class MicrosoftDynamicsCRMtimestampdatemapping
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMtimestampdatemapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMtimestampdatemapping(string timestamp = default(string), object date = default(object), string timestampdatemappingid = default(string))
+        public MicrosoftDynamicsCRMtimestampdatemapping(long? timestamp = default(long?), System.DateTimeOffset? date = default(System.DateTimeOffset?), string timestampdatemappingid = default(string))
         {
             Timestamp = timestamp;
             Date = date;
@@ -40,12 +43,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "timestamp")]
-        public string Timestamp { get; set; }
+        public long? Timestamp { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "date")]
-        public object Date { get; set; }
+        public System.DateTimeOffset? Date { get; set; }
 
         /// <summary>
         /// </summary>

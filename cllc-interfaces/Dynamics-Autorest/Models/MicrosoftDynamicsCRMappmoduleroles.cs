@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// appmoduleroles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMappmoduleroles
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMappmoduleroles class.
         /// </summary>
-        public MicrosoftDynamicsCRMappmoduleroles(string solutionid = default(string), int? componentstate = default(int?), string appmoduleroleidunique = default(string), string introducedversion = default(string), string versionnumber = default(string), object overwritetime = default(object), string appmoduleroleid = default(string), bool? ismanaged = default(bool?), string _appmoduleidValue = default(string), string _roleidValue = default(string))
+        public MicrosoftDynamicsCRMappmoduleroles(string solutionid = default(string), int? componentstate = default(int?), string appmoduleroleidunique = default(string), string introducedversion = default(string), long? versionnumber = default(long?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string appmoduleroleid = default(string), bool? ismanaged = default(bool?), string _appmoduleidValue = default(string), string _roleidValue = default(string))
         {
             Solutionid = solutionid;
             Componentstate = componentstate;
@@ -67,12 +70,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

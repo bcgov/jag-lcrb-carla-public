@@ -11,7 +11,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMEntityKeyMetadata : MicrosoftDynamicsCRMMetadataBase
+    /// <summary>
+    /// EntityKeyMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMEntityKeyMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -28,8 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="entityKeyIndexStatus">Possible values include:
         /// 'Pending', 'InProgress', 'Active', 'Failed'</param>
-        public MicrosoftDynamicsCRMEntityKeyMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string))
-            : base(metadataId, hasChanged)
+        public MicrosoftDynamicsCRMEntityKeyMetadata(MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string))
         {
             DisplayName = displayName;
             LogicalName = logicalName;
