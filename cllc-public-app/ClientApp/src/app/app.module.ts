@@ -129,6 +129,7 @@ import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-a
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 import { AliasDataService } from './services/alias-data.service';
+import { PreviousAddressDataService } from './services/previous-address-data.service';
 
 @NgModule({
   declarations: [
@@ -302,6 +303,7 @@ import { AliasDataService } from './services/alias-data.service';
     ContactDataService,
     PaymentDataService,
     TiedHouseConnectionsDataService,
+    PreviousAddressDataService,
     NgbDropdown,
     Title,
     CanDeactivateGuard,
