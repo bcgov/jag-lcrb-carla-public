@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.firstname = worker.AdoxioFirstname;
                 result.middlename = worker.AdoxioMiddlename;
                 result.lastname = worker.AdoxioLastname;
-                result.dateofbirth = (DateTime?)worker.AdoxioDateofbirth;
+                result.dateofbirth = worker.AdoxioDateofbirth;
                 //result.gender = worker.AdoxioGendercode;
                 result.birthplace = worker.AdoxioBirthplace;
                 result.driverslicencenumber = worker.AdoxioDriverslicencenumber;
@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.triggerphs = worker.AdoxioTriggerphs == 1;
                 result.contactId = worker._adoxioContactidValue;
                 result.paymentReceived = worker.AdoxioPaymentreceived == 1;
-                result.paymentRecievedDate = (DateTime?)worker.AdoxioPaymentreceiveddate;
+                result.paymentRecievedDate = worker.AdoxioPaymentreceiveddate;
                 result.workerId = worker.AdoxioWorkerid;
             }
             return result;
