@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// businessunitnewsarticle
+    /// </summary>
     public partial class MicrosoftDynamicsCRMbusinessunitnewsarticle
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbusinessunitnewsarticle class.
         /// </summary>
-        public MicrosoftDynamicsCRMbusinessunitnewsarticle(object modifiedon = default(object), object activeuntil = default(object), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string newsarticle = default(string), object overriddencreatedon = default(object), int? timezoneruleversionnumber = default(int?), int? articletypecode = default(int?), object activeon = default(object), string _createdbyValue = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string articleurl = default(string), string businessunitnewsarticleid = default(string), object createdon = default(object), string articletitle = default(string), bool? showonhomepage = default(bool?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitNewsArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitNewsArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMbusinessunitnewsarticle(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? activeuntil = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string newsarticle = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? articletypecode = default(int?), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string articleurl = default(string), string businessunitnewsarticleid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string articletitle = default(string), bool? showonhomepage = default(bool?), int? utcconversiontimezonecode = default(int?), long? versionnumber = default(long?), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitNewsArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitNewsArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Modifiedon = modifiedon;
             Activeuntil = activeuntil;
@@ -66,12 +69,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "activeuntil")]
-        public object Activeuntil { get; set; }
+        public System.DateTimeOffset? Activeuntil { get; set; }
 
         /// <summary>
         /// </summary>
@@ -96,7 +99,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -111,7 +114,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "activeon")]
-        public object Activeon { get; set; }
+        public System.DateTimeOffset? Activeon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,7 +144,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -161,7 +164,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

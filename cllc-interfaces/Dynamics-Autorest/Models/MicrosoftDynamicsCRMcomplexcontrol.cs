@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// complexcontrol
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcomplexcontrol
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcomplexcontrol class.
         /// </summary>
-        public MicrosoftDynamicsCRMcomplexcontrol(string versionnumber = default(string), string complexcontrolxml = default(string), string complexcontrolid = default(string), string _organizationidValue = default(string), int? type = default(int?), string complexcontrolidunique = default(string), int? version = default(int?), string name = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcomplexcontrol(long? versionnumber = default(long?), string complexcontrolxml = default(string), string complexcontrolid = default(string), string _organizationidValue = default(string), int? type = default(int?), string complexcontrolidunique = default(string), int? version = default(int?), string name = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Versionnumber = versionnumber;
             Complexcontrolxml = complexcontrolxml;
@@ -47,7 +50,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

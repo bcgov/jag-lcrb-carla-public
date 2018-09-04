@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// fieldpermission
+    /// </summary>
     public partial class MicrosoftDynamicsCRMfieldpermission
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfieldpermission class.
         /// </summary>
-        public MicrosoftDynamicsCRMfieldpermission(string attributelogicalname = default(string), string fieldpermissionid = default(string), int? cancreate = default(int?), int? componentstate = default(int?), object overwritetime = default(object), int? canupdate = default(int?), string _organizationidValue = default(string), string fieldpermissionidunique = default(string), string solutionid = default(string), string _fieldsecurityprofileidValue = default(string), string versionnumber = default(string), string entityname = default(string), bool? ismanaged = default(bool?), int? canread = default(int?), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile))
+        public MicrosoftDynamicsCRMfieldpermission(string attributelogicalname = default(string), string fieldpermissionid = default(string), int? cancreate = default(int?), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? canupdate = default(int?), string _organizationidValue = default(string), string fieldpermissionidunique = default(string), string solutionid = default(string), string _fieldsecurityprofileidValue = default(string), long? versionnumber = default(long?), string entityname = default(string), bool? ismanaged = default(bool?), int? canread = default(int?), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile))
         {
             Attributelogicalname = attributelogicalname;
             Fieldpermissionid = fieldpermissionid;
@@ -75,7 +78,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,7 +108,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

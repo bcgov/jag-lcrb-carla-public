@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMStatusOptionMetadata : MicrosoftDynamicsCRMOptionMetadata
+    /// <summary>
+    /// StatusOptionMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMStatusOptionMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,8 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMStatusOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMStatusOptionMetadata(int? value = default(int?), MicrosoftDynamicsCRMLabel label = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?), int? state = default(int?), string transitionData = default(string))
-            : base(value, label, description, color, isManaged, metadataId, hasChanged)
+        public MicrosoftDynamicsCRMStatusOptionMetadata(int? state = default(int?), string transitionData = default(string))
         {
             State = state;
             TransitionData = transitionData;

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// similarityrule
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsimilarityrule
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsimilarityrule class.
         /// </summary>
-        public MicrosoftDynamicsCRMsimilarityrule(object overriddencreatedon = default(object), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), string solutionid = default(string), int? statuscode = default(int?), object createdon = default(object), string _organizationidValue = default(string), string name = default(string), string similarityruleid = default(string), string _createdonbehalfbyValue = default(string), string matchingentityname = default(string), int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? statecode = default(int?), string introducedversion = default(string), string fetchxmllist = default(string), string activerulefetchxml = default(string), int? maxkeywords = default(int?), int? utcconversiontimezonecode = default(int?), int? baseentitytypecode = default(int?), int? importsequencenumber = default(int?), object overwritetime = default(object), string similarityruleidunique = default(string), object exchangerate = default(object), int? ngramsize = default(int?), string description = default(string), string baseentityname = default(string), object modifiedon = default(object), string versionnumber = default(string), int? matchingentitytypecode = default(int?), bool? excludeinactiverecords = default(bool?), string ruleconditionxml = default(string), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> similarityruleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMsimilarityrule(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), string solutionid = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string name = default(string), string similarityruleid = default(string), string _createdonbehalfbyValue = default(string), string matchingentityname = default(string), int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? statecode = default(int?), string introducedversion = default(string), string fetchxmllist = default(string), string activerulefetchxml = default(string), int? maxkeywords = default(int?), int? utcconversiontimezonecode = default(int?), int? baseentitytypecode = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string similarityruleidunique = default(string), object exchangerate = default(object), int? ngramsize = default(int?), string description = default(string), string baseentityname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), int? matchingentitytypecode = default(int?), bool? excludeinactiverecords = default(bool?), string ruleconditionxml = default(string), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> similarityruleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Overriddencreatedon = overriddencreatedon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -77,7 +80,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -102,7 +105,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,7 +185,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -212,12 +215,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

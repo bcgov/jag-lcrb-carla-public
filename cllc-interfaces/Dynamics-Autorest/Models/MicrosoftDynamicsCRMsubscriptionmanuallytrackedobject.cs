@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// subscriptionmanuallytrackedobject
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject(string versionnumber = default(string), string subscriptionmanuallytrackedobjectid = default(string), string subscriptionid = default(string), string objecttypecode = default(string), bool? track = default(bool?), string objectid = default(string))
+        public MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject(long? versionnumber = default(long?), string subscriptionmanuallytrackedobjectid = default(string), string subscriptionid = default(string), string objecttypecode = default(string), bool? track = default(bool?), string objectid = default(string))
         {
             Versionnumber = versionnumber;
             Subscriptionmanuallytrackedobjectid = subscriptionmanuallytrackedobjectid;
@@ -43,7 +46,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
