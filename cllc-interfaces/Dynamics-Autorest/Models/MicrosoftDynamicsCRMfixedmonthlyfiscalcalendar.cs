@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// fixedmonthlyfiscalcalendar
+    /// </summary>
     public partial class MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar(string _modifiedonbehalfbyValue = default(string), object period10 = default(object), object period5Base = default(object), object createdon = default(object), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), object period13Base = default(object), object period11Base = default(object), string _salespersonidValue = default(string), object period11 = default(object), object period12 = default(object), string _transactioncurrencyidValue = default(string), object period9Base = default(object), object modifiedon = default(object), object period13 = default(object), object period5 = default(object), object period2 = default(object), int? utcconversiontimezonecode = default(int?), object period2Base = default(object), object period1 = default(object), object period8Base = default(object), object period7 = default(object), object period3Base = default(object), object exchangerate = default(object), object period8 = default(object), object period9 = default(object), object period3 = default(object), object period4Base = default(object), int? fiscalperiodtype = default(int?), object period1Base = default(object), string _createdonbehalfbyValue = default(string), object effectiveon = default(object), object period10Base = default(object), string _createdbyValue = default(string), object period6 = default(object), object period4 = default(object), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), object period12Base = default(object), object period6Base = default(object), object period7Base = default(object), IList<MicrosoftDynamicsCRMbulkdeletefailure> fixedMonthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> fixedMonthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar(string _modifiedonbehalfbyValue = default(string), object period10 = default(object), object period5Base = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), object period13Base = default(object), object period11Base = default(object), string _salespersonidValue = default(string), object period11 = default(object), object period12 = default(object), string _transactioncurrencyidValue = default(string), object period9Base = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), object period13 = default(object), object period5 = default(object), object period2 = default(object), int? utcconversiontimezonecode = default(int?), object period2Base = default(object), object period1 = default(object), object period8Base = default(object), object period7 = default(object), object period3Base = default(object), object exchangerate = default(object), object period8 = default(object), object period9 = default(object), object period3 = default(object), object period4Base = default(object), int? fiscalperiodtype = default(int?), object period1Base = default(object), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), object period10Base = default(object), string _createdbyValue = default(string), object period6 = default(object), object period4 = default(object), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), object period12Base = default(object), object period6Base = default(object), object period7Base = default(object), IList<MicrosoftDynamicsCRMbulkdeletefailure> fixedMonthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> fixedMonthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Period10 = period10;
@@ -103,7 +106,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -153,7 +156,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -243,7 +246,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "effectiveon")]
-        public object Effectiveon { get; set; }
+        public System.DateTimeOffset? Effectiveon { get; set; }
 
         /// <summary>
         /// </summary>

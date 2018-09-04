@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// leadtoopportunitysalesprocess
+    /// </summary>
     public partial class MicrosoftDynamicsCRMleadtoopportunitysalesprocess
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMleadtoopportunitysalesprocess class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadtoopportunitysalesprocess(int? importsequencenumber = default(int?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _processidValue = default(string), string _modifiedbyValue = default(string), object activestagestartedon = default(object), string versionnumber = default(string), object exchangerate = default(object), string _opportunityidValue = default(string), int? duration = default(int?), object completedon = default(object), object overriddencreatedon = default(object), string businessprocessflowinstanceid = default(string), object createdon = default(object), string _createdonbehalfbyValue = default(string), object modifiedon = default(object), string _transactioncurrencyidValue = default(string), string _leadidValue = default(string), string _activestageidValue = default(string), int? statuscode = default(int?), string traversedpath = default(string), string name = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMlead leadId = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> leadToOpportunitySalesProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMopportunity opportunityId = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMleadtoopportunitysalesprocess(int? importsequencenumber = default(int?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _processidValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), object exchangerate = default(object), string _opportunityidValue = default(string), int? duration = default(int?), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string businessprocessflowinstanceid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _leadidValue = default(string), string _activestageidValue = default(string), int? statuscode = default(int?), string traversedpath = default(string), string name = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMlead leadId = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> leadToOpportunitySalesProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMopportunity opportunityId = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser))
         {
             Importsequencenumber = importsequencenumber;
             this._organizationidValue = _organizationidValue;
@@ -105,12 +108,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "activestagestartedon")]
-        public object Activestagestartedon { get; set; }
+        public System.DateTimeOffset? Activestagestartedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,12 +133,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "completedon")]
-        public object Completedon { get; set; }
+        public System.DateTimeOffset? Completedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,7 +148,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -155,7 +158,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

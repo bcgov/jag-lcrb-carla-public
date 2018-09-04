@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// connectionrole
+    /// </summary>
     public partial class MicrosoftDynamicsCRMconnectionrole
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMconnectionrole class.
         /// </summary>
-        public MicrosoftDynamicsCRMconnectionrole(string name = default(string), int? statecode = default(int?), string versionnumber = default(string), string introducedversion = default(string), string description = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _organizationidValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), object modifiedon = default(object), int? category = default(int?), bool? ismanaged = default(bool?), string connectionroleid = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), string _modifiedbyValue = default(string), object createdon = default(object), string connectionroleidunique = default(string), int? componentstate = default(int?), object overwritetime = default(object), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> connectionRoleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> connectionRoleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociation = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociationReferenced = default(IList<MicrosoftDynamicsCRMconnectionrole>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMconnectionrole(string name = default(string), int? statecode = default(int?), long? versionnumber = default(long?), string introducedversion = default(string), string description = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _organizationidValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? category = default(int?), bool? ismanaged = default(bool?), string connectionroleid = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string connectionroleidunique = default(string), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> connectionRoleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> connectionRoleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociation = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociationReferenced = default(IList<MicrosoftDynamicsCRMconnectionrole>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Name = name;
             Statecode = statecode;
@@ -82,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -117,7 +120,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,7 +160,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -172,7 +175,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

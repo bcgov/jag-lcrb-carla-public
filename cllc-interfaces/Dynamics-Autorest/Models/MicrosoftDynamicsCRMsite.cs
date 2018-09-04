@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// site
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsite
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMsite class.
         /// </summary>
-        public MicrosoftDynamicsCRMsite(string _modifiedonbehalfbyValue = default(string), string address1Upszone = default(string), string address2Telephone1 = default(string), int? address2Shippingmethodcode = default(int?), string address1Name = default(string), string address2Upszone = default(string), string emailaddress = default(string), object address2Latitude = default(object), object address1Longitude = default(object), string organizationid = default(string), string _createdonbehalfbyValue = default(string), string address1Stateorprovince = default(string), string address1Telephone3 = default(string), int? address1Shippingmethodcode = default(int?), string name = default(string), string siteid = default(string), object overriddencreatedon = default(object), string address2City = default(string), string _createdbyValue = default(string), string address1Postalcode = default(string), string versionnumber = default(string), string address1Line2 = default(string), string address1Postofficebox = default(string), object modifiedon = default(object), string address2Country = default(string), int? address1Utcoffset = default(int?), string address2County = default(string), int? importsequencenumber = default(int?), int? timezonecode = default(int?), string address2Line1 = default(string), string address1Telephone1 = default(string), string address2Stateorprovince = default(string), int? address1Addresstypecode = default(int?), string address1City = default(string), string address2Postalcode = default(string), string address2Line3 = default(string), object address1Latitude = default(object), string address2Telephone3 = default(string), object address2Longitude = default(object), string address2Line2 = default(string), string address2Name = default(string), string _modifiedbyValue = default(string), int? address2Utcoffset = default(int?), string address1Country = default(string), string address1Line3 = default(string), string address2Postofficebox = default(string), string address2Telephone2 = default(string), object createdon = default(object), string address1Addressid = default(string), string address1Line1 = default(string), int? address2Addresstypecode = default(int?), string address2Fax = default(string), string address1County = default(string), string address1Telephone2 = default(string), string address2Addressid = default(string), string address1Fax = default(string), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> siteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> siteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMequipment> siteEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMsystemuser> siteSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsyncerror> siteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresource> siteResources = default(IList<MicrosoftDynamicsCRMresource>))
+        public MicrosoftDynamicsCRMsite(string _modifiedonbehalfbyValue = default(string), string address1Upszone = default(string), string address2Telephone1 = default(string), int? address2Shippingmethodcode = default(int?), string address1Name = default(string), string address2Upszone = default(string), string emailaddress = default(string), double? address2Latitude = default(double?), double? address1Longitude = default(double?), string organizationid = default(string), string _createdonbehalfbyValue = default(string), string address1Stateorprovince = default(string), string address1Telephone3 = default(string), int? address1Shippingmethodcode = default(int?), string name = default(string), string siteid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address2City = default(string), string _createdbyValue = default(string), string address1Postalcode = default(string), long? versionnumber = default(long?), string address1Line2 = default(string), string address1Postofficebox = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string address2Country = default(string), int? address1Utcoffset = default(int?), string address2County = default(string), int? importsequencenumber = default(int?), int? timezonecode = default(int?), string address2Line1 = default(string), string address1Telephone1 = default(string), string address2Stateorprovince = default(string), int? address1Addresstypecode = default(int?), string address1City = default(string), string address2Postalcode = default(string), string address2Line3 = default(string), double? address1Latitude = default(double?), string address2Telephone3 = default(string), double? address2Longitude = default(double?), string address2Line2 = default(string), string address2Name = default(string), string _modifiedbyValue = default(string), int? address2Utcoffset = default(int?), string address1Country = default(string), string address1Line3 = default(string), string address2Postofficebox = default(string), string address2Telephone2 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address1Addressid = default(string), string address1Line1 = default(string), int? address2Addresstypecode = default(int?), string address2Fax = default(string), string address1County = default(string), string address1Telephone2 = default(string), string address2Addressid = default(string), string address1Fax = default(string), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> siteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> siteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMequipment> siteEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMsystemuser> siteSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsyncerror> siteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresource> siteResources = default(IList<MicrosoftDynamicsCRMresource>))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Address1Upszone = address1Upszone;
@@ -140,12 +143,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address2_latitude")]
-        public object Address2Latitude { get; set; }
+        public double? Address2Latitude { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address1_longitude")]
-        public object Address1Longitude { get; set; }
+        public double? Address1Longitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -185,7 +188,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -205,7 +208,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -220,7 +223,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -285,7 +288,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address1_latitude")]
-        public object Address1Latitude { get; set; }
+        public double? Address1Latitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -295,7 +298,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address2_longitude")]
-        public object Address2Longitude { get; set; }
+        public double? Address2Longitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -340,7 +343,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

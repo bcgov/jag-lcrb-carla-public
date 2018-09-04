@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// bookableresource
+    /// </summary>
     public partial class MicrosoftDynamicsCRMbookableresource
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbookableresource class.
         /// </summary>
-        public MicrosoftDynamicsCRMbookableresource(string _owneridValue = default(string), string _calendaridValue = default(string), object overriddencreatedon = default(object), object modifiedon = default(object), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), object createdon = default(object), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _accountidValue = default(string), int? resourcetype = default(int?), string _transactioncurrencyidValue = default(string), int? importsequencenumber = default(int?), string _owningbusinessunitValue = default(string), string _useridValue = default(string), string _contactidValue = default(string), string bookableresourceid = default(string), string processid = default(string), string _createdbyValue = default(string), int? timezone = default(int?), int? statecode = default(int?), string stageid = default(string), string traversedpath = default(string), string versionnumber = default(string), string _owningteamValue = default(string), string name = default(string), object exchangerate = default(object), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> bookableresourceAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> bookableresourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bookableresourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount accountId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact contactId = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbookableresourcebooking> bookableresourceBookableresourcebookingResource = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> bookableresourceBookableresourcecategoryassnResource = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> bookableresourceBookableresourcecharacteristicResource = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> bookableresourceBookableresourcegroupChildResource = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> bookableresourceBookableresourcegroupParentResource = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), MicrosoftDynamicsCRMsystemuser userId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> bookableResourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMbookableresource(string _owneridValue = default(string), string _calendaridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _accountidValue = default(string), int? resourcetype = default(int?), string _transactioncurrencyidValue = default(string), int? importsequencenumber = default(int?), string _owningbusinessunitValue = default(string), string _useridValue = default(string), string _contactidValue = default(string), string bookableresourceid = default(string), string processid = default(string), string _createdbyValue = default(string), int? timezone = default(int?), int? statecode = default(int?), string stageid = default(string), string traversedpath = default(string), long? versionnumber = default(long?), string _owningteamValue = default(string), string name = default(string), object exchangerate = default(object), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> bookableresourceAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> bookableresourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bookableresourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount accountId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact contactId = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbookableresourcebooking> bookableresourceBookableresourcebookingResource = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> bookableresourceBookableresourcecategoryassnResource = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> bookableresourceBookableresourcecharacteristicResource = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> bookableresourceBookableresourcegroupChildResource = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> bookableresourceBookableresourcegroupParentResource = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), MicrosoftDynamicsCRMsystemuser userId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> bookableResourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             this._owneridValue = _owneridValue;
             this._calendaridValue = _calendaridValue;
@@ -103,12 +106,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,7 +141,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -223,7 +226,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

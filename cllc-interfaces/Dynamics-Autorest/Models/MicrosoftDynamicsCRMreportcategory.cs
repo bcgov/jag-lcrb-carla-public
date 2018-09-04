@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// reportcategory
+    /// </summary>
     public partial class MicrosoftDynamicsCRMreportcategory
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMreportcategory class.
         /// </summary>
-        public MicrosoftDynamicsCRMreportcategory(int? componentstate = default(int?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), object overwritetime = default(object), string reportcategoryidunique = default(string), object createdon = default(object), string _modifiedonbehalfbyValue = default(string), object exchangerate = default(object), string reportcategoryid = default(string), object modifiedon = default(object), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string owningbusinessunit = default(string), bool? ismanaged = default(bool?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), string solutionid = default(string), int? categorycode = default(int?), string _reportidValue = default(string), string owninguser = default(string), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMreportcategory(int? componentstate = default(int?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _createdonbehalfbyValue = default(string), long? versionnumber = default(long?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string reportcategoryidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), object exchangerate = default(object), string reportcategoryid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string owningbusinessunit = default(string), bool? ismanaged = default(bool?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), string solutionid = default(string), int? categorycode = default(int?), string _reportidValue = default(string), string owninguser = default(string), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Componentstate = componentstate;
             Importsequencenumber = importsequencenumber;
@@ -100,12 +103,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,7 +118,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -135,7 +138,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

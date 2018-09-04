@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// leadproduct
+    /// </summary>
     public partial class MicrosoftDynamicsCRMleadproduct
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMleadproduct
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadproduct(string leadproductid = default(string), string productid = default(string), string leadid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMleadproduct(string leadproductid = default(string), string productid = default(string), string leadid = default(string), long? versionnumber = default(long?))
         {
             Leadproductid = leadproductid;
             Productid = productid;
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMOneToManyRelationshipMetadata : MicrosoftDynamicsCRMRelationshipMetadataBase
+    /// <summary>
+    /// OneToManyRelationshipMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMOneToManyRelationshipMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,12 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOneToManyRelationshipMetadata class.
         /// </summary>
-        /// <param name="securityTypes">Possible values include: 'None',
-        /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
-        /// <param name="relationshipType">Possible values include:
-        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
-        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string), MicrosoftDynamicsCRMAssociatedMenuConfiguration associatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMCascadeConfiguration cascadeConfiguration = default(MicrosoftDynamicsCRMCascadeConfiguration), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata))
-            : base(metadataId, hasChanged, isCustomRelationship, isCustomizable, isValidForAdvancedFind, schemaName, securityTypes, isManaged, relationshipType, introducedVersion)
+        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(MicrosoftDynamicsCRMAssociatedMenuConfiguration associatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMCascadeConfiguration cascadeConfiguration = default(MicrosoftDynamicsCRMCascadeConfiguration), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata))
         {
             AssociatedMenuConfiguration = associatedMenuConfiguration;
             CascadeConfiguration = cascadeConfiguration;

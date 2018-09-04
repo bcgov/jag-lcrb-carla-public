@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAuditPartitionDetail class.
         /// </summary>
-        public MicrosoftDynamicsCRMAuditPartitionDetail(int? partitionNumber = default(int?), object startDate = default(object), object endDate = default(object), string size = default(string))
+        public MicrosoftDynamicsCRMAuditPartitionDetail(int? partitionNumber = default(int?), System.DateTimeOffset? startDate = default(System.DateTimeOffset?), System.DateTimeOffset? endDate = default(System.DateTimeOffset?), long? size = default(long?))
         {
             PartitionNumber = partitionNumber;
             StartDate = startDate;
@@ -49,17 +49,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "StartDate")]
-        public object StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "EndDate")]
-        public object EndDate { get; set; }
+        public System.DateTimeOffset? EndDate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Size")]
-        public string Size { get; set; }
+        public long? Size { get; set; }
 
     }
 }

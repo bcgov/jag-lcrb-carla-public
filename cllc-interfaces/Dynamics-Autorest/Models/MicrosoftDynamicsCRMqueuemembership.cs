@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// queuemembership
+    /// </summary>
     public partial class MicrosoftDynamicsCRMqueuemembership
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMqueuemembership class.
         /// </summary>
-        public MicrosoftDynamicsCRMqueuemembership(string queueid = default(string), string queuemembershipid = default(string), string versionnumber = default(string), string systemuserid = default(string))
+        public MicrosoftDynamicsCRMqueuemembership(string queueid = default(string), string queuemembershipid = default(string), long? versionnumber = default(long?), string systemuserid = default(string))
         {
             Queueid = queueid;
             Queuemembershipid = queuemembershipid;
@@ -51,7 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

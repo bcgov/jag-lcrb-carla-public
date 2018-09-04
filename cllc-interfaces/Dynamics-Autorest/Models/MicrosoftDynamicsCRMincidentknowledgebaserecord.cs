@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// incidentknowledgebaserecord
+    /// </summary>
     public partial class MicrosoftDynamicsCRMincidentknowledgebaserecord
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMincidentknowledgebaserecord class.
         /// </summary>
-        public MicrosoftDynamicsCRMincidentknowledgebaserecord(string knowledgebaserecordid = default(string), string incidentid = default(string), string versionnumber = default(string), string incidentknowledgebaserecordid = default(string))
+        public MicrosoftDynamicsCRMincidentknowledgebaserecord(string knowledgebaserecordid = default(string), string incidentid = default(string), long? versionnumber = default(long?), string incidentknowledgebaserecordid = default(string))
         {
             Knowledgebaserecordid = knowledgebaserecordid;
             Incidentid = incidentid;
@@ -51,7 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// tracelog
+    /// </summary>
     public partial class MicrosoftDynamicsCRMtracelog
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMtracelog
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMtracelog(string tracelogid = default(string), int? level = default(int?), string _regardingobjectidValue = default(string), string traceparameterxml = default(string), string _regardingobjectowneridValue = default(string), string text = default(string), string tracedetailxml = default(string), string _regardingobjectowningbusinessunitValue = default(string), string errordetails = default(string), string _modifiedonbehalfbyValue = default(string), string machinename = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string traceactionxml = default(string), string _organizationidValue = default(string), object modifiedon = default(object), bool? tracestatus = default(bool?), int? collationlevel = default(int?), int? utcconversiontimezonecode = default(int?), string errortypedisplay = default(string), int? tracecode = default(int?), bool? isunique = default(bool?), string _parenttracelogidValue = default(string), int? traceparameterhash = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), object createdon = default(object), bool? canbedeleted = default(bool?), MicrosoftDynamicsCRMmailbox regardingobjectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtracelog parenttracelogid = default(MicrosoftDynamicsCRMtracelog), IList<MicrosoftDynamicsCRMtracelog> tracelogParentTracelog = default(IList<MicrosoftDynamicsCRMtracelog>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMemailserverprofile regardingobjectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile))
+        public MicrosoftDynamicsCRMtracelog(string tracelogid = default(string), int? level = default(int?), string _regardingobjectidValue = default(string), string traceparameterxml = default(string), string _regardingobjectowneridValue = default(string), string text = default(string), string tracedetailxml = default(string), string _regardingobjectowningbusinessunitValue = default(string), string errordetails = default(string), string _modifiedonbehalfbyValue = default(string), string machinename = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string traceactionxml = default(string), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? tracestatus = default(bool?), int? collationlevel = default(int?), int? utcconversiontimezonecode = default(int?), string errortypedisplay = default(string), int? tracecode = default(int?), bool? isunique = default(bool?), string _parenttracelogidValue = default(string), int? traceparameterhash = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? canbedeleted = default(bool?), MicrosoftDynamicsCRMmailbox regardingobjectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtracelog parenttracelogid = default(MicrosoftDynamicsCRMtracelog), IList<MicrosoftDynamicsCRMtracelog> tracelogParentTracelog = default(IList<MicrosoftDynamicsCRMtracelog>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMemailserverprofile regardingobjectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile))
         {
             Tracelogid = tracelogid;
             Level = level;
@@ -151,7 +154,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -206,7 +209,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// monthlyfiscalcalendar
+    /// </summary>
     public partial class MicrosoftDynamicsCRMmonthlyfiscalcalendar
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmonthlyfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(object month8 = default(object), object month12Base = default(object), object month10Base = default(object), object exchangerate = default(object), string _createdonbehalfbyValue = default(string), object month6Base = default(object), object month9Base = default(object), string _salespersonidValue = default(string), object month9 = default(object), int? fiscalperiodtype = default(int?), object month4Base = default(object), string _createdbyValue = default(string), object month3Base = default(object), object month12 = default(object), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), int? utcconversiontimezonecode = default(int?), object month11Base = default(object), object month2 = default(object), string _modifiedbyValue = default(string), object month5 = default(object), object month7 = default(object), object month1 = default(object), object month6 = default(object), object modifiedon = default(object), int? timezoneruleversionnumber = default(int?), object month11 = default(object), object createdon = default(object), object effectiveon = default(object), object month8Base = default(object), object month7Base = default(object), object month10 = default(object), object month5Base = default(object), object month2Base = default(object), object month3 = default(object), object month1Base = default(object), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), object month4 = default(object), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(object month8 = default(object), object month12Base = default(object), object month10Base = default(object), object exchangerate = default(object), string _createdonbehalfbyValue = default(string), object month6Base = default(object), object month9Base = default(object), string _salespersonidValue = default(string), object month9 = default(object), int? fiscalperiodtype = default(int?), object month4Base = default(object), string _createdbyValue = default(string), object month3Base = default(object), object month12 = default(object), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), int? utcconversiontimezonecode = default(int?), object month11Base = default(object), object month2 = default(object), string _modifiedbyValue = default(string), object month5 = default(object), object month7 = default(object), object month1 = default(object), object month6 = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), object month11 = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), object month8Base = default(object), object month7Base = default(object), object month10 = default(object), object month5Base = default(object), object month2Base = default(object), object month3 = default(object), object month1Base = default(object), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), object month4 = default(object), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Month8 = month8;
             Month12Base = month12Base;
@@ -206,7 +209,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -221,12 +224,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "effectiveon")]
-        public object Effectiveon { get; set; }
+        public System.DateTimeOffset? Effectiveon { get; set; }
 
         /// <summary>
         /// </summary>

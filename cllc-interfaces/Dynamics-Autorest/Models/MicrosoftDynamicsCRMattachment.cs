@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// attachment
+    /// </summary>
     public partial class MicrosoftDynamicsCRMattachment
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMattachment
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMattachment(string mimetype = default(string), string filename = default(string), string attachmentid = default(string), string body = default(string), object bodyBinary = default(object), int? filesize = default(int?), string subject = default(string), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
+        public MicrosoftDynamicsCRMattachment(string mimetype = default(string), string filename = default(string), string attachmentid = default(string), string body = default(string), object bodyBinary = default(object), int? filesize = default(int?), string subject = default(string), long? versionnumber = default(long?), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
         {
             Mimetype = mimetype;
             Filename = filename;
@@ -84,7 +87,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

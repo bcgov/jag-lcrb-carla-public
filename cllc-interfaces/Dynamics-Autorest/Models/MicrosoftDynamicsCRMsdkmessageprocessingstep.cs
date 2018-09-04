@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// sdkmessageprocessingstep
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsdkmessageprocessingstep
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsdkmessageprocessingstep class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessageprocessingstep(string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepid = default(string), string _sdkmessagefilteridValue = default(string), string introducedversion = default(string), string _sdkmessageidValue = default(string), int? componentstate = default(int?), string configuration = default(string), int? customizationlevel = default(int?), int? statecode = default(int?), int? mode = default(int?), string _createdonbehalfbyValue = default(string), object overwritetime = default(object), string _modifiedbyValue = default(string), string solutionid = default(string), bool? asyncautodelete = default(bool?), object createdon = default(object), bool? canusereadonlyconnection = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _sdkmessageprocessingstepsecureconfigidValue = default(string), string name = default(string), object modifiedon = default(object), int? stage = default(int?), string filteringattributes = default(string), string versionnumber = default(string), int? supporteddeployment = default(int?), bool? ismanaged = default(bool?), string sdkmessageprocessingstepidunique = default(string), string _eventhandlerValue = default(string), int? rank = default(int?), string _impersonatinguseridValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string description = default(string), MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig sdkmessageprocessingstepsecureconfigid = default(MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessagefilter sdkmessagefilterid = default(MicrosoftDynamicsCRMsdkmessagefilter), MicrosoftDynamicsCRMsystemuser impersonatinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype eventhandlerPlugintype = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMasyncoperation> sdkMessageProcessingStepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> sdkmessageprocessingstepidSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), MicrosoftDynamicsCRMserviceendpoint eventhandlerServiceendpoint = default(MicrosoftDynamicsCRMserviceendpoint))
+        public MicrosoftDynamicsCRMsdkmessageprocessingstep(string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepid = default(string), string _sdkmessagefilteridValue = default(string), string introducedversion = default(string), string _sdkmessageidValue = default(string), int? componentstate = default(int?), string configuration = default(string), int? customizationlevel = default(int?), int? statecode = default(int?), int? mode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string solutionid = default(string), bool? asyncautodelete = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? canusereadonlyconnection = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _sdkmessageprocessingstepsecureconfigidValue = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? stage = default(int?), string filteringattributes = default(string), long? versionnumber = default(long?), int? supporteddeployment = default(int?), bool? ismanaged = default(bool?), string sdkmessageprocessingstepidunique = default(string), string _eventhandlerValue = default(string), int? rank = default(int?), string _impersonatinguseridValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string description = default(string), MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig sdkmessageprocessingstepsecureconfigid = default(MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessagefilter sdkmessagefilterid = default(MicrosoftDynamicsCRMsdkmessagefilter), MicrosoftDynamicsCRMsystemuser impersonatinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype eventhandlerPlugintype = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMasyncoperation> sdkMessageProcessingStepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> sdkmessageprocessingstepidSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), MicrosoftDynamicsCRMserviceendpoint eventhandlerServiceendpoint = default(MicrosoftDynamicsCRMserviceendpoint))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._organizationidValue = _organizationidValue;
@@ -148,7 +151,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,7 +171,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -193,7 +196,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -208,7 +211,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

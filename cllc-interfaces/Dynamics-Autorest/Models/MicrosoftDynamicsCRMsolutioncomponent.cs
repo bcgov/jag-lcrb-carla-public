@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// solutioncomponent
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsolutioncomponent
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsolutioncomponent class.
         /// </summary>
-        public MicrosoftDynamicsCRMsolutioncomponent(object modifiedon = default(object), object createdon = default(object), int? componenttype = default(int?), int? rootcomponentbehavior = default(int?), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), bool? ismetadata = default(bool?), string rootsolutioncomponentid = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string _solutionidValue = default(string), string _modifiedbyValue = default(string), string solutioncomponentid = default(string), string objectid = default(string), MicrosoftDynamicsCRMsolution solutionid = default(MicrosoftDynamicsCRMsolution), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsolutioncomponent rootsolutioncomponentidSolutioncomponent = default(MicrosoftDynamicsCRMsolutioncomponent), IList<MicrosoftDynamicsCRMsolutioncomponent> solutioncomponentParentSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>))
+        public MicrosoftDynamicsCRMsolutioncomponent(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? componenttype = default(int?), int? rootcomponentbehavior = default(int?), long? versionnumber = default(long?), string _modifiedonbehalfbyValue = default(string), bool? ismetadata = default(bool?), string rootsolutioncomponentid = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string _solutionidValue = default(string), string _modifiedbyValue = default(string), string solutioncomponentid = default(string), string objectid = default(string), MicrosoftDynamicsCRMsolution solutionid = default(MicrosoftDynamicsCRMsolution), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsolutioncomponent rootsolutioncomponentidSolutioncomponent = default(MicrosoftDynamicsCRMsolutioncomponent), IList<MicrosoftDynamicsCRMsolutioncomponent> solutioncomponentParentSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>))
         {
             Modifiedon = modifiedon;
             Createdon = createdon;
@@ -58,12 +61,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -78,7 +81,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

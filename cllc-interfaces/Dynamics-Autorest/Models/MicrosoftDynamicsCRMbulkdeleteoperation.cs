@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// bulkdeleteoperation
+    /// </summary>
     public partial class MicrosoftDynamicsCRMbulkdeleteoperation
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbulkdeleteoperation class.
         /// </summary>
-        public MicrosoftDynamicsCRMbulkdeleteoperation(int? successcount = default(int?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), int? statuscode = default(int?), bool? isrecurring = default(bool?), object createdon = default(object), int? processingqeindex = default(int?), int? failurecount = default(int?), object nextrun = default(object), string _owninguserValue = default(string), string orderedquerysetxml = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), object modifiedon = default(object), int? utcconversiontimezonecode = default(int?), string name = default(string), string bulkdeleteoperationid = default(string), string _asyncoperationidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationid = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkDeleteOperationBulkDeleteFailure = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMbulkdeleteoperation(int? successcount = default(int?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), int? statuscode = default(int?), bool? isrecurring = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? processingqeindex = default(int?), int? failurecount = default(int?), System.DateTimeOffset? nextrun = default(System.DateTimeOffset?), string _owninguserValue = default(string), string orderedquerysetxml = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string name = default(string), string bulkdeleteoperationid = default(string), string _asyncoperationidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationid = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkDeleteOperationBulkDeleteFailure = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Successcount = successcount;
             this._createdbyValue = _createdbyValue;
@@ -98,7 +101,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,7 +116,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "nextrun")]
-        public object Nextrun { get; set; }
+        public System.DateTimeOffset? Nextrun { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,7 +141,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_licencetypestep
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioLicencetypestep
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicencetypestep class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLicencetypestep(string adoxioName = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), string versionnumber = default(string), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), bool? adoxioDisableuntilprerequisitescomplete = default(bool?), string _createdbyValue = default(string), string _owningteamValue = default(string), int? importsequencenumber = default(int?), object createdon = default(object), string adoxioLicencetypestepid = default(string), string _adoxioLicencetypeValue = default(string), string _owningbusinessunitValue = default(string), string _adoxioModuleValue = default(string), object overriddencreatedon = default(object), object modifiedon = default(object), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? adoxioDisplayorder = default(int?), string adoxioStepinstructiontitle = default(string), string adoxioStepinstructions = default(string), string _owninguserValue = default(string), bool? adoxioDisableprerequisitesuponcompletion = default(bool?), string _owneridValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencetypestepSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencetypestepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencetypestepBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplicationmodule adoxioModule = default(MicrosoftDynamicsCRMadoxioApplicationmodule), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMadoxioApplicantstep> adoxioLicencetypestepAdoxioApplicantstepLicenceTypeStep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationLastCompletedStep = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationMarkStepIncomplete = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisiteAppliesTo = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisitePrerequisiteStep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>))
+        public MicrosoftDynamicsCRMadoxioLicencetypestep(string adoxioName = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), long? versionnumber = default(long?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), bool? adoxioDisableuntilprerequisitescomplete = default(bool?), string _createdbyValue = default(string), string _owningteamValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioLicencetypestepid = default(string), string _adoxioLicencetypeValue = default(string), string _owningbusinessunitValue = default(string), string _adoxioModuleValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? adoxioDisplayorder = default(int?), string adoxioStepinstructiontitle = default(string), string adoxioStepinstructions = default(string), string _owninguserValue = default(string), bool? adoxioDisableprerequisitesuponcompletion = default(bool?), string _owneridValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencetypestepSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencetypestepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencetypestepBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplicationmodule adoxioModule = default(MicrosoftDynamicsCRMadoxioApplicationmodule), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMadoxioApplicantstep> adoxioLicencetypestepAdoxioApplicantstepLicenceTypeStep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationLastCompletedStep = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationMarkStepIncomplete = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisiteAppliesTo = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisitePrerequisiteStep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>))
         {
             AdoxioName = adoxioName;
             this._modifiedbyValue = _modifiedbyValue;
@@ -100,7 +103,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -135,7 +138,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,12 +163,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

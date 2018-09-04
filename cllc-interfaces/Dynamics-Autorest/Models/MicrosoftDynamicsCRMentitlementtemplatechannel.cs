@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// entitlementtemplatechannel
+    /// </summary>
     public partial class MicrosoftDynamicsCRMentitlementtemplatechannel
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementtemplatechannel class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementtemplatechannel(string _entitlementtemplateidValue = default(string), string entitlementtemplatechannelid = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), string versionnumber = default(string), object exchangerate = default(object), object overriddencreatedon = default(object), string name = default(string), string _modifiedonbehalfbyValue = default(string), object totalterms = default(object), object modifiedon = default(object), int? channel = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), object createdon = default(object), string _organizationidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMentitlementtemplatechannel(string _entitlementtemplateidValue = default(string), string entitlementtemplatechannelid = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), long? versionnumber = default(long?), object exchangerate = default(object), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string name = default(string), string _modifiedonbehalfbyValue = default(string), object totalterms = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? channel = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._entitlementtemplateidValue = _entitlementtemplateidValue;
             Entitlementtemplatechannelid = entitlementtemplatechannelid;
@@ -98,7 +101,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,7 +111,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -128,7 +131,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,7 +151,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
