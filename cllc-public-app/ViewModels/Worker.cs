@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string email { get; set; }
         public bool selfdisclosure { get; set; }
         public bool triggerphs { get; set; }
-        public string contactId { get; set; }
+        public Contact contact { get; set; }
         public bool paymentReceived { get; set; }
         public DateTimeOffset? paymentRecievedDate { get; set; }
         public string workerId { get; set; }
