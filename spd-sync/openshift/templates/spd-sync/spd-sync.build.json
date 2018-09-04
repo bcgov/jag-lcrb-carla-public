@@ -61,14 +61,6 @@
               {
                 "name": "DOTNET_STARTUP_PROJECT",
                 "value": "${DOTNET_STARTUP_PROJECT}"
-              },
-			  {
-                "name": "UAT_BUILD",
-                "value": "${UAT_BUILD}"
-              },
-			  {
-                "name": "PROD_BUILD",
-                "value": "${PROD_BUILD}"
               }
             ]
           }
@@ -185,18 +177,6 @@
       "description": "The resources Memory request (in Mi, Gi, etc) for this build.",
       "required": true,
       "value": "4Gi"
-    },
-	{
-      "name": "UAT_BUILD",
-      "displayName": "UAT Build",
-      "description": "1 if true",      
-      "value": ""
-    },
-	{
-      "name": "PROD_BUILD",
-      "displayName": "UAT Build",
-      "description": "1 if true",      
-      "value": ""
-    }     
+    }
   ]
 }
