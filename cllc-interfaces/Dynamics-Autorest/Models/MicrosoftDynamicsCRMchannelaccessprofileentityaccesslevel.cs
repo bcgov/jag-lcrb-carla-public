@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// channelaccessprofileentityaccesslevel
+    /// </summary>
     public partial class MicrosoftDynamicsCRMchannelaccessprofileentityaccesslevel
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMchannelaccessprofileentityaccesslevel class.
         /// </summary>
-        public MicrosoftDynamicsCRMchannelaccessprofileentityaccesslevel(string channelaccessprofileentityaccesslevelid = default(string), object overwritetime = default(object), string versionnumber = default(string), string entityaccesslevelid = default(string), string channelaccessprofileid = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), string channelaccessprofileentityaccesslevelidunique = default(string), int? componentstate = default(int?), int? entityaccessleveldepthmask = default(int?))
+        public MicrosoftDynamicsCRMchannelaccessprofileentityaccesslevel(string channelaccessprofileentityaccesslevelid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), long? versionnumber = default(long?), string entityaccesslevelid = default(string), string channelaccessprofileid = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), string channelaccessprofileentityaccesslevelidunique = default(string), int? componentstate = default(int?), int? entityaccessleveldepthmask = default(int?))
         {
             Channelaccessprofileentityaccesslevelid = channelaccessprofileentityaccesslevelid;
             Overwritetime = overwritetime;
@@ -52,12 +55,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

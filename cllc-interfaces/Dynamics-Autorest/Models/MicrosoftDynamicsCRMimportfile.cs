@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// importfile
+    /// </summary>
     public partial class MicrosoftDynamicsCRMimportfile
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportfile
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportfile(int? totalcount = default(int?), string targetentityname = default(string), string parsedtablename = default(string), object completedon = default(object), string additionalheaderrow = default(string), bool? isfirstrowheader = default(bool?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string content = default(string), string source = default(string), int? fielddelimitercode = default(int?), string importfileid = default(string), string _modifiedonbehalfbyValue = default(string), int? partialfailurecount = default(int?), string _importmapidValue = default(string), string size = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablecolumnprefix = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), bool? usesystemmap = default(bool?), string _owninguserValue = default(string), int? datadelimitercode = default(int?), string sourceentityname = default(string), string _importidValue = default(string), bool? enableduplicatedetection = default(bool?), string _createdonbehalfbyValue = default(string), object createdon = default(object), int? filetypecode = default(int?), int? failurecount = default(int?), string relatedentitycolumns = default(string), int? processingstatus = default(int?), int? utcconversiontimezonecode = default(int?), object modifiedon = default(object), string name = default(string), string _owneridValue = default(string), string headerrow = default(string), string _owningteamValue = default(string), int? processcode = default(int?), int? successcount = default(int?), int? parsedtablecolumnsnumber = default(int?), int? progresscounter = default(int?), string _recordsowneridValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
+        public MicrosoftDynamicsCRMimportfile(int? totalcount = default(int?), string targetentityname = default(string), string parsedtablename = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string additionalheaderrow = default(string), bool? isfirstrowheader = default(bool?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string content = default(string), string source = default(string), int? fielddelimitercode = default(int?), string importfileid = default(string), string _modifiedonbehalfbyValue = default(string), int? partialfailurecount = default(int?), string _importmapidValue = default(string), string size = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablecolumnprefix = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), bool? usesystemmap = default(bool?), string _owninguserValue = default(string), int? datadelimitercode = default(int?), string sourceentityname = default(string), string _importidValue = default(string), bool? enableduplicatedetection = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? filetypecode = default(int?), int? failurecount = default(int?), string relatedentitycolumns = default(string), int? processingstatus = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _owneridValue = default(string), string headerrow = default(string), string _owningteamValue = default(string), int? processcode = default(int?), int? successcount = default(int?), int? parsedtablecolumnsnumber = default(int?), int? progresscounter = default(int?), string _recordsowneridValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
         {
             Totalcount = totalcount;
             Targetentityname = targetentityname;
@@ -114,7 +117,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "completedon")]
-        public object Completedon { get; set; }
+        public System.DateTimeOffset? Completedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -239,7 +242,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -269,7 +272,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

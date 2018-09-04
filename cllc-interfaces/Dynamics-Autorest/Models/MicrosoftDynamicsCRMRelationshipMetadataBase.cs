@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMRelationshipMetadataBase : MicrosoftDynamicsCRMMetadataBase
+    /// <summary>
+    /// RelationshipMetadataBase
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMRelationshipMetadataBase
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -28,8 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
         /// <param name="relationshipType">Possible values include:
         /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
-        public MicrosoftDynamicsCRMRelationshipMetadataBase(string metadataId = default(string), bool? hasChanged = default(bool?), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string))
-            : base(metadataId, hasChanged)
+        public MicrosoftDynamicsCRMRelationshipMetadataBase(bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string))
         {
             IsCustomRelationship = isCustomRelationship;
             IsCustomizable = isCustomizable;

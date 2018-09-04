@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// customcontrolresource
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcustomcontrolresource
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcustomcontrolresource class.
         /// </summary>
-        public MicrosoftDynamicsCRMcustomcontrolresource(string _organizationidValue = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string customcontrolresourceidunique = default(string), object modifiedon = default(object), string versionrequirement = default(string), string _createdonbehalfbyValue = default(string), string customcontrolresourceid = default(string), string webresourceid = default(string), string name = default(string), object overwritetime = default(object), string solutionid = default(string), string _modifiedonbehalfbyValue = default(string), string customcontrolid = default(string), string _createdbyValue = default(string), string introducedversion = default(string), int? componentstate = default(int?), string versionnumber = default(string), string version = default(string), object createdon = default(object), MicrosoftDynamicsCRMcustomcontrol customcontrolidCustomcontrol = default(MicrosoftDynamicsCRMcustomcontrol), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcustomcontrolresource(string _organizationidValue = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string customcontrolresourceidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionrequirement = default(string), string _createdonbehalfbyValue = default(string), string customcontrolresourceid = default(string), string webresourceid = default(string), string name = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string _modifiedonbehalfbyValue = default(string), string customcontrolid = default(string), string _createdbyValue = default(string), string introducedversion = default(string), int? componentstate = default(int?), long? versionnumber = default(long?), string version = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMcustomcontrol customcontrolidCustomcontrol = default(MicrosoftDynamicsCRMcustomcontrol), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
             this._modifiedbyValue = _modifiedbyValue;
@@ -83,7 +86,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,7 +116,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,7 +151,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,7 +161,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
