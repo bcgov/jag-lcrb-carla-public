@@ -37,7 +37,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.email = worker.AdoxioEmail;
                 result.selfdisclosure = worker.AdoxioSelfdisclosure == 1;
                 result.triggerphs = worker.AdoxioTriggerphs == 1;
-                result.contactId = worker._adoxioContactidValue;
+                if (worker.AdoxioContactId != null)
+                {
+                    result.contact = worker.AdoxioContactId.ToViewModel();
+                }
                 result.paymentReceived = worker.AdoxioPaymentreceived == 1;
                 result.paymentRecievedDate = worker.AdoxioPaymentreceiveddate;
                 result.workerId = worker.AdoxioWorkerid;
@@ -61,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEmail = from.email;
             to.AdoxioSelfdisclosure = from.selfdisclosure ? 1 : 0;
             to.AdoxioTriggerphs = from.triggerphs ? 1 : 0;
-            to._adoxioContactidValue = from.contactId;
+            //to._adoxioContactidValue = from.contactId;
             to.AdoxioPaymentreceived = from.paymentReceived ? 1 : 0;
             to.AdoxioPaymentreceiveddate = from.paymentRecievedDate;
             to.AdoxioWorkerid = from.workerId;

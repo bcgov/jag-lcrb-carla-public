@@ -53,11 +53,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         result.Add(a.ToViewModel());
                     });
-                    
-                }
-                else
-                {
-                    return new NotFoundResult();
                 }
             }
             else
