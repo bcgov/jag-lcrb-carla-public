@@ -33,7 +33,7 @@ export class BceidConfirmationComponent {
     // if this passes, this means the user's account exists but it's contact information has not been created.
     // user will skip the BCeid confirmation.
     this.busySubscription = this.accountDataService.getCurrentAccount().subscribe((data) => {
-      let account = data.json();
+      let account = data;
       this.createContact(account);
     },
     error => {

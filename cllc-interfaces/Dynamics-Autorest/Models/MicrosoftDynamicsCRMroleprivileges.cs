@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// roleprivileges
+    /// </summary>
     public partial class MicrosoftDynamicsCRMroleprivileges
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMroleprivileges class.
         /// </summary>
-        public MicrosoftDynamicsCRMroleprivileges(string privilegeid = default(string), int? privilegedepthmask = default(int?), string versionnumber = default(string), bool? ismanaged = default(bool?), string roleprivilegeidunique = default(string), int? componentstate = default(int?), object overwritetime = default(object), string roleprivilegeid = default(string), string solutionid = default(string), string roleid = default(string))
+        public MicrosoftDynamicsCRMroleprivileges(string privilegeid = default(string), int? privilegedepthmask = default(int?), long? versionnumber = default(long?), bool? ismanaged = default(bool?), string roleprivilegeidunique = default(string), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string roleprivilegeid = default(string), string solutionid = default(string), string roleid = default(string))
         {
             Privilegeid = privilegeid;
             Privilegedepthmask = privilegedepthmask;
@@ -57,7 +60,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -77,7 +80,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

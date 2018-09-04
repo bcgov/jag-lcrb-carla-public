@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// campaignactivityitem
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcampaignactivityitem
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignactivityitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignactivityitem(string owningbusinessunit = default(string), string _owneridValue = default(string), string itemid = default(string), string versionnumber = default(string), string owninguser = default(string), string _campaignactivityidValue = default(string), string itemobjecttypecode = default(string), string campaignactivityitemid = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
+        public MicrosoftDynamicsCRMcampaignactivityitem(string owningbusinessunit = default(string), string _owneridValue = default(string), string itemid = default(string), long? versionnumber = default(long?), string owninguser = default(string), string _campaignactivityidValue = default(string), string itemobjecttypecode = default(string), string campaignactivityitemid = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
         {
             Owningbusinessunit = owningbusinessunit;
             this._owneridValue = _owneridValue;
@@ -61,7 +64,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

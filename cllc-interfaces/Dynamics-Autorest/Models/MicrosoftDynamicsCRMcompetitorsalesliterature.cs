@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// competitorsalesliterature
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcompetitorsalesliterature
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcompetitorsalesliterature class.
         /// </summary>
-        public MicrosoftDynamicsCRMcompetitorsalesliterature(string competitorid = default(string), string salesliteratureid = default(string), string versionnumber = default(string), string competitorsalesliteratureid = default(string))
+        public MicrosoftDynamicsCRMcompetitorsalesliterature(string competitorid = default(string), string salesliteratureid = default(string), long? versionnumber = default(long?), string competitorsalesliteratureid = default(string))
         {
             Competitorid = competitorid;
             Salesliteratureid = salesliteratureid;
@@ -51,7 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

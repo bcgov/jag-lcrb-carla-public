@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// exchangesyncidmapping
+    /// </summary>
     public partial class MicrosoftDynamicsCRMexchangesyncidmapping
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMexchangesyncidmapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMexchangesyncidmapping(int? objecttypecode = default(int?), object modifiedon = default(object), object lastsyncerroroccurredon = default(object), string objectid = default(string), string _owninguserValue = default(string), int? tocrmchangetype = default(int?), int? retries = default(int?), string itemsubject = default(string), bool? isdeletedinexchange = default(bool?), string versionnumber = default(string), int? lastsyncerrorcode = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? isunlinkedincrm = default(bool?), string _owningteamValue = default(string), string exchangesyncidmappingid = default(string), int? fromcrmchangetype = default(int?), int? userdecision = default(int?), string exchangeentryid = default(string), string lastsyncerror = default(string), object createdon = default(object), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMexchangesyncidmapping(int? objecttypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), string objectid = default(string), string _owninguserValue = default(string), int? tocrmchangetype = default(int?), int? retries = default(int?), string itemsubject = default(string), bool? isdeletedinexchange = default(bool?), long? versionnumber = default(long?), int? lastsyncerrorcode = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? isunlinkedincrm = default(bool?), string _owningteamValue = default(string), string exchangesyncidmappingid = default(string), int? fromcrmchangetype = default(int?), int? userdecision = default(int?), string exchangeentryid = default(string), string lastsyncerror = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
             Objecttypecode = objecttypecode;
             Modifiedon = modifiedon;
@@ -67,12 +70,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "lastsyncerroroccurredon")]
-        public object Lastsyncerroroccurredon { get; set; }
+        public System.DateTimeOffset? Lastsyncerroroccurredon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,7 +110,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,7 +165,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

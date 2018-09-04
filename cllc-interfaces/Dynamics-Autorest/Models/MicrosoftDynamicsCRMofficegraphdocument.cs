@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// officegraphdocument
+    /// </summary>
     public partial class MicrosoftDynamicsCRMofficegraphdocument
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMofficegraphdocument class.
         /// </summary>
-        public MicrosoftDynamicsCRMofficegraphdocument(string previewimageurl = default(string), object modifiedtime = default(object), string fileextension = default(string), string readurl = default(string), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), string officegraphdocumentid = default(string), object exchangerate = default(object), object createdtime = default(object), string weblocationurl = default(string), string secondaryfileextension = default(string), int? rank = default(int?), string modifiedby = default(string), object documentlastmodifiedon = default(object), string authornames = default(string), string siteurl = default(string), string title = default(string), string createdby = default(string), string documentlastmodifiedby = default(string), string _modifiedonbehalfbyValue = default(string), string documentpreviewmetadata = default(string), int? querytype = default(int?), string documentid = default(string), int? viewcount = default(int?), string sitetitle = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string filetype = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMofficegraphdocument(string previewimageurl = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string fileextension = default(string), string readurl = default(string), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), string officegraphdocumentid = default(string), object exchangerate = default(object), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string weblocationurl = default(string), string secondaryfileextension = default(string), int? rank = default(int?), string modifiedby = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string authornames = default(string), string siteurl = default(string), string title = default(string), string createdby = default(string), string documentlastmodifiedby = default(string), string _modifiedonbehalfbyValue = default(string), string documentpreviewmetadata = default(string), int? querytype = default(int?), string documentid = default(string), int? viewcount = default(int?), string sitetitle = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string filetype = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Previewimageurl = previewimageurl;
             Modifiedtime = modifiedtime;
@@ -76,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedtime")]
-        public object Modifiedtime { get; set; }
+        public System.DateTimeOffset? Modifiedtime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -111,7 +114,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdtime")]
-        public object Createdtime { get; set; }
+        public System.DateTimeOffset? Createdtime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -136,7 +139,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "documentlastmodifiedon")]
-        public object Documentlastmodifiedon { get; set; }
+        public System.DateTimeOffset? Documentlastmodifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -211,7 +214,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

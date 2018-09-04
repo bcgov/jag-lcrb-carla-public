@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// knowledgearticlescategories
+    /// </summary>
     public partial class MicrosoftDynamicsCRMknowledgearticlescategories
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMknowledgearticlescategories class.
         /// </summary>
-        public MicrosoftDynamicsCRMknowledgearticlescategories(string knowledgearticlecategoryid = default(string), string categoryid = default(string), string knowledgearticleid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMknowledgearticlescategories(string knowledgearticlecategoryid = default(string), string categoryid = default(string), string knowledgearticleid = default(string), long? versionnumber = default(long?))
         {
             Knowledgearticlecategoryid = knowledgearticlecategoryid;
             Categoryid = categoryid;
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

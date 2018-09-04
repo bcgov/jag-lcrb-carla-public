@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// dataperformance
+    /// </summary>
     public partial class MicrosoftDynamicsCRMdataperformance
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdataperformance class.
         /// </summary>
-        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), int? count = default(int?), object optimizationstorage = default(object), bool? anyoptimizationavailable = default(bool?), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), object weight = default(object), string entity = default(string), object mediantime = default(object), object estimatedoptimizationimpact = default(object), string solution = default(string), string executionperiod = default(string), object mintime = default(object), string optimizationstatus = default(string), object maxtime = default(object), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), object lastoptimizationdate = default(object), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), int? count = default(int?), object optimizationstorage = default(object), bool? anyoptimizationavailable = default(bool?), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), object weight = default(object), string entity = default(string), object mediantime = default(object), object estimatedoptimizationimpact = default(object), string solution = default(string), string executionperiod = default(string), object mintime = default(object), string optimizationstatus = default(string), object maxtime = default(object), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
             Count = count;
@@ -148,7 +151,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "lastoptimizationdate")]
-        public object Lastoptimizationdate { get; set; }
+        public System.DateTimeOffset? Lastoptimizationdate { get; set; }
 
         /// <summary>
         /// </summary>

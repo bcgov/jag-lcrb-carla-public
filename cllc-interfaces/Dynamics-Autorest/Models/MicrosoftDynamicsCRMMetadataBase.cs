@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// MetadataBase
+    /// </summary>
     public partial class MicrosoftDynamicsCRMMetadataBase
     {
         /// <summary>
