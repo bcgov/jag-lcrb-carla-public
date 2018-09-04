@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
     [Route("api/spd")]
-    public class IndexController : Controller
+    public class SpdController : Controller
     {
         private readonly IConfiguration Configuration;
         private readonly string accessToken;
         private readonly string baseUri;
 
-        public IndexController(IConfiguration configuration)
+        public SpdController(IConfiguration configuration)
         {
             Configuration = configuration;
             accessToken = Configuration["ACCESS_TOKEN"];

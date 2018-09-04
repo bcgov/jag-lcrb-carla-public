@@ -93,16 +93,17 @@ namespace Gov.Lclb.Cllb.SpdSync
                 var batch = GetBatchNumber().ToString();
                 batch = AddZeroPadding(batch);
                 var attachmentName = $@"{batch}_Worker_{datePart}.csv";
-                File.WriteAllText($@".\{attachmentName}", csv.ToString());
+                //File.WriteAllText($@".\{attachmentName}", csv.ToString());
 
                 if (SendSPDEmail(csv.ToString(), attachmentName))
                 {
                     //update exporteddate in dynamics
+                    var exportDate = DateTime.Now;
                     result.ForEach(row =>
                     {
                         var patchApplication = new MicrosoftDynamicsCRMadoxioSpddatarow()
                         {
-                            AdoxioExporteddate = DateTime.Now
+                            AdoxioExporteddate = exportDate
                         };
                         try
                         {
