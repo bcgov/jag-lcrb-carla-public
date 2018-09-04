@@ -14,8 +14,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string provstate {get; set;}
         public string country {get; set;}
         public string postalcode {get; set;}
-        public DateTime fromdate {get; set;}
-        public DateTime todate {get; set;}
+        public DateTimeOffset? fromdate {get; set;}
+        public DateTimeOffset? todate {get; set;}
         public string contactId { get; set; }
         public string workerId { get; set; }
     }
