@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// actioncarduserstate
+    /// </summary>
     public partial class MicrosoftDynamicsCRMactioncarduserstate
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactioncarduserstate class.
         /// </summary>
-        public MicrosoftDynamicsCRMactioncarduserstate(object exchangerate = default(object), int? state = default(int?), string _owneridValue = default(string), string actioncarduserstateid = default(string), string _actioncardidValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), object startdate = default(object), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMactioncarduserstate(object exchangerate = default(object), int? state = default(int?), string _owneridValue = default(string), string actioncarduserstateid = default(string), string _actioncardidValue = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Exchangerate = exchangerate;
             State = state;
@@ -76,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,7 +94,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "startdate")]
-        public object Startdate { get; set; }
+        public System.DateTimeOffset? Startdate { get; set; }
 
         /// <summary>
         /// </summary>

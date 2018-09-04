@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_contravention
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioContravention
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioContravention class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioContravention(string _adoxioViolationtypeValue = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string adoxioName = default(string), string _createdonbehalfbyValue = default(string), string adoxioManagerpenaltytext = default(string), string adoxioPenaltyexecuted = default(string), object adoxioMonetarypenaltyBase = default(object), string adoxioGmrational = default(string), string _owningteamValue = default(string), string adoxioContraventionid = default(string), int? timezoneruleversionnumber = default(int?), object createdon = default(object), string _adoxioViolationproductValue = default(string), string _adoxioComplaintValue = default(string), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), int? statuscode = default(int?), string _adoxioInvestigationValue = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), int? adoxioSuspensionpenalty = default(int?), object adoxioMonetarypenalty = default(object), string _owneridValue = default(string), int? adoxioIsalternative = default(int?), object overriddencreatedon = default(object), int? adoxioContraventionoutcome = default(int?), string _adoxioInspectionValue = default(string), object exchangerate = default(object), bool? adoxioOutcome = default(bool?), string _transactioncurrencyidValue = default(string), string adoxioWipenaltyreason = default(string), string adoxioContraventionnoticenumber = default(string), object adoxioContraventiondatetime = default(object), string _modifiedonbehalfbyValue = default(string), string adoxioOtherfactors = default(string), string versionnumber = default(string), string adoxioSection = default(string), string _modifiedbyValue = default(string), object modifiedon = default(object), string _adoxioLicenceValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMadoxioViolationnotification> adoxioAdoxioContraventionAdoxioViolationnotificationRelatedContravention = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioViolationtype adoxioViolationType = default(MicrosoftDynamicsCRMadoxioViolationtype), MicrosoftDynamicsCRMincident adoxioInspection = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMproduct adoxioViolationProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation))
+        public MicrosoftDynamicsCRMadoxioContravention(string _adoxioViolationtypeValue = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string adoxioName = default(string), string _createdonbehalfbyValue = default(string), string adoxioManagerpenaltytext = default(string), string adoxioPenaltyexecuted = default(string), object adoxioMonetarypenaltyBase = default(object), string adoxioGmrational = default(string), string _owningteamValue = default(string), string adoxioContraventionid = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioViolationproductValue = default(string), string _adoxioComplaintValue = default(string), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), int? statuscode = default(int?), string _adoxioInvestigationValue = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), int? adoxioSuspensionpenalty = default(int?), object adoxioMonetarypenalty = default(object), string _owneridValue = default(string), int? adoxioIsalternative = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioContraventionoutcome = default(int?), string _adoxioInspectionValue = default(string), object exchangerate = default(object), bool? adoxioOutcome = default(bool?), string _transactioncurrencyidValue = default(string), string adoxioWipenaltyreason = default(string), string adoxioContraventionnoticenumber = default(string), System.DateTimeOffset? adoxioContraventiondatetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string adoxioOtherfactors = default(string), long? versionnumber = default(long?), string adoxioSection = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _adoxioLicenceValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMadoxioViolationnotification> adoxioAdoxioContraventionAdoxioViolationnotificationRelatedContravention = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioViolationtype adoxioViolationType = default(MicrosoftDynamicsCRMadoxioViolationtype), MicrosoftDynamicsCRMincident adoxioInspection = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMproduct adoxioViolationProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation))
         {
             this._adoxioViolationtypeValue = _adoxioViolationtypeValue;
             Importsequencenumber = importsequencenumber;
@@ -161,7 +164,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -226,7 +229,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -266,7 +269,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_contraventiondatetime")]
-        public object AdoxioContraventiondatetime { get; set; }
+        public System.DateTimeOffset? AdoxioContraventiondatetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -281,7 +284,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -296,7 +299,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

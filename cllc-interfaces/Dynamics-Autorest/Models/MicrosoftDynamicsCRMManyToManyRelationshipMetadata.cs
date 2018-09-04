@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMManyToManyRelationshipMetadata : MicrosoftDynamicsCRMRelationshipMetadataBase
+    /// <summary>
+    /// ManyToManyRelationshipMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMManyToManyRelationshipMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,12 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMManyToManyRelationshipMetadata class.
         /// </summary>
-        /// <param name="securityTypes">Possible values include: 'None',
-        /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
-        /// <param name="relationshipType">Possible values include:
-        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
-        public MicrosoftDynamicsCRMManyToManyRelationshipMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity1AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity2AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), string entity1LogicalName = default(string), string entity2LogicalName = default(string), string intersectEntityName = default(string), string entity1IntersectAttribute = default(string), string entity2IntersectAttribute = default(string), string entity1NavigationPropertyName = default(string), string entity2NavigationPropertyName = default(string))
-            : base(metadataId, hasChanged, isCustomRelationship, isCustomizable, isValidForAdvancedFind, schemaName, securityTypes, isManaged, relationshipType, introducedVersion)
+        public MicrosoftDynamicsCRMManyToManyRelationshipMetadata(MicrosoftDynamicsCRMAssociatedMenuConfiguration entity1AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity2AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), string entity1LogicalName = default(string), string entity2LogicalName = default(string), string intersectEntityName = default(string), string entity1IntersectAttribute = default(string), string entity2IntersectAttribute = default(string), string entity1NavigationPropertyName = default(string), string entity2NavigationPropertyName = default(string))
         {
             Entity1AssociatedMenuConfiguration = entity1AssociatedMenuConfiguration;
             Entity2AssociatedMenuConfiguration = entity2AssociatedMenuConfiguration;

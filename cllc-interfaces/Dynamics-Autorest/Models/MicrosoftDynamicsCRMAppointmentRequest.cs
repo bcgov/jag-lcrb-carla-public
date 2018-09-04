@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="direction">Possible values include: 'Forward',
         /// 'Backward'</param>
-        public MicrosoftDynamicsCRMAppointmentRequest(string serviceId = default(string), int? anchorOffset = default(int?), int? userTimeZoneCode = default(int?), int? recurrenceDuration = default(int?), int? recurrenceTimeZoneCode = default(int?), IList<MicrosoftDynamicsCRMAppointmentsToIgnore> appointmentsToIgnore = default(IList<MicrosoftDynamicsCRMAppointmentsToIgnore>), IList<MicrosoftDynamicsCRMRequiredResource> requiredResources = default(IList<MicrosoftDynamicsCRMRequiredResource>), object searchWindowStart = default(object), object searchWindowEnd = default(object), object searchRecurrenceStart = default(object), string searchRecurrenceRule = default(string), int? duration = default(int?), IList<MicrosoftDynamicsCRMConstraintRelation> constraints = default(IList<MicrosoftDynamicsCRMConstraintRelation>), IList<MicrosoftDynamicsCRMObjectiveRelation> objectives = default(IList<MicrosoftDynamicsCRMObjectiveRelation>), string direction = default(string), int? numberOfResults = default(int?), IList<string> sites = default(IList<string>))
+        public MicrosoftDynamicsCRMAppointmentRequest(string serviceId = default(string), int? anchorOffset = default(int?), int? userTimeZoneCode = default(int?), int? recurrenceDuration = default(int?), int? recurrenceTimeZoneCode = default(int?), IList<MicrosoftDynamicsCRMAppointmentsToIgnore> appointmentsToIgnore = default(IList<MicrosoftDynamicsCRMAppointmentsToIgnore>), IList<MicrosoftDynamicsCRMRequiredResource> requiredResources = default(IList<MicrosoftDynamicsCRMRequiredResource>), System.DateTimeOffset? searchWindowStart = default(System.DateTimeOffset?), System.DateTimeOffset? searchWindowEnd = default(System.DateTimeOffset?), System.DateTimeOffset? searchRecurrenceStart = default(System.DateTimeOffset?), string searchRecurrenceRule = default(string), int? duration = default(int?), IList<MicrosoftDynamicsCRMConstraintRelation> constraints = default(IList<MicrosoftDynamicsCRMConstraintRelation>), IList<MicrosoftDynamicsCRMObjectiveRelation> objectives = default(IList<MicrosoftDynamicsCRMObjectiveRelation>), string direction = default(string), int? numberOfResults = default(int?), IList<string> sites = default(IList<string>))
         {
             ServiceId = serviceId;
             AnchorOffset = anchorOffset;
@@ -96,17 +96,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "SearchWindowStart")]
-        public object SearchWindowStart { get; set; }
+        public System.DateTimeOffset? SearchWindowStart { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "SearchWindowEnd")]
-        public object SearchWindowEnd { get; set; }
+        public System.DateTimeOffset? SearchWindowEnd { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "SearchRecurrenceStart")]
-        public object SearchRecurrenceStart { get; set; }
+        public System.DateTimeOffset? SearchRecurrenceStart { get; set; }
 
         /// <summary>
         /// </summary>

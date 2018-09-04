@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// contactquotes
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcontactquotes
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcontactquotes
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontactquotes(string contactquoteid = default(string), string contactid = default(string), string versionnumber = default(string), string quoteid = default(string))
+        public MicrosoftDynamicsCRMcontactquotes(string contactquoteid = default(string), string contactid = default(string), long? versionnumber = default(long?), string quoteid = default(string))
         {
             Contactquoteid = contactquoteid;
             Contactid = contactid;
@@ -51,7 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

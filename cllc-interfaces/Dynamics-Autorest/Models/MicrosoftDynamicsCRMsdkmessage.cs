@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// sdkmessage
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsdkmessage
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsdkmessage
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessage(bool? autotransact = default(bool?), bool? workflowsdkstepenabled = default(bool?), string versionnumber = default(string), string _organizationidValue = default(string), bool? isreadonly = default(bool?), int? customizationlevel = default(int?), int? availability = default(int?), object createdon = default(object), string categoryname = default(string), bool? isactive = default(bool?), object modifiedon = default(object), string _createdbyValue = default(string), string sdkmessageid = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), bool? isprivate = default(bool?), bool? isvalidforexecuteasync = default(bool?), string sdkmessageidunique = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), bool? template = default(bool?), string throttlesettings = default(string), bool? expand = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsdkmessage(bool? autotransact = default(bool?), bool? workflowsdkstepenabled = default(bool?), long? versionnumber = default(long?), string _organizationidValue = default(string), bool? isreadonly = default(bool?), int? customizationlevel = default(int?), int? availability = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string categoryname = default(string), bool? isactive = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string sdkmessageid = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), bool? isprivate = default(bool?), bool? isvalidforexecuteasync = default(bool?), string sdkmessageidunique = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), bool? template = default(bool?), string throttlesettings = default(string), bool? expand = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Autotransact = autotransact;
             Workflowsdkstepenabled = workflowsdkstepenabled;
@@ -79,7 +82,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -104,7 +107,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -119,7 +122,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
