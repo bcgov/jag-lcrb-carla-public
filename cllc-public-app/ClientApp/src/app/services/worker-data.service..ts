@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { AdoxioWorker } from '../models/adoxio-worker.model';
+import { Worker } from '../models/worker.model';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 
@@ -21,7 +21,7 @@ export class WorkerDataService {
    */
   getWorker(accountId: string) {
     const apiPath = `api/worker/${accountId}`;
-    return this.http.get<AdoxioWorker>(apiPath, { headers: this.headers })
+    return this.http.get<Worker>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError("getWorker", null)));
   }
 
@@ -30,7 +30,7 @@ export class WorkerDataService {
    * @param data - legal entity data
    */
   createWorker(data: any) {
-    return this.http.post<AdoxioWorker>('api/worker/', data, { headers: this.headers })
+    return this.http.post<Worker>('api/worker/', data, { headers: this.headers })
       .pipe(catchError(this.handleError("createWorker", null)));
   }
 
@@ -39,7 +39,7 @@ export class WorkerDataService {
    * @param data - legal entity data
    */
   updateWorker(data: any, id: string) {
-    return this.http.put<AdoxioWorker>(`api/worker/${id}`, data, { headers: this.headers })
+    return this.http.put<Worker>(`api/worker/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError("updateWorker", null)));
   }
 
@@ -48,7 +48,7 @@ export class WorkerDataService {
    * @param data - legal entity data
    */
   deleteWorker(id: string) {
-    return this.http.post<AdoxioWorker>(`api/worker/${id}/delete`, {}, { headers: this.headers })
+    return this.http.post<Worker>(`api/worker/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError("deleteWorker", null)));
   }
 
