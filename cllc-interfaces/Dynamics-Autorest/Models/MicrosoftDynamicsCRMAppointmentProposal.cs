@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAppointmentProposal class.
         /// </summary>
-        public MicrosoftDynamicsCRMAppointmentProposal(object start = default(object), object end = default(object), string siteId = default(string), string siteName = default(string), IList<MicrosoftDynamicsCRMProposalParty> proposalParties = default(IList<MicrosoftDynamicsCRMProposalParty>))
+        public MicrosoftDynamicsCRMAppointmentProposal(System.DateTimeOffset? start = default(System.DateTimeOffset?), System.DateTimeOffset? end = default(System.DateTimeOffset?), string siteId = default(string), string siteName = default(string), IList<MicrosoftDynamicsCRMProposalParty> proposalParties = default(IList<MicrosoftDynamicsCRMProposalParty>))
         {
             Start = start;
             End = end;
@@ -47,12 +47,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Start")]
-        public object Start { get; set; }
+        public System.DateTimeOffset? Start { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "End")]
-        public object End { get; set; }
+        public System.DateTimeOffset? End { get; set; }
 
         /// <summary>
         /// </summary>

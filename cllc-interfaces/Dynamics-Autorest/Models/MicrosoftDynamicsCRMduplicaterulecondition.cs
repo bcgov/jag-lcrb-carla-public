@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// duplicaterulecondition
+    /// </summary>
     public partial class MicrosoftDynamicsCRMduplicaterulecondition
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMduplicaterulecondition class.
         /// </summary>
-        public MicrosoftDynamicsCRMduplicaterulecondition(string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), string baseattributename = default(string), string _modifiedonbehalfbyValue = default(string), string matchingattributename = default(string), string _regardingobjectidValue = default(string), string owninguser = default(string), object modifiedon = default(object), object createdon = default(object), string _createdonbehalfbyValue = default(string), bool? ignoreblankvalues = default(bool?), int? operatorparam = default(int?), string owningbusinessunit = default(string), string duplicateruleconditionid = default(string), int? operatorcode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMduplicaterulecondition(string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), string baseattributename = default(string), string _modifiedonbehalfbyValue = default(string), string matchingattributename = default(string), string _regardingobjectidValue = default(string), string owninguser = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), bool? ignoreblankvalues = default(bool?), int? operatorparam = default(int?), string owningbusinessunit = default(string), string duplicateruleconditionid = default(string), int? operatorcode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             this._owneridValue = _owneridValue;
@@ -101,12 +104,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
