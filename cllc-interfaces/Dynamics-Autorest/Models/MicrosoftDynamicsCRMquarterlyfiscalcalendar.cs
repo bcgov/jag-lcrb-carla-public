@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// quarterlyfiscalcalendar
+    /// </summary>
     public partial class MicrosoftDynamicsCRMquarterlyfiscalcalendar
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMquarterlyfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMquarterlyfiscalcalendar(int? fiscalperiodtype = default(int?), object quarter4 = default(object), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), object quarter1 = default(object), object createdon = default(object), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), object quarter3 = default(object), string _salespersonidValue = default(string), string _createdonbehalfbyValue = default(string), string userfiscalcalendarid = default(string), string _modifiedonbehalfbyValue = default(string), object quarter2 = default(object), object exchangerate = default(object), object quarter4Base = default(object), string _businessunitidValue = default(string), object quarter2Base = default(object), object quarter1Base = default(object), object effectiveon = default(object), int? utcconversiontimezonecode = default(int?), object modifiedon = default(object), object quarter3Base = default(object), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> quarterlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quarterlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMquarterlyfiscalcalendar(int? fiscalperiodtype = default(int?), object quarter4 = default(object), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), object quarter1 = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), object quarter3 = default(object), string _salespersonidValue = default(string), string _createdonbehalfbyValue = default(string), string userfiscalcalendarid = default(string), string _modifiedonbehalfbyValue = default(string), object quarter2 = default(object), object exchangerate = default(object), object quarter4Base = default(object), string _businessunitidValue = default(string), object quarter2Base = default(object), object quarter1Base = default(object), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), object quarter3Base = default(object), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> quarterlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quarterlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
         {
             Fiscalperiodtype = fiscalperiodtype;
             Quarter4 = quarter4;
@@ -95,7 +98,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -165,7 +168,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "effectiveon")]
-        public object Effectiveon { get; set; }
+        public System.DateTimeOffset? Effectiveon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -175,7 +178,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

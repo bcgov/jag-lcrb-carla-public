@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// importdata
+    /// </summary>
     public partial class MicrosoftDynamicsCRMimportdata
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportdata
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportdata(string _owningteamValue = default(string), object modifiedon = default(object), bool? haserror = default(bool?), int? errortype = default(int?), string _importfileidValue = default(string), int? linenumber = default(int?), int? statuscode = default(int?), int? statecode = default(int?), string _owneridValue = default(string), string importdataid = default(string), object createdon = default(object), string data = default(string), string _owninguserValue = default(string), string recordid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importDataAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), IList<MicrosoftDynamicsCRMimportlog> importLogImportData = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importDataBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMimportdata(string _owningteamValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? haserror = default(bool?), int? errortype = default(int?), string _importfileidValue = default(string), int? linenumber = default(int?), int? statuscode = default(int?), int? statecode = default(int?), string _owneridValue = default(string), string importdataid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string data = default(string), string _owninguserValue = default(string), string recordid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importDataAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), IList<MicrosoftDynamicsCRMimportlog> importLogImportData = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importDataBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._owningteamValue = _owningteamValue;
             Modifiedon = modifiedon;
@@ -75,7 +78,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,7 +123,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

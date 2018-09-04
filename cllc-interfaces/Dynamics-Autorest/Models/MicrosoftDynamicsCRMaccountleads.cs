@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// accountleads
+    /// </summary>
     public partial class MicrosoftDynamicsCRMaccountleads
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMaccountleads
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMaccountleads(string accountleadid = default(string), string leadid = default(string), string accountid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMaccountleads(string accountleadid = default(string), string leadid = default(string), string accountid = default(string), long? versionnumber = default(long?))
         {
             Accountleadid = accountleadid;
             Leadid = leadid;
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }
