@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// systemusersyncmappingprofiles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsystemusersyncmappingprofiles
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsystemusersyncmappingprofiles class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemusersyncmappingprofiles(string systemuserid = default(string), string syncattributemappingprofileid = default(string), string systemusersyncmappingprofileid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMsystemusersyncmappingprofiles(string systemuserid = default(string), string syncattributemappingprofileid = default(string), string systemusersyncmappingprofileid = default(string), long? versionnumber = default(long?))
         {
             Systemuserid = systemuserid;
             Syncattributemappingprofileid = syncattributemappingprofileid;
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

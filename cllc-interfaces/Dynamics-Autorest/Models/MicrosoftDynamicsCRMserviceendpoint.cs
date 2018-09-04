@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// serviceendpoint
+    /// </summary>
     public partial class MicrosoftDynamicsCRMserviceendpoint
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMserviceendpoint class.
         /// </summary>
-        public MicrosoftDynamicsCRMserviceendpoint(int? connectionmode = default(int?), bool? ismanaged = default(bool?), string solutionid = default(string), int? messageformat = default(int?), string introducedversion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? issastokenset = default(bool?), string _modifiedonbehalfbyValue = default(string), bool? issaskeyset = default(bool?), object modifiedon = default(object), string sastoken = default(string), string serviceendpointidunique = default(string), int? componentstate = default(int?), string path = default(string), string description = default(string), string _modifiedbyValue = default(string), int? namespaceformat = default(int?), string _organizationidValue = default(string), int? contract = default(int?), string _createdbyValue = default(string), string serviceendpointid = default(string), int? authtype = default(int?), string solutionnamespace = default(string), object overwritetime = default(object), string namespaceaddress = default(string), int? userclaim = default(int?), object createdon = default(object), string _createdonbehalfbyValue = default(string), string saskeyname = default(string), string name = default(string), string saskey = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> serviceendpointSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMserviceendpoint(int? connectionmode = default(int?), bool? ismanaged = default(bool?), string solutionid = default(string), int? messageformat = default(int?), string introducedversion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? issastokenset = default(bool?), string _modifiedonbehalfbyValue = default(string), bool? issaskeyset = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sastoken = default(string), string serviceendpointidunique = default(string), int? componentstate = default(int?), string path = default(string), string description = default(string), string _modifiedbyValue = default(string), int? namespaceformat = default(int?), string _organizationidValue = default(string), int? contract = default(int?), string _createdbyValue = default(string), string serviceendpointid = default(string), int? authtype = default(int?), string solutionnamespace = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string namespaceaddress = default(string), int? userclaim = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string saskeyname = default(string), string name = default(string), string saskey = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> serviceendpointSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Connectionmode = connectionmode;
             Ismanaged = ismanaged;
@@ -121,7 +124,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -191,7 +194,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -206,7 +209,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

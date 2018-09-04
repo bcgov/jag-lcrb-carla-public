@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// bulkoperationlog
+    /// </summary>
     public partial class MicrosoftDynamicsCRMbulkoperationlog
     {
         /// <summary>

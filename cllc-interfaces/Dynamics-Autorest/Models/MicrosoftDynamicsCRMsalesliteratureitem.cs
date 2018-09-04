@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// salesliteratureitem
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsalesliteratureitem
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsalesliteratureitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMsalesliteratureitem(string _salesliteratureidValue = default(string), bool? iscustomerviewable = default(bool?), object overriddencreatedon = default(object), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), int? filetypecode = default(int?), object modifiedon = default(object), string title = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string organizationid = default(string), string mimetype = default(string), object createdon = default(object), string authorname = default(string), string salesliteratureitemid = default(string), string abstractProperty = default(string), string keywords = default(string), string documentbody = default(string), object documentbodyBinary = default(object), string filename = default(string), string attacheddocumenturl = default(string), int? filesize = default(int?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature salesliteratureid = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesLiteratureItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> salesLiteratureItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        public MicrosoftDynamicsCRMsalesliteratureitem(string _salesliteratureidValue = default(string), bool? iscustomerviewable = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), long? versionnumber = default(long?), string _modifiedbyValue = default(string), int? filetypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string title = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string organizationid = default(string), string mimetype = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string authorname = default(string), string salesliteratureitemid = default(string), string abstractProperty = default(string), string keywords = default(string), string documentbody = default(string), object documentbodyBinary = default(object), string filename = default(string), string attacheddocumenturl = default(string), int? filesize = default(int?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature salesliteratureid = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesLiteratureItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> salesLiteratureItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             this._salesliteratureidValue = _salesliteratureidValue;
             Iscustomerviewable = iscustomerviewable;
@@ -80,7 +83,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -90,7 +93,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,7 +108,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -135,7 +138,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

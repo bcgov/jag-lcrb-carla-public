@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// campaignitem
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcampaignitem
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcampaignitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignitem(string entitytype = default(string), string _owneridValue = default(string), string versionnumber = default(string), string owningbusinessunit = default(string), string entityid = default(string), string campaignitemid = default(string), string owninguser = default(string), string _campaignidValue = default(string))
+        public MicrosoftDynamicsCRMcampaignitem(string entitytype = default(string), string _owneridValue = default(string), long? versionnumber = default(long?), string owningbusinessunit = default(string), string entityid = default(string), string campaignitemid = default(string), string owninguser = default(string), string _campaignidValue = default(string))
         {
             Entitytype = entitytype;
             this._owneridValue = _owneridValue;
@@ -55,7 +58,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

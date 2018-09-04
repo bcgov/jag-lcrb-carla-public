@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMIntegerAttributeMetadata : MicrosoftDynamicsCRMAttributeMetadata
+    /// <summary>
+    /// IntegerAttributeMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMIntegerAttributeMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,15 +27,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMIntegerAttributeMetadata class.
         /// </summary>
-        /// <param name="attributeType">Possible values include: 'Boolean',
-        /// 'Customer', 'DateTime', 'Decimal', 'Double', 'Integer', 'Lookup',
-        /// 'Memo', 'Money', 'Owner', 'PartyList', 'Picklist', 'State',
-        /// 'Status', 'String', 'Uniqueidentifier', 'CalendarRules', 'Virtual',
-        /// 'BigInt', 'ManagedProperty', 'EntityName'</param>
         /// <param name="format">Possible values include: 'None', 'Duration',
         /// 'TimeZone', 'Language', 'Locale'</param>
-        public MicrosoftDynamicsCRMIntegerAttributeMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), string attributeOf = default(string), string attributeType = default(string), MicrosoftDynamicsCRMAttributeTypeDisplayName attributeTypeName = default(MicrosoftDynamicsCRMAttributeTypeDisplayName), int? columnNumber = default(int?), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), MicrosoftDynamicsCRMBooleanManagedProperty isAuditEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isGlobalFilterEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty isSortableEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), string linkedAttributeId = default(string), string logicalName = default(string), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty isRenameable = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty isValidForAdvancedFind = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty requiredLevel = default(MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty canModifyAdditionalSettings = default(MicrosoftDynamicsCRMBooleanManagedProperty), string schemaName = default(string), bool? isLogical = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?), string format = default(string), string maxValue = default(string), string minValue = default(string), string formulaDefinition = default(string), int? sourceTypeMask = default(int?))
-            : base(metadataId, hasChanged, attributeOf, attributeType, attributeTypeName, columnNumber, description, displayName, deprecatedVersion, introducedVersion, entityLogicalName, isAuditEnabled, isCustomAttribute, isPrimaryId, isPrimaryName, isValidForCreate, isValidForRead, isValidForUpdate, canBeSecuredForRead, canBeSecuredForCreate, canBeSecuredForUpdate, isSecured, isRetrievable, isFilterable, isSearchable, isManaged, isGlobalFilterEnabled, isSortableEnabled, linkedAttributeId, logicalName, isCustomizable, isRenameable, isValidForAdvancedFind, requiredLevel, canModifyAdditionalSettings, schemaName, isLogical, inheritsFrom, sourceType)
+        public MicrosoftDynamicsCRMIntegerAttributeMetadata(string format = default(string), int? maxValue = default(int?), int? minValue = default(int?), string formulaDefinition = default(string), int? sourceTypeMask = default(int?))
         {
             Format = format;
             MaxValue = maxValue;
@@ -57,12 +54,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "MaxValue")]
-        public string MaxValue { get; set; }
+        public int? MaxValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "MinValue")]
-        public string MinValue { get; set; }
+        public int? MinValue { get; set; }
 
         /// <summary>
         /// </summary>

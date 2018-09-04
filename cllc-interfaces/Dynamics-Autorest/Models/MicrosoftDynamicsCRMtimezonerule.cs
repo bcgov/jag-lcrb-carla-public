@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// timezonerule
+    /// </summary>
     public partial class MicrosoftDynamicsCRMtimezonerule
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMtimezonerule
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMtimezonerule(int? standardmonth = default(int?), int? standardhour = default(int?), object createdon = default(object), int? standardsecond = default(int?), string versionnumber = default(string), string timezoneruleid = default(string), int? daylightsecond = default(int?), int? bias = default(int?), int? standardyear = default(int?), int? daylightminute = default(int?), object modifiedon = default(object), int? standardday = default(int?), int? standardbias = default(int?), int? daylightmonth = default(int?), int? standardminute = default(int?), string _createdbyValue = default(string), string _timezonedefinitionidValue = default(string), int? standarddayofweek = default(int?), string _modifiedbyValue = default(string), int? daylighthour = default(int?), string _createdonbehalfbyValue = default(string), object effectivedatetime = default(object), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? daylightdayofweek = default(int?), int? daylightbias = default(int?), int? timezoneruleversionnumber = default(int?), int? daylightyear = default(int?), int? daylightday = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMtimezonerule(int? standardmonth = default(int?), int? standardhour = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? standardsecond = default(int?), long? versionnumber = default(long?), string timezoneruleid = default(string), int? daylightsecond = default(int?), int? bias = default(int?), int? standardyear = default(int?), int? daylightminute = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? standardday = default(int?), int? standardbias = default(int?), int? daylightmonth = default(int?), int? standardminute = default(int?), string _createdbyValue = default(string), string _timezonedefinitionidValue = default(string), int? standarddayofweek = default(int?), string _modifiedbyValue = default(string), int? daylighthour = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? effectivedatetime = default(System.DateTimeOffset?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? daylightdayofweek = default(int?), int? daylightbias = default(int?), int? timezoneruleversionnumber = default(int?), int? daylightyear = default(int?), int? daylightday = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Standardmonth = standardmonth;
             Standardhour = standardhour;
@@ -81,7 +84,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,7 +94,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -121,7 +124,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -176,7 +179,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "effectivedatetime")]
-        public object Effectivedatetime { get; set; }
+        public System.DateTimeOffset? Effectivedatetime { get; set; }
 
         /// <summary>
         /// </summary>

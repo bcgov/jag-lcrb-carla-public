@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 'Vacation', 'Appointment', 'ResourceStartTime',
         /// 'ResourceServiceRestriction', 'ResourceCapacity',
         /// 'ServiceRestriction', 'ServiceCost'</param>
-        public MicrosoftDynamicsCRMTimeInfo(object start = default(object), object end = default(object), string timeCode = default(string), string subCode = default(string), string sourceId = default(string), string calendarId = default(string), int? sourceTypeCode = default(int?), bool? isActivity = default(bool?), int? activityStatusCode = default(int?), object effort = default(object), string displayText = default(string))
+        public MicrosoftDynamicsCRMTimeInfo(System.DateTimeOffset? start = default(System.DateTimeOffset?), System.DateTimeOffset? end = default(System.DateTimeOffset?), string timeCode = default(string), string subCode = default(string), string sourceId = default(string), string calendarId = default(string), int? sourceTypeCode = default(int?), bool? isActivity = default(bool?), int? activityStatusCode = default(int?), double? effort = default(double?), string displayText = default(string))
         {
             Start = start;
             End = end;
@@ -58,12 +58,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Start")]
-        public object Start { get; set; }
+        public System.DateTimeOffset? Start { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "End")]
-        public object End { get; set; }
+        public System.DateTimeOffset? End { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Available', 'Busy',
@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Effort")]
-        public object Effort { get; set; }
+        public double? Effort { get; set; }
 
         /// <summary>
         /// </summary>

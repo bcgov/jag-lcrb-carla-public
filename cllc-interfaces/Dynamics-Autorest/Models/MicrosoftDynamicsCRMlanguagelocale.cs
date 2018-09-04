@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// languagelocale
+    /// </summary>
     public partial class MicrosoftDynamicsCRMlanguagelocale
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMlanguagelocale class.
         /// </summary>
-        public MicrosoftDynamicsCRMlanguagelocale(string region = default(string), string languagelocaleid = default(string), string language = default(string), string code = default(string), string versionnumber = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _organizationidValue = default(string), string name = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMlanguagelocale(string region = default(string), string languagelocaleid = default(string), string language = default(string), string code = default(string), long? versionnumber = default(long?), int? statecode = default(int?), int? statuscode = default(int?), string _organizationidValue = default(string), string name = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Region = region;
             Languagelocaleid = languagelocaleid;
@@ -71,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

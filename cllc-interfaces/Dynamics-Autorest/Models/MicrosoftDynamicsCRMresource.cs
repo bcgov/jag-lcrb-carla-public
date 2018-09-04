@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// resource
+    /// </summary>
     public partial class MicrosoftDynamicsCRMresource
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMresource
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMresource(bool? isdisabled = default(bool?), string entityimageid = default(string), string entityimageTimestamp = default(string), string versionnumber = default(string), string objecttypecode = default(string), string _organizationidValue = default(string), string _businessunitidValue = default(string), object entityimage = default(object), string _siteidValue = default(string), string name = default(string), string calendarid = default(string), string entityimageUrl = default(string), string resourceid = default(string), bool? displayinserviceviews = default(bool?), MicrosoftDynamicsCRMsystemuser resourceidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> resourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> resourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMequipment resourceidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMresourcespec resourceidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite))
+        public MicrosoftDynamicsCRMresource(bool? isdisabled = default(bool?), string entityimageid = default(string), long? entityimageTimestamp = default(long?), long? versionnumber = default(long?), string objecttypecode = default(string), string _organizationidValue = default(string), string _businessunitidValue = default(string), object entityimage = default(object), string _siteidValue = default(string), string name = default(string), string calendarid = default(string), string entityimageUrl = default(string), string resourceid = default(string), bool? displayinserviceviews = default(bool?), MicrosoftDynamicsCRMsystemuser resourceidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> resourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> resourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMequipment resourceidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMresourcespec resourceidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite))
         {
             Isdisabled = isdisabled;
             Entityimageid = entityimageid;
@@ -72,12 +75,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public string EntityimageTimestamp { get; set; }
+        public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

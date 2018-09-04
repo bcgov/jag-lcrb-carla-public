@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// actioncard
+    /// </summary>
     public partial class MicrosoftDynamicsCRMactioncard
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMactioncard
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMactioncard(string _modifiedbyValue = default(string), object createdon = default(object), int? source = default(int?), int? state = default(int?), object overriddencreatedon = default(object), string _createdonbehalfbyValue = default(string), int? priority = default(int?), string _regardingobjectidValue = default(string), string data = default(string), string _owninguserValue = default(string), string description = default(string), string referencetokens = default(string), string _createdbyValue = default(string), int? cardtype = default(int?), string _cardtypeidValue = default(string), string _owneridValue = default(string), object startdate = default(object), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), object exchangerate = default(object), object expirydate = default(object), string _owningbusinessunitValue = default(string), string actioncardid = default(string), string _transactioncurrencyidValue = default(string), bool? visibility = default(bool?), int? importsequencenumber = default(int?), string _recordidValue = default(string), string _owningteamValue = default(string), string title = default(string), object modifiedon = default(object), MicrosoftDynamicsCRMletter regardingobjectidLetterActioncard = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecallActioncard = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncidentActioncard = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMlead regardingobjectidLeadActioncard = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMfax regardingobjectidFaxActioncard = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMcontact regardingobjectidContactActioncard = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMactioncarduserstate> actionCardUserStateActionCard = default(IList<MicrosoftDynamicsCRMactioncarduserstate>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityActioncard = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMserviceappointment regardingobjectidServiceappointmentActioncard = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMemail regardingobjectidEmailActioncard = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMappointment regardingobjectidAppointmentActioncard = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmasterActioncard = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMaccount regardingobjectidAccountActioncard = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtask regardingobjectidTaskActioncard = default(MicrosoftDynamicsCRMtask))
+        public MicrosoftDynamicsCRMactioncard(string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? source = default(int?), int? state = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? priority = default(int?), string _regardingobjectidValue = default(string), string data = default(string), string _owninguserValue = default(string), string description = default(string), string referencetokens = default(string), string _createdbyValue = default(string), int? cardtype = default(int?), string _cardtypeidValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _modifiedonbehalfbyValue = default(string), object exchangerate = default(object), System.DateTimeOffset? expirydate = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string actioncardid = default(string), string _transactioncurrencyidValue = default(string), bool? visibility = default(bool?), int? importsequencenumber = default(int?), string _recordidValue = default(string), string _owningteamValue = default(string), string title = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMletter regardingobjectidLetterActioncard = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecallActioncard = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncidentActioncard = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMlead regardingobjectidLeadActioncard = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMfax regardingobjectidFaxActioncard = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMcontact regardingobjectidContactActioncard = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMactioncarduserstate> actionCardUserStateActionCard = default(IList<MicrosoftDynamicsCRMactioncarduserstate>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityActioncard = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMserviceappointment regardingobjectidServiceappointmentActioncard = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMemail regardingobjectidEmailActioncard = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMappointment regardingobjectidAppointmentActioncard = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmasterActioncard = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMaccount regardingobjectidAccountActioncard = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtask regardingobjectidTaskActioncard = default(MicrosoftDynamicsCRMtask))
         {
             this._modifiedbyValue = _modifiedbyValue;
             Createdon = createdon;
@@ -95,7 +98,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,7 +113,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,12 +173,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "startdate")]
-        public object Startdate { get; set; }
+        public System.DateTimeOffset? Startdate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,7 +193,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "expirydate")]
-        public object Expirydate { get; set; }
+        public System.DateTimeOffset? Expirydate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -235,7 +238,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

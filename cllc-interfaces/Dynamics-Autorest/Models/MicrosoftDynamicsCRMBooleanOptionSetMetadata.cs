@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMBooleanOptionSetMetadata : MicrosoftDynamicsCRMOptionSetMetadataBase
+    /// <summary>
+    /// BooleanOptionSetMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMBooleanOptionSetMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,10 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMBooleanOptionSetMetadata class.
         /// </summary>
-        /// <param name="optionSetType">Possible values include: 'Picklist',
-        /// 'State', 'Status', 'Boolean'</param>
-        public MicrosoftDynamicsCRMBooleanOptionSetMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string name = default(string), string optionSetType = default(string), string introducedVersion = default(string), MicrosoftDynamicsCRMOptionMetadata trueOption = default(MicrosoftDynamicsCRMOptionMetadata), MicrosoftDynamicsCRMOptionMetadata falseOption = default(MicrosoftDynamicsCRMOptionMetadata))
-            : base(metadataId, hasChanged, description, displayName, isCustomOptionSet, isGlobal, isManaged, isCustomizable, name, optionSetType, introducedVersion)
+        public MicrosoftDynamicsCRMBooleanOptionSetMetadata(MicrosoftDynamicsCRMOptionMetadata trueOption = default(MicrosoftDynamicsCRMOptionMetadata), MicrosoftDynamicsCRMOptionMetadata falseOption = default(MicrosoftDynamicsCRMOptionMetadata))
         {
             TrueOption = trueOption;
             FalseOption = falseOption;
