@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string firstname { get; set; }
         public string middlename { get; set; }
         public string lastname { get; set; }
-        public DateTime? dateofbirth { get; set; }
+        public DateTimeOffset? dateofbirth { get; set; }
         public string gender { get; set; }
         public string birthplace { get; set; }
         public string driverslicencenumber { get; set; }
@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool triggerphs { get; set; }
         public string contactId { get; set; }
         public bool paymentReceived { get; set; }
-        public DateTime? paymentRecievedDate { get; set; }
+        public DateTimeOffset? paymentRecievedDate { get; set; }
         public string workerId { get; set; }
     }
 }
