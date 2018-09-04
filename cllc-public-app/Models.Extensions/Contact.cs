@@ -26,6 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 result.name = contact.Fullname;
                 result.address1_city = contact.Address1City;
+                result.address1_country = contact.Address1Country;
                 result.address1_line1 = contact.Address1Line1;
                 result.address1_postalcode = contact.Address1Postalcode;
                 result.address1_stateorprovince = contact.Address1Stateorprovince;
@@ -37,6 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.adoxio_cansigntemporarychangeapplications = contact.AdoxioCansigntemporarychangeapplications;
                 result.emailaddress1 = contact.Emailaddress1;
                 result.firstname = contact.Firstname;
+                result.middlename = contact.Middlename;
                 result.lastname = contact.Lastname;
                 result.telephone1 = contact.Telephone1;
             }            
@@ -48,9 +50,11 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.Fullname = from.name;
             to.Emailaddress1 = from.emailaddress1;
-            to.Firstname = from.firstname;            
+            to.Firstname = from.firstname;
+            to.Middlename = from.middlename;
             to.Lastname = from.lastname;
             to.Address1City = from.address1_city;
+            to.Address1Country = from.address1_country;
             to.Address1Line1 = from.address1_line1;
             to.Address1Postalcode = from.address1_postalcode;
             to.Address1Stateorprovince = from.address1_stateorprovince;
@@ -77,8 +81,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Emailaddress1 = contact.emailaddress1;
                 result.Firstname = contact.firstname;
                 result.Lastname = contact.lastname;
+                result.Middlename = contact.middlename;
                 
                 result.Address1City = contact.address1_city;
+                result.Address1Country = contact.address1_country;
                 result.Address1Line1 = contact.address1_line1;
                 result.Address1Postalcode = contact.address1_postalcode;
                 result.Address1Stateorprovince = contact.address1_stateorprovince;

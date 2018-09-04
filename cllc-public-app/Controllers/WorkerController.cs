@@ -11,45 +11,49 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class ContactController : Controller
+    public class WorkerController : Controller
     {
         private readonly IConfiguration Configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+        public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
-            _logger = loggerFactory.CreateLogger(typeof(ContactController));
+            _logger = loggerFactory.CreateLogger(typeof(WorkerController));
         }
 
 
         /// <summary>
         /// Get a specific legal entity
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="contactId"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetContact(string id)
+        [HttpGet("{contactId}")]
+        public async Task<IActionResult> GetWorker(string contactId)
         {
-            ViewModels.Contact result = null;
+            ViewModels.Worker result = null;
 
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(contactId))
             {
-                Guid contactId = Guid.Parse(id);
+                Guid id = Guid.Parse(contactId);
                 // query the Dynamics system to get the contact record.
-                MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactId);
+                string filter = $"_adoxio_contactid_value eq {contactId}";
+                var fields = new List<string> { "adoxio_ContactId", "" };
+                MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter).Value.FirstOrDefault();
 
-                if (contact != null)
+                if (worker != null)
                 {
-                    result = contact.ToViewModel();
+                    result = worker.ToViewModel();
                 }
                 else
                 {
@@ -215,128 +219,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return Json(contact.ToViewModel());
-        }
-
-        /// <summary>
-        /// Create a contact
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
-        [HttpPost("worker")]
-        public async Task<IActionResult> CreateWorkerContact([FromBody] ViewModels.Contact item)
-        {
-
-            // get UserSettings from the session
-            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
-            // first check to see that a contact exists.
-            string contactSiteminderGuid = userSettings.SiteMinderGuid;
-            if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
-            {
-                _logger.LogError(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
-                throw new Exception("Error. No ContactSiteminderGuid exernal id");
-            }
-
-            // get the contact record.
-            MicrosoftDynamicsCRMcontact userContact = null;
-
-            // see if the contact exists.
-            try
-            {
-                userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
-                if (userContact != null)
-                {
-                    throw new Exception("Contact already Exists");
-                }
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid.");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new OdataerrorException("Error getting contact by Siteminder Guid");
-            }
-
-            // create a new contact.
-            MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
-            MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias();
-            contact.CopyValues(item);
-            string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
-            contact.Externaluseridentifier = userSettings.UserId;
-
-            //clean externalId    
-            var externalId = "";
-            var tokens = sanitizedAccountSiteminderId.Split('|');
-            if (tokens.Length > 0)
-            {
-                externalId = tokens[0];
-            }
-
-            if (!string.IsNullOrEmpty(externalId))
-            {
-                tokens = externalId.Split(':');
-                externalId = tokens[tokens.Length - 1];
-            }
-
-            contact.AdoxioExternalid = externalId;
-            try
-            {
-                //worker.AdoxioContactId = contact;
-
-                alias.AdoxioContactId = contact;
-                alias.AdoxioWorkerId = worker;
-                alias = await _dynamicsClient.Aliases.CreateAsync(alias);
-                contact = await _dynamicsClient.GetContactById(Guid.Parse(alias._adoxioContactidValue.ToString()));
-                worker = await _dynamicsClient.GetWorkerById(Guid.Parse(alias._adoxioWorkeridValue.ToString()));
-                var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
-                patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contact", contact.Contactid.ToString());
-                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-            }
-
-            // if we have not yet authenticated, then this is the new record for the user.
-            if (userSettings.IsNewUserRegistration)
-            {
-                userSettings.ContactId = contact.Contactid.ToString();
-
-                // we can now authenticate.
-                if (userSettings.AuthenticatedUser == null)
-                {
-                    Models.User user = new Models.User();
-                    user.Active = true;
-                    user.ContactId = Guid.Parse(userSettings.ContactId);
-                    user.UserType = userSettings.UserType;
-                    user.SmUserId = userSettings.UserId;
-                    userSettings.AuthenticatedUser = user;
-                }
-
-                userSettings.IsNewUserRegistration = false;
-
-                string userSettingsString = JsonConvert.SerializeObject(userSettings);
-                _logger.LogDebug("userSettingsString --> " + userSettingsString);
-
-                // add the user to the session.
-                _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
-                _logger.LogDebug("user added to session. ");
-            }
-            else
-            {
-                _logger.LogError(LoggingEvents.Error, "Invalid user registration.");
-                throw new Exception("Invalid user registration.");
-            }
-
-            return Json(contact);
         }
     }
 }

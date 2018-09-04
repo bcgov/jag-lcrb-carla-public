@@ -132,7 +132,7 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
         saveResult.next(true);
         this.savedFormData = saveData;
         this.busy = this.accountDataService.getAccount(this.accountId).subscribe(data =>
-          this.store.dispatch(new currentAccountActions.SetCurrentAccountAction(data.json()))
+          this.store.dispatch(new currentAccountActions.SetCurrentAccountAction(data))
         );
       },
       err => {
@@ -155,7 +155,7 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
   getAccount(accountId: string) {
     this.accountDataService.getAccount(accountId).subscribe(
       res => {
-        return res.json();
+        return res;
       },
       err => {
         console.log('Error occured');

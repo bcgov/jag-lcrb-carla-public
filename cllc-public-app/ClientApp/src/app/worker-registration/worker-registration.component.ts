@@ -7,7 +7,12 @@ import { AppState } from '../app-state/models/app-state';
 import * as CurrentUserActions from '../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
-import { Form, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { AliasDataService } from '../services/alias-data.service';
+import { Alias } from '../models/alias.model';
+import { PreviousAddress } from '../models/previous-address.model';
+import { PreviousAddressDataService } from '../services/previous-address-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-worker-registration',
@@ -18,9 +23,10 @@ export class WorkerRegistrationComponent implements OnInit {
   currentUser: User;
   isNewUser: boolean;
   dataLoaded = false;
-  contact: DynamicsContact;
   busy: Subscription;
   form: FormGroup;
+
+  addressesToDelete: PreviousAddress[] =[];
 
   public get addresses(): FormArray {
     return this.form.get('previous_address') as FormArray;
@@ -28,45 +34,48 @@ export class WorkerRegistrationComponent implements OnInit {
 
   constructor(private userDataService: UserDataService,
     private store: Store<AppState>,
+    private aliasDataService: AliasDataService,
+    private previousAddressDataService: PreviousAddressDataService,
     private contactDataService: ContactDataService,
     private fb: FormBuilder
   ) { }
 
   ngOnInit() {
     this.reloadUser();
-    this.form = this.fb.group({
-      contact: this.fb.group({
+    this.form = this.fb.group({ //first level fields are for the alias
+        id: [],
         firstname: ['', Validators.required],
         middlename: ['', Validators.required],
         lastname: ['', Validators.required],
-        emailaddress1: ['', Validators.required],
-        telephone1: ['', Validators.required],
-        address1_street1: ['', Validators.required],
-        address1_city: ['', Validators.required],
-        address1_stateorprovince: ['', Validators.required],
-        address1_country: ['', Validators.required],
-        address1_postalcode: ['', Validators.required],
-      }),
-      worker: this.fb.group({
-        adoxio_isldbworker: [false],
-        adoxio_firstname: ['', Validators.required],
-        adoxio_middlename: ['', Validators.required],
-        adoxio_lastname: ['', Validators.required],
-        adoxio_dateofbirth: ['', Validators.required],
-        adoxio_gender: ['', Validators.required],
-        adoxio_birthplace: ['', Validators.required],
-        adoxio_driverslicencenumber: ['', Validators.required],
-        adoxio_bcidcardnumber: ['', Validators.required],
-        adoxio_phonenumber: ['', Validators.required],
-        adoxio_email: ['', Validators.required],
-        adoxio_selfdisclosure: ['', Validators.required],
-        adoxio_triggerphs: ['', Validators.required]
-      }),
-      alias: this.fb.group({
-        adoxio_firstname: ['', Validators.required],
-        adoxio_middlename: ['', Validators.required],
-        adoxio_lastname: ['', Validators.required],
-      }),
+        contact: this.fb.group({
+          id: [],
+          firstname: ['', Validators.required],
+          middlename: ['', Validators.required],
+          lastname: ['', Validators.required],
+          emailaddress1: ['', Validators.required],
+          telephone1: ['', Validators.required],
+          address1_line1: ['', Validators.required],
+          address1_city: ['', Validators.required],
+          address1_stateorprovince: ['', Validators.required],
+          address1_country: ['', Validators.required],
+          address1_postalcode: ['', Validators.required],
+        }),      
+        worker: this.fb.group({
+          id: [],
+          isldbworker: [false],
+          firstname: ['', Validators.required],
+          middlename: ['', Validators.required],
+          lastname: ['', Validators.required],
+          dateofbirth: ['', Validators.required],
+          gender: ['', Validators.required],
+          birthplace: ['', Validators.required],
+          driverslicencenumber: ['', Validators.required],
+          bcidcardnumber: ['', Validators.required],
+          phonenumber: ['', Validators.required],
+          email: ['', Validators.required],
+          selfdisclosure: ['', Validators.required],
+          triggerphs: ['', Validators.required]
+        }),
       previous_address: this.fb.array([
         this.createAddress()
       ])
@@ -81,10 +90,17 @@ export class WorkerRegistrationComponent implements OnInit {
         this.isNewUser = this.currentUser.isNewUser;
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-          this.contactDataService.getContact(this.currentUser.contactid).
-            subscribe(res => {
-              this.contact = res;
+          this.aliasDataService.getAlias(this.currentUser.contactid).
+            subscribe(alias => {
+              this.form.patchValue(alias);
             });
+          this.previousAddressDataService.getPreviousAdderess(this.currentUser.contactid)
+          .subscribe(addresses =>{
+            addresses = addresses || [];
+            addresses.forEach(a => {
+                this.addAddress(a);  
+            });
+          });
         }
       });
   }
@@ -97,7 +113,7 @@ export class WorkerRegistrationComponent implements OnInit {
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
-      this.busy = this.contactDataService.createContact(contact).subscribe(res => {
+      this.busy = this.contactDataService.createWorkerContact(contact).subscribe(res => {
         this.reloadUser();
       }, error => alert('Failed to create contact'));
     } else {
@@ -105,26 +121,51 @@ export class WorkerRegistrationComponent implements OnInit {
     }
   }
 
-  createAddress() {
+  createAddress(address: PreviousAddress = null) {
     return this.fb.group({
-      adoxio_name: ['', Validators.required],
-      adoxio_streetaddress: ['', Validators.required],
-      adoxio_city: ['', Validators.required],
-      adoxio_provstate: ['', Validators.required],
-      adoxio_country: ['', Validators.required],
-      adoxio_postalcode: ['', Validators.required],
-      adoxio_fromdate: ['', Validators.required],
-      adoxio_todate: ['', Validators.required]
+      id: [],
+      name: ['', Validators.required],
+      streetaddress: ['', Validators.required],
+      city: ['', Validators.required],
+      provstate: ['', Validators.required],
+      country: ['', Validators.required],
+      postalcode: ['', Validators.required],
+      fromdate: ['', Validators.required],
+      todate: ['', Validators.required]
     });
   }
 
-  addAddress() {
-    this.addresses.push(
-      this.createAddress()
-    );
+  addAddress(address: PreviousAddress = null) {
+    this.addresses.push(this.createAddress(address));
   }
 
-  deleteAddress(index: number) {
+  deletedddress(index: number) {
+    var address = this.addresses[index];
+    if(address.id){
+      this.addressesToDelete.push(address);
+    }
     this.addresses.removeAt(index);
+  }
+
+  save() {
+    let saves = [this.aliasDataService.updateAlias( this.form.value,  this.form.value.id)];
+    this.addressesToDelete.forEach(a => {
+      let save = this.previousAddressDataService.deletePreviousAdderess(a.id);
+      saves.push(save);
+    });
+
+    for(let i=0; i < this.addresses.length; i++){
+      if(this.addresses[i].id){
+        let save = this.previousAddressDataService.updatePreviousAdderess(this.addresses[i], this.addresses[i].id);
+        saves.push(save);
+      } else {
+        let save = this.previousAddressDataService.createPreviousAdderess(this.addresses[i]);
+        saves.push(save);
+      }
+    }
+
+    Observable.zip(...saves).subscribe(res => {
+      this.reloadUser();
+    });
   }
 }
