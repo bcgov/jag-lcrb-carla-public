@@ -19,44 +19,43 @@ export class AliasDataService {
    * Get legal entities from Dynamics filtered by position
    * @param positionType
    */
-  getAlias(contactId: string) {
+  getAliases(contactId: string): Observable<Alias[]> {
     const apiPath = `api/alias/by-contactid/${contactId}`;
-    return this.http.get<Alias>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError("getAlias", null)));
+    return this.http.get<Alias[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError('getAlias', null)));
   }
 
   /**
-   * Create a new legal entity in Dynamics
-   * @param data - legal entity data
+   * Create a new alias in Dynamics
+   * @param data - alias data
    */
   createAlias(data: any) {
     return this.http.post<Alias>('api/alias/', data, { headers: this.headers })
-      .pipe(catchError(this.handleError("createAlias", null)));
+      .pipe(catchError(this.handleError('createAlias', null)));
   }
 
   /**
-   * update a  legal entity in Dynamics
-   * @param data - legal entity data
+   * update a  alias in Dynamics
+   * @param data - alias data
    */
   updateAlias(data: any, id: string) {
     return this.http.put<Alias>(`api/alias/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError("updateAlias", null)));
+      .pipe(catchError(this.handleError('updateAlias', null)));
   }
 
   /**
-   * delete a  legal entity in Dynamics
-   * @param data - legal entity data
+   * delete a  alias in Dynamics
+   * @param data - alias data
    */
   deleteAlias(id: string) {
     return this.http.post<Alias>(`api/alias/${id}/delete`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError("deleteAlias", null)));
+      .pipe(catchError(this.handleError('deleteAlias', null)));
   }
 
   /**
    * Handle error
    * @param error
    */
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

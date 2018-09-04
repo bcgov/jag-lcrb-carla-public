@@ -263,7 +263,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
             MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
-            MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias();
             contact.CopyValues(item);
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
             contact.Externaluseridentifier = userSettings.UserId;
@@ -287,14 +286,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 //worker.AdoxioContactId = contact;
 
-                alias.AdoxioContactId = contact;
-                alias.AdoxioWorkerId = worker;
-                alias = await _dynamicsClient.Aliases.CreateAsync(alias);
-                contact = await _dynamicsClient.GetContactById(Guid.Parse(alias._adoxioContactidValue.ToString()));
-                worker = await _dynamicsClient.GetWorkerById(Guid.Parse(alias._adoxioWorkeridValue.ToString()));
-                var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
-                patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contact", contact.Contactid.ToString());
-                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
+                worker.AdoxioContactId = contact;
+                worker = await _dynamicsClient.Workers.CreateAsync(worker);
+                contact = await _dynamicsClient.GetContactById(Guid.Parse(worker._adoxioContactidValue));
             }
             catch (OdataerrorException odee)
             {
