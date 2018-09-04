@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_personalhistorysummary
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioPersonalhistorysummary
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioPersonalhistorysummary class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioPersonalhistorysummary(string adoxioBirthlastname = default(string), int? statuscode = default(int?), string adoxioBirthfirstname = default(string), string adoxioLicenceorjobnumber = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioLegalentityname = default(int?), string adoxioName = default(string), string adoxioMiddlename = default(string), object adoxioExpirydate = default(object), string adoxioPhonenumber = default(string), string _adoxioWorkeridValue = default(string), int? adoxioGender = default(int?), int? adoxioComplete = default(int?), string _owningteamValue = default(string), string _adoxioLegalentityidValue = default(string), string adoxioPersonalhistorysummaryid = default(string), string adoxioResidenceaddresspostalcode = default(string), string versionnumber = default(string), string _adoxioApplicationidValue = default(string), int? timezoneruleversionnumber = default(int?), string adoxioBirthmiddlename = default(string), string adoxioOtherlastnames = default(string), string adoxioFullname = default(string), string _adoxioContactidValue = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string adoxioEstablishmentparcelid = default(string), string _owningbusinessunitValue = default(string), int? adoxioSecuritystatus = default(int?), string adoxioDriverslicencenumber = default(string), string _createdbyValue = default(string), string adoxioEstablishmentname = default(string), object overriddencreatedon = default(object), string adoxioResidenceaddresscity = default(string), string adoxioWorkerjobnumber = default(string), int? statecode = default(int?), string adoxioFirstname = default(string), string adoxioResidenceaddressstreet = default(string), string _modifiedbyValue = default(string), bool? adoxioSameasapplyingperson = default(bool?), object modifiedon = default(object), int? utcconversiontimezonecode = default(int?), object adoxioBirthdate = default(object), string adoxioAssociatejobnumber = default(string), object createdon = default(object), string adoxioLastname = default(string), string adoxioEmail = default(string), object adoxioCompletedon = default(object), string _owninguserValue = default(string), string _owneridValue = default(string), string adoxioResidenceaddressprovincecountry = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPersonalhistorysummarySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioPersonalhistorysummarySharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPersonalhistorysummaryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPersonalhistorysummaryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationid = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioPersonalhistorysummaryAdoxioLegalentityCorrespondingPersonalHistorySummary = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), MicrosoftDynamicsCRMcontact adoxioContactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioWorker adoxioWorkerId = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity))
+        public MicrosoftDynamicsCRMadoxioPersonalhistorysummary(string adoxioBirthlastname = default(string), int? statuscode = default(int?), string adoxioBirthfirstname = default(string), string adoxioLicenceorjobnumber = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioLegalentityname = default(int?), string adoxioName = default(string), string adoxioMiddlename = default(string), System.DateTimeOffset? adoxioExpirydate = default(System.DateTimeOffset?), string adoxioPhonenumber = default(string), string _adoxioWorkeridValue = default(string), int? adoxioGender = default(int?), int? adoxioComplete = default(int?), string _owningteamValue = default(string), string _adoxioLegalentityidValue = default(string), string adoxioPersonalhistorysummaryid = default(string), string adoxioResidenceaddresspostalcode = default(string), long? versionnumber = default(long?), string _adoxioApplicationidValue = default(string), int? timezoneruleversionnumber = default(int?), string adoxioBirthmiddlename = default(string), string adoxioOtherlastnames = default(string), string adoxioFullname = default(string), string _adoxioContactidValue = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string adoxioEstablishmentparcelid = default(string), string _owningbusinessunitValue = default(string), int? adoxioSecuritystatus = default(int?), string adoxioDriverslicencenumber = default(string), string _createdbyValue = default(string), string adoxioEstablishmentname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioResidenceaddresscity = default(string), string adoxioWorkerjobnumber = default(string), int? statecode = default(int?), string adoxioFirstname = default(string), string adoxioResidenceaddressstreet = default(string), string _modifiedbyValue = default(string), bool? adoxioSameasapplyingperson = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? adoxioBirthdate = default(System.DateTimeOffset?), string adoxioAssociatejobnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioLastname = default(string), string adoxioEmail = default(string), System.DateTimeOffset? adoxioCompletedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _owneridValue = default(string), string adoxioResidenceaddressprovincecountry = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPersonalhistorysummarySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioPersonalhistorysummarySharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPersonalhistorysummaryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPersonalhistorysummaryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationid = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioPersonalhistorysummaryAdoxioLegalentityCorrespondingPersonalHistorySummary = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), MicrosoftDynamicsCRMcontact adoxioContactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioWorker adoxioWorkerId = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity))
         {
             AdoxioBirthlastname = adoxioBirthlastname;
             Statuscode = statuscode;
@@ -149,7 +152,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_expirydate")]
-        public object AdoxioExpirydate { get; set; }
+        public System.DateTimeOffset? AdoxioExpirydate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -194,7 +197,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -269,7 +272,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -309,7 +312,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -319,7 +322,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_birthdate")]
-        public object AdoxioBirthdate { get; set; }
+        public System.DateTimeOffset? AdoxioBirthdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -329,7 +332,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -344,7 +347,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_completedon")]
-        public object AdoxioCompletedon { get; set; }
+        public System.DateTimeOffset? AdoxioCompletedon { get; set; }
 
         /// <summary>
         /// </summary>

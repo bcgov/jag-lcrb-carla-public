@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// principalobjectaccess
+    /// </summary>
     public partial class MicrosoftDynamicsCRMprincipalobjectaccess
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMprincipalobjectaccess class.
         /// </summary>
-        public MicrosoftDynamicsCRMprincipalobjectaccess(int? inheritedaccessrightsmask = default(int?), string versionnumber = default(string), int? accessrightsmask = default(int?), string principaltypecode = default(string), int? timezoneruleversionnumber = default(int?), object changedon = default(object), string objecttypecode = default(string), string principalid = default(string), int? utcconversiontimezonecode = default(int?), string principalobjectaccessid = default(string), string objectid = default(string))
+        public MicrosoftDynamicsCRMprincipalobjectaccess(int? inheritedaccessrightsmask = default(int?), long? versionnumber = default(long?), int? accessrightsmask = default(int?), string principaltypecode = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? changedon = default(System.DateTimeOffset?), string objecttypecode = default(string), string principalid = default(string), int? utcconversiontimezonecode = default(int?), string principalobjectaccessid = default(string), string objectid = default(string))
         {
             Inheritedaccessrightsmask = inheritedaccessrightsmask;
             Versionnumber = versionnumber;
@@ -53,7 +56,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -73,7 +76,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "changedon")]
-        public object Changedon { get; set; }
+        public System.DateTimeOffset? Changedon { get; set; }
 
         /// <summary>
         /// </summary>

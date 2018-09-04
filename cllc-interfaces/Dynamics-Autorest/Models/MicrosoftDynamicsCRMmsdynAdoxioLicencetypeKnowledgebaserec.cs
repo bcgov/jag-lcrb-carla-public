@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// msdyn_adoxio_licencetype_knowledgebaserec
+    /// </summary>
     public partial class MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec(string knowledgebaserecordid = default(string), string msdynAdoxioLicencetypeKnowledgebaserecid = default(string), string versionnumber = default(string), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec(string knowledgebaserecordid = default(string), string msdynAdoxioLicencetypeKnowledgebaserecid = default(string), long? versionnumber = default(long?), string adoxioLicencetypeid = default(string))
         {
             Knowledgebaserecordid = knowledgebaserecordid;
             MsdynAdoxioLicencetypeKnowledgebaserecid = msdynAdoxioLicencetypeKnowledgebaserecid;
@@ -51,7 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

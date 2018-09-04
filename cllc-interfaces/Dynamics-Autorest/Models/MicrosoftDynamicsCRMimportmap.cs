@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// importmap
+    /// </summary>
     public partial class MicrosoftDynamicsCRMimportmap
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportmap
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportmap(string _owningbusinessunitValue = default(string), string source = default(string), int? sourcetype = default(int?), int? entitiesperfile = default(int?), bool? isvalidforimport = default(bool?), string targetuseridentifierforsourcecrmuserlink = default(string), string sourceuseridentifierforsourcedatasourceuserlink = default(string), string importmapid = default(string), string _owneridValue = default(string), bool? iswizardcreated = default(bool?), int? targetentity = default(int?), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string _createdonbehalfbyValue = default(string), string mapcustomizations = default(string), string description = default(string), int? statuscode = default(int?), string name = default(string), string sourceuseridentifierforsourcecrmuserlink = default(string), int? statecode = default(int?), string _createdbyValue = default(string), object createdon = default(object), int? importmaptype = default(int?), string _owninguserValue = default(string), object modifiedon = default(object), string _modifiedonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> importMapSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importMapAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportentitymapping> importEntityMappingImportMap = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importMapBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportfile> importMapImportFile = default(IList<MicrosoftDynamicsCRMimportfile>))
+        public MicrosoftDynamicsCRMimportmap(string _owningbusinessunitValue = default(string), string source = default(string), int? sourcetype = default(int?), int? entitiesperfile = default(int?), bool? isvalidforimport = default(bool?), string targetuseridentifierforsourcecrmuserlink = default(string), string sourceuseridentifierforsourcedatasourceuserlink = default(string), string importmapid = default(string), string _owneridValue = default(string), bool? iswizardcreated = default(bool?), int? targetentity = default(int?), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string _createdonbehalfbyValue = default(string), string mapcustomizations = default(string), string description = default(string), int? statuscode = default(int?), string name = default(string), string sourceuseridentifierforsourcecrmuserlink = default(string), int? statecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importmaptype = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> importMapSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importMapAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportentitymapping> importEntityMappingImportMap = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importMapBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportfile> importMapImportFile = default(IList<MicrosoftDynamicsCRMimportfile>))
         {
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Source = source;
@@ -183,7 +186,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -198,7 +201,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

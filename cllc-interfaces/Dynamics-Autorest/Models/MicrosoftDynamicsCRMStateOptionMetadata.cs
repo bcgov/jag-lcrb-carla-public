@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMStateOptionMetadata : MicrosoftDynamicsCRMOptionMetadata
+    /// <summary>
+    /// StateOptionMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMStateOptionMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,8 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMStateOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMStateOptionMetadata(int? value = default(int?), MicrosoftDynamicsCRMLabel label = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?), int? defaultStatus = default(int?), string invariantName = default(string))
-            : base(value, label, description, color, isManaged, metadataId, hasChanged)
+        public MicrosoftDynamicsCRMStateOptionMetadata(int? defaultStatus = default(int?), string invariantName = default(string))
         {
             DefaultStatus = defaultStatus;
             InvariantName = invariantName;

@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// plugintracelog
+    /// </summary>
     public partial class MicrosoftDynamicsCRMplugintracelog
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMplugintracelog class.
         /// </summary>
-        public MicrosoftDynamicsCRMplugintracelog(int? performanceconstructorduration = default(int?), int? operationtype = default(int?), string primaryentity = default(string), string secureconfiguration = default(string), string configuration = default(string), string exceptiondetails = default(string), string plugintracelogid = default(string), string pluginstepid = default(string), int? mode = default(int?), string messageblock = default(string), string _createdbyValue = default(string), string typename = default(string), object createdon = default(object), string _createdonbehalfbyValue = default(string), string profile = default(string), string organizationid = default(string), object performanceconstructorstarttime = default(object), object performanceexecutionstarttime = default(object), int? depth = default(int?), bool? issystemcreated = default(bool?), string requestid = default(string), string correlationid = default(string), string persistencekey = default(string), int? performanceexecutionduration = default(int?), string messagename = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMplugintracelog(int? performanceconstructorduration = default(int?), int? operationtype = default(int?), string primaryentity = default(string), string secureconfiguration = default(string), string configuration = default(string), string exceptiondetails = default(string), string plugintracelogid = default(string), string pluginstepid = default(string), int? mode = default(int?), string messageblock = default(string), string _createdbyValue = default(string), string typename = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string profile = default(string), string organizationid = default(string), System.DateTimeOffset? performanceconstructorstarttime = default(System.DateTimeOffset?), System.DateTimeOffset? performanceexecutionstarttime = default(System.DateTimeOffset?), int? depth = default(int?), bool? issystemcreated = default(bool?), string requestid = default(string), string correlationid = default(string), string persistencekey = default(string), int? performanceexecutionduration = default(int?), string messagename = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Performanceconstructorduration = performanceconstructorduration;
             Operationtype = operationtype;
@@ -124,7 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,12 +147,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "performanceconstructorstarttime")]
-        public object Performanceconstructorstarttime { get; set; }
+        public System.DateTimeOffset? Performanceconstructorstarttime { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "performanceexecutionstarttime")]
-        public object Performanceexecutionstarttime { get; set; }
+        public System.DateTimeOffset? Performanceexecutionstarttime { get; set; }
 
         /// <summary>
         /// </summary>
