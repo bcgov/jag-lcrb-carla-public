@@ -1,0 +1,7 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: cllc-public
+#=========================================================
+APPLICATION_DOMAIN=lclb-cllc-test.pathfinder.gov.bc.ca
+SITEMINDER_APPLICATION_DOMAIN=cannabis-licensing-test.pathfinder.bcgov
+TAG_NAME=test
