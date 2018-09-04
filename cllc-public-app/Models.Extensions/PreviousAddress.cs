@@ -30,8 +30,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.provstate = address.AdoxioProvstate;
                 result.country = address.AdoxioCountry;
                 result.postalcode = address.AdoxioPostalcode;
-                result.fromdate = (DateTime) address.AdoxioFromdate;
-                result.todate = (DateTime) address.AdoxioTodate;
+                result.fromdate = address.AdoxioFromdate;
+                result.todate = address.AdoxioTodate;
             }
             return result;
         }
