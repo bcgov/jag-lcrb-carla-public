@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// servicecontractcontacts
+    /// </summary>
     public partial class MicrosoftDynamicsCRMservicecontractcontacts
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMservicecontractcontacts class.
         /// </summary>
-        public MicrosoftDynamicsCRMservicecontractcontacts(int? servicelevel = default(int?), string contactid = default(string), string servicecontractcontactid = default(string), string versionnumber = default(string), string contractid = default(string))
+        public MicrosoftDynamicsCRMservicecontractcontacts(int? servicelevel = default(int?), string contactid = default(string), string servicecontractcontactid = default(string), long? versionnumber = default(long?), string contractid = default(string))
         {
             Servicelevel = servicelevel;
             Contactid = contactid;
@@ -57,7 +60,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

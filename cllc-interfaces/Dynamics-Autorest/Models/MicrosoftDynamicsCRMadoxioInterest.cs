@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_interest
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioInterest
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioInterest class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioInterest(string _modifiedbyValue = default(string), object createdon = default(object), object adoxioAmountBase = default(object), int? importsequencenumber = default(int?), string _transactioncurrencyidValue = default(string), string adoxioOccupationorbusiness = default(string), string _owningbusinessunitValue = default(string), object adoxioAmount = default(object), string _createdbyValue = default(string), string _adoxioAccountidValue = default(string), string adoxioInterestid = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioInteresttype = default(int?), object overriddencreatedon = default(object), int? statuscode = default(int?), string adoxioName = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), string versionnumber = default(string), string adoxioRelationshiptocorporation = default(string), object modifiedon = default(object), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), object exchangerate = default(object), int? statecode = default(int?), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioInterestSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInterestDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInterestDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioInterestAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioInterestBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
+        public MicrosoftDynamicsCRMadoxioInterest(string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), object adoxioAmountBase = default(object), int? importsequencenumber = default(int?), string _transactioncurrencyidValue = default(string), string adoxioOccupationorbusiness = default(string), string _owningbusinessunitValue = default(string), object adoxioAmount = default(object), string _createdbyValue = default(string), string _adoxioAccountidValue = default(string), string adoxioInterestid = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioInteresttype = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string adoxioName = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), long? versionnumber = default(long?), string adoxioRelationshiptocorporation = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), object exchangerate = default(object), int? statecode = default(int?), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioInterestSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInterestDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInterestDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioInterestAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioInterestBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
         {
             this._modifiedbyValue = _modifiedbyValue;
             Createdon = createdon;
@@ -86,7 +89,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,7 +149,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -171,7 +174,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -181,7 +184,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

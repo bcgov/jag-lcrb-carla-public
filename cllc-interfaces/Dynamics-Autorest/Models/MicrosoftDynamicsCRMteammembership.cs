@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// teammembership
+    /// </summary>
     public partial class MicrosoftDynamicsCRMteammembership
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMteammembership class.
         /// </summary>
-        public MicrosoftDynamicsCRMteammembership(string systemuserid = default(string), string versionnumber = default(string), string teammembershipid = default(string), string teamid = default(string))
+        public MicrosoftDynamicsCRMteammembership(string systemuserid = default(string), long? versionnumber = default(long?), string teammembershipid = default(string), string teamid = default(string))
         {
             Systemuserid = systemuserid;
             Versionnumber = versionnumber;
@@ -46,7 +49,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

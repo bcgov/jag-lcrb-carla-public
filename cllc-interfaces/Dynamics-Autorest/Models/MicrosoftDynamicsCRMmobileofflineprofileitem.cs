@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// mobileofflineprofileitem
+    /// </summary>
     public partial class MicrosoftDynamicsCRMmobileofflineprofileitem
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmobileofflineprofileitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMmobileofflineprofileitem(bool? recordsownedbymyteam = default(bool?), bool? canbefollowed = default(bool?), string viewquery = default(string), int? entityobjecttypecode = default(int?), string stageid = default(string), string _createdbyValue = default(string), string versionnumber = default(string), bool? getrelatedentityrecords = default(bool?), string mobileofflineprofileitemid = default(string), string introducedversion = default(string), bool? isvisibleingrid = default(bool?), string profileitementityfilter = default(string), string _regardingobjectidValue = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), object overwritetime = default(object), string selectedentitymetadata = default(string), int? recorddistributioncriteria = default(int?), string _modifiedbyValue = default(string), string traversedpath = default(string), string _modifiedonbehalfbyValue = default(string), bool? recordsownedbymybusinessunit = default(bool?), string mobileofflineprofileitemidunique = default(string), object publishedon = default(object), string _createdonbehalfbyValue = default(string), string selectedentitytypecode = default(string), string relationshipdata = default(string), object createdon = default(object), object modifiedon = default(object), string name = default(string), string _organizationidValue = default(string), string processid = default(string), bool? isvalidated = default(bool?), string solutionid = default(string), bool? recordsownedbyme = default(bool?), string _profileitemruleValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmobileofflineprofile regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemMobileOfflineProfileItemAssociation = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsavedquery profileitemrule = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmobileofflineprofileitem(bool? recordsownedbymyteam = default(bool?), bool? canbefollowed = default(bool?), string viewquery = default(string), int? entityobjecttypecode = default(int?), string stageid = default(string), string _createdbyValue = default(string), long? versionnumber = default(long?), bool? getrelatedentityrecords = default(bool?), string mobileofflineprofileitemid = default(string), string introducedversion = default(string), bool? isvisibleingrid = default(bool?), string profileitementityfilter = default(string), string _regardingobjectidValue = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string selectedentitymetadata = default(string), int? recorddistributioncriteria = default(int?), string _modifiedbyValue = default(string), string traversedpath = default(string), string _modifiedonbehalfbyValue = default(string), bool? recordsownedbymybusinessunit = default(bool?), string mobileofflineprofileitemidunique = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string selectedentitytypecode = default(string), string relationshipdata = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _organizationidValue = default(string), string processid = default(string), bool? isvalidated = default(bool?), string solutionid = default(string), bool? recordsownedbyme = default(bool?), string _profileitemruleValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmobileofflineprofile regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemMobileOfflineProfileItemAssociation = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsavedquery profileitemrule = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Recordsownedbymyteam = recordsownedbymyteam;
             Canbefollowed = canbefollowed;
@@ -113,7 +116,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,7 +161,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -198,7 +201,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "publishedon")]
-        public object Publishedon { get; set; }
+        public System.DateTimeOffset? Publishedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -218,12 +221,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

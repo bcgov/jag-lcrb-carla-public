@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// subscriptionsyncentryoffline
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsubscriptionsyncentryoffline
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsubscriptionsyncentryoffline class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubscriptionsyncentryoffline(int? syncstate = default(int?), int? objecttypecode = default(int?), string objectid = default(string), string subscriptionid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMsubscriptionsyncentryoffline(int? syncstate = default(int?), int? objecttypecode = default(int?), string objectid = default(string), string subscriptionid = default(string), long? versionnumber = default(long?))
         {
             Syncstate = syncstate;
             Objecttypecode = objecttypecode;
@@ -62,7 +65,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

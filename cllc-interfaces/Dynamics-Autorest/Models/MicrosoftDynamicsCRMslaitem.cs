@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// slaitem
+    /// </summary>
     public partial class MicrosoftDynamicsCRMslaitem
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMslaitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMslaitem(string _createdbyValue = default(string), string _owneridValue = default(string), int? failureafter = default(int?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), int? warnafter = default(int?), string description = default(string), bool? ismanaged = default(bool?), string _owninguserValue = default(string), int? sequencenumber = default(int?), string _slaidValue = default(string), int? componentstate = default(int?), string solutionid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _workflowidValue = default(string), string _modifiedonbehalfbyValue = default(string), object modifiedon = default(object), string applicablewhenxml = default(string), object createdon = default(object), string name = default(string), string versionnumber = default(string), string slaitemidunique = default(string), string relatedfield = default(string), object exchangerate = default(object), object overwritetime = default(object), string successconditionsxml = default(string), string slaitemid = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMworkflow workflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> sLAItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMslaitem(string _createdbyValue = default(string), string _owneridValue = default(string), int? failureafter = default(int?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), int? warnafter = default(int?), string description = default(string), bool? ismanaged = default(bool?), string _owninguserValue = default(string), int? sequencenumber = default(int?), string _slaidValue = default(string), int? componentstate = default(int?), string solutionid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _workflowidValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string applicablewhenxml = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), long? versionnumber = default(long?), string slaitemidunique = default(string), string relatedfield = default(string), object exchangerate = default(object), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string successconditionsxml = default(string), string slaitemid = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMworkflow workflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> sLAItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             this._owneridValue = _owneridValue;
@@ -160,7 +163,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,7 +173,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -180,7 +183,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -200,7 +203,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

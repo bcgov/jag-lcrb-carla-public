@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// teamsyncattributemappingprofiles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMteamsyncattributemappingprofiles
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMteamsyncattributemappingprofiles class.
         /// </summary>
-        public MicrosoftDynamicsCRMteamsyncattributemappingprofiles(string teamsyncattributemappingprofileid = default(string), string syncattributemappingprofileid = default(string), string versionnumber = default(string), string teamid = default(string))
+        public MicrosoftDynamicsCRMteamsyncattributemappingprofiles(string teamsyncattributemappingprofileid = default(string), string syncattributemappingprofileid = default(string), long? versionnumber = default(long?), string teamid = default(string))
         {
             Teamsyncattributemappingprofileid = teamsyncattributemappingprofileid;
             Syncattributemappingprofileid = syncattributemappingprofileid;
@@ -51,7 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// dynamicproperty
+    /// </summary>
     public partial class MicrosoftDynamicsCRMdynamicproperty
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdynamicproperty class.
         /// </summary>
-        public MicrosoftDynamicsCRMdynamicproperty(string rootdynamicpropertyid = default(string), string _organizationidValue = default(string), object createdon = default(object), string defaultvaluestring = default(string), int? importsequencenumber = default(int?), string _basedynamicpropertyidValue = default(string), bool? isreadonly = default(bool?), int? defaultvalueinteger = default(int?), bool? isrequired = default(bool?), int? dmtimportstate = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? maxvalueinteger = default(int?), object maxvaluedouble = default(object), string _modifiedbyValue = default(string), object minvaluedecimal = default(object), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), object defaultvaluedecimal = default(object), int? maxlengthstring = default(int?), string description = default(string), object maxvaluedecimal = default(object), object defaultvaluedouble = default(object), string overwrittendynamicpropertyid = default(string), object overriddencreatedon = default(object), object minvaluedouble = default(object), string _defaultvalueoptionsetValue = default(string), int? statuscode = default(int?), int? precision = default(int?), string dynamicpropertyid = default(string), object modifiedon = default(object), string _regardingobjectidValue = default(string), int? minvalueinteger = default(int?), bool? ishidden = default(bool?), string versionnumber = default(string), int? datatype = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty basedynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), IList<MicrosoftDynamicsCRMdynamicproperty> dynamicpropertyBaseDynamicproperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> dynamicPropertyDynamicPropertyInstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> dynamicpropertyDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> dynamicPropertyDynamicPropertyOptionSetItem = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), MicrosoftDynamicsCRMdynamicpropertyoptionsetitem dynamicpropertyoptionsetvalueid = default(MicrosoftDynamicsCRMdynamicpropertyoptionsetitem), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMdynamicproperty(string rootdynamicpropertyid = default(string), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultvaluestring = default(string), int? importsequencenumber = default(int?), string _basedynamicpropertyidValue = default(string), bool? isreadonly = default(bool?), int? defaultvalueinteger = default(int?), bool? isrequired = default(bool?), int? dmtimportstate = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? maxvalueinteger = default(int?), double? maxvaluedouble = default(double?), string _modifiedbyValue = default(string), object minvaluedecimal = default(object), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), object defaultvaluedecimal = default(object), int? maxlengthstring = default(int?), string description = default(string), object maxvaluedecimal = default(object), double? defaultvaluedouble = default(double?), string overwrittendynamicpropertyid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), double? minvaluedouble = default(double?), string _defaultvalueoptionsetValue = default(string), int? statuscode = default(int?), int? precision = default(int?), string dynamicpropertyid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _regardingobjectidValue = default(string), int? minvalueinteger = default(int?), bool? ishidden = default(bool?), long? versionnumber = default(long?), int? datatype = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty basedynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), IList<MicrosoftDynamicsCRMdynamicproperty> dynamicpropertyBaseDynamicproperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> dynamicPropertyDynamicPropertyInstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> dynamicpropertyDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> dynamicPropertyDynamicPropertyOptionSetItem = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), MicrosoftDynamicsCRMdynamicpropertyoptionsetitem dynamicpropertyoptionsetvalueid = default(MicrosoftDynamicsCRMdynamicpropertyoptionsetitem), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Rootdynamicpropertyid = rootdynamicpropertyid;
             this._organizationidValue = _organizationidValue;
@@ -99,7 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,7 +157,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "maxvaluedouble")]
-        public object Maxvaluedouble { get; set; }
+        public double? Maxvaluedouble { get; set; }
 
         /// <summary>
         /// </summary>
@@ -204,7 +207,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "defaultvaluedouble")]
-        public object Defaultvaluedouble { get; set; }
+        public double? Defaultvaluedouble { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,12 +217,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "minvaluedouble")]
-        public object Minvaluedouble { get; set; }
+        public double? Minvaluedouble { get; set; }
 
         /// <summary>
         /// </summary>
@@ -244,7 +247,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -264,7 +267,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

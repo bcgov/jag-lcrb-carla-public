@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// knowledgearticleviews
+    /// </summary>
     public partial class MicrosoftDynamicsCRMknowledgearticleviews
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMknowledgearticleviews class.
         /// </summary>
-        public MicrosoftDynamicsCRMknowledgearticleviews(string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), object overriddencreatedon = default(object), string _createdonbehalfbyValue = default(string), int? location = default(int?), int? statecode = default(int?), object exchangerate = default(object), int? knowledgearticleview = default(int?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), object viewdate = default(object), int? importsequencenumber = default(int?), object modifiedon = default(object), object createdon = default(object), string versionnumber = default(string), string _knowledgearticleidValue = default(string), string owninguser = default(string), string knowledgearticleviewsid = default(string), string owningbusinessunit = default(string), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleViewsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMknowledgearticleviews(string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? location = default(int?), int? statecode = default(int?), object exchangerate = default(object), int? knowledgearticleview = default(int?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? viewdate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _knowledgearticleidValue = default(string), string owninguser = default(string), string knowledgearticleviewsid = default(string), string owningbusinessunit = default(string), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleViewsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -94,7 +97,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -134,7 +137,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "viewdate")]
-        public object Viewdate { get; set; }
+        public System.DateTimeOffset? Viewdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,17 +147,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// salesorderdetail
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsalesorderdetail
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsalesorderdetail class.
         /// </summary>
-        public MicrosoftDynamicsCRMsalesorderdetail(string owningbusinessunit = default(string), string shiptoCity = default(string), int? lineitemnumber = default(int?), object quantity = default(object), bool? isproductoverridden = default(bool?), int? pricingerrorcode = default(int?), string parentbundleid = default(string), string shiptoCountry = default(string), string productdescription = default(string), string shiptoContactname = default(string), int? shiptoFreighttermscode = default(int?), int? importsequencenumber = default(int?), string owninguser = default(string), object manualdiscountamountBase = default(object), string _productidValue = default(string), bool? iscopied = default(bool?), string shiptoLine1 = default(string), string description = default(string), object createdon = default(object), string _modifiedonbehalfbyValue = default(string), int? propertyconfigurationstatus = default(int?), object extendedamount = default(object), object modifiedon = default(object), object quantityshipped = default(object), bool? salesorderispricelocked = default(bool?), string _uomidValue = default(string), int? utcconversiontimezonecode = default(int?), int? producttypecode = default(int?), string salesorderdetailid = default(string), bool? ispriceoverridden = default(bool?), object volumediscountamountBase = default(object), object baseamountBase = default(object), object tax = default(object), object baseamount = default(object), string shiptoLine3 = default(string), string productassociationid = default(string), string shiptoLine2 = default(string), int? sequencenumber = default(int?), string shiptoAddressid = default(string), string _modifiedbyValue = default(string), object quantitycancelled = default(object), string _salesrepidValue = default(string), string _salesorderidValue = default(string), object exchangerate = default(object), string shiptoFax = default(string), string shiptoStateorprovince = default(string), string shiptoTelephone = default(string), string _createdonbehalfbyValue = default(string), object priceperunitBase = default(object), object requestdeliveryby = default(object), object quantitybackordered = default(object), object overriddencreatedon = default(object), string shiptoName = default(string), object extendedamountBase = default(object), object manualdiscountamount = default(object), string shiptoPostalcode = default(string), object priceperunit = default(object), int? timezoneruleversionnumber = default(int?), int? salesorderstatecode = default(int?), string versionnumber = default(string), bool? willcall = default(bool?), object taxBase = default(object), object volumediscountamount = default(object), string _owneridValue = default(string), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorderdetail parentbundleidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), IList<MicrosoftDynamicsCRMsalesorderdetail> salesorderdetailParentSalesorderdetail = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> salesOrderDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> salesOrderDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesOrderDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> salesOrderDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMsalesorderdetail(string owningbusinessunit = default(string), string shiptoCity = default(string), int? lineitemnumber = default(int?), object quantity = default(object), bool? isproductoverridden = default(bool?), int? pricingerrorcode = default(int?), string parentbundleid = default(string), string shiptoCountry = default(string), string productdescription = default(string), string shiptoContactname = default(string), int? shiptoFreighttermscode = default(int?), int? importsequencenumber = default(int?), string owninguser = default(string), object manualdiscountamountBase = default(object), string _productidValue = default(string), bool? iscopied = default(bool?), string shiptoLine1 = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? propertyconfigurationstatus = default(int?), object extendedamount = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), object quantityshipped = default(object), bool? salesorderispricelocked = default(bool?), string _uomidValue = default(string), int? utcconversiontimezonecode = default(int?), int? producttypecode = default(int?), string salesorderdetailid = default(string), bool? ispriceoverridden = default(bool?), object volumediscountamountBase = default(object), object baseamountBase = default(object), object tax = default(object), object baseamount = default(object), string shiptoLine3 = default(string), string productassociationid = default(string), string shiptoLine2 = default(string), int? sequencenumber = default(int?), string shiptoAddressid = default(string), string _modifiedbyValue = default(string), object quantitycancelled = default(object), string _salesrepidValue = default(string), string _salesorderidValue = default(string), object exchangerate = default(object), string shiptoFax = default(string), string shiptoStateorprovince = default(string), string shiptoTelephone = default(string), string _createdonbehalfbyValue = default(string), object priceperunitBase = default(object), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), object quantitybackordered = default(object), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string shiptoName = default(string), object extendedamountBase = default(object), object manualdiscountamount = default(object), string shiptoPostalcode = default(string), object priceperunit = default(object), int? timezoneruleversionnumber = default(int?), int? salesorderstatecode = default(int?), long? versionnumber = default(long?), bool? willcall = default(bool?), object taxBase = default(object), object volumediscountamount = default(object), string _owneridValue = default(string), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorderdetail parentbundleidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), IList<MicrosoftDynamicsCRMsalesorderdetail> salesorderdetailParentSalesorderdetail = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> salesOrderDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> salesOrderDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesOrderDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> salesOrderDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Owningbusinessunit = owningbusinessunit;
             ShiptoCity = shiptoCity;
@@ -211,7 +214,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -231,7 +234,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -366,7 +369,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "requestdeliveryby")]
-        public object Requestdeliveryby { get; set; }
+        public System.DateTimeOffset? Requestdeliveryby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -376,7 +379,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -416,7 +419,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

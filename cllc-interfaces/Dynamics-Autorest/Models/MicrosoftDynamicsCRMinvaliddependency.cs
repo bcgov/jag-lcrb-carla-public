@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// invaliddependency
+    /// </summary>
     public partial class MicrosoftDynamicsCRMinvaliddependency
     {
         /// <summary>

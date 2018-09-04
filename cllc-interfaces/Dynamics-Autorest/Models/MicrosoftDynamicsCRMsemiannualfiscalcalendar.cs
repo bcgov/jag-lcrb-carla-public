@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// semiannualfiscalcalendar
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsemiannualfiscalcalendar
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsemiannualfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMsemiannualfiscalcalendar(int? fiscalperiodtype = default(int?), string _businessunitidValue = default(string), object firsthalf = default(object), int? timezoneruleversionnumber = default(int?), object secondhalf = default(object), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), object firsthalfBase = default(object), string _transactioncurrencyidValue = default(string), object secondhalfBase = default(object), string userfiscalcalendarid = default(string), int? importsequencenumber = default(int?), object exchangerate = default(object), object modifiedon = default(object), string _createdonbehalfbyValue = default(string), object effectiveon = default(object), string _salespersonidValue = default(string), object createdon = default(object), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> semiAnnualFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> semiAnnualFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsemiannualfiscalcalendar(int? fiscalperiodtype = default(int?), string _businessunitidValue = default(string), object firsthalf = default(object), int? timezoneruleversionnumber = default(int?), object secondhalf = default(object), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), object firsthalfBase = default(object), string _transactioncurrencyidValue = default(string), object secondhalfBase = default(object), string userfiscalcalendarid = default(string), int? importsequencenumber = default(int?), object exchangerate = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), string _salespersonidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> semiAnnualFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> semiAnnualFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Fiscalperiodtype = fiscalperiodtype;
             this._businessunitidValue = _businessunitidValue;
@@ -132,7 +135,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,7 +145,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "effectiveon")]
-        public object Effectiveon { get; set; }
+        public System.DateTimeOffset? Effectiveon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,7 +155,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

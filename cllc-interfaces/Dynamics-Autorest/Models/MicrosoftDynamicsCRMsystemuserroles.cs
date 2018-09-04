@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// systemuserroles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsystemuserroles
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsystemuserroles class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemuserroles(string versionnumber = default(string), string systemuserroleid = default(string), string roleid = default(string), string systemuserid = default(string))
+        public MicrosoftDynamicsCRMsystemuserroles(long? versionnumber = default(long?), string systemuserroleid = default(string), string roleid = default(string), string systemuserid = default(string))
         {
             Versionnumber = versionnumber;
             Systemuserroleid = systemuserroleid;
@@ -41,7 +44,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

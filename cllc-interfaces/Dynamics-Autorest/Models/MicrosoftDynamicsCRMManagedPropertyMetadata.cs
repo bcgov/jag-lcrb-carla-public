@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMManagedPropertyMetadata : MicrosoftDynamicsCRMMetadataBase
+    /// <summary>
+    /// ManagedPropertyMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMManagedPropertyMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -30,8 +33,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 'Update', 'CreateUpdate', 'Delete', 'UpdateDelete', 'All'</param>
         /// <param name="evaluationPriority">Possible values include: 'None',
         /// 'Low', 'Normal', 'High', 'Essential'</param>
-        public MicrosoftDynamicsCRMManagedPropertyMetadata(string metadataId = default(string), bool? hasChanged = default(bool?), string logicalName = default(string), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string managedPropertyType = default(string), string operation = default(string), bool? isGlobalForOperation = default(bool?), string evaluationPriority = default(string), bool? isPrivate = default(bool?), int? errorCode = default(int?), string enablesEntityName = default(string), string enablesAttributeName = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string introducedVersion = default(string))
-            : base(metadataId, hasChanged)
+        public MicrosoftDynamicsCRMManagedPropertyMetadata(string logicalName = default(string), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string managedPropertyType = default(string), string operation = default(string), bool? isGlobalForOperation = default(bool?), string evaluationPriority = default(string), bool? isPrivate = default(bool?), int? errorCode = default(int?), string enablesEntityName = default(string), string enablesAttributeName = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string introducedVersion = default(string))
         {
             LogicalName = logicalName;
             DisplayName = displayName;
