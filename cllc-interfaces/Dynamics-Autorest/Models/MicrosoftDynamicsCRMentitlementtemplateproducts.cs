@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// entitlementtemplateproducts
+    /// </summary>
     public partial class MicrosoftDynamicsCRMentitlementtemplateproducts
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementtemplateproducts class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementtemplateproducts(string productid = default(string), string entitlementtemplateproductid = default(string), string entitlementtemplateid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMentitlementtemplateproducts(string productid = default(string), string entitlementtemplateproductid = default(string), string entitlementtemplateid = default(string), long? versionnumber = default(long?))
         {
             Productid = productid;
             Entitlementtemplateproductid = entitlementtemplateproductid;
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

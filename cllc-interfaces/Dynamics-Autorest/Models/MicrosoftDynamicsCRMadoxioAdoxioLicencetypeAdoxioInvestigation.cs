@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_adoxio_licencetype_adoxio_investigation
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), string adoxioInvestigationid = default(string), string versionnumber = default(string), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), string adoxioInvestigationid = default(string), long? versionnumber = default(long?), string adoxioLicencetypeid = default(string))
         {
             AdoxioAdoxioLicencetypeAdoxioInvestigationid = adoxioAdoxioLicencetypeAdoxioInvestigationid;
             AdoxioInvestigationid = adoxioInvestigationid;
@@ -53,7 +56,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

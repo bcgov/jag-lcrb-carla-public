@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// entitlement
+    /// </summary>
     public partial class MicrosoftDynamicsCRMentitlement
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMentitlement
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlement(int? decreaseremainingon = default(int?), object startdate = default(object), int? statecode = default(int?), int? kbaccesslevel = default(int?), string entitlementid = default(string), object modifiedon = default(object), string versionnumber = default(string), int? importsequencenumber = default(int?), object enddate = default(object), string _customeridValue = default(string), bool? restrictcasecreation = default(bool?), bool? isdefault = default(bool?), string _owningteamValue = default(string), object exchangerate = default(object), int? allocationtypecode = default(int?), string _accountidValue = default(string), object remainingterms = default(object), string _contactidValue = default(string), string processid = default(string), string description = default(string), string _transactioncurrencyidValue = default(string), string _owningbusinessunitValue = default(string), string _slaidValue = default(string), object createdon = default(object), string _owninguserValue = default(string), int? statuscode = default(int?), object overriddencreatedon = default(object), object totalterms = default(object), string _owneridValue = default(string), string stageid = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string traversedpath = default(string), string _entitlementtemplateidValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string name = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> entitlementActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> entitlementAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> entitlementEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> entitlementFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> entitlementLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> entitlementPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> entitlementServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> entitlementTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> entitlementRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMconnection> entitlementConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> entitlementConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> entitlementDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> entitlementDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> entitlementAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMentitlementchannel> entitlementEntitlementchannelEntitlementId = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMproduct> productEntitlementAssociation = default(IList<MicrosoftDynamicsCRMproduct>), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMaccount accountid = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact contactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsocialactivity> entitlementSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcontact> entitlementcontactsAssociation = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMincident> entitlementCases = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMsyncerror> entitlementSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMentitlement(int? decreaseremainingon = default(int?), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? statecode = default(int?), int? kbaccesslevel = default(int?), string entitlementid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), int? importsequencenumber = default(int?), System.DateTimeOffset? enddate = default(System.DateTimeOffset?), string _customeridValue = default(string), bool? restrictcasecreation = default(bool?), bool? isdefault = default(bool?), string _owningteamValue = default(string), object exchangerate = default(object), int? allocationtypecode = default(int?), string _accountidValue = default(string), object remainingterms = default(object), string _contactidValue = default(string), string processid = default(string), string description = default(string), string _transactioncurrencyidValue = default(string), string _owningbusinessunitValue = default(string), string _slaidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owninguserValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), object totalterms = default(object), string _owneridValue = default(string), string stageid = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string traversedpath = default(string), string _entitlementtemplateidValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string name = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> entitlementActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> entitlementAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> entitlementEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> entitlementFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> entitlementLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> entitlementPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> entitlementServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> entitlementTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> entitlementRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMconnection> entitlementConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> entitlementConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> entitlementDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> entitlementDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> entitlementAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMentitlementchannel> entitlementEntitlementchannelEntitlementId = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMproduct> productEntitlementAssociation = default(IList<MicrosoftDynamicsCRMproduct>), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMaccount accountid = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact contactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsocialactivity> entitlementSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcontact> entitlementcontactsAssociation = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMincident> entitlementCases = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMsyncerror> entitlementSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Decreaseremainingon = decreaseremainingon;
             Startdate = startdate;
@@ -120,7 +123,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "startdate")]
-        public object Startdate { get; set; }
+        public System.DateTimeOffset? Startdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,12 +143,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -155,7 +158,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "enddate")]
-        public object Enddate { get; set; }
+        public System.DateTimeOffset? Enddate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -230,7 +233,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -245,7 +248,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

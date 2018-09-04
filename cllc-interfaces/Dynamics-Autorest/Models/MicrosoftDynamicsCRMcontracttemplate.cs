@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// contracttemplate
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcontracttemplate
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcontracttemplate class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontracttemplate(object createdon = default(object), int? contractservicelevelcode = default(int?), int? componentstate = default(int?), string introducedversion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? billingfrequencycode = default(int?), string solutionid = default(string), string versionnumber = default(string), object modifiedon = default(object), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string contracttemplateid = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string abbreviation = default(string), string description = default(string), object overwritetime = default(object), string _organizationidValue = default(string), object overriddencreatedon = default(object), int? importsequencenumber = default(int?), bool? usediscountaspercentage = default(bool?), string _createdonbehalfbyValue = default(string), string effectivitycalendar = default(string), string contracttemplateidunique = default(string), string name = default(string), int? allotmenttypecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> contractTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> contractTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractTemplateContracts = default(IList<MicrosoftDynamicsCRMcontract>))
+        public MicrosoftDynamicsCRMcontracttemplate(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? contractservicelevelcode = default(int?), int? componentstate = default(int?), string introducedversion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? billingfrequencycode = default(int?), string solutionid = default(string), long? versionnumber = default(long?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string contracttemplateid = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string abbreviation = default(string), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), bool? usediscountaspercentage = default(bool?), string _createdonbehalfbyValue = default(string), string effectivitycalendar = default(string), string contracttemplateidunique = default(string), string name = default(string), int? allotmenttypecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> contractTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> contractTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractTemplateContracts = default(IList<MicrosoftDynamicsCRMcontract>))
         {
             Createdon = createdon;
             Contractservicelevelcode = contractservicelevelcode;
@@ -74,7 +77,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -109,12 +112,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,7 +157,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
-        public object Overwritetime { get; set; }
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -164,7 +167,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

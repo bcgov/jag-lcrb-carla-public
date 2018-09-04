@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_postalcode
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioPostalcode
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioPostalcode class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioPostalcode(string _adoxioTerritoryValue = default(string), string _createdbyValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioPostalcodeid = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), object overriddencreatedon = default(object), string _owneridValue = default(string), object modifiedon = default(object), string _owningbusinessunitValue = default(string), string _adoxioLocalgovermentValue = default(string), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string adoxioName = default(string), string _modifiedonbehalfbyValue = default(string), object createdon = default(object), int? importsequencenumber = default(int?), string _adoxioPolicejurisdictionValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPostalcodeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPostalcodeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPostalcodeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPostalcodeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPostalcodeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioLocalGoverment = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioPoliceJurisdiction = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory))
+        public MicrosoftDynamicsCRMadoxioPostalcode(string _adoxioTerritoryValue = default(string), string _createdbyValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioPostalcodeid = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _adoxioLocalgovermentValue = default(string), long? versionnumber = default(long?), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string adoxioName = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _adoxioPolicejurisdictionValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPostalcodeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPostalcodeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPostalcodeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPostalcodeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPostalcodeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioLocalGoverment = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioPoliceJurisdiction = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory))
         {
             this._adoxioTerritoryValue = _adoxioTerritoryValue;
             this._createdbyValue = _createdbyValue;
@@ -117,7 +120,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,7 +130,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,7 +145,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -172,7 +175,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

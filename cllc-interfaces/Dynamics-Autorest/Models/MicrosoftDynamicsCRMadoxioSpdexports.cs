@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_spdexports
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioSpdexports
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioSpdexports class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioSpdexports(string adoxioSpdexportsid = default(string), object overriddencreatedon = default(object), string adoxioName = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), object createdon = default(object), bool? adoxioIscompleted = default(bool?), string _owninguserValue = default(string), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), int? statecode = default(int?), object modifiedon = default(object), object adoxioExportedon = default(object), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSpdexportsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioSpdexportsSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSpdexportsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSpdexportsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> adoxioSpdexportsAdoxioSpddatarowSPDExport = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>))
+        public MicrosoftDynamicsCRMadoxioSpdexports(string adoxioSpdexportsid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioName = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), long? versionnumber = default(long?), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? adoxioIscompleted = default(bool?), string _owninguserValue = default(string), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExportedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSpdexportsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioSpdexportsSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSpdexportsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSpdexportsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> adoxioSpdexportsAdoxioSpddatarowSPDExport = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>))
         {
             AdoxioSpdexportsid = adoxioSpdexportsid;
             Overriddencreatedon = overriddencreatedon;
@@ -78,7 +81,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
-        public object Overriddencreatedon { get; set; }
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,7 +111,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,7 +141,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,12 +171,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_exportedon")]
-        public object AdoxioExportedon { get; set; }
+        public System.DateTimeOffset? AdoxioExportedon { get; set; }
 
         /// <summary>
         /// </summary>

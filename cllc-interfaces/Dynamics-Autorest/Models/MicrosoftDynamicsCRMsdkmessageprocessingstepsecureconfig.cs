@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// sdkmessageprocessingstepsecureconfig
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig(int? customizationlevel = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string sdkmessageprocessingstepsecureconfigidunique = default(string), string _modifiedbyValue = default(string), string secureconfig = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepsecureconfigid = default(string), string _createdbyValue = default(string), object modifiedon = default(object), object createdon = default(object), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageprocessingstepsecureconfigidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig(int? customizationlevel = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string sdkmessageprocessingstepsecureconfigidunique = default(string), string _modifiedbyValue = default(string), string secureconfig = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepsecureconfigid = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageprocessingstepsecureconfigidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Customizationlevel = customizationlevel;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -101,12 +104,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
-        public object Modifiedon { get; set; }
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
-        public object Createdon { get; set; }
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
