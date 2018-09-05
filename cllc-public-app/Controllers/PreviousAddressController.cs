@@ -141,10 +141,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var contact = _dynamicsClient.GetContactById(Guid.Parse(item.contactId));
-                patchAddress.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contact", item.contactId);
+                patchAddress.ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", item.contactId);
 
                 var worker = _dynamicsClient.GetWorkerById(Guid.Parse(item.workerId));
-                patchAddress.WorkerIdAccountODataBind = _dynamicsClient.GetEntityURI("worker", item.workerId);
+                patchAddress.WorkerIdODataBind = _dynamicsClient.GetEntityURI("adoxio_workers", item.workerId);
 
                 await _dynamicsClient.Previousaddresses.UpdateAsync(address.AdoxioPreviousaddressid, patchAddress);
             }

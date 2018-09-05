@@ -1,4 +1,4 @@
-export interface PreviousAddress { 
+export interface PreviousAddress {
     id: string;
     streetaddress: string;
     city: string;
@@ -7,4 +7,6 @@ export interface PreviousAddress {
     postalcode: string;
     fromdate: string;
     todate: string;
+    contactId: string;
+    workerId: string;
 }

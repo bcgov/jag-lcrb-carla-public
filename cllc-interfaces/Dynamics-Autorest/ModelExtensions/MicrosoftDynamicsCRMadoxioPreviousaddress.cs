@@ -10,13 +10,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_contactid_value@odata.bind")]
-        public string ContactIdAccountODataBind { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ContactId@odata.bind")]
+        public string ContactIdODataBind { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_workerid_value@odata.bind")]
-        public string WorkerIdAccountODataBind { get; set; }
+        [JsonProperty(PropertyName = "adoxio_WorkerId@odata.bind")]
+        public string WorkerIdODataBind { get; set; }
 
     }
 }

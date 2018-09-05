@@ -54,7 +54,7 @@ export class WorkerRegistrationComponent implements OnInit {
         firstname: ['', Validators.required],
         middlename: ['', Validators.required],
         lastname: ['', Validators.required],
-        emailaddress1: ['', Validators.required],
+        emailaddress1: ['', [Validators.required, Validators.email]],
         telephone1: ['', Validators.required],
         address1_line1: ['', Validators.required],
         address1_city: ['', Validators.required],
@@ -74,15 +74,13 @@ export class WorkerRegistrationComponent implements OnInit {
         driverslicencenumber: ['', Validators.required],
         bcidcardnumber: ['', Validators.required],
         phonenumber: ['', Validators.required],
-        email: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
         selfdisclosure: ['', Validators.required],
-        triggerphs: ['', Validators.required]
+        // triggerphs: ['', Validators.required]
       }),
       aliases: this.fb.array([
-        this.createAlias()
       ]),
       addresses: this.fb.array([
-        this.createAddress()
       ])
     });
     this.reloadUser();
@@ -108,22 +106,19 @@ export class WorkerRegistrationComponent implements OnInit {
             const addresses = res[2];
             this.form.patchValue({
               worker: worker,
-              contact:  contact,
-              aliases: aliases,
-              addresses: addresses
+              contact: contact,
+            });
+
+            this.clearAliases();
+            aliases.forEach(alias => {
+              this.addAlias(alias);
+            });
+
+            this.clearAddresses();
+            addresses.forEach(address => {
+              this.addAddress(address);
             });
           });
-          // this.aliasDataService.getAliases(this.currentUser.contactid).
-          //   subscribe(alias => {
-          //     this.form.patchValue(alias);
-          //   });
-          // this.previousAddressDataService.getPreviousAdderesses(this.currentUser.contactid)
-          //   .subscribe(addresses => {
-          //     addresses = addresses || [];
-          //     addresses.forEach(a => {
-          //       this.addAddress(a);
-          //     });
-          //   });
         }
       });
   }
@@ -179,6 +174,12 @@ export class WorkerRegistrationComponent implements OnInit {
     this.addresses.removeAt(index);
   }
 
+  clearAddresses() {
+    for (let i = this.addresses.controls.length; i > 0;  i--) {
+      this.addresses.removeAt(0);
+    }
+  }
+
   addAlias(alias: Alias = null) {
     this.aliases.push(this.createAlias(alias));
   }
@@ -189,6 +190,12 @@ export class WorkerRegistrationComponent implements OnInit {
       this.aliasesToDelete.push(alias.value);
     }
     this.aliases.removeAt(index);
+  }
+
+  clearAliases() {
+    for (let i = this.aliases.controls.length; i > 0;  i--) {
+      this.aliases.removeAt(0);
+    }
   }
 
   createAlias(alias: Alias = null) {
@@ -206,18 +213,46 @@ export class WorkerRegistrationComponent implements OnInit {
   }
 
   save() {
-    const saves = [this.aliasDataService.updateAlias(this.form.value, this.form.value.id)];
+    const value = this.form.value;
+    const saves = [
+      this.contactDataService.updateContact(value.contact),
+      this.workerDataService.updateWorker(value.worker, value.worker.id)
+    ];
+
     this.addressesToDelete.forEach(a => {
       const save = this.previousAddressDataService.deletePreviousAdderess(a.id);
       saves.push(save);
     });
 
-    for (let i = 0; i < this.addresses.length; i++) {
-      if (this.addresses[i].id) {
-        const save = this.previousAddressDataService.updatePreviousAdderess(this.addresses[i], this.addresses[i].id);
+    const addressControls = this.addresses.controls;
+    for (let i = 0; i < addressControls.length; i++) {
+      if (addressControls[i].value.id) {
+        const save = this.previousAddressDataService.updatePreviousAdderess(addressControls[i].value, addressControls[i].value.id);
         saves.push(save);
       } else {
-        const save = this.previousAddressDataService.createPreviousAdderess(this.addresses[i]);
+        const newAddress = addressControls[i].value;
+        newAddress.contactId = value.contact.id;
+        newAddress.workerId = value.worker.id;
+        const save = this.previousAddressDataService.createPreviousAdderess(newAddress);
+        saves.push(save);
+      }
+    }
+
+    this.aliasesToDelete.forEach(a => {
+      const save = this.aliasDataService.deleteAlias(a.id);
+      saves.push(save);
+    });
+
+    const aliasControls = this.aliases.controls;
+    for (let j = 0; j < aliasControls.length; j++) {
+      if (aliasControls[j].value.id) {
+        const save = this.aliasDataService.updateAlias(aliasControls[j].value, aliasControls[j].value.id);
+        saves.push(save);
+      } else {
+        const alias = aliasControls[j].value;
+        alias.contact = { id: value.contact.id };
+        alias.worker = { id: value.worker.id };
+        const save = this.aliasDataService.createAlias(alias);
         saves.push(save);
       }
     }
