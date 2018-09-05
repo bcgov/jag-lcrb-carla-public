@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+    public enum Gender {
+        Male = 1,
+        Female = 2,
+        Other = 3
+    }
+
     public class Worker
     {
         public string id { get; set; }
@@ -13,7 +21,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string middlename { get; set; }
         public string lastname { get; set; }
         public DateTimeOffset? dateofbirth { get; set; }
-        public string gender { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Gender gender { get; set; }
         public string birthplace { get; set; }
         public string driverslicencenumber { get; set; }
         public string bcidcardnumber { get; set; }
