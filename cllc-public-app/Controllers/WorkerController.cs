@@ -138,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
-                patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contact", item.contact.id);
+                patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
             catch (OdataerrorException odee)
