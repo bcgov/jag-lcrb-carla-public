@@ -88,30 +88,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid aliasId = Guid.Parse(id);
             
             MicrosoftDynamicsCRMadoxioAlias alias = await _dynamicsClient.GetAliasById(aliasId);
-            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(Guid.Parse(item.contact.id));
-            MicrosoftDynamicsCRMadoxioWorker worker = await _dynamicsClient.GetWorkerById(Guid.Parse(item.worker.id));
 
             if (alias == null)
             {
                 return new NotFoundResult();
             }
             MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
-            MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
-            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
             patchAlias.CopyValues(item);
             try
             {
                 await _dynamicsClient.Aliases.UpdateAsync(aliasId.ToString(), patchAlias);
-                if (contact != null)
-                {
-                    patchContact.CopyValues(item.contact);
-                    await _dynamicsClient.Contacts.UpdateAsync(contact.Contactid.ToString(), patchContact);
-                }
-                if (worker != null)
-                {
-                    patchWorker.CopyValues(item.worker);
-                    await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
-                }
             }
             catch (OdataerrorException odee)
             {
@@ -134,7 +120,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateAlias([FromBody] ViewModels.Alias item)
         {
-            if(item == null || item.contact.id == null || item.worker.id == null){
+            if(item?.contact?.id == null || item?.worker?.id == null){
                 return BadRequest();
             }
 
@@ -167,10 +153,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var worker = _dynamicsClient.GetWorkerById(Guid.Parse(item.worker.id));
-                patchAlias.WorkerIdAccountODataBind = _dynamicsClient.GetEntityURI("worker", item.worker.id);
+                patchAlias.WorkerIdODataBind = _dynamicsClient.GetEntityURI("adoxio_workers", item.worker.id);
                 
                 var contact = _dynamicsClient.GetContactById(Guid.Parse(item.contact.id));
-                patchAlias.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contact", item.contact.id);
+                patchAlias.ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
 
                 await _dynamicsClient.Aliases.UpdateAsync(alias.AdoxioAliasid, patchAlias);
             }
