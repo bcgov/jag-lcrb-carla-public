@@ -330,7 +330,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Invalid user registration.");
             }
 
-            return Json(contact);
+            return Json(contact.ToViewModel());
         }
     }
 }
