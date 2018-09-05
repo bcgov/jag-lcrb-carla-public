@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.SpdSync
 {
@@ -86,6 +88,13 @@ namespace Gov.Lclb.Cllb.SpdSync
                 config.UseMemoryStorage();
                 // enable console logs for jobs
                 config.UseConsole();
+            });
+
+            // health checks. 
+            services.AddHealthChecks(checks =>
+            {
+                checks.AddValueTaskCheck("HTTP Endpoint", () => new
+                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
             });
         }
 
