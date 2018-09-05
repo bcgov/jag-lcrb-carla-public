@@ -74,9 +74,9 @@ namespace Gov.Lclb.Cllb.SpdSync
                 o.TokenValidationParameters = new TokenValidationParameters()
                 {
                     RequireExpirationTime = false,
-                    ValidIssuer = Configuration["Tokens:Issuer"],
-                    ValidAudience = Configuration["Tokens:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                    ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                    ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
                 };
             });
 
