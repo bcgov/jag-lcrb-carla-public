@@ -29,7 +29,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = worker.AdoxioMiddlename;
                 result.lastname = worker.AdoxioLastname;
                 result.dateofbirth = worker.AdoxioDateofbirth;
-                //result.gender = worker.AdoxioGendercode;
+                if (worker.AdoxioGendercode != null)
+                {
+                    result.gender = (ViewModels.Gender)worker.AdoxioGendercode;
+                }
                 result.birthplace = worker.AdoxioBirthplace;
                 result.driverslicencenumber = worker.AdoxioDriverslicencenumber;
                 result.bcidcardnumber = worker.AdoxioBcidcardnumber;
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioLastname = from.lastname;
             to.AdoxioDateofbirth = from.dateofbirth;
-            // to.AdoxioGendercode = from.gender;
+            to.AdoxioGendercode = (int?)from.gender;
             to.AdoxioBirthplace = from.birthplace;
             to.AdoxioDriverslicencenumber = from.driverslicencenumber;
             to.AdoxioBcidcardnumber = from.bcidcardnumber;
