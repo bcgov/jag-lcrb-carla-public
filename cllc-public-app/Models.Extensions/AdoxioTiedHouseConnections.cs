@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioFederalproducerconnectiontocorp = from.FederalProducerConnectionToCorp;
             to.AdoxioFederalproducerconnectiontocorpdetails = from.FederalProducerConnectionToCorpDetails;
             to.AdoxioIsconnection = from.IsConnection;
-            to.AdoxioPartnersConnectionFederalProducer = from.PartnersConnectionFederalProducer;
+            to.AdoxioPartnersconnectionfederalproducer = from.PartnersConnectionFederalProducer;
             to.AdoxioPartnersconnectionfederalproducerdetails = from.PartnersConnectionFederalProducerDetails;
             to.AdoxioPercentageofownership = from.PercentageofOwnership;
             to.AdoxioShare20plusconnectionproducer = from.Share20PlusConnectionProducer;
@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.FederalProducerConnectionToCorp = tiedHouse.AdoxioFederalproducerconnectiontocorp;
                 result.FederalProducerConnectionToCorpDetails = tiedHouse.AdoxioFederalproducerconnectiontocorpdetails;
                 result.IsConnection = tiedHouse.AdoxioIsconnection;
-                result.PartnersConnectionFederalProducer = tiedHouse.AdoxioPartnersConnectionFederalProducer;
+                result.PartnersConnectionFederalProducer = tiedHouse.AdoxioPartnersconnectionfederalproducer;
                 result.PartnersConnectionFederalProducerDetails = tiedHouse.AdoxioPartnersconnectionfederalproducerdetails;
                 result.PercentageofOwnership = tiedHouse.AdoxioPercentageofownership;
                 result.Share20PlusConnectionProducer = tiedHouse.AdoxioShare20plusconnectionproducer;
