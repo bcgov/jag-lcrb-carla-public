@@ -69,50 +69,6 @@
                     "value": "${ASPNETCORE_ENVIRONMENT}"
                   },
                   {
-                    "name": "DB_USER",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "database-user",
-                        "name": "${DATABASE_SERVICE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DB_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "database-password",
-                        "name": "${DATABASE_SERVICE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DB_ADMIN_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "database-admin-password",
-                        "name": "${DATABASE_SERVICE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DB_DATABASE",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "database-name",
-                        "name": "${DATABASE_SERVICE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DATABASE_SERVICE_NAME",
-                    "value": "${DATABASE_SERVICE_NAME}"
-                  },
-                  {
-                    "name": "PathBase",
-                    "value": "${BASE_PATH}"
-                  },
-                  {
                     "name": "testEmail",
                     "value": "${TEST_EMAIL}"
                   },
@@ -121,57 +77,21 @@
                     "value": "${SMTP_HOST}"
                   },
                   {
-                    "name": "ENCRYPTION_KEY",
-                    "value": "${ENCRYPTION_KEY}"
-                  },
-                  {
                     "name": "BASE_URI",
                     "value": "${BASE_URI}"
                   },
                   {
                     "name": "BASE_PATH",
                     "value": "${BASE_PATH}"
+                  },                  
+                  {
+                    "name": "SSG_USERNAME",
+                    "value": "${SSG_USERNAME}"
                   },
                   {
-                    "name": "DYNAMICS_ODATA_URI1",
-                    "value": "${DYNAMICS_ODATA_URI1}"
-                  },
-                  {
-                    "name": "SHAREPOINT_SERVER_APPID_URI",
-                    "value": "${SHAREPOINT_SERVER_APPID_URI}"
-                  },
-                  {
-                    "name": "SHAREPOINT_WEBNAME",
-                    "value": "${SHAREPOINT_WEBNAME}"
-                  },
-                  {
-                    "name": "SHAREPOINT_AAD_TENANTID",
-                    "value": "${SHAREPOINT_AAD_TENANTID}"
-                  },
-                  {
-                    "name": "SHAREPOINT_CLIENT_ID",
-                    "value": "${SHAREPOINT_CLIENT_ID}"
-                  },
-                  {
-                    "name": "SHAREPOINT_CERTIFICATE_PASSWORD",
-                    "value": "${SHAREPOINT_CERTIFICATE_PASSWORD}"
-                  },
-                  {
-                    "name": "SHAREPOINT_CERTIFICATE_FILENAME",
-                    "value": "${SHAREPOINT_CERTIFICATE_FILENAME}"
-                  },
-                  {
-                    "name": "SSG_USERNAME1",
-                    "value": "${SSG_USERNAME1}"
-                  },
-                  {
-                    "name": "SSG_PASSWORD1",
-                    "value": "${SSG_PASSWORD1}"
-                  },
-                  {
-                    "name": "REDIS_SERVER",
-                    "value": "${REDIS_SERVER}"
-                  },
+                    "name": "SSG_PASSWORD",
+                    "value": "${SSG_PASSWORD}"
+                  },                 
                   {
                     "name": "DYNAMICS_ODATA_URI",
                     "value": "${DYNAMICS_ODATA_URI}"
@@ -255,7 +175,7 @@
         "name": "${NAME}"
       },
       "spec": {
-        "host": "${APPLICATION_DOMAIN}",
+        "host": "${ROUTE_HOST}",
         "port": {
           "targetPort": "8080-tcp"
         },
@@ -269,46 +189,7 @@
           "weight": 100
         }
       }
-    },
-    {
-      "apiVersion": "v1",
-      "kind": "Route",
-      "metadata": {
-        "name": "${NAME}-siteminder-route",
-        "labels": {
-          "app": "${NAME}-siteminder-route"
-        }
-      },
-      "spec": {
-        "host": "${SITEMINDER_APPLICATION_DOMAIN}",
-        "port": {
-          "targetPort": "8080-tcp"
-        },
-        "to": {
-          "kind": "Service",
-          "name": "${NAME}",
-          "weight": 100
-        }
-      }
-    },
-    {
-      "kind": "HorizontalPodAutoscaler",
-      "apiVersion": "autoscaling/v1",
-      "metadata": {
-        "name": "${NAME}",
-        "labels": {
-          "app": "${NAME}"
-        }
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "kind": "DeploymentConfig",
-          "name": "${NAME}"
-        },
-        "minReplicas": 2,
-        "maxReplicas": 6
-      }
-    }
+    }    
   ],
   "parameters": [
     {
@@ -316,14 +197,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "cllc-public"
+      "value": "spd-sync"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the image to use for this resource.",
       "required": true,
-      "value": "cllc-public"
+      "value": "spd-sync"
     },
     {
       "name": "IMAGE_NAMESPACE",
@@ -350,58 +231,26 @@
       "name": "CPU_LIMIT",
       "displayName": "CPU Limit",
       "description": "Maximum amount of CPU the container can use.",
-      "value": "1"
+      "value": "100m"
     },
     {
       "name": "MEMORY_LIMIT",
       "displayName": "Memory Limit",
       "description": "Maximum amount of memory the container can use.",
-      "value": "4Gi"
+      "value": "2Gi"
     },
     {
       "name": "CPU_REQUEST",
       "displayName": "CPU Request",
       "description": "Starting amount of CPU the container can use.",
-      "value": "100m"
+      "value": "10m"
     },
     {
       "name": "MEMORY_REQUEST",
       "displayName": "Memory Request",
       "description": "Starting amount of memory the container can use.",
-      "value": "2Gi"
-    },
-    {
-      "name": "DATABASE_SERVICE_NAME",
-      "displayName": "Database service name",
-      "description": "Database service name",
-      "value": "mssql"
-    },
-    {
-      "description": "OpenShift cluster private IP range in CIDR notation, used by Nginx ngx_http_realip_module.",
-      "displayName": "OpenShift Cluster IP Range",
-      "name": "REAL_IP_FROM",
-      "required": true,
-      "value": "172.51.0.0/16"
-    },
-    {
-      "description": "The endpoint used for SiteMinder routed access to the application.",
-      "displayName": "SiteMinder Application Domain",
-      "name": "SITEMINDER_APPLICATION_DOMAIN",
-      "value": "cannabis-licensing-dev.pathfinder.bcgov"
-    },
-    {
-      "description": "The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca, if left blank a value will be defaulted.",
-      "displayName": "Application Domain",
-      "name": "APPLICATION_DOMAIN",
-      "value": "lclb-cllc-dev.pathfinder.gov.bc.ca"
-    },
-    {
-      "description": "The base path for the application, e.g., /cannabislicensing, if left blank a value will be defaulted.",
-      "displayName": "Base Path",
-      "name": "BASE_PATH",
-      "required": true,
-      "value": "/cannabislicensing"
-    },
+      "value": "512Mi"
+    },   
     {
       "description": "Field for a test email.",
       "displayName": "Test Email",
@@ -413,86 +262,20 @@
       "name": "SMTP_HOST",
       "required": true,
       "value": "apps.smtp.gov.bc.ca"
-    },
-    {
-      "description": "Encryption key",
-      "displayName": "Encryption Key",
-      "name": "ENCRYPTION_KEY",
-      "required": true
-    },
-    {
-      "description": "The base URI for the application, e.g., https://dev.justice.gov.bc.ca, if left blank a value will be defaulted.",
-      "displayName": "Base URI",
-      "name": "BASE_URI",
-      "required": true,
-      "value": "https://dev.justice.gov.bc.ca"
-    },
-    {
-      "description": "URI for Dynamics OData, e.g., https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/, if left blank a value will be defaulted.",
-      "displayName": "Dynamics OData URI",
-      "name": "DYNAMICS_ODATA_URI1",
-      "required": true,
-      "value": "https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/"
-    },
-    {
-      "description": "URI for Sharepoint server, e.g., https://bcgovtrial.sharepoint.com/, if left blank a value will be defaulted.",
-      "displayName": "Sharepoint Server URI",
-      "name": "SHAREPOINT_SERVER_APPID_URI",
-      "required": true,
-      "value": "https://bcgovtrial.sharepoint.com/"
-    },
-    {
-      "description": "Webname for Sharepoint, e.g., cannabisdev, if left blank a value will be defaulted.",
-      "displayName": "Sharepoint Webname",
-      "name": "SHAREPOINT_WEBNAME",
-      "required": true,
-      "value": "cannabisdev"
-    },
-    {
-      "description": "Sharepoint Tennant ID, e.g., bcgovtrial.onmicrosoft.com, if left blank a value will be defaulted.",
-      "displayName": "Sharepoint AAD Tennant ID",
-      "name": "SHAREPOINT_AAD_TENANTID",
-      "required": true,
-      "value": "bcgovtrial.onmicrosoft.com"
-    },
-    {
-      "description": "Sharepoint Clien ID",
-      "displayName": "Sharepoint Client ID",
-      "name": "SHAREPOINT_CLIENT_ID",
-      "required": true
-    },
-    {
-      "description": "Sharepoint Certificate Password",
-      "displayName": "Sharepoint Certificate Password",
-      "name": "SHAREPOINT_CERTIFICATE_PASSWORD",
-      "required": true
-    },
-    {
-      "description": "Filename for BCGovTrial.pfx, e.g., /sharepointcert/BCGovTrial.pfx, if left blank a value will be defaulted.",
-      "displayName": "Sharepoint Certificate Filename",
-      "name": "SHAREPOINT_CERTIFICATE_FILENAME",
-      "required": true,
-      "value": "/sharepointcert/BCGovTrial.pfx"
-    },
+    },    
     {
       "description": "Username for SSG, e.g., clb_uat, if left blank a value will be defaulted.",
       "displayName": "SSG Username",
-      "name": "SSG_USERNAME1",
+      "name": "SSG_USERNAME",
       "required": true,
       "value": "clb_uat"
     },
     {
       "description": "Password for SSG.",
       "displayName": "SSG Password",
-      "name": "SSG_PASSWORD1",
-      "required": true
-    },
-    {
-      "description": "URL for redis server, e.g., localhost:6379, if left blank a value will be defaulted.",
-      "displayName": "Redis Server",
-      "name": "REDIS_SERVER",
+      "name": "SSG_PASSWORD",
       "required": true,
-      "value": "localhost:6379"
+	  "value": " "
     },
     {
       "description": "URI for Dynamics OData, e.g., https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/, if left blank a value will be defaulted.",
@@ -500,6 +283,13 @@
       "name": "DYNAMICS_ODATA_URI",
       "required": true,
       "value": "https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"
-    }
+    },
+	{
+      "description": "Route Host",
+      "displayName": "Route Host",
+      "name": "ROUTE_HOST",
+      "required": true,
+      "value": "lcrb-spd-sync-test.pathfinder.bcgov"
+    }	
   ]
 }
