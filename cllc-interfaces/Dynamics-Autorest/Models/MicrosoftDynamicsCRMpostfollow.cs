@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// postfollow
+    /// </summary>
     public partial class MicrosoftDynamicsCRMpostfollow
     {
         /// <summary>
@@ -26,42 +29,42 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpostfollow
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpostfollow(IList<MicrosoftDynamicsCRMasyncoperation> postFollowAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> postFollowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), string postfollowid = default(string), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object), int? yammerpoststate = default(int?))
+        public MicrosoftDynamicsCRMpostfollow(string _owningteamValue = default(string), string postfollowid = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), int? yammerpoststate = default(int?), long? versionnumber = default(long?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> postFollowAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMsyncerror> postFollowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor))
         {
-            PostFollowAsyncOperations = postFollowAsyncOperations;
-            PostFollowSyncErrors = postFollowSyncErrors;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owningteamValue = _owningteamValue;
+            Postfollowid = postfollowid;
             this._owninguserValue = _owninguserValue;
             this._regardingobjectidValue = _regardingobjectidValue;
-            Createdby = createdby;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._owneridValue = _owneridValue;
+            this._createdbyValue = _createdbyValue;
             Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Yammerpoststate = yammerpoststate;
+            Versionnumber = versionnumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            RegardingobjectidTask = regardingobjectidTask;
+            RegardingobjectidAppointment = regardingobjectidAppointment;
+            RegardingobjectidPhonecall = regardingobjectidPhonecall;
+            RegardingobjectidIncident = regardingobjectidIncident;
+            RegardingobjectidRecurringappointmentmaster = regardingobjectidRecurringappointmentmaster;
+            Createdby = createdby;
+            RegardingobjectidAccount = regardingobjectidAccount;
+            RegardingobjectidContact = regardingobjectidContact;
+            RegardingobjectidLead = regardingobjectidLead;
+            RegardingobjectidOpportunity = regardingobjectidOpportunity;
+            RegardingobjectidSystemuser = regardingobjectidSystemuser;
+            PostFollowAsyncOperations = postFollowAsyncOperations;
             Ownerid = ownerid;
             Owningbusinessunit = owningbusinessunit;
             Owningteam = owningteam;
             Owninguser = owninguser;
-            Postfollowid = postfollowid;
-            RegardingobjectidAccount = regardingobjectidAccount;
-            RegardingobjectidAppointment = regardingobjectidAppointment;
-            RegardingobjectidCompetitor = regardingobjectidCompetitor;
-            RegardingobjectidContact = regardingobjectidContact;
-            RegardingobjectidIncident = regardingobjectidIncident;
-            RegardingobjectidKnowledgearticle = regardingobjectidKnowledgearticle;
-            RegardingobjectidLead = regardingobjectidLead;
-            RegardingobjectidOpportunity = regardingobjectidOpportunity;
-            RegardingobjectidPhonecall = regardingobjectidPhonecall;
+            Createdonbehalfby = createdonbehalfby;
             RegardingobjectidQueue = regardingobjectidQueue;
-            RegardingobjectidRecurringappointmentmaster = regardingobjectidRecurringappointmentmaster;
-            RegardingobjectidSystemuser = regardingobjectidSystemuser;
-            RegardingobjectidTask = regardingobjectidTask;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
-            Yammerpoststate = yammerpoststate;
+            PostFollowSyncErrors = postFollowSyncErrors;
+            RegardingobjectidKnowledgearticle = regardingobjectidKnowledgearticle;
+            RegardingobjectidCompetitor = regardingobjectidCompetitor;
             CustomInit();
         }
 
@@ -72,38 +75,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "PostFollow_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> PostFollowAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "PostFollow_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> PostFollowSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "postfollowid")]
+        public string Postfollowid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -117,8 +95,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,8 +120,83 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "yammerpoststate")]
+        public int? Yammerpoststate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_task")]
+        public MicrosoftDynamicsCRMtask RegardingobjectidTask { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_appointment")]
+        public MicrosoftDynamicsCRMappointment RegardingobjectidAppointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_phonecall")]
+        public MicrosoftDynamicsCRMphonecall RegardingobjectidPhonecall { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMrecurringappointmentmaster RegardingobjectidRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contact")]
+        public MicrosoftDynamicsCRMcontact RegardingobjectidContact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
+        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_systemuser")]
+        public MicrosoftDynamicsCRMsystemuser RegardingobjectidSystemuser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "PostFollow_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> PostFollowAsyncOperations { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,53 +220,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "postfollowid")]
-        public string Postfollowid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_account")]
-        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_appointment")]
-        public MicrosoftDynamicsCRMappointment RegardingobjectidAppointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_competitor")]
-        public MicrosoftDynamicsCRMcompetitor RegardingobjectidCompetitor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contact")]
-        public MicrosoftDynamicsCRMcontact RegardingobjectidContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incident")]
-        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle")]
-        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_lead")]
-        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
-        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_phonecall")]
-        public MicrosoftDynamicsCRMphonecall RegardingobjectidPhonecall { get; set; }
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,38 +230,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMrecurringappointmentmaster RegardingobjectidRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "PostFollow_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> PostFollowSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_systemuser")]
-        public MicrosoftDynamicsCRMsystemuser RegardingobjectidSystemuser { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle")]
+        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticle { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_task")]
-        public MicrosoftDynamicsCRMtask RegardingobjectidTask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "yammerpoststate")]
-        public int? Yammerpoststate { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_competitor")]
+        public MicrosoftDynamicsCRMcompetitor RegardingobjectidCompetitor { get; set; }
 
     }
 }

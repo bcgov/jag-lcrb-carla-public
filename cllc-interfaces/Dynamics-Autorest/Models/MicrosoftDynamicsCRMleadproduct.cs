@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// leadproduct
+    /// </summary>
     public partial class MicrosoftDynamicsCRMleadproduct
     {
         /// <summary>
@@ -24,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMleadproduct
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadproduct(string leadid = default(string), string leadproductid = default(string), string productid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMleadproduct(string leadproductid = default(string), string productid = default(string), string leadid = default(string), long? versionnumber = default(long?))
         {
-            Leadid = leadid;
             Leadproductid = leadproductid;
             Productid = productid;
+            Leadid = leadid;
             Versionnumber = versionnumber;
             CustomInit();
         }
@@ -37,11 +40,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "leadid")]
-        public string Leadid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "leadid")]
+        public string Leadid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

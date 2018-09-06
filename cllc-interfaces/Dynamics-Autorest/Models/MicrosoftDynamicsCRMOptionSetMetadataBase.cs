@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMOptionSetMetadataBase : MicrosoftDynamicsCRMMetadataBase
+    /// <summary>
+    /// OptionSetMetadataBase
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMOptionSetMetadataBase
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -26,18 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="optionSetType">Possible values include: 'Picklist',
         /// 'State', 'Status', 'Boolean'</param>
-        public MicrosoftDynamicsCRMOptionSetMetadataBase(bool? hasChanged = default(bool?), string metadataId = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string introducedVersion = default(string), bool? isCustomOptionSet = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), string name = default(string), string optionSetType = default(string))
-            : base(hasChanged, metadataId)
+        public MicrosoftDynamicsCRMOptionSetMetadataBase(MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string name = default(string), string optionSetType = default(string), string introducedVersion = default(string))
         {
             Description = description;
             DisplayName = displayName;
-            IntroducedVersion = introducedVersion;
             IsCustomOptionSet = isCustomOptionSet;
-            IsCustomizable = isCustomizable;
             IsGlobal = isGlobal;
             IsManaged = isManaged;
+            IsCustomizable = isCustomizable;
             Name = name;
             OptionSetType = optionSetType;
+            IntroducedVersion = introducedVersion;
             CustomInit();
         }
 
@@ -58,18 +60,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "IntroducedVersion")]
-        public string IntroducedVersion { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "IsCustomOptionSet")]
         public bool? IsCustomOptionSet { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsCustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -83,6 +75,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "IsCustomizable")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "Name")]
         public string Name { get; set; }
 
@@ -92,6 +89,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "OptionSetType")]
         public string OptionSetType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IntroducedVersion")]
+        public string IntroducedVersion { get; set; }
 
     }
 }

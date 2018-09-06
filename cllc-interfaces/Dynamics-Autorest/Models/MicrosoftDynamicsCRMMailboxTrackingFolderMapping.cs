@@ -27,14 +27,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMMailboxTrackingFolderMapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMMailboxTrackingFolderMapping(string exchangeFolderId = default(string), string exchangeFolderName = default(string), bool? isFolderOnboarded = default(bool?), string regardingObjectId = default(string), string regardingObjectName = default(string), int? regardingObjectTypeCode = default(int?))
+        public MicrosoftDynamicsCRMMailboxTrackingFolderMapping(string exchangeFolderId = default(string), string exchangeFolderName = default(string), string regardingObjectId = default(string), string regardingObjectName = default(string), int? regardingObjectTypeCode = default(int?), bool? isFolderOnboarded = default(bool?))
         {
             ExchangeFolderId = exchangeFolderId;
             ExchangeFolderName = exchangeFolderName;
-            IsFolderOnboarded = isFolderOnboarded;
             RegardingObjectId = regardingObjectId;
             RegardingObjectName = regardingObjectName;
             RegardingObjectTypeCode = regardingObjectTypeCode;
+            IsFolderOnboarded = isFolderOnboarded;
             CustomInit();
         }
 
@@ -55,11 +55,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "IsFolderOnboarded")]
-        public bool? IsFolderOnboarded { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "RegardingObjectId")]
         public string RegardingObjectId { get; set; }
 
@@ -72,6 +67,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "RegardingObjectTypeCode")]
         public int? RegardingObjectTypeCode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsFolderOnboarded")]
+        public bool? IsFolderOnboarded { get; set; }
 
     }
 }

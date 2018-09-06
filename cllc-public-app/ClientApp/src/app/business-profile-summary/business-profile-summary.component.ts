@@ -93,7 +93,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
   getIsCompleteStatus(accountId: string) {
     this.accountDataService.getBusinessProfile(accountId)
       .subscribe(response => {
-        const data = response.json();
+        const data = response;
         data.forEach(element => {
           const d = this.profileSummaryList.filter(e => e.legalEntityId === element.legalEntityId)[0];
           if (d) {

@@ -27,10 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMMissingComponent class.
         /// </summary>
-        public MicrosoftDynamicsCRMMissingComponent(MicrosoftDynamicsCRMComponentDetail dependentComponent = default(MicrosoftDynamicsCRMComponentDetail), MicrosoftDynamicsCRMComponentDetail requiredComponent = default(MicrosoftDynamicsCRMComponentDetail))
+        public MicrosoftDynamicsCRMMissingComponent(MicrosoftDynamicsCRMComponentDetail requiredComponent = default(MicrosoftDynamicsCRMComponentDetail), MicrosoftDynamicsCRMComponentDetail dependentComponent = default(MicrosoftDynamicsCRMComponentDetail))
         {
-            DependentComponent = dependentComponent;
             RequiredComponent = requiredComponent;
+            DependentComponent = dependentComponent;
             CustomInit();
         }
 
@@ -41,13 +41,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "DependentComponent")]
-        public MicrosoftDynamicsCRMComponentDetail DependentComponent { get; set; }
+        [JsonProperty(PropertyName = "RequiredComponent")]
+        public MicrosoftDynamicsCRMComponentDetail RequiredComponent { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "RequiredComponent")]
-        public MicrosoftDynamicsCRMComponentDetail RequiredComponent { get; set; }
+        [JsonProperty(PropertyName = "DependentComponent")]
+        public MicrosoftDynamicsCRMComponentDetail DependentComponent { get; set; }
 
     }
 }

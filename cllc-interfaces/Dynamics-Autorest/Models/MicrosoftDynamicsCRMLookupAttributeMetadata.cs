@@ -11,7 +11,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMLookupAttributeMetadata : MicrosoftDynamicsCRMAttributeMetadata
+    /// <summary>
+    /// LookupAttributeMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMLookupAttributeMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -26,13 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMLookupAttributeMetadata class.
         /// </summary>
-        /// <param name="attributeType">Possible values include: 'Boolean',
-        /// 'Customer', 'DateTime', 'Decimal', 'Double', 'Integer', 'Lookup',
-        /// 'Memo', 'Money', 'Owner', 'PartyList', 'Picklist', 'State',
-        /// 'Status', 'String', 'Uniqueidentifier', 'CalendarRules', 'Virtual',
-        /// 'BigInt', 'ManagedProperty', 'EntityName'</param>
-        public MicrosoftDynamicsCRMLookupAttributeMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), string attributeOf = default(string), string attributeType = default(string), MicrosoftDynamicsCRMAttributeTypeDisplayName attributeTypeName = default(MicrosoftDynamicsCRMAttributeTypeDisplayName), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForUpdate = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty canModifyAdditionalSettings = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? columnNumber = default(int?), string deprecatedVersion = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string entityLogicalName = default(string), string inheritsFrom = default(string), string introducedVersion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty isAuditEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isCustomAttribute = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isFilterable = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isGlobalFilterEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isLogical = default(bool?), bool? isManaged = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isRenameable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isRetrievable = default(bool?), bool? isSearchable = default(bool?), bool? isSecured = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isSortableEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty isValidForAdvancedFind = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), string linkedAttributeId = default(string), string logicalName = default(string), MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty requiredLevel = default(MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty), string schemaName = default(string), int? sourceType = default(int?), IList<string> targets = default(IList<string>))
-            : base(hasChanged, metadataId, attributeOf, attributeType, attributeTypeName, canBeSecuredForCreate, canBeSecuredForRead, canBeSecuredForUpdate, canModifyAdditionalSettings, columnNumber, deprecatedVersion, description, displayName, entityLogicalName, inheritsFrom, introducedVersion, isAuditEnabled, isCustomAttribute, isCustomizable, isFilterable, isGlobalFilterEnabled, isLogical, isManaged, isPrimaryId, isPrimaryName, isRenameable, isRetrievable, isSearchable, isSecured, isSortableEnabled, isValidForAdvancedFind, isValidForCreate, isValidForRead, isValidForUpdate, linkedAttributeId, logicalName, requiredLevel, schemaName, sourceType)
+        public MicrosoftDynamicsCRMLookupAttributeMetadata(IList<string> targets = default(IList<string>))
         {
             Targets = targets;
             CustomInit();

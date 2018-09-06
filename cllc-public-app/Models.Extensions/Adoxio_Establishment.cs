@@ -258,8 +258,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.StateCode = adoxio_establishment.Statecode;
                 result.Timezoneruleversionnumber = adoxio_establishment.Timezoneruleversionnumber;
                 result.Utcconversiontimezonecode = adoxio_establishment.Utcconversiontimezonecode;
-                result.Versionnumber = (long?) adoxio_establishment.Versionnumber;
-
+                if (adoxio_establishment.Versionnumber != null)
+                {
+                    result.Versionnumber = adoxio_establishment.Versionnumber;
+                }
+                
             }
             return result;
         }

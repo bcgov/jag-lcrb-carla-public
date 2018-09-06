@@ -11,7 +11,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMrecurringappointmentmaster : MicrosoftDynamicsCRMactivitypointer
+    /// <summary>
+    /// recurringappointmentmaster
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMrecurringappointmentmaster
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -26,95 +29,94 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMrecurringappointmentmaster class.
         /// </summary>
-        public MicrosoftDynamicsCRMrecurringappointmentmaster(IList<MicrosoftDynamicsCRMasyncoperation> activityPointerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityPointerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMcampaignactivityitem> activityPointerCampaignActivityItems = default(IList<MicrosoftDynamicsCRMcampaignactivityitem>), IList<MicrosoftDynamicsCRMqueueitem> activityPointerQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdActivityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), string _sendermailboxidValue = default(string), string _serviceidValue = default(string), string _slaidValue = default(string), string _slainvokedidValue = default(string), string _transactioncurrencyidValue = default(string), IList<MicrosoftDynamicsCRMcampaignresponse> activityCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMbulkoperation> activityPointerBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMbulkoperationlog> activityPointerBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMactivitymimeattachment> activityPointerActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMappointment> activityPointerAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcampaignactivity> activityPointerCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcampaignresponse> activityPointerCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMemail> activityPointerEmail = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> activityPointerFax = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincidentresolution> activityPointerIncidentResolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMletter> activityPointerLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMopportunityclose> activityPointerOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> activityPointerOrderClose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMphonecall> activityPointerPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMquoteclose> activityPointerQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> activityPointerRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMserviceappointment> activityPointerServiceAppointment = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsocialactivity> activityPointerSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMtask> activityPointerTask = default(IList<MicrosoftDynamicsCRMtask>), string activityadditionalparams = default(string), string activityid = default(string), IList<MicrosoftDynamicsCRMactivityparty> activitypointerActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), string activitytypecode = default(string), int? actualdurationminutes = default(int?), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), int? community = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? deliverylastattemptedon = default(System.DateTimeOffset?), int? deliveryprioritycode = default(int?), string description = default(string), string exchangeitemid = default(string), double? exchangerate = default(double?), string exchangeweblink = default(string), int? instancetypecode = default(int?), bool? isbilled = default(bool?), bool? ismapiprivate = default(bool?), bool? isregularactivity = default(bool?), bool? isworkflowcreated = default(bool?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), bool? leftvoicemail = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), int? onholdtime = default(int?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? postponeactivityprocessinguntil = default(System.DateTimeOffset?), int? prioritycode = default(int?), string processid = default(string), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioAgencycommunication regardingobjectidAdoxioAgencycommunication = default(MicrosoftDynamicsCRMadoxioAgencycommunication), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioInvestigationstakeholder regardingobjectidAdoxioInvestigationstakeholder = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), int? scheduleddurationminutes = default(int?), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), MicrosoftDynamicsCRMmailbox sendermailboxid = default(MicrosoftDynamicsCRMmailbox), System.DateTimeOffset? senton = default(System.DateTimeOffset?), string seriesid = default(string), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsla slaActivitypointerSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceActivitypointer = default(IList<MicrosoftDynamicsCRMslakpiinstance>), System.DateTimeOffset? sortdate = default(System.DateTimeOffset?), string stageid = default(string), int? statecode = default(int?), int? statuscode = default(int?), string subject = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), string traversedpath = default(string), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object), IList<MicrosoftDynamicsCRMannotation> recurringAppointmentMasterAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> recurringAppointmentMasterAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> recurringAppointmentMasterBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMqueueitem> recurringAppointmentMasterQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMsyncerror> recurringAppointmentMasterSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _groupidValue = default(string), string _ruleidValue = default(string), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), string category = default(string), MicrosoftDynamicsCRMsystemuser createdbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), int? dayofmonth = default(int?), int? daysofweekmask = default(int?), string deletedexceptionslist = default(string), int? duration = default(int?), System.DateTimeOffset? effectiveenddate = default(System.DateTimeOffset?), System.DateTimeOffset? effectivestartdate = default(System.DateTimeOffset?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), int? expansionstatecode = default(int?), int? firstdayofweek = default(int?), string globalobjectid = default(string), int? importsequencenumber = default(int?), int? instance = default(int?), int? interval = default(int?), bool? isalldayevent = default(bool?), bool? isnthmonthly = default(bool?), bool? isnthyearly = default(bool?), bool? isregenerate = default(bool?), bool? isweekdaypattern = default(bool?), System.DateTimeOffset? lastexpandedinstancedate = default(System.DateTimeOffset?), string location = default(string), MicrosoftDynamicsCRMsystemuser modifiedbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), int? monthofyear = default(int?), System.DateTimeOffset? nextexpansioninstancedate = default(System.DateTimeOffset?), int? occurrences = default(int?), int? outlookownerapptid = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMbusinessunit owningbusinessunitRecurringappointmentmaster = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteamRecurringappointmentmaster = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguserRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? patternenddate = default(System.DateTimeOffset?), int? patternendtype = default(int?), System.DateTimeOffset? patternstartdate = default(System.DateTimeOffset?), int? recurrencepatterntype = default(int?), IList<MicrosoftDynamicsCRMpostfollow> recurringappointmentmasterPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> recurringappointmentmasterPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMactioncard> recurringappointmentmasterActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMactivityparty> recurringappointmentmasterActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMappointment> recurringappointmentmasterAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcampaignresponse> recurringappointmentmasterCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMaccount regardingobjectidAccountRecurringappointmentmaster = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioAgencycommunication regardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioAgencycommunication), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioInvestigationstakeholder regardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationRecurringappointmentmaster = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcontact regardingobjectidContactRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontract regardingobjectidContractRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMincident regardingobjectidIncidentRecurringappointmentmaster = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceRecurringappointmentmaster = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMlead regardingobjectidLeadRecurringappointmentmaster = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityRecurringappointmentmaster = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingobjectidQuoteRecurringappointmentmaster = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderRecurringappointmentmaster = default(MicrosoftDynamicsCRMsalesorder), bool? seriesstatus = default(bool?), MicrosoftDynamicsCRMservice serviceidRecurringappointmentmaster = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string subcategory = default(string), string subscriptionid = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidRecurringappointmentmaster = default(MicrosoftDynamicsCRMtransactioncurrency))
-            : base(activityPointerAsyncOperations, activityPointerBulkDeleteFailures, activityPointerCampaignActivityItems, activityPointerQueueItem, createdActivityBulkOperationLogs, _createdbyValue, _createdonbehalfbyValue, _modifiedbyValue, _modifiedonbehalfbyValue, _owneridValue, _owningbusinessunitValue, _owningteamValue, _owninguserValue, _regardingobjectidValue, _sendermailboxidValue, _serviceidValue, _slaidValue, _slainvokedidValue, _transactioncurrencyidValue, activityCampaignresponse, activityPointerBulkOperation, activityPointerBulkOperationLogs, activityPointerActivityMimeAttachment, activityPointerAppointment, activityPointerCampaignactivity, activityPointerCampaignresponse, activityPointerEmail, activityPointerFax, activityPointerIncidentResolution, activityPointerLetter, activityPointerOpportunityClose, activityPointerOrderClose, activityPointerPhonecall, activityPointerQuoteClose, activityPointerRecurringappointmentmaster, activityPointerServiceAppointment, activityPointerSocialactivity, activityPointerTask, activityadditionalparams, activityid, activitypointerActivityParties, activitypointerConnections1, activitypointerConnections2, activitytypecode, actualdurationminutes, actualend, actualstart, community, createdby, createdon, createdonbehalfby, deliverylastattemptedon, deliveryprioritycode, description, exchangeitemid, exchangerate, exchangeweblink, instancetypecode, isbilled, ismapiprivate, isregularactivity, isworkflowcreated, lastonholdtime, leftvoicemail, modifiedby, modifiedon, modifiedonbehalfby, onholdtime, ownerid, owningbusinessunit, owningteam, owninguser, postponeactivityprocessinguntil, prioritycode, processid, regardingobjectidAccount, regardingobjectidAdoxioAgencycommunication, regardingobjectidAdoxioApplication, regardingobjectidAdoxioComplaint, regardingobjectidAdoxioInvestigation, regardingobjectidAdoxioInvestigationstakeholder, regardingobjectidAdoxioLicences, regardingobjectidBookableresourcebooking, regardingobjectidBookableresourcebookingheader, regardingobjectidBulkoperation, regardingobjectidCampaign, regardingobjectidCampaignactivity, regardingobjectidContact, regardingobjectidContract, regardingobjectidEntitlement, regardingobjectidEntitlementtemplate, regardingobjectidIncident, regardingobjectidInvoice, regardingobjectidKnowledgearticle, regardingobjectidKnowledgebaserecord, regardingobjectidLead, regardingobjectidNewInteractionforemail, regardingobjectidOpportunity, regardingobjectidQuote, regardingobjectidSalesorder, scheduleddurationminutes, scheduledend, scheduledstart, sendermailboxid, senton, seriesid, serviceid, slaActivitypointerSla, slainvokedidActivitypointerSla, slakpiinstanceActivitypointer, sortdate, stageid, statecode, statuscode, subject, timezoneruleversionnumber, transactioncurrencyid, traversedpath, utcconversiontimezonecode, versionnumber)
+        public MicrosoftDynamicsCRMrecurringappointmentmaster(int? occurrences = default(int?), int? importsequencenumber = default(int?), string category = default(string), string _ruleidValue = default(string), bool? isregenerate = default(bool?), bool? isnthmonthly = default(bool?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), int? daysofweekmask = default(int?), int? outlookownerapptid = default(int?), string subscriptionid = default(string), System.DateTimeOffset? effectiveenddate = default(System.DateTimeOffset?), bool? isalldayevent = default(bool?), System.DateTimeOffset? patternenddate = default(System.DateTimeOffset?), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string globalobjectid = default(string), System.DateTimeOffset? patternstartdate = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? instance = default(int?), int? patternendtype = default(int?), string deletedexceptionslist = default(string), System.DateTimeOffset? nextexpansioninstancedate = default(System.DateTimeOffset?), int? monthofyear = default(int?), System.DateTimeOffset? lastexpandedinstancedate = default(System.DateTimeOffset?), int? duration = default(int?), bool? isweekdaypattern = default(bool?), int? firstdayofweek = default(int?), bool? isnthyearly = default(bool?), bool? seriesstatus = default(bool?), string subcategory = default(string), int? dayofmonth = default(int?), int? expansionstatecode = default(int?), System.DateTimeOffset? effectivestartdate = default(System.DateTimeOffset?), int? recurrencepatterntype = default(int?), string _groupidValue = default(string), string location = default(string), int? interval = default(int?), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlementtemplate), IList<MicrosoftDynamicsCRMpostregarding> recurringappointmentmasterPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> recurringappointmentmasterPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMbulkdeletefailure> recurringAppointmentMasterBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> recurringAppointmentMasterAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguserRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamRecurringappointmentmaster = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcontract regardingobjectidContractRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> recurringappointmentmasterActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitRecurringappointmentmaster = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceRecurringappointmentmaster = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMservice serviceidRecurringappointmentmaster = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsystemuser createdonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMappointment> recurringappointmentmasterAppointment = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMaccount regardingobjectidAccountRecurringappointmentmaster = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMqueueitem> recurringAppointmentMasterQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLeadRecurringappointmentmaster = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityRecurringappointmentmaster = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidRecurringappointmentmaster = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMcampaignresponse> recurringappointmentmasterCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> recurringAppointmentMasterSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMincident regardingobjectidIncidentRecurringappointmentmaster = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactioncard> recurringappointmentmasterActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderRecurringappointmentmaster = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquote regardingobjectidQuoteRecurringappointmentmaster = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMcontact regardingobjectidContactRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationRecurringappointmentmaster = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMannotation> recurringAppointmentMasterAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMadoxioAgencycommunication regardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioAgencycommunication), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigationstakeholder regardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioInvestigation))
         {
-            RecurringAppointmentMasterAnnotation = recurringAppointmentMasterAnnotation;
-            RecurringAppointmentMasterAsyncOperations = recurringAppointmentMasterAsyncOperations;
-            RecurringAppointmentMasterBulkDeleteFailures = recurringAppointmentMasterBulkDeleteFailures;
-            RecurringAppointmentMasterDuplicateBaseRecord = recurringAppointmentMasterDuplicateBaseRecord;
-            RecurringAppointmentMasterDuplicateMatchingRecord = recurringAppointmentMasterDuplicateMatchingRecord;
-            RecurringAppointmentMasterQueueItem = recurringAppointmentMasterQueueItem;
-            RecurringAppointmentMasterSyncErrors = recurringAppointmentMasterSyncErrors;
-            this._groupidValue = _groupidValue;
-            this._ruleidValue = _ruleidValue;
-            ActivityidActivitypointer = activityidActivitypointer;
-            Category = category;
-            CreatedbyRecurringappointmentmaster = createdbyRecurringappointmentmaster;
-            CreatedonbehalfbyRecurringappointmentmaster = createdonbehalfbyRecurringappointmentmaster;
-            Dayofmonth = dayofmonth;
-            Daysofweekmask = daysofweekmask;
-            Deletedexceptionslist = deletedexceptionslist;
-            Duration = duration;
-            Effectiveenddate = effectiveenddate;
-            Effectivestartdate = effectivestartdate;
-            Endtime = endtime;
-            Expansionstatecode = expansionstatecode;
-            Firstdayofweek = firstdayofweek;
-            Globalobjectid = globalobjectid;
-            Importsequencenumber = importsequencenumber;
-            Instance = instance;
-            Interval = interval;
-            Isalldayevent = isalldayevent;
-            Isnthmonthly = isnthmonthly;
-            Isnthyearly = isnthyearly;
-            Isregenerate = isregenerate;
-            Isweekdaypattern = isweekdaypattern;
-            Lastexpandedinstancedate = lastexpandedinstancedate;
-            Location = location;
-            ModifiedbyRecurringappointmentmaster = modifiedbyRecurringappointmentmaster;
-            ModifiedonbehalfbyRecurringappointmentmaster = modifiedonbehalfbyRecurringappointmentmaster;
-            Monthofyear = monthofyear;
-            Nextexpansioninstancedate = nextexpansioninstancedate;
             Occurrences = occurrences;
+            Importsequencenumber = importsequencenumber;
+            Category = category;
+            this._ruleidValue = _ruleidValue;
+            Isregenerate = isregenerate;
+            Isnthmonthly = isnthmonthly;
+            Endtime = endtime;
+            Daysofweekmask = daysofweekmask;
             Outlookownerapptid = outlookownerapptid;
-            Overriddencreatedon = overriddencreatedon;
-            OwningbusinessunitRecurringappointmentmaster = owningbusinessunitRecurringappointmentmaster;
-            OwningteamRecurringappointmentmaster = owningteamRecurringappointmentmaster;
-            OwninguserRecurringappointmentmaster = owninguserRecurringappointmentmaster;
+            Subscriptionid = subscriptionid;
+            Effectiveenddate = effectiveenddate;
+            Isalldayevent = isalldayevent;
             Patternenddate = patternenddate;
-            Patternendtype = patternendtype;
+            Starttime = starttime;
+            Globalobjectid = globalobjectid;
             Patternstartdate = patternstartdate;
+            Overriddencreatedon = overriddencreatedon;
+            Instance = instance;
+            Patternendtype = patternendtype;
+            Deletedexceptionslist = deletedexceptionslist;
+            Nextexpansioninstancedate = nextexpansioninstancedate;
+            Monthofyear = monthofyear;
+            Lastexpandedinstancedate = lastexpandedinstancedate;
+            Duration = duration;
+            Isweekdaypattern = isweekdaypattern;
+            Firstdayofweek = firstdayofweek;
+            Isnthyearly = isnthyearly;
+            Seriesstatus = seriesstatus;
+            Subcategory = subcategory;
+            Dayofmonth = dayofmonth;
+            Expansionstatecode = expansionstatecode;
+            Effectivestartdate = effectivestartdate;
             Recurrencepatterntype = recurrencepatterntype;
-            RecurringappointmentmasterPostFollows = recurringappointmentmasterPostFollows;
-            RecurringappointmentmasterPostRegardings = recurringappointmentmasterPostRegardings;
-            RecurringappointmentmasterActioncard = recurringappointmentmasterActioncard;
-            RecurringappointmentmasterActivityParties = recurringappointmentmasterActivityParties;
-            RecurringappointmentmasterAppointment = recurringappointmentmasterAppointment;
-            RecurringappointmentmasterCampaignresponse = recurringappointmentmasterCampaignresponse;
-            RecurringappointmentmasterConnections1 = recurringappointmentmasterConnections1;
-            RecurringappointmentmasterConnections2 = recurringappointmentmasterConnections2;
-            RegardingobjectidAccountRecurringappointmentmaster = regardingobjectidAccountRecurringappointmentmaster;
-            RegardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster = regardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster;
-            RegardingobjectidAdoxioApplicationRecurringappointmentmaster = regardingobjectidAdoxioApplicationRecurringappointmentmaster;
-            RegardingobjectidAdoxioComplaintRecurringappointmentmaster = regardingobjectidAdoxioComplaintRecurringappointmentmaster;
-            RegardingobjectidAdoxioInvestigationRecurringappointmentmaster = regardingobjectidAdoxioInvestigationRecurringappointmentmaster;
-            RegardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster = regardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster;
-            RegardingobjectidAdoxioLicencesRecurringappointmentmaster = regardingobjectidAdoxioLicencesRecurringappointmentmaster;
-            RegardingobjectidBookableresourcebookingRecurringappointmentmaster = regardingobjectidBookableresourcebookingRecurringappointmentmaster;
-            RegardingobjectidBookableresourcebookingheaderRecurringappointmentmaster = regardingobjectidBookableresourcebookingheaderRecurringappointmentmaster;
-            RegardingobjectidBulkoperationRecurringappointmentmaster = regardingobjectidBulkoperationRecurringappointmentmaster;
-            RegardingobjectidCampaignRecurringappointmentmaster = regardingobjectidCampaignRecurringappointmentmaster;
-            RegardingobjectidCampaignactivityRecurringappointmentmaster = regardingobjectidCampaignactivityRecurringappointmentmaster;
-            RegardingobjectidContactRecurringappointmentmaster = regardingobjectidContactRecurringappointmentmaster;
-            RegardingobjectidContractRecurringappointmentmaster = regardingobjectidContractRecurringappointmentmaster;
+            this._groupidValue = _groupidValue;
+            Location = location;
+            Interval = interval;
             RegardingobjectidEntitlementRecurringappointmentmaster = regardingobjectidEntitlementRecurringappointmentmaster;
             RegardingobjectidEntitlementtemplateRecurringappointmentmaster = regardingobjectidEntitlementtemplateRecurringappointmentmaster;
-            RegardingobjectidIncidentRecurringappointmentmaster = regardingobjectidIncidentRecurringappointmentmaster;
-            RegardingobjectidInvoiceRecurringappointmentmaster = regardingobjectidInvoiceRecurringappointmentmaster;
-            RegardingobjectidKnowledgearticleRecurringappointmentmaster = regardingobjectidKnowledgearticleRecurringappointmentmaster;
+            RecurringappointmentmasterPostRegardings = recurringappointmentmasterPostRegardings;
+            RecurringappointmentmasterPostFollows = recurringappointmentmasterPostFollows;
+            RegardingobjectidBookableresourcebookingRecurringappointmentmaster = regardingobjectidBookableresourcebookingRecurringappointmentmaster;
+            RegardingobjectidBookableresourcebookingheaderRecurringappointmentmaster = regardingobjectidBookableresourcebookingheaderRecurringappointmentmaster;
             RegardingobjectidKnowledgebaserecordRecurringappointmentmaster = regardingobjectidKnowledgebaserecordRecurringappointmentmaster;
+            RecurringAppointmentMasterBulkDeleteFailures = recurringAppointmentMasterBulkDeleteFailures;
+            RecurringAppointmentMasterAsyncOperations = recurringAppointmentMasterAsyncOperations;
+            RecurringAppointmentMasterDuplicateBaseRecord = recurringAppointmentMasterDuplicateBaseRecord;
+            OwninguserRecurringappointmentmaster = owninguserRecurringappointmentmaster;
+            OwningteamRecurringappointmentmaster = owningteamRecurringappointmentmaster;
+            RegardingobjectidContractRecurringappointmentmaster = regardingobjectidContractRecurringappointmentmaster;
+            ActivityidActivitypointer = activityidActivitypointer;
+            RecurringappointmentmasterActivityParties = recurringappointmentmasterActivityParties;
+            RecurringAppointmentMasterDuplicateMatchingRecord = recurringAppointmentMasterDuplicateMatchingRecord;
+            OwningbusinessunitRecurringappointmentmaster = owningbusinessunitRecurringappointmentmaster;
+            RegardingobjectidCampaignRecurringappointmentmaster = regardingobjectidCampaignRecurringappointmentmaster;
+            RegardingobjectidInvoiceRecurringappointmentmaster = regardingobjectidInvoiceRecurringappointmentmaster;
+            ServiceidRecurringappointmentmaster = serviceidRecurringappointmentmaster;
+            CreatedonbehalfbyRecurringappointmentmaster = createdonbehalfbyRecurringappointmentmaster;
+            CreatedbyRecurringappointmentmaster = createdbyRecurringappointmentmaster;
+            RegardingobjectidKnowledgearticleRecurringappointmentmaster = regardingobjectidKnowledgearticleRecurringappointmentmaster;
+            RecurringappointmentmasterAppointment = recurringappointmentmasterAppointment;
+            RegardingobjectidAccountRecurringappointmentmaster = regardingobjectidAccountRecurringappointmentmaster;
+            RecurringAppointmentMasterQueueItem = recurringAppointmentMasterQueueItem;
+            RecurringappointmentmasterConnections1 = recurringappointmentmasterConnections1;
+            ModifiedonbehalfbyRecurringappointmentmaster = modifiedonbehalfbyRecurringappointmentmaster;
             RegardingobjectidLeadRecurringappointmentmaster = regardingobjectidLeadRecurringappointmentmaster;
             RegardingobjectidOpportunityRecurringappointmentmaster = regardingobjectidOpportunityRecurringappointmentmaster;
-            RegardingobjectidQuoteRecurringappointmentmaster = regardingobjectidQuoteRecurringappointmentmaster;
-            RegardingobjectidSalesorderRecurringappointmentmaster = regardingobjectidSalesorderRecurringappointmentmaster;
-            Seriesstatus = seriesstatus;
-            ServiceidRecurringappointmentmaster = serviceidRecurringappointmentmaster;
-            StageidProcessstage = stageidProcessstage;
-            Starttime = starttime;
-            Subcategory = subcategory;
-            Subscriptionid = subscriptionid;
             TransactioncurrencyidRecurringappointmentmaster = transactioncurrencyidRecurringappointmentmaster;
+            RecurringappointmentmasterCampaignresponse = recurringappointmentmasterCampaignresponse;
+            RecurringappointmentmasterConnections2 = recurringappointmentmasterConnections2;
+            RecurringAppointmentMasterSyncErrors = recurringAppointmentMasterSyncErrors;
+            RegardingobjectidIncidentRecurringappointmentmaster = regardingobjectidIncidentRecurringappointmentmaster;
+            StageidProcessstage = stageidProcessstage;
+            RecurringappointmentmasterActioncard = recurringappointmentmasterActioncard;
+            RegardingobjectidSalesorderRecurringappointmentmaster = regardingobjectidSalesorderRecurringappointmentmaster;
+            RegardingobjectidQuoteRecurringappointmentmaster = regardingobjectidQuoteRecurringappointmentmaster;
+            RegardingobjectidContactRecurringappointmentmaster = regardingobjectidContactRecurringappointmentmaster;
+            ModifiedbyRecurringappointmentmaster = modifiedbyRecurringappointmentmaster;
+            RegardingobjectidBulkoperationRecurringappointmentmaster = regardingobjectidBulkoperationRecurringappointmentmaster;
+            RegardingobjectidCampaignactivityRecurringappointmentmaster = regardingobjectidCampaignactivityRecurringappointmentmaster;
+            RecurringAppointmentMasterAnnotation = recurringAppointmentMasterAnnotation;
+            RegardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster = regardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster;
+            RegardingobjectidAdoxioApplicationRecurringappointmentmaster = regardingobjectidAdoxioApplicationRecurringappointmentmaster;
+            RegardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster = regardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster;
+            RegardingobjectidAdoxioLicencesRecurringappointmentmaster = regardingobjectidAdoxioLicencesRecurringappointmentmaster;
+            RegardingobjectidAdoxioComplaintRecurringappointmentmaster = regardingobjectidAdoxioComplaintRecurringappointmentmaster;
+            RegardingobjectidAdoxioInvestigationRecurringappointmentmaster = regardingobjectidAdoxioInvestigationRecurringappointmentmaster;
             CustomInit();
         }
 
@@ -125,118 +127,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "RecurringAppointmentMaster_Annotation")]
-        public IList<MicrosoftDynamicsCRMannotation> RecurringAppointmentMasterAnnotation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RecurringAppointmentMaster_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> RecurringAppointmentMasterAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RecurringAppointmentMaster_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> RecurringAppointmentMasterBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RecurringAppointmentMaster_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> RecurringAppointmentMasterDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RecurringAppointmentMaster_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> RecurringAppointmentMasterDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RecurringAppointmentMaster_QueueItem")]
-        public IList<MicrosoftDynamicsCRMqueueitem> RecurringAppointmentMasterQueueItem { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RecurringAppointmentMaster_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> RecurringAppointmentMasterSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_groupid_value")]
-        public string _groupidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ruleid_value")]
-        public string _ruleidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activityid_activitypointer")]
-        public MicrosoftDynamicsCRMactivitypointer ActivityidActivitypointer { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "category")]
-        public string Category { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMsystemuser CreatedbyRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMsystemuser CreatedonbehalfbyRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dayofmonth")]
-        public int? Dayofmonth { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "daysofweekmask")]
-        public int? Daysofweekmask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "deletedexceptionslist")]
-        public string Deletedexceptionslist { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]
-        public int? Duration { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "effectiveenddate")]
-        public System.DateTimeOffset? Effectiveenddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "effectivestartdate")]
-        public System.DateTimeOffset? Effectivestartdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "endtime")]
-        public System.DateTimeOffset? Endtime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "expansionstatecode")]
-        public int? Expansionstatecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "firstdayofweek")]
-        public int? Firstdayofweek { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "globalobjectid")]
-        public string Globalobjectid { get; set; }
+        [JsonProperty(PropertyName = "occurrences")]
+        public int? Occurrences { get; set; }
 
         /// <summary>
         /// </summary>
@@ -245,28 +137,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "instance")]
-        public int? Instance { get; set; }
+        [JsonProperty(PropertyName = "category")]
+        public string Category { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "interval")]
-        public int? Interval { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isalldayevent")]
-        public bool? Isalldayevent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isnthmonthly")]
-        public bool? Isnthmonthly { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isnthyearly")]
-        public bool? Isnthyearly { get; set; }
+        [JsonProperty(PropertyName = "_ruleid_value")]
+        public string _ruleidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -275,43 +152,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isweekdaypattern")]
-        public bool? Isweekdaypattern { get; set; }
+        [JsonProperty(PropertyName = "isnthmonthly")]
+        public bool? Isnthmonthly { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastexpandedinstancedate")]
-        public System.DateTimeOffset? Lastexpandedinstancedate { get; set; }
+        [JsonProperty(PropertyName = "endtime")]
+        public System.DateTimeOffset? Endtime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "location")]
-        public string Location { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMsystemuser ModifiedbyRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMsystemuser ModifiedonbehalfbyRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "monthofyear")]
-        public int? Monthofyear { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "nextexpansioninstancedate")]
-        public System.DateTimeOffset? Nextexpansioninstancedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "occurrences")]
-        public int? Occurrences { get; set; }
+        [JsonProperty(PropertyName = "daysofweekmask")]
+        public int? Daysofweekmask { get; set; }
 
         /// <summary>
         /// </summary>
@@ -320,23 +172,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "subscriptionid")]
+        public string Subscriptionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMbusinessunit OwningbusinessunitRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "effectiveenddate")]
+        public System.DateTimeOffset? Effectiveenddate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningteam_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMteam OwningteamRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMsystemuser OwninguserRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "isalldayevent")]
+        public bool? Isalldayevent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -345,8 +192,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "patternendtype")]
-        public int? Patternendtype { get; set; }
+        [JsonProperty(PropertyName = "starttime")]
+        public System.DateTimeOffset? Starttime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "globalobjectid")]
+        public string Globalobjectid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -355,118 +207,103 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "instance")]
+        public int? Instance { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "patternendtype")]
+        public int? Patternendtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "deletedexceptionslist")]
+        public string Deletedexceptionslist { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "nextexpansioninstancedate")]
+        public System.DateTimeOffset? Nextexpansioninstancedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "monthofyear")]
+        public int? Monthofyear { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastexpandedinstancedate")]
+        public System.DateTimeOffset? Lastexpandedinstancedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "duration")]
+        public int? Duration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isweekdaypattern")]
+        public bool? Isweekdaypattern { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "firstdayofweek")]
+        public int? Firstdayofweek { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isnthyearly")]
+        public bool? Isnthyearly { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "seriesstatus")]
+        public bool? Seriesstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subcategory")]
+        public string Subcategory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dayofmonth")]
+        public int? Dayofmonth { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "expansionstatecode")]
+        public int? Expansionstatecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effectivestartdate")]
+        public System.DateTimeOffset? Effectivestartdate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "recurrencepatterntype")]
         public int? Recurrencepatterntype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_PostFollows")]
-        public IList<MicrosoftDynamicsCRMpostfollow> RecurringappointmentmasterPostFollows { get; set; }
+        [JsonProperty(PropertyName = "_groupid_value")]
+        public string _groupidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_PostRegardings")]
-        public IList<MicrosoftDynamicsCRMpostregarding> RecurringappointmentmasterPostRegardings { get; set; }
+        [JsonProperty(PropertyName = "location")]
+        public string Location { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_actioncard")]
-        public IList<MicrosoftDynamicsCRMactioncard> RecurringappointmentmasterActioncard { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_activity_parties")]
-        public IList<MicrosoftDynamicsCRMactivityparty> RecurringappointmentmasterActivityParties { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_appointment")]
-        public IList<MicrosoftDynamicsCRMappointment> RecurringappointmentmasterAppointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_campaignresponse")]
-        public IList<MicrosoftDynamicsCRMcampaignresponse> RecurringappointmentmasterCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_connections1")]
-        public IList<MicrosoftDynamicsCRMconnection> RecurringappointmentmasterConnections1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "recurringappointmentmaster_connections2")]
-        public IList<MicrosoftDynamicsCRMconnection> RecurringappointmentmasterConnections2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_account_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_agencycommunication_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMadoxioAgencycommunication RegardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplicationRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaintRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigationRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigationstakeholder_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMadoxioInvestigationstakeholder RegardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicencesRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_campaign_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaignRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivityRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contact_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMcontact RegardingobjectidContactRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contract_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMcontract RegardingobjectidContractRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "interval")]
+        public int? Interval { get; set; }
 
         /// <summary>
         /// </summary>
@@ -480,8 +317,83 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incident_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMincident RegardingobjectidIncidentRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "recurringappointmentmaster_PostRegardings")]
+        public IList<MicrosoftDynamicsCRMpostregarding> RecurringappointmentmasterPostRegardings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "recurringappointmentmaster_PostFollows")]
+        public IList<MicrosoftDynamicsCRMpostfollow> RecurringappointmentmasterPostFollows { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RecurringAppointmentMaster_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> RecurringAppointmentMasterBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RecurringAppointmentMaster_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> RecurringAppointmentMasterAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RecurringAppointmentMaster_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> RecurringAppointmentMasterDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMsystemuser OwninguserRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMteam OwningteamRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contract_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMcontract RegardingobjectidContractRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_activitypointer")]
+        public MicrosoftDynamicsCRMactivitypointer ActivityidActivitypointer { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "recurringappointmentmaster_activity_parties")]
+        public IList<MicrosoftDynamicsCRMactivityparty> RecurringappointmentmasterActivityParties { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RecurringAppointmentMaster_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> RecurringAppointmentMasterDuplicateMatchingRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMbusinessunit OwningbusinessunitRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaign_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaignRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
@@ -490,13 +402,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "serviceid_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMservice ServiceidRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMsystemuser CreatedonbehalfbyRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMsystemuser CreatedbyRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle_recurringappointmentmaster")]
         public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticleRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "recurringappointmentmaster_appointment")]
+        public IList<MicrosoftDynamicsCRMappointment> RecurringappointmentmasterAppointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RecurringAppointmentMaster_QueueItem")]
+        public IList<MicrosoftDynamicsCRMqueueitem> RecurringAppointmentMasterQueueItem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "recurringappointmentmaster_connections1")]
+        public IList<MicrosoftDynamicsCRMconnection> RecurringappointmentmasterConnections1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMsystemuser ModifiedonbehalfbyRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
@@ -510,23 +457,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quote_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMquote RegardingobjectidQuoteRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "transactioncurrencyid_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMtransactioncurrency TransactioncurrencyidRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesorder_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorderRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "recurringappointmentmaster_campaignresponse")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> RecurringappointmentmasterCampaignresponse { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "seriesstatus")]
-        public bool? Seriesstatus { get; set; }
+        [JsonProperty(PropertyName = "recurringappointmentmaster_connections2")]
+        public IList<MicrosoftDynamicsCRMconnection> RecurringappointmentmasterConnections2 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "serviceid_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMservice ServiceidRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "RecurringAppointmentMaster_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> RecurringAppointmentMasterSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncidentRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
@@ -535,23 +487,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "starttime")]
-        public System.DateTimeOffset? Starttime { get; set; }
+        [JsonProperty(PropertyName = "recurringappointmentmaster_actioncard")]
+        public IList<MicrosoftDynamicsCRMactioncard> RecurringappointmentmasterActioncard { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "subcategory")]
-        public string Subcategory { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_salesorder_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorderRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "subscriptionid")]
-        public string Subscriptionid { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_quote_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMquote RegardingobjectidQuoteRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid_recurringappointmentmaster")]
-        public MicrosoftDynamicsCRMtransactioncurrency TransactioncurrencyidRecurringappointmentmaster { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_contact_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMcontact RegardingobjectidContactRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMsystemuser ModifiedbyRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivityRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "RecurringAppointmentMaster_Annotation")]
+        public IList<MicrosoftDynamicsCRMannotation> RecurringAppointmentMasterAnnotation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_agencycommunication_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMadoxioAgencycommunication RegardingobjectidAdoxioAgencycommunicationRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplicationRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigationstakeholder_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMadoxioInvestigationstakeholder RegardingobjectidAdoxioInvestigationstakeholderRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicencesRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaintRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation_recurringappointmentmaster")]
+        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigationRecurringappointmentmaster { get; set; }
 
     }
 }

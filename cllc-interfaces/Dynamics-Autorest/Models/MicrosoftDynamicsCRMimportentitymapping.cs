@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// importentitymapping
+    /// </summary>
     public partial class MicrosoftDynamicsCRMimportentitymapping
     {
         /// <summary>
@@ -24,27 +27,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMimportentitymapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportentitymapping(string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _importmapidValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), int? dedupe = default(int?), string importentitymappingid = default(string), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), int? processcode = default(int?), string sourceentityname = default(string), int? statecode = default(int?), int? statuscode = default(int?), string targetentityname = default(string))
+        public MicrosoftDynamicsCRMimportentitymapping(int? dedupe = default(int?), int? processcode = default(int?), string importentitymappingid = default(string), string sourceentityname = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string targetentityname = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _importmapidValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._createdbyValue = _createdbyValue;
+            Dedupe = dedupe;
+            Processcode = processcode;
+            Importentitymappingid = importentitymappingid;
+            Sourceentityname = sourceentityname;
+            Statuscode = statuscode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Targetentityname = targetentityname;
+            Statecode = statecode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
+            Modifiedon = modifiedon;
+            Createdon = createdon;
             this._importmapidValue = _importmapidValue;
             this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Dedupe = dedupe;
-            Importentitymappingid = importentitymappingid;
-            Importmapid = importmapid;
             Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
+            Createdby = createdby;
+            Importmapid = importmapid;
+            Createdonbehalfby = createdonbehalfby;
             Modifiedonbehalfby = modifiedonbehalfby;
-            Processcode = processcode;
-            Sourceentityname = sourceentityname;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Targetentityname = targetentityname;
             CustomInit();
         }
 
@@ -55,13 +58,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "dedupe")]
+        public int? Dedupe { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processcode")]
+        public int? Processcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importentitymappingid")]
+        public string Importentitymappingid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sourceentityname")]
+        public string Sourceentityname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetentityname")]
+        public string Targetentityname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -75,8 +128,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,8 +138,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "importmapid")]
+        public MicrosoftDynamicsCRMimportmap Importmapid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,58 +148,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dedupe")]
-        public int? Dedupe { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importentitymappingid")]
-        public string Importentitymappingid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importmapid")]
-        public MicrosoftDynamicsCRMimportmap Importmapid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processcode")]
-        public int? Processcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sourceentityname")]
-        public string Sourceentityname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "targetentityname")]
-        public string Targetentityname { get; set; }
 
     }
 }

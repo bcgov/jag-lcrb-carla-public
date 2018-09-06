@@ -29,10 +29,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="parameterType">Possible values include: 'None',
         /// 'String', 'Attribute'</param>
-        public MicrosoftDynamicsCRMBusinessNotificationParameter(string data = default(string), string parameterType = default(string))
+        public MicrosoftDynamicsCRMBusinessNotificationParameter(string parameterType = default(string), string data = default(string))
         {
-            Data = data;
             ParameterType = parameterType;
+            Data = data;
             CustomInit();
         }
 
@@ -42,15 +42,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Data")]
-        public string Data { get; set; }
-
-        /// <summary>
         /// Gets or sets possible values include: 'None', 'String', 'Attribute'
         /// </summary>
         [JsonProperty(PropertyName = "ParameterType")]
         public string ParameterType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Data")]
+        public string Data { get; set; }
 
     }
 }

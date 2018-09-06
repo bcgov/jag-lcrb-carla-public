@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_adoxio_licencetype_adoxio_investigation
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
     {
         /// <summary>
@@ -26,12 +29,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), string adoxioInvestigationid = default(string), string adoxioLicencetypeid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), string adoxioInvestigationid = default(string), long? versionnumber = default(long?), string adoxioLicencetypeid = default(string))
         {
             AdoxioAdoxioLicencetypeAdoxioInvestigationid = adoxioAdoxioLicencetypeAdoxioInvestigationid;
             AdoxioInvestigationid = adoxioInvestigationid;
-            AdoxioLicencetypeid = adoxioLicencetypeid;
             Versionnumber = versionnumber;
+            AdoxioLicencetypeid = adoxioLicencetypeid;
             CustomInit();
         }
 
@@ -52,13 +55,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
     }
 }

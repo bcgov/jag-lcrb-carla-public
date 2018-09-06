@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// teamsyncattributemappingprofiles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMteamsyncattributemappingprofiles
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMteamsyncattributemappingprofiles class.
         /// </summary>
-        public MicrosoftDynamicsCRMteamsyncattributemappingprofiles(string syncattributemappingprofileid = default(string), string teamid = default(string), string teamsyncattributemappingprofileid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMteamsyncattributemappingprofiles(string teamsyncattributemappingprofileid = default(string), string syncattributemappingprofileid = default(string), long? versionnumber = default(long?), string teamid = default(string))
         {
-            Syncattributemappingprofileid = syncattributemappingprofileid;
-            Teamid = teamid;
             Teamsyncattributemappingprofileid = teamsyncattributemappingprofileid;
+            Syncattributemappingprofileid = syncattributemappingprofileid;
             Versionnumber = versionnumber;
+            Teamid = teamid;
             CustomInit();
         }
 
@@ -40,23 +43,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "syncattributemappingprofileid")]
-        public string Syncattributemappingprofileid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "teamid")]
-        public string Teamid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "teamsyncattributemappingprofileid")]
         public string Teamsyncattributemappingprofileid { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "syncattributemappingprofileid")]
+        public string Syncattributemappingprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "teamid")]
+        public string Teamid { get; set; }
 
     }
 }

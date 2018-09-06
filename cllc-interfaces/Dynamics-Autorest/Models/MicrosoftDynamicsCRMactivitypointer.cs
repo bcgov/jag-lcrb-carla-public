@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// activitypointer
+    /// </summary>
     public partial class MicrosoftDynamicsCRMactivitypointer
     {
         /// <summary>
@@ -26,128 +29,128 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactivitypointer class.
         /// </summary>
-        public MicrosoftDynamicsCRMactivitypointer(IList<MicrosoftDynamicsCRMasyncoperation> activityPointerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityPointerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMcampaignactivityitem> activityPointerCampaignActivityItems = default(IList<MicrosoftDynamicsCRMcampaignactivityitem>), IList<MicrosoftDynamicsCRMqueueitem> activityPointerQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdActivityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), string _sendermailboxidValue = default(string), string _serviceidValue = default(string), string _slaidValue = default(string), string _slainvokedidValue = default(string), string _transactioncurrencyidValue = default(string), IList<MicrosoftDynamicsCRMcampaignresponse> activityCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMbulkoperation> activityPointerBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMbulkoperationlog> activityPointerBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMactivitymimeattachment> activityPointerActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMappointment> activityPointerAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcampaignactivity> activityPointerCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcampaignresponse> activityPointerCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMemail> activityPointerEmail = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> activityPointerFax = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincidentresolution> activityPointerIncidentResolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMletter> activityPointerLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMopportunityclose> activityPointerOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> activityPointerOrderClose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMphonecall> activityPointerPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMquoteclose> activityPointerQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> activityPointerRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMserviceappointment> activityPointerServiceAppointment = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsocialactivity> activityPointerSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMtask> activityPointerTask = default(IList<MicrosoftDynamicsCRMtask>), string activityadditionalparams = default(string), string activityid = default(string), IList<MicrosoftDynamicsCRMactivityparty> activitypointerActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), string activitytypecode = default(string), int? actualdurationminutes = default(int?), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), int? community = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? deliverylastattemptedon = default(System.DateTimeOffset?), int? deliveryprioritycode = default(int?), string description = default(string), string exchangeitemid = default(string), double? exchangerate = default(double?), string exchangeweblink = default(string), int? instancetypecode = default(int?), bool? isbilled = default(bool?), bool? ismapiprivate = default(bool?), bool? isregularactivity = default(bool?), bool? isworkflowcreated = default(bool?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), bool? leftvoicemail = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), int? onholdtime = default(int?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? postponeactivityprocessinguntil = default(System.DateTimeOffset?), int? prioritycode = default(int?), string processid = default(string), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioAgencycommunication regardingobjectidAdoxioAgencycommunication = default(MicrosoftDynamicsCRMadoxioAgencycommunication), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioInvestigationstakeholder regardingobjectidAdoxioInvestigationstakeholder = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), int? scheduleddurationminutes = default(int?), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), MicrosoftDynamicsCRMmailbox sendermailboxid = default(MicrosoftDynamicsCRMmailbox), System.DateTimeOffset? senton = default(System.DateTimeOffset?), string seriesid = default(string), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsla slaActivitypointerSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceActivitypointer = default(IList<MicrosoftDynamicsCRMslakpiinstance>), System.DateTimeOffset? sortdate = default(System.DateTimeOffset?), string stageid = default(string), int? statecode = default(int?), int? statuscode = default(int?), string subject = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), string traversedpath = default(string), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMactivitypointer(string _owneridValue = default(string), string activityadditionalparams = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _regardingobjectidValue = default(string), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), bool? isbilled = default(bool?), string _transactioncurrencyidValue = default(string), int? prioritycode = default(int?), string _sendermailboxidValue = default(string), int? scheduleddurationminutes = default(int?), string _owninguserValue = default(string), string exchangeweblink = default(string), long? versionnumber = default(long?), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), string _slainvokedidValue = default(string), System.DateTimeOffset? postponeactivityprocessinguntil = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? deliveryprioritycode = default(int?), string _owningteamValue = default(string), bool? ismapiprivate = default(bool?), string traversedpath = default(string), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), int? actualdurationminutes = default(int?), string _serviceidValue = default(string), int? instancetypecode = default(int?), string _createdonbehalfbyValue = default(string), string seriesid = default(string), string activityid = default(string), string description = default(string), bool? leftvoicemail = default(bool?), bool? isworkflowcreated = default(bool?), System.DateTimeOffset? senton = default(System.DateTimeOffset?), string processid = default(string), int? community = default(int?), string _modifiedbyValue = default(string), string exchangeitemid = default(string), int? statecode = default(int?), string activitytypecode = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), string subject = default(string), System.DateTimeOffset? deliverylastattemptedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string stageid = default(string), int? onholdtime = default(int?), System.DateTimeOffset? sortdate = default(System.DateTimeOffset?), bool? isregularactivity = default(bool?), object exchangerate = default(object), string _slaidValue = default(string), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbulkoperationlog> createdActivityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMsocialactivity> activityPointerSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> activityPointerRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMemail> activityPointerEmail = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMmailbox sendermailboxid = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMquoteclose> activityPointerQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMqueueitem> activityPointerQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperation> activityPointerBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignactivityitem> activityPointerCampaignActivityItems = default(IList<MicrosoftDynamicsCRMcampaignactivityitem>), MicrosoftDynamicsCRMsla slaActivitypointerSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMcampaignresponse> activityPointerCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMserviceappointment> activityPointerServiceAppointment = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMactivitymimeattachment> activityPointerActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMfax> activityPointerFax = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperationlog> activityPointerBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMtask> activityPointerTask = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMopportunityclose> activityPointerOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMcampaignresponse> activityCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMcampaignactivity> activityPointerCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMphonecall> activityPointerPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMappointment> activityPointerAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMorderclose> activityPointerOrderClose = default(IList<MicrosoftDynamicsCRMorderclose>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMincidentresolution> activityPointerIncidentResolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMletter> activityPointerLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceActivitypointer = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityPointerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> activityPointerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMactivityparty> activitypointerActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMadoxioAgencycommunication regardingobjectidAdoxioAgencycommunication = default(MicrosoftDynamicsCRMadoxioAgencycommunication), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigationstakeholder regardingobjectidAdoxioInvestigationstakeholder = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation))
         {
-            ActivityPointerAsyncOperations = activityPointerAsyncOperations;
-            ActivityPointerBulkDeleteFailures = activityPointerBulkDeleteFailures;
-            ActivityPointerCampaignActivityItems = activityPointerCampaignActivityItems;
-            ActivityPointerQueueItem = activityPointerQueueItem;
-            CreatedActivityBulkOperationLogs = createdActivityBulkOperationLogs;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            this._regardingobjectidValue = _regardingobjectidValue;
-            this._sendermailboxidValue = _sendermailboxidValue;
-            this._serviceidValue = _serviceidValue;
-            this._slaidValue = _slaidValue;
-            this._slainvokedidValue = _slainvokedidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            ActivityCampaignresponse = activityCampaignresponse;
-            ActivityPointerBulkOperation = activityPointerBulkOperation;
-            ActivityPointerBulkOperationLogs = activityPointerBulkOperationLogs;
-            ActivityPointerActivityMimeAttachment = activityPointerActivityMimeAttachment;
-            ActivityPointerAppointment = activityPointerAppointment;
-            ActivityPointerCampaignactivity = activityPointerCampaignactivity;
-            ActivityPointerCampaignresponse = activityPointerCampaignresponse;
-            ActivityPointerEmail = activityPointerEmail;
-            ActivityPointerFax = activityPointerFax;
-            ActivityPointerIncidentResolution = activityPointerIncidentResolution;
-            ActivityPointerLetter = activityPointerLetter;
-            ActivityPointerOpportunityClose = activityPointerOpportunityClose;
-            ActivityPointerOrderClose = activityPointerOrderClose;
-            ActivityPointerPhonecall = activityPointerPhonecall;
-            ActivityPointerQuoteClose = activityPointerQuoteClose;
-            ActivityPointerRecurringappointmentmaster = activityPointerRecurringappointmentmaster;
-            ActivityPointerServiceAppointment = activityPointerServiceAppointment;
-            ActivityPointerSocialactivity = activityPointerSocialactivity;
-            ActivityPointerTask = activityPointerTask;
             Activityadditionalparams = activityadditionalparams;
-            Activityid = activityid;
-            ActivitypointerActivityParties = activitypointerActivityParties;
-            ActivitypointerConnections1 = activitypointerConnections1;
-            ActivitypointerConnections2 = activitypointerConnections2;
-            Activitytypecode = activitytypecode;
-            Actualdurationminutes = actualdurationminutes;
-            Actualend = actualend;
-            Actualstart = actualstart;
-            Community = community;
-            Createdby = createdby;
             Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Deliverylastattemptedon = deliverylastattemptedon;
-            Deliveryprioritycode = deliveryprioritycode;
-            Description = description;
-            Exchangeitemid = exchangeitemid;
-            Exchangerate = exchangerate;
-            Exchangeweblink = exchangeweblink;
-            Instancetypecode = instancetypecode;
-            Isbilled = isbilled;
-            Ismapiprivate = ismapiprivate;
-            Isregularactivity = isregularactivity;
-            Isworkflowcreated = isworkflowcreated;
-            Lastonholdtime = lastonholdtime;
-            Leftvoicemail = leftvoicemail;
-            Modifiedby = modifiedby;
+            Statuscode = statuscode;
             Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Onholdtime = onholdtime;
-            Ownerid = ownerid;
-            Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Postponeactivityprocessinguntil = postponeactivityprocessinguntil;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            Scheduledstart = scheduledstart;
+            Lastonholdtime = lastonholdtime;
+            Isbilled = isbilled;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Prioritycode = prioritycode;
+            this._sendermailboxidValue = _sendermailboxidValue;
+            Scheduleddurationminutes = scheduleddurationminutes;
+            this._owninguserValue = _owninguserValue;
+            Exchangeweblink = exchangeweblink;
+            Versionnumber = versionnumber;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Scheduledend = scheduledend;
+            this._slainvokedidValue = _slainvokedidValue;
+            Postponeactivityprocessinguntil = postponeactivityprocessinguntil;
+            this._createdbyValue = _createdbyValue;
+            Deliveryprioritycode = deliveryprioritycode;
+            this._owningteamValue = _owningteamValue;
+            Ismapiprivate = ismapiprivate;
+            Traversedpath = traversedpath;
+            Actualend = actualend;
+            Actualdurationminutes = actualdurationminutes;
+            this._serviceidValue = _serviceidValue;
+            Instancetypecode = instancetypecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Seriesid = seriesid;
+            Activityid = activityid;
+            Description = description;
+            Leftvoicemail = leftvoicemail;
+            Isworkflowcreated = isworkflowcreated;
+            Senton = senton;
             Processid = processid;
-            RegardingobjectidAccount = regardingobjectidAccount;
-            RegardingobjectidAdoxioAgencycommunication = regardingobjectidAdoxioAgencycommunication;
-            RegardingobjectidAdoxioApplication = regardingobjectidAdoxioApplication;
-            RegardingobjectidAdoxioComplaint = regardingobjectidAdoxioComplaint;
-            RegardingobjectidAdoxioInvestigation = regardingobjectidAdoxioInvestigation;
-            RegardingobjectidAdoxioInvestigationstakeholder = regardingobjectidAdoxioInvestigationstakeholder;
-            RegardingobjectidAdoxioLicences = regardingobjectidAdoxioLicences;
-            RegardingobjectidBookableresourcebooking = regardingobjectidBookableresourcebooking;
-            RegardingobjectidBookableresourcebookingheader = regardingobjectidBookableresourcebookingheader;
-            RegardingobjectidBulkoperation = regardingobjectidBulkoperation;
-            RegardingobjectidCampaign = regardingobjectidCampaign;
-            RegardingobjectidCampaignactivity = regardingobjectidCampaignactivity;
-            RegardingobjectidContact = regardingobjectidContact;
-            RegardingobjectidContract = regardingobjectidContract;
+            Community = community;
+            this._modifiedbyValue = _modifiedbyValue;
+            Exchangeitemid = exchangeitemid;
+            Statecode = statecode;
+            Activitytypecode = activitytypecode;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Actualstart = actualstart;
+            Subject = subject;
+            Deliverylastattemptedon = deliverylastattemptedon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Stageid = stageid;
+            Onholdtime = onholdtime;
+            Sortdate = sortdate;
+            Isregularactivity = isregularactivity;
+            Exchangerate = exchangerate;
+            this._slaidValue = _slaidValue;
+            RegardingobjectidNewInteractionforemail = regardingobjectidNewInteractionforemail;
             RegardingobjectidEntitlement = regardingobjectidEntitlement;
             RegardingobjectidEntitlementtemplate = regardingobjectidEntitlementtemplate;
-            RegardingobjectidIncident = regardingobjectidIncident;
-            RegardingobjectidInvoice = regardingobjectidInvoice;
-            RegardingobjectidKnowledgearticle = regardingobjectidKnowledgearticle;
+            RegardingobjectidBookableresourcebooking = regardingobjectidBookableresourcebooking;
+            RegardingobjectidBookableresourcebookingheader = regardingobjectidBookableresourcebookingheader;
             RegardingobjectidKnowledgebaserecord = regardingobjectidKnowledgebaserecord;
-            RegardingobjectidLead = regardingobjectidLead;
-            RegardingobjectidNewInteractionforemail = regardingobjectidNewInteractionforemail;
-            RegardingobjectidOpportunity = regardingobjectidOpportunity;
-            RegardingobjectidQuote = regardingobjectidQuote;
-            RegardingobjectidSalesorder = regardingobjectidSalesorder;
-            Scheduleddurationminutes = scheduleddurationminutes;
-            Scheduledend = scheduledend;
-            Scheduledstart = scheduledstart;
+            RegardingobjectidAccount = regardingobjectidAccount;
+            RegardingobjectidContract = regardingobjectidContract;
+            Createdby = createdby;
+            RegardingobjectidContact = regardingobjectidContact;
+            CreatedActivityBulkOperationLogs = createdActivityBulkOperationLogs;
+            ActivityPointerSocialactivity = activityPointerSocialactivity;
+            ActivityPointerRecurringappointmentmaster = activityPointerRecurringappointmentmaster;
+            ActivityPointerEmail = activityPointerEmail;
             Sendermailboxid = sendermailboxid;
-            Senton = senton;
-            Seriesid = seriesid;
-            Serviceid = serviceid;
-            SlaActivitypointerSla = slaActivitypointerSla;
-            SlainvokedidActivitypointerSla = slainvokedidActivitypointerSla;
-            SlakpiinstanceActivitypointer = slakpiinstanceActivitypointer;
-            Sortdate = sortdate;
-            Stageid = stageid;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Subject = subject;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            ActivityPointerQuoteClose = activityPointerQuoteClose;
             Transactioncurrencyid = transactioncurrencyid;
-            Traversedpath = traversedpath;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            ActivityPointerQueueItem = activityPointerQueueItem;
+            RegardingobjectidSalesorder = regardingobjectidSalesorder;
+            Ownerid = ownerid;
+            RegardingobjectidOpportunity = regardingobjectidOpportunity;
+            Owninguser = owninguser;
+            ActivityPointerBulkOperation = activityPointerBulkOperation;
+            ActivityPointerCampaignActivityItems = activityPointerCampaignActivityItems;
+            SlaActivitypointerSla = slaActivitypointerSla;
+            RegardingobjectidInvoice = regardingobjectidInvoice;
+            Owningbusinessunit = owningbusinessunit;
+            RegardingobjectidKnowledgearticle = regardingobjectidKnowledgearticle;
+            RegardingobjectidQuote = regardingobjectidQuote;
+            RegardingobjectidLead = regardingobjectidLead;
+            ActivityPointerCampaignresponse = activityPointerCampaignresponse;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            ActivityPointerServiceAppointment = activityPointerServiceAppointment;
+            ActivityPointerActivityMimeAttachment = activityPointerActivityMimeAttachment;
+            ActivityPointerFax = activityPointerFax;
+            Createdonbehalfby = createdonbehalfby;
+            ActivityPointerBulkOperationLogs = activityPointerBulkOperationLogs;
+            Modifiedby = modifiedby;
+            RegardingobjectidBulkoperation = regardingobjectidBulkoperation;
+            Serviceid = serviceid;
+            ActivityPointerTask = activityPointerTask;
+            ActivityPointerOpportunityClose = activityPointerOpportunityClose;
+            RegardingobjectidIncident = regardingobjectidIncident;
+            ActivityCampaignresponse = activityCampaignresponse;
+            ActivityPointerCampaignactivity = activityPointerCampaignactivity;
+            ActivityPointerPhonecall = activityPointerPhonecall;
+            ActivityPointerAppointment = activityPointerAppointment;
+            ActivityPointerOrderClose = activityPointerOrderClose;
+            RegardingobjectidCampaign = regardingobjectidCampaign;
+            ActivityPointerIncidentResolution = activityPointerIncidentResolution;
+            ActivityPointerLetter = activityPointerLetter;
+            ActivitypointerConnections2 = activitypointerConnections2;
+            SlakpiinstanceActivitypointer = slakpiinstanceActivitypointer;
+            Owningteam = owningteam;
+            RegardingobjectidCampaignactivity = regardingobjectidCampaignactivity;
+            ActivityPointerBulkDeleteFailures = activityPointerBulkDeleteFailures;
+            SlainvokedidActivitypointerSla = slainvokedidActivitypointerSla;
+            ActivitypointerConnections1 = activitypointerConnections1;
+            ActivityPointerAsyncOperations = activityPointerAsyncOperations;
+            ActivitypointerActivityParties = activitypointerActivityParties;
+            RegardingobjectidAdoxioAgencycommunication = regardingobjectidAdoxioAgencycommunication;
+            RegardingobjectidAdoxioApplication = regardingobjectidAdoxioApplication;
+            RegardingobjectidAdoxioInvestigationstakeholder = regardingobjectidAdoxioInvestigationstakeholder;
+            RegardingobjectidAdoxioLicences = regardingobjectidAdoxioLicences;
+            RegardingobjectidAdoxioComplaint = regardingobjectidAdoxioComplaint;
+            RegardingobjectidAdoxioInvestigation = regardingobjectidAdoxioInvestigation;
             CustomInit();
         }
 
@@ -158,193 +161,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ActivityPointer_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> ActivityPointerAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ActivityPointer_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ActivityPointerBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ActivityPointer_CampaignActivityItems")]
-        public IList<MicrosoftDynamicsCRMcampaignactivityitem> ActivityPointerCampaignActivityItems { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ActivityPointer_QueueItem")]
-        public IList<MicrosoftDynamicsCRMqueueitem> ActivityPointerQueueItem { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CreatedActivity_BulkOperationLogs")]
-        public IList<MicrosoftDynamicsCRMbulkoperationlog> CreatedActivityBulkOperationLogs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_sendermailboxid_value")]
-        public string _sendermailboxidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_serviceid_value")]
-        public string _serviceidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_campaignresponse")]
-        public IList<MicrosoftDynamicsCRMcampaignresponse> ActivityCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_BulkOperation")]
-        public IList<MicrosoftDynamicsCRMbulkoperation> ActivityPointerBulkOperation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_BulkOperation_logs")]
-        public IList<MicrosoftDynamicsCRMbulkoperationlog> ActivityPointerBulkOperationLogs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_activity_mime_attachment")]
-        public IList<MicrosoftDynamicsCRMactivitymimeattachment> ActivityPointerActivityMimeAttachment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_appointment")]
-        public IList<MicrosoftDynamicsCRMappointment> ActivityPointerAppointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_campaignactivity")]
-        public IList<MicrosoftDynamicsCRMcampaignactivity> ActivityPointerCampaignactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_campaignresponse")]
-        public IList<MicrosoftDynamicsCRMcampaignresponse> ActivityPointerCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_email")]
-        public IList<MicrosoftDynamicsCRMemail> ActivityPointerEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_fax")]
-        public IList<MicrosoftDynamicsCRMfax> ActivityPointerFax { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_incident_resolution")]
-        public IList<MicrosoftDynamicsCRMincidentresolution> ActivityPointerIncidentResolution { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_letter")]
-        public IList<MicrosoftDynamicsCRMletter> ActivityPointerLetter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_opportunity_close")]
-        public IList<MicrosoftDynamicsCRMopportunityclose> ActivityPointerOpportunityClose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_order_close")]
-        public IList<MicrosoftDynamicsCRMorderclose> ActivityPointerOrderClose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_phonecall")]
-        public IList<MicrosoftDynamicsCRMphonecall> ActivityPointerPhonecall { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_quote_close")]
-        public IList<MicrosoftDynamicsCRMquoteclose> ActivityPointerQuoteClose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_recurringappointmentmaster")]
-        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ActivityPointerRecurringappointmentmaster { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_service_appointment")]
-        public IList<MicrosoftDynamicsCRMserviceappointment> ActivityPointerServiceAppointment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_socialactivity")]
-        public IList<MicrosoftDynamicsCRMsocialactivity> ActivityPointerSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activity_pointer_task")]
-        public IList<MicrosoftDynamicsCRMtask> ActivityPointerTask { get; set; }
 
         /// <summary>
         /// </summary>
@@ -353,133 +171,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "activityid")]
-        public string Activityid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activitypointer_activity_parties")]
-        public IList<MicrosoftDynamicsCRMactivityparty> ActivitypointerActivityParties { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activitypointer_connections1")]
-        public IList<MicrosoftDynamicsCRMconnection> ActivitypointerConnections1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activitypointer_connections2")]
-        public IList<MicrosoftDynamicsCRMconnection> ActivitypointerConnections2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activitytypecode")]
-        public string Activitytypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualdurationminutes")]
-        public int? Actualdurationminutes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualend")]
-        public System.DateTimeOffset? Actualend { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualstart")]
-        public System.DateTimeOffset? Actualstart { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "community")]
-        public int? Community { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "deliverylastattemptedon")]
-        public System.DateTimeOffset? Deliverylastattemptedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "deliveryprioritycode")]
-        public int? Deliveryprioritycode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangeitemid")]
-        public string Exchangeitemid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangeweblink")]
-        public string Exchangeweblink { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "instancetypecode")]
-        public int? Instancetypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isbilled")]
-        public bool? Isbilled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismapiprivate")]
-        public bool? Ismapiprivate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isregularactivity")]
-        public bool? Isregularactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isworkflowcreated")]
-        public bool? Isworkflowcreated { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lastonholdtime")]
-        public System.DateTimeOffset? Lastonholdtime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "leftvoicemail")]
-        public bool? Leftvoicemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -488,38 +186,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "onholdtime")]
-        public int? Onholdtime { get; set; }
+        [JsonProperty(PropertyName = "scheduledstart")]
+        public System.DateTimeOffset? Scheduledstart { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+        [JsonProperty(PropertyName = "lastonholdtime")]
+        public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+        [JsonProperty(PropertyName = "isbilled")]
+        public bool? Isbilled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "postponeactivityprocessinguntil")]
-        public System.DateTimeOffset? Postponeactivityprocessinguntil { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -528,78 +216,223 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_sendermailboxid_value")]
+        public string _sendermailboxidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "scheduleddurationminutes")]
+        public int? Scheduleddurationminutes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangeweblink")]
+        public string Exchangeweblink { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "scheduledend")]
+        public System.DateTimeOffset? Scheduledend { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slainvokedid_value")]
+        public string _slainvokedidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "postponeactivityprocessinguntil")]
+        public System.DateTimeOffset? Postponeactivityprocessinguntil { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "deliveryprioritycode")]
+        public int? Deliveryprioritycode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismapiprivate")]
+        public bool? Ismapiprivate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualend")]
+        public System.DateTimeOffset? Actualend { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualdurationminutes")]
+        public int? Actualdurationminutes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_serviceid_value")]
+        public string _serviceidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "instancetypecode")]
+        public int? Instancetypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "seriesid")]
+        public string Seriesid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid")]
+        public string Activityid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leftvoicemail")]
+        public bool? Leftvoicemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isworkflowcreated")]
+        public bool? Isworkflowcreated { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "senton")]
+        public System.DateTimeOffset? Senton { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "processid")]
         public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_account")]
-        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
+        [JsonProperty(PropertyName = "community")]
+        public int? Community { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_agencycommunication")]
-        public MicrosoftDynamicsCRMadoxioAgencycommunication RegardingobjectidAdoxioAgencycommunication { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application")]
-        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplication { get; set; }
+        [JsonProperty(PropertyName = "exchangeitemid")]
+        public string Exchangeitemid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint")]
-        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaint { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation")]
-        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigation { get; set; }
+        [JsonProperty(PropertyName = "activitytypecode")]
+        public string Activitytypecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigationstakeholder")]
-        public MicrosoftDynamicsCRMadoxioInvestigationstakeholder RegardingobjectidAdoxioInvestigationstakeholder { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences")]
-        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicences { get; set; }
+        [JsonProperty(PropertyName = "actualstart")]
+        public System.DateTimeOffset? Actualstart { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking")]
-        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebooking { get; set; }
+        [JsonProperty(PropertyName = "subject")]
+        public string Subject { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader")]
-        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheader { get; set; }
+        [JsonProperty(PropertyName = "deliverylastattemptedon")]
+        public System.DateTimeOffset? Deliverylastattemptedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation")]
-        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperation { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_campaign")]
-        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaign { get; set; }
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity")]
-        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivity { get; set; }
+        [JsonProperty(PropertyName = "onholdtime")]
+        public int? Onholdtime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contact")]
-        public MicrosoftDynamicsCRMcontact RegardingobjectidContact { get; set; }
+        [JsonProperty(PropertyName = "sortdate")]
+        public System.DateTimeOffset? Sortdate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contract")]
-        public MicrosoftDynamicsCRMcontract RegardingobjectidContract { get; set; }
+        [JsonProperty(PropertyName = "isregularactivity")]
+        public bool? Isregularactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slaid_value")]
+        public string _slaidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_new_interactionforemail")]
+        public MicrosoftDynamicsCRMinteractionforemail RegardingobjectidNewInteractionforemail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -613,18 +446,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incident")]
-        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking")]
+        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebooking { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_invoice")]
-        public MicrosoftDynamicsCRMinvoice RegardingobjectidInvoice { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle")]
-        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticle { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader")]
+        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheader { get; set; }
 
         /// <summary>
         /// </summary>
@@ -633,43 +461,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_lead")]
-        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_account")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_new_interactionforemail")]
-        public MicrosoftDynamicsCRMinteractionforemail RegardingobjectidNewInteractionforemail { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_contract")]
+        public MicrosoftDynamicsCRMcontract RegardingobjectidContract { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
-        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quote")]
-        public MicrosoftDynamicsCRMquote RegardingobjectidQuote { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_contact")]
+        public MicrosoftDynamicsCRMcontact RegardingobjectidContact { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesorder")]
-        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorder { get; set; }
+        [JsonProperty(PropertyName = "CreatedActivity_BulkOperationLogs")]
+        public IList<MicrosoftDynamicsCRMbulkoperationlog> CreatedActivityBulkOperationLogs { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "scheduleddurationminutes")]
-        public int? Scheduleddurationminutes { get; set; }
+        [JsonProperty(PropertyName = "activity_pointer_socialactivity")]
+        public IList<MicrosoftDynamicsCRMsocialactivity> ActivityPointerSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "scheduledend")]
-        public System.DateTimeOffset? Scheduledend { get; set; }
+        [JsonProperty(PropertyName = "activity_pointer_recurringappointmentmaster")]
+        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ActivityPointerRecurringappointmentmaster { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "scheduledstart")]
-        public System.DateTimeOffset? Scheduledstart { get; set; }
+        [JsonProperty(PropertyName = "activity_pointer_email")]
+        public IList<MicrosoftDynamicsCRMemail> ActivityPointerEmail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -678,63 +506,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "senton")]
-        public System.DateTimeOffset? Senton { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "seriesid")]
-        public string Seriesid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "serviceid")]
-        public MicrosoftDynamicsCRMservice Serviceid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sla_activitypointer_sla")]
-        public MicrosoftDynamicsCRMsla SlaActivitypointerSla { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "slainvokedid_activitypointer_sla")]
-        public MicrosoftDynamicsCRMsla SlainvokedidActivitypointerSla { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "slakpiinstance_activitypointer")]
-        public IList<MicrosoftDynamicsCRMslakpiinstance> SlakpiinstanceActivitypointer { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sortdate")]
-        public System.DateTimeOffset? Sortdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject")]
-        public string Subject { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "activity_pointer_quote_close")]
+        public IList<MicrosoftDynamicsCRMquoteclose> ActivityPointerQuoteClose { get; set; }
 
         /// <summary>
         /// </summary>
@@ -743,18 +516,248 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
+        [JsonProperty(PropertyName = "ActivityPointer_QueueItem")]
+        public IList<MicrosoftDynamicsCRMqueueitem> ActivityPointerQueueItem { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_salesorder")]
+        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorder { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
+        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_BulkOperation")]
+        public IList<MicrosoftDynamicsCRMbulkoperation> ActivityPointerBulkOperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ActivityPointer_CampaignActivityItems")]
+        public IList<MicrosoftDynamicsCRMcampaignactivityitem> ActivityPointerCampaignActivityItems { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sla_activitypointer_sla")]
+        public MicrosoftDynamicsCRMsla SlaActivitypointerSla { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_invoice")]
+        public MicrosoftDynamicsCRMinvoice RegardingobjectidInvoice { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_knowledgearticle")]
+        public MicrosoftDynamicsCRMknowledgearticle RegardingobjectidKnowledgearticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quote")]
+        public MicrosoftDynamicsCRMquote RegardingobjectidQuote { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_campaignresponse")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> ActivityPointerCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_service_appointment")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> ActivityPointerServiceAppointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_activity_mime_attachment")]
+        public IList<MicrosoftDynamicsCRMactivitymimeattachment> ActivityPointerActivityMimeAttachment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_fax")]
+        public IList<MicrosoftDynamicsCRMfax> ActivityPointerFax { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_BulkOperation_logs")]
+        public IList<MicrosoftDynamicsCRMbulkoperationlog> ActivityPointerBulkOperationLogs { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceid")]
+        public MicrosoftDynamicsCRMservice Serviceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_task")]
+        public IList<MicrosoftDynamicsCRMtask> ActivityPointerTask { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_opportunity_close")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> ActivityPointerOpportunityClose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_campaignresponse")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> ActivityCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_campaignactivity")]
+        public IList<MicrosoftDynamicsCRMcampaignactivity> ActivityPointerCampaignactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_phonecall")]
+        public IList<MicrosoftDynamicsCRMphonecall> ActivityPointerPhonecall { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_appointment")]
+        public IList<MicrosoftDynamicsCRMappointment> ActivityPointerAppointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_order_close")]
+        public IList<MicrosoftDynamicsCRMorderclose> ActivityPointerOrderClose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaign")]
+        public MicrosoftDynamicsCRMcampaign RegardingobjectidCampaign { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_incident_resolution")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> ActivityPointerIncidentResolution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activity_pointer_letter")]
+        public IList<MicrosoftDynamicsCRMletter> ActivityPointerLetter { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activitypointer_connections2")]
+        public IList<MicrosoftDynamicsCRMconnection> ActivitypointerConnections2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slakpiinstance_activitypointer")]
+        public IList<MicrosoftDynamicsCRMslakpiinstance> SlakpiinstanceActivitypointer { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_campaignactivity")]
+        public MicrosoftDynamicsCRMcampaignactivity RegardingobjectidCampaignactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ActivityPointer_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ActivityPointerBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slainvokedid_activitypointer_sla")]
+        public MicrosoftDynamicsCRMsla SlainvokedidActivitypointerSla { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activitypointer_connections1")]
+        public IList<MicrosoftDynamicsCRMconnection> ActivitypointerConnections1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ActivityPointer_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> ActivityPointerAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activitypointer_activity_parties")]
+        public IList<MicrosoftDynamicsCRMactivityparty> ActivitypointerActivityParties { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_agencycommunication")]
+        public MicrosoftDynamicsCRMadoxioAgencycommunication RegardingobjectidAdoxioAgencycommunication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application")]
+        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigationstakeholder")]
+        public MicrosoftDynamicsCRMadoxioInvestigationstakeholder RegardingobjectidAdoxioInvestigationstakeholder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences")]
+        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicences { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint")]
+        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation")]
+        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigation { get; set; }
 
     }
 }

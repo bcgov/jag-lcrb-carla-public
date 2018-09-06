@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// leadcompetitors
+    /// </summary>
     public partial class MicrosoftDynamicsCRMleadcompetitors
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMleadcompetitors class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadcompetitors(string competitorid = default(string), string leadcompetitorid = default(string), string leadid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMleadcompetitors(long? versionnumber = default(long?), string leadid = default(string), string competitorid = default(string), string leadcompetitorid = default(string))
         {
+            Versionnumber = versionnumber;
+            Leadid = leadid;
             Competitorid = competitorid;
             Leadcompetitorid = leadcompetitorid;
-            Leadid = leadid;
-            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -40,13 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "competitorid")]
-        public string Competitorid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "leadcompetitorid")]
-        public string Leadcompetitorid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "competitorid")]
+        public string Competitorid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadcompetitorid")]
+        public string Leadcompetitorid { get; set; }
 
     }
 }

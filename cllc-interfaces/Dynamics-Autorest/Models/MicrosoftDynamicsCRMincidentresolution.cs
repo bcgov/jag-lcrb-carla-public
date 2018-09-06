@@ -11,7 +11,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMincidentresolution : MicrosoftDynamicsCRMactivitypointer
+    /// <summary>
+    /// incidentresolution
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMincidentresolution
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -26,32 +29,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMincidentresolution class.
         /// </summary>
-        public MicrosoftDynamicsCRMincidentresolution(IList<MicrosoftDynamicsCRMasyncoperation> activityPointerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityPointerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMcampaignactivityitem> activityPointerCampaignActivityItems = default(IList<MicrosoftDynamicsCRMcampaignactivityitem>), IList<MicrosoftDynamicsCRMqueueitem> activityPointerQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdActivityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), string _sendermailboxidValue = default(string), string _serviceidValue = default(string), string _slaidValue = default(string), string _slainvokedidValue = default(string), string _transactioncurrencyidValue = default(string), IList<MicrosoftDynamicsCRMcampaignresponse> activityCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMbulkoperation> activityPointerBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMbulkoperationlog> activityPointerBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMactivitymimeattachment> activityPointerActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMappointment> activityPointerAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcampaignactivity> activityPointerCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcampaignresponse> activityPointerCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMemail> activityPointerEmail = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> activityPointerFax = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincidentresolution> activityPointerIncidentResolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMletter> activityPointerLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMopportunityclose> activityPointerOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> activityPointerOrderClose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMphonecall> activityPointerPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMquoteclose> activityPointerQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> activityPointerRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMserviceappointment> activityPointerServiceAppointment = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsocialactivity> activityPointerSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMtask> activityPointerTask = default(IList<MicrosoftDynamicsCRMtask>), string activityadditionalparams = default(string), string activityid = default(string), IList<MicrosoftDynamicsCRMactivityparty> activitypointerActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), string activitytypecode = default(string), int? actualdurationminutes = default(int?), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), int? community = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? deliverylastattemptedon = default(System.DateTimeOffset?), int? deliveryprioritycode = default(int?), string description = default(string), string exchangeitemid = default(string), double? exchangerate = default(double?), string exchangeweblink = default(string), int? instancetypecode = default(int?), bool? isbilled = default(bool?), bool? ismapiprivate = default(bool?), bool? isregularactivity = default(bool?), bool? isworkflowcreated = default(bool?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), bool? leftvoicemail = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), int? onholdtime = default(int?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? postponeactivityprocessinguntil = default(System.DateTimeOffset?), int? prioritycode = default(int?), string processid = default(string), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioAgencycommunication regardingobjectidAdoxioAgencycommunication = default(MicrosoftDynamicsCRMadoxioAgencycommunication), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioInvestigationstakeholder regardingobjectidAdoxioInvestigationstakeholder = default(MicrosoftDynamicsCRMadoxioInvestigationstakeholder), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), int? scheduleddurationminutes = default(int?), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), MicrosoftDynamicsCRMmailbox sendermailboxid = default(MicrosoftDynamicsCRMmailbox), System.DateTimeOffset? senton = default(System.DateTimeOffset?), string seriesid = default(string), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsla slaActivitypointerSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceActivitypointer = default(IList<MicrosoftDynamicsCRMslakpiinstance>), System.DateTimeOffset? sortdate = default(System.DateTimeOffset?), string stageid = default(string), int? statecode = default(int?), int? statuscode = default(int?), string subject = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), string traversedpath = default(string), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object), IList<MicrosoftDynamicsCRMannotation> incidentResolutionAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> incidentResolutionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> incidentResolutionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> incidentResolutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyexternalpartyValue = default(string), string _incidentidValue = default(string), string _modifiedbyexternalpartyValue = default(string), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), string category = default(string), MicrosoftDynamicsCRMsystemuser createdbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMactivityparty> incidentresolutionActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser modifiedbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMbusinessunit owningbusinessunitIncidentresolution = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteamIncidentresolution = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguserIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMservice serviceidIncidentresolution = default(MicrosoftDynamicsCRMservice), string subcategory = default(string), int? timespent = default(int?))
-            : base(activityPointerAsyncOperations, activityPointerBulkDeleteFailures, activityPointerCampaignActivityItems, activityPointerQueueItem, createdActivityBulkOperationLogs, _createdbyValue, _createdonbehalfbyValue, _modifiedbyValue, _modifiedonbehalfbyValue, _owneridValue, _owningbusinessunitValue, _owningteamValue, _owninguserValue, _regardingobjectidValue, _sendermailboxidValue, _serviceidValue, _slaidValue, _slainvokedidValue, _transactioncurrencyidValue, activityCampaignresponse, activityPointerBulkOperation, activityPointerBulkOperationLogs, activityPointerActivityMimeAttachment, activityPointerAppointment, activityPointerCampaignactivity, activityPointerCampaignresponse, activityPointerEmail, activityPointerFax, activityPointerIncidentResolution, activityPointerLetter, activityPointerOpportunityClose, activityPointerOrderClose, activityPointerPhonecall, activityPointerQuoteClose, activityPointerRecurringappointmentmaster, activityPointerServiceAppointment, activityPointerSocialactivity, activityPointerTask, activityadditionalparams, activityid, activitypointerActivityParties, activitypointerConnections1, activitypointerConnections2, activitytypecode, actualdurationminutes, actualend, actualstart, community, createdby, createdon, createdonbehalfby, deliverylastattemptedon, deliveryprioritycode, description, exchangeitemid, exchangerate, exchangeweblink, instancetypecode, isbilled, ismapiprivate, isregularactivity, isworkflowcreated, lastonholdtime, leftvoicemail, modifiedby, modifiedon, modifiedonbehalfby, onholdtime, ownerid, owningbusinessunit, owningteam, owninguser, postponeactivityprocessinguntil, prioritycode, processid, regardingobjectidAccount, regardingobjectidAdoxioAgencycommunication, regardingobjectidAdoxioApplication, regardingobjectidAdoxioComplaint, regardingobjectidAdoxioInvestigation, regardingobjectidAdoxioInvestigationstakeholder, regardingobjectidAdoxioLicences, regardingobjectidBookableresourcebooking, regardingobjectidBookableresourcebookingheader, regardingobjectidBulkoperation, regardingobjectidCampaign, regardingobjectidCampaignactivity, regardingobjectidContact, regardingobjectidContract, regardingobjectidEntitlement, regardingobjectidEntitlementtemplate, regardingobjectidIncident, regardingobjectidInvoice, regardingobjectidKnowledgearticle, regardingobjectidKnowledgebaserecord, regardingobjectidLead, regardingobjectidNewInteractionforemail, regardingobjectidOpportunity, regardingobjectidQuote, regardingobjectidSalesorder, scheduleddurationminutes, scheduledend, scheduledstart, sendermailboxid, senton, seriesid, serviceid, slaActivitypointerSla, slainvokedidActivitypointerSla, slakpiinstanceActivitypointer, sortdate, stageid, statecode, statuscode, subject, timezoneruleversionnumber, transactioncurrencyid, traversedpath, utcconversiontimezonecode, versionnumber)
+        public MicrosoftDynamicsCRMincidentresolution(string subcategory = default(string), string _modifiedbyexternalpartyValue = default(string), string category = default(string), int? importsequencenumber = default(int?), string _incidentidValue = default(string), int? timespent = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyexternalpartyValue = default(string), MicrosoftDynamicsCRMservice serviceidIncidentresolution = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMasyncoperation> incidentResolutionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> incidentResolutionAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> incidentResolutionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMsystemuser owninguserIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMbusinessunit owningbusinessunitIncidentresolution = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteamIncidentresolution = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> incidentResolutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivityparty> incidentresolutionActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser createdbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser))
         {
-            IncidentResolutionAnnotation = incidentResolutionAnnotation;
-            IncidentResolutionAsyncOperations = incidentResolutionAsyncOperations;
-            IncidentResolutionBulkDeleteFailures = incidentResolutionBulkDeleteFailures;
-            IncidentResolutionSyncErrors = incidentResolutionSyncErrors;
-            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
-            this._incidentidValue = _incidentidValue;
+            Subcategory = subcategory;
             this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
-            ActivityidActivitypointer = activityidActivitypointer;
             Category = category;
-            CreatedbyIncidentresolution = createdbyIncidentresolution;
-            CreatedonbehalfbyIncidentresolution = createdonbehalfbyIncidentresolution;
             Importsequencenumber = importsequencenumber;
-            Incidentid = incidentid;
-            IncidentresolutionActivityParties = incidentresolutionActivityParties;
-            ModifiedbyIncidentresolution = modifiedbyIncidentresolution;
-            ModifiedonbehalfbyIncidentresolution = modifiedonbehalfbyIncidentresolution;
+            this._incidentidValue = _incidentidValue;
+            Timespent = timespent;
             Overriddencreatedon = overriddencreatedon;
+            this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
+            ServiceidIncidentresolution = serviceidIncidentresolution;
+            IncidentResolutionAsyncOperations = incidentResolutionAsyncOperations;
+            CreatedonbehalfbyIncidentresolution = createdonbehalfbyIncidentresolution;
+            IncidentResolutionAnnotation = incidentResolutionAnnotation;
+            IncidentResolutionBulkDeleteFailures = incidentResolutionBulkDeleteFailures;
+            Incidentid = incidentid;
+            OwninguserIncidentresolution = owninguserIncidentresolution;
+            ModifiedonbehalfbyIncidentresolution = modifiedonbehalfbyIncidentresolution;
+            ModifiedbyIncidentresolution = modifiedbyIncidentresolution;
+            ActivityidActivitypointer = activityidActivitypointer;
             OwningbusinessunitIncidentresolution = owningbusinessunitIncidentresolution;
             OwningteamIncidentresolution = owningteamIncidentresolution;
-            OwninguserIncidentresolution = owninguserIncidentresolution;
-            ServiceidIncidentresolution = serviceidIncidentresolution;
-            Subcategory = subcategory;
-            Timespent = timespent;
+            IncidentResolutionSyncErrors = incidentResolutionSyncErrors;
+            IncidentresolutionActivityParties = incidentresolutionActivityParties;
+            CreatedbyIncidentresolution = createdbyIncidentresolution;
             CustomInit();
         }
 
@@ -62,33 +64,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "IncidentResolution_Annotation")]
-        public IList<MicrosoftDynamicsCRMannotation> IncidentResolutionAnnotation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IncidentResolution_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> IncidentResolutionAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IncidentResolution_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> IncidentResolutionBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IncidentResolution_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> IncidentResolutionSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
-        public string _createdbyexternalpartyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_incidentid_value")]
-        public string _incidentidValue { get; set; }
+        [JsonProperty(PropertyName = "subcategory")]
+        public string Subcategory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -97,23 +74,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "activityid_activitypointer")]
-        public MicrosoftDynamicsCRMactivitypointer ActivityidActivitypointer { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby_incidentresolution")]
-        public MicrosoftDynamicsCRMsystemuser CreatedbyIncidentresolution { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby_incidentresolution")]
-        public MicrosoftDynamicsCRMsystemuser CreatedonbehalfbyIncidentresolution { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,18 +84,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_incidentid_value")]
+        public string _incidentidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timespent")]
+        public int? Timespent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
+        public string _createdbyexternalpartyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceid_incidentresolution")]
+        public MicrosoftDynamicsCRMservice ServiceidIncidentresolution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IncidentResolution_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> IncidentResolutionAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby_incidentresolution")]
+        public MicrosoftDynamicsCRMsystemuser CreatedonbehalfbyIncidentresolution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IncidentResolution_Annotation")]
+        public IList<MicrosoftDynamicsCRMannotation> IncidentResolutionAnnotation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IncidentResolution_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> IncidentResolutionBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "incidentid")]
         public MicrosoftDynamicsCRMincident Incidentid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "incidentresolution_activity_parties")]
-        public IList<MicrosoftDynamicsCRMactivityparty> IncidentresolutionActivityParties { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby_incidentresolution")]
-        public MicrosoftDynamicsCRMsystemuser ModifiedbyIncidentresolution { get; set; }
+        [JsonProperty(PropertyName = "owninguser_incidentresolution")]
+        public MicrosoftDynamicsCRMsystemuser OwninguserIncidentresolution { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,8 +144,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "modifiedby_incidentresolution")]
+        public MicrosoftDynamicsCRMsystemuser ModifiedbyIncidentresolution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activityid_activitypointer")]
+        public MicrosoftDynamicsCRMactivitypointer ActivityidActivitypointer { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,23 +164,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owninguser_incidentresolution")]
-        public MicrosoftDynamicsCRMsystemuser OwninguserIncidentresolution { get; set; }
+        [JsonProperty(PropertyName = "IncidentResolution_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> IncidentResolutionSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "serviceid_incidentresolution")]
-        public MicrosoftDynamicsCRMservice ServiceidIncidentresolution { get; set; }
+        [JsonProperty(PropertyName = "incidentresolution_activity_parties")]
+        public IList<MicrosoftDynamicsCRMactivityparty> IncidentresolutionActivityParties { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "subcategory")]
-        public string Subcategory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timespent")]
-        public int? Timespent { get; set; }
+        [JsonProperty(PropertyName = "createdby_incidentresolution")]
+        public MicrosoftDynamicsCRMsystemuser CreatedbyIncidentresolution { get; set; }
 
     }
 }
