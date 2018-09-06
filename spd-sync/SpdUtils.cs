@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 {
     public class SpdUtils
     {
-        private static HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = new HttpClient();
 
         private IConfiguration Configuration { get; }
 
@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <summary>
         /// Hangfire job to send an export to SPD.
         /// </summary>
-        public async Task SendExportJob(PerformContext hangfireContext)
+        public void SendExportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Export Job.");
 
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                             }
 
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             item.Add("\"\""); ;
                         }
@@ -152,7 +152,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Hangfire job to receive an import from SPD.
         /// </summary>
 
-        public static async Task ReceiveImportJob(string baseUri, PerformContext hangfireContext)
+        public static void ReceiveImportJob(string baseUri, PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Import Job.");
 
@@ -186,7 +186,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     mailClient.Send(message);
                     emailSentSuccessfully = true;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     emailSentSuccessfully = false;
                 }
