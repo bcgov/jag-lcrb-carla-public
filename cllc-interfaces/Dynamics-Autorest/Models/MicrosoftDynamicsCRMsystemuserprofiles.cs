@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// systemuserprofiles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsystemuserprofiles
     {
         /// <summary>
@@ -24,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsystemuserprofiles class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemuserprofiles(string fieldsecurityprofileid = default(string), string systemuserid = default(string), string systemuserprofileid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsystemuserprofiles(string systemuserprofileid = default(string), string fieldsecurityprofileid = default(string), string systemuserid = default(string), long? versionnumber = default(long?))
         {
+            Systemuserprofileid = systemuserprofileid;
             Fieldsecurityprofileid = fieldsecurityprofileid;
             Systemuserid = systemuserid;
-            Systemuserprofileid = systemuserprofileid;
             Versionnumber = versionnumber;
             CustomInit();
         }
@@ -37,6 +40,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "systemuserprofileid")]
+        public string Systemuserprofileid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -50,13 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "systemuserprofileid")]
-        public string Systemuserprofileid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

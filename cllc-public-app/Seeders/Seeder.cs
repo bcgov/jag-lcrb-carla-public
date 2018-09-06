@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Public.Contexts;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,14 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private readonly IHostingEnvironment _env;
         protected ILogger Logger;
+        protected IDynamicsClient _dynamicsClient;
 
-        protected Seeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        protected Seeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _env = env;
             Logger = loggerFactory.CreateLogger(typeof(Seeder<T>));
             Configuration = configuration;
+            _dynamicsClient = dynamicsClient;
         }
 
         protected bool IsEnvironment(string environmentName)

@@ -46,9 +46,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccounts Accounts { get; private set; }
 
         /// <summary>
+        /// Gets the IAliases.
+        /// </summary>
+        public virtual IAliases Aliases { get; private set; }
+
+        /// <summary>
         /// Gets the IApplications.
         /// </summary>
         public virtual IApplications Applications { get; private set; }
+
+        /// <summary>
+        /// Gets the ICorporatehistorysummaries.
+        /// </summary>
+        public virtual ICorporatehistorysummaries Corporatehistorysummaries { get; private set; }
+
+        /// <summary>
+        /// Gets the ICorporateroles.
+        /// </summary>
+        public virtual ICorporateroles Corporateroles { get; private set; }
 
         /// <summary>
         /// Gets the IEstablishments.
@@ -99,6 +114,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAdoxioTiedhouseconnections.
         /// </summary>
         public virtual IAdoxioTiedhouseconnections AdoxioTiedhouseconnections { get; private set; }
+
+        /// <summary>
+        /// Gets the IWorkers.
+        /// </summary>
+        public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -357,7 +377,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
+            Aliases = new Aliases(this);
             Applications = new Applications(this);
+            Corporatehistorysummaries = new Corporatehistorysummaries(this);
+            Corporateroles = new Corporateroles(this);
             Establishments = new Establishments(this);
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
@@ -368,6 +391,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Spdexportses = new Spdexportses(this);
             AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
             AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
+            Workers = new Workers(this);
             Contacts = new Contacts(this);
             Invoices = new Invoices(this);
             SharepointDocumentLocations = new SharepointDocumentLocations(this);

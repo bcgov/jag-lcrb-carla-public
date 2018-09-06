@@ -30,13 +30,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="privilegeType">Possible values include: 'None',
         /// 'Create', 'Read', 'Write', 'Delete', 'Assign', 'Share', 'Append',
         /// 'AppendTo'</param>
-        public MicrosoftDynamicsCRMSecurityPrivilegeMetadata(bool? canBeBasic = default(bool?), bool? canBeDeep = default(bool?), bool? canBeEntityReference = default(bool?), bool? canBeGlobal = default(bool?), bool? canBeLocal = default(bool?), bool? canBeParentEntityReference = default(bool?), string name = default(string), string privilegeId = default(string), string privilegeType = default(string))
+        public MicrosoftDynamicsCRMSecurityPrivilegeMetadata(bool? canBeBasic = default(bool?), bool? canBeDeep = default(bool?), bool? canBeGlobal = default(bool?), bool? canBeLocal = default(bool?), bool? canBeEntityReference = default(bool?), bool? canBeParentEntityReference = default(bool?), string name = default(string), string privilegeId = default(string), string privilegeType = default(string))
         {
             CanBeBasic = canBeBasic;
             CanBeDeep = canBeDeep;
-            CanBeEntityReference = canBeEntityReference;
             CanBeGlobal = canBeGlobal;
             CanBeLocal = canBeLocal;
+            CanBeEntityReference = canBeEntityReference;
             CanBeParentEntityReference = canBeParentEntityReference;
             Name = name;
             PrivilegeId = privilegeId;
@@ -61,11 +61,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CanBeEntityReference")]
-        public bool? CanBeEntityReference { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "CanBeGlobal")]
         public bool? CanBeGlobal { get; set; }
 
@@ -73,6 +68,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "CanBeLocal")]
         public bool? CanBeLocal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CanBeEntityReference")]
+        public bool? CanBeEntityReference { get; set; }
 
         /// <summary>
         /// </summary>

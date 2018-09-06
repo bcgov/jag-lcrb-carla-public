@@ -31,17 +31,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="joinOperator">Possible values include: 'Inner',
         /// 'LeftOuter', 'Natural'</param>
-        public MicrosoftDynamicsCRMLinkEntity(MicrosoftDynamicsCRMColumnSet columns = default(MicrosoftDynamicsCRMColumnSet), string entityAlias = default(string), string joinOperator = default(string), MicrosoftDynamicsCRMFilterExpression linkCriteria = default(MicrosoftDynamicsCRMFilterExpression), IList<MicrosoftDynamicsCRMLinkEntity> linkEntities = default(IList<MicrosoftDynamicsCRMLinkEntity>), string linkFromAttributeName = default(string), string linkFromEntityName = default(string), string linkToAttributeName = default(string), string linkToEntityName = default(string), IList<MicrosoftDynamicsCRMOrderExpression> orders = default(IList<MicrosoftDynamicsCRMOrderExpression>))
+        public MicrosoftDynamicsCRMLinkEntity(string linkFromAttributeName = default(string), string linkFromEntityName = default(string), string linkToEntityName = default(string), string linkToAttributeName = default(string), string joinOperator = default(string), MicrosoftDynamicsCRMFilterExpression linkCriteria = default(MicrosoftDynamicsCRMFilterExpression), IList<MicrosoftDynamicsCRMLinkEntity> linkEntities = default(IList<MicrosoftDynamicsCRMLinkEntity>), MicrosoftDynamicsCRMColumnSet columns = default(MicrosoftDynamicsCRMColumnSet), string entityAlias = default(string), IList<MicrosoftDynamicsCRMOrderExpression> orders = default(IList<MicrosoftDynamicsCRMOrderExpression>))
         {
-            Columns = columns;
-            EntityAlias = entityAlias;
+            LinkFromAttributeName = linkFromAttributeName;
+            LinkFromEntityName = linkFromEntityName;
+            LinkToEntityName = linkToEntityName;
+            LinkToAttributeName = linkToAttributeName;
             JoinOperator = joinOperator;
             LinkCriteria = linkCriteria;
             LinkEntities = linkEntities;
-            LinkFromAttributeName = linkFromAttributeName;
-            LinkFromEntityName = linkFromEntityName;
-            LinkToAttributeName = linkToAttributeName;
-            LinkToEntityName = linkToEntityName;
+            Columns = columns;
+            EntityAlias = entityAlias;
             Orders = orders;
             CustomInit();
         }
@@ -53,13 +53,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Columns")]
-        public MicrosoftDynamicsCRMColumnSet Columns { get; set; }
+        [JsonProperty(PropertyName = "LinkFromAttributeName")]
+        public string LinkFromAttributeName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "EntityAlias")]
-        public string EntityAlias { get; set; }
+        [JsonProperty(PropertyName = "LinkFromEntityName")]
+        public string LinkFromEntityName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "LinkToEntityName")]
+        public string LinkToEntityName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "LinkToAttributeName")]
+        public string LinkToAttributeName { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Inner', 'LeftOuter',
@@ -80,23 +90,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "LinkFromAttributeName")]
-        public string LinkFromAttributeName { get; set; }
+        [JsonProperty(PropertyName = "Columns")]
+        public MicrosoftDynamicsCRMColumnSet Columns { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "LinkFromEntityName")]
-        public string LinkFromEntityName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "LinkToAttributeName")]
-        public string LinkToAttributeName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "LinkToEntityName")]
-        public string LinkToEntityName { get; set; }
+        [JsonProperty(PropertyName = "EntityAlias")]
+        public string EntityAlias { get; set; }
 
         /// <summary>
         /// </summary>

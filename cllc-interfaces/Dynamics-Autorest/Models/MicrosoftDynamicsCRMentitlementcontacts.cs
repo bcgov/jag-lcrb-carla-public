@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// entitlementcontacts
+    /// </summary>
     public partial class MicrosoftDynamicsCRMentitlementcontacts
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementcontacts class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementcontacts(string contactid = default(string), string entitlementcontactid = default(string), string entitlementid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMentitlementcontacts(string entitlementcontactid = default(string), string entitlementid = default(string), long? versionnumber = default(long?), string contactid = default(string))
         {
-            Contactid = contactid;
             Entitlementcontactid = entitlementcontactid;
             Entitlementid = entitlementid;
             Versionnumber = versionnumber;
+            Contactid = contactid;
             CustomInit();
         }
 
@@ -37,11 +40,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contactid")]
-        public string Contactid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -56,7 +54,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contactid")]
+        public string Contactid { get; set; }
 
     }
 }

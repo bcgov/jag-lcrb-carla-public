@@ -5,7 +5,7 @@
     <ProjectGuid>{309D775B-CF5B-4194-9E63-3410A95D20F4}</ProjectGuid>
   </PropertyGroup>
    <ItemGroup>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.11" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.13" />
   </ItemGroup>
 
 </Project>

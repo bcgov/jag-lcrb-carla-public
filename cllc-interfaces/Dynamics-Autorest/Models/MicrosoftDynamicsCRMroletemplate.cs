@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// roletemplate
+    /// </summary>
     public partial class MicrosoftDynamicsCRMroletemplate
     {
         /// <summary>
@@ -26,12 +29,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMroletemplate
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMroletemplate(string name = default(string), IList<MicrosoftDynamicsCRMrole> roleTemplateRoles = default(IList<MicrosoftDynamicsCRMrole>), string roletemplateid = default(string), IList<MicrosoftDynamicsCRMprivilege> roletemplateprivilegesAssociation = default(IList<MicrosoftDynamicsCRMprivilege>))
+        public MicrosoftDynamicsCRMroletemplate(string name = default(string), string roletemplateid = default(string), IList<MicrosoftDynamicsCRMprivilege> roletemplateprivilegesAssociation = default(IList<MicrosoftDynamicsCRMprivilege>), IList<MicrosoftDynamicsCRMrole> roleTemplateRoles = default(IList<MicrosoftDynamicsCRMrole>))
         {
             Name = name;
-            RoleTemplateRoles = roleTemplateRoles;
             Roletemplateid = roletemplateid;
             RoletemplateprivilegesAssociation = roletemplateprivilegesAssociation;
+            RoleTemplateRoles = roleTemplateRoles;
             CustomInit();
         }
 
@@ -47,11 +50,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "role_template_roles")]
-        public IList<MicrosoftDynamicsCRMrole> RoleTemplateRoles { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "roletemplateid")]
         public string Roletemplateid { get; set; }
 
@@ -59,6 +57,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "roletemplateprivileges_association")]
         public IList<MicrosoftDynamicsCRMprivilege> RoletemplateprivilegesAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "role_template_roles")]
+        public IList<MicrosoftDynamicsCRMrole> RoleTemplateRoles { get; set; }
 
     }
 }

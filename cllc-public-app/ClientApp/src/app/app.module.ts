@@ -128,6 +128,9 @@ import { LiteApplicationDashboardComponent, ConfirmationDialog } from './lite-ap
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
+import { AliasDataService } from './services/alias-data.service';
+import { PreviousAddressDataService } from './services/previous-address-data.service';
+import { WorkerDataService } from './services/worker-data.service.';
 
 @NgModule({
   declarations: [
@@ -293,6 +296,7 @@ import { WorkerRegistrationComponent } from './worker-registration/worker-regist
     SurveyDataService,
     VoteDataService,
     UserDataService,
+    AliasDataService,
     AdoxioApplicationDataService,
     AdoxioLegalEntityDataService,
     AdoxioLicenseDataService,
@@ -300,6 +304,8 @@ import { WorkerRegistrationComponent } from './worker-registration/worker-regist
     ContactDataService,
     PaymentDataService,
     TiedHouseConnectionsDataService,
+    PreviousAddressDataService,
+    WorkerDataService,
     NgbDropdown,
     Title,
     CanDeactivateGuard,

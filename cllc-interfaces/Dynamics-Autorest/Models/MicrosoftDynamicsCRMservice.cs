@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// service
+    /// </summary>
     public partial class MicrosoftDynamicsCRMservice
     {
         /// <summary>
@@ -26,62 +29,62 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMservice
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMservice(IList<MicrosoftDynamicsCRMannotation> serviceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> serviceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> serviceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> serviceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _resourcespecidValue = default(string), string _strategyidValue = default(string), int? anchoroffset = default(int?), string calendarid = default(string), MicrosoftDynamicsCRMcalendar calendaridCalendar = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), int? duration = default(int?), string granularity = default(string), int? importsequencenumber = default(int?), int? initialstatuscode = default(int?), bool? isschedulable = default(bool?), bool? isvisible = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), IList<MicrosoftDynamicsCRMaccount> serviceAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMactivitypointer> serviceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> serviceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcalendarrule> serviceCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMcontact> serviceContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMemail> serviceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> serviceFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincidentresolution> serviceIncidentresolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMletter> serviceLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMopportunityclose> serviceOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> serviceOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMphonecall> servicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMquoteclose> serviceQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> serviceRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMserviceappointment> serviceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsocialactivity> serviceSocialactivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMtask> serviceTasks = default(IList<MicrosoftDynamicsCRMtask>), string serviceid = default(string), bool? showresources = default(bool?), MicrosoftDynamicsCRMplugintype strategyid = default(MicrosoftDynamicsCRMplugintype), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMservice(string _organizationidValue = default(string), string granularity = default(string), bool? isschedulable = default(bool?), string _createdbyValue = default(string), string _resourcespecidValue = default(string), int? initialstatuscode = default(int?), int? anchoroffset = default(int?), bool? isvisible = default(bool?), string serviceid = default(string), string calendarid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? duration = default(int?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _strategyidValue = default(string), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), bool? showresources = default(bool?), string description = default(string), MicrosoftDynamicsCRMplugintype strategyid = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMincidentresolution> serviceIncidentresolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMaccount> serviceAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMserviceappointment> serviceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMquoteclose> serviceQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMopportunityclose> serviceOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMphonecall> servicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> serviceRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMfax> serviceFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> serviceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMtask> serviceTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMsocialactivity> serviceSocialactivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMcalendar calendaridCalendar = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMsyncerror> serviceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorderclose> serviceOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMletter> serviceLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMactivitypointer> serviceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMbulkdeletefailure> serviceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontact> serviceContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMappointment> serviceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMemail> serviceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMcalendarrule> serviceCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), IList<MicrosoftDynamicsCRMasyncoperation> serviceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
         {
-            ServiceAnnotation = serviceAnnotation;
-            ServiceAsyncOperations = serviceAsyncOperations;
-            ServiceBulkDeleteFailures = serviceBulkDeleteFailures;
-            ServiceDuplicateBaseRecord = serviceDuplicateBaseRecord;
-            ServiceDuplicateMatchingRecord = serviceDuplicateMatchingRecord;
-            ServiceSyncErrors = serviceSyncErrors;
+            this._organizationidValue = _organizationidValue;
+            Granularity = granularity;
+            Isschedulable = isschedulable;
             this._createdbyValue = _createdbyValue;
+            this._resourcespecidValue = _resourcespecidValue;
+            Initialstatuscode = initialstatuscode;
+            Anchoroffset = anchoroffset;
+            Isvisible = isvisible;
+            Serviceid = serviceid;
+            Calendarid = calendarid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Overriddencreatedon = overriddencreatedon;
+            Duration = duration;
             this._modifiedbyValue = _modifiedbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._resourcespecidValue = _resourcespecidValue;
-            this._strategyidValue = _strategyidValue;
-            Anchoroffset = anchoroffset;
-            Calendarid = calendarid;
-            CalendaridCalendar = calendaridCalendar;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
-            Duration = duration;
-            Granularity = granularity;
             Importsequencenumber = importsequencenumber;
-            Initialstatuscode = initialstatuscode;
-            Isschedulable = isschedulable;
-            Isvisible = isvisible;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
+            this._strategyidValue = _strategyidValue;
             Name = name;
-            Organizationid = organizationid;
-            Overriddencreatedon = overriddencreatedon;
-            Resourcespecid = resourcespecid;
-            ServiceAccounts = serviceAccounts;
-            ServiceActivityPointers = serviceActivityPointers;
-            ServiceAppointments = serviceAppointments;
-            ServiceCalendarRules = serviceCalendarRules;
-            ServiceContacts = serviceContacts;
-            ServiceEmails = serviceEmails;
-            ServiceFaxes = serviceFaxes;
-            ServiceIncidentresolutions = serviceIncidentresolutions;
-            ServiceLetters = serviceLetters;
-            ServiceOpportunityclose = serviceOpportunityclose;
-            ServiceOrderclose = serviceOrderclose;
-            ServicePhonecalls = servicePhonecalls;
-            ServiceQuoteclose = serviceQuoteclose;
-            ServiceRecurringappointmentmasters = serviceRecurringappointmentmasters;
-            ServiceServiceAppointments = serviceServiceAppointments;
-            ServiceSocialactivities = serviceSocialactivities;
-            ServiceTasks = serviceTasks;
-            Serviceid = serviceid;
-            Showresources = showresources;
-            Strategyid = strategyid;
+            Createdon = createdon;
+            Modifiedon = modifiedon;
             Versionnumber = versionnumber;
+            Showresources = showresources;
+            Description = description;
+            Strategyid = strategyid;
+            ServiceIncidentresolutions = serviceIncidentresolutions;
+            ServiceAccounts = serviceAccounts;
+            ServiceServiceAppointments = serviceServiceAppointments;
+            ServiceQuoteclose = serviceQuoteclose;
+            ServiceOpportunityclose = serviceOpportunityclose;
+            ServicePhonecalls = servicePhonecalls;
+            ServiceRecurringappointmentmasters = serviceRecurringappointmentmasters;
+            Organizationid = organizationid;
+            ServiceFaxes = serviceFaxes;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Modifiedby = modifiedby;
+            ServiceAnnotation = serviceAnnotation;
+            ServiceTasks = serviceTasks;
+            ServiceSocialactivities = serviceSocialactivities;
+            CalendaridCalendar = calendaridCalendar;
+            ServiceSyncErrors = serviceSyncErrors;
+            Createdby = createdby;
+            ServiceOrderclose = serviceOrderclose;
+            ServiceLetters = serviceLetters;
+            ServiceActivityPointers = serviceActivityPointers;
+            ServiceBulkDeleteFailures = serviceBulkDeleteFailures;
+            Createdonbehalfby = createdonbehalfby;
+            ServiceContacts = serviceContacts;
+            ServiceAppointments = serviceAppointments;
+            ServiceDuplicateBaseRecord = serviceDuplicateBaseRecord;
+            ServiceEmails = serviceEmails;
+            ServiceCalendarRules = serviceCalendarRules;
+            Resourcespecid = resourcespecid;
+            ServiceAsyncOperations = serviceAsyncOperations;
+            ServiceDuplicateMatchingRecord = serviceDuplicateMatchingRecord;
             CustomInit();
         }
 
@@ -92,33 +95,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Service_Annotation")]
-        public IList<MicrosoftDynamicsCRMannotation> ServiceAnnotation { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Service_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> ServiceAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "granularity")]
+        public string Granularity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Service_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ServiceBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Service_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> ServiceDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Service_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> ServiceDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Service_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> ServiceSyncErrors { get; set; }
+        [JsonProperty(PropertyName = "isschedulable")]
+        public bool? Isschedulable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,8 +115,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_resourcespecid_value")]
+        public string _resourcespecidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "initialstatuscode")]
+        public int? Initialstatuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "anchoroffset")]
+        public int? Anchoroffset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isvisible")]
+        public bool? Isvisible { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceid")]
+        public string Serviceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendarid")]
+        public string Calendarid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "duration")]
+        public int? Duration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,13 +170,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_resourcespecid_value")]
-        public string _resourcespecidValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,23 +180,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "anchoroffset")]
-        public int? Anchoroffset { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendarid")]
-        public string Calendarid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendarid_calendar")]
-        public MicrosoftDynamicsCRMcalendar CalendaridCalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,168 +190,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]
-        public int? Duration { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "granularity")]
-        public string Granularity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "initialstatuscode")]
-        public int? Initialstatuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isschedulable")]
-        public bool? Isschedulable { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isvisible")]
-        public bool? Isvisible { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "resourcespecid")]
-        public MicrosoftDynamicsCRMresourcespec Resourcespecid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_accounts")]
-        public IList<MicrosoftDynamicsCRMaccount> ServiceAccounts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_activity_pointers")]
-        public IList<MicrosoftDynamicsCRMactivitypointer> ServiceActivityPointers { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_appointments")]
-        public IList<MicrosoftDynamicsCRMappointment> ServiceAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_calendar_rules")]
-        public IList<MicrosoftDynamicsCRMcalendarrule> ServiceCalendarRules { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_contacts")]
-        public IList<MicrosoftDynamicsCRMcontact> ServiceContacts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_emails")]
-        public IList<MicrosoftDynamicsCRMemail> ServiceEmails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_faxes")]
-        public IList<MicrosoftDynamicsCRMfax> ServiceFaxes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_incidentresolutions")]
-        public IList<MicrosoftDynamicsCRMincidentresolution> ServiceIncidentresolutions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_letters")]
-        public IList<MicrosoftDynamicsCRMletter> ServiceLetters { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_opportunityclose")]
-        public IList<MicrosoftDynamicsCRMopportunityclose> ServiceOpportunityclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_orderclose")]
-        public IList<MicrosoftDynamicsCRMorderclose> ServiceOrderclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_phonecalls")]
-        public IList<MicrosoftDynamicsCRMphonecall> ServicePhonecalls { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_quoteclose")]
-        public IList<MicrosoftDynamicsCRMquoteclose> ServiceQuoteclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_recurringappointmentmasters")]
-        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ServiceRecurringappointmentmasters { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_service_appointments")]
-        public IList<MicrosoftDynamicsCRMserviceappointment> ServiceServiceAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_socialactivities")]
-        public IList<MicrosoftDynamicsCRMsocialactivity> ServiceSocialactivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "service_tasks")]
-        public IList<MicrosoftDynamicsCRMtask> ServiceTasks { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "serviceid")]
-        public string Serviceid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -352,13 +205,163 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "strategyid")]
         public MicrosoftDynamicsCRMplugintype Strategyid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "service_incidentresolutions")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> ServiceIncidentresolutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_accounts")]
+        public IList<MicrosoftDynamicsCRMaccount> ServiceAccounts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_service_appointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> ServiceServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_quoteclose")]
+        public IList<MicrosoftDynamicsCRMquoteclose> ServiceQuoteclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_opportunityclose")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> ServiceOpportunityclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_phonecalls")]
+        public IList<MicrosoftDynamicsCRMphonecall> ServicePhonecalls { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_recurringappointmentmasters")]
+        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ServiceRecurringappointmentmasters { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_faxes")]
+        public IList<MicrosoftDynamicsCRMfax> ServiceFaxes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Service_Annotation")]
+        public IList<MicrosoftDynamicsCRMannotation> ServiceAnnotation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_tasks")]
+        public IList<MicrosoftDynamicsCRMtask> ServiceTasks { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_socialactivities")]
+        public IList<MicrosoftDynamicsCRMsocialactivity> ServiceSocialactivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendarid_calendar")]
+        public MicrosoftDynamicsCRMcalendar CalendaridCalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Service_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> ServiceSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_orderclose")]
+        public IList<MicrosoftDynamicsCRMorderclose> ServiceOrderclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_letters")]
+        public IList<MicrosoftDynamicsCRMletter> ServiceLetters { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_activity_pointers")]
+        public IList<MicrosoftDynamicsCRMactivitypointer> ServiceActivityPointers { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Service_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ServiceBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_contacts")]
+        public IList<MicrosoftDynamicsCRMcontact> ServiceContacts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_appointments")]
+        public IList<MicrosoftDynamicsCRMappointment> ServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Service_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> ServiceDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_emails")]
+        public IList<MicrosoftDynamicsCRMemail> ServiceEmails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "service_calendar_rules")]
+        public IList<MicrosoftDynamicsCRMcalendarrule> ServiceCalendarRules { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resourcespecid")]
+        public MicrosoftDynamicsCRMresourcespec Resourcespecid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Service_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> ServiceAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Service_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> ServiceDuplicateMatchingRecord { get; set; }
 
     }
 }

@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// systemusersyncmappingprofiles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsystemusersyncmappingprofiles
     {
         /// <summary>
@@ -24,10 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsystemusersyncmappingprofiles class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemusersyncmappingprofiles(string syncattributemappingprofileid = default(string), string systemuserid = default(string), string systemusersyncmappingprofileid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsystemusersyncmappingprofiles(string systemuserid = default(string), string syncattributemappingprofileid = default(string), string systemusersyncmappingprofileid = default(string), long? versionnumber = default(long?))
         {
-            Syncattributemappingprofileid = syncattributemappingprofileid;
             Systemuserid = systemuserid;
+            Syncattributemappingprofileid = syncattributemappingprofileid;
             Systemusersyncmappingprofileid = systemusersyncmappingprofileid;
             Versionnumber = versionnumber;
             CustomInit();
@@ -40,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "syncattributemappingprofileid")]
-        public string Syncattributemappingprofileid { get; set; }
+        [JsonProperty(PropertyName = "systemuserid")]
+        public string Systemuserid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "systemuserid")]
-        public string Systemuserid { get; set; }
+        [JsonProperty(PropertyName = "syncattributemappingprofileid")]
+        public string Syncattributemappingprofileid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

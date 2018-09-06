@@ -1,6 +1,18 @@
 BC Liquor and Cannabis Regulation Branch - Cannabis Retail Licence Application
 ======================
 
+Technology Stack
+-----------------
+
+|         |            |
+| Layer   | Technology | 
+| ------- | ------------ |
+| Presentation | Angular 5 |
+| Business Logic | C Sharp - Dotnet Core 2.1 |
+| Web Server | Kestrel |
+| Data    | SQL Server 2017 |
+| Data    | MS Dynamics |   
+
 Repository Map
 --------------
 - **.s2i**: Source to image (s2i) assembly script
