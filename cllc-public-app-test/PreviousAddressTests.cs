@@ -11,9 +11,9 @@ using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class WorkerTests : ApiIntegrationTestBaseWithLogin
+    public class PreviousAddressTests : ApiIntegrationTestBaseWithLogin
     {
-        public WorkerTests(CustomWebApplicationFactory<Startup> factory)
+        public PreviousAddressTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
         { }
 
@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
 
             // try a random GET, should return unauthorized
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + id);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/PreviousAddress/by-contactid/" + id);
             var response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
@@ -36,8 +36,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task TestCRUD()
         {
 
-            string initialName = "TestFirst";
-            string changedName = "ChangedName";
+            string initialAddress = "645 Tyee Road";
+            string changedAddress = "123 ChangedAddress Ave";
             string service = "contact";
 
             // register and login as our first user
@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             //First create the contact
             var request = new HttpRequestMessage(HttpMethod.Post, $"/api/{service}/worker");
             ViewModels.Contact contactVM = new ViewModels.Contact() {
-                firstname  = initialName,
+                firstname  = "TestFirst",
                 middlename = "TestMiddle",
                 lastname = "TestLst"
             };
@@ -63,51 +63,74 @@ namespace Gov.Lclb.Cllb.Public.Test
           
             contactVM = JsonConvert.DeserializeObject<ViewModels.Contact>(jsonString);
 
-            // R -Read
+            // Get the worker
             request = new HttpRequestMessage(HttpMethod.Get, $"/api/worker/{contactVM.id}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
             var workerVM = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
-            Assert.NotNull(workerVM?.id);
 
+            var addressVM = new ViewModels.PreviousAddress()
+            {
+                streetaddress = initialAddress,
+                contactId = contactVM.id,
+                workerId = workerVM.id
+            };
+            request = new HttpRequestMessage(HttpMethod.Post, $"/api/PreviousAddress");
+            jsonString = JsonConvert.SerializeObject(addressVM);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            addressVM = JsonConvert.DeserializeObject<ViewModels.PreviousAddress>(jsonString);
+
+
+            // R - Read
+
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/PreviousAddress/by-contactid/" + contactVM.id);
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            var address2 = (JsonConvert.DeserializeObject<List<ViewModels.PreviousAddress>>(jsonString)).FirstOrDefault(); ;
+            Assert.Equal(address2.id, addressVM.id);
 
 
             // U - Update            
-           workerVM.firstname = changedName;
-            request = new HttpRequestMessage(HttpMethod.Put, "/api/worker/" + workerVM.id)
+           address2.streetaddress = changedAddress;
+            request = new HttpRequestMessage(HttpMethod.Put, "/api/PreviousAddress/" + address2.id)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(workerVM), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(address2), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // verify that the update persisted.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + contactVM.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/PreviousAddress/by-contactid/" + contactVM.id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            var worker2 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
-            Assert.Equal(worker2.firstname, changedName);
+            var address3 = (JsonConvert.DeserializeObject<List<ViewModels.PreviousAddress>>(jsonString)).FirstOrDefault(); ;
+            Assert.Equal(changedAddress, address3.streetaddress);
 
             // D - Delete
 
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/worker/" + workerVM.id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/PreviousAddress/" + addressVM.id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // second delete should return a 404.
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/worker/" + workerVM.id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/PreviousAddress/" + addressVM.id + "/delete");
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + contactVM.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/PreviousAddress/by-contactid/" + contactVM.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
-            var worker3 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
-            Assert.Null(worker3);
+            var address4 = (JsonConvert.DeserializeObject<List<ViewModels.PreviousAddress>>(jsonString)).FirstOrDefault();
+            Assert.Null(address4);
             await Logout();
         }
     }

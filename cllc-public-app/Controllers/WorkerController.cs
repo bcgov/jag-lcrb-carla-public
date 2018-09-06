@@ -96,7 +96,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             patchWorker.CopyValues(item);
             try
             {
-                    await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
+                if (patchWorker.AdoxioGendercode == 0)
+                {
+                    patchWorker.AdoxioGendercode = null;
+                }
+                await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
             catch (OdataerrorException odee)
             {
