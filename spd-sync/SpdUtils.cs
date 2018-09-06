@@ -1,25 +1,23 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using System.Text;
-using System.IO;
 using System.Net.Mail;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.SpdSync
 {
     public class SpdUtils
     {
-       
-        private static HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = new HttpClient();
 
         private IConfiguration Configuration { get; }
 
@@ -30,12 +28,11 @@ namespace Gov.Lclb.Cllb.SpdSync
             this.Configuration = Configuration;
             this._dynamics = SetupDynamics();
         }
-        
-        
+
         /// <summary>
         /// Hangfire job to send an export to SPD.
         /// </summary>
-        public  async Task SendExportJob(PerformContext hangfireContext)
+        public void SendExportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Export Job.");
 
@@ -44,16 +41,33 @@ namespace Gov.Lclb.Cllb.SpdSync
             var csvList = new List<List<string>>();
             var headers = new List<string>();
             var headerDefinition = GetExportHeaders();
-            headerDefinition.ForEach(h => {
+            headerDefinition.ForEach(h =>
+            {
                 headers.Add($"\"{h.Value}\"");
             });
-           
+
             csvList.Add(headers);
 
             string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
-            List<MicrosoftDynamicsCRMadoxioSpddatarow> result = _dynamics.Spddatarows.Get(filter: filter).Value.ToList();
+            List<MicrosoftDynamicsCRMadoxioSpddatarow> result = null;
 
-            if (result.Count > 0)
+            try
+            {
+                result = _dynamics.Spddatarows.Get(filter: filter).Value.ToList();
+            }
+            catch (OdataerrorException odee)
+            {
+                hangfireContext.WriteLine("Error getting SPD data rows");
+                hangfireContext.WriteLine("Request:");
+                hangfireContext.WriteLine(odee.Request.Content);
+                hangfireContext.WriteLine("Response:");
+                hangfireContext.WriteLine(odee.Response.Content);
+                // fail if we can't get results.
+                throw (odee);
+            }
+
+
+            if (result != null && result.Count > 0)
             {
                 foreach (var row in result)
                 {
@@ -74,7 +88,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                             }
 
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             item.Add("\"\""); ;
                         }
@@ -89,14 +103,15 @@ namespace Gov.Lclb.Cllb.SpdSync
                     var line = String.Join(",", row);
                     csv.AppendLine(line);
                 });
-                var datePart = DateTime.Now.ToString("yyyyMMdd_HH-mm-ss");
+                var datePart = DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 var batch = GetBatchNumber().ToString();
                 batch = AddZeroPadding(batch);
-                var attachmentName = $@"{batch}_Worker_{datePart}.csv";
+                var attachmentName = $@"{batch}_Request_Worker_{datePart}.csv";
                 //File.WriteAllText($@".\{attachmentName}", csv.ToString());
 
                 if (SendSPDEmail(csv.ToString(), attachmentName))
                 {
+                    hangfireContext.WriteLine("Sent SPD email. Now updating Dynamics...");
                     //update exporteddate in dynamics
                     var exportDate = DateTime.Now;
                     result.ForEach(row =>
@@ -108,7 +123,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         try
                         {
                             if (row.AdoxioSpddatarowid != null) // skip test data
-                        {
+                            {
                                 _dynamics.Spddatarows.Update(row.AdoxioSpddatarowid, patchApplication);
                             }
                         }
@@ -119,12 +134,23 @@ namespace Gov.Lclb.Cllb.SpdSync
                             hangfireContext.WriteLine(odee.Request.Content);
                             hangfireContext.WriteLine("Response:");
                             hangfireContext.WriteLine(odee.Response.Content);
-                        // fail if we can't create.
-                        throw (odee);
+                            // fail if we can't create.
+                            throw (odee);
                         }
                     });
+                    hangfireContext.WriteLine("Dynamics update complete.");
+                }
+                else
+                {
+                    hangfireContext.WriteLine("Error sending SPD email.");
                 }
             }
+            else
+            {
+                hangfireContext.WriteLine("No data to send, aborting.");
+            }
+
+            hangfireContext.WriteLine("End of SPD Export Job.");
         }
 
         private long GetBatchNumber()
@@ -142,7 +168,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private string AddZeroPadding(string input, int maxLength = 8)
         {
-            while(input.Length < maxLength)
+            while (input.Length < maxLength)
             {
                 input = "0" + input;
             }
@@ -153,7 +179,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Hangfire job to receive an import from SPD.
         /// </summary>
 
-        public static async Task ReceiveImportJob(string baseUri, PerformContext hangfireContext)
+        public static void ReceiveImportJob(string baseUri, PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Import Job.");
 
@@ -169,7 +195,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             using (var stream = new MemoryStream())
             using (var writer = new StreamWriter(stream))    // using UTF-8 encoding by default
-            using (var mailClient = new SmtpClient("localhost", 25))
+            using (var mailClient = new SmtpClient(Configuration["SMTP_HOST"]))
             using (var message = new MailMessage("no-reply@gov.bc.ca", email))
             {
                 writer.WriteLine(attachmentContent);
@@ -186,7 +212,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 {
                     mailClient.Send(message);
                     emailSentSuccessfully = true;
-                } catch(Exception e)
+                }
+                catch (Exception)
                 {
                     emailSentSuccessfully = false;
                 }

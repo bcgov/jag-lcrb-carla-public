@@ -69,21 +69,9 @@
                     "value": "${ASPNETCORE_ENVIRONMENT}"
                   },
                   {
-                    "name": "testEmail",
-                    "value": "${TEST_EMAIL}"
-                  },
-                  {
                     "name": "SMTP_HOST",
                     "value": "${SMTP_HOST}"
                   },
-                  {
-                    "name": "BASE_URI",
-                    "value": "${BASE_URI}"
-                  },
-                  {
-                    "name": "BASE_PATH",
-                    "value": "${BASE_PATH}"
-                  },                  
                   {
                     "name": "SSG_USERNAME",
                     "value": "${SSG_USERNAME}"
@@ -95,7 +83,35 @@
                   {
                     "name": "DYNAMICS_ODATA_URI",
                     "value": "${DYNAMICS_ODATA_URI}"
-                  }
+                  },
+				  {
+                    "name": "DYNAMICS_CLIENT_KEY",
+                    "value": "${DYNAMICS_CLIENT_KEY}"
+                  },
+				  {
+                    "name": "DYNAMICS_AAD_TENANT_ID",
+                    "value": "${DYNAMICS_AAD_TENANT_ID}"
+                  },
+				  {
+                    "name": "DYNAMICS_CLIENT_ID",
+                    "value": "${DYNAMICS_CLIENT_ID}"
+                  },
+				  {
+                    "name": "JWT_VALID_ISSUER",
+                    "value": "${JWT_VALID_ISSUER}"
+                  },
+				  {
+                    "name": "JWT_VALID_AUDIENCE",
+                    "value": "${JWT_VALID_AUDIENCE}"
+                  },
+                  {
+                    "name": "JWT_TOKEN_KEY",
+                    "value": "${JWT_TOKEN_KEY}"
+                  },
+				  {
+                    "name": "SPD_EXPORT_EMAIL",
+                    "value": "${SPD_EXPORT_EMAIL}"
+                  }				                    
                 ],
                 "resources": {
                   "limits": {
@@ -284,6 +300,55 @@
       "required": true,
       "value": "https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"
     },
+	{
+		"description": "ADFS Dynamics Client Key (Property of an application user)",
+		"displayName": "DYNAMICS CLIENT KEY",
+		"name": "DYNAMICS_CLIENT_KEY",
+		"required": true,
+		"value": ""
+	},
+	{
+		"description": "ADFS Dynamics Tenant ID",
+		"displayName": "DYNAMICS AAD TENANT ID",
+		"name": "DYNAMICS_AAD_TENANT_ID",
+		"required": true,
+        "value": ""
+	},
+	{
+		"description": "ADFS Dynamics Client ID",
+		"displayName": "DYNAMICS CLIENT ID",
+		"name": "DYNAMICS_CLIENT_ID",
+		"required": true,
+        "value": ""
+    },
+    {
+		"description": "String used to identify the issuer.  Usually a URL to a website.",
+		"displayName": "JWT VALID ISSUER",
+        "name": "JWT_VALID_ISSUER",
+		"required": true,
+        "value": ""
+    },
+    {
+		"description": "String used to identify the audience.",
+		"displayName": "JWT VALID AUDIENCE",
+        "name": "JWT_VALID_AUDIENCE",
+		"required": true,
+        "value": ""
+    },
+    {
+		"description": "Secret/Key used to generate tokens.  Can be any text string, including the text form of a GUID.",
+		"displayName": "JWT Token Key",
+		"name": "JWT_TOKEN_KEY",
+		"required": true,
+		"value": ""
+    },
+	{
+		"description": "Email address where exports will be sent to.",
+		"displayName": "SPD EXPORT EMAIL",
+        "name": "SPD_EXPORT_EMAIL",
+		"required": true,
+        "value": "${SPD_EXPORT_EMAIL}"
+	},		
 	{
       "description": "Route Host",
       "displayName": "Route Host",
