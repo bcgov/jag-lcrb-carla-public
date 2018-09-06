@@ -5,7 +5,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMadoxioPreviousaddress
+    public partial class MicrosoftDynamicsCRMadoxioAlias
     {
 
         /// <summary>
