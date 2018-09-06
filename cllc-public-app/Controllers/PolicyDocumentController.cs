@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public PolicyDocumentController(IDynamicsClient dynamicsClient, IConfiguration configuration, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
         {
             Configuration = configuration;
-            this._dynamicsClient = dynamicsClient;
+            _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(PolicyDocumentController));
             _cache = memoryCache;
         }
@@ -80,7 +80,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // Set cache options.
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    // Keep in cache for this time, reset time if accessed.
+                    // Keep in cache for this time
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
 
                 // Save data in cache.
@@ -110,7 +110,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // Set cache options.
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    // Keep in cache for this time, reset time if accessed.
+                    // Keep in cache for this time
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
 
                 // Save data in cache.
