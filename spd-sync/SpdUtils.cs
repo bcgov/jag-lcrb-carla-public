@@ -103,14 +103,15 @@ namespace Gov.Lclb.Cllb.SpdSync
                     var line = String.Join(",", row);
                     csv.AppendLine(line);
                 });
-                var datePart = DateTime.Now.ToString("yyyyMMdd_HH-mm-ss");
+                var datePart = DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 var batch = GetBatchNumber().ToString();
                 batch = AddZeroPadding(batch);
-                var attachmentName = $@"{batch}_Worker_{datePart}.csv";
+                var attachmentName = $@"{batch}_Request_Worker_{datePart}.csv";
                 //File.WriteAllText($@".\{attachmentName}", csv.ToString());
 
                 if (SendSPDEmail(csv.ToString(), attachmentName))
                 {
+                    hangfireContext.WriteLine("Sent SPD email. Now updating Dynamics...");
                     //update exporteddate in dynamics
                     var exportDate = DateTime.Now;
                     result.ForEach(row =>
@@ -137,6 +138,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                             throw (odee);
                         }
                     });
+                    hangfireContext.WriteLine("Dynamics update complete.");
                 }
                 else
                 {
