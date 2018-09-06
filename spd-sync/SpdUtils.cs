@@ -1,18 +1,17 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using System.Text;
-using System.IO;
 using System.Net.Mail;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.SpdSync
 {
@@ -50,9 +49,25 @@ namespace Gov.Lclb.Cllb.SpdSync
             csvList.Add(headers);
 
             string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
-            List<MicrosoftDynamicsCRMadoxioSpddatarow> result = _dynamics.Spddatarows.Get(filter: filter).Value.ToList();
+            List<MicrosoftDynamicsCRMadoxioSpddatarow> result = null;
 
-            if (result.Count > 0)
+            try
+            {
+                result = _dynamics.Spddatarows.Get(filter: filter).Value.ToList();
+            }
+            catch (OdataerrorException odee)
+            {
+                hangfireContext.WriteLine("Error getting SPD data rows");
+                hangfireContext.WriteLine("Request:");
+                hangfireContext.WriteLine(odee.Request.Content);
+                hangfireContext.WriteLine("Response:");
+                hangfireContext.WriteLine(odee.Response.Content);
+                // fail if we can't get results.
+                throw (odee);
+            }
+
+
+            if (result != null && result.Count > 0)
             {
                 foreach (var row in result)
                 {
@@ -122,6 +137,10 @@ namespace Gov.Lclb.Cllb.SpdSync
                             throw (odee);
                         }
                     });
+                }
+                else
+                {
+                    hangfireContext.WriteLine("Error sending SPD email.");
                 }
             }
         }

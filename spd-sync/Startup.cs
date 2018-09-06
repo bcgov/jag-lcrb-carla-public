@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
@@ -47,10 +48,14 @@ namespace Gov.Lclb.Cllb.SpdSync
         {
             services.AddMvc(config =>
             {
-                var policy = new AuthorizationPolicyBuilder()
+                if (! string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+                {
+                    var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
                                  .Build();
-                //config.Filters.Add(new AuthorizeFilter(policy));
+                    config.Filters.Add(new AuthorizeFilter(policy));
+                }
+                
             });
 
             // Other ConfigureServices() code...
@@ -63,23 +68,26 @@ namespace Gov.Lclb.Cllb.SpdSync
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 
-            // Configure JWT authentication
-            services.AddAuthentication(o =>
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
             {
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
-            {
-                o.SaveToken = true;
-                o.RequireHttpsMetadata = false;
-                o.TokenValidationParameters = new TokenValidationParameters()
+                // Configure JWT authentication
+                services.AddAuthentication(o =>
                 {
-                    RequireExpirationTime = false,
-                    ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-                    ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
-                };
-            });
+                    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(o =>
+                {
+                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        RequireExpirationTime = false,
+                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                    };
+                });
+            }
 
             services.AddHangfire(config =>
             {
@@ -101,8 +109,6 @@ namespace Gov.Lclb.Cllb.SpdSync
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
 
             if (env.IsDevelopment())
             {
@@ -125,23 +131,18 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             if (startHangfire)
             {
-                // enable Hangfire
+                // enable Hangfire, using the default authentication model (local connections only)
                 app.UseHangfireServer();
 
-                // Modify this to change authentication for Hangfire.
-                // For example, to restore default authorization (local access only), remove the Authorization = new [] ... line.
                 DashboardOptions dashboardOptions = new DashboardOptions
                 {
-                    Authorization = new[] { new LocalHangfireAuthorizationFilter() }
-                };
-
-                dashboardOptions.AppPath = null;
+                    AppPath = null
+                };                
 
                 app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
-
-            // this should be set as an environment variable
-            if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_INDEX"]))
+            
+            if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, loggerFactory);
             }
@@ -163,15 +164,12 @@ namespace Gov.Lclb.Cllb.SpdSync
         private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             ILogger log = loggerFactory.CreateLogger(typeof(Startup));
-            log.LogInformation("Starting setup of Hangfire Document Index job ...");
+            log.LogInformation("Starting setup of Hangfire job ...");
 
             try
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    string accessToken = Configuration["SearchService:AccessToken"];
-                    string baseUri = Configuration["SearchService:BaseUri"];
-
+                {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
                     
                     RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration).SendExportJob(null), Cron.Daily);

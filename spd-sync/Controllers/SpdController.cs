@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -11,34 +12,40 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         private readonly IConfiguration Configuration;
         private readonly string accessToken;
         private readonly string baseUri;
+        private readonly ILogger _logger;
 
-        public SpdController(IConfiguration configuration)
+        public SpdController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             accessToken = Configuration["ACCESS_TOKEN"];
             baseUri = Configuration["BASE_URI"];
-;
+            _logger = loggerFactory.CreateLogger(typeof(SpdController));
         }
 
         /// <summary>
-        /// GET api/search
+        /// GET api/spd/send
+        /// Send export to SPD.
         /// </summary>
-        /// <param name="query">space delimited query keywords</param>
-        /// <param name="_skip">Search Result Offset</param>
-        /// <param name="_limit">Maximum number of search results to return</param>
-        /// <returns>List of GUID id fields for requests matching the query.</returns>
-        [HttpGet("run-export")]
+        /// <returns>OK if successful</returns>
+        [HttpGet("send")]
         public ActionResult Send()
         {
             BackgroundJob.Enqueue(() => new SpdUtils(Configuration).SendExportJob(null));
+            _logger.LogInformation("Started send export job");
             return Ok();
         }
 
+        /// <summary>
+        /// GET api/apd/receive
+        /// Start a receive import job
+        /// </summary>
+        /// <returns>OK if successful</returns>
         [HttpGet("receive")]
         public ActionResult Receive()
         {
             // check the file drop for a file, and then process it.
-            return NoContent();
+            _logger.LogInformation("Started receive import job");
+            return Ok();
 
         }
     }
