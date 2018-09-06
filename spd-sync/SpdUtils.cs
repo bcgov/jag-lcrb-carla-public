@@ -18,7 +18,6 @@ namespace Gov.Lclb.Cllb.SpdSync
 {
     public class SpdUtils
     {
-       
         private static HttpClient Client = new HttpClient();
 
         private IConfiguration Configuration { get; }
@@ -30,12 +29,11 @@ namespace Gov.Lclb.Cllb.SpdSync
             this.Configuration = Configuration;
             this._dynamics = SetupDynamics();
         }
-        
-        
+
         /// <summary>
         /// Hangfire job to send an export to SPD.
         /// </summary>
-        public  async Task SendExportJob(PerformContext hangfireContext)
+        public async Task SendExportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Export Job.");
 
@@ -44,10 +42,11 @@ namespace Gov.Lclb.Cllb.SpdSync
             var csvList = new List<List<string>>();
             var headers = new List<string>();
             var headerDefinition = GetExportHeaders();
-            headerDefinition.ForEach(h => {
+            headerDefinition.ForEach(h =>
+            {
                 headers.Add($"\"{h.Value}\"");
             });
-           
+
             csvList.Add(headers);
 
             string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
@@ -108,7 +107,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         try
                         {
                             if (row.AdoxioSpddatarowid != null) // skip test data
-                        {
+                            {
                                 _dynamics.Spddatarows.Update(row.AdoxioSpddatarowid, patchApplication);
                             }
                         }
@@ -119,8 +118,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                             hangfireContext.WriteLine(odee.Request.Content);
                             hangfireContext.WriteLine("Response:");
                             hangfireContext.WriteLine(odee.Response.Content);
-                        // fail if we can't create.
-                        throw (odee);
+                            // fail if we can't create.
+                            throw (odee);
                         }
                     });
                 }
@@ -142,7 +141,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private string AddZeroPadding(string input, int maxLength = 8)
         {
-            while(input.Length < maxLength)
+            while (input.Length < maxLength)
             {
                 input = "0" + input;
             }
@@ -186,7 +185,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 {
                     mailClient.Send(message);
                     emailSentSuccessfully = true;
-                } catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     emailSentSuccessfully = false;
                 }
