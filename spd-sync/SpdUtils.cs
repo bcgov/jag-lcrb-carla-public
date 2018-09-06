@@ -143,6 +143,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                     hangfireContext.WriteLine("Error sending SPD email.");
                 }
             }
+            else
+            {
+                hangfireContext.WriteLine("No data to send, aborting.");
+            }
+
+            hangfireContext.WriteLine("End of SPD Export Job.");
         }
 
         private long GetBatchNumber()
