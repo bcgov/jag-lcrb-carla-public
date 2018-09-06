@@ -193,7 +193,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             using (var stream = new MemoryStream())
             using (var writer = new StreamWriter(stream))    // using UTF-8 encoding by default
-            using (var mailClient = new SmtpClient("localhost", 25))
+            using (var mailClient = new SmtpClient(Configuration["SMTP_HOST"]))
             using (var message = new MailMessage("no-reply@gov.bc.ca", email))
             {
                 writer.WriteLine(attachmentContent);
