@@ -29,7 +29,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = worker.AdoxioMiddlename;
                 result.lastname = worker.AdoxioLastname;
                 result.dateofbirth = worker.AdoxioDateofbirth;
-                //result.gender = worker.AdoxioGendercode;
+                if (worker.AdoxioGendercode != null)
+                {
+                    result.gender = (ViewModels.Gender)worker.AdoxioGendercode;
+                }
                 result.birthplace = worker.AdoxioBirthplace;
                 result.driverslicencenumber = worker.AdoxioDriverslicencenumber;
                 result.bcidcardnumber = worker.AdoxioBcidcardnumber;
@@ -37,7 +40,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.email = worker.AdoxioEmail;
                 result.selfdisclosure = worker.AdoxioSelfdisclosure == 1;
                 result.triggerphs = worker.AdoxioTriggerphs == 1;
-                result.contactId = worker._adoxioContactidValue;
+                if (worker.AdoxioContactId != null)
+                {
+                    result.contact = worker.AdoxioContactId.ToViewModel();
+                }
                 result.paymentReceived = worker.AdoxioPaymentreceived == 1;
                 result.paymentRecievedDate = worker.AdoxioPaymentreceiveddate;
                 result.workerId = worker.AdoxioWorkerid;
@@ -53,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioLastname = from.lastname;
             to.AdoxioDateofbirth = from.dateofbirth;
-            // to.AdoxioGendercode = from.gender;
+            to.AdoxioGendercode = (int?)from.gender;
             to.AdoxioBirthplace = from.birthplace;
             to.AdoxioDriverslicencenumber = from.driverslicencenumber;
             to.AdoxioBcidcardnumber = from.bcidcardnumber;
@@ -61,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEmail = from.email;
             to.AdoxioSelfdisclosure = from.selfdisclosure ? 1 : 0;
             to.AdoxioTriggerphs = from.triggerphs ? 1 : 0;
-            to._adoxioContactidValue = from.contactId;
+            //to._adoxioContactidValue = from.contactId;
             to.AdoxioPaymentreceived = from.paymentReceived ? 1 : 0;
             to.AdoxioPaymentreceiveddate = from.paymentRecievedDate;
             to.AdoxioWorkerid = from.workerId;

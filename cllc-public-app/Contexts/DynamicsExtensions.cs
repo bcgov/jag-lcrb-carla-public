@@ -538,7 +538,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 // fetch from Dynamics.
-                var filter = "_adoxio_account_value eq " + guid;
+                var filter = "_adoxio_contactid_value eq " + guid;
                 result = system.Previousaddresses.Get(filter: filter).Value.ToList();
             }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)

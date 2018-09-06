@@ -13,10 +13,5 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_AccountId@odata.bind")]
         public string AccountODataBind { get; set; }
 
-           /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_partnersconnectionfederalproducer")]
-        public int? AdoxioPartnersConnectionFederalProducer { get; set; }
-
     }
 }

@@ -490,6 +490,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
                     throw new OdataerrorException("Error creating Tied house connection.");
+                }catch(Exception e)
+                {
+                    var j = 0;
                 }
 
             }

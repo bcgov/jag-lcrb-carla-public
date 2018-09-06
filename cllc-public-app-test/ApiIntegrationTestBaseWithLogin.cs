@@ -48,8 +48,19 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
             
         }
-		
-		public string randomNewUserName(string userid, int len)
+
+        public async System.Threading.Tasks.Task ServiceCardLogin(string userid, string businessName)
+        {
+            string loginAs = userid + "::" + businessName;
+            _client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/bcservice/token/" + loginAs);
+            var response = await _client.SendAsync(request);
+            string _discard = await response.Content.ReadAsStringAsync();
+            Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
+
+        }
+
+        public string randomNewUserName(string userid, int len)
 		{
 			return userid + TestUtilities.RandomANString(len);
 		}

@@ -130,6 +130,7 @@ import { AssociatesDashboardComponent } from './lite/associates-dashboard/associ
 import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 import { AliasDataService } from './services/alias-data.service';
 import { PreviousAddressDataService } from './services/previous-address-data.service';
+import { WorkerDataService } from './services/worker-data.service.';
 
 @NgModule({
   declarations: [
@@ -304,6 +305,7 @@ import { PreviousAddressDataService } from './services/previous-address-data.ser
     PaymentDataService,
     TiedHouseConnectionsDataService,
     PreviousAddressDataService,
+    WorkerDataService,
     NgbDropdown,
     Title,
     CanDeactivateGuard,

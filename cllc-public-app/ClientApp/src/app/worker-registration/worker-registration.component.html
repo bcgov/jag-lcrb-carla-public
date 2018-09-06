@@ -211,7 +211,8 @@
         <div [ngClass]="{'has-error': !this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched}">
           <label>Birth Date</label>
           <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="dateofbirth">
+          <input type="text" formControlName='dateofbirth' style="width: 250px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
           <div *ngIf="!this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched" class="alert alert-danger"
             style="width: 250px;">
             <div *ngIf="!this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched ">
@@ -224,7 +225,12 @@
         <div [ngClass]="{'has-error': !this.form.get('worker.gender').valid && this.form.get('worker.gender').touched}">
           <label>Gender</label>
           <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="gender">
+          <select class="form-control" style="width: 250px;" type="text" formControlName="gender">
+          <option value=""></option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          </select>
           <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched" class="alert alert-danger" style="width: 250px;">
             <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched ">
               This is required
@@ -270,7 +276,7 @@
             </div>
           </div>
         </div>
-      </section> 
+      </section>
       <section>
         <div [ngClass]="{'has-error': !this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched}">
           <label>Phone Number</label>
@@ -300,7 +306,7 @@
         <div [ngClass]="{'has-error': !this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched}">
           <label>Self Disclosure</label>
           <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="selfdisclosure">
+          <input type="checkbox" formControlName="selfdisclosure">
           <div *ngIf="!this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched" class="alert alert-danger"
             style="width: 250px;">
             <div *ngIf="!this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched ">
@@ -309,11 +315,11 @@
           </div>
         </div>
       </section>
-      <section>
+      <!-- <section>
         <div [ngClass]="{'has-error': !this.form.get('worker.triggerphs').valid && this.form.get('worker.triggerphs').touched}">
           <label>Trigger PHS Creation</label>
           <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="triggerphs">
+          <input type="checkbox" formControlName="triggerphs">
           <div *ngIf="!this.form.get('worker.triggerphs').valid && this.form.get('worker.triggerphs').touched" class="alert alert-danger"
             style="width: 250px;">
             <div *ngIf="!this.form.get('worker.triggerphs').valid && this.form.get('worker.triggerphs').touched ">
@@ -321,53 +327,58 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
     </div>
 
-    <div>
-      <h2>Alias</h2>
-      <section>
-        <div [ngClass]="{'has-error': !this.form.get('firstname').valid && this.form.get('firstname').touched}">
-          <label>First Name</label>
-          <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
-          <div *ngIf="!this.form.get('firstname').valid && this.form.get('firstname').touched" class="alert alert-danger"
-            style="width: 250px;">
-            <div *ngIf="!this.form.get('firstname').valid && this.form.get('firstname').touched ">
-              This is required
+    <div formArrayName="aliases">
+      <h2>Aliases</h2>
+      <button *ngIf="aliases.controls.length < 5" class="btn btn-primary" (click)="addAlias()">Add Alias</button>
+      <div *ngFor="let alias of aliases.controls; let i = index">
+        <div [formGroupName]="i">
+          <h3>Alias {{i + 1}}</h3>
+          <button class="btn btn-primary" (click)="deleteAlias(i)">Delete Alias
+          </button>
+          <section>
+            <div [ngClass]="{'has-error': !alias.get('firstname').valid && alias.get('firstname').touched}">
+              <label>First Name</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
+              <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched ">
+                  This is required
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div [ngClass]="{'has-error': !this.form.get('middlename').valid && this.form.get('middlename').touched}">
-          <label>Second Name</label>
-          <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
-          <div *ngIf="!this.form.get('middlename').valid && this.form.get('middlename').touched" class="alert alert-danger"
-            style="width: 250px;">
-            <div *ngIf="!this.form.get('middlename').valid && this.form.get('middlename').touched ">
-              This is required
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !alias.get('middlename').valid && alias.get('middlename').touched}">
+              <label>Second Name</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
+              <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched ">
+                  This is required
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div [ngClass]="{'has-error': !this.form.get('lastname').valid && this.form.get('lastname').touched}">
-          <label>Last Name</label>
-          <br />
-          <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
-          <div *ngIf="!this.form.get('lastname').valid && this.form.get('lastname').touched" class="alert alert-danger"
-            style="width: 250px;">
-            <div *ngIf="!this.form.get('lastname').valid && this.form.get('lastname').touched ">
-              This is required
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !alias.get('lastname').valid && alias.get('lastname').touched}">
+              <label>Last Name</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
+              <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched ">
+                  This is required
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
 
-    <div formArrayName="previous_address">
+    <div formArrayName="addresses">
       <h2>Previous Addresses</h2>
       <button class="btn btn-primary" (click)="addAddress()">Add previous address</button>
       <div *ngFor="let address of addresses.controls; let i = index">
@@ -377,16 +388,6 @@
             <button *ngIf="addresses.controls.length > 1" class="btn btn-primary" (click)="deleteAddress(i)">Delete previous
               address
             </button>
-            <!-- <div [ngClass]="{'has-error': !address.get('name').valid && address.get('name').touched}">
-              <label>Name</label>
-              <br />
-              <input class="form-control" style="width: 250px;" type="text" formControlName="name">
-              <div *ngIf="!address.get('name').valid && address.get('name').touched" class="alert alert-danger" style="width: 250px;">
-                <div *ngIf="!address.get('name').valid && address.get('name').touched ">
-                  This is required
-                </div>
-              </div>
-            </div> -->
           </section>
           <section>
             <div [ngClass]="{'has-error': !address.get('streetaddress').valid && address.get('streetaddress').touched}">
@@ -452,7 +453,8 @@
             <div [ngClass]="{'has-error': !address.get('fromdate').valid && address.get('fromdate').touched}">
               <label>From</label>
               <br />
-              <input class="form-control" style="width: 250px;" type="text" formControlName="fromdate">
+              <input type="text" formControlName='fromdate' style="width: 250px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
               <div *ngIf="!address.get('fromdate').valid && address.get('fromdate').touched" class="alert alert-danger" style="width: 250px;">
                 <div *ngIf="!address.get('fromdate').valid && address.get('fromdate').touched ">
                   This is required
@@ -464,7 +466,8 @@
             <div [ngClass]="{'has-error': !address.get('todate').valid && address.get('todate').touched}">
               <label>To</label>
               <br />
-              <input class="form-control" style="width: 250px;" type="text" formControlName="todate">
+              <input type="text" formControlName='todate' style="width: 250px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
               <div *ngIf="!address.get('todate').valid && address.get('todate').touched" class="alert alert-danger" style="width: 250px;">
                 <div *ngIf="!address.get('todate').valid && address.get('todate').touched ">
                   This is required
