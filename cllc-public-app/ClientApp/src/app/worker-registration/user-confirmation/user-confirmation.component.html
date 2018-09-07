@@ -1,4 +1,6 @@
-<section>
+<app-worker-terms-and-conditions (termsAccepted)="termsAccepted=$event" *ngIf="!termsAccepted"></app-worker-terms-and-conditions>
+
+<section *ngIf="termsAccepted">
     <h2>Please confirm the name associated with the BC Service card login provided.</h2>
     <div>
       <p>
