@@ -21,4 +21,5 @@ export interface Worker {
     paymentReceivedDate: Date;
     workerId: string;
     contact: DynamicsContact;
+    modifiedOn: Date;
 }
