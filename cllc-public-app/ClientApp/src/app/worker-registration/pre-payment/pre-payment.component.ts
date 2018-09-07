@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 import { UserDataService } from '../../services/user-data.service';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Worker } from '../../models/worker.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pre-payment',
@@ -13,11 +14,16 @@ import { Worker } from '../../models/worker.model';
 export class PrePaymentComponent implements OnInit {
   currentUser: User;
   worker: Worker;
+  workerId: string;
 
   constructor(
     private paymentDataService: PaymentDataService,
     private workerDataService: WorkerDataService,
-    private userDataService: UserDataService) {
+    private userDataService: UserDataService,
+    private route: ActivatedRoute) {
+      this.route.params.subscribe(params => {
+        this.workerId = params.id;
+      });
   }
 
   ngOnInit() {
@@ -29,7 +35,7 @@ export class PrePaymentComponent implements OnInit {
       .subscribe((data: User) => {
         this.currentUser = data;
         if (this.currentUser && this.currentUser.contactid) {
-            this.workerDataService.getWorker(this.currentUser.contactid).subscribe(res => {
+            this.workerDataService.getWorker(this.workerId).subscribe(res => {
             this.worker = res;
           });
         }

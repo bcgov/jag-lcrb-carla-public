@@ -4,6 +4,7 @@
     "outDir": "../out-tsc/app",
     "module": "es2015",
     "baseUrl": "",
+    "target": "es5",
     "types": [
       "knockout"
     ]
