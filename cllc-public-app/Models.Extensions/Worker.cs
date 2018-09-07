@@ -59,7 +59,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioLastname = from.lastname;
             to.AdoxioDateofbirth = from.dateofbirth;
-            to.AdoxioGendercode = (int?)from.gender;
+            if (from.gender != 0)
+            {
+                to.AdoxioGendercode = (int?)from.gender;
+            } else
+            {
+                to.AdoxioGendercode = null;
+            }
             to.AdoxioBirthplace = from.birthplace;
             to.AdoxioDriverslicencenumber = from.driverslicencenumber;
             to.AdoxioBcidcardnumber = from.bcidcardnumber;
