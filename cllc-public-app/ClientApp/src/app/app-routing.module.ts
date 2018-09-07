@@ -86,15 +86,15 @@ const routes: Routes = [
         component: WorkerDashboardComponent
       },
       {
-        path: 'application',
+        path: 'application/:id',
         component: WorkerApplicationComponent
       },
       {
-        path: 'pre-payment',
+        path: 'pre-payment/:id',
         component: PrePaymentComponent
       },
       {
-        path: 'spd-consent',
+        path: 'spd-consent/:id',
         component: SpdConsentComponent
       }
     ]

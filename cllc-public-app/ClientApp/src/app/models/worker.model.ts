@@ -1,4 +1,6 @@
-export interface Worker { 
+import { DynamicsContact } from './dynamics-contact.model';
+
+export interface Worker {
     id: string;
     isldbworker: boolean;
     firstname: string;
@@ -18,4 +20,5 @@ export interface Worker {
     paymentReceived: boolean;
     paymentReceivedDate: Date;
     workerId: string;
+    contact: DynamicsContact;
 }
