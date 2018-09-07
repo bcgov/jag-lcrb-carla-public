@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="contactId"></param>
         /// <returns></returns>
         [HttpGet("{contactId}")]
-        public async Task<IActionResult> GetWorker(string contactId)
+        public IActionResult GetWorker(string contactId)
         {
             ViewModels.Worker result = null;
 
