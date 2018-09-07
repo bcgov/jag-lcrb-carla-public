@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,27 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }   
         
+        public static void CopyHeaderValues(this MicrosoftDynamicsCRMcontact to, IHttpContextAccessor httpContextAccessor)       
+        {
+            var headers = httpContextAccessor.HttpContext.Request.Headers;
+            string smgov_useremail = headers["SMGOV_USEREMAIL"];
+            string smgov_birthdate = headers["SMGOV_BIRTHDATE"];
+            string smgov_sex = headers["SMGOV_SEX"];
+            string smgov_streetaddress = headers["SMGOV_STREETADDRESS"];
+            string smgov_city = headers["SMGOV_CITY"];
+            string smgov_postalcode = headers["SMGOV_POSTALCODE"];
+            string smgov_country = headers["SMGOV_COUNTRY"];
+            string smgov_stateorprovince = headers["SMGOV_STATEORPROVINCE"];
+
+            to.Emailaddress1 = smgov_useremail;
+            to.Address1Line1 = smgov_streetaddress;            
+            to.Address1Postalcode = smgov_postalcode;
+            to.Address1City = smgov_city;
+            to.Address1Country = smgov_country;
+
+            //to.AdoxioStateprovince = smgov_stateorprovince;
+
+        }
 
         public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
         {

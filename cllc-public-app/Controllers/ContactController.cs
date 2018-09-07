@@ -155,6 +155,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
             contact.Externaluseridentifier = userSettings.UserId;
 
+            if (userSettings.IsNewUserRegistration)
+            {
+                // get additional information from the service card headers.
+                contact.CopyHeaderValues( _httpContextAccessor );
+            }
+
             //clean externalId    
             var externalId = "";
             var tokens = sanitizedAccountSiteminderId.Split('|');
