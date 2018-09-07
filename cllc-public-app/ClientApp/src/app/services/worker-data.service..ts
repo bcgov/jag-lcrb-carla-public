@@ -17,10 +17,19 @@ export class WorkerDataService {
 
   /**
    * Get legal entities from Dynamics filtered by position
-   * @param positionType
+   * @param accountId
    */
-  getWorker(accountId: string) {
-    const apiPath = `api/worker/${accountId}`;
+  getWorkerByContactId(accountId: string): Observable<Worker[]> {
+    const apiPath = `api/worker/contact/${accountId}`;
+    return this.http.get<Worker[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError('getWorker', null)));
+  }
+  /**
+   * Get legal entities from Dynamics filtered by position
+   * @param id
+   */
+  getWorker(id: string): Observable<Worker> {
+    const apiPath = `api/worker/${id}`;
     return this.http.get<Worker>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError('getWorker', null)));
   }
