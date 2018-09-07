@@ -20,6 +20,7 @@ export class UserConfirmationComponent implements OnInit {
   @Input() currentUser: User;
   @Output() reloadUser: EventEmitter<any> = new EventEmitter<any>();
   busy: any;
+  termsAccepted = false;
 
   constructor(private userDataService: UserDataService,
     private store: Store<AppState>,

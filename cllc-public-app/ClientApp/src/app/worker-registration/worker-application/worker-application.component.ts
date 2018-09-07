@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-worker-application',
@@ -22,13 +23,13 @@ import { PreviousAddress } from '../../models/previous-address.model';
 })
 export class WorkerApplicationComponent implements OnInit {
   currentUser: User;
-  isNewUser: boolean;
   dataLoaded = false;
   busy: Subscription;
   form: FormGroup;
 
   addressesToDelete: PreviousAddress[] = [];
   aliasesToDelete: Alias[] = [];
+  workerId: string;
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
@@ -44,8 +45,13 @@ export class WorkerApplicationComponent implements OnInit {
     private previousAddressDataService: PreviousAddressDataService,
     private contactDataService: ContactDataService,
     private workerDataService: WorkerDataService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(params => {
+      this.workerId = params.id;
+    });
+   }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -91,11 +97,10 @@ export class WorkerApplicationComponent implements OnInit {
       .subscribe((data: User) => {
         this.currentUser = data;
         this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
-        this.isNewUser = this.currentUser.isNewUser;
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
           Observable.zip(
-            this.workerDataService.getWorker(this.currentUser.contactid),
+            this.workerDataService.getWorker(this.workerId),
             this.aliasDataService.getAliases(this.currentUser.contactid),
             this.previousAddressDataService.getPreviousAdderesses(this.currentUser.contactid)
           ).subscribe(res => {
