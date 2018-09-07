@@ -1,7 +1,7 @@
 <div class="wrapper" [formGroup]="form" style="max-width: 700px;">
   <h2>STEP 1</h2>
   <div [ngBusy]="busy"></div>
-  <div *ngIf="dataLoaded && !isNewUser">
+  <div *ngIf="dataLoaded">
     <section>
       <h1>
         Worker Registration
@@ -479,15 +479,12 @@
         </div>
       </div>
       <span style="float: right;">
+        <button class="btn btn-primary" (click)="save()">SAVE</button>
           <button class="btn btn-primary">
             <i class="fa fa-save" style="color: #fff;"></i>
             SAVE FOR LATER</button>
-          <button routerLink="../spd-consent" class="btn btn-primary">SAVE & CONTINUE TO STEP 2 ></button>
+          <button routerLink="/worker-registration/spd-consent/{{workerId}}" class="btn btn-primary">SAVE & CONTINUE TO STEP 2 ></button>
         </span>
     </div>
   </div>
-
-  <section *ngIf="isNewUser">
-      <app-user-confirmation [currentUser]="currentUser" (reloadUser)="reloadUser()"></app-user-confirmation>
-  </section>
 </div>

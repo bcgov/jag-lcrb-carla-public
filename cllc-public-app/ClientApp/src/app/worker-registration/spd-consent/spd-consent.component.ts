@@ -3,6 +3,7 @@ import { PaymentDataService } from '../../services/payment-data.service';
 import { UserDataService } from '../../services/user-data.service';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { User } from '../../models/user.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-spd-consent',
@@ -11,10 +12,16 @@ import { User } from '../../models/user.model';
 })
 export class SpdConsentComponent implements OnInit {
   currentUser: any;
+  workerId: string;
+
   constructor(
     private paymentDataService: PaymentDataService,
     private workerDataService: WorkerDataService,
-    private userDataService: UserDataService) {
+    private userDataService: UserDataService,
+    private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.workerId = params.id;
+    });
   }
 
   ngOnInit() {

@@ -137,6 +137,7 @@ import { PrePaymentComponent } from './worker-registration/pre-payment/pre-payme
 import { UserConfirmationComponent } from './worker-registration/user-confirmation/user-confirmation.component';
 import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 import { WorkerPaymentConfirmationComponent } from './worker-registration/payment-confirmation/payment-confirmation.component';
+import { WorkerTermsAndConditionsComponent } from './worker-registration/worker-terms-and-conditions/worker-terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -201,7 +202,8 @@ import { WorkerPaymentConfirmationComponent } from './worker-registration/paymen
     WorkerPaymentConfirmationComponent,
     SpdConsentComponent,
     PrePaymentComponent,
-    UserConfirmationComponent
+    UserConfirmationComponent,
+    WorkerTermsAndConditionsComponent
   ],
   imports: [
     BrowserModule,
