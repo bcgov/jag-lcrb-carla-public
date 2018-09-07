@@ -1,0 +1,360 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "${NAME}-deployment-template",
+    "creationTimestamp": null
+  },
+  "objects": [
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "template": "${NAME}-deployment"
+        },
+        "annotations": {
+          "description": "Defines how to deploy ${NAME}"
+        }
+      },
+      "spec": {
+        "strategy": {
+          "type": "Rolling"
+        },
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          },
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "namespace": "${IMAGE_NAMESPACE}",
+                "name": "${SOURCE_IMAGE_NAME}:${TAG_NAME}"
+              }
+            }
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name": "${NAME}"
+        },
+        "template": {
+          "metadata": {
+            "name": "${NAME}",
+            "labels": {
+              "name": "${NAME}"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "${NAME}",
+                "image": "",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "ASPNETCORE_ENVIRONMENT",
+                    "value": "${ASPNETCORE_ENVIRONMENT}"
+                  },
+                  {
+                    "name": "SMTP_HOST",
+                    "value": "${SMTP_HOST}"
+                  },
+                  {
+                    "name": "SSG_USERNAME",
+                    "value": "${SSG_USERNAME}"
+                  },
+                  {
+                    "name": "SSG_PASSWORD",
+                    "value": "${SSG_PASSWORD}"
+                  },                 
+                  {
+                    "name": "DYNAMICS_ODATA_URI",
+                    "value": "${DYNAMICS_ODATA_URI}"
+                  },
+				  {
+                    "name": "DYNAMICS_CLIENT_KEY",
+                    "value": "${DYNAMICS_CLIENT_KEY}"
+                  },
+				  {
+                    "name": "DYNAMICS_AAD_TENANT_ID",
+                    "value": "${DYNAMICS_AAD_TENANT_ID}"
+                  },
+				  {
+                    "name": "DYNAMICS_CLIENT_ID",
+                    "value": "${DYNAMICS_CLIENT_ID}"
+                  },
+				  {
+                    "name": "JWT_VALID_ISSUER",
+                    "value": "${JWT_VALID_ISSUER}"
+                  },
+				  {
+                    "name": "JWT_VALID_AUDIENCE",
+                    "value": "${JWT_VALID_AUDIENCE}"
+                  },
+                  {
+                    "name": "JWT_TOKEN_KEY",
+                    "value": "${JWT_TOKEN_KEY}"
+                  },
+				  {
+                    "name": "SPD_EXPORT_EMAIL",
+                    "value": "${SPD_EXPORT_EMAIL}"
+                  }				                    
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "${CPU_LIMIT}",
+                    "memory": "${MEMORY_LIMIT}"
+                  },
+                  "requests": {
+                    "cpu": "${CPU_REQUEST}",
+                    "memory": "${MEMORY_REQUEST}"
+                  }
+                },
+                "readinessProbe": {
+                  "httpGet": {
+                    "path": "/hc",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 10,
+                  "timeoutSeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                },
+                "liveinessProbe": {
+                  "httpGet": {
+                    "path": "/hc",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 10,
+                  "timeoutSeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "template": "${NAME}-deployment"
+        },
+        "annotations": {
+          "description": "Exposes and load balances the application pods."
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8080-tcp",
+            "protocol": "TCP",
+            "port": 8080,
+            "targetPort": 8080
+          }
+        ],
+        "selector": {
+          "name": "${NAME}"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "labels": {
+          "app": "${NAME}"
+        },
+        "name": "${NAME}"
+      },
+      "spec": {
+        "host": "${ROUTE_HOST}",
+        "port": {
+          "targetPort": "8080-tcp"
+        },
+        "tls": {
+          "insecureEdgeTerminationPolicy": "Redirect",
+          "termination": "edge"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}",
+          "weight": 100
+        }
+      }
+    }    
+  ],
+  "parameters": [
+    {
+      "name": "NAME",
+      "displayName": "Name",
+      "description": "The name assigned to all of the resources defined in this template.",
+      "required": true,
+      "value": "spd-sync"
+    },
+    {
+      "name": "SOURCE_IMAGE_NAME",
+      "displayName": "Source Image Name",
+      "description": "The name of the image to use for this resource.",
+      "required": true,
+      "value": "spd-sync"
+    },
+    {
+      "name": "IMAGE_NAMESPACE",
+      "displayName": "Image Namespace",
+      "description": "The namespace of the OpenShift project containing the imagestream for the application.",
+      "required": true,
+      "value": "lclb-cllc-tools"
+    },
+    {
+      "name": "TAG_NAME",
+      "displayName": "Environment TAG name",
+      "description": "The TAG name for this environment, e.g., dev, test, prod",
+      "required": true,
+      "value": "dev"
+    },
+    {
+      "name": "ASPNETCORE_ENVIRONMENT",
+      "displayName": "AspNetCore Environment",
+      "description": "The ASP Net Core deployment environment setting.",
+      "required": true,
+      "value": "Production"
+    },
+    {
+      "name": "CPU_LIMIT",
+      "displayName": "CPU Limit",
+      "description": "Maximum amount of CPU the container can use.",
+      "value": "100m"
+    },
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Memory Limit",
+      "description": "Maximum amount of memory the container can use.",
+      "value": "2Gi"
+    },
+    {
+      "name": "CPU_REQUEST",
+      "displayName": "CPU Request",
+      "description": "Starting amount of CPU the container can use.",
+      "value": "10m"
+    },
+    {
+      "name": "MEMORY_REQUEST",
+      "displayName": "Memory Request",
+      "description": "Starting amount of memory the container can use.",
+      "value": "512Mi"
+    },   
+    {
+      "description": "Field for a test email.",
+      "displayName": "Test Email",
+      "name": "TEST_EMAIL"
+    },
+    {
+      "description": "URL for SMTP Host, e.g., apps.smtp.gov.bc.ca, if left blank a value will be defaulted.",
+      "displayName": "SMTP Host",
+      "name": "SMTP_HOST",
+      "required": true,
+      "value": "apps.smtp.gov.bc.ca"
+    },    
+    {
+      "description": "Username for SSG, e.g., clb_uat, if left blank a value will be defaulted.",
+      "displayName": "SSG Username",
+      "name": "SSG_USERNAME",
+      "required": true,
+      "value": "clb_uat"
+    },
+    {
+      "description": "Password for SSG.",
+      "displayName": "SSG Password",
+      "name": "SSG_PASSWORD",
+      "required": true,
+	  "value": " "
+    },
+    {
+      "description": "URI for Dynamics OData, e.g., https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/, if left blank a value will be defaulted.",
+      "displayName": "Dynamics OData URI",
+      "name": "DYNAMICS_ODATA_URI",
+      "required": true,
+      "value": "https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"
+    },
+	{
+		"description": "ADFS Dynamics Client Key (Property of an application user)",
+		"displayName": "DYNAMICS CLIENT KEY",
+		"name": "DYNAMICS_CLIENT_KEY",
+		"required": true,
+		"value": ""
+	},
+	{
+		"description": "ADFS Dynamics Tenant ID",
+		"displayName": "DYNAMICS AAD TENANT ID",
+		"name": "DYNAMICS_AAD_TENANT_ID",
+		"required": true,
+        "value": ""
+	},
+	{
+		"description": "ADFS Dynamics Client ID",
+		"displayName": "DYNAMICS CLIENT ID",
+		"name": "DYNAMICS_CLIENT_ID",
+		"required": true,
+        "value": ""
+    },
+    {
+		"description": "String used to identify the issuer.  Usually a URL to a website.",
+		"displayName": "JWT VALID ISSUER",
+        "name": "JWT_VALID_ISSUER",
+		"required": true,
+        "value": ""
+    },
+    {
+		"description": "String used to identify the audience.",
+		"displayName": "JWT VALID AUDIENCE",
+        "name": "JWT_VALID_AUDIENCE",
+		"required": true,
+        "value": ""
+    },
+    {
+		"description": "Secret/Key used to generate tokens.  Can be any text string, including the text form of a GUID.",
+		"displayName": "JWT Token Key",
+		"name": "JWT_TOKEN_KEY",
+		"required": true,
+		"value": ""
+    },
+	{
+		"description": "Email address where exports will be sent to.",
+		"displayName": "SPD EXPORT EMAIL",
+        "name": "SPD_EXPORT_EMAIL",
+		"required": true,
+        "value": "${SPD_EXPORT_EMAIL}"
+	},		
+	{
+      "description": "Route Host",
+      "displayName": "Route Host",
+      "name": "ROUTE_HOST",
+      "required": true,
+      "value": "lcrb-spd-sync-test.pathfinder.bcgov"
+    }	
+  ]
+}
