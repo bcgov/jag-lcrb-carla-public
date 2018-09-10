@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
@@ -30,6 +30,7 @@ export class WorkerApplicationComponent implements OnInit {
   addressesToDelete: PreviousAddress[] = [];
   aliasesToDelete: Alias[] = [];
   workerId: string;
+  saveFormData: any;
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
@@ -93,13 +94,13 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   reloadUser() {
-    this.userDataService.getCurrentUser()
+    this.busy =  this.userDataService.getCurrentUser()
       .subscribe((data: User) => {
         this.currentUser = data;
         this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-          Observable.zip(
+         Observable.zip(
             this.workerDataService.getWorker(this.workerId),
             this.aliasDataService.getAliases(this.currentUser.contactid),
             this.previousAddressDataService.getPreviousAdderesses(this.currentUser.contactid)
@@ -123,6 +124,8 @@ export class WorkerApplicationComponent implements OnInit {
             addresses.forEach(address => {
               this.addAddress(address);
             });
+
+            this.saveFormData = this.form.value;
           });
         }
       });
@@ -217,7 +220,16 @@ export class WorkerApplicationComponent implements OnInit {
     });
   }
 
-  save() {
+  canDeactivate(): Observable<boolean> | boolean {
+    if (JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
+      return true;
+    } else {
+      return this.save();
+    }
+  }
+
+  save(): Subject<boolean> {
+    const subResult = new Subject<boolean>();
     const value = this.form.value;
     const saves = [
       this.contactDataService.updateContact(value.contact),
@@ -262,8 +274,11 @@ export class WorkerApplicationComponent implements OnInit {
       }
     }
 
-    Observable.zip(...saves).subscribe(res => {
+    this.busy = Observable.zip(...saves).subscribe(res => {
+      subResult.next(true);
       this.reloadUser();
-    });
+    }, err => subResult.next(false));
+
+    return subResult;
   }
 }

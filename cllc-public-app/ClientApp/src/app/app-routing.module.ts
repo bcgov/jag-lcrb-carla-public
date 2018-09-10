@@ -87,7 +87,8 @@ const routes: Routes = [
       },
       {
         path: 'application/:id',
-        component: WorkerApplicationComponent
+        component: WorkerApplicationComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: 'pre-payment/:id',
