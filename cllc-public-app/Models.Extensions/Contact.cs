@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,92 @@ namespace Gov.Lclb.Cllb.Public.Models
             }            
             return result;
         }   
+        
+        public static void CopyHeaderValues(this MicrosoftDynamicsCRMcontact to, IHttpContextAccessor httpContextAccessor)       
+        {
+            var headers = httpContextAccessor.HttpContext.Request.Headers;
+            string smgov_useremail = headers["SMGOV_USEREMAIL"];
+            string smgov_birthdate = headers["SMGOV_BIRTHDATE"];
+            string smgov_sex = headers["SMGOV_SEX"];
+            string smgov_streetaddress = headers["SMGOV_STREETADDRESS"];
+            string smgov_city = headers["SMGOV_CITY"];
+            string smgov_postalcode = headers["SMGOV_POSTALCODE"];            
+            string smgov_stateorprovince = headers["SMGOV_STATEORPROVINCE"];
+            string smgov_country = headers["SMGOV_COUNTRY"];
+
+            to.Emailaddress1 = smgov_useremail;
+            to.Address1Line1 = smgov_streetaddress;            
+            to.Address1Postalcode = smgov_postalcode;
+            to.Address1City = smgov_city;            
+            to.Address1Stateorprovince = smgov_stateorprovince;
+            to.Address1Country = smgov_country;
+        }
+
+
+        /// <summary>
+        /// Return a Dynamics gender code for the given string.
+        /// </summary>
+        /// <param name="genderCode"></param>
+        /// <returns>
+        /// 1 - M
+        /// 2 - F
+        /// 3 - Other
+        /// </returns>
+        static int? GetIntGenderCode(string genderCode)
+        {
+            // possible values:
+            
+            int? result = null;
+
+            if (! string.IsNullOrEmpty(genderCode))
+            {
+                string upper = genderCode.ToUpper();
+                if (upper.Equals("MALE") || upper.Equals("M"))
+                {
+                    result = 1;
+                }
+                else if (upper.Equals("FEMALE") || upper.Equals("F"))
+                {
+                    result = 2;
+                }
+                else
+                {
+                    result = 3;
+                }
+            }
+
+            return result;
+        }
+
+        public static void CopyHeaderValues(this MicrosoftDynamicsCRMadoxioWorker to, IHttpContextAccessor httpContextAccessor)
+        {
+            var headers = httpContextAccessor.HttpContext.Request.Headers;
+            string smgov_useremail = headers["SMGOV_USEREMAIL"];
+            // the following fields appear to just have a guid in them, not a driver's licence.
+            string smgov_useridentifier = headers["SMGOV_USERIDENTIFIER"];
+            string smgov_useridentifiertype = headers["SMGOV_USERIDENTIFIERTYPE"];
+
+            // birthdate is YYYY-MM-DD
+            string smgov_birthdate = headers["SMGOV_BIRTHDATE"];
+            // Male / Female / Unknown. 
+            string smgov_sex = headers["SMGOV_SEX"];
+            string smgov_givenname = headers["SMGOV_GIVENNAME"];
+            string smgov_surname = headers["SMGOV_SURNAME"];
+
+            to.AdoxioFirstname = smgov_givenname;
+            to.AdoxioLastname = smgov_surname;
+            to.AdoxioEmail = smgov_useremail;
+            
+
+            if (DateTimeOffset.TryParse (smgov_birthdate, out DateTimeOffset tempDate))
+            {
+                to.AdoxioDateofbirth = tempDate;
+            }
+
+            to.AdoxioGendercode = GetIntGenderCode(smgov_sex);
+
+        }
+
         
 
         public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
