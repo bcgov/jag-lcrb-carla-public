@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             Configuration = configuration;
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
+            _logger = loggerFactory.CreateLogger(typeof(AdoxioEstablishmentController));
         }
 
         /// <summary>
