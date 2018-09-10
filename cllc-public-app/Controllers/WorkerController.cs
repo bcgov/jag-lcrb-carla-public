@@ -38,55 +38,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="contactId"></param>
         /// <returns></returns>
-        [HttpGet("contact/{contactId}")]
-        public async Task<IActionResult> GetWorkers(string contactId)
+        [HttpGet("{contactId}")]
+        public IActionResult GetWorker(string contactId)
         {
-            List<ViewModels.Worker> results = new List<ViewModels.Worker>();
+            ViewModels.Worker result = null;
 
             if (!string.IsNullOrEmpty(contactId))
             {
                 Guid id = Guid.Parse(contactId);
                 // query the Dynamics system to get the contact record.
                 string filter = $"_adoxio_contactid_value eq {contactId}";
-                var fields = new List<string> { "adoxio_ContactId" };
-                List<MicrosoftDynamicsCRMadoxioWorker> workers = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.ToList();
-
-                if (workers != null)
-                {
-                    workers.ForEach(w =>
-                    {
-                        results.Add(w.ToViewModel());
-                    });
-                }
-                else
-                {
-                    return new NotFoundResult();
-                }
-            }
-            else
-            {
-                return BadRequest();
-            }
-
-            return Json(results);
-        }
-
-
-        /// <summary>
-        /// Get a specific worker
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetWorker(string id)
-        {
-            ViewModels.Worker result = null;
-
-            if (!string.IsNullOrEmpty(id))
-            {
-                Guid workerId = Guid.Parse(id);
-                // query the Dynamics system to get the contact record.
-                string filter = $"adoxio_workerid eq {id}";
                 var fields = new List<string> { "adoxio_ContactId" };
                 MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
 
