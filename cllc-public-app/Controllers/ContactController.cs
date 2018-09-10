@@ -268,7 +268,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
+            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker() {
+                AdoxioFirstname = item.firstname,
+                AdoxioMiddlename = item.middlename,
+                AdoxioLastname = item.lastname
+            };
             contact.CopyValues(item);
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
             contact.Externaluseridentifier = userSettings.UserId;
