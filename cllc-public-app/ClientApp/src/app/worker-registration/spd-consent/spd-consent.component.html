@@ -31,22 +31,22 @@
   <span>
     I, the undersigned, do hereby consent to the collection and disclosure by the Royal Canadian Mounted Police (RCMP) and other
     law enforcement agencies, as well as other duly authorized agencies of the government, of any and all information related
-    to the security screening checks in support of this application for up to two years. This may include some or all of: (a)
-    criminal record check or fingerprint-based criminal record verification by searching the Canadian Police Information Centre
-    database; (b) a police information check; (c) a check of intelligence databases maintained by law enforcement agencies;
-    (d) a check of records in the justice information system of the Ministry of Attorney General and; (e) a check of records
-    in the corrections information system of the Ministry of Public Safety and Solicitor General.
+    to the security screening checks in support of this application for up to two years. This may include some or all of:
+    (a) criminal record check or fingerprint-based criminal record verification by searching the Canadian Police Information
+    Centre database; (b) a police information check; (c) a check of intelligence databases maintained by law enforcement
+    agencies; (d) a check of records in the justice information system of the Ministry of Attorney General and; (e) a check
+    of records in the corrections information system of the Ministry of Public Safety and Solicitor General.
   </span>
 </section>
 <br>
 <section style="display: flex">
-<input type="checkbox"> &nbsp;
-<span>
-  I certify that, to the best of my knowledge, the information I have provided on my application and will provide as necessary
-  is complete, honest and accurate. I understand that a false statement or omission of facts herein may lead to a denial
-  of a cannabis workers registration. I am also aware that later discovery of an omission or misrepresentation may be grounds
-  for any finding of suitability to be suspended or revoked.
-</span>
+  <input type="checkbox"> &nbsp;
+  <span>
+    I certify that, to the best of my knowledge, the information I have provided on my application and will provide as necessary
+    is complete, honest and accurate. I understand that a false statement or omission of facts herein may lead to a denial
+    of a cannabis workers registration. I am also aware that later discovery of an omission or misrepresentation may be grounds
+    for any finding of suitability to be suspended or revoked.
+  </span>
 </section>
 <p></p>
 
@@ -60,7 +60,9 @@
 <h3>1. Download Signature Form</h3>
 <p>The Worker Registration Application and the Consent for Cannabis Security Screening require the applicant’s signature.
   Digital signatures are not permitted..</p>
-  <button class="btn btn-primary">CLICK TO DOWNLOAD SIGNITURE FORM</button>
+<button class="btn btn-primary">
+  <i class="fas fa-download"></i>
+  CLICK TO DOWNLOAD SIGNITURE FORM</button>
 
 <h3>2. Complete and Scan Signature Form</h3>
 <p>Sign and make a high-resolution scan of the form.</p>
@@ -79,8 +81,12 @@
 <P>&nbsp;</P>
 
 <span style="float: right;">
-  <button class="btn btn-primary">
+  <button class="btn btn-primary" routerLink="/worker-registration/dashboard">
     <i class="fa fa-save" style="color: #fff;"></i>
     SAVE FOR LATER</button>
-  <button routerLink="/worker-registration/pre-payment/{{workerId}}" class="btn btn-primary">SAVE & CONTINUE TO STEP 3 ></button>
+  <button routerLink="/worker-registration/application/{{workerId}}" class="btn btn-primary">RETURN TO STEP 1
+  </button>
+  <button routerLink="/worker-registration/pre-payment/{{workerId}}" class="btn btn-primary">SAVE & CONTINUE TO STEP 3 <i
+      class="fas fa-chevron-right"></i>
+  </button>
 </span>
