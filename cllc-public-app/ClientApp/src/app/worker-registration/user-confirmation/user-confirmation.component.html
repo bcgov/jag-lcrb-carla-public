@@ -1,0 +1,24 @@
+<app-worker-terms-and-conditions (termsAccepted)="termsAccepted=$event" *ngIf="!termsAccepted"></app-worker-terms-and-conditions>
+
+<section *ngIf="termsAccepted">
+    <h2>Please confirm the name associated with the BC Service card login provided.</h2>
+    <div>
+      <p>
+        <b>{{currentUser.name}}</b>
+      </p>
+      <p>
+        Is this correct?
+      </p>
+      <div class="row">
+        <div class="col-md-12 text-left">
+          <button class="btn btn-primary" (click)="confirmContact(true)">
+            <strong>Yes</strong>
+          </button>
+          <button class="btn btn-secondary" (click)="confirmContact(false)">
+            <strong>No</strong>
+          </button>
+          <br>
+        </div>
+      </div>
+    </div>
+  </section>
