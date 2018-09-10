@@ -58,37 +58,42 @@ namespace Gov.Lclb.Cllb.Interfaces
 			this.bcep_hashkey = ut_hash_key;
 		}
 
-		/// <summary>
+        /// <summary>
         /// GET a payment re-direct url for an Application
         /// </summary>
-		/// <param name="orderNum">Unique order number (transaction id from invoice)</param>
-		/// <param name="applicationId">GUID of the Application to pay</param>
-		/// <param name="amount">amount to pay (from invoice)</param>
+        /// <param name="orderNum">Unique order number (transaction id from invoice)</param>
+        /// <param name="applicationId">GUID of the Application to pay</param>
+        /// <param name="amount">amount to pay (from invoice)</param>
         /// <returns></returns>
-		public string GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount) 
+        public string GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount, string confUrl = null)
         {
+            if (confUrl == null)
+            {
+                confUrl = bcep_conf_url;
+            }
+            
             // build the param string for the re-direct url
-			string paramString = BCEP_P_MERCH_ID + "=" + bcep_merchid +
-				"&" + BCEP_P_TRANS_TYPE +
-				"&" + BCEP_P_ORDER_NUM + "=" + orderNum +
-				"&" + BCEP_P_RESPONSE_PG + "=" + bcep_conf_url +
-				"&" + BCEP_P_APPLICATION_ID + "=" + applicationId +
-				"&" + BCEP_P_TRANS_AMT + "=" + amount;
+            string paramString = BCEP_P_MERCH_ID + "=" + bcep_merchid +
+            "&" + BCEP_P_TRANS_TYPE +
+            "&" + BCEP_P_ORDER_NUM + "=" + orderNum +
+            "&" + BCEP_P_RESPONSE_PG + "=" + confUrl +
+            "&" + BCEP_P_APPLICATION_ID + "=" + applicationId +
+            "&" + BCEP_P_TRANS_AMT + "=" + amount;
 
-			// Calculate the expiry based on the minutesToExpire value
+            // Calculate the expiry based on the minutesToExpire value
             DateTime expiry = DateTime.Now.AddMinutes(HASH_EXPIRY_TIME);
             string expiryStr = expiry.ToString(HASH_EXPIRY_FMT);
 
-			// Add expiry to the redirect
+            // Add expiry to the redirect
             paramString = paramString + "&" + BCEP_P_HASH_EXPIRY + "=" + expiryStr;
 
-			// replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
-			paramString = paramString.Replace(" ", "%20");
+            // replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
+            paramString = paramString.Replace(" ", "%20");
 
-			// add hash key at the end of params
-			string paramStringWithHash = paramString + bcep_hashkey;
+            // add hash key at the end of params
+            string paramStringWithHash = paramString + bcep_hashkey;
 
-			// Calculate the MD5 value using the Hash Key set on the Order Settings page (Within Beanstream account).
+            // Calculate the MD5 value using the Hash Key set on the Order Settings page (Within Beanstream account).
             // How:
             // Place the hash key after the last parameter. 
             // Perform an MD5 hash on the text up to the end of the key, then  
@@ -96,13 +101,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Add the result to the hosted service url. 
             // Note: Hash is calculated on the params ONLY.. Does NOT include the hosted payment page url.
             // See http://support.beanstream.com/#docs/about-hash-validation.htm?Highlight=hash for more info. 
-			string hashed = getHash(paramStringWithHash);
+            string hashed = getHash(paramStringWithHash);
 
-			// Add hash and expiry to the redirect
-			paramString = paramString + "&" + BCEP_P_HASH_VALUE + "=" + hashed;
+            // Add hash and expiry to the redirect
+            paramString = paramString + "&" + BCEP_P_HASH_VALUE + "=" + hashed;
 
             // Build re-direct URL
-			string redirect = this.bcep_pay_url + BCEP_P_SCRIPT + "?" + paramString;
+            string redirect = this.bcep_pay_url + BCEP_P_SCRIPT + "?" + paramString;
 
             return redirect;
         }
