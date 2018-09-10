@@ -155,6 +155,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
             contact.Externaluseridentifier = userSettings.UserId;
 
+            if (userSettings.IsNewUserRegistration)
+            {
+                // get additional information from the service card headers.
+                contact.CopyHeaderValues( _httpContextAccessor );
+            }
+
             //clean externalId    
             var externalId = "";
             var tokens = sanitizedAccountSiteminderId.Split('|');
@@ -268,6 +274,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 AdoxioLastname = item.lastname
             };
             contact.CopyValues(item);
+
+            if (userSettings.IsNewUserRegistration)
+            {
+                // get additional information from the service card headers.
+                contact.CopyHeaderValues(_httpContextAccessor);
+                worker.CopyHeaderValues(_httpContextAccessor);
+            }
+
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
             contact.Externaluseridentifier = userSettings.UserId;
 
@@ -291,6 +305,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 //worker.AdoxioContactId = contact;
 
                 worker.AdoxioContactId = contact;
+
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
                 contact = await _dynamicsClient.GetContactById(Guid.Parse(worker._adoxioContactidValue));
             }
@@ -302,6 +317,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
             }
+
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)

@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Configuration = configuration;
             this._httpContextAccessor = httpContextAccessor;
             this._dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));                    
+            _logger = loggerFactory.CreateLogger(typeof(InvoiceController));                    
         }
 
         /// <summary>

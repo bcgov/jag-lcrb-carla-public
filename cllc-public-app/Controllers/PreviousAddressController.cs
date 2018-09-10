@@ -38,14 +38,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         // /// <param name="contactId"></param>
         // /// <returns></returns>
         [HttpGet("by-contactid/{contactId}")]
-        public async Task<IActionResult> GetAddressesByContactId(string contactId)
+        public IActionResult GetAddressesByContactId(string contactId)
         {
             List<ViewModels.PreviousAddress> result = new List<ViewModels.PreviousAddress>();
 
             if (!string.IsNullOrEmpty(contactId))
             {
                 // query the Dynamics system to get the Address record.
-                List<MicrosoftDynamicsCRMadoxioPreviousaddress> addresses = await _dynamicsClient.GetPreviousAddressByContactId(contactId);
+                List<MicrosoftDynamicsCRMadoxioPreviousaddress> addresses = _dynamicsClient.GetPreviousAddressByContactId(contactId);
 
                 if (addresses != null)
                 {

@@ -495,11 +495,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         _logger.LogDebug("userSettings.AccountId:" + userSettings.AccountId);
                         _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
                     }
-                }
-				else if (!hostingEnv.IsProduction() && isBCSCDeveloperLogin)
-				{
-
-				}
+                }				
 
                 // **************************************************
                 // Update user settings

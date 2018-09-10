@@ -30,9 +30,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public PolicyDocumentController(IDynamicsClient dynamicsClient, IConfiguration configuration, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
         {
             Configuration = configuration;
+            _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(PolicyDocumentController));
-            _cache = memoryCache;
         }
 
         /// <summary>
