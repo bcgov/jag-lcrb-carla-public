@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _httpContextAccessor = httpContextAccessor;
             _sharePointFileManager = sharePointFileManager;
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
+            _logger = loggerFactory.CreateLogger(typeof(AdoxioApplicationController));
         }
 
         /// <summary>
