@@ -532,7 +532,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system">Re</param>
         /// <param name="id"></param>
         /// <returns>The Invoice, or null if it does not exist</returns>
-        public static async Task<List<MicrosoftDynamicsCRMadoxioPreviousaddress>> GetPreviousAddressByContactId(this IDynamicsClient system, string guid)
+        public static List<MicrosoftDynamicsCRMadoxioPreviousaddress> GetPreviousAddressByContactId(this IDynamicsClient system, string guid)
         {
             List<MicrosoftDynamicsCRMadoxioPreviousaddress> result;
             try
