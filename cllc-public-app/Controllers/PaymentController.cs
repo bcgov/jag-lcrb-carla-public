@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Reflection;
-using Gov.Lclb.Cllb.Public.Utils;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	public class PaymentController : Controller
 	{
 		private static Random random = new Random();
