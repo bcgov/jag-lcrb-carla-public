@@ -1,0 +1,490 @@
+<div class="wrapper" [formGroup]="form" style="max-width: 700px;">
+  <h2>STEP 1</h2>
+  <div [ngBusy]="busy"></div>
+  <div *ngIf="dataLoaded">
+    <section>
+      <h1>
+        Worker Registration
+      </h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada convallis ultrices. Proin blandit convallis vulputate.
+        Sed erat eros, aliquam et finibus nec, aliquam et ante. Phasellus pretium justo nunc, sed vulputate orci dictum id.
+        Donec et pretium lorem, quis pretium tortor. Donec ac justo mattis, condimentum ex semper, tempor orci. Ut a nunc
+        diam. Aliquam pretium at eros a euismod. Mauris sapien odio, facilisis placerat luctus non, finibus pulvinar lorem.
+        Sed risus mi, ultricies ultrices vehicula id, condimentum ac turpis. In consectetur sem velit, sit amet blandit dui
+        rutrum quis.
+      </p>
+      <!-- <section>
+        <app-file-uploader *ngIf="contact && contact.id" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+          [multipleFiles]="false" entityName="contact" [entityId]="contact.id" #mainForm></app-file-uploader>
+      </section> -->
+    </section>
+
+    <div formGroupName="contact">
+      <h2>Contact</h2>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.firstname').valid && this.form.get('contact.firstname').touched}">
+          <label>First Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
+          <div *ngIf="!this.form.get('contact.firstname').valid && this.form.get('contact.firstname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.firstname').valid && this.form.get('contact.firstname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.middlename').valid && this.form.get('contact.middlename').touched}">
+          <label>Middle Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
+          <div *ngIf="!this.form.get('contact.middlename').valid && this.form.get('contact.middlename').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.middlename').valid && this.form.get('contact.middlename').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.lastname').valid && this.form.get('contact.lastname').touched}">
+          <label>Last Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
+          <div *ngIf="!this.form.get('contact.lastname').valid && this.form.get('contact.lastname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.lastname').valid && this.form.get('contact.lastname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched}">
+          <label>Email</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1">
+          <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.telephone1').valid && this.form.get('contact.telephone1').touched}">
+          <label>Phone Number</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="telephone1">
+          <div *ngIf="!this.form.get('contact.telephone1').valid && this.form.get('contact.telephone1').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.telephone1').valid && this.form.get('contact.telephone1').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched}">
+          <label>Street Address</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_line1">
+          <div *ngIf="!this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched}">
+          <label>City</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_city">
+          <div *ngIf="!this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched}">
+          <label>Province / State</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_stateorprovince">
+          <div *ngIf="!this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched}">
+          <label>Country</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country">
+          <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched}">
+          <label>Postal / Zip Code</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="address1_postalcode">
+          <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div formGroupName="worker">
+      <h2>Worker</h2>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.isldbworker').valid && this.form.get('worker.isldbworker').touched}">
+          <label>Is LDB Worker?</label>
+          <br />
+          <input type="checkbox" formControlName="isldbworker">
+          <div *ngIf="!this.form.get('worker.isldbworker').valid && this.form.get('worker.isldbworker').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.isldbworker').valid && this.form.get('worker.isldbworker').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.firstname').valid && this.form.get('worker.firstname').touched}">
+          <label>First Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
+          <div *ngIf="!this.form.get('worker.firstname').valid && this.form.get('worker.firstname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.firstname').valid && this.form.get('worker.firstname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.middlename').valid && this.form.get('worker.middlename').touched}">
+          <label>Second Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
+          <div *ngIf="!this.form.get('worker.middlename').valid && this.form.get('worker.middlename').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.middlename').valid && this.form.get('worker.middlename').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched}">
+          <label>Last Name</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
+          <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched}">
+          <label>Birth Date</label>
+          <br />
+          <input type="text" formControlName='dateofbirth' style="width: 250px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+          <div *ngIf="!this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.gender').valid && this.form.get('worker.gender').touched}">
+          <label>Gender</label>
+          <br />
+          <select class="form-control" style="width: 250px;" type="text" formControlName="gender">
+          <option value=""></option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          </select>
+          <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched" class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched}">
+          <label>Birthplace</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="birthplace">
+          <div *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.driverslicencenumber').valid && this.form.get('worker.driverslicencenumber').touched}">
+          <label>Driver's License No.</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="driverslicencenumber">
+          <div *ngIf="!this.form.get('worker.driverslicencenumber').valid && this.form.get('worker.driverslicencenumber').touched"
+            class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.driverslicencenumber').valid && this.form.get('worker.driverslicencenumber').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched}">
+          <label>BC ID Card Number</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="bcidcardnumber">
+          <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched}">
+          <label>Phone Number</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="phonenumber">
+          <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.email').valid && this.form.get('worker.email').touched}">
+          <label>Email</label>
+          <br />
+          <input class="form-control" style="width: 250px;" type="text" formControlName="email">
+          <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="alert alert-danger" style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched}">
+          <label>Self Disclosure</label>
+          <br />
+          <input type="checkbox" formControlName="selfdisclosure">
+          <div *ngIf="!this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.selfdisclosure').valid && this.form.get('worker.selfdisclosure').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.triggerphs').valid && this.form.get('worker.triggerphs').touched}">
+          <label>Trigger PHS Creation</label>
+          <br />
+          <input type="checkbox" formControlName="triggerphs">
+          <div *ngIf="!this.form.get('worker.triggerphs').valid && this.form.get('worker.triggerphs').touched" class="alert alert-danger"
+            style="width: 250px;">
+            <div *ngIf="!this.form.get('worker.triggerphs').valid && this.form.get('worker.triggerphs').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section> -->
+    </div>
+
+    <div formArrayName="aliases">
+      <h2>Aliases</h2>
+      <button *ngIf="aliases.controls.length < 5" class="btn btn-primary" (click)="addAlias()">Add Alias</button>
+      <div *ngFor="let alias of aliases.controls; let i = index">
+        <div [formGroupName]="i">
+          <h3>Alias {{i + 1}}</h3>
+          <button class="btn btn-primary" (click)="deleteAlias(i)">Delete Alias
+          </button>
+          <section>
+            <div [ngClass]="{'has-error': !alias.get('firstname').valid && alias.get('firstname').touched}">
+              <label>First Name</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
+              <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !alias.get('middlename').valid && alias.get('middlename').touched}">
+              <label>Second Name</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
+              <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !alias.get('lastname').valid && alias.get('lastname').touched}">
+              <label>Last Name</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
+              <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="addresses">
+      <h2>Previous Addresses</h2>
+      <button class="btn btn-primary" (click)="addAddress()">Add previous address</button>
+      <div *ngFor="let address of addresses.controls; let i = index">
+        <div [formGroupName]="i">
+          <h3>Address {{i + 1}}</h3>
+          <section>
+            <button *ngIf="addresses.controls.length > 1" class="btn btn-primary" (click)="deleteAddress(i)">Delete previous
+              address
+            </button>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('streetaddress').valid && address.get('streetaddress').touched}">
+              <label>Street Address</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="streetaddress">
+              <div *ngIf="!address.get('streetaddress').valid && address.get('streetaddress').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('streetaddress').valid && address.get('streetaddress').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('city').valid && address.get('city').touched}">
+              <label>City</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="city">
+              <div *ngIf="!address.get('city').valid && address.get('city').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('city').valid && address.get('city').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('provstate').valid && address.get('provstate').touched}">
+              <label>Province / State</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="provstate">
+              <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('provstate').valid && address.get('provstate').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('country').valid && address.get('country').touched}">
+              <label>Country</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="country">
+              <div *ngIf="!address.get('country').valid && address.get('country').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('country').valid && address.get('country').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('postalcode').valid && address.get('postalcode').touched}">
+              <label>Postal / Zip Code</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" formControlName="postalcode">
+              <div *ngIf="!address.get('postalcode').valid && address.get('postalcode').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('postalcode').valid && address.get('postalcode').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('fromdate').valid && address.get('fromdate').touched}">
+              <label>From</label>
+              <br />
+              <input type="text" formControlName='fromdate' style="width: 250px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+              <div *ngIf="!address.get('fromdate').valid && address.get('fromdate').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('fromdate').valid && address.get('fromdate').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div [ngClass]="{'has-error': !address.get('todate').valid && address.get('todate').touched}">
+              <label>To</label>
+              <br />
+              <input type="text" formControlName='todate' style="width: 250px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+              <div *ngIf="!address.get('todate').valid && address.get('todate').touched" class="alert alert-danger" style="width: 250px;">
+                <div *ngIf="!address.get('todate').valid && address.get('todate').touched ">
+                  This is required
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <span style="float: right;">
+        <button class="btn btn-primary" (click)="save()">SAVE</button>
+          <button class="btn btn-primary">
+            <i class="fa fa-save" style="color: #fff;"></i>
+            SAVE FOR LATER</button>
+          <button routerLink="/worker-registration/spd-consent/{{workerId}}" class="btn btn-primary">SAVE & CONTINUE TO STEP 2 ></button>
+        </span>
+    </div>
+  </div>
+</div>
