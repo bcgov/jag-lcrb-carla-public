@@ -73,7 +73,7 @@
     Upload your completed form before continuing to Step 3.</p>
 
   <section>
-    <app-file-uploader *ngIf="currentUser?.contactid" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+    <app-file-uploader *ngIf="currentUser?.contactid" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT."
       [multipleFiles]="false" entityName="contact" [entityId]="currentUser?.contactid" #mainForm></app-file-uploader>
   </section>
 
