@@ -24,12 +24,14 @@ export class PolicyDocumentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: any) => {
-      this.setSlug(data.slug);
-    });
+    this.route.params
+      .filter(data => !!data && !!data.slug)
+      .subscribe((data: any) => {
+        this.setSlug(data.slug);
+      });
   }
 
-  setSlug(slug) {
+  public setSlug(slug) {
     this.policyDocumentDataService.getPolicyDocument(slug).then((data) => {
       this.policyDocument = data;
       this.title = this.policyDocument.title;
