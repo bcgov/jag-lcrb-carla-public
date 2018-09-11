@@ -201,10 +201,16 @@ namespace Gov.Lclb.Cllb.SpdSync
                 List < WorkerResponse > response = WorkerResponseParser.ParseWorkerResponse(payload);
                 foreach (WorkerResponse item in response)
                 {
-                    // get the worker record.
-                    string filter = "AdoxioLcrbworkerjobid eq "
-                    _dynamics.Spddatarows.Get ()
+                    // search for the Personal History Record.
 
+                    MicrosoftDynamicsCRMadoxioSpddatarow record = _dynamics.Spddatarows.GetByWorkerJobId(item.RecordIdentifier);
+
+                    if (record != null)
+                    {
+                        // update the record.
+                        MicrosoftDynamicsCRMadoxioSpddatarow patchRecord = new MicrosoftDynamicsCRMadoxioSpddatarow();
+                        
+                    }
                 }
             }
 
