@@ -1194,7 +1194,7 @@
         }
       }
     },
-        "/adoxio_aliases": {
+    "/adoxio_aliases": {
       "get": {
         "tags": [
           "aliases"
@@ -5616,6 +5616,494 @@
           "adoxio_licenceses"
         ],
         "summary": "Update entity in adoxio_licenceses"
+      }
+    },
+    "/adoxio_personalhistorysummaries": {
+      "get": {
+        "tags": [
+          "personalhistorysummaries"
+        ],
+        "summary": "Get entities from adoxio_personalhistorysummaries",
+        "operationId": "Personalhistorysummaries_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_birthlastname",
+                "adoxio_birthlastname desc",
+                "statuscode",
+                "statuscode desc",
+                "adoxio_birthfirstname",
+                "adoxio_birthfirstname desc",
+                "adoxio_licenceorjobnumber",
+                "adoxio_licenceorjobnumber desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "adoxio_legalentityname",
+                "adoxio_legalentityname desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "adoxio_middlename",
+                "adoxio_middlename desc",
+                "adoxio_expirydate",
+                "adoxio_expirydate desc",
+                "adoxio_phonenumber",
+                "adoxio_phonenumber desc",
+                "_adoxio_workerid_value",
+                "_adoxio_workerid_value desc",
+                "adoxio_gender",
+                "adoxio_gender desc",
+                "adoxio_complete",
+                "adoxio_complete desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "_adoxio_legalentityid_value",
+                "_adoxio_legalentityid_value desc",
+                "adoxio_personalhistorysummaryid",
+                "adoxio_personalhistorysummaryid desc",
+                "adoxio_residenceaddresspostalcode",
+                "adoxio_residenceaddresspostalcode desc",
+                "versionnumber",
+                "versionnumber desc",
+                "_adoxio_applicationid_value",
+                "_adoxio_applicationid_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_birthmiddlename",
+                "adoxio_birthmiddlename desc",
+                "adoxio_otherlastnames",
+                "adoxio_otherlastnames desc",
+                "adoxio_fullname",
+                "adoxio_fullname desc",
+                "_adoxio_contactid_value",
+                "_adoxio_contactid_value desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "adoxio_establishmentparcelid",
+                "adoxio_establishmentparcelid desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_securitystatus",
+                "adoxio_securitystatus desc",
+                "adoxio_driverslicencenumber",
+                "adoxio_driverslicencenumber desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_establishmentname",
+                "adoxio_establishmentname desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_residenceaddresscity",
+                "adoxio_residenceaddresscity desc",
+                "adoxio_workerjobnumber",
+                "adoxio_workerjobnumber desc",
+                "statecode",
+                "statecode desc",
+                "adoxio_firstname",
+                "adoxio_firstname desc",
+                "adoxio_residenceaddressstreet",
+                "adoxio_residenceaddressstreet desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "adoxio_sameasapplyingperson",
+                "adoxio_sameasapplyingperson desc",
+                "modifiedon",
+                "modifiedon desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "adoxio_birthdate",
+                "adoxio_birthdate desc",
+                "adoxio_associatejobnumber",
+                "adoxio_associatejobnumber desc",
+                "createdon",
+                "createdon desc",
+                "adoxio_lastname",
+                "adoxio_lastname desc",
+                "adoxio_email",
+                "adoxio_email desc",
+                "adoxio_completedon",
+                "adoxio_completedon desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_residenceaddressprovincecountry",
+                "adoxio_residenceaddressprovincecountry desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_birthlastname",
+                "statuscode",
+                "adoxio_birthfirstname",
+                "adoxio_licenceorjobnumber",
+                "_modifiedonbehalfby_value",
+                "adoxio_legalentityname",
+                "adoxio_name",
+                "adoxio_middlename",
+                "adoxio_expirydate",
+                "adoxio_phonenumber",
+                "_adoxio_workerid_value",
+                "adoxio_gender",
+                "adoxio_complete",
+                "_owningteam_value",
+                "_adoxio_legalentityid_value",
+                "adoxio_personalhistorysummaryid",
+                "adoxio_residenceaddresspostalcode",
+                "versionnumber",
+                "_adoxio_applicationid_value",
+                "timezoneruleversionnumber",
+                "adoxio_birthmiddlename",
+                "adoxio_otherlastnames",
+                "adoxio_fullname",
+                "_adoxio_contactid_value",
+                "importsequencenumber",
+                "_createdonbehalfby_value",
+                "adoxio_establishmentparcelid",
+                "_owningbusinessunit_value",
+                "adoxio_securitystatus",
+                "adoxio_driverslicencenumber",
+                "_createdby_value",
+                "adoxio_establishmentname",
+                "overriddencreatedon",
+                "adoxio_residenceaddresscity",
+                "adoxio_workerjobnumber",
+                "statecode",
+                "adoxio_firstname",
+                "adoxio_residenceaddressstreet",
+                "_modifiedby_value",
+                "adoxio_sameasapplyingperson",
+                "modifiedon",
+                "utcconversiontimezonecode",
+                "adoxio_birthdate",
+                "adoxio_associatejobnumber",
+                "createdon",
+                "adoxio_lastname",
+                "adoxio_email",
+                "adoxio_completedon",
+                "_owninguser_value",
+                "_ownerid_value",
+                "adoxio_residenceaddressprovincecountry"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_personalhistorysummary_SyncErrors",
+                "adoxio_personalhistorysummary_DuplicateMatchingRecord",
+                "adoxio_personalhistorysummary_DuplicateBaseRecord",
+                "adoxio_personalhistorysummary_SharePointDocumentLocations",
+                "adoxio_personalhistorysummary_AsyncOperations",
+                "adoxio_personalhistorysummary_BulkDeleteFailures",
+                "adoxio_applicationid",
+                "adoxio_adoxio_personalhistorysummary_adoxio_legalentity_CorrespondingPersonalHistorySummary",
+                "adoxio_contactid",
+                "adoxio_WorkerId",
+                "adoxio_LegalEntityId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Collection of adoxio_personalhistorysummaries",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_personalhistorysummary"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "personalhistorysummaries"
+        ],
+        "summary": "Add new entity to adoxio_personalhistorysummaries",
+        "operationId": "Personalhistorysummaries_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_personalhistorysummary"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_personalhistorysummary"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_personalhistorysummaries({adoxio_personalhistorysummaryid})": {
+      "get": {
+        "tags": [
+          "personalhistorysummaries"
+        ],
+        "summary": "Get entity from adoxio_personalhistorysummaries by key",
+        "operationId": "Personalhistorysummaries_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_personalhistorysummaryid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_personalhistorysummaryid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_birthlastname",
+                "statuscode",
+                "adoxio_birthfirstname",
+                "adoxio_licenceorjobnumber",
+                "_modifiedonbehalfby_value",
+                "adoxio_legalentityname",
+                "adoxio_name",
+                "adoxio_middlename",
+                "adoxio_expirydate",
+                "adoxio_phonenumber",
+                "_adoxio_workerid_value",
+                "adoxio_gender",
+                "adoxio_complete",
+                "_owningteam_value",
+                "_adoxio_legalentityid_value",
+                "adoxio_personalhistorysummaryid",
+                "adoxio_residenceaddresspostalcode",
+                "versionnumber",
+                "_adoxio_applicationid_value",
+                "timezoneruleversionnumber",
+                "adoxio_birthmiddlename",
+                "adoxio_otherlastnames",
+                "adoxio_fullname",
+                "_adoxio_contactid_value",
+                "importsequencenumber",
+                "_createdonbehalfby_value",
+                "adoxio_establishmentparcelid",
+                "_owningbusinessunit_value",
+                "adoxio_securitystatus",
+                "adoxio_driverslicencenumber",
+                "_createdby_value",
+                "adoxio_establishmentname",
+                "overriddencreatedon",
+                "adoxio_residenceaddresscity",
+                "adoxio_workerjobnumber",
+                "statecode",
+                "adoxio_firstname",
+                "adoxio_residenceaddressstreet",
+                "_modifiedby_value",
+                "adoxio_sameasapplyingperson",
+                "modifiedon",
+                "utcconversiontimezonecode",
+                "adoxio_birthdate",
+                "adoxio_associatejobnumber",
+                "createdon",
+                "adoxio_lastname",
+                "adoxio_email",
+                "adoxio_completedon",
+                "_owninguser_value",
+                "_ownerid_value",
+                "adoxio_residenceaddressprovincecountry"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_personalhistorysummary_SyncErrors",
+                "adoxio_personalhistorysummary_DuplicateMatchingRecord",
+                "adoxio_personalhistorysummary_DuplicateBaseRecord",
+                "adoxio_personalhistorysummary_SharePointDocumentLocations",
+                "adoxio_personalhistorysummary_AsyncOperations",
+                "adoxio_personalhistorysummary_BulkDeleteFailures",
+                "adoxio_applicationid",
+                "adoxio_adoxio_personalhistorysummary_adoxio_legalentity_CorrespondingPersonalHistorySummary",
+                "adoxio_contactid",
+                "adoxio_WorkerId",
+                "adoxio_LegalEntityId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_personalhistorysummary"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "personalhistorysummaries"
+        ],
+        "summary": "Delete entity from adoxio_personalhistorysummaries",
+        "operationId": "Personalhistorysummaries_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_personalhistorysummaryid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_personalhistorysummaryid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "personalhistorysummaries"
+        ],
+        "summary": "Update entity in adoxio_personalhistorysummaries",
+        "operationId": "Personalhistorysummaries_Update",
+        "parameters": [
+          {
+            "name": "adoxio_personalhistorysummaryid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_personalhistorysummaryid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_personalhistorysummary"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
       }
     },
 	"/adoxio_policydocuments": {
@@ -11366,7 +11854,11 @@
 
 	},
   "definitions": {
-        "Microsoft.Dynamics.CRM.accountleads": {
+    "Microsoft.Dynamics.CRM.crmbaseentity": {
+      "title": "crmbaseentity",
+      "type": "object"
+    },
+    "Microsoft.Dynamics.CRM.accountleads": {
       "title": "accountleads",
       "type": "object",
       "properties": {
@@ -18954,6 +19446,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_establishmentaddresspostalcode": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_contraventionnoticenumber": {
           "type": "string",
           "x-nullable": true
@@ -18962,8 +19458,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_liquorservice": {
-          "type": "boolean",
+        "adoxio_notapprovedreason": {
+          "type": "string",
           "x-nullable": true
         },
         "_modifiedonbehalfby_value": {
@@ -19027,6 +19523,14 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "_adoxio_investigator_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_adoxio_contactid_value": {
           "type": "string",
           "x-nullable": true
@@ -19037,6 +19541,10 @@
         },
         "adoxio_ubrewuvin": {
           "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_establishmentaddresscity": {
+          "type": "string",
           "x-nullable": true
         },
         "_ownerid_value": {
@@ -19083,15 +19591,15 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_overcrowding": {
-          "type": "boolean",
-          "x-nullable": true
-        },
         "adoxio_alternatecontraventiontext": {
           "type": "string",
           "x-nullable": true
         },
         "adoxio_entertainment": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_liquorservice": {
           "type": "boolean",
           "x-nullable": true
         },
@@ -19111,7 +19619,11 @@
           "type": "string",
           "x-nullable": true
         },
-        "_createdby_value": {
+        "adoxio_overcrowding": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_establishmentproposedname": {
           "type": "string",
           "x-nullable": true
         },
@@ -19124,6 +19636,10 @@
           "x-nullable": true
         },
         "adoxio_regionalmanagernameforsignature": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_establishmentaddressstreet": {
           "type": "string",
           "x-nullable": true
         },
@@ -19159,8 +19675,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "_adoxio_investigator_value": {
-          "type": "string",
+        "adoxio_isapproved": {
+          "type": "integer",
           "x-nullable": true
         },
         "adoxio_operatingoutsideofprimarypurpose": {
@@ -19199,6 +19715,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "_adoxio_secondaryinvestigatorid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_alternatecontraventiontitle": {
           "type": "string",
           "x-nullable": true
@@ -19226,6 +19746,9 @@
         "adoxio_productionofrecords": {
           "type": "boolean",
           "x-nullable": true
+        },
+        "adoxio_SecondaryInvestigatorId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         },
         "adoxio_investigation_QueueItems": {
           "type": "array",
@@ -21358,6 +21881,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_position": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_createdonbehalfby_value": {
           "type": "string",
           "x-nullable": true
@@ -22104,6 +22631,10 @@
           "x-nullable": true
         },
         "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_position": {
           "type": "string",
           "x-nullable": true
         },
@@ -73070,6 +73601,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_workerinvoicehistory"
           }
         },
+        "adoxio_systemuser_secondaryinvestigator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+          }
+        },
         "lk_adoxio_agencycommunication_createdby": {
           "type": "array",
           "items": {
@@ -84357,17 +84894,6 @@
         "Filter"
       ]
     },
-	"odata.id": {
-		"required": [
-			"@odata.id"
-		],
-		"type": "object",
-		"properties": {
-			"@odata.id": {
-			"type": "string"
-			}
-		}
-	},
     "odata.error": {
       "type": "object",
       "required": [
@@ -84424,7 +84950,19 @@
           "type": "string"
         }
       }
-    }
+    },
+	"odata.id": {
+		"required": [
+			"@odata.id"
+		],
+		"type": "object",
+		"properties": {
+			"@odata.id": {
+			"type": "string"
+			}
+		}
+	}
+
   },
   "tags": [
     {
