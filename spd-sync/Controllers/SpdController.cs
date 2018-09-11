@@ -44,6 +44,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         public ActionResult Receive()
         {
             // check the file drop for a file, and then process it.
+            BackgroundJob.Enqueue(() => new SpdUtils(Configuration).ReceiveImportJob(null));
             _logger.LogInformation("Started receive import job");
             return Ok();
 

@@ -5,6 +5,8 @@ using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
+using SpdSync;
+using SpdSync.models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -176,12 +178,41 @@ namespace Gov.Lclb.Cllb.SpdSync
         }
 
         /// <summary>
+        /// Check the import mailbox.  Returns the first CSV file in the mailbox.
+        /// </summary>
+        /// <returns></returns>
+        public static string CheckMailBoxForImport()
+        {
+            string result = File.ReadAllText("C:\\tmp\\testimport.csv");
+            return result;
+        }
+
+        /// <summary>
         /// Hangfire job to receive an import from SPD.
         /// </summary>
 
-        public static void ReceiveImportJob(string baseUri, PerformContext hangfireContext)
+        public void ReceiveImportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Import Job.");
+
+            string payload = CheckMailBoxForImport();
+            if (payload != null) // parse the payload
+            {
+                List < WorkerResponse > response = WorkerResponseParser.ParseWorkerResponse(payload);
+                foreach (WorkerResponse item in response)
+                {
+                    // search for the Personal History Record.
+
+                    MicrosoftDynamicsCRMadoxioSpddatarow record = _dynamics.Spddatarows.GetByWorkerJobId(item.RecordIdentifier);
+
+                    if (record != null)
+                    {
+                        // update the record.
+                        MicrosoftDynamicsCRMadoxioSpddatarow patchRecord = new MicrosoftDynamicsCRMadoxioSpddatarow();
+                        
+                    }
+                }
+            }
 
             hangfireContext.WriteLine("Done.");
         }
@@ -337,8 +368,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 task.Wait();
                 authenticationResult = task.Result;
             }
-
-
 
             ServiceClientCredentials serviceClientCredentials = null;
 
