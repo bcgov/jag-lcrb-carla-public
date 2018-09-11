@@ -29,6 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = worker.AdoxioMiddlename;
                 result.lastname = worker.AdoxioLastname;
                 result.dateofbirth = worker.AdoxioDateofbirth;
+                result.modifiedOn =  worker.Modifiedon;
                 if (worker.AdoxioGendercode != null)
                 {
                     result.gender = (ViewModels.Gender)worker.AdoxioGendercode;
