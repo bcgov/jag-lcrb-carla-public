@@ -61,6 +61,6 @@ use Odata.OpenAPI to convert the file
 5. Use this file as an input to autorest.
 
 ```
-autorest --verbose --input-file=dynamics-2.1.json --output-folder=Dynamics-Autorest  --csharp --use-datetimeoffset --generate-empty-classes --override-client-name=DynamicsClient  --namespace=Gov.Lclb.Cllb.Interfaces --preview  --add-credentials
+autorest --verbose --input-file=dynamics-2.1.json --output-folder=Dynamics-Autorest  --csharp --use-datetimeoffset --generate-empty-classes --override-client-name=DynamicsClient  --namespace=Gov.Lclb.Cllb.Interfaces --preview  --add-credentials --debug
 ```
 
