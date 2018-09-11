@@ -1,0 +1,45 @@
+.submitted-header {
+    background-color: rgba(56, 89, 138, 1);
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    color: #fff !important;
+  }
+  
+  .submitted-header h2 {
+    color: #fff !important;
+  }
+  
+  .submitted-content {
+    background-color: #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .submit-container {
+    background-color: #38598A;
+    border-bottom: solid 4px #FFCC00;
+    color: #fff;
+    margin-bottom: 20px;
+    padding: 30px;
+    padding-top: 20px;
+    h2 {
+        color: #fff;
+    }
+  }
+
+  .dashboard-spacing {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  @media (max-width: 575.98px) {
+    .dashboard-spacing {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+  }
