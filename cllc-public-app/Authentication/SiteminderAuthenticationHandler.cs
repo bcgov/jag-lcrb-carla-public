@@ -20,6 +20,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
     /// </summary>
     public class SiteMinderAuthOptions : AuthenticationSchemeOptions
     {
+        // note that header keys are case insensitive, thus the reason why the keys are all lower case.
+
 		private const string ConstDevAuthenticationTokenKey = "DEV-USER";
 		private const string ConstDevBCSCAuthenticationTokenKey = "DEV-BCSC-USER";
         private const string ConstDevDefaultUserId = "TMcTesterson";       
@@ -27,12 +29,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         private const string ConstSiteMinderUserIdentifierKey = "smgov_useridentifier";
         private const string ConstSiteMinderUniversalIdKey = "sm_universalid";
         private const string ConstSiteMinderUserNameKey = "sm_user";
+
         //BCeId Values
         private const string ConstSiteMinderBusinessGuidKey = "smgov_businessguid"; 
         private const string ConstSiteMinderBusinessLegalNameKey = "smgov_businesslegalname";
 
         //BC Services Card
-
+        private const string ConstSiteMinderBirthDate = "smgov_birthdate";
 
         //BCeID or BC Services Card
         private const string ConstSiteMinderUserType = "smgov_usertype"; // get the type values from siteminder header this will be bceid or bcservices
@@ -43,6 +46,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         private const string ConstMissingSiteMinderGuidError = "Missing SiteMinder Guid";
         private const string ConstMissingSiteMinderUserTypeError = "Missing SiteMinder User Type";
         private const string ConstMissingDbUserIdError = "Could not find UserId in the database";
+        private const string ConstUnderageError = "You must be 19 years of age or older to access this website.";
+
         private const string ConstInactivegDbUserIdError = "Database UserId is inactive";
         private const string ConstInvalidPermissions = "UserId does not have valid permissions";
 
@@ -58,6 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             SiteMinderUserNameKey = ConstSiteMinderUserNameKey;
             SiteMinderUserDisplayNameKey = ConstSiteMinderUserDisplayNameKey;
             SiteMinderUserTypeKey = ConstSiteMinderUserType;
+            SiteMinderBirthDate = ConstSiteMinderUserType;
             MissingSiteMinderUserIdError = ConstMissingSiteMinderUserIdError;
             MissingSiteMinderUserTypeError = ConstMissingSiteMinderUserIdError;
             MissingSiteMinderGuidError = ConstMissingSiteMinderGuidError;
@@ -67,7 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             DevAuthenticationTokenKey = ConstDevAuthenticationTokenKey;
 			DevBCSCAuthenticationTokenKey = ConstDevBCSCAuthenticationTokenKey;
             DevDefaultUserId = ConstDevDefaultUserId;
-
+            UnderageError = ConstUnderageError;
         }        
 
         /// <summary>
@@ -113,6 +119,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         public string SiteMinderUserTypeKey { get; set; }
 
         /// <summary>
+        /// BC Service Card - Birth Date field.
+        /// </summary>
+        public string SiteMinderBirthDate { get; set; }
+
+        /// <summary>
         /// Missing SiteMinder User Type Error
         /// </summary>
         public string MissingSiteMinderUserTypeError { get; set; }
@@ -136,6 +147,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// Inactive Database UserId Error
         /// </summary>
         public string InactivegDbUserIdError { get; set; }
+
+        /// <summary>
+        /// Inactive Database UserId Error
+        /// </summary>
+        public string UnderageError { get; set; }
 
         /// <summary>
         /// User does not jave active / valid permissions
@@ -391,6 +407,22 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 _logger.LogDebug("Loading user external id = " + siteMinderGuid);
                 userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid);
                 _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
+
+                // check that the potential new user is 19.
+                if (userSettings.AuthenticatedUser != null && userSettings.AuthenticatedUser.ContactId == null)
+                {
+                    string rawBirthDate = context.Request.Headers[options.SiteMinderBirthDate];
+                    // get the birthdate.
+                    if (DateTimeOffset.TryParse (rawBirthDate, out DateTimeOffset birthDate))
+                    {
+                        DateTimeOffset nineteenYears = DateTimeOffset.Now.AddYears(-19);
+                        if (birthDate > nineteenYears)
+                        {
+                            // younger than 19, cannot login.
+                            return AuthenticateResult.Fail(options.UnderageError);
+                        }
+                    }
+                }
 
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
