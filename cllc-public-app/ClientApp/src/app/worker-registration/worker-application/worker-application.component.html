@@ -34,19 +34,6 @@
         </div>
       </section> -->
       <section>
-        <div [ngClass]="{'has-error': !this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched}">
-          <label>Last Name</label>
-          <br />
-          <input class="form-control" style="max-width: 450px; min-width: 250px;" readonly type="text" formControlName="lastname">
-          <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched" class="alert alert-danger"
-            style="max-width: 450px; min-width: 250px;">
-            <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched ">
-              This is required
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
         <div [ngClass]="{'has-error': !this.form.get('worker.firstname').valid && this.form.get('worker.firstname').touched}">
           <label>First Name</label>
           <br />
@@ -72,6 +59,68 @@
           </div>
         </div>
       </section>
+      <section>
+        <div [ngClass]="{'has-error': !this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched}">
+          <label>Last Name</label>
+          <br />
+          <input class="form-control" style="max-width: 450px; min-width: 250px;" readonly type="text" formControlName="lastname">
+          <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched" class="alert alert-danger"
+            style="max-width: 450px; min-width: 250px;">
+            <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched ">
+              This is required
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div formArrayName="aliases">
+        <div *ngFor="let alias of aliases.controls; let i = index">
+          <div [formGroupName]="i">
+            <h3>PREVIOUS NAME {{i == 0 ? '' : i + 1}} <i class="fa fa-trash" style="float: right;" (click)="deleteAlias(i)" aria-hidden="true"></i></h3>
+            <!-- <button class="btn btn-primary" (click)="deleteAlias(i)">Delete Alias
+              </button> -->
+            <section>
+              <div [ngClass]="{'has-error': !alias.get('firstname').valid && alias.get('firstname').touched}">
+                <label>First Name</label>
+                <br />
+                <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
+                <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched" class="alert alert-danger" style="width: 250px;">
+                  <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched ">
+                    This is required
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div [ngClass]="{'has-error': !alias.get('middlename').valid && alias.get('middlename').touched}">
+                <label>Second Name</label>
+                <br />
+                <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
+                <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched" class="alert alert-danger" style="width: 250px;">
+                  <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched ">
+                    This is required
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div [ngClass]="{'has-error': !alias.get('lastname').valid && alias.get('lastname').touched}">
+                <label>Last Name</label>
+                <br />
+                <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
+                <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched" class="alert alert-danger" style="width: 250px;">
+                  <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched ">
+                    This is required
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <span *ngIf="aliases.controls.length < 3" >If you have more than one previous name, please <a href="javascript:void(0)" (click)="addAlias()">click here to add them.</a></span>
+        <p></p>
+        <hr>
+      </div>
       <section>
         <div [ngClass]="{'has-error': !this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched}">
           <label>Place of Birth</label>
@@ -103,12 +152,9 @@
         <div [ngClass]="{'has-error': !this.form.get('worker.gender').valid && this.form.get('worker.gender').touched}">
           <label>Sex</label>
           <br />
-          <select class="form-control" style="width: 250px;" type="text" formControlName="gender">
-            <option value=""></option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
+          <input type="radio" name="gender" formControlName="gender" value="Male"> &nbsp; Male 
+          <input type="radio" name="gender" formControlName="gender" value="Female"> &nbsp; Female
+          <input type="radio" name="gender" formControlName="gender" value="Other"> &nbsp; Other
           <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched" class="alert alert-danger" style="width: 250px;">
             <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched ">
               This is required
@@ -131,7 +177,7 @@
       </section>
       <section>
         <div [ngClass]="{'has-error': !this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched}">
-          <label>BC ID Card Number</label>
+          <label>BCID Card Number</label>
           <br />
           <input class="form-control" style="width: 250px;" type="text" formControlName="bcidcardnumber">
           <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched" class="alert alert-danger"
@@ -330,54 +376,7 @@
       </section>
     </div>
 
-    <div formArrayName="aliases">
-      <h3 class="blue-header">ALIASES</h3>
-      <button *ngIf="aliases.controls.length < 5" class="btn btn-primary" (click)="addAlias()">Add Alias</button>
-      <div *ngFor="let alias of aliases.controls; let i = index">
-        <div [formGroupName]="i">
-          <h3>Alias {{i + 1}} <i class="fa fa-trash" style="float: right;" (click)="deleteAlias(i)" aria-hidden="true"></i></h3>
-          <!-- <button class="btn btn-primary" (click)="deleteAlias(i)">Delete Alias
-          </button> -->
-          <section>
-            <div [ngClass]="{'has-error': !alias.get('firstname').valid && alias.get('firstname').touched}">
-              <label>First Name</label>
-              <br />
-              <input class="form-control" style="width: 250px;" type="text" formControlName="firstname">
-              <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched" class="alert alert-danger" style="width: 250px;">
-                <div *ngIf="!alias.get('firstname').valid && alias.get('firstname').touched ">
-                  This is required
-                </div>
-              </div>
-            </div>
-          </section>
-          <section>
-            <div [ngClass]="{'has-error': !alias.get('middlename').valid && alias.get('middlename').touched}">
-              <label>Second Name</label>
-              <br />
-              <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
-              <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched" class="alert alert-danger" style="width: 250px;">
-                <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched ">
-                  This is required
-                </div>
-              </div>
-            </div>
-          </section>
-          <section>
-            <div [ngClass]="{'has-error': !alias.get('lastname').valid && alias.get('lastname').touched}">
-              <label>Last Name</label>
-              <br />
-              <input class="form-control" style="width: 250px;" type="text" formControlName="lastname">
-              <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched" class="alert alert-danger" style="width: 250px;">
-                <div *ngIf="!alias.get('lastname').valid && alias.get('lastname').touched ">
-                  This is required
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <hr>
-      </div>
-    </div>
+
 
     <h3 class="blue-header">ADDRESSES</h3>
     <p></p>
