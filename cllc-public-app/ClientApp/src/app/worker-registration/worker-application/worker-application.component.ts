@@ -37,7 +37,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   public get aliases(): FormArray {
-    return this.form.get('aliases') as FormArray;
+    return this.form.get('worker.aliases') as FormArray;
   }
 
   constructor(private userDataService: UserDataService,
@@ -52,7 +52,7 @@ export class WorkerApplicationComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.workerId = params.id;
     });
-   }
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -83,10 +83,10 @@ export class WorkerApplicationComponent implements OnInit {
         phonenumber: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         selfdisclosure: ['', Validators.required],
-        // triggerphs: ['', Validators.required]
+        // triggerphs: ['', Validators.required],
+        aliases: this.fb.array([
+        ]),
       }),
-      aliases: this.fb.array([
-      ]),
       addresses: this.fb.array([
       ])
     });
@@ -94,13 +94,13 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   reloadUser() {
-    this.busy =  this.userDataService.getCurrentUser()
+    this.busy = this.userDataService.getCurrentUser()
       .subscribe((data: User) => {
         this.currentUser = data;
         this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-         Observable.zip(
+          Observable.zip(
             this.workerDataService.getWorker(this.workerId),
             this.aliasDataService.getAliases(this.currentUser.contactid),
             this.previousAddressDataService.getPreviousAdderesses(this.currentUser.contactid)
@@ -183,7 +183,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   clearAddresses() {
-    for (let i = this.addresses.controls.length; i > 0;  i--) {
+    for (let i = this.addresses.controls.length; i > 0; i--) {
       this.addresses.removeAt(0);
     }
   }
@@ -201,7 +201,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   clearAliases() {
-    for (let i = this.aliases.controls.length; i > 0;  i--) {
+    for (let i = this.aliases.controls.length; i > 0; i--) {
       this.aliases.removeAt(0);
     }
   }
