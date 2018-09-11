@@ -83,6 +83,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenses Licenses { get; }
 
         /// <summary>
+        /// Gets the IPersonalhistorysummaries.
+        /// </summary>
+        IPersonalhistorysummaries Personalhistorysummaries { get; }
+
+        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         IPolicydocuments Policydocuments { get; }
