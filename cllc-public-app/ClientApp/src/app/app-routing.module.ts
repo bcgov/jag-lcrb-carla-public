@@ -71,15 +71,18 @@ const routes: Routes = [
   },
   {
     path: 'worker-registration/user-comfirmation',
-    component: UserConfirmationComponent
+    component: UserConfirmationComponent,
+    canActivate: [ServiceCardAuthGuard]
   },
   {
     path: 'worker-registration/payment-confirmation',
     component: WorkerPaymentConfirmationComponent,
+    canActivate: [ServiceCardAuthGuard]
   },
   {
     path: 'worker-registration',
     component: WorkerRegistrationComponent,
+    canActivate: [ServiceCardAuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -87,7 +90,8 @@ const routes: Routes = [
       },
       {
         path: 'application/:id',
-        component: WorkerApplicationComponent
+        component: WorkerApplicationComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: 'pre-payment/:id',
@@ -95,7 +99,8 @@ const routes: Routes = [
       },
       {
         path: 'spd-consent/:id',
-        component: SpdConsentComponent
+        component: SpdConsentComponent,
+        canDeactivate: [CanDeactivateGuard]
       }
     ]
   },

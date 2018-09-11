@@ -33,6 +33,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Contact contact { get; set; }
         public bool paymentReceived { get; set; }
         public DateTimeOffset? paymentRecievedDate { get; set; }
+        public DateTimeOffset? modifiedOn { get; set; }
         public string workerId { get; set; }
     }
 }
