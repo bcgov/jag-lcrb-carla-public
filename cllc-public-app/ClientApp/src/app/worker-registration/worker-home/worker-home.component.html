@@ -4,16 +4,23 @@
     <div class="col-lg-7 col-sm-12">
       <app-policy-document #policyDocs></app-policy-document>
       <p></p>
-      <button class="btn btn-primary">REGISTER NOW</button>
+      <button class="btn btn-primary" (click)="openRegisterDialog()">REGISTER NOW</button>
       <a class="btn btn-primary" href="bcservice">LOGIN</a>
     </div>
     <div class="col-lg-4 col-sm-12" style="position: relative">
       <!-- <div [ngBusy]="busy"></div> -->
       <p></p>
       <section class="submit-container">
-        <div>
-          <h2>Get a BC Services Card</h2>
-        </div>
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-id-card"></i></h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Get a BC Services Card</h2>
+            </td>
+          </tr>
+        </table>
         <div class="submit-content">
           <p>B.C. residents who have lived in the province for at least six months must use a BC Services Card to log in
             to the Cannabis Worker Registry. Learn how to get a card.
@@ -22,9 +29,16 @@
         </div>
       </section>
       <section class="submit-container">
-        <div>
-          <h2>Applicants Without a BC Services Card</h2>
-        </div>
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-question"></i></h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Applicants Without a BC Services Card</h2>
+            </td>
+          </tr>
+        </table>
         <div class="submit-content">
           <p>Applicants who haven’t lived in B.C. for at least six months or who live outside the province must email the
             Liquor and Cannabis Regulation Branch for a Worker Registration Application Form.</p>
