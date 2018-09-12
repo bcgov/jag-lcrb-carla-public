@@ -4,10 +4,8 @@
     <h1>Worker Registration Dashboard</h1>
     <div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Your Worker Registration Application and Consent for Cannabis Security Screening are incomplete. You can return to this page
+        and complete and submit them with payment at any time.
       </p>
 
       <h2>Registration Status</h2>
@@ -19,7 +17,7 @@
           <ng-container matColumnDef="lastUpdated">
             <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <!-- {{element?.modifiedon | date:'mediumDate'}}  -->
+              {{element?.modifiedOn | date:'mediumDate'}}
             </mat-cell>
           </ng-container>
 
@@ -28,14 +26,15 @@
             <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <a routerLink="/worker-registration/application/{{element.id}}">{{element?.firstname}} {{element?.middlename}}
-                {{element.lastname}}</a>
+                {{element.lastname}}
+              </a>
             </mat-cell>
           </ng-container>
 
           <!-- Column -->
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
-            <mat-cell *matCellDef="let element">
+            <mat-cell *matCellDef="let element"> {{element.paymentReceived === true ? 'Submitted' : 'In progress'}}
               <!-- <span (click)="cancelApplication(element?.id, element?.establishmentName, element?.name)">
               <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
               <a href="javascript: void(0)">
@@ -52,9 +51,9 @@
     </div>
   </section>
 
-  
+
   <section *ngIf="isNewUser && dataLoaded">
-      <app-user-confirmation [currentUser]="currentUser" (reloadUser)="reloadUser()"></app-user-confirmation>
+    <app-user-confirmation [currentUser]="currentUser" (reloadUser)="reloadUser()"></app-user-confirmation>
   </section>
 
 </div>
