@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// duplicaterulecondition
+    /// </summary>
     public partial class MicrosoftDynamicsCRMduplicaterulecondition
     {
         /// <summary>
@@ -26,30 +29,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMduplicaterulecondition class.
         /// </summary>
-        public MicrosoftDynamicsCRMduplicaterulecondition(IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _regardingobjectidValue = default(string), string baseattributename = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string duplicateruleconditionid = default(string), bool? ignoreblankvalues = default(bool?), string matchingattributename = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), int? operatorcode = default(int?), int? operatorparam = default(int?), string owningbusinessunit = default(string), string owninguser = default(string), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule))
+        public MicrosoftDynamicsCRMduplicaterulecondition(string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), string baseattributename = default(string), string _modifiedonbehalfbyValue = default(string), string matchingattributename = default(string), string _regardingobjectidValue = default(string), string owninguser = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), bool? ignoreblankvalues = default(bool?), int? operatorparam = default(int?), string owningbusinessunit = default(string), string duplicateruleconditionid = default(string), int? operatorcode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            DuplicateRuleConditionSyncErrors = duplicateRuleConditionSyncErrors;
             this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owneridValue = _owneridValue;
-            this._regardingobjectidValue = _regardingobjectidValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Baseattributename = baseattributename;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Duplicateruleconditionid = duplicateruleconditionid;
-            Ignoreblankvalues = ignoreblankvalues;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Matchingattributename = matchingattributename;
-            Modifiedby = modifiedby;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            Owninguser = owninguser;
             Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Operatorcode = operatorcode;
+            Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Ignoreblankvalues = ignoreblankvalues;
             Operatorparam = operatorparam;
             Owningbusinessunit = owningbusinessunit;
-            Owninguser = owninguser;
+            Duplicateruleconditionid = duplicateruleconditionid;
+            Operatorcode = operatorcode;
+            DuplicateRuleConditionSyncErrors = duplicateRuleConditionSyncErrors;
             Regardingobjectid = regardingobjectid;
+            Createdonbehalfby = createdonbehalfby;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Modifiedby = modifiedby;
+            Createdby = createdby;
             CustomInit();
         }
 
@@ -60,28 +63,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "DuplicateRuleCondition_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> DuplicateRuleConditionSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -90,8 +73,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -100,28 +83,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "duplicateruleconditionid")]
-        public string Duplicateruleconditionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ignoreblankvalues")]
-        public bool? Ignoreblankvalues { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,8 +93,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,13 +108,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "operatorcode")]
-        public int? Operatorcode { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ignoreblankvalues")]
+        public bool? Ignoreblankvalues { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,13 +133,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
+        [JsonProperty(PropertyName = "duplicateruleconditionid")]
+        public string Duplicateruleconditionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operatorcode")]
+        public int? Operatorcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DuplicateRuleCondition_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> DuplicateRuleConditionSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid")]
         public MicrosoftDynamicsCRMduplicaterule Regardingobjectid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
     }
 }

@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// roleprivileges
+    /// </summary>
     public partial class MicrosoftDynamicsCRMroleprivileges
     {
         /// <summary>
@@ -24,18 +27,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMroleprivileges class.
         /// </summary>
-        public MicrosoftDynamicsCRMroleprivileges(int? componentstate = default(int?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? privilegedepthmask = default(int?), string privilegeid = default(string), string roleid = default(string), string roleprivilegeid = default(string), string roleprivilegeidunique = default(string), string solutionid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMroleprivileges(string privilegeid = default(string), int? privilegedepthmask = default(int?), long? versionnumber = default(long?), bool? ismanaged = default(bool?), string roleprivilegeidunique = default(string), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string roleprivilegeid = default(string), string solutionid = default(string), string roleid = default(string))
         {
-            Componentstate = componentstate;
-            Ismanaged = ismanaged;
-            Overwritetime = overwritetime;
-            Privilegedepthmask = privilegedepthmask;
             Privilegeid = privilegeid;
-            Roleid = roleid;
-            Roleprivilegeid = roleprivilegeid;
-            Roleprivilegeidunique = roleprivilegeidunique;
-            Solutionid = solutionid;
+            Privilegedepthmask = privilegedepthmask;
             Versionnumber = versionnumber;
+            Ismanaged = ismanaged;
+            Roleprivilegeidunique = roleprivilegeidunique;
+            Componentstate = componentstate;
+            Overwritetime = overwritetime;
+            Roleprivilegeid = roleprivilegeid;
+            Solutionid = solutionid;
+            Roleid = roleid;
             CustomInit();
         }
 
@@ -46,18 +49,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "privilegeid")]
+        public string Privilegeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -66,18 +59,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "privilegeid")]
-        public string Privilegeid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "roleid")]
-        public string Roleid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "roleprivilegeid")]
-        public string Roleprivilegeid { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
@@ -86,13 +74,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "roleprivilegeid")]
+        public string Roleprivilegeid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "roleid")]
+        public string Roleid { get; set; }
 
     }
 }

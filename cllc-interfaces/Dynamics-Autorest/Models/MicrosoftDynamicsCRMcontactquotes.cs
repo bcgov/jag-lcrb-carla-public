@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// contactquotes
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcontactquotes
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcontactquotes
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontactquotes(string contactid = default(string), string contactquoteid = default(string), string quoteid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcontactquotes(string contactquoteid = default(string), string contactid = default(string), long? versionnumber = default(long?), string quoteid = default(string))
         {
-            Contactid = contactid;
             Contactquoteid = contactquoteid;
-            Quoteid = quoteid;
+            Contactid = contactid;
             Versionnumber = versionnumber;
+            Quoteid = quoteid;
             CustomInit();
         }
 
@@ -40,23 +43,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactid")]
-        public string Contactid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "contactquoteid")]
         public string Contactquoteid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "quoteid")]
-        public string Quoteid { get; set; }
+        [JsonProperty(PropertyName = "contactid")]
+        public string Contactid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "quoteid")]
+        public string Quoteid { get; set; }
 
     }
 }

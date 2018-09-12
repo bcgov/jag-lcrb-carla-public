@@ -29,11 +29,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="depth">Possible values include: 'Basic', 'Local',
         /// 'Deep', 'Global'</param>
-        public MicrosoftDynamicsCRMRolePrivilege(string businessUnitId = default(string), string depth = default(string), string privilegeId = default(string))
+        public MicrosoftDynamicsCRMRolePrivilege(string depth = default(string), string privilegeId = default(string), string businessUnitId = default(string))
         {
-            BusinessUnitId = businessUnitId;
             Depth = depth;
             PrivilegeId = privilegeId;
+            BusinessUnitId = businessUnitId;
             CustomInit();
         }
 
@@ -41,11 +41,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnitId")]
-        public string BusinessUnitId { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Basic', 'Local', 'Deep',
@@ -58,6 +53,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "PrivilegeId")]
         public string PrivilegeId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnitId")]
+        public string BusinessUnitId { get; set; }
 
     }
 }

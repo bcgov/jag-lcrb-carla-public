@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMBooleanOptionSetMetadata : MicrosoftDynamicsCRMOptionSetMetadataBase
+    /// <summary>
+    /// BooleanOptionSetMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMBooleanOptionSetMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,13 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMBooleanOptionSetMetadata class.
         /// </summary>
-        /// <param name="optionSetType">Possible values include: 'Picklist',
-        /// 'State', 'Status', 'Boolean'</param>
-        public MicrosoftDynamicsCRMBooleanOptionSetMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string introducedVersion = default(string), bool? isCustomOptionSet = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), string name = default(string), string optionSetType = default(string), MicrosoftDynamicsCRMOptionMetadata falseOption = default(MicrosoftDynamicsCRMOptionMetadata), MicrosoftDynamicsCRMOptionMetadata trueOption = default(MicrosoftDynamicsCRMOptionMetadata))
-            : base(hasChanged, metadataId, description, displayName, introducedVersion, isCustomOptionSet, isCustomizable, isGlobal, isManaged, name, optionSetType)
+        public MicrosoftDynamicsCRMBooleanOptionSetMetadata(MicrosoftDynamicsCRMOptionMetadata trueOption = default(MicrosoftDynamicsCRMOptionMetadata), MicrosoftDynamicsCRMOptionMetadata falseOption = default(MicrosoftDynamicsCRMOptionMetadata))
         {
-            FalseOption = falseOption;
             TrueOption = trueOption;
+            FalseOption = falseOption;
             CustomInit();
         }
 
@@ -41,13 +41,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "FalseOption")]
-        public MicrosoftDynamicsCRMOptionMetadata FalseOption { get; set; }
+        [JsonProperty(PropertyName = "TrueOption")]
+        public MicrosoftDynamicsCRMOptionMetadata TrueOption { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "TrueOption")]
-        public MicrosoftDynamicsCRMOptionMetadata TrueOption { get; set; }
+        [JsonProperty(PropertyName = "FalseOption")]
+        public MicrosoftDynamicsCRMOptionMetadata FalseOption { get; set; }
 
     }
 }

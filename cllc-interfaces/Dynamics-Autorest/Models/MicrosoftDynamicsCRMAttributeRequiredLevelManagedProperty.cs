@@ -29,11 +29,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="value">Possible values include: 'None',
         /// 'SystemRequired', 'ApplicationRequired', 'Recommended'</param>
-        public MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty(bool? canBeChanged = default(bool?), string managedPropertyLogicalName = default(string), string value = default(string))
+        public MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty(string value = default(string), bool? canBeChanged = default(bool?), string managedPropertyLogicalName = default(string))
         {
+            Value = value;
             CanBeChanged = canBeChanged;
             ManagedPropertyLogicalName = managedPropertyLogicalName;
-            Value = value;
             CustomInit();
         }
 
@@ -41,6 +41,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// Gets or sets possible values include: 'None', 'SystemRequired',
+        /// 'ApplicationRequired', 'Recommended'
+        /// </summary>
+        [JsonProperty(PropertyName = "Value")]
+        public string Value { get; set; }
 
         /// <summary>
         /// </summary>
@@ -51,13 +58,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ManagedPropertyLogicalName")]
         public string ManagedPropertyLogicalName { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'None', 'SystemRequired',
-        /// 'ApplicationRequired', 'Recommended'
-        /// </summary>
-        [JsonProperty(PropertyName = "Value")]
-        public string Value { get; set; }
 
     }
 }

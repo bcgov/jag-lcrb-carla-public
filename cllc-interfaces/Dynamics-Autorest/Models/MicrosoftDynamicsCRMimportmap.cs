@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// importmap
+    /// </summary>
     public partial class MicrosoftDynamicsCRMimportmap
     {
         /// <summary>
@@ -26,47 +29,47 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportmap
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportmap(IList<MicrosoftDynamicsCRMimportentitymapping> importEntityMappingImportMap = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMasyncoperation> importMapAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importMapBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMimportfile> importMapImportFile = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMsyncerror> importMapSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), int? entitiesperfile = default(int?), string importmapid = default(string), int? importmaptype = default(int?), bool? isvalidforimport = default(bool?), bool? iswizardcreated = default(bool?), string mapcustomizations = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), string source = default(string), int? sourcetype = default(int?), string sourceuseridentifierforsourcecrmuserlink = default(string), string sourceuseridentifierforsourcedatasourceuserlink = default(string), int? statecode = default(int?), int? statuscode = default(int?), int? targetentity = default(int?), string targetuseridentifierforsourcecrmuserlink = default(string))
+        public MicrosoftDynamicsCRMimportmap(string _owningbusinessunitValue = default(string), string source = default(string), int? sourcetype = default(int?), int? entitiesperfile = default(int?), bool? isvalidforimport = default(bool?), string targetuseridentifierforsourcecrmuserlink = default(string), string sourceuseridentifierforsourcedatasourceuserlink = default(string), string importmapid = default(string), string _owneridValue = default(string), bool? iswizardcreated = default(bool?), int? targetentity = default(int?), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string _createdonbehalfbyValue = default(string), string mapcustomizations = default(string), string description = default(string), int? statuscode = default(int?), string name = default(string), string sourceuseridentifierforsourcecrmuserlink = default(string), int? statecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importmaptype = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> importMapSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importMapAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportentitymapping> importEntityMappingImportMap = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importMapBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportfile> importMapImportFile = default(IList<MicrosoftDynamicsCRMimportfile>))
         {
-            ImportEntityMappingImportMap = importEntityMappingImportMap;
-            ImportMapAsyncOperations = importMapAsyncOperations;
-            ImportMapBulkDeleteFailures = importMapBulkDeleteFailures;
-            ImportMapImportFile = importMapImportFile;
-            ImportMapSyncErrors = importMapSyncErrors;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
-            Entitiesperfile = entitiesperfile;
-            Importmapid = importmapid;
-            Importmaptype = importmaptype;
-            Isvalidforimport = isvalidforimport;
-            Iswizardcreated = iswizardcreated;
-            Mapcustomizations = mapcustomizations;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
-            Ownerid = ownerid;
-            Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
             Source = source;
             Sourcetype = sourcetype;
-            Sourceuseridentifierforsourcecrmuserlink = sourceuseridentifierforsourcecrmuserlink;
-            Sourceuseridentifierforsourcedatasourceuserlink = sourceuseridentifierforsourcedatasourceuserlink;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Targetentity = targetentity;
+            Entitiesperfile = entitiesperfile;
+            Isvalidforimport = isvalidforimport;
             Targetuseridentifierforsourcecrmuserlink = targetuseridentifierforsourcecrmuserlink;
+            Sourceuseridentifierforsourcedatasourceuserlink = sourceuseridentifierforsourcedatasourceuserlink;
+            Importmapid = importmapid;
+            this._owneridValue = _owneridValue;
+            Iswizardcreated = iswizardcreated;
+            Targetentity = targetentity;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._owningteamValue = _owningteamValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Mapcustomizations = mapcustomizations;
+            Description = description;
+            Statuscode = statuscode;
+            Name = name;
+            Sourceuseridentifierforsourcecrmuserlink = sourceuseridentifierforsourcecrmuserlink;
+            Statecode = statecode;
+            this._createdbyValue = _createdbyValue;
+            Createdon = createdon;
+            Importmaptype = importmaptype;
+            this._owninguserValue = _owninguserValue;
+            Modifiedon = modifiedon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            ImportMapSyncErrors = importMapSyncErrors;
+            Ownerid = ownerid;
+            Createdonbehalfby = createdonbehalfby;
+            ImportMapAsyncOperations = importMapAsyncOperations;
+            Owningteam = owningteam;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            ImportEntityMappingImportMap = importEntityMappingImportMap;
+            ImportMapBulkDeleteFailures = importMapBulkDeleteFailures;
+            Owninguser = owninguser;
+            Modifiedby = modifiedby;
+            Owningbusinessunit = owningbusinessunit;
+            Createdby = createdby;
+            ImportMapImportFile = importMapImportFile;
             CustomInit();
         }
 
@@ -77,158 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ImportEntityMapping_ImportMap")]
-        public IList<MicrosoftDynamicsCRMimportentitymapping> ImportEntityMappingImportMap { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ImportMap_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> ImportMapAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ImportMap_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ImportMapBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ImportMap_ImportFile")]
-        public IList<MicrosoftDynamicsCRMimportfile> ImportMapImportFile { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ImportMap_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> ImportMapSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entitiesperfile")]
-        public int? Entitiesperfile { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importmapid")]
-        public string Importmapid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importmaptype")]
-        public int? Importmaptype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isvalidforimport")]
-        public bool? Isvalidforimport { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "iswizardcreated")]
-        public bool? Iswizardcreated { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "mapcustomizations")]
-        public string Mapcustomizations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
 
         /// <summary>
         /// </summary>
@@ -242,8 +95,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sourceuseridentifierforsourcecrmuserlink")]
-        public string Sourceuseridentifierforsourcecrmuserlink { get; set; }
+        [JsonProperty(PropertyName = "entitiesperfile")]
+        public int? Entitiesperfile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isvalidforimport")]
+        public bool? Isvalidforimport { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetuseridentifierforsourcecrmuserlink")]
+        public string Targetuseridentifierforsourcecrmuserlink { get; set; }
 
         /// <summary>
         /// </summary>
@@ -252,13 +115,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "importmapid")]
+        public string Importmapid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iswizardcreated")]
+        public bool? Iswizardcreated { get; set; }
 
         /// <summary>
         /// </summary>
@@ -267,8 +135,143 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "targetuseridentifierforsourcecrmuserlink")]
-        public string Targetuseridentifierforsourcecrmuserlink { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mapcustomizations")]
+        public string Mapcustomizations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sourceuseridentifierforsourcecrmuserlink")]
+        public string Sourceuseridentifierforsourcecrmuserlink { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importmaptype")]
+        public int? Importmaptype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ImportMap_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> ImportMapSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ImportMap_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> ImportMapAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ImportEntityMapping_ImportMap")]
+        public IList<MicrosoftDynamicsCRMimportentitymapping> ImportEntityMappingImportMap { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ImportMap_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ImportMapBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ImportMap_ImportFile")]
+        public IList<MicrosoftDynamicsCRMimportfile> ImportMapImportFile { get; set; }
 
     }
 }

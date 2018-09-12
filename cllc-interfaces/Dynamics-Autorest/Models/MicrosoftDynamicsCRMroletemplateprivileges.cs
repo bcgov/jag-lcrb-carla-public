@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// roletemplateprivileges
+    /// </summary>
     public partial class MicrosoftDynamicsCRMroletemplateprivileges
     {
         /// <summary>
@@ -24,15 +27,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMroletemplateprivileges class.
         /// </summary>
-        public MicrosoftDynamicsCRMroletemplateprivileges(bool? isbasic = default(bool?), bool? isdeep = default(bool?), bool? isglobal = default(bool?), bool? islocal = default(bool?), string privilegeid = default(string), string roletemplateid = default(string), string roletemplateprivilegeid = default(string))
+        public MicrosoftDynamicsCRMroletemplateprivileges(string roletemplateprivilegeid = default(string), bool? isdeep = default(bool?), bool? islocal = default(bool?), bool? isglobal = default(bool?), string roletemplateid = default(string), string privilegeid = default(string), bool? isbasic = default(bool?))
         {
-            Isbasic = isbasic;
-            Isdeep = isdeep;
-            Isglobal = isglobal;
-            Islocal = islocal;
-            Privilegeid = privilegeid;
-            Roletemplateid = roletemplateid;
             Roletemplateprivilegeid = roletemplateprivilegeid;
+            Isdeep = isdeep;
+            Islocal = islocal;
+            Isglobal = isglobal;
+            Roletemplateid = roletemplateid;
+            Privilegeid = privilegeid;
+            Isbasic = isbasic;
             CustomInit();
         }
 
@@ -43,8 +46,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isbasic")]
-        public bool? Isbasic { get; set; }
+        [JsonProperty(PropertyName = "roletemplateprivilegeid")]
+        public string Roletemplateprivilegeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,18 +56,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isglobal")]
-        public bool? Isglobal { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "islocal")]
         public bool? Islocal { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "privilegeid")]
-        public string Privilegeid { get; set; }
+        [JsonProperty(PropertyName = "isglobal")]
+        public bool? Isglobal { get; set; }
 
         /// <summary>
         /// </summary>
@@ -73,8 +71,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "roletemplateprivilegeid")]
-        public string Roletemplateprivilegeid { get; set; }
+        [JsonProperty(PropertyName = "privilegeid")]
+        public string Privilegeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isbasic")]
+        public bool? Isbasic { get; set; }
 
     }
 }

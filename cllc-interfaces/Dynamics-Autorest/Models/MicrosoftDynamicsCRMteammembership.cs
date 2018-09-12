@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// teammembership
+    /// </summary>
     public partial class MicrosoftDynamicsCRMteammembership
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMteammembership class.
         /// </summary>
-        public MicrosoftDynamicsCRMteammembership(string systemuserid = default(string), string teamid = default(string), string teammembershipid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMteammembership(string systemuserid = default(string), long? versionnumber = default(long?), string teammembershipid = default(string), string teamid = default(string))
         {
             Systemuserid = systemuserid;
-            Teamid = teamid;
-            Teammembershipid = teammembershipid;
             Versionnumber = versionnumber;
+            Teammembershipid = teammembershipid;
+            Teamid = teamid;
             CustomInit();
         }
 
@@ -45,8 +48,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "teamid")]
-        public string Teamid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "teamid")]
+        public string Teamid { get; set; }
 
     }
 }

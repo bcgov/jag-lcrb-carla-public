@@ -11,7 +11,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMOptionSetMetadata : MicrosoftDynamicsCRMOptionSetMetadataBase
+    /// <summary>
+    /// OptionSetMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMOptionSetMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -26,10 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionSetMetadata class.
         /// </summary>
-        /// <param name="optionSetType">Possible values include: 'Picklist',
-        /// 'State', 'Status', 'Boolean'</param>
-        public MicrosoftDynamicsCRMOptionSetMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string introducedVersion = default(string), bool? isCustomOptionSet = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), string name = default(string), string optionSetType = default(string), IList<MicrosoftDynamicsCRMOptionMetadata> options = default(IList<MicrosoftDynamicsCRMOptionMetadata>))
-            : base(hasChanged, metadataId, description, displayName, introducedVersion, isCustomOptionSet, isCustomizable, isGlobal, isManaged, name, optionSetType)
+        public MicrosoftDynamicsCRMOptionSetMetadata(IList<MicrosoftDynamicsCRMOptionMetadata> options = default(IList<MicrosoftDynamicsCRMOptionMetadata>))
         {
             Options = options;
             CustomInit();

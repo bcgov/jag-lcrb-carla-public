@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// businessunit
+    /// </summary>
     public partial class MicrosoftDynamicsCRMbusinessunit
     {
         /// <summary>
@@ -26,117 +29,89 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMbusinessunit
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMbusinessunit(IList<MicrosoftDynamicsCRMbulkdeleteoperation> bulkDeleteOperationBusinessUnit = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMcampaign> businessUnitCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMduplicaterule> businessUnitDuplicateRules = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMimportdata> businessUnitImportData = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMimportfile> businessUnitImportFiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMimportlog> businessUnitImportLogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMimportmap> businessUnitImportMaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMimport> businessUnitImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMsyncerror> businessUnitSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsyncerror> businessUnitSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _calendaridValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _parentbusinessunitidValue = default(string), string _transactioncurrencyidValue = default(string), string address1Addressid = default(string), int? address1Addresstypecode = default(int?), string address1City = default(string), string address1Country = default(string), string address1County = default(string), string address1Fax = default(string), double? address1Latitude = default(double?), string address1Line1 = default(string), string address1Line2 = default(string), string address1Line3 = default(string), double? address1Longitude = default(double?), string address1Name = default(string), string address1Postalcode = default(string), string address1Postofficebox = default(string), int? address1Shippingmethodcode = default(int?), string address1Stateorprovince = default(string), string address1Telephone1 = default(string), string address1Telephone2 = default(string), string address1Telephone3 = default(string), string address1Upszone = default(string), int? address1Utcoffset = default(int?), string address2Addressid = default(string), int? address2Addresstypecode = default(int?), string address2City = default(string), string address2Country = default(string), string address2County = default(string), string address2Fax = default(string), double? address2Latitude = default(double?), string address2Line1 = default(string), string address2Line2 = default(string), string address2Line3 = default(string), double? address2Longitude = default(double?), string address2Name = default(string), string address2Postalcode = default(string), string address2Postofficebox = default(string), int? address2Shippingmethodcode = default(int?), string address2Stateorprovince = default(string), string address2Telephone1 = default(string), string address2Telephone2 = default(string), string address2Telephone3 = default(string), string address2Upszone = default(string), int? address2Utcoffset = default(int?), IList<MicrosoftDynamicsCRMbulkoperation> businessUnitBulkOperationActivities = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMpostregarding> businessUnitPostRegarding = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMabsAutonumberedentity> businessUnitAbsAutonumberedentity = default(IList<MicrosoftDynamicsCRMabsAutonumberedentity>), IList<MicrosoftDynamicsCRMaccount> businessUnitAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMactioncard> businessUnitActioncards = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMactivitypointer> businessUnitActivitypointer = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> businessUnitAdoxioAgencycommunication = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> businessUnitAdoxioApplicantstep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> businessUnitAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> businessUnitAdoxioApplicationmodule = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> businessUnitAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> businessUnitAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> businessUnitAdoxioComplaincemeeting = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaint> businessUnitAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> businessUnitAdoxioComplaintsubject = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioContravention> businessUnitAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> businessUnitAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioEstablishment> businessUnitAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioExhibit> businessUnitAdoxioExhibit = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioFundingsource> businessUnitAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioInterest> businessUnitAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInvestigation> businessUnitAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> businessUnitAdoxioInvestigationdetail = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> businessUnitAdoxioInvestigationstakeholder = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioLegalentity> businessUnitAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> businessUnitAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> businessUnitAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> businessUnitAdoxioLicencetypeprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> businessUnitAdoxioLicencetypestep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> businessUnitAdoxioLicencetypestepprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLoan> businessUnitAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> businessUnitAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPostalcode> businessUnitAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioRegion> businessUnitAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioSetting> businessUnitAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> businessUnitAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> businessUnitAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> businessUnitAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTestentity> businessUnitAdoxioTestentity = default(IList<MicrosoftDynamicsCRMadoxioTestentity>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> businessUnitAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> businessUnitAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> businessUnitAdoxioViolationnotification = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationtype> businessUnitAdoxioViolationtype = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> businessUnitAdoxioWitnessstatement = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMannotation> businessUnitAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMappointment> businessUnitAppointmentActivities = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitAsyncoperation = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbookableresource> businessUnitBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> businessUnitBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> businessUnitBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> businessUnitBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> businessUnitBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> businessUnitBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> businessUnitBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> businessUnitBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcalendar> businessUnitCalendars = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMcampaignactivity> businessUnitCampaignactivityActivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcampaignresponse> businessUnitCampaignresponseActivities = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMcategory> businessUnitCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMcharacteristic> businessUnitCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMconnection> businessUnitConnections = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> businessUnitConstraintBasedGroups = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMcontact> businessUnitContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> businessUnitDynamicproperyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMemail> businessUnitEmailActivities = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMemailserverprofile> businessUnitEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMentitlement> businessUnitEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMequipment> businessUnitEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMexchangesyncidmapping> businessUnitExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMfax> businessUnitFaxActivities = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMfeedback> businessUnitFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMgoal> businessUnitGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoalrollupquery> businessUnitGoalrollupquery = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMincidentresolution> businessUnitIncidentResolutionActivities = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMincident> businessUnitIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMinvoice> businessUnitInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMknowledgearticle> businessUnitKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMlead> businessUnitLeads = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMletter> businessUnitLetterActivities = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMlist> businessUnitList = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMmailbox> businessUnitMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailmergetemplate> businessUnitMailmergetemplates = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMinteractionforemail> businessUnitNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMopportunity> businessUnitOpportunities = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMopportunityclose> businessUnitOpportunityCloseActivities = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> businessUnitOrderCloseActivities = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMsalesorder> businessUnitOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMbusinessunit> businessUnitParentBusinessUnit = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> businessUnitPersonaldocumenttemplates = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMphonecall> businessUnitPhoneCallActivities = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMpostfollow> businessUnitPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMqueue> businessUnitQueues = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMqueue> businessUnitQueues2 = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMquoteclose> businessUnitQuoteCloseActivities = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMquote> businessUnitQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMratingmodel> businessUnitRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> businessUnitRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> businessUnitRecurringappointmentmasterActivities = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMreport> businessUnitReports = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMresourcegroup> businessUnitResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), IList<MicrosoftDynamicsCRMresourcespec> businessUnitResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMresource> businessUnitResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMrole> businessUnitRoles = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMserviceappointment> businessUnitServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMcontract> businessUnitServiceContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> businessUnitSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsharepointsite> businessUnitSharepointsites = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMsla> businessUnitSlabase = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMslakpiinstance> businessUnitSlakpiinstance = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMsocialactivity> businessUnitSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsocialprofile> businessUnitSocialprofiles = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMsystemuser> businessUnitSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMtask> businessUnitTaskActivities = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMteam> businessUnitTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMtemplate> businessUnitTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMusersettings> businessUnitUserSettings = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMuserform> businessUnitUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMuserquery> businessUnitUserquery = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMuserqueryvisualization> businessUnitUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMworkflow> businessUnitWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMworkflowlog> businessUnitWorkflowlogs = default(IList<MicrosoftDynamicsCRMworkflowlog>), string businessunitid = default(string), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), string costcenter = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), double? creditlimit = default(double?), string description = default(string), string disabledreason = default(string), string divisionname = default(string), string emailaddress = default(string), double? exchangerate = default(double?), string fileasname = default(string), string ftpsiteurl = default(string), int? importsequencenumber = default(int?), int? inheritancemask = default(int?), bool? isdisabled = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMbusinessunit parentbusinessunitid = default(MicrosoftDynamicsCRMbusinessunit), string picture = default(string), string stockexchange = default(string), string tickersymbol = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), int? utcoffset = default(int?), object versionnumber = default(object), string websiteurl = default(string), bool? workflowsuspended = default(bool?))
+        public MicrosoftDynamicsCRMbusinessunit(string address1Line2 = default(string), string address1Stateorprovince = default(string), int? address1Addresstypecode = default(int?), string _organizationidValue = default(string), int? address2Addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), string address2Addressid = default(string), double? creditlimit = default(double?), object exchangerate = default(object), string emailaddress = default(string), string _modifiedbyValue = default(string), string stockexchange = default(string), string address1Telephone1 = default(string), int? address2Shippingmethodcode = default(int?), string address2Country = default(string), string address2Name = default(string), long? versionnumber = default(long?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string tickersymbol = default(string), int? address2Utcoffset = default(int?), double? address2Latitude = default(double?), string name = default(string), string _parentbusinessunitidValue = default(string), string address2Fax = default(string), int? importsequencenumber = default(int?), string picture = default(string), string address1County = default(string), string address2Line1 = default(string), string _createdonbehalfbyValue = default(string), string address2Telephone2 = default(string), string divisionname = default(string), string websiteurl = default(string), string address2Telephone1 = default(string), string address2Postofficebox = default(string), string fileasname = default(string), string address1Telephone3 = default(string), string address1Line1 = default(string), string address2Line3 = default(string), string address1City = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string businessunitid = default(string), int? utcoffset = default(int?), double? address2Longitude = default(double?), int? address1Shippingmethodcode = default(int?), double? address1Latitude = default(double?), int? inheritancemask = default(int?), string costcenter = default(string), int? address1Utcoffset = default(int?), string address2Line2 = default(string), string address1Fax = default(string), string address1Name = default(string), string address1Line3 = default(string), string address2Telephone3 = default(string), double? address1Longitude = default(double?), string address2Upszone = default(string), string _calendaridValue = default(string), string address2County = default(string), string address2City = default(string), string address1Postofficebox = default(string), bool? workflowsuspended = default(bool?), string address1Postalcode = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string address1Telephone2 = default(string), string address1Upszone = default(string), string address2Stateorprovince = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address2Postalcode = default(string), string address1Country = default(string), string description = default(string), bool? isdisabled = default(bool?), string address1Addressid = default(string), string disabledreason = default(string), string ftpsiteurl = default(string), IList<MicrosoftDynamicsCRMexchangesyncidmapping> businessUnitExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMinteractionforemail> businessUnitNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMknowledgearticle> businessUnitKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> businessUnitSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMentitlement> businessUnitEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMgoal> businessUnitGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMmailbox> businessUnitMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMbookableresource> businessUnitBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> businessUnitBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> businessUnitBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> businessUnitBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> businessUnitBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> businessUnitBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> businessUnitBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> businessUnitBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcharacteristic> businessUnitCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMratingmodel> businessUnitRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> businessUnitRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMsyncerror> businessUnitSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMlead> businessUnitLeads = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMbulkdeleteoperation> bulkDeleteOperationBusinessUnit = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMworkflow> businessUnitWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMsyncerror> businessUnitSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMpostregarding> businessUnitPostRegarding = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> businessUnitPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMqueue> businessUnitQueues = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMfax> businessUnitFaxActivities = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMcalendar> businessUnitCalendars = default(IList<MicrosoftDynamicsCRMcalendar>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMinvoice> businessUnitInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMquote> businessUnitQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMimportlog> businessUnitImportLogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMannotation> businessUnitAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMopportunity> businessUnitOpportunities = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> businessUnitRecurringappointmentmasterActivities = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMtemplate> businessUnitTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> businessUnitDynamicproperyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMaccount> businessUnitAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMresourcespec> businessUnitResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMsalesorder> businessUnitOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMorderclose> businessUnitOrderCloseActivities = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMsocialprofile> businessUnitSocialprofiles = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMappointment> businessUnitAppointmentActivities = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMletter> businessUnitLetterActivities = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMactioncard> businessUnitActioncards = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMtask> businessUnitTaskActivities = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMactivitypointer> businessUnitActivitypointer = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMlist> businessUnitList = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMqueue> businessUnitQueues2 = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitAsyncoperation = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMemail> businessUnitEmailActivities = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMrole> businessUnitRoles = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMresourcegroup> businessUnitResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), IList<MicrosoftDynamicsCRMteam> businessUnitTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMequipment> businessUnitEquipment = default(IList<MicrosoftDynamicsCRMequipment>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> businessUnitUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMslakpiinstance> businessUnitSlakpiinstance = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMduplicaterule> businessUnitDuplicateRules = default(IList<MicrosoftDynamicsCRMduplicaterule>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcampaign> businessUnitCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMimportdata> businessUnitImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMphonecall> businessUnitPhoneCallActivities = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMcontract> businessUnitServiceContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMincident> businessUnitIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMcontact> businessUnitContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMsharepointsite> businessUnitSharepointsites = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMemailserverprofile> businessUnitEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMmailmergetemplate> businessUnitMailmergetemplates = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMbulkoperation> businessUnitBulkOperationActivities = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMworkflowlog> businessUnitWorkflowlogs = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMresource> businessUnitResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMquoteclose> businessUnitQuoteCloseActivities = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMconnection> businessUnitConnections = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> businessUnitPersonaldocumenttemplates = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMcampaignresponse> businessUnitCampaignresponseActivities = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMimportfile> businessUnitImportFiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMfeedback> businessUnitFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMreport> businessUnitReports = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMusersettings> businessUnitUserSettings = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMincidentresolution> businessUnitIncidentResolutionActivities = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> businessUnitConstraintBasedGroups = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMimport> businessUnitImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMcategory> businessUnitCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMsystemuser> businessUnitSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsla> businessUnitSlabase = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMuserform> businessUnitUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMsocialactivity> businessUnitSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMgoalrollupquery> businessUnitGoalrollupquery = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMuserquery> businessUnitUserquery = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMserviceappointment> businessUnitServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMimportmap> businessUnitImportMaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMcampaignactivity> businessUnitCampaignactivityActivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMopportunityclose> businessUnitOpportunityCloseActivities = default(IList<MicrosoftDynamicsCRMopportunityclose>), MicrosoftDynamicsCRMbusinessunit parentbusinessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbusinessunit> businessUnitParentBusinessUnit = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> businessUnitAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> businessUnitAdoxioWorkerinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> businessUnitAdoxioAgencycommunication = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> businessUnitAdoxioApplicantstep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> businessUnitAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> businessUnitAdoxioApplicationmodule = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> businessUnitAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> businessUnitAdoxioComplaincemeeting = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> businessUnitAdoxioComplaintsubject = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioContravention> businessUnitAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioEstablishment> businessUnitAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioExhibit> businessUnitAdoxioExhibit = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> businessUnitAdoxioInvestigationdetail = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> businessUnitAdoxioInvestigationstakeholder = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioLegalentity> businessUnitAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> businessUnitAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> businessUnitAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> businessUnitAdoxioLicencetypeprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> businessUnitAdoxioLicencetypestep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> businessUnitAdoxioLicencetypestepprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> businessUnitAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPostalcode> businessUnitAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioRegion> businessUnitAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> businessUnitAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> businessUnitAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTestentity> businessUnitAdoxioTestentity = default(IList<MicrosoftDynamicsCRMadoxioTestentity>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> businessUnitAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> businessUnitAdoxioViolationnotification = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationtype> businessUnitAdoxioViolationtype = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> businessUnitAdoxioWitnessstatement = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioComplaint> businessUnitAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioFundingsource> businessUnitAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> businessUnitAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> businessUnitAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioLoan> businessUnitAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioInterest> businessUnitAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> businessUnitAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioInvestigation> businessUnitAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioSetting> businessUnitAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSpdexports> businessUnitAdoxioSpdexports = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> businessUnitAdoxioPreviousaddress = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> businessUnitAdoxioSpddatarow = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> businessUnitAdoxioPolicydocument = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> businessUnitAdoxioApplicationinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorker> businessUnitAdoxioWorker = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioAlias> businessUnitAdoxioAlias = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> businessUnitAdoxioCorporatehistorysummary = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>))
         {
-            BulkDeleteOperationBusinessUnit = bulkDeleteOperationBusinessUnit;
-            BusinessUnitAsyncOperations = businessUnitAsyncOperations;
-            BusinessUnitBulkDeleteFailures = businessUnitBulkDeleteFailures;
-            BusinessUnitCampaigns = businessUnitCampaigns;
-            BusinessUnitDuplicateRules = businessUnitDuplicateRules;
-            BusinessUnitImportData = businessUnitImportData;
-            BusinessUnitImportFiles = businessUnitImportFiles;
-            BusinessUnitImportLogs = businessUnitImportLogs;
-            BusinessUnitImportMaps = businessUnitImportMaps;
-            BusinessUnitImports = businessUnitImports;
-            BusinessUnitSyncError = businessUnitSyncError;
-            BusinessUnitSyncErrors = businessUnitSyncErrors;
-            this._calendaridValue = _calendaridValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._parentbusinessunitidValue = _parentbusinessunitidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Address1Addressid = address1Addressid;
-            Address1Addresstypecode = address1Addresstypecode;
-            Address1City = address1City;
-            Address1Country = address1Country;
-            Address1County = address1County;
-            Address1Fax = address1Fax;
-            Address1Latitude = address1Latitude;
-            Address1Line1 = address1Line1;
             Address1Line2 = address1Line2;
-            Address1Line3 = address1Line3;
-            Address1Longitude = address1Longitude;
-            Address1Name = address1Name;
-            Address1Postalcode = address1Postalcode;
-            Address1Postofficebox = address1Postofficebox;
-            Address1Shippingmethodcode = address1Shippingmethodcode;
             Address1Stateorprovince = address1Stateorprovince;
-            Address1Telephone1 = address1Telephone1;
-            Address1Telephone2 = address1Telephone2;
-            Address1Telephone3 = address1Telephone3;
-            Address1Upszone = address1Upszone;
-            Address1Utcoffset = address1Utcoffset;
-            Address2Addressid = address2Addressid;
+            Address1Addresstypecode = address1Addresstypecode;
+            this._organizationidValue = _organizationidValue;
             Address2Addresstypecode = address2Addresstypecode;
-            Address2City = address2City;
-            Address2Country = address2Country;
-            Address2County = address2County;
-            Address2Fax = address2Fax;
-            Address2Latitude = address2Latitude;
-            Address2Line1 = address2Line1;
-            Address2Line2 = address2Line2;
-            Address2Line3 = address2Line3;
-            Address2Longitude = address2Longitude;
-            Address2Name = address2Name;
-            Address2Postalcode = address2Postalcode;
-            Address2Postofficebox = address2Postofficebox;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Address2Addressid = address2Addressid;
+            Creditlimit = creditlimit;
+            Exchangerate = exchangerate;
+            Emailaddress = emailaddress;
+            this._modifiedbyValue = _modifiedbyValue;
+            Stockexchange = stockexchange;
+            Address1Telephone1 = address1Telephone1;
             Address2Shippingmethodcode = address2Shippingmethodcode;
-            Address2Stateorprovince = address2Stateorprovince;
-            Address2Telephone1 = address2Telephone1;
-            Address2Telephone2 = address2Telephone2;
-            Address2Telephone3 = address2Telephone3;
-            Address2Upszone = address2Upszone;
+            Address2Country = address2Country;
+            Address2Name = address2Name;
+            Versionnumber = versionnumber;
+            Createdon = createdon;
+            Tickersymbol = tickersymbol;
             Address2Utcoffset = address2Utcoffset;
-            BusinessUnitBulkOperationActivities = businessUnitBulkOperationActivities;
-            BusinessUnitPostRegarding = businessUnitPostRegarding;
-            BusinessUnitAbsAutonumberedentity = businessUnitAbsAutonumberedentity;
-            BusinessUnitAccounts = businessUnitAccounts;
-            BusinessUnitActioncards = businessUnitActioncards;
-            BusinessUnitActivitypointer = businessUnitActivitypointer;
-            BusinessUnitAdoxioAgencycommunication = businessUnitAdoxioAgencycommunication;
-            BusinessUnitAdoxioApplicantstep = businessUnitAdoxioApplicantstep;
-            BusinessUnitAdoxioApplication = businessUnitAdoxioApplication;
-            BusinessUnitAdoxioApplicationmodule = businessUnitAdoxioApplicationmodule;
-            BusinessUnitAdoxioApplicationtermsconditionslimitation = businessUnitAdoxioApplicationtermsconditionslimitation;
-            BusinessUnitAdoxioBusinessaccount = businessUnitAdoxioBusinessaccount;
-            BusinessUnitAdoxioComplaincemeeting = businessUnitAdoxioComplaincemeeting;
-            BusinessUnitAdoxioComplaint = businessUnitAdoxioComplaint;
-            BusinessUnitAdoxioComplaintsubject = businessUnitAdoxioComplaintsubject;
-            BusinessUnitAdoxioContravention = businessUnitAdoxioContravention;
-            BusinessUnitAdoxioCorporaterole = businessUnitAdoxioCorporaterole;
-            BusinessUnitAdoxioEstablishment = businessUnitAdoxioEstablishment;
-            BusinessUnitAdoxioExhibit = businessUnitAdoxioExhibit;
-            BusinessUnitAdoxioFundingsource = businessUnitAdoxioFundingsource;
-            BusinessUnitAdoxioInterest = businessUnitAdoxioInterest;
-            BusinessUnitAdoxioInvestigation = businessUnitAdoxioInvestigation;
-            BusinessUnitAdoxioInvestigationdetail = businessUnitAdoxioInvestigationdetail;
-            BusinessUnitAdoxioInvestigationstakeholder = businessUnitAdoxioInvestigationstakeholder;
-            BusinessUnitAdoxioLegalentity = businessUnitAdoxioLegalentity;
-            BusinessUnitAdoxioLicences = businessUnitAdoxioLicences;
-            BusinessUnitAdoxioLicencetype = businessUnitAdoxioLicencetype;
-            BusinessUnitAdoxioLicencetypeprerequisite = businessUnitAdoxioLicencetypeprerequisite;
-            BusinessUnitAdoxioLicencetypestep = businessUnitAdoxioLicencetypestep;
-            BusinessUnitAdoxioLicencetypestepprerequisite = businessUnitAdoxioLicencetypestepprerequisite;
-            BusinessUnitAdoxioLoan = businessUnitAdoxioLoan;
-            BusinessUnitAdoxioPersonalhistorysummary = businessUnitAdoxioPersonalhistorysummary;
-            BusinessUnitAdoxioPostalcode = businessUnitAdoxioPostalcode;
-            BusinessUnitAdoxioRegion = businessUnitAdoxioRegion;
-            BusinessUnitAdoxioSetting = businessUnitAdoxioSetting;
-            BusinessUnitAdoxioTaxandaccounting = businessUnitAdoxioTaxandaccounting;
-            BusinessUnitAdoxioTermsconditionslimitationspreset = businessUnitAdoxioTermsconditionslimitationspreset;
-            BusinessUnitAdoxioTerritory = businessUnitAdoxioTerritory;
-            BusinessUnitAdoxioTestentity = businessUnitAdoxioTestentity;
-            BusinessUnitAdoxioTiedhouseassociation = businessUnitAdoxioTiedhouseassociation;
-            BusinessUnitAdoxioTiedhouseconnection = businessUnitAdoxioTiedhouseconnection;
-            BusinessUnitAdoxioViolationnotification = businessUnitAdoxioViolationnotification;
-            BusinessUnitAdoxioViolationtype = businessUnitAdoxioViolationtype;
-            BusinessUnitAdoxioWitnessstatement = businessUnitAdoxioWitnessstatement;
-            BusinessUnitAnnotations = businessUnitAnnotations;
-            BusinessUnitAppointmentActivities = businessUnitAppointmentActivities;
-            BusinessUnitAsyncoperation = businessUnitAsyncoperation;
+            Address2Latitude = address2Latitude;
+            Name = name;
+            this._parentbusinessunitidValue = _parentbusinessunitidValue;
+            Address2Fax = address2Fax;
+            Importsequencenumber = importsequencenumber;
+            Picture = picture;
+            Address1County = address1County;
+            Address2Line1 = address2Line1;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Address2Telephone2 = address2Telephone2;
+            Divisionname = divisionname;
+            Websiteurl = websiteurl;
+            Address2Telephone1 = address2Telephone1;
+            Address2Postofficebox = address2Postofficebox;
+            Fileasname = fileasname;
+            Address1Telephone3 = address1Telephone3;
+            Address1Line1 = address1Line1;
+            Address2Line3 = address2Line3;
+            Address1City = address1City;
+            Modifiedon = modifiedon;
+            Businessunitid = businessunitid;
+            Utcoffset = utcoffset;
+            Address2Longitude = address2Longitude;
+            Address1Shippingmethodcode = address1Shippingmethodcode;
+            Address1Latitude = address1Latitude;
+            Inheritancemask = inheritancemask;
+            Costcenter = costcenter;
+            Address1Utcoffset = address1Utcoffset;
+            Address2Line2 = address2Line2;
+            Address1Fax = address1Fax;
+            Address1Name = address1Name;
+            Address1Line3 = address1Line3;
+            Address2Telephone3 = address2Telephone3;
+            Address1Longitude = address1Longitude;
+            Address2Upszone = address2Upszone;
+            this._calendaridValue = _calendaridValue;
+            Address2County = address2County;
+            Address2City = address2City;
+            Address1Postofficebox = address1Postofficebox;
+            Workflowsuspended = workflowsuspended;
+            Address1Postalcode = address1Postalcode;
+            this._createdbyValue = _createdbyValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Address1Telephone2 = address1Telephone2;
+            Address1Upszone = address1Upszone;
+            Address2Stateorprovince = address2Stateorprovince;
+            Overriddencreatedon = overriddencreatedon;
+            Address2Postalcode = address2Postalcode;
+            Address1Country = address1Country;
+            Description = description;
+            Isdisabled = isdisabled;
+            Address1Addressid = address1Addressid;
+            Disabledreason = disabledreason;
+            Ftpsiteurl = ftpsiteurl;
+            BusinessUnitExchangesyncidmapping = businessUnitExchangesyncidmapping;
+            BusinessUnitNewInteractionforemail = businessUnitNewInteractionforemail;
+            BusinessUnitKnowledgearticle = businessUnitKnowledgearticle;
+            BusinessUnitSharepointdocumentlocation = businessUnitSharepointdocumentlocation;
+            BusinessUnitEntitlement = businessUnitEntitlement;
+            BusinessUnitGoal = businessUnitGoal;
+            BusinessUnitMailbox = businessUnitMailbox;
             BusinessUnitBookableresource = businessUnitBookableresource;
             BusinessUnitBookableresourcebooking = businessUnitBookableresourcebooking;
             BusinessUnitBookableresourcebookingheader = businessUnitBookableresourcebookingheader;
@@ -145,104 +120,140 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             BusinessUnitBookableresourcecharacteristic = businessUnitBookableresourcecharacteristic;
             BusinessUnitBookableresourcegroup = businessUnitBookableresourcegroup;
             BusinessUnitBookingstatus = businessUnitBookingstatus;
-            BusinessUnitCalendars = businessUnitCalendars;
-            BusinessUnitCampaignactivityActivities = businessUnitCampaignactivityActivities;
-            BusinessUnitCampaignresponseActivities = businessUnitCampaignresponseActivities;
-            BusinessUnitCategory = businessUnitCategory;
             BusinessUnitCharacteristic = businessUnitCharacteristic;
-            BusinessUnitConnections = businessUnitConnections;
-            BusinessUnitConstraintBasedGroups = businessUnitConstraintBasedGroups;
-            BusinessUnitContacts = businessUnitContacts;
-            BusinessUnitDynamicproperyinstance = businessUnitDynamicproperyinstance;
-            BusinessUnitEmailActivities = businessUnitEmailActivities;
-            BusinessUnitEmailserverprofile = businessUnitEmailserverprofile;
-            BusinessUnitEntitlement = businessUnitEntitlement;
-            BusinessUnitEquipment = businessUnitEquipment;
-            BusinessUnitExchangesyncidmapping = businessUnitExchangesyncidmapping;
-            BusinessUnitFaxActivities = businessUnitFaxActivities;
-            BusinessUnitFeedback = businessUnitFeedback;
-            BusinessUnitGoal = businessUnitGoal;
-            BusinessUnitGoalrollupquery = businessUnitGoalrollupquery;
-            BusinessUnitIncidentResolutionActivities = businessUnitIncidentResolutionActivities;
-            BusinessUnitIncidents = businessUnitIncidents;
-            BusinessUnitInvoices = businessUnitInvoices;
-            BusinessUnitKnowledgearticle = businessUnitKnowledgearticle;
-            BusinessUnitLeads = businessUnitLeads;
-            BusinessUnitLetterActivities = businessUnitLetterActivities;
-            BusinessUnitList = businessUnitList;
-            BusinessUnitMailbox = businessUnitMailbox;
-            BusinessUnitMailmergetemplates = businessUnitMailmergetemplates;
-            BusinessUnitNewInteractionforemail = businessUnitNewInteractionforemail;
-            BusinessUnitOpportunities = businessUnitOpportunities;
-            BusinessUnitOpportunityCloseActivities = businessUnitOpportunityCloseActivities;
-            BusinessUnitOrderCloseActivities = businessUnitOrderCloseActivities;
-            BusinessUnitOrders = businessUnitOrders;
-            BusinessUnitParentBusinessUnit = businessUnitParentBusinessUnit;
-            BusinessUnitPersonaldocumenttemplates = businessUnitPersonaldocumenttemplates;
-            BusinessUnitPhoneCallActivities = businessUnitPhoneCallActivities;
-            BusinessUnitPostfollows = businessUnitPostfollows;
-            BusinessUnitQueues = businessUnitQueues;
-            BusinessUnitQueues2 = businessUnitQueues2;
-            BusinessUnitQuoteCloseActivities = businessUnitQuoteCloseActivities;
-            BusinessUnitQuotes = businessUnitQuotes;
             BusinessUnitRatingmodel = businessUnitRatingmodel;
             BusinessUnitRatingvalue = businessUnitRatingvalue;
-            BusinessUnitRecurringappointmentmasterActivities = businessUnitRecurringappointmentmasterActivities;
-            BusinessUnitReports = businessUnitReports;
-            BusinessUnitResourceGroups = businessUnitResourceGroups;
-            BusinessUnitResourceSpecs = businessUnitResourceSpecs;
-            BusinessUnitResources = businessUnitResources;
-            BusinessUnitRoles = businessUnitRoles;
-            BusinessUnitServiceAppointments = businessUnitServiceAppointments;
-            BusinessUnitServiceContracts = businessUnitServiceContracts;
-            BusinessUnitSharepointdocumentlocation = businessUnitSharepointdocumentlocation;
-            BusinessUnitSharepointsites = businessUnitSharepointsites;
-            BusinessUnitSlabase = businessUnitSlabase;
-            BusinessUnitSlakpiinstance = businessUnitSlakpiinstance;
-            BusinessUnitSocialactivity = businessUnitSocialactivity;
-            BusinessUnitSocialprofiles = businessUnitSocialprofiles;
-            BusinessUnitSystemUsers = businessUnitSystemUsers;
-            BusinessUnitTaskActivities = businessUnitTaskActivities;
-            BusinessUnitTeams = businessUnitTeams;
-            BusinessUnitTemplates = businessUnitTemplates;
-            BusinessUnitUserSettings = businessUnitUserSettings;
-            BusinessUnitUserform = businessUnitUserform;
-            BusinessUnitUserquery = businessUnitUserquery;
-            BusinessUnitUserqueryvisualizations = businessUnitUserqueryvisualizations;
-            BusinessUnitWorkflow = businessUnitWorkflow;
-            BusinessUnitWorkflowlogs = businessUnitWorkflowlogs;
-            Businessunitid = businessunitid;
-            Calendarid = calendarid;
-            Costcenter = costcenter;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Creditlimit = creditlimit;
-            Description = description;
-            Disabledreason = disabledreason;
-            Divisionname = divisionname;
-            Emailaddress = emailaddress;
-            Exchangerate = exchangerate;
-            Fileasname = fileasname;
-            Ftpsiteurl = ftpsiteurl;
-            Importsequencenumber = importsequencenumber;
-            Inheritancemask = inheritancemask;
-            Isdisabled = isdisabled;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
-            Organizationid = organizationid;
-            Overriddencreatedon = overriddencreatedon;
-            Parentbusinessunitid = parentbusinessunitid;
-            Picture = picture;
-            Stockexchange = stockexchange;
-            Tickersymbol = tickersymbol;
+            BusinessUnitSyncErrors = businessUnitSyncErrors;
+            BusinessUnitLeads = businessUnitLeads;
             Transactioncurrencyid = transactioncurrencyid;
-            Utcoffset = utcoffset;
-            Versionnumber = versionnumber;
-            Websiteurl = websiteurl;
-            Workflowsuspended = workflowsuspended;
+            BulkDeleteOperationBusinessUnit = bulkDeleteOperationBusinessUnit;
+            Modifiedby = modifiedby;
+            BusinessUnitWorkflow = businessUnitWorkflow;
+            BusinessUnitSyncError = businessUnitSyncError;
+            BusinessUnitPostRegarding = businessUnitPostRegarding;
+            BusinessUnitPostfollows = businessUnitPostfollows;
+            BusinessUnitAsyncOperations = businessUnitAsyncOperations;
+            BusinessUnitQueues = businessUnitQueues;
+            BusinessUnitFaxActivities = businessUnitFaxActivities;
+            BusinessUnitCalendars = businessUnitCalendars;
+            Createdonbehalfby = createdonbehalfby;
+            BusinessUnitInvoices = businessUnitInvoices;
+            BusinessUnitQuotes = businessUnitQuotes;
+            BusinessUnitImportLogs = businessUnitImportLogs;
+            BusinessUnitAnnotations = businessUnitAnnotations;
+            Calendarid = calendarid;
+            BusinessUnitOpportunities = businessUnitOpportunities;
+            BusinessUnitRecurringappointmentmasterActivities = businessUnitRecurringappointmentmasterActivities;
+            BusinessUnitTemplates = businessUnitTemplates;
+            BusinessUnitDynamicproperyinstance = businessUnitDynamicproperyinstance;
+            BusinessUnitAccounts = businessUnitAccounts;
+            BusinessUnitResourceSpecs = businessUnitResourceSpecs;
+            BusinessUnitOrders = businessUnitOrders;
+            BusinessUnitOrderCloseActivities = businessUnitOrderCloseActivities;
+            BusinessUnitSocialprofiles = businessUnitSocialprofiles;
+            BusinessUnitAppointmentActivities = businessUnitAppointmentActivities;
+            BusinessUnitLetterActivities = businessUnitLetterActivities;
+            BusinessUnitActioncards = businessUnitActioncards;
+            BusinessUnitTaskActivities = businessUnitTaskActivities;
+            BusinessUnitActivitypointer = businessUnitActivitypointer;
+            BusinessUnitList = businessUnitList;
+            BusinessUnitQueues2 = businessUnitQueues2;
+            BusinessUnitAsyncoperation = businessUnitAsyncoperation;
+            BusinessUnitEmailActivities = businessUnitEmailActivities;
+            BusinessUnitRoles = businessUnitRoles;
+            BusinessUnitResourceGroups = businessUnitResourceGroups;
+            BusinessUnitTeams = businessUnitTeams;
+            BusinessUnitEquipment = businessUnitEquipment;
+            Createdby = createdby;
+            BusinessUnitUserqueryvisualizations = businessUnitUserqueryvisualizations;
+            BusinessUnitSlakpiinstance = businessUnitSlakpiinstance;
+            BusinessUnitDuplicateRules = businessUnitDuplicateRules;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            BusinessUnitCampaigns = businessUnitCampaigns;
+            BusinessUnitImportData = businessUnitImportData;
+            Organizationid = organizationid;
+            BusinessUnitPhoneCallActivities = businessUnitPhoneCallActivities;
+            BusinessUnitServiceContracts = businessUnitServiceContracts;
+            BusinessUnitIncidents = businessUnitIncidents;
+            BusinessUnitContacts = businessUnitContacts;
+            BusinessUnitSharepointsites = businessUnitSharepointsites;
+            BusinessUnitEmailserverprofile = businessUnitEmailserverprofile;
+            BusinessUnitMailmergetemplates = businessUnitMailmergetemplates;
+            BusinessUnitBulkOperationActivities = businessUnitBulkOperationActivities;
+            BusinessUnitWorkflowlogs = businessUnitWorkflowlogs;
+            BusinessUnitResources = businessUnitResources;
+            BusinessUnitBulkDeleteFailures = businessUnitBulkDeleteFailures;
+            BusinessUnitQuoteCloseActivities = businessUnitQuoteCloseActivities;
+            BusinessUnitConnections = businessUnitConnections;
+            BusinessUnitPersonaldocumenttemplates = businessUnitPersonaldocumenttemplates;
+            BusinessUnitCampaignresponseActivities = businessUnitCampaignresponseActivities;
+            BusinessUnitImportFiles = businessUnitImportFiles;
+            BusinessUnitFeedback = businessUnitFeedback;
+            BusinessUnitReports = businessUnitReports;
+            BusinessUnitUserSettings = businessUnitUserSettings;
+            BusinessUnitIncidentResolutionActivities = businessUnitIncidentResolutionActivities;
+            BusinessUnitConstraintBasedGroups = businessUnitConstraintBasedGroups;
+            BusinessUnitImports = businessUnitImports;
+            BusinessUnitCategory = businessUnitCategory;
+            BusinessUnitSystemUsers = businessUnitSystemUsers;
+            BusinessUnitSlabase = businessUnitSlabase;
+            BusinessUnitUserform = businessUnitUserform;
+            BusinessUnitSocialactivity = businessUnitSocialactivity;
+            BusinessUnitGoalrollupquery = businessUnitGoalrollupquery;
+            BusinessUnitUserquery = businessUnitUserquery;
+            BusinessUnitServiceAppointments = businessUnitServiceAppointments;
+            BusinessUnitImportMaps = businessUnitImportMaps;
+            BusinessUnitCampaignactivityActivities = businessUnitCampaignactivityActivities;
+            BusinessUnitOpportunityCloseActivities = businessUnitOpportunityCloseActivities;
+            Parentbusinessunitid = parentbusinessunitid;
+            BusinessUnitParentBusinessUnit = businessUnitParentBusinessUnit;
+            BusinessUnitAdoxioTiedhouseconnection = businessUnitAdoxioTiedhouseconnection;
+            BusinessUnitAdoxioWorkerinvoicehistory = businessUnitAdoxioWorkerinvoicehistory;
+            BusinessUnitAdoxioAgencycommunication = businessUnitAdoxioAgencycommunication;
+            BusinessUnitAdoxioApplicantstep = businessUnitAdoxioApplicantstep;
+            BusinessUnitAdoxioApplication = businessUnitAdoxioApplication;
+            BusinessUnitAdoxioApplicationmodule = businessUnitAdoxioApplicationmodule;
+            BusinessUnitAdoxioApplicationtermsconditionslimitation = businessUnitAdoxioApplicationtermsconditionslimitation;
+            BusinessUnitAdoxioComplaincemeeting = businessUnitAdoxioComplaincemeeting;
+            BusinessUnitAdoxioComplaintsubject = businessUnitAdoxioComplaintsubject;
+            BusinessUnitAdoxioContravention = businessUnitAdoxioContravention;
+            BusinessUnitAdoxioEstablishment = businessUnitAdoxioEstablishment;
+            BusinessUnitAdoxioExhibit = businessUnitAdoxioExhibit;
+            BusinessUnitAdoxioInvestigationdetail = businessUnitAdoxioInvestigationdetail;
+            BusinessUnitAdoxioInvestigationstakeholder = businessUnitAdoxioInvestigationstakeholder;
+            BusinessUnitAdoxioLegalentity = businessUnitAdoxioLegalentity;
+            BusinessUnitAdoxioLicences = businessUnitAdoxioLicences;
+            BusinessUnitAdoxioLicencetype = businessUnitAdoxioLicencetype;
+            BusinessUnitAdoxioLicencetypeprerequisite = businessUnitAdoxioLicencetypeprerequisite;
+            BusinessUnitAdoxioLicencetypestep = businessUnitAdoxioLicencetypestep;
+            BusinessUnitAdoxioLicencetypestepprerequisite = businessUnitAdoxioLicencetypestepprerequisite;
+            BusinessUnitAdoxioPersonalhistorysummary = businessUnitAdoxioPersonalhistorysummary;
+            BusinessUnitAdoxioPostalcode = businessUnitAdoxioPostalcode;
+            BusinessUnitAdoxioRegion = businessUnitAdoxioRegion;
+            BusinessUnitAdoxioTermsconditionslimitationspreset = businessUnitAdoxioTermsconditionslimitationspreset;
+            BusinessUnitAdoxioTerritory = businessUnitAdoxioTerritory;
+            BusinessUnitAdoxioTestentity = businessUnitAdoxioTestentity;
+            BusinessUnitAdoxioTiedhouseassociation = businessUnitAdoxioTiedhouseassociation;
+            BusinessUnitAdoxioViolationnotification = businessUnitAdoxioViolationnotification;
+            BusinessUnitAdoxioViolationtype = businessUnitAdoxioViolationtype;
+            BusinessUnitAdoxioWitnessstatement = businessUnitAdoxioWitnessstatement;
+            BusinessUnitAdoxioComplaint = businessUnitAdoxioComplaint;
+            BusinessUnitAdoxioFundingsource = businessUnitAdoxioFundingsource;
+            BusinessUnitAdoxioTaxandaccounting = businessUnitAdoxioTaxandaccounting;
+            BusinessUnitAdoxioBusinessaccount = businessUnitAdoxioBusinessaccount;
+            BusinessUnitAdoxioLoan = businessUnitAdoxioLoan;
+            BusinessUnitAdoxioInterest = businessUnitAdoxioInterest;
+            BusinessUnitAdoxioCorporaterole = businessUnitAdoxioCorporaterole;
+            BusinessUnitAdoxioInvestigation = businessUnitAdoxioInvestigation;
+            BusinessUnitAdoxioSetting = businessUnitAdoxioSetting;
+            BusinessUnitAdoxioSpdexports = businessUnitAdoxioSpdexports;
+            BusinessUnitAdoxioPreviousaddress = businessUnitAdoxioPreviousaddress;
+            BusinessUnitAdoxioSpddatarow = businessUnitAdoxioSpddatarow;
+            BusinessUnitAdoxioPolicydocument = businessUnitAdoxioPolicydocument;
+            BusinessUnitAdoxioApplicationinvoicehistory = businessUnitAdoxioApplicationinvoicehistory;
+            BusinessUnitAdoxioWorker = businessUnitAdoxioWorker;
+            BusinessUnitAdoxioAlias = businessUnitAdoxioAlias;
+            BusinessUnitAdoxioCorporatehistorysummary = businessUnitAdoxioCorporatehistorysummary;
             CustomInit();
         }
 
@@ -253,178 +264,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "BulkDeleteOperation_BusinessUnit")]
-        public IList<MicrosoftDynamicsCRMbulkdeleteoperation> BulkDeleteOperationBusinessUnit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> BusinessUnitAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> BusinessUnitBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_Campaigns")]
-        public IList<MicrosoftDynamicsCRMcampaign> BusinessUnitCampaigns { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_DuplicateRules")]
-        public IList<MicrosoftDynamicsCRMduplicaterule> BusinessUnitDuplicateRules { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_ImportData")]
-        public IList<MicrosoftDynamicsCRMimportdata> BusinessUnitImportData { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_ImportFiles")]
-        public IList<MicrosoftDynamicsCRMimportfile> BusinessUnitImportFiles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_ImportLogs")]
-        public IList<MicrosoftDynamicsCRMimportlog> BusinessUnitImportLogs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_ImportMaps")]
-        public IList<MicrosoftDynamicsCRMimportmap> BusinessUnitImportMaps { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_Imports")]
-        public IList<MicrosoftDynamicsCRMimport> BusinessUnitImports { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_SyncError")]
-        public IList<MicrosoftDynamicsCRMsyncerror> BusinessUnitSyncError { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "BusinessUnit_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> BusinessUnitSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_calendarid_value")]
-        public string _calendaridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentbusinessunitid_value")]
-        public string _parentbusinessunitidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_addressid")]
-        public string Address1Addressid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_addresstypecode")]
-        public int? Address1Addresstypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_city")]
-        public string Address1City { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_country")]
-        public string Address1Country { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_county")]
-        public string Address1County { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_fax")]
-        public string Address1Fax { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_latitude")]
-        public double? Address1Latitude { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line1")]
-        public string Address1Line1 { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_line2")]
         public string Address1Line2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_line3")]
-        public string Address1Line3 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_longitude")]
-        public double? Address1Longitude { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_name")]
-        public string Address1Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postalcode")]
-        public string Address1Postalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postofficebox")]
-        public string Address1Postofficebox { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
-        public int? Address1Shippingmethodcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -433,33 +274,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone1")]
-        public string Address1Telephone1 { get; set; }
+        [JsonProperty(PropertyName = "address1_addresstypecode")]
+        public int? Address1Addresstypecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone2")]
-        public string Address1Telephone2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone3")]
-        public string Address1Telephone3 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_upszone")]
-        public string Address1Upszone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_utcoffset")]
-        public int? Address1Utcoffset { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_addressid")]
-        public string Address2Addressid { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -468,63 +289,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_city")]
-        public string Address2City { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_country")]
-        public string Address2Country { get; set; }
+        [JsonProperty(PropertyName = "address2_addressid")]
+        public string Address2Addressid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_county")]
-        public string Address2County { get; set; }
+        [JsonProperty(PropertyName = "creditlimit")]
+        public double? Creditlimit { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_fax")]
-        public string Address2Fax { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_latitude")]
-        public double? Address2Latitude { get; set; }
+        [JsonProperty(PropertyName = "emailaddress")]
+        public string Emailaddress { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_line1")]
-        public string Address2Line1 { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_line2")]
-        public string Address2Line2 { get; set; }
+        [JsonProperty(PropertyName = "stockexchange")]
+        public string Stockexchange { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_line3")]
-        public string Address2Line3 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_longitude")]
-        public double? Address2Longitude { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_name")]
-        public string Address2Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_postalcode")]
-        public string Address2Postalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_postofficebox")]
-        public string Address2Postofficebox { get; set; }
+        [JsonProperty(PropertyName = "address1_telephone1")]
+        public string Address1Telephone1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -533,28 +334,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_stateorprovince")]
-        public string Address2Stateorprovince { get; set; }
+        [JsonProperty(PropertyName = "address2_country")]
+        public string Address2Country { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone1")]
-        public string Address2Telephone1 { get; set; }
+        [JsonProperty(PropertyName = "address2_name")]
+        public string Address2Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone2")]
-        public string Address2Telephone2 { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone3")]
-        public string Address2Telephone3 { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_upszone")]
-        public string Address2Upszone { get; set; }
+        [JsonProperty(PropertyName = "tickersymbol")]
+        public string Tickersymbol { get; set; }
 
         /// <summary>
         /// </summary>
@@ -563,238 +364,308 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_BulkOperation_activities")]
-        public IList<MicrosoftDynamicsCRMbulkoperation> BusinessUnitBulkOperationActivities { get; set; }
+        [JsonProperty(PropertyName = "address2_latitude")]
+        public double? Address2Latitude { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_PostRegarding")]
-        public IList<MicrosoftDynamicsCRMpostregarding> BusinessUnitPostRegarding { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_abs_autonumberedentity")]
-        public IList<MicrosoftDynamicsCRMabsAutonumberedentity> BusinessUnitAbsAutonumberedentity { get; set; }
+        [JsonProperty(PropertyName = "_parentbusinessunitid_value")]
+        public string _parentbusinessunitidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_accounts")]
-        public IList<MicrosoftDynamicsCRMaccount> BusinessUnitAccounts { get; set; }
+        [JsonProperty(PropertyName = "address2_fax")]
+        public string Address2Fax { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_actioncards")]
-        public IList<MicrosoftDynamicsCRMactioncard> BusinessUnitActioncards { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_activitypointer")]
-        public IList<MicrosoftDynamicsCRMactivitypointer> BusinessUnitActivitypointer { get; set; }
+        [JsonProperty(PropertyName = "picture")]
+        public string Picture { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_agencycommunication")]
-        public IList<MicrosoftDynamicsCRMadoxioAgencycommunication> BusinessUnitAdoxioAgencycommunication { get; set; }
+        [JsonProperty(PropertyName = "address1_county")]
+        public string Address1County { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_applicantstep")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicantstep> BusinessUnitAdoxioApplicantstep { get; set; }
+        [JsonProperty(PropertyName = "address2_line1")]
+        public string Address2Line1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_application")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> BusinessUnitAdoxioApplication { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_applicationmodule")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationmodule> BusinessUnitAdoxioApplicationmodule { get; set; }
+        [JsonProperty(PropertyName = "address2_telephone2")]
+        public string Address2Telephone2 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_applicationtermsconditionslimitation")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> BusinessUnitAdoxioApplicationtermsconditionslimitation { get; set; }
+        [JsonProperty(PropertyName = "divisionname")]
+        public string Divisionname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_businessaccount")]
-        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> BusinessUnitAdoxioBusinessaccount { get; set; }
+        [JsonProperty(PropertyName = "websiteurl")]
+        public string Websiteurl { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_complaincemeeting")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> BusinessUnitAdoxioComplaincemeeting { get; set; }
+        [JsonProperty(PropertyName = "address2_telephone1")]
+        public string Address2Telephone1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_complaint")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> BusinessUnitAdoxioComplaint { get; set; }
+        [JsonProperty(PropertyName = "address2_postofficebox")]
+        public string Address2Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_complaintsubject")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> BusinessUnitAdoxioComplaintsubject { get; set; }
+        [JsonProperty(PropertyName = "fileasname")]
+        public string Fileasname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_contravention")]
-        public IList<MicrosoftDynamicsCRMadoxioContravention> BusinessUnitAdoxioContravention { get; set; }
+        [JsonProperty(PropertyName = "address1_telephone3")]
+        public string Address1Telephone3 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_corporaterole")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> BusinessUnitAdoxioCorporaterole { get; set; }
+        [JsonProperty(PropertyName = "address1_line1")]
+        public string Address1Line1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_establishment")]
-        public IList<MicrosoftDynamicsCRMadoxioEstablishment> BusinessUnitAdoxioEstablishment { get; set; }
+        [JsonProperty(PropertyName = "address2_line3")]
+        public string Address2Line3 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_exhibit")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> BusinessUnitAdoxioExhibit { get; set; }
+        [JsonProperty(PropertyName = "address1_city")]
+        public string Address1City { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_fundingsource")]
-        public IList<MicrosoftDynamicsCRMadoxioFundingsource> BusinessUnitAdoxioFundingsource { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_interest")]
-        public IList<MicrosoftDynamicsCRMadoxioInterest> BusinessUnitAdoxioInterest { get; set; }
+        [JsonProperty(PropertyName = "businessunitid")]
+        public string Businessunitid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> BusinessUnitAdoxioInvestigation { get; set; }
+        [JsonProperty(PropertyName = "utcoffset")]
+        public int? Utcoffset { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_investigationdetail")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> BusinessUnitAdoxioInvestigationdetail { get; set; }
+        [JsonProperty(PropertyName = "address2_longitude")]
+        public double? Address2Longitude { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_investigationstakeholder")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> BusinessUnitAdoxioInvestigationstakeholder { get; set; }
+        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
+        public int? Address1Shippingmethodcode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_legalentity")]
-        public IList<MicrosoftDynamicsCRMadoxioLegalentity> BusinessUnitAdoxioLegalentity { get; set; }
+        [JsonProperty(PropertyName = "address1_latitude")]
+        public double? Address1Latitude { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_licences")]
-        public IList<MicrosoftDynamicsCRMadoxioLicences> BusinessUnitAdoxioLicences { get; set; }
+        [JsonProperty(PropertyName = "inheritancemask")]
+        public int? Inheritancemask { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_licencetype")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetype> BusinessUnitAdoxioLicencetype { get; set; }
+        [JsonProperty(PropertyName = "costcenter")]
+        public string Costcenter { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_licencetypeprerequisite")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> BusinessUnitAdoxioLicencetypeprerequisite { get; set; }
+        [JsonProperty(PropertyName = "address1_utcoffset")]
+        public int? Address1Utcoffset { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_licencetypestep")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetypestep> BusinessUnitAdoxioLicencetypestep { get; set; }
+        [JsonProperty(PropertyName = "address2_line2")]
+        public string Address2Line2 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_licencetypestepprerequisite")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> BusinessUnitAdoxioLicencetypestepprerequisite { get; set; }
+        [JsonProperty(PropertyName = "address1_fax")]
+        public string Address1Fax { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_loan")]
-        public IList<MicrosoftDynamicsCRMadoxioLoan> BusinessUnitAdoxioLoan { get; set; }
+        [JsonProperty(PropertyName = "address1_name")]
+        public string Address1Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_personalhistorysummary")]
-        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> BusinessUnitAdoxioPersonalhistorysummary { get; set; }
+        [JsonProperty(PropertyName = "address1_line3")]
+        public string Address1Line3 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_postalcode")]
-        public IList<MicrosoftDynamicsCRMadoxioPostalcode> BusinessUnitAdoxioPostalcode { get; set; }
+        [JsonProperty(PropertyName = "address2_telephone3")]
+        public string Address2Telephone3 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_region")]
-        public IList<MicrosoftDynamicsCRMadoxioRegion> BusinessUnitAdoxioRegion { get; set; }
+        [JsonProperty(PropertyName = "address1_longitude")]
+        public double? Address1Longitude { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_setting")]
-        public IList<MicrosoftDynamicsCRMadoxioSetting> BusinessUnitAdoxioSetting { get; set; }
+        [JsonProperty(PropertyName = "address2_upszone")]
+        public string Address2Upszone { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_taxandaccounting")]
-        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> BusinessUnitAdoxioTaxandaccounting { get; set; }
+        [JsonProperty(PropertyName = "_calendarid_value")]
+        public string _calendaridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_termsconditionslimitationspreset")]
-        public IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> BusinessUnitAdoxioTermsconditionslimitationspreset { get; set; }
+        [JsonProperty(PropertyName = "address2_county")]
+        public string Address2County { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_territory")]
-        public IList<MicrosoftDynamicsCRMadoxioTerritory> BusinessUnitAdoxioTerritory { get; set; }
+        [JsonProperty(PropertyName = "address2_city")]
+        public string Address2City { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_testentity")]
-        public IList<MicrosoftDynamicsCRMadoxioTestentity> BusinessUnitAdoxioTestentity { get; set; }
+        [JsonProperty(PropertyName = "address1_postofficebox")]
+        public string Address1Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_tiedhouseassociation")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> BusinessUnitAdoxioTiedhouseassociation { get; set; }
+        [JsonProperty(PropertyName = "workflowsuspended")]
+        public bool? Workflowsuspended { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_tiedhouseconnection")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> BusinessUnitAdoxioTiedhouseconnection { get; set; }
+        [JsonProperty(PropertyName = "address1_postalcode")]
+        public string Address1Postalcode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_violationnotification")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> BusinessUnitAdoxioViolationnotification { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_violationtype")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> BusinessUnitAdoxioViolationtype { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_adoxio_witnessstatement")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> BusinessUnitAdoxioWitnessstatement { get; set; }
+        [JsonProperty(PropertyName = "address1_telephone2")]
+        public string Address1Telephone2 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_annotations")]
-        public IList<MicrosoftDynamicsCRMannotation> BusinessUnitAnnotations { get; set; }
+        [JsonProperty(PropertyName = "address1_upszone")]
+        public string Address1Upszone { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_appointment_activities")]
-        public IList<MicrosoftDynamicsCRMappointment> BusinessUnitAppointmentActivities { get; set; }
+        [JsonProperty(PropertyName = "address2_stateorprovince")]
+        public string Address2Stateorprovince { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_asyncoperation")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> BusinessUnitAsyncoperation { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_postalcode")]
+        public string Address2Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_country")]
+        public string Address1Country { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isdisabled")]
+        public bool? Isdisabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_addressid")]
+        public string Address1Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "disabledreason")]
+        public string Disabledreason { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ftpsiteurl")]
+        public string Ftpsiteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_exchangesyncidmapping")]
+        public IList<MicrosoftDynamicsCRMexchangesyncidmapping> BusinessUnitExchangesyncidmapping { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_new_interactionforemail")]
+        public IList<MicrosoftDynamicsCRMinteractionforemail> BusinessUnitNewInteractionforemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_knowledgearticle")]
+        public IList<MicrosoftDynamicsCRMknowledgearticle> BusinessUnitKnowledgearticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_sharepointdocumentlocation")]
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> BusinessUnitSharepointdocumentlocation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_entitlement")]
+        public IList<MicrosoftDynamicsCRMentitlement> BusinessUnitEntitlement { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_goal")]
+        public IList<MicrosoftDynamicsCRMgoal> BusinessUnitGoal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_mailbox")]
+        public IList<MicrosoftDynamicsCRMmailbox> BusinessUnitMailbox { get; set; }
 
         /// <summary>
         /// </summary>
@@ -838,203 +709,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_calendars")]
-        public IList<MicrosoftDynamicsCRMcalendar> BusinessUnitCalendars { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_campaignactivity_activities")]
-        public IList<MicrosoftDynamicsCRMcampaignactivity> BusinessUnitCampaignactivityActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_campaignresponse_activities")]
-        public IList<MicrosoftDynamicsCRMcampaignresponse> BusinessUnitCampaignresponseActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_category")]
-        public IList<MicrosoftDynamicsCRMcategory> BusinessUnitCategory { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "business_unit_characteristic")]
         public IList<MicrosoftDynamicsCRMcharacteristic> BusinessUnitCharacteristic { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_connections")]
-        public IList<MicrosoftDynamicsCRMconnection> BusinessUnitConnections { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_constraint_based_groups")]
-        public IList<MicrosoftDynamicsCRMconstraintbasedgroup> BusinessUnitConstraintBasedGroups { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_contacts")]
-        public IList<MicrosoftDynamicsCRMcontact> BusinessUnitContacts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_dynamicproperyinstance")]
-        public IList<MicrosoftDynamicsCRMdynamicpropertyinstance> BusinessUnitDynamicproperyinstance { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_email_activities")]
-        public IList<MicrosoftDynamicsCRMemail> BusinessUnitEmailActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_emailserverprofile")]
-        public IList<MicrosoftDynamicsCRMemailserverprofile> BusinessUnitEmailserverprofile { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_entitlement")]
-        public IList<MicrosoftDynamicsCRMentitlement> BusinessUnitEntitlement { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_equipment")]
-        public IList<MicrosoftDynamicsCRMequipment> BusinessUnitEquipment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_exchangesyncidmapping")]
-        public IList<MicrosoftDynamicsCRMexchangesyncidmapping> BusinessUnitExchangesyncidmapping { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_fax_activities")]
-        public IList<MicrosoftDynamicsCRMfax> BusinessUnitFaxActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_feedback")]
-        public IList<MicrosoftDynamicsCRMfeedback> BusinessUnitFeedback { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_goal")]
-        public IList<MicrosoftDynamicsCRMgoal> BusinessUnitGoal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_goalrollupquery")]
-        public IList<MicrosoftDynamicsCRMgoalrollupquery> BusinessUnitGoalrollupquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_incident_resolution_activities")]
-        public IList<MicrosoftDynamicsCRMincidentresolution> BusinessUnitIncidentResolutionActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_incidents")]
-        public IList<MicrosoftDynamicsCRMincident> BusinessUnitIncidents { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_invoices")]
-        public IList<MicrosoftDynamicsCRMinvoice> BusinessUnitInvoices { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_knowledgearticle")]
-        public IList<MicrosoftDynamicsCRMknowledgearticle> BusinessUnitKnowledgearticle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_leads")]
-        public IList<MicrosoftDynamicsCRMlead> BusinessUnitLeads { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_letter_activities")]
-        public IList<MicrosoftDynamicsCRMletter> BusinessUnitLetterActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_list")]
-        public IList<MicrosoftDynamicsCRMlist> BusinessUnitList { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_mailbox")]
-        public IList<MicrosoftDynamicsCRMmailbox> BusinessUnitMailbox { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_mailmergetemplates")]
-        public IList<MicrosoftDynamicsCRMmailmergetemplate> BusinessUnitMailmergetemplates { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_new_interactionforemail")]
-        public IList<MicrosoftDynamicsCRMinteractionforemail> BusinessUnitNewInteractionforemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_opportunities")]
-        public IList<MicrosoftDynamicsCRMopportunity> BusinessUnitOpportunities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_opportunity_close_activities")]
-        public IList<MicrosoftDynamicsCRMopportunityclose> BusinessUnitOpportunityCloseActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_order_close_activities")]
-        public IList<MicrosoftDynamicsCRMorderclose> BusinessUnitOrderCloseActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_orders")]
-        public IList<MicrosoftDynamicsCRMsalesorder> BusinessUnitOrders { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_parent_business_unit")]
-        public IList<MicrosoftDynamicsCRMbusinessunit> BusinessUnitParentBusinessUnit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_personaldocumenttemplates")]
-        public IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> BusinessUnitPersonaldocumenttemplates { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_phone_call_activities")]
-        public IList<MicrosoftDynamicsCRMphonecall> BusinessUnitPhoneCallActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_postfollows")]
-        public IList<MicrosoftDynamicsCRMpostfollow> BusinessUnitPostfollows { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_queues")]
-        public IList<MicrosoftDynamicsCRMqueue> BusinessUnitQueues { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_queues2")]
-        public IList<MicrosoftDynamicsCRMqueue> BusinessUnitQueues2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_quote_close_activities")]
-        public IList<MicrosoftDynamicsCRMquoteclose> BusinessUnitQuoteCloseActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_quotes")]
-        public IList<MicrosoftDynamicsCRMquote> BusinessUnitQuotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1048,258 +724,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_recurringappointmentmaster_activities")]
-        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> BusinessUnitRecurringappointmentmasterActivities { get; set; }
+        [JsonProperty(PropertyName = "BusinessUnit_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> BusinessUnitSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "business_unit_reports")]
-        public IList<MicrosoftDynamicsCRMreport> BusinessUnitReports { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_resource_groups")]
-        public IList<MicrosoftDynamicsCRMresourcegroup> BusinessUnitResourceGroups { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_resource_specs")]
-        public IList<MicrosoftDynamicsCRMresourcespec> BusinessUnitResourceSpecs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_resources")]
-        public IList<MicrosoftDynamicsCRMresource> BusinessUnitResources { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_roles")]
-        public IList<MicrosoftDynamicsCRMrole> BusinessUnitRoles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_service_appointments")]
-        public IList<MicrosoftDynamicsCRMserviceappointment> BusinessUnitServiceAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_service_contracts")]
-        public IList<MicrosoftDynamicsCRMcontract> BusinessUnitServiceContracts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_sharepointdocumentlocation")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> BusinessUnitSharepointdocumentlocation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_sharepointsites")]
-        public IList<MicrosoftDynamicsCRMsharepointsite> BusinessUnitSharepointsites { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_slabase")]
-        public IList<MicrosoftDynamicsCRMsla> BusinessUnitSlabase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_slakpiinstance")]
-        public IList<MicrosoftDynamicsCRMslakpiinstance> BusinessUnitSlakpiinstance { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_socialactivity")]
-        public IList<MicrosoftDynamicsCRMsocialactivity> BusinessUnitSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_socialprofiles")]
-        public IList<MicrosoftDynamicsCRMsocialprofile> BusinessUnitSocialprofiles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_system_users")]
-        public IList<MicrosoftDynamicsCRMsystemuser> BusinessUnitSystemUsers { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_task_activities")]
-        public IList<MicrosoftDynamicsCRMtask> BusinessUnitTaskActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_teams")]
-        public IList<MicrosoftDynamicsCRMteam> BusinessUnitTeams { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_templates")]
-        public IList<MicrosoftDynamicsCRMtemplate> BusinessUnitTemplates { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_user_settings")]
-        public IList<MicrosoftDynamicsCRMusersettings> BusinessUnitUserSettings { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_userform")]
-        public IList<MicrosoftDynamicsCRMuserform> BusinessUnitUserform { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_userquery")]
-        public IList<MicrosoftDynamicsCRMuserquery> BusinessUnitUserquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_userqueryvisualizations")]
-        public IList<MicrosoftDynamicsCRMuserqueryvisualization> BusinessUnitUserqueryvisualizations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_workflow")]
-        public IList<MicrosoftDynamicsCRMworkflow> BusinessUnitWorkflow { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "business_unit_workflowlogs")]
-        public IList<MicrosoftDynamicsCRMworkflowlog> BusinessUnitWorkflowlogs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "businessunitid")]
-        public string Businessunitid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendarid")]
-        public MicrosoftDynamicsCRMcalendar Calendarid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "costcenter")]
-        public string Costcenter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "creditlimit")]
-        public double? Creditlimit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "disabledreason")]
-        public string Disabledreason { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "divisionname")]
-        public string Divisionname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "emailaddress")]
-        public string Emailaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "fileasname")]
-        public string Fileasname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ftpsiteurl")]
-        public string Ftpsiteurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "inheritancemask")]
-        public int? Inheritancemask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isdisabled")]
-        public bool? Isdisabled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "parentbusinessunitid")]
-        public MicrosoftDynamicsCRMbusinessunit Parentbusinessunitid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "picture")]
-        public string Picture { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stockexchange")]
-        public string Stockexchange { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "tickersymbol")]
-        public string Tickersymbol { get; set; }
+        [JsonProperty(PropertyName = "business_unit_leads")]
+        public IList<MicrosoftDynamicsCRMlead> BusinessUnitLeads { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1308,23 +739,643 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcoffset")]
-        public int? Utcoffset { get; set; }
+        [JsonProperty(PropertyName = "BulkDeleteOperation_BusinessUnit")]
+        public IList<MicrosoftDynamicsCRMbulkdeleteoperation> BulkDeleteOperationBusinessUnit { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "websiteurl")]
-        public string Websiteurl { get; set; }
+        [JsonProperty(PropertyName = "business_unit_workflow")]
+        public IList<MicrosoftDynamicsCRMworkflow> BusinessUnitWorkflow { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "workflowsuspended")]
-        public bool? Workflowsuspended { get; set; }
+        [JsonProperty(PropertyName = "BusinessUnit_SyncError")]
+        public IList<MicrosoftDynamicsCRMsyncerror> BusinessUnitSyncError { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_PostRegarding")]
+        public IList<MicrosoftDynamicsCRMpostregarding> BusinessUnitPostRegarding { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_postfollows")]
+        public IList<MicrosoftDynamicsCRMpostfollow> BusinessUnitPostfollows { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> BusinessUnitAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_queues")]
+        public IList<MicrosoftDynamicsCRMqueue> BusinessUnitQueues { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_fax_activities")]
+        public IList<MicrosoftDynamicsCRMfax> BusinessUnitFaxActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_calendars")]
+        public IList<MicrosoftDynamicsCRMcalendar> BusinessUnitCalendars { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_invoices")]
+        public IList<MicrosoftDynamicsCRMinvoice> BusinessUnitInvoices { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_quotes")]
+        public IList<MicrosoftDynamicsCRMquote> BusinessUnitQuotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_ImportLogs")]
+        public IList<MicrosoftDynamicsCRMimportlog> BusinessUnitImportLogs { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> BusinessUnitAnnotations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendarid")]
+        public MicrosoftDynamicsCRMcalendar Calendarid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_opportunities")]
+        public IList<MicrosoftDynamicsCRMopportunity> BusinessUnitOpportunities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_recurringappointmentmaster_activities")]
+        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> BusinessUnitRecurringappointmentmasterActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_templates")]
+        public IList<MicrosoftDynamicsCRMtemplate> BusinessUnitTemplates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_dynamicproperyinstance")]
+        public IList<MicrosoftDynamicsCRMdynamicpropertyinstance> BusinessUnitDynamicproperyinstance { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_accounts")]
+        public IList<MicrosoftDynamicsCRMaccount> BusinessUnitAccounts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_resource_specs")]
+        public IList<MicrosoftDynamicsCRMresourcespec> BusinessUnitResourceSpecs { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_orders")]
+        public IList<MicrosoftDynamicsCRMsalesorder> BusinessUnitOrders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_order_close_activities")]
+        public IList<MicrosoftDynamicsCRMorderclose> BusinessUnitOrderCloseActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_socialprofiles")]
+        public IList<MicrosoftDynamicsCRMsocialprofile> BusinessUnitSocialprofiles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_appointment_activities")]
+        public IList<MicrosoftDynamicsCRMappointment> BusinessUnitAppointmentActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_letter_activities")]
+        public IList<MicrosoftDynamicsCRMletter> BusinessUnitLetterActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_actioncards")]
+        public IList<MicrosoftDynamicsCRMactioncard> BusinessUnitActioncards { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_task_activities")]
+        public IList<MicrosoftDynamicsCRMtask> BusinessUnitTaskActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_activitypointer")]
+        public IList<MicrosoftDynamicsCRMactivitypointer> BusinessUnitActivitypointer { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_list")]
+        public IList<MicrosoftDynamicsCRMlist> BusinessUnitList { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_queues2")]
+        public IList<MicrosoftDynamicsCRMqueue> BusinessUnitQueues2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_asyncoperation")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> BusinessUnitAsyncoperation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_email_activities")]
+        public IList<MicrosoftDynamicsCRMemail> BusinessUnitEmailActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_roles")]
+        public IList<MicrosoftDynamicsCRMrole> BusinessUnitRoles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_resource_groups")]
+        public IList<MicrosoftDynamicsCRMresourcegroup> BusinessUnitResourceGroups { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_teams")]
+        public IList<MicrosoftDynamicsCRMteam> BusinessUnitTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_equipment")]
+        public IList<MicrosoftDynamicsCRMequipment> BusinessUnitEquipment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_userqueryvisualizations")]
+        public IList<MicrosoftDynamicsCRMuserqueryvisualization> BusinessUnitUserqueryvisualizations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_slakpiinstance")]
+        public IList<MicrosoftDynamicsCRMslakpiinstance> BusinessUnitSlakpiinstance { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_DuplicateRules")]
+        public IList<MicrosoftDynamicsCRMduplicaterule> BusinessUnitDuplicateRules { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_Campaigns")]
+        public IList<MicrosoftDynamicsCRMcampaign> BusinessUnitCampaigns { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_ImportData")]
+        public IList<MicrosoftDynamicsCRMimportdata> BusinessUnitImportData { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_phone_call_activities")]
+        public IList<MicrosoftDynamicsCRMphonecall> BusinessUnitPhoneCallActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_service_contracts")]
+        public IList<MicrosoftDynamicsCRMcontract> BusinessUnitServiceContracts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_incidents")]
+        public IList<MicrosoftDynamicsCRMincident> BusinessUnitIncidents { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_contacts")]
+        public IList<MicrosoftDynamicsCRMcontact> BusinessUnitContacts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_sharepointsites")]
+        public IList<MicrosoftDynamicsCRMsharepointsite> BusinessUnitSharepointsites { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_emailserverprofile")]
+        public IList<MicrosoftDynamicsCRMemailserverprofile> BusinessUnitEmailserverprofile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_mailmergetemplates")]
+        public IList<MicrosoftDynamicsCRMmailmergetemplate> BusinessUnitMailmergetemplates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_BulkOperation_activities")]
+        public IList<MicrosoftDynamicsCRMbulkoperation> BusinessUnitBulkOperationActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_workflowlogs")]
+        public IList<MicrosoftDynamicsCRMworkflowlog> BusinessUnitWorkflowlogs { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_resources")]
+        public IList<MicrosoftDynamicsCRMresource> BusinessUnitResources { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> BusinessUnitBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_quote_close_activities")]
+        public IList<MicrosoftDynamicsCRMquoteclose> BusinessUnitQuoteCloseActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_connections")]
+        public IList<MicrosoftDynamicsCRMconnection> BusinessUnitConnections { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_personaldocumenttemplates")]
+        public IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> BusinessUnitPersonaldocumenttemplates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_campaignresponse_activities")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> BusinessUnitCampaignresponseActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_ImportFiles")]
+        public IList<MicrosoftDynamicsCRMimportfile> BusinessUnitImportFiles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_feedback")]
+        public IList<MicrosoftDynamicsCRMfeedback> BusinessUnitFeedback { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_reports")]
+        public IList<MicrosoftDynamicsCRMreport> BusinessUnitReports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_user_settings")]
+        public IList<MicrosoftDynamicsCRMusersettings> BusinessUnitUserSettings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_incident_resolution_activities")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> BusinessUnitIncidentResolutionActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_constraint_based_groups")]
+        public IList<MicrosoftDynamicsCRMconstraintbasedgroup> BusinessUnitConstraintBasedGroups { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_Imports")]
+        public IList<MicrosoftDynamicsCRMimport> BusinessUnitImports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_category")]
+        public IList<MicrosoftDynamicsCRMcategory> BusinessUnitCategory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_system_users")]
+        public IList<MicrosoftDynamicsCRMsystemuser> BusinessUnitSystemUsers { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_slabase")]
+        public IList<MicrosoftDynamicsCRMsla> BusinessUnitSlabase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_userform")]
+        public IList<MicrosoftDynamicsCRMuserform> BusinessUnitUserform { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_socialactivity")]
+        public IList<MicrosoftDynamicsCRMsocialactivity> BusinessUnitSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_goalrollupquery")]
+        public IList<MicrosoftDynamicsCRMgoalrollupquery> BusinessUnitGoalrollupquery { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_userquery")]
+        public IList<MicrosoftDynamicsCRMuserquery> BusinessUnitUserquery { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_service_appointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> BusinessUnitServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BusinessUnit_ImportMaps")]
+        public IList<MicrosoftDynamicsCRMimportmap> BusinessUnitImportMaps { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_campaignactivity_activities")]
+        public IList<MicrosoftDynamicsCRMcampaignactivity> BusinessUnitCampaignactivityActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_opportunity_close_activities")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> BusinessUnitOpportunityCloseActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentbusinessunitid")]
+        public MicrosoftDynamicsCRMbusinessunit Parentbusinessunitid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_parent_business_unit")]
+        public IList<MicrosoftDynamicsCRMbusinessunit> BusinessUnitParentBusinessUnit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_tiedhouseconnection")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> BusinessUnitAdoxioTiedhouseconnection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_workerinvoicehistory")]
+        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> BusinessUnitAdoxioWorkerinvoicehistory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_agencycommunication")]
+        public IList<MicrosoftDynamicsCRMadoxioAgencycommunication> BusinessUnitAdoxioAgencycommunication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_applicantstep")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicantstep> BusinessUnitAdoxioApplicantstep { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_application")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> BusinessUnitAdoxioApplication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_applicationmodule")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationmodule> BusinessUnitAdoxioApplicationmodule { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_applicationtermsconditionslimitation")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> BusinessUnitAdoxioApplicationtermsconditionslimitation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_complaincemeeting")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> BusinessUnitAdoxioComplaincemeeting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_complaintsubject")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> BusinessUnitAdoxioComplaintsubject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_contravention")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> BusinessUnitAdoxioContravention { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_establishment")]
+        public IList<MicrosoftDynamicsCRMadoxioEstablishment> BusinessUnitAdoxioEstablishment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_exhibit")]
+        public IList<MicrosoftDynamicsCRMadoxioExhibit> BusinessUnitAdoxioExhibit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_investigationdetail")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> BusinessUnitAdoxioInvestigationdetail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_investigationstakeholder")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> BusinessUnitAdoxioInvestigationstakeholder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_legalentity")]
+        public IList<MicrosoftDynamicsCRMadoxioLegalentity> BusinessUnitAdoxioLegalentity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_licences")]
+        public IList<MicrosoftDynamicsCRMadoxioLicences> BusinessUnitAdoxioLicences { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_licencetype")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetype> BusinessUnitAdoxioLicencetype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_licencetypeprerequisite")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> BusinessUnitAdoxioLicencetypeprerequisite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_licencetypestep")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetypestep> BusinessUnitAdoxioLicencetypestep { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_licencetypestepprerequisite")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> BusinessUnitAdoxioLicencetypestepprerequisite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_personalhistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> BusinessUnitAdoxioPersonalhistorysummary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_postalcode")]
+        public IList<MicrosoftDynamicsCRMadoxioPostalcode> BusinessUnitAdoxioPostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_region")]
+        public IList<MicrosoftDynamicsCRMadoxioRegion> BusinessUnitAdoxioRegion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_termsconditionslimitationspreset")]
+        public IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> BusinessUnitAdoxioTermsconditionslimitationspreset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_territory")]
+        public IList<MicrosoftDynamicsCRMadoxioTerritory> BusinessUnitAdoxioTerritory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_testentity")]
+        public IList<MicrosoftDynamicsCRMadoxioTestentity> BusinessUnitAdoxioTestentity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_tiedhouseassociation")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> BusinessUnitAdoxioTiedhouseassociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_violationnotification")]
+        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> BusinessUnitAdoxioViolationnotification { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_violationtype")]
+        public IList<MicrosoftDynamicsCRMadoxioViolationtype> BusinessUnitAdoxioViolationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_witnessstatement")]
+        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> BusinessUnitAdoxioWitnessstatement { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_complaint")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> BusinessUnitAdoxioComplaint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_fundingsource")]
+        public IList<MicrosoftDynamicsCRMadoxioFundingsource> BusinessUnitAdoxioFundingsource { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_taxandaccounting")]
+        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> BusinessUnitAdoxioTaxandaccounting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_businessaccount")]
+        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> BusinessUnitAdoxioBusinessaccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_loan")]
+        public IList<MicrosoftDynamicsCRMadoxioLoan> BusinessUnitAdoxioLoan { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_interest")]
+        public IList<MicrosoftDynamicsCRMadoxioInterest> BusinessUnitAdoxioInterest { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_corporaterole")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> BusinessUnitAdoxioCorporaterole { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_investigation")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> BusinessUnitAdoxioInvestigation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_setting")]
+        public IList<MicrosoftDynamicsCRMadoxioSetting> BusinessUnitAdoxioSetting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_spdexports")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> BusinessUnitAdoxioSpdexports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_previousaddress")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> BusinessUnitAdoxioPreviousaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_spddatarow")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> BusinessUnitAdoxioSpddatarow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_policydocument")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> BusinessUnitAdoxioPolicydocument { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_applicationinvoicehistory")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> BusinessUnitAdoxioApplicationinvoicehistory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_worker")]
+        public IList<MicrosoftDynamicsCRMadoxioWorker> BusinessUnitAdoxioWorker { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_alias")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> BusinessUnitAdoxioAlias { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "business_unit_adoxio_corporatehistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> BusinessUnitAdoxioCorporatehistorysummary { get; set; }
 
     }
 }

@@ -22,9 +22,6 @@ using Microsoft.Rest;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
 using System;
-using System.Data.SqlClient;
-using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -125,8 +122,7 @@ namespace Gov.Lclb.Cllb.Public
             {
                 options.MultipartBodyLengthLimit = 1073741824; // 1 GB
             });
-
-
+            
             // health checks
             services.AddHealthChecks(checks =>
             {
@@ -205,9 +201,6 @@ namespace Gov.Lclb.Cllb.Public
 
                 return client;
             }));
-
-
-
 
             // add SharePoint.
 
