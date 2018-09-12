@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// socialprofile
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsocialprofile
     {
         /// <summary>
@@ -26,52 +29,52 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsocialprofile
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsocialprofile(IList<MicrosoftDynamicsCRMasyncoperation> socialProfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> socialProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsocialactivity> socialprofileSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _customeridValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), bool? blocked = default(bool?), int? community = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), double? exchangerate = default(double?), int? importsequencenumber = default(int?), double? influencescore = default(double?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), string profilefullname = default(string), string profilelink = default(string), string profilename = default(string), IList<MicrosoftDynamicsCRMincident> socialprofileCases = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), string socialprofileid = default(string), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), string uniqueprofileid = default(string), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsocialprofile(int? utcconversiontimezonecode = default(int?), string uniqueprofileid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), double? influencescore = default(double?), int? statecode = default(int?), object exchangerate = default(object), int? importsequencenumber = default(int?), bool? blocked = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), string profilefullname = default(string), string profilename = default(string), string socialprofileid = default(string), string _owningbusinessunitValue = default(string), int? community = default(int?), string _createdbyValue = default(string), string profilelink = default(string), int? timezoneruleversionnumber = default(int?), string _owningteamValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _customeridValue = default(string), long? versionnumber = default(long?), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> socialProfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMsyncerror> socialProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsocialactivity> socialprofileSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMincident> socialprofileCases = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            SocialProfileAsyncOperations = socialProfileAsyncOperations;
-            SocialProfileDuplicateBaseRecord = socialProfileDuplicateBaseRecord;
-            SocialProfileDuplicateMatchingRecord = socialProfileDuplicateMatchingRecord;
-            SocialProfileSyncErrors = socialProfileSyncErrors;
-            SocialprofileSocialActivities = socialprofileSocialActivities;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._customeridValue = _customeridValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Blocked = blocked;
-            Community = community;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            CustomeridAccount = customeridAccount;
-            CustomeridContact = customeridContact;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Uniqueprofileid = uniqueprofileid;
+            Modifiedon = modifiedon;
+            Influencescore = influencescore;
+            Statecode = statecode;
             Exchangerate = exchangerate;
             Importsequencenumber = importsequencenumber;
-            Influencescore = influencescore;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
+            Blocked = blocked;
             Overriddencreatedon = overriddencreatedon;
-            Ownerid = ownerid;
-            Owningbusinessunit = owningbusinessunit;
-            Owninguser = owninguser;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Statuscode = statuscode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owninguserValue = _owninguserValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._owneridValue = _owneridValue;
             Profilefullname = profilefullname;
-            Profilelink = profilelink;
             Profilename = profilename;
-            SocialprofileCases = socialprofileCases;
+            Socialprofileid = socialprofileid;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Community = community;
+            this._createdbyValue = _createdbyValue;
+            Profilelink = profilelink;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._owningteamValue = _owningteamValue;
+            Createdon = createdon;
+            this._customeridValue = _customeridValue;
+            Versionnumber = versionnumber;
+            SocialProfileDuplicateBaseRecord = socialProfileDuplicateBaseRecord;
+            SocialProfileAsyncOperations = socialProfileAsyncOperations;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Owningbusinessunit = owningbusinessunit;
             SocialprofileConnections1 = socialprofileConnections1;
             SocialprofileConnections2 = socialprofileConnections2;
-            Socialprofileid = socialprofileid;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Owninguser = owninguser;
+            CustomeridContact = customeridContact;
+            SocialProfileSyncErrors = socialProfileSyncErrors;
+            SocialprofileSocialActivities = socialprofileSocialActivities;
+            Ownerid = ownerid;
+            SocialprofileCases = socialprofileCases;
             Transactioncurrencyid = transactioncurrencyid;
-            Uniqueprofileid = uniqueprofileid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            SocialProfileDuplicateMatchingRecord = socialProfileDuplicateMatchingRecord;
+            CustomeridAccount = customeridAccount;
+            Createdonbehalfby = createdonbehalfby;
             CustomInit();
         }
 
@@ -82,43 +85,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SocialProfile_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> SocialProfileAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SocialProfile_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> SocialProfileDuplicateBaseRecord { get; set; }
+        [JsonProperty(PropertyName = "uniqueprofileid")]
+        public string Uniqueprofileid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SocialProfile_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> SocialProfileDuplicateMatchingRecord { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SocialProfile_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> SocialProfileSyncErrors { get; set; }
+        [JsonProperty(PropertyName = "influencescore")]
+        public double? Influencescore { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Socialprofile_SocialActivities")]
-        public IList<MicrosoftDynamicsCRMsocialactivity> SocialprofileSocialActivities { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        [JsonProperty(PropertyName = "blocked")]
+        public bool? Blocked { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,23 +135,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,78 +160,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "blocked")]
-        public bool? Blocked { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "community")]
-        public int? Community { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customerid_account")]
-        public MicrosoftDynamicsCRMaccount CustomeridAccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customerid_contact")]
-        public MicrosoftDynamicsCRMcontact CustomeridContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "influencescore")]
-        public double? Influencescore { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -237,18 +170,78 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "profilelink")]
-        public string Profilelink { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "profilename")]
         public string Profilename { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "socialprofile_cases")]
-        public IList<MicrosoftDynamicsCRMincident> SocialprofileCases { get; set; }
+        [JsonProperty(PropertyName = "socialprofileid")]
+        public string Socialprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "community")]
+        public int? Community { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "profilelink")]
+        public string Profilelink { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_customerid_value")]
+        public string _customeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SocialProfile_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> SocialProfileDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SocialProfile_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> SocialProfileAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
 
         /// <summary>
         /// </summary>
@@ -262,23 +255,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "socialprofileid")]
-        public string Socialprofileid { get; set; }
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "customerid_contact")]
+        public MicrosoftDynamicsCRMcontact CustomeridContact { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "SocialProfile_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> SocialProfileSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "Socialprofile_SocialActivities")]
+        public IList<MicrosoftDynamicsCRMsocialactivity> SocialprofileSocialActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "socialprofile_cases")]
+        public IList<MicrosoftDynamicsCRMincident> SocialprofileCases { get; set; }
 
         /// <summary>
         /// </summary>
@@ -287,18 +290,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "uniqueprofileid")]
-        public string Uniqueprofileid { get; set; }
+        [JsonProperty(PropertyName = "SocialProfile_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> SocialProfileDuplicateMatchingRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "customerid_account")]
+        public MicrosoftDynamicsCRMaccount CustomeridAccount { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
     }
 }

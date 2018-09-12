@@ -1,0 +1,66 @@
+<mat-card class="mat-elevation-z0">
+    <div [ngBusy]="busy" class="container" style="margin-left:0px;">
+      <div *ngIf="isApproved">
+        <div>
+          <span class="print-page" (click)="printPage()">
+            <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
+            <i class="fas fa-print fa-lg"></i>
+            <a href="javascript: void(0)"> Print Page</a>
+          </span>
+          <h1 style="color:green">Payment Approved</h1>
+          <p></p>
+          <div class="table" style="padding:0px;">
+            <table>
+              <tr>
+                <td>Card Type</td>
+                <td>{{cardType}}</td>
+              </tr>
+              <tr>
+                <td>Date/Time</td>
+                <td>{{trnDate}}</td>
+              </tr>
+              <tr>
+                <td>Invoice Number</td>
+                <td>{{invoice}}</td>
+              </tr>
+              <tr>
+                <td>Transaction ID</td>
+                <td>{{trnId}}</td>
+              </tr>
+              <tr>
+                <td>Authorization</td>
+                <td>{{authCode}}</td>
+              </tr>
+              <tr>
+                <td>Amount</td>
+                <td>{{trnAmount | currency}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+  
+        <hr>
+  
+        <br>
+        <p> Please print your receipt for your records.</p>
+  
+      </div>
+  
+      <div *ngIf="!isApproved && loaded">
+        <br />
+        <alert type="danger">
+          <strong>{{paymentTransactionTitle}}</strong>
+          <br />
+          <br />
+          <div [innerHTML]="paymentTransactionMessage"></div>
+        </alert>
+      </div>
+      <div *ngIf="loaded" style="padding-top:20px">
+        <p><a class="" routerLink="/worker-registration/dashboard">
+            <i class="fa fa-angle-double-left fa-lg" style="margin-right:5px" aria-hidden="true"></i>Return to Dashboard
+          </a>
+        </p>
+      </div>
+    </div>
+  </mat-card>
+  

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// bookingstatus
+    /// </summary>
     public partial class MicrosoftDynamicsCRMbookingstatus
     {
         /// <summary>
@@ -26,46 +29,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMbookingstatus
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMbookingstatus(IList<MicrosoftDynamicsCRMsyncerror> bookingStatusSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> bookingstatusAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bookingstatusBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> bookingstatusDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> bookingstatusDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbookableresourcebooking> bookingstatusBookableresourcebookingBookingStatus = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), string bookingstatusid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), double? exchangerate = default(double?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), int? statecode = default(int?), int? status = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMbookingstatus(int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), string description = default(string), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), long? versionnumber = default(long?), object exchangerate = default(object), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string bookingstatusid = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), int? status = default(int?), string name = default(string), string _owningteamValue = default(string), int? statecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> bookingstatusDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> bookingstatusDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> bookingstatusAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bookingstatusBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMbookableresourcebooking> bookingstatusBookableresourcebookingBookingStatus = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> bookingStatusSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
-            BookingStatusSyncErrors = bookingStatusSyncErrors;
-            this._createdbyValue = _createdbyValue;
+            Statuscode = statuscode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            BookingstatusAsyncOperations = bookingstatusAsyncOperations;
-            BookingstatusBulkDeleteFailures = bookingstatusBulkDeleteFailures;
-            BookingstatusDuplicateBaseRecord = bookingstatusDuplicateBaseRecord;
-            BookingstatusDuplicateMatchingRecord = bookingstatusDuplicateMatchingRecord;
-            BookingstatusBookableresourcebookingBookingStatus = bookingstatusBookableresourcebookingBookingStatus;
-            Bookingstatusid = bookingstatusid;
-            Createdbyname = createdbyname;
-            Createdon = createdon;
-            Createdonbehalfbyname = createdonbehalfbyname;
             Description = description;
+            this._createdbyValue = _createdbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Overriddencreatedon = overriddencreatedon;
+            Createdon = createdon;
+            Versionnumber = versionnumber;
             Exchangerate = exchangerate;
             Importsequencenumber = importsequencenumber;
-            Modifiedbyname = modifiedbyname;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Bookingstatusid = bookingstatusid;
+            this._owninguserValue = _owninguserValue;
+            this._owneridValue = _owneridValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Modifiedon = modifiedon;
-            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Status = status;
             Name = name;
-            Overriddencreatedon = overriddencreatedon;
+            this._owningteamValue = _owningteamValue;
+            Statecode = statecode;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Createdbyname = createdbyname;
+            Createdonbehalfbyname = createdonbehalfbyname;
+            Modifiedbyname = modifiedbyname;
+            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            Owninguser = owninguser;
+            Owningteam = owningteam;
             Ownerid = ownerid;
             Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Statecode = statecode;
-            Status = status;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            BookingstatusDuplicateMatchingRecord = bookingstatusDuplicateMatchingRecord;
+            BookingstatusDuplicateBaseRecord = bookingstatusDuplicateBaseRecord;
+            BookingstatusAsyncOperations = bookingstatusAsyncOperations;
+            BookingstatusBulkDeleteFailures = bookingstatusBulkDeleteFailures;
+            BookingstatusBookableresourcebookingBookingStatus = bookingstatusBookableresourcebookingBookingStatus;
             Transactioncurrencyid = transactioncurrencyid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            BookingStatusSyncErrors = bookingStatusSyncErrors;
             CustomInit();
         }
 
@@ -76,13 +79,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "BookingStatus_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> BookingStatusSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,73 +89,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bookingstatus_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> BookingstatusAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bookingstatus_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> BookingstatusBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bookingstatus_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> BookingstatusDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bookingstatus_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> BookingstatusDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bookingstatus_bookableresourcebooking_BookingStatus")]
-        public IList<MicrosoftDynamicsCRMbookableresourcebooking> BookingstatusBookableresourcebookingBookingStatus { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bookingstatusid")]
-        public string Bookingstatusid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -166,18 +114,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
+        public object Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -186,8 +129,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bookingstatusid")]
+        public string Bookingstatusid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -196,8 +159,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "status")]
+        public int? Status { get; set; }
 
         /// <summary>
         /// </summary>
@@ -206,8 +179,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
 
         /// <summary>
         /// </summary>
@@ -221,33 +234,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+        [JsonProperty(PropertyName = "bookingstatus_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> BookingstatusDuplicateMatchingRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+        [JsonProperty(PropertyName = "bookingstatus_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> BookingstatusDuplicateBaseRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "bookingstatus_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> BookingstatusAsyncOperations { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
-        public int? Status { get; set; }
+        [JsonProperty(PropertyName = "bookingstatus_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> BookingstatusBulkDeleteFailures { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "bookingstatus_bookableresourcebooking_BookingStatus")]
+        public IList<MicrosoftDynamicsCRMbookableresourcebooking> BookingstatusBookableresourcebookingBookingStatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -256,13 +264,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "BookingStatus_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> BookingStatusSyncErrors { get; set; }
 
     }
 }

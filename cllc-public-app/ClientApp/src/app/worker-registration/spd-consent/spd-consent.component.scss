@@ -1,0 +1,25 @@
+.blue-header {
+    background-color: #38598A;
+    color: #fff;
+    padding: 7px 7px 7px 15px;
+}
+
+.step {
+    border-bottom: 2px solid #FCBA19;
+}
+
+.error {
+    background-color: #F2DEDE;
+    border-radius: 5px;
+    border: 2px solid #EBCCD1;
+    color: #A12622;
+    padding-top: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.app-cancel {
+    display: inline-flex;
+    justify-content: center;
+    cursor: pointer;
+}

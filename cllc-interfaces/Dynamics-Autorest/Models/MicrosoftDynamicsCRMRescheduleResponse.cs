@@ -29,10 +29,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMRescheduleResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMRescheduleResponse(IList<MicrosoftDynamicsCRMBusinessNotification> notifications = default(IList<MicrosoftDynamicsCRMBusinessNotification>), MicrosoftDynamicsCRMValidationResult validationResult = default(MicrosoftDynamicsCRMValidationResult))
+        public MicrosoftDynamicsCRMRescheduleResponse(MicrosoftDynamicsCRMValidationResult validationResult = default(MicrosoftDynamicsCRMValidationResult), IList<MicrosoftDynamicsCRMBusinessNotification> notifications = default(IList<MicrosoftDynamicsCRMBusinessNotification>))
         {
-            Notifications = notifications;
             ValidationResult = validationResult;
+            Notifications = notifications;
             CustomInit();
         }
 
@@ -43,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Notifications")]
-        public IList<MicrosoftDynamicsCRMBusinessNotification> Notifications { get; set; }
+        [JsonProperty(PropertyName = "ValidationResult")]
+        public MicrosoftDynamicsCRMValidationResult ValidationResult { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ValidationResult")]
-        public MicrosoftDynamicsCRMValidationResult ValidationResult { get; set; }
+        [JsonProperty(PropertyName = "Notifications")]
+        public IList<MicrosoftDynamicsCRMBusinessNotification> Notifications { get; set; }
 
     }
 }

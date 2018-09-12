@@ -29,15 +29,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="state">Possible values include: 'Enabled',
         /// 'Disabled'</param>
-        public MicrosoftDynamicsCRMOrganizationDetail(MicrosoftDynamicsCRMEndpointCollection endpoints = default(MicrosoftDynamicsCRMEndpointCollection), string friendlyName = default(string), string organizationId = default(string), string organizationVersion = default(string), string state = default(string), string uniqueName = default(string), string urlName = default(string))
+        public MicrosoftDynamicsCRMOrganizationDetail(string organizationId = default(string), string friendlyName = default(string), string organizationVersion = default(string), string urlName = default(string), string uniqueName = default(string), MicrosoftDynamicsCRMEndpointCollection endpoints = default(MicrosoftDynamicsCRMEndpointCollection), string state = default(string))
         {
-            Endpoints = endpoints;
-            FriendlyName = friendlyName;
             OrganizationId = organizationId;
+            FriendlyName = friendlyName;
             OrganizationVersion = organizationVersion;
-            State = state;
-            UniqueName = uniqueName;
             UrlName = urlName;
+            UniqueName = uniqueName;
+            Endpoints = endpoints;
+            State = state;
             CustomInit();
         }
 
@@ -48,8 +48,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Endpoints")]
-        public MicrosoftDynamicsCRMEndpointCollection Endpoints { get; set; }
+        [JsonProperty(PropertyName = "OrganizationId")]
+        public string OrganizationId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -58,19 +58,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "OrganizationId")]
-        public string OrganizationId { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "OrganizationVersion")]
         public string OrganizationVersion { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Enabled', 'Disabled'
         /// </summary>
-        [JsonProperty(PropertyName = "State")]
-        public string State { get; set; }
+        [JsonProperty(PropertyName = "UrlName")]
+        public string UrlName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -79,8 +73,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "UrlName")]
-        public string UrlName { get; set; }
+        [JsonProperty(PropertyName = "Endpoints")]
+        public MicrosoftDynamicsCRMEndpointCollection Endpoints { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'Enabled', 'Disabled'
+        /// </summary>
+        [JsonProperty(PropertyName = "State")]
+        public string State { get; set; }
 
     }
 }

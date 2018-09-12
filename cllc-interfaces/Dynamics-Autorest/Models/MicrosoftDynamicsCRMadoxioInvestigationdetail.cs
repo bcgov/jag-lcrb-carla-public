@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_investigationdetail
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioInvestigationdetail
     {
         /// <summary>
@@ -26,44 +29,44 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioInvestigationdetail class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioInvestigationdetail(string _adoxioInvestigationValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), string adoxioDetails = default(string), System.DateTimeOffset? adoxioInvestigationdate = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMasyncoperation> adoxioInvestigationdetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioInvestigationdetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationdetailDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationdetailDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> adoxioInvestigationdetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string adoxioInvestigationdetailid = default(string), string adoxioName = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMadoxioInvestigationdetail(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningteamValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioInvestigationValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), string _owninguserValue = default(string), string adoxioDetails = default(string), string _owningbusinessunitValue = default(string), int? importsequencenumber = default(int?), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? adoxioInvestigationdate = default(System.DateTimeOffset?), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _modifiedbyValue = default(string), string adoxioInvestigationdetailid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioInvestigationdetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationdetailDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationdetailDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioInvestigationdetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioInvestigationdetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation))
         {
-            this._adoxioInvestigationValue = _adoxioInvestigationValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            AdoxioInvestigation = adoxioInvestigation;
-            AdoxioDetails = adoxioDetails;
-            AdoxioInvestigationdate = adoxioInvestigationdate;
-            AdoxioInvestigationdetailAsyncOperations = adoxioInvestigationdetailAsyncOperations;
-            AdoxioInvestigationdetailBulkDeleteFailures = adoxioInvestigationdetailBulkDeleteFailures;
-            AdoxioInvestigationdetailDuplicateBaseRecord = adoxioInvestigationdetailDuplicateBaseRecord;
-            AdoxioInvestigationdetailDuplicateMatchingRecord = adoxioInvestigationdetailDuplicateMatchingRecord;
-            AdoxioInvestigationdetailSyncErrors = adoxioInvestigationdetailSyncErrors;
-            AdoxioInvestigationdetailid = adoxioInvestigationdetailid;
-            AdoxioName = adoxioName;
-            Createdbyname = createdbyname;
             Createdon = createdon;
-            Createdonbehalfbyname = createdonbehalfbyname;
-            Importsequencenumber = importsequencenumber;
-            Modifiedbyname = modifiedbyname;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            this._owningteamValue = _owningteamValue;
             Overriddencreatedon = overriddencreatedon;
+            this._adoxioInvestigationValue = _adoxioInvestigationValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioName = adoxioName;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owneridValue = _owneridValue;
+            this._owninguserValue = _owninguserValue;
+            AdoxioDetails = adoxioDetails;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Importsequencenumber = importsequencenumber;
+            Statecode = statecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._createdbyValue = _createdbyValue;
+            AdoxioInvestigationdate = adoxioInvestigationdate;
+            Statuscode = statuscode;
+            Modifiedon = modifiedon;
+            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioInvestigationdetailid = adoxioInvestigationdetailid;
+            Createdbyname = createdbyname;
+            Createdonbehalfbyname = createdonbehalfbyname;
+            Modifiedbyname = modifiedbyname;
+            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            Owninguser = owninguser;
+            Owningteam = owningteam;
             Ownerid = ownerid;
             Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            AdoxioInvestigationdetailSyncErrors = adoxioInvestigationdetailSyncErrors;
+            AdoxioInvestigationdetailDuplicateMatchingRecord = adoxioInvestigationdetailDuplicateMatchingRecord;
+            AdoxioInvestigationdetailDuplicateBaseRecord = adoxioInvestigationdetailDuplicateBaseRecord;
+            AdoxioInvestigationdetailAsyncOperations = adoxioInvestigationdetailAsyncOperations;
+            AdoxioInvestigationdetailBulkDeleteFailures = adoxioInvestigationdetailBulkDeleteFailures;
+            AdoxioInvestigation = adoxioInvestigation;
             CustomInit();
         }
 
@@ -74,38 +77,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_investigation_value")]
-        public string _adoxioInvestigationValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -114,53 +87,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Investigation")]
-        public MicrosoftDynamicsCRMadoxioInvestigation AdoxioInvestigation { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_investigation_value")]
+        public string _adoxioInvestigationValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_details")]
-        public string AdoxioDetails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdate")]
-        public System.DateTimeOffset? AdoxioInvestigationdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdetail_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioInvestigationdetailAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdetail_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioInvestigationdetailBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdetail_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioInvestigationdetailDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdetail_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioInvestigationdetailDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdetail_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioInvestigationdetailSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdetailid")]
-        public string AdoxioInvestigationdetailid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -169,18 +107,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_details")]
+        public string AdoxioDetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -189,8 +137,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationdate")]
+        public System.DateTimeOffset? AdoxioInvestigationdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -199,13 +172,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationdetailid")]
+        public string AdoxioInvestigationdetailid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
         public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
 
         /// <summary>
         /// </summary>
@@ -219,38 +227,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigationdetail_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioInvestigationdetailSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigationdetail_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioInvestigationdetailDuplicateMatchingRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigationdetail_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioInvestigationdetailDuplicateBaseRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigationdetail_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioInvestigationdetailAsyncOperations { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigationdetail_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioInvestigationdetailBulkDeleteFailures { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_Investigation")]
+        public MicrosoftDynamicsCRMadoxioInvestigation AdoxioInvestigation { get; set; }
 
     }
 }

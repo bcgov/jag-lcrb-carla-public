@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// knowledgearticlescategories
+    /// </summary>
     public partial class MicrosoftDynamicsCRMknowledgearticlescategories
     {
         /// <summary>
@@ -24,10 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMknowledgearticlescategories class.
         /// </summary>
-        public MicrosoftDynamicsCRMknowledgearticlescategories(string categoryid = default(string), string knowledgearticlecategoryid = default(string), string knowledgearticleid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMknowledgearticlescategories(string knowledgearticlecategoryid = default(string), string categoryid = default(string), string knowledgearticleid = default(string), long? versionnumber = default(long?))
         {
-            Categoryid = categoryid;
             Knowledgearticlecategoryid = knowledgearticlecategoryid;
+            Categoryid = categoryid;
             Knowledgearticleid = knowledgearticleid;
             Versionnumber = versionnumber;
             CustomInit();
@@ -40,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "categoryid")]
-        public string Categoryid { get; set; }
+        [JsonProperty(PropertyName = "knowledgearticlecategoryid")]
+        public string Knowledgearticlecategoryid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticlecategoryid")]
-        public string Knowledgearticlecategoryid { get; set; }
+        [JsonProperty(PropertyName = "categoryid")]
+        public string Categoryid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

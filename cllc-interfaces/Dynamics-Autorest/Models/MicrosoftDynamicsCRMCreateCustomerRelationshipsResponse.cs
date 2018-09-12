@@ -29,10 +29,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMCreateCustomerRelationshipsResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMCreateCustomerRelationshipsResponse(string attributeId = default(string), IList<string> relationshipIds = default(IList<string>))
+        public MicrosoftDynamicsCRMCreateCustomerRelationshipsResponse(IList<string> relationshipIds = default(IList<string>), string attributeId = default(string))
         {
-            AttributeId = attributeId;
             RelationshipIds = relationshipIds;
+            AttributeId = attributeId;
             CustomInit();
         }
 
@@ -43,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "AttributeId")]
-        public string AttributeId { get; set; }
+        [JsonProperty(PropertyName = "RelationshipIds")]
+        public IList<string> RelationshipIds { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "RelationshipIds")]
-        public IList<string> RelationshipIds { get; set; }
+        [JsonProperty(PropertyName = "AttributeId")]
+        public string AttributeId { get; set; }
 
     }
 }

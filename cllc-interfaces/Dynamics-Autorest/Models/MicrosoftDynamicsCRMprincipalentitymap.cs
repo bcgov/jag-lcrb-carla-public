@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// principalentitymap
+    /// </summary>
     public partial class MicrosoftDynamicsCRMprincipalentitymap
     {
         /// <summary>
@@ -24,13 +27,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMprincipalentitymap class.
         /// </summary>
-        public MicrosoftDynamicsCRMprincipalentitymap(string objecttypecode = default(string), string principalentitymapid = default(string), string principalid = default(string), MicrosoftDynamicsCRMprincipal principalidOwner = default(MicrosoftDynamicsCRMprincipal), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMprincipalentitymap(string objecttypecode = default(string), string principalid = default(string), string principalentitymapid = default(string), long? versionnumber = default(long?), MicrosoftDynamicsCRMprincipal principalidOwner = default(MicrosoftDynamicsCRMprincipal))
         {
             Objecttypecode = objecttypecode;
-            Principalentitymapid = principalentitymapid;
             Principalid = principalid;
-            PrincipalidOwner = principalidOwner;
+            Principalentitymapid = principalentitymapid;
             Versionnumber = versionnumber;
+            PrincipalidOwner = principalidOwner;
             CustomInit();
         }
 
@@ -46,23 +49,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "principalentitymapid")]
-        public string Principalentitymapid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "principalid")]
         public string Principalid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "principalid_owner")]
-        public MicrosoftDynamicsCRMprincipal PrincipalidOwner { get; set; }
+        [JsonProperty(PropertyName = "principalentitymapid")]
+        public string Principalentitymapid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "principalid_owner")]
+        public MicrosoftDynamicsCRMprincipal PrincipalidOwner { get; set; }
 
     }
 }

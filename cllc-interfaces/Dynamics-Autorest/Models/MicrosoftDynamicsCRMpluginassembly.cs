@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// pluginassembly
+    /// </summary>
     public partial class MicrosoftDynamicsCRMpluginassembly
     {
         /// <summary>
@@ -26,45 +29,45 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpluginassembly class.
         /// </summary>
-        public MicrosoftDynamicsCRMpluginassembly(string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), int? componentstate = default(int?), string content = default(string), string contentBinary = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string culture = default(string), int? customizationlevel = default(int?), string description = default(string), string introducedversion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? ismanaged = default(bool?), int? isolationmode = default(int?), int? major = default(int?), int? minor = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string path = default(string), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), string pluginassemblyid = default(string), string pluginassemblyidunique = default(string), string publickeytoken = default(string), string solutionid = default(string), string sourcehash = default(string), int? sourcetype = default(int?), string version = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMpluginassembly(MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? sourcetype = default(int?), string _organizationidValue = default(string), string sourcehash = default(string), string introducedversion = default(string), string name = default(string), string publickeytoken = default(string), string _createdbyValue = default(string), int? customizationlevel = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string version = default(string), string description = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), string culture = default(string), string pluginassemblyidunique = default(string), long? versionnumber = default(long?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string pluginassemblyid = default(string), string _modifiedbyValue = default(string), int? major = default(int?), int? componentstate = default(int?), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string path = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? minor = default(int?), string content = default(string), object contentBinary = default(object), int? isolationmode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Ishidden = ishidden;
+            Sourcetype = sourcetype;
             this._organizationidValue = _organizationidValue;
+            Sourcehash = sourcehash;
+            Introducedversion = introducedversion;
+            Name = name;
+            Publickeytoken = publickeytoken;
+            this._createdbyValue = _createdbyValue;
+            Customizationlevel = customizationlevel;
+            Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Version = version;
+            Description = description;
+            Solutionid = solutionid;
+            Ismanaged = ismanaged;
+            Culture = culture;
+            Pluginassemblyidunique = pluginassemblyidunique;
+            Versionnumber = versionnumber;
+            Overwritetime = overwritetime;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Pluginassemblyid = pluginassemblyid;
+            this._modifiedbyValue = _modifiedbyValue;
+            Major = major;
             Componentstate = componentstate;
+            Iscustomizable = iscustomizable;
+            Path = path;
+            Modifiedon = modifiedon;
+            Minor = minor;
             Content = content;
             ContentBinary = contentBinary;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Culture = culture;
-            Customizationlevel = customizationlevel;
-            Description = description;
-            Introducedversion = introducedversion;
-            Iscustomizable = iscustomizable;
-            Ishidden = ishidden;
-            Ismanaged = ismanaged;
             Isolationmode = isolationmode;
-            Major = major;
-            Minor = minor;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
-            Organizationid = organizationid;
-            Overwritetime = overwritetime;
-            Path = path;
+            Createdby = createdby;
             PluginassemblyPlugintype = pluginassemblyPlugintype;
-            Pluginassemblyid = pluginassemblyid;
-            Pluginassemblyidunique = pluginassemblyidunique;
-            Publickeytoken = publickeytoken;
-            Solutionid = solutionid;
-            Sourcehash = sourcehash;
-            Sourcetype = sourcetype;
-            Version = version;
-            Versionnumber = versionnumber;
+            Organizationid = organizationid;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Createdonbehalfby = createdonbehalfby;
+            Modifiedby = modifiedby;
             CustomInit();
         }
 
@@ -75,23 +78,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "ishidden")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty Ishidden { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "sourcetype")]
+        public int? Sourcetype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -100,8 +93,128 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "sourcehash")]
+        public string Sourcehash { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "publickeytoken")]
+        public string Publickeytoken { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customizationlevel")]
+        public int? Customizationlevel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "version")]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "culture")]
+        public string Culture { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pluginassemblyidunique")]
+        public string Pluginassemblyidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pluginassemblyid")]
+        public string Pluginassemblyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "major")]
+        public int? Major { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "path")]
+        public string Path { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "minor")]
+        public int? Minor { get; set; }
 
         /// <summary>
         /// </summary>
@@ -111,57 +224,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "content_binary")]
-        public string ContentBinary { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "culture")]
-        public string Culture { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customizationlevel")]
-        public int? Customizationlevel { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ishidden")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty Ishidden { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        public object ContentBinary { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,48 +233,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "major")]
-        public int? Major { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "minor")]
-        public int? Minor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "path")]
-        public string Path { get; set; }
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -220,43 +243,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pluginassemblyid")]
-        public string Pluginassemblyid { get; set; }
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pluginassemblyidunique")]
-        public string Pluginassemblyidunique { get; set; }
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "publickeytoken")]
-        public string Publickeytoken { get; set; }
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sourcehash")]
-        public string Sourcehash { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sourcetype")]
-        public int? Sourcetype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public string Version { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
     }
 }

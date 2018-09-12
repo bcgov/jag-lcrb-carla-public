@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMRelationshipMetadataBase : MicrosoftDynamicsCRMMetadataBase
+    /// <summary>
+    /// RelationshipMetadataBase
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMRelationshipMetadataBase
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,21 +27,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMRelationshipMetadataBase class.
         /// </summary>
-        /// <param name="relationshipType">Possible values include:
-        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
         /// <param name="securityTypes">Possible values include: 'None',
         /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
-        public MicrosoftDynamicsCRMRelationshipMetadataBase(bool? hasChanged = default(bool?), string metadataId = default(string), string introducedVersion = default(string), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), bool? isValidForAdvancedFind = default(bool?), string relationshipType = default(string), string schemaName = default(string), string securityTypes = default(string))
-            : base(hasChanged, metadataId)
+        /// <param name="relationshipType">Possible values include:
+        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
+        public MicrosoftDynamicsCRMRelationshipMetadataBase(bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string))
         {
-            IntroducedVersion = introducedVersion;
             IsCustomRelationship = isCustomRelationship;
             IsCustomizable = isCustomizable;
-            IsManaged = isManaged;
             IsValidForAdvancedFind = isValidForAdvancedFind;
-            RelationshipType = relationshipType;
             SchemaName = schemaName;
             SecurityTypes = securityTypes;
+            IsManaged = isManaged;
+            RelationshipType = relationshipType;
+            IntroducedVersion = introducedVersion;
             CustomInit();
         }
 
@@ -46,11 +48,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IntroducedVersion")]
-        public string IntroducedVersion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -64,20 +61,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "IsManaged")]
-        public bool? IsManaged { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "IsValidForAdvancedFind")]
         public bool? IsValidForAdvancedFind { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'OneToManyRelationship',
-        /// 'ManyToManyRelationship'
-        /// </summary>
-        [JsonProperty(PropertyName = "RelationshipType")]
-        public string RelationshipType { get; set; }
 
         /// <summary>
         /// </summary>
@@ -90,6 +75,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "SecurityTypes")]
         public string SecurityTypes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsManaged")]
+        public bool? IsManaged { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'OneToManyRelationship',
+        /// 'ManyToManyRelationship'
+        /// </summary>
+        [JsonProperty(PropertyName = "RelationshipType")]
+        public string RelationshipType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IntroducedVersion")]
+        public string IntroducedVersion { get; set; }
 
     }
 }

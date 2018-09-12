@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// productsalesliterature
+    /// </summary>
     public partial class MicrosoftDynamicsCRMproductsalesliterature
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMproductsalesliterature class.
         /// </summary>
-        public MicrosoftDynamicsCRMproductsalesliterature(string productid = default(string), string productsalesliteratureid = default(string), string salesliteratureid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMproductsalesliterature(string salesliteratureid = default(string), string productid = default(string), long? versionnumber = default(long?), string productsalesliteratureid = default(string))
         {
-            Productid = productid;
-            Productsalesliteratureid = productsalesliteratureid;
             Salesliteratureid = salesliteratureid;
+            Productid = productid;
             Versionnumber = versionnumber;
+            Productsalesliteratureid = productsalesliteratureid;
             CustomInit();
         }
 
@@ -40,23 +43,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productid")]
-        public string Productid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productsalesliteratureid")]
-        public string Productsalesliteratureid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "salesliteratureid")]
         public string Salesliteratureid { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "productid")]
+        public string Productid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productsalesliteratureid")]
+        public string Productsalesliteratureid { get; set; }
 
     }
 }

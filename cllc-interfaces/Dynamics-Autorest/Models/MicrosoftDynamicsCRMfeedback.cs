@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// feedback
+    /// </summary>
     public partial class MicrosoftDynamicsCRMfeedback
     {
         /// <summary>
@@ -26,55 +29,55 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMfeedback
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMfeedback(MicrosoftDynamicsCRMcontact contactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontact createdByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontact createdOnBehalfByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMfeedback feedbackId = default(MicrosoftDynamicsCRMfeedback), IList<MicrosoftDynamicsCRMsyncerror> feedbackSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgeArticleId = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser modifiedOnBehalfBy = default(MicrosoftDynamicsCRMsystemuser), string _closedbyValue = default(string), string _createdbyValue = default(string), string _createdbycontactValue = default(string), string _createdonbehalfbyValue = default(string), string _createdonbehalfbycontactValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMsystemuser closedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? closedon = default(System.DateTimeOffset?), string comments = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), double? exchangerate = default(double?), IList<MicrosoftDynamicsCRMduplicaterecord> feedbackDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> feedbackDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMfeedback> feedbackFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), string feedbackid = default(string), int? importsequencenumber = default(int?), int? maxrating = default(int?), int? minrating = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), double? normalizedrating = default(double?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), int? rating = default(int?), int? source = default(int?), int? statecode = default(int?), int? statuscode = default(int?), string title = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMfeedback(string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string feedbackid = default(string), System.DateTimeOffset? closedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? rating = default(int?), string _regardingobjectidValue = default(string), string title = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owneridValue = default(string), string _createdbycontactValue = default(string), string comments = default(string), int? maxrating = default(int?), string _closedbyValue = default(string), int? importsequencenumber = default(int?), int? source = default(int?), string _createdonbehalfbycontactValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), long? versionnumber = default(long?), string _owninguserValue = default(string), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), object normalizedrating = default(object), int? minrating = default(int?), string _owningbusinessunitValue = default(string), object exchangerate = default(object), MicrosoftDynamicsCRMcontact contactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontact createdOnBehalfByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedOnBehalfBy = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser closedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact createdByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfeedback feedbackId = default(MicrosoftDynamicsCRMfeedback), IList<MicrosoftDynamicsCRMfeedback> feedbackFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> feedbackSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgeArticleId = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMduplicaterecord> feedbackDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> feedbackDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
         {
-            ContactId = contactId;
-            CreatedByContact = createdByContact;
-            CreatedOnBehalfByContact = createdOnBehalfByContact;
-            FeedbackId = feedbackId;
-            FeedbackSyncErrors = feedbackSyncErrors;
-            KnowledgeArticleId = knowledgeArticleId;
-            ModifiedOnBehalfBy = modifiedOnBehalfBy;
-            this._closedbyValue = _closedbyValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdbycontactValue = _createdbycontactValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
+            Statuscode = statuscode;
+            Feedbackid = feedbackid;
+            Closedon = closedon;
+            Overriddencreatedon = overriddencreatedon;
+            Statecode = statecode;
+            Rating = rating;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            Title = title;
+            Createdon = createdon;
+            this._owneridValue = _owneridValue;
+            this._createdbycontactValue = _createdbycontactValue;
+            Comments = comments;
+            Maxrating = maxrating;
+            this._closedbyValue = _closedbyValue;
+            Importsequencenumber = importsequencenumber;
+            Source = source;
             this._createdonbehalfbycontactValue = _createdonbehalfbycontactValue;
             this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            this._regardingobjectidValue = _regardingobjectidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Closedby = closedby;
-            Closedon = closedon;
-            Comments = comments;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Exchangerate = exchangerate;
-            FeedbackDuplicateBaseRecord = feedbackDuplicateBaseRecord;
-            FeedbackDuplicateMatchingRecord = feedbackDuplicateMatchingRecord;
-            FeedbackFeedback = feedbackFeedback;
-            Feedbackid = feedbackid;
-            Importsequencenumber = importsequencenumber;
-            Maxrating = maxrating;
-            Minrating = minrating;
-            Modifiedby = modifiedby;
             Modifiedon = modifiedon;
-            Normalizedrating = normalizedrating;
-            Overriddencreatedon = overriddencreatedon;
-            Ownerid = ownerid;
-            Owningbusinessunit = owningbusinessunit;
-            Rating = rating;
-            Source = source;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Title = title;
-            Transactioncurrencyid = transactioncurrencyid;
+            this._owningteamValue = _owningteamValue;
             Versionnumber = versionnumber;
+            this._owninguserValue = _owninguserValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Normalizedrating = normalizedrating;
+            Minrating = minrating;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Exchangerate = exchangerate;
+            ContactId = contactId;
+            CreatedOnBehalfByContact = createdOnBehalfByContact;
+            Modifiedby = modifiedby;
+            Ownerid = ownerid;
+            Transactioncurrencyid = transactioncurrencyid;
+            ModifiedOnBehalfBy = modifiedOnBehalfBy;
+            Closedby = closedby;
+            Createdonbehalfby = createdonbehalfby;
+            CreatedByContact = createdByContact;
+            Createdby = createdby;
+            FeedbackId = feedbackId;
+            FeedbackFeedback = feedbackFeedback;
+            Owningbusinessunit = owningbusinessunit;
+            FeedbackSyncErrors = feedbackSyncErrors;
+            KnowledgeArticleId = knowledgeArticleId;
+            FeedbackDuplicateMatchingRecord = feedbackDuplicateMatchingRecord;
+            FeedbackDuplicateBaseRecord = feedbackDuplicateBaseRecord;
             CustomInit();
         }
 
@@ -85,43 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ContactId")]
-        public MicrosoftDynamicsCRMcontact ContactId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CreatedByContact")]
-        public MicrosoftDynamicsCRMcontact CreatedByContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CreatedOnBehalfByContact")]
-        public MicrosoftDynamicsCRMcontact CreatedOnBehalfByContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "FeedbackId")]
-        public MicrosoftDynamicsCRMfeedback FeedbackId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Feedback_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> FeedbackSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "KnowledgeArticleId")]
-        public MicrosoftDynamicsCRMknowledgearticle KnowledgeArticleId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ModifiedOnBehalfBy")]
-        public MicrosoftDynamicsCRMsystemuser ModifiedOnBehalfBy { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_closedby_value")]
-        public string _closedbyValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,13 +98,83 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "feedbackid")]
+        public string Feedbackid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "closedon")]
+        public System.DateTimeOffset? Closedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rating")]
+        public int? Rating { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdbycontact_value")]
         public string _createdbycontactValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "comments")]
+        public string Comments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "maxrating")]
+        public int? Maxrating { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_closedby_value")]
+        public string _closedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "source")]
+        public int? Source { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,18 +188,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,13 +198,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -185,68 +218,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "closedby")]
-        public MicrosoftDynamicsCRMsystemuser Closedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "closedon")]
-        public System.DateTimeOffset? Closedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "comments")]
-        public string Comments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "feedback_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> FeedbackDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "feedback_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> FeedbackDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "feedback_feedback")]
-        public IList<MicrosoftDynamicsCRMfeedback> FeedbackFeedback { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "feedbackid")]
-        public string Feedbackid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "maxrating")]
-        public int? Maxrating { get; set; }
+        [JsonProperty(PropertyName = "normalizedrating")]
+        public object Normalizedrating { get; set; }
 
         /// <summary>
         /// </summary>
@@ -255,23 +228,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ContactId")]
+        public MicrosoftDynamicsCRMcontact ContactId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CreatedOnBehalfByContact")]
+        public MicrosoftDynamicsCRMcontact CreatedOnBehalfByContact { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "normalizedrating")]
-        public double? Normalizedrating { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -280,43 +258,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "rating")]
-        public int? Rating { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "source")]
-        public int? Source { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "transactioncurrencyid")]
         public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "ModifiedOnBehalfBy")]
+        public MicrosoftDynamicsCRMsystemuser ModifiedOnBehalfBy { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "closedby")]
+        public MicrosoftDynamicsCRMsystemuser Closedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CreatedByContact")]
+        public MicrosoftDynamicsCRMcontact CreatedByContact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "FeedbackId")]
+        public MicrosoftDynamicsCRMfeedback FeedbackId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "feedback_feedback")]
+        public IList<MicrosoftDynamicsCRMfeedback> FeedbackFeedback { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Feedback_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> FeedbackSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "KnowledgeArticleId")]
+        public MicrosoftDynamicsCRMknowledgearticle KnowledgeArticleId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "feedback_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> FeedbackDuplicateMatchingRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "feedback_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> FeedbackDuplicateBaseRecord { get; set; }
 
     }
 }

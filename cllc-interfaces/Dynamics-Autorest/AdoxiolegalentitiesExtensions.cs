@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModel Get(this IAdoxiolegalentities operations, int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static GetOKResponseModelModelModelModelModelModel Get(this IAdoxiolegalentities operations, int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, filter, orderby, count, select, expand).GetAwaiter().GetResult();
             }
@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModel> GetAsync(this IAdoxiolegalentities operations, int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GetOKResponseModelModelModelModelModelModel> GetAsync(this IAdoxiolegalentities operations, int? top = default(int?), int? skip = default(int?), string filter = default(string), IList<string> orderby = default(IList<string>), bool? count = default(bool?), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, filter, orderby, count, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
