@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_policydocuments
+    /// Collection of adoxio_personalhistorysummaries
     /// </summary>
     public partial class GetOKResponseModelModelModelModelModelModelModelModelModel
     {
@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// GetOKResponseModelModelModelModelModelModelModelModelModel class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioPolicydocument> value = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> value = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> Value { get; set; }
 
     }
 }
