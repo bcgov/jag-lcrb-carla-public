@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Spddatarows operations.
+    /// Personalhistorysummaries operations.
     /// </summary>
-    public partial interface ISpddatarows
+    public partial interface IPersonalhistorysummaries
     {
         /// <summary>
-        /// Get entities from adoxio_spddatarows
+        /// Get entities from adoxio_personalhistorysummaries
         /// </summary>
         /// <param name='top'>
         /// </param>
@@ -52,9 +52,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GetOKResponseModelModelModelModelModelModelModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Add new entity to adoxio_spddatarows
+        /// Add new entity to adoxio_personalhistorysummaries
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -78,12 +78,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarow>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioSpddatarow body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioPersonalhistorysummary body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get entity from adoxio_spddatarows by key
+        /// Get entity from adoxio_personalhistorysummaries by key
         /// </summary>
-        /// <param name='adoxioSpddatarowid'>
-        /// key: adoxio_spddatarowid
+        /// <param name='adoxioPersonalhistorysummaryid'>
+        /// key: adoxio_personalhistorysummaryid
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -106,12 +106,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarow>> GetByKeyWithHttpMessagesAsync(string adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>> GetByKeyWithHttpMessagesAsync(string adoxioPersonalhistorysummaryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_spddatarows
+        /// Delete entity from adoxio_personalhistorysummaries
         /// </summary>
-        /// <param name='adoxioSpddatarowid'>
-        /// key: adoxio_spddatarowid
+        /// <param name='adoxioPersonalhistorysummaryid'>
+        /// key: adoxio_personalhistorysummaryid
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -128,12 +128,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioSpddatarowid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioPersonalhistorysummaryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Update entity in adoxio_spddatarows
+        /// Update entity in adoxio_personalhistorysummaries
         /// </summary>
-        /// <param name='adoxioSpddatarowid'>
-        /// key: adoxio_spddatarowid
+        /// <param name='adoxioPersonalhistorysummaryid'>
+        /// key: adoxio_personalhistorysummaryid
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -150,6 +150,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioPersonalhistorysummaryid, MicrosoftDynamicsCRMadoxioPersonalhistorysummary body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
