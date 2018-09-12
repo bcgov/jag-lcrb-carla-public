@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// webresource
+    /// </summary>
     public partial class MicrosoftDynamicsCRMwebresource
     {
         /// <summary>
@@ -26,46 +29,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMwebresource
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMwebresource(string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty canbedeleted = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? componentstate = default(int?), string content = default(string), string contentBinary = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string dependencyxml = default(string), string description = default(string), string displayname = default(string), string introducedversion = default(string), bool? isavailableformobileoffline = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isenabledformobileclient = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? ismanaged = default(bool?), int? languagecode = default(int?), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string silverlightversion = default(string), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), string solutionid = default(string), object versionnumber = default(object), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), string webresourceid = default(string), string webresourceidunique = default(string), int? webresourcetype = default(int?))
+        public MicrosoftDynamicsCRMwebresource(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string webresourceid = default(string), string silverlightversion = default(string), string _modifiedbyValue = default(string), int? webresourcetype = default(int?), MicrosoftDynamicsCRMBooleanManagedProperty canbedeleted = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _createdonbehalfbyValue = default(string), string dependencyxml = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string webresourceidunique = default(string), bool? isavailableformobileoffline = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), bool? isenabledformobileclient = default(bool?), string name = default(string), string description = default(string), string introducedversion = default(string), long? versionnumber = default(long?), MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? componentstate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string solutionid = default(string), string content = default(string), object contentBinary = default(object), string displayname = default(string), int? languagecode = default(int?), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedon = modifiedon;
+            Webresourceid = webresourceid;
+            Silverlightversion = silverlightversion;
             this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
+            Webresourcetype = webresourcetype;
             Canbedeleted = canbedeleted;
-            Componentstate = componentstate;
-            Content = content;
-            ContentBinary = contentBinary;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Dependencyxml = dependencyxml;
-            Description = description;
-            Displayname = displayname;
-            Introducedversion = introducedversion;
+            Overwritetime = overwritetime;
+            Webresourceidunique = webresourceidunique;
             Isavailableformobileoffline = isavailableformobileoffline;
             Iscustomizable = iscustomizable;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
             Isenabledformobileclient = isenabledformobileclient;
-            Ishidden = ishidden;
-            Ismanaged = ismanaged;
-            Languagecode = languagecode;
-            LkThemeLogoid = lkThemeLogoid;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
             Name = name;
-            Organizationid = organizationid;
-            Overwritetime = overwritetime;
-            Silverlightversion = silverlightversion;
-            SolutionConfigurationWebresource = solutionConfigurationWebresource;
-            Solutionid = solutionid;
+            Description = description;
+            Introducedversion = introducedversion;
             Versionnumber = versionnumber;
-            WebresourceSavedqueryvisualizations = webresourceSavedqueryvisualizations;
+            Ishidden = ishidden;
+            Componentstate = componentstate;
+            Createdon = createdon;
+            this._organizationidValue = _organizationidValue;
+            Solutionid = solutionid;
+            Content = content;
+            ContentBinary = contentBinary;
+            Displayname = displayname;
+            Languagecode = languagecode;
+            Ismanaged = ismanaged;
+            SolutionConfigurationWebresource = solutionConfigurationWebresource;
+            Organizationid = organizationid;
+            Modifiedby = modifiedby;
             WebresourceUserqueryvisualizations = webresourceUserqueryvisualizations;
-            Webresourceid = webresourceid;
-            Webresourceidunique = webresourceidunique;
-            Webresourcetype = webresourcetype;
+            Createdonbehalfby = createdonbehalfby;
+            WebresourceSavedqueryvisualizations = webresourceSavedqueryvisualizations;
+            LkThemeLogoid = lkThemeLogoid;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Createdby = createdby;
             CustomInit();
         }
 
@@ -76,13 +79,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "webresourceid")]
+        public string Webresourceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "silverlightversion")]
+        public string Silverlightversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,13 +99,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "webresourcetype")]
+        public int? Webresourcetype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -106,33 +109,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "content")]
-        public string Content { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "content_binary")]
-        public string ContentBinary { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,18 +119,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "displayname")]
-        public string Displayname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "webresourceidunique")]
+        public string Webresourceidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -166,43 +139,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "isenabledformobileclient")]
         public bool? Isenabledformobileclient { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ishidden")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty Ishidden { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "languagecode")]
-        public int? Languagecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_theme_logoid")]
-        public IList<MicrosoftDynamicsCRMtheme> LkThemeLogoid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -211,23 +159,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "silverlightversion")]
-        public string Silverlightversion { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solution_configuration_webresource")]
-        public IList<MicrosoftDynamicsCRMsolution> SolutionConfigurationWebresource { get; set; }
+        [JsonProperty(PropertyName = "ishidden")]
+        public MicrosoftDynamicsCRMBooleanManagedProperty Ishidden { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -236,13 +199,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "content")]
+        public string Content { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "webresource_savedqueryvisualizations")]
-        public IList<MicrosoftDynamicsCRMsavedqueryvisualization> WebresourceSavedqueryvisualizations { get; set; }
+        [JsonProperty(PropertyName = "content_binary")]
+        public object ContentBinary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "displayname")]
+        public string Displayname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "languagecode")]
+        public int? Languagecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solution_configuration_webresource")]
+        public IList<MicrosoftDynamicsCRMsolution> SolutionConfigurationWebresource { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -251,18 +244,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "webresourceid")]
-        public string Webresourceid { get; set; }
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "webresourceidunique")]
-        public string Webresourceidunique { get; set; }
+        [JsonProperty(PropertyName = "webresource_savedqueryvisualizations")]
+        public IList<MicrosoftDynamicsCRMsavedqueryvisualization> WebresourceSavedqueryvisualizations { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "webresourcetype")]
-        public int? Webresourcetype { get; set; }
+        [JsonProperty(PropertyName = "lk_theme_logoid")]
+        public IList<MicrosoftDynamicsCRMtheme> LkThemeLogoid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
     }
 }

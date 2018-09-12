@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// officegraphdocument
+    /// </summary>
     public partial class MicrosoftDynamicsCRMofficegraphdocument
     {
         /// <summary>
@@ -24,42 +27,42 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMofficegraphdocument class.
         /// </summary>
-        public MicrosoftDynamicsCRMofficegraphdocument(string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _transactioncurrencyidValue = default(string), string authornames = default(string), string createdby = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string documentid = default(string), string documentlastmodifiedby = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string documentpreviewmetadata = default(string), double? exchangerate = default(double?), string fileextension = default(string), string filetype = default(string), string modifiedby = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string officegraphdocumentid = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), string previewimageurl = default(string), int? querytype = default(int?), int? rank = default(int?), string readurl = default(string), string secondaryfileextension = default(string), string sitetitle = default(string), string siteurl = default(string), int? timezoneruleversionnumber = default(int?), string title = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object), int? viewcount = default(int?), string weblocationurl = default(string))
+        public MicrosoftDynamicsCRMofficegraphdocument(string previewimageurl = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string fileextension = default(string), string readurl = default(string), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), string officegraphdocumentid = default(string), object exchangerate = default(object), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string weblocationurl = default(string), string secondaryfileextension = default(string), int? rank = default(int?), string modifiedby = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string authornames = default(string), string siteurl = default(string), string title = default(string), string createdby = default(string), string documentlastmodifiedby = default(string), string _modifiedonbehalfbyValue = default(string), string documentpreviewmetadata = default(string), int? querytype = default(int?), string documentid = default(string), int? viewcount = default(int?), string sitetitle = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string filetype = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Authornames = authornames;
-            Createdby = createdby;
-            Createdonbehalfby = createdonbehalfby;
-            Createdtime = createdtime;
-            Documentid = documentid;
-            Documentlastmodifiedby = documentlastmodifiedby;
-            Documentlastmodifiedon = documentlastmodifiedon;
-            Documentpreviewmetadata = documentpreviewmetadata;
-            Exchangerate = exchangerate;
-            Fileextension = fileextension;
-            Filetype = filetype;
-            Modifiedby = modifiedby;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Modifiedtime = modifiedtime;
-            Officegraphdocumentid = officegraphdocumentid;
-            Organizationid = organizationid;
             Previewimageurl = previewimageurl;
-            Querytype = querytype;
-            Rank = rank;
+            Modifiedtime = modifiedtime;
+            Fileextension = fileextension;
             Readurl = readurl;
-            Secondaryfileextension = secondaryfileextension;
-            Sitetitle = sitetitle;
-            Siteurl = siteurl;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Title = title;
-            Transactioncurrencyid = transactioncurrencyid;
+            this._organizationidValue = _organizationidValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
-            Viewcount = viewcount;
+            Officegraphdocumentid = officegraphdocumentid;
+            Exchangerate = exchangerate;
+            Createdtime = createdtime;
             Weblocationurl = weblocationurl;
+            Secondaryfileextension = secondaryfileextension;
+            Rank = rank;
+            Modifiedby = modifiedby;
+            Documentlastmodifiedon = documentlastmodifiedon;
+            Authornames = authornames;
+            Siteurl = siteurl;
+            Title = title;
+            Createdby = createdby;
+            Documentlastmodifiedby = documentlastmodifiedby;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Documentpreviewmetadata = documentpreviewmetadata;
+            Querytype = querytype;
+            Documentid = documentid;
+            Viewcount = viewcount;
+            Sitetitle = sitetitle;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Filetype = filetype;
+            Versionnumber = versionnumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Createdonbehalfby = createdonbehalfby;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Organizationid = organizationid;
+            Transactioncurrencyid = transactioncurrencyid;
             CustomInit();
         }
 
@@ -70,88 +73,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "authornames")]
-        public string Authornames { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public string Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdtime")]
-        public System.DateTimeOffset? Createdtime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "documentid")]
-        public string Documentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "documentlastmodifiedby")]
-        public string Documentlastmodifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "documentlastmodifiedon")]
-        public System.DateTimeOffset? Documentlastmodifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "documentpreviewmetadata")]
-        public string Documentpreviewmetadata { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "fileextension")]
-        public string Fileextension { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "filetype")]
-        public string Filetype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public string Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "previewimageurl")]
+        public string Previewimageurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,28 +83,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "officegraphdocumentid")]
-        public string Officegraphdocumentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "previewimageurl")]
-        public string Previewimageurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "querytype")]
-        public int? Querytype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "rank")]
-        public int? Rank { get; set; }
+        [JsonProperty(PropertyName = "fileextension")]
+        public string Fileextension { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,33 +93,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "secondaryfileextension")]
-        public string Secondaryfileextension { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sitetitle")]
-        public string Sitetitle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "siteurl")]
-        public string Siteurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -225,8 +103,88 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "officegraphdocumentid")]
+        public string Officegraphdocumentid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdtime")]
+        public System.DateTimeOffset? Createdtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "weblocationurl")]
+        public string Weblocationurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "secondaryfileextension")]
+        public string Secondaryfileextension { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rank")]
+        public int? Rank { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public string Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "documentlastmodifiedon")]
+        public System.DateTimeOffset? Documentlastmodifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "authornames")]
+        public string Authornames { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "siteurl")]
+        public string Siteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public string Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "documentlastmodifiedby")]
+        public string Documentlastmodifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "documentpreviewmetadata")]
+        public string Documentpreviewmetadata { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "querytype")]
+        public int? Querytype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "documentid")]
+        public string Documentid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -235,8 +193,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "weblocationurl")]
-        public string Weblocationurl { get; set; }
+        [JsonProperty(PropertyName = "sitetitle")]
+        public string Sitetitle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filetype")]
+        public string Filetype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
     }
 }

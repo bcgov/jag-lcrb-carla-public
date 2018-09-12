@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { AdoxioPreviousAddress } from '../models/adoxio-previous-address.model';
+import { PreviousAddress } from '../models/previous-address.model';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 
@@ -20,37 +20,37 @@ export class PreviousAddressDataService {
    * Get legal entities from Dynamics filtered by position
    * @param positionType
    */
-  getPreviousAdderess(accountId: string) {
-    const apiPath = `api/previous-address/${accountId}`;
-    return this.http.get<AdoxioPreviousAddress>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError("getPreviousAddress", null)));
+  getPreviousAdderesses(contactId: string): Observable<PreviousAddress[]> {
+    const apiPath = `api/previousaddress/by-contactid/${contactId}`;
+    return this.http.get<PreviousAddress[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError('getPreviousAddress', null)));
   }
 
   /**
-   * Create a new legal entity in Dynamics
-   * @param data - legal entity data
+   * Create a new address in Dynamics
+   * @param data - address data
    */
   createPreviousAdderess(data: any) {
-    return this.http.post<AdoxioPreviousAddress>('api/previous-address/', data, { headers: this.headers })
-      .pipe(catchError(this.handleError("createPreviousAddress", null)));
+    return this.http.post<PreviousAddress>('api/previousaddress/', data, { headers: this.headers })
+      .pipe(catchError(this.handleError('createPreviousAddress', null)));
   }
 
   /**
-   * update a  legal entity in Dynamics
-   * @param data - legal entity data
+   * update a  address in Dynamics
+   * @param data - address data
    */
   updatePreviousAdderess(data: any, id: string) {
-    return this.http.put<AdoxioPreviousAddress>(`api/previous-address/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError("updatePreviousAddress", null)));
+    return this.http.put<PreviousAddress>(`api/previousaddress/${id}`, data, { headers: this.headers })
+      .pipe(catchError(this.handleError('updatePreviousAddress', null)));
   }
 
   /**
-   * delete a  legal entity in Dynamics
-   * @param data - legal entity data
+   * delete a  address in Dynamics
+   * @param data - address data
    */
   deletePreviousAdderess(id: string) {
-    return this.http.post<AdoxioPreviousAddress>(`api/previous-address/${id}/delete`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError("deletePreviousAddress", null)));
+    return this.http.post<PreviousAddress>(`api/previousaddress/${id}/delete`, {}, { headers: this.headers })
+      .pipe(catchError(this.handleError('deletePreviousAddress', null)));
   }
 
   /**

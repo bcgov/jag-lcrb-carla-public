@@ -29,8 +29,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-
-
         public AccountController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
@@ -490,6 +488,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
                     throw new OdataerrorException("Error creating Tied house connection.");
+                }catch(Exception e)
+                {
+                    _logger.LogError(e.Message);
                 }
 
             }

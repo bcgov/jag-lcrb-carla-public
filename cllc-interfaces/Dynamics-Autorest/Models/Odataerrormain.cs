@@ -27,13 +27,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="innererror">The structure of this object is
         /// service-specific</param>
-        public Odataerrormain(string code, string message, IList<Odataerrordetail> details = default(IList<Odataerrordetail>), object innererror = default(object), string target = default(string))
+        public Odataerrormain(string code, string message, string target = default(string), IList<Odataerrordetail> details = default(IList<Odataerrordetail>), object innererror = default(object))
         {
             Code = code;
-            Details = details;
-            Innererror = innererror;
             Message = message;
             Target = target;
+            Details = details;
+            Innererror = innererror;
             CustomInit();
         }
 
@@ -49,6 +49,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "message")]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "target")]
+        public string Target { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "details")]
         public IList<Odataerrordetail> Details { get; set; }
 
@@ -57,16 +67,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "innererror")]
         public object Innererror { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "target")]
-        public string Target { get; set; }
 
         /// <summary>
         /// Validate the object.

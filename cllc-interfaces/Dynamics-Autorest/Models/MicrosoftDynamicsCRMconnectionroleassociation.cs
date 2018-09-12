@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// connectionroleassociation
+    /// </summary>
     public partial class MicrosoftDynamicsCRMconnectionroleassociation
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMconnectionroleassociation class.
         /// </summary>
-        public MicrosoftDynamicsCRMconnectionroleassociation(string associatedconnectionroleid = default(string), string connectionroleassociationid = default(string), string connectionroleid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMconnectionroleassociation(string associatedconnectionroleid = default(string), string connectionroleassociationid = default(string), string connectionroleid = default(string), long? versionnumber = default(long?))
         {
             Associatedconnectionroleid = associatedconnectionroleid;
             Connectionroleassociationid = connectionroleassociationid;
@@ -56,7 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

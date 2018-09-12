@@ -11,7 +11,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMEntityKeyMetadata : MicrosoftDynamicsCRMMetadataBase
+    /// <summary>
+    /// EntityKeyMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMEntityKeyMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -28,19 +31,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="entityKeyIndexStatus">Possible values include:
         /// 'Pending', 'InProgress', 'Active', 'Failed'</param>
-        public MicrosoftDynamicsCRMEntityKeyMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), string asyncJob = default(string), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string entityKeyIndexStatus = default(string), string entityLogicalName = default(string), string introducedVersion = default(string), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), IList<string> keyAttributes = default(IList<string>), string logicalName = default(string), string schemaName = default(string))
-            : base(hasChanged, metadataId)
+        public MicrosoftDynamicsCRMEntityKeyMetadata(MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string))
         {
-            AsyncJob = asyncJob;
             DisplayName = displayName;
-            EntityKeyIndexStatus = entityKeyIndexStatus;
-            EntityLogicalName = entityLogicalName;
-            IntroducedVersion = introducedVersion;
-            IsCustomizable = isCustomizable;
-            IsManaged = isManaged;
-            KeyAttributes = keyAttributes;
             LogicalName = logicalName;
             SchemaName = schemaName;
+            EntityLogicalName = entityLogicalName;
+            KeyAttributes = keyAttributes;
+            IsCustomizable = isCustomizable;
+            IsManaged = isManaged;
+            IntroducedVersion = introducedVersion;
+            EntityKeyIndexStatus = entityKeyIndexStatus;
+            AsyncJob = asyncJob;
             CustomInit();
         }
 
@@ -51,20 +53,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "AsyncJob")]
-        public string AsyncJob { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
         public MicrosoftDynamicsCRMLabel DisplayName { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Pending', 'InProgress',
-        /// 'Active', 'Failed'
         /// </summary>
-        [JsonProperty(PropertyName = "EntityKeyIndexStatus")]
-        public string EntityKeyIndexStatus { get; set; }
+        [JsonProperty(PropertyName = "LogicalName")]
+        public string LogicalName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SchemaName")]
+        public string SchemaName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -73,8 +73,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "IntroducedVersion")]
-        public string IntroducedVersion { get; set; }
+        [JsonProperty(PropertyName = "KeyAttributes")]
+        public IList<string> KeyAttributes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -88,18 +88,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "KeyAttributes")]
-        public IList<string> KeyAttributes { get; set; }
+        [JsonProperty(PropertyName = "IntroducedVersion")]
+        public string IntroducedVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'Pending', 'InProgress',
+        /// 'Active', 'Failed'
+        /// </summary>
+        [JsonProperty(PropertyName = "EntityKeyIndexStatus")]
+        public string EntityKeyIndexStatus { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "LogicalName")]
-        public string LogicalName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "SchemaName")]
-        public string SchemaName { get; set; }
+        [JsonProperty(PropertyName = "AsyncJob")]
+        public string AsyncJob { get; set; }
 
     }
 }

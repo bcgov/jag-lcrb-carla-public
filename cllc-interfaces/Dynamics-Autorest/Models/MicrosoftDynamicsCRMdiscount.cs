@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// discount
+    /// </summary>
     public partial class MicrosoftDynamicsCRMdiscount
     {
         /// <summary>
@@ -26,37 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMdiscount
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMdiscount(IList<MicrosoftDynamicsCRMasyncoperation> discountAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> discountBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> discountSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _discounttypeidValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), double? amount = default(double?), double? amountBase = default(double?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string discountid = default(string), MicrosoftDynamicsCRMdiscounttype discounttypeid = default(MicrosoftDynamicsCRMdiscounttype), double? exchangerate = default(double?), double? highquantity = default(double?), int? importsequencenumber = default(int?), bool? isamounttype = default(bool?), double? lowquantity = default(double?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string organizationid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), double? percentage = default(double?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMdiscount(object amount = default(object), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), bool? isamounttype = default(bool?), string _modifiedonbehalfbyValue = default(string), string organizationid = default(string), object amountBase = default(object), object highquantity = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), object exchangerate = default(object), string discountid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), object percentage = default(object), object lowquantity = default(object), string _discounttypeidValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _transactioncurrencyidValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> discountAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> discountSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdiscounttype discounttypeid = default(MicrosoftDynamicsCRMdiscounttype), IList<MicrosoftDynamicsCRMbulkdeletefailure> discountBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            DiscountAsyncOperations = discountAsyncOperations;
-            DiscountBulkDeleteFailures = discountBulkDeleteFailures;
-            DiscountSyncErrors = discountSyncErrors;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._discounttypeidValue = _discounttypeidValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Amount = amount;
-            AmountBase = amountBase;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Discountid = discountid;
-            Discounttypeid = discounttypeid;
-            Exchangerate = exchangerate;
-            Highquantity = highquantity;
             Importsequencenumber = importsequencenumber;
+            this._modifiedbyValue = _modifiedbyValue;
             Isamounttype = isamounttype;
-            Lowquantity = lowquantity;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Organizationid = organizationid;
-            Overriddencreatedon = overriddencreatedon;
+            AmountBase = amountBase;
+            Highquantity = highquantity;
+            Createdon = createdon;
+            Exchangerate = exchangerate;
+            Discountid = discountid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedon = modifiedon;
             Percentage = percentage;
-            Transactioncurrencyid = transactioncurrencyid;
+            Lowquantity = lowquantity;
+            this._discounttypeidValue = _discounttypeidValue;
+            this._createdbyValue = _createdbyValue;
+            Overriddencreatedon = overriddencreatedon;
             Versionnumber = versionnumber;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            DiscountAsyncOperations = discountAsyncOperations;
+            Createdonbehalfby = createdonbehalfby;
+            Transactioncurrencyid = transactioncurrencyid;
+            DiscountSyncErrors = discountSyncErrors;
+            Createdby = createdby;
+            Discounttypeid = discounttypeid;
+            DiscountBulkDeleteFailures = discountBulkDeleteFailures;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Modifiedby = modifiedby;
             CustomInit();
         }
 
@@ -67,93 +70,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Discount_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> DiscountAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Discount_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> DiscountBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Discount_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> DiscountSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_discounttypeid_value")]
-        public string _discounttypeidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "amount")]
-        public double? Amount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "amount_base")]
-        public double? AmountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "discountid")]
-        public string Discountid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "discounttypeid")]
-        public MicrosoftDynamicsCRMdiscounttype Discounttypeid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "highquantity")]
-        public double? Highquantity { get; set; }
+        public object Amount { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,28 +80,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "isamounttype")]
         public bool? Isamounttype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lowquantity")]
-        public double? Lowquantity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -192,13 +100,83 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "amount_base")]
+        public object AmountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "highquantity")]
+        public object Highquantity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "discountid")]
+        public string Discountid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "percentage")]
+        public object Percentage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lowquantity")]
+        public object Lowquantity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_discounttypeid_value")]
+        public string _discounttypeidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "percentage")]
-        public double? Percentage { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Discount_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> DiscountAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,8 +185,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "Discount_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> DiscountSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "discounttypeid")]
+        public MicrosoftDynamicsCRMdiscounttype Discounttypeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Discount_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> DiscountBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
     }
 }

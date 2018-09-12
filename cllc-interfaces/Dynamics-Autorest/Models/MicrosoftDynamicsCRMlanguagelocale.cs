@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// languagelocale
+    /// </summary>
     public partial class MicrosoftDynamicsCRMlanguagelocale
     {
         /// <summary>
@@ -26,20 +29,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMlanguagelocale class.
         /// </summary>
-        public MicrosoftDynamicsCRMlanguagelocale(string _organizationidValue = default(string), string code = default(string), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), string language = default(string), string languagelocaleid = default(string), int? localeid = default(int?), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), string region = default(string), int? statecode = default(int?), int? statuscode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMlanguagelocale(string region = default(string), string languagelocaleid = default(string), string language = default(string), string code = default(string), long? versionnumber = default(long?), int? statecode = default(int?), int? statuscode = default(int?), string _organizationidValue = default(string), string name = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
-            this._organizationidValue = _organizationidValue;
-            Code = code;
-            KnowledgearticleLanguagelocaleid = knowledgearticleLanguagelocaleid;
-            Language = language;
-            Languagelocaleid = languagelocaleid;
-            Localeid = localeid;
-            Name = name;
-            Organizationid = organizationid;
             Region = region;
+            Languagelocaleid = languagelocaleid;
+            Language = language;
+            Code = code;
+            Versionnumber = versionnumber;
             Statecode = statecode;
             Statuscode = statuscode;
-            Versionnumber = versionnumber;
+            this._organizationidValue = _organizationidValue;
+            Name = name;
+            Localeid = localeid;
+            KnowledgearticleLanguagelocaleid = knowledgearticleLanguagelocaleid;
+            Organizationid = organizationid;
             CustomInit();
         }
 
@@ -50,23 +53,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "code")]
-        public string Code { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticle_languagelocaleid")]
-        public IList<MicrosoftDynamicsCRMknowledgearticle> KnowledgearticleLanguagelocaleid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "language")]
-        public string Language { get; set; }
+        [JsonProperty(PropertyName = "region")]
+        public string Region { get; set; }
 
         /// <summary>
         /// </summary>
@@ -75,23 +63,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "localeid")]
-        public int? Localeid { get; set; }
+        [JsonProperty(PropertyName = "language")]
+        public string Language { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "code")]
+        public string Code { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "region")]
-        public string Region { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,8 +88,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "localeid")]
+        public int? Localeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "knowledgearticle_languagelocaleid")]
+        public IList<MicrosoftDynamicsCRMknowledgearticle> KnowledgearticleLanguagelocaleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
 
     }
 }

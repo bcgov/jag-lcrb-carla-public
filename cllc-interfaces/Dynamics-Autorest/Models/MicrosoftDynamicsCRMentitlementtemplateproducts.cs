@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// entitlementtemplateproducts
+    /// </summary>
     public partial class MicrosoftDynamicsCRMentitlementtemplateproducts
     {
         /// <summary>
@@ -24,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementtemplateproducts class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementtemplateproducts(string entitlementtemplateid = default(string), string entitlementtemplateproductid = default(string), string productid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMentitlementtemplateproducts(string productid = default(string), string entitlementtemplateproductid = default(string), string entitlementtemplateid = default(string), long? versionnumber = default(long?))
         {
-            Entitlementtemplateid = entitlementtemplateid;
-            Entitlementtemplateproductid = entitlementtemplateproductid;
             Productid = productid;
+            Entitlementtemplateproductid = entitlementtemplateproductid;
+            Entitlementtemplateid = entitlementtemplateid;
             Versionnumber = versionnumber;
             CustomInit();
         }
@@ -40,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entitlementtemplateid")]
-        public string Entitlementtemplateid { get; set; }
+        [JsonProperty(PropertyName = "productid")]
+        public string Productid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -50,13 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productid")]
-        public string Productid { get; set; }
+        [JsonProperty(PropertyName = "entitlementtemplateid")]
+        public string Entitlementtemplateid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
 
     }
 }

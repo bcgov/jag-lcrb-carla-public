@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// goal
+    /// </summary>
     public partial class MicrosoftDynamicsCRMgoal
     {
         /// <summary>
@@ -24,124 +27,124 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMgoal class.
         /// </summary>
-        public MicrosoftDynamicsCRMgoal(IList<MicrosoftDynamicsCRMannotation> goalAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> goalAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMgoal> goalRollupErrorGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMsyncerror> goalSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _goalowneridValue = default(string), string _goalwitherroridValue = default(string), string _metricidValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _parentgoalidValue = default(string), string _rollupqueryactualdecimalidValue = default(string), string _rollupqueryactualintegeridValue = default(string), string _rollupqueryactualmoneyidValue = default(string), string _rollupquerycustomdecimalidValue = default(string), string _rollupquerycustomintegeridValue = default(string), string _rollupquerycustommoneyidValue = default(string), string _rollupqueryinprogressdecimalidValue = default(string), string _rollupqueryinprogressintegeridValue = default(string), string _rollupqueryinprogressmoneyidValue = default(string), string _transactioncurrencyidValue = default(string), double? actualdecimal = default(double?), int? actualinteger = default(int?), double? actualmoney = default(double?), double? actualmoneyBase = default(double?), string actualstring = default(string), int? amountdatatype = default(int?), double? computedtargetasoftodaydecimal = default(double?), int? computedtargetasoftodayinteger = default(int?), double? computedtargetasoftodaymoney = default(double?), double? computedtargetasoftodaymoneyBase = default(double?), double? computedtargetasoftodaypercentageachieved = default(double?), bool? consideronlygoalownersrecords = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), double? customrollupfielddecimal = default(double?), int? customrollupfieldinteger = default(int?), double? customrollupfieldmoney = default(double?), double? customrollupfieldmoneyBase = default(double?), string customrollupfieldstring = default(string), int? depth = default(int?), string entityimage = default(string), object entityimageTimestamp = default(object), string entityimageUrl = default(string), string entityimageid = default(string), double? exchangerate = default(double?), int? fiscalperiod = default(int?), int? fiscalyear = default(int?), IList<MicrosoftDynamicsCRMconnection> goalConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> goalConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMgoal> goalParentGoal = default(IList<MicrosoftDynamicsCRMgoal>), System.DateTimeOffset? goalenddate = default(System.DateTimeOffset?), string goalid = default(string), MicrosoftDynamicsCRMsystemuser goalowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam goalowneridTeam = default(MicrosoftDynamicsCRMteam), System.DateTimeOffset? goalstartdate = default(System.DateTimeOffset?), MicrosoftDynamicsCRMgoal goalwitherrorid = default(MicrosoftDynamicsCRMgoal), int? importsequencenumber = default(int?), double? inprogressdecimal = default(double?), int? inprogressinteger = default(int?), double? inprogressmoney = default(double?), double? inprogressmoneyBase = default(double?), string inprogressstring = default(string), bool? isamount = default(bool?), bool? isfiscalperiodgoal = default(bool?), bool? isoverridden = default(bool?), bool? isoverride = default(bool?), System.DateTimeOffset? lastrolledupdate = default(System.DateTimeOffset?), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMgoal parentgoalid = default(MicrosoftDynamicsCRMgoal), double? percentage = default(double?), int? rolluperrorcode = default(int?), bool? rolluponlyfromchildgoals = default(bool?), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustommoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), int? statecode = default(int?), int? statuscode = default(int?), double? stretchtargetdecimal = default(double?), int? stretchtargetinteger = default(int?), double? stretchtargetmoney = default(double?), double? stretchtargetmoneyBase = default(double?), string stretchtargetstring = default(string), double? targetdecimal = default(double?), int? targetinteger = default(int?), double? targetmoney = default(double?), double? targetmoneyBase = default(double?), string targetstring = default(string), int? timezoneruleversionnumber = default(int?), string title = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), string treeid = default(string), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMgoal(object computedtargetasoftodaypercentageachieved = default(object), string stretchtargetstring = default(string), int? amountdatatype = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _rollupqueryinprogressintegeridValue = default(string), string _createdbyValue = default(string), int? inprogressinteger = default(int?), bool? rolluponlyfromchildgoals = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastrolledupdate = default(System.DateTimeOffset?), object targetmoneyBase = default(object), string _rollupqueryactualintegeridValue = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), bool? isoverridden = default(bool?), string title = default(string), System.DateTimeOffset? goalenddate = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _rollupqueryactualdecimalidValue = default(string), string _goalowneridValue = default(string), object inprogressdecimal = default(object), bool? consideronlygoalownersrecords = default(bool?), string _rollupquerycustomintegeridValue = default(string), string _rollupqueryactualmoneyidValue = default(string), string entityimageid = default(string), object targetdecimal = default(object), object computedtargetasoftodaymoney = default(object), bool? isoverride = default(bool?), bool? isamount = default(bool?), string _modifiedonbehalfbyValue = default(string), int? computedtargetasoftodayinteger = default(int?), object entityimage = default(object), string treeid = default(string), long? versionnumber = default(long?), long? entityimageTimestamp = default(long?), string _owneridValue = default(string), object percentage = default(object), string actualstring = default(string), object customrollupfieldmoneyBase = default(object), int? stretchtargetinteger = default(int?), object actualmoneyBase = default(object), object targetmoney = default(object), object computedtargetasoftodaymoneyBase = default(object), string entityimageUrl = default(string), int? targetinteger = default(int?), object actualmoney = default(object), string inprogressstring = default(string), System.DateTimeOffset? goalstartdate = default(System.DateTimeOffset?), object inprogressmoneyBase = default(object), string targetstring = default(string), int? fiscalperiod = default(int?), int? statuscode = default(int?), int? statecode = default(int?), object customrollupfieldmoney = default(object), string goalid = default(string), string _rollupquerycustommoneyidValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), string _rollupqueryinprogressdecimalidValue = default(string), object exchangerate = default(object), object stretchtargetmoney = default(object), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _goalwitherroridValue = default(string), object actualdecimal = default(object), bool? isfiscalperiodgoal = default(bool?), string customrollupfieldstring = default(string), string _rollupqueryinprogressmoneyidValue = default(string), string _rollupquerycustomdecimalidValue = default(string), string _metricidValue = default(string), int? actualinteger = default(int?), object computedtargetasoftodaydecimal = default(object), object customrollupfielddecimal = default(object), int? fiscalyear = default(int?), object stretchtargetmoneyBase = default(object), object stretchtargetdecimal = default(object), int? timezoneruleversionnumber = default(int?), object inprogressmoney = default(object), int? depth = default(int?), int? rolluperrorcode = default(int?), string _parentgoalidValue = default(string), int? customrollupfieldinteger = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustommoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser goalowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMgoal parentgoalid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalParentGoal = default(IList<MicrosoftDynamicsCRMgoal>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMgoal goalwitherrorid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalRollupErrorGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMconnection> goalConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> goalSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> goalAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> goalConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> goalAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMteam goalowneridTeam = default(MicrosoftDynamicsCRMteam))
         {
-            GoalAnnotation = goalAnnotation;
-            GoalAsyncOperations = goalAsyncOperations;
-            GoalDuplicateBaseRecord = goalDuplicateBaseRecord;
-            GoalDuplicateMatchingRecord = goalDuplicateMatchingRecord;
-            GoalRollupErrorGoal = goalRollupErrorGoal;
-            GoalSyncErrors = goalSyncErrors;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._goalowneridValue = _goalowneridValue;
-            this._goalwitherroridValue = _goalwitherroridValue;
-            this._metricidValue = _metricidValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._owninguserValue = _owninguserValue;
-            this._parentgoalidValue = _parentgoalidValue;
-            this._rollupqueryactualdecimalidValue = _rollupqueryactualdecimalidValue;
-            this._rollupqueryactualintegeridValue = _rollupqueryactualintegeridValue;
-            this._rollupqueryactualmoneyidValue = _rollupqueryactualmoneyidValue;
-            this._rollupquerycustomdecimalidValue = _rollupquerycustomdecimalidValue;
-            this._rollupquerycustomintegeridValue = _rollupquerycustomintegeridValue;
-            this._rollupquerycustommoneyidValue = _rollupquerycustommoneyidValue;
-            this._rollupqueryinprogressdecimalidValue = _rollupqueryinprogressdecimalidValue;
-            this._rollupqueryinprogressintegeridValue = _rollupqueryinprogressintegeridValue;
-            this._rollupqueryinprogressmoneyidValue = _rollupqueryinprogressmoneyidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Actualdecimal = actualdecimal;
-            Actualinteger = actualinteger;
-            Actualmoney = actualmoney;
-            ActualmoneyBase = actualmoneyBase;
-            Actualstring = actualstring;
-            Amountdatatype = amountdatatype;
-            Computedtargetasoftodaydecimal = computedtargetasoftodaydecimal;
-            Computedtargetasoftodayinteger = computedtargetasoftodayinteger;
-            Computedtargetasoftodaymoney = computedtargetasoftodaymoney;
-            ComputedtargetasoftodaymoneyBase = computedtargetasoftodaymoneyBase;
             Computedtargetasoftodaypercentageachieved = computedtargetasoftodaypercentageachieved;
-            Consideronlygoalownersrecords = consideronlygoalownersrecords;
-            Createdby = createdby;
+            Stretchtargetstring = stretchtargetstring;
+            Amountdatatype = amountdatatype;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Customrollupfielddecimal = customrollupfielddecimal;
-            Customrollupfieldinteger = customrollupfieldinteger;
-            Customrollupfieldmoney = customrollupfieldmoney;
-            CustomrollupfieldmoneyBase = customrollupfieldmoneyBase;
-            Customrollupfieldstring = customrollupfieldstring;
-            Depth = depth;
-            Entityimage = entityimage;
-            EntityimageTimestamp = entityimageTimestamp;
-            EntityimageUrl = entityimageUrl;
-            Entityimageid = entityimageid;
-            Exchangerate = exchangerate;
-            Fiscalperiod = fiscalperiod;
-            Fiscalyear = fiscalyear;
-            GoalConnections1 = goalConnections1;
-            GoalConnections2 = goalConnections2;
-            GoalParentGoal = goalParentGoal;
-            Goalenddate = goalenddate;
-            Goalid = goalid;
-            GoalowneridSystemuser = goalowneridSystemuser;
-            GoalowneridTeam = goalowneridTeam;
-            Goalstartdate = goalstartdate;
-            Goalwitherrorid = goalwitherrorid;
-            Importsequencenumber = importsequencenumber;
-            Inprogressdecimal = inprogressdecimal;
+            this._rollupqueryinprogressintegeridValue = _rollupqueryinprogressintegeridValue;
+            this._createdbyValue = _createdbyValue;
             Inprogressinteger = inprogressinteger;
-            Inprogressmoney = inprogressmoney;
-            InprogressmoneyBase = inprogressmoneyBase;
-            Inprogressstring = inprogressstring;
-            Isamount = isamount;
-            Isfiscalperiodgoal = isfiscalperiodgoal;
-            Isoverridden = isoverridden;
-            Isoverride = isoverride;
-            Lastrolledupdate = lastrolledupdate;
-            Metricid = metricid;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Overriddencreatedon = overriddencreatedon;
-            Ownerid = ownerid;
-            Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Parentgoalid = parentgoalid;
-            Percentage = percentage;
-            Rolluperrorcode = rolluperrorcode;
             Rolluponlyfromchildgoals = rolluponlyfromchildgoals;
-            Rollupqueryactualdecimalid = rollupqueryactualdecimalid;
+            Overriddencreatedon = overriddencreatedon;
+            Lastrolledupdate = lastrolledupdate;
+            TargetmoneyBase = targetmoneyBase;
+            this._rollupqueryactualintegeridValue = _rollupqueryactualintegeridValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._modifiedbyValue = _modifiedbyValue;
+            Isoverridden = isoverridden;
+            Title = title;
+            Goalenddate = goalenddate;
+            this._owningteamValue = _owningteamValue;
+            this._rollupqueryactualdecimalidValue = _rollupqueryactualdecimalidValue;
+            this._goalowneridValue = _goalowneridValue;
+            Inprogressdecimal = inprogressdecimal;
+            Consideronlygoalownersrecords = consideronlygoalownersrecords;
+            this._rollupquerycustomintegeridValue = _rollupquerycustomintegeridValue;
+            this._rollupqueryactualmoneyidValue = _rollupqueryactualmoneyidValue;
+            Entityimageid = entityimageid;
+            Targetdecimal = targetdecimal;
+            Computedtargetasoftodaymoney = computedtargetasoftodaymoney;
+            Isoverride = isoverride;
+            Isamount = isamount;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Computedtargetasoftodayinteger = computedtargetasoftodayinteger;
+            Entityimage = entityimage;
+            Treeid = treeid;
+            Versionnumber = versionnumber;
+            EntityimageTimestamp = entityimageTimestamp;
+            this._owneridValue = _owneridValue;
+            Percentage = percentage;
+            Actualstring = actualstring;
+            CustomrollupfieldmoneyBase = customrollupfieldmoneyBase;
+            Stretchtargetinteger = stretchtargetinteger;
+            ActualmoneyBase = actualmoneyBase;
+            Targetmoney = targetmoney;
+            ComputedtargetasoftodaymoneyBase = computedtargetasoftodaymoneyBase;
+            EntityimageUrl = entityimageUrl;
+            Targetinteger = targetinteger;
+            Actualmoney = actualmoney;
+            Inprogressstring = inprogressstring;
+            Goalstartdate = goalstartdate;
+            InprogressmoneyBase = inprogressmoneyBase;
+            Targetstring = targetstring;
+            Fiscalperiod = fiscalperiod;
+            Statuscode = statuscode;
+            Statecode = statecode;
+            Customrollupfieldmoney = customrollupfieldmoney;
+            Goalid = goalid;
+            this._rollupquerycustommoneyidValue = _rollupquerycustommoneyidValue;
+            this._owninguserValue = _owninguserValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._rollupqueryinprogressdecimalidValue = _rollupqueryinprogressdecimalidValue;
+            Exchangerate = exchangerate;
+            Stretchtargetmoney = stretchtargetmoney;
+            Importsequencenumber = importsequencenumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedon = modifiedon;
+            this._goalwitherroridValue = _goalwitherroridValue;
+            Actualdecimal = actualdecimal;
+            Isfiscalperiodgoal = isfiscalperiodgoal;
+            Customrollupfieldstring = customrollupfieldstring;
+            this._rollupqueryinprogressmoneyidValue = _rollupqueryinprogressmoneyidValue;
+            this._rollupquerycustomdecimalidValue = _rollupquerycustomdecimalidValue;
+            this._metricidValue = _metricidValue;
+            Actualinteger = actualinteger;
+            Computedtargetasoftodaydecimal = computedtargetasoftodaydecimal;
+            Customrollupfielddecimal = customrollupfielddecimal;
+            Fiscalyear = fiscalyear;
+            StretchtargetmoneyBase = stretchtargetmoneyBase;
+            Stretchtargetdecimal = stretchtargetdecimal;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Inprogressmoney = inprogressmoney;
+            Depth = depth;
+            Rolluperrorcode = rolluperrorcode;
+            this._parentgoalidValue = _parentgoalidValue;
+            Customrollupfieldinteger = customrollupfieldinteger;
+            Owningteam = owningteam;
+            Ownerid = ownerid;
             Rollupqueryactualintegerid = rollupqueryactualintegerid;
             Rollupqueryactualmoneyid = rollupqueryactualmoneyid;
-            Rollupquerycustomdecimalid = rollupquerycustomdecimalid;
+            Rollupqueryactualdecimalid = rollupqueryactualdecimalid;
             Rollupquerycustomintegerid = rollupquerycustomintegerid;
             Rollupquerycustommoneyid = rollupquerycustommoneyid;
-            Rollupqueryinprogressdecimalid = rollupqueryinprogressdecimalid;
+            Rollupquerycustomdecimalid = rollupquerycustomdecimalid;
             Rollupqueryinprogressintegerid = rollupqueryinprogressintegerid;
             Rollupqueryinprogressmoneyid = rollupqueryinprogressmoneyid;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Stretchtargetdecimal = stretchtargetdecimal;
-            Stretchtargetinteger = stretchtargetinteger;
-            Stretchtargetmoney = stretchtargetmoney;
-            StretchtargetmoneyBase = stretchtargetmoneyBase;
-            Stretchtargetstring = stretchtargetstring;
-            Targetdecimal = targetdecimal;
-            Targetinteger = targetinteger;
-            Targetmoney = targetmoney;
-            TargetmoneyBase = targetmoneyBase;
-            Targetstring = targetstring;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Title = title;
+            Rollupqueryinprogressdecimalid = rollupqueryinprogressdecimalid;
+            Createdby = createdby;
+            Createdonbehalfby = createdonbehalfby;
+            Modifiedby = modifiedby;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Owninguser = owninguser;
+            Owningbusinessunit = owningbusinessunit;
+            GoalowneridSystemuser = goalowneridSystemuser;
+            Parentgoalid = parentgoalid;
+            GoalParentGoal = goalParentGoal;
             Transactioncurrencyid = transactioncurrencyid;
-            Treeid = treeid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            Metricid = metricid;
+            GoalDuplicateMatchingRecord = goalDuplicateMatchingRecord;
+            Goalwitherrorid = goalwitherrorid;
+            GoalRollupErrorGoal = goalRollupErrorGoal;
+            GoalConnections2 = goalConnections2;
+            GoalSyncErrors = goalSyncErrors;
+            GoalAnnotation = goalAnnotation;
+            GoalConnections1 = goalConnections1;
+            GoalAsyncOperations = goalAsyncOperations;
+            GoalDuplicateBaseRecord = goalDuplicateBaseRecord;
+            GoalowneridTeam = goalowneridTeam;
             CustomInit();
         }
 
@@ -152,168 +155,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Goal_Annotation")]
-        public IList<MicrosoftDynamicsCRMannotation> GoalAnnotation { get; set; }
+        [JsonProperty(PropertyName = "computedtargetasoftodaypercentageachieved")]
+        public object Computedtargetasoftodaypercentageachieved { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Goal_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> GoalAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Goal_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> GoalDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Goal_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> GoalDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Goal_RollupError_Goal")]
-        public IList<MicrosoftDynamicsCRMgoal> GoalRollupErrorGoal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Goal_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> GoalSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_goalownerid_value")]
-        public string _goalowneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_goalwitherrorid_value")]
-        public string _goalwitherroridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_metricid_value")]
-        public string _metricidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentgoalid_value")]
-        public string _parentgoalidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryactualdecimalid_value")]
-        public string _rollupqueryactualdecimalidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryactualintegerid_value")]
-        public string _rollupqueryactualintegeridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryactualmoneyid_value")]
-        public string _rollupqueryactualmoneyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupquerycustomdecimalid_value")]
-        public string _rollupquerycustomdecimalidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupquerycustomintegerid_value")]
-        public string _rollupquerycustomintegeridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupquerycustommoneyid_value")]
-        public string _rollupquerycustommoneyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryinprogressdecimalid_value")]
-        public string _rollupqueryinprogressdecimalidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryinprogressintegerid_value")]
-        public string _rollupqueryinprogressintegeridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryinprogressmoneyid_value")]
-        public string _rollupqueryinprogressmoneyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualdecimal")]
-        public double? Actualdecimal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualinteger")]
-        public int? Actualinteger { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualmoney")]
-        public double? Actualmoney { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualmoney_base")]
-        public double? ActualmoneyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualstring")]
-        public string Actualstring { get; set; }
+        [JsonProperty(PropertyName = "stretchtargetstring")]
+        public string Stretchtargetstring { get; set; }
 
         /// <summary>
         /// </summary>
@@ -322,38 +170,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "computedtargetasoftodaydecimal")]
-        public double? Computedtargetasoftodaydecimal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "computedtargetasoftodayinteger")]
-        public int? Computedtargetasoftodayinteger { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "computedtargetasoftodaymoney")]
-        public double? Computedtargetasoftodaymoney { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "computedtargetasoftodaymoney_base")]
-        public double? ComputedtargetasoftodaymoneyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "computedtargetasoftodaypercentageachieved")]
-        public double? Computedtargetasoftodaypercentageachieved { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "consideronlygoalownersrecords")]
-        public bool? Consideronlygoalownersrecords { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -362,128 +180,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "_rollupqueryinprogressintegerid_value")]
+        public string _rollupqueryinprogressintegeridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "customrollupfielddecimal")]
-        public double? Customrollupfielddecimal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customrollupfieldinteger")]
-        public int? Customrollupfieldinteger { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customrollupfieldmoney")]
-        public double? Customrollupfieldmoney { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customrollupfieldmoney_base")]
-        public double? CustomrollupfieldmoneyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customrollupfieldstring")]
-        public string Customrollupfieldstring { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "depth")]
-        public int? Depth { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage")]
-        public string Entityimage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public object EntityimageTimestamp { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_url")]
-        public string EntityimageUrl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "fiscalperiod")]
-        public int? Fiscalperiod { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "fiscalyear")]
-        public int? Fiscalyear { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goal_connections1")]
-        public IList<MicrosoftDynamicsCRMconnection> GoalConnections1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goal_connections2")]
-        public IList<MicrosoftDynamicsCRMconnection> GoalConnections2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goal_parent_goal")]
-        public IList<MicrosoftDynamicsCRMgoal> GoalParentGoal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goalenddate")]
-        public System.DateTimeOffset? Goalenddate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goalid")]
-        public string Goalid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goalownerid_systemuser")]
-        public MicrosoftDynamicsCRMsystemuser GoalowneridSystemuser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goalownerid_team")]
-        public MicrosoftDynamicsCRMteam GoalowneridTeam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goalstartdate")]
-        public System.DateTimeOffset? Goalstartdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goalwitherrorid")]
-        public MicrosoftDynamicsCRMgoal Goalwitherrorid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "inprogressdecimal")]
-        public double? Inprogressdecimal { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -492,63 +195,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "inprogressmoney")]
-        public double? Inprogressmoney { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "inprogressmoney_base")]
-        public double? InprogressmoneyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "inprogressstring")]
-        public string Inprogressstring { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isamount")]
-        public bool? Isamount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isfiscalperiodgoal")]
-        public bool? Isfiscalperiodgoal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isoverridden")]
-        public bool? Isoverridden { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isoverride")]
-        public bool? Isoverride { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lastrolledupdate")]
-        public System.DateTimeOffset? Lastrolledupdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "metricid")]
-        public MicrosoftDynamicsCRMmetric Metricid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "rolluponlyfromchildgoals")]
+        public bool? Rolluponlyfromchildgoals { get; set; }
 
         /// <summary>
         /// </summary>
@@ -557,33 +205,358 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+        [JsonProperty(PropertyName = "lastrolledupdate")]
+        public System.DateTimeOffset? Lastrolledupdate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+        [JsonProperty(PropertyName = "targetmoney_base")]
+        public object TargetmoneyBase { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+        [JsonProperty(PropertyName = "_rollupqueryactualintegerid_value")]
+        public string _rollupqueryactualintegeridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "parentgoalid")]
-        public MicrosoftDynamicsCRMgoal Parentgoalid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isoverridden")]
+        public bool? Isoverridden { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "goalenddate")]
+        public System.DateTimeOffset? Goalenddate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rollupqueryactualdecimalid_value")]
+        public string _rollupqueryactualdecimalidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_goalownerid_value")]
+        public string _goalowneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "inprogressdecimal")]
+        public object Inprogressdecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "consideronlygoalownersrecords")]
+        public bool? Consideronlygoalownersrecords { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rollupquerycustomintegerid_value")]
+        public string _rollupquerycustomintegeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rollupqueryactualmoneyid_value")]
+        public string _rollupqueryactualmoneyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetdecimal")]
+        public object Targetdecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "computedtargetasoftodaymoney")]
+        public object Computedtargetasoftodaymoney { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isoverride")]
+        public bool? Isoverride { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isamount")]
+        public bool? Isamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "computedtargetasoftodayinteger")]
+        public int? Computedtargetasoftodayinteger { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage")]
+        public object Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "treeid")]
+        public string Treeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_timestamp")]
+        public long? EntityimageTimestamp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "percentage")]
-        public double? Percentage { get; set; }
+        public object Percentage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualstring")]
+        public string Actualstring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customrollupfieldmoney_base")]
+        public object CustomrollupfieldmoneyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stretchtargetinteger")]
+        public int? Stretchtargetinteger { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualmoney_base")]
+        public object ActualmoneyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetmoney")]
+        public object Targetmoney { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "computedtargetasoftodaymoney_base")]
+        public object ComputedtargetasoftodaymoneyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entityimage_url")]
+        public string EntityimageUrl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetinteger")]
+        public int? Targetinteger { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualmoney")]
+        public object Actualmoney { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "inprogressstring")]
+        public string Inprogressstring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "goalstartdate")]
+        public System.DateTimeOffset? Goalstartdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "inprogressmoney_base")]
+        public object InprogressmoneyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetstring")]
+        public string Targetstring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fiscalperiod")]
+        public int? Fiscalperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customrollupfieldmoney")]
+        public object Customrollupfieldmoney { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "goalid")]
+        public string Goalid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rollupquerycustommoneyid_value")]
+        public string _rollupquerycustommoneyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rollupqueryinprogressdecimalid_value")]
+        public string _rollupqueryinprogressdecimalidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stretchtargetmoney")]
+        public object Stretchtargetmoney { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_goalwitherrorid_value")]
+        public string _goalwitherroridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualdecimal")]
+        public object Actualdecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isfiscalperiodgoal")]
+        public bool? Isfiscalperiodgoal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customrollupfieldstring")]
+        public string Customrollupfieldstring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rollupqueryinprogressmoneyid_value")]
+        public string _rollupqueryinprogressmoneyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_rollupquerycustomdecimalid_value")]
+        public string _rollupquerycustomdecimalidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_metricid_value")]
+        public string _metricidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualinteger")]
+        public int? Actualinteger { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "computedtargetasoftodaydecimal")]
+        public object Computedtargetasoftodaydecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customrollupfielddecimal")]
+        public object Customrollupfielddecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fiscalyear")]
+        public int? Fiscalyear { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stretchtargetmoney_base")]
+        public object StretchtargetmoneyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stretchtargetdecimal")]
+        public object Stretchtargetdecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "inprogressmoney")]
+        public object Inprogressmoney { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "depth")]
+        public int? Depth { get; set; }
 
         /// <summary>
         /// </summary>
@@ -592,13 +565,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "rolluponlyfromchildgoals")]
-        public bool? Rolluponlyfromchildgoals { get; set; }
+        [JsonProperty(PropertyName = "_parentgoalid_value")]
+        public string _parentgoalidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "rollupqueryactualdecimalid")]
-        public MicrosoftDynamicsCRMgoalrollupquery Rollupqueryactualdecimalid { get; set; }
+        [JsonProperty(PropertyName = "customrollupfieldinteger")]
+        public int? Customrollupfieldinteger { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -612,8 +595,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "rollupquerycustomdecimalid")]
-        public MicrosoftDynamicsCRMgoalrollupquery Rollupquerycustomdecimalid { get; set; }
+        [JsonProperty(PropertyName = "rollupqueryactualdecimalid")]
+        public MicrosoftDynamicsCRMgoalrollupquery Rollupqueryactualdecimalid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -627,8 +610,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "rollupqueryinprogressdecimalid")]
-        public MicrosoftDynamicsCRMgoalrollupquery Rollupqueryinprogressdecimalid { get; set; }
+        [JsonProperty(PropertyName = "rollupquerycustomdecimalid")]
+        public MicrosoftDynamicsCRMgoalrollupquery Rollupquerycustomdecimalid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -642,73 +625,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "rollupqueryinprogressdecimalid")]
+        public MicrosoftDynamicsCRMgoalrollupquery Rollupqueryinprogressdecimalid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stretchtargetdecimal")]
-        public double? Stretchtargetdecimal { get; set; }
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stretchtargetinteger")]
-        public int? Stretchtargetinteger { get; set; }
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stretchtargetmoney")]
-        public double? Stretchtargetmoney { get; set; }
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stretchtargetmoney_base")]
-        public double? StretchtargetmoneyBase { get; set; }
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stretchtargetstring")]
-        public string Stretchtargetstring { get; set; }
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "targetdecimal")]
-        public double? Targetdecimal { get; set; }
+        [JsonProperty(PropertyName = "goalownerid_systemuser")]
+        public MicrosoftDynamicsCRMsystemuser GoalowneridSystemuser { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "targetinteger")]
-        public int? Targetinteger { get; set; }
+        [JsonProperty(PropertyName = "parentgoalid")]
+        public MicrosoftDynamicsCRMgoal Parentgoalid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "targetmoney")]
-        public double? Targetmoney { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "targetmoney_base")]
-        public double? TargetmoneyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "targetstring")]
-        public string Targetstring { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
+        [JsonProperty(PropertyName = "goal_parent_goal")]
+        public IList<MicrosoftDynamicsCRMgoal> GoalParentGoal { get; set; }
 
         /// <summary>
         /// </summary>
@@ -717,18 +680,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "treeid")]
-        public string Treeid { get; set; }
+        [JsonProperty(PropertyName = "metricid")]
+        public MicrosoftDynamicsCRMmetric Metricid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "Goal_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> GoalDuplicateMatchingRecord { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "goalwitherrorid")]
+        public MicrosoftDynamicsCRMgoal Goalwitherrorid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Goal_RollupError_Goal")]
+        public IList<MicrosoftDynamicsCRMgoal> GoalRollupErrorGoal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "goal_connections2")]
+        public IList<MicrosoftDynamicsCRMconnection> GoalConnections2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Goal_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> GoalSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Goal_Annotation")]
+        public IList<MicrosoftDynamicsCRMannotation> GoalAnnotation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "goal_connections1")]
+        public IList<MicrosoftDynamicsCRMconnection> GoalConnections1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Goal_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> GoalAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Goal_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> GoalDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "goalownerid_team")]
+        public MicrosoftDynamicsCRMteam GoalowneridTeam { get; set; }
 
     }
 }

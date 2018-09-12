@@ -1,0 +1,102 @@
+<div [formGroup]="form">
+  <h3><span class="step">STEP 2</span></h3>
+
+  <h1>Consent for Cannabis Security Screening</h1>
+
+  <p>
+    In step two, you consent to a criminal background check. Please read the declaration before agreeing. You must also download,
+    read and upload a signed consent form.
+  </p>
+
+  <p>
+    Complete all fields and upload all forms to continue to step three.
+  </p>
+
+  <h2 class="blue-header">CRIMINAL BACKGROUND</h2>
+  <label for="">Have you ever been charged or convicted of a criminal offence?</label>
+  <br>
+  <input type="radio" [value]="true" formControlName="selfdisclosure" name="selfdisclosure"> YES &nbsp;
+  <input type="radio" [value]="false" formControlName="selfdisclosure" name="selfdisclosure"> NO
+  <br>
+
+  <p>
+    This includes <strong>ALL</strong> charges or convictions, including information as a Young Offender pursuant to Section
+    119(1)(o) of the Youth Criminal Justice Act, <strong>regardless of the outcome</strong>, convictions that have received
+    a record suspension and charges resulting in non-convictions.
+  </p>
+
+  <h2 class="blue-header">DECLARATION AND CONSENT</h2>
+  <section style="display: flex">
+
+    <input type="checkbox" [(ngModel)]="consentToCollection" [ngModelOptions]="{standalone: true}"> &nbsp;
+    <span>
+      I, the undersigned, do hereby consent to the collection and disclosure by the Royal Canadian Mounted Police (RCMP) and other
+      law enforcement agencies, as well as other duly authorized agencies of the government, of any and all information related
+      to the security screening checks in support of this application for up to two years. This may include some or all of:
+      (a) criminal record check or fingerprint-based criminal record verification by searching the Canadian Police Information
+      Centre database; (b) a police information check; (c) a check of intelligence databases maintained by law enforcement
+      agencies; (d) a check of records in the justice information system of the Ministry of Attorney General and; (e) a check
+      of records in the corrections information system of the Ministry of Public Safety and Solicitor General.
+    </span>
+  </section>
+  <br>
+  <section style="display: flex">
+    <input type="checkbox" [(ngModel)]="infoAccurate" [ngModelOptions]="{standalone: true}"> &nbsp;
+    <span>
+      I certify that, to the best of my knowledge, the information I have provided on my application and will provide as necessary
+      is complete, honest and accurate. I understand that a false statement or omission of facts herein may lead to a denial
+      of a cannabis workers registration. I am also aware that later discovery of an omission or misrepresentation may be
+      grounds for any finding of suitability to be suspended or revoked.
+    </span>
+  </section>
+  <p></p>
+
+  <label for="">Applicant Name</label>
+  <br>
+  <input type="text" class="form-control" [(ngModel)]="signName" [ngModelOptions]="{standalone: true}" style="width: 350px">
+  <p></p>
+
+  <h2 class="blue-header">SIGNATURE</h2>
+
+  <h3>1. Download Signature Form</h3>
+  <p>The Worker Registration Application and the Consent for Cannabis Security Screening require the applicant’s signature.
+    Digital signatures are not permitted..</p>
+  <button class="btn btn-primary">
+    <i class="fas fa-download"></i>
+    CLICK TO DOWNLOAD SIGNITURE FORM</button>
+
+  <h3>2. Complete and Scan Signature Form</h3>
+  <p>Sign and make a high-resolution scan of the form.</p>
+
+  <h3>3. Upload Completed Signature Form</h3>
+  <p>
+    Upload your completed form before continuing to Step 3.</p>
+
+  <section>
+    <app-file-uploader *ngIf="currentUser?.contactid" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT."
+      [multipleFiles]="false" entityName="contact" [entityId]="currentUser?.contactid" #mainForm></app-file-uploader>
+  </section>
+
+  <P>&nbsp;</P>
+  <P>&nbsp;</P>
+  <P>&nbsp;</P>
+  <section class="error" *ngIf="showValidationMessages">
+    <p *ngFor="let message of validationMessages">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
+      </span>
+    </p>
+  </section>
+
+  <span style="float: right;">
+    <button class="btn btn-primary" routerLink="/worker-registration/dashboard">
+      <i class="fa fa-save" style="color: #fff;"></i>
+      SAVE FOR LATER</button>
+    <button routerLink="/worker-registration/application/{{workerId}}" class="btn btn-primary">RETURN TO STEP 1
+    </button>
+    <button (click)="goToNextStep()" class="btn btn-primary">SAVE & CONTINUE TO STEP 3
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </span>
+</div>

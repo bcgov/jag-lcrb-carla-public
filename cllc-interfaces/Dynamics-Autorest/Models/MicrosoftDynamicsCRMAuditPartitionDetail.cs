@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAuditPartitionDetail class.
         /// </summary>
-        public MicrosoftDynamicsCRMAuditPartitionDetail(System.DateTimeOffset? endDate = default(System.DateTimeOffset?), int? partitionNumber = default(int?), object size = default(object), System.DateTimeOffset? startDate = default(System.DateTimeOffset?))
+        public MicrosoftDynamicsCRMAuditPartitionDetail(int? partitionNumber = default(int?), System.DateTimeOffset? startDate = default(System.DateTimeOffset?), System.DateTimeOffset? endDate = default(System.DateTimeOffset?), long? size = default(long?))
         {
-            EndDate = endDate;
             PartitionNumber = partitionNumber;
-            Size = size;
             StartDate = startDate;
+            EndDate = endDate;
+            Size = size;
             CustomInit();
         }
 
@@ -43,23 +43,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "EndDate")]
-        public System.DateTimeOffset? EndDate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "PartitionNumber")]
         public int? PartitionNumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Size")]
-        public object Size { get; set; }
+        [JsonProperty(PropertyName = "StartDate")]
+        public System.DateTimeOffset? StartDate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "StartDate")]
-        public System.DateTimeOffset? StartDate { get; set; }
+        [JsonProperty(PropertyName = "EndDate")]
+        public System.DateTimeOffset? EndDate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Size")]
+        public long? Size { get; set; }
 
     }
 }

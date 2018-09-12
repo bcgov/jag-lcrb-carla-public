@@ -29,13 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAppointmentProposal class.
         /// </summary>
-        public MicrosoftDynamicsCRMAppointmentProposal(System.DateTimeOffset? end = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMProposalParty> proposalParties = default(IList<MicrosoftDynamicsCRMProposalParty>), string siteId = default(string), string siteName = default(string), System.DateTimeOffset? start = default(System.DateTimeOffset?))
+        public MicrosoftDynamicsCRMAppointmentProposal(System.DateTimeOffset? start = default(System.DateTimeOffset?), System.DateTimeOffset? end = default(System.DateTimeOffset?), string siteId = default(string), string siteName = default(string), IList<MicrosoftDynamicsCRMProposalParty> proposalParties = default(IList<MicrosoftDynamicsCRMProposalParty>))
         {
+            Start = start;
             End = end;
-            ProposalParties = proposalParties;
             SiteId = siteId;
             SiteName = siteName;
-            Start = start;
+            ProposalParties = proposalParties;
             CustomInit();
         }
 
@@ -46,13 +46,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "End")]
-        public System.DateTimeOffset? End { get; set; }
+        [JsonProperty(PropertyName = "Start")]
+        public System.DateTimeOffset? Start { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ProposalParties")]
-        public IList<MicrosoftDynamicsCRMProposalParty> ProposalParties { get; set; }
+        [JsonProperty(PropertyName = "End")]
+        public System.DateTimeOffset? End { get; set; }
 
         /// <summary>
         /// </summary>
@@ -66,8 +66,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Start")]
-        public System.DateTimeOffset? Start { get; set; }
+        [JsonProperty(PropertyName = "ProposalParties")]
+        public IList<MicrosoftDynamicsCRMProposalParty> ProposalParties { get; set; }
 
     }
 }

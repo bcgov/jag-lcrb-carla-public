@@ -1,23 +1,29 @@
-::ng-deep .drop-zone{
+::ng-deep .drop-zone {
     border: 1px dashed #CCC !important;
     background-color: #F2F2F2;
     border-radius: 5PX !important;
     padding-bottom: 20px;
 }
 
-::ng-deep  .content {
+::ng-deep .content {
     color: #424242 !important;
 }
 
-.file-list{
-    background-color: #eee; 
-    margin-bottom: 3px; 
-    display: flex; 
+.file-list {
+    background-color: #eee;
+    margin-bottom: 3px;
+    display: flex;
     justify-content: space-between;
     padding: 3px 7px;
     margin-right: 10px;
 }
 
-.no-drop{
+.no-drop {
     cursor: no-drop;
+}
+
+.upload-wrapper {
+    max-width: 700px;
+    position: relative;
+    margin: auto;
 }

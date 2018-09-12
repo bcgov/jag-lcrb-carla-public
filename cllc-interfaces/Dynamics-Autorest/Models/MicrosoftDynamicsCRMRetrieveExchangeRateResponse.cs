@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMRetrieveExchangeRateResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMRetrieveExchangeRateResponse(double? exchangeRate = default(double?))
+        public MicrosoftDynamicsCRMRetrieveExchangeRateResponse(object exchangeRate = default(object))
         {
             ExchangeRate = exchangeRate;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ExchangeRate")]
-        public double? ExchangeRate { get; set; }
+        public object ExchangeRate { get; set; }
 
     }
 }

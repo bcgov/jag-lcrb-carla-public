@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// recommendeddocument
+    /// </summary>
     public partial class MicrosoftDynamicsCRMrecommendeddocument
     {
         /// <summary>
@@ -24,44 +27,44 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMrecommendeddocument class.
         /// </summary>
-        public MicrosoftDynamicsCRMrecommendeddocument(string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _regardingobjectidValue = default(string), string _transactioncurrencyidValue = default(string), string absoluteurl = default(string), string associatedrecordname = default(string), string author = default(string), string contenttype = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), string editurl = default(string), double? exchangerate = default(double?), string externaldocumentid = default(string), string externalmodifiedby = default(string), int? filesize = default(int?), string filetype = default(string), string fullname = default(string), string iconclassname = default(string), string location = default(string), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), string readurl = default(string), string recommendeddocumentid = default(string), string source = default(string), int? timezoneruleversionnumber = default(int?), string title = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency), int? utcconversiontimezonecode = default(int?), string version = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMrecommendeddocument(long? versionnumber = default(long?), string readurl = default(string), string externaldocumentid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string contenttype = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string iconclassname = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string editurl = default(string), string location = default(string), string fullname = default(string), string source = default(string), object exchangerate = default(object), string version = default(string), string _regardingobjectidValue = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string associatedrecordname = default(string), string externalmodifiedby = default(string), string _organizationidValue = default(string), int? filesize = default(int?), string title = default(string), string absoluteurl = default(string), string author = default(string), string recommendeddocumentid = default(string), string filetype = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._regardingobjectidValue = _regardingobjectidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Absoluteurl = absoluteurl;
-            Associatedrecordname = associatedrecordname;
-            Author = author;
-            Contenttype = contenttype;
-            Createdbyname = createdbyname;
-            Createdon = createdon;
-            Createdonbehalfbyname = createdonbehalfbyname;
-            Editurl = editurl;
-            Exchangerate = exchangerate;
+            Versionnumber = versionnumber;
+            Readurl = readurl;
             Externaldocumentid = externaldocumentid;
-            Externalmodifiedby = externalmodifiedby;
-            Filesize = filesize;
-            Filetype = filetype;
-            Fullname = fullname;
-            Iconclassname = iconclassname;
-            Location = location;
-            Modifiedbyname = modifiedbyname;
+            Createdon = createdon;
             Modifiedon = modifiedon;
+            Contenttype = contenttype;
+            this._createdbyValue = _createdbyValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Iconclassname = iconclassname;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Editurl = editurl;
+            Location = location;
+            Fullname = fullname;
+            Source = source;
+            Exchangerate = exchangerate;
+            Version = version;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Associatedrecordname = associatedrecordname;
+            Externalmodifiedby = externalmodifiedby;
+            this._organizationidValue = _organizationidValue;
+            Filesize = filesize;
+            Title = title;
+            Absoluteurl = absoluteurl;
+            Author = author;
+            Recommendeddocumentid = recommendeddocumentid;
+            Filetype = filetype;
+            Createdbyname = createdbyname;
+            Createdonbehalfbyname = createdonbehalfbyname;
+            Modifiedbyname = modifiedbyname;
             Modifiedonbehalfbyname = modifiedonbehalfbyname;
             Organizationid = organizationid;
-            Readurl = readurl;
-            Recommendeddocumentid = recommendeddocumentid;
-            Source = source;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Title = title;
             Transactioncurrencyidname = transactioncurrencyidname;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Version = version;
-            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -72,83 +75,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "absoluteurl")]
-        public string Absoluteurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "associatedrecordname")]
-        public string Associatedrecordname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "author")]
-        public string Author { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contenttype")]
-        public string Contenttype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "editurl")]
-        public string Editurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "readurl")]
+        public string Readurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,23 +90,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "externalmodifiedby")]
-        public string Externalmodifiedby { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "filesize")]
-        public int? Filesize { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "filetype")]
-        public string Filetype { get; set; }
+        [JsonProperty(PropertyName = "contenttype")]
+        public string Contenttype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fullname")]
-        public string Fullname { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,18 +125,118 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "editurl")]
+        public string Editurl { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+        [JsonProperty(PropertyName = "fullname")]
+        public string Fullname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "source")]
+        public string Source { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "version")]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "associatedrecordname")]
+        public string Associatedrecordname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "externalmodifiedby")]
+        public string Externalmodifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filesize")]
+        public int? Filesize { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "absoluteurl")]
+        public string Absoluteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "author")]
+        public string Author { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "recommendeddocumentid")]
+        public string Recommendeddocumentid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filetype")]
+        public string Filetype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,48 +250,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "readurl")]
-        public string Readurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "recommendeddocumentid")]
-        public string Recommendeddocumentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "source")]
-        public string Source { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "transactioncurrencyidname")]
         public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyidname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public string Version { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
 
     }
 }

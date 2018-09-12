@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// postcomment
+    /// </summary>
     public partial class MicrosoftDynamicsCRMpostcomment
     {
         /// <summary>
@@ -24,21 +27,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpostcomment
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpostcomment(string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _organizationidValue = default(string), string _postidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), string postcommentid = default(string), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost), string text = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?))
+        public MicrosoftDynamicsCRMpostcomment(string postcommentid = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), string text = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _postidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost))
         {
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._postidValue = _postidValue;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Organizationid = organizationid;
             Postcommentid = postcommentid;
-            Postid = postid;
-            Text = text;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._organizationidValue = _organizationidValue;
+            Text = text;
+            Createdon = createdon;
+            this._postidValue = _postidValue;
+            Createdby = createdby;
+            Organizationid = organizationid;
+            Createdonbehalfby = createdonbehalfby;
+            Postid = postid;
             CustomInit();
         }
 
@@ -49,8 +52,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "postcommentid")]
+        public string Postcommentid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -59,8 +62,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "text")]
+        public string Text { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -74,8 +102,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -84,33 +112,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "postcommentid")]
-        public string Postcommentid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "postid")]
         public MicrosoftDynamicsCRMpost Postid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "text")]
-        public string Text { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
     }
 }

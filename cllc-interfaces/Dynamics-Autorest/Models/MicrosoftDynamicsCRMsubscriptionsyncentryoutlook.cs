@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// subscriptionsyncentryoutlook
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsubscriptionsyncentryoutlook
     {
         /// <summary>
@@ -24,13 +27,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsubscriptionsyncentryoutlook class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubscriptionsyncentryoutlook(string objectid = default(string), int? objecttypecode = default(int?), string subscriptionid = default(string), int? syncstate = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsubscriptionsyncentryoutlook(int? objecttypecode = default(int?), long? versionnumber = default(long?), int? syncstate = default(int?), string objectid = default(string), string subscriptionid = default(string))
         {
-            Objectid = objectid;
             Objecttypecode = objecttypecode;
-            Subscriptionid = subscriptionid;
-            Syncstate = syncstate;
             Versionnumber = versionnumber;
+            Syncstate = syncstate;
+            Objectid = objectid;
+            Subscriptionid = subscriptionid;
             CustomInit();
         }
 
@@ -41,18 +44,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objectid")]
-        public string Objectid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public int? Objecttypecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "subscriptionid")]
-        public string Subscriptionid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -61,8 +59,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "objectid")]
+        public string Objectid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subscriptionid")]
+        public string Subscriptionid { get; set; }
 
     }
 }

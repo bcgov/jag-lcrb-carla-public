@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// servicecontractcontacts
+    /// </summary>
     public partial class MicrosoftDynamicsCRMservicecontractcontacts
     {
         /// <summary>
@@ -24,13 +27,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMservicecontractcontacts class.
         /// </summary>
-        public MicrosoftDynamicsCRMservicecontractcontacts(string contactid = default(string), string contractid = default(string), string servicecontractcontactid = default(string), int? servicelevel = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMservicecontractcontacts(int? servicelevel = default(int?), string contactid = default(string), string servicecontractcontactid = default(string), long? versionnumber = default(long?), string contractid = default(string))
         {
-            Contactid = contactid;
-            Contractid = contractid;
-            Servicecontractcontactid = servicecontractcontactid;
             Servicelevel = servicelevel;
+            Contactid = contactid;
+            Servicecontractcontactid = servicecontractcontactid;
             Versionnumber = versionnumber;
+            Contractid = contractid;
             CustomInit();
         }
 
@@ -41,13 +44,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactid")]
-        public string Contactid { get; set; }
+        [JsonProperty(PropertyName = "servicelevel")]
+        public int? Servicelevel { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contractid")]
-        public string Contractid { get; set; }
+        [JsonProperty(PropertyName = "contactid")]
+        public string Contactid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -56,13 +59,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "servicelevel")]
-        public int? Servicelevel { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "contractid")]
+        public string Contractid { get; set; }
 
     }
 }

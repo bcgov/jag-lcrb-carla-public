@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// campaignitem
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcampaignitem
     {
         /// <summary>
@@ -24,16 +27,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcampaignitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignitem(string _campaignidValue = default(string), string _owneridValue = default(string), string campaignitemid = default(string), string entityid = default(string), string entitytype = default(string), string owningbusinessunit = default(string), string owninguser = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcampaignitem(string entitytype = default(string), string _owneridValue = default(string), long? versionnumber = default(long?), string owningbusinessunit = default(string), string entityid = default(string), string campaignitemid = default(string), string owninguser = default(string), string _campaignidValue = default(string))
         {
-            this._campaignidValue = _campaignidValue;
-            this._owneridValue = _owneridValue;
-            Campaignitemid = campaignitemid;
-            Entityid = entityid;
             Entitytype = entitytype;
-            Owningbusinessunit = owningbusinessunit;
-            Owninguser = owninguser;
+            this._owneridValue = _owneridValue;
             Versionnumber = versionnumber;
+            Owningbusinessunit = owningbusinessunit;
+            Entityid = entityid;
+            Campaignitemid = campaignitemid;
+            Owninguser = owninguser;
+            this._campaignidValue = _campaignidValue;
             CustomInit();
         }
 
@@ -44,8 +47,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_campaignid_value")]
-        public string _campaignidValue { get; set; }
+        [JsonProperty(PropertyName = "entitytype")]
+        public string Entitytype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -54,18 +57,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "campaignitemid")]
-        public string Campaignitemid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityid")]
-        public string Entityid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entitytype")]
-        public string Entitytype { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -74,13 +67,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "entityid")]
+        public string Entityid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignitemid")]
+        public string Campaignitemid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
         public string Owninguser { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_campaignid_value")]
+        public string _campaignidValue { get; set; }
 
     }
 }

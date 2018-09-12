@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// position
+    /// </summary>
     public partial class MicrosoftDynamicsCRMposition
     {
         /// <summary>
@@ -26,41 +29,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMposition
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMposition(IList<MicrosoftDynamicsCRMsyncerror> positionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _parentpositionidValue = default(string), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), double? exchangerate = default(double?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMposition parentpositionid = default(MicrosoftDynamicsCRMposition), IList<MicrosoftDynamicsCRMasyncoperation> positionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> positionConnection1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> positionConnection2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMposition> positionParentPosition = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMsystemuser> positionUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), string positionid = default(string), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMposition(int? timezoneruleversionnumber = default(int?), string _parentpositionidValue = default(string), object exchangerate = default(object), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), string name = default(string), string positionid = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), long? versionnumber = default(long?), string description = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> positionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsystemuser> positionUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMposition parentpositionid = default(MicrosoftDynamicsCRMposition), IList<MicrosoftDynamicsCRMposition> positionParentPosition = default(IList<MicrosoftDynamicsCRMposition>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMconnection> positionConnection1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> positionConnection2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> positionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
-            PositionSyncErrors = positionSyncErrors;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._parentpositionidValue = _parentpositionidValue;
+            Exchangerate = exchangerate;
+            this._modifiedbyValue = _modifiedbyValue;
+            Createdon = createdon;
+            this._organizationidValue = _organizationidValue;
+            Modifiedon = modifiedon;
+            Statecode = statecode;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Name = name;
+            Positionid = positionid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
+            Statuscode = statuscode;
+            Versionnumber = versionnumber;
+            Description = description;
+            Overriddencreatedon = overriddencreatedon;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Createdby = createdby;
-            Createdon = createdon;
             Createdonbehalfby = createdonbehalfby;
-            Description = description;
-            Exchangerate = exchangerate;
-            Importsequencenumber = importsequencenumber;
             Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
             Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
             Organizationid = organizationid;
-            Overriddencreatedon = overriddencreatedon;
-            Parentpositionid = parentpositionid;
             PositionAsyncOperations = positionAsyncOperations;
+            PositionUsers = positionUsers;
+            Parentpositionid = parentpositionid;
+            PositionParentPosition = positionParentPosition;
+            Transactioncurrencyid = transactioncurrencyid;
             PositionConnection1 = positionConnection1;
             PositionConnection2 = positionConnection2;
-            PositionParentPosition = positionParentPosition;
-            PositionUsers = positionUsers;
-            Positionid = positionid;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Transactioncurrencyid = transactioncurrencyid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            PositionSyncErrors = positionSyncErrors;
             CustomInit();
         }
 
@@ -71,18 +74,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Position_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> PositionSyncErrors { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "_parentpositionid_value")]
+        public string _parentpositionidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,8 +94,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -101,8 +104,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parentpositionid_value")]
-        public string _parentpositionidValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "positionid")]
+        public string Positionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -116,28 +179,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "createdonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,18 +189,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -166,8 +199,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "position_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> PositionAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "position_users")]
+        public IList<MicrosoftDynamicsCRMsystemuser> PositionUsers { get; set; }
 
         /// <summary>
         /// </summary>
@@ -176,8 +214,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "position_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> PositionAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "position_parent_position")]
+        public IList<MicrosoftDynamicsCRMposition> PositionParentPosition { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -191,48 +234,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "position_parent_position")]
-        public IList<MicrosoftDynamicsCRMposition> PositionParentPosition { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "position_users")]
-        public IList<MicrosoftDynamicsCRMsystemuser> PositionUsers { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "positionid")]
-        public string Positionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "Position_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> PositionSyncErrors { get; set; }
 
     }
 }

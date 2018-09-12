@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// slaitem
+    /// </summary>
     public partial class MicrosoftDynamicsCRMslaitem
     {
         /// <summary>
@@ -26,44 +29,44 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMslaitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMslaitem(IList<MicrosoftDynamicsCRMsyncerror> sLAItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owninguserValue = default(string), string _slaidValue = default(string), string _transactioncurrencyidValue = default(string), string _workflowidValue = default(string), string applicablewhenxml = default(string), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string description = default(string), double? exchangerate = default(double?), int? failureafter = default(int?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string relatedfield = default(string), int? sequencenumber = default(int?), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), string slaitemid = default(string), string slaitemidunique = default(string), string solutionid = default(string), string successconditionsxml = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), object versionnumber = default(object), int? warnafter = default(int?), MicrosoftDynamicsCRMworkflow workflowid = default(MicrosoftDynamicsCRMworkflow))
+        public MicrosoftDynamicsCRMslaitem(string _createdbyValue = default(string), string _owneridValue = default(string), int? failureafter = default(int?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), int? warnafter = default(int?), string description = default(string), bool? ismanaged = default(bool?), string _owninguserValue = default(string), int? sequencenumber = default(int?), string _slaidValue = default(string), int? componentstate = default(int?), string solutionid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _workflowidValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string applicablewhenxml = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), long? versionnumber = default(long?), string slaitemidunique = default(string), string relatedfield = default(string), object exchangerate = default(object), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string successconditionsxml = default(string), string slaitemid = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMworkflow workflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> sLAItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            SLAItemSyncErrors = sLAItemSyncErrors;
             this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owninguserValue = _owninguserValue;
-            this._slaidValue = _slaidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._workflowidValue = _workflowidValue;
-            Applicablewhenxml = applicablewhenxml;
-            Componentstate = componentstate;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Description = description;
-            Exchangerate = exchangerate;
             Failureafter = failureafter;
-            Ismanaged = ismanaged;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Name = name;
-            Overwritetime = overwritetime;
-            Relatedfield = relatedfield;
-            Sequencenumber = sequencenumber;
-            Slaid = slaid;
-            Slaitemid = slaitemid;
-            Slaitemidunique = slaitemidunique;
-            Solutionid = solutionid;
-            Successconditionsxml = successconditionsxml;
-            Transactioncurrencyid = transactioncurrencyid;
-            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Warnafter = warnafter;
+            Description = description;
+            Ismanaged = ismanaged;
+            this._owninguserValue = _owninguserValue;
+            Sequencenumber = sequencenumber;
+            this._slaidValue = _slaidValue;
+            Componentstate = componentstate;
+            Solutionid = solutionid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._workflowidValue = _workflowidValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Modifiedon = modifiedon;
+            Applicablewhenxml = applicablewhenxml;
+            Createdon = createdon;
+            Name = name;
+            Versionnumber = versionnumber;
+            Slaitemidunique = slaitemidunique;
+            Relatedfield = relatedfield;
+            Exchangerate = exchangerate;
+            Overwritetime = overwritetime;
+            Successconditionsxml = successconditionsxml;
+            Slaitemid = slaitemid;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Createdonbehalfby = createdonbehalfby;
             Workflowid = workflowid;
+            SLAItemSyncErrors = sLAItemSyncErrors;
+            Transactioncurrencyid = transactioncurrencyid;
+            Modifiedby = modifiedby;
+            Slaid = slaid;
+            Createdby = createdby;
             CustomInit();
         }
 
@@ -74,28 +77,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SLAItem_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> SLAItemSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -104,18 +87,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "failureafter")]
+        public int? Failureafter { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -124,33 +102,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_workflowid_value")]
-        public string _workflowidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "applicablewhenxml")]
-        public string Applicablewhenxml { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "warnafter")]
+        public int? Warnafter { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,48 +112,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "failureafter")]
-        public int? Failureafter { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "relatedfield")]
-        public string Relatedfield { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,18 +127,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "slaid")]
-        public MicrosoftDynamicsCRMsla Slaid { get; set; }
+        [JsonProperty(PropertyName = "_slaid_value")]
+        public string _slaidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "slaitemid")]
-        public string Slaitemid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "slaitemidunique")]
-        public string Slaitemidunique { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,8 +142,98 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_workflowid_value")]
+        public string _workflowidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "applicablewhenxml")]
+        public string Applicablewhenxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slaitemidunique")]
+        public string Slaitemidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "relatedfield")]
+        public string Relatedfield { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "successconditionsxml")]
         public string Successconditionsxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slaitemid")]
+        public string Slaitemid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "workflowid")]
+        public MicrosoftDynamicsCRMworkflow Workflowid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "SLAItem_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> SLAItemSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
@@ -239,18 +242,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "warnafter")]
-        public int? Warnafter { get; set; }
+        [JsonProperty(PropertyName = "slaid")]
+        public MicrosoftDynamicsCRMsla Slaid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "workflowid")]
-        public MicrosoftDynamicsCRMworkflow Workflowid { get; set; }
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
     }
 }

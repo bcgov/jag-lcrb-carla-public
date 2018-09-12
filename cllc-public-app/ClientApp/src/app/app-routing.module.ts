@@ -36,6 +36,12 @@ import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.componen
 import { ApplicationComponent } from './lite/application/application.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
+import { WorkerDashboardComponent } from './worker-registration/dashboard/dashboard.component';
+import { WorkerApplicationComponent } from './worker-registration/worker-application/worker-application.component';
+import { UserConfirmationComponent } from './worker-registration/user-confirmation/user-confirmation.component';
+import { PrePaymentComponent } from './worker-registration/pre-payment/pre-payment.component';
+import { WorkerPaymentConfirmationComponent } from './worker-registration/payment-confirmation/payment-confirmation.component';
+import { SpdConsentComponent } from './worker-registration/spd-consent/spd-consent.component';
 
 const routes: Routes = [
   {
@@ -62,6 +68,41 @@ const routes: Routes = [
     component: ApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'worker-registration/user-comfirmation',
+    component: UserConfirmationComponent,
+    canActivate: [ServiceCardAuthGuard]
+  },
+  {
+    path: 'worker-registration/payment-confirmation',
+    component: WorkerPaymentConfirmationComponent,
+    canActivate: [ServiceCardAuthGuard]
+  },
+  {
+    path: 'worker-registration',
+    component: WorkerRegistrationComponent,
+    canActivate: [ServiceCardAuthGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: WorkerDashboardComponent
+      },
+      {
+        path: 'application/:id',
+        component: WorkerApplicationComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'pre-payment/:id',
+        component: PrePaymentComponent
+      },
+      {
+        path: 'spd-consent/:id',
+        component: SpdConsentComponent,
+        canDeactivate: [CanDeactivateGuard]
+      }
+    ]
   },
   // {
   //   path: 'business-profile/:accountId/:legalEntityId',

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// theme
+    /// </summary>
     public partial class MicrosoftDynamicsCRMtheme
     {
         /// <summary>
@@ -24,51 +27,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMtheme class.
         /// </summary>
-        public MicrosoftDynamicsCRMtheme(string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _logoidValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _transactioncurrencyidValue = default(string), string backgroundcolor = default(string), string controlborder = default(string), string controlshade = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string defaultcustomentitycolor = default(string), string defaultentitycolor = default(string), double? exchangerate = default(double?), string globallinkcolor = default(string), string headercolor = default(string), string hoverlinkeffect = default(string), int? importsequencenumber = default(int?), bool? isdefaulttheme = default(bool?), MicrosoftDynamicsCRMwebresource logoimage = default(MicrosoftDynamicsCRMwebresource), string logotooltip = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string name = default(string), string navbarbackgroundcolor = default(string), string navbarshelfcolor = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string processcontrolcolor = default(string), string selectedlinkeffect = default(string), int? statecode = default(int?), int? statuscode = default(int?), IList<MicrosoftDynamicsCRMasyncoperation> themeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> themeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), string themeid = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), bool? type = default(bool?), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMtheme(string headercolor = default(string), string name = default(string), string controlborder = default(string), string globallinkcolor = default(string), string navbarbackgroundcolor = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string backgroundcolor = default(string), string _logoidValue = default(string), string _organizationidValue = default(string), bool? isdefaulttheme = default(bool?), object exchangerate = default(object), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string processcontrolcolor = default(string), string _transactioncurrencyidValue = default(string), bool? type = default(bool?), string hoverlinkeffect = default(string), int? utcconversiontimezonecode = default(int?), string defaultentitycolor = default(string), string logotooltip = default(string), string _createdonbehalfbyValue = default(string), string themeid = default(string), string defaultcustomentitycolor = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string selectedlinkeffect = default(string), string navbarshelfcolor = default(string), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _createdbyValue = default(string), string controlshade = default(string), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> themeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> themeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMwebresource logoimage = default(MicrosoftDynamicsCRMwebresource))
         {
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._logoidValue = _logoidValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Backgroundcolor = backgroundcolor;
-            Controlborder = controlborder;
-            Controlshade = controlshade;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Defaultcustomentitycolor = defaultcustomentitycolor;
-            Defaultentitycolor = defaultentitycolor;
-            Exchangerate = exchangerate;
-            Globallinkcolor = globallinkcolor;
             Headercolor = headercolor;
-            Hoverlinkeffect = hoverlinkeffect;
-            Importsequencenumber = importsequencenumber;
-            Isdefaulttheme = isdefaulttheme;
-            Logoimage = logoimage;
-            Logotooltip = logotooltip;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
             Name = name;
+            Controlborder = controlborder;
+            Globallinkcolor = globallinkcolor;
             Navbarbackgroundcolor = navbarbackgroundcolor;
-            Navbarshelfcolor = navbarshelfcolor;
-            Organizationid = organizationid;
+            this._modifiedbyValue = _modifiedbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Backgroundcolor = backgroundcolor;
+            this._logoidValue = _logoidValue;
+            this._organizationidValue = _organizationidValue;
+            Isdefaulttheme = isdefaulttheme;
+            Exchangerate = exchangerate;
+            Importsequencenumber = importsequencenumber;
             Overriddencreatedon = overriddencreatedon;
             Processcontrolcolor = processcontrolcolor;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Type = type;
+            Hoverlinkeffect = hoverlinkeffect;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Defaultentitycolor = defaultentitycolor;
+            Logotooltip = logotooltip;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Themeid = themeid;
+            Defaultcustomentitycolor = defaultcustomentitycolor;
+            Createdon = createdon;
             Selectedlinkeffect = selectedlinkeffect;
+            Navbarshelfcolor = navbarshelfcolor;
             Statecode = statecode;
+            Modifiedon = modifiedon;
+            Versionnumber = versionnumber;
+            this._createdbyValue = _createdbyValue;
+            Controlshade = controlshade;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Statuscode = statuscode;
+            Createdby = createdby;
+            Createdonbehalfby = createdonbehalfby;
+            Modifiedby = modifiedby;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Organizationid = organizationid;
             ThemeAsyncOperations = themeAsyncOperations;
             ThemeBulkDeleteFailures = themeBulkDeleteFailures;
-            Themeid = themeid;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Transactioncurrencyid = transactioncurrencyid;
-            Type = type;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            Logoimage = logoimage;
             CustomInit();
         }
 
@@ -79,133 +82,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_logoid_value")]
-        public string _logoidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "backgroundcolor")]
-        public string Backgroundcolor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "controlborder")]
-        public string Controlborder { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "controlshade")]
-        public string Controlshade { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "defaultcustomentitycolor")]
-        public string Defaultcustomentitycolor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "defaultentitycolor")]
-        public string Defaultentitycolor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "globallinkcolor")]
-        public string Globallinkcolor { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "headercolor")]
         public string Headercolor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "hoverlinkeffect")]
-        public string Hoverlinkeffect { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isdefaulttheme")]
-        public bool? Isdefaulttheme { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "logoimage")]
-        public MicrosoftDynamicsCRMwebresource Logoimage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "logotooltip")]
-        public string Logotooltip { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,18 +92,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "controlborder")]
+        public string Controlborder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "globallinkcolor")]
+        public string Globallinkcolor { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "navbarbackgroundcolor")]
         public string Navbarbackgroundcolor { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "navbarshelfcolor")]
-        public string Navbarshelfcolor { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "backgroundcolor")]
+        public string Backgroundcolor { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_logoid_value")]
+        public string _logoidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isdefaulttheme")]
+        public bool? Isdefaulttheme { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -239,8 +157,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "type")]
+        public bool? Type { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "hoverlinkeffect")]
+        public string Hoverlinkeffect { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "defaultentitycolor")]
+        public string Defaultentitycolor { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "logotooltip")]
+        public string Logotooltip { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "themeid")]
+        public string Themeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "defaultcustomentitycolor")]
+        public string Defaultcustomentitycolor { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "selectedlinkeffect")]
         public string Selectedlinkeffect { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "navbarshelfcolor")]
+        public string Navbarshelfcolor { get; set; }
 
         /// <summary>
         /// </summary>
@@ -249,8 +222,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "controlshade")]
+        public string Controlshade { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -264,33 +287,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "themeid")]
-        public string Themeid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "transactioncurrencyid")]
         public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public bool? Type { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "logoimage")]
+        public MicrosoftDynamicsCRMwebresource Logoimage { get; set; }
 
     }
 }

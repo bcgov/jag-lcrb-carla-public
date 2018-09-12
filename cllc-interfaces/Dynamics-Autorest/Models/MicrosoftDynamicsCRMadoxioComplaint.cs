@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// adoxio_complaint
+    /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioComplaint
     {
         /// <summary>
@@ -26,104 +29,105 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioComplaint class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioComplaint(string _adoxioComplainantValue = default(string), string _adoxioEstablishmentValue = default(string), string _adoxioInspectorValue = default(string), string _adoxioLicenceValue = default(string), string _adoxioLicenseeValue = default(string), string _adoxioRegionValue = default(string), string _adoxioRegionalmanagerValue = default(string), string _adoxioTerritoryValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _stageidValue = default(string), MicrosoftDynamicsCRMaccount adoxioComplainantAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioComplainantContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMaccount adoxioLicensee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioAdoxioComplaintAdoxioContraventionComplaint = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioComplaintAdoxioInvestigationComplaint = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioComplaintIncidentComplaint = default(IList<MicrosoftDynamicsCRMincident>), string adoxioComplainantcity = default(string), System.DateTimeOffset? adoxioComplainantdate = default(System.DateTimeOffset?), string adoxioComplainantfirstname = default(string), string adoxioComplainantfullname = default(string), string adoxioComplainantlastname = default(string), string adoxioComplainantlicencenumber = default(string), string adoxioComplainantphone = default(string), string adoxioComplainantpostalcode = default(string), string adoxioComplainantprovince = default(string), string adoxioComplainantstreet = default(string), IList<MicrosoftDynamicsCRMactivitypointer> adoxioComplaintActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMannotation> adoxioComplaintAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMappointment> adoxioComplaintAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioComplaintAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioComplaintBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMemail> adoxioComplaintEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioComplaintFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioComplaintLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioComplaintPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioComplaintRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioComplaintServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioComplaintSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioComplaintSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> adoxioComplaintSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMtask> adoxioComplaintTasks = default(IList<MicrosoftDynamicsCRMtask>), System.DateTimeOffset? adoxioComplaintdatetime = default(System.DateTimeOffset?), string adoxioComplaintdetails = default(string), string adoxioComplaintestablishmentcity = default(string), string adoxioComplaintestablishmentname = default(string), string adoxioComplaintestablishmentstreet = default(string), int? adoxioComplainthasmerit = default(int?), string adoxioComplaintid = default(string), int? adoxioComplaintinvestigationcomplete = default(int?), int? adoxioComplaintinvestigationrequired = default(int?), int? adoxioComplaintresponselettersent = default(int?), System.DateTimeOffset? adoxioComplaintresponselettersentdate = default(System.DateTimeOffset?), int? adoxioComplaintresultsent = default(int?), string adoxioDismissalreasonstext = default(string), string adoxioEmail = default(string), int? adoxioInvestigationcomplaintsource = default(int?), string adoxioName = default(string), string adoxioNumber = default(string), int? adoxioRegionalmanagernotifiedforcomplaint = default(int?), int? adoxioResolvecomplaint = default(int?), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> bpfAdoxioComplaintAdoxioComplaintpublicbpf = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), string processid = default(string), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), string traversedpath = default(string), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMadoxioComplaint(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioComplaintid = default(string), string adoxioName = default(string), int? statecode = default(int?), string _owneridValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _adoxioTerritoryValue = default(string), string adoxioComplainantfirstname = default(string), int? adoxioInvestigationcomplaintsource = default(int?), string adoxioDismissalreasonstext = default(string), string _adoxioLicenseeValue = default(string), string adoxioComplaintdetails = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioRegionalmanagernotifiedforcomplaint = default(int?), int? statuscode = default(int?), string _adoxioInspectorValue = default(string), int? adoxioResolvecomplaint = default(int?), int? adoxioComplaintresultsent = default(int?), string adoxioComplainantlicencenumber = default(string), string processid = default(string), string adoxioComplainantpostalcode = default(string), string _createdonbehalfbyValue = default(string), string adoxioComplainantprovince = default(string), int? importsequencenumber = default(int?), string adoxioComplainantfullname = default(string), string _owninguserValue = default(string), int? adoxioComplainthasmerit = default(int?), string adoxioComplainantcity = default(string), string adoxioEmail = default(string), long? versionnumber = default(long?), string _adoxioLicenceValue = default(string), int? adoxioComplaintinvestigationrequired = default(int?), string _adoxioRegionValue = default(string), string _adoxioEstablishmentValue = default(string), string adoxioComplainantlastname = default(string), string traversedpath = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? adoxioComplainantdate = default(System.DateTimeOffset?), string adoxioNumber = default(string), string adoxioComplaintestablishmentstreet = default(string), string _owningteamValue = default(string), string _stageidValue = default(string), string _adoxioComplainantValue = default(string), System.DateTimeOffset? adoxioComplaintresponselettersentdate = default(System.DateTimeOffset?), string adoxioComplaintestablishmentcity = default(string), int? adoxioComplaintresponselettersent = default(int?), System.DateTimeOffset? adoxioComplaintdatetime = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), int? adoxioComplaintinvestigationcomplete = default(int?), string adoxioComplainantstreet = default(string), string adoxioComplaintestablishmentname = default(string), int? timezoneruleversionnumber = default(int?), string adoxioComplainantphone = default(string), bool? adoxioChecklistcomplaintcomplete = default(bool?), string _adoxioRegionalmanagerValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioComplaintSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioComplaintAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioComplaintBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMaccount adoxioComplainantAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioComplainantContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMaccount adoxioLicensee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioComplaintSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMactivitypointer> adoxioComplaintActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioComplaintAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioComplaintEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioComplaintFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioComplaintLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioComplaintPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioComplaintServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioComplaintTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioComplaintRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioComplaintSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMannotation> adoxioComplaintAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioComplaintIncidentComplaint = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioAdoxioComplaintAdoxioContraventionComplaint = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> bpfAdoxioComplaintAdoxioComplaintpublicbpf = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioComplaintAdoxioInvestigationComplaint = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>))
         {
-            this._adoxioComplainantValue = _adoxioComplainantValue;
-            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
-            this._adoxioInspectorValue = _adoxioInspectorValue;
-            this._adoxioLicenceValue = _adoxioLicenceValue;
-            this._adoxioLicenseeValue = _adoxioLicenseeValue;
-            this._adoxioRegionValue = _adoxioRegionValue;
-            this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
-            this._adoxioTerritoryValue = _adoxioTerritoryValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Createdon = createdon;
+            AdoxioComplaintid = adoxioComplaintid;
+            AdoxioName = adoxioName;
+            Statecode = statecode;
+            this._owneridValue = _owneridValue;
             this._modifiedbyValue = _modifiedbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
+            this._adoxioTerritoryValue = _adoxioTerritoryValue;
+            AdoxioComplainantfirstname = adoxioComplainantfirstname;
+            AdoxioInvestigationcomplaintsource = adoxioInvestigationcomplaintsource;
+            AdoxioDismissalreasonstext = adoxioDismissalreasonstext;
+            this._adoxioLicenseeValue = _adoxioLicenseeValue;
+            AdoxioComplaintdetails = adoxioComplaintdetails;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioRegionalmanagernotifiedforcomplaint = adoxioRegionalmanagernotifiedforcomplaint;
+            Statuscode = statuscode;
+            this._adoxioInspectorValue = _adoxioInspectorValue;
+            AdoxioResolvecomplaint = adoxioResolvecomplaint;
+            AdoxioComplaintresultsent = adoxioComplaintresultsent;
+            AdoxioComplainantlicencenumber = adoxioComplainantlicencenumber;
+            Processid = processid;
+            AdoxioComplainantpostalcode = adoxioComplainantpostalcode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioComplainantprovince = adoxioComplainantprovince;
+            Importsequencenumber = importsequencenumber;
+            AdoxioComplainantfullname = adoxioComplainantfullname;
             this._owninguserValue = _owninguserValue;
+            AdoxioComplainthasmerit = adoxioComplainthasmerit;
+            AdoxioComplainantcity = adoxioComplainantcity;
+            AdoxioEmail = adoxioEmail;
+            Versionnumber = versionnumber;
+            this._adoxioLicenceValue = _adoxioLicenceValue;
+            AdoxioComplaintinvestigationrequired = adoxioComplaintinvestigationrequired;
+            this._adoxioRegionValue = _adoxioRegionValue;
+            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
+            AdoxioComplainantlastname = adoxioComplainantlastname;
+            Traversedpath = traversedpath;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._createdbyValue = _createdbyValue;
+            AdoxioComplainantdate = adoxioComplainantdate;
+            AdoxioNumber = adoxioNumber;
+            AdoxioComplaintestablishmentstreet = adoxioComplaintestablishmentstreet;
+            this._owningteamValue = _owningteamValue;
             this._stageidValue = _stageidValue;
+            this._adoxioComplainantValue = _adoxioComplainantValue;
+            AdoxioComplaintresponselettersentdate = adoxioComplaintresponselettersentdate;
+            AdoxioComplaintestablishmentcity = adoxioComplaintestablishmentcity;
+            AdoxioComplaintresponselettersent = adoxioComplaintresponselettersent;
+            AdoxioComplaintdatetime = adoxioComplaintdatetime;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            AdoxioComplaintinvestigationcomplete = adoxioComplaintinvestigationcomplete;
+            AdoxioComplainantstreet = adoxioComplainantstreet;
+            AdoxioComplaintestablishmentname = adoxioComplaintestablishmentname;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioComplainantphone = adoxioComplainantphone;
+            AdoxioChecklistcomplaintcomplete = adoxioChecklistcomplaintcomplete;
+            this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
+            Modifiedon = modifiedon;
+            Createdbyname = createdbyname;
+            Createdonbehalfbyname = createdonbehalfbyname;
+            Modifiedbyname = modifiedbyname;
+            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            Owninguser = owninguser;
+            Owningteam = owningteam;
+            Ownerid = ownerid;
+            Owningbusinessunit = owningbusinessunit;
+            AdoxioComplaintSyncErrors = adoxioComplaintSyncErrors;
+            AdoxioComplaintDuplicateMatchingRecord = adoxioComplaintDuplicateMatchingRecord;
+            AdoxioComplaintDuplicateBaseRecord = adoxioComplaintDuplicateBaseRecord;
+            AdoxioComplaintAsyncOperations = adoxioComplaintAsyncOperations;
+            AdoxioComplaintBulkDeleteFailures = adoxioComplaintBulkDeleteFailures;
+            AdoxioEstablishment = adoxioEstablishment;
             AdoxioComplainantAccount = adoxioComplainantAccount;
             AdoxioComplainantContact = adoxioComplainantContact;
-            AdoxioEstablishment = adoxioEstablishment;
+            AdoxioRegionalManager = adoxioRegionalManager;
             AdoxioInspector = adoxioInspector;
             AdoxioLicence = adoxioLicence;
             AdoxioLicensee = adoxioLicensee;
             AdoxioRegion = adoxioRegion;
-            AdoxioRegionalManager = adoxioRegionalManager;
-            AdoxioTerritory = adoxioTerritory;
-            AdoxioAdoxioComplaintAdoxioContraventionComplaint = adoxioAdoxioComplaintAdoxioContraventionComplaint;
-            AdoxioAdoxioComplaintAdoxioInvestigationComplaint = adoxioAdoxioComplaintAdoxioInvestigationComplaint;
-            AdoxioAdoxioComplaintIncidentComplaint = adoxioAdoxioComplaintIncidentComplaint;
-            AdoxioComplainantcity = adoxioComplainantcity;
-            AdoxioComplainantdate = adoxioComplainantdate;
-            AdoxioComplainantfirstname = adoxioComplainantfirstname;
-            AdoxioComplainantfullname = adoxioComplainantfullname;
-            AdoxioComplainantlastname = adoxioComplainantlastname;
-            AdoxioComplainantlicencenumber = adoxioComplainantlicencenumber;
-            AdoxioComplainantphone = adoxioComplainantphone;
-            AdoxioComplainantpostalcode = adoxioComplainantpostalcode;
-            AdoxioComplainantprovince = adoxioComplainantprovince;
-            AdoxioComplainantstreet = adoxioComplainantstreet;
+            AdoxioComplaintSharePointDocumentLocations = adoxioComplaintSharePointDocumentLocations;
             AdoxioComplaintActivityPointers = adoxioComplaintActivityPointers;
-            AdoxioComplaintAnnotations = adoxioComplaintAnnotations;
             AdoxioComplaintAppointments = adoxioComplaintAppointments;
-            AdoxioComplaintAsyncOperations = adoxioComplaintAsyncOperations;
-            AdoxioComplaintBulkDeleteFailures = adoxioComplaintBulkDeleteFailures;
-            AdoxioComplaintDuplicateBaseRecord = adoxioComplaintDuplicateBaseRecord;
-            AdoxioComplaintDuplicateMatchingRecord = adoxioComplaintDuplicateMatchingRecord;
             AdoxioComplaintEmails = adoxioComplaintEmails;
             AdoxioComplaintFaxes = adoxioComplaintFaxes;
             AdoxioComplaintLetters = adoxioComplaintLetters;
             AdoxioComplaintPhoneCalls = adoxioComplaintPhoneCalls;
-            AdoxioComplaintRecurringAppointmentMasters = adoxioComplaintRecurringAppointmentMasters;
             AdoxioComplaintServiceAppointments = adoxioComplaintServiceAppointments;
-            AdoxioComplaintSharePointDocumentLocations = adoxioComplaintSharePointDocumentLocations;
-            AdoxioComplaintSocialActivities = adoxioComplaintSocialActivities;
-            AdoxioComplaintSyncErrors = adoxioComplaintSyncErrors;
             AdoxioComplaintTasks = adoxioComplaintTasks;
-            AdoxioComplaintdatetime = adoxioComplaintdatetime;
-            AdoxioComplaintdetails = adoxioComplaintdetails;
-            AdoxioComplaintestablishmentcity = adoxioComplaintestablishmentcity;
-            AdoxioComplaintestablishmentname = adoxioComplaintestablishmentname;
-            AdoxioComplaintestablishmentstreet = adoxioComplaintestablishmentstreet;
-            AdoxioComplainthasmerit = adoxioComplainthasmerit;
-            AdoxioComplaintid = adoxioComplaintid;
-            AdoxioComplaintinvestigationcomplete = adoxioComplaintinvestigationcomplete;
-            AdoxioComplaintinvestigationrequired = adoxioComplaintinvestigationrequired;
-            AdoxioComplaintresponselettersent = adoxioComplaintresponselettersent;
-            AdoxioComplaintresponselettersentdate = adoxioComplaintresponselettersentdate;
-            AdoxioComplaintresultsent = adoxioComplaintresultsent;
-            AdoxioDismissalreasonstext = adoxioDismissalreasonstext;
-            AdoxioEmail = adoxioEmail;
-            AdoxioInvestigationcomplaintsource = adoxioInvestigationcomplaintsource;
-            AdoxioName = adoxioName;
-            AdoxioNumber = adoxioNumber;
-            AdoxioRegionalmanagernotifiedforcomplaint = adoxioRegionalmanagernotifiedforcomplaint;
-            AdoxioResolvecomplaint = adoxioResolvecomplaint;
-            BpfAdoxioComplaintAdoxioComplaintpublicbpf = bpfAdoxioComplaintAdoxioComplaintpublicbpf;
-            Createdbyname = createdbyname;
-            Createdon = createdon;
-            Createdonbehalfbyname = createdonbehalfbyname;
-            Importsequencenumber = importsequencenumber;
-            Modifiedbyname = modifiedbyname;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfbyname = modifiedonbehalfbyname;
-            Overriddencreatedon = overriddencreatedon;
-            Ownerid = ownerid;
-            Owningbusinessunit = owningbusinessunit;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Processid = processid;
+            AdoxioComplaintRecurringAppointmentMasters = adoxioComplaintRecurringAppointmentMasters;
+            AdoxioComplaintSocialActivities = adoxioComplaintSocialActivities;
+            AdoxioComplaintAnnotations = adoxioComplaintAnnotations;
+            AdoxioAdoxioComplaintIncidentComplaint = adoxioAdoxioComplaintIncidentComplaint;
+            AdoxioAdoxioComplaintAdoxioContraventionComplaint = adoxioAdoxioComplaintAdoxioContraventionComplaint;
             Stageid = stageid;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Traversedpath = traversedpath;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            AdoxioTerritory = adoxioTerritory;
+            BpfAdoxioComplaintAdoxioComplaintpublicbpf = bpfAdoxioComplaintAdoxioComplaintpublicbpf;
+            AdoxioAdoxioComplaintAdoxioInvestigationComplaint = adoxioAdoxioComplaintAdoxioInvestigationComplaint;
             CustomInit();
         }
 
@@ -134,53 +138,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_complainant_value")]
-        public string _adoxioComplainantValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
-        public string _adoxioEstablishmentValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complaintid")]
+        public string AdoxioComplaintid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_inspector_value")]
-        public string _adoxioInspectorValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licence_value")]
-        public string _adoxioLicenceValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licensee_value")]
-        public string _adoxioLicenseeValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_region_value")]
-        public string _adoxioRegionValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_regionalmanager_value")]
-        public string _adoxioRegionalmanagerValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_territory_value")]
-        public string _adoxioTerritoryValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -194,18 +173,98 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_territory_value")]
+        public string _adoxioTerritoryValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complainantfirstname")]
+        public string AdoxioComplainantfirstname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigationcomplaintsource")]
+        public int? AdoxioInvestigationcomplaintsource { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dismissalreasonstext")]
+        public string AdoxioDismissalreasonstext { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licensee_value")]
+        public string _adoxioLicenseeValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintdetails")]
+        public string AdoxioComplaintdetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_regionalmanagernotifiedforcomplaint")]
+        public int? AdoxioRegionalmanagernotifiedforcomplaint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_inspector_value")]
+        public string _adoxioInspectorValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_resolvecomplaint")]
+        public int? AdoxioResolvecomplaint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintresultsent")]
+        public int? AdoxioComplaintresultsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantlicencenumber")]
+        public string AdoxioComplainantlicencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantpostalcode")]
+        public string AdoxioComplainantpostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantprovince")]
+        public string AdoxioComplainantprovince { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantfullname")]
+        public string AdoxioComplainantfullname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,8 +273,228 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainthasmerit")]
+        public int? AdoxioComplainthasmerit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantcity")]
+        public string AdoxioComplainantcity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_email")]
+        public string AdoxioEmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licence_value")]
+        public string _adoxioLicenceValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintinvestigationrequired")]
+        public int? AdoxioComplaintinvestigationrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_region_value")]
+        public string _adoxioRegionValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
+        public string _adoxioEstablishmentValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantlastname")]
+        public string AdoxioComplainantlastname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantdate")]
+        public System.DateTimeOffset? AdoxioComplainantdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_number")]
+        public string AdoxioNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintestablishmentstreet")]
+        public string AdoxioComplaintestablishmentstreet { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_stageid_value")]
         public string _stageidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_complainant_value")]
+        public string _adoxioComplainantValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintresponselettersentdate")]
+        public System.DateTimeOffset? AdoxioComplaintresponselettersentdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintestablishmentcity")]
+        public string AdoxioComplaintestablishmentcity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintresponselettersent")]
+        public int? AdoxioComplaintresponselettersent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintdatetime")]
+        public System.DateTimeOffset? AdoxioComplaintdatetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintinvestigationcomplete")]
+        public int? AdoxioComplaintinvestigationcomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantstreet")]
+        public string AdoxioComplainantstreet { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintestablishmentname")]
+        public string AdoxioComplaintestablishmentname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complainantphone")]
+        public string AdoxioComplainantphone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcomplaintcomplete")]
+        public bool? AdoxioChecklistcomplaintcomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_regionalmanager_value")]
+        public string _adoxioRegionalmanagerValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaint_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioComplaintSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaint_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioComplaintDuplicateMatchingRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaint_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioComplaintDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaint_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioComplaintAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaint_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioComplaintBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Establishment")]
+        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,8 +508,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Establishment")]
-        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishment { get; set; }
+        [JsonProperty(PropertyName = "adoxio_RegionalManager")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioRegionalManager { get; set; }
 
         /// <summary>
         /// </summary>
@@ -254,78 +533,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_RegionalManager")]
-        public MicrosoftDynamicsCRMsystemuser AdoxioRegionalManager { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Territory")]
-        public MicrosoftDynamicsCRMadoxioTerritory AdoxioTerritory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_complaint_adoxio_contravention_Complaint")]
-        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioAdoxioComplaintAdoxioContraventionComplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_complaint_adoxio_investigation_Complaint")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioAdoxioComplaintAdoxioInvestigationComplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_complaint_incident_Complaint")]
-        public IList<MicrosoftDynamicsCRMincident> AdoxioAdoxioComplaintIncidentComplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantcity")]
-        public string AdoxioComplainantcity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantdate")]
-        public System.DateTimeOffset? AdoxioComplainantdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantfirstname")]
-        public string AdoxioComplainantfirstname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantfullname")]
-        public string AdoxioComplainantfullname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantlastname")]
-        public string AdoxioComplainantlastname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantlicencenumber")]
-        public string AdoxioComplainantlicencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantphone")]
-        public string AdoxioComplainantphone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantpostalcode")]
-        public string AdoxioComplainantpostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantprovince")]
-        public string AdoxioComplainantprovince { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainantstreet")]
-        public string AdoxioComplainantstreet { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complaint_SharePointDocumentLocations")]
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioComplaintSharePointDocumentLocations { get; set; }
 
         /// <summary>
         /// </summary>
@@ -334,33 +543,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_Annotations")]
-        public IList<MicrosoftDynamicsCRMannotation> AdoxioComplaintAnnotations { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_complaint_Appointments")]
         public IList<MicrosoftDynamicsCRMappointment> AdoxioComplaintAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioComplaintAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioComplaintBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioComplaintDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioComplaintDuplicateMatchingRecord { get; set; }
 
         /// <summary>
         /// </summary>
@@ -384,28 +568,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_RecurringAppointmentMasters")]
-        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> AdoxioComplaintRecurringAppointmentMasters { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_complaint_ServiceAppointments")]
         public IList<MicrosoftDynamicsCRMserviceappointment> AdoxioComplaintServiceAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_SharePointDocumentLocations")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioComplaintSharePointDocumentLocations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_SocialActivities")]
-        public IList<MicrosoftDynamicsCRMsocialactivity> AdoxioComplaintSocialActivities { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaint_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioComplaintSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
@@ -414,168 +578,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintdatetime")]
-        public System.DateTimeOffset? AdoxioComplaintdatetime { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complaint_RecurringAppointmentMasters")]
+        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> AdoxioComplaintRecurringAppointmentMasters { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintdetails")]
-        public string AdoxioComplaintdetails { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complaint_SocialActivities")]
+        public IList<MicrosoftDynamicsCRMsocialactivity> AdoxioComplaintSocialActivities { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintestablishmentcity")]
-        public string AdoxioComplaintestablishmentcity { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complaint_Annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> AdoxioComplaintAnnotations { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintestablishmentname")]
-        public string AdoxioComplaintestablishmentname { get; set; }
+        [JsonProperty(PropertyName = "adoxio_adoxio_complaint_incident_Complaint")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioAdoxioComplaintIncidentComplaint { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintestablishmentstreet")]
-        public string AdoxioComplaintestablishmentstreet { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complainthasmerit")]
-        public int? AdoxioComplainthasmerit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintid")]
-        public string AdoxioComplaintid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintinvestigationcomplete")]
-        public int? AdoxioComplaintinvestigationcomplete { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintinvestigationrequired")]
-        public int? AdoxioComplaintinvestigationrequired { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintresponselettersent")]
-        public int? AdoxioComplaintresponselettersent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintresponselettersentdate")]
-        public System.DateTimeOffset? AdoxioComplaintresponselettersentdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintresultsent")]
-        public int? AdoxioComplaintresultsent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dismissalreasonstext")]
-        public string AdoxioDismissalreasonstext { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_email")]
-        public string AdoxioEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationcomplaintsource")]
-        public int? AdoxioInvestigationcomplaintsource { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_number")]
-        public string AdoxioNumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_regionalmanagernotifiedforcomplaint")]
-        public int? AdoxioRegionalmanagernotifiedforcomplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_resolvecomplaint")]
-        public int? AdoxioResolvecomplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bpf_adoxio_complaint_adoxio_complaintpublicbpf")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> BpfAdoxioComplaintAdoxioComplaintpublicbpf { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_adoxio_complaint_adoxio_contravention_Complaint")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioAdoxioComplaintAdoxioContraventionComplaint { get; set; }
 
         /// <summary>
         /// </summary>
@@ -584,33 +608,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_Territory")]
+        public MicrosoftDynamicsCRMadoxioTerritory AdoxioTerritory { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "bpf_adoxio_complaint_adoxio_complaintpublicbpf")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> BpfAdoxioComplaintAdoxioComplaintpublicbpf { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_adoxio_complaint_adoxio_investigation_Complaint")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioAdoxioComplaintAdoxioInvestigationComplaint { get; set; }
 
     }
 }

@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// dependency
+    /// </summary>
     public partial class MicrosoftDynamicsCRMdependency
     {
         /// <summary>
@@ -24,21 +27,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMdependency
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMdependency(string _dependentcomponentnodeidValue = default(string), string _requiredcomponentnodeidValue = default(string), string dependencyid = default(string), int? dependencytype = default(int?), string dependentcomponentbasesolutionid = default(string), string dependentcomponentobjectid = default(string), string dependentcomponentparentid = default(string), int? dependentcomponenttype = default(int?), string requiredcomponentbasesolutionid = default(string), double? requiredcomponentintroducedversion = default(double?), string requiredcomponentobjectid = default(string), string requiredcomponentparentid = default(string), int? requiredcomponenttype = default(int?))
+        public MicrosoftDynamicsCRMdependency(string _requiredcomponentnodeidValue = default(string), string requiredcomponentparentid = default(string), double? requiredcomponentintroducedversion = default(double?), string requiredcomponentbasesolutionid = default(string), int? dependencytype = default(int?), int? requiredcomponenttype = default(int?), string dependentcomponentbasesolutionid = default(string), string _dependentcomponentnodeidValue = default(string), int? dependentcomponenttype = default(int?), string dependentcomponentobjectid = default(string), string requiredcomponentobjectid = default(string), string dependencyid = default(string), string dependentcomponentparentid = default(string))
         {
-            this._dependentcomponentnodeidValue = _dependentcomponentnodeidValue;
             this._requiredcomponentnodeidValue = _requiredcomponentnodeidValue;
-            Dependencyid = dependencyid;
-            Dependencytype = dependencytype;
-            Dependentcomponentbasesolutionid = dependentcomponentbasesolutionid;
-            Dependentcomponentobjectid = dependentcomponentobjectid;
-            Dependentcomponentparentid = dependentcomponentparentid;
-            Dependentcomponenttype = dependentcomponenttype;
-            Requiredcomponentbasesolutionid = requiredcomponentbasesolutionid;
-            Requiredcomponentintroducedversion = requiredcomponentintroducedversion;
-            Requiredcomponentobjectid = requiredcomponentobjectid;
             Requiredcomponentparentid = requiredcomponentparentid;
+            Requiredcomponentintroducedversion = requiredcomponentintroducedversion;
+            Requiredcomponentbasesolutionid = requiredcomponentbasesolutionid;
+            Dependencytype = dependencytype;
             Requiredcomponenttype = requiredcomponenttype;
+            Dependentcomponentbasesolutionid = dependentcomponentbasesolutionid;
+            this._dependentcomponentnodeidValue = _dependentcomponentnodeidValue;
+            Dependentcomponenttype = dependentcomponenttype;
+            Dependentcomponentobjectid = dependentcomponentobjectid;
+            Requiredcomponentobjectid = requiredcomponentobjectid;
+            Dependencyid = dependencyid;
+            Dependentcomponentparentid = dependentcomponentparentid;
             CustomInit();
         }
 
@@ -49,58 +52,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_dependentcomponentnodeid_value")]
-        public string _dependentcomponentnodeidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_requiredcomponentnodeid_value")]
         public string _requiredcomponentnodeidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dependencyid")]
-        public string Dependencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dependencytype")]
-        public int? Dependencytype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dependentcomponentbasesolutionid")]
-        public string Dependentcomponentbasesolutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dependentcomponentobjectid")]
-        public string Dependentcomponentobjectid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dependentcomponentparentid")]
-        public string Dependentcomponentparentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dependentcomponenttype")]
-        public int? Dependentcomponenttype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "requiredcomponentbasesolutionid")]
-        public string Requiredcomponentbasesolutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "requiredcomponentintroducedversion")]
-        public double? Requiredcomponentintroducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "requiredcomponentobjectid")]
-        public string Requiredcomponentobjectid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -109,8 +62,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "requiredcomponentintroducedversion")]
+        public double? Requiredcomponentintroducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "requiredcomponentbasesolutionid")]
+        public string Requiredcomponentbasesolutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dependencytype")]
+        public int? Dependencytype { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "requiredcomponenttype")]
         public int? Requiredcomponenttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dependentcomponentbasesolutionid")]
+        public string Dependentcomponentbasesolutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_dependentcomponentnodeid_value")]
+        public string _dependentcomponentnodeidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dependentcomponenttype")]
+        public int? Dependentcomponenttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dependentcomponentobjectid")]
+        public string Dependentcomponentobjectid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "requiredcomponentobjectid")]
+        public string Requiredcomponentobjectid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dependencyid")]
+        public string Dependencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dependentcomponentparentid")]
+        public string Dependentcomponentparentid { get; set; }
 
     }
 }

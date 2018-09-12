@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// principal
+    /// </summary>
     public partial class MicrosoftDynamicsCRMprincipal
     {
         /// <summary>
@@ -26,56 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMprincipal
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMprincipal(IList<MicrosoftDynamicsCRMactioncarduserstate> actionCardUserStateOwner = default(IList<MicrosoftDynamicsCRMactioncarduserstate>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> ownerDynamicproperyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsocialprofile> ownerSocialProfile = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMsyncerror> ownerSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMabsAutonumberedentity> ownerAbsAutonumberedentity = default(IList<MicrosoftDynamicsCRMabsAutonumberedentity>), IList<MicrosoftDynamicsCRMaccount> ownerAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMactioncard> ownerActioncards = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMactivitypointer> ownerActivitypointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> ownerAdoxioAgencycommunication = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> ownerAdoxioApplicantstep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> ownerAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> ownerAdoxioApplicationmodule = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> ownerAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> ownerAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> ownerAdoxioComplaincemeeting = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaint> ownerAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> ownerAdoxioComplaintsubject = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioContravention> ownerAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> ownerAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioEstablishment> ownerAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioExhibit> ownerAdoxioExhibit = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioFundingsource> ownerAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioInterest> ownerAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInvestigation> ownerAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> ownerAdoxioInvestigationdetail = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> ownerAdoxioInvestigationstakeholder = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioLegalentity> ownerAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> ownerAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> ownerAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> ownerAdoxioLicencetypeprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> ownerAdoxioLicencetypestep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> ownerAdoxioLicencetypestepprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLoan> ownerAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> ownerAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPostalcode> ownerAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioRegion> ownerAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioSetting> ownerAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> ownerAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> ownerAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> ownerAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTestentity> ownerAdoxioTestentity = default(IList<MicrosoftDynamicsCRMadoxioTestentity>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> ownerAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> ownerAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> ownerAdoxioViolationnotification = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationtype> ownerAdoxioViolationtype = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> ownerAdoxioWitnessstatement = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMannotation> ownerAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> ownerAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbookableresource> ownerBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> ownerBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> ownerBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> ownerBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> ownerBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> ownerBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> ownerBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> ownerBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcampaign> ownerCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcategory> ownerCategories = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMcharacteristic> ownerCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMconnection> ownerConnections = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMcontact> ownerContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMcontract> ownerContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMduplicaterule> ownerDuplicaterules = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMemailserverprofile> ownerEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMentitlement> ownerEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMexchangesyncidmapping> ownerExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMfeedback> ownerFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMgoal> ownerGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoalrollupquery> ownerGoalrollupquery = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMimportdata> ownerImportdatas = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMimportfile> ownerImportfiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMimportlog> ownerImportlogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMimportmap> ownerImportmaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMimport> ownerImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMincident> ownerIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMinvoice> ownerInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMknowledgearticle> ownerKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMlead> ownerLeads = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMlist> ownerLists = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMmailbox> ownerMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailmergetemplate> ownerMailmergetemplates = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMinteractionforemail> ownerNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMopportunity> ownerOpportunitys = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> ownerPersonaldocumenttemplates = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMpostfollow> ownerPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMprincipalentitymap> ownerPrincipalentitymap = default(IList<MicrosoftDynamicsCRMprincipalentitymap>), IList<MicrosoftDynamicsCRMqueue> ownerQueues = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMquote> ownerQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMratingmodel> ownerRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> ownerRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMreport> ownerReports = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMsalesorder> ownerSalesorders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> ownerSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsharepointsite> ownerSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMsla> ownerSlas = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMtemplate> ownerTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMuserform> ownerUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMuserquery> ownerUserquerys = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMuserqueryvisualization> ownerUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMworkflow> ownerWorkflows = default(IList<MicrosoftDynamicsCRMworkflow>), string ownerid = default(string), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceOwner = default(IList<MicrosoftDynamicsCRMslakpiinstance>))
+        public MicrosoftDynamicsCRMprincipal(string ownerid = default(string), IList<MicrosoftDynamicsCRMexchangesyncidmapping> ownerExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMinteractionforemail> ownerNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMknowledgearticle> ownerKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMsharepointsite> ownerSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> ownerSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMentitlement> ownerEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMgoal> ownerGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMmailbox> ownerMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMbookableresource> ownerBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> ownerBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> ownerBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> ownerBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> ownerBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> ownerBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> ownerBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> ownerBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcharacteristic> ownerCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMratingmodel> ownerRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> ownerRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> ownerPersonaldocumenttemplates = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMaccount> ownerAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMgoalrollupquery> ownerGoalrollupquery = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMsalesorder> ownerSalesorders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMpostfollow> ownerPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMworkflow> ownerWorkflows = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMlist> ownerLists = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMuserquery> ownerUserquerys = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMimportmap> ownerImportmaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMmailmergetemplate> ownerMailmergetemplates = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMopportunity> ownerOpportunitys = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMduplicaterule> ownerDuplicaterules = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMreport> ownerReports = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMactivitypointer> ownerActivitypointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMactioncarduserstate> actionCardUserStateOwner = default(IList<MicrosoftDynamicsCRMactioncarduserstate>), IList<MicrosoftDynamicsCRMprincipalentitymap> ownerPrincipalentitymap = default(IList<MicrosoftDynamicsCRMprincipalentitymap>), IList<MicrosoftDynamicsCRMimportdata> ownerImportdatas = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMcategory> ownerCategories = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> ownerDynamicproperyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMqueue> ownerQueues = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMactioncard> ownerActioncards = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMuserqueryvisualization> ownerUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMcampaign> ownerCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMfeedback> ownerFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMquote> ownerQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMinvoice> ownerInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMannotation> ownerAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMuserform> ownerUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMasyncoperation> ownerAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsocialprofile> ownerSocialProfile = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMsla> ownerSlas = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceOwner = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMemailserverprofile> ownerEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMincident> ownerIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMtemplate> ownerTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMcontact> ownerContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMimport> ownerImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMlead> ownerLeads = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMconnection> ownerConnections = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMimportfile> ownerImportfiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMimportlog> ownerImportlogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMsyncerror> ownerSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMcontract> ownerContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> ownerAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> ownerAdoxioWorkerinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> ownerAdoxioAgencycommunication = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> ownerAdoxioApplicantstep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> ownerAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> ownerAdoxioApplicationmodule = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> ownerAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> ownerAdoxioComplaincemeeting = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> ownerAdoxioComplaintsubject = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioContravention> ownerAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioEstablishment> ownerAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioExhibit> ownerAdoxioExhibit = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> ownerAdoxioInvestigationdetail = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> ownerAdoxioInvestigationstakeholder = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioLegalentity> ownerAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> ownerAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> ownerAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> ownerAdoxioLicencetypeprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> ownerAdoxioLicencetypestep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> ownerAdoxioLicencetypestepprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> ownerAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPostalcode> ownerAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioRegion> ownerAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> ownerAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> ownerAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTestentity> ownerAdoxioTestentity = default(IList<MicrosoftDynamicsCRMadoxioTestentity>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> ownerAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> ownerAdoxioViolationnotification = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationtype> ownerAdoxioViolationtype = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> ownerAdoxioWitnessstatement = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioComplaint> ownerAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioFundingsource> ownerAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> ownerAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> ownerAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioLoan> ownerAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioInterest> ownerAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> ownerAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioInvestigation> ownerAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioSetting> ownerAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSpdexports> ownerAdoxioSpdexports = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> ownerAdoxioPreviousaddress = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> ownerAdoxioSpddatarow = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> ownerAdoxioPolicydocument = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> ownerAdoxioApplicationinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorker> ownerAdoxioWorker = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioAlias> ownerAdoxioAlias = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> ownerAdoxioCorporatehistorysummary = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>))
         {
-            ActionCardUserStateOwner = actionCardUserStateOwner;
-            OwnerDynamicproperyinstance = ownerDynamicproperyinstance;
-            OwnerSocialProfile = ownerSocialProfile;
-            OwnerSyncError = ownerSyncError;
-            OwnerAbsAutonumberedentity = ownerAbsAutonumberedentity;
-            OwnerAccounts = ownerAccounts;
-            OwnerActioncards = ownerActioncards;
-            OwnerActivitypointers = ownerActivitypointers;
-            OwnerAdoxioAgencycommunication = ownerAdoxioAgencycommunication;
-            OwnerAdoxioApplicantstep = ownerAdoxioApplicantstep;
-            OwnerAdoxioApplication = ownerAdoxioApplication;
-            OwnerAdoxioApplicationmodule = ownerAdoxioApplicationmodule;
-            OwnerAdoxioApplicationtermsconditionslimitation = ownerAdoxioApplicationtermsconditionslimitation;
-            OwnerAdoxioBusinessaccount = ownerAdoxioBusinessaccount;
-            OwnerAdoxioComplaincemeeting = ownerAdoxioComplaincemeeting;
-            OwnerAdoxioComplaint = ownerAdoxioComplaint;
-            OwnerAdoxioComplaintsubject = ownerAdoxioComplaintsubject;
-            OwnerAdoxioContravention = ownerAdoxioContravention;
-            OwnerAdoxioCorporaterole = ownerAdoxioCorporaterole;
-            OwnerAdoxioEstablishment = ownerAdoxioEstablishment;
-            OwnerAdoxioExhibit = ownerAdoxioExhibit;
-            OwnerAdoxioFundingsource = ownerAdoxioFundingsource;
-            OwnerAdoxioInterest = ownerAdoxioInterest;
-            OwnerAdoxioInvestigation = ownerAdoxioInvestigation;
-            OwnerAdoxioInvestigationdetail = ownerAdoxioInvestigationdetail;
-            OwnerAdoxioInvestigationstakeholder = ownerAdoxioInvestigationstakeholder;
-            OwnerAdoxioLegalentity = ownerAdoxioLegalentity;
-            OwnerAdoxioLicences = ownerAdoxioLicences;
-            OwnerAdoxioLicencetype = ownerAdoxioLicencetype;
-            OwnerAdoxioLicencetypeprerequisite = ownerAdoxioLicencetypeprerequisite;
-            OwnerAdoxioLicencetypestep = ownerAdoxioLicencetypestep;
-            OwnerAdoxioLicencetypestepprerequisite = ownerAdoxioLicencetypestepprerequisite;
-            OwnerAdoxioLoan = ownerAdoxioLoan;
-            OwnerAdoxioPersonalhistorysummary = ownerAdoxioPersonalhistorysummary;
-            OwnerAdoxioPostalcode = ownerAdoxioPostalcode;
-            OwnerAdoxioRegion = ownerAdoxioRegion;
-            OwnerAdoxioSetting = ownerAdoxioSetting;
-            OwnerAdoxioTaxandaccounting = ownerAdoxioTaxandaccounting;
-            OwnerAdoxioTermsconditionslimitationspreset = ownerAdoxioTermsconditionslimitationspreset;
-            OwnerAdoxioTerritory = ownerAdoxioTerritory;
-            OwnerAdoxioTestentity = ownerAdoxioTestentity;
-            OwnerAdoxioTiedhouseassociation = ownerAdoxioTiedhouseassociation;
-            OwnerAdoxioTiedhouseconnection = ownerAdoxioTiedhouseconnection;
-            OwnerAdoxioViolationnotification = ownerAdoxioViolationnotification;
-            OwnerAdoxioViolationtype = ownerAdoxioViolationtype;
-            OwnerAdoxioWitnessstatement = ownerAdoxioWitnessstatement;
-            OwnerAnnotations = ownerAnnotations;
-            OwnerAsyncoperations = ownerAsyncoperations;
+            Ownerid = ownerid;
+            OwnerExchangesyncidmapping = ownerExchangesyncidmapping;
+            OwnerNewInteractionforemail = ownerNewInteractionforemail;
+            OwnerKnowledgearticle = ownerKnowledgearticle;
+            OwnerSharepointsite = ownerSharepointsite;
+            OwnerSharepointdocumentlocation = ownerSharepointdocumentlocation;
+            OwnerEntitlement = ownerEntitlement;
+            OwnerGoal = ownerGoal;
+            OwnerMailbox = ownerMailbox;
             OwnerBookableresource = ownerBookableresource;
             OwnerBookableresourcebooking = ownerBookableresourcebooking;
             OwnerBookableresourcebookingheader = ownerBookableresourcebookingheader;
@@ -84,52 +48,99 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             OwnerBookableresourcecharacteristic = ownerBookableresourcecharacteristic;
             OwnerBookableresourcegroup = ownerBookableresourcegroup;
             OwnerBookingstatus = ownerBookingstatus;
-            OwnerCampaigns = ownerCampaigns;
-            OwnerCategories = ownerCategories;
             OwnerCharacteristic = ownerCharacteristic;
-            OwnerConnections = ownerConnections;
-            OwnerContacts = ownerContacts;
-            OwnerContracts = ownerContracts;
-            OwnerDuplicaterules = ownerDuplicaterules;
-            OwnerEmailserverprofile = ownerEmailserverprofile;
-            OwnerEntitlement = ownerEntitlement;
-            OwnerExchangesyncidmapping = ownerExchangesyncidmapping;
-            OwnerFeedback = ownerFeedback;
-            OwnerGoal = ownerGoal;
-            OwnerGoalrollupquery = ownerGoalrollupquery;
-            OwnerImportdatas = ownerImportdatas;
-            OwnerImportfiles = ownerImportfiles;
-            OwnerImportlogs = ownerImportlogs;
-            OwnerImportmaps = ownerImportmaps;
-            OwnerImports = ownerImports;
-            OwnerIncidents = ownerIncidents;
-            OwnerInvoices = ownerInvoices;
-            OwnerKnowledgearticle = ownerKnowledgearticle;
-            OwnerLeads = ownerLeads;
-            OwnerLists = ownerLists;
-            OwnerMailbox = ownerMailbox;
-            OwnerMailmergetemplates = ownerMailmergetemplates;
-            OwnerNewInteractionforemail = ownerNewInteractionforemail;
-            OwnerOpportunitys = ownerOpportunitys;
-            OwnerPersonaldocumenttemplates = ownerPersonaldocumenttemplates;
-            OwnerPostfollows = ownerPostfollows;
-            OwnerPrincipalentitymap = ownerPrincipalentitymap;
-            OwnerQueues = ownerQueues;
-            OwnerQuotes = ownerQuotes;
             OwnerRatingmodel = ownerRatingmodel;
             OwnerRatingvalue = ownerRatingvalue;
-            OwnerReports = ownerReports;
+            OwnerPersonaldocumenttemplates = ownerPersonaldocumenttemplates;
+            OwnerAccounts = ownerAccounts;
+            OwnerGoalrollupquery = ownerGoalrollupquery;
             OwnerSalesorders = ownerSalesorders;
-            OwnerSharepointdocumentlocation = ownerSharepointdocumentlocation;
-            OwnerSharepointsite = ownerSharepointsite;
-            OwnerSlas = ownerSlas;
-            OwnerTemplates = ownerTemplates;
-            OwnerUserform = ownerUserform;
-            OwnerUserquerys = ownerUserquerys;
-            OwnerUserqueryvisualizations = ownerUserqueryvisualizations;
+            OwnerPostfollows = ownerPostfollows;
             OwnerWorkflows = ownerWorkflows;
-            Ownerid = ownerid;
+            OwnerLists = ownerLists;
+            OwnerUserquerys = ownerUserquerys;
+            OwnerImportmaps = ownerImportmaps;
+            OwnerMailmergetemplates = ownerMailmergetemplates;
+            OwnerOpportunitys = ownerOpportunitys;
+            OwnerDuplicaterules = ownerDuplicaterules;
+            OwnerReports = ownerReports;
+            OwnerActivitypointers = ownerActivitypointers;
+            ActionCardUserStateOwner = actionCardUserStateOwner;
+            OwnerPrincipalentitymap = ownerPrincipalentitymap;
+            OwnerImportdatas = ownerImportdatas;
+            OwnerCategories = ownerCategories;
+            OwnerDynamicproperyinstance = ownerDynamicproperyinstance;
+            OwnerQueues = ownerQueues;
+            OwnerActioncards = ownerActioncards;
+            OwnerUserqueryvisualizations = ownerUserqueryvisualizations;
+            OwnerCampaigns = ownerCampaigns;
+            OwnerFeedback = ownerFeedback;
+            OwnerQuotes = ownerQuotes;
+            OwnerInvoices = ownerInvoices;
+            OwnerAnnotations = ownerAnnotations;
+            OwnerUserform = ownerUserform;
+            OwnerAsyncoperations = ownerAsyncoperations;
+            OwnerSocialProfile = ownerSocialProfile;
+            OwnerSlas = ownerSlas;
             SlakpiinstanceOwner = slakpiinstanceOwner;
+            OwnerEmailserverprofile = ownerEmailserverprofile;
+            OwnerIncidents = ownerIncidents;
+            OwnerTemplates = ownerTemplates;
+            OwnerContacts = ownerContacts;
+            OwnerImports = ownerImports;
+            OwnerLeads = ownerLeads;
+            OwnerConnections = ownerConnections;
+            OwnerImportfiles = ownerImportfiles;
+            OwnerImportlogs = ownerImportlogs;
+            OwnerSyncError = ownerSyncError;
+            OwnerContracts = ownerContracts;
+            OwnerAdoxioTiedhouseconnection = ownerAdoxioTiedhouseconnection;
+            OwnerAdoxioWorkerinvoicehistory = ownerAdoxioWorkerinvoicehistory;
+            OwnerAdoxioAgencycommunication = ownerAdoxioAgencycommunication;
+            OwnerAdoxioApplicantstep = ownerAdoxioApplicantstep;
+            OwnerAdoxioApplication = ownerAdoxioApplication;
+            OwnerAdoxioApplicationmodule = ownerAdoxioApplicationmodule;
+            OwnerAdoxioApplicationtermsconditionslimitation = ownerAdoxioApplicationtermsconditionslimitation;
+            OwnerAdoxioComplaincemeeting = ownerAdoxioComplaincemeeting;
+            OwnerAdoxioComplaintsubject = ownerAdoxioComplaintsubject;
+            OwnerAdoxioContravention = ownerAdoxioContravention;
+            OwnerAdoxioEstablishment = ownerAdoxioEstablishment;
+            OwnerAdoxioExhibit = ownerAdoxioExhibit;
+            OwnerAdoxioInvestigationdetail = ownerAdoxioInvestigationdetail;
+            OwnerAdoxioInvestigationstakeholder = ownerAdoxioInvestigationstakeholder;
+            OwnerAdoxioLegalentity = ownerAdoxioLegalentity;
+            OwnerAdoxioLicences = ownerAdoxioLicences;
+            OwnerAdoxioLicencetype = ownerAdoxioLicencetype;
+            OwnerAdoxioLicencetypeprerequisite = ownerAdoxioLicencetypeprerequisite;
+            OwnerAdoxioLicencetypestep = ownerAdoxioLicencetypestep;
+            OwnerAdoxioLicencetypestepprerequisite = ownerAdoxioLicencetypestepprerequisite;
+            OwnerAdoxioPersonalhistorysummary = ownerAdoxioPersonalhistorysummary;
+            OwnerAdoxioPostalcode = ownerAdoxioPostalcode;
+            OwnerAdoxioRegion = ownerAdoxioRegion;
+            OwnerAdoxioTermsconditionslimitationspreset = ownerAdoxioTermsconditionslimitationspreset;
+            OwnerAdoxioTerritory = ownerAdoxioTerritory;
+            OwnerAdoxioTestentity = ownerAdoxioTestentity;
+            OwnerAdoxioTiedhouseassociation = ownerAdoxioTiedhouseassociation;
+            OwnerAdoxioViolationnotification = ownerAdoxioViolationnotification;
+            OwnerAdoxioViolationtype = ownerAdoxioViolationtype;
+            OwnerAdoxioWitnessstatement = ownerAdoxioWitnessstatement;
+            OwnerAdoxioComplaint = ownerAdoxioComplaint;
+            OwnerAdoxioFundingsource = ownerAdoxioFundingsource;
+            OwnerAdoxioTaxandaccounting = ownerAdoxioTaxandaccounting;
+            OwnerAdoxioBusinessaccount = ownerAdoxioBusinessaccount;
+            OwnerAdoxioLoan = ownerAdoxioLoan;
+            OwnerAdoxioInterest = ownerAdoxioInterest;
+            OwnerAdoxioCorporaterole = ownerAdoxioCorporaterole;
+            OwnerAdoxioInvestigation = ownerAdoxioInvestigation;
+            OwnerAdoxioSetting = ownerAdoxioSetting;
+            OwnerAdoxioSpdexports = ownerAdoxioSpdexports;
+            OwnerAdoxioPreviousaddress = ownerAdoxioPreviousaddress;
+            OwnerAdoxioSpddatarow = ownerAdoxioSpddatarow;
+            OwnerAdoxioPolicydocument = ownerAdoxioPolicydocument;
+            OwnerAdoxioApplicationinvoicehistory = ownerAdoxioApplicationinvoicehistory;
+            OwnerAdoxioWorker = ownerAdoxioWorker;
+            OwnerAdoxioAlias = ownerAdoxioAlias;
+            OwnerAdoxioCorporatehistorysummary = ownerAdoxioCorporatehistorysummary;
             CustomInit();
         }
 
@@ -140,243 +151,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ActionCardUserState_Owner")]
-        public IList<MicrosoftDynamicsCRMactioncarduserstate> ActionCardUserStateOwner { get; set; }
+        [JsonProperty(PropertyName = "ownerid")]
+        public string Ownerid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Owner_dynamicproperyinstance")]
-        public IList<MicrosoftDynamicsCRMdynamicpropertyinstance> OwnerDynamicproperyinstance { get; set; }
+        [JsonProperty(PropertyName = "owner_exchangesyncidmapping")]
+        public IList<MicrosoftDynamicsCRMexchangesyncidmapping> OwnerExchangesyncidmapping { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_SocialProfile")]
-        public IList<MicrosoftDynamicsCRMsocialprofile> OwnerSocialProfile { get; set; }
+        [JsonProperty(PropertyName = "owner_new_interactionforemail")]
+        public IList<MicrosoftDynamicsCRMinteractionforemail> OwnerNewInteractionforemail { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_SyncError")]
-        public IList<MicrosoftDynamicsCRMsyncerror> OwnerSyncError { get; set; }
+        [JsonProperty(PropertyName = "owner_knowledgearticle")]
+        public IList<MicrosoftDynamicsCRMknowledgearticle> OwnerKnowledgearticle { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_abs_autonumberedentity")]
-        public IList<MicrosoftDynamicsCRMabsAutonumberedentity> OwnerAbsAutonumberedentity { get; set; }
+        [JsonProperty(PropertyName = "owner_sharepointsite")]
+        public IList<MicrosoftDynamicsCRMsharepointsite> OwnerSharepointsite { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_accounts")]
-        public IList<MicrosoftDynamicsCRMaccount> OwnerAccounts { get; set; }
+        [JsonProperty(PropertyName = "owner_sharepointdocumentlocation")]
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> OwnerSharepointdocumentlocation { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_actioncards")]
-        public IList<MicrosoftDynamicsCRMactioncard> OwnerActioncards { get; set; }
+        [JsonProperty(PropertyName = "owner_entitlement")]
+        public IList<MicrosoftDynamicsCRMentitlement> OwnerEntitlement { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_activitypointers")]
-        public IList<MicrosoftDynamicsCRMactivitypointer> OwnerActivitypointers { get; set; }
+        [JsonProperty(PropertyName = "owner_goal")]
+        public IList<MicrosoftDynamicsCRMgoal> OwnerGoal { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_agencycommunication")]
-        public IList<MicrosoftDynamicsCRMadoxioAgencycommunication> OwnerAdoxioAgencycommunication { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_applicantstep")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicantstep> OwnerAdoxioApplicantstep { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_application")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> OwnerAdoxioApplication { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_applicationmodule")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationmodule> OwnerAdoxioApplicationmodule { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_applicationtermsconditionslimitation")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> OwnerAdoxioApplicationtermsconditionslimitation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_businessaccount")]
-        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> OwnerAdoxioBusinessaccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_complaincemeeting")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> OwnerAdoxioComplaincemeeting { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_complaint")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> OwnerAdoxioComplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_complaintsubject")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> OwnerAdoxioComplaintsubject { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_contravention")]
-        public IList<MicrosoftDynamicsCRMadoxioContravention> OwnerAdoxioContravention { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_corporaterole")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> OwnerAdoxioCorporaterole { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_establishment")]
-        public IList<MicrosoftDynamicsCRMadoxioEstablishment> OwnerAdoxioEstablishment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_exhibit")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> OwnerAdoxioExhibit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_fundingsource")]
-        public IList<MicrosoftDynamicsCRMadoxioFundingsource> OwnerAdoxioFundingsource { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_interest")]
-        public IList<MicrosoftDynamicsCRMadoxioInterest> OwnerAdoxioInterest { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> OwnerAdoxioInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_investigationdetail")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> OwnerAdoxioInvestigationdetail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_investigationstakeholder")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> OwnerAdoxioInvestigationstakeholder { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_legalentity")]
-        public IList<MicrosoftDynamicsCRMadoxioLegalentity> OwnerAdoxioLegalentity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_licences")]
-        public IList<MicrosoftDynamicsCRMadoxioLicences> OwnerAdoxioLicences { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_licencetype")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetype> OwnerAdoxioLicencetype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_licencetypeprerequisite")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> OwnerAdoxioLicencetypeprerequisite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_licencetypestep")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetypestep> OwnerAdoxioLicencetypestep { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_licencetypestepprerequisite")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> OwnerAdoxioLicencetypestepprerequisite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_loan")]
-        public IList<MicrosoftDynamicsCRMadoxioLoan> OwnerAdoxioLoan { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_personalhistorysummary")]
-        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> OwnerAdoxioPersonalhistorysummary { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_postalcode")]
-        public IList<MicrosoftDynamicsCRMadoxioPostalcode> OwnerAdoxioPostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_region")]
-        public IList<MicrosoftDynamicsCRMadoxioRegion> OwnerAdoxioRegion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_setting")]
-        public IList<MicrosoftDynamicsCRMadoxioSetting> OwnerAdoxioSetting { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_taxandaccounting")]
-        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> OwnerAdoxioTaxandaccounting { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_termsconditionslimitationspreset")]
-        public IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> OwnerAdoxioTermsconditionslimitationspreset { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_territory")]
-        public IList<MicrosoftDynamicsCRMadoxioTerritory> OwnerAdoxioTerritory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_testentity")]
-        public IList<MicrosoftDynamicsCRMadoxioTestentity> OwnerAdoxioTestentity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_tiedhouseassociation")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> OwnerAdoxioTiedhouseassociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_tiedhouseconnection")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> OwnerAdoxioTiedhouseconnection { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_violationnotification")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> OwnerAdoxioViolationnotification { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_violationtype")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> OwnerAdoxioViolationtype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_adoxio_witnessstatement")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> OwnerAdoxioWitnessstatement { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_annotations")]
-        public IList<MicrosoftDynamicsCRMannotation> OwnerAnnotations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_asyncoperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> OwnerAsyncoperations { get; set; }
+        [JsonProperty(PropertyName = "owner_mailbox")]
+        public IList<MicrosoftDynamicsCRMmailbox> OwnerMailbox { get; set; }
 
         /// <summary>
         /// </summary>
@@ -420,163 +236,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_campaigns")]
-        public IList<MicrosoftDynamicsCRMcampaign> OwnerCampaigns { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_categories")]
-        public IList<MicrosoftDynamicsCRMcategory> OwnerCategories { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "owner_characteristic")]
         public IList<MicrosoftDynamicsCRMcharacteristic> OwnerCharacteristic { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_connections")]
-        public IList<MicrosoftDynamicsCRMconnection> OwnerConnections { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_contacts")]
-        public IList<MicrosoftDynamicsCRMcontact> OwnerContacts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_contracts")]
-        public IList<MicrosoftDynamicsCRMcontract> OwnerContracts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_duplicaterules")]
-        public IList<MicrosoftDynamicsCRMduplicaterule> OwnerDuplicaterules { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_emailserverprofile")]
-        public IList<MicrosoftDynamicsCRMemailserverprofile> OwnerEmailserverprofile { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_entitlement")]
-        public IList<MicrosoftDynamicsCRMentitlement> OwnerEntitlement { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_exchangesyncidmapping")]
-        public IList<MicrosoftDynamicsCRMexchangesyncidmapping> OwnerExchangesyncidmapping { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_feedback")]
-        public IList<MicrosoftDynamicsCRMfeedback> OwnerFeedback { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_goal")]
-        public IList<MicrosoftDynamicsCRMgoal> OwnerGoal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_goalrollupquery")]
-        public IList<MicrosoftDynamicsCRMgoalrollupquery> OwnerGoalrollupquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_importdatas")]
-        public IList<MicrosoftDynamicsCRMimportdata> OwnerImportdatas { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_importfiles")]
-        public IList<MicrosoftDynamicsCRMimportfile> OwnerImportfiles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_importlogs")]
-        public IList<MicrosoftDynamicsCRMimportlog> OwnerImportlogs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_importmaps")]
-        public IList<MicrosoftDynamicsCRMimportmap> OwnerImportmaps { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_imports")]
-        public IList<MicrosoftDynamicsCRMimport> OwnerImports { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_incidents")]
-        public IList<MicrosoftDynamicsCRMincident> OwnerIncidents { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_invoices")]
-        public IList<MicrosoftDynamicsCRMinvoice> OwnerInvoices { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_knowledgearticle")]
-        public IList<MicrosoftDynamicsCRMknowledgearticle> OwnerKnowledgearticle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_leads")]
-        public IList<MicrosoftDynamicsCRMlead> OwnerLeads { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_lists")]
-        public IList<MicrosoftDynamicsCRMlist> OwnerLists { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_mailbox")]
-        public IList<MicrosoftDynamicsCRMmailbox> OwnerMailbox { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_mailmergetemplates")]
-        public IList<MicrosoftDynamicsCRMmailmergetemplate> OwnerMailmergetemplates { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_new_interactionforemail")]
-        public IList<MicrosoftDynamicsCRMinteractionforemail> OwnerNewInteractionforemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_opportunitys")]
-        public IList<MicrosoftDynamicsCRMopportunity> OwnerOpportunitys { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_personaldocumenttemplates")]
-        public IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> OwnerPersonaldocumenttemplates { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_postfollows")]
-        public IList<MicrosoftDynamicsCRMpostfollow> OwnerPostfollows { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_principalentitymap")]
-        public IList<MicrosoftDynamicsCRMprincipalentitymap> OwnerPrincipalentitymap { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_queues")]
-        public IList<MicrosoftDynamicsCRMqueue> OwnerQueues { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_quotes")]
-        public IList<MicrosoftDynamicsCRMquote> OwnerQuotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -590,8 +251,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_reports")]
-        public IList<MicrosoftDynamicsCRMreport> OwnerReports { get; set; }
+        [JsonProperty(PropertyName = "owner_personaldocumenttemplates")]
+        public IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> OwnerPersonaldocumenttemplates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_accounts")]
+        public IList<MicrosoftDynamicsCRMaccount> OwnerAccounts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_goalrollupquery")]
+        public IList<MicrosoftDynamicsCRMgoalrollupquery> OwnerGoalrollupquery { get; set; }
 
         /// <summary>
         /// </summary>
@@ -600,38 +271,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owner_sharepointdocumentlocation")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> OwnerSharepointdocumentlocation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_sharepointsite")]
-        public IList<MicrosoftDynamicsCRMsharepointsite> OwnerSharepointsite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_slas")]
-        public IList<MicrosoftDynamicsCRMsla> OwnerSlas { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_templates")]
-        public IList<MicrosoftDynamicsCRMtemplate> OwnerTemplates { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_userform")]
-        public IList<MicrosoftDynamicsCRMuserform> OwnerUserform { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_userquerys")]
-        public IList<MicrosoftDynamicsCRMuserquery> OwnerUserquerys { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owner_userqueryvisualizations")]
-        public IList<MicrosoftDynamicsCRMuserqueryvisualization> OwnerUserqueryvisualizations { get; set; }
+        [JsonProperty(PropertyName = "owner_postfollows")]
+        public IList<MicrosoftDynamicsCRMpostfollow> OwnerPostfollows { get; set; }
 
         /// <summary>
         /// </summary>
@@ -640,13 +281,423 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public string Ownerid { get; set; }
+        [JsonProperty(PropertyName = "owner_lists")]
+        public IList<MicrosoftDynamicsCRMlist> OwnerLists { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_userquerys")]
+        public IList<MicrosoftDynamicsCRMuserquery> OwnerUserquerys { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_importmaps")]
+        public IList<MicrosoftDynamicsCRMimportmap> OwnerImportmaps { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_mailmergetemplates")]
+        public IList<MicrosoftDynamicsCRMmailmergetemplate> OwnerMailmergetemplates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_opportunitys")]
+        public IList<MicrosoftDynamicsCRMopportunity> OwnerOpportunitys { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_duplicaterules")]
+        public IList<MicrosoftDynamicsCRMduplicaterule> OwnerDuplicaterules { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_reports")]
+        public IList<MicrosoftDynamicsCRMreport> OwnerReports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_activitypointers")]
+        public IList<MicrosoftDynamicsCRMactivitypointer> OwnerActivitypointers { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ActionCardUserState_Owner")]
+        public IList<MicrosoftDynamicsCRMactioncarduserstate> ActionCardUserStateOwner { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_principalentitymap")]
+        public IList<MicrosoftDynamicsCRMprincipalentitymap> OwnerPrincipalentitymap { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_importdatas")]
+        public IList<MicrosoftDynamicsCRMimportdata> OwnerImportdatas { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_categories")]
+        public IList<MicrosoftDynamicsCRMcategory> OwnerCategories { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Owner_dynamicproperyinstance")]
+        public IList<MicrosoftDynamicsCRMdynamicpropertyinstance> OwnerDynamicproperyinstance { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_queues")]
+        public IList<MicrosoftDynamicsCRMqueue> OwnerQueues { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_actioncards")]
+        public IList<MicrosoftDynamicsCRMactioncard> OwnerActioncards { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_userqueryvisualizations")]
+        public IList<MicrosoftDynamicsCRMuserqueryvisualization> OwnerUserqueryvisualizations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_campaigns")]
+        public IList<MicrosoftDynamicsCRMcampaign> OwnerCampaigns { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_feedback")]
+        public IList<MicrosoftDynamicsCRMfeedback> OwnerFeedback { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_quotes")]
+        public IList<MicrosoftDynamicsCRMquote> OwnerQuotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_invoices")]
+        public IList<MicrosoftDynamicsCRMinvoice> OwnerInvoices { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> OwnerAnnotations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_userform")]
+        public IList<MicrosoftDynamicsCRMuserform> OwnerUserform { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_asyncoperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> OwnerAsyncoperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_SocialProfile")]
+        public IList<MicrosoftDynamicsCRMsocialprofile> OwnerSocialProfile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_slas")]
+        public IList<MicrosoftDynamicsCRMsla> OwnerSlas { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "slakpiinstance_owner")]
         public IList<MicrosoftDynamicsCRMslakpiinstance> SlakpiinstanceOwner { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_emailserverprofile")]
+        public IList<MicrosoftDynamicsCRMemailserverprofile> OwnerEmailserverprofile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_incidents")]
+        public IList<MicrosoftDynamicsCRMincident> OwnerIncidents { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_templates")]
+        public IList<MicrosoftDynamicsCRMtemplate> OwnerTemplates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_contacts")]
+        public IList<MicrosoftDynamicsCRMcontact> OwnerContacts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_imports")]
+        public IList<MicrosoftDynamicsCRMimport> OwnerImports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_leads")]
+        public IList<MicrosoftDynamicsCRMlead> OwnerLeads { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_connections")]
+        public IList<MicrosoftDynamicsCRMconnection> OwnerConnections { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_importfiles")]
+        public IList<MicrosoftDynamicsCRMimportfile> OwnerImportfiles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_importlogs")]
+        public IList<MicrosoftDynamicsCRMimportlog> OwnerImportlogs { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_SyncError")]
+        public IList<MicrosoftDynamicsCRMsyncerror> OwnerSyncError { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_contracts")]
+        public IList<MicrosoftDynamicsCRMcontract> OwnerContracts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_tiedhouseconnection")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> OwnerAdoxioTiedhouseconnection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_workerinvoicehistory")]
+        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> OwnerAdoxioWorkerinvoicehistory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_agencycommunication")]
+        public IList<MicrosoftDynamicsCRMadoxioAgencycommunication> OwnerAdoxioAgencycommunication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_applicantstep")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicantstep> OwnerAdoxioApplicantstep { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_application")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> OwnerAdoxioApplication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_applicationmodule")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationmodule> OwnerAdoxioApplicationmodule { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_applicationtermsconditionslimitation")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> OwnerAdoxioApplicationtermsconditionslimitation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_complaincemeeting")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> OwnerAdoxioComplaincemeeting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_complaintsubject")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> OwnerAdoxioComplaintsubject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_contravention")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> OwnerAdoxioContravention { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_establishment")]
+        public IList<MicrosoftDynamicsCRMadoxioEstablishment> OwnerAdoxioEstablishment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_exhibit")]
+        public IList<MicrosoftDynamicsCRMadoxioExhibit> OwnerAdoxioExhibit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_investigationdetail")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> OwnerAdoxioInvestigationdetail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_investigationstakeholder")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> OwnerAdoxioInvestigationstakeholder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_legalentity")]
+        public IList<MicrosoftDynamicsCRMadoxioLegalentity> OwnerAdoxioLegalentity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_licences")]
+        public IList<MicrosoftDynamicsCRMadoxioLicences> OwnerAdoxioLicences { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_licencetype")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetype> OwnerAdoxioLicencetype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_licencetypeprerequisite")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> OwnerAdoxioLicencetypeprerequisite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_licencetypestep")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetypestep> OwnerAdoxioLicencetypestep { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_licencetypestepprerequisite")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> OwnerAdoxioLicencetypestepprerequisite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_personalhistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> OwnerAdoxioPersonalhistorysummary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_postalcode")]
+        public IList<MicrosoftDynamicsCRMadoxioPostalcode> OwnerAdoxioPostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_region")]
+        public IList<MicrosoftDynamicsCRMadoxioRegion> OwnerAdoxioRegion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_termsconditionslimitationspreset")]
+        public IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> OwnerAdoxioTermsconditionslimitationspreset { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_territory")]
+        public IList<MicrosoftDynamicsCRMadoxioTerritory> OwnerAdoxioTerritory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_testentity")]
+        public IList<MicrosoftDynamicsCRMadoxioTestentity> OwnerAdoxioTestentity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_tiedhouseassociation")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> OwnerAdoxioTiedhouseassociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_violationnotification")]
+        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> OwnerAdoxioViolationnotification { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_violationtype")]
+        public IList<MicrosoftDynamicsCRMadoxioViolationtype> OwnerAdoxioViolationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_witnessstatement")]
+        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> OwnerAdoxioWitnessstatement { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_complaint")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> OwnerAdoxioComplaint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_fundingsource")]
+        public IList<MicrosoftDynamicsCRMadoxioFundingsource> OwnerAdoxioFundingsource { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_taxandaccounting")]
+        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> OwnerAdoxioTaxandaccounting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_businessaccount")]
+        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> OwnerAdoxioBusinessaccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_loan")]
+        public IList<MicrosoftDynamicsCRMadoxioLoan> OwnerAdoxioLoan { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_interest")]
+        public IList<MicrosoftDynamicsCRMadoxioInterest> OwnerAdoxioInterest { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_corporaterole")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> OwnerAdoxioCorporaterole { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_investigation")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> OwnerAdoxioInvestigation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_setting")]
+        public IList<MicrosoftDynamicsCRMadoxioSetting> OwnerAdoxioSetting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_spdexports")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> OwnerAdoxioSpdexports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_previousaddress")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> OwnerAdoxioPreviousaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_spddatarow")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> OwnerAdoxioSpddatarow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_policydocument")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> OwnerAdoxioPolicydocument { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_applicationinvoicehistory")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> OwnerAdoxioApplicationinvoicehistory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_worker")]
+        public IList<MicrosoftDynamicsCRMadoxioWorker> OwnerAdoxioWorker { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_alias")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> OwnerAdoxioAlias { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owner_adoxio_corporatehistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> OwnerAdoxioCorporatehistorysummary { get; set; }
 
     }
 }

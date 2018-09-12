@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// contractdetail
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcontractdetail
     {
         /// <summary>
@@ -26,74 +29,74 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcontractdetail class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontractdetail(IList<MicrosoftDynamicsCRMannotation> contractDetailAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> contractDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> contractDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), string _accountidValue = default(string), string _contactidValue = default(string), string _contractidValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _customeridValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _productidValue = default(string), string _serviceaddressValue = default(string), string _transactioncurrencyidValue = default(string), string _uomidValue = default(string), string _uomscheduleidValue = default(string), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), int? allotmentsoverage = default(int?), int? allotmentsremaining = default(int?), int? allotmentsused = default(int?), IList<MicrosoftDynamicsCRMincident> contractDetailCases = default(IList<MicrosoftDynamicsCRMincident>), string contractdetailid = default(string), MicrosoftDynamicsCRMcontract contractid = default(MicrosoftDynamicsCRMcontract), int? contractstatecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), double? discount = default(double?), double? discountBase = default(double?), double? discountpercentage = default(double?), string effectivitycalendar = default(string), double? exchangerate = default(double?), System.DateTimeOffset? expireson = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? initialquantity = default(int?), int? lineitemorder = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), double? net = default(double?), double? netBase = default(double?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string owningbusinessunit = default(string), string owninguser = default(string), double? price = default(double?), double? priceBase = default(double?), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), string productserialnumber = default(string), double? rate = default(double?), double? rateBase = default(double?), MicrosoftDynamicsCRMcustomeraddress serviceaddress = default(MicrosoftDynamicsCRMcustomeraddress), int? servicecontractunitscode = default(int?), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), string title = default(string), int? totalallotments = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), int? utcconversiontimezonecode = default(int?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcontractdetail(System.DateTimeOffset? expireson = default(System.DateTimeOffset?), object priceBase = default(object), object rateBase = default(object), object netBase = default(object), int? allotmentsused = default(int?), int? statecode = default(int?), string owningbusinessunit = default(string), long? versionnumber = default(long?), string _customeridValue = default(string), object discountBase = default(object), int? timezoneruleversionnumber = default(int?), string _createdbyValue = default(string), int? servicecontractunitscode = default(int?), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string effectivitycalendar = default(string), int? utcconversiontimezonecode = default(int?), string _uomidValue = default(string), string owninguser = default(string), string title = default(string), string _productidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _uomscheduleidValue = default(string), object discountpercentage = default(object), string _serviceaddressValue = default(string), int? contractstatecode = default(int?), int? initialquantity = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), object rate = default(object), object net = default(object), string _contractidValue = default(string), int? allotmentsoverage = default(int?), string contractdetailid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), int? allotmentsremaining = default(int?), object discount = default(object), int? totalallotments = default(int?), object price = default(object), string _contactidValue = default(string), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), string _accountidValue = default(string), string productserialnumber = default(string), object exchangerate = default(object), string _owneridValue = default(string), int? statuscode = default(int?), int? lineitemorder = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> contractDetailCases = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMsyncerror> contractDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcustomeraddress serviceaddress = default(MicrosoftDynamicsCRMcustomeraddress), MicrosoftDynamicsCRMcontract contractid = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMannotation> contractDetailAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> contractDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact))
         {
+            Expireson = expireson;
+            PriceBase = priceBase;
+            RateBase = rateBase;
+            NetBase = netBase;
+            Allotmentsused = allotmentsused;
+            Statecode = statecode;
+            Owningbusinessunit = owningbusinessunit;
+            Versionnumber = versionnumber;
+            this._customeridValue = _customeridValue;
+            DiscountBase = discountBase;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._createdbyValue = _createdbyValue;
+            Servicecontractunitscode = servicecontractunitscode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
+            Effectivitycalendar = effectivitycalendar;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._uomidValue = _uomidValue;
+            Owninguser = owninguser;
+            Title = title;
+            this._productidValue = _productidValue;
+            Modifiedon = modifiedon;
+            this._uomscheduleidValue = _uomscheduleidValue;
+            Discountpercentage = discountpercentage;
+            this._serviceaddressValue = _serviceaddressValue;
+            Contractstatecode = contractstatecode;
+            Initialquantity = initialquantity;
+            Overriddencreatedon = overriddencreatedon;
+            Rate = rate;
+            Net = net;
+            this._contractidValue = _contractidValue;
+            Allotmentsoverage = allotmentsoverage;
+            Contractdetailid = contractdetailid;
+            Createdon = createdon;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Allotmentsremaining = allotmentsremaining;
+            Discount = discount;
+            Totalallotments = totalallotments;
+            Price = price;
+            this._contactidValue = _contactidValue;
+            Activeon = activeon;
+            this._accountidValue = _accountidValue;
+            Productserialnumber = productserialnumber;
+            Exchangerate = exchangerate;
+            this._owneridValue = _owneridValue;
+            Statuscode = statuscode;
+            Lineitemorder = lineitemorder;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            ContractDetailBulkDeleteFailures = contractDetailBulkDeleteFailures;
+            Uomscheduleid = uomscheduleid;
+            Createdonbehalfby = createdonbehalfby;
+            ContractDetailCases = contractDetailCases;
+            ContractDetailSyncErrors = contractDetailSyncErrors;
+            Transactioncurrencyid = transactioncurrencyid;
+            Createdby = createdby;
+            Serviceaddress = serviceaddress;
+            Contractid = contractid;
             ContractDetailAnnotation = contractDetailAnnotation;
             ContractDetailAsyncOperations = contractDetailAsyncOperations;
-            ContractDetailBulkDeleteFailures = contractDetailBulkDeleteFailures;
-            ContractDetailSyncErrors = contractDetailSyncErrors;
-            this._accountidValue = _accountidValue;
-            this._contactidValue = _contactidValue;
-            this._contractidValue = _contractidValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._customeridValue = _customeridValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            this._productidValue = _productidValue;
-            this._serviceaddressValue = _serviceaddressValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._uomidValue = _uomidValue;
-            this._uomscheduleidValue = _uomscheduleidValue;
-            Activeon = activeon;
-            Allotmentsoverage = allotmentsoverage;
-            Allotmentsremaining = allotmentsremaining;
-            Allotmentsused = allotmentsused;
-            ContractDetailCases = contractDetailCases;
-            Contractdetailid = contractdetailid;
-            Contractid = contractid;
-            Contractstatecode = contractstatecode;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            CustomeridAccount = customeridAccount;
-            CustomeridContact = customeridContact;
-            Discount = discount;
-            DiscountBase = discountBase;
-            Discountpercentage = discountpercentage;
-            Effectivitycalendar = effectivitycalendar;
-            Exchangerate = exchangerate;
-            Expireson = expireson;
-            Importsequencenumber = importsequencenumber;
-            Initialquantity = initialquantity;
-            Lineitemorder = lineitemorder;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Net = net;
-            NetBase = netBase;
-            Overriddencreatedon = overriddencreatedon;
-            Owningbusinessunit = owningbusinessunit;
-            Owninguser = owninguser;
-            Price = price;
-            PriceBase = priceBase;
-            Productid = productid;
-            Productserialnumber = productserialnumber;
-            Rate = rate;
-            RateBase = rateBase;
-            Serviceaddress = serviceaddress;
-            Servicecontractunitscode = servicecontractunitscode;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Title = title;
-            Totalallotments = totalallotments;
-            Transactioncurrencyid = transactioncurrencyid;
             Uomid = uomid;
-            Uomscheduleid = uomscheduleid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            CustomeridAccount = customeridAccount;
+            Productid = productid;
+            Modifiedby = modifiedby;
+            CustomeridContact = customeridContact;
             CustomInit();
         }
 
@@ -101,6 +104,301 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "expireson")]
+        public System.DateTimeOffset? Expireson { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price_base")]
+        public object PriceBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rate_base")]
+        public object RateBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "net_base")]
+        public object NetBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "allotmentsused")]
+        public int? Allotmentsused { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public string Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_customerid_value")]
+        public string _customeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "discount_base")]
+        public object DiscountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "servicecontractunitscode")]
+        public int? Servicecontractunitscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effectivitycalendar")]
+        public string Effectivitycalendar { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_uomid_value")]
+        public string _uomidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_productid_value")]
+        public string _productidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_uomscheduleid_value")]
+        public string _uomscheduleidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "discountpercentage")]
+        public object Discountpercentage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_serviceaddress_value")]
+        public string _serviceaddressValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contractstatecode")]
+        public int? Contractstatecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "initialquantity")]
+        public int? Initialquantity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "rate")]
+        public object Rate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "net")]
+        public object Net { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_contractid_value")]
+        public string _contractidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "allotmentsoverage")]
+        public int? Allotmentsoverage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contractdetailid")]
+        public string Contractdetailid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "allotmentsremaining")]
+        public int? Allotmentsremaining { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "discount")]
+        public object Discount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "totalallotments")]
+        public int? Totalallotments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price")]
+        public object Price { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_contactid_value")]
+        public string _contactidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activeon")]
+        public System.DateTimeOffset? Activeon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_accountid_value")]
+        public string _accountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productserialnumber")]
+        public string Productserialnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lineitemorder")]
+        public int? Lineitemorder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ContractDetail_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ContractDetailBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "uomscheduleid")]
+        public MicrosoftDynamicsCRMuomschedule Uomscheduleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contract_detail_cases")]
+        public IList<MicrosoftDynamicsCRMincident> ContractDetailCases { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ContractDetail_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> ContractDetailSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceaddress")]
+        public MicrosoftDynamicsCRMcustomeraddress Serviceaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contractid")]
+        public MicrosoftDynamicsCRMcontract Contractid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -114,138 +412,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ContractDetail_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> ContractDetailBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ContractDetail_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> ContractDetailSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_contactid_value")]
-        public string _contactidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_contractid_value")]
-        public string _contractidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_productid_value")]
-        public string _productidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_serviceaddress_value")]
-        public string _serviceaddressValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_uomid_value")]
-        public string _uomidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_uomscheduleid_value")]
-        public string _uomscheduleidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activeon")]
-        public System.DateTimeOffset? Activeon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "allotmentsoverage")]
-        public int? Allotmentsoverage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "allotmentsremaining")]
-        public int? Allotmentsremaining { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "allotmentsused")]
-        public int? Allotmentsused { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contract_detail_cases")]
-        public IList<MicrosoftDynamicsCRMincident> ContractDetailCases { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contractdetailid")]
-        public string Contractdetailid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contractid")]
-        public MicrosoftDynamicsCRMcontract Contractid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contractstatecode")]
-        public int? Contractstatecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "uomid")]
+        public MicrosoftDynamicsCRMuom Uomid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -254,53 +422,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "customerid_contact")]
-        public MicrosoftDynamicsCRMcontact CustomeridContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "discount")]
-        public double? Discount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "discount_base")]
-        public double? DiscountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "discountpercentage")]
-        public double? Discountpercentage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "effectivitycalendar")]
-        public string Effectivitycalendar { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "expireson")]
-        public System.DateTimeOffset? Expireson { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "initialquantity")]
-        public int? Initialquantity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lineitemorder")]
-        public int? Lineitemorder { get; set; }
+        [JsonProperty(PropertyName = "productid")]
+        public MicrosoftDynamicsCRMproduct Productid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -309,128 +432,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "net")]
-        public double? Net { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "net_base")]
-        public double? NetBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "price")]
-        public double? Price { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "price_base")]
-        public double? PriceBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productid")]
-        public MicrosoftDynamicsCRMproduct Productid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productserialnumber")]
-        public string Productserialnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "rate")]
-        public double? Rate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "rate_base")]
-        public double? RateBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "serviceaddress")]
-        public MicrosoftDynamicsCRMcustomeraddress Serviceaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "servicecontractunitscode")]
-        public int? Servicecontractunitscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "totalallotments")]
-        public int? Totalallotments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "uomid")]
-        public MicrosoftDynamicsCRMuom Uomid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "uomscheduleid")]
-        public MicrosoftDynamicsCRMuomschedule Uomscheduleid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "customerid_contact")]
+        public MicrosoftDynamicsCRMcontact CustomeridContact { get; set; }
 
     }
 }

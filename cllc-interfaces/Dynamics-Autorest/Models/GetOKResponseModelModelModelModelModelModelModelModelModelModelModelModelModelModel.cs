@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of sharepointdocumentlocations
+    /// Collection of adoxio_tiedhouseassociations
     /// </summary>
     public partial class GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel
     {
@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel
         /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMsharepointdocumentlocation> value = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> value = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>))
         {
             Value = value;
             CustomInit();
@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> Value { get; set; }
 
     }
 }

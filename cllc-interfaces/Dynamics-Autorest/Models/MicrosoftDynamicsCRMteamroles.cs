@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// teamroles
+    /// </summary>
     public partial class MicrosoftDynamicsCRMteamroles
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMteamroles
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMteamroles(string roleid = default(string), string teamid = default(string), string teamroleid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMteamroles(long? versionnumber = default(long?), string teamid = default(string), string teamroleid = default(string), string roleid = default(string))
         {
-            Roleid = roleid;
+            Versionnumber = versionnumber;
             Teamid = teamid;
             Teamroleid = teamroleid;
-            Versionnumber = versionnumber;
+            Roleid = roleid;
             CustomInit();
         }
 
@@ -40,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "roleid")]
-        public string Roleid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "roleid")]
+        public string Roleid { get; set; }
 
     }
 }

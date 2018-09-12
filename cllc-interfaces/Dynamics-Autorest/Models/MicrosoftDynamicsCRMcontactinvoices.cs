@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// contactinvoices
+    /// </summary>
     public partial class MicrosoftDynamicsCRMcontactinvoices
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcontactinvoices class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontactinvoices(string contactid = default(string), string contactinvoiceid = default(string), string invoiceid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMcontactinvoices(string contactinvoiceid = default(string), string contactid = default(string), long? versionnumber = default(long?), string invoiceid = default(string))
         {
-            Contactid = contactid;
             Contactinvoiceid = contactinvoiceid;
-            Invoiceid = invoiceid;
+            Contactid = contactid;
             Versionnumber = versionnumber;
+            Invoiceid = invoiceid;
             CustomInit();
         }
 
@@ -40,23 +43,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactid")]
-        public string Contactid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "contactinvoiceid")]
         public string Contactinvoiceid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "invoiceid")]
-        public string Invoiceid { get; set; }
+        [JsonProperty(PropertyName = "contactid")]
+        public string Contactid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "invoiceid")]
+        public string Invoiceid { get; set; }
 
     }
 }

@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// kbarticlecomment
+    /// </summary>
     public partial class MicrosoftDynamicsCRMkbarticlecomment
     {
         /// <summary>
@@ -26,27 +29,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMkbarticlecomment class.
         /// </summary>
-        public MicrosoftDynamicsCRMkbarticlecomment(IList<MicrosoftDynamicsCRMasyncoperation> kbArticleCommentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleCommentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _kbarticleidValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string commenttext = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string kbarticlecommentid = default(string), MicrosoftDynamicsCRMkbarticle kbarticleid = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), string organizationid = default(string), string title = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMkbarticlecomment(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string organizationid = default(string), string _kbarticleidValue = default(string), string kbarticlecommentid = default(string), string commenttext = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string title = default(string), long? versionnumber = default(long?), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleCommentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleCommentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle kbarticleid = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            KbArticleCommentAsyncOperations = kbArticleCommentAsyncOperations;
-            KbArticleCommentBulkDeleteFailures = kbArticleCommentBulkDeleteFailures;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._kbarticleidValue = _kbarticleidValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Commenttext = commenttext;
-            Createdby = createdby;
             Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Kbarticlecommentid = kbarticlecommentid;
-            Kbarticleid = kbarticleid;
-            Modifiedby = modifiedby;
             Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
+            this._modifiedbyValue = _modifiedbyValue;
             Organizationid = organizationid;
+            this._kbarticleidValue = _kbarticleidValue;
+            Kbarticlecommentid = kbarticlecommentid;
+            Commenttext = commenttext;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Title = title;
             Versionnumber = versionnumber;
+            this._createdbyValue = _createdbyValue;
+            KbArticleCommentBulkDeleteFailures = kbArticleCommentBulkDeleteFailures;
+            Createdby = createdby;
+            Createdonbehalfby = createdonbehalfby;
+            KbArticleCommentAsyncOperations = kbArticleCommentAsyncOperations;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Kbarticleid = kbarticleid;
+            Modifiedby = modifiedby;
             CustomInit();
         }
 
@@ -57,28 +60,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "KbArticleComment_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> KbArticleCommentAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "KbArticleComment_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> KbArticleCommentBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_kbarticleid_value")]
-        public string _kbarticleidValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -87,8 +75,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "organizationid")]
+        public string Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_kbarticleid_value")]
+        public string _kbarticleidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "kbarticlecommentid")]
+        public string Kbarticlecommentid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -97,13 +95,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "KbArticleComment_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> KbArticleCommentBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -112,8 +135,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "kbarticlecommentid")]
-        public string Kbarticlecommentid { get; set; }
+        [JsonProperty(PropertyName = "KbArticleComment_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> KbArticleCommentAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -124,31 +152,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
 
     }
 }

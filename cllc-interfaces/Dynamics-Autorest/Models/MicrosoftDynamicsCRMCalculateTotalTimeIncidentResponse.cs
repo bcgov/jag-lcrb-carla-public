@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMCalculateTotalTimeIncidentResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMCalculateTotalTimeIncidentResponse(object totalTime = default(object))
+        public MicrosoftDynamicsCRMCalculateTotalTimeIncidentResponse(long? totalTime = default(long?))
         {
             TotalTime = totalTime;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "TotalTime")]
-        public object TotalTime { get; set; }
+        public long? TotalTime { get; set; }
 
     }
 }
