@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             var csvList = new List<List<string>>();
             var headers = new List<string>();
-            var headerDefinition = GetExportHeaders();
+            var headerDefinition = GetExportHeadersIndividual();
             headerDefinition.ForEach(h =>
             {
                 headers.Add($"\"{h.Value}\"");
@@ -68,6 +68,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 throw (odee);
             }
 
+            var batch = GetBatchNumber().ToString();
+            batch = AddZeroPadding(batch);
 
             if (result != null && result.Count > 0)
             {
@@ -106,8 +108,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     csv.AppendLine(line);
                 });
                 var datePart = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                var batch = GetBatchNumber().ToString();
-                batch = AddZeroPadding(batch);
+                
                 var attachmentName = $@"{batch}_Request_Worker_{datePart}.csv";
                 //File.WriteAllText($@".\{attachmentName}", csv.ToString());
 
@@ -149,7 +150,8 @@ namespace Gov.Lclb.Cllb.SpdSync
             }
             else
             {
-                hangfireContext.WriteLine("No data to send, aborting.");
+                hangfireContext.WriteLine("No data to send, sending a null email.");
+                SendSPDNoResultsEmail(batch);
             }
 
             hangfireContext.WriteLine("End of SPD Export Job.");
@@ -183,6 +185,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <returns></returns>
         public static string CheckMailBoxForImport()
         {
+            // TODO: replace this with logic to check a mailbox.
             string result = File.ReadAllText("C:\\tmp\\testimport.csv");
             return result;
         }
@@ -190,7 +193,6 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <summary>
         /// Hangfire job to receive an import from SPD.
         /// </summary>
-
         public void ReceiveImportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Import Job.");
@@ -198,18 +200,33 @@ namespace Gov.Lclb.Cllb.SpdSync
             string payload = CheckMailBoxForImport();
             if (payload != null) // parse the payload
             {
-                List < WorkerResponse > response = WorkerResponseParser.ParseWorkerResponse(payload);
-                foreach (WorkerResponse item in response)
+                List < WorkerResponse > responses = WorkerResponseParser.ParseWorkerResponse(payload);
+                foreach (WorkerResponse workerResponse in responses)
                 {
                     // search for the Personal History Record.
-
-                    MicrosoftDynamicsCRMadoxioSpddatarow record = _dynamics.Spddatarows.GetByWorkerJobId(item.RecordIdentifier);
+                    MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamics.Personalhistorysummaries.GetByWorkerJobNumber(workerResponse.RecordIdentifier);
 
                     if (record != null)
                     {
                         // update the record.
-                        MicrosoftDynamicsCRMadoxioSpddatarow patchRecord = new MicrosoftDynamicsCRMadoxioSpddatarow();
+                        MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchRecord = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary()
+                        {
+                            AdoxioSecuritystatus = SPDResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
+                            AdoxioCompletedon = workerResponse.DateProcessed
+                        };
                         
+                        try
+                        {
+                            _dynamics.Personalhistorysummaries.Update(record.AdoxioPersonalhistorysummaryid, patchRecord);
+                        }
+                        catch (OdataerrorException odee)
+                        {
+                            hangfireContext.WriteLine("Error updating worker personal history");
+                            hangfireContext.WriteLine("Request:");
+                            hangfireContext.WriteLine(odee.Request.Content);
+                            hangfireContext.WriteLine("Response:");
+                            hangfireContext.WriteLine(odee.Response.Content);                            
+                        }
                     }
                 }
             }
@@ -253,13 +270,49 @@ namespace Gov.Lclb.Cllb.SpdSync
             return emailSentSuccessfully;
         }
 
-        private List<KeyValuePair<string, string>> GetExportHeaders()
+        private bool SendSPDNoResultsEmail(string batchNumber)
+        {
+            var emailSentSuccessfully = false;
+            var datePart = DateTime.Now.ToString().Replace('/', '-').Replace(':', '_');
+            var email = Configuration["SPD_EXPORT_EMAIL"];
+            string body = "";
+
+            using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream))    // using UTF-8 encoding by default
+            using (var mailClient = new SmtpClient(Configuration["SMTP_HOST"]))
+            using (var message = new MailMessage("no-reply@gov.bc.ca", email))
+            {
+                writer.WriteLine($"No data exists on this batch request({ batchNumber})");
+                writer.Flush();
+                stream.Position = 0;     // read from the start of what was written
+
+                message.Subject = $"No data exists on this batch request({ batchNumber})";
+                message.Body = body;
+                message.IsBodyHtml = true;
+
+
+                try
+                {
+                    mailClient.Send(message);
+                    emailSentSuccessfully = true;
+                }
+                catch (Exception)
+                {
+                    emailSentSuccessfully = false;
+                }
+
+            }
+            return emailSentSuccessfully;
+        }
+
+        private List<KeyValuePair<string, string>> GetExportHeadersIndividual()
         {
             var result = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("AdoxioLcrbbusinessjobid", "LCRB BUSINESS JOB ID"),
                 new KeyValuePair<string, string>("AdoxioLcrbassociatejobid", "LCRB ASSOCIATE JOB ID"),
-                new KeyValuePair<string, string>("AdoxioBcregistriesnumber", "Bcregistriesnumber"),
+                // 9-12-18 - BC Registries number is no longer required for individuals (only business records, which are not yet part of the export)
+                // new KeyValuePair<string, string>("AdoxioBcregistriesnumber", "Bcregistriesnumber"),
                 new KeyValuePair<string, string>("AdoxioSelfdisclosure", "SELF-DISCLOSURE YN"),
                 new KeyValuePair<string, string>("AdoxioLegalsurname", "SURNAME"),
                 new KeyValuePair<string, string>("AdoxioLegalfirstname", "FIRST NAME"),
