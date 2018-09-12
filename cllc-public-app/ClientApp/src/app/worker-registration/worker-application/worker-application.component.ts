@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
@@ -30,13 +30,14 @@ export class WorkerApplicationComponent implements OnInit {
   addressesToDelete: PreviousAddress[] = [];
   aliasesToDelete: Alias[] = [];
   workerId: string;
+  saveFormData: any;
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
   }
 
   public get aliases(): FormArray {
-    return this.form.get('aliases') as FormArray;
+    return this.form.get('worker.aliases') as FormArray;
   }
 
   constructor(private userDataService: UserDataService,
@@ -51,7 +52,7 @@ export class WorkerApplicationComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.workerId = params.id;
     });
-   }
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -82,10 +83,10 @@ export class WorkerApplicationComponent implements OnInit {
         phonenumber: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         selfdisclosure: ['', Validators.required],
-        // triggerphs: ['', Validators.required]
+        // triggerphs: ['', Validators.required],
+        aliases: this.fb.array([
+        ]),
       }),
-      aliases: this.fb.array([
-      ]),
       addresses: this.fb.array([
       ])
     });
@@ -93,7 +94,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   reloadUser() {
-    this.userDataService.getCurrentUser()
+    this.busy = this.userDataService.getCurrentUser()
       .subscribe((data: User) => {
         this.currentUser = data;
         this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
@@ -123,6 +124,8 @@ export class WorkerApplicationComponent implements OnInit {
             addresses.forEach(address => {
               this.addAddress(address);
             });
+
+            this.saveFormData = this.form.value;
           });
         }
       });
@@ -180,7 +183,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   clearAddresses() {
-    for (let i = this.addresses.controls.length; i > 0;  i--) {
+    for (let i = this.addresses.controls.length; i > 0; i--) {
       this.addresses.removeAt(0);
     }
   }
@@ -198,7 +201,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   clearAliases() {
-    for (let i = this.aliases.controls.length; i > 0;  i--) {
+    for (let i = this.aliases.controls.length; i > 0; i--) {
       this.aliases.removeAt(0);
     }
   }
@@ -217,7 +220,16 @@ export class WorkerApplicationComponent implements OnInit {
     });
   }
 
-  save() {
+  canDeactivate(): Observable<boolean> | boolean {
+    if (JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
+      return true;
+    } else {
+      return this.save();
+    }
+  }
+
+  save(): Subject<boolean> {
+    const subResult = new Subject<boolean>();
     const value = this.form.value;
     const saves = [
       this.contactDataService.updateContact(value.contact),
@@ -262,8 +274,11 @@ export class WorkerApplicationComponent implements OnInit {
       }
     }
 
-    Observable.zip(...saves).subscribe(res => {
+    this.busy = Observable.zip(...saves).subscribe(res => {
+      subResult.next(true);
       this.reloadUser();
-    });
+    }, err => subResult.next(false));
+
+    return subResult;
   }
 }

@@ -32,25 +32,58 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(WorkerController));
         }
 
-
         /// <summary>
-        /// Get a specific worker
+        /// Get a  workers  associated with the contactId
         /// </summary>
         /// <param name="contactId"></param>
         /// <returns></returns>
-        [HttpGet("{contactId}")]
-        public IActionResult GetWorker(string contactId)
+        [HttpGet("contact/{contactId}")]
+        public async Task<IActionResult> GetWorkers(string contactId)
         {
-            ViewModels.Worker result = null;
-
+            List<ViewModels.Worker> results = new List<ViewModels.Worker>();
             if (!string.IsNullOrEmpty(contactId))
             {
                 Guid id = Guid.Parse(contactId);
                 // query the Dynamics system to get the contact record.
                 string filter = $"_adoxio_contactid_value eq {contactId}";
                 var fields = new List<string> { "adoxio_ContactId" };
-                MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
+                List<MicrosoftDynamicsCRMadoxioWorker> workers = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.ToList();
+                if (workers != null)
+                {
+                    workers.ForEach(w =>
+                    {
+                        results.Add(w.ToViewModel());
+                    });
+                }
+                else
+                {
+                    return new NotFoundResult();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+            return Json(results);
+        }
 
+
+        /// <summary>
+        /// Get a specific worker
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWorker(string id)
+        {
+            ViewModels.Worker result = null;
+            if (!string.IsNullOrEmpty(id))
+            {
+                Guid workerId = Guid.Parse(id);
+                // query the Dynamics system to get the contact record.
+                string filter = $"adoxio_workerid eq {id}";
+                var fields = new List<string> { "adoxio_ContactId" };
+                MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
                 if (worker != null)
                 {
                     result = worker.ToViewModel();
@@ -64,7 +97,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-
             return Json(result);
         }
 
@@ -76,18 +108,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-          public async Task<IActionResult> UpdateWorker([FromBody] ViewModels.Worker item, string id)
-        {            
+        public async Task<IActionResult> UpdateWorker([FromBody] ViewModels.Worker item, string id)
+        {
             if (id != null && item.id != null && id != item.id)
             {
                 return BadRequest();
             }
-            
+
             // get the contact
             Guid workerId = Guid.Parse(id);
-            
-            MicrosoftDynamicsCRMadoxioWorker worker = await _dynamicsClient.GetWorkerById(Guid.Parse(item.id));
 
+            MicrosoftDynamicsCRMadoxioWorker worker = await _dynamicsClient.GetWorkerById(Guid.Parse(item.id));
             if (worker == null)
             {
                 return new NotFoundResult();
@@ -96,10 +127,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             patchWorker.CopyValues(item);
             try
             {
-                if (patchWorker.AdoxioGendercode == 0)
-                {
-                    patchWorker.AdoxioGendercode = null;
-                }
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
             catch (OdataerrorException odee)
@@ -109,8 +136,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
-            }            
-
+            }
             worker = await _dynamicsClient.GetWorkerById(workerId);
             return Json(worker.ToViewModel());
         }
@@ -123,23 +149,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateWorker([FromBody] ViewModels.Worker item)
         {
-
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-
             // create a new worker.
             MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
             worker.CopyValues(item);
-
-            if(item?.contact?.id == null)
+            if (item?.contact?.id == null)
             {
                 return BadRequest();
             }
-
             try
             {
-
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
@@ -153,13 +174,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
             }
-
             return Json(worker);
         }
 
 
         /// <summary>
-        /// Delete an Address.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        /// Delete a Worker.  Using a HTTP Post to avoid Siteminder issues with DELETE
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -171,9 +191,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-
             await _dynamicsClient.Workers.DeleteAsync(id);
-
             return NoContent(); // 204
         }
     }
