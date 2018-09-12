@@ -86,6 +86,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenses Licenses { get; private set; }
 
         /// <summary>
+        /// Gets the IPersonalhistorysummaries.
+        /// </summary>
+        public virtual IPersonalhistorysummaries Personalhistorysummaries { get; private set; }
+
+        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         public virtual IPolicydocuments Policydocuments { get; private set; }
@@ -385,6 +390,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Adoxiolegalentities = new Adoxiolegalentities(this);
             AdoxioLicencetypes = new AdoxioLicencetypes(this);
             Licenses = new Licenses(this);
+            Personalhistorysummaries = new Personalhistorysummaries(this);
             Policydocuments = new Policydocuments(this);
             Previousaddresses = new Previousaddresses(this);
             Spddatarows = new Spddatarows(this);
