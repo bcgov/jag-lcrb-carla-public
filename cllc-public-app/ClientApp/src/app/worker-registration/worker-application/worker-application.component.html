@@ -75,11 +75,14 @@
 
       <div formArrayName="aliases">
         <div *ngFor="let alias of aliases.controls; let i = index">
+          <hr>
           <div [formGroupName]="i">
-            <h3>PREVIOUS NAME {{i == 0 ? '' : i + 1}} <i class="fa fa-trash" style="float: right;  cursor: pointer; margin-right: 100px;"
-                (click)="deleteAlias(i)" aria-hidden="true"></i></h3>
-            <!-- <button class="btn btn-primary" (click)="deleteAlias(i)">Delete Alias
-              </button> -->
+            <h3>PREVIOUS NAME {{i == 0 ? '' : i + 1}}
+              <button class="btn btn-secondary" style="float: right;" (click)="deleteAlias(i)">
+                <i class="fa fa-trash"></i>
+                DELETE NAME
+              </button>
+            </h3>
             <section>
               <div [ngClass]="{'has-error': !alias.get('firstname').valid && alias.get('firstname').touched}">
                 <label>First Name</label>
@@ -458,8 +461,12 @@
       </section>
       <div *ngFor="let address of addresses.controls; let i = index">
         <div [formGroupName]="i">
-          <h3>PAST ADDRESS {{i + 1}} <i class="fa fa-trash" style="float: right; margin-right: 100px; cursor: pointer;" (click)="deleteAddress(i)"
-              aria-hidden="true"></i></h3>
+          <h3>PAST ADDRESS {{i + 1}} 
+              <button class="btn btn-secondary" style="float: right;" (click)="deleteAddress(i)">
+                  <i class="fa fa-trash"></i>
+                  DELETE ADDRESS
+                </button>
+            </h3>
           <section>
             <div [ngClass]="{'has-error': !address.get('streetaddress').valid && address.get('streetaddress').touched}">
               <label>Street</label>
@@ -557,12 +564,13 @@
         </div>
         <hr>
       </div>
-      <button *ngIf="addresses.controls.length < 9" class="btn btn-primary" (click)="addAddress()" style="float: right;">ADD ANOTHER ADDRESS</button>
+      <button *ngIf="addresses.controls.length < 9" class="btn btn-primary" (click)="addAddress()" style="float: right;">ADD
+        ANOTHER ADDRESS</button>
       <div style="clear: both;"></div>
       <p></p>
     </div>
-    <section *ngIf="!validatePastAddresses() || !form.valid" style="color: #A12622">
-        <i class="fas fa-exclamation-triangle"></i> Some required fields have not been completed.
+    <section *ngIf="!form.valid" style="color: #A12622">
+      <i class="fas fa-exclamation-triangle"></i> Some required fields have not been completed.
     </section>
     <section>
       <span style="float: right;">
