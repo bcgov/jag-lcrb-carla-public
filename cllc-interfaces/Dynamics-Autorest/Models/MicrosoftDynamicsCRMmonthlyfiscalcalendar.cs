@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// monthlyfiscalcalendar
+    /// </summary>
     public partial class MicrosoftDynamicsCRMmonthlyfiscalcalendar
     {
         /// <summary>
@@ -26,55 +29,55 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmonthlyfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), string _businessunitidValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _salespersonidValue = default(string), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), double? exchangerate = default(double?), int? fiscalperiodtype = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), double? month1 = default(double?), double? month10 = default(double?), double? month10Base = default(double?), double? month11 = default(double?), double? month11Base = default(double?), double? month12 = default(double?), double? month12Base = default(double?), double? month1Base = default(double?), double? month2 = default(double?), double? month2Base = default(double?), double? month3 = default(double?), double? month3Base = default(double?), double? month4 = default(double?), double? month4Base = default(double?), double? month5 = default(double?), double? month5Base = default(double?), double? month6 = default(double?), double? month6Base = default(double?), double? month7 = default(double?), double? month7Base = default(double?), double? month8 = default(double?), double? month8Base = default(double?), double? month9 = default(double?), double? month9Base = default(double?), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), string userfiscalcalendarid = default(string), int? utcconversiontimezonecode = default(int?))
+        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(object month8 = default(object), object month12Base = default(object), object month10Base = default(object), object exchangerate = default(object), string _createdonbehalfbyValue = default(string), object month6Base = default(object), object month9Base = default(object), string _salespersonidValue = default(string), object month9 = default(object), int? fiscalperiodtype = default(int?), object month4Base = default(object), string _createdbyValue = default(string), object month3Base = default(object), object month12 = default(object), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), int? utcconversiontimezonecode = default(int?), object month11Base = default(object), object month2 = default(object), string _modifiedbyValue = default(string), object month5 = default(object), object month7 = default(object), object month1 = default(object), object month6 = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), object month11 = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), object month8Base = default(object), object month7Base = default(object), object month10 = default(object), object month5Base = default(object), object month2Base = default(object), object month3 = default(object), object month1Base = default(object), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), object month4 = default(object), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            MonthlyFiscalCalendarAsyncOperations = monthlyFiscalCalendarAsyncOperations;
-            MonthlyFiscalCalendarBulkDeleteFailures = monthlyFiscalCalendarBulkDeleteFailures;
-            this._businessunitidValue = _businessunitidValue;
-            this._createdbyValue = _createdbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._salespersonidValue = _salespersonidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Createdby = createdby;
-            Createdon = createdon;
-            Createdonbehalfby = createdonbehalfby;
-            Effectiveon = effectiveon;
-            Exchangerate = exchangerate;
-            Fiscalperiodtype = fiscalperiodtype;
-            Modifiedby = modifiedby;
-            Modifiedon = modifiedon;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Month1 = month1;
-            Month10 = month10;
-            Month10Base = month10Base;
-            Month11 = month11;
-            Month11Base = month11Base;
-            Month12 = month12;
+            Month8 = month8;
             Month12Base = month12Base;
-            Month1Base = month1Base;
+            Month10Base = month10Base;
+            Exchangerate = exchangerate;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Month6Base = month6Base;
+            Month9Base = month9Base;
+            this._salespersonidValue = _salespersonidValue;
+            Month9 = month9;
+            Fiscalperiodtype = fiscalperiodtype;
+            Month4Base = month4Base;
+            this._createdbyValue = _createdbyValue;
+            Month3Base = month3Base;
+            Month12 = month12;
+            Userfiscalcalendarid = userfiscalcalendarid;
+            this._businessunitidValue = _businessunitidValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Month11Base = month11Base;
             Month2 = month2;
+            this._modifiedbyValue = _modifiedbyValue;
+            Month5 = month5;
+            Month7 = month7;
+            Month1 = month1;
+            Month6 = month6;
+            Modifiedon = modifiedon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Month11 = month11;
+            Createdon = createdon;
+            Effectiveon = effectiveon;
+            Month8Base = month8Base;
+            Month7Base = month7Base;
+            Month10 = month10;
+            Month5Base = month5Base;
             Month2Base = month2Base;
             Month3 = month3;
-            Month3Base = month3Base;
+            Month1Base = month1Base;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Month4 = month4;
-            Month4Base = month4Base;
-            Month5 = month5;
-            Month5Base = month5Base;
-            Month6 = month6;
-            Month6Base = month6Base;
-            Month7 = month7;
-            Month7Base = month7Base;
-            Month8 = month8;
-            Month8Base = month8Base;
-            Month9 = month9;
-            Month9Base = month9Base;
+            Modifiedby = modifiedby;
+            Modifiedonbehalfby = modifiedonbehalfby;
             Salespersonid = salespersonid;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            MonthlyFiscalCalendarAsyncOperations = monthlyFiscalCalendarAsyncOperations;
             Transactioncurrencyid = transactioncurrencyid;
-            Userfiscalcalendarid = userfiscalcalendarid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Createdby = createdby;
+            MonthlyFiscalCalendarBulkDeleteFailures = monthlyFiscalCalendarBulkDeleteFailures;
+            Createdonbehalfby = createdonbehalfby;
             CustomInit();
         }
 
@@ -85,23 +88,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "MonthlyFiscalCalendar_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> MonthlyFiscalCalendarAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "month8")]
+        public object Month8 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "MonthlyFiscalCalendar_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> MonthlyFiscalCalendarBulkDeleteFailures { get; set; }
+        [JsonProperty(PropertyName = "month12_base")]
+        public object Month12Base { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
+        [JsonProperty(PropertyName = "month10_base")]
+        public object Month10Base { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,13 +113,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "month6_base")]
+        public object Month6Base { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "month9_base")]
+        public object Month9Base { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,33 +128,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "effectiveon")]
-        public System.DateTimeOffset? Effectiveon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public double? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "month9")]
+        public object Month9 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,153 +138,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+        [JsonProperty(PropertyName = "month4_base")]
+        public object Month4Base { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month1")]
-        public double? Month1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month10")]
-        public double? Month10 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month10_base")]
-        public double? Month10Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month11")]
-        public double? Month11 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month11_base")]
-        public double? Month11Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month12")]
-        public double? Month12 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month12_base")]
-        public double? Month12Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month1_base")]
-        public double? Month1Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month2")]
-        public double? Month2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month2_base")]
-        public double? Month2Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month3")]
-        public double? Month3 { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "month3_base")]
-        public double? Month3Base { get; set; }
+        public object Month3Base { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "month4")]
-        public double? Month4 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month4_base")]
-        public double? Month4Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month5")]
-        public double? Month5 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month5_base")]
-        public double? Month5Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month6")]
-        public double? Month6 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month6_base")]
-        public double? Month6Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month7")]
-        public double? Month7 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month7_base")]
-        public double? Month7Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month8")]
-        public double? Month8 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month8_base")]
-        public double? Month8Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month9")]
-        public double? Month9 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "month9_base")]
-        public double? Month9Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "salespersonid")]
-        public MicrosoftDynamicsCRMsystemuser Salespersonid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+        [JsonProperty(PropertyName = "month12")]
+        public object Month12 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -315,8 +163,163 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_businessunitid_value")]
+        public string _businessunitidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month11_base")]
+        public object Month11Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month2")]
+        public object Month2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month5")]
+        public object Month5 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month7")]
+        public object Month7 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month1")]
+        public object Month1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month6")]
+        public object Month6 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month11")]
+        public object Month11 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "effectiveon")]
+        public System.DateTimeOffset? Effectiveon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month8_base")]
+        public object Month8Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month7_base")]
+        public object Month7Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month10")]
+        public object Month10 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month5_base")]
+        public object Month5Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month2_base")]
+        public object Month2Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month3")]
+        public object Month3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month1_base")]
+        public object Month1Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month4")]
+        public object Month4 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "salespersonid")]
+        public MicrosoftDynamicsCRMsystemuser Salespersonid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "MonthlyFiscalCalendar_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> MonthlyFiscalCalendarAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "MonthlyFiscalCalendar_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> MonthlyFiscalCalendarBulkDeleteFailures { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
 
     }
 }

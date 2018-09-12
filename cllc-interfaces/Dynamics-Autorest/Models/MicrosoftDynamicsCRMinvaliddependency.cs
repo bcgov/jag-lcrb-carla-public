@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// invaliddependency
+    /// </summary>
     public partial class MicrosoftDynamicsCRMinvaliddependency
     {
         /// <summary>
@@ -24,17 +27,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMinvaliddependency class.
         /// </summary>
-        public MicrosoftDynamicsCRMinvaliddependency(string existingcomponentid = default(string), int? existingcomponenttype = default(int?), int? existingdependencytype = default(int?), string invaliddependencyid = default(string), bool? isexistingnoderequiredcomponent = default(bool?), string missingcomponentid = default(string), string missingcomponentinfo = default(string), int? missingcomponentlookuptype = default(int?), int? missingcomponenttype = default(int?))
+        public MicrosoftDynamicsCRMinvaliddependency(int? existingcomponenttype = default(int?), int? existingdependencytype = default(int?), string missingcomponentid = default(string), int? missingcomponentlookuptype = default(int?), string invaliddependencyid = default(string), string missingcomponentinfo = default(string), bool? isexistingnoderequiredcomponent = default(bool?), int? missingcomponenttype = default(int?), string existingcomponentid = default(string))
         {
-            Existingcomponentid = existingcomponentid;
             Existingcomponenttype = existingcomponenttype;
             Existingdependencytype = existingdependencytype;
-            Invaliddependencyid = invaliddependencyid;
-            Isexistingnoderequiredcomponent = isexistingnoderequiredcomponent;
             Missingcomponentid = missingcomponentid;
-            Missingcomponentinfo = missingcomponentinfo;
             Missingcomponentlookuptype = missingcomponentlookuptype;
+            Invaliddependencyid = invaliddependencyid;
+            Missingcomponentinfo = missingcomponentinfo;
+            Isexistingnoderequiredcomponent = isexistingnoderequiredcomponent;
             Missingcomponenttype = missingcomponenttype;
+            Existingcomponentid = existingcomponentid;
             CustomInit();
         }
 
@@ -42,11 +45,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "existingcomponentid")]
-        public string Existingcomponentid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -60,23 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "invaliddependencyid")]
-        public string Invaliddependencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isexistingnoderequiredcomponent")]
-        public bool? Isexistingnoderequiredcomponent { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "missingcomponentid")]
         public string Missingcomponentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "missingcomponentinfo")]
-        public string Missingcomponentinfo { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,8 +68,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "invaliddependencyid")]
+        public string Invaliddependencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "missingcomponentinfo")]
+        public string Missingcomponentinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isexistingnoderequiredcomponent")]
+        public bool? Isexistingnoderequiredcomponent { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "missingcomponenttype")]
         public int? Missingcomponenttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "existingcomponentid")]
+        public string Existingcomponentid { get; set; }
 
     }
 }

@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// opportunitycompetitors
+    /// </summary>
     public partial class MicrosoftDynamicsCRMopportunitycompetitors
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMopportunitycompetitors class.
         /// </summary>
-        public MicrosoftDynamicsCRMopportunitycompetitors(string competitorid = default(string), string opportunitycompetitorid = default(string), string opportunityid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMopportunitycompetitors(string opportunitycompetitorid = default(string), long? versionnumber = default(long?), string opportunityid = default(string), string competitorid = default(string))
         {
-            Competitorid = competitorid;
             Opportunitycompetitorid = opportunitycompetitorid;
-            Opportunityid = opportunityid;
             Versionnumber = versionnumber;
+            Opportunityid = opportunityid;
+            Competitorid = competitorid;
             CustomInit();
         }
 
@@ -40,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "competitorid")]
-        public string Competitorid { get; set; }
+        [JsonProperty(PropertyName = "opportunitycompetitorid")]
+        public string Opportunitycompetitorid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "opportunitycompetitorid")]
-        public string Opportunitycompetitorid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "competitorid")]
+        public string Competitorid { get; set; }
 
     }
 }

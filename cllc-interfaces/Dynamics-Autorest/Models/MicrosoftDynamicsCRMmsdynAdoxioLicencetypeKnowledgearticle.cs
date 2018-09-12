@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// msdyn_adoxio_licencetype_knowledgearticle
+    /// </summary>
     public partial class MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle
     {
         /// <summary>
@@ -24,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle(string adoxioLicencetypeid = default(string), string knowledgearticleid = default(string), string msdynAdoxioLicencetypeKnowledgearticleid = default(string), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle(long? versionnumber = default(long?), string msdynAdoxioLicencetypeKnowledgearticleid = default(string), string knowledgearticleid = default(string), string adoxioLicencetypeid = default(string))
         {
-            AdoxioLicencetypeid = adoxioLicencetypeid;
-            Knowledgearticleid = knowledgearticleid;
-            MsdynAdoxioLicencetypeKnowledgearticleid = msdynAdoxioLicencetypeKnowledgearticleid;
             Versionnumber = versionnumber;
+            MsdynAdoxioLicencetypeKnowledgearticleid = msdynAdoxioLicencetypeKnowledgearticleid;
+            Knowledgearticleid = knowledgearticleid;
+            AdoxioLicencetypeid = adoxioLicencetypeid;
             CustomInit();
         }
 
@@ -40,13 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "knowledgearticleid")]
-        public string Knowledgearticleid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,8 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "knowledgearticleid")]
+        public string Knowledgearticleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
     }
 }

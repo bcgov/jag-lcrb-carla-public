@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMCalculateActualValueOpportunityResponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMCalculateActualValueOpportunityResponse(double? value = default(double?))
+        public MicrosoftDynamicsCRMCalculateActualValueOpportunityResponse(object value = default(object))
         {
             Value = value;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Value")]
-        public double? Value { get; set; }
+        public object Value { get; set; }
 
     }
 }

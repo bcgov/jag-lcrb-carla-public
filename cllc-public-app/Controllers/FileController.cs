@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _httpContextAccessor = httpContextAccessor;
             _sharePointFileManager = sharePointFileManager;
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
+            _logger = loggerFactory.CreateLogger(typeof(FileController));
         }
 
 
@@ -140,13 +140,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             var result = false;
             var id = Guid.Parse(entityId);
-            switch(entityName.ToLower())
+            switch (entityName.ToLower())
             {
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(id);
                     result = application != null && CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue);
                     break;
-                    case "contact":
+                case "contact":
                     var contact = await _dynamicsClient.GetContactById(id);
                     result = contact != null && CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
                     break;
@@ -155,6 +155,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             return result;
         }
+        private async Task<bool> CanAccessEntityFile(string entityName, string entityId, string documentType, string serverRelativeUrl)
+        {
+            var result = await CanAccessEntity(entityName, entityId);
+            //get list of files for entity
+            var files = await getFileDetailsListInFolder(entityId, entityName, documentType);
+            //confirm the serverRelativeUrl is in one of the files
+            var hasFile = files.Any(f => f.serverrelativeurl == serverRelativeUrl);
+            return result && hasFile;
+        }
+
 
         private async Task<string> GetFolderName(string entityName, string entityId, string documentType)
         {
@@ -168,7 +178,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(Guid.Parse(entityId));
-                    var cleanId= contact.Contactid.ToString().ToUpper().Replace("-", "");
+                    var cleanId = contact.Contactid.ToString().ToUpper().Replace("-", "");
                     folderName = GetContactFolderName(contact);
                     break;
                 default:
@@ -232,17 +242,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("{entityId}/download-file/{entityName}/{fileName}")]
-        public async Task<IActionResult> DownloadFile(string entityId, string entityName, [FromQuery]string serverRelativeUrl)
+        public async Task<IActionResult> DownloadFile(string entityId, string entityName, [FromQuery]string serverRelativeUrl, [FromQuery]string documentType)
         {
             // get the file.
-            if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName))
+            if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(documentType) || string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName))
             {
                 return BadRequest();
             }
 
             ValidateSession();
 
-            var hasAccess = await CanAccessEntity(entityName, entityId);
+            var hasAccess = await CanAccessEntityFile(entityName, entityId, documentType, serverRelativeUrl);
             if (!hasAccess)
             {
                 return new NotFoundResult();
@@ -267,6 +277,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{entityId}/attachments/{entityName}/{documentType}")]
         public async Task<IActionResult> GetFileDetailsListInFolder([FromRoute] string entityId, [FromRoute] string entityName, [FromRoute] string documentType)
         {
+            if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
+            {
+                return BadRequest();
+            }
+
+            ValidateSession();
+
+            List<ViewModels.FileSystemItem> fileSystemItemVMList = await getFileDetailsListInFolder(entityId, entityName, documentType);
+
+            var hasAccess = await CanAccessEntity(entityName, entityId);
+            if (!hasAccess)
+            {
+                return new NotFoundResult();
+            }
+
+            return Json(fileSystemItemVMList);
+        }
+
+        private async Task<List<ViewModels.FileSystemItem>> getFileDetailsListInFolder(string entityId, string entityName, string documentType)
+        {
             List<ViewModels.FileSystemItem> fileSystemItemVMList = new List<ViewModels.FileSystemItem>();
 
             ValidateSession();
@@ -275,56 +305,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
-                return BadRequest();
-            }
-
-            var hasAccess = await CanAccessEntity(entityName, entityId);
-            if (!hasAccess)
-            {
-                return new NotFoundResult();
+                return fileSystemItemVMList;
             }
 
             string folderName = await GetFolderName(entityName, entityId, documentType); ;
-                // Get the file details list in folder
-                List<FileDetailsList> fileDetailsList = null;
-                try
-                {
-                    fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentListTitle(entityName), folderName, documentType);
-                }
-                catch (SharePointRestException spre)
-                {
-                    _logger.LogError("Error getting SharePoint File List");
-                    _logger.LogError("Request URI:");
-                    _logger.LogError(spre.Request.RequestUri.ToString());
-                    _logger.LogError("Response:");
-                    _logger.LogError(spre.Response.Content);
-                    throw new Exception("Unable to get Sharepoint File List.");
-                }
-
-                if (fileDetailsList != null)
-                {
-                    foreach (FileDetailsList fileDetails in fileDetailsList)
-                    {
-                        ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
-                        // remove the document type text from file name
-                        fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2);
-                        // convert size from bytes (original) to KB
-                        fileSystemItemVM.size = int.Parse(fileDetails.Length);
-                        fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
-                        fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
-                        fileSystemItemVM.documenttype = fileDetails.DocumentType;
-                        fileSystemItemVMList.Add(fileSystemItemVM);
-                    }
-                }
-            
-
-            else
+            // Get the file details list in folder
+            List<FileDetailsList> fileDetailsList = null;
+            try
             {
-                _logger.LogError("Application not found.");
-                return new NotFoundResult();
+                fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentListTitle(entityName), folderName, documentType);
+            }
+            catch (SharePointRestException spre)
+            {
+                _logger.LogError("Error getting SharePoint File List");
+                _logger.LogError("Request URI:");
+                _logger.LogError(spre.Request.RequestUri.ToString());
+                _logger.LogError("Response:");
+                _logger.LogError(spre.Response.Content);
+                throw new Exception("Unable to get Sharepoint File List.");
             }
 
-            return Json(fileSystemItemVMList);
+            if (fileDetailsList != null)
+            {
+                foreach (FileDetailsList fileDetails in fileDetailsList)
+                {
+                    ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
+                    // remove the document type text from file name
+                    fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2);
+                    // convert size from bytes (original) to KB
+                    fileSystemItemVM.size = int.Parse(fileDetails.Length);
+                    fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
+                    fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
+                    fileSystemItemVM.documenttype = fileDetails.DocumentType;
+                    fileSystemItemVMList.Add(fileSystemItemVM);
+                }
+            }
+
+            return fileSystemItemVMList;
         }
 
 
@@ -352,17 +369,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="serverRelativeUrl">The ServerRelativeUrl to delete</param>
         /// <returns></returns>
         [HttpDelete("{entityId}/attachments/{entityName}")]
-        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromRoute] string entityId, [FromRoute] string entityName)
+        public async Task<IActionResult> DeleteFile([FromQuery] string serverRelativeUrl, [FromQuery] string documentType, [FromRoute] string entityId, [FromRoute] string entityName)
         {
             // get the file.
-            if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(serverRelativeUrl))
+            if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(documentType))
             {
                 return BadRequest();
             }
 
             ValidateSession();
 
-            var hasAccess = await CanAccessEntity(entityName, entityId);
+            var hasAccess = await CanAccessEntityFile(entityName, entityId, documentType, serverRelativeUrl);
             if (!hasAccess)
             {
                 return new NotFoundResult();

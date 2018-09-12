@@ -53,10 +53,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 'EqualUserOrUserHierarchy', 'EqualUserOrUserHierarchyAndTeams',
         /// 'OlderThanXYears', 'OlderThanXWeeks', 'OlderThanXDays',
         /// 'OlderThanXHours', 'OlderThanXMinutes'</param>
-        public MicrosoftDynamicsCRMConditionExpression(string attributeName = default(string), string entityName = default(string), string operatorProperty = default(string), IList<object> values = default(IList<object>))
+        public MicrosoftDynamicsCRMConditionExpression(string entityName = default(string), string attributeName = default(string), string operatorProperty = default(string), IList<object> values = default(IList<object>))
         {
-            AttributeName = attributeName;
             EntityName = entityName;
+            AttributeName = attributeName;
             OperatorProperty = operatorProperty;
             Values = values;
             CustomInit();
@@ -69,13 +69,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "AttributeName")]
-        public string AttributeName { get; set; }
+        [JsonProperty(PropertyName = "EntityName")]
+        public string EntityName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "EntityName")]
-        public string EntityName { get; set; }
+        [JsonProperty(PropertyName = "AttributeName")]
+        public string AttributeName { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Equal', 'NotEqual',

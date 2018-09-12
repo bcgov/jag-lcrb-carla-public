@@ -9,7 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class MicrosoftDynamicsCRMOneToManyRelationshipMetadata : MicrosoftDynamicsCRMRelationshipMetadataBase
+    /// <summary>
+    /// OneToManyRelationshipMetadata
+    /// </summary>
+    public partial class MicrosoftDynamicsCRMOneToManyRelationshipMetadata
     {
         /// <summary>
         /// Initializes a new instance of the
@@ -24,23 +27,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOneToManyRelationshipMetadata class.
         /// </summary>
-        /// <param name="relationshipType">Possible values include:
-        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
-        /// <param name="securityTypes">Possible values include: 'None',
-        /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
-        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(bool? hasChanged = default(bool?), string metadataId = default(string), string introducedVersion = default(string), bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), bool? isValidForAdvancedFind = default(bool?), string relationshipType = default(string), string schemaName = default(string), string securityTypes = default(string), MicrosoftDynamicsCRMAssociatedMenuConfiguration associatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMCascadeConfiguration cascadeConfiguration = default(MicrosoftDynamicsCRMCascadeConfiguration), bool? isHierarchical = default(bool?), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata), string referencedAttribute = default(string), string referencedEntity = default(string), string referencedEntityNavigationPropertyName = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), string referencingEntityNavigationPropertyName = default(string))
-            : base(hasChanged, metadataId, introducedVersion, isCustomRelationship, isCustomizable, isManaged, isValidForAdvancedFind, relationshipType, schemaName, securityTypes)
+        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(MicrosoftDynamicsCRMAssociatedMenuConfiguration associatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMCascadeConfiguration cascadeConfiguration = default(MicrosoftDynamicsCRMCascadeConfiguration), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata))
         {
             AssociatedMenuConfiguration = associatedMenuConfiguration;
             CascadeConfiguration = cascadeConfiguration;
-            IsHierarchical = isHierarchical;
-            Lookup = lookup;
             ReferencedAttribute = referencedAttribute;
             ReferencedEntity = referencedEntity;
-            ReferencedEntityNavigationPropertyName = referencedEntityNavigationPropertyName;
             ReferencingAttribute = referencingAttribute;
             ReferencingEntity = referencingEntity;
+            IsHierarchical = isHierarchical;
+            ReferencedEntityNavigationPropertyName = referencedEntityNavigationPropertyName;
             ReferencingEntityNavigationPropertyName = referencingEntityNavigationPropertyName;
+            Lookup = lookup;
             CustomInit();
         }
 
@@ -61,16 +59,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "IsHierarchical")]
-        public bool? IsHierarchical { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "Lookup")]
-        public MicrosoftDynamicsCRMLookupAttributeMetadata Lookup { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ReferencedAttribute")]
         public string ReferencedAttribute { get; set; }
 
@@ -78,11 +66,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ReferencedEntity")]
         public string ReferencedEntity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ReferencedEntityNavigationPropertyName")]
-        public string ReferencedEntityNavigationPropertyName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -96,8 +79,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "IsHierarchical")]
+        public bool? IsHierarchical { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ReferencedEntityNavigationPropertyName")]
+        public string ReferencedEntityNavigationPropertyName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ReferencingEntityNavigationPropertyName")]
         public string ReferencingEntityNavigationPropertyName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Lookup")]
+        public MicrosoftDynamicsCRMLookupAttributeMetadata Lookup { get; set; }
 
     }
 }

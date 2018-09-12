@@ -9,6 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// subscriptionmanuallytrackedobject
+    /// </summary>
     public partial class MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject
     {
         /// <summary>
@@ -24,14 +27,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject(string objectid = default(string), string objecttypecode = default(string), string subscriptionid = default(string), string subscriptionmanuallytrackedobjectid = default(string), bool? track = default(bool?), object versionnumber = default(object))
+        public MicrosoftDynamicsCRMsubscriptionmanuallytrackedobject(long? versionnumber = default(long?), string subscriptionmanuallytrackedobjectid = default(string), string subscriptionid = default(string), string objecttypecode = default(string), bool? track = default(bool?), string objectid = default(string))
         {
-            Objectid = objectid;
-            Objecttypecode = objecttypecode;
-            Subscriptionid = subscriptionid;
-            Subscriptionmanuallytrackedobjectid = subscriptionmanuallytrackedobjectid;
-            Track = track;
             Versionnumber = versionnumber;
+            Subscriptionmanuallytrackedobjectid = subscriptionmanuallytrackedobjectid;
+            Subscriptionid = subscriptionid;
+            Objecttypecode = objecttypecode;
+            Track = track;
+            Objectid = objectid;
             CustomInit();
         }
 
@@ -42,18 +45,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objectid")]
-        public string Objectid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public string Objecttypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subscriptionid")]
-        public string Subscriptionid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -62,13 +55,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "subscriptionid")]
+        public string Subscriptionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "track")]
         public bool? Track { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public object Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "objectid")]
+        public string Objectid { get; set; }
 
     }
 }

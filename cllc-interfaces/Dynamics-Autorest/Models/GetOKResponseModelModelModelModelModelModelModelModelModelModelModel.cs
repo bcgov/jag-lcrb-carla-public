@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_tiedhouseconnections
+    /// Collection of adoxio_previousaddresses
     /// </summary>
     public partial class GetOKResponseModelModelModelModelModelModelModelModelModelModelModel
     {
@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModel
         /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> value = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioPreviousaddress> value = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>))
         {
             Value = value;
             CustomInit();
@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> Value { get; set; }
 
     }
 }

@@ -27,13 +27,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMProposalParty
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMProposalParty(string displayName = default(string), double? effortRequired = default(double?), string entityName = default(string), string resourceId = default(string), string resourceSpecId = default(string))
+        public MicrosoftDynamicsCRMProposalParty(string resourceId = default(string), string resourceSpecId = default(string), string displayName = default(string), string entityName = default(string), double? effortRequired = default(double?))
         {
-            DisplayName = displayName;
-            EffortRequired = effortRequired;
-            EntityName = entityName;
             ResourceId = resourceId;
             ResourceSpecId = resourceSpecId;
+            DisplayName = displayName;
+            EntityName = entityName;
+            EffortRequired = effortRequired;
             CustomInit();
         }
 
@@ -44,13 +44,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "DisplayName")]
-        public string DisplayName { get; set; }
+        [JsonProperty(PropertyName = "ResourceId")]
+        public string ResourceId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "EffortRequired")]
-        public double? EffortRequired { get; set; }
+        [JsonProperty(PropertyName = "ResourceSpecId")]
+        public string ResourceSpecId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "DisplayName")]
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -59,13 +64,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ResourceId")]
-        public string ResourceId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ResourceSpecId")]
-        public string ResourceSpecId { get; set; }
+        [JsonProperty(PropertyName = "EffortRequired")]
+        public double? EffortRequired { get; set; }
 
     }
 }
