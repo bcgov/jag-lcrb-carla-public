@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             var csvList = new List<List<string>>();
             var headers = new List<string>();
-            var headerDefinition = GetExportHeadersIndividual();
+            var headerDefinition = GetExportHeadersWorker();
             headerDefinition.ForEach(h =>
             {
                 headers.Add($"\"{h.Value}\"");
@@ -305,12 +305,13 @@ namespace Gov.Lclb.Cllb.SpdSync
             return emailSentSuccessfully;
         }
 
-        private List<KeyValuePair<string, string>> GetExportHeadersIndividual()
+        private List<KeyValuePair<string, string>> GetExportHeadersWorker()
         {
             var result = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("AdoxioLcrbbusinessjobid", "LCRB BUSINESS JOB ID"),
-                new KeyValuePair<string, string>("AdoxioLcrbassociatejobid", "LCRB ASSOCIATE JOB ID"),
+                new KeyValuePair<string, string>("AdoxioLcrbbusinessjobid", "LCRB BUSINESS JOB ID"),                
+                // 9-12-18 Substituted AdoxioLcrbassociatejobid for AdoxioLcrbworkerjobid to fix blank fields in export.
+                new KeyValuePair<string, string>("AdoxioLcrbworkerjobid", "LCRB ASSOCIATE JOB ID"),
                 // 9-12-18 - BC Registries number is no longer required for individuals (only business records, which are not yet part of the export)
                 // new KeyValuePair<string, string>("AdoxioBcregistriesnumber", "Bcregistriesnumber"),
                 new KeyValuePair<string, string>("AdoxioSelfdisclosure", "SELF-DISCLOSURE YN"),

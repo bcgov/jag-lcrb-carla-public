@@ -288,9 +288,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            // Update modifiedon to current time
-            UpdateEntityModifiedOnDate(entityName, entityId);
-
             byte[] fileContents = await _sharePointFileManager.DownloadFile(serverRelativeUrl);
             return new FileContentResult(fileContents, "application/octet-stream")
             {
@@ -359,14 +356,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (FileDetailsList fileDetails in fileDetailsList)
                 {
-                    ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem();
-                    // remove the document type text from file name
-                    fileSystemItemVM.name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2);
-                    // convert size from bytes (original) to KB
-                    fileSystemItemVM.size = int.Parse(fileDetails.Length);
-                    fileSystemItemVM.serverrelativeurl = fileDetails.ServerRelativeUrl;
-                    fileSystemItemVM.timelastmodified = DateTime.Parse(fileDetails.TimeLastModified);
-                    fileSystemItemVM.documenttype = fileDetails.DocumentType;
+                    ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem()
+                    {
+                        // remove the document type text from file name
+                        name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2),
+                        // convert size from bytes (original) to KB
+                        size = int.Parse(fileDetails.Length),
+                        serverrelativeurl = fileDetails.ServerRelativeUrl,
+                        timelastmodified = DateTime.Parse(fileDetails.TimeLastModified),
+                        documenttype = fileDetails.DocumentType
+                    };
+                    
                     fileSystemItemVMList.Add(fileSystemItemVM);
                 }
             }
