@@ -4,7 +4,7 @@ import { UserDataService } from '../../services/user-data.service';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { User } from '../../models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -17,6 +17,7 @@ import { FileUploaderComponent } from '../../file-uploader/file-uploader.compone
 })
 export class SpdConsentComponent implements OnInit {
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('name') nameInputRef: NgForm;
   currentUser: any;
   workerId: string;
   form: FormGroup;
@@ -30,7 +31,6 @@ export class SpdConsentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private paymentDataService: PaymentDataService,
     private workerDataService: WorkerDataService,
     private userDataService: UserDataService,
     private router: Router,
@@ -65,23 +65,34 @@ export class SpdConsentComponent implements OnInit {
   isValid(): boolean {
     this.showValidationMessages = false;
     let valid = true;
-    this.validationMessages = [];
-    if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
+    if (!this.isFileUploadValid()) {
       valid = false;
-      this.validationMessages.push('Signature form is required.');
     }
-    if (!this.signName || !this.consentToCollection || !this.infoAccurate) {
+    if (!this.isDeclarationValid()) {
       valid = false;
-      this.validationMessages.push('Please complete the "Declaration and Consent" section');
     }
-    if (!(this.form.value.selfdisclosure === true || this.form.value.selfdisclosure === false)) {
+    if (!this.isCriminalBackgroundValid()) {
       valid = false;
-      this.validationMessages.push('Please complete the "Criminal Background" section');
-
     }
 
     return valid;
   }
+
+  isCriminalBackgroundValid(): boolean {
+    const valid = (this.form.value.selfdisclosure === true || this.form.value.selfdisclosure === false);
+    return valid;
+  }
+
+  isDeclarationValid(): boolean {
+    const valid = !!(this.signName && this.consentToCollection && this.infoAccurate);
+    return valid;
+  }
+
+  isFileUploadValid(): boolean {
+    const valid = !!(this.mainForm && this.mainForm.files && this.mainForm.files.length > 0);
+    return valid;
+  }
+
 
   formValid() {
     return this.infoAccurate
@@ -103,10 +114,10 @@ export class SpdConsentComponent implements OnInit {
     const subResult = new Subject<boolean>();
     const worker = this.form.value;
 
-    this.busy = this.workerDataService.updateWorker(worker, worker.id).subscribe(res => {
+    this.busy = this.workerDataService.updateWorker(worker, worker.id).subscribe(() => {
       subResult.next(true);
       this.reloadUser();
-    }, err => subResult.next(false)
+    }, () => subResult.next(false)
     );
     return subResult;
   }
@@ -116,6 +127,7 @@ export class SpdConsentComponent implements OnInit {
       this.router.navigate([`/worker-registration/pre-payment/${this.workerId}`]);
     } else {
       this.showValidationMessages = true;
+      this.nameInputRef.control.markAsTouched();
     }
   }
 
