@@ -1,61 +1,112 @@
 <div class="dashboard-spacing">
-  <section *ngIf="!isNewUser && dataLoaded">
-    <!-- <div [ngBusy]="busy"></div> -->
-    <h1>Worker Registration Dashboard</h1>
-    <div>
-      <p>
-        Your Worker Registration Application and Consent for Cannabis Security Screening are incomplete. You can return to this page
-        and complete and submit them with payment at any time.
-      </p>
+  <!-- <div [ngBusy]="busy"></div> -->
+  <div *ngIf="!isNewUser && dataLoaded" class="row">
+    <div class="col-lg-7 col-sm-12">
+      <div>
+        <section>
+          <!-- <div [ngBusy]="busy"></div> -->
+          <h1>Worker Registration Dashboard</h1>
+          <div>
+            <p>
+              Your Worker Registration Application and Consent for Cannabis Security Screening are incomplete. You can return to this page
+              and complete and submit them with payment at any time.
+            </p>
 
-      <p>The program will let you know in writing the results of your screening.</p>
+            <p>The program will let you know in writing the results of your screening.</p>
 
-      <h2>Registration Status</h2>
+            <h2>Registration Status</h2>
 
-      <section>
-        <mat-table class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
+            <section>
+              <mat-table class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
 
-          <!-- Column -->
-          <ng-container matColumnDef="lastUpdated">
-            <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              {{element?.modifiedOn | date:'mediumDate'}}
-            </mat-cell>
-          </ng-container>
+                <!-- Column -->
+                <ng-container matColumnDef="lastUpdated">
+                  <mat-header-cell *matHeaderCellDef> LAST UPDATED </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    {{element?.modifiedOn | date:'mediumDate'}}
+                  </mat-cell>
+                </ng-container>
 
-          <!-- Column -->
-          <ng-container matColumnDef="worker">
-            <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <a routerLink="/worker-registration/application/{{element.id}}">{{element?.firstname}} {{element?.middlename}}
-                {{element.lastname}}
-              </a>
-            </mat-cell>
-          </ng-container>
+                <!-- Column -->
+                <ng-container matColumnDef="worker">
+                  <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <a routerLink="/worker-registration/application/{{element.id}}">{{element?.firstname}} {{element?.middlename}}
+                      {{element.lastname}}
+                    </a>
+                  </mat-cell>
+                </ng-container>
 
-          <!-- Column -->
-          <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.paymentReceived === true ? 'Submitted' : 'In progress'}}
-              <!-- <span (click)="cancelApplication(element?.id, element?.establishmentName, element?.name)">
-              <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-              <a href="javascript: void(0)">
-                Cancel Application</a>
-            </span> -->
-            </mat-cell>
-          </ng-container>
+                <!-- Column -->
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.paymentReceived === true ? 'Submitted' : 'In progress'}}
+                    <!-- <span (click)="cancelApplication(element?.id, element?.establishmentName, element?.name)">
+                          <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+                          <a href="javascript: void(0)">
+                            Cancel Application</a>
+                        </span> -->
+                  </mat-cell>
+                </ng-container>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
-        </mat-table>
-      </section>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </section>
 
+          </div>
+        </section>
+      </div>
     </div>
-  </section>
-
-
+    <div class="col-lg-4 col-sm-12" style="position: relative">
+      <!-- <div [ngBusy]="busy"></div> -->
+      <p></p>
+      <section class="submit-container">
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-question"></i></h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Update your personal information</h2>
+            </td>
+          </tr>
+        </table>
+        <div class="submit-content">
+          <p>If you find an error in your personal information, please contact Service BC, ICBC or AddressChangeBC to correct
+            it.
+          </p>
+          <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary">LEARN MORE</button>
+        </div>
+      </section>
+      <section class="submit-container">
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-envelope"></i></h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Contact the Criminal Records Review Program</h2>
+            </td>
+          </tr>
+        </table>
+        <div class="submit-content">
+          <p>For question about criminal record checks, contact the Criminal Records Review Program Monday tdo Friday, 8:30
+            a.m. - 4:30 p.m.</p>
+          <section>
+            <i class="fas fa-fax"></i>&nbsp; <strong>Fax</strong>: 250 356-1889
+          </section>
+          <section>
+            <i class="fas fa-phone"></i>&nbsp; <strong>Office</strong>: Toll free - 1 855 587-0185 (press option 2)
+          </section>
+          <section>
+            <i class="fas fa-envelope"></i>&nbsp; <strong>Email</strong>: criminalrecords@gov.bc.ca
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
   <section *ngIf="isNewUser && dataLoaded">
     <app-user-confirmation [currentUser]="currentUser" (reloadUser)="reloadUser()"></app-user-confirmation>
   </section>
-
 </div>
