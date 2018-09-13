@@ -138,6 +138,7 @@ import { UserConfirmationComponent } from './worker-registration/user-confirmati
 import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
 import { WorkerPaymentConfirmationComponent } from './worker-registration/payment-confirmation/payment-confirmation.component';
 import { WorkerTermsAndConditionsComponent } from './worker-registration/worker-terms-and-conditions/worker-terms-and-conditions.component';
+import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-registration/worker-home/worker-home.component';
 
 @NgModule({
   declarations: [
@@ -203,7 +204,9 @@ import { WorkerTermsAndConditionsComponent } from './worker-registration/worker-
     SpdConsentComponent,
     PrePaymentComponent,
     UserConfirmationComponent,
-    WorkerTermsAndConditionsComponent
+    WorkerTermsAndConditionsComponent,
+    WorkerHomeComponent,
+    WorkerHomeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -330,7 +333,8 @@ import { WorkerTermsAndConditionsComponent } from './worker-registration/worker-
     ShareholderPersonDialogComponent,
     ShareholderOrganizationDialogComponent,
     DirectorAndOfficerPersonDialogComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    WorkerHomeDialogComponent
   ],
   bootstrap: [AppComponent]
 })
