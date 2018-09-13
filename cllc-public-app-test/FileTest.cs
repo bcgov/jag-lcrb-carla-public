@@ -107,20 +107,23 @@ namespace Gov.Lclb.Cllb.Public.Test
             var files = JsonConvert.DeserializeObject<List<FileSystemItem>>(jsonString);
             Assert.True(files.Count > 0);
 
+            string serverrelativeurl = files[0].serverrelativeurl;
+            string fileName = files[0].name;
+
             // Verify that the file can be downloaded and the contents match
             // {entityId}/download-file/{entityName}"
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/download-file/application?serverRelativeUrl={files[0].serverrelativeurl}");
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/download-file/application/{fileName}?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // Cleanup the Application
 
-            request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + id + $"/attachments/application?serverRelativeUrl={files[0].serverrelativeurl}");
+            request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + id + $"/attachments/application/?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // should get a 404 if we try a get now.
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/attachments/application/{System.Uri.EscapeDataString(documentType)}");
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/attachments/application/{filename}?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
