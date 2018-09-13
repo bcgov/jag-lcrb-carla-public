@@ -223,13 +223,16 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // Verify that the file can be downloaded and the contents match
             // {entityId}/download-file/{entityName}"
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{contactId}/download-file/contact?serverRelativeUrl={files[0].serverrelativeurl}");
+            string serverrelativeurl = Uri.EscapeDataString( files[0].serverrelativeurl );
+            string fileName = files[0].name;
+
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{contactId}/download-file/contact/{fileName}?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // Cleanup the Application
 
-            request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + contactId + $"/attachments/contact?serverRelativeUrl={files[0].serverrelativeurl}");
+            request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + contactId + $"/attachments/contact?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
