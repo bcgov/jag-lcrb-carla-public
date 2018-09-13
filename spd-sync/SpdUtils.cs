@@ -5,6 +5,7 @@ using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
+using Pop3;
 using SpdSync;
 using SpdSync.models;
 using System;
@@ -14,6 +15,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.SpdSync
 {
@@ -42,7 +44,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             var csvList = new List<List<string>>();
             var headers = new List<string>();
-            var headerDefinition = GetExportHeadersIndividual();
+            var headerDefinition = GetExportHeadersWorker();
             headerDefinition.ForEach(h =>
             {
                 headers.Add($"\"{h.Value}\"");
@@ -183,11 +185,59 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Check the import mailbox.  Returns the first CSV file in the mailbox.
         /// </summary>
         /// <returns></returns>
-        public static string CheckMailBoxForImport()
-        {
-            // TODO: replace this with logic to check a mailbox.
-            string result = File.ReadAllText("C:\\tmp\\testimport.csv");
-            return result;
+        public async Task CheckMailBoxForImport(PerformContext hangfireContext)
+        {            
+            Pop3Client pop3Client = new Pop3Client();
+            await pop3Client.ConnectAsync(Configuration["SPD_IMPORT_POP3_SERVER"], 
+                                          Configuration["SPD_IMPORT_POP3_USERNAME"], 
+                                          Configuration["SPD_IMPORT_POP3_PASSWORD"], true);
+            List<Pop3Message> messages = (await pop3Client.ListAndRetrieveAsync()).ToList();
+
+            foreach (Pop3Message message in messages)
+            {                
+                var attachments = message.Attachments.ToList();
+                if (attachments.Count > 0)
+                {
+                    // string payload = null; // File.ReadAllText("C:\\tmp\\testimport.csv");
+
+                    string payload = Encoding.Default.GetString(attachments[0].GetData());
+                    if (payload != null) // parse the payload
+                    {
+                        List<WorkerResponse> responses = WorkerResponseParser.ParseWorkerResponse(payload);
+                        foreach (WorkerResponse workerResponse in responses)
+                        {
+                            // search for the Personal History Record.
+                            MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamics.Personalhistorysummaries.GetByWorkerJobNumber(workerResponse.RecordIdentifier);
+
+                            if (record != null)
+                            {
+                                // update the record.
+                                MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchRecord = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary()
+                                {
+                                    AdoxioSecuritystatus = SPDResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
+                                    AdoxioCompletedon = workerResponse.DateProcessed
+                                };
+
+                                try
+                                {
+                                    _dynamics.Personalhistorysummaries.Update(record.AdoxioPersonalhistorysummaryid, patchRecord);
+                                }
+                                catch (OdataerrorException odee)
+                                {
+                                    hangfireContext.WriteLine("Error updating worker personal history");
+                                    hangfireContext.WriteLine("Request:");
+                                    hangfireContext.WriteLine(odee.Request.Content);
+                                    hangfireContext.WriteLine("Response:");
+                                    hangfireContext.WriteLine(odee.Response.Content);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                await pop3Client.DeleteAsync(message);
+                hangfireContext.WriteLine("Deleted message:");
+            }            
         }
 
         /// <summary>
@@ -197,39 +247,9 @@ namespace Gov.Lclb.Cllb.SpdSync
         {
             hangfireContext.WriteLine("Starting SPD Import Job.");
 
-            string payload = CheckMailBoxForImport();
-            if (payload != null) // parse the payload
-            {
-                List < WorkerResponse > responses = WorkerResponseParser.ParseWorkerResponse(payload);
-                foreach (WorkerResponse workerResponse in responses)
-                {
-                    // search for the Personal History Record.
-                    MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamics.Personalhistorysummaries.GetByWorkerJobNumber(workerResponse.RecordIdentifier);
+            var runner = CheckMailBoxForImport(hangfireContext);
 
-                    if (record != null)
-                    {
-                        // update the record.
-                        MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchRecord = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary()
-                        {
-                            AdoxioSecuritystatus = SPDResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
-                            AdoxioCompletedon = workerResponse.DateProcessed
-                        };
-                        
-                        try
-                        {
-                            _dynamics.Personalhistorysummaries.Update(record.AdoxioPersonalhistorysummaryid, patchRecord);
-                        }
-                        catch (OdataerrorException odee)
-                        {
-                            hangfireContext.WriteLine("Error updating worker personal history");
-                            hangfireContext.WriteLine("Request:");
-                            hangfireContext.WriteLine(odee.Request.Content);
-                            hangfireContext.WriteLine("Response:");
-                            hangfireContext.WriteLine(odee.Response.Content);                            
-                        }
-                    }
-                }
-            }
+            runner.Wait();
 
             hangfireContext.WriteLine("Done.");
         }
@@ -305,12 +325,13 @@ namespace Gov.Lclb.Cllb.SpdSync
             return emailSentSuccessfully;
         }
 
-        private List<KeyValuePair<string, string>> GetExportHeadersIndividual()
+        private List<KeyValuePair<string, string>> GetExportHeadersWorker()
         {
             var result = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("AdoxioLcrbbusinessjobid", "LCRB BUSINESS JOB ID"),
-                new KeyValuePair<string, string>("AdoxioLcrbassociatejobid", "LCRB ASSOCIATE JOB ID"),
+                new KeyValuePair<string, string>("AdoxioLcrbbusinessjobid", "LCRB BUSINESS JOB ID"),                
+                // 9-12-18 Substituted AdoxioLcrbassociatejobid for AdoxioLcrbworkerjobid to fix blank fields in export.
+                new KeyValuePair<string, string>("AdoxioLcrbworkerjobid", "LCRB ASSOCIATE JOB ID"),
                 // 9-12-18 - BC Registries number is no longer required for individuals (only business records, which are not yet part of the export)
                 // new KeyValuePair<string, string>("AdoxioBcregistriesnumber", "Bcregistriesnumber"),
                 new KeyValuePair<string, string>("AdoxioSelfdisclosure", "SELF-DISCLOSURE YN"),

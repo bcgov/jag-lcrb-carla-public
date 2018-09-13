@@ -46,6 +46,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // query the Dynamics system to get the Address record.
                 List<MicrosoftDynamicsCRMadoxioPreviousaddress> addresses = _dynamicsClient.GetPreviousAddressByContactId(contactId);
+                addresses.Sort((a, b) => {
+                    var res = 0;
+                    if (a.AdoxioFromdate < b.AdoxioFromdate)
+                    {
+                        res = 1;
+                    }
+                    if (a.AdoxioFromdate > b.AdoxioFromdate)
+                    {
+                        res = -1;
+                    }
+                    return res;
+                });
 
                 if (addresses != null)
                 {
