@@ -18,7 +18,11 @@
   <input type="radio" [value]="true" formControlName="selfdisclosure" name="selfdisclosure"> YES &nbsp;
   <input type="radio" [value]="false" formControlName="selfdisclosure" name="selfdisclosure"> NO
   <br>
-
+  <div *ngIf="showValidationMessages && !isCriminalBackgroundValid()" style="color: #A12622; margin-top: 2px;">
+      <div *ngIf="!name.valid && name.touched ">
+          Please select “yes” or “no.”
+      </div>
+    </div>
   <p>
     This includes <strong>ALL</strong> charges or convictions, including information as a Young Offender pursuant to Section
     119(1)(o) of the Youth Criminal Justice Act, <strong>regardless of the outcome</strong>, convictions that have received
@@ -26,8 +30,12 @@
   </p>
 
   <h2 class="blue-header">DECLARATION AND CONSENT</h2>
+  <div *ngIf="showValidationMessages && !isDeclarationValid()" style="color: #A12622; margin-top: 2px;">
+      <div *ngIf="!name.valid && name.touched ">
+          Please read the declaration and consent and select the check boxes.
+      </div>
+    </div>
   <section style="display: flex">
-
     <input type="checkbox" [(ngModel)]="consentToCollection" [ngModelOptions]="{standalone: true}"> &nbsp;
     <span>
       I, the undersigned, do hereby consent to the collection and disclosure by the Royal Canadian Mounted Police (RCMP) and other
@@ -53,7 +61,15 @@
 
   <label for="">Applicant Name</label>
   <br>
-  <input type="text" class="form-control" [(ngModel)]="signName" [ngModelOptions]="{standalone: true}" style="width: 350px">
+  <input type="text" class="form-control" required [(ngModel)]="signName" [ngModelOptions]="{standalone: true}" style="width: 350px"
+    #name="ngModel"> 
+    <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622;"></i>
+    <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622; margin-left: -6px;"></i>
+  <div *ngIf="!name.valid && name.touched" style="color: #A12622; width: 350px; margin-top: 2px;">
+    <div *ngIf="!name.valid && name.touched ">
+      Please enter your full legal name.
+    </div>
+  </div>
   <p></p>
 
   <h2 class="blue-header">SIGNATURE</h2>
@@ -73,27 +89,28 @@
     Upload your completed form before continuing to Step 3.</p>
 
   <section>
-    <app-file-uploader *ngIf="currentUser?.contactid" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT."
-      [multipleFiles]="false" entityName="contact" [entityId]="currentUser?.contactid" #mainForm></app-file-uploader>
+    <app-file-uploader *ngIf="workerId" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
+      entityName="worker" [entityId]="workerId" #mainForm></app-file-uploader>
   </section>
+  <div *ngIf="showValidationMessages &&  (!mainForm || !mainForm.files || mainForm.files.length < 1)" style="color: #A12622; width: 700px; margin: auto; margin-top: 2px;">
+    <span>Please upload your completed signature form. Ensure it is less than 25MB.</span>
+    <br>
+    <span>Your completed signature form didn’t upload. Please ensure your form is less than 25MB.</span>
+  </div>
 
   <P>&nbsp;</P>
-  <P>&nbsp;</P>
-  <P>&nbsp;</P>
-  <section class="error" *ngIf="showValidationMessages">
-    <p *ngFor="let message of validationMessages">
-      <span class="app-cancel">
-        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-        {{message}}
-      </span>
-    </p>
+
+  <section *ngIf="showValidationMessages" style="color: #A12622; background-color: #F2F2F2; padding: 10px">
+    <i class="fas fa-exclamation-triangle"></i>
+    Please make sure that you have filled out the entire form correctly.
   </section>
+  <P>&nbsp;</P>
 
   <span style="float: right;">
-    <button class="btn btn-primary" routerLink="/worker-registration/dashboard">
-      <i class="fa fa-save" style="color: #fff;"></i>
+    <button class="btn btn-secondary" routerLink="/worker-registration/dashboard">
+      <i class="fa fa-save"></i>
       SAVE FOR LATER</button>
-    <button routerLink="/worker-registration/application/{{workerId}}" class="btn btn-primary">RETURN TO STEP 1
+    <button routerLink="/worker-registration/application/{{workerId}}" class="btn btn-secondary">RETURN TO STEP 1
     </button>
     <button (click)="goToNextStep()" class="btn btn-primary">SAVE & CONTINUE TO STEP 3
       <i class="fas fa-chevron-right"></i>
