@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class Worker
     {
         public string id { get; set; }
-        public bool isldbworker { get; set; }
+        public bool? isldbworker { get; set; }
         public string firstname { get; set; }
         public string middlename { get; set; }
         public string lastname { get; set; }
@@ -28,10 +28,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string bcidcardnumber { get; set; }
         public string phonenumber { get; set; }
         public string email { get; set; }
-        public bool selfdisclosure { get; set; }
-        public bool triggerphs { get; set; }
+        public bool? selfdisclosure { get; set; }
+        public bool? triggerphs { get; set; }
         public Contact contact { get; set; }
-        public bool paymentReceived { get; set; }
+        public bool? paymentReceived { get; set; }
         public DateTimeOffset? paymentRecievedDate { get; set; }
         public DateTimeOffset? modifiedOn { get; set; }
         public string workerId { get; set; }
