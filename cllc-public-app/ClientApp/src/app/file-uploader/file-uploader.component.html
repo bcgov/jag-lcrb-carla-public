@@ -17,12 +17,12 @@
       <input (change)="onBrowserFileSelect($event)" type="file" style="visibility: hidden;" #fileBrowser>
     </div>
   </file-drop>
-  <div style="margin-top: 5px;">
+  <div style="margin-top: 5px; color: #2C679E;">
     <div [ngBusy]="busy"></div>
     <section *ngFor="let item of files; let i=index" class="file-list">
     <a href="{{item.downloadUrl}}" >{{ item.name }}</a>
       <span>
-        <span style="margin-right: 20px;">{{item.size}} kb</span>
+        <span style="margin-right: 20px; color: #A9A9A9">{{item.size}} kb</span>
         <a href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
       </span>
     </section>

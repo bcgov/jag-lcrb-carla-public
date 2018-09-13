@@ -42,6 +42,7 @@ import { UserConfirmationComponent } from './worker-registration/user-confirmati
 import { PrePaymentComponent } from './worker-registration/pre-payment/pre-payment.component';
 import { WorkerPaymentConfirmationComponent } from './worker-registration/payment-confirmation/payment-confirmation.component';
 import { SpdConsentComponent } from './worker-registration/spd-consent/spd-consent.component';
+import { WorkerHomeComponent } from './worker-registration/worker-home/worker-home.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,10 @@ const routes: Routes = [
     component: ApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'worker-registration/home',
+    component: WorkerHomeComponent
   },
   {
     path: 'worker-registration/user-comfirmation',
