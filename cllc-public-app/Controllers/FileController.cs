@@ -48,7 +48,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetContactFolderName(MicrosoftDynamicsCRMcontact contact)
         {
             string applicationIdCleaned = contact.Contactid.ToString().ToUpper().Replace("-", "");
-            string folderName = $"{contact.Fullname}_{applicationIdCleaned}";
+            string folderName = $"contact_{applicationIdCleaned}";
+            return folderName;
+        }
+
+        private string GetWorkerFolderName(MicrosoftDynamicsCRMadoxioWorker worker)
+        {
+            string applicationIdCleaned = worker.AdoxioWorkerid.ToString().ToUpper().Replace("-", "");
+            string folderName = $"worker_{applicationIdCleaned}";
             return folderName;
         }
 
@@ -150,6 +157,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var contact = await _dynamicsClient.GetContactById(id);
                     result = contact != null && CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
                     break;
+                case "worker":
+                    var worker = await _dynamicsClient.GetWorkerById(id);
+                    result = worker != null && CurrentUserHasAccessToContactOwnedBy(worker._adoxioContactidValue);
+                    break;
                 default:
                     break;
             }
@@ -173,13 +184,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(Guid.Parse(entityId));
-                    var applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
                     folderName = GetApplicationFolderName(application);
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(Guid.Parse(entityId));
-                    var cleanId = contact.Contactid.ToString().ToUpper().Replace("-", "");
                     folderName = GetContactFolderName(contact);
+                    break;
+                case "worker":
+                    var worker = await _dynamicsClient.GetWorkerById(Guid.Parse(entityId));
+                    folderName = GetWorkerFolderName(worker);
                     break;
                 default:
                     break;
@@ -213,6 +226,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     try
                     {
                         _dynamicsClient.Contacts.Update(entityId, patchContact);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating Contact");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        // fail if we can't create.
+                        throw (odee);
+                    }
+                    break;
+                case "worker":
+                    var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
+                    try
+                    {
+                        _dynamicsClient.Workers.Update(entityId, patchWorker);
                     }
                     catch (OdataerrorException odee)
                     {
@@ -355,6 +385,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     break;
                 case "contact":
                     listTitle = SharePointFileManager.ContactDocumentListTitle;
+                    break;
+                case "worker":
+                    listTitle = SharePointFileManager.WorkertDocumentListTitle;
                     break;
                 default:
                     break;
