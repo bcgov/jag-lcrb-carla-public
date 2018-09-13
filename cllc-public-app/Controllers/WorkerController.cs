@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="contactId"></param>
         /// <returns></returns>
         [HttpGet("contact/{contactId}")]
-        public async Task<IActionResult> GetWorkers(string contactId)
+        public IActionResult GetWorkers(string contactId)
         {
             List<ViewModels.Worker> results = new List<ViewModels.Worker>();
             if (!string.IsNullOrEmpty(contactId))
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetWorker(string id)
+        public IActionResult GetWorker(string id)
         {
             ViewModels.Worker result = null;
             if (!string.IsNullOrEmpty(id))
@@ -99,7 +99,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             return Json(result);
         }
-
 
         /// <summary>
         /// Update a worker
