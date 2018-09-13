@@ -32,30 +32,6 @@
   }
 }
 
-ul {
-  list-style-type: none;
-}
-
-li::before {
-  color: #1E4176;
-  content: "\25AA";
-  display: inline-block;
-  font-size: 34px;
-  line-height: 0;
-  vertical-align: middle;
-  width: 0.5em;
-  margin-left: -16px;
-}
-
-li {
-  margin: 10px auto;
-  margin-left: 16px;
-}
-
-.li-header {
-  margin-left: 40px;
-}
-
 .dashboard-spacing {
   padding-left: 50px;
   padding-right: 50px;
