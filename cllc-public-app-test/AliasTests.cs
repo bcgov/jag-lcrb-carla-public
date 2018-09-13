@@ -35,8 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
-
-            string initialName = "InitialName";
+            
             string changedName = "ChangedName";
             string service = "contact";
 
