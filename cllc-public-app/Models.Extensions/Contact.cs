@@ -117,17 +117,27 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_givenname = headers["SMGOV_GIVENNAME"];
             string smgov_surname = headers["SMGOV_SURNAME"];
 
-            to.AdoxioFirstname = smgov_givenname;
-            to.AdoxioLastname = smgov_surname;
-            to.AdoxioEmail = smgov_useremail;
+            if (!string.IsNullOrEmpty(smgov_givenname)) {
+                to.AdoxioFirstname = smgov_givenname;
+            }
+            if (!string.IsNullOrEmpty(smgov_surname))
+            {
+                to.AdoxioLastname = smgov_surname;
+            }
+            if (!string.IsNullOrEmpty(smgov_useremail))
+            {
+                to.AdoxioEmail = smgov_useremail;
+            }
             
 
-            if (DateTimeOffset.TryParse (smgov_birthdate, out DateTimeOffset tempDate))
+            if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse (smgov_birthdate, out DateTimeOffset tempDate))
             {
                 to.AdoxioDateofbirth = tempDate;
             }
-
-            to.AdoxioGendercode = GetIntGenderCode(smgov_sex);
+            if (!string.IsNullOrEmpty(smgov_sex))
+            {
+                to.AdoxioGendercode = GetIntGenderCode(smgov_sex);
+            }
 
         }
 

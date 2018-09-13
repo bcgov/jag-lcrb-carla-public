@@ -59,10 +59,10 @@ export class WorkerApplicationComponent implements OnInit {
       contact: this.fb.group({
         id: [],
         firstname: ['', Validators.required],
-        middlename: ['', Validators.required],
+        middlename: [''],
         lastname: ['', Validators.required],
-        emailaddress1: ['', [Validators.required, Validators.email]],
-        telephone1: ['', Validators.required],
+        emailaddress1: [''],
+        telephone1: [''],
         address1_line1: ['', Validators.required],
         address1_city: ['', Validators.required],
         address1_stateorprovince: ['', Validators.required],
@@ -73,7 +73,7 @@ export class WorkerApplicationComponent implements OnInit {
         id: [],
         isldbworker: [false],
         firstname: ['', Validators.required],
-        middlename: ['', Validators.required],
+        middlename: [''],
         lastname: ['', Validators.required],
         dateofbirth: ['', Validators.required],
         gender: ['', Validators.required],
@@ -82,7 +82,7 @@ export class WorkerApplicationComponent implements OnInit {
         bcidcardnumber: ['', Validators.required],
         phonenumber: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        selfdisclosure: ['', Validators.required],
+        selfdisclosure: [''],
         // triggerphs: ['', Validators.required],
         aliases: this.fb.array([
         ]),
@@ -215,7 +215,7 @@ export class WorkerApplicationComponent implements OnInit {
     return this.fb.group({
       id: [alias.id],
       firstname: [alias.firstname, Validators.required],
-      middlename: [alias.middlename, Validators.required],
+      middlename: [alias.middlename],
       lastname: [alias.lastname, Validators.required],
     });
   }
@@ -280,5 +280,64 @@ export class WorkerApplicationComponent implements OnInit {
     }, err => subResult.next(false));
 
     return subResult;
+  }
+
+  validatePastAddresses() {
+    let valid = true;
+    let dts = [];
+    const addressControls = this.addresses.controls;
+    for (let i = 0; i < addressControls.length; i++) {
+      const fromDate = new Date(addressControls[i].value.fromdate);
+      const toDate = new Date(addressControls[i].value.todate);
+      dts.push({ fd: fromDate, td: toDate });
+      if (fromDate > toDate) {
+        valid = false;
+      }
+    }
+
+    if (dts.length < 1) {
+      return false;
+    }
+
+    dts = dts.sort((a, b) => {
+      let res = 0;
+      if (a.fd < b.fd) {
+        res = -1;
+      }
+      if (a.fd > b.fd) {
+        res = 1;
+      }
+      return res;
+    });
+
+    // verify there is no gap between dates
+    let isContinuous = true;
+    for (let i = 1; i < dts.length; i++) {
+      const element = dts[i];
+      if (element.fd >= dts[i - 1].td && this.daysBetween(element.fd, dts[i - 1].td) > 1) {
+        isContinuous = false;
+        valid = false;
+        break;
+      }
+    }
+
+    if (isContinuous) {
+      const daysIn5years = 365 * 5 + 1;
+      // verify that the dates form a range >=  5 years
+      if (this.daysBetween(dts[0].fd, dts[dts.length - 1].td) < daysIn5years) {
+        valid = false;
+      }
+    }
+    return valid;
+  }
+
+  private daysBetween(firstDate: Date, secondDate: Date) {
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    const diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+    return diffDays;
+  }
+
+  isAscending(fromDate: string, toDate: string) {
+    return new Date(toDate) >= new Date(fromDate);
   }
 }

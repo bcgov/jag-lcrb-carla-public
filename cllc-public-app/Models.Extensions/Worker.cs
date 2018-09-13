@@ -23,8 +23,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.id = worker.AdoxioWorkerid;
                 }
-
-                result.isldbworker = worker.AdoxioIsldbworker == 1;
+                if (worker.AdoxioIsldbworker != null)
+                {
+                    result.isldbworker = worker.AdoxioIsldbworker == 1;
+                }
                 result.firstname = worker.AdoxioFirstname;
                 result.middlename = worker.AdoxioMiddlename;
                 result.lastname = worker.AdoxioLastname;
@@ -39,13 +41,22 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.bcidcardnumber = worker.AdoxioBcidcardnumber;
                 result.phonenumber = worker.AdoxioPhonenumber;
                 result.email = worker.AdoxioEmail;
-                result.selfdisclosure = worker.AdoxioSelfdisclosure == 1;
-                result.triggerphs = worker.AdoxioTriggerphs == 1;
+                if (worker.AdoxioSelfdisclosure != null)
+                {
+                    result.selfdisclosure = worker.AdoxioSelfdisclosure == 1;
+                }
+                if (worker.AdoxioTriggerphs != null)
+                {
+                    result.triggerphs = worker.AdoxioTriggerphs == 1;
+                }
                 if (worker.AdoxioContactId != null)
                 {
                     result.contact = worker.AdoxioContactId.ToViewModel();
                 }
-                result.paymentReceived = worker.AdoxioPaymentreceived == 1;
+                if (worker.AdoxioPaymentreceived != null)
+                {
+                    result.paymentReceived = worker.AdoxioPaymentreceived == 1;
+                }
                 result.paymentRecievedDate = worker.AdoxioPaymentreceiveddate;
                 result.workerId = worker.AdoxioWorkerid;
             }
@@ -55,7 +66,10 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioWorker to, ViewModels.Worker from)
         {
-            to.AdoxioIsldbworker = from.isldbworker ? 1 : 0;
+            if (from.isldbworker != null)
+            {
+                to.AdoxioIsldbworker = from.isldbworker == true ? 1 : 0;
+            }
             to.AdoxioFirstname = from.firstname;
             to.AdoxioMiddlename = from.middlename;
             to.AdoxioLastname = from.lastname;
@@ -72,10 +86,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioBcidcardnumber = from.bcidcardnumber;
             to.AdoxioPhonenumber = from.phonenumber;
             to.AdoxioEmail = from.email;
-            to.AdoxioSelfdisclosure = from.selfdisclosure ? 1 : 0;
-            to.AdoxioTriggerphs = from.triggerphs ? 1 : 0;
-            //to._adoxioContactidValue = from.contactId;
-            to.AdoxioPaymentreceived = from.paymentReceived ? 1 : 0;
+            if (from.selfdisclosure != null)
+            {
+                to.AdoxioSelfdisclosure = from.selfdisclosure == true ? 1 : 0;
+            }
+            if (from.triggerphs != null)
+            {
+                to.AdoxioTriggerphs = from.triggerphs == true ? 1 : 0;
+            }
+            if (from.paymentReceived != null)
+            {
+                to.AdoxioPaymentreceived = from.paymentReceived == true ? 1 : 0;
+            }
             to.AdoxioPaymentreceiveddate = from.paymentRecievedDate;
             to.AdoxioWorkerid = from.workerId;
         }

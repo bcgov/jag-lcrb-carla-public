@@ -1,0 +1,35 @@
+<section class="header">REGISTER</section>
+
+<p>
+  To register as a Cannabis Worker, you must log in with your BC Service Card Account. Please select an option below:
+</p>
+
+<div class="action-cont" (click)="dialogRef.close('login')">
+  <strong>I already have a BC Services Card Account</strong>, take me to the log in
+  <i class="fas fa-chevron-right"></i>
+</div>
+
+<div class="action-cont" (click)="dialogRef.close('create-account')">
+  <strong>I don't have a BC Services Card Account</strong>, setup an account
+  <i class="fas fa-chevron-right"></i>
+</div>
+
+<style>
+  .action-cont {
+    background-color: #EFF3FC;
+    margin-bottom: 10px;
+    border: 1px solid #BECEF3;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    color: #003366;
+  }
+  .action-cont:hover {
+    background-color: #e3eaf9;
+  }
+
+  .header{
+    background-color: #38598A;
+
+  }
+</style>
