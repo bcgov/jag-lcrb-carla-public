@@ -58,7 +58,7 @@ export class WorkerHomeComponent implements OnInit, AfterViewInit {
 })
 export class WorkerHomeDialogComponent {
 
-  constructor(private dialogRef: MatDialogRef<WorkerHomeDialogComponent>) {
+  constructor(public dialogRef: MatDialogRef<WorkerHomeDialogComponent>) {
   }
 
   register() {
