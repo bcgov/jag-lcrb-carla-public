@@ -25,6 +25,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.console" Version="2.4.0">
       <PrivateAssets>all</PrivateAssets>
@@ -38,6 +42,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
