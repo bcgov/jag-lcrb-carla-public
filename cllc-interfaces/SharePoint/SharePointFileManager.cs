@@ -94,6 +94,21 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         }
         
+        /// <summary>
+        /// Escape the apostrophe character.  Since we use it to enclose the filename it must be escaped.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns>Filename, with apropstophes escaped.</returns>
+        private string EscapeApostrophe (string filename)
+        {
+            string result = null;
+            if (! string.IsNullOrEmpty(filename))
+            {
+                result = filename.Replace("'", "''");
+            }
+            return result;
+        }
+
         public class FileSystemItem
         {
             public string Id { get; set; }
@@ -127,7 +142,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
             string _responseContent = null;
             HttpRequestMessage _httpRequest =
-                            new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/files");
+                            new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/files");
             // make the request.
             var _httpResponse = await client.SendAsync(_httpRequest);
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
@@ -303,7 +318,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
-    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
+    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
 
 
             // We want to delete this folder.
@@ -355,7 +370,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Object result = null;
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
-            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')");
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
 
 
             // make the request.
@@ -433,12 +448,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<bool> UploadFile(string name, string listTitle, string folderName, Stream fileData, string contentType)
         {
             bool result = false;
+            
             // Delete is very similar to a GET.
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
             HttpRequestMessage endpointRequest =
-    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + serverRelativeUrl + "')/Files/add(url='"
-    + name + "',overwrite=true)");
+    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/Files/add(url='"
+    + EscapeApostrophe(name) + "',overwrite=true)");
             // convert the stream into a byte array.
             MemoryStream ms = new MemoryStream();
             fileData.CopyTo(ms);
@@ -480,7 +496,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<byte[]> DownloadFile(string url)
         {
             byte[] result = null;
-            var webRequest = System.Net.WebRequest.Create(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + url + "')/$value");
+            var webRequest = System.Net.WebRequest.Create(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value");
             HttpWebRequest request = (HttpWebRequest)webRequest;
             request.PreAuthenticate = true;
             request.Headers.Add("Authorization", Authorization);
@@ -539,7 +555,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Delete is very similar to a GET.
 
             HttpRequestMessage endpointRequest =
-    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/GetFileByServerRelativeUrl('" + serverRelativeUrl + "')");
+    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
 
             // We want to delete this file.
             endpointRequest.Headers.Add("IF-MATCH", "*");
