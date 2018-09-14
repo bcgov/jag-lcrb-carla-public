@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{309D775B-CF5B-4194-9E63-3410A95D20F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "one-stop-service", "one-stop-service\one-stop-service.csproj", "{2297BB9C-E3A4-4C4E-8B00-B2562709FC96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2297BB9C-E3A4-4C4E-8B00-B2562709FC96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2297BB9C-E3A4-4C4E-8B00-B2562709FC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2297BB9C-E3A4-4C4E-8B00-B2562709FC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2297BB9C-E3A4-4C4E-8B00-B2562709FC96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F5AFC19-C3AC-448F-8839-EF705AB89A43}
+	EndGlobalSection
+EndGlobal

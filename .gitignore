@@ -8,3 +8,5 @@ cllc-public-app/ClientApp/e2e-reports
 /package-lock.json
 .vscode/launch.json
 .vscode/tasks.json
+one-stop-service/one-stop-service/bin/
+one-stop-service/one-stop-service/obj/
