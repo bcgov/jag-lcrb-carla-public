@@ -85,28 +85,32 @@ const routes: Routes = [
     canActivate: [ServiceCardAuthGuard]
   },
   {
+    path: 'worker-registration/dashboard',
+    component: WorkerDashboardComponent,
+    canActivate: [ServiceCardAuthGuard]
+  },
+  {
+    path: 'worker-registration/application/:id',
+    component: WorkerApplicationComponent,
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [ServiceCardAuthGuard]
+  },
+  {
+    path: 'worker-registration/spd-consent/:id',
+    component: SpdConsentComponent,
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [ServiceCardAuthGuard]
+  },
+  {
     path: 'worker-registration',
     component: WorkerRegistrationComponent,
     canActivate: [ServiceCardAuthGuard],
     children: [
       {
-        path: 'dashboard',
-        component: WorkerDashboardComponent
-      },
-      {
-        path: 'application/:id',
-        component: WorkerApplicationComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
         path: 'pre-payment/:id',
         component: PrePaymentComponent
       },
-      {
-        path: 'spd-consent/:id',
-        component: SpdConsentComponent,
-        canDeactivate: [CanDeactivateGuard]
-      }
+
     ]
   },
   // {
