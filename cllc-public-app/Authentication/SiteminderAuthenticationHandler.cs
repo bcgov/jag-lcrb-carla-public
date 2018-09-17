@@ -233,6 +233,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
 
                 UserSettings userSettings = new UserSettings();
+                
                 string userId = null;
 				string devCompanyId = null;
                 string siteMinderGuid = "";
@@ -528,6 +529,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         _logger.LogDebug("userSettings.ContactId:" + userSettings.ContactId);
                     }
                 }				
+
+                // add the worker settings if it is a new user.
+                if (userSettings.IsNewUserRegistration && userSettings.NewWorker == null)
+                {
+                    userSettings.NewWorker = new ViewModels.Worker();
+                    userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
+                }
 
                 // **************************************************
                 // Update user settings
