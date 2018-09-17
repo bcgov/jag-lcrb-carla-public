@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Mail;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,10 +35,36 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send an export to SPD.
         /// </summary>
-        public void SendExportJob(PerformContext hangfireContext)
+        public async Task SendLicenceCreationMessage(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Export Job.");
 
+
+            var cred = new System.ServiceModel.Description.ClientCredentials();
+            cred.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
+            cred.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
+            var serviceClient = new OneStopServiceReference.receiveFromPartner_PortTypeClient();
+            var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+            basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            serviceClient.Endpoint.Binding = basicHttpBinding;
+
+            using (new OperationContextScope(serviceClient.InnerChannel))
+            {
+                //Create message header containing the credentials
+                var header = new OneStopServiceReference.SoapSecurityHeader("", Configuration["ONESTOP_HUB_USERNAME"], Configuration["ONESTOP_HUB_PASSWORD"], "");
+                //Add the credentials message header to the outgoing request
+                OperationContext.Current.OutgoingMessageHeaders.Add(header);
+
+
+                //try
+                //{
+                var version = await serviceClient.receiveFromPartnerAsync("");
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw;
+                //}
+            }
             //Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
 
             //var csvList = new List<List<string>>();
