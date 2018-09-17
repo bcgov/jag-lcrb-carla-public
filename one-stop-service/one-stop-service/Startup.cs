@@ -172,7 +172,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
 
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration).SendExportJob(null), Cron.Minutely);
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null), Cron.Minutely);
 
                     log.LogInformation("Hangfire Send Export job done.");
 
