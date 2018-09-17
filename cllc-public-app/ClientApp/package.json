@@ -12,7 +12,7 @@
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e config cli.warnings.versionMismatch false"
   },
   "private": true,
   "dependencies": {
