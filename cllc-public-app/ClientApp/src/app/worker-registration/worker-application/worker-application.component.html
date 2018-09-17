@@ -161,9 +161,7 @@
               <div [ngClass]="{'has-error': !this.form.get('worker.gender').valid && this.form.get('worker.gender').touched}">
                 <label>Sex</label>
                 <br />
-                <input type="radio" name="gender" formControlName="gender" value="Male" readonly> &nbsp; Male
-                <input type="radio" name="gender" formControlName="gender" value="Female" readonly> &nbsp; Female
-                <input type="radio" name="gender" formControlName="gender" value="Other" readonly> &nbsp; Other
+                <input type="text" formControlName='gender' readonly disabled style="width: 250px;" name="gender" > 
                 <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched" class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched ">
                     This is required
