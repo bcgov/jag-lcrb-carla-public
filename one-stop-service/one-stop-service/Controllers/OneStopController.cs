@@ -19,10 +19,10 @@ namespace one_stop_service.Controllers
             Configuration = configuration;
         }
 
-        [Route("[action]")]
-        public async Task<IActionResult> SendLicenceCreationMessage()
+        [Route("[action]/{licenceGuild}")]
+        public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuild)
         {
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null, licenceGuild));
             return Ok();
         }
 
