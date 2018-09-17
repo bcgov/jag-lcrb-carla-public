@@ -154,7 +154,50 @@ namespace Gov.Lclb.Cllb.Public.Models
             }            
         }
 
-        
+
+
+        public static void CopyHeaderValues(this ViewModels.Contact to, IHeaderDictionary headers)
+        {
+            string smgov_useremail = headers["SMGOV_USEREMAIL"];
+            string smgov_birthdate = headers["SMGOV_BIRTHDATE"];
+            string smgov_sex = headers["SMGOV_SEX"];
+            string smgov_streetaddress = headers["SMGOV_STREETADDRESS"];
+            string smgov_city = headers["SMGOV_CITY"];
+            string smgov_postalcode = headers["SMGOV_POSTALCODE"];
+            string smgov_stateorprovince = headers["SMGOV_STATEORPROVINCE"];
+            string smgov_country = headers["SMGOV_COUNTRY"];
+            string smgov_givenname = headers["SMGOV_GIVENNAME"];
+            string smgov_givennames = headers["SMGOV_GIVENNAMES"];
+            string smgov_surname = headers["SMGOV_SURNAME"];
+
+            to.address1_line1 = smgov_streetaddress;
+            to.address1_postalcode = smgov_postalcode;
+            to.address1_city = smgov_city;
+            to.address1_stateorprovince = smgov_stateorprovince;
+            to.address1_country = smgov_country;            
+
+            if (!string.IsNullOrEmpty(smgov_givenname))
+            {
+                to.firstname = smgov_givenname;
+            }
+
+            if (!string.IsNullOrEmpty(smgov_givennames))
+            {
+                to.middlename = smgov_givennames;
+            }
+
+            if (!string.IsNullOrEmpty(smgov_surname))
+            {
+                to.lastname = smgov_surname;
+            }
+            if (!string.IsNullOrEmpty(smgov_useremail))
+            {
+                to.emailaddress1 = smgov_useremail;
+            }
+
+        }
+
+
 
         public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
         {
@@ -175,24 +218,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
             to.AdoxioCansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
             to.Telephone1 = from.telephone1;            
-        }
-
-
-        public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Worker from)
-        {
-            to.Fullname = from.firstname;
-            if (! string.IsNullOrEmpty (from.middlename))
-            {
-                to.Fullname += " " + from.middlename;
-            }
-            to.Fullname += " " + from.lastname;
-            to.Fullname = to.Fullname.Trim();
-
-            to.Emailaddress1 = from.email;
-            to.Firstname = from.firstname;
-            to.Middlename = from.middlename;
-            to.Lastname = from.lastname;            
-        }
+        }        
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
         {
