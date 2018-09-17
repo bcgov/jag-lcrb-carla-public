@@ -41,6 +41,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         public string AccountId { get; set; }
 
         /// <summary>
+        /// Worker registration requires some additional fields.
+        /// </summary>
+        public ViewModels.Worker NewWorker { get; set; }
+
+        /// <summary>
         /// Check the UserSettings object and throw an exception if it is invalid.
         /// </summary>
         public void Validate()
