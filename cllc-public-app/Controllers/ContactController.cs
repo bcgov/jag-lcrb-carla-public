@@ -275,11 +275,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             };
             contact.CopyValues(item);
 
-            if (userSettings.IsNewUserRegistration)
+            if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null)
             {
                 // get additional information from the service card headers.
-                contact.CopyHeaderValues(_httpContextAccessor);
-                worker.CopyHeaderValues(_httpContextAccessor);
+                contact.CopyValues(userSettings.NewContact);
+                worker.CopyValues(userSettings.NewWorker);                
             }
 
             string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
