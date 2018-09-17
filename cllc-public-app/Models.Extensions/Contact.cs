@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -109,9 +110,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
-        public static void CopyHeaderValues(this MicrosoftDynamicsCRMadoxioWorker to, IHttpContextAccessor httpContextAccessor)
+        public static void CopyHeaderValues(this ViewModels.Worker to, IHeaderDictionary headers)
         {
-            var headers = httpContextAccessor.HttpContext.Request.Headers;
             string smgov_useremail = headers["SMGOV_USEREMAIL"];
             // the following fields appear to just have a guid in them, not a driver's licence.
             string smgov_useridentifier = headers["SMGOV_USERIDENTIFIER"];
@@ -126,33 +126,32 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_surname = headers["SMGOV_SURNAME"];
 
             if (!string.IsNullOrEmpty(smgov_givenname)) {
-                to.AdoxioFirstname = smgov_givenname;
+                to.firstname = smgov_givenname;
             }
 
             if (!string.IsNullOrEmpty(smgov_givennames))
             {
-                to.AdoxioMiddlename = smgov_givennames;
+                to.middlename = smgov_givennames;
             }
 
             if (!string.IsNullOrEmpty(smgov_surname))
             {
-                to.AdoxioLastname = smgov_surname;
+                to.lastname = smgov_surname;
             }
             if (!string.IsNullOrEmpty(smgov_useremail))
             {
-                to.AdoxioEmail = smgov_useremail;
+                to.email = smgov_useremail;
             }
             
 
             if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse (smgov_birthdate, out DateTimeOffset tempDate))
             {
-                to.AdoxioDateofbirth = tempDate;
+                to.dateofbirth = tempDate;
             }
             if (!string.IsNullOrEmpty(smgov_sex))
             {
-                to.AdoxioGendercode = GetIntGenderCode(smgov_sex);
-            }
-
+                to.gender = (Gender) GetIntGenderCode(smgov_sex);
+            }            
         }
 
         
@@ -176,6 +175,23 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
             to.AdoxioCansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
             to.Telephone1 = from.telephone1;            
+        }
+
+
+        public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Worker from)
+        {
+            to.Fullname = from.firstname;
+            if (! string.IsNullOrEmpty (from.middlename))
+            {
+                to.Fullname += " " + from.middlename;
+            }
+            to.Fullname += " " + from.lastname;
+            to.Fullname = to.Fullname.Trim();
+
+            to.Emailaddress1 = from.email;
+            to.Firstname = from.firstname;
+            to.Middlename = from.middlename;
+            to.Lastname = from.lastname;            
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
