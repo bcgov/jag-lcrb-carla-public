@@ -112,18 +112,18 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyHeaderValues(this ViewModels.Worker to, IHeaderDictionary headers)
         {
-            string smgov_useremail = headers["SMGOV_USEREMAIL"];
+            string smgov_useremail = headers["smgov_useremail"];
             // the following fields appear to just have a guid in them, not a driver's licence.
-            string smgov_useridentifier = headers["SMGOV_USERIDENTIFIER"];
-            string smgov_useridentifiertype = headers["SMGOV_USERIDENTIFIERTYPE"];
+            string smgov_useridentifier = headers["smgov_useridentifier"];
+            string smgov_useridentifiertype = headers["smgov_useridentifiertype"];
 
             // birthdate is YYYY-MM-DD
-            string smgov_birthdate = headers["SMGOV_BIRTHDATE"];
+            string smgov_birthdate = headers["smgov_birthdate"];
             // Male / Female / Unknown. 
-            string smgov_sex = headers["SMGOV_SEX"];
-            string smgov_givenname = headers["SMGOV_GIVENNAME"];
-            string smgov_givennames = headers["SMGOV_GIVENNAMES"];
-            string smgov_surname = headers["SMGOV_SURNAME"];
+            string smgov_sex = headers["smgov_sex"];
+            string smgov_givenname = headers["smgov_givenname"];
+            string smgov_givennames = headers["smgov_givennames"];
+            string smgov_surname = headers["smgov_surname"];
 
             if (!string.IsNullOrEmpty(smgov_givenname)) {
                 to.firstname = smgov_givenname;
@@ -131,7 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             if (!string.IsNullOrEmpty(smgov_givennames))
             {
-                to.middlename = smgov_givennames;
+                to.middlename = smgov_givennames.Replace(smgov_givenname, "").Trim();
             }
 
             if (!string.IsNullOrEmpty(smgov_surname))
@@ -158,17 +158,17 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyHeaderValues(this ViewModels.Contact to, IHeaderDictionary headers)
         {
-            string smgov_useremail = headers["SMGOV_USEREMAIL"];
-            string smgov_birthdate = headers["SMGOV_BIRTHDATE"];
-            string smgov_sex = headers["SMGOV_SEX"];
-            string smgov_streetaddress = headers["SMGOV_STREETADDRESS"];
-            string smgov_city = headers["SMGOV_CITY"];
-            string smgov_postalcode = headers["SMGOV_POSTALCODE"];
-            string smgov_stateorprovince = headers["SMGOV_STATEORPROVINCE"];
-            string smgov_country = headers["SMGOV_COUNTRY"];
-            string smgov_givenname = headers["SMGOV_GIVENNAME"];
-            string smgov_givennames = headers["SMGOV_GIVENNAMES"];
-            string smgov_surname = headers["SMGOV_SURNAME"];
+            string smgov_useremail = headers["smgov_useremail"];
+            string smgov_birthdate = headers["smgov_birthdate"];
+            string smgov_sex = headers["smgov_sex"];
+            string smgov_streetaddress = headers["smgov_streetaddress"];
+            string smgov_city = headers["smgov_city"];
+            string smgov_postalcode = headers["smgov_postalcode"];
+            string smgov_stateorprovince = headers["smgov_province"];
+            string smgov_country = headers["smgov_country"];
+            string smgov_givenname = headers["smgov_givenname"];
+            string smgov_givennames = headers["smgov_givennames"];
+            string smgov_surname = headers["smgov_surname"];
 
             to.address1_line1 = smgov_streetaddress;
             to.address1_postalcode = smgov_postalcode;
