@@ -57,8 +57,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_postalcode = headers["SMGOV_POSTALCODE"];            
             string smgov_stateorprovince = headers["SMGOV_STATEORPROVINCE"];
             string smgov_country = headers["SMGOV_COUNTRY"];
+            string smgov_givenname = headers["SMGOV_GIVENNAME"];
+            string smgov_givennames = headers["SMGOV_GIVENNAMES"];
+            string smgov_surname = headers["SMGOV_SURNAME"];
+
 
             to.Emailaddress1 = smgov_useremail;
+            to.Firstname = smgov_givenname;
+            to.Middlename = smgov_givennames;
+            to.Lastname = smgov_surname;
             to.Address1Line1 = smgov_streetaddress;            
             to.Address1Postalcode = smgov_postalcode;
             to.Address1City = smgov_city;            
@@ -115,11 +122,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             // Male / Female / Unknown. 
             string smgov_sex = headers["SMGOV_SEX"];
             string smgov_givenname = headers["SMGOV_GIVENNAME"];
+            string smgov_givennames = headers["SMGOV_GIVENNAMES"];
             string smgov_surname = headers["SMGOV_SURNAME"];
 
             if (!string.IsNullOrEmpty(smgov_givenname)) {
                 to.AdoxioFirstname = smgov_givenname;
             }
+
+            if (!string.IsNullOrEmpty(smgov_givennames))
+            {
+                to.AdoxioMiddlename = smgov_givennames;
+            }
+
             if (!string.IsNullOrEmpty(smgov_surname))
             {
                 to.AdoxioLastname = smgov_surname;

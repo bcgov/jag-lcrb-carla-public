@@ -58,9 +58,9 @@ export class WorkerApplicationComponent implements OnInit {
     this.form = this.fb.group({
       contact: this.fb.group({
         id: [],
-        firstname: ['', Validators.required],
+        firstname: [''],
         middlename: [''],
-        lastname: ['', Validators.required],
+        lastname: [''],
         emailaddress1: [''],
         telephone1: [''],
         address1_line1: ['', Validators.required],
@@ -72,11 +72,11 @@ export class WorkerApplicationComponent implements OnInit {
       worker: this.fb.group({
         id: [],
         isldbworker: [false],
-        firstname: ['', Validators.required],
+        firstname: [''],
         middlename: [''],
-        lastname: ['', Validators.required],
-        dateofbirth: ['', Validators.required],
-        gender: ['', Validators.required],
+        lastname: [''],
+        dateofbirth: [''],
+        gender: [''],
         birthplace: ['', Validators.required],
         driverslicencenumber: ['', Validators.required],
         bcidcardnumber: ['', Validators.required],
