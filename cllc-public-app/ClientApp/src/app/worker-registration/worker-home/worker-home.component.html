@@ -3,10 +3,13 @@
   <div class="row">
     <div class="col-lg-7 col-sm-12">
       <app-policy-document #policyDocs></app-policy-document>
-      <p></p>
-      <button class="btn btn-primary" (click)="openRegisterDialog()">REGISTER NOW</button>
-      <a class="btn btn-primary" href="bcservice">LOGIN</a>
-    </div>
+      <p>Please select an option below:</p>
+
+      <p>I’m a B.C. resident with a BC Services Card Account <a class="btn btn-primary" href="bcservice">LOGIN</a></p>
+      <p>I’m a B.C. resident but I don't have a BC Services Card Account <a class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/login-with-card">SET UP ACCOUNT</a></p>
+      <p>I’m not a B.C. resident, send me a Cannabis Worker Registration form. <a class="btn btn-primary" href="mailto:cannabis.worker@gov.bc.ca">REQUEST FORM</a></p>
+
+</div>
     <div class="col-lg-4 col-sm-12" style="position: relative">
       <!-- <div [ngBusy]="busy"></div> -->
       <p></p>
