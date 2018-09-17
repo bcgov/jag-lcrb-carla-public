@@ -537,6 +537,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
                 }
 
+                // add the worker settings if it is a new user.
+                if (userSettings.IsNewUserRegistration && userSettings.NewContact == null)
+                {
+                    userSettings.NewContact = new ViewModels.Contact();
+                    userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+                }
+
                 // **************************************************
                 // Update user settings
                 // **************************************************                

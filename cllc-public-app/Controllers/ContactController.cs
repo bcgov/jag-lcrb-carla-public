@@ -278,7 +278,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null)
             {
                 // get additional information from the service card headers.
-                contact.CopyValues(userSettings.NewWorker);
+                contact.CopyValues(userSettings.NewContact);
                 worker.CopyValues(userSettings.NewWorker);                
             }
 
