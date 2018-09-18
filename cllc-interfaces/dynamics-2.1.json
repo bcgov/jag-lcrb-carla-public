@@ -20727,6 +20727,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_businessprogramaccountreferencenumber": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_adoxio_policejurisdiction_value": {
           "type": "string",
           "x-nullable": true
@@ -20942,7 +20946,7 @@
           }
         }
       }
-    },
+    },      
     "Microsoft.Dynamics.CRM.adoxio_licencetypeprerequisite": {
       "title": "adoxio_licencetypeprerequisite",
       "type": "object",
