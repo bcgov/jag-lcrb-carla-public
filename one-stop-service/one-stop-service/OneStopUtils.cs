@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send an export to SPD.
         /// </summary>
-        public async Task SendLicenceCreationMessage(PerformContext hangfireContext)
+        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuild)
         {
             hangfireContext.WriteLine("Starting SPD Export Job.");
 
