@@ -101,18 +101,13 @@ const routes: Routes = [
     canDeactivate: [CanDeactivateGuard],
     canActivate: [ServiceCardAuthGuard]
   },
-  {
-    path: 'worker-registration',
-    component: WorkerRegistrationComponent,
-    canActivate: [ServiceCardAuthGuard],
-    children: [
-      {
-        path: 'pre-payment/:id',
-        component: PrePaymentComponent
-      },
-
-    ]
-  },
+  // {
+  //   path: 'worker-registration',
+  //   component: WorkerRegistrationComponent,
+  //   canActivate: [ServiceCardAuthGuard],
+  //   children: [
+  //   ]
+  // },
   // {
   //   path: 'business-profile/:accountId/:legalEntityId',
   //   component: BusinessProfileComponent,
