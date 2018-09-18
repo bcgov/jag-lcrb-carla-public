@@ -152,30 +152,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
             contact.CopyValues(item);
-            string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
-            contact.Externaluseridentifier = userSettings.UserId;
+            
 
             if (userSettings.IsNewUserRegistration)
             {
                 // get additional information from the service card headers.
                 contact.CopyHeaderValues( _httpContextAccessor );
-            }
+            }        
 
-            //clean externalId    
-            var externalId = "";
-            var tokens = sanitizedAccountSiteminderId.Split('|');
-            if (tokens.Length > 0)
-            {
-                externalId = tokens[0];
-            }
-
-            if (!string.IsNullOrEmpty(externalId))
-            {
-                tokens = externalId.Split(':');
-                externalId = tokens[tokens.Length - 1];
-            }
-
-            contact.AdoxioExternalid = externalId;
+            contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
             try
             {
                 contact = await _dynamicsClient.Contacts.CreateAsync(contact);
