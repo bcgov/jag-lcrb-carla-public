@@ -10,7 +10,7 @@ node('nodejs') {
 				// sh 'export DISPLAY=:1'
 				sh 'npm install -g @angular/cli'
 				sh 'npm install'
-                sh 'ng e2e --no-serve --base-href=http://cannabis-licensing-dev.pathfinder.bcgov'
+                sh 'ng e2e config cli.warnings.versionMismatch false --no-serve --base-href=http://cannabis-licensing-dev.pathfinder.bcgov'
 	    } finally {
 		        archiveArtifacts allowEmptyArchive: true, artifacts: 'e2e-reports/**/*'                
                 junit 'junitresults.xml'
