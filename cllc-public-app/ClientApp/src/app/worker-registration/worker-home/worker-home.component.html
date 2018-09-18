@@ -5,11 +5,22 @@
       <app-policy-document #policyDocs></app-policy-document>
       <p>Please select an option below:</p>
 
-      <p>I’m a B.C. resident with a BC Services Card Account <a class="btn btn-primary" href="bcservice">LOGIN</a></p>
-      <p>I’m a B.C. resident but I don't have a BC Services Card Account <a class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/login-with-card">SET UP ACCOUNT</a></p>
-      <p>I’m not a B.C. resident, send me a Cannabis Worker Registration form. <a class="btn btn-primary" href="mailto:cannabis.worker@gov.bc.ca">REQUEST FORM</a></p>
+      <p class="login-cont">
+        <strong style="margin-top: 10px">I’m a B.C. resident with a BC Services Card Account</strong>
+        <a  class="btn btn-primary" href="bcservice">LOGIN</a>
+      </p>
+      <p class="login-cont">
+        <strong style="margin-top: 10px">I’m a B.C. resident but I don't have a BC Services Card Account</strong>
+        <a  class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/login-with-card">SET
+          UP ACCOUNT</a>
+      </p>
+      <p class="login-cont">
+        <strong style="margin-top: 10px">I’m not a B.C. resident, send me a Cannabis Worker Registration form.</strong>
+        <a  class="btn btn-primary" href="mailto:cannabis.worker@gov.bc.ca">REQUEST
+          FORM</a>
+      </p>
 
-</div>
+    </div>
     <div class="col-lg-4 col-sm-12" style="position: relative">
       <!-- <div [ngBusy]="busy"></div> -->
       <p></p>
@@ -25,7 +36,8 @@
           </tr>
         </table>
         <div class="submit-content">
-          <p>B.C. residents who have lived in the province for at least six months must use a BC Services Card to log in
+          <p>B.C. residents who have lived in the province for at least six months must use a BC Services Card to log
+            in
             to the Cannabis Worker Registry. Learn how to get a card.
           </p>
           <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary">READ MORE</button>
@@ -43,7 +55,8 @@
           </tr>
         </table>
         <div class="submit-content">
-          <p>Applicants who haven’t lived in B.C. for at least six months or who live outside the province must email the
+          <p>Applicants who haven’t lived in B.C. for at least six months or who live outside the province must email
+            the
             Liquor and Cannabis Regulation Branch for a Worker Registration Application Form.</p>
         </div>
       </section>
