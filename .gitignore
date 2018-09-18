@@ -10,3 +10,4 @@ cllc-public-app/ClientApp/e2e-reports
 .vscode/tasks.json
 one-stop-service/one-stop-service/bin/
 one-stop-service/one-stop-service/obj/
+one-stop-service/.vs/one-stop-service/v15/
