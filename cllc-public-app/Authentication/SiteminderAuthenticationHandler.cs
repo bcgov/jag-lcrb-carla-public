@@ -457,15 +457,19 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.SiteMinderBusinessGuid = siteMinderBusinessGuid;
                 _logger.LogDebug("Before getting contact and account ids = " + userSettings.GetJson());
 
-				if (userSettings.AuthenticatedUser != null && siteMinderBusinessGuid != null)
+                if (userSettings.AuthenticatedUser != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
-                    var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
-                    if (account != null && account.Accountid != null)
-                    {
-                        userSettings.AccountId = account.Accountid;
-                        userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
-                    }
+
+                    if (siteMinderBusinessGuid != null) // BCeID user
+                    {                        
+                        var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                        if (account != null && account.Accountid != null)
+                        {
+                            userSettings.AccountId = account.Accountid;
+                            userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
+                        }
+                    }                    
                 }
 
 				if (!hostingEnv.IsProduction() && (isDeveloperLogin || isBCSCDeveloperLogin))

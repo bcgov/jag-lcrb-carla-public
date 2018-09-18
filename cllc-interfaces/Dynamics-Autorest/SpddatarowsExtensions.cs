@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     /// <summary>
     /// Extension methods for Spddatarows.
     /// </summary>
-    public static partial class PersonalhistorysummaryExtensions
+    public static partial class SpddatarowsExtensions
     {
             /// <summary>
             /// Get entities from adoxio_spddatarows
