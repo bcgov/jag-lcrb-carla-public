@@ -360,11 +360,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
-        public static async Task<MicrosoftDynamicsCRMcontact> GetContactBySiteminderGuid(this IDynamicsClient system, string siteminderId)
+        public static MicrosoftDynamicsCRMcontact GetContactByExternalId(this IDynamicsClient system, string siteminderId)
         {
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
-            var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
+            var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
             result = contactsResponse.Value.FirstOrDefault();
             return result;
         }
@@ -473,22 +473,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 if (Guid.TryParse(userId, out userGuid))
                 {
-                    user = await _dynamicsClient.GetUserBySmUserId(userId);
+                    user = _dynamicsClient.GetUserBySmUserId(userId);
                 }
                 else
                 { //BC service card login
 
                     string externalId = GetServiceCardID(userId);
+                    contact = _dynamicsClient.GetContactByExternalId(externalId);
 
-                    var filter = "adoxio_externalid eq " + userId;
-                    try
-                    {
-                        contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
-                    }
-                    catch (OdataerrorException)
-                    {
-                        contact = null;
-                    }
                     if (contact != null)
                     {
                         user = new User();
@@ -541,11 +533,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="context"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> GetUserBySmUserId(this IDynamicsClient _dynamicsClient, string guid)
+        public static User GetUserBySmUserId(this IDynamicsClient _dynamicsClient, string guid)
         {
             Guid id = new Guid(guid);
             User user = null;
-            var contact = await _dynamicsClient.GetContactBySiteminderGuid(id.ToString());
+            var contact = _dynamicsClient.GetContactByExternalId(id.ToString());
             if (contact != null)
             {
                 user = new User();
