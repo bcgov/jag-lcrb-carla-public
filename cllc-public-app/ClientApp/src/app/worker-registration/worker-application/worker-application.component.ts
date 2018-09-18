@@ -14,7 +14,7 @@ import { Observable, Subject } from 'rxjs';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-worker-application',
@@ -47,6 +47,7 @@ export class WorkerApplicationComponent implements OnInit {
     private contactDataService: ContactDataService,
     private workerDataService: WorkerDataService,
     private fb: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
@@ -339,5 +340,27 @@ export class WorkerApplicationComponent implements OnInit {
 
   isAscending(fromDate: string, toDate: string) {
     return new Date(toDate) >= new Date(fromDate);
+  }
+
+  gotoStep2() {
+    if (this.form.valid) {
+      this.router.navigate([`/worker-registration/spd-consent/${this.workerId}`]);
+    } else {
+      this.form.markAsTouched();
+      (<FormGroup[]>this.addresses.controls).forEach(address => {
+        for (const c in address.controls) {
+          if (typeof (address.controls[c].markAsTouched) === 'function') {
+            address.controls[c].markAsTouched();
+          }
+        }
+      });
+      (<FormGroup[]>this.aliases.controls).forEach(alias => {
+        for (const c in alias.controls) {
+          if (typeof (alias.controls[c].markAsTouched) === 'function') {
+          alias.controls[c].markAsTouched();
+          }
+        }
+      });
+    }
   }
 }
