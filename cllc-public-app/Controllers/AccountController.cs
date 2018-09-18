@@ -347,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
             }
             catch (OdataerrorException odee)
             {
