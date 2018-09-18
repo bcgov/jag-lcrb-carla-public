@@ -8,7 +8,8 @@
         <h1>Consent for Cannabis Security Screening</h1>
 
         <p>
-          In step two, you consent to a criminal background check. Please read the declaration before agreeing. You must also download,
+          In step two, you consent to a criminal background check. Please read the declaration before agreeing. You
+          must also download,
           read and upload a signed consent form.
         </p>
 
@@ -17,85 +18,109 @@
         </p>
 
         <h2 class="blue-header">CRIMINAL BACKGROUND</h2>
-        <label for="">Have you ever been charged or convicted of a criminal offence?</label>
-        <br>
-        <input type="radio" [value]="true" formControlName="selfdisclosure" name="selfdisclosure"> YES &nbsp;
-        <input type="radio" [value]="false" formControlName="selfdisclosure" name="selfdisclosure"> NO
-        <br>
-        <div *ngIf="showValidationMessages && !isCriminalBackgroundValid()" style="color: #A12622; margin-top: 2px;">
-          <div *ngIf="!name.valid && name.touched ">
-            Please select “yes” or “no.”
+        <section style="padding-left: 10px;">
+          <label for="">Have you ever been charged or convicted of a criminal offence?</label>
+          <br>
+          <input type="radio" [value]="true" formControlName="selfdisclosure" name="selfdisclosure"> YES &nbsp;
+          <input type="radio" [value]="false" formControlName="selfdisclosure" name="selfdisclosure"> NO
+          <br>
+          <div *ngIf="showValidationMessages && !isCriminalBackgroundValid()" style="color: #A12622; margin-top: 2px;">
+            <div *ngIf="!name.valid && name.touched ">
+              Please select “yes” or “no.”
+            </div>
           </div>
-        </div>
-        <p>
-          This includes <strong>ALL</strong> charges or convictions, including information as a Young Offender pursuant to
-          Section 119(1)(o) of the Youth Criminal Justice Act, <strong>regardless of the outcome</strong>, convictions that
-          have received a record suspension and charges resulting in non-convictions.
-        </p>
-
+          <p>
+            This includes <strong>ALL</strong> charges or convictions, including information as a Young Offender
+            pursuant
+            to
+            Section 119(1)(o) of the Youth Criminal Justice Act, <strong>regardless of the outcome</strong>,
+            convictions
+            that
+            have received a record suspension and charges resulting in non-convictions.
+          </p>
+        </section>
         <h2 class="blue-header">DECLARATION AND CONSENT</h2>
-        <div *ngIf="showValidationMessages && !isDeclarationValid()" style="color: #A12622; margin-top: 2px;">
-          <div *ngIf="!name.valid && name.touched ">
-            Please read the declaration and consent and select the check boxes.
+        <section style="padding-left: 10px;">
+          <div *ngIf="showValidationMessages && !isDeclarationValid()" style="color: #A12622; margin-top: 2px;">
+            <div *ngIf="!name.valid && name.touched ">
+              Please read the declaration and consent and select the check boxes.
+            </div>
           </div>
-        </div>
-        <section style="display: flex">
-          <input type="checkbox" [(ngModel)]="consentToCollection" [ngModelOptions]="{standalone: true}"> &nbsp;
-          <span>
-            I, the undersigned, do hereby consent to the collection and disclosure by the Royal Canadian Mounted Police (RCMP) and other
-            law enforcement agencies, as well as other duly authorized agencies of the government, of any and all information
-            related to the security screening checks in support of this application for up to two years. This may include
-            some or all of: (a) criminal record check or fingerprint-based criminal record verification by searching the
-            Canadian Police Information Centre database; (b) a police information check; (c) a check of intelligence databases
-            maintained by law enforcement agencies; (d) a check of records in the justice information system of the Ministry
-            of Attorney General and; (e) a check of records in the corrections information system of the Ministry of Public
-            Safety and Solicitor General.
-          </span>
-        </section>
-        <br>
-        <section style="display: flex">
-          <input type="checkbox" [(ngModel)]="infoAccurate" [ngModelOptions]="{standalone: true}"> &nbsp;
-          <span>
-            I certify that, to the best of my knowledge, the information I have provided on my application and will provide as necessary
-            is complete, honest and accurate. I understand that a false statement or omission of facts herein may lead to
-            a denial of a cannabis workers registration. I am also aware that later discovery of an omission or misrepresentation
-            may be grounds for any finding of suitability to be suspended or revoked.
-          </span>
-        </section>
-        <p></p>
+          <section style="display: flex">
+            <input type="checkbox" [(ngModel)]="consentToCollection" [ngModelOptions]="{standalone: true}"> &nbsp;
+            <span>
+              I, the undersigned, do hereby consent to the collection and disclosure by the Royal Canadian Mounted
+              Police
+              (RCMP) and other
+              law enforcement agencies, as well as other duly authorized agencies of the government, of any and all
+              information
+              related to the security screening checks in support of this application for up to two years. This may
+              include
+              some or all of: (a) criminal record check or fingerprint-based criminal record verification by searching
+              the
+              Canadian Police Information Centre database; (b) a police information check; (c) a check of intelligence
+              databases
+              maintained by law enforcement agencies; (d) a check of records in the justice information system of the
+              Ministry
+              of Attorney General and; (e) a check of records in the corrections information system of the Ministry of
+              Public
+              Safety and Solicitor General.
+            </span>
+          </section>
+          <br>
+          <section style="display: flex">
+            <input type="checkbox" [(ngModel)]="infoAccurate" [ngModelOptions]="{standalone: true}"> &nbsp;
+            <span>
+              I certify that, to the best of my knowledge, the information I have provided on my application and will
+              provide as necessary
+              is complete, honest and accurate. I understand that a false statement or omission of facts herein may
+              lead
+              to
+              a denial of a cannabis workers registration. I am also aware that later discovery of an omission or
+              misrepresentation
+              may be grounds for any finding of suitability to be suspended or revoked.
+            </span>
+          </section>
+          <p></p>
 
-        <label for="">Applicant Name</label>
-        <br>
-        <input type="text" class="form-control" required [(ngModel)]="signName" [ngModelOptions]="{standalone: true}" style="width: 350px"
-          #name="ngModel">
-        <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622;"></i>
-        <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622; margin-left: -6px;"></i>
-        <div *ngIf="!name.valid && name.touched" style="color: #A12622; width: 350px; margin-top: 2px;">
-          <div *ngIf="!name.valid && name.touched ">
-            Please enter your full legal name.
+          <label for="">Applicant Name</label>
+          <br>
+          <input type="text" class="form-control" required [(ngModel)]="signName" [ngModelOptions]="{standalone: true}"
+            style="width: 350px" #name="ngModel">
+          <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622;"></i>
+          <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622; margin-left: -6px;"></i>
+          <div *ngIf="!name.valid && name.touched" style="color: #A12622; width: 350px; margin-top: 2px;">
+            <div *ngIf="!name.valid && name.touched ">
+              Please enter your full legal name.
+            </div>
           </div>
-        </div>
-        <p></p>
+          <p></p>
+        </section>
 
         <h2 class="blue-header">SIGNATURE</h2>
+        <section style="padding-left: 10px;">
 
-        <h3>1. Download Signature Form</h3>
-        <p>The Worker Registration Application and the Consent for Cannabis Security Screening require the applicant’s signature.
-          Digital signatures are not permitted.</p>
-        <button class="btn btn-primary">
-          <i class="fas fa-download"></i>
-          CLICK TO DOWNLOAD SIGNITURE FORM</button>
+          <h3>1. Download Signature Form</h3>
+          <p>The Worker Registration Application and the Consent for Cannabis Security Screening require the
+            applicant’s
+            signature.
+            Digital signatures are not permitted.</p>
+          <button class="btn btn-primary">
+            <i class="fas fa-download"></i>
+            CLICK TO DOWNLOAD SIGNITURE FORM</button>
 
-        <h3>2. Complete and Scan Signature Form</h3>
-        <p>Sign and make a high-resolution scan of the form.</p>
+          <h3>2. Complete and Scan Signature Form</h3>
 
-        <h3>3. Upload Completed Signature Form</h3>
-        <p>
-          Upload your completed form before continuing to Step 3.</p>
+          <p>Sign and make a high-resolution scan of the form.</p>
+
+          <h3>3. Upload Completed Signature Form</h3>
+          <p>
+            Upload your completed form before continuing to Step 3.</p>
+        </section>
 
         <section>
-          <app-file-uploader *ngIf="workerId" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false"
-            entityName="worker" [entityId]="workerId" #mainForm></app-file-uploader>
+          <app-file-uploader *ngIf="workerId" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT."
+            [multipleFiles]="false" entityName="worker" [entityId]="workerId" #mainForm></app-file-uploader>
         </section>
         <div *ngIf="showValidationMessages &&  (!mainForm || !mainForm.files || mainForm.files.length < 1)" style="color: #A12622; width: 700px; margin: auto; margin-top: 2px;">
           <span>Please upload your completed signature form. Ensure it is less than 25MB.</span>
@@ -104,6 +129,13 @@
         </div>
 
         <P>&nbsp;</P>
+
+        <h2 class="blue-header">FEE PAYMENT</h2>
+        <section style="padding-left: 10px;">
+          <p>You are now ready to submit and pay. The application fee is $100</p>
+          <p>You'll make your payment through BC ExpressPay, a secure government service. It takes Mastercard and Visa
+            debit and credit cards and American Express.</p>
+        </section>
 
         <section *ngIf="showValidationMessages" style="color: #A12622; background-color: #F2F2F2; padding: 10px">
           <i class="fas fa-exclamation-triangle"></i>
@@ -115,11 +147,10 @@
           <button class="btn btn-secondary" routerLink="/worker-registration/dashboard">
             <i class="fa fa-save"></i>
             SAVE FOR LATER</button>
-          <button style="margin-left: 10px;" routerLink="/worker-registration/application/{{workerId}}" class="btn btn-secondary">RETURN TO STEP 1
+          <button style="margin-left: 10px;" routerLink="/worker-registration/application/{{workerId}}" class="btn btn-secondary">RETURN
+            TO STEP 1
           </button>
-          <button style="margin-left: 10px;" (click)="goToNextStep()" class="btn btn-primary">SAVE & CONTINUE TO STEP 3
-            <i class="fas fa-chevron-right"></i>
-          </button>
+          <button style="margin-left: 10px;" (click)="goToNextStep()" class="btn btn-primary">SUBMIT & PAY</button>
         </span>
       </div>
     </div>
@@ -138,8 +169,8 @@
           </tr>
         </table>
         <div class="submit-content">
-          <p>For question about criminal record checks, contact the Criminal Records Review Program Monday tdo Friday, 8:30
-            a.m. - 4:30 p.m.</p>
+          <p>For question about criminal record checks, contact the Criminal Records Review Program Monday tdo Friday,
+            8:30 a.m. - 4:30 p.m.</p>
           <section>
             <i class="fas fa-fax"></i>&nbsp; <strong>Fax</strong>: 250 356-1889
           </section>
@@ -151,15 +182,38 @@
           </section>
         </div>
       </section>
+      <section class="submit-container">
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-envelope"></i></h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Contact BC ExpressPay</h2>
+            </td>
+          </tr>
+        </table>
+        <div class="submit-content">
+          <p>For help paying, contact BC ExpressPay Monday to Friday, 8:30 a.m. - 4:30 p.m.</p>
+          <section>
+            <i class="fas fa-envelope"></i>&nbsp; <strong>Email</strong>: BCEPSupport@gov.bc.ca
+          </section>
+        </div>
+      </section>
       <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none;">
         <h2 style="color: #000">Collection Notice:</h2>
         <div class="submit-content">
           <p>
-            The Security Programs Division (SPD) will collect your personal information for the purpose of fulfilling the requirements
-            of the Cannabis Control and Licensing Act (CCLA) and associated regulations in accordance with Sections 26 (a)
-            and (c) of the Freedom of Information and Protection of Privacy Act. Should you have any questions about the
-            collection, use, or disclosure of personal information, please contact the Senior Policy Analyst, Security Programs
-            Division via mail to PO Box 9217 Stn Prov Govt Victoria, BC V8W 9J1; email to cannabissecurityscreening@gov.bc.ca;
+            The Security Programs Division (SPD) will collect your personal information for the purpose of fulfilling
+            the requirements
+            of the Cannabis Control and Licensing Act (CCLA) and associated regulations in accordance with Sections 26
+            (a)
+            and (c) of the Freedom of Information and Protection of Privacy Act. Should you have any questions about
+            the
+            collection, use, or disclosure of personal information, please contact the Senior Policy Analyst, Security
+            Programs
+            Division via mail to PO Box 9217 Stn Prov Govt Victoria, BC V8W 9J1; email to
+            cannabissecurityscreening@gov.bc.ca;
             or by telephone at 1-855-587-0185.</p>
         </div>
       </section>
