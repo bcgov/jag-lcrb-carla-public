@@ -426,6 +426,32 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
+        /// Convert a service card ID string into a format that is useful (and fits into Dynamics)
+        /// </summary>
+        /// <param name="raw"></param>
+        /// <returns></returns>
+        public static string GetServiceCardID (string raw)
+        {
+            string result = "";
+            if (! string.IsNullOrEmpty(raw))
+            {
+                var tokens = raw.Split('|');
+                if (tokens.Length > 0)
+                {
+                    result = tokens[0];
+                }
+
+                if (!string.IsNullOrEmpty(result))
+                {
+                    tokens = result.Split(':');
+                    result = tokens[tokens.Length - 1];
+                }
+            }
+            
+            return result;
+        }
+
+        /// <summary>
         /// Load User from database using their userId and guid
         /// </summary>
         /// <param name="context"></param>
@@ -451,7 +477,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 else
                 { //BC service card login
-                    var filter = "externaluseridentifier eq " + userId;
+
+                    string externalId = GetServiceCardID(userId);
+
+                    var filter = "adoxio_externalid eq " + userId;
                     try
                     {
                         contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
