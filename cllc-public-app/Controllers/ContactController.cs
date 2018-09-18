@@ -133,7 +133,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     throw new Exception("Contact already Exists");
@@ -235,7 +235,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     throw new Exception("Contact already Exists");
@@ -266,25 +266,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 contact.CopyValues(userSettings.NewContact);
                 worker.CopyValues(userSettings.NewWorker);                
             }
+            
+            contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
 
-            string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
-            contact.Externaluseridentifier = userSettings.UserId;
-
-            //clean externalId    
-            var externalId = "";
-            var tokens = sanitizedAccountSiteminderId.Split('|');
-            if (tokens.Length > 0)
-            {
-                externalId = tokens[0];
-            }
-
-            if (!string.IsNullOrEmpty(externalId))
-            {
-                tokens = externalId.Split(':');
-                externalId = tokens[tokens.Length - 1];
-            }
-
-            contact.AdoxioExternalid = externalId;
             try
             {
                 //worker.AdoxioContactId = contact;
