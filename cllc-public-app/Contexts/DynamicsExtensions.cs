@@ -360,11 +360,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="siteminderId"></param>
         /// <returns></returns>
-        public static async Task<MicrosoftDynamicsCRMcontact> GetContactBySiteminderGuid(this IDynamicsClient system, string siteminderId)
+        public static MicrosoftDynamicsCRMcontact GetContactByExternalId(this IDynamicsClient system, string siteminderId)
         {
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
-            var contactsResponse = await system.Contacts.GetAsync(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
+            var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
             result = contactsResponse.Value.FirstOrDefault();
             return result;
         }
@@ -426,6 +426,32 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
+        /// Convert a service card ID string into a format that is useful (and fits into Dynamics)
+        /// </summary>
+        /// <param name="raw"></param>
+        /// <returns></returns>
+        public static string GetServiceCardID (string raw)
+        {
+            string result = "";
+            if (! string.IsNullOrEmpty(raw))
+            {
+                var tokens = raw.Split('|');
+                if (tokens.Length > 0)
+                {
+                    result = tokens[0];
+                }
+
+                if (!string.IsNullOrEmpty(result))
+                {
+                    tokens = result.Split(':');
+                    result = tokens[tokens.Length - 1];
+                }
+            }
+            
+            return result;
+        }
+
+        /// <summary>
         /// Load User from database using their userId and guid
         /// </summary>
         /// <param name="context"></param>
@@ -447,19 +473,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 if (Guid.TryParse(userId, out userGuid))
                 {
-                    user = await _dynamicsClient.GetUserBySmUserId(userId);
+                    user = _dynamicsClient.GetUserBySmUserId(userId);
                 }
                 else
                 { //BC service card login
-                    var filter = "externaluseridentifier eq " + userId;
-                    try
-                    {
-                        contact = _dynamicsClient.Contacts.Get(filter: filter).Value.FirstOrDefault();
-                    }
-                    catch (OdataerrorException)
-                    {
-                        contact = null;
-                    }
+
+                    string externalId = GetServiceCardID(userId);
+                    contact = _dynamicsClient.GetContactByExternalId(externalId);
+
                     if (contact != null)
                     {
                         user = new User();
@@ -512,11 +533,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="context"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> GetUserBySmUserId(this IDynamicsClient _dynamicsClient, string guid)
+        public static User GetUserBySmUserId(this IDynamicsClient _dynamicsClient, string guid)
         {
             Guid id = new Guid(guid);
             User user = null;
-            var contact = await _dynamicsClient.GetContactBySiteminderGuid(id.ToString());
+            var contact = _dynamicsClient.GetContactByExternalId(id.ToString());
             if (contact != null)
             {
                 user = new User();
