@@ -133,7 +133,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     throw new Exception("Contact already Exists");
@@ -152,30 +152,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
             contact.CopyValues(item);
-            string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
-            contact.Externaluseridentifier = userSettings.UserId;
+            
 
             if (userSettings.IsNewUserRegistration)
             {
                 // get additional information from the service card headers.
                 contact.CopyHeaderValues( _httpContextAccessor );
-            }
+            }        
 
-            //clean externalId    
-            var externalId = "";
-            var tokens = sanitizedAccountSiteminderId.Split('|');
-            if (tokens.Length > 0)
-            {
-                externalId = tokens[0];
-            }
-
-            if (!string.IsNullOrEmpty(externalId))
-            {
-                tokens = externalId.Split(':');
-                externalId = tokens[tokens.Length - 1];
-            }
-
-            contact.AdoxioExternalid = externalId;
+            contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
             try
             {
                 contact = await _dynamicsClient.Contacts.CreateAsync(contact);
@@ -231,7 +216,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("worker")]
         public async Task<IActionResult> CreateWorkerContact([FromBody] ViewModels.Contact item)
         {
-
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -250,7 +234,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // see if the contact exists.
             try
             {
-                userContact = await _dynamicsClient.GetContactBySiteminderGuid(contactSiteminderGuid);
+                userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     throw new Exception("Contact already Exists");
@@ -281,29 +265,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 contact.CopyValues(userSettings.NewContact);
                 worker.CopyValues(userSettings.NewWorker);                
             }
+            
+            contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
 
-            string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
-            contact.Externaluseridentifier = userSettings.UserId;
-
-            //clean externalId    
-            var externalId = "";
-            var tokens = sanitizedAccountSiteminderId.Split('|');
-            if (tokens.Length > 0)
-            {
-                externalId = tokens[0];
-            }
-
-            if (!string.IsNullOrEmpty(externalId))
-            {
-                tokens = externalId.Split(':');
-                externalId = tokens[tokens.Length - 1];
-            }
-
-            contact.AdoxioExternalid = externalId;
             try
             {
-                //worker.AdoxioContactId = contact;
-
                 worker.AdoxioContactId = contact;
 
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
