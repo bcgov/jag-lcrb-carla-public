@@ -216,7 +216,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("worker")]
         public async Task<IActionResult> CreateWorkerContact([FromBody] ViewModels.Contact item)
         {
-
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -271,8 +270,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                //worker.AdoxioContactId = contact;
-
                 worker.AdoxioContactId = contact;
 
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
