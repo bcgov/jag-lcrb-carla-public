@@ -33,6 +33,7 @@ export class SpdConsentComponent implements OnInit {
     private fb: FormBuilder,
     private workerDataService: WorkerDataService,
     private userDataService: UserDataService,
+    private paymentDataService: PaymentDataService,
     private router: Router,
     private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -124,11 +125,24 @@ export class SpdConsentComponent implements OnInit {
 
   goToNextStep() {
     if (this.isValid()) {
-      this.router.navigate([`/worker-registration/pre-payment/${this.workerId}`]);
+      this.submitPayment();
     } else {
       this.showValidationMessages = true;
       this.nameInputRef.control.markAsTouched();
     }
+  }
+
+      /**
+   * Redirect to payment processing page (Express Pay / Bambora service)
+   * */
+  private submitPayment() {
+    this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
+      const jsonUrl = res.json();
+      window.location.href = jsonUrl['url'];
+      return jsonUrl['url'];
+    }, err => {
+      console.log('Error occured');
+    });
   }
 
 }
