@@ -26,7 +26,7 @@ export class WorkerApplicationComponent implements OnInit {
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;
-  busy2: Subscription;
+  busy2: Promise<any>;
   form: FormGroup;
 
   addressesToDelete: PreviousAddress[] = [];
@@ -99,17 +99,17 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   reloadUser() {
-    this.userDataService.getCurrentUser()
+    this.busy = this.userDataService.getCurrentUser()
       .subscribe((data: User) => {
         this.currentUser = data;
         this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-          Observable.forkJoin(
+          this.busy2 = Observable.forkJoin(
             this.workerDataService.getWorker(this.workerId),
             this.aliasDataService.getAliases(this.currentUser.contactid),
             this.previousAddressDataService.getPreviousAdderesses(this.currentUser.contactid)
-          ).subscribe(res => {
+          ).toPromise().then(res => {
             const worker = res[0];
             const contact = worker.contact;
             delete worker.contact;
@@ -279,7 +279,7 @@ export class WorkerApplicationComponent implements OnInit {
       }
     }
 
-    this.busy = Observable.zip(...saves).subscribe(res => {
+    this.busy2 = Observable.zip(...saves).toPromise().then(res => {
       subResult.next(true);
       this.reloadUser();
     }, err => subResult.next(false));
