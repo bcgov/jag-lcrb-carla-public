@@ -7,7 +7,7 @@ import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
 import { Observable, Subject } from 'rxjs';
@@ -79,8 +79,8 @@ export class WorkerApplicationComponent implements OnInit {
         dateofbirth: [''],
         gender: [''],
         birthplace: ['', Validators.required],
-        driverslicencenumber: ['', Validators.required],
-        bcidcardnumber: ['', Validators.required],
+        driverslicencenumber: [''],
+        bcidcardnumber: [''],
         phonenumber: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         selfdisclosure: [''],
@@ -343,24 +343,50 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   gotoStep2() {
-    if (this.form.valid) {
+    if (this.form.valid && this.isBCIDValid()) {
       this.router.navigate([`/worker-registration/spd-consent/${this.workerId}`]);
     } else {
-      this.form.markAsTouched();
-      (<FormGroup[]>this.addresses.controls).forEach(address => {
-        for (const c in address.controls) {
-          if (typeof (address.controls[c].markAsTouched) === 'function') {
-            address.controls[c].markAsTouched();
-          }
-        }
-      });
-      (<FormGroup[]>this.aliases.controls).forEach(alias => {
-        for (const c in alias.controls) {
-          if (typeof (alias.controls[c].markAsTouched) === 'function') {
-          alias.controls[c].markAsTouched();
-          }
-        }
-      });
+      this.markAsTouched();
     }
+  }
+
+  // marking the form as touched makes the validation messages show
+  markAsTouched() {
+    this.form.markAsTouched();
+
+    const workerControls = (<FormGroup>(this.form.get('worker'))).controls;
+    for (const c in workerControls) {
+      if (typeof (workerControls[c].markAsTouched) === 'function') {
+        workerControls[c].markAsTouched();
+      }
+    }
+
+    const contactControls = (<FormGroup>(this.form.get('contact'))).controls;
+    for (const c in contactControls) {
+      if (typeof (contactControls[c].markAsTouched) === 'function') {
+        contactControls[c].markAsTouched();
+      }
+    }
+
+    (<FormGroup[]>this.addresses.controls).forEach(address => {
+      for (const c in address.controls) {
+        if (typeof (address.controls[c].markAsTouched) === 'function') {
+          address.controls[c].markAsTouched();
+        }
+      }
+    });
+    (<FormGroup[]>this.aliases.controls).forEach(alias => {
+      for (const c in alias.controls) {
+        if (typeof (alias.controls[c].markAsTouched) === 'function') {
+          alias.controls[c].markAsTouched();
+        }
+      }
+    });
+  }
+
+  isBCIDValid(): boolean {
+    const valid = !!(this.form.get('worker.driverslicencenumber').value
+      || this.form.get('worker.bcidcardnumber').value);
+    return valid;
   }
 }

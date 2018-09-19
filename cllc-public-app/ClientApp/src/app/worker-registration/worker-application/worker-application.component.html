@@ -170,27 +170,21 @@
               </div>
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('worker.driverslicencenumber').valid && this.form.get('worker.driverslicencenumber').touched}">
+              <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BC Driver's Licence Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="driverslicencenumber">
-                <div *ngIf="!this.form.get('worker.driverslicencenumber').valid && this.form.get('worker.driverslicencenumber').touched"
-                  class="alert alert-danger" style="width: 250px;">
-                  <div *ngIf="!this.form.get('worker.driverslicencenumber').valid && this.form.get('worker.driverslicencenumber').touched ">
-                    This is required
-                  </div>
-                </div>
               </div>
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched}">
+              <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BCID Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="bcidcardnumber">
-                <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched" class="alert alert-danger"
+                <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" class="alert alert-danger"
                   style="width: 250px;">
-                  <div *ngIf="!this.form.get('worker.bcidcardnumber').valid && this.form.get('worker.bcidcardnumber').touched ">
-                    This is required
+                  <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)">
+                      You must enter either a BCID number or a driver’s licence number.
                   </div>
                 </div>
               </div>
@@ -571,7 +565,7 @@
             <div style="clear: both;"></div>
             <p></p>
           </div>
-          <section *ngIf="!form.valid" style="color: #A12622">
+          <section *ngIf="!(form.valid && isBCIDValid())" style="color: #A12622">
             <i class="fas fa-exclamation-triangle"></i> Some required fields have not been completed.
           </section>
           <section>
@@ -579,7 +573,7 @@
               <button class="btn btn-secondary" routerLink="/worker-registration/dashboard">
                 <i class="fa fa-save"></i>
                 SAVE FOR LATER</button>
-              <button (click)="gotoStep2()" class="btn btn-primary">SAVE & CONTINUE
+              <button style="margin-left: 10px" (click)="gotoStep2()" class="btn btn-primary">SAVE & CONTINUE
                 TO STEP 2 <i class="fas fa-chevron-right"></i></button>
             </span>
           </section>
