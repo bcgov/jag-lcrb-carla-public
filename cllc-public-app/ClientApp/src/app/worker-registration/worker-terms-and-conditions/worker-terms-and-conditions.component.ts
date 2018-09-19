@@ -10,6 +10,7 @@ export class WorkerTermsAndConditionsComponent implements OnInit {
   @Output() termsAccepted = new EventEmitter<boolean>();
   window = window;
   _termsAccepted: boolean;
+  acceptEmailUse: boolean;
 
   constructor() { }
 

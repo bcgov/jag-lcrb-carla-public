@@ -1,10 +1,9 @@
 <div class="dashboard-spacing">
-  <!-- <div [ngBusy]="busy"></div> -->
+  <div [ngBusy]="busy"></div>
   <div class="row">
     <div class="col-lg-7 col-sm-12">
       <div class="wrapper" [formGroup]="form">
         <h3><span class="step">STEP 1</span></h3>
-        <div [ngBusy]="busy"></div>
         <div *ngIf="dataLoaded">
           <section>
             <h1>
@@ -448,11 +447,42 @@
                 </div>
               </div>
             </section>
+            <section style="display: inline-block; vertical-align: top;">
+                <div [ngClass]="{'has-error': !form.get('contact.fromdate').valid && form.get('contact.fromdate').touched}">
+                  <label>Date: From</label>
+                  <br />
+                  <input type="text" formControlName='fromdate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+                    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                  <div *ngIf="form.get('contact.fromdate').touched && (!form.get('contact.fromdate').valid || form.get('contact.fromdate').valid  && !isAscending(form.get('contact.fromdate').value, form.get('contact.todate').value)) "
+                    class="alert alert-danger" style="width: 200px;">
+                    <div *ngIf="!form.get('contact.fromdate').valid">
+                      This is required
+                    </div>
+                    <div *ngIf="form.get('contact.fromdate').valid && !isAscending(form.get('contact.fromdate').value, form.get('contact.todate').value)">
+                      From Date should be less than To Date
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section style="display: inline-block; vertical-align: top; padding-left: 30px;">
+                <div [ngClass]="{'has-error': form.get('contact.fromdate').valid && form.get('contact.todate').valid  && !isAscending(form.get('contact.fromdate').value, form.get('contact.todate').value)}">
+                  <label>Date: To</label>
+                  <br />
+                  <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control" bsDatepicker
+                    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                  <div *ngIf="form.get('contact.todate').touched && (form.get('contact.fromdate').valid && form.get('contact.todate').valid  && !isAscending(form.get('contact.fromdate').value, form.get('contact.todate').value)) "
+                    class="alert alert-danger" style="width: 200px;">
+                    <div *ngIf="form.get('contact.fromdate').valid && form.get('contact.todate').valid  && !isAscending(form.get('contact.fromdate').value, form.get('contact.todate').value)">
+                      To Date should be greater than From Date
+                    </div>
+                  </div>
+                </div>
+              </section>
           </div>
           <hr>
           <div formArrayName="addresses">
             <p>Please list all addresses in the past 5 years.</p>
-            <section *ngIf="!validatePastAddresses()">
+            <section *ngIf="!pastAddressesAreValid()">
               You’ve provided fewer than five years of past addresses. Please enter at least five years.
             </section>
             <div *ngFor="let address of addresses.controls; let i = index">
@@ -565,7 +595,7 @@
             <div style="clear: both;"></div>
             <p></p>
           </div>
-          <section *ngIf="!(form.valid && isBCIDValid())" style="color: #A12622">
+          <section *ngIf="!(form.valid && isBCIDValid()) && form.touched" style="color: #A12622">
             <i class="fas fa-exclamation-triangle"></i> Some required fields have not been completed.
           </section>
           <section>
