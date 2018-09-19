@@ -38,45 +38,27 @@
                     </div>
                   </section> -->
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('worker.firstname').valid && this.form.get('worker.firstname').touched}">
+              <div >
                 <label>First Name</label>
                 <br />
                 <input class="form-control" style="max-width: 450px; min-width: 250px;" readonly type="text"
                   formControlName="firstname">
-                <div *ngIf="!this.form.get('worker.firstname').valid && this.form.get('worker.firstname').touched"
-                  class="alert alert-danger" style="max-width: 450px; min-width: 250px;">
-                  <div *ngIf="!this.form.get('worker.firstname').valid && this.form.get('worker.firstname').touched ">
-                    This is required
-                  </div>
-                </div>
               </div>
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('worker.middlename').valid && this.form.get('worker.middlename').touched}">
+              <div>
                 <label>Middle Name</label>
                 <br />
                 <input class="form-control" style="max-width: 450px; min-width: 250px;" readonly type="text"
                   formControlName="middlename">
-                <div *ngIf="!this.form.get('worker.middlename').valid && this.form.get('worker.middlename').touched"
-                  class="alert alert-danger" style="max-width: 450px; min-width: 250px;">
-                  <div *ngIf="!this.form.get('worker.middlename').valid && this.form.get('worker.middlename').touched ">
-                    This is required
-                  </div>
-                </div>
               </div>
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched}">
+              <div>
                 <label>Last Name</label>
                 <br />
                 <input class="form-control" style="max-width: 450px; min-width: 250px;" readonly type="text"
                   formControlName="lastname">
-                <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched" class="alert alert-danger"
-                  style="max-width: 450px; min-width: 250px;">
-                  <div *ngIf="!this.form.get('worker.lastname').valid && this.form.get('worker.lastname').touched ">
-                    This is required
-                  </div>
-                </div>
               </div>
             </section>
 
@@ -150,30 +132,18 @@
               </div>
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched}">
+              <div>
                 <label>Date of Birth</label>
                 <br />
-                <input type="text" formControlName='dateofbirth' readonly disabled style="width: 250px;" placeholder="yyyy-mm-dd"
+                <input type="text" formControlName='dateofbirth' readonly  style="width: 250px;" placeholder="yyyy-mm-dd"
                   class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
-                <div *ngIf="!this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched"
-                  class="alert alert-danger" style="width: 250px;">
-                  <div *ngIf="!this.form.get('worker.dateofbirth').valid && this.form.get('worker.dateofbirth').touched ">
-                    This is required
-                  </div>
-                </div>
               </div>
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('worker.gender').valid && this.form.get('worker.gender').touched}">
+              <div>
                 <label>Sex</label>
                 <br />
-                <input type="text" formControlName='gender' readonly disabled style="width: 250px;" name="gender" class="form-control">
-                <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched" class="alert alert-danger"
-                  style="width: 250px;">
-                  <div *ngIf="!this.form.get('worker.gender').valid && this.form.get('worker.gender').touched ">
-                    This is required
-                  </div>
-                </div>
+                <input type="text" formControlName='gender' readonly  style="width: 250px;" name="gender" class="form-control">
               </div>
             </section>
             <section>
@@ -491,7 +461,7 @@
           <hr>
           <div formArrayName="addresses">
             <p>Please list all addresses in the past 5 years.</p>
-            <section *ngIf="!pastAddressesAreValid()">
+            <section *ngIf="!pastAddressesAreValid()" style="color: #A12622;">
               You’ve provided fewer than five years of past addresses. Please enter at least five years.
             </section>
             <div *ngFor="let address of addresses.controls; let i = index">
