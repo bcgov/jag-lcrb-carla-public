@@ -52,7 +52,7 @@ export class SpdConsentComponent implements OnInit {
 
 
   reloadUser() {
-    this.userDataService.getCurrentUser()
+    this.busy = this.userDataService.getCurrentUser()
       .subscribe((data: User) => {
         this.currentUser = data;
       });
@@ -136,7 +136,7 @@ export class SpdConsentComponent implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
+    this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
       const jsonUrl = res.json();
       window.location.href = jsonUrl['url'];
       return jsonUrl['url'];

@@ -4,6 +4,7 @@ import { UserDataService } from '../../services/user-data.service';
 import { User } from '../../models/user.model';
 import { Worker } from '../../models/worker.model';
 import { WorkerDataService } from '../../services/worker-data.service.';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class WorkerDashboardComponent implements OnInit {
   dataSource: Worker[] = [];
   isNewUser: boolean;
   dataLoaded = false;
+  busy: Subscription;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private userDataService: UserDataService,
@@ -29,13 +31,13 @@ export class WorkerDashboardComponent implements OnInit {
   }
 
   reloadUser() {
-    this.userDataService.getCurrentUser()
+    this.busy = this.userDataService.getCurrentUser()
       .subscribe((data: User) => {
         this.currentUser = data;
         this.isNewUser = this.currentUser.isNewUser;
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-          this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
+          this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
             this.dataSource = res;
           });
         }
