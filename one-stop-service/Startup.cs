@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IPingService>(new PingService());
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService());
 
             services.AddMvc(config =>
             {
@@ -114,7 +114,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
-            app.UseSoapEndpoint<IPingService>(path: "/receivefromhub", binding: new BasicHttpBinding());
+            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receivefromhub", binding: new BasicHttpBinding());
 
             if (env.IsDevelopment())
             {
