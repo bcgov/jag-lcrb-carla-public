@@ -92,21 +92,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             if (orderby != null)
             {
-                if (orderby.Count != orderby.Distinct().Count())
+                if (orderby.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(orderby)))
                 {
                     throw new ValidationException(ValidationRules.UniqueItems, "orderby");
                 }
             }
             if (select != null)
             {
-                if (select.Count != select.Distinct().Count())
+                if (select.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(select)))
                 {
                     throw new ValidationException(ValidationRules.UniqueItems, "select");
                 }
             }
             if (expand != null)
             {
-                if (expand.Count != expand.Distinct().Count())
+                if (expand.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(expand)))
                 {
                     throw new ValidationException(ValidationRules.UniqueItems, "expand");
                 }
@@ -615,14 +615,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             if (select != null)
             {
-                if (select.Count != select.Distinct().Count())
+                if (select.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(select)))
                 {
                     throw new ValidationException(ValidationRules.UniqueItems, "select");
                 }
             }
             if (expand != null)
             {
-                if (expand.Count != expand.Distinct().Count())
+                if (expand.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(expand)))
                 {
                     throw new ValidationException(ValidationRules.UniqueItems, "expand");
                 }

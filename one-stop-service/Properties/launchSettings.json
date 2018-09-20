@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/onestop/sendlicencecreationmessage",
+      "launchUrl": "api/onestop/sendlicencecreationmessage/guid",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

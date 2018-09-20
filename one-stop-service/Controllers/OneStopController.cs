@@ -23,6 +23,7 @@ namespace one_stop_service.Controllers
         public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuild)
         {
             BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null, licenceGuild));
+            
             return Ok();
         }
 
