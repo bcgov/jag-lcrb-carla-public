@@ -15,6 +15,7 @@ using System.Net.Mail;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplicationSoap.OneStop;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -37,13 +38,13 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuild)
         {
-            hangfireContext.WriteLine("Starting SPD Export Job.");
+            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
 
-            var cred = new System.ServiceModel.Description.ClientCredentials();
-            cred.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
-            cred.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
-            var serviceClient = new OneStopServiceReference.receiveFromPartner_PortTypeClient();
+            OneStopHubService.receiveFromPartnerResponse output;
+            var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
+            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
+            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
             var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
             basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             serviceClient.Endpoint.Binding = basicHttpBinding;
@@ -56,15 +57,19 @@ namespace Gov.Lclb.Cllb.OneStopService
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
 
 
-                //try
-                //{
-                var version = await serviceClient.receiveFromPartnerAsync("");
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw;
-                //}
+                try
+                {
+                    var req = new ProgramAccountRequest();
+                    var innerXML = req.CreateXML("guid");
+                    var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
+                    output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
+            hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
             //Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
 
             //var csvList = new List<List<string>>();
@@ -181,8 +186,10 @@ namespace Gov.Lclb.Cllb.OneStopService
             //    SendSPDNoResultsEmail(batch);
             //}
 
-            hangfireContext.WriteLine("End of SPD Export Job.");
+            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
         }
+
+
 
         private long GetBatchNumber()
         {

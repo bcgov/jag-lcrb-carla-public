@@ -15,6 +15,7 @@ import { WorkerDataService } from '../../services/worker-data.service.';
 import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Component({
   selector: 'app-worker-application',
@@ -25,6 +26,7 @@ export class WorkerApplicationComponent implements OnInit {
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;
+  busy2: Promise<any>;
   form: FormGroup;
 
   addressesToDelete: PreviousAddress[] = [];
@@ -69,15 +71,17 @@ export class WorkerApplicationComponent implements OnInit {
         address1_stateorprovince: ['', Validators.required],
         address1_country: ['', Validators.required],
         address1_postalcode: ['', Validators.required],
+        fromdate: ['', Validators.required],
+        todate: [{value: new Date(), disabled: true}]
       }),
       worker: this.fb.group({
         id: [],
         isldbworker: [false],
-        firstname: [''],
-        middlename: [''],
-        lastname: [''],
-        dateofbirth: [''],
-        gender: [''],
+        firstname: [{value: '', disabled: true}],
+        middlename: [{value: '', disabled: true}],
+        lastname: [{value: '', disabled: true}],
+        dateofbirth: [{value: '', disabled: true}],
+        gender: [{value: '', disabled: true}],
         birthplace: ['', Validators.required],
         driverslicencenumber: [''],
         bcidcardnumber: [''],
@@ -101,11 +105,11 @@ export class WorkerApplicationComponent implements OnInit {
         this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-          Observable.zip(
+          this.busy2 = Observable.forkJoin(
             this.workerDataService.getWorker(this.workerId),
             this.aliasDataService.getAliases(this.currentUser.contactid),
             this.previousAddressDataService.getPreviousAdderesses(this.currentUser.contactid)
-          ).subscribe(res => {
+          ).toPromise().then(res => {
             const worker = res[0];
             const contact = worker.contact;
             delete worker.contact;
@@ -275,7 +279,7 @@ export class WorkerApplicationComponent implements OnInit {
       }
     }
 
-    this.busy = Observable.zip(...saves).subscribe(res => {
+    this.busy2 = Observable.zip(...saves).toPromise().then(res => {
       subResult.next(true);
       this.reloadUser();
     }, err => subResult.next(false));
@@ -283,24 +287,32 @@ export class WorkerApplicationComponent implements OnInit {
     return subResult;
   }
 
-  validatePastAddresses() {
+  pastAddressesAreValid() {
     let valid = true;
-    let dts = [];
+    // add current address range
+    let dateRanges = [
+      {
+        fd: new Date(this.form.get('contact.fromdate').value),
+        td: new Date(this.form.get('contact.todate').value)
+      }
+    ];
+
+    // extract date ranges
     const addressControls = this.addresses.controls;
     for (let i = 0; i < addressControls.length; i++) {
       const fromDate = new Date(addressControls[i].value.fromdate);
       const toDate = new Date(addressControls[i].value.todate);
-      dts.push({ fd: fromDate, td: toDate });
+      dateRanges.push({ fd: fromDate, td: toDate });
       if (fromDate > toDate) {
         valid = false;
       }
     }
 
-    if (dts.length < 1) {
+    if (dateRanges.length < 1) {
       return false;
     }
 
-    dts = dts.sort((a, b) => {
+    dateRanges = dateRanges.sort((a, b) => {
       let res = 0;
       if (a.fd < b.fd) {
         res = -1;
@@ -313,9 +325,9 @@ export class WorkerApplicationComponent implements OnInit {
 
     // verify there is no gap between dates
     let isContinuous = true;
-    for (let i = 1; i < dts.length; i++) {
-      const element = dts[i];
-      if (element.fd >= dts[i - 1].td && this.daysBetween(element.fd, dts[i - 1].td) > 1) {
+    for (let i = 1; i < dateRanges.length; i++) {
+      const element = dateRanges[i];
+      if (element.fd >= dateRanges[i - 1].td && this.daysBetween(element.fd, dateRanges[i - 1].td) > 1) {
         isContinuous = false;
         valid = false;
         break;
@@ -325,7 +337,7 @@ export class WorkerApplicationComponent implements OnInit {
     if (isContinuous) {
       const daysIn5years = 365 * 5 + 1;
       // verify that the dates form a range >=  5 years
-      if (this.daysBetween(dts[0].fd, dts[dts.length - 1].td) < daysIn5years) {
+      if (this.daysBetween(dateRanges[0].fd, dateRanges[dateRanges.length - 1].td) < daysIn5years) {
         valid = false;
       }
     }
@@ -343,7 +355,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   gotoStep2() {
-    if (this.form.valid && this.isBCIDValid()) {
+    if (this.form.valid && this.isBCIDValid() && this.pastAddressesAreValid() ) {
       this.router.navigate([`/worker-registration/spd-consent/${this.workerId}`]);
     } else {
       this.markAsTouched();

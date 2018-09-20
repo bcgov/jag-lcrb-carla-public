@@ -7,43 +7,47 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OneStopServiceReference
+namespace OneStopHubService
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="https://wmgateway.gov.bc.ca/WSConnectors.BCPartner:receiveFromPartner", ConfigurationName="OneStopServiceReference.receiveFromPartner_PortType")]
-    public interface receiveFromPartner_PortType
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://142.32.211.230/", ConfigurationName="OneStopHubService.http___SOAP_BCPartnerPortType")]
+    public interface http___SOAP_BCPartnerPortType
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="WSConnectors_BCPartner_receiveFromPartner_Binder_receiveFromPartner", ReplyAction="*")]
-        System.Threading.Tasks.Task<OneStopServiceReference.receiveFromPartnerResponse> receiveFromPartnerAsync(OneStopServiceReference.receiveFromPartnerRequest request);
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        System.Threading.Tasks.Task<OneStopHubService.receiveFromPartnerResponse> receiveFromPartnerAsync(OneStopHubService.receiveFromPartnerRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="receiveFromPartnerInput", WrapperNamespace="https://wmgateway.gov.bc.ca/WSConnectors.BCPartner:receiveFromPartner", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="receiveFromPartner", WrapperNamespace="http://142.32.211.230/SOAP.BCPartner", IsWrapped=true)]
     public partial class receiveFromPartnerRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
         public string inputXML;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
+        public string outputXML;
+        
         public receiveFromPartnerRequest()
         {
         }
         
-        public receiveFromPartnerRequest(string inputXML)
+        public receiveFromPartnerRequest(string inputXML, string outputXML)
         {
             this.inputXML = inputXML;
+            this.outputXML = outputXML;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="receiveFromPartnerOutput", WrapperNamespace="https://wmgateway.gov.bc.ca/WSConnectors.BCPartner:receiveFromPartner", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="receiveFromPartnerResponse", WrapperNamespace="http://142.32.211.230/SOAP.BCPartner", IsWrapped=true)]
     public partial class receiveFromPartnerResponse
     {
         
@@ -61,13 +65,13 @@ namespace OneStopServiceReference
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    public interface receiveFromPartner_PortTypeChannel : OneStopServiceReference.receiveFromPartner_PortType, System.ServiceModel.IClientChannel
+    public interface http___SOAP_BCPartnerPortTypeChannel : OneStopHubService.http___SOAP_BCPartnerPortType, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    public partial class receiveFromPartner_PortTypeClient : System.ServiceModel.ClientBase<OneStopServiceReference.receiveFromPartner_PortType>, OneStopServiceReference.receiveFromPartner_PortType
+    public partial class http___SOAP_BCPartnerPortTypeClient : System.ServiceModel.ClientBase<OneStopHubService.http___SOAP_BCPartnerPortType>, OneStopHubService.http___SOAP_BCPartnerPortType
     {
         
     /// <summary>
@@ -77,50 +81,42 @@ namespace OneStopServiceReference
     /// <param name="clientCredentials">The client credentials</param>
     static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public receiveFromPartner_PortTypeClient() : 
-                base(receiveFromPartner_PortTypeClient.GetDefaultBinding(), receiveFromPartner_PortTypeClient.GetDefaultEndpointAddress())
+        public http___SOAP_BCPartnerPortTypeClient() : 
+                base(http___SOAP_BCPartnerPortTypeClient.GetDefaultBinding(), http___SOAP_BCPartnerPortTypeClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.WSConnectors_BCPartner_receiveFromPartner_Port.ToString();
+            this.Endpoint.Name = EndpointConfiguration.http___SOAP_BCPartnerPort0.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public receiveFromPartner_PortTypeClient(EndpointConfiguration endpointConfiguration) : 
-                base(receiveFromPartner_PortTypeClient.GetBindingForEndpoint(endpointConfiguration), receiveFromPartner_PortTypeClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public receiveFromPartner_PortTypeClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(receiveFromPartner_PortTypeClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public http___SOAP_BCPartnerPortTypeClient(EndpointConfiguration endpointConfiguration) : 
+                base(http___SOAP_BCPartnerPortTypeClient.GetBindingForEndpoint(endpointConfiguration), http___SOAP_BCPartnerPortTypeClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public receiveFromPartner_PortTypeClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(receiveFromPartner_PortTypeClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public http___SOAP_BCPartnerPortTypeClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(http___SOAP_BCPartnerPortTypeClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public receiveFromPartner_PortTypeClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public http___SOAP_BCPartnerPortTypeClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(http___SOAP_BCPartnerPortTypeClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public http___SOAP_BCPartnerPortTypeClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OneStopServiceReference.receiveFromPartnerResponse> OneStopServiceReference.receiveFromPartner_PortType.receiveFromPartnerAsync(OneStopServiceReference.receiveFromPartnerRequest request)
+        public System.Threading.Tasks.Task<OneStopHubService.receiveFromPartnerResponse> receiveFromPartnerAsync(OneStopHubService.receiveFromPartnerRequest request)
         {
             return base.Channel.receiveFromPartnerAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<OneStopServiceReference.receiveFromPartnerResponse> receiveFromPartnerAsync(string inputXML)
-        {
-            OneStopServiceReference.receiveFromPartnerRequest inValue = new OneStopServiceReference.receiveFromPartnerRequest();
-            inValue.inputXML = inputXML;
-            return ((OneStopServiceReference.receiveFromPartner_PortType)(this)).receiveFromPartnerAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -135,7 +131,7 @@ namespace OneStopServiceReference
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.WSConnectors_BCPartner_receiveFromPartner_Port))
+            if ((endpointConfiguration == EndpointConfiguration.http___SOAP_BCPartnerPort0))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -150,28 +146,27 @@ namespace OneStopServiceReference
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.WSConnectors_BCPartner_receiveFromPartner_Port))
+            if ((endpointConfiguration == EndpointConfiguration.http___SOAP_BCPartnerPort0))
             {
-                return new System.ServiceModel.EndpointAddress("https://twmgateway.gov.bc.ca:5443/ws/WSConnectors.BCPartner.receiveFromPartner/WS" +
-                        "Connectors_BCPartner_receiveFromPartner_Port");
+                return new System.ServiceModel.EndpointAddress("https://twmgateway.gov.bc.ca:4443/soap/rpc");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return receiveFromPartner_PortTypeClient.GetBindingForEndpoint(EndpointConfiguration.WSConnectors_BCPartner_receiveFromPartner_Port);
+            return http___SOAP_BCPartnerPortTypeClient.GetBindingForEndpoint(EndpointConfiguration.http___SOAP_BCPartnerPort0);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return receiveFromPartner_PortTypeClient.GetEndpointAddress(EndpointConfiguration.WSConnectors_BCPartner_receiveFromPartner_Port);
+            return http___SOAP_BCPartnerPortTypeClient.GetEndpointAddress(EndpointConfiguration.http___SOAP_BCPartnerPort0);
         }
         
         public enum EndpointConfiguration
         {
             
-            WSConnectors_BCPartner_receiveFromPartner_Port,
+            http___SOAP_BCPartnerPort0,
         }
     }
 }
