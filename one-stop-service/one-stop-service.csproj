@@ -40,9 +40,9 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
   </ItemGroup>
 
   <ItemGroup>
