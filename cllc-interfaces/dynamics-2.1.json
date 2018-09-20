@@ -26061,6 +26061,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_currentaddressdatefrom": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_isldbworker": {
           "type": "integer",
           "x-nullable": true
