@@ -14,7 +14,7 @@ namespace WebApplicationSoap.OneStop
          * Initial XML message sent to the Hub requesting a new program account when a new cannabis licence is issued.
          * The purpose is to receive a Program Account Reference Number required by the Program Account Details Broadcast
          */
-        public void CreateXML()
+        public string CreateXML(string guid)
         {
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
@@ -22,8 +22,11 @@ namespace WebApplicationSoap.OneStop
             programAccountRequest.body = GetProgramAccountRequestBody();
 
             var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountRequest1));
-            using (var stream = new StreamWriter("C:\\delete\\Test_ProgramAccountRequest.xml"))
-                serializer.Serialize(stream, programAccountRequest);
+            using (StringWriter textWriter = new StringWriter())
+            {
+                serializer.Serialize(textWriter, programAccountRequest);
+                return textWriter.ToString();
+            }
         }
 
         private SBNCreateProgramAccountRequestHeader GetProgramAccountRequestHeader()
