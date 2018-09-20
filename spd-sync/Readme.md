@@ -48,7 +48,7 @@ Where token is a valid JWT token,  obtained through the Authorization endpoint. 
 
 Using the above JWT Authentication method, here is the request to start the export:
 
-`curl --header "Authorization: Bearer <TOKEN>" -k https://lcrb-spd-sync-test.pathfinder.bcgov/api/run-export`
+`curl --header "Authorization: Bearer <TOKEN>" -k https://lcrb-spd-sync-test.pathfinder.bcgov/api/spd/send`
 
 ### Viewing Progress of the export
 

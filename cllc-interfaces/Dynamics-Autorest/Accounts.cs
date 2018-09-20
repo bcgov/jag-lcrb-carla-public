@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             if (expand != null)
             {
-                if (expand.Count != expand.Distinct().Count())
+                if (expand.Count != System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(expand)))
                 {
                     throw new ValidationException(ValidationRules.UniqueItems, "expand");
                 }
