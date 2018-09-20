@@ -15,6 +15,7 @@ using System.Net.Mail;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplicationSoap.OneStop;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -56,69 +57,16 @@ namespace Gov.Lclb.Cllb.OneStopService
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
 
 
-                //try
-                //{
-                output = serviceClient.receiveFromPartnerAsync(new OneStopHubService.receiveFromPartnerRequest(@"<?xml version=""1.0""?>
-<SBNCreateProgramAccountRequest>
-  <header>
-    <requestMode>A</requestMode>
-    <documentSubType>000</documentSubType>
-    <senderID>LCLB</senderID>
-    <receiverID>BCSBNHUB</receiverID>
-    <partnerNote>012093066,303594-001</partnerNote>
-    <CCRAHeader>
-      <userApplication>BF</userApplication>
-      <userRole>01</userRole>
-      <userCredentials>
-        <businessRegistrationNumber>739930568</businessRegistrationNumber>
-        <legalName>SPPP, LCLB Test 17/ Receiver Manager - Boales Wood &amp; Co.</legalName>
-        <postalCode>V0E2B9</postalCode>
-        <lastName>SPPP</lastName>
-      </userCredentials>
-    </CCRAHeader>
-  </header>
-  <body>
-    <businessRegistrationNumber>739930568</businessRegistrationNumber>
-    <businessProgramIdentifier>BB</businessProgramIdentifier>
-    <SBNProgramTypeCode>121</SBNProgramTypeCode>
-    <businessCore>
-      <programAccountTypeCode>01</programAccountTypeCode>
-      <crossReferenceProgramNumber>303594-001</crossReferenceProgramNumber>
-    </businessCore>
-    <programAccountStatus>
-      <programAccountStatusCode>01</programAccountStatusCode>
-      <effectiveDate>2018-08-08</effectiveDate>
-    </programAccountStatus>
-    <legalName>SPPP, LCLB Test 17/ Receiver Manager - Boales Wood &amp; Co.</legalName>
-    <operatingName>
-      <operatingName>Wines on Douglas</operatingName>
-      <operatingNamesequenceNumber>1</operatingNamesequenceNumber>
-    </operatingName>
-    <businessAddress>
-      <foreignLegacy>
-        <addressDetailLine1>1 Douglas Street</addressDetailLine1>
-      </foreignLegacy>
-      <municipality>VICTORIA</municipality>
-      <provinceStateCode>BC</provinceStateCode>
-      <postalCode>V0E2B9</postalCode>
-      <countryCode>CA</countryCode>
-    </businessAddress>
-    <mailingAddress>
-      <foreignLegacy>
-        <addressDetailLine1>1 Douglas Street</addressDetailLine1>
-      </foreignLegacy>
-      <municipality>VICTORIA</municipality>
-      <provinceStateCode>BC</provinceStateCode>
-      <postalCode>V0E2B9</postalCode>
-      <countryCode>CA</countryCode>
-    </mailingAddress>
-  </body>
-</SBNCreateProgramAccountRequest>", "out")).GetAwaiter().GetResult();
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw;
-                //}
+                try
+                {
+                    var req = new ProgramAccountRequest();
+                    var innerXML = req.CreateXML("");
+                    output = serviceClient.receiveFromPartnerAsync(new OneStopHubService.receiveFromPartnerRequest(innerXML, "out")).GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
             hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
             //Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
@@ -239,6 +187,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
         }
+
+
 
         private long GetBatchNumber()
         {
