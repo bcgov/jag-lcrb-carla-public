@@ -60,8 +60,9 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML("");
-                    output = serviceClient.receiveFromPartnerAsync(new OneStopHubService.receiveFromPartnerRequest(innerXML, "out")).GetAwaiter().GetResult();
+                    var innerXML = req.CreateXML("guid");
+                    var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
+                    output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
                 catch (Exception ex)
                 {
