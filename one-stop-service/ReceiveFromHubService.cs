@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
-    public class PingService : IPingService
+    public class ReceiveFromHubService : IReceiveFromHubService
     {
-        public string Ping(string message)
+        public string receiveFromHub(string inputXML)
         {
-            return string.Join("", message.Reverse());
+            return string.Join("", inputXML.Reverse());
         }
     }
 
     [ServiceContract]
-    public interface IPingService
+    public interface IReceiveFromHubService
     {
         [OperationContract]
-        string Ping(string message);
+        string receiveFromHub(string inputXML);
     }
 }
