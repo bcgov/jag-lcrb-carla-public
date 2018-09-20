@@ -37,13 +37,13 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuild)
         {
-            hangfireContext.WriteLine("Starting SPD Export Job.");
+            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
 
-            var cred = new System.ServiceModel.Description.ClientCredentials();
-            cred.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
-            cred.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
-            var serviceClient = new OneStopServiceReference.receiveFromPartner_PortTypeClient();
+            OneStopHubService.receiveFromPartnerResponse output;
+            var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
+            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
+            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
             var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
             basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             serviceClient.Endpoint.Binding = basicHttpBinding;
@@ -58,13 +58,69 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 //try
                 //{
-                var version = await serviceClient.receiveFromPartnerAsync("");
+                output = serviceClient.receiveFromPartnerAsync(new OneStopHubService.receiveFromPartnerRequest(@"<?xml version=""1.0""?>
+<SBNCreateProgramAccountRequest>
+  <header>
+    <requestMode>A</requestMode>
+    <documentSubType>000</documentSubType>
+    <senderID>LCLB</senderID>
+    <receiverID>BCSBNHUB</receiverID>
+    <partnerNote>012093066,303594-001</partnerNote>
+    <CCRAHeader>
+      <userApplication>BF</userApplication>
+      <userRole>01</userRole>
+      <userCredentials>
+        <businessRegistrationNumber>739930568</businessRegistrationNumber>
+        <legalName>SPPP, LCLB Test 17/ Receiver Manager - Boales Wood &amp; Co.</legalName>
+        <postalCode>V0E2B9</postalCode>
+        <lastName>SPPP</lastName>
+      </userCredentials>
+    </CCRAHeader>
+  </header>
+  <body>
+    <businessRegistrationNumber>739930568</businessRegistrationNumber>
+    <businessProgramIdentifier>BB</businessProgramIdentifier>
+    <SBNProgramTypeCode>121</SBNProgramTypeCode>
+    <businessCore>
+      <programAccountTypeCode>01</programAccountTypeCode>
+      <crossReferenceProgramNumber>303594-001</crossReferenceProgramNumber>
+    </businessCore>
+    <programAccountStatus>
+      <programAccountStatusCode>01</programAccountStatusCode>
+      <effectiveDate>2018-08-08</effectiveDate>
+    </programAccountStatus>
+    <legalName>SPPP, LCLB Test 17/ Receiver Manager - Boales Wood &amp; Co.</legalName>
+    <operatingName>
+      <operatingName>Wines on Douglas</operatingName>
+      <operatingNamesequenceNumber>1</operatingNamesequenceNumber>
+    </operatingName>
+    <businessAddress>
+      <foreignLegacy>
+        <addressDetailLine1>1 Douglas Street</addressDetailLine1>
+      </foreignLegacy>
+      <municipality>VICTORIA</municipality>
+      <provinceStateCode>BC</provinceStateCode>
+      <postalCode>V0E2B9</postalCode>
+      <countryCode>CA</countryCode>
+    </businessAddress>
+    <mailingAddress>
+      <foreignLegacy>
+        <addressDetailLine1>1 Douglas Street</addressDetailLine1>
+      </foreignLegacy>
+      <municipality>VICTORIA</municipality>
+      <provinceStateCode>BC</provinceStateCode>
+      <postalCode>V0E2B9</postalCode>
+      <countryCode>CA</countryCode>
+    </mailingAddress>
+  </body>
+</SBNCreateProgramAccountRequest>", "out")).GetAwaiter().GetResult();
                 //}
                 //catch (Exception ex)
                 //{
                 //    throw;
                 //}
             }
+            hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
             //Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
 
             //var csvList = new List<List<string>>();
@@ -181,7 +237,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             //    SendSPDNoResultsEmail(batch);
             //}
 
-            hangfireContext.WriteLine("End of SPD Export Job.");
+            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
         }
 
         private long GetBatchNumber()

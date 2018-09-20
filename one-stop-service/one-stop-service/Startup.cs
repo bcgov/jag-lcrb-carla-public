@@ -12,9 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using SoapCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Reflection;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,6 +48,8 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IPingService>(new PingService());
+
             services.AddMvc(config =>
             {
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
@@ -109,6 +113,8 @@ namespace Gov.Lclb.Cllb.OneStopService
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+
+            app.UseSoapEndpoint<IPingService>(path: "/receivefromhub", binding: new BasicHttpBinding());
 
             if (env.IsDevelopment())
             {
