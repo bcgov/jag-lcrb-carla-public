@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,12 +15,12 @@ namespace WebApplicationSoap.OneStop
          * Initial XML message sent to the Hub requesting a new program account when a new cannabis licence is issued.
          * The purpose is to receive a Program Account Reference Number required by the Program Account Details Broadcast
          */
-        public string CreateXML(string guid)
+        public string CreateXML(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
-            programAccountRequest.header = GetProgramAccountRequestHeader();
-            programAccountRequest.body = GetProgramAccountRequestBody();
+            programAccountRequest.header = GetProgramAccountRequestHeader(application);
+            programAccountRequest.body = GetProgramAccountRequestBody(application);
 
             var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountRequest1));
             using (StringWriter textWriter = new StringWriter())
@@ -29,7 +30,7 @@ namespace WebApplicationSoap.OneStop
             }
         }
 
-        private SBNCreateProgramAccountRequestHeader GetProgramAccountRequestHeader()
+        private SBNCreateProgramAccountRequestHeader GetProgramAccountRequestHeader(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var header = new SBNCreateProgramAccountRequestHeader();
 
@@ -39,44 +40,44 @@ namespace WebApplicationSoap.OneStop
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
             header.partnerNote = "ToGetFromDynamics";
-            header.CCRAHeader = GetCCRAHeader();
+            header.CCRAHeader = GetCCRAHeader(application);
 
             return header;
         }
 
-        private SBNCreateProgramAccountRequestHeaderCCRAHeader GetCCRAHeader()
+        private SBNCreateProgramAccountRequestHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var ccraHeader = new SBNCreateProgramAccountRequestHeaderCCRAHeader();
 
             ccraHeader.userApplication = OneStopUtils.USER_APPLICATION;
             ccraHeader.userRole = OneStopUtils.USER_ROLE;
-            ccraHeader.userCredentials = GetUserCredentials();
+            ccraHeader.userCredentials = GetUserCredentials(application);
 
             return ccraHeader;
         }
 
-        private SBNCreateProgramAccountRequestHeaderCCRAHeaderUserCredentials GetUserCredentials()
+        private SBNCreateProgramAccountRequestHeaderCCRAHeaderUserCredentials GetUserCredentials(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var userCredentials = new SBNCreateProgramAccountRequestHeaderCCRAHeaderUserCredentials();
 
             //BN9 of licensee (Owner company)
-            userCredentials.businessRegistrationNumber = "ToGetFromDynamics";
+            userCredentials.businessRegistrationNumber = application.AdoxioBusinessnumber;
             //the name of the applicant (licensee)- last name, first name middle initial or company name
-            userCredentials.legalName = "ToGetFromDynamics";
+            userCredentials.legalName = application.AdoxioContactpersonfullname;
             //establishment (physical location of store)
-            userCredentials.postalCode = "ToGetFromDynamics";
+            userCredentials.postalCode = application.AdoxioEstablishmentaddresspostalcode;
             //last name of sole proprietor (if not sole prop then null)
-            userCredentials.lastName = "ToGetFromDynamics";
+            userCredentials.lastName = application.AdoxioContactpersonlastname;
 
             return userCredentials;
         }
 
-        private SBNCreateProgramAccountRequestBody GetProgramAccountRequestBody()
+        private SBNCreateProgramAccountRequestBody GetProgramAccountRequestBody(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var programAccountRequestBody = new SBNCreateProgramAccountRequestBody();
 
             //BN9
-            programAccountRequestBody.businessRegistrationNumber = "ToGetFromDynamics";
+            programAccountRequestBody.businessRegistrationNumber = application.AdoxioBusinessnumber;
             //this code identifies that the message is from LCRB.  It's the same in every message from LCRB
             programAccountRequestBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
             //this identifies the licence type. Fixed number assigned by the OneStopHub
@@ -84,10 +85,10 @@ namespace WebApplicationSoap.OneStop
             programAccountRequestBody.businessCore = GetBusinessCore();
             programAccountRequestBody.programAccountStatus = GetProgramAccountStatus();
             //the name of the applicant(licensee)- lastName, firstName middleName or company name
-            programAccountRequestBody.legalName = "ToGetFromDynamics";
-            programAccountRequestBody.operatingName = getOperatingName();
-            programAccountRequestBody.businessAddress = getBusinessAddress();
-            programAccountRequestBody.mailingAddress = getMailingAddress();
+            programAccountRequestBody.legalName = application.AdoxioNameofapplicant; // TODO: verify this field
+            programAccountRequestBody.operatingName = getOperatingName(application);
+            programAccountRequestBody.businessAddress = getBusinessAddress(application);
+            programAccountRequestBody.mailingAddress = getMailingAddress(application);
 
             return programAccountRequestBody;
         }
@@ -115,12 +116,12 @@ namespace WebApplicationSoap.OneStop
             return programAccountStatus;
         }
 
-        private SBNCreateProgramAccountRequestBodyOperatingName getOperatingName()
+        private SBNCreateProgramAccountRequestBodyOperatingName getOperatingName(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var operatingName = new SBNCreateProgramAccountRequestBodyOperatingName();
 
             //store name
-            operatingName.operatingName = "ToGetFromDynamics";
+            operatingName.operatingName = application.AdoxioName; // TODO: verify this field
             //only ever have 1 operating name
             operatingName.operatingNamesequenceNumber = OneStopUtils.OPERATING_NAME_SEQUENCE_NUMBER;
 
@@ -130,26 +131,26 @@ namespace WebApplicationSoap.OneStop
         /**
          * Business Address (physical location of the store)
          */
-        private SBNCreateProgramAccountRequestBodyBusinessAddress getBusinessAddress()
+        private SBNCreateProgramAccountRequestBodyBusinessAddress getBusinessAddress(MicrosoftDynamicsCRMadoxioApplication application)
         {
             //physical location of the store
             var businessAddress = new SBNCreateProgramAccountRequestBodyBusinessAddress();
 
-            businessAddress.foreignLegacy = GetForeignLegacyBusiness();
+            businessAddress.foreignLegacy = GetForeignLegacyBusiness(application);
             businessAddress.municipality = "ToGetFromDynamics";
             businessAddress.provinceStateCode = "ToGetFromDynamics";
-            businessAddress.postalCode = "ToGetFromDynamics";
-            businessAddress.countryCode = "ToGetFromDynamics";
+            businessAddress.postalCode = application.AdoxioEstablishmentaddresspostalcode; ;
+            businessAddress.countryCode = application.AdoxioEstablishmentaddresscountry;
 
             return businessAddress;
         }
 
-        private SBNCreateProgramAccountRequestBodyBusinessAddressForeignLegacy GetForeignLegacyBusiness()
+        private SBNCreateProgramAccountRequestBodyBusinessAddressForeignLegacy GetForeignLegacyBusiness(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var foreignLegacy = new SBNCreateProgramAccountRequestBodyBusinessAddressForeignLegacy();
 
-            foreignLegacy.addressDetailLine1 = "ToGetFromDynamics";
-            foreignLegacy.addressDetailLine2 = "ToGetFromDynamics";
+            foreignLegacy.addressDetailLine1 = application.AdoxioAddressstreet; // TODO: Verify this field
+            foreignLegacy.addressDetailLine2 = application.AdoxioAddresscity; // TODO: Verify this field
 
             return foreignLegacy;
         }
@@ -157,26 +158,26 @@ namespace WebApplicationSoap.OneStop
         /**
          * Mailing Address (for the licence)
          */
-        private SBNCreateProgramAccountRequestBodyMailingAddress getMailingAddress()
+        private SBNCreateProgramAccountRequestBodyMailingAddress getMailingAddress(MicrosoftDynamicsCRMadoxioApplication application)
         {
             //mailing address for the licence
             var mailingAddress = new SBNCreateProgramAccountRequestBodyMailingAddress();
 
-            mailingAddress.foreignLegacy = GetForeignLegacyMailing();
-            mailingAddress.municipality = "ToGetFromDynamics";
-            mailingAddress.provinceStateCode = "ToGetFromDynamics";
-            mailingAddress.postalCode = "ToGetFromDynamics";
-            mailingAddress.countryCode = "ToGetFromDynamics";
+            mailingAddress.foreignLegacy = GetForeignLegacyMailing(application);
+            mailingAddress.municipality = "ToGetFromDynamics";  // TODO: Verify this field
+            mailingAddress.provinceStateCode = application.AdoxioAddressprovince;
+            mailingAddress.postalCode = application.AdoxioAddresspostalcode;
+            mailingAddress.countryCode = application.AdoxioAddresscountry;
 
             return mailingAddress;
         }
 
-        private SBNCreateProgramAccountRequestBodyMailingAddressForeignLegacy GetForeignLegacyMailing()
+        private SBNCreateProgramAccountRequestBodyMailingAddressForeignLegacy GetForeignLegacyMailing(MicrosoftDynamicsCRMadoxioApplication application)
         {
             var foreignLegacyMailing = new SBNCreateProgramAccountRequestBodyMailingAddressForeignLegacy();
 
-            foreignLegacyMailing.addressDetailLine1 = "ToGetFromDynamics";
-            foreignLegacyMailing.addressDetailLine2 = "ToGetFromDynamics";
+            foreignLegacyMailing.addressDetailLine1 = application.AdoxioAddressstreet;
+            foreignLegacyMailing.addressDetailLine2 = application.AdoxioAddresscity; // TODO: Verify this field
 
             return foreignLegacyMailing;
         }
