@@ -114,7 +114,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
-            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receivefromhub", binding: new BasicHttpBinding());
+            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
 
             if (env.IsDevelopment())
             {
