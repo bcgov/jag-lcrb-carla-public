@@ -13,6 +13,11 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         public string receiveFromHub(string inputXML)
         {
+            if (string.IsNullOrEmpty(inputXML))
+            {
+                return "400";
+            }
+
             try
             {
                 // deserialize the inputXML
@@ -28,7 +33,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             catch (Exception e)
             {
-                //TODO: Construct error message and return it
+                return "500";
             }
 
             return "200";
