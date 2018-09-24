@@ -61,12 +61,13 @@ namespace PDF.Controllers
 
             var testObject = new Dictionary <string, string>();
             testObject.Add("title", "test title");
-            testObject.Add("licenceNumber", "12345");
-            testObject.Add("BusinessName", "test biz name");
-            testObject.Add("AddressLine1", "add1");
-            testObject.Add("AddressLine2", "add2");
-            testObject.Add("permitIssueDate", "date 123");
-            testObject.Add("restrictionsText", "restrictions");
+            testObject.Add("licenceNumber", "123456");
+            testObject.Add("businessName", "test biz name");
+            testObject.Add("addressLine1", "address 1");
+            testObject.Add("addressLine2", "address 2");
+            testObject.Add("companyName", "Test Inc.");
+            // testObject.Add("permitIssueDate", "date 123");
+            // testObject.Add("restrictionsText", "restrictions");
 
             // execute the Node.js component
             result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", testObject, options); 
