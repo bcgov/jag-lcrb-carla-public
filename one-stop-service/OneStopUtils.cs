@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML(GetApplicationFromDynamics(hangfireContext));
+                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext));
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetApplicationFromDynamics(PerformContext hangfireContext, string guid = "2287f8c8-0853-e811-8140-480fcfeac941")
+        private MicrosoftDynamicsCRMadoxioLicences GetLicenceFromDynamics(PerformContext hangfireContext, string guid = "2287f8c8-0853-e811-8140-480fcfeac941")
         {
             MicrosoftDynamicsCRMadoxioApplication result;
             try
