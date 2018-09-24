@@ -11,6 +11,6 @@
   "dependencies": {
     "fs": "0.0.1-security",
     "html-pdf": "^2.2.0",
-    "mustache": "^3.0.0"
+    "mustache": "^2.3.0"
   }
 }
