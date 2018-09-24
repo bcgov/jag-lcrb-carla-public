@@ -234,7 +234,12 @@ namespace Gov.Lclb.Cllb.Public
             var bcep_conf_path = Configuration["BCEP_CONF_PATH"];
 
             services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid,
-                                                                    bcep_base_uri + bcep_base_path + bcep_conf_path));
+                bcep_base_uri + bcep_base_path + bcep_conf_path));
+
+            // add the PDF client.
+            string pdf_service_base_uri = Configuration["PDF_SERVICE_BASE_URI"];
+
+            services.AddTransient<PdfClient>(_ => new PdfClient(pdf_service_base_uri));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
