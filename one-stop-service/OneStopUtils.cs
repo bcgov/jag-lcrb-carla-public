@@ -77,11 +77,12 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private MicrosoftDynamicsCRMadoxioLicences GetLicenceFromDynamics(PerformContext hangfireContext, string guid = "2287f8c8-0853-e811-8140-480fcfeac941")
         {
-            MicrosoftDynamicsCRMadoxioApplication result;
+            MicrosoftDynamicsCRMadoxioLicences result;
             try
             {
                 string filter = $"adoxio_applicationid eq {guid}";
-                result = _dynamics.Applications.Get(filter: filter).Value.FirstOrDefault();
+                var expand = new List<string> { "adoxio_AccountId", "adoxio_establishment" };
+                result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             }
             catch (OdataerrorException odee)
             {
