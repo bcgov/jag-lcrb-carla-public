@@ -67,10 +67,9 @@ namespace PDF.Controllers
             testObject.Add("AddressLine2", "add2");
             testObject.Add("permitIssueDate", "date 123");
             testObject.Add("restrictionsText", "restrictions");
-            string data = JsonConvert.SerializeObject(testObject);
 
             // execute the Node.js component
-            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", data, options); 
+            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", testObject, options); 
                         
             return new FileContentResult(result.data, "application/pdf");
         }
