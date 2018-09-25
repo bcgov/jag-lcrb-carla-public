@@ -29,6 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                                                     + ", " + establishment.AdoxioAddresscity
                                                     + " " + establishment.AdoxioAddresspostalcode;
             }
+            adoxioLicenseVM.expiryDate = dynamicsLicense.AdoxioExpirydate;
 
             // fetch the licence status
             int? adoxio_licenceStatusId = dynamicsLicense.Statuscode;

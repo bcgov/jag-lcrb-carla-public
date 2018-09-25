@@ -6,7 +6,12 @@ import { AdoxioLicenseDataService } from '../services/adoxio-license-data.servic
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
 import { AdoxioApplication } from '../models/adoxio-application.model';
 import { AdoxioLicense } from '../models/adoxio-license.model';
+import { Observable, Subscription } from 'rxjs';
+import { PaymentDataService } from '../services/payment-data.service';
 
+const ACTIVE = 'Active';
+const PAYMENT_REQUIRED = 'Payment Required';
+const RENEWAL_DUE = 'Renewal Due';
 
 @Component({
   selector: 'app-license-application-summary',
@@ -14,12 +19,15 @@ import { AdoxioLicense } from '../models/adoxio-license.model';
   styleUrls: ['./license-application-summary.component.css']
 })
 export class LicenseApplicationSummaryComponent implements OnInit {
-  displayedColumns = ['name', 'establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
+  readonly ACTIVE = ACTIVE;
+  readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
+  readonly RENEWAL_DUE = RENEWAL_DUE;
+  displayedColumns = ['licenseNumber', 'establishmentName', 'status', 'actions'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  busy: Promise<any>;
+  busy: Subscription;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -29,52 +37,66 @@ export class LicenseApplicationSummaryComponent implements OnInit {
 
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService,
     private adoxioLicenseDataService: AdoxioLicenseDataService,
+    private paymentService: PaymentDataService,
     private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    let licenseApplicationSummary: LicenseApplicationSummary[] = [];
+    const licenseApplicationSummary: LicenseApplicationSummary[] = [];
 
-    this.busy = Promise.all([
-      this.adoxioApplicationDataService.getAdoxioApplications(),
-      this.adoxioLicenseDataService.getAdoxioLicenses()
-    ]).then(value => {
-      let adoxioApplications = value[0];
-      let adoxioLicenses = value[1];
+    this.busy = this.adoxioApplicationDataService.getAdoxioApplications()
+      .subscribe(applications => {
+        applications.forEach((entry) => {
+          if (entry.assignedLicence) {
+            const licAppSum = new LicenseApplicationSummary();
+            licAppSum.id = entry.id;
+            licAppSum.name = entry.assignedLicence.licenseNumber;
+            licAppSum.establishmentName = entry.establishmentName;
+            licAppSum.establishmentAddress = entry.establishmentAddress;
+            licAppSum.licenseType = entry.licenseType;
+            licAppSum.status = this.getLicenceStatus(entry);
+            licAppSum.licenseNumber = entry.assignedLicence.licenseNumber;
+            licenseApplicationSummary.push(licAppSum);
+          }
+        });
 
-      adoxioApplications.forEach((entry) => {
-        let licAppSum = new LicenseApplicationSummary();
-        licAppSum.id = entry.id;
-        licAppSum.name = entry.name;
-        licAppSum.establishmentName = entry.establishmentName;
-        licAppSum.establishmentAddress = entry.establishmentAddress;
-        licAppSum.licenseType = entry.licenseType;
-        licAppSum.status = entry.applicationStatus;
-        licenseApplicationSummary.push(licAppSum);
+        this.dataSource.data = licenseApplicationSummary;
+        // console.log(adoxioApplications);
+        // console.log(adoxioLicenses);
+        // console.log(this.dataSource.data);
+
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        });
       });
+  }
 
-      adoxioLicenses.forEach((entry) => {
-        let licAppSum = new LicenseApplicationSummary();
-        licAppSum.id = entry.id;
-        licAppSum.name = entry.name;
-        licAppSum.establishmentName = entry.establishmentName;
-        licAppSum.establishmentAddress = entry.establishmentAddress;
-        licAppSum.licenseType = entry.licenseType;
-        licAppSum.status = entry.licenseStatus;
-        licAppSum.licenseNumber = entry.licenseNumber;
-        licenseApplicationSummary.push(licAppSum);
-      });
+  getLicenceStatus(application: AdoxioApplication): string {
+    let status = ACTIVE;
+    if (application.licenceFeeInvoicePaid !== true) {
+      status = PAYMENT_REQUIRED;
+    }
+    if (application.assignedLicence && (new Date() > new Date(application.assignedLicence.expiryDate))) {
+      status = RENEWAL_DUE;
+    }
 
-      this.dataSource.data = licenseApplicationSummary;
-      //console.log(adoxioApplications);
-      //console.log(adoxioLicenses);
-      //console.log(this.dataSource.data);
+    return status;
+  }
 
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
+  downloadLicence(application) {
+
+  }
+
+  payLicenceFee(application) {
+    this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
+      const data = res.json();
+      window.location.href = data.url;
     });
+  }
+
+  renewLicence(application) {
+
   }
 
 }

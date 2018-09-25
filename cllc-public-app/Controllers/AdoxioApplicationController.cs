@@ -52,9 +52,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
                 try
                 {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter).Value;
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value;
                 }
                 catch (OdataerrorException)
                 {
