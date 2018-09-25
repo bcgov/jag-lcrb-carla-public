@@ -28,6 +28,7 @@ export class FileUploaderComponent implements OnInit {
   @Input() entityId: string;
   @Input() multipleFiles = true;
   @Input() extensions: string[] = ['pdf'];
+  @Input() uploadHeader: string = 'TO UPLOAD DOCUMENTS, DRAG FILES HERE OR';
   busy: Subscription;
   attachmentURL: string;
   Math = Math;
