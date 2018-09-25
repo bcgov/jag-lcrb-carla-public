@@ -22,7 +22,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
-  displayedColumns = ['licenseNumber', 'establishmentName', 'status', 'actions'];
+  displayedColumns = ['modifiedOn', 'establishmentName', 'status', 'actions'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -54,6 +54,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
             licAppSum.establishmentName = entry.establishmentName;
             licAppSum.establishmentAddress = entry.establishmentAddress;
             licAppSum.licenseType = entry.licenseType;
+            licAppSum.modifiedon = entry.modifiedon;
             licAppSum.status = this.getLicenceStatus(entry);
             licAppSum.licenseNumber = entry.assignedLicence.licenseNumber;
             licenseApplicationSummary.push(licAppSum);
