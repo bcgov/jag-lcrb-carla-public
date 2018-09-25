@@ -65,6 +65,7 @@
     <ProjectReference Include="..\cllc-interfaces\BCeID\BCeID.csproj" />
     <ProjectReference Include="..\cllc-interfaces\BCEP\BCEP.csproj" />
     <ProjectReference Include="..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\PDF\PDF.csproj" />
     <ProjectReference Include="..\cllc-interfaces\SharePoint\SharePoint.csproj" />
   </ItemGroup>
 
