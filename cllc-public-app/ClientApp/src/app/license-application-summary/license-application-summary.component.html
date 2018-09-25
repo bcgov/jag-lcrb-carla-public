@@ -1,68 +1,57 @@
-<mat-card class="mat-elevation-z0">
-  <mat-card-title><h1>Applications</h1></mat-card-title>
-  <mat-card  class="mat-elevation-z0">
-
+<div>
   <div [ngBusy]="busy"></div>
 
-  <div *ngIf="dataSource.data && dataSource.data.length == 0">No licence applications have been started</div>
+  <div *ngIf="dataSource.data && dataSource.data.length == 0">No licences have been issued</div>
 
   <div *ngIf="dataSource.data.length > 0">
 
-      <div class="example-header">
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="License Applications Filter">
-        </mat-form-field>
-      </div>
+    <!-- <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="License Applications Filter">
+      </mat-form-field>
+    </div> -->
 
-      <mat-table  class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
+    <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
-        <!-- Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> Name </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <a routerLink="/license-application/{{element.id}}/contact-details" skipLocationChange>{{element.name}}</a>
-          </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="licenseNumber">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> LICENCE NUMBER </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.licenseNumber}} </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="establishmentName">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> Store Name </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="establishmentName">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="establishmentAddress">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> Address </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.establishmentAddress}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <!-- <ng-container matColumnDef="establishmentAddress">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> ADDRESS </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.establishmentAddress}} </mat-cell>
+      </ng-container> -->
 
-        <!-- Column -->
-        <ng-container matColumnDef="status">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> STATUS </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="licenseType">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> Type </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.licenseType}} </mat-cell>
-        </ng-container>
+      <!-- Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell mat-sort-header *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+        <button *ngIf="element.status == ACTIVE" class="btn btn-primary" (click)="downloadLicence(element)">DOWNLOAD LICENCE</button>
+        <button *ngIf="element.status == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(element)">PAY LICENCE FEE</button>
+        <button *ngIf="element.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(element)">RENEW LICENCE</button>  
+        </mat-cell>
+      </ng-container>
 
-        <!-- Column -->
-        <ng-container matColumnDef="licenseNumber">
-          <mat-header-cell mat-sort-header *matHeaderCellDef> Licence Number </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.licenseNumber}} </mat-cell>
-        </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; columns: displayedColumns; let i = index"></mat-row>
+    </mat-table>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-
-      <mat-paginator #paginator
-                     [pageSize]="5"
-                     [pageSizeOptions]="[5, 10, 15]"
-                     [showFirstLastButtons]="true">
-      </mat-paginator>
-    </div>
-  </mat-card>
-</mat-card>
+    <!-- <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" [showFirstLastButtons]="true"> -->
+    <!-- </mat-paginator> -->
+  </div>
+</div>

@@ -107,6 +107,7 @@ import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key
 import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
+import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
 import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
 import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
@@ -124,7 +125,10 @@ import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule } from '@ngrx/store';
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 import { ApplicationComponent } from './lite/application/application.component';
-import { LiteApplicationDashboardComponent, ConfirmationDialog } from './lite-application-dashboard/lite-application-dashboard.component';
+import {
+  LiteApplicationDashboardComponent,
+  ConfirmationDialogComponent
+} from './lite-application-dashboard/lite-application-dashboard.component';
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerApplicationComponent } from './worker-registration/worker-application/worker-application.component';
@@ -194,7 +198,7 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-registr
     DashboardLiteComponent,
     ApplicationComponent,
     LiteApplicationDashboardComponent,
-    ConfirmationDialog,
+    ConfirmationDialogComponent,
     TermsAndConditionsComponent,
     AssociatesDashboardComponent,
     WorkerApplicationComponent,
@@ -206,7 +210,8 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-registr
     UserConfirmationComponent,
     WorkerTermsAndConditionsComponent,
     WorkerHomeComponent,
-    WorkerHomeDialogComponent
+    WorkerHomeDialogComponent,
+    LicenceFeePaymentConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -333,7 +338,7 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-registr
     ShareholderPersonDialogComponent,
     ShareholderOrganizationDialogComponent,
     DirectorAndOfficerPersonDialogComponent,
-    ConfirmationDialog,
+    ConfirmationDialogComponent,
     WorkerHomeDialogComponent
   ],
   bootstrap: [AppComponent]

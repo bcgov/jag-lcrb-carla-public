@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdoxioApplicationDataService } from '../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../services/payment-data.service';
 import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
-import { ConfirmationDialog } from '../../lite-application-dashboard/lite-application-dashboard.component';
+import { ConfirmationDialogComponent } from '../../lite-application-dashboard/lite-application-dashboard.component';
 import { AdoxioApplication } from '../../models/adoxio-application.model';
 import { debug } from 'util';
 
@@ -53,12 +53,10 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
-      .then(value => this.submittedApplications = value);
+      .subscribe(value => this.submittedApplications = value);
 
-    
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
+      (data: AdoxioApplication) => {
         this.application = data;
         this.form.patchValue(data);
         if (data.isPaid) {
@@ -126,8 +124,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
+      (data: AdoxioApplication) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );
@@ -146,8 +143,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
-    }
-    else {
+    } else {
       this.save(true).subscribe((result: boolean) => {
         if (result) {
           this.submitPayment();
@@ -175,19 +171,19 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     this.validationMessages = [];
     if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
       valid = false;
-      this.validationMessages.push("Application form is required.")
+      this.validationMessages.push('Application form is required.');
     }
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;
-      this.validationMessages.push("At least one supporting document is required.")
+      this.validationMessages.push('At least one supporting document is required.');
     }
     if (!this.form.get('establishmentName').value) {
       valid = false;
-      this.validationMessages.push("Establishment name is required.")
+      this.validationMessages.push('Establishment name is required.');
     }
     if (this.submittedApplications >= 8) {
       valid = false;
-      this.validationMessages.push("Only 8 applications can be submitted");
+      this.validationMessages.push('Only 8 applications can be submitted');
     }
     return valid;
   }
@@ -209,7 +205,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     };
 
     // open dialog, get reference and process returned data from dialog
-    const dialogRef = this.dialog.open(ConfirmationDialog, dialogConfig);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       cancelApplication => {
         if (cancelApplication) {
