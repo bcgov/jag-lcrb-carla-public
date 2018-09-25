@@ -1,175 +1,192 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>{{title}}</title>
     <style>
-    body {
-        background-color: white;
-        color: black;
-        font-family: sans-serif;
-        padding: 30px;
-        white-space: nowrap;
-    }
+        body {
+            background-color: white;
+            color: black;
+            font-family: sans-serif;
+            padding: 30px;
+            white-space: nowrap;
+        }
 
-    #header {
-        position: relative;
-    }
+        #header {
+            position: relative;
+        }
 
-    #logo {
-        float: left;
-        width: 160px;
-        height: 50px;
-    }
+        #logo {
+            float: left;
+            width: 160px;
+            height: 50px;
+        }
 
-    img {
-        height: 100%;
-    }
+        img {
+            height: 100%;
+        }
 
-    #word-mark {
-        float: left;
-        margin-top: 9px;
-        padding-left: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-        font-family: serif;
-        font-size: 17px;
-        line-height: 15px;
-        color: #355980;
-        border-left: 2px solid #999;
-    }
+        #word-mark {
+            float: left;
+            margin-top: 9px;
+            padding-left: 10px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            font-family: serif;
+            font-size: 17px;
+            line-height: 15px;
+            color: #355980;
+            border-left: 2px solid #999;
+        }
 
-    #permit-num {
-        margin-top: 7px;
-        float: right;
-        font-size: 26px;
-        font-weight: bold;
-    }
+        #permit-num {
+            margin-top: 7px;
+            float: right;
+            font-size: 26px;
+            font-weight: bold;
+        }
 
-    #permit-num-box {
-        display: inline-block;
-        border: 2px solid #999;
-        font-size: 20px;
-        padding: 8px;
-    }
-
-
-    h1 {
-        text-align: center;
-        margin: 10px;
-        font-size: 36px;
-        color: red;
-    }
-
-    p {
-        margin: 10px 0;
-        font-size: 11px;
-        white-space: normal;
-    }
+        #permit-num-box {
+            display: inline-block;
+            border: 2px solid #999;
+            font-size: 20px;
+            padding: 8px;
+        }
 
 
-    #info-box {
-        border: 3px solid black;
-        padding: 5px 25px;
-        font-size: 12px;
-    }
+        h1 {
+            text-align: center;
+            margin: 10px;
+            font-size: 36px;
+            color: red;
+        }
 
-    .row {
-        margin: 2px 0;
-    }
+        h2 {
+            text-align: center;
+            margin: 20px;
+            font-size: 24px;
+        }
 
-    .row .label {
-        margin-top: 5px;
-        float: left;
-        height: 14px;
-        width: 190px;
-    }
-
-    .row .label.in {
-        padding-left: 30px;
-        width: 160px;
-    }
-
-    .row .value {
-        float: right;
-        border: 1px solid #999;
-        padding: 3px 5px;
-        font-weight: bold;
-        height: 14px;
-        overflow-x: hidden;
-        width: calc(100% - 210px);
-    }
-
-    .col-1 {
-        float: left;
-        width: 56%;
-    }
-
-    .col-2 {
-        float: right;
-        width: 42%;
-    }
-
-    .col-2 .label {
-        width: 120px;
-    }
-
-    .col-2 .value {
-        width: calc(100% - 150px);
-    }
-
-    #restrictions .label {
-        height: 50px;
-        line-height: 50px;
-        width: 70px;
-    }
-
-    #restrictions .value {
-        height: 50px;
-        width: calc(100% - 100px);
-        white-space: normal;
-    }
+        p {
+            margin: 10px 0;
+            font-size: 11px;
+            white-space: normal;
+        }
 
 
-    #notice {
-        text-transform: uppercase;
-    }
+        #info-box {
+            border: 3px solid black;
+            padding: 25px;
+            font-size: 12px;
+        }
 
-    #footer {
-        position: relative;
-    }
+        .row {
+            margin: 2px 0;
+        }
 
-    #form-number {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        font-size: 6px;
-    }
+        .row .label {
+            margin-top: 5px;
+            float: left;
+            height: 14px;
+            width: 190px;
+        }
 
-    #issued-by {
-        text-align: center;
-        position: absolute;
-        right: 0;
-        top: -10px;
-        font-size: 10px;
-    }
+        .row .label.in {
+            padding-left: 30px;
+            width: 160px;
+        }
 
-    #permit-location {
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 14px;
-        color: red;
-    }
+        .row .value {
+            float: right;
+            border: 1px solid #999;
+            padding: 3px 5px;
+            font-weight: bold;
+            height: 14px;
+            overflow-x: hidden;
+            width: calc(100% - 210px);
+        }
+
+        .col-1 {
+            float: left;
+            width: 56%;
+        }
+
+        .col-2 {
+            float: right;
+            width: 42%;
+        }
+
+        .col-2 .label {
+            width: 120px;
+        }
+
+        .col-2 .value {
+            width: calc(100% - 150px);
+        }
+
+        #restrictions .label {
+            height: 50px;
+            line-height: 50px;
+            width: 70px;
+        }
+
+        #restrictions .value {
+            height: 50px;
+            width: calc(100% - 100px);
+            white-space: normal;
+        }
 
 
-    .clearfix:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+        #notice {
+            text-transform: uppercase;
+        }
+
+        #footer {
+            position: relative;
+        }
+
+        #form-number {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            font-size: 6px;
+        }
+
+        #issued-by {
+            text-align: center;
+            position: absolute;
+            right: 0;
+            top: -10px;
+            font-size: 10px;
+        }
+
+        #permit-location {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 14px;
+            color: red;
+        }
+
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;    
+        }
     </style>
 </head>
+
 <body>
 
     <div id="box">
@@ -182,36 +199,77 @@
                     LCRB
                 </div>
                 <div id="permit-num">
-                    Number: <div id="permit-num-box">{{licenceNumber}}</div>
+                    <!-- Number: <div id="permit-num-box">{{licenceNumber}}</div> -->
                 </div>
             </div>
-            <h1>Cannabis Retail Licence</h1>
-            <p>(Text to show on the license)</p>
+            <br>
+            <h2>Cannabis Retail Store Licence #{{licenceNumber}}</h2>
             <div id="info-box">
                 <div class="row clearfix">
-                    <div class="label in">Business Name:</div>
-                    <div class="value">{{BusinessName}}</div>
+                    <div class="label in">Establisment Name:</div>
+                    <div class="value">{{businessName}}</div>
                 </div>
                 <div class="row clearfix">
                     <div class="label in">Address:</div>
-                    <div class="value">{{AddressLine1}}</div>
+                    <div class="value">{{addressLine1}}</div>
                 </div>
                 <div class="row clearfix">
                     <div class="label in"></div>
-                    <div class="value">{{AddressLine2}}</div>
+                    <div class="value">{{addressLine2}}</div>
                 </div>
-                <div class="two-column clearfix">
-                    <div class="col-2">
-                        <div class="row clearfix">
-                            <div class="label">Date Issued:</div>
-                            <div class="value">{{permitIssueDate}}</div>
-                        </div>
-                    </div>
+                <div class="row clearfix">
+                    <div class="label in">Issued to:</div>
+                    <div class="value">{{companyName}}</div>
                 </div>
-                <div id="restrictions" class="row clearfix">
-                    <div class="label">Restrictions:</div>
-                    <div class="value">{{restrictionsText}}</div>
-                </div>
+            </div>
+            <div>
+                <h2>TERMS AND CONDITIONS</h2>
+                <li>The terms and conditions to which this licence is subject include the terms and
+                    conditions contained in the ‘Cannabis Retail Store Terms and Conditions Handbook’. This
+                    publication is amended from time to time.
+                </li>
+                <li>Packaged cannabis may only be sold within the service area(s) outlined on the official floor plan,
+                    unless otherwise
+                    endorsed or approved by the LCRB.
+                </li>
+                <li>
+                    Subject to terms and conditions specified in the restriction or approval letter(s). Copy of
+                    restriction or approval
+                    letter(s) must be kept with the current cannabis licence.
+                </li>
+                <h3 style="text-align: center;">HOURS OF SALE</h3>
+                <table style="width:100%">
+                    <tr>
+                      <th></th>
+                      <th>Monday</th>
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                      <th>Saturday</th>
+                      <th>Sunday</th>
+                    </tr>
+                    <tr>
+                      <td>Open</td>
+                      <td><b>9:00 AM</b></td>
+                      <td><b>9:00 AM</b></td>
+                      <td><b>9:00 AM</b></td>
+                      <td><b>9:00 AM</b></td>
+                      <td><b>9:00 AM</b></td>
+                      <td><b>9:00 AM</b></td>
+                      <td><b>9:00 AM</b></td>
+                    </tr>
+                    <tr>
+                        <td>Close</td>
+                        <td><b>11:00 PM</b></td>
+                        <td><b>11:00 PM</b></td>
+                        <td><b>11:00 PM</b></td>
+                        <td><b>11:00 PM</b></td>
+                        <td><b>11:00 PM</b></td>
+                        <td><b>11:00 PM</b></td>
+                        <td><b>11:00 PM</b></td>
+                  </table>
+                  <br>
             </div>
         </div>
 
@@ -220,15 +278,13 @@
 
             <div id="footer">
                 <div id="form-number">Form #</div>
-        <p id="permit-location">Footer text</p>
-        <div id="issued-by">
-            <b>Issued by the</b><br>
-            LCRB
-            
-        </div>
+                <p id="permit-location">Footer text</p>
+                <div id="issued-by">
+                    <b>Issued by the</b><br>
+                    LCRB
+                </div>
+            </div>
     </div>
-
-</div>
-
 </body>
+
 </html>
