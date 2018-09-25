@@ -22,12 +22,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration Configuration;        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly PdfClient _pdfClient;
 
-        public AdoxioLicenseController(IDynamicsClient dynamicsClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public AdoxioLicenseController(IDynamicsClient dynamicsClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, PdfClient pdfClient)
         {
             Configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
+            _pdfClient = pdfClient;
         }
 
         private async Task<List<AdoxioLicense>> GetLicensesByLicencee(string licenceeId)
@@ -96,5 +98,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
+        /// GET a licence as PDF.
+        [HttpGet("{licenceId}/pdf")]
+
+        public async Task<FileContentResult> GetLicencePDF(string licenceId)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("licenceNumber","1234");
+            byte[] data = await _pdfClient.GetPdf(parameters);         
+            return File(data, "application/pdf");
+        }
     }
 }
