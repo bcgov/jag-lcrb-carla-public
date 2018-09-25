@@ -14,9 +14,9 @@
     <mat-table class="mat-elevation-z0" matSort #table [dataSource]="dataSource">
 
       <!-- Column -->
-      <ng-container matColumnDef="licenseNumber">
-        <mat-header-cell mat-sort-header *matHeaderCellDef> LICENCE NUMBER </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.licenseNumber}} </mat-cell>
+      <ng-container matColumnDef="modifiedOn">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> MODIFIED ON </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.modifiedon  | date:'mediumDate'}} </mat-cell>
       </ng-container>
 
       <!-- Column -->
