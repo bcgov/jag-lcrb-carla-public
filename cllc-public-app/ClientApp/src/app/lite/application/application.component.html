@@ -6,29 +6,31 @@
 <div [formGroup]="form" class="application-wrapper">
 
   <p>
-    Please make sure that all of the required forms and supporting documentation for your application are included. A $7,500.00
-    application fee will be required at the time of application submission. If your application for a licence is approved,
-    a $1,500.00 first year licensing fee will be required prior to the licence being issued.
+    Please ensure that your application form, financial integrity form and supporting documentation for your
+    application are included. A $7,500.00 application fee will be required at the time of application submission. If
+    your application for a licence is approved, a $1,500.00 first year licensing fee will be required prior to the
+    licence being issued.
   </p>
   <br>
 
   <p>
-    Please note that applications which are submitted without all required information or documents will stop being processed.
-    The LCRB will be assessing complete applications as a priority. Other applications that are received before the applicant
-    provides the branch with missing information will be prioritized. The application checklist can assist in completing
-    all the required documentation.
+    Please note that applications which are submitted without all required information or documents will
+    stop being processed. The LCRB will be assessing complete applications as a priority. Other applications
+    that are received before the applicant provides the branch with missing information will be prioritized.
+    The application checklist can assist in completing all the required documentation.
   </p>
   <br>
 
   <p class="li-header">A proposed store must have:</p>
   <ul>
     <li>
-      If in the area of a local government, have all required local government approvals, such as being a permitted use under the
-      zoning bylaw or meeting the requirements of business licensing bylaw, or
+      If in the area of a local government, all required local government approvals, such as being a permitted
+      use under the zoning bylaw or meeting the requirements of business licensing bylaw, or
     </li>
     <li>
-      If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a proposed store will be
-      located, the zoning approval and a business permit or licence from the Indigenous nation to sell cannabis.
+      If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a
+      proposed store will be located, the zoning approval and a business permit or licence from the
+      Indigenous nation to sell cannabis.
     </li>
   </ul>
   <hr>
@@ -42,16 +44,17 @@
       <br>
 
       <p>
-        A name cannot mislead the public about what kind of business it operates. The name cannot imply a licensee is selling medical
-        cannabis, and cannot include words in any form or combination or manner the words "apothecary", "pharmacy", "medicines",
-        "drugs", "drug store", "drug department", "dispensary" or any other words of similar meaning that imply licensing
-        under the Pharmacy Operations and Drug Scheduling Act. Store names cannot also use language that encourages intoxication.
+        A name cannot mislead the public about what kind of business it operates. The name cannot imply a
+        licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
+        words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
+        or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
+        Scheduling Act. Store names cannot also use language that encourages intoxication.
       </p>
       <br>
 
       <p>
-        Additionally, a name cannot imply an association with another business. This applies to signs, trademarks and any type of
-        branding.
+        Additionally, a name cannot imply an association with another business. This applies to signs,
+        trademarks and any type of branding.
       </p>
       <br>
 
@@ -75,7 +78,18 @@
   <p>Upload the completed application form below.</p>
   <section>
     <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
-      [multipleFiles]="false" entityName="application" [entityId]="applicationId" #mainForm></app-file-uploader>
+      [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm></app-file-uploader>
+  </section>
+  <br>
+  <hr>
+  <br>
+
+  <label for="">Financial Integrity Form</label>
+  <br>
+  <p>Upload the completed Financial Integrity form below.</p>
+  <section>
+    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" fileTypes="FILE MUST BE IN PDF FORMAT."
+      [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments></app-file-uploader>
   </section>
   <br>
   <hr>
@@ -86,15 +100,18 @@
   <p>Upload all required documentation that will support the licence application.</p>
   <section>
     <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILE MUST BE IN PDF, JPEG, PNG, DOC(X), XLS(X), FORMAT."
-    entityName="application" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx']" #supportingDocuments></app-file-uploader>
+      entityName="application" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx']"
+      #supportingDocuments></app-file-uploader>
   </section>
   <br>
   <hr>
   <p>Proceed to pay online using a credit card through the secure web portal.</p>
   <i>
     <p>
-      <b>Please note:</b> Applications which are submitted without all required information or documents will not be processed.
-      Applicants will be contacted and provided the opportunity to submit missing information. Once applicants provide all
+      <b>Please note:</b> Applications which are submitted without all required information or documents will not be
+      processed.
+      Applicants will be contacted and provided the opportunity to submit missing information. Once applicants provide
+      all
       required documents to the LCRB, the application will be submitted for processing.</p>
   </i>
   <br>
@@ -126,14 +143,18 @@
     </span>
     <p>&nbsp;</p>
     <p>
-      The province does not know how many application for a cannabis retail store license will be recieved. Therefore, it is difficult
-      to predict how long applications will take to process. To minimize delays in processing, applicants must make sure
+      The province does not know how many application for a cannabis retail store license will be recieved. Therefore,
+      it is difficult
+      to predict how long applications will take to process. To minimize delays in processing, applicants must make
+      sure
       the application is complete before submitting it.
     </p>
     <br>
     <p>
-      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that once an application
-      is submitted you will be unable to upload additional documentation. For questions on the LCRB application process please
+      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
+      once an application
+      is submitted you will be unable to upload additional documentation. For questions on the LCRB application process
+      please
       contact:
       <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
     </p>

@@ -23,6 +23,7 @@ import { debug } from 'util';
 export class ApplicationComponent implements OnInit, OnDestroy {
   application: AdoxioApplication;
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
   form: FormGroup;
   savedFormData: any;
@@ -176,6 +177,10 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
       valid = false;
       this.validationMessages.push("Application form is required.")
+    }
+    if (!this.financialIntegrityDocuments || !this.financialIntegrityDocuments.files || this.financialIntegrityDocuments.files.length < 1) {
+      valid = false;
+      this.validationMessages.push("Financial Integrity form is required.")
     }
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;
