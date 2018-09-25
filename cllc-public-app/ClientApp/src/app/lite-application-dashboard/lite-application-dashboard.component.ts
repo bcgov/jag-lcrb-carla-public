@@ -4,7 +4,10 @@ import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, 
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
 import { FileSystemItem } from '../models/file-system-item.model';
-import {saveAs } from "file-saver";
+import { saveAs } from 'file-saver';
+import { AdoxioApplication } from '../models/adoxio-application.model';
+
+
 
 @Component({
   selector: 'app-lite-application-dashboard',
@@ -15,13 +18,13 @@ export class LiteApplicationDashboardComponent implements OnInit {
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
-  dataLoaded: boolean = false;
+  dataLoaded = false;
 
-  //displayedColumns = ['name', 'establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
+  // displayedColumns = ['name', 'establishmentName', 'establishmentAddress', 'status', 'licenseType', 'licenseNumber'];
   displayedColumns = ['establishmentName', 'name', 'cancel'];
   dataSource = new MatTableDataSource<LicenseApplicationSummary>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  //@ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatSort) sort: MatSort;
 
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService, public dialog: MatDialog) { }
 
@@ -33,21 +36,19 @@ export class LiteApplicationDashboardComponent implements OnInit {
    *
    * */
   private displayApplications() {
-    let licenseApplicationSummary: LicenseApplicationSummary[] = [];
-    this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe(res => {
+    const licenseApplicationSummary: LicenseApplicationSummary[] = [];
+    this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
 
       // for Applications in progress display the ones not paid
       // for Applications submitted display the ones paid
       if (this.applicationInProgress) {
         this.displayedColumns = ['lastUpdated', 'establishmentName', 'cancel'];
-      }
-      else {
+      } else {
         this.displayedColumns = ['name'];
       }
 
-      let adoxioApplications = res.json();
       adoxioApplications.forEach((entry) => {
-        let licAppSum = new LicenseApplicationSummary();
+        const licAppSum = new LicenseApplicationSummary();
         licAppSum.id = entry.id;
         licAppSum.name = entry.name;
         licAppSum.establishmentName = entry.establishmentName;
@@ -63,12 +64,10 @@ export class LiteApplicationDashboardComponent implements OnInit {
           if (!licAppSum.isPaid) {
             licenseApplicationSummary.push(licAppSum);
           }
-        }
-        else {
-          if (licAppSum.isPaid) {
+        } else {
+          if (licAppSum.isPaid && !entry.assignedLicence) {
             this.busy = this.adoxioApplicationDataService.getFileListAttachedToApplication(entry.id, 'Licence Application Main')
-              .subscribe(res => {
-                var files: FileSystemItem[] = res.json();
+              .subscribe((files: FileSystemItem[]) => {
                 if (files && files.length) {
                   licAppSum.applicationFormFileUrl = files[0].serverrelativeurl;
                   licAppSum.fileName = files[0].name;
@@ -88,7 +87,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param applicationId
    * @param establishmentName
    * @param applicationName
@@ -107,7 +106,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
     };
 
     // open dialog, get reference and process returned data from dialog
-    const dialogRef = this.dialog.open(ConfirmationDialog, dialogConfig);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       cancelApplication => {
         if (cancelApplication) {
@@ -128,13 +127,13 @@ export class LiteApplicationDashboardComponent implements OnInit {
   selector: 'app-lite-application-dashboard-dialog',
   templateUrl: 'lite-application-dashboard-dialog.html',
 })
-export class ConfirmationDialog {
+export class ConfirmationDialogComponent {
 
   establishmentName: string;
   applicationName: string;
 
   constructor(
-    public dialogRef: MatDialogRef<ConfirmationDialog>,
+    public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.applicationName = data.applicationName;
     this.establishmentName = data.establishmentName;
