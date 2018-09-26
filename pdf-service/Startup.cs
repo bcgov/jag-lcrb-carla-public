@@ -49,7 +49,6 @@ namespace Pdf
 
             services.AddMvc(config =>
             {
-					
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
                 {
                     var policy = new AuthorizationPolicyBuilder()
@@ -57,7 +56,6 @@ namespace Pdf
                                  .Build();
                     config.Filters.Add(new AuthorizeFilter(policy));
                 }
-
             });
 
             // Other ConfigureServices() code...
@@ -70,26 +68,26 @@ namespace Pdf
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 
-            //if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
-            //{
-            //    // Configure JWT authentication
-            //    services.AddAuthentication(o =>
-            //    {
-            //        o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    }).AddJwtBearer(o =>
-            //    {
-            //        o.SaveToken = true;
-            //        o.RequireHttpsMetadata = false;
-            //        o.TokenValidationParameters = new TokenValidationParameters()
-            //        {
-            //            RequireExpirationTime = false,
-            //            ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-            //            ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
-            //        };
-            //    });
-            //}
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            {
+               // Configure JWT authentication
+               services.AddAuthentication(o =>
+               {
+                   o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                   o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+               }).AddJwtBearer(o =>
+               {
+                   o.SaveToken = true;
+                   o.RequireHttpsMetadata = false;
+                   o.TokenValidationParameters = new TokenValidationParameters()
+                   {
+                    //    RequireExpirationTime = false,
+                       ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                       ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                   };
+               });
+            }
             
             // health checks. 
             services.AddHealthChecks(checks =>
@@ -109,8 +107,7 @@ namespace Pdf
                 app.UseDeveloperExceptionPage();
             }
 
-
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
