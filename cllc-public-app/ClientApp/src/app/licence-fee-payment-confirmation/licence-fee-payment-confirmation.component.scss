@@ -1,0 +1,28 @@
+.table {
+  padding: 15px;
+  text-align: left;
+
+  td {
+    border: none;
+  }
+}
+
+.border {
+  border-style:solid;
+  border-color:black
+}
+
+.border-red {
+  border-style: solid;
+  border-color: red;
+  background-color: #ff9999
+}
+
+.print-page {
+  /*display: inline-flex;
+  justify-content: center;*/
+  cursor: pointer;
+  color: #1a5a96;
+  float: right;
+  margin-top: 10px;
+}

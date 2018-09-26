@@ -43,6 +43,7 @@ import { PrePaymentComponent } from './worker-registration/pre-payment/pre-payme
 import { WorkerPaymentConfirmationComponent } from './worker-registration/payment-confirmation/payment-confirmation.component';
 import { SpdConsentComponent } from './worker-registration/spd-consent/spd-consent.component';
 import { WorkerHomeComponent } from './worker-registration/worker-home/worker-home.component';
+import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 
 const routes: Routes = [
   {
@@ -205,6 +206,11 @@ const routes: Routes = [
   {
     path: 'payment-confirmation',
     component: PaymentConfirmationComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'licence-fee-payment-confirmation',
+    component: LicenceFeePaymentConfirmationComponent,
     canActivate: [BCeidAuthGuard]
   },
 
