@@ -10,7 +10,8 @@
               Apply for a cannabis retail store licence
             </h2>
             <p>
-              A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in British Columbia.
+              A cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis accessories in
+              British Columbia.
               To use the online application service, you must have a Business BCeID.
             </p>
             <div class="text-left">
@@ -20,7 +21,8 @@
                 <br>
               </button>
               <span style="padding: 10px;">OR</span>
-              <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="window.location.href='login'" tabindex="3">
+              <button style="margin-bottom: 10px;" class="btn btn-primary" (click)="window.location.href='login'"
+                tabindex="3">
                 <strong>LOG IN</strong>
                 <br>
               </button>
@@ -29,17 +31,21 @@
         </div>
 
         <div class="col-md-5 ">
-          <div class="side-box-wrapper">
-            <section class="side-box" style="">
+          <div class="side-box-wrapper" style="margin-left: -15px;">
+            <section class="side-box">
               <section style="display: flex">
                 <button mat-fab class="fab-button mat-elevation-z0">
                   <mat-icon class="icon" aria-label="description icon">description</mat-icon>
                 </button>
-                <h2>Forms for associates of licence applicants</h2>
+                <h2>Application Statistics</h2>
               </section>
-              <div style="text-align: center; margin-left: -30px;">
-                <button class="btn btn-primary" (click)="window.location.href='https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2'"
-                  tabindex="3">GO TO FORMS FOR ASSOCIATES</button>
+              <p style="padding-top: 30px;">
+                The number of applications received and where they are in the process. Updated twice a week. Last
+                updated: XXX, 2018.
+              </p>
+              <div style="float: right;">
+                <button class="btn btn-primary" routerLink="/policy-document/application-stats"
+                  tabindex="3">See Application Statistics</button>
               </div>
             </section>
           </div>
