@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyDocument } from '../models/policy-document.model';
 import { PolicyDocumentDataService } from '../services/policy-document-data.service';
-import { Title } from '@angular/platform-browser';
+import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-policy-document',
@@ -14,14 +14,16 @@ export class PolicyDocumentComponent implements OnInit {
   public policyDocument: PolicyDocument;
   public title: string;
   public category: string;
-  public body: string;
+  public body: SafeHtml;
 
   /** PolicyDocument ctor */
   constructor(private policyDocumentDataService: PolicyDocumentDataService,
     private titleService: Title,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
+  ) {
 
-  }
+}
 
   ngOnInit(): void {
     this.route.params
@@ -35,7 +37,7 @@ export class PolicyDocumentComponent implements OnInit {
     this.policyDocumentDataService.getPolicyDocument(slug).then((data) => {
       this.policyDocument = data;
       this.title = this.policyDocument.title;
-      this.body = this.policyDocument.body;
+      this.body = this.sanitizer.bypassSecurityTrustHtml(this.policyDocument.body);
       this.category = this.policyDocument.category;
       this.titleService.setTitle(`${this.title} - Liquor and Cannabis Regulation Branch`);
     });
