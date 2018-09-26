@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import * as currentApplicatioActions from '../app-state/actions/current-application.action';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app-state/models/app-state';
+import { AdoxioApplication } from '../models/adoxio-application.model';
 
 @Component({
   selector: 'app-license-application',
@@ -65,8 +66,7 @@ export class LicenseApplicationComponent implements OnInit {
     // get application name
     if (!this.applicationName) {
       this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-        res => {
-          const data = res.json();
+        (data: AdoxioApplication) => {
           this.applicationName = data.name;
           this.store.dispatch(new currentApplicatioActions.SetCurrentApplicationAction(data));
         },

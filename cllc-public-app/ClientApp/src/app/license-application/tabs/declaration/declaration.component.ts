@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
+import { AdoxioApplication } from '../../../models/adoxio-application.model';
 
 @Component({
   selector: 'app-declaration',
@@ -22,7 +23,7 @@ export class DeclarationComponent implements OnInit {
   subscriptions: Subscription[] = [];
   application: any;
   savedFormData: any = {};
-  isReadOnly: boolean = false;
+  isReadOnly = false;
 
   constructor(private applicationDataService: AdoxioApplicationDataService,
     private store: Store<AppState>,
@@ -89,8 +90,7 @@ export class DeclarationComponent implements OnInit {
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
+      (data: AdoxioApplication) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );
