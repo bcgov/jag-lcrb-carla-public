@@ -28,6 +28,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Terminated = 845280009
     }
 
+    public enum AdoxioFinalDecisionCodes
+    {
+        Approved = 845280000,
+        Denied = 845280001
+    }
+
     public class AdoxioApplication
     {
 		public string id { get; set; } //adoxio_applicationid
@@ -55,19 +61,28 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string contactpersonphone { get; set; } //adoxio_contactpersonphone
 
 		public GeneralYesNo adoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
-		public string adoxioInvoiceId;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AdoxioFinalDecisionCodes AppChecklistFinalDecision { get; set; } //adoxioFinaldecision
+        public string adoxioInvoiceId;
 		public bool isSubmitted { get; set; }
 		public bool isPaid { get; set; }
 		public bool prevPaymentFailed { get; set; }
         public DateTimeOffset? paymentreceiveddate { get; set; }
         public DateTimeOffset? modifiedOn { get; set; }
 
+        public bool licenceFeeInvoicePaid { get; set; }
+
         public DateTimeOffset? createdon { get; set; }
         public DateTimeOffset? modifiedon { get; set; }
 
 
         public ViewModels.Account applicant { get; set; }
-    
+
+        public ViewModels.Invoice  licenceFeeInvoice { get; set; }
+
+        public ViewModels.AdoxioLicense assignedLicence { get; set; }
+
 
     }
 }

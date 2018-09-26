@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { AdoxioApplication } from "../models/adoxio-application.model";
-import { AdoxioApplicationDataService } from "../services/adoxio-application-data.service";
+import { ActivatedRoute } from '@angular/router';
+import { AdoxioApplication } from '../models/adoxio-application.model';
+import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
 
 @Component({
@@ -9,8 +9,8 @@ import { MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
   templateUrl: './applications-list.component.html',
   styleUrls: ['./applications-list.component.css']
 })
-export class ApplicationsListComponent {
-  //adoxioApplications: AdoxioApplication[];
+export class ApplicationsListComponent implements OnInit {
+  // adoxioApplications: AdoxioApplication[];
 
   displayedColumns = ['name', 'applyingPerson', 'jobNumber', 'licenseType'];
   dataSource = new MatTableDataSource<AdoxioApplication>();
@@ -29,8 +29,7 @@ export class ApplicationsListComponent {
 
   ngOnInit() {
     this.adoxioApplicationDataService.getAdoxioApplications()
-      .then((data) => {
-        //this.adoxioApplications = data;
+      .subscribe((data: AdoxioApplication[]) => {
         this.dataSource.data = data;
       });
     this.dataSource.paginator = this.paginator;
