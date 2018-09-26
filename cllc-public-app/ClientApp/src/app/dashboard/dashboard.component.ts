@@ -16,8 +16,8 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   user: User;
-  isApplicant: boolean = false;
-  isAssociate: boolean = false;
+  isApplicant = false;
+  isAssociate = false;
   accountId: string = null;
   contactId: string = null;
   account: DynamicsAccount;
@@ -61,14 +61,13 @@ ngOnInit(): void {
    * Start a new Dynamics License Application
    * */
   startNewLicenceApplication() {
-    let newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
+    const newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
     newLicenceApplicationData.licenseType = 'Cannabis Retail Store';
     newLicenceApplicationData.applicantType = this.account.businessType;
     newLicenceApplicationData.account = this.account;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
-      res => {
-        const data = res.json();
+      (data: AdoxioApplication) => {
         this.router.navigateByUrl(`/license-application/${data.id}/contact-details`);
       },
       err => {
