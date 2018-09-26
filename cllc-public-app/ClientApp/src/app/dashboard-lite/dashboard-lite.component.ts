@@ -50,7 +50,7 @@ export class DashboardLiteComponent implements OnInit {
       });
 
     this.applicationDataService.getSubmittedApplicationCount()
-      .then(value => this.submittedApplications = value);
+      .subscribe(value => this.submittedApplications = value);
   }
 
   verify_payment() {
@@ -60,9 +60,7 @@ export class DashboardLiteComponent implements OnInit {
     newLicenceApplicationData.account = this.account;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
-      res => {
-        const data = res.json();
-
+      data => {
         this.busy = this.paymentDataService.getPaymentSubmissionUrl(data.id).subscribe(
           res2 => {
             // console.log("applicationVM: ", res.json());
@@ -76,7 +74,7 @@ export class DashboardLiteComponent implements OnInit {
           }
         );
 
-        // this.router.navigate(['./payment-confirmation'], { queryParams: { trnId: '0', SessionKey: data.id } });        
+        // this.router.navigate(['./payment-confirmation'], { queryParams: { trnId: '0', SessionKey: data.id } });
       },
       err => {
         this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
@@ -93,8 +91,7 @@ export class DashboardLiteComponent implements OnInit {
     newLicenceApplicationData.account = this.account;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
-      res => {
-        const data = res.json();
+      data => {
         this.router.navigateByUrl(`/application-lite/${data.id}`);
       },
       err => {
