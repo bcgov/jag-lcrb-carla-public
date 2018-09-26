@@ -10,8 +10,3 @@ services:
     ports:
       - 1401:1433
 
-  redis1:
-    image: redis
-    ports:
-      - 6379:6379
-
