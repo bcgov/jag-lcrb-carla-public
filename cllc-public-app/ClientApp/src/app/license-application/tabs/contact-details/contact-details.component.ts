@@ -111,8 +111,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      res => {
-        const data = res.json();
+      (data: AdoxioApplication) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );
