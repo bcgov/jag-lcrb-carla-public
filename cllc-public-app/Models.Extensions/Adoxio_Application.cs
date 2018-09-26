@@ -98,8 +98,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                                                     + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
                                                     + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode;
 
+            adoxioApplicationVM.licenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid == true);
+
             //get application status
             adoxioApplicationVM.applicationStatus = (AdoxioApplicationStatusCodes) dynamicsApplication.Statuscode;
+
+            if (dynamicsApplication.AdoxioAppchecklistfinaldecision != null)
+            {
+                adoxioApplicationVM.AppChecklistFinalDecision = (AdoxioFinalDecisionCodes)dynamicsApplication.AdoxioAppchecklistfinaldecision;
+            }
 
             // set a couple of read-only flags to indicate status
 			adoxioApplicationVM.isPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved);
@@ -142,6 +149,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             //get record audit info
             adoxioApplicationVM.createdon = dynamicsApplication.Createdon; 
             adoxioApplicationVM.modifiedon = dynamicsApplication.Modifiedon;
+
+            if(dynamicsApplication.AdoxioLicenceFeeInvoice != null)
+            {
+                adoxioApplicationVM.licenceFeeInvoice = dynamicsApplication.AdoxioLicenceFeeInvoice.ToViewModel();
+            }
+
+            if(dynamicsApplication.AdoxioAssignedLicence != null)
+            {
+                adoxioApplicationVM.assignedLicence = dynamicsApplication.AdoxioAssignedLicence.ToViewModel(dynamicsClient);
+            }
 
             return adoxioApplicationVM;
         }
