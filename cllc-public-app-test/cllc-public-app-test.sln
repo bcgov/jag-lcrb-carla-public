@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint.Tests", "..\cllc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCEP", "..\cllc-interfaces\BCEP\BCEP.csproj", "{05301D75-ACF9-45D8-B572-AC052EAD4B54}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDF", "..\cllc-interfaces\PDF\PDF.csproj", "{C94D22EF-8DEF-4F1F-819D-194B002267B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{05301D75-ACF9-45D8-B572-AC052EAD4B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05301D75-ACF9-45D8-B572-AC052EAD4B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05301D75-ACF9-45D8-B572-AC052EAD4B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C94D22EF-8DEF-4F1F-819D-194B002267B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C94D22EF-8DEF-4F1F-819D-194B002267B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C94D22EF-8DEF-4F1F-819D-194B002267B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C94D22EF-8DEF-4F1F-819D-194B002267B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{309D775B-CF5B-4194-9E63-3410A95D20F4} = {16C4AEED-68DC-44A3-93E4-014C80604C10}
 		{34357658-13CF-4654-B799-5C64D877FD16} = {A5BF3AF6-7B6F-4216-9918-3D0AE9A86646}
 		{05301D75-ACF9-45D8-B572-AC052EAD4B54} = {16C4AEED-68DC-44A3-93E4-014C80604C10}
+		{C94D22EF-8DEF-4F1F-819D-194B002267B7} = {16C4AEED-68DC-44A3-93E4-014C80604C10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7840E594-A82A-4D70-82DF-02991CEB5BB2}
