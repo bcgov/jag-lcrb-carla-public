@@ -1,4 +1,4 @@
-import { Component, OnInit, Sanitizer, SecurityContext } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyDocument } from '../models/policy-document.model';
 import { PolicyDocumentDataService } from '../services/policy-document-data.service';
