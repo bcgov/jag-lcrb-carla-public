@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,16 @@ namespace Gov.Lclb.Cllb.OneStopService
 {
     public class ReceiveFromHubService : IReceiveFromHubService
     {
+        IDynamicsClient _dynamicsClient;
+
+        public ILogger _logger{ get; }
+
+        public ReceiveFromHubService(IDynamicsClient dynamicsClient, ILogger logger)
+        {
+            _dynamicsClient = dynamicsClient;
+            _logger = logger;
+        }
+
         public string receiveFromHub(string inputXML)
         {
             if (string.IsNullOrEmpty(inputXML))
@@ -26,6 +38,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 using (TextReader reader = new StringReader(inputXML))
                 {
                     licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
+                    _logger.LogInformation(inputXML);
                 }
 
                 //TODO: Update dynamics
