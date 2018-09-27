@@ -90,7 +90,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   }
 
   payLicenceFee(application) {
-    this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
+    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
       const data = res.json();
       window.location.href = data.url;
     });
