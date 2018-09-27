@@ -34,7 +34,11 @@
       <!-- Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell mat-sort-header *matHeaderCellDef> STATUS </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        <mat-cell *matCellDef="let element"> 
+            <i *ngIf="element.status == ACTIVE" class="fa fa-check-circle" style="color: #4b830d"></i>
+            <i *ngIf="element.status == PAYMENT_REQUIRED" class="fa fa-exclamation-triangle" style="color: #e65100"></i>
+            <i *ngIf="element.status == RENEWAL_DUE" class="fa fa-fa-exclamation-circle" style="color: #a30000"></i>  
+          {{element.status}} </mat-cell>
       </ng-container>
 
       <!-- Column -->
