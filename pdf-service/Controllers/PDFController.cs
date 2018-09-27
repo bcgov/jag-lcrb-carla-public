@@ -28,10 +28,10 @@ namespace PDF.Controllers
 
         protected ILogger _logger;
 
-        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
             Configuration = configuration;
-                 
+            _env = env;
             _logger = loggerFactory.CreateLogger(typeof(PDFController));
         }
 
@@ -56,6 +56,8 @@ namespace PDF.Controllers
 
         public async Task<IActionResult> GetTestPDF([FromServices] INodeServices nodeServices)
         {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
             JSONResponse result = null;
             var options = new { format="letter", orientation= "portrait" };            
 

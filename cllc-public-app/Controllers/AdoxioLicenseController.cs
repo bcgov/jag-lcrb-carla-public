@@ -107,9 +107,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string filter = $"adoxio_licencesid eq {licenceId}";
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter:filter).Value.FirstOrDefault();
+            AdoxioLicense license = adoxioLicense.ToViewModel(_dynamicsClient);
+
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("licenceNumber", adoxioLicense.AdoxioLicencenumber);
+            parameters.Add("title", "Canabis_License");
+            parameters.Add("licenceNumber", license.licenseNumber);
+            parameters.Add("businessName", license.establishmentName);
+            parameters.Add("addressLine1", license.establishmentAddress);
+            //parameters.Add("addressLine2", adoxioLicense.addressLine2);
+            //parameters.Add("companyName", adoxioLicense.companyName);
+            parameters.Add("permitIssueDate", adoxioLicense.AdoxioEffectivedate.ToString());
+            //parameters.Add("restrictionsText", adoxioLicense.restrictionsText);
+
             byte[] data = await _pdfClient.GetPdf(parameters);
             return File(data, "application/pdf");
         }
