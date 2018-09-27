@@ -120,15 +120,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			_logger.LogError("Called GetLicencePaymentUrl(" + id + ")");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
-            // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id);
-            
-            if (adoxioApplication == null || string.IsNullOrEmpty(adoxioApplication._adoxioLicencefeeinvoiceValue))
+
+            if (adoxioApplication == null)
             {
                 return NotFound();
             }
 
+            if (!string.IsNullOrEmpty(adoxioApplication._adoxioLicencefeeinvoiceValue))
+            {
+
+                MicrosoftDynamicsCRMinvoice invoice2 = await _dynamicsClient.GetInvoiceById(Guid.Parse(adoxioApplication._adoxioLicencefeeinvoiceValue));
+                if (invoice2 != null && invoice2.Statecode == (int)Adoxio_invoicestates.Cancelled)
+                {
+                    // set the application invoice trigger to create an invoice
+                    ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
+                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
+                    adoxioApplication2.CopyValues(vm);
+                    // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
+                    adoxioApplication2.AdoxioLicenceFeeInvoiceTrigger = (int?)ViewModels.GeneralYesNo.Yes;
+                    _dynamicsClient.Applications.Update(id, adoxioApplication2);
+                    adoxioApplication = await GetDynamicsApplication(id);
+                }
+            }
             string invoiceId = adoxioApplication._adoxioLicencefeeinvoiceValue;
            
 
@@ -344,8 +359,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     // set the Application payment status
                     adoxioApplication2.AdoxioLicencefeeinvoicepaid = true;
-                    //adoxioApplication2.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
-                    //adoxioApplication2.AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes;
 
                     _dynamicsClient.Applications.Update(id, adoxioApplication2);
                     adoxioApplication2 = await GetDynamicsApplication(id);
@@ -356,21 +369,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError("Transaction NOT approved");
 
-                    //// set invoice status to Cancelled
-                    //invoice2.Statecode = (int?)Adoxio_invoicestates.Cancelled;
-                    //invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Cancelled;
+                    // set invoice status to Cancelled
+                    invoice2.Statecode = (int?)Adoxio_invoicestates.Cancelled;
+                    invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Cancelled;
 
-                    //_dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
+                    _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
                     // set the Application invoice status back to No
-                    //adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
-                    // don't clear the invoice, leave the previous "Cancelled" so we can report status
-                    //adoxioApplication2._adoxioInvoiceValue = null;
-                    //adoxioApplication2.AdoxioInvoice = null;
-
-                    //_dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    adoxioApplication2 = await GetDynamicsApplication(id);
-
+                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
+                    patchApplication.AdoxioLicenceFeeInvoiceTrigger = (int?)ViewModels.GeneralYesNo.No;
+                    _dynamicsClient.Applications.Update(id, patchApplication);
                 }
             }
             else
