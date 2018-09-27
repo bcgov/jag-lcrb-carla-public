@@ -20,10 +20,16 @@ namespace one_stop_service.Controllers
         }
 
         [Route("[action]/{licenceGuild}")]
-        public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuild)
+        public IActionResult SendLicenceCreationMessage(string licenceGuild)
         {
             BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null, licenceGuild));
-            
+            return Ok();
+        }
+
+        [Route("[action]/{licenceGuild}")]
+        public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuild)
+        {
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessage(null, licenceGuild));
             return Ok();
         }
 

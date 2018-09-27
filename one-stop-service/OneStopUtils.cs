@@ -30,11 +30,11 @@ namespace Gov.Lclb.Cllb.OneStopService
         public OneStopUtils(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
-            this._dynamics = SetupDynamics();
+            this._dynamics = OneStopUtils.SetupDynamics(Configuration);
         }
 
         /// <summary>
-        /// Hangfire job to send an export to SPD.
+        /// Hangfire job to send LicenceCreationMessage to One stop.
         /// </summary>
         public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuild)
         {
@@ -74,6 +74,47 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
         }
+        /// <summary>
+        /// Hangfire job to send LicenceDetailsMessage to One stop.
+        /// </summary>
+        public async Task SendProgramAccountDetailsBroadcastMessage(PerformContext hangfireContext, string licenceGuild)
+        {
+            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+
+
+            OneStopHubService.receiveFromPartnerResponse output;
+            var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
+            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
+            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
+            var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+            basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            serviceClient.Endpoint.Binding = basicHttpBinding;
+
+            using (new OperationContextScope(serviceClient.InnerChannel))
+            {
+                //Create message header containing the credentials
+                var header = new OneStopServiceReference.SoapSecurityHeader("", Configuration["ONESTOP_HUB_USERNAME"],
+                                                                            Configuration["ONESTOP_HUB_PASSWORD"], "");
+                //Add the credentials message header to the outgoing request
+                OperationContext.Current.OutgoingMessageHeaders.Add(header);
+
+
+                try
+                {
+                    var req = new ProgramAccountDetailsBroadcast();
+                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext));
+                    var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
+                    output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+            hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
+
+            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+        }
 
         private MicrosoftDynamicsCRMadoxioLicences GetLicenceFromDynamics(PerformContext hangfireContext, string guid = "2287f8c8-0853-e811-8140-480fcfeac941")
         {
@@ -97,7 +138,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             return result;
         }
 
-        private IDynamicsClient SetupDynamics()
+        public static IDynamicsClient SetupDynamics(IConfiguration Configuration)
         {
 
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
