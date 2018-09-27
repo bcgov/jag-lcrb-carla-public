@@ -43,11 +43,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = contact.Middlename;
                 result.lastname = contact.Lastname;
                 result.telephone1 = contact.Telephone1;
-            }            
+            }
             return result;
-        }   
-        
-        public static void CopyHeaderValues(this MicrosoftDynamicsCRMcontact to, IHttpContextAccessor httpContextAccessor)       
+        }
+
+        public static void CopyHeaderValues(this MicrosoftDynamicsCRMcontact to, IHttpContextAccessor httpContextAccessor)
         {
             var headers = httpContextAccessor.HttpContext.Request.Headers;
             string smgov_useremail = headers["SMGOV_USEREMAIL"];
@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_sex = headers["SMGOV_SEX"];
             string smgov_streetaddress = headers["SMGOV_STREETADDRESS"];
             string smgov_city = headers["SMGOV_CITY"];
-            string smgov_postalcode = headers["SMGOV_POSTALCODE"];            
+            string smgov_postalcode = headers["SMGOV_POSTALCODE"];
             string smgov_stateorprovince = headers["SMGOV_STATEORPROVINCE"];
             string smgov_country = headers["SMGOV_COUNTRY"];
             string smgov_givenname = headers["SMGOV_GIVENNAME"];
@@ -63,15 +63,43 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_surname = headers["SMGOV_SURNAME"];
 
 
-            to.Emailaddress1 = smgov_useremail;
-            to.Firstname = smgov_givenname;
-            to.Middlename = smgov_givennames;
-            to.Lastname = smgov_surname;
-            to.Address1Line1 = smgov_streetaddress;            
-            to.Address1Postalcode = smgov_postalcode;
-            to.Address1City = smgov_city;            
-            to.Address1Stateorprovince = smgov_stateorprovince;
-            to.Address1Country = smgov_country;
+
+            if (!string.IsNullOrEmpty(smgov_useremail))
+            {
+                to.Emailaddress1 = smgov_useremail;
+            }
+            if (!string.IsNullOrEmpty(smgov_givenname))
+            {
+                to.Firstname = smgov_givenname;
+            }
+            if (!string.IsNullOrEmpty(smgov_givennames))
+            {
+                to.Middlename = smgov_givennames;
+            }
+            if (!string.IsNullOrEmpty(smgov_surname))
+            {
+                to.Lastname = smgov_surname;
+            }
+            if (!string.IsNullOrEmpty(smgov_streetaddress))
+            {
+                to.Address1Line1 = smgov_streetaddress;
+            }
+            if (!string.IsNullOrEmpty(smgov_postalcode))
+            {
+                to.Address1Postalcode = smgov_postalcode;
+            }
+            if (!string.IsNullOrEmpty(smgov_city))
+            {
+                to.Address1City = smgov_city;
+            }
+            if (!string.IsNullOrEmpty(smgov_stateorprovince))
+            {
+                to.Address1Stateorprovince = smgov_stateorprovince;
+            }
+            if (!string.IsNullOrEmpty(smgov_country))
+            {
+                to.Address1Country = smgov_country;
+            }
         }
 
 
@@ -87,10 +115,10 @@ namespace Gov.Lclb.Cllb.Public.Models
         static int? GetIntGenderCode(string genderCode)
         {
             // possible values:
-            
+
             int? result = null;
 
-            if (! string.IsNullOrEmpty(genderCode))
+            if (!string.IsNullOrEmpty(genderCode))
             {
                 string upper = genderCode.ToUpper();
                 if (upper.Equals("MALE") || upper.Equals("M"))
@@ -125,7 +153,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_givennames = headers["smgov_givennames"];
             string smgov_surname = headers["smgov_surname"];
 
-            if (!string.IsNullOrEmpty(smgov_givenname)) {
+            if (!string.IsNullOrEmpty(smgov_givenname))
+            {
                 to.firstname = smgov_givenname;
             }
 
@@ -142,16 +171,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.email = smgov_useremail;
             }
-            
 
-            if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse (smgov_birthdate, out DateTimeOffset tempDate))
+
+            if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse(smgov_birthdate, out DateTimeOffset tempDate))
             {
                 to.dateofbirth = tempDate;
             }
             if (!string.IsNullOrEmpty(smgov_sex))
             {
-                to.gender = (Gender) GetIntGenderCode(smgov_sex);
-            }            
+                to.gender = (Gender)GetIntGenderCode(smgov_sex);
+            }
         }
 
 
@@ -174,7 +203,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.address1_postalcode = smgov_postalcode;
             to.address1_city = smgov_city;
             to.address1_stateorprovince = smgov_stateorprovince;
-            to.address1_country = smgov_country;            
+            to.address1_country = smgov_country;
 
             if (!string.IsNullOrEmpty(smgov_givenname))
             {
@@ -217,8 +246,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCansigngrocerystoreproofofsalesrevenue = from.adoxio_cansigngrocerystoreproofofsalesrevenue;
             to.AdoxioCansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
             to.AdoxioCansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
-            to.Telephone1 = from.telephone1;            
-        }        
+            to.Telephone1 = from.telephone1;
+        }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
         {
@@ -226,7 +255,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (contact != null)
             {
                 result = new MicrosoftDynamicsCRMcontact();
-                if (! string.IsNullOrEmpty(contact.id))
+                if (!string.IsNullOrEmpty(contact.id))
                 {
                     result.Contactid = contact.id;
                 }
@@ -235,7 +264,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Firstname = contact.firstname;
                 result.Lastname = contact.lastname;
                 result.Middlename = contact.middlename;
-                
+
                 result.Address1City = contact.address1_city;
                 result.Address1Country = contact.address1_country;
                 result.Address1Line1 = contact.address1_line1;
