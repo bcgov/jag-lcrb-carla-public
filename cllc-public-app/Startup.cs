@@ -238,8 +238,9 @@ namespace Gov.Lclb.Cllb.Public
 
             // add the PDF client.
             string pdf_service_base_uri = Configuration["PDF_SERVICE_BASE_URI"];
+            string bearer_token = $"Bearer {Configuration["PDF_JWT_TOKEN"]}";
 
-            services.AddTransient<PdfClient>(_ => new PdfClient(pdf_service_base_uri));
+            services.AddTransient<PdfClient>(_ => new PdfClient(pdf_service_base_uri, bearer_token));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
