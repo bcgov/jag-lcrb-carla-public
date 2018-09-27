@@ -48,13 +48,13 @@ namespace Gov.Lclb.Cllb.SpdSync
         {
             services.AddMvc(config =>
             {
-                if (! string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
-                {
-                    var policy = new AuthorizationPolicyBuilder()
-                                 .RequireAuthenticatedUser()
-                                 .Build();
-                    config.Filters.Add(new AuthorizeFilter(policy));
-                }
+                // if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+                // {
+                //     var policy = new AuthorizationPolicyBuilder()
+                //                  .RequireAuthenticatedUser()
+                //                  .Build();
+                //     config.Filters.Add(new AuthorizeFilter(policy));
+                // }
                 
             });
 
