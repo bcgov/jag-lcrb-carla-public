@@ -499,7 +499,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // set the application invoice trigger to create an invoice
             ViewModels.Worker vm = worker.ToViewModel();
             MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
-            patchWorker.CopyValues(vm);
             // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
             patchWorker.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes;
             _dynamicsClient.Workers.Update(workerId, patchWorker);
