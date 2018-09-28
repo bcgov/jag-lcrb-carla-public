@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 //TODO: Update dynamics
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "500";
             }
