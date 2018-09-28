@@ -100,7 +100,7 @@
                   }
                 },
                 "readinessProbe": {
-                  "httpGet": {
+                  "tcpSocket": {
                     "path": "/hc",
                     "port": 8080,
                     "scheme": "HTTP"
@@ -112,7 +112,7 @@
                   "failureThreshold": 3
                 },
                 "liveinessProbe": {
-                  "httpGet": {
+                  "tcpSocket": {
                     "path": "/hc",
                     "port": 8080,
                     "scheme": "HTTP"
