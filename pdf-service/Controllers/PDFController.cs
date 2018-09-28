@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.NodeServices;
+using Microsoft.AspNetCore.Hosting;
 
 namespace PDF.Controllers
 {
@@ -24,8 +25,8 @@ namespace PDF.Controllers
     [Route("api/[controller]")]
     public class PDFController : Controller
     {
-        private readonly IConfiguration Configuration;                
-
+        private readonly IConfiguration Configuration;
+        private readonly IHostingEnvironment _env;
         protected ILogger _logger;
 
         public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IHostingEnvironment env)
