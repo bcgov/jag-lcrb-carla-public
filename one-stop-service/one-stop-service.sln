@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "one-stop-service", "one-stop-service.csproj", "{73677CB7-DA65-4E34-B139-FF22506E8AF2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneStopRestClient", "..\cllc-interfaces\OneStopRestClient\OneStopRestClient.csproj", "{646C01CC-EA9A-40AC-9850-878D71ADB8E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{73677CB7-DA65-4E34-B139-FF22506E8AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73677CB7-DA65-4E34-B139-FF22506E8AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73677CB7-DA65-4E34-B139-FF22506E8AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{646C01CC-EA9A-40AC-9850-878D71ADB8E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{646C01CC-EA9A-40AC-9850-878D71ADB8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{646C01CC-EA9A-40AC-9850-878D71ADB8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{646C01CC-EA9A-40AC-9850-878D71ADB8E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
