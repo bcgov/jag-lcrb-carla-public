@@ -7,6 +7,7 @@ using System.ServiceModel;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Gov.Lclb.Cllb.OneStopService;
+using Microsoft.Extensions.Logging;
 
 namespace one_stop_service.Controllers
 {
@@ -14,22 +15,27 @@ namespace one_stop_service.Controllers
     public class OneStopController : Controller
     {
         IConfiguration Configuration;
-        public OneStopController(IConfiguration configuration)
+        private readonly ILogger logger;
+
+        public OneStopController(IConfiguration configuration, ILogger logger)
         {
             Configuration = configuration;
+            this.logger = logger;
         }
 
-        [Route("[action]/{licenceGuild}")]
-        public IActionResult SendLicenceCreationMessage(string licenceGuild)
+        [Route("[action]/{licenceGuid}")]
+        public IActionResult SendLicenceCreationMessage(string licenceGuid)
         {
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null, licenceGuild));
+            logger.LogInformation($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null, licenceGuid));
             return Ok();
         }
 
-        [Route("[action]/{licenceGuild}")]
-        public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuild)
+        [Route("[action]/{licenceGuid}")]
+        public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid)
         {
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessage(null, licenceGuild));
+            logger.LogInformation("Reached SendProgramAccountDetailsBroadcastMessage");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessage(null, licenceGuid));
             return Ok();
         }
 
