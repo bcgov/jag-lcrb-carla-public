@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,9 +25,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 {
     public class Startup
     {
+        private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            _loggerFactory = loggerFactory;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -48,7 +51,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService());
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(OneStopUtils.SetupDynamics(Configuration), _loggerFactory.CreateLogger("IReceiveFromHubService")));
 
             services.AddMvc(config =>
             {
