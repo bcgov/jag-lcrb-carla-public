@@ -2,15 +2,15 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace OneStopRestClient
+namespace Gov.Lclb.Cllb.Interfaces
 {
-    public class Client : IOneStopRestClient
+    public class OneStopRestClient : IOneStopRestClient
     {
         public Uri BaseUri { get; set; }
         public string AuthorizationHeaderValue { get; set; }
         private readonly HttpClient httpClient = new HttpClient();
 
-        public Client(Uri baseUri, string authorizationHeaderValue)
+        public OneStopRestClient(Uri baseUri, string authorizationHeaderValue)
         {
             BaseUri = baseUri;
             AuthorizationHeaderValue = authorizationHeaderValue;
