@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop.
         /// </summary>
-        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuild)
+        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuid)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
@@ -64,7 +64,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuild));
+                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
@@ -80,12 +80,12 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop using REST.
         /// </summary>
-        public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuild)
+        public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuid)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
             var req = new ProgramAccountRequest();
-            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuild));
+            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
             var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
 
             hangfireContext.WriteLine(outputXML);
@@ -97,7 +97,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceDetailsMessage to One stop.
         /// </summary>
-        public async Task SendProgramAccountDetailsBroadcastMessage(PerformContext hangfireContext, string licenceGuild)
+        public async Task SendProgramAccountDetailsBroadcastMessage(PerformContext hangfireContext, string licenceGuid)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
@@ -122,7 +122,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountDetailsBroadcast();
-                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuild));
+                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
@@ -139,12 +139,12 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceDetailsMessage to One stop.
         /// </summary>
-        public async Task SendProgramAccountDetailsBroadcastMessageREST(PerformContext hangfireContext, string licenceGuild)
+        public async Task SendProgramAccountDetailsBroadcastMessageREST(PerformContext hangfireContext, string licenceGuid)
         {
             hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
 
             var req = new ProgramAccountDetailsBroadcast();
-            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuild));
+            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
             var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
 
             hangfireContext.WriteLine(outputXML);
