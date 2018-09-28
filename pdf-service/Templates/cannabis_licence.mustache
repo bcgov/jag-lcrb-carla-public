@@ -143,7 +143,19 @@
         }
 
         #footer {
-            position: relative;
+            position:absolute;
+            bottom:0;
+            width:100%;
+            height:60px;   /* Height of the footer */
+        }
+
+        #left-footer {
+            position: absolute;
+            text-transform: uppercase;
+            left: 0;
+            font-size: 10px;
+            word-wrap: normal;
+            max-width: 25% !important;
         }
 
         #form-number {
@@ -154,10 +166,9 @@
         }
 
         #issued-by {
-            text-align: center;
+            text-align: right;
             position: absolute;
             right: 0;
-            top: -10px;
             font-size: 10px;
         }
 
@@ -176,13 +187,17 @@
             clear: both;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid black;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             padding: 5px;
-            text-align: left;    
+            text-align: left;
         }
     </style>
 </head>
@@ -221,6 +236,10 @@
                     <div class="label in">Issued to:</div>
                     <div class="value">{{companyName}}</div>
                 </div>
+                <div class="row clearfix">
+                    <div class="label in">Restrictions:</div>
+                    <div class="value">{{restrictionsText}}</div>
+                </div>
             </div>
             <div>
                 <h2>TERMS AND CONDITIONS</h2>
@@ -240,24 +259,24 @@
                 <h3 style="text-align: center;">HOURS OF SALE</h3>
                 <table style="width:100%">
                     <tr>
-                      <th></th>
-                      <th>Monday</th>
-                      <th>Tuesday</th>
-                      <th>Wednesday</th>
-                      <th>Thursday</th>
-                      <th>Friday</th>
-                      <th>Saturday</th>
-                      <th>Sunday</th>
+                        <th></th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
                     </tr>
                     <tr>
-                      <td>Open</td>
-                      <td><b>9:00 AM</b></td>
-                      <td><b>9:00 AM</b></td>
-                      <td><b>9:00 AM</b></td>
-                      <td><b>9:00 AM</b></td>
-                      <td><b>9:00 AM</b></td>
-                      <td><b>9:00 AM</b></td>
-                      <td><b>9:00 AM</b></td>
+                        <td>Open</td>
+                        <td><b>9:00 AM</b></td>
+                        <td><b>9:00 AM</b></td>
+                        <td><b>9:00 AM</b></td>
+                        <td><b>9:00 AM</b></td>
+                        <td><b>9:00 AM</b></td>
+                        <td><b>9:00 AM</b></td>
+                        <td><b>9:00 AM</b></td>
                     </tr>
                     <tr>
                         <td>Close</td>
@@ -268,23 +287,21 @@
                         <td><b>11:00 PM</b></td>
                         <td><b>11:00 PM</b></td>
                         <td><b>11:00 PM</b></td>
-                  </table>
-                  <br>
-            </div>
-        </div>
-
-        <p id="notice">
-            Notice text
-
-            <div id="footer">
-                <div id="form-number">Form #</div>
-                <p id="permit-location">Footer text</p>
-                <div id="issued-by">
-                    <b>Issued by the</b><br>
-                    LCRB
-                </div>
+                </table>
+                <br>
             </div>
     </div>
+    <div id="footer">
+        <div id="left-footer">
+            Your current valid licence must be prominently displayed at all times.
+            Tampering, altering or defacing this licence in any manner may result in the licence being cancelled.
+        </div>
+        <div id="issued-by">
+            Issued: {{permitIssueDate}}
+            <br>
+            By: Liquor and Cannabis Regulation Branch
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>
