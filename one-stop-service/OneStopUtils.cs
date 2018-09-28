@@ -237,9 +237,12 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public static IOneStopRestClient SetupOneStopClient(IConfiguration Configuration)
         {
+            //create authorization header 
             var byteArray = Encoding.ASCII.GetBytes($"{Configuration["ONESTOP_HUB_USERNAME"]}:{Configuration["ONESTOP_HUB_PASSWORD"]}");
             string authorization = Convert.ToBase64String(byteArray);
-            var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_RST_URI"]), authorization);
+            
+            //create client
+            var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_REST_URI"]), authorization);
             return client;
         }
 
