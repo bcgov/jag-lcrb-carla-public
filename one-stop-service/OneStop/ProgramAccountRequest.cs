@@ -17,6 +17,19 @@ namespace WebApplicationSoap.OneStop
          */
         public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence)
         {
+            if (licence == null)
+            {
+                throw new Exception("licence can not be null");
+            }
+            else if (licence.AdoxioEstablishment == null)
+            {
+                throw new Exception("The licence must have an Establishment");
+            }
+            else if (licence.AdoxioLicencee == null)
+            {
+                throw new Exception("The licence must have an AdoxioLicencee");
+            }
+
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
             programAccountRequest.header = GetProgramAccountRequestHeader(licence);
@@ -61,7 +74,7 @@ namespace WebApplicationSoap.OneStop
             var userCredentials = new SBNCreateProgramAccountRequestHeaderCCRAHeaderUserCredentials();
 
             //BN9 of licensee (Owner company)
-            userCredentials.businessRegistrationNumber = licence.AdoxioAccountId.Accountnumber;
+            userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicenceprintname;
             //establishment (physical location of store)
@@ -77,7 +90,7 @@ namespace WebApplicationSoap.OneStop
             var programAccountRequestBody = new SBNCreateProgramAccountRequestBody();
 
             //BN9
-            programAccountRequestBody.businessRegistrationNumber = licence.AdoxioAccountId.Accountnumber;
+            programAccountRequestBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             //this code identifies that the message is from LCRB.  It's the same in every message from LCRB
             programAccountRequestBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
             //this identifies the licence type. Fixed number assigned by the OneStopHub
