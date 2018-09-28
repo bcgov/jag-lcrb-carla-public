@@ -27,7 +27,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendLicenceCreationMessage(string licenceGuid)
         {
             logger.LogInformation($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null, licenceGuid));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid));
             return Ok();
         }
 
@@ -35,7 +35,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid)
         {
             logger.LogInformation("Reached SendProgramAccountDetailsBroadcastMessage");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessage(null, licenceGuid));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licenceGuid));
             return Ok();
         }
 
