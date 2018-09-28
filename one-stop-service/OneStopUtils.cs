@@ -16,7 +16,6 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplicationSoap.OneStop;
-using OneStopRestClient;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -240,7 +239,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             var byteArray = Encoding.ASCII.GetBytes($"{Configuration["ONESTOP_HUB_USERNAME"]}:{Configuration["ONESTOP_HUB_PASSWORD"]}");
             string authorization = Convert.ToBase64String(byteArray);
-            var client = new Client(new Uri(Configuration["ONESTOP_HUB_RST_URI"]), authorization);
+            var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_RST_URI"]), authorization);
             return client;
         }
 
