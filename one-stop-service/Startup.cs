@@ -53,6 +53,9 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(OneStopUtils.SetupDynamics(Configuration), _loggerFactory.CreateLogger("IReceiveFromHubService")));
 
+
+            services.AddSingleton<ILogger>(_loggerFactory.CreateLogger("OneStopController"));
+
             services.AddMvc(config =>
             {
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
@@ -75,26 +78,26 @@ namespace Gov.Lclb.Cllb.OneStopService
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 
-            //if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
-            //{
-            //    // Configure JWT authentication
-            //    services.AddAuthentication(o =>
-            //    {
-            //        o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    }).AddJwtBearer(o =>
-            //    {
-            //        o.SaveToken = true;
-            //        o.RequireHttpsMetadata = false;
-            //        o.TokenValidationParameters = new TokenValidationParameters()
-            //        {
-            //            RequireExpirationTime = false,
-            //            ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-            //            ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
-            //        };
-            //    });
-            //}
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            {
+                // Configure JWT authentication
+                services.AddAuthentication(o =>
+                {
+                    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(o =>
+                {
+                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        RequireExpirationTime = false,
+                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                    };
+                });
+            }
 
             services.AddHangfire(config =>
             {
