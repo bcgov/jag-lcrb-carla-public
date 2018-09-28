@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -21,13 +22,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly IHostingEnvironment _env;
 
-        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
             Configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(ContactController));
+            this._env = env;
         }
 
 
@@ -259,7 +262,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             };
             contact.CopyValues(item);
 
-            if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null)
+            if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null && !_env.IsDevelopment())
             {
                 // get additional information from the service card headers.
                 contact.CopyValues(userSettings.NewContact);
