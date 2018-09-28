@@ -18,8 +18,19 @@ namespace WebApplicationSoap.OneStop
          */
         public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence)
         {
+            if(licence == null)
+            {
+                throw new Exception("The licence can not be null");
+            }
+            else if (licence.AdoxioEstablishment == null)
+            {
+                throw new Exception("The licence musy have an Establishment");
+            }
+            else if (licence.AdoxioAccountId == null)
+            {
+                throw new Exception("The licence must have an Account");
+            }
             var programAccountDetailsBroadcast = new SBNProgramAccountDetailsBroadcast1();
-
             programAccountDetailsBroadcast.header = GetProgramAccountDetailsBroadcastHeader(licence);
             programAccountDetailsBroadcast.body = GetProgramAccountDetailsBroadcastBody(licence);
 
