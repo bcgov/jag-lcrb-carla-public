@@ -24,7 +24,7 @@ namespace WebApplicationSoap.OneStop
             }
             else if (licence.AdoxioEstablishment == null)
             {
-                throw new Exception("The licence musy have an Establishment");
+                throw new Exception("The licence must have an Establishment");
             }
             else if (licence.AdoxioAccountId == null)
             {
