@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -19,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class AdoxioLicenseController : Controller
     {
-        private readonly IConfiguration Configuration;        
+        private readonly IConfiguration Configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly PdfClient _pdfClient;
@@ -100,12 +102,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET a licence as PDF.
         [HttpGet("{licenceId}/pdf")]
-
+        [AllowAnonymous]
         public async Task<FileContentResult> GetLicencePDF(string licenceId)
         {
+            string filter = $"adoxio_licencesid eq {licenceId}";
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter:filter).Value.FirstOrDefault();
+            AdoxioLicense license = adoxioLicense.ToViewModel(_dynamicsClient);
+
+
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("licenceNumber","1234");
-            byte[] data = await _pdfClient.GetPdf(parameters);         
+            parameters.Add("title", "Canabis_License");
+            parameters.Add("licenceNumber", license.licenseNumber);
+            parameters.Add("businessName", license.establishmentName);
+            parameters.Add("addressLine1", license.establishmentAddress);
+            //parameters.Add("addressLine2", adoxioLicense.addressLine2);
+            //parameters.Add("companyName", adoxioLicense.companyName);
+            parameters.Add("permitIssueDate", adoxioLicense.AdoxioEffectivedate.ToString());
+            //parameters.Add("restrictionsText", adoxioLicense.restrictionsText);
+
+            byte[] data = await _pdfClient.GetPdf(parameters);
             return File(data, "application/pdf");
         }
     }
