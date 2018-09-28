@@ -43,6 +43,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\OneStopRestClient\OneStopRestClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>
