@@ -26,9 +26,9 @@ namespace WebApplicationSoap.OneStop
             {
                 throw new Exception("The licence must have an Establishment");
             }
-            else if (licence.AdoxioAccountId == null)
+            else if (licence.AdoxioLicencee == null)
             {
-                throw new Exception("The licence must have an Account");
+                throw new Exception("The licence must have an AdoxioLicencee");
             }
             var programAccountDetailsBroadcast = new SBNProgramAccountDetailsBroadcast1();
             programAccountDetailsBroadcast.header = GetProgramAccountDetailsBroadcastHeader(licence);
@@ -73,7 +73,7 @@ namespace WebApplicationSoap.OneStop
             var userCredentials = new SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials();
 
             //BN9 of licensee (Owner company)
-            userCredentials.businessRegistrationNumber = licence.AdoxioAccountId.Accountnumber;
+            userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicenceprintname;
             //establishment (physical location of store)
@@ -89,7 +89,7 @@ namespace WebApplicationSoap.OneStop
             var programAccountDetailsBroadcastBody = new SBNProgramAccountDetailsBroadcastBody();
 
             // BN9
-            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioAccountId.Accountnumber;
+            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             
             // this code identifies that the message is from LCRB.  It's the same in every message from LCRB
             programAccountDetailsBroadcastBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
