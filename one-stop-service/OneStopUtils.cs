@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             try
             {
                 string filter = $"adoxio_licencesid eq {guid}";
-                var expand = new List<string> { "adoxio_AccountId", "adoxio_establishment" };
+                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
                 result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             }
             catch (OdataerrorException odee)
