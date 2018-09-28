@@ -157,13 +157,13 @@ namespace Gov.Lclb.Cllb.OneStopService
             MicrosoftDynamicsCRMadoxioLicences result;
             try
             {
-                string filter = $"adoxio_applicationid eq {guid}";
-                var expand = new List<string> { "adoxio_AccountId", "adoxio_establishment" };
+                string filter = $"adoxio_licencesid eq {guid}";
+                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
                 result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             }
             catch (OdataerrorException odee)
             {
-                hangfireContext.WriteLine("Error getting Application");
+                hangfireContext.WriteLine("Error getting Licence");
                 hangfireContext.WriteLine("Request:");
                 hangfireContext.WriteLine(odee.Request.Content);
                 hangfireContext.WriteLine("Response:");
