@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             BaseUri = baseUri;
             AuthorizationHeaderValue = authorizationHeaderValue;
-            httpClient.DefaultRequestHeaders.Add("Basic", authorizationHeaderValue);
+            httpClient.DefaultRequestHeaders.Add("Authorization", authorizationHeaderValue);
         }
 
         public async Task<string> receiveFromPartner(string inputXml)
