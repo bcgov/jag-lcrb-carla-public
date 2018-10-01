@@ -7,6 +7,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class AdoxioLicense
     {
+        public string id { get; set; }
         public string establishmentName { get; set; }
         public string establishmentAddress { get; set; }
         public string licenseStatus { get; set; }
