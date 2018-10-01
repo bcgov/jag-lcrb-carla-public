@@ -15,6 +15,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             AdoxioLicense adoxioLicenseVM = new AdoxioLicense();
 
+            adoxioLicenseVM.id = dynamicsLicense.AdoxioLicencesid;
+
             // fetch the establishment and get name and address
             Guid? adoxioEstablishmentId = null;
             if (!string.IsNullOrEmpty(dynamicsLicense._adoxioEstablishmentValue))
