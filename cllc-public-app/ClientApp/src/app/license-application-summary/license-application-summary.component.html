@@ -45,7 +45,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell mat-sort-header *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let element">
-        <button *ngIf="element.status == ACTIVE" class="btn btn-primary" (click)="downloadLicence(element)">DOWNLOAD LICENCE</button>
+        <a *ngIf="element.status == ACTIVE" class="btn btn-primary" [href]="'api/adoxiolicense/' + element?.assignedLicence?.id + '/pdf'">DOWNLOAD LICENCE</a>
         <button *ngIf="element.status == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(element)">PAY LICENCE FEE</button>
         <button *ngIf="element.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(element)">RENEW LICENCE</button>  
         </mat-cell>
