@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Linq;
+using System.Net;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -106,9 +108,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<FileContentResult> GetLicencePDF(string licenceId)
         {
             string filter = $"adoxio_licencesid eq {licenceId}";
-            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter:filter).Value.FirstOrDefault();
-            AdoxioLicense license = adoxioLicense.ToViewModel(_dynamicsClient);
 
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
+            AdoxioLicense license = new AdoxioLicense();
+
+            try
+            {
+                license = adoxioLicense.ToViewModel(_dynamicsClient);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error getting license by id.");
+            }
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("title", "Canabis_License");
