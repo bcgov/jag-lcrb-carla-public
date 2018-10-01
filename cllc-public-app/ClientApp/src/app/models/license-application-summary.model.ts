@@ -1,3 +1,5 @@
+import { AdoxioLicense } from './adoxio-license.model';
+
 export class LicenseApplicationSummary {
   id: string;
   establishmentName: string;
@@ -12,4 +14,5 @@ export class LicenseApplicationSummary {
   modifiedon: Date;
   applicationFormFileUrl: string;
   fileName: string;
+  assignedLicence: AdoxioLicense;
 }
