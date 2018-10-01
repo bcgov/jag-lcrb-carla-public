@@ -53,7 +53,6 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(OneStopUtils.SetupDynamics(Configuration), _loggerFactory.CreateLogger("IReceiveFromHubService"), Configuration));
 
-
             services.AddSingleton<ILogger>(_loggerFactory.CreateLogger("OneStopController"));
 
             services.AddMvc(config =>
@@ -72,7 +71,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB SPD Transfer Service", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB One Stop Service", Version = "v1" });
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -118,8 +117,6 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-
             app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
 
             if (env.IsDevelopment())
@@ -164,7 +161,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
             });
         }
 
