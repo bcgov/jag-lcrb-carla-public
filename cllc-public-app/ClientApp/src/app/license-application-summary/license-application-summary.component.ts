@@ -50,6 +50,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
           if (entry.assignedLicence) {
             const licAppSum = new LicenseApplicationSummary();
             licAppSum.id = entry.id;
+            licAppSum.assignedLicence = entry.assignedLicence;
             licAppSum.name = entry.assignedLicence.licenseNumber;
             licAppSum.establishmentName = entry.establishmentName;
             licAppSum.establishmentAddress = entry.establishmentAddress;
