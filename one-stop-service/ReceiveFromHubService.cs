@@ -8,6 +8,9 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Hangfire;
+using Microsoft.Extensions.Configuration;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -16,11 +19,13 @@ namespace Gov.Lclb.Cllb.OneStopService
         IDynamicsClient _dynamicsClient;
 
         public ILogger _logger{ get; }
+        private readonly IConfiguration Configuration;
 
-        public ReceiveFromHubService(IDynamicsClient dynamicsClient, ILogger logger)
+        public ReceiveFromHubService(IDynamicsClient dynamicsClient, ILogger logger, IConfiguration configuration)
         {
             _dynamicsClient = dynamicsClient;
             _logger = logger;
+            Configuration = configuration;
         }
 
         public string receiveFromHub(string inputXML)
@@ -41,10 +46,26 @@ namespace Gov.Lclb.Cllb.OneStopService
                     _logger.LogInformation(inputXML);
                 }
 
-                //TODO: Update dynamics
+                var filter = $"adoxio_licencenumber eq '{licenseData.header.partnerNote}'";
+                MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
+                if(licence == null)
+                {
+                    return "400";
+                }
+
+                //save the program account number to dynamics
+                var businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
+                MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    AdoxioBusinessprogramaccountreferencenumber = businessProgramAccountNumber
+                };
+                _dynamicsClient.Licenses.Update(licence.AdoxioLicencesid, pathLicence);
+
+                //Trigger the Send ProgramAccountDetailsBroadcast Message
+                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "500";
             }
