@@ -9,6 +9,10 @@ Communication is currently delivered using SMTP.
 
 SPD Sync is a Dotnet Core 2.1 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
 
+## Installation ##
+
+Follow the instructions in the `openshift` directory to install the service in OpenShift.
+
 ## Testing ##
 
 This section describes concepts and tools necessary for testing the service.
