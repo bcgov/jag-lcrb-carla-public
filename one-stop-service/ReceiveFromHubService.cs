@@ -30,6 +30,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public string receiveFromHub(string inputXML)
         {
+            _logger.LogInformation($">>>> Reached receiveFromHub method: { DateTime.Now.ToString() }");
+
             if (string.IsNullOrEmpty(inputXML))
             {
                 return "400";
