@@ -114,8 +114,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             AdoxioLicense license = new AdoxioLicense();
 
-            filter = $"_adoxio_licence_value eq {licenceId}";
-
             try
             {
                 license = adoxioLicense.ToViewModel(_dynamicsClient);
