@@ -19,9 +19,9 @@ namespace Gov.Lclb.Cllb.OneStopService
         public async Task Invoke(HttpContext context)
         {
             // Do work that doesn't write to the Response.
-            if (context.Request.Path.Value.Equals("/receiveFromHub") && string.IsNullOrEmpty(context.Request.Headers["SoapAction"]))
+            if (context.Request.Path.Value.Equals("/receiveFromHub") && string.IsNullOrEmpty(context.Request.Headers["SOAPAction"]))
             {
-                context.Request.Headers["SoapAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
+                context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
             }
             await _next(context);
         }
