@@ -23,12 +23,22 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public async Task Invoke(HttpContext context)
         {
+            
+            
+            if (context.Request.Path.Value.Equals("/receiveFromHub"))
+            {
+                string soapAction = context.Request.Headers["SOAPAction"];
+                if (string.IsNullOrEmpty(soapAction) || soapAction.Equals("\"\""))
+                {
+                    context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
+                }
+                
+                
+            }
+
             var requestLog = await FormatRequest(context.Request);
             logger.LogInformation(requestLog);
-            if (context.Request.Path.Value.Equals("/receiveFromHub") && string.IsNullOrEmpty(context.Request.Headers["SOAPAction"]))
-            {
-                context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
-            }
+
             await _next(context);
         }
 
