@@ -120,19 +120,8 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
-            app.Use(async (context, next) =>
-            {
-                // Do work that doesn't write to the Response.
-                if (context.Request.Path.Value.Equals("/receiveFromHub") && string.IsNullOrEmpty(context.Request.Headers["SoapAction"]))
-                {
-                    context.Request.Headers["SoapAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
-                }
-
-                await next.Invoke();
-                // Do logging or other work that doesn't write to the Response.
-            });
-
-
+            // app.UseSoapHeaderMiddleware();
+            
             app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
 
             if (env.IsDevelopment())
