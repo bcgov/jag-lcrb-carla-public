@@ -117,15 +117,33 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseSoapHeaderMiddleware();
+            // app.UseRequestLoggerMiddleware();
 
-            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding(), serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true);
+            // OneStop does not seem to set the SoapAction properly
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.Value.Equals("/receiveFromHub"))
+                {
+                    string soapAction = context.Request.Headers["SOAPAction"];
+                    if (string.IsNullOrEmpty(soapAction) || soapAction.Equals("\"\""))
+                    {
+                        context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
+                    }
+                }                
+
+                await next.Invoke();
+                
+            });
+
+            app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+
+            // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
 
             bool startHangfire = true;
 #if DEBUG
