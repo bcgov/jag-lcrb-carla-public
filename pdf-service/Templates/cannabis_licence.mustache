@@ -142,20 +142,10 @@
             text-transform: uppercase;
         }
 
-        #footer {
-            position:absolute;
-            bottom:0;
-            width:100%;
-            height:60px;   /* Height of the footer */
-        }
-
-        #left-footer {
-            position: absolute;
+        .footer-text {
             text-transform: uppercase;
-            left: 0;
             font-size: 10px;
-            word-wrap: normal;
-            max-width: 25% !important;
+            white-space: normal;
         }
 
         #form-number {
@@ -163,13 +153,6 @@
             left: 0;
             bottom: 0;
             font-size: 6px;
-        }
-
-        #issued-by {
-            text-align: right;
-            position: absolute;
-            right: 0;
-            font-size: 10px;
         }
 
         #permit-location {
@@ -200,10 +183,10 @@
             text-align: left;
         }
     </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-
     <div id="box">
         <div id="inner">
             <div id="header" class="clearfix">
@@ -220,25 +203,23 @@
             <br>
             <h2>Cannabis Retail Store Licence #{{licenceNumber}}</h2>
             <div id="info-box">
-                <div class="row clearfix">
-                    <div class="label in">Establisment Name:</div>
-                    <div class="value">{{businessName}}</div>
+                <div class="row">
+                    <div><b>Establisment Name:</b> {{establishmentName}}</div>
                 </div>
-                <div class="row clearfix">
-                    <div class="label in">Address:</div>
-                    <div class="value">{{addressLine1}}</div>
+                <div class="row">
+                    <div><b>Address:</b> {{establishmentAddress}}</div>
                 </div>
-                <div class="row clearfix">
-                    <div class="label in"></div>
-                    <div class="value">{{addressLine2}}</div>
+                <div class="row">
+                    <div><b>Licencee:</b> {{licencee}}</div>
                 </div>
-                <div class="row clearfix">
-                    <div class="label in">Issued to:</div>
-                    <div class="value">{{companyName}}</div>
+                <div class="row">
+                    <div><b>Effective Date:</b> {{effectiveDate}}</div>
                 </div>
-                <div class="row clearfix">
-                    <div class="label in">Restrictions:</div>
-                    <div class="value">{{restrictionsText}}</div>
+                <div class="row">
+                    <div><b>Expiry Date:</b> {{expiryDate}}</div>
+                </div>
+                <div class="row">
+                    <div><b>Restrictions:</b> {{restrictionsText}}</div>
                 </div>
             </div>
             <div>
@@ -290,18 +271,32 @@
                 </table>
                 <br>
             </div>
+        </div>
+
     </div>
-    <div id="footer">
+    <!-- <div class="page-footer">
         <div id="left-footer">
-            Your current valid licence must be prominently displayed at all times.
-            Tampering, altering or defacing this licence in any manner may result in the licence being cancelled.
+            
         </div>
         <div id="issued-by">
             Issued: {{permitIssueDate}}
             <br>
-            By: Liquor and Cannabis Regulation Branch
+            
+        </div>
+    </div> -->
+    <footer class="page-footer">
+        <div class="row footer-text">
+            <div class="col-xs-4">
+                    Your current valid licence must be prominently displayed at all times.
+                    Tampering, altering or defacing this licence in any manner may result in the licence being cancelled.
+            </div>
+            <div class="col-xs-4">
+            </div>
+            <div class="col-xs-4" style="text-align: right;">
+                By: Liquor and Cannabis Regulation Branch
             </div>
         </div>
-    </div>
+    </footer>
 </body>
+
 </html>
