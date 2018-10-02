@@ -121,17 +121,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license by id.");
             }
 
-            Dictionary<string, string> parameters = new Dictionary<string, string>
-            {
-                { "title", "Canabis_License" },
-                { "licenceNumber", license.licenseNumber },
-                { "establishmentName", license.establishmentName },
-                { "establishmentAddress", license.establishmentAddress},
-                { "licencee", adoxioLicense.AdoxioLicencee.Name},
-                { "effectiveDate", adoxioLicense.AdoxioEffectivedate.ToString()},
-                { "expiryDate", adoxioLicense.AdoxioExpirydate.ToString()},
-                { "restrictionsText", adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence.ToString()}
-            };
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("title", "Canabis_License");
+            parameters.Add("licenceNumber", license.licenseNumber);
+            parameters.Add("establishmentName", license.establishmentName);
+            parameters.Add("establishmentAddress", license.establishmentAddress);
+            parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
+            parameters.Add("effectiveDate", adoxioLicense.AdoxioEffectivedate.ToString());
+            parameters.Add("expiryDate", adoxioLicense.AdoxioExpirydate.ToString());
+            parameters.Add("restrictionsText", adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence.ToString());
 
             byte[] data = await _pdfClient.GetPdf(parameters);
             return File(data, "application/pdf");
