@@ -121,15 +121,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license by id.");
             }
 
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("title", "Canabis_License");
-            parameters.Add("licenceNumber", license.licenseNumber);
-            parameters.Add("businessName", license.establishmentName);
-            parameters.Add("addressLine1", license.establishmentAddress);
-            //parameters.Add("addressLine2", adoxioLicense.addressLine2);
-            //parameters.Add("companyName", adoxioLicense.companyName);
-            parameters.Add("permitIssueDate", adoxioLicense.AdoxioEffectivedate.ToString());
-            //parameters.Add("restrictionsText", adoxioLicense.restrictionsText);
+            Dictionary<string, string> parameters = new Dictionary<string, string>
+            {
+                { "title", "Canabis_License" },
+                { "licenceNumber", license.licenseNumber },
+                { "establishmentName", license.establishmentName },
+                { "establishmentAddress", license.establishmentAddress},
+                { "licencee", adoxioLicense.AdoxioLicencee.Name},
+                { "effectiveDate", adoxioLicense.AdoxioEffectivedate.ToString()},
+                { "expiryDate", adoxioLicense.AdoxioExpirydate.ToString()},
+                { "restrictionsText", adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence.ToString()}
+            };
 
             byte[] data = await _pdfClient.GetPdf(parameters);
             return File(data, "application/pdf");
