@@ -120,7 +120,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
-            app.UseSoapHeaderMiddleware();
+            // app.UseSoapHeaderMiddleware();
             
             app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
 
