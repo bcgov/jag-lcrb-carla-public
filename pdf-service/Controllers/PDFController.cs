@@ -44,7 +44,7 @@ namespace PDF.Controllers
         public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  Object rawdata )
         {
             JSONResponse result = null;
-            var options = new { format="letter", orientation= "portrait" };            
+            var options = new { format="letter", orientation= "landscape" };            
 
             // execute the Node.js component
             result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", rawdata, options); 
@@ -60,7 +60,7 @@ namespace PDF.Controllers
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             JSONResponse result = null;
-            var options = new { format="letter", orientation= "portrait" };            
+            var options = new { format="letter", orientation= "landscape" };            
 
             var testObject = new Dictionary <string, string>();
             testObject.Add("title", "test title");
