@@ -116,7 +116,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             // check to see if it is simply a problem with an old account number.
 
-            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals(11409)) // Old account number.
+            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.
             {
                 _logger.LogInformation("Error is old account number is already associated with another account.");
                 // retry the request with a higher increment.
@@ -164,7 +164,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 switch (rootNodeName)
                 {
-                    case "SBNCreateProgramAccountRequest":
+                    case "SBNCreateProgramAccountResponse":
                         result = HandleSBNCreateProgramAccountResponse(inputXML);
                         break;
                     case "SBNErrorNotification":
