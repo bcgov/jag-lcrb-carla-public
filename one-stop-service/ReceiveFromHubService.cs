@@ -36,7 +36,11 @@ namespace Gov.Lclb.Cllb.OneStopService
             string result = null;
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(inputXML);
-            result = xmlDocument.ChildNodes[0].Name;
+            // node 0 is going to be "xml", so get the next node.
+            if (xmlDocument.ChildNodes.Count > 1)
+            {
+                result = xmlDocument.ChildNodes[1].Name;
+            }            
             return result;
         }
 
