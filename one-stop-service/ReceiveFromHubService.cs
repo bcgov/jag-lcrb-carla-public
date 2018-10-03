@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             string result = null;
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(inputXML);
+            xmlDocument.LoadXml(inputXML);
             result = xmlDocument.ChildNodes[0].Name;
             return result;
         }
