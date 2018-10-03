@@ -62,6 +62,17 @@ export class LicenseApplicationSummaryComponent implements OnInit {
           }
         });
 
+        licenseApplicationSummary.sort(function (a, b) {
+          var dateA = new Date(a.modifiedon);
+          var dateB = new Date(b.modifiedon);
+  
+          if(dateB < dateA){
+            return -1
+          } else {
+            return 1;
+          }
+        });
+
         this.dataSource.data = licenseApplicationSummary;
         // console.log(adoxioApplications);
         // console.log(adoxioLicenses);
