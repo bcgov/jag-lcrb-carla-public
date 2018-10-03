@@ -129,8 +129,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("establishmentName", license.establishmentName);
             parameters.Add("establishmentAddress", license.establishmentAddress);
             parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
-            parameters.Add("effectiveDate", adoxioLicense.AdoxioEffectivedate.ToString());
-            parameters.Add("expiryDate", adoxioLicense.AdoxioExpirydate.ToString());
+            try
+            {
+                DateTime effectiveDate = adoxioLicense.AdoxioExpirydate.HasValue ? adoxioLicense.AdoxioExpirydate.Value.DateTime : DateTime.MaxValue;
+                DateTime expiryDate = adoxioLicense.AdoxioExpirydate.HasValue ? adoxioLicense.AdoxioExpirydate.Value.DateTime : DateTime.MaxValue;
+                parameters.Add("effectiveDate", effectiveDate.ToString("dd/mm/yyyy"));
+                parameters.Add("expiryDate", expiryDate.ToString("dd/mm/yyyy"));
+            }
+            catch
+            {
+                parameters.Add("effectiveDate", "");
+                parameters.Add("expiryDate", "");
+            }
             parameters.Add("restrictionsText", adoxioLicense.adoxio_termsandconditions);
 
             byte[] data = await _pdfClient.GetPdf(parameters);
