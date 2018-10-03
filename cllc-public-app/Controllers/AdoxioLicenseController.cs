@@ -109,7 +109,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string filter = $"adoxio_licencesid eq {licenceId}";
 
-            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
+            var expand = new List<string> { "adoxio_Licencee" };
+
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             AdoxioLicense license = new AdoxioLicense();
 
             try
@@ -129,7 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
             parameters.Add("effectiveDate", adoxioLicense.AdoxioEffectivedate.ToString());
             parameters.Add("expiryDate", adoxioLicense.AdoxioExpirydate.ToString());
-            parameters.Add("restrictionsText", adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence.ToString());
+            parameters.Add("restrictionsText", adoxioLicense.adoxio_termsandconditions);
 
             byte[] data = await _pdfClient.GetPdf(parameters);
             return File(data, "application/pdf");
