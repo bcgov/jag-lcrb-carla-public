@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop.
         /// </summary>
-        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuid)
+        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuid, string suffix)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
+                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid), suffix);
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
@@ -77,12 +77,12 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop using REST.
         /// </summary>
-        public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuid)
+        public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuid, string suffix)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
             var req = new ProgramAccountRequest();
-            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
+            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid), suffix);
             var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
 
             hangfireContext.WriteLine(outputXML);
@@ -243,5 +243,56 @@ namespace Gov.Lclb.Cllb.OneStopService
             var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_REST_URI"]), authorization);
             return client;
         }
+        
+        /// <summary>
+        /// Extract a guid from a partnerNote.
+        /// </summary>
+        /// <param name="partnerNote"></param>
+        /// <returns></returns>
+        public static string GetGuidFromPartnerNote(string partnerNote)
+        {
+            string result = null;
+            string[] parts = partnerNote.Split(",");
+            result = parts[0];                
+            
+            return result;
+        }
+
+        /// <summary>
+        /// Extract a suffix from a partnerNote
+        /// </summary>
+        /// <param name="partnerNote"></param>
+        /// <returns></returns>
+        public static int GetSuffixFromPartnerNote(string partnerNote)
+        {
+            int result = 0;
+            string[] parts = partnerNote.Split("-");
+            if (parts.Length > 1)
+            {
+                string suffix = parts[1];
+                int.TryParse(suffix, out result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Extract a  from a partnerNote.
+        /// </summary>
+        /// <param name="partnerNote"></param>
+        /// <returns></returns>
+        public static string GetLicenceNumberFromPartnerNote(string partnerNote)
+        {
+            string result = null;
+            string[] parts = partnerNote.Split(",");
+            if (parts.Length > 1)
+            {
+                string secondString = parts[1];
+                string[] secondParts = secondString.Split("-");
+                result = secondParts[0];                
+            }
+            return result;
+        }
+
+
     }
 }
