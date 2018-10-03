@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Gov.Lclb.Cllb.OneStopService
@@ -25,40 +26,45 @@ namespace Gov.Lclb.Cllb.OneStopService
             Configuration = configuration;
         }
 
-        public string receiveFromHub(string inputXML)
+        /// <summary>
+        /// Get the name of the root node.
+        /// </summary>
+        /// <param name="inputXML"></param>
+        /// <returns></returns>
+        private string GetRootNodeName(string inputXML)
         {
-            _logger.LogInformation($">>>> Reached receiveFromHub method: { DateTime.Now.ToString() }");
+            string result = null;
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(inputXML);
+            result = xmlDocument.ChildNodes[0].Name;
+            return result;
+        }
 
-            if (string.IsNullOrEmpty(inputXML))
+        private string HandleSBNCreateProgramAccountResponse(string inputXML)
+        {
+            string result = "200";
+            // deserialize the inputXML
+            var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountResponse1));
+            SBNCreateProgramAccountResponse1 licenseData;
+
+            using (TextReader reader = new StringReader(inputXML))
             {
-                _logger.LogInformation("inputXML is empty - returning 400.");
-                return "400";
+                licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
+                _logger.LogInformation(inputXML);
             }
+            _logger.LogInformation("Getting licence with number of {licenseData.header.partnerNote}");
 
-            try
+            string licenceNumber = OneStopUtils.GetLicenceNumberFromPartnerNote(licenseData.header.partnerNote);
+
+            var filter = $"adoxio_licencenumber eq '{licenceNumber}'";
+            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
+            if (licence == null)
             {
-                // sanitize inputXML.
-                inputXML = inputXML.Trim();
-                _logger.LogInformation($"inputXML is: {inputXML}");
-
-                // deserialize the inputXML
-                var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountResponse1));
-                SBNCreateProgramAccountResponse1 licenseData;
-                
-                using (TextReader reader = new StringReader(inputXML))
-                {
-                    licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
-                    _logger.LogInformation(inputXML);
-                }
-                _logger.LogInformation("Getting licence with number of {licenseData.header.partnerNote}");
-                var filter = $"adoxio_licencenumber eq '{licenseData.header.partnerNote}'";
-                MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
-                if(licence == null)
-                {
-                    _logger.LogInformation("licence is null - returning 400.");
-                    return "400";
-                }
-
+                _logger.LogInformation("licence is null - returning 400.");
+                result = "400";
+            }
+            else
+            {
                 //save the program account number to dynamics
                 var businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
                 MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences()
@@ -85,6 +91,78 @@ namespace Gov.Lclb.Cllb.OneStopService
                 //Trigger the Send ProgramAccountDetailsBroadcast Message
                 BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
                 _logger.LogInformation("Enqueued send program account details broadcast.");
+            }
+
+            return result;
+            
+        }
+
+        private string HandleSBNErrorNotification(string inputXML)
+        {
+            string result = "200";
+            // deserialize the inputXML
+            var serializer = new XmlSerializer(typeof(SBNErrorNotification1));
+            SBNErrorNotification1 errorNotification;
+
+            using (TextReader reader = new StringReader(inputXML))
+            {
+                errorNotification = (SBNErrorNotification1)serializer.Deserialize(reader);                
+            }
+            _logger.LogInformation("Received error notification");
+
+            // check to see if it is simply a problem with an old account number.
+
+            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals(11409)) // Old account number.
+            {
+                _logger.LogInformation("Error is old account number is already associated with another account.");
+                // retry the request with a higher increment.
+
+                string licenceGuid = OneStopUtils.GetGuidFromPartnerNote(errorNotification.header.partnerNote);
+                int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote);
+
+                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
+            }
+
+            return result;
+
+        }
+
+
+        public string receiveFromHub(string inputXML)
+        {
+            string result = "200";
+            _logger.LogInformation($">>>> Reached receiveFromHub method: { DateTime.Now.ToString() }");
+
+            if (string.IsNullOrEmpty(inputXML))
+            {
+                _logger.LogInformation("inputXML is empty - returning 400.");
+                return "400";
+            }
+
+            try
+            {
+                // sanitize inputXML.
+                inputXML = inputXML.Trim();
+                _logger.LogInformation($"inputXML is: {inputXML}");
+
+                // determine the type of XML.
+                string rootNodeName = GetRootNodeName(inputXML);
+
+                switch (rootNodeName)
+                {
+                    case "SBNCreateProgramAccountRequest":
+                        result = HandleSBNCreateProgramAccountResponse(inputXML);
+                        break;
+                    case "SBNErrorNotification":
+                        result = HandleSBNErrorNotification(inputXML);
+                        break;
+                    default:
+                        _logger.LogInformation($"Unknown Root Node encountered: {rootNodeName}");
+                        break;
+                }
+
+
+                
 
             }
             catch (Exception ex)
@@ -94,7 +172,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 return "500";
             }
 
-            return "200";
+            return result;
 
         }
     }
