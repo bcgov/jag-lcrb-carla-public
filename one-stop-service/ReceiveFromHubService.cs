@@ -31,6 +31,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             if (string.IsNullOrEmpty(inputXML))
             {
+                _logger.LogInformation("inputXML is empty - returning 400.");
                 return "400";
             }
 
@@ -48,11 +49,12 @@ namespace Gov.Lclb.Cllb.OneStopService
                     licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
                     _logger.LogInformation(inputXML);
                 }
-
+                _logger.LogInformation("Getting licence with number of {licenseData.header.partnerNote}");
                 var filter = $"adoxio_licencenumber eq '{licenseData.header.partnerNote}'";
                 MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
                 if(licence == null)
                 {
+                    _logger.LogInformation("licence is null - returning 400.");
                     return "400";
                 }
 
@@ -66,7 +68,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     _dynamicsClient.Licenses.Update(licence.AdoxioLicencesid, pathLicence);
-                    _logger.LogInformation("Updated Licence record");
+                    _logger.LogInformation($"Updated Licence record {licence.AdoxioLicencesid} to {businessProgramAccountNumber}");
                 }
                 catch (OdataerrorException odee)
                 {
@@ -86,6 +88,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             catch (Exception ex)
             {
+                _logger.LogError("Exception occured during processing of SOAP message");
+                _logger.LogError(ex.Message);
                 return "500";
             }
 
