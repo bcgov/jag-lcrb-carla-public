@@ -120,7 +120,17 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string licenceGuid = OneStopUtils.GetGuidFromPartnerNote(errorNotification.header.partnerNote);
                 int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote);
 
-                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
+                // sanity check
+                if (currentSuffix < 10)
+                {
+                    currentSuffix++;
+                    _logger.LogInformation($"Starting resend of licence creation message, attempt {currentSuffix}");
+                    BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString()));
+                }                
+                else
+                {
+                    _logger.LogInformation($"Skipping resend of licence creation message as there have been too many tries({currentSuffix})");
+                }
             }
 
             return result;
