@@ -3,19 +3,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
-    public class SoapHeaderMiddleware
+    public class RequestLoggerMiddleware
     {
         private readonly RequestDelegate _next;
         private ILogger logger;
 
-        public SoapHeaderMiddleware(RequestDelegate next, ILogger logger)
+        public RequestLoggerMiddleware(RequestDelegate next, ILogger logger)
         {
             _next = next;
             this.logger = logger;
@@ -23,15 +22,22 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public async Task Invoke(HttpContext context)
         {
-            var requestLog = await FormatRequest(context.Request);
-            logger.LogInformation(requestLog);
-            if (context.Request.Path.Value.Equals("/receiveFromHub") && string.IsNullOrEmpty(context.Request.Headers["SOAPAction"]))
+
+            if (context.Request.Path.Value.Equals("/receiveFromHub"))
             {
-                context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
+                string soapAction = context.Request.Headers["SOAPAction"];
+                if (string.IsNullOrEmpty(soapAction) || soapAction.Equals("\"\""))
+                {
+                    context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
+                }
             }
+
+            var requestLog = await FormatRequest(context.Request);
+
+            logger.LogInformation(requestLog);
+
             await _next(context);
         }
-
 
         private async Task<string> FormatRequest(HttpRequest request)
         {
@@ -64,11 +70,11 @@ namespace Gov.Lclb.Cllb.OneStopService
     }
 
 
-    public static class SoapHeaderMiddlewareExtensions
+    public static class RequestLoggerMiddlewareExtensions
     {
         public static IApplicationBuilder UseSoapHeaderMiddleware(this IApplicationBuilder app)
         {
-            return app.UseMiddleware<SoapHeaderMiddleware>();
+            return app.UseMiddleware<RequestLoggerMiddleware>();
         }
     }
 }

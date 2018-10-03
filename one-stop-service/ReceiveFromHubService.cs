@@ -1,16 +1,13 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using Hangfire;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Hangfire;
-using Microsoft.Extensions.Configuration;
-using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -42,6 +39,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                 // deserialize the inputXML
                 var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountResponse1));
                 SBNCreateProgramAccountResponse1 licenseData;
+
+                // sanitize inputXML.
+                inputXML = inputXML.Trim();
+
                 using (TextReader reader = new StringReader(inputXML))
                 {
                     licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
@@ -61,10 +62,26 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     AdoxioBusinessprogramaccountreferencenumber = businessProgramAccountNumber
                 };
-                _dynamicsClient.Licenses.Update(licence.AdoxioLicencesid, pathLicence);
+
+                try
+                {
+                    _dynamicsClient.Licenses.Update(licence.AdoxioLicencesid, pathLicence);
+                    _logger.LogInformation("Updated Licence record");
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error updating Licence");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    // fail if we can't get results.
+                    throw (odee);
+                }
 
                 //Trigger the Send ProgramAccountDetailsBroadcast Message
                 BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
+                _logger.LogInformation("Enqueued send program account details broadcast.");
 
             }
             catch (Exception ex)
