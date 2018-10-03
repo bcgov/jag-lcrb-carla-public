@@ -5,13 +5,10 @@ using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-using Pop3;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Mail;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,7 +115,6 @@ namespace Gov.Lclb.Cllb.OneStopService
                 //Add the credentials message header to the outgoing request
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
 
-
                 try
                 {
                     var req = new ProgramAccountDetailsBroadcast();
@@ -128,6 +124,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
                 catch (Exception ex)
                 {
+                    hangfireContext.WriteLine("Error sending program account details broadcast:");
+                    hangfireContext.WriteLine(ex.Message);
                     throw;
                 }
             }
@@ -245,7 +243,5 @@ namespace Gov.Lclb.Cllb.OneStopService
             var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_REST_URI"]), authorization);
             return client;
         }
-
-
     }
 }
