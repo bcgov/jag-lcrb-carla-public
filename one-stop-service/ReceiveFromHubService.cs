@@ -37,13 +37,14 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             try
             {
+                // sanitize inputXML.
+                inputXML = inputXML.Trim();
+                _logger.LogInformation($"inputXML is: {inputXML}");
+
                 // deserialize the inputXML
                 var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountResponse1));
                 SBNCreateProgramAccountResponse1 licenseData;
-
-                // sanitize inputXML.
-                inputXML = inputXML.Trim();
-
+                
                 using (TextReader reader = new StringReader(inputXML))
                 {
                     licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
