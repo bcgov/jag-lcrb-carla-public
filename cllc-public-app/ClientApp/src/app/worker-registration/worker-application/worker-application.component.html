@@ -123,10 +123,12 @@
                 <label>City and Country of Birth</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="birthplace">
+                <i *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched"
-                  class="alert alert-danger" style="width: 250px;">
+                  class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched ">
-                    This is required
+                    The city and country of your birth is required.
                   </div>
                 </div>
               </div>
@@ -151,6 +153,8 @@
                 <label>BC Driver's Licence Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="driverslicencenumber">
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
               </div>
             </section>
             <section>
@@ -158,8 +162,10 @@
                 <label>BCID Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="bcidcardnumber">
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
-                  class="alert alert-danger" style="width: 250px;">
+                  class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)">
                     You must enter either a BCID number or a driver’s licence number.
                   </div>
@@ -172,10 +178,14 @@
                 <span>(incl. area code)</span>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="phonenumber">
+                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
-                  class="alert alert-danger" style="width: 250px;">
+                  class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched ">
-                    This is required
+                    <span>Please enter a value.</span><br>
+                    <span>This field cannot contain letters.</span><br>
+                    <span>Please provide a 10-digit phone number without a country code, spaces or special characters.*</span>
                   </div>
                 </div>
               </div>
@@ -185,10 +195,14 @@
                 <label>Email Address</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="email">
+                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="alert alert-danger"
-                  style="width: 250px;">
+                  style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched ">
-                    This is required
+                    <span>Please enter a value.</span><br>
+                    <span>Please include an “@” in the email address.</span><br>
+                    <span>Your address must include a domain at the end such as .com, .ca, or .net.</span>
                   </div>
                 </div>
               </div>
