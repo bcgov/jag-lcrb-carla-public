@@ -15,7 +15,7 @@ namespace WebApplicationSoap.OneStop
          * Initial XML message sent to the Hub requesting a new program account when a new cannabis licence is issued.
          * The purpose is to receive a Program Account Reference Number required by the Program Account Details Broadcast
          */
-        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence)
+        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence, string suffix)
         {
             if (licence == null)
             {
@@ -32,7 +32,7 @@ namespace WebApplicationSoap.OneStop
 
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
-            programAccountRequest.header = GetProgramAccountRequestHeader(licence);
+            programAccountRequest.header = GetProgramAccountRequestHeader(licence, suffix);
             programAccountRequest.body = GetProgramAccountRequestBody(licence);
 
             var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountRequest1));
@@ -43,7 +43,7 @@ namespace WebApplicationSoap.OneStop
             }
         }
 
-        private SBNCreateProgramAccountRequestHeader GetProgramAccountRequestHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNCreateProgramAccountRequestHeader GetProgramAccountRequestHeader(MicrosoftDynamicsCRMadoxioLicences licence, string suffix)
         {
             var header = new SBNCreateProgramAccountRequestHeader();
 
@@ -52,7 +52,7 @@ namespace WebApplicationSoap.OneStop
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
-            header.partnerNote = licence.AdoxioLicencenumber;
+            header.partnerNote = licence.AdoxioLicencesid + "," + licence.AdoxioLicencenumber + "-" + suffix;
             header.CCRAHeader = GetCCRAHeader(licence);
 
             return header;
