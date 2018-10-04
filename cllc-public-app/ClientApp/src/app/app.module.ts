@@ -131,18 +131,18 @@ import {
 } from './lite-application-dashboard/lite-application-dashboard.component';
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
-import { WorkerApplicationComponent } from './worker-registration/worker-application/worker-application.component';
-import { WorkerDashboardComponent } from './worker-registration/dashboard/dashboard.component';
+import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
+import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { AliasDataService } from './services/alias-data.service';
 import { PreviousAddressDataService } from './services/previous-address-data.service';
 import { WorkerDataService } from './services/worker-data.service.';
-import { SpdConsentComponent } from './worker-registration/spd-consent/spd-consent.component';
-import { PrePaymentComponent } from './worker-registration/pre-payment/pre-payment.component';
-import { UserConfirmationComponent } from './worker-registration/user-confirmation/user-confirmation.component';
-import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
-import { WorkerPaymentConfirmationComponent } from './worker-registration/payment-confirmation/payment-confirmation.component';
-import { WorkerTermsAndConditionsComponent } from './worker-registration/worker-terms-and-conditions/worker-terms-and-conditions.component';
-import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-registration/worker-home/worker-home.component';
+import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-consent.component';
+import { PrePaymentComponent } from './worker-qualification/pre-payment/pre-payment.component';
+import { UserConfirmationComponent } from './worker-qualification/user-confirmation/user-confirmation.component';
+import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
+import { WorkerPaymentConfirmationComponent } from './worker-qualification/payment-confirmation/payment-confirmation.component';
+import { WorkerTermsAndConditionsComponent } from './worker-qualification/worker-terms-and-conditions/worker-terms-and-conditions.component';
+import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualification/worker-home/worker-home.component';
 
 @NgModule({
   declarations: [
@@ -203,7 +203,7 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-registr
     AssociatesDashboardComponent,
     WorkerApplicationComponent,
     WorkerDashboardComponent,
-    WorkerRegistrationComponent,
+    WorkerQualificationComponent,
     WorkerPaymentConfirmationComponent,
     SpdConsentComponent,
     PrePaymentComponent,
