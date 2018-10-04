@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -11,7 +12,11 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            WebHost.CreateDefaultBuilder(args)                
+                    .ConfigureAppConfiguration((hostingContext, config) =>
+                            {
+                        config.AddEnvironmentVariables();
+                    })
+            .UseStartup<Startup>();
     }
 }
