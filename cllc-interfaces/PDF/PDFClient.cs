@@ -34,12 +34,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<byte[]> GetPdf(Dictionary<string,string> parameters)
+        public async Task<byte[]> GetPdf(Dictionary<string,string> parameters, string template)
         {
             byte[] result = null;
 
             HttpRequestMessage endpointRequest =
-                new HttpRequestMessage(HttpMethod.Post, BaseUri + "/api/pdf/GetPdf");
+                new HttpRequestMessage(HttpMethod.Post, BaseUri + "/api/pdf/GetPdf/" + template);
 
             //HttpRequestMessage endpointRequest =
             //    new HttpRequestMessage(HttpMethod.Get, BaseUri + "/api/pdf/GetTestPDF");
