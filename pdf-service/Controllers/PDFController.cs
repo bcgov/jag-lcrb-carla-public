@@ -37,17 +37,17 @@ namespace PDF.Controllers
         }
 
         [HttpPost]
-        [Route("GetPDF")]
+        [Route("GetPDF/{template}")]
         [Produces("application/pdf")]
         [ProducesResponseType(200, Type = typeof(FileContentResult))]
 
-        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  Object rawdata )
+        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  Object rawdata, string template )
         {
             JSONResponse result = null;
             var options = new { format="letter", orientation= "landscape" };            
 
             // execute the Node.js component
-            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", rawdata, options); 
+            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", template, rawdata, options); 
                         
             return new FileContentResult(result.data, "application/pdf");
         }        
