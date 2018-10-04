@@ -122,9 +122,9 @@ export class WorkerPaymentConfirmationComponent implements OnInit {
    * */
   return_to_application() {
     if (this.trnApproved === '1') {
-      this.router.navigate(['/worker-registration/dashboard']);
+      this.router.navigate(['/worker-qualification/dashboard']);
     } else {
-      this.router.navigate(['/worker-registration/application/' + this.workerId]);
+      this.router.navigate(['/worker-qualification/application/' + this.workerId]);
     }
   }
 
