@@ -59,6 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
                 result.paymentRecievedDate = worker.AdoxioPaymentreceiveddate;
                 result.workerId = worker.AdoxioWorkerid;
+                result.fromdate = worker.AdoxioCurrentaddressdatefrom;
             }
             return result;
         }
@@ -100,6 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             to.AdoxioPaymentreceiveddate = from.paymentRecievedDate;
             to.AdoxioWorkerid = from.workerId;
+            to.AdoxioCurrentaddressdatefrom = from.fromdate;
         }
     }
 }
