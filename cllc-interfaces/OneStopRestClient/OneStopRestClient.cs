@@ -23,10 +23,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ToString();
+                var content = await response.Content.ReadAsStringAsync();
+                return content;
             } else
             {
-                var ex = response.ReasonPhrase + " \n" + response.Content.ToString();
+                var content = await response.Content.ReadAsStringAsync();
+                var ex = response.ReasonPhrase + " \n >>>" + content;
                 throw new Exception(ex);
             }
         }
