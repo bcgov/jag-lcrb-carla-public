@@ -46,26 +46,28 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private string HandleSBNCreateProgramAccountResponse(string inputXML)
         {
-            string result = "200";
+            string httpStatusCode = "200";
+
             // deserialize the inputXML
             var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountResponse1));
             SBNCreateProgramAccountResponse1 licenseData;
-
             using (TextReader reader = new StringReader(inputXML))
             {
                 licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
                 _logger.LogInformation(inputXML);
             }
-            _logger.LogInformation($"Getting licence with number of {licenseData.header.partnerNote}");
+
 
             string licenceNumber = OneStopUtils.GetLicenceNumberFromPartnerNote(licenseData.header.partnerNote);
+            _logger.LogInformation($"Getting licence with number of {licenceNumber}");
 
+            // Get licence from dynamics
             var filter = $"adoxio_licencenumber eq '{licenceNumber}'";
             MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
             if (licence == null)
             {
                 _logger.LogInformation("licence is null - returning 400.");
-                result = "400";
+                httpStatusCode = "400";
             }
             else
             {
@@ -98,7 +100,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 _logger.LogInformation("Enqueued send program account details broadcast.");
             }
 
-            return result;
+            return httpStatusCode;
             
         }
 
