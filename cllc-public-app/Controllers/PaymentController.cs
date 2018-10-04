@@ -546,7 +546,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
-            var redirectPath = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "worker-registration/payment-confirmation";
+            var redirectPath = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "worker-qualification/payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), redirectPath);
 
             _logger.LogError(">>>>>" + redirectUrl["url"]);
