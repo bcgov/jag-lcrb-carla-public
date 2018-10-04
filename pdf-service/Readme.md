@@ -48,6 +48,25 @@ Using the above JWT Authentication method, here is the request to start the expo
 
 `curl --header "Authorization: Bearer <TOKEN>" -d {input data} -k <URL to service>`
 
+## Adding a new template
 
+To have multiple templates do the following:
 
-  
+### In the pdf-service project
+
+1. Add your template to the Templates directory.
+2. Add your template to the item group in pdf-service.csproj
+
+```
+<None Update="Templates\{your-template-name}.mustache">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+</None>
+```
+
+### In your service that is connecting to pdf-service
+
+3. Query the service by using the following code where the second parameter is the name of the template without .mustache. The example below assumes the template is called cannabis_licence.mustache:
+
+```
+byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
+```
