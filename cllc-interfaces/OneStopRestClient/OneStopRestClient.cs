@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             } else
             {
                 var ex = response.ReasonPhrase + " \n" + response.Content.ToString();
-                throw new Exception();
+                throw new Exception(ex);
             }
         }
     }
