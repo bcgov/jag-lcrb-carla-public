@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 licenseData = (SBNCreateProgramAccountResponse1)serializer.Deserialize(reader);
                 _logger.LogInformation(inputXML);
             }
-            _logger.LogInformation("Getting licence with number of {licenseData.header.partnerNote}");
+            _logger.LogInformation($"Getting licence with number of {licenseData.header.partnerNote}");
 
             string licenceNumber = OneStopUtils.GetLicenceNumberFromPartnerNote(licenseData.header.partnerNote);
 
@@ -69,13 +69,14 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             else
             {
+                _logger.LogInformation($"Licence record retrieved from Dynamics.");
                 //save the program account number to dynamics
                 var businessProgramAccountNumber = licenseData.body.businessProgramAccountNumber.businessProgramAccountReferenceNumber;
                 MicrosoftDynamicsCRMadoxioLicences pathLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
                     AdoxioBusinessprogramaccountreferencenumber = businessProgramAccountNumber
                 };
-
+                _logger.LogInformation($"Sending update to Dynamics for BusinessProgramAccountNumber.");
                 try
                 {
                     _dynamicsClient.Licenses.Update(licence.AdoxioLicencesid, pathLicence);
