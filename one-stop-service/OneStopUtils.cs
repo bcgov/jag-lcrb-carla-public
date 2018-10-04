@@ -80,8 +80,10 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
+            // prepare soap message
             var req = new ProgramAccountRequest();
             var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid), suffix);
+            // send message to Onestop hub
             var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
 
             hangfireContext.WriteLine(outputXML);
@@ -140,8 +142,11 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
 
+            //prepare soap content
             var req = new ProgramAccountDetailsBroadcast();
             var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
+
+            //send message to Onestop hub
             var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
 
             hangfireContext.WriteLine(outputXML);
