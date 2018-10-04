@@ -30,7 +30,7 @@ describe('Login component test', () => {
 
     // Uncomment this when BC Service dashboard is ready.
 
-    // it('should finish login (worker) process and redirect to worker registration page', async () => {
+    // it('should finish login (worker) process and redirect to worker qualification page', async () => {
     //     await page.navigateToBCServiceLogin("protractorServiceTestUser");
     //     expect(page.getHeading('h2')).toEqual('Please confirm the name associated with the BC Service card login provided.');
     //     page.getButtonByClass("btn-primary").click();
