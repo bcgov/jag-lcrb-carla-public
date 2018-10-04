@@ -57,7 +57,6 @@ namespace Gov.Lclb.Cllb.OneStopService
                 //Add the credentials message header to the outgoing request
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
 
-
                 try
                 {
                     var req = new ProgramAccountRequest();
@@ -292,7 +291,5 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             return result;
         }
-
-
     }
 }
