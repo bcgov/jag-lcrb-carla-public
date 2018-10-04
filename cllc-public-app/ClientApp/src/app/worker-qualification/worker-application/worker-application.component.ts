@@ -355,7 +355,7 @@ export class WorkerApplicationComponent implements OnInit {
 
   gotoStep2() {
     if (this.form.valid && this.isBCIDValid() && this.pastAddressesAreValid() ) {
-      this.router.navigate([`/worker-registration/spd-consent/${this.workerId}`]);
+      this.router.navigate([`/worker-qualification/spd-consent/${this.workerId}`]);
     } else {
       this.markAsTouched();
     }
