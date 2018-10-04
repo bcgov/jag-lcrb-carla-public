@@ -34,7 +34,7 @@ namespace WebApplicationSoap.OneStop
             programAccountDetailsBroadcast.header = GetProgramAccountDetailsBroadcastHeader(licence);
             programAccountDetailsBroadcast.body = GetProgramAccountDetailsBroadcastBody(licence);
 
-            var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountRequest1));
+            var serializer = new XmlSerializer(typeof(SBNProgramAccountDetailsBroadcast1));
             using (StringWriter textWriter = new StringWriter())
             {
                 serializer.Serialize(textWriter, programAccountDetailsBroadcast);
