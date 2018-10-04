@@ -99,13 +99,13 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
           this.isApproved = false;
           if (this.messageId === '559') {
             this.paymentTransactionTitle = 'Cancelled';
-            this.paymentTransactionMessage = 'Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+            this.paymentTransactionMessage = 'Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Approved Applications. </p>';
           } else if (this.messageId === '7') {
             this.paymentTransactionTitle = 'Declined';
-            this.paymentTransactionMessage = 'Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+            this.paymentTransactionMessage = 'Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Approved Applications. </p>';
           } else {
             this.paymentTransactionTitle = 'Declined';
-            this.paymentTransactionMessage = 'Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+            this.paymentTransactionMessage = 'Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Approved Applications. </p>';
           }
         }
 

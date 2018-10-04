@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "one-stop-service", "one-sto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneStopRestClient", "..\cllc-interfaces\OneStopRestClient\OneStopRestClient.csproj", "{646C01CC-EA9A-40AC-9850-878D71ADB8E6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{646C01CC-EA9A-40AC-9850-878D71ADB8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{646C01CC-EA9A-40AC-9850-878D71ADB8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{646C01CC-EA9A-40AC-9850-878D71ADB8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
