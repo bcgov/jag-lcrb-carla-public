@@ -143,7 +143,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             parameters.Add("restrictionsText", adoxioLicense.adoxio_termsandconditions);
 
-            byte[] data = await _pdfClient.GetPdf(parameters);
+            byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
             return File(data, "application/pdf");
         }
     }
