@@ -28,6 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
+                logger.LogInformation("OneStop message sequence completed successfully ");
                 return content;
             } else
             {
