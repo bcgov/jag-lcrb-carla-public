@@ -11,6 +11,10 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Linq;
+using System.Net;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -19,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class AdoxioLicenseController : Controller
     {
-        private readonly IConfiguration Configuration;        
+        private readonly IConfiguration Configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly PdfClient _pdfClient;
@@ -100,12 +104,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET a licence as PDF.
         [HttpGet("{licenceId}/pdf")]
-
+        [AllowAnonymous]
         public async Task<FileContentResult> GetLicencePDF(string licenceId)
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("licenceNumber","1234");
-            byte[] data = await _pdfClient.GetPdf(parameters);         
+            string filter = $"adoxio_licencesid eq {licenceId}";
+
+            var expand = new List<string> { "adoxio_Licencee" };
+
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
+            AdoxioLicense license = new AdoxioLicense();
+
+            try
+            {
+                license = adoxioLicense.ToViewModel(_dynamicsClient);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error getting license by id.");
+            }
+
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("title", "Canabis_License");
+            parameters.Add("licenceNumber", license.licenseNumber);
+            parameters.Add("establishmentName", license.establishmentName);
+            parameters.Add("establishmentAddress", license.establishmentAddress);
+            parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
+            try
+            {
+                DateTime effectiveDate = adoxioLicense.AdoxioExpirydate.HasValue ? adoxioLicense.AdoxioExpirydate.Value.DateTime : DateTime.MaxValue;
+                DateTime expiryDate = adoxioLicense.AdoxioExpirydate.HasValue ? adoxioLicense.AdoxioExpirydate.Value.DateTime : DateTime.MaxValue;
+                parameters.Add("effectiveDate", effectiveDate.ToString("dd/mm/yyyy"));
+                parameters.Add("expiryDate", expiryDate.ToString("dd/mm/yyyy"));
+            }
+            catch
+            {
+                parameters.Add("effectiveDate", "");
+                parameters.Add("expiryDate", "");
+            }
+            parameters.Add("restrictionsText", adoxioLicense.adoxio_termsandconditions);
+
+            byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
             return File(data, "application/pdf");
         }
     }

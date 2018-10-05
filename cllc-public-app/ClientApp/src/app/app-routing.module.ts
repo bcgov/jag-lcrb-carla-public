@@ -35,14 +35,14 @@ import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit
 import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
 import { ApplicationComponent } from './lite/application/application.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
-import { WorkerRegistrationComponent } from './worker-registration/worker-registration.component';
-import { WorkerDashboardComponent } from './worker-registration/dashboard/dashboard.component';
-import { WorkerApplicationComponent } from './worker-registration/worker-application/worker-application.component';
-import { UserConfirmationComponent } from './worker-registration/user-confirmation/user-confirmation.component';
-import { PrePaymentComponent } from './worker-registration/pre-payment/pre-payment.component';
-import { WorkerPaymentConfirmationComponent } from './worker-registration/payment-confirmation/payment-confirmation.component';
-import { SpdConsentComponent } from './worker-registration/spd-consent/spd-consent.component';
-import { WorkerHomeComponent } from './worker-registration/worker-home/worker-home.component';
+import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
+import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
+import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
+import { UserConfirmationComponent } from './worker-qualification/user-confirmation/user-confirmation.component';
+import { PrePaymentComponent } from './worker-qualification/pre-payment/pre-payment.component';
+import { WorkerPaymentConfirmationComponent } from './worker-qualification/payment-confirmation/payment-confirmation.component';
+import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-consent.component';
+import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-home.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 
 const routes: Routes = [
@@ -72,39 +72,39 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'worker-registration/home',
+    path: 'worker-qualification/home',
     component: WorkerHomeComponent
   },
   {
-    path: 'worker-registration/user-comfirmation',
+    path: 'worker-qualification/user-comfirmation',
     component: UserConfirmationComponent,
     canActivate: [ServiceCardAuthGuard]
   },
   {
-    path: 'worker-registration/payment-confirmation',
+    path: 'worker-qualification/payment-confirmation',
     component: WorkerPaymentConfirmationComponent,
     canActivate: [ServiceCardAuthGuard]
   },
   {
-    path: 'worker-registration/dashboard',
+    path: 'worker-qualification/dashboard',
     component: WorkerDashboardComponent,
     canActivate: [ServiceCardAuthGuard]
   },
   {
-    path: 'worker-registration/application/:id',
+    path: 'worker-qualification/application/:id',
     component: WorkerApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [ServiceCardAuthGuard]
   },
   {
-    path: 'worker-registration/spd-consent/:id',
+    path: 'worker-qualification/spd-consent/:id',
     component: SpdConsentComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [ServiceCardAuthGuard]
   },
   // {
-  //   path: 'worker-registration',
-  //   component: WorkerRegistrationComponent,
+  //   path: 'worker-qualification',
+  //   component: WorkerqualificationComponent,
   //   canActivate: [ServiceCardAuthGuard],
   //   children: [
   //   ]
@@ -231,8 +231,8 @@ const routes: Routes = [
     redirectTo: 'prv/survey'
   },
   {
-    path: 'worker-registration',
-    component: WorkerRegistrationComponent
+    path: 'worker-qualification',
+    component: WorkerQualificationComponent
   },
   {
     path: 'result/:data',

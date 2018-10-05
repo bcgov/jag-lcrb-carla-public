@@ -14,10 +14,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public string BaseUri { get; set; }
         
-        string Authorization { get; set; }
         private HttpClient client;
 
-        public PdfClient ( string baseUri )
+        public PdfClient ( string baseUri, string Authorization )
         {
             BaseUri = baseUri;                       
 
@@ -35,12 +34,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<byte[]> GetPdf(Dictionary<string,string> parameters)
+        public async Task<byte[]> GetPdf(Dictionary<string,string> parameters, string template)
         {
             byte[] result = null;
 
             HttpRequestMessage endpointRequest =
-                new HttpRequestMessage(HttpMethod.Post, BaseUri + "api/pdf/GetPdf");
+                new HttpRequestMessage(HttpMethod.Post, BaseUri + "/api/pdf/GetPdf/" + template);
+
+            //HttpRequestMessage endpointRequest =
+            //    new HttpRequestMessage(HttpMethod.Get, BaseUri + "/api/pdf/GetTestPDF");
 
             string jsonString = JsonConvert.SerializeObject(parameters);
             StringContent strContent = new StringContent(jsonString, Encoding.UTF8);

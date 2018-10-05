@@ -16,6 +16,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "statuscode@odata.bind")]
         public string StatusCodeODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_licencefeeinvoicetrigger")]
+        public int? AdoxioLicenceFeeInvoiceTrigger { get; set; }
+
+        //adoxio_LicenceFeeInvoice
         [JsonProperty(PropertyName = "adoxio_LicenceType@odata.bind")]
         public string AdoxioLicenceTypeODataBind { get; set; }
 
