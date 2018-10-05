@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.NodeServices;
+using Microsoft.AspNetCore.Hosting;
 
 namespace PDF.Controllers
 {
@@ -24,29 +25,29 @@ namespace PDF.Controllers
     [Route("api/[controller]")]
     public class PDFController : Controller
     {
-        private readonly IConfiguration Configuration;                
-
+        private readonly IConfiguration Configuration;
+        private readonly IHostingEnvironment _env;
         protected ILogger _logger;
 
-        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
             Configuration = configuration;
-                 
+            _env = env;
             _logger = loggerFactory.CreateLogger(typeof(PDFController));
         }
 
         [HttpPost]
-        [Route("GetPDF")]
+        [Route("GetPDF/{template}")]
         [Produces("application/pdf")]
         [ProducesResponseType(200, Type = typeof(FileContentResult))]
 
-        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  Object rawdata )
+        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  Object rawdata, string template )
         {
             JSONResponse result = null;
-            var options = new { format="letter", orientation= "portrait" };            
+            var options = new { format="letter", orientation= "landscape" };            
 
             // execute the Node.js component
-            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", "cannabis_licence", rawdata, options); 
+            result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", template, rawdata, options); 
                         
             return new FileContentResult(result.data, "application/pdf");
         }        
@@ -56,8 +57,10 @@ namespace PDF.Controllers
 
         public async Task<IActionResult> GetTestPDF([FromServices] INodeServices nodeServices)
         {
+            if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
+
             JSONResponse result = null;
-            var options = new { format="letter", orientation= "portrait" };            
+            var options = new { format="letter", orientation= "landscape" };            
 
             var testObject = new Dictionary <string, string>();
             testObject.Add("title", "test title");

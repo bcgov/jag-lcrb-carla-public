@@ -42,12 +42,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
 
         /// <summary>
-        /// Worker registration requires new contact info.
+        /// Worker qualification requires new contact info.
         /// </summary>
         public ViewModels.Contact NewContact { get; set; }
 
         /// <summary>
-        /// Worker registration requires some additional fields.
+        /// Worker qualification requires some additional fields.
         /// </summary>
         public ViewModels.Worker NewWorker { get; set; }
 

@@ -50,6 +50,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
           if (entry.assignedLicence) {
             const licAppSum = new LicenseApplicationSummary();
             licAppSum.id = entry.id;
+            licAppSum.assignedLicence = entry.assignedLicence;
             licAppSum.name = entry.assignedLicence.licenseNumber;
             licAppSum.establishmentName = entry.establishmentName;
             licAppSum.establishmentAddress = entry.establishmentAddress;
@@ -58,6 +59,17 @@ export class LicenseApplicationSummaryComponent implements OnInit {
             licAppSum.status = this.getLicenceStatus(entry);
             licAppSum.licenseNumber = entry.assignedLicence.licenseNumber;
             licenseApplicationSummary.push(licAppSum);
+          }
+        });
+
+        licenseApplicationSummary.sort(function (a, b) {
+          var dateA = new Date(a.modifiedon);
+          var dateB = new Date(b.modifiedon);
+  
+          if(dateB < dateA){
+            return -1
+          } else {
+            return 1;
           }
         });
 
@@ -90,7 +102,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   }
 
   payLicenceFee(application) {
-    this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
+    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
       const data = res.json();
       window.location.href = data.url;
     });

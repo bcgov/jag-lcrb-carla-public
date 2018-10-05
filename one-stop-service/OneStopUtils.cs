@@ -5,13 +5,10 @@ using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-using Pop3;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Mail;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +24,19 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private IDynamicsClient _dynamics;
 
+        private IOneStopRestClient _onestopRestClient;
+
         public OneStopUtils(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
-            this._dynamics = SetupDynamics();
+            this._dynamics = OneStopUtils.SetupDynamics(Configuration);
+            this._onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration);
         }
 
         /// <summary>
-        /// Hangfire job to send an export to SPD.
+        /// Hangfire job to send LicenceCreationMessage to One stop.
         /// </summary>
-        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuild)
+        public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuid, string suffix)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
@@ -57,11 +57,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                 //Add the credentials message header to the outgoing request
                 OperationContext.Current.OutgoingMessageHeaders.Add(header);
 
-
                 try
                 {
                     var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext));
+                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid), suffix);
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
@@ -74,19 +73,99 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
         }
+        /// <summary>
+        /// Hangfire job to send LicenceCreationMessage to One stop using REST.
+        /// </summary>
+        public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuid, string suffix)
+        {
+            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
 
-        private MicrosoftDynamicsCRMadoxioLicences GetLicenceFromDynamics(PerformContext hangfireContext, string guid = "2287f8c8-0853-e811-8140-480fcfeac941")
+            // prepare soap message
+            var req = new ProgramAccountRequest();
+            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid), suffix);
+            // send message to Onestop hub
+            var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
+
+            hangfireContext.WriteLine(outputXML);
+            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+        }
+
+
+
+        /// <summary>
+        /// Hangfire job to send LicenceDetailsMessage to One stop.
+        /// </summary>
+        public async Task SendProgramAccountDetailsBroadcastMessage(PerformContext hangfireContext, string licenceGuid)
+        {
+            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+
+
+            OneStopHubService.receiveFromPartnerResponse output;
+            var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
+            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
+            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
+            var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+            basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            serviceClient.Endpoint.Binding = basicHttpBinding;
+
+            using (new OperationContextScope(serviceClient.InnerChannel))
+            {
+                //Create message header containing the credentials
+                var header = new OneStopServiceReference.SoapSecurityHeader("", Configuration["ONESTOP_HUB_USERNAME"],
+                                                                            Configuration["ONESTOP_HUB_PASSWORD"], "");
+                //Add the credentials message header to the outgoing request
+                OperationContext.Current.OutgoingMessageHeaders.Add(header);
+
+                try
+                {
+                    var req = new ProgramAccountDetailsBroadcast();
+                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
+                    var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
+                    output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    hangfireContext.WriteLine("Error sending program account details broadcast:");
+                    hangfireContext.WriteLine(ex.Message);
+                    throw;
+                }
+            }
+            hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
+
+            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+        }
+
+        /// <summary>
+        /// Hangfire job to send LicenceDetailsMessage to One stop.
+        /// </summary>
+        public async Task SendProgramAccountDetailsBroadcastMessageREST(PerformContext hangfireContext, string licenceGuid)
+        {
+            hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
+
+            //prepare soap content
+            var req = new ProgramAccountDetailsBroadcast();
+            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
+
+            //send message to Onestop hub
+            var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
+
+            hangfireContext.WriteLine(outputXML);
+            hangfireContext.WriteLine("End ofOneStop REST SendLicenceCreationMessage  Job.");
+        }
+
+
+        private MicrosoftDynamicsCRMadoxioLicences GetLicenceFromDynamics(PerformContext hangfireContext, string guid)
         {
             MicrosoftDynamicsCRMadoxioLicences result;
             try
             {
-                string filter = $"adoxio_applicationid eq {guid}";
-                var expand = new List<string> { "adoxio_AccountId", "adoxio_establishment" };
+                string filter = $"adoxio_licencesid eq {guid}";
+                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
                 result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             }
             catch (OdataerrorException odee)
             {
-                hangfireContext.WriteLine("Error getting Application");
+                hangfireContext.WriteLine("Error getting Licence");
                 hangfireContext.WriteLine("Request:");
                 hangfireContext.WriteLine(odee.Request.Content);
                 hangfireContext.WriteLine("Response:");
@@ -97,7 +176,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             return result;
         }
 
-        private IDynamicsClient SetupDynamics()
+        public static IDynamicsClient SetupDynamics(IConfiguration Configuration)
         {
 
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
@@ -158,6 +237,64 @@ namespace Gov.Lclb.Cllb.OneStopService
             return client;
         }
 
+        public static IOneStopRestClient SetupOneStopClient(IConfiguration Configuration)
+        {
+            //create authorization header 
+            var byteArray = Encoding.ASCII.GetBytes($"{Configuration["ONESTOP_HUB_USERNAME"]}:{Configuration["ONESTOP_HUB_PASSWORD"]}");
+            string authorization = "Basic " + Convert.ToBase64String(byteArray);
+            
+            //create client
+            var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_REST_URI"]), authorization);
+            return client;
+        }
+        
+        /// <summary>
+        /// Extract a guid from a partnerNote.
+        /// </summary>
+        /// <param name="partnerNote"></param>
+        /// <returns></returns>
+        public static string GetGuidFromPartnerNote(string partnerNote)
+        {
+            string result = null;
+            string[] parts = partnerNote.Split(",");
+            result = parts[0];                
+            
+            return result;
+        }
 
+        /// <summary>
+        /// Extract a suffix from a partnerNote
+        /// </summary>
+        /// <param name="partnerNote"></param>
+        /// <returns></returns>
+        public static int GetSuffixFromPartnerNote(string partnerNote)
+        {
+            int result = 0;
+            string[] parts = partnerNote.Split("-");
+            if (parts.Length > 1)
+            {
+                string suffix = parts[1];
+                int.TryParse(suffix, out result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Extract a  from a partnerNote.
+        /// </summary>
+        /// <param name="partnerNote"></param>
+        /// <returns></returns>
+        public static string GetLicenceNumberFromPartnerNote(string partnerNote)
+        {
+            string result = null;
+            string[] parts = partnerNote.Split(",");
+            if (parts.Length > 1)
+            {
+                string secondString = parts[1];
+                string[] secondParts = secondString.Split("-");
+                result = secondParts[0];                
+            }
+            return result;
+        }
     }
 }
