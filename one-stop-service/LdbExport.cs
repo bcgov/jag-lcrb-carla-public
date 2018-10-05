@@ -81,12 +81,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 csvList.Add(headers);
 
-                var csv = new StringBuilder();
-                csvList.ForEach(row =>
-                {
-                    var line = String.Join(",", row);
-                    csv.AppendLine(line);
-                });
+                
 
                 if (result != null && result.Count > 0)
                 {
@@ -115,11 +110,16 @@ namespace Gov.Lclb.Cllb.OneStopService
                             }
                         }
                         csvList.Add(item);
-
                     }
+                    
                 }
 
-
+                var csv = new StringBuilder();
+                csvList.ForEach(row =>
+                {
+                    var line = String.Join(",", row);
+                    csv.AppendLine(line);
+                });
 
                 var datePart = DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
