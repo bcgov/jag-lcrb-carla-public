@@ -5,16 +5,16 @@
       <div>
         <section>
           <!-- <div [ngBusy]="busy"></div> -->
-          <h1>Worker Registration Dashboard</h1>
+          <h1>Worker Qualification Dashboard</h1>
           <div>
             <p>
-              Your Worker Registration Application and Consent for Cannabis Security Screening are incomplete. You can return to this page
+              Your Worker Qualification Application and Consent for Cannabis Security Screening are incomplete. You can return to this page
               and complete and submit them with payment at any time.
             </p>
 
             <p>The program will let you know in writing the results of your screening.</p>
 
-            <h2>Registration Status</h2>
+            <h2>Qualification Status</h2>
 
             <section>
               <mat-table class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
@@ -31,7 +31,7 @@
                 <ng-container matColumnDef="worker">
                   <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <a routerLink="/worker-registration/application/{{element.id}}">{{element?.firstname}} {{element?.middlename}}
+                    <a routerLink="/worker-qualification/application/{{element.id}}">{{element?.firstname}} {{element?.middlename}}
                       {{element.lastname}}
                     </a>
                   </mat-cell>
