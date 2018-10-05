@@ -23,9 +23,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
                 if (propertyName.IndexOf(".") > -1)
                 {
                     string[] tokens = propertyName.Split(".");
-
-                    var property = this.GetType().GetProperty(tokens[0]).GetValue(this, null);
-                    return property.GetType().GetProperty(tokens[1]).GetValue(this, null);
+                    string firstToken = tokens[0];
+                    string secondToken = tokens[1];
+                    var property = this.GetType().GetProperty(firstToken).GetValue(this, null);
+                    if (property == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return property.GetType().GetProperty(secondToken).GetValue(property, null);
+                    }
+                    
                 }
                 else
                 {
