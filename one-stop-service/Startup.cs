@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using SoapCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
@@ -52,6 +53,11 @@ namespace Gov.Lclb.Cllb.OneStopService
         public void ConfigureServices(IServiceCollection services)
         {
             IDynamicsClient dynamicsClient = OneStopUtils.SetupDynamics(Configuration);
+            var x = dynamicsClient.Licenses.Get().Value.FirstOrDefault();
+            var logger = _loggerFactory.CreateLogger("Test Dynamics connection");
+            logger.LogInformation($"************** Got licence with id: {x.AdoxioLicencesid}");
+
+
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), Configuration));
 
             services.AddSingleton<ILogger>(_loggerFactory.CreateLogger("OneStopController"));
