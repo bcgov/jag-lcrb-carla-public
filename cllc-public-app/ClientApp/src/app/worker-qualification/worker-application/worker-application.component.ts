@@ -71,8 +71,6 @@ export class WorkerApplicationComponent implements OnInit {
         address1_stateorprovince: ['', Validators.required],
         address1_country: ['', Validators.required],
         address1_postalcode: ['', Validators.required],
-        fromdate: ['', Validators.required],
-        todate: [{value: new Date(), disabled: true}]
       }),
       worker: this.fb.group({
         id: [],
@@ -88,7 +86,8 @@ export class WorkerApplicationComponent implements OnInit {
         phonenumber: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         selfdisclosure: [''],
-        // triggerphs: ['', Validators.required],
+        fromdate: ['', Validators.required],
+        todate: [{value: new Date(), disabled: true}],
         aliases: this.fb.array([
         ]),
       }),
@@ -292,8 +291,8 @@ export class WorkerApplicationComponent implements OnInit {
     // add current address range
     let dateRanges = [
       {
-        fd: new Date(this.form.get('contact.fromdate').value),
-        td: new Date(this.form.get('contact.todate').value)
+        fd: new Date(this.form.get('worker.fromdate').value),
+        td: new Date(this.form.get('worker.todate').value)
       }
     ];
 
@@ -356,7 +355,7 @@ export class WorkerApplicationComponent implements OnInit {
 
   gotoStep2() {
     if (this.form.valid && this.isBCIDValid() && this.pastAddressesAreValid() ) {
-      this.router.navigate([`/worker-registration/spd-consent/${this.workerId}`]);
+      this.router.navigate([`/worker-qualification/spd-consent/${this.workerId}`]);
     } else {
       this.markAsTouched();
     }

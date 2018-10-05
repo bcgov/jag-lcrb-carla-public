@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,9 +25,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 {
     public class Startup
     {
+        private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            _loggerFactory = loggerFactory;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -48,7 +51,10 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService());
+            IDynamicsClient dynamicsClient = OneStopUtils.SetupDynamics(Configuration);
+            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), Configuration));
+
+            services.AddSingleton<ILogger>(_loggerFactory.CreateLogger("OneStopController"));
 
             services.AddMvc(config =>
             {
@@ -66,32 +72,32 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB SPD Transfer Service", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB One Stop Service", Version = "v1" });
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 
-            //if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
-            //{
-            //    // Configure JWT authentication
-            //    services.AddAuthentication(o =>
-            //    {
-            //        o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    }).AddJwtBearer(o =>
-            //    {
-            //        o.SaveToken = true;
-            //        o.RequireHttpsMetadata = false;
-            //        o.TokenValidationParameters = new TokenValidationParameters()
-            //        {
-            //            RequireExpirationTime = false,
-            //            ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-            //            ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
-            //        };
-            //    });
-            //}
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            {
+                // Configure JWT authentication
+                services.AddAuthentication(o =>
+                {
+                    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(o =>
+                {
+                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        RequireExpirationTime = false,
+                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                    };
+                });
+            }
 
             services.AddHangfire(config =>
             {
@@ -112,15 +118,33 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            // app.UseRequestLoggerMiddleware();
+
+            // OneStop does not seem to set the SoapAction properly
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.Value.Equals("/receiveFromHub"))
+                {
+                    string soapAction = context.Request.Headers["SOAPAction"];
+                    if (string.IsNullOrEmpty(soapAction) || soapAction.Equals("\"\""))
+                    {
+                        context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
+                    }
+                }                
+
+                await next.Invoke();
+                
+            });
 
             app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
+
+            // , serializer: SoapSerializer.XmlSerializer, caseInsensitivePath: true
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
 
             bool startHangfire = true;
 #if DEBUG
@@ -158,7 +182,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
             });
         }
 
