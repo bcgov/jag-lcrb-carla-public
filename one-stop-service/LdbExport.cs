@@ -41,9 +41,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             List<MicrosoftDynamicsCRMadoxioLicences> result = null;
             string filter = $"adoxio_businessprogramaccountreferencenumber eq null";
+            List<string> expand = new List<string>();
+            expand.Add("adoxio_establishment");
             try
             {
-                result = _dynamics.Licenses.Get(filter: filter).Value.ToList();
+                result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.ToList();
             }
             catch (OdataerrorException odee)
             {
@@ -81,17 +83,12 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                 csvList.Add(headers);
 
-                var csv = new StringBuilder();
-                csvList.ForEach(row =>
-                {
-                    var line = String.Join(",", row);
-                    csv.AppendLine(line);
-                });
+                
 
                 if (result != null && result.Count > 0)
                 {
                     foreach (var row in result)
-                    {
+                    {                                                          
                         var item = new List<string>();
 
                         foreach (var h in headerDefinition)
@@ -115,11 +112,16 @@ namespace Gov.Lclb.Cllb.OneStopService
                             }
                         }
                         csvList.Add(item);
-
                     }
+                    
                 }
 
-
+                var csv = new StringBuilder();
+                csvList.ForEach(row =>
+                {
+                    var line = String.Join(",", row);
+                    csv.AppendLine(line);
+                });
 
                 var datePart = DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
