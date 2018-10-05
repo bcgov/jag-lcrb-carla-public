@@ -70,7 +70,7 @@ export class WorkerApplicationComponent implements OnInit {
         address1_city: ['', Validators.required],
         address1_stateorprovince: ['', Validators.required],
         address1_country: ['', Validators.required],
-        address1_postalcode: ['', Validators.required],
+        address1_postalcode: ['', [Validators.required, Validators.pattern('(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)')]]
       }),
       worker: this.fb.group({
         id: [],
@@ -168,7 +168,7 @@ export class WorkerApplicationComponent implements OnInit {
       city: [address.city, Validators.required],
       provstate: [address.provstate, Validators.required],
       country: [address.country, Validators.required],
-      postalcode: [address.postalcode, Validators.required],
+      postalcode: [address.postalcode, [Validators.required, Validators.pattern('(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)')]],
       fromdate: [address.fromdate, Validators.required],
       todate: [address.todate, Validators.required]
     });
@@ -396,8 +396,10 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   isBCIDValid(): boolean {
-    const valid = !!(this.form.get('worker.driverslicencenumber').value
-      || this.form.get('worker.bcidcardnumber').value);
-    return valid;
+    const validDriver = !!(this.form.get('worker.driverslicencenumber').value && (this.form.get('worker.driverslicencenumber').value + '').length == 7); 
+    const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length == 7);
+    console.log(this.form.get('worker.driverslicencenumber').value);
+    console.log((this.form.get('worker.driverslicencenumber').value + '').length);
+    return validDriver || validBceid;
   }
 }
