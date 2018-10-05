@@ -316,6 +316,18 @@
                   {
                     "name": "SITEMINDER_LOGOUT_URL",
                     "value": "${SITEMINDER_LOGOUT_URL}"
+                  },
+                  {
+                    "name": "PDF_SERVICE_BASE_URI",
+                    "value": "${PDF_SERVICE_BASE_URI}"
+                  },
+                  {
+                    "name": "PDF_JWT_TOKEN",
+                    "value": "${PDF_JWT_TOKEN}"
+                  },
+                  {
+                    "name": "BCEP_CONF_PATH_WORKER",
+                    "value": "${BCEP_CONF_PATH_WORKER}"
                   }
                 ],
                 "resources": {
@@ -596,6 +608,27 @@
       "description": "Siteminder logout URL, e.g., https://logon.gov.bc.ca/clp-cgi/logoff.cgi, if left blank a value will be defaulted. Note this url is for prod and should be changed for dev and test.",
       "required": true,
       "value": "https://logon.gov.bc.ca/clp-cgi/logoff.cgi"
+    },
+    {
+      "name": "PDF_SERVICE_BASE_URI",
+      "displayName": "URI to PDF Service",
+      "description": "URI to PDF Service, e.g., http://pdf-service:8080, if left blank a value will be defaulted.",
+      "required": true,
+      "value": "http://pdf-service:8080"
+    },
+    {
+      "name": "PDF_JWT_TOKEN",
+      "displayName": "JWT for PDF service",
+      "description": "JWT for PDF service.",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "BCEP_CONF_PATH_WORKER",
+      "displayName": "Path to BCEP Conf",
+      "description": "Path to BCEP Conf, e.g., /worker-registration/payment-confirmation, if left blank a value will be defaulted.",
+      "required": true,
+      "value": "/worker-registration/payment-confirmation"
     }
   ]
 }
