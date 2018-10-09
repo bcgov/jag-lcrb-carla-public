@@ -154,22 +154,18 @@
               <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BC Driver's Licence Number</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="driverslicencenumber">
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <input class="form-control" style="width: 250px;" type="number" formControlName="driverslicencenumber">
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
               </div>
             </section>
             <section>
               <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BCID Number</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="bcidcardnumber">
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <input class="form-control" style="width: 250px;" type="number" formControlName="bcidcardnumber">
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)">
@@ -183,11 +179,9 @@
                 <label>Primary Phone Number</label>
                 <span>(incl. area code)</span>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="phonenumber">
-                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <input class="form-control" style="width: 250px;" type="tel" pattern="^\d{10}$" formControlName="phonenumber">
+                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched ">
@@ -202,10 +196,9 @@
               <div [ngClass]="{'has-error': !this.form.get('worker.email').valid && this.form.get('worker.email').touched}">
                 <label>Email Address</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="email">
-                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" style="margin-left: -6px;"
-                  class="fas fa-chevron-left"></i>
+                <input class="form-control" style="width: 250px;" type="email" formControlName="email">
+                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="alert alert-danger"
                   style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched ">
@@ -358,7 +351,7 @@
                 <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched ">
-                    This is required
+                    This is required.
                   </div>
                 </div>
               </div>
@@ -368,10 +361,12 @@
                 <label>Postal / Zip Code</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="address1_postalcode">
+                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
-                  class="alert alert-danger" style="width: 250px;">
+                  class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched ">
-                    This is required
+                    This is required.<br>Your postal / zip code should be in one of the following formats:<br>X1X 1X1, 12345, 12345-1234
                   </div>
                 </div>
               </div>
@@ -428,10 +423,12 @@
                 <label>Postal Code / Zip Code</label>
                 <br />
                 <input class="form-control" style="width: 200px;" type="text" formControlName="address1_postalcode">
+                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
-                  class="alert alert-danger" style="width: 200px;">
+                  class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched ">
-                    This is required
+                    This is required.<br>Your postal / zip code should be in one of the following formats:<br>X1X 1X1, 12345, 12345-1234.
                   </div>
                 </div>
               </div>
