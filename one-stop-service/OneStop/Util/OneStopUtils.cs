@@ -9,7 +9,7 @@ namespace WebApplicationSoap.OneStop
     {
         public const string ASYNCHRONOUS = "A";
         public const string DOCUMENT_SUBTYPE = "000";
-        public const string SENDER_ID = "LCLB";
+        public const string SENDER_ID = "LCRB";
         public const string RECEIVER_ID = "BCSBNHUB";
         public const string USER_APPLICATION = "BF";
         public const string USER_ROLE = "01";
