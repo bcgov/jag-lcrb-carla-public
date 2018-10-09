@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         { }
 
         [Fact]
-        public async System.Threading.Tasks.Task TestFileUploadWithAccount()
+        public async System.Threading.Tasks.Task TestLicenseApplicationUpload()
         {
             // First create a Legal Entity
 
@@ -131,6 +131,105 @@ namespace Gov.Lclb.Cllb.Public.Test
             files = JsonConvert.DeserializeObject<List<FileSystemItem>>(jsonString);
             Assert.True(files.Count == 0);
 
+            // Cleanup the Application
+
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + applicationService + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            await LogoutAndCleanupTestUser(strId);
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task TestLicenseApplicationInvalidFile()
+        {
+            // First create a Legal Entity
+
+            string initialName = randomNewUserName("LETest InitialName", 6);
+            string changedName = randomNewUserName("LETest ChangedName", 6);
+            const string applicationService = "adoxioapplication";
+            const string fileService = "file";
+
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+            User user = await GetCurrentUser();
+
+            // C - Create
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + applicationService);
+            Account currentAccount1 = await GetAccountForCurrentUser();
+            AdoxioApplication viewmodel_application = new AdoxioApplication()
+            {
+                name = initialName,
+                applyingPerson = "Applying Person",
+                applicant = currentAccount1,
+                applicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
+                ,
+                jobNumber = "123",
+                licenseType = "Cannabis Retail Store",
+                establishmentName = "Private Retail Store",
+                establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
+                establishmentaddressstreet = "666 Any Street",
+                establishmentaddresscity = "Victoria, BC",
+                establishmentaddresspostalcode = "V1X 1X1",
+                applicationStatus = AdoxioApplicationStatusCodes.Active
+            };
+
+            var jsonString = JsonConvert.SerializeObject(viewmodel_application);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // parse as JSON.
+            jsonString = await response.Content.ReadAsStringAsync();
+            AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<AdoxioApplication>(jsonString);
+
+            string id = responseViewModel.id;
+
+            // Attach a file
+
+            string testData = "This is just a test.";
+            byte[] bytes = Encoding.ASCII.GetBytes(testData);
+            string documentType = "Test Document Type";
+
+            // Create random filename
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[261];
+            var random = new Random();
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+            var randomString = new String(stringChars);
+            string filename = randomString + ".txt";
+
+            MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
+            var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
+            fileContent.Headers.ContentDisposition.Name = "File";
+            fileContent.Headers.ContentDisposition.FileName = filename;
+            multiPartContent.Add(fileContent);
+            multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
+
+            string applicationId = responseViewModel.id;
+
+            // create a new request object for the upload, as we will be using multipart form submission.
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + fileService + "/" + applicationId + "/attachments/application");
+            requestMessage.Content = multiPartContent;
+
+            var uploadResponse = await _client.SendAsync(requestMessage);
+
+            // should be a 404.
+            Assert.Equal(HttpStatusCode.NotFound, uploadResponse.StatusCode);
+
+            // Cleanup the Application
+
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + applicationService + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
             await LogoutAndCleanupTestUser(strId);
         }
 
@@ -233,7 +332,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            // Cleanup the Application
+            // Cleanup the Application Files
 
             request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + contactId + $"/attachments/contact?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
             response = await _client.SendAsync(request);
@@ -247,6 +346,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             files = JsonConvert.DeserializeObject<List<FileSystemItem>>(jsonString);
             Assert.True(files.Count == 0);
+
+           
 
             await LogoutAndCleanupTestUser(strId);
         }
