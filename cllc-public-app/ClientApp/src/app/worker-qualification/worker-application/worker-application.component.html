@@ -7,7 +7,7 @@
         <div *ngIf="dataLoaded">
           <section>
             <h1>
-              Worker Qualification
+              Worker Qualification Application
             </h1>
             <p>
               In step one, you identify who you are and where you've lived for each of the last five years. You must
@@ -38,7 +38,7 @@
                     </div>
                   </section> -->
             <section>
-              <div >
+              <div>
                 <label>First Name</label>
                 <br />
                 <input class="form-control" style="max-width: 450px; min-width: 250px;" readonly type="text"
@@ -123,8 +123,10 @@
                 <label>City and Country of Birth</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="birthplace">
-                <i *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched" class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched"
+                  class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched"
+                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched"
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.birthplace').valid && this.form.get('worker.birthplace').touched ">
@@ -137,7 +139,7 @@
               <div>
                 <label>Date of Birth</label>
                 <br />
-                <input type="text" formControlName='dateofbirth' readonly  style="width: 250px;" placeholder="yyyy-mm-dd"
+                <input type="text" formControlName='dateofbirth' readonly style="width: 250px;" placeholder="yyyy-mm-dd"
                   class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
               </div>
             </section>
@@ -145,7 +147,7 @@
               <div>
                 <label>Sex</label>
                 <br />
-                <input type="text" formControlName='gender' readonly  style="width: 250px;" name="gender" class="form-control">
+                <input type="text" formControlName='gender' readonly style="width: 250px;" name="gender" class="form-control">
               </div>
             </section>
             <section>
@@ -153,8 +155,10 @@
                 <label>BC Driver's Licence Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="driverslicencenumber">
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" class="fas fa-chevron-left"></i>
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
+                  class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
+                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
               </div>
             </section>
             <section>
@@ -162,8 +166,10 @@
                 <label>BCID Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="bcidcardnumber">
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" class="fas fa-chevron-left"></i>
-                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
+                  class="fas fa-chevron-left"></i>
+                <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
+                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)">
@@ -178,8 +184,10 @@
                 <span>(incl. area code)</span>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="phonenumber">
-                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched" class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched" style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
+                  class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
+                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched ">
@@ -195,8 +203,9 @@
                 <label>Email Address</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="email">
-                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched"style="margin-left: -6px;" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="fas fa-chevron-left"></i>
+                <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" style="margin-left: -6px;"
+                  class="fas fa-chevron-left"></i>
                 <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="alert alert-danger"
                   style="background: transparent; border: none;">
                   <div *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched ">
