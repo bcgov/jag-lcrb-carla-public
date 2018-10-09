@@ -78,8 +78,8 @@ export class FileUploaderComponent implements OnInit {
       return;
     }
 
-    if(file && file.name && file.name.length > 60){
-      alert('File name must be 50 characters or less.');
+    if(file && file.name && file.name.length > 128){
+      alert('File name must be 128 characters or less.');
       return;
     }
 
