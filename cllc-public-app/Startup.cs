@@ -5,6 +5,7 @@ using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -22,6 +23,7 @@ using Microsoft.Rest;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
 using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -110,6 +112,9 @@ namespace Gov.Lclb.Cllb.Public
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
             services.RegisterPermissionHandler();
+
+            // setup key ring to persist in storage.
+            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(Configuration["KEY_RING_DIRECTORY"]));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
