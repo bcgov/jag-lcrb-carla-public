@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using System;
@@ -26,11 +27,11 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private IOneStopRestClient _onestopRestClient;
 
-        public OneStopUtils(IConfiguration Configuration)
+        public OneStopUtils(IConfiguration Configuration, ILogger logger)
         {
             this.Configuration = Configuration;
             this._dynamics = OneStopUtils.SetupDynamics(Configuration);
-            this._onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration);
+            this._onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, logger);
         }
 
         /// <summary>
@@ -237,14 +238,14 @@ namespace Gov.Lclb.Cllb.OneStopService
             return client;
         }
 
-        public static IOneStopRestClient SetupOneStopClient(IConfiguration Configuration)
+        public static IOneStopRestClient SetupOneStopClient(IConfiguration Configuration, ILogger logger)
         {
             //create authorization header 
             var byteArray = Encoding.ASCII.GetBytes($"{Configuration["ONESTOP_HUB_USERNAME"]}:{Configuration["ONESTOP_HUB_PASSWORD"]}");
             string authorization = "Basic " + Convert.ToBase64String(byteArray);
             
             //create client
-            var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_REST_URI"]), authorization);
+            var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_REST_URI"]), authorization, logger);
             return client;
         }
         

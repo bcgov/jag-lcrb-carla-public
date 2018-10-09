@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using SoapCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
