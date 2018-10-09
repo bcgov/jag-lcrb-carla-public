@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
 
                 //Trigger the Send ProgramAccountDetailsBroadcast Message
-                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
+                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
                 _logger.LogInformation("Enqueued send program account details broadcast.");
             }
 
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     currentSuffix++;
                     _logger.LogInformation($"Starting resend of licence creation message, attempt {currentSuffix}");
-                    BackgroundJob.Enqueue(() => new OneStopUtils(Configuration).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString()));
+                    BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString()));
                 }                
                 else
                 {

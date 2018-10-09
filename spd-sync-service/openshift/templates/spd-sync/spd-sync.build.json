@@ -45,19 +45,24 @@
             "uri": "${GIT_REPO_URL}",
             "ref": "${GIT_REF}"
           },
-          "contextDir": "${SOURCE_CONTEXT_DIR}"
+          "contextDir": "${SOURCE_CONTEXT_DIR}"          
         },
         "strategy":
         {
-          "type": "Docker",
-          "dockerStrategy":
-          {           
+          "type": "Source",
+          "sourceStrategy":
+          {
             "from":
             {
               "kind": "${SOURCE_IMAGE_KIND}",
               "name": "${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}"              
             },
-            "dockerfilePath": "${DOCKER_FILE_PATH}"            
+            "env": [
+              {
+                "name": "DOTNET_STARTUP_PROJECT",
+                "value": "${DOTNET_STARTUP_PROJECT}"
+              }
+            ]
           }
         },
         "output":
@@ -66,6 +71,16 @@
           {
             "kind": "ImageStreamTag",
             "name": "${NAME}:${OUTPUT_IMAGE_TAG}"
+          }
+        },
+        "resources": {
+          "requests": {
+            "cpu": "${CPU_REQUEST}",
+            "memory": "${MEMORY_REQUEST}"
+          },
+          "limits": {
+            "cpu": "${CPU_LIMIT}",
+            "memory": "${MEMORY_LIMIT}"
           }
         }
       }
@@ -77,42 +92,42 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "dotnet-20-centos7"
+      "value": "spd-sync"
     },
     {
       "name": "GIT_REPO_URL",
       "displayName": "Git Repo URL",
       "description": "The URL to your GIT repo.",
       "required": true,
-      "value": "https://github.com/redhat-developer/s2i-dotnetcore.git"
+      "value": "https://github.com/bcgov/ag-lclb-cllc-public.git"
     },
     {
       "name": "GIT_REF",
       "displayName": "Git Reference",
       "description": "The git reference or branch.",
       "required": true,
-      "value": "master"
+      "value": "spd-sync"
     },
     {
       "name": "SOURCE_CONTEXT_DIR",
       "displayName": "Source Context Directory",
       "description": "The source context directory.",
       "required": false,
-      "value": "/2.0/build"
+      "value": ""
     },
     {
       "name": "SOURCE_IMAGE_KIND",
       "displayName": "Source Image Kind",
       "description": "The 'kind' (type) of the  source image; typically ImageStreamTag, or DockerImage.",
       "required": true,
-      "value": "ImageStreamTag"
+      "value": "DockerImage"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "dotnet-20-runtime-centos7"
+      "value": "registry.access.redhat.com/dotnet/dotnet-21-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
@@ -122,11 +137,11 @@
       "value": "latest"
     },
     {
-      "name": "DOCKER_FILE_PATH",
-      "displayName": "Docker File Path",
-      "description": "The path to the docker file defining the build.",
-      "required": false,
-      "value": "Dockerfile"
+      "name": "DOTNET_STARTUP_PROJECT",
+      "displayName": "DotNet Startup Project",
+      "description": "The path to the startup project for the .Net application.",
+      "required": true,
+      "value": "spd-sync-service/SpdSync.csproj"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",
@@ -134,6 +149,34 @@
       "description": "The tag given to the built image.",
       "required": true,
       "value": "latest"
+    },
+    {
+      "name": "CPU_LIMIT",
+      "displayName": "Resources CPU Limit",
+      "description": "The resources CPU limit (in cores) for this build.",
+      "required": true,
+      "value": "1"
+    },
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Resources Memory Limit",
+      "description": "The resources Memory limit (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "6Gi"
+    },   
+    {
+      "name": "CPU_REQUEST",
+      "displayName": "Resources CPU Request",
+      "description": "The resources CPU request (in cores) for this build.",
+      "required": true,
+      "value": "1"
+    },
+    {
+      "name": "MEMORY_REQUEST",
+      "displayName": "Resources Memory Request",
+      "description": "The resources Memory request (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "4Gi"
     }
   ]
 }
