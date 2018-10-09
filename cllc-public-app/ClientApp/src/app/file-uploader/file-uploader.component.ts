@@ -77,6 +77,12 @@ export class FileUploaderComponent implements OnInit {
       alert('File type not supported.');
       return;
     }
+
+    if(file && file.name && file.name.length > 128){
+      alert('File name must be 128 characters or less.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('documentType', this.documentType);
