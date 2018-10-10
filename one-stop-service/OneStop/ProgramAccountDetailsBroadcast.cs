@@ -73,7 +73,7 @@ namespace WebApplicationSoap.OneStop
             var userCredentials = new SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials();
 
             //BN9 of licensee (Owner company)
-            userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
+            userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBcincorporationnumber;
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicenceprintname;
             //establishment (physical location of store)
@@ -89,7 +89,7 @@ namespace WebApplicationSoap.OneStop
             var programAccountDetailsBroadcastBody = new SBNProgramAccountDetailsBroadcastBody();
 
             // BN9
-            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
+            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBcincorporationnumber;
             
             // this code identifies that the message is from LCRB.  It's the same in every message from LCRB
             programAccountDetailsBroadcastBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
