@@ -480,6 +480,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         // Update the contact with info from Siteminder
                         var contactVM = new Public.ViewModels.Contact();
                         contactVM.CopyHeaderValues(Headers);
+                        _logger.LogInformation(">>>> After reading hearders: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
                         MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
                         patchContact.CopyValues(contactVM);
                         try
