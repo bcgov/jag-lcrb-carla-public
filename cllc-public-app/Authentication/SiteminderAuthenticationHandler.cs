@@ -318,16 +318,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     _logger.LogDebug("No UserSettings found");
                 }
 
-                // is user authenticated - if so we're done
-                if ((userSettings.UserAuthenticated && string.IsNullOrEmpty(userId)) ||
-                    (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
-                     !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
-                {
-                    _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
-                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
-                    return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
-                }
-
                 string smgov_userdisplayname = context.Request.Headers["smgov_userdisplayname"];
                 if (!string.IsNullOrEmpty(smgov_userdisplayname))
                 {
@@ -408,6 +398,17 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 _logger.LogDebug("Loading user external id = " + siteMinderGuid);
                 userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _logger);
                 _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
+
+                
+                // is user authenticated - if so we're done
+                if ((userSettings.UserAuthenticated && string.IsNullOrEmpty(userId)) ||
+                    (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
+                     !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
+                {
+                    _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
+                    principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
+                    return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
+                }
 
                 // check that the potential new user is 19.
                 if (userSettings.AuthenticatedUser != null && userSettings.AuthenticatedUser.ContactId == null)
