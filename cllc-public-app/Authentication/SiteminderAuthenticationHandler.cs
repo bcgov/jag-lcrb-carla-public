@@ -406,7 +406,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // so we just do a Dynamics lookup on the siteMinderGuid.
 
                 _logger.LogDebug("Loading user external id = " + siteMinderGuid);
-                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid);
+                userSettings.AuthenticatedUser = await _dynamicsClient.LoadUser(siteMinderGuid, context.Request.Headers, _logger);
                 _logger.LogDebug("After getting authenticated user = " + userSettings.GetJson());
 
                 // check that the potential new user is 19.
