@@ -1,6 +1,6 @@
 <div class="upload-wrapper">
   <p></p>
-  <file-drop [disableIf]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)"
+  <file-drop [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)"
     customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
     <div style="text-align: center">
       <h3></h3>
