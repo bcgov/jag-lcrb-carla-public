@@ -472,11 +472,13 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (user == null)
             {
+                _logger.LogInformation(">>>> LoadUser for BCEID.");
                 if (Guid.TryParse(userId, out userGuid))
                 {
                     user = _dynamicsClient.GetUserBySmUserId(userId);
                     if (user != null)
                     {
+                        _logger.LogInformation(">>>> LoadUser for BCEID: user != null");
                         // Update the contact with info from Siteminder
                         var contactVM = new Public.ViewModels.Contact();
                         contactVM.CopyHeaderValues(Headers);
@@ -502,11 +504,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                 else
                 { //BC service card login
 
+                    _logger.LogInformation(">>>> LoadUser for BC Services Card.");
                     string externalId = GetServiceCardID(userId);
                     contact = _dynamicsClient.GetContactByExternalId(externalId);
 
                     if (contact != null)
                     {
+                        _logger.LogInformation(">>>> LoadUser for BC Services Card: contact != null");
                         user = new User();
                         user.FromContact(contact);
 
