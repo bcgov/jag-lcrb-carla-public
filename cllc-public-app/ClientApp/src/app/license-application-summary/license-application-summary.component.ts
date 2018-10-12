@@ -61,7 +61,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
             licenseApplicationSummary.push(licAppSum);
           }
         });
-        
+
         this.dataSource.data = licenseApplicationSummary;
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
