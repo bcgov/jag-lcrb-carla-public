@@ -1,14 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UploadFile, UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { Http, Headers, Response, ResponseContentType } from '@angular/http';
+import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { Http, Headers, Response } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
-import { Observable, Subject } from 'rxjs';
-import { throttleTime, catchError } from 'rxjs/operators';
-import { debug } from 'util';
-import { forEach } from '@angular/router/src/utils/collection';
 import { Subscription } from 'rxjs';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
-import { saveAs } from 'file-saver';
 
 export interface DropdownOption {
   id: string;
@@ -64,11 +59,13 @@ export class FileUploaderComponent implements OnInit {
     }
   }
 
-  onBrowserFileSelect(event: any) {
+  onBrowserFileSelect(event: any, input: any) {
     const uploadedFiles = event.target.files;
     for (const file of uploadedFiles) {
       this.uploadFile(file);
     }
+
+    input.value = "";
   }
 
   private uploadFile(file) {
