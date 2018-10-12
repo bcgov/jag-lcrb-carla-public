@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
                 try
                 {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value;
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
                 catch (OdataerrorException)
                 {
@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError($"FolderName is: {folderName}");
                     throw e;
                 }
-                
+
             }
 
             // Create the SharePointDocumentLocation entity
