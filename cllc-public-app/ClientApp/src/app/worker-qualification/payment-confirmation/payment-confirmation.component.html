@@ -1,6 +1,6 @@
 <mat-card class="mat-elevation-z0">
     <div [ngBusy]="busy" class="container" style="margin-left:0px;">
-      <div *ngIf="isApproved">
+      <div *ngIf="isApproved && loaded">
         <div>
           <span class="print-page" (click)="printPage()">
             <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
