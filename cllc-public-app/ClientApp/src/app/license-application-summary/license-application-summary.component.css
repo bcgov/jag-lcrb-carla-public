@@ -18,20 +18,21 @@ mat-header-row {
     display: none;
 }
 
-@media (max-width: 959px) {
+@media (max-width: 1590px) {
     .summary-table {
         display: inline-block;
+        width: 100%;
     }
     .detail-table {
         display: none;
     }
 }
 
-@media (min-width: 992px) and (max-width: 1590px) {
+/* @media (min-width: 992px) and (max-width: 1590px) {
     .summary-table {
         display: inline-block;
     }
     .detail-table {
         display: none;
     }
-}
+} */
