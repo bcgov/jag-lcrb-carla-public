@@ -47,6 +47,7 @@
           <!-- Column -->
           <ng-container matColumnDef="summary">
             <mat-cell *matCellDef="let element">
+              <p></p>
               <span>LAST UPDATED: </span>
               <span>{{element.modifiedon | date:'mediumDate'}}</span>
               <p></p>
@@ -62,7 +63,7 @@
             </mat-cell>
           </ng-container>
 
-          <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: ['summary'];"></mat-row>
+          <mat-row [ngClass]="{'grey-background' : i%2 != 1}" *matRowDef="let row; let i = index; columns: ['summary'];"></mat-row>
         </mat-table>
 
         <div *ngIf="dataSource.data && dataSource.data.length == 0" class="no-application">
@@ -95,7 +96,8 @@
 
           <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
         </mat-table>
-        <mat-paginator #paginator style="background-color: #eee;" [pageSize]="4" [pageSizeOptions]="[4, 8, 12]" [showFirstLastButtons]="true">
+        <mat-paginator #paginator style="background-color: #eee;" [pageSize]="4" [pageSizeOptions]="[4, 8, 12]"
+          [showFirstLastButtons]="true">
         </mat-paginator>
       </div>
 
