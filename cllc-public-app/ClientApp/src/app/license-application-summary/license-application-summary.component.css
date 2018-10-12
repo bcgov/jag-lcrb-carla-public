@@ -9,3 +9,29 @@ mat-header-row {
 .mat-header-cell {
     color: #fff;
 }
+
+.small-dl-btn {
+    display: none;
+}
+
+.summary-table {
+    display: none;
+}
+
+@media (max-width: 959px) {
+    .summary-table {
+        display: inline-block;
+    }
+    .detail-table {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1590px) {
+    .summary-table {
+        display: inline-block;
+    }
+    .detail-table {
+        display: none;
+    }
+}
