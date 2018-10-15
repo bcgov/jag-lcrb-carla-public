@@ -9,7 +9,7 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 })
 export class WorkerHomeComponent implements OnInit, AfterViewInit {
 
-  policySlug = 'employee-registration-training';
+  policySlug = 'worker-qualification-home';
   @ViewChild('policyDocs') policyDocs: PolicyDocumentComponent;
   constructor(public dialog: MatDialog) { }
 
