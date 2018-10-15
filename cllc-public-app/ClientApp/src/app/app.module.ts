@@ -143,6 +143,7 @@ import { WorkerQualificationComponent } from './worker-qualification/worker-qual
 import { WorkerPaymentConfirmationComponent } from './worker-qualification/payment-confirmation/payment-confirmation.component';
 import { WorkerTermsAndConditionsComponent } from './worker-qualification/worker-terms-and-conditions/worker-terms-and-conditions.component';
 import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualification/worker-home/worker-home.component';
+import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
 
 @NgModule({
   declarations: [
@@ -211,7 +212,8 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualifi
     WorkerTermsAndConditionsComponent,
     WorkerHomeComponent,
     WorkerHomeDialogComponent,
-    LicenceFeePaymentConfirmationComponent
+    LicenceFeePaymentConfirmationComponent,
+    WorkerInformationComponent
   ],
   imports: [
     BrowserModule,
