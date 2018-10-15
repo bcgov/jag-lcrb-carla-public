@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyDocument } from '../models/policy-document.model';
 import { PolicyDocumentDataService } from '../services/policy-document-data.service';
@@ -15,6 +15,9 @@ export class PolicyDocumentComponent implements OnInit {
   public title: string;
   public category: string;
   public body: SafeHtml;
+  @Input() fullWidth: false;
+  dataLoaded: boolean;
+  busy: Promise<any>;
 
   /** PolicyDocument ctor */
   constructor(private policyDocumentDataService: PolicyDocumentDataService,
@@ -34,13 +37,14 @@ export class PolicyDocumentComponent implements OnInit {
   }
 
   public setSlug(slug) {
-    this.policyDocumentDataService.getPolicyDocument(slug).then((data) => {
+    this.busy = this.policyDocumentDataService.getPolicyDocument(slug).then((data) => {
+      this.dataLoaded = true;
       this.policyDocument = data;
       this.title = this.policyDocument.title;
       this.body = this.sanitizer.bypassSecurityTrustHtml(this.policyDocument.body);
       this.category = this.policyDocument.category;
       this.titleService.setTitle(`${this.title} - Liquor and Cannabis Regulation Branch`);
-    });
+    }).catch(error => this.dataLoaded = true);
   }
 
 }

@@ -18,9 +18,9 @@ namespace Gov.Lclb.Cllb.Interfaces
     public class SharePointFileManager
     {
         public const string DefaultDocumentListTitle = "Account";
-        public const string ApplicationDocumentListTitle = "adoxio_application";
+        public const string ApplicationDocumentListTitle = "Application";
         public const string ContactDocumentListTitle = "contact";
-        public const string WorkertDocumentListTitle = "worker";
+        public const string WorkertDocumentListTitle = "Worker Qualification";
 
         private AuthenticationResult authenticationResult;
 
@@ -253,13 +253,79 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<Object> CreateDocumentLibrary(string listTitle)
+        public async Task<Object> CreateDocumentLibrary(string listTitle, string documentTemplateUrlTitle = null)
         {
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/Lists");
 
+            if(documentTemplateUrlTitle == null)
+            {
+                documentTemplateUrlTitle = listTitle;
+            }
+            var library = CreateNewDocumentLibraryRequest(documentTemplateUrlTitle);
 
-            var library = CreateNewDocumentLibraryRequest($"{listTitle}");
+
+            string jsonString = JsonConvert.SerializeObject(library);
+            StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            endpointRequest.Content = strContent;
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+            HttpStatusCode _statusCode = response.StatusCode;
+
+            if (_statusCode != HttpStatusCode.Created)
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
+            else
+            {
+                jsonString = await response.Content.ReadAsStringAsync();
+                var ob = Newtonsoft.Json.JsonConvert.DeserializeObject<DocumentLibraryResponse>(jsonString);
+
+                if(listTitle != documentTemplateUrlTitle)
+                {
+                    // update list title
+                    endpointRequest = new HttpRequestMessage(HttpMethod.Post, $"{ApiEndpoint}web/lists(guid'{ob.d.Id}')");
+                    var type = new { type = "SP.List" };
+                    var request = new
+                    {
+                        __metadata = type,
+                        Title = listTitle
+                    };
+                    jsonString = JsonConvert.SerializeObject(request);
+                    strContent = new StringContent(jsonString, Encoding.UTF8);
+                    strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+                    endpointRequest.Headers.Add("IF-MATCH", "*");
+                    endpointRequest.Headers.Add("X-HTTP-Method", "MERGE");
+                    endpointRequest.Content = strContent;
+                    response = await client.SendAsync(endpointRequest);
+                    jsonString = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
+                }
+            }
+
+            return library;
+        }
+
+        public async Task<Object> UpdateDocumentLibrary(string listTitle)
+        {
+            HttpRequestMessage endpointRequest =
+                new HttpRequestMessage(HttpMethod.Put, $"{ApiEndpoint}web/Lists");
+
+
+            var library = CreateNewDocumentLibraryRequest(listTitle);
 
 
             string jsonString = JsonConvert.SerializeObject(library);
@@ -306,7 +372,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             var type = new { type = "SP.List" };
             var request = new { __metadata = type,
                 BaseTemplate = 101,
-                Title = listName };
+                Title = listName
+            };
             return request;
         }
 
@@ -586,5 +653,15 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return result;
         }
+    }
+
+   class DocumentLibraryResponse
+    {
+        public DocumentLibraryResponseContent d { get; set; }
+    }
+
+    class DocumentLibraryResponseContent
+    {
+        public string Id { get; set; }
     }
 }

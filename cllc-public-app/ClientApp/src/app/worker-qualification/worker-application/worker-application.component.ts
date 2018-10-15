@@ -17,6 +17,9 @@ import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
+
+const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)';
+
 @Component({
   selector: 'app-worker-application',
   templateUrl: './worker-application.component.html',
@@ -70,16 +73,21 @@ export class WorkerApplicationComponent implements OnInit {
         address1_city: ['', Validators.required],
         address1_stateorprovince: ['', Validators.required],
         address1_country: ['', Validators.required],
-        address1_postalcode: ['', [Validators.required, Validators.pattern('(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)')]]
+        address1_postalcode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+        address2_line1: ['', Validators.required],
+        address2_city: ['', Validators.required],
+        address2_stateorprovince: ['', Validators.required],
+        address2_country: ['', Validators.required],
+        address2_postalcode: ['', [Validators.required, Validators.pattern(postalRegex)]]
       }),
       worker: this.fb.group({
         id: [],
         isldbworker: [false],
-        firstname: [{value: '', disabled: true}],
-        middlename: [{value: '', disabled: true}],
-        lastname: [{value: '', disabled: true}],
-        dateofbirth: [{value: '', disabled: true}],
-        gender: [{value: '', disabled: true}],
+        firstname: [{ value: '', disabled: true }],
+        middlename: [{ value: '', disabled: true }],
+        lastname: [{ value: '', disabled: true }],
+        dateofbirth: [{ value: '', disabled: true }],
+        gender: [{ value: '', disabled: true }],
         birthplace: ['', Validators.required],
         driverslicencenumber: [''],
         bcidcardnumber: [''],
@@ -87,7 +95,7 @@ export class WorkerApplicationComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         selfdisclosure: [''],
         fromdate: ['', Validators.required],
-        todate: [{value: new Date(), disabled: true}],
+        todate: [{ value: new Date(), disabled: true }],
         aliases: this.fb.array([
         ]),
       }),
@@ -168,7 +176,7 @@ export class WorkerApplicationComponent implements OnInit {
       city: [address.city, Validators.required],
       provstate: [address.provstate, Validators.required],
       country: [address.country, Validators.required],
-      postalcode: [address.postalcode, [Validators.required, Validators.pattern('(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)')]],
+      postalcode: [address.postalcode, [Validators.required, Validators.pattern(postalRegex)]],
       fromdate: [address.fromdate, Validators.required],
       todate: [address.todate, Validators.required]
     });
@@ -176,6 +184,18 @@ export class WorkerApplicationComponent implements OnInit {
 
   addAddress(address: PreviousAddress = null) {
     this.addresses.push(this.createAddress(address));
+  }
+
+  copyPhysicalAddressToMailingAddress(): void {
+    let contact = this.form.get('contact').value;
+    contact = {
+      address2_line1: contact.address1_line1,
+      address2_city: contact.address1_city,
+      address2_stateorprovince: contact.address1_stateorprovince,
+      address2_country: contact.address1_country,
+      address2_postalcode: contact.address1_postalcode,
+    };
+    this.form.get('contact').patchValue(contact);
   }
 
   deleteAddress(index: number) {
@@ -354,7 +374,7 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   gotoStep2() {
-    if (this.form.valid && this.isBCIDValid() && this.pastAddressesAreValid() ) {
+    if (this.form.valid && this.isBCIDValid() && this.pastAddressesAreValid()) {
       this.router.navigate([`/worker-qualification/spd-consent/${this.workerId}`]);
     } else {
       this.markAsTouched();
@@ -396,8 +416,9 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   isBCIDValid(): boolean {
-    const validDriver = !!(this.form.get('worker.driverslicencenumber').value && (this.form.get('worker.driverslicencenumber').value + '').length == 7); 
-    const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length == 7);
+    const validDriver = !!(this.form.get('worker.driverslicencenumber').value
+      && (this.form.get('worker.driverslicencenumber').value + '').length === 7);
+    const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length === 7);
     console.log(this.form.get('worker.driverslicencenumber').value);
     console.log((this.form.get('worker.driverslicencenumber').value + '').length);
     return validDriver || validBceid;

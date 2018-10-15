@@ -4,6 +4,7 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -458,7 +459,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="userId"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string userId, string guid = null)
+        public static async Task<User> LoadUser(this IDynamicsClient _dynamicsClient, string userId, IHeaderDictionary Headers, ILogger _logger, string guid = null)
         {
             User user = null;
             MicrosoftDynamicsCRMcontact contact = null;
@@ -471,20 +472,78 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (user == null)
             {
+                _logger.LogInformation(">>>> LoadUser for BCEID.");
                 if (Guid.TryParse(userId, out userGuid))
                 {
                     user = _dynamicsClient.GetUserBySmUserId(userId);
+                    if (user != null)
+                    {
+                        _logger.LogInformation(">>>> LoadUser for BCEID: user != null");
+                        // Update the contact with info from Siteminder
+                        var contactVM = new Public.ViewModels.Contact();
+                        contactVM.CopyHeaderValues(Headers);
+                        _logger.LogInformation(">>>> After reading hearders: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
+                        MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+                        patchContact.CopyValues(contactVM);
+                        try
+                        {
+                            _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
+                        }
+                        catch (OdataerrorException odee)
+                        {
+                            _logger.LogError("Error updating Contact");
+                            _logger.LogError("Request:");
+                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError("Response:");
+                            _logger.LogError(odee.Response.Content);
+                            // fail if we can't create.
+                            throw (odee);
+                        }
+                    }
                 }
                 else
                 { //BC service card login
 
+                    _logger.LogInformation(">>>> LoadUser for BC Services Card.");
                     string externalId = GetServiceCardID(userId);
                     contact = _dynamicsClient.GetContactByExternalId(externalId);
 
                     if (contact != null)
                     {
+                        _logger.LogInformation(">>>> LoadUser for BC Services Card: contact != null");
                         user = new User();
                         user.FromContact(contact);
+
+                        // Update the contact and worker with info from Siteminder
+                        var contactVM = new Public.ViewModels.Contact();
+                        var workerVm = new Public.ViewModels.Worker();
+                        contactVM.CopyHeaderValues(Headers);
+                        workerVm.CopyHeaderValues(Headers);
+                        MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+                        MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
+                        patchContact.CopyValues(contactVM);
+                        patchWorker.CopyValues(workerVm);
+                        try
+                        {
+                            string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
+                            var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
+                            foreach (var item in workers)
+                            {
+                                _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
+
+                            }
+                            _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
+                        }
+                        catch (OdataerrorException odee)
+                        {
+                            _logger.LogError("Error updating Contact");
+                            _logger.LogError("Request:");
+                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError("Response:");
+                            _logger.LogError(odee.Response.Content);
+                            // fail if we can't create.
+                            throw (odee);
+                        }
                     }
                 }
             }

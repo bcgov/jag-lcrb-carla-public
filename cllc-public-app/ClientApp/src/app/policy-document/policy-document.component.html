@@ -1,14 +1,15 @@
 <div class="extra-padding-left">
-  <div class="row" *ngIf="policyDocument">
+  <div [ngBusy]="busy"></div>
+  <div class="row" *ngIf="policyDocument && dataLoaded">
     <div class="col-md-2" *ngIf="category">
-      <app-policy-document-sidebar *ngIf="policyDocument" (slugChange)="setSlug($event)" [category]="category"></app-policy-document-sidebar>    
+      <app-policy-document-sidebar *ngIf="policyDocument" (slugChange)="setSlug($event)" [category]="category"></app-policy-document-sidebar>
     </div>
-    <div class="col-md-8 contentPolicy">
+    <div [ngClass]="{'row': fullWidth, 'col-md-8': !fullWidth }" class="contentPolicy">
       <div id="title" [innerHTML]="title" class="h1"></div>
       <div id="body" [innerHTML]="body" class="body"></div>
     </div>
   </div>
-  <section *ngIf="!policyDocument" class="h1">
+  <section *ngIf="!policyDocument && dataLoaded" class="h1">
     This content is not available yet.
   </section>
 </div>
