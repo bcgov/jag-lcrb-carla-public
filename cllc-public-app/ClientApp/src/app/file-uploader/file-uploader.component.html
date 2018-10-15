@@ -13,8 +13,8 @@
       <br>
       <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
       <br>
-      <input (change)="onBrowserFileSelect($event)" type="file" multiple style="visibility: hidden;" #fileBrowserM>
-      <input (change)="onBrowserFileSelect($event)" type="file" style="visibility: hidden;" #fileBrowser>
+      <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" multiple style="visibility: hidden;" #fileBrowserM>
+      <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" style="visibility: hidden;" #fileBrowser>
     </div>
   </file-drop>
   <div style="margin-top: 5px; color: #2C679E;">
