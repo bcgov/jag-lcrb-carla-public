@@ -30,6 +30,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string address1_postalcode { get; set; }
 
+        public string address2_line1 { get; set; }
+
+        public string address2_city { get; set; }
+
+        public string address2_country { get; set; }
+
+        public string address2_stateorprovince { get; set; }
+
+        public string address2_postalcode { get; set; }
+
         public Boolean? adoxio_cansignpermanentchangeapplications { get; set; }
 
         public Boolean? adoxio_canattendeducationsessions { get; set; }
