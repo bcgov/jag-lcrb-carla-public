@@ -32,6 +32,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.address1_line1 = contact.Address1Line1;
                 result.address1_postalcode = contact.Address1Postalcode;
                 result.address1_stateorprovince = contact.Address1Stateorprovince;
+                result.address2_city = contact.Address2City;
+                result.address2_country = contact.Address2Country;
+                result.address2_line1 = contact.Address2Line1;
+                result.address2_postalcode = contact.Address2Postalcode;
+                result.address2_stateorprovince = contact.Address2Stateorprovince;
                 result.adoxio_canattendcompliancemeetings = contact.AdoxioCanattendcompliancemeetings;
                 result.adoxio_canobtainlicenceinfofrombranch = contact.AdoxioCanobtainlicenceinfofrombranch;
                 result.adoxio_canrepresentlicenseeathearings = contact.AdoxioCanrepresentlicenseeathearings;
@@ -240,6 +245,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Address1Line1 = from.address1_line1;
             to.Address1Postalcode = from.address1_postalcode;
             to.Address1Stateorprovince = from.address1_stateorprovince;
+            to.Address2City = from.address2_city;
+            to.Address2Country = from.address2_country;
+            to.Address2Line1 = from.address2_line1;
+            to.Address2Postalcode = from.address2_postalcode;
+            to.Address2Stateorprovince = from.address2_stateorprovince;
             to.AdoxioCanattendcompliancemeetings = from.adoxio_canattendcompliancemeetings;
             to.AdoxioCanobtainlicenceinfofrombranch = from.adoxio_canobtainlicenceinfofrombranch;
             to.AdoxioCanrepresentlicenseeathearings = from.adoxio_canrepresentlicenseeathearings;
