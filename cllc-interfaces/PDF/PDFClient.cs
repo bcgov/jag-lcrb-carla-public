@@ -56,6 +56,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (_statusCode == HttpStatusCode.OK)
             {
                 result = await response.Content.ReadAsByteArrayAsync();
+            } else {
+                throw new Exception("PDF service did not return OK result.");
             }
 
             return result;

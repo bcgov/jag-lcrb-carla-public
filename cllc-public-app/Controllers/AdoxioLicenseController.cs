@@ -131,10 +131,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
             try
             {
-                DateTime effectiveDate = adoxioLicense.AdoxioExpirydate.HasValue ? adoxioLicense.AdoxioExpirydate.Value.DateTime : DateTime.MaxValue;
+                DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.HasValue ? adoxioLicense.AdoxioEffectivedate.Value.DateTime : DateTime.MaxValue;
                 DateTime expiryDate = adoxioLicense.AdoxioExpirydate.HasValue ? adoxioLicense.AdoxioExpirydate.Value.DateTime : DateTime.MaxValue;
-                parameters.Add("effectiveDate", effectiveDate.ToString("dd/mm/yyyy"));
-                parameters.Add("expiryDate", expiryDate.ToString("dd/mm/yyyy"));
+                parameters.Add("effectiveDate", effectiveDate.ToString("dd/MM/yyyy"));
+                parameters.Add("expiryDate", expiryDate.ToString("dd/MM/yyyy"));
             }
             catch
             {
