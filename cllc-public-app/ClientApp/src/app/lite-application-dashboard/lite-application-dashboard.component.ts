@@ -78,12 +78,6 @@ export class LiteApplicationDashboardComponent implements OnInit {
         }
       });
 
-      licenseApplicationSummary.sort(function (a, b) {
-        var dateA = new Date(a.modifiedon);
-          var dateB = new Date(b.modifiedon);
-          return dateB.valueOf() - dateA.valueOf();
-      });
-
       this.dataSource.data = licenseApplicationSummary;
       this.dataLoaded = true;
       setTimeout(() => {

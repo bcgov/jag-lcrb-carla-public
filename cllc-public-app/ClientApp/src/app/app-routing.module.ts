@@ -44,6 +44,7 @@ import { WorkerPaymentConfirmationComponent } from './worker-qualification/payme
 import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-consent.component';
 import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-home.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
+import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
 
 const routes: Routes = [
   {
@@ -156,6 +157,10 @@ const routes: Routes = [
   {
     path: 'form-viewer/:id',
     component: FormViewerComponent
+  },
+  {
+    path: 'policy-document/worker-qualification-training',
+    component: WorkerInformationComponent
   },
   {
     path: 'policy-document/:slug',

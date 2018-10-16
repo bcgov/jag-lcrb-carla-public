@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetWorkerFolderName(MicrosoftDynamicsCRMadoxioWorker worker)
         {
             string applicationIdCleaned = worker.AdoxioWorkerid.ToString().ToUpper().Replace("-", "");
-            string folderName = $"worker_{applicationIdCleaned}";
+            string folderName = $"{worker.AdoxioName}_{applicationIdCleaned}";
             return folderName;
         }
 
@@ -111,7 +111,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.FileSystemItem result = null;
             ValidateSession();
 
-            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName));
+            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
@@ -131,7 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string folderName = await GetFolderName(entityName, entityId, documentType);
             try
             {
-                await _sharePointFileManager.AddFile(GetDocumentListTitle(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
+                await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
             }
             catch (SharePointRestException ex)
             {
@@ -328,7 +328,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             ValidateSession();
 
-            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName));
+            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
@@ -340,7 +340,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<FileDetailsList> fileDetailsList = null;
             try
             {
-                fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentListTitle(entityName), folderName, documentType);
+                fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(entityName), folderName, documentType);
             }
             catch (SharePointRestException spre)
             {
@@ -388,6 +388,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     break;
                 case "worker":
                     listTitle = SharePointFileManager.WorkertDocumentListTitle;
+                    break;
+                default:
+                    break;
+            }
+            return listTitle;
+        }
+
+        private string GetDocumentTemplateUrlPart(string entityName)
+        {
+            var listTitle = "";
+            switch (entityName.ToLower())
+            {
+                case "application":
+                    listTitle = "adoxio_application";
+                    break;
+                case "contact":
+                    listTitle = SharePointFileManager.ContactDocumentListTitle;
+                    break;
+                case "worker":
+                    listTitle = "adoxio_worker";
                     break;
                 default:
                     break;
@@ -473,12 +493,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        private async void CreateDocumentLibraryIfMissing(string listTitle)
+        private async void CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
         {
             var exists = await _sharePointFileManager.DocumentLibraryExists(listTitle);
             if (!exists)
             {
-                await _sharePointFileManager.CreateDocumentLibrary(listTitle);
+                await _sharePointFileManager.CreateDocumentLibrary(listTitle, documentTemplateUrl);
             }
         }
     }

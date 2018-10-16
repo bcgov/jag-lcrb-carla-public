@@ -1,6 +1,9 @@
 <mat-card class="mat-elevation-z0">
     <div [ngBusy]="busy" class="container" style="margin-left:0px;">
-      <div *ngIf="isApproved">
+      <div *ngIf="isApproved  && loaded">
+        <p>Thank you for applying for Cannabis Worker Qualification.</p>
+        <p>Your payment has been received and your application will be reviewed shortly. You’ll be contacted if it’s incomplete or inaccurate.</p>
+        <p>You’ll be emailed the results when they become available.</p>
         <div>
           <span class="print-page" (click)="printPage()">
             <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
@@ -26,10 +29,6 @@
               <tr>
                 <td>Transaction ID</td>
                 <td>{{trnId}}</td>
-              </tr>
-              <tr>
-                <td>Authorization</td>
-                <td>{{authCode}}</td>
               </tr>
               <tr>
                 <td>Amount</td>
