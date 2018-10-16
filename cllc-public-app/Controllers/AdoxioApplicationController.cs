@@ -52,10 +52,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
                 var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
                 try
                 {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value;
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
                 catch (OdataerrorException)
                 {
@@ -245,34 +246,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplication.AdoxioApplicanttype = (int?)item.applicantType;
             try
             {
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
+
+                // set license type relationship 
+                adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+                adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
             }
             catch (OdataerrorException odee)
             {
                 _logger.LogError("Error creating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                // fail if we can't create.
-                throw (odee);
-            }
-
-
-            MicrosoftDynamicsCRMadoxioApplication patchAdoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
-
-            // set license type relationship 
-
-            try
-            {
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
-                patchAdoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid); ;
-                patchAdoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
-                _dynamicsClient.Applications.Update(adoxioApplication.AdoxioApplicationid, patchAdoxioApplication);
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error updating application");
                 _logger.LogError("Request:");
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
@@ -300,21 +284,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string name = adoxioApplication.AdoxioJobnumber + " Files";
 
             // Create the folder
-            bool folderExists = await _sharePointFileManager.FolderExists(ApplicationDocumentListTitle, folderName);
+            bool folderExists = await _sharePointFileManager.FolderExists(ApplicationDocumentUrlTitle, folderName);
             if (!folderExists)
             {
                 try
                 {
-                    var folder = await _sharePointFileManager.CreateFolder(ApplicationDocumentListTitle, folderName);
+                    var folder = await _sharePointFileManager.CreateFolder(ApplicationDocumentUrlTitle, folderName);
                 }
                 catch (Exception e)
                 {
                     _logger.LogError("Error creating Sharepoint Folder");
-                    _logger.LogError($"List is: {ApplicationDocumentListTitle}");
+                    _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
                     _logger.LogError($"FolderName is: {folderName}");
                     throw e;
                 }
-                
+
             }
 
             // Create the SharePointDocumentLocation entity
