@@ -284,18 +284,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string name = adoxioApplication.AdoxioJobnumber + " Files";
 
             // Create the folder
-            var documentUrlTitle = "adoxio_application";
-            bool folderExists = await _sharePointFileManager.FolderExists(documentUrlTitle, folderName);
+            bool folderExists = await _sharePointFileManager.FolderExists(ApplicationDocumentUrlTitle, folderName);
             if (!folderExists)
             {
                 try
                 {
-                    var folder = await _sharePointFileManager.CreateFolder(documentUrlTitle, folderName);
+                    var folder = await _sharePointFileManager.CreateFolder(ApplicationDocumentUrlTitle, folderName);
                 }
                 catch (Exception e)
                 {
                     _logger.LogError("Error creating Sharepoint Folder");
-                    _logger.LogError($"List is: {documentUrlTitle}");
+                    _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
                     _logger.LogError($"FolderName is: {folderName}");
                     throw e;
                 }
