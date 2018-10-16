@@ -18,6 +18,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
 		/// <param name="businessNumber"></param>
 		/// <returns></returns>
 		public static string SanitizeNumber(string businessNumber){
+            if (string.IsNullOrEmpty(businessNumber))
+            {
+                return null;
+            }
 			//sanitize the business number
 			string result = Regex.Replace(businessNumber, "\\s", "");
 			//validate the result
