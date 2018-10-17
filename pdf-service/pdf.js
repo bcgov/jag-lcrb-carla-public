@@ -15,8 +15,6 @@ module.exports = function (callback, templateName, viewData, pdfOptions) {
 		// Page options
 		border: "40px",            // default is 0, units: mm, cm, in, px
 
-		zoomFactor: "1",
-
 		// File options
 		type: "pdf"             // allowed file types: png, jpeg, pdf
 	}
