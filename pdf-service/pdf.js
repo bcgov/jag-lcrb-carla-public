@@ -13,8 +13,8 @@ module.exports = function (callback, templateName, viewData, pdfOptions) {
 		orientation: "portrait", // portrait or landscape
 	  
 		// Page options
-		border: "2.54cm",            // default is 0, units: mm, cm, in, px
-	  
+		border: "1.27cm",            // default is 0, units: mm, cm, in, px
+
 		// File options
 		type: "pdf"             // allowed file types: png, jpeg, pdf
 	}
