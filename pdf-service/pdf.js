@@ -13,7 +13,7 @@ module.exports = function (callback, templateName, viewData, pdfOptions) {
 		orientation: "portrait", // portrait or landscape
 	  
 		// Page options
-		border: "1.27cm",            // default is 0, units: mm, cm, in, px
+		border: "40px",            // default is 0, units: mm, cm, in, px
 
 		zoomFactor: "1",
 
