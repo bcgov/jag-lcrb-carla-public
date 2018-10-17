@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string filter = $"adoxio_licencesid eq {licenceId}";
 
-            var expand = new List<string> { "adoxio_Licencee" };
+            var expand = new List<string> { "adoxio_Licencee", "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence" };
 
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             AdoxioLicense license = new AdoxioLicense();
@@ -141,7 +141,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 parameters.Add("effectiveDate", "");
                 parameters.Add("expiryDate", "");
             }
-            parameters.Add("restrictionsText", adoxioLicense.adoxio_termsandconditions);
+
+            var termsAndConditions = "";
+            foreach (var item in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+            {
+                termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+            }
+            parameters.Add("restrictionsText", termsAndConditions);
 
             byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
             return File(data, "application/pdf");
