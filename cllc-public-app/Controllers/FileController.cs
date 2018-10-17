@@ -131,7 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string folderName = await GetFolderName(entityName, entityId, documentType);
             try
             {
-                await _sharePointFileManager.AddFile(GetDocumentListTitle(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
+                await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
             }
             catch (SharePointRestException ex)
             {
@@ -340,7 +340,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<FileDetailsList> fileDetailsList = null;
             try
             {
-                fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentListTitle(entityName), folderName, documentType);
+                fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(entityName), folderName, documentType);
             }
             catch (SharePointRestException spre)
             {
