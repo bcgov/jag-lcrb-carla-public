@@ -9,12 +9,13 @@ module.exports = function (callback, templateName, viewData, pdfOptions) {
 
 	const DEFAULT_PDF_OPTIONS = {
 		// Papersize Options: http://phantomjs.org/api/webpage/property/paper-size.html
-		// format: "Letter",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
-		// orientation: "portrait", // portrait or landscape
+		format: "Letter",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
+		orientation: "portrait", // portrait or landscape
 	  
 		// Page options
-		height: "11in",
-		width: "8in",            // default is 0, units: mm, cm, in, px
+		border: "1.27cm",            // default is 0, units: mm, cm, in, px
+
+		zoomFactor: "1",
 
 		// File options
 		type: "pdf"             // allowed file types: png, jpeg, pdf
