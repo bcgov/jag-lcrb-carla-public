@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Runtime.Serialization;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-
-using Microsoft.EntityFrameworkCore;
-using PDF.Models;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.NodeServices;
 using Microsoft.AspNetCore.Hosting;
@@ -41,10 +32,10 @@ namespace PDF.Controllers
         [Produces("application/pdf")]
         [ProducesResponseType(200, Type = typeof(FileContentResult))]
 
-        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  Object rawdata, string template )
+        public async Task<IActionResult> GetPDF([FromServices] INodeServices nodeServices, [FromBody]  object rawdata, string template )
         {
             JSONResponse result = null;
-            var options = new { format="letter", orientation= "landscape" };            
+            var options = new { format="Letter", orientation= "portrait" };            
 
             // execute the Node.js component
             result = await nodeServices.InvokeAsync<JSONResponse>("./pdf", template, rawdata, options); 
@@ -60,7 +51,7 @@ namespace PDF.Controllers
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
             JSONResponse result = null;
-            var options = new { format="letter", orientation= "landscape" };            
+            var options = new { };            
 
             var testObject = new Dictionary <string, string>();
             testObject.Add("title", "test title");

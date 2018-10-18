@@ -107,41 +107,107 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public async Task<FileContentResult> GetLicencePDF(string licenceId)
         {
+            var parameters = new Dictionary<string, string>();
+
             string filter = $"adoxio_licencesid eq {licenceId}";
 
-            var expand = new List<string> { "adoxio_Licencee" };
+            var expand = new List<string> {
+                "adoxio_Licencee",
+                "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
+                "adoxio_adoxio_licences_adoxio_application_AssignedLicence"
+            };
 
-            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.GetByKey(licenceId, expand: expand);
+            if (adoxioLicense == null)
+            {
+                throw new Exception("Error getting license.");
+            }
+
             AdoxioLicense license = new AdoxioLicense();
-
-            try
-            {
-                license = adoxioLicense.ToViewModel(_dynamicsClient);
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error getting license by id.");
-            }
-
-            var parameters = new Dictionary<string, string>();
+            license = adoxioLicense.ToViewModel(_dynamicsClient);
+            
             parameters.Add("title", "Canabis_License");
             parameters.Add("licenceNumber", license.licenseNumber);
             parameters.Add("establishmentName", license.establishmentName);
             parameters.Add("establishmentAddress", license.establishmentAddress);
             parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
-            try
+
+            if (adoxioLicense.AdoxioEffectivedate.HasValue)
             {
-                DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.HasValue ? adoxioLicense.AdoxioEffectivedate.Value.DateTime : DateTime.MaxValue;
-                DateTime expiryDate = adoxioLicense.AdoxioExpirydate.HasValue ? adoxioLicense.AdoxioExpirydate.Value.DateTime : DateTime.MaxValue;
+                DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.Value.DateTime;
                 parameters.Add("effectiveDate", effectiveDate.ToString("dd/MM/yyyy"));
-                parameters.Add("expiryDate", expiryDate.ToString("dd/MM/yyyy"));
             }
-            catch
+            else
             {
                 parameters.Add("effectiveDate", "");
+            }
+
+            if (adoxioLicense.AdoxioExpirydate.HasValue)
+            {
+                DateTime expiryDate = adoxioLicense.AdoxioExpirydate.Value.DateTime;
+                parameters.Add("expiryDate", expiryDate.ToString("dd/MM/yyyy"));
+            }
+            else
+            {
                 parameters.Add("expiryDate", "");
             }
-            parameters.Add("restrictionsText", adoxioLicense.adoxio_termsandconditions);
+
+            var termsAndConditions = "";
+            foreach (var item in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+            {
+                termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+            }
+            parameters.Add("restrictionsText", termsAndConditions);
+
+
+
+            var application = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.FirstOrDefault();
+            var storeHours = $@"
+                <tr>
+                    <td>Open</td>
+                    <td>9:00 am</td>
+                    <td>9:00 am</td>
+                    <td>9:00 am</td>
+                    <td>9:00 am</td>
+                    <td>9:00 am</td>
+                    <td>9:00 am</td>
+                    <td>9:00 am</td>
+                </tr>                
+                <tr>
+                    <td>Close</td>
+                    <td>11:00 pm</td>
+                    <td>11:00 pm</td>
+                    <td>11:00 pm</td>
+                    <td>11:00 pm</td>
+                    <td>11:00 pm</td>
+                    <td>11:00 pm</td>
+                    <td>11:00 pm</td>
+                </tr>";
+            if (application.AdoxioServicehoursstandardhours != true)
+            {
+                storeHours = $@"
+                <tr>
+                    <td>Open</td>
+                    <td>{application?.AdoxioServicehoursmondayopen}</td>
+                    <td>{application?.AdoxioServicehourstuesdayopen}</td>
+                    <td>{application?.AdoxioServicehourswednesdayopen}</td>
+                    <td>{application?.AdoxioServicehoursthursdayopen}</td>
+                    <td>{application?.AdoxioServicehoursfridayopen}</td>
+                    <td>{application?.AdoxioServicehourssaturdayopen}</td>
+                    <td>{application?.AdoxioServicehourssundayopen}</td>
+                </tr>                
+                <tr>
+                    <td>Close</td>
+                    <td>{application?.AdoxioServicehoursmondayclose}</td>
+                    <td>{application?.AdoxioServicehourstuesdayclose}</td>
+                    <td>{application?.AdoxioServicehourswednesdayclose}</td>
+                    <td>{application?.AdoxioServicehoursthursdayclose}</td>
+                    <td>{application?.AdoxioServicehoursfridayclose}</td>
+                    <td>{application?.AdoxioServicehourssaturdayclose}</td>
+                    <td>{application?.AdoxioServicehourssundayclose}</td>
+                </tr>";
+            }
+            parameters.Add("storeHours", storeHours);    
 
             byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
             return File(data, "application/pdf");
