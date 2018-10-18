@@ -173,10 +173,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                 app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
 
-           // if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
-           // {
+           if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
+           {
                 SetupHangfireJobs(app, loggerFactory);
-           // }
+           }
 
             app.UseAuthentication();
             app.UseMvc();
@@ -201,10 +201,9 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
-
-                    // RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration).SendLicenceCreationMessage(null), Cron.Minutely);
-
+                    log.LogInformation("Creating Hangfire job for License issuance check ...");
+                    ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
