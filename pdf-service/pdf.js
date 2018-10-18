@@ -13,7 +13,7 @@ module.exports = function (callback, templateName, viewData, pdfOptions) {
 		orientation: "portrait", // portrait or landscape
 	  
 		// Page options
-		border: "40px",            // default is 0, units: mm, cm, in, px
+		border: "20px",            // default is 0, units: mm, cm, in, px
 
 		// Uncomment when you are on local using Windows Subsystem for Linux
 		// "phantomPath": "./node_modules/phantomjs-prebuilt/bin/phantomjs",
