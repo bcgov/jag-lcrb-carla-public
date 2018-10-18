@@ -44,10 +44,5 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
                 
             set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
         }
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_termsandconditions@odata.bind")]
-        public string adoxio_termsandconditions { get; set; }
-
     }
 }
