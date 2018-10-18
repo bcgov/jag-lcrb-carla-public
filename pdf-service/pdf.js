@@ -15,6 +15,10 @@ module.exports = function (callback, templateName, viewData, pdfOptions) {
 		// Page options
 		border: "40px",            // default is 0, units: mm, cm, in, px
 
+		// Uncomment when you are on local using Windows Subsystem for Linux
+		// "phantomPath": "./node_modules/phantomjs-prebuilt/bin/phantomjs",
+		// "script": "pdf_a4_portrait.js",
+
 		// File options
 		type: "pdf"             // allowed file types: png, jpeg, pdf
 	}
