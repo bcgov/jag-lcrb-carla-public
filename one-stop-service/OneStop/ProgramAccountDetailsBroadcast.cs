@@ -75,7 +75,7 @@ namespace WebApplicationSoap.OneStop
             //BN9 of licensee (Owner company)
             userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBcincorporationnumber;
             //the name of the applicant (licensee)- last name, first name middle initial or company name
-            userCredentials.legalName = licence.AdoxioEstablishment.AdoxioName;
+            userCredentials.legalName = licence.AdoxioAccountId.Name;
             //establishment (physical location of store)
             userCredentials.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
             //last name of sole proprietor (if not sole prop then null)
@@ -105,7 +105,7 @@ namespace WebApplicationSoap.OneStop
             programAccountDetailsBroadcastBody.programAccountStatus = GetProgramAccountStatus(licence);
             
             // the legal name of the establishment
-            programAccountDetailsBroadcastBody.legalName = licence.AdoxioEstablishment.AdoxioName;
+            programAccountDetailsBroadcastBody.legalName = licence.AdoxioAccountId.Name;
 
             programAccountDetailsBroadcastBody.operatingName = getOperatingName(licence);
 
