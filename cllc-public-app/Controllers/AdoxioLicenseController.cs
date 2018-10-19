@@ -104,17 +104,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET a licence as PDF.
         [HttpGet("{licenceId}/pdf")]
-        [AllowAnonymous]
         public async Task<FileContentResult> GetLicencePDF(string licenceId)
         {
             var parameters = new Dictionary<string, string>();
 
-            string filter = $"adoxio_licencesid eq {licenceId}";
-
             var expand = new List<string> {
                 "adoxio_Licencee",
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
-                "adoxio_adoxio_licences_adoxio_application_AssignedLicence"
+                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                "adoxio_establishment"
             };
 
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.GetByKey(licenceId, expand: expand);
@@ -122,14 +120,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 throw new Exception("Error getting license.");
             }
-
-            AdoxioLicense license = new AdoxioLicense();
-            license = adoxioLicense.ToViewModel(_dynamicsClient);
             
             parameters.Add("title", "Canabis_License");
-            parameters.Add("licenceNumber", license.licenseNumber);
-            parameters.Add("establishmentName", license.establishmentName);
-            parameters.Add("establishmentAddress", license.establishmentAddress);
+            parameters.Add("licenceNumber", adoxioLicense.AdoxioLicencenumber);
+            parameters.Add("establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName);
+            parameters.Add("establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet);
+            parameters.Add("establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity);
+            parameters.Add("establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode);
             parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
 
             if (adoxioLicense.AdoxioEffectivedate.HasValue)
