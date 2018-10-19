@@ -193,7 +193,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                 { "establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName },
                 { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
-                { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity },
+                { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
                 { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
                 { "licencee", adoxioLicense.AdoxioLicencee.Name },
                 { "effectiveDate", effectiveDateParam },
