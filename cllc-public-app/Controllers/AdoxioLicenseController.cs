@@ -104,17 +104,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET a licence as PDF.
         [HttpGet("{licenceId}/pdf")]
-        [AllowAnonymous]
         public async Task<FileContentResult> GetLicencePDF(string licenceId)
         {
-            var parameters = new Dictionary<string, string>();
-
-            string filter = $"adoxio_licencesid eq {licenceId}";
 
             var expand = new List<string> {
                 "adoxio_Licencee",
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
-                "adoxio_adoxio_licences_adoxio_application_AssignedLicence"
+                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                "adoxio_establishment"
             };
 
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.GetByKey(licenceId, expand: expand);
@@ -123,33 +120,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license.");
             }
 
-            AdoxioLicense license = new AdoxioLicense();
-            license = adoxioLicense.ToViewModel(_dynamicsClient);
-            
-            parameters.Add("title", "Canabis_License");
-            parameters.Add("licenceNumber", license.licenseNumber);
-            parameters.Add("establishmentName", license.establishmentName);
-            parameters.Add("establishmentAddress", license.establishmentAddress);
-            parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
-
+            var effectiveDateParam = "";
             if (adoxioLicense.AdoxioEffectivedate.HasValue)
             {
                 DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.Value.DateTime;
-                parameters.Add("effectiveDate", effectiveDate.ToString("dd/MM/yyyy"));
-            }
-            else
-            {
-                parameters.Add("effectiveDate", "");
+                effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
             }
 
+            var expiraryDateParam = "";
             if (adoxioLicense.AdoxioExpirydate.HasValue)
             {
                 DateTime expiryDate = adoxioLicense.AdoxioExpirydate.Value.DateTime;
-                parameters.Add("expiryDate", expiryDate.ToString("dd/MM/yyyy"));
-            }
-            else
-            {
-                parameters.Add("expiryDate", "");
+                expiraryDateParam = expiryDate.ToString("dd/MM/yyyy");
             }
 
             var termsAndConditions = "";
@@ -157,9 +139,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
             }
-            parameters.Add("restrictionsText", termsAndConditions);
-
-
 
             var application = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.FirstOrDefault();
             var storeHours = $@"
@@ -207,7 +186,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>{application?.AdoxioServicehourssundayclose}</td>
                 </tr>";
             }
-            parameters.Add("storeHours", storeHours);    
+
+            var parameters = new Dictionary<string, string>
+            {
+                { "title", "Canabis_License" },
+                { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
+                { "establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName },
+                { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
+                { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity },
+                { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
+                { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                { "effectiveDate", effectiveDateParam },
+                { "expiryDate", expiraryDateParam },
+                { "restrictionsText", termsAndConditions },
+                { "storeHours", storeHours }
+            }; 
 
             byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
             return File(data, "application/pdf");
