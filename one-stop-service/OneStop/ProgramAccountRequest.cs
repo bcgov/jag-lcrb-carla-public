@@ -29,6 +29,10 @@ namespace WebApplicationSoap.OneStop
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
             }
+            else if (licence.AdoxioAccountId == null)
+            {
+                throw new Exception("The licence must have an Account");
+            }
 
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
@@ -58,13 +62,13 @@ namespace WebApplicationSoap.OneStop
             return header;
         }
 
-        private SBNCreateProgramAccountRequestHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences application)
+        private SBNCreateProgramAccountRequestHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             var ccraHeader = new SBNCreateProgramAccountRequestHeaderCCRAHeader();
 
             ccraHeader.userApplication = OneStopUtils.USER_APPLICATION;
             ccraHeader.userRole = OneStopUtils.USER_ROLE;
-            ccraHeader.userCredentials = GetUserCredentials(application);
+            ccraHeader.userCredentials = GetUserCredentials(licence);
 
             return ccraHeader;
         }
@@ -76,7 +80,7 @@ namespace WebApplicationSoap.OneStop
             //BN9 of licensee (Owner company)
             userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             //the name of the applicant (licensee)- last name, first name middle initial or company name
-            userCredentials.legalName = licence.AdoxioLicenceprintname;
+            userCredentials.legalName = licence.AdoxioAccountId.Name;
             //establishment (physical location of store)
             userCredentials.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
             //last name of sole proprietor (if not sole prop then null)
@@ -98,7 +102,7 @@ namespace WebApplicationSoap.OneStop
             programAccountRequestBody.businessCore = GetBusinessCore(licence);
             programAccountRequestBody.programAccountStatus = GetProgramAccountStatus();
             //the name of the applicant(licensee)- lastName, firstName middleName or company name
-            programAccountRequestBody.legalName = licence.AdoxioLicenceprintname; 
+            programAccountRequestBody.legalName = licence.AdoxioAccountId.Name; 
             programAccountRequestBody.operatingName = getOperatingName(licence);
             programAccountRequestBody.businessAddress = getBusinessAddress(licence);
             programAccountRequestBody.mailingAddress = getMailingAddress(licence);
