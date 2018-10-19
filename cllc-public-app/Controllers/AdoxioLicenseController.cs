@@ -106,7 +106,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{licenceId}/pdf")]
         public async Task<FileContentResult> GetLicencePDF(string licenceId)
         {
-            var parameters = new Dictionary<string, string>();
 
             var expand = new List<string> {
                 "adoxio_Licencee",
@@ -120,33 +119,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 throw new Exception("Error getting license.");
             }
-            
-            parameters.Add("title", "Canabis_License");
-            parameters.Add("licenceNumber", adoxioLicense.AdoxioLicencenumber);
-            parameters.Add("establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName);
-            parameters.Add("establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet);
-            parameters.Add("establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity);
-            parameters.Add("establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode);
-            parameters.Add("licencee", adoxioLicense.AdoxioLicencee.Name);
 
+            var effectiveDateParam = "";
             if (adoxioLicense.AdoxioEffectivedate.HasValue)
             {
                 DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.Value.DateTime;
-                parameters.Add("effectiveDate", effectiveDate.ToString("dd/MM/yyyy"));
-            }
-            else
-            {
-                parameters.Add("effectiveDate", "");
+                effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
             }
 
+            var expiraryDateParam = "";
             if (adoxioLicense.AdoxioExpirydate.HasValue)
             {
                 DateTime expiryDate = adoxioLicense.AdoxioExpirydate.Value.DateTime;
-                parameters.Add("expiryDate", expiryDate.ToString("dd/MM/yyyy"));
-            }
-            else
-            {
-                parameters.Add("expiryDate", "");
+                expiraryDateParam = expiryDate.ToString("dd/MM/yyyy");
             }
 
             var termsAndConditions = "";
@@ -154,9 +139,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
             }
-            parameters.Add("restrictionsText", termsAndConditions);
-
-
 
             var application = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.FirstOrDefault();
             var storeHours = $@"
@@ -204,7 +186,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>{application?.AdoxioServicehourssundayclose}</td>
                 </tr>";
             }
-            parameters.Add("storeHours", storeHours);    
+
+            var parameters = new Dictionary<string, string>
+            {
+                { "title", "Canabis_License" },
+                { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
+                { "establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName },
+                { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
+                { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity },
+                { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
+                { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                { "effectiveDate", effectiveDateParam },
+                { "expiryDate", expiraryDateParam },
+                { "restrictionsText", termsAndConditions },
+                { "storeHours", storeHours }
+            }; 
 
             byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
             return File(data, "application/pdf");
