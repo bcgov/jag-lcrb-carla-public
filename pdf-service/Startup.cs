@@ -10,8 +10,6 @@ using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 

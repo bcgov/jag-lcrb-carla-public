@@ -1,48 +1,48 @@
-fs = require('fs')
-// https://www.npmjs.com/package/mustache
-var mustache = require ('mustache');
-// https://www.npmjs.com/package/html-pdf
-var pdf = require('html-pdf');
-
 module.exports = function (callback, templateName, viewData, pdfOptions) {
 
-const DEFAULT_PDF_OPTIONS = {
-	format: 'letter',
-	orientation: 'landscape', // portrait or landscape
-}
-
 	// https://www.npmjs.com/package/mustache
-	var mustache = require ('mustache');
+	var mustache = require('mustache');
 	// https://www.npmjs.com/package/html-pdf
 	var pdf = require('html-pdf');
-	
 	// setup mustache template	
-	fs = require('fs');
-	fs.readFile('Templates/'+templateName+'.mustache', 'utf8', function (err,template) {	
-		if (err)
-		{
-			callback (err, null);
+	var fs = require('fs');
+
+	const DEFAULT_PDF_OPTIONS = {
+		// Papersize Options: http://phantomjs.org/api/webpage/property/paper-size.html
+		format: "Letter",        // allowed units: A3, A4, A5, Legal, Letter, Tabloid
+		orientation: "portrait", // portrait or landscape
+	  
+		// Page options
+		border: "20px",            // default is 0, units: mm, cm, in, px
+
+		// Uncomment when you are on local using Windows Subsystem for Linux
+		// "phantomPath": "./node_modules/phantomjs-prebuilt/bin/phantomjs",
+		// "script": "pdf_a4_portrait.js",
+
+		// File options
+		type: "pdf"             // allowed file types: png, jpeg, pdf
+	}
+
+	fs.readFile('Templates/' + templateName + '.mustache', 'utf8', function (err, template) {
+		if (err) {
+			callback(err, null);
 		}
-		else
-		{	
+		else {
 			// render
-			
-			var html = mustache.render( template, viewData )		
-			
+			var html = mustache.render(template, viewData)
+
 			// PDF options
 			var options = Object.assign({}, DEFAULT_PDF_OPTIONS, pdfOptions);
-			
+
 			// export as PDF
-			pdf.create(html, options).toBuffer(function(err, buffer){
-				if (err)
-				{
-					callback (err, null);
+			pdf.create(html, options).toBuffer(function (err, buffer) {
+				if (err) {
+					callback(err, null);
 				}
-				else
-				{					
-					callback (null, buffer.toJSON());
+				else {
+					callback(null, buffer.toJSON());
 				}
-			});	    
+			});
 		}
-	});	
+	});
 };
