@@ -1,7 +1,7 @@
 {
   "name": "pdf",
   "version": "1.0.0",
-  "description": "",
+  "description": "Service to convert .mustache file to pdf.",
   "main": "pdf.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
