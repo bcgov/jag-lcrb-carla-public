@@ -29,6 +29,10 @@ namespace WebApplicationSoap.OneStop
             {
                 throw new Exception("The licence must have an AdoxioLicencee");
             }
+            else if (licence.AdoxioAccountId == null)
+            {
+                throw new Exception("The licence must have an Account");
+            }
 
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
@@ -58,13 +62,13 @@ namespace WebApplicationSoap.OneStop
             return header;
         }
 
-        private SBNCreateProgramAccountRequestHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences application)
+        private SBNCreateProgramAccountRequestHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             var ccraHeader = new SBNCreateProgramAccountRequestHeaderCCRAHeader();
 
             ccraHeader.userApplication = OneStopUtils.USER_APPLICATION;
             ccraHeader.userRole = OneStopUtils.USER_ROLE;
-            ccraHeader.userCredentials = GetUserCredentials(application);
+            ccraHeader.userCredentials = GetUserCredentials(licence);
 
             return ccraHeader;
         }
