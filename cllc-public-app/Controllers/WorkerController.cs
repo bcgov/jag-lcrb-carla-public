@@ -13,6 +13,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -23,13 +24,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly PdfClient _pdfClient;
 
-        public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+        public WorkerController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, PdfClient pdfClient)
         {
             Configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(WorkerController));
+            _pdfClient = pdfClient;
         }
 
         /// <summary>
@@ -192,6 +195,67 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             await _dynamicsClient.Workers.DeleteAsync(id);
             return NoContent(); // 204
+        }
+
+         /// GET a licence as PDF.
+        [HttpGet("{workerId}/pdf")]
+        [AllowAnonymous]
+
+        public async Task<FileContentResult> GetLicencePDF(string workerId)
+        {
+
+           var expand = new List<string> {
+               "adoxio_ContactId",
+               "adoxio_workerregistration_personalhistorysummary"
+           };
+
+           MicrosoftDynamicsCRMadoxioWorker adoxioWorker = _dynamicsClient.Workers.GetByKey(workerId, expand: expand);
+           if (adoxioWorker == null)
+           {
+               throw new Exception("Error getting worker.");
+           }
+
+            var dateOfBirthParam = "";
+            if (adoxioWorker.AdoxioDateofbirth.HasValue)
+            {
+                DateTime dateOfBirth = adoxioWorker.AdoxioDateofbirth.Value.DateTime;
+                dateOfBirthParam = dateOfBirth.ToString("dd/MM/yyyy");
+            }
+
+            var effectiveDateParam = "";
+            var securityClearance = adoxioWorker.AdoxioWorkerregistrationPersonalhistorysummary.FirstOrDefault();
+            if (securityClearance != null && securityClearance.AdoxioCompletedon.HasValue)
+            {
+                DateTime effectiveDate = securityClearance.AdoxioCompletedon.Value.DateTime;
+                effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
+            }
+
+            var expiryDateParam = "";
+            if (securityClearance != null && securityClearance.AdoxioExpirydate.HasValue)
+            {
+                DateTime expiryDate = securityClearance.AdoxioExpirydate.Value.DateTime;
+                expiryDateParam = expiryDate.ToString("dd/MM/yyyy");
+            }
+
+            var parameters = new Dictionary<string, string>
+            {
+                { "title", "Worker_Qualification" },
+                { "currentDate", DateTime.Now.ToLongDateString() },
+                { "firstName", adoxioWorker.AdoxioFirstname },
+                { "middleName", adoxioWorker.AdoxioMiddlename },
+                { "lastName", adoxioWorker.AdoxioLastname },
+                { "dateOfBirth", dateOfBirthParam },
+                { "address", adoxioWorker.AdoxioContactId.Address1Line1 },
+                { "city", adoxioWorker.AdoxioContactId.Address1City },
+                { "province", adoxioWorker.AdoxioContactId.Address1Stateorprovince},
+                { "postalCode", adoxioWorker.AdoxioContactId.Address1Postalcode},
+                { "effectiveDate", effectiveDateParam },
+                { "expiryDate", expiryDateParam },
+                { "border", "{ \"top\": \"40px\", \"right\": \"40px\", \"bottom\": \"0px\", \"left\": \"40px\" }" }
+            };
+
+           byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
+           return File(data, "application/pdf");
         }
     }
 }
