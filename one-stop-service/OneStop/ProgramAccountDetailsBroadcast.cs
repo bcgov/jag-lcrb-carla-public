@@ -78,7 +78,7 @@ namespace WebApplicationSoap.OneStop
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             //last name of sole proprietor (if not sole prop then null)
             userCredentials.lastName = "N/A";
 
