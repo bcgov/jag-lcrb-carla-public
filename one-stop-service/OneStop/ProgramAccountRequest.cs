@@ -32,7 +32,7 @@ namespace WebApplicationSoap.OneStop
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
             programAccountRequest.header = GetProgramAccountRequestHeader(licence, suffix);
-            programAccountRequest.body = GetProgramAccountRequestBody(licence);
+            programAccountRequest.body = GetProgramAccountRequestBody(licence, suffix);
 
             var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountRequest1));
             using (StringWriter textWriter = new StringWriter())
@@ -77,14 +77,14 @@ namespace WebApplicationSoap.OneStop
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            userCredentials.postalCode = FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             //last name of sole proprietor (if not sole prop then null)
             userCredentials.lastName = "N/A";
 
             return userCredentials;
         }
 
-        private SBNCreateProgramAccountRequestBody GetProgramAccountRequestBody(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNCreateProgramAccountRequestBody GetProgramAccountRequestBody(MicrosoftDynamicsCRMadoxioLicences licence, string suffix)
         {
             var programAccountRequestBody = new SBNCreateProgramAccountRequestBody();
 
@@ -94,7 +94,7 @@ namespace WebApplicationSoap.OneStop
             programAccountRequestBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
             //this identifies the licence type. Fixed number assigned by the OneStopHub
             programAccountRequestBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
-            programAccountRequestBody.businessCore = GetBusinessCore(licence);
+            programAccountRequestBody.businessCore = GetBusinessCore(licence, suffix);
             programAccountRequestBody.programAccountStatus = GetProgramAccountStatus();
             //the name of the applicant(licensee)- lastName, firstName middleName or company name
             programAccountRequestBody.legalName = licence.AdoxioLicencee.Name; 
@@ -105,14 +105,14 @@ namespace WebApplicationSoap.OneStop
             return programAccountRequestBody;
         }
 
-        private SBNCreateProgramAccountRequestBodyBusinessCore GetBusinessCore(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNCreateProgramAccountRequestBodyBusinessCore GetBusinessCore(MicrosoftDynamicsCRMadoxioLicences licence, string suffix)
         {
             var businessCore = new SBNCreateProgramAccountRequestBodyBusinessCore();
 
             //always 01 for our requests
             businessCore.programAccountTypeCode = OneStopUtils.PROGRAM_ACCOUNT_TYPE_CODE;
             //licence number - dash sequence number. Sequence is always 1
-            businessCore.crossReferenceProgramNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
+            businessCore.crossReferenceProgramNumber = licence.AdoxioLicencenumber + "-" + suffix;
 
             return businessCore;
         }
