@@ -165,7 +165,8 @@
                 <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)">
-                    You must enter either a BCID number or a driver’s licence number.
+                    You must enter either a BCID number or a driver’s licence number. <br>
+                    Format is 7 digits.
                   </div>
                 </div>
               </div>
