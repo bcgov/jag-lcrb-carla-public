@@ -46,6 +46,9 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private string HandleSBNCreateProgramAccountResponse(string inputXML)
         {
+            _logger.LogInformation("Reached HandleSBNCreateProgramAccountResponse");
+            _logger.LogInformation($"inputXML is: {inputXML}");
+
             string httpStatusCode = "200";
 
             // deserialize the inputXML
@@ -95,10 +98,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                     throw (odee);
                 }
 
-                //Trigger the Send ProgramAccountDetailsBroadcast Message
-                OneStopUtils oneStopUtils = new OneStopUtils(Configuration, _logger);
-                var task = oneStopUtils.SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid);
-                task.Wait();
+                //Trigger the Send ProgramAccountDetailsBroadcast Message                
+                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
 
                 _logger.LogInformation("send program account details broadcast done.");
             }
@@ -118,7 +119,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 errorNotification = (SBNErrorNotification1)serializer.Deserialize(reader);                
             }
-            _logger.LogInformation("Received error notification");
+            _logger.LogError("Received error notification");
+            _logger.LogError(inputXML);
 
             // check to see if it is simply a problem with an old account number.
 
@@ -162,8 +164,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             try
             {
                 // sanitize inputXML.
-                inputXML = inputXML.Trim();
-                _logger.LogInformation($"inputXML is: {inputXML}");
+                inputXML = inputXML.Trim();                
 
                 // determine the type of XML.
                 string rootNodeName = GetRootNodeName(inputXML);
