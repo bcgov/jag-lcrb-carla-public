@@ -96,8 +96,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
 
                 //Trigger the Send ProgramAccountDetailsBroadcast Message
-                BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid));
-                _logger.LogInformation("Enqueued send program account details broadcast.");
+                OneStopUtils oneStopUtils = new OneStopUtils(Configuration, _logger);
+                var task = oneStopUtils.SendProgramAccountDetailsBroadcastMessageREST(null, licence.AdoxioLicencesid);
+                task.Wait();
+
+                _logger.LogInformation("send program account details broadcast done.");
             }
 
             return httpStatusCode;
