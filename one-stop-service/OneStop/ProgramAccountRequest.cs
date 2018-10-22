@@ -150,9 +150,9 @@ namespace WebApplicationSoap.OneStop
 
             businessAddress.foreignLegacy = GetForeignLegacyBusiness(licence);
             businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
-            businessAddress.provinceStateCode = "BC"; // TODO: Verify this field
-            businessAddress.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode; ;
-            businessAddress.countryCode = "Canada"; // TODO: Verify this field
+            businessAddress.provinceStateCode = "BC"; // BC is province code for British Columbia
+            businessAddress.postalCode = FormatPostalCode( licence.AdoxioEstablishment.AdoxioAddresspostalcode );
+            businessAddress.countryCode = "CA"; // CA is country code for Canada
 
             return businessAddress;
         }
@@ -178,7 +178,7 @@ namespace WebApplicationSoap.OneStop
             mailingAddress.foreignLegacy = GetForeignLegacyMailing(licence);
             mailingAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
             mailingAddress.provinceStateCode = "BC";
-            mailingAddress.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            mailingAddress.postalCode = FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             mailingAddress.countryCode = "CA";
 
             return mailingAddress;
@@ -192,6 +192,16 @@ namespace WebApplicationSoap.OneStop
             //foreignLegacyMailing.addressDetailLine2 = 
 
             return foreignLegacyMailing;
+        }
+
+        private string FormatPostalCode(string input)
+        {
+            string result = null;
+            if (input != null)
+            {
+                result = input.ToUpper().Replace(" ", "");
+            }
+            return result;
         }
     }
 }
