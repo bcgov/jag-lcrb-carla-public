@@ -8,10 +8,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     public partial class MicrosoftDynamicsCRMsharepointdocumentlocation
     {
 
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_application@odata.bind")]
         public string RegardingobjectidAdoxioApplicationODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_worker@odata.bind")]
+        public string RegardingobjectidWorkerApplicationODataBind { get; set; }
 
         [JsonProperty(PropertyName = "parentsiteorlocation_sharepointdocumentlocation@odata.bind")]        
         public string ParentsiteorlocationSharepointdocumentlocationODataBind { get; set; }
