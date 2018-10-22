@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.OneStopService;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -77,7 +78,7 @@ namespace WebApplicationSoap.OneStop
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             //last name of sole proprietor (if not sole prop then null)
             userCredentials.lastName = "N/A";
 
@@ -151,7 +152,7 @@ namespace WebApplicationSoap.OneStop
             businessAddress.foreignLegacy = GetForeignLegacyBusiness(licence);
             businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
             businessAddress.provinceStateCode = "BC"; // BC is province code for British Columbia
-            businessAddress.postalCode = FormatPostalCode( licence.AdoxioEstablishment.AdoxioAddresspostalcode );
+            businessAddress.postalCode = Utils.FormatPostalCode( licence.AdoxioEstablishment.AdoxioAddresspostalcode );
             businessAddress.countryCode = "CA"; // CA is country code for Canada
 
             return businessAddress;
@@ -178,7 +179,7 @@ namespace WebApplicationSoap.OneStop
             mailingAddress.foreignLegacy = GetForeignLegacyMailing(licence);
             mailingAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
             mailingAddress.provinceStateCode = "BC";
-            mailingAddress.postalCode = FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+            mailingAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             mailingAddress.countryCode = "CA";
 
             return mailingAddress;
@@ -194,14 +195,6 @@ namespace WebApplicationSoap.OneStop
             return foreignLegacyMailing;
         }
 
-        private string FormatPostalCode(string input)
-        {
-            string result = null;
-            if (input != null)
-            {
-                result = input.ToUpper().Replace(" ", "");
-            }
-            return result;
-        }
+        
     }
 }
