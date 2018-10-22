@@ -32,7 +32,7 @@ namespace WebApplicationSoap.OneStop
             var programAccountRequest = new SBNCreateProgramAccountRequest1();
 
             programAccountRequest.header = GetProgramAccountRequestHeader(licence, suffix);
-            programAccountRequest.body = GetProgramAccountRequestBody(licence);
+            programAccountRequest.body = GetProgramAccountRequestBody(licence, suffix);
 
             var serializer = new XmlSerializer(typeof(SBNCreateProgramAccountRequest1));
             using (StringWriter textWriter = new StringWriter())
@@ -77,14 +77,14 @@ namespace WebApplicationSoap.OneStop
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            userCredentials.postalCode = FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             //last name of sole proprietor (if not sole prop then null)
             userCredentials.lastName = "N/A";
 
             return userCredentials;
         }
 
-        private SBNCreateProgramAccountRequestBody GetProgramAccountRequestBody(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNCreateProgramAccountRequestBody GetProgramAccountRequestBody(MicrosoftDynamicsCRMadoxioLicences licence, string suffix)
         {
             var programAccountRequestBody = new SBNCreateProgramAccountRequestBody();
 
@@ -94,7 +94,7 @@ namespace WebApplicationSoap.OneStop
             programAccountRequestBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
             //this identifies the licence type. Fixed number assigned by the OneStopHub
             programAccountRequestBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
-            programAccountRequestBody.businessCore = GetBusinessCore(licence);
+            programAccountRequestBody.businessCore = GetBusinessCore(licence, suffix);
             programAccountRequestBody.programAccountStatus = GetProgramAccountStatus();
             //the name of the applicant(licensee)- lastName, firstName middleName or company name
             programAccountRequestBody.legalName = licence.AdoxioLicencee.Name; 
@@ -105,14 +105,14 @@ namespace WebApplicationSoap.OneStop
             return programAccountRequestBody;
         }
 
-        private SBNCreateProgramAccountRequestBodyBusinessCore GetBusinessCore(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNCreateProgramAccountRequestBodyBusinessCore GetBusinessCore(MicrosoftDynamicsCRMadoxioLicences licence, string suffix)
         {
             var businessCore = new SBNCreateProgramAccountRequestBodyBusinessCore();
 
             //always 01 for our requests
             businessCore.programAccountTypeCode = OneStopUtils.PROGRAM_ACCOUNT_TYPE_CODE;
             //licence number - dash sequence number. Sequence is always 1
-            businessCore.crossReferenceProgramNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
+            businessCore.crossReferenceProgramNumber = licence.AdoxioLicencenumber + "-" + suffix;
 
             return businessCore;
         }
@@ -150,9 +150,9 @@ namespace WebApplicationSoap.OneStop
 
             businessAddress.foreignLegacy = GetForeignLegacyBusiness(licence);
             businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
-            businessAddress.provinceStateCode = "BC"; // TODO: Verify this field
-            businessAddress.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode; ;
-            businessAddress.countryCode = "Canada"; // TODO: Verify this field
+            businessAddress.provinceStateCode = "BC"; // BC is province code for British Columbia
+            businessAddress.postalCode = FormatPostalCode( licence.AdoxioEstablishment.AdoxioAddresspostalcode );
+            businessAddress.countryCode = "CA"; // CA is country code for Canada
 
             return businessAddress;
         }
@@ -178,7 +178,7 @@ namespace WebApplicationSoap.OneStop
             mailingAddress.foreignLegacy = GetForeignLegacyMailing(licence);
             mailingAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
             mailingAddress.provinceStateCode = "BC";
-            mailingAddress.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            mailingAddress.postalCode = FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             mailingAddress.countryCode = "CA";
 
             return mailingAddress;
@@ -192,6 +192,16 @@ namespace WebApplicationSoap.OneStop
             //foreignLegacyMailing.addressDetailLine2 = 
 
             return foreignLegacyMailing;
+        }
+
+        private string FormatPostalCode(string input)
+        {
+            string result = null;
+            if (input != null)
+            {
+                result = input.ToUpper().Replace(" ", "");
+            }
+            return result;
         }
     }
 }
