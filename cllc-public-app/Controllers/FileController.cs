@@ -38,21 +38,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
 
-        private string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
+        private static string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
         {
             string applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
             string folderName = $"{application.AdoxioJobnumber}_{applicationIdCleaned}";
             return folderName;
         }
 
-        private string GetContactFolderName(MicrosoftDynamicsCRMcontact contact)
+        private static string GetContactFolderName(MicrosoftDynamicsCRMcontact contact)
         {
             string applicationIdCleaned = contact.Contactid.ToString().ToUpper().Replace("-", "");
             string folderName = $"contact_{applicationIdCleaned}";
             return folderName;
         }
 
-        private string GetWorkerFolderName(MicrosoftDynamicsCRMadoxioWorker worker)
+        private static string GetWorkerFolderName(MicrosoftDynamicsCRMadoxioWorker worker)
         {
             string applicationIdCleaned = worker.AdoxioWorkerid.ToString().ToUpper().Replace("-", "");
             string folderName = $"{worker.AdoxioName}_{applicationIdCleaned}";
@@ -128,7 +128,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UpdateEntityModifiedOnDate(entityName, entityId);
 
             string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
-            string folderName = await GetFolderName(entityName, entityId, documentType);
+            string folderName = await GetFolderName(entityName, entityId, _dynamicsClient);
             try
             {
                 await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
@@ -177,7 +177,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        private async Task<string> GetFolderName(string entityName, string entityId, string documentType)
+        public static async Task<string> GetFolderName(string entityName, string entityId, IDynamicsClient _dynamicsClient)
         {
             var folderName = "";
             switch (entityName.ToLower())
@@ -335,7 +335,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return fileSystemItemVMList;
             }
 
-            string folderName = await GetFolderName(entityName, entityId, documentType); ;
+            string folderName = await GetFolderName(entityName, entityId, _dynamicsClient); ;
             // Get the file details list in folder
             List<FileDetailsList> fileDetailsList = null;
             try
@@ -375,7 +375,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        private string GetDocumentListTitle(string entityName)
+        public static string GetDocumentListTitle(string entityName)
         {
             var listTitle = "";
             switch (entityName.ToLower())
@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return listTitle;
         }
 
-        private string GetDocumentTemplateUrlPart(string entityName)
+        public static string GetDocumentTemplateUrlPart(string entityName)
         {
             var listTitle = "";
             switch (entityName.ToLower())
