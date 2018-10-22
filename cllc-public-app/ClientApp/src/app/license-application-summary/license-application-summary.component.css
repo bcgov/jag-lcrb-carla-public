@@ -10,6 +10,10 @@ mat-header-row {
     color: #fff;
 }
 
+.mat-column-actions{
+    flex: 0 0 250px;
+}
+
 .small-dl-btn {
     display: none;
 }
