@@ -24,10 +24,11 @@ namespace one_stop_service.Controllers
         }
 
         [HttpGet("SendLicenceCreationMessage/{licenceGuid}")]
-        public IActionResult SendLicenceCreationMessage(string licenceGuid)
+        public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuid)
         {
             logger.LogInformation($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, logger).SendLicenceCreationMessageREST(null, licenceGuid,"001"));
+            OneStopUtils oneStopUtils = new OneStopUtils(Configuration, logger);
+            await oneStopUtils.SendLicenceCreationMessageREST(null, licenceGuid,"001");
             return Ok();
         }
 
