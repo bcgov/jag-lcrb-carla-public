@@ -32,11 +32,15 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         private IOneStopRestClient _onestopRestClient;
 
+        private ILogger _logger;
+
+
         public OneStopUtils(IConfiguration Configuration, ILogger logger)
         {
             this.Configuration = Configuration;
-            this._dynamics = OneStopUtils.SetupDynamics(Configuration);
-            this._onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, logger);
+            _dynamics = OneStopUtils.SetupDynamics(Configuration);
+            _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, logger);
+            _logger = logger;
         }
 
         private string FormatGuidForDynamics(string guid)
@@ -86,6 +90,12 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine($"Exception occured. {ex.Message}");
                     hangfireContext.WriteLine($"Cancelling");
 
+                    if (_logger != null)
+                    {
+                        _logger.LogError(ex.Message);
+                        _logger.LogError(ex.StackTrace);
+                    }
+
                     throw;
                 }
             }
@@ -126,7 +136,11 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task SendProgramAccountDetailsBroadcastMessage(PerformContext hangfireContext, string licenceGuidRaw)
         {
-            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+            }
+            
             string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
 
             OneStopHubService.receiveFromPartnerResponse output;
@@ -148,11 +162,18 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountDetailsBroadcast();
-                    hangfireContext.WriteLine($"Getting licence {licenceGuid}");
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine($"Getting licence {licenceGuid}");
+                    }
+                        
                     MicrosoftDynamicsCRMadoxioLicences licence = GetLicenceFromDynamics(hangfireContext, licenceGuid);
 
-                    hangfireContext.WriteLine("Got licence. Creating XML request");
-
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine("Got licence. Creating XML request");
+                    }
+                    
                     var innerXML = req.CreateXML(licence);
                     hangfireContext.WriteLine("Sending request.");
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
@@ -160,14 +181,29 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
                 catch (Exception ex)
                 {
-                    hangfireContext.WriteLine("Error sending program account details broadcast:");
-                    hangfireContext.WriteLine(ex.Message);
+                    if (_logger != null)
+                    {
+                        _logger.LogError(ex.Message);
+                        _logger.LogError(ex.StackTrace);
+                    }
+
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine("Error sending program account details broadcast:");
+                        hangfireContext.WriteLine(ex.Message);
+                    }
+                    
                     throw;
                 }
             }
-            hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
 
-            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(output));
+                hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+            }
+
+
         }
 
         /// <summary>
@@ -175,18 +211,27 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task SendProgramAccountDetailsBroadcastMessageREST(PerformContext hangfireContext, string licenceGuidRaw)
         {
-            hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
+            }
+            
             string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
 
             //prepare soap content
             var req = new ProgramAccountDetailsBroadcast();
+
             var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
 
             //send message to Onestop hub
             var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
 
-            hangfireContext.WriteLine(outputXML);
-            hangfireContext.WriteLine("End ofOneStop REST SendLicenceCreationMessage  Job.");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine(outputXML);
+                hangfireContext.WriteLine("End ofOneStop REST SendLicenceCreationMessage  Job.");
+            }
+            
         }
 
 
@@ -195,7 +240,10 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task CheckForNewLicences(PerformContext hangfireContext)
         {
-            hangfireContext.WriteLine("Starting check for new licences job.");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("Starting check for new licences job.");
+            }
             IList<MicrosoftDynamicsCRMadoxioLicences> result = null;
             try
             {
@@ -204,11 +252,15 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             catch (OdataerrorException odee)
             {
-                hangfireContext.WriteLine("Error getting Licences");
-                hangfireContext.WriteLine("Request:");
-                hangfireContext.WriteLine(odee.Request.Content);
-                hangfireContext.WriteLine("Response:");
-                hangfireContext.WriteLine(odee.Response.Content);
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine("Error getting Licences");
+                    hangfireContext.WriteLine("Request:");
+                    hangfireContext.WriteLine(odee.Request.Content);
+                    hangfireContext.WriteLine("Response:");
+                    hangfireContext.WriteLine(odee.Response.Content);
+                }
+
                 // fail if we can't get results.
                 throw (odee);
             }
@@ -255,6 +307,14 @@ namespace Gov.Lclb.Cllb.OneStopService
                     hangfireContext.WriteLine(odee.Request.Content);
                     hangfireContext.WriteLine("Response:");
                     hangfireContext.WriteLine(odee.Response.Content);
+                }
+                if (_logger != null)
+                {
+                    _logger.LogError("Error getting Licence");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
                 }
                 // fail if we can't get results.
                 throw (odee);
