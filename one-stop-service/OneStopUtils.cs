@@ -108,25 +108,53 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
         {
-            hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
+            }
+            
 
             string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
 
             // prepare soap message
             var req = new ProgramAccountRequest();
 
-            hangfireContext.WriteLine($"Getting Licence {licenceGuid}");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine($"Getting Licence {licenceGuid}");
+            }
 
             var licence = GetLicenceFromDynamics(hangfireContext, licenceGuid);
 
-            hangfireContext.WriteLine($"Got Licence {licenceGuid}");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
+            }
 
-            var innerXML = req.CreateXML(licence, suffix);
-            // send message to Onestop hub
-            var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
+            if (licence == null)
+            {
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                }
 
-            hangfireContext.WriteLine(outputXML);
-            hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+                if (_logger != null)
+                {
+                    _logger.LogError($"Unable to get licence {licenceGuid}.");
+                }
+            }
+            else
+            {
+                var innerXML = req.CreateXML(licence, suffix);
+                // send message to Onestop hub
+                var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
+
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine(outputXML);
+                    hangfireContext.WriteLine("End ofOneStop SendLicenceCreationMessage  Job.");
+                }
+            }
         }
 
 
