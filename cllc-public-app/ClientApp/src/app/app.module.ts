@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
-import { ToastModule } from 'ng2-toastr';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -260,7 +259,6 @@ import { WorkerInformationComponent } from './worker-qualification/worker-inform
     MatToolbarModule,
     MatTooltipModule,
     FileDropModule,
-    ToastModule.forRoot(),
     BsDatepickerModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     AlertModule.forRoot()
