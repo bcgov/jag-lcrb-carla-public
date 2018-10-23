@@ -75,3 +75,11 @@ mat-header-row {
 .mat-header-cell {
     color: #fff;
 }
+
+.mat-column-actions{
+    flex: 0 0 300px;
+}
+
+.mat-column-lastUpdated{
+    flex: 0 0 150px;
+}

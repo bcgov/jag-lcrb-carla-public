@@ -1,7 +1,7 @@
 <div class="dashboard-spacing" style="position: relative;">
   <div [ngBusy]="busy"></div>
   <div *ngIf="!isNewUser && dataLoaded" class="row">
-    <div class="col-lg-7 col-sm-12">
+    <div class="col-xl-7 col-sm-12">
       <div>
         <section>
           <!-- <div [ngBusy]="busy"></div> -->
@@ -49,6 +49,16 @@
                   </mat-cell>
                 </ng-container>
 
+                <!-- Column -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> 
+                    <a class="btn btn-primary" [href]="'api/worker/' + element?.id + '/pdf'">
+                      <i class="fas fa-download"></i>
+                      Download Qualification Letter</a>
+                  </mat-cell>
+                </ng-container>
+
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
               </mat-table>
@@ -58,7 +68,7 @@
         </section>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-12" style="position: relative">
+    <div class="col-xl-4 col-sm-12" style="position: relative">
       <!-- <div [ngBusy]="busy"></div> -->
       <p></p>
       <section class="submit-container">
@@ -91,7 +101,7 @@
           </tr>
         </table>
         <div class="submit-content">
-          <p>For question about criminal record checks, contact the Criminal Records Review Program Monday tdo Friday, 8:30
+          <p>For questions about criminal record checks, contact the Criminal Records Review Program Monday to Friday, 8:30
             a.m. - 4:30 p.m.</p>
           <section>
             <i class="fas fa-fax"></i>&nbsp; <strong>Fax</strong>: 250 356-1889
