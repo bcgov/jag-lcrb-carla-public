@@ -7,10 +7,10 @@ import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
-import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, zip } from 'rxjs';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
@@ -112,7 +112,7 @@ export class WorkerApplicationComponent implements OnInit {
         this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
-          this.busy2 = Observable.forkJoin(
+          this.busy2 = forkJoin(
             this.workerDataService.getWorker(this.workerId),
             this.aliasDataService.getAliases(this.currentUser.contactid),
             this.previousAddressDataService.getPreviousAdderesses(this.currentUser.contactid)
@@ -298,7 +298,7 @@ export class WorkerApplicationComponent implements OnInit {
       }
     }
 
-    this.busy2 = Observable.zip(...saves).toPromise().then(res => {
+    this.busy2 = zip(...saves).toPromise().then(res => {
       subResult.next(true);
       this.reloadUser();
     }, err => subResult.next(false));

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { NewsletterDataService } from "../services/newsletter-data.service"
-import { ToastsManager } from 'ng2-toastr';
-import { FormGroup, FormControl, FormBuilder, Validators, EmailValidator, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-newsletter-signup',
@@ -26,8 +26,7 @@ export class NewsletterSignupComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   /** newsletter-signup ctor */
-  constructor(private newsletterDataService: NewsletterDataService, public toastr: ToastsManager, vcr: ViewContainerRef) {
-    this.toastr.setRootViewContainerRef(vcr);
+  constructor(private newsletterDataService: NewsletterDataService, vcr: ViewContainerRef, public snackBar: MatSnackBar,) {
   }
 
   ngOnInit(): void {
@@ -43,7 +42,7 @@ export class NewsletterSignupComponent implements OnInit {
   signup() {
     // subscribe to the newsletter.
     this.newsletterDataService.signup(this.slug, this.email).then((results) => {
-      this.toastr.success('Thanks for signing up!', 'Success!');
+      this.snackBar.open('Thanks for signing up!', 'Success!', { duration: 3500, panelClass: ['green-snackbar'] });
       this.signupSuccess = true;
     });
   }

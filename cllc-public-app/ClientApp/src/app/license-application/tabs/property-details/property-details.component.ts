@@ -106,12 +106,12 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
         this.updateApplicationInStore();
         this.saveFormData = saveData;
         if (showProgress === true) {
-          this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+          this.snackBar.open('Property Details have been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
         }
       },
       err => {
         saveResult.next(false);
-        this.snackBar.open('Error saving Property Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error saving Property Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error occured saving Property Details');
       });
 
