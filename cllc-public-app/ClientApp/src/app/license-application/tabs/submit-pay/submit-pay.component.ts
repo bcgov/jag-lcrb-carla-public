@@ -45,7 +45,7 @@ export class SubmitPayComponent implements OnInit {
         this.isLoaded = true;
       },
       err => {
-        this.snackBar.open('Error getting Application Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error getting Application Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error occured getting Application Details');
       }
     );
@@ -113,7 +113,7 @@ export class SubmitPayComponent implements OnInit {
           });
       },
       err => {
-        this.snackBar.open('Error getting Application Details for validation', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error getting Application Details for validation', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error occured getting Application Details for validation');
         result.next(false);
       }

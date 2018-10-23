@@ -77,7 +77,7 @@ export class DashboardLiteComponent implements OnInit {
         // this.router.navigate(['./payment-confirmation'], { queryParams: { trnId: '0', SessionKey: data.id } });
       },
       err => {
-        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error starting a New Licence Application');
       }
     );
@@ -95,7 +95,7 @@ export class DashboardLiteComponent implements OnInit {
         this.router.navigateByUrl(`/application-lite/${data.id}`);
       },
       err => {
-        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error starting a New Licence Application');
       }
     );
