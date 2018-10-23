@@ -121,7 +121,10 @@ namespace WebApplicationSoap.OneStop
             //programAccountDetailsBroadcastBody.partnerInfo2 = "ToGetFromDynamics";
             
             // licence expiry date
-            programAccountDetailsBroadcastBody.expiryDate = licence.AdoxioExpirydate.ToString();
+            if (licence.AdoxioExpirydate != null)
+            {
+                programAccountDetailsBroadcastBody.expiryDate = licence.AdoxioExpirydate.Value.ToString("yyyy-MM-dd");
+            }            
 
             return programAccountDetailsBroadcastBody;
         }
@@ -172,7 +175,7 @@ namespace WebApplicationSoap.OneStop
             businessAddress.foreignLegacy = GetForeignLegacyBusiness(licence);
             businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
             businessAddress.provinceStateCode = "BC";
-            businessAddress.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            businessAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             businessAddress.countryCode = "CA";
 
             return businessAddress;
