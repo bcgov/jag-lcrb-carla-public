@@ -40,20 +40,15 @@
                 <!-- Column -->
                 <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.paymentReceived === true ? 'Submitted' : 'In progress'}}
-                    <!-- <span (click)="cancelApplication(element?.id, element?.establishmentName, element?.name)">
-                          <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-                          <a href="javascript: void(0)">
-                            Cancel Application</a>
-                        </span> -->
+                  <mat-cell *matCellDef="let element"> {{element.status}}
                   </mat-cell>
                 </ng-container>
 
                 <!-- Column -->
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> 
-                    <a class="btn btn-primary" [href]="'api/worker/' + element?.id + '/pdf'">
+                  <mat-cell  *matCellDef="let element"> 
+                    <a *ngIf="element?.status === 'Active'" class="btn btn-primary" [href]="'api/worker/' + element?.id + '/pdf'">
                       <i class="fas fa-download"></i>
                       Download Qualification Letter</a>
                   </mat-cell>
