@@ -66,27 +66,31 @@
       <!-- Column -->
       <ng-container matColumnDef="summary">
         <mat-cell *matCellDef="let element">
-          <p></p>
-          <span>MODIFIED ON: </span>
-          <span>{{element.modifiedon | date:'mediumDate'}}</span>
-          <p></p>
-          <span>ESTABLISHMENT NAME: </span>
-          {{element.establishmentName}}
-          <p></p>
-          <span>STATUS: </span>
-          <i *ngIf="element.status == ACTIVE" class="fa fa-check-circle" style="color: #4b830d"></i>
-          <i *ngIf="element.status == PAYMENT_REQUIRED" class="fa fa-exclamation-triangle" style="color: #e65100"></i>
-          <i *ngIf="element.status == RENEWAL_DUE" class="fa fa-fa-exclamation-circle" style="color: #a30000"></i>
-          {{element.status}}
-          <p></p>
-          <a *ngIf="element.status == ACTIVE" class="btn btn-primary" style="min-width: 10px;" [href]="'api/adoxiolicense/' + element?.assignedLicence?.id + '/pdf'">
-            <span> <i class="fas fa-download"></i> DOWNLOAD LICENCE</span>
-          </a>
-          <button *ngIf="element.status == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(element)">PAY
-            LICENCE FEE</button>
-          <button *ngIf="element.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(element)">RENEW
-            LICENCE</button>
-          <p></p>
+          <section>
+            <p></p>
+            <span>MODIFIED ON: </span>
+            <span>{{element.modifiedon | date:'mediumDate'}}</span>
+            <p></p>
+            <span>ESTABLISHMENT NAME: </span>
+            {{element.establishmentName}}
+            <p></p>
+            <span>STATUS: </span>
+            <i *ngIf="element.status == ACTIVE" class="fa fa-check-circle" style="color: #4b830d"></i>
+            <i *ngIf="element.status == PAYMENT_REQUIRED" class="fa fa-exclamation-triangle" style="color: #e65100"></i>
+            <i *ngIf="element.status == RENEWAL_DUE" class="fa fa-fa-exclamation-circle" style="color: #a30000"></i>
+            {{element.status}}
+            <p></p>
+            <a *ngIf="element.status == ACTIVE" class="btn btn-primary" style="min-width: 10px;" [href]="'api/adoxiolicense/' + element?.assignedLicence?.id + '/pdf'">
+              <span> <i class="fas fa-download"></i> DOWNLOAD LICENCE</span>
+            </a>
+            <button *ngIf="element.status == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(element)">PAY
+              LICENCE FEE
+            </button>
+            <button *ngIf="element.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(element)">RENEW
+              LICENCE
+            </button>
+            <p></p>
+          </section>
         </mat-cell>
       </ng-container>
 
