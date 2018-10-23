@@ -1,4 +1,3 @@
-@import "../../../node_modules/ng2-toastr/bundles/ng2-toastr.min.css";
 h2 {
     margin-top: 0;
     color: #ffffff;
@@ -73,4 +72,8 @@ p {
     color: #fff;
     margin-left: -5px;
     margin-top: -5px;
+}
+
+.green-snackbar {
+    background: #00ff21;
 }

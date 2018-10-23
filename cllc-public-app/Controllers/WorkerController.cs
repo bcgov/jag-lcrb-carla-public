@@ -197,21 +197,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return NoContent(); // 204
         }
 
-         /// GET a licence as PDF.
+        /// GET a licence as PDF.
         [HttpGet("{workerId}/pdf")]
-        public async Task<FileContentResult> GetLicencePDF(string workerId)
+        public async Task<IActionResult> GetLicencePDF(string workerId)
         {
 
-           var expand = new List<string> {
+            var expand = new List<string> {
                "adoxio_ContactId",
                "adoxio_workerregistration_personalhistorysummary"
            };
 
-           MicrosoftDynamicsCRMadoxioWorker adoxioWorker = _dynamicsClient.Workers.GetByKey(workerId, expand: expand);
-           if (adoxioWorker == null)
-           {
-               throw new Exception("Error getting worker.");
-           }
+            MicrosoftDynamicsCRMadoxioWorker adoxioWorker = _dynamicsClient.Workers.GetByKey(workerId, expand: expand);
+            if (adoxioWorker == null)
+            {
+                throw new Exception("Error getting worker.");
+            }
 
             var dateOfBirthParam = "";
             if (adoxioWorker.AdoxioDateofbirth.HasValue)
@@ -252,8 +252,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "border", "{ \"top\": \"40px\", \"right\": \"40px\", \"bottom\": \"0px\", \"left\": \"40px\" }" }
             };
 
-           byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
-           return File(data, "application/pdf");
+            try
+            {
+                byte[] data = await _pdfClient.GetPdf(parameters, "worker_qualification_letter");
+                return File(data, "application/pdf");
+            }
+            catch
+            {
+                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+                basePath += "/worker-qualification/dashboard";
+                return Redirect(basePath);
+            }
         }
     }
 }
