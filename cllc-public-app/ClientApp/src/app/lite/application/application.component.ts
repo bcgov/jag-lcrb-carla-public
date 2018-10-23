@@ -107,12 +107,12 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
         }
       },
       err => {
         saveResult.next(false);
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error occured');
       });
 
@@ -221,7 +221,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
               this.router.navigate(['/dashboard-lite']);
             },
             err => {
-              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
               console.error('Error cancelling the application');
             });
         }

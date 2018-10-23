@@ -210,11 +210,11 @@ export class EditShareholdersComponent implements OnInit {
           }
           this.busyObsv = save.subscribe(
             res => {
-              this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, extraClasses: ['green-snackbar'] });
+              this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
               this.getShareholders();
             },
             err => {
-              this.snackBar.open('Error saving Shareholder Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+              this.snackBar.open('Error saving Shareholder Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
               this.handleError(err);
             }
           );
@@ -250,7 +250,7 @@ export class EditShareholdersComponent implements OnInit {
           }
           this.busyObsv = save.subscribe(
             res => {
-              this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+              this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
               this.getShareholders();
               this.legalEntityDataservice.getBusinessProfileSummary().subscribe(data => {
                 this.store.dispatch(new LegalEntitiesActions.SetLegalEntitiesAction(data));
@@ -258,7 +258,7 @@ export class EditShareholdersComponent implements OnInit {
             },
             err => {
               // console.log("Error occured");
-              this.snackBar.open('Error saving Shareholder Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+              this.snackBar.open('Error saving Shareholder Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
               this.handleError(err);
             }
           );
