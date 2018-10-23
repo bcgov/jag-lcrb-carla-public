@@ -91,13 +91,13 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
     const saveObservable = new Subject<boolean>();
     const subscription = this.tiedHouseService.updateTiedHouse(data, data.id).subscribe(res => {
       if (showProgress === true) {
-        this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Connections to producers have been saved', 'Success', { duration: 3500, panelClass: ['red-snackbar'] });
       }
       saveObservable.next(true);
       this.savedFormData = saveData;
     },
       err => {
-        this.snackBar.open('Error saving Connections to producers', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error saving Connections to producers', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         saveObservable.next(false);
         console.log('Error occured');
       });
