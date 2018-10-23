@@ -93,12 +93,12 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
         this.saveFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+          this.snackBar.open('Contact Details have been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
         }
       },
       err => {
         saveResult.next(false);
-        this.snackBar.open('Error saving Contact Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error saving Contact Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error occured saving Contact Details');
       });
 

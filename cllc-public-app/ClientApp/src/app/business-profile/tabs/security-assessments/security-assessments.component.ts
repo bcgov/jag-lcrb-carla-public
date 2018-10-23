@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
-import { ToastsManager } from 'ng2-toastr';
+import { MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
@@ -102,11 +101,11 @@ export class SecurityAssessmentsComponent implements OnInit {
         .subscribe(
           res => {
             this.snackBar.open('Consent Request(s) Sent', 'Success',
-            { duration: 2500, extraClasses: ['red-snackbar'] });
+            { duration: 2500, panelClass: ['red-snackbar'] });
           },
           err => {
             this.snackBar.open('Consent Request(s) Sent', 'Failed',
-            { duration: 4500, extraClasses: ['red-snackbar'] });
+            { duration: 4500, panelClass: ['red-snackbar'] });
           }
         );
     }

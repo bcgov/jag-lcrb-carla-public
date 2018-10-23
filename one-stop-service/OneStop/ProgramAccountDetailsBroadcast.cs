@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.OneStopService;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -73,11 +74,11 @@ namespace WebApplicationSoap.OneStop
             var userCredentials = new SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials();
 
             //BN9 of licensee (Owner company)
-            userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBcincorporationnumber;
+            userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             //the name of the applicant (licensee)- last name, first name middle initial or company name
             userCredentials.legalName = licence.AdoxioLicencee.Name;
             //establishment (physical location of store)
-            userCredentials.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             //last name of sole proprietor (if not sole prop then null)
             userCredentials.lastName = "N/A";
 
@@ -89,7 +90,7 @@ namespace WebApplicationSoap.OneStop
             var programAccountDetailsBroadcastBody = new SBNProgramAccountDetailsBroadcastBody();
 
             // BN9
-            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.AdoxioBcincorporationnumber;
+            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
             
             // this code identifies that the message is from LCRB.  It's the same in every message from LCRB
             programAccountDetailsBroadcastBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
@@ -198,7 +199,7 @@ namespace WebApplicationSoap.OneStop
             mailingAddress.foreignLegacy = GetForeignLegacyMailing(licence);
             mailingAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
             mailingAddress.provinceStateCode = "BC";
-            mailingAddress.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
+            mailingAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             mailingAddress.countryCode = "CA";
 
             return mailingAddress;
@@ -213,5 +214,6 @@ namespace WebApplicationSoap.OneStop
 
             return foreignLegacyMailing;
         }
+        
     }
 }
