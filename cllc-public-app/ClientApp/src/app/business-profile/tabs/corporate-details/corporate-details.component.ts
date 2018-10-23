@@ -127,7 +127,7 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
     const sub = this.accountDataService.updateAccount(this.accountModel).subscribe(
       res => {
         if (showProgress === true) {
-          this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, extraClasses: ['red-snackbar'] });
+          this.snackBar.open('Corporate Details have been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
         }
         saveResult.next(true);
         this.savedFormData = saveData;
@@ -136,7 +136,7 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
         );
       },
       err => {
-        this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error saving Corporate Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         saveResult.next(false);
         console.log('Error occured');
       });
