@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             var licence = GetLicenceFromDynamics(hangfireContext, licenceGuid);
 
-            if (hangfireContext != null)
+            if (hangfireContext != null && licence != null)
             {
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
@@ -249,18 +249,38 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             //prepare soap content
             var req = new ProgramAccountDetailsBroadcast();
+            var licence = GetLicenceFromDynamics(hangfireContext, licenceGuid);
 
-            var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid));
-
-            //send message to Onestop hub
-            var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
-
-            if (hangfireContext != null)
+            if (hangfireContext != null && licence != null)
             {
-                hangfireContext.WriteLine(outputXML);
-                hangfireContext.WriteLine("End ofOneStop REST SendLicenceCreationMessage  Job.");
+                hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
-            
+
+            if (licence == null)
+            {
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                }
+
+                if (_logger != null)
+                {
+                    _logger.LogError($"Unable to get licence {licenceGuid}.");
+                }
+            }
+            else
+            {
+                var innerXML = req.CreateXML(licence);
+
+                //send message to Onestop hub
+                var outputXML = await _onestopRestClient.receiveFromPartner(innerXML);
+
+                if (hangfireContext != null)
+                {
+                    hangfireContext.WriteLine(outputXML);
+                    hangfireContext.WriteLine("End ofOneStop REST SendLicenceCreationMessage  Job.");
+                }
+            }            
         }
 
 
@@ -345,9 +365,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
                 }
-                // fail if we can't get results.
-                throw (odee);
+                // return null if we can't get results.
+                result = null;
             }
+
             return result;
         }
 
