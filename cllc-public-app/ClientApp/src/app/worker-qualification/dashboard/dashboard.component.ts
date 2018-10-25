@@ -40,7 +40,7 @@ export class WorkerDashboardComponent implements OnInit {
           this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
             this.dataSource = res;
 
-            const passedApplications = res.filter(i => (<any>i).submitted === true); // TODO: update filter condition
+            const passedApplications = res.filter(i => (<any>i).status === 'Active');
             if (passedApplications.length > 0) {
               this.displayedColumns.push('actions');
             }

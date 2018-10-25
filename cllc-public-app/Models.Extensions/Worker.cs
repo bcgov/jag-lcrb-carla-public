@@ -36,6 +36,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.gender = (ViewModels.Gender)worker.AdoxioGendercode;
                 }
+                if(worker.Statuscode != null){
+                    result.Status = (ViewModels.StatusCode)worker.Statuscode;
+                }
                 result.birthplace = worker.AdoxioBirthplace;
                 result.driverslicencenumber = worker.AdoxioDriverslicencenumber;
                 result.bcidcardnumber = worker.AdoxioBcidcardnumber;
@@ -81,6 +84,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             } else
             {
                 to.AdoxioGendercode = null;
+            }
+            if (from.Status != 0)
+            {
+                to.Statecode = (int?)from.Status;
+            } else
+            {
+                to.Statecode = null;
             }
             to.AdoxioBirthplace = from.birthplace;
             to.AdoxioDriverslicencenumber = from.driverslicencenumber;
