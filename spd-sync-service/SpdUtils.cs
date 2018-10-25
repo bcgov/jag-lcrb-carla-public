@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         public SpdUtils(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
-            this._dynamics = SetupDynamics();
+            this._dynamics = SetupDynamics(Configuration);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     csv.AppendLine(line);
                 });
                 var datePart = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                
+
                 var attachmentName = $@"{batch}_Request_Worker_{datePart}.csv";
                 //File.WriteAllText($@".\{attachmentName}", csv.ToString());
 
@@ -186,15 +186,15 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// </summary>
         /// <returns></returns>
         public async Task CheckMailBoxForImport(PerformContext hangfireContext)
-        {            
+        {
             Pop3Client pop3Client = new Pop3Client();
-            await pop3Client.ConnectAsync(Configuration["SPD_IMPORT_POP3_SERVER"], 
-                                          Configuration["SPD_IMPORT_POP3_USERNAME"], 
+            await pop3Client.ConnectAsync(Configuration["SPD_IMPORT_POP3_SERVER"],
+                                          Configuration["SPD_IMPORT_POP3_USERNAME"],
                                           Configuration["SPD_IMPORT_POP3_PASSWORD"], true);
             List<Pop3Message> messages = (await pop3Client.ListAndRetrieveAsync()).ToList();
 
             foreach (Pop3Message message in messages)
-            {                
+            {
                 var attachments = message.Attachments.ToList();
                 if (attachments.Count > 0)
                 {
@@ -237,7 +237,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 await pop3Client.DeleteAsync(message);
                 hangfireContext.WriteLine("Deleted message:");
-            }            
+            }
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             return result;
         }
 
-        private IDynamicsClient SetupDynamics()
+        public static IDynamicsClient SetupDynamics(IConfiguration Configuration)
         {
 
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
@@ -479,11 +479,35 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             return client;
         }
+        public static SharePointFileManager SetupSharepoint(IConfiguration Configuration)
+        {
+            // add SharePoint.
 
+            string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
+            string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
+            string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
+            string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
+            string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
+            string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
+            string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
+            string ssgUsername = Configuration["SSG_USERNAME"];
+            string ssgPassword = Configuration["SSG_PASSWORD"];
+            string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
 
+            var manager = new SharePointFileManager
+            (
+                sharePointServerAppIdUri,
+                sharePointOdataUri,
+                sharePointWebname,
+                sharePointAadTenantId,
+                sharePointClientId,
+                sharePointCertFileName,
+                sharePointCertPassword,
+                ssgUsername,
+                ssgPassword,
+                sharePointNativeBaseURI
+            );
+            return manager;
+        }
     }
 }
-
-
-
-
