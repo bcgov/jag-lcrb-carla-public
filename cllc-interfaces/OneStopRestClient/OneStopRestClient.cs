@@ -32,8 +32,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return content;
             } else
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var ex = response.ReasonPhrase + " \n >>>" + content;
+                string content = await response.Content.ReadAsStringAsync();
+                string ex = response.ReasonPhrase + " \n >>>" + content;
+                logger.LogError($"Error received: {ex}");
                 throw new Exception(ex);
             }
         }

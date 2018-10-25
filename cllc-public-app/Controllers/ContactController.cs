@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -23,14 +24,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IHostingEnvironment _env;
+        private readonly SharePointFileManager _sharePointFileManager;
 
-        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IHostingEnvironment env)
+        public ContactController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
             Configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(ContactController));
-            this._env = env;
+            _env = env;
+            _sharePointFileManager = sharePointFileManager;
         }
 
 
@@ -277,6 +280,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
                 contact = await _dynamicsClient.GetContactById(Guid.Parse(worker._adoxioContactidValue));
+                await CreateSharepointDynamicsLink(worker);
             }
             catch (OdataerrorException odee)
             {
@@ -320,6 +324,147 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return Json(contact.ToViewModel());
+        }
+
+
+        private async Task CreateSharepointDynamicsLink(MicrosoftDynamicsCRMadoxioWorker worker)
+        {
+            // create a SharePointDocumentLocation link
+            string folderName = await FileController.GetFolderName("worker", worker.AdoxioWorkerid, _dynamicsClient);
+            string name = worker.AdoxioWorkerid + " Files";
+
+
+            // Create the folder
+            bool folderExists = await _sharePointFileManager.FolderExists(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
+            if (!folderExists)
+            {
+                try
+                {
+                    var folder = await _sharePointFileManager.CreateFolder(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError("Error creating Sharepoint Folder");
+                    _logger.LogError($"List is: {SharePointFileManager.WorkertDocumentUrlTitle}");
+                    _logger.LogError($"FolderName is: {folderName}");
+                    throw e;
+                }
+
+            }
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Worker Qualification Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.SharepointDocumentLocations.Create(mdcsdl);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error creating SharepointDocumentLocation");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+                // add a regardingobjectid.
+                string workerReference = _dynamicsClient.GetEntityURI("adoxio_workers", worker.AdoxioWorkerid);
+                var patchSharePointDocumentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation();
+                patchSharePointDocumentLocation.RegardingobjectidWorkerApplicationODataBind = workerReference;
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_worker");
+                patchSharePointDocumentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference);
+
+                try
+                {
+                    _dynamicsClient.SharepointDocumentLocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error adding reference SharepointDocumentLocation to application");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw odee;
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+                // update the sharePointLocationData.
+                Odataid oDataId = new Odataid()
+                {
+                    OdataidProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Workers.AddReference(worker.AdoxioWorkerid, "adoxio_worker_SharePointDocumentLocations", oDataId);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error adding reference to SharepointDocumentLocation");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw odee;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Get a document location by reference
+        /// </summary>
+        /// <param name="relativeUrl"></param>
+        /// <returns></returns>
+        private string GetDocumentLocationReferenceByRelativeURL(string relativeUrl)
+        {
+            string result = null;
+            string sanitized = relativeUrl.Replace("'", "''");
+            // first see if one exists.
+            var locations = _dynamicsClient.SharepointDocumentLocations.Get(filter: "relativeurl eq '" + sanitized + "'");
+            var location = locations.Value.FirstOrDefault();
+
+            if (location == null)
+            {
+                //get parent location 
+                var parentLocation = _dynamicsClient.SharepointDocumentLocations
+                    .Get(filter: "relativeurl eq ''").Value.FirstOrDefault();
+                MicrosoftDynamicsCRMsharepointdocumentlocation newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    Relativeurl = relativeUrl,
+                    Name = "Documents on Default Site 1"
+                };
+                // create a new document location.
+                try
+                {
+                    location = _dynamicsClient.SharepointDocumentLocations.Create(newRecord);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error creating document location");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+            }
+
+            if (location != null)
+            {
+                result = location.Sharepointdocumentlocationid;
+            }
+
+            return result;
         }
     }
 }

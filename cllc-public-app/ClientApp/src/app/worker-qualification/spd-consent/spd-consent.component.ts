@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-spd-consent',
@@ -34,6 +35,7 @@ export class SpdConsentComponent implements OnInit {
     private workerDataService: WorkerDataService,
     private userDataService: UserDataService,
     private paymentDataService: PaymentDataService,
+    public snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -132,16 +134,18 @@ export class SpdConsentComponent implements OnInit {
     }
   }
 
-      /**
-   * Redirect to payment processing page (Express Pay / Bambora service)
-   * */
+  /**
+* Redirect to payment processing page (Express Pay / Bambora service)
+* */
   private submitPayment() {
     this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
       const jsonUrl = res.json();
       window.location.href = jsonUrl['url'];
       return jsonUrl['url'];
     }, err => {
-      console.log('Error occured');
+      if (err._body === 'Payment already made') {
+        this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      }
     });
   }
 

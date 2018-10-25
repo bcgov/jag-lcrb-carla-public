@@ -104,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET a licence as PDF.
         [HttpGet("{licenceId}/pdf")]
-        public async Task<FileContentResult> GetLicencePDF(string licenceId)
+        public async Task<IActionResult> GetLicencePDF(string licenceId)
         {
 
             var expand = new List<string> {
@@ -193,17 +193,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
                 { "establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName },
                 { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
-                { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity },
+                { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
                 { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
                 { "licencee", adoxioLicense.AdoxioLicencee.Name },
                 { "effectiveDate", effectiveDateParam },
                 { "expiryDate", expiraryDateParam },
                 { "restrictionsText", termsAndConditions },
                 { "storeHours", storeHours }
-            }; 
+            };
 
-            byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
-            return File(data, "application/pdf");
+            try
+            {
+                byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
+                return File(data, "application/pdf");
+            }
+            catch
+            {
+                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+                basePath += "/dashboard-lite";
+                return Redirect(basePath);
+            }
         }
     }
 }

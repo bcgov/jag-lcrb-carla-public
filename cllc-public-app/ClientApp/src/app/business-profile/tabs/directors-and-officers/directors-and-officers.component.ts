@@ -132,11 +132,11 @@ export class DirectorsAndOfficersComponent implements OnInit {
           this.busyObsv = save.subscribe(
             res => {
               this.snackBar.open('Director / Officer Details have been saved', 'Success',
-                { duration: 2500, extraClasses: ['red-snackbar'] });
+                { duration: 2500, panelClass: ['red-snackbar'] });
               this.getDirectorsAndOfficers();
             },
             err => {
-              this.snackBar.open('Error saving Director / Officer Details', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+              this.snackBar.open('Error saving Director / Officer Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
               this.handleError(err);
             });
         }
