@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { AdoxioLicenseDataService } from '../services/adoxio-license-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
@@ -38,6 +38,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService,
     private adoxioLicenseDataService: AdoxioLicenseDataService,
     private paymentService: PaymentDataService,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute) {
   }
 
@@ -90,6 +91,10 @@ export class LicenseApplicationSummaryComponent implements OnInit {
     this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
       const data = res.json();
       window.location.href = data.url;
+    }, err => {
+      if (err._body === 'Payment already made') {
+        this.snackBar.open('Application Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+      }
     });
   }
 
