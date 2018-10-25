@@ -56,9 +56,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			{
 				return NotFound();
 			}
+            if (adoxioApplication.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+            {
+                return NotFound("Payment already made");
+            }
 
-			// set the application invoice trigger to create an invoice
-			ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
+            // set the application invoice trigger to create an invoice
+            ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
 			MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
 			adoxioApplication2.CopyValues(vm);
 			// this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
@@ -107,17 +111,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			return Json(redirectUrl);
 		}
 
-		/// <summary>
-		/// GET a payment re-direct url for an Application Licence Fee
-		/// This will register an (unpaid) invoice against the application licence and generate an invoice number,
-		/// which will be used to match payments
-		/// </summary>
-		/// <param name="id">GUID of the Application to pay licence fee</param>
-		/// <returns></returns>
-		[HttpGet("submit/licence-fee/{id}")]
-		public async Task<IActionResult> GetLicencePaymentUrl(string id)
-		{
-			_logger.LogError("Called GetLicencePaymentUrl(" + id + ")");
+        /// <summary>
+        /// GET a payment re-direct url for an Application Licence Fee
+        /// This will register an (unpaid) invoice against the application licence and generate an invoice number,
+        /// which will be used to match payments
+        /// </summary>
+        /// <param name="id">GUID of the Application to pay licence fee</param>
+        /// <returns></returns>
+        [HttpGet("submit/licence-fee/{id}")]
+        public async Task<IActionResult> GetLicencePaymentUrl(string id)
+        {
+            _logger.LogError("Called GetLicencePaymentUrl(" + id + ")");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
@@ -126,6 +130,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (adoxioApplication == null)
             {
                 return NotFound();
+            }
+
+            if (adoxioApplication.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+            {
+                return NotFound("Payment already made");
             }
 
             if (!string.IsNullOrEmpty(adoxioApplication._adoxioLicencefeeinvoiceValue))
@@ -145,23 +154,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
             string invoiceId = adoxioApplication._adoxioLicencefeeinvoiceValue;
-           
 
 
-			int retries = 0;
-			while (retries < 10 && string.IsNullOrEmpty(invoiceId))
-			{
+
+            int retries = 0;
+            while (retries < 10 && string.IsNullOrEmpty(invoiceId))
+            {
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 adoxioApplication = await GetDynamicsApplication(id);
                 retries++;
-				_logger.LogError("No invoice found, retry = " + retries);
-				System.Threading.Thread.Sleep(1000);
-				invoiceId = adoxioApplication._adoxioInvoiceValue;
-			}
-			_logger.LogError("Created invoice for application = " + invoiceId);
+                _logger.LogError("No invoice found, retry = " + retries);
+                System.Threading.Thread.Sleep(1000);
+                invoiceId = adoxioApplication._adoxioInvoiceValue;
+            }
+            _logger.LogError("Created invoice for application = " + invoiceId);
 
-			/*
+            /*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
              *  - we will then re-query the Application to get the Invoice number,
              *  - and then query the Invoice to get the amount
@@ -173,22 +182,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
              *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
              */
 
-			MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-			// dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-			var ordernum = invoice.AdoxioTransactionid;
-			// dynamics determines the amount based on the licence type of the application
-			var orderamt = invoice.Totalamount;
+            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
+            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
+            var ordernum = invoice.AdoxioTransactionid;
+            // dynamics determines the amount based on the licence type of the application
+            var orderamt = invoice.Totalamount;
 
-			Dictionary<string, string> redirectUrl;
-			redirectUrl = new Dictionary<string, string>();
+            Dictionary<string, string> redirectUrl;
+            redirectUrl = new Dictionary<string, string>();
 
             var redirectPath = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), redirectPath);
 
-			_logger.LogError(">>>>>" + redirectUrl["url"]);
+            _logger.LogError(">>>>>" + redirectUrl["url"]);
 
-			return Json(redirectUrl);
-		}
+            return Json(redirectUrl);
+        }
 
         /// <summary>
         /// Update a payment response from Bamboora (payment success or failed)
@@ -398,8 +407,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogError("Application id = " + id);
             _logger.LogError("User id = " + userSettings.AccountId);
-
-            var dynamicsApplication = await _dynamicsClient.GetApplicationById(Guid.Parse(id));
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice" };
+            var dynamicsApplication = await _dynamicsClient.Applications.GetByKeyAsync(Guid.Parse(id).ToString(), expand: expand);
             if (dynamicsApplication == null)
             {
                 return null;
@@ -422,8 +431,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogError("Worker id = " + id);
             _logger.LogError("User Contact id = " + userSettings.ContactId);
-
-            var worker = await _dynamicsClient.GetWorkerById(Guid.Parse(id));
+            var expand = new List<string> { "adoxio_Invoice" };
+            var worker = await _dynamicsClient.Workers.GetByKeyAsync(Guid.Parse(id).ToString(), expand: expand);
             if (worker == null)
             {
                 return null;
@@ -503,7 +512,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return NotFound();
             }
-
+            if(worker.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+            {
+                return NotFound("Payment already made");
+            }
             // set the application invoice trigger to create an invoice
             ViewModels.Worker vm = worker.ToViewModel();
             MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
