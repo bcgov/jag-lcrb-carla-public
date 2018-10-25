@@ -22,4 +22,5 @@ export interface Worker {
     workerId: string;
     contact: DynamicsContact;
     modifiedOn: Date;
+    status: string;
 }
