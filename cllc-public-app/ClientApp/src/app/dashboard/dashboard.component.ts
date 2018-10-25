@@ -71,7 +71,7 @@ ngOnInit(): void {
         this.router.navigateByUrl(`/license-application/${data.id}/contact-details`);
       },
       err => {
-        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, extraClasses: ['red-snackbar'] });
+        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error starting a New Licence Application');
       }
     );
