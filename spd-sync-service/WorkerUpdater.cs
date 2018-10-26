@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using SpdSync.models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -37,6 +38,7 @@ namespace SpdSync
         /// </summary>
         public async Task SendSharepointCheckerJob(PerformContext hangfireContext)
         {
+            Debug.Print("SendSharepointCheckerJob");
             hangfireContext.WriteLine("Starting Sharepoint Checker Job.");
 
             // If folder does not exist create folder.
