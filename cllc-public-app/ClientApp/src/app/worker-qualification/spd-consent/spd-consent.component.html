@@ -4,21 +4,24 @@
     <div class="col-lg-7 col-sm-12">
       <div [formGroup]="form">
         <h3><span class="step">STEP 2</span></h3>
-
         <h1>Consent for Cannabis Security Screening</h1>
-
         <p>
-          In step two, you consent to a criminal background check. Please read the declaration before agreeing. You
-          must also download, read and upload a signed consent form.
+          In step two, you consent to a security screening. Please read the declaration before agreeing. You must also
+          download, read and upload a signed consent form.
         </p>
-
         <p>
           Complete all fields and upload all forms to continue to step three.
         </p>
 
-        <h2 class="blue-header">CRIMINAL BACKGROUND</h2>
+        <h2 class="blue-header">BACKGROUND SCREENING</h2>
         <section style="padding-left: 10px;">
-          <label for="">Have you ever been charged or convicted of a criminal offence?</label>
+          <label for="">Have you ever been arrested, charged or convicted in respect of an offence under any of the
+            following:</label>
+          <p>(i) the Criminal Code, the Controlled Drugs and Substances Act (Canada), the Cannabis Act (Canada), or the
+            Narcotic Control Act (Canada);</p>
+          <p>(ii) the British Columbia Cannabis Control and Licensing Act, the Cannabis Distribution Act, the Liquor
+            Control and Licensing Act or the Liquor Distribution Act;</p>
+          <p>(iii) a provision of an Act of a province or territory if the provision regulates cannabis.</p>
           <br>
           <input type="radio" [value]="true" formControlName="selfdisclosure" name="selfdisclosure"> YES &nbsp;
           <input type="radio" [value]="false" formControlName="selfdisclosure" name="selfdisclosure"> NO
@@ -29,8 +32,8 @@
             </div>
           </div>
           <p>
-            This includes <strong>ALL</strong> charges or convictions, including information as a Young Offender
-            pursuant to Section 119(1)(o) of the Youth Criminal Justice Act, <strong>regardless of the outcome</strong>,
+            This includes <strong>ALL</strong> charges or convictions, including information as a young person under
+            Section 119(1)(o) of the Youth Criminal Justice Act, <strong>regardless of the outcome</strong>,
             convictions that have received a record suspension and charges resulting in non-convictions.
           </p>
         </section>
@@ -61,13 +64,12 @@
             <span>
               I certify that, to the best of my knowledge, the information I have provided on my application and will
               provide as necessary is complete, honest and accurate. I understand that a false statement or omission of
-              facts herein may lead to a denial of a cannabis workers qualification. I am also aware that later
+              facts herein may lead to a denial of a cannabis workers registration. I am also aware that later
               discovery of an omission or misrepresentation may be grounds for any finding of suitability to be
               suspended or revoked.
             </span>
           </section>
           <p></p>
-
           <label for="">Applicant Name</label>
           <br>
           <input type="text" class="form-control" required [(ngModel)]="signName" [ngModelOptions]="{standalone: true}"
@@ -84,7 +86,10 @@
 
         <h2 class="blue-header">SIGNATURE</h2>
         <section style="padding-left: 10px;">
-
+          <h4>WAIVER AND RELEASE</h4>
+          <p>The information on this form is required for the purposes of conducting a security screening assessment.
+            It is collected pursuant to Section 8(1) of the Privacy Act of Canada, and Sections s.26(c), 32(b) and
+            33.1(1)(b) of the British Columbia Freedom of Information and Protection of Privacy Act (FOIPPA).</p>
           <h3>1. Download Signature Form</h3>
           <p>The Worker Qualification Form and the Consent for Cannabis Security Screening require the applicant’s
             signature. Digital signatures are not permitted.</p>
@@ -95,11 +100,10 @@
           </a>
           <h3>2. Complete and Scan or Photograph Your Signature Form</h3>
 
-          <p>Sign and make a high-resolution scan of the form.</p>
+          <p>Sign and make a high-resolution scan or photograph of your form.</p>
 
           <h3>3. Upload Completed Signature Form</h3>
-          <p>
-            Upload your completed signature form.</p>
+          <p>Upload your completed signature form before continuing to Step 3.</p>
         </section>
 
         <section>
@@ -115,11 +119,19 @@
         <P>&nbsp;</P>
 
         <h2 class="blue-header">FEE PAYMENT</h2>
-        <section style="padding-left: 10px;">
-          <p>You are now ready to submit and pay. The qualification fee is $100</p>
-          <p>You'll make your payment through BC ExpressPay, a secure government service. It takes Mastercard and Visa
-            debit and credit cards and American Express.</p>
-        </section>
+
+        <p>You are now ready to submit and pay. The qualification fee is $100.</p>
+        <p>You'll make your payment through BC ExpressPay, a secure government service. It takes MasterCard and Visa
+          debit and credit cards and American Express.</p>
+        <h3>PRIVACY STATEMENT</h3>
+        <div>
+          I hereby release and forever discharge (i) Her Majesty the Queen in Right of Canada, the Royal Canadian
+          Mounted Police, their members, employees, agents and assigns, and (ii) Her Majesty the Queen in Right of the
+          Province of British Columbia and all employees and agents of the Province of British Columbia from any and
+          all actions, causes of actions, claims, complaints and demands for any form of relief, damages, loss or
+          injury which may hereafter be sustained by myself, howsoever arising from the above authorized disclosure of
+          information and waive all rights thereto.
+        </div>
 
         <section *ngIf="showValidationMessages" style="color: #A12622; background-color: #F2F2F2; padding: 10px">
           <i class="fas fa-exclamation-triangle"></i>
