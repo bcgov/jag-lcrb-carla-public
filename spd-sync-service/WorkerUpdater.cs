@@ -134,7 +134,7 @@ namespace SpdSync
 
         public async Task UpdateWorker(WorkerResponse spdResponse, string id)
         {
-            var filter = "adoxio_workerjobnumber eq " + id;
+            var filter = "adoxio_workerjobnumber eq '" + id + "'";
             List<string> expand = new List<string> { "adoxio_WorkerId" };
             MicrosoftDynamicsCRMadoxioPersonalhistorysummary response = null;
             try
