@@ -1,6 +1,7 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,6 +16,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_worker_SharePointDocumentLocations")]
         public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioWorkerSharePointDocumentLocations { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_securitystatus")]
+        public string SecurityStatus { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_securitycompletedon")]
+        public DateTimeOffset? SecurityCompletedOn { get; set; }
 
     }
 }
