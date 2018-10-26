@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     }
 
     public enum StatusCode{
-        [EnumMember(Value = "Not Submitted")]
+        [EnumMember(Value = "Application Incomplete")]
         NotSubmitted = 845280002,
         [EnumMember(Value = "Pending Review")]
         PendingReview  = 845280003,
