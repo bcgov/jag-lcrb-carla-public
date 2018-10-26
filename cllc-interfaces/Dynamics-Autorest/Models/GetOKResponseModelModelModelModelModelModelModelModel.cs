@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_licenceses
+    /// Collection of adoxio_licencetypes
     /// </summary>
     public partial class GetOKResponseModelModelModelModelModelModelModelModel
     {
@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// GetOKResponseModelModelModelModelModelModelModelModel class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioLicences> value = default(IList<MicrosoftDynamicsCRMadoxioLicences>))
+        public GetOKResponseModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioLicencetype> value = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>))
         {
             Value = value;
             CustomInit();
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioLicences> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioLicencetype> Value { get; set; }
 
     }
 }

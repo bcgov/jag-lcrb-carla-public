@@ -38,6 +38,16 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         /// <summary>
+        /// Gets the ISharepointSites.
+        /// </summary>
+        ISharepointSites SharepointSites { get; }
+
+        /// <summary>
+        /// Gets the ISharepointSite.
+        /// </summary>
+        ISharepointSite SharepointSite { get; }
+
+        /// <summary>
         /// Gets the IAccounts.
         /// </summary>
         IAccounts Accounts { get; }
