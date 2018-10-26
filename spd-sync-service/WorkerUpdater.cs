@@ -37,37 +37,42 @@ namespace SpdSync
         /// </summary>
         public async Task SendSharepointCheckerJob(PerformContext hangfireContext)
         {
-            //hangfireContext.WriteLine("Starting Sharepoint Checker Job.");
+            hangfireContext.WriteLine("Starting Sharepoint Checker Job.");
 
             // If folder does not exist create folder.
             var folderExists = await _sharePointFileManager.DocumentLibraryExists(SharePointDocumentTitle);
             if (!folderExists)
             {
-                //hangfireContext.WriteLine("No directory found. Creating directory.");
+                hangfireContext.WriteLine("No directory found. Creating directory.");
                 await _sharePointFileManager.CreateDocumentLibrary(SharePointDocumentTitle);
                 await _sharePointFileManager.CreateFolder(SharePointDocumentTitle, SharePointFolderName);
-                //hangfireContext.WriteLine("End of Sharepoint Checker Job.");
+                hangfireContext.WriteLine("End of Sharepoint Checker Job.");
                 return;
             }
-            List<FileSystemItem> fileSystemItemVMList = await getFileDetailsListInFolder();
 
+            List<FileSystemItem> fileSystemItemVMList = await getFileDetailsListInFolder(hangfireContext);
+           
             // Look for files with unprocessed name
+            hangfireContext.WriteLine("Looking for unprocessed files.");
             var unprocessedFiles = fileSystemItemVMList.Where(f => !f.name.StartsWith("processed_")).ToList();
             unprocessedFiles.ForEach(async file =>
             {
 
                 // Download file
+                hangfireContext.WriteLine("File found. Downloading file.");
                 byte[] fileContents = await _sharePointFileManager.DownloadFile(file.serverrelativeurl);
 
                 // Update worker
+                hangfireContext.WriteLine("Updating worker.");
                 string data = System.Text.Encoding.Default.GetString(fileContents);
                 List<WorkerResponse> parsedData = WorkerResponseParser.ParseWorkerResponse(data);
                 parsedData.ForEach(async spdResponse =>
                 {
-                    await UpdateWorker(spdResponse, spdResponse.RecordIdentifier);
+                    await UpdateWorker(hangfireContext, spdResponse, spdResponse.RecordIdentifier);
                 });
 
                 // Reupload with updated name
+                hangfireContext.WriteLine("Finished processing file.");
                 string newFileName = "processed_" + file.name;
                 try
                 {
@@ -84,13 +89,10 @@ namespace SpdSync
                 await _sharePointFileManager.DeleteFile(file.serverrelativeurl);
             });
 
-
-
-            // Else end job
-            //hangfireContext.WriteLine("End of Sharepoint Checker Job.");
+            hangfireContext.WriteLine("End of Sharepoint Checker Job.");
         }
 
-        private async Task<List<FileSystemItem>> getFileDetailsListInFolder()
+        private async Task<List<FileSystemItem>> getFileDetailsListInFolder(PerformContext hangfireContext)
         {
             List<FileSystemItem> fileSystemItemVMList = new List<FileSystemItem>();
 
@@ -102,12 +104,12 @@ namespace SpdSync
             }
             catch (SharePointRestException spre)
             {
-                //_logger.LogError("Error getting SharePoint File List");
-                //_logger.LogError("Request URI:");
-                //_logger.LogError(spre.Request.RequestUri.ToString());
-                //_logger.LogError("Response:");
-                //_logger.LogError(spre.Response.Content);
-                throw new Exception("Unable to get Sharepoint File List.");
+                hangfireContext.WriteLine("Unable to get Sharepoint File List.");
+                hangfireContext.WriteLine("Request:");
+                hangfireContext.WriteLine(spre.Request.Content);
+                hangfireContext.WriteLine("Response:");
+                hangfireContext.WriteLine(spre.Response.Content);
+                throw spre;
             }
 
             if (fileDetailsList != null)
@@ -132,7 +134,7 @@ namespace SpdSync
             return fileSystemItemVMList;
         }
 
-        public async Task UpdateWorker(WorkerResponse spdResponse, string id)
+        public async Task UpdateWorker(PerformContext hangfireContext, WorkerResponse spdResponse, string id)
         {
             var filter = "adoxio_workerjobnumber eq '" + id + "'";
             List<string> expand = new List<string> { "adoxio_WorkerId" };
@@ -143,12 +145,12 @@ namespace SpdSync
             }
             catch (OdataerrorException odee)
             {
-                var x = odee.Request.Content;
-                //_logger.LogError("Error updating contact");
-                //_logger.LogError("Request:");
-                //_logger.LogError(odee.Request.Content);
-                //_logger.LogError("Response:");
-                //_logger.LogError(odee.Response.Content);
+                hangfireContext.WriteLine("Unable to get personal history summary.");
+                hangfireContext.WriteLine("Request:");
+                hangfireContext.WriteLine(odee.Request.Content);
+                hangfireContext.WriteLine("Response:");
+                hangfireContext.WriteLine(odee.Response.Content);
+                throw odee;
             }
             MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
             {
@@ -165,11 +167,12 @@ namespace SpdSync
                 }
                 catch (OdataerrorException odee)
                 {
-                    //_logger.LogError("Error updating contact");
-                    //_logger.LogError("Request:");
-                    //_logger.LogError(odee.Request.Content);
-                    //_logger.LogError("Response:");
-                    //_logger.LogError(odee.Response.Content);
+                    hangfireContext.WriteLine("Unable to patch worker.");
+                    hangfireContext.WriteLine("Request:");
+                    hangfireContext.WriteLine(odee.Request.Content);
+                    hangfireContext.WriteLine("Response:");
+                    hangfireContext.WriteLine(odee.Response.Content);
+                    throw odee;
                 }
             }
         }
