@@ -55,9 +55,8 @@ namespace SpdSync
             // Look for files with unprocessed name
             hangfireContext.WriteLine("Looking for unprocessed files.");
             var unprocessedFiles = fileSystemItemVMList.Where(f => !f.name.StartsWith("processed_")).ToList();
-            unprocessedFiles.ForEach(async file =>
+            foreach (var file in unprocessedFiles)
             {
-
                 // Download file
                 hangfireContext.WriteLine("File found. Downloading file.");
                 byte[] fileContents = await _sharePointFileManager.DownloadFile(file.serverrelativeurl);
@@ -66,28 +65,46 @@ namespace SpdSync
                 hangfireContext.WriteLine("Updating worker.");
                 string data = System.Text.Encoding.Default.GetString(fileContents);
                 List<WorkerResponse> parsedData = WorkerResponseParser.ParseWorkerResponse(data);
-                parsedData.ForEach(async spdResponse =>
-                {
-                    await UpdateWorker(hangfireContext, spdResponse, spdResponse.RecordIdentifier);
-                });
 
-                // Reupload with updated name
+                foreach (var spdResponse in parsedData)
+                {
+                    try
+                    {
+                        await UpdateSecurityClearance(hangfireContext, spdResponse, spdResponse.RecordIdentifier);
+                    }
+                    catch (SharePointRestException spre)
+                    {
+                        hangfireContext.WriteLine("Unable to get Sharepoint File List.");
+                        hangfireContext.WriteLine("Request:");
+                        hangfireContext.WriteLine(spre.Request.Content);
+                        hangfireContext.WriteLine("Response:");
+                        hangfireContext.WriteLine(spre.Response.Content);
+                        throw spre;
+                    }
+                }
+
+                // Rename file
                 hangfireContext.WriteLine("Finished processing file.");
-                string newFileName = "processed_" + file.name;
+                string newserverrelativeurl = "";
+                int index = file.serverrelativeurl.LastIndexOf("/");
+                if (index > 0)
+                    newserverrelativeurl = file.serverrelativeurl.Substring(0, index);
+                newserverrelativeurl += "/" + "processed_" + file.name;
+
                 try
                 {
-                    await _sharePointFileManager.AddFile(SharePointDocumentTitle, SharePointFolderName, newFileName, new MemoryStream(fileContents), null);
+                    await _sharePointFileManager.RenameFile(file.serverrelativeurl, newserverrelativeurl);
                 }
-                catch (SharePointRestException ex)
+                catch (SharePointRestException spre)
                 {
-                    //_logger.LogError("Error uploading file to SharePoint");
-                    //_logger.LogError(ex.Response.Content);
-                    //_logger.LogError(ex.Message);
+                    hangfireContext.WriteLine("Unable to rename file.");
+                    hangfireContext.WriteLine("Request:");
+                    hangfireContext.WriteLine(spre.Request.Content);
+                    hangfireContext.WriteLine("Response:");
+                    hangfireContext.WriteLine(spre.Response.Content);
+                    throw spre;
                 }
-
-                // Delete file
-                await _sharePointFileManager.DeleteFile(file.serverrelativeurl);
-            });
+            }
 
             hangfireContext.WriteLine("End of Sharepoint Checker Job.");
         }
@@ -134,7 +151,7 @@ namespace SpdSync
             return fileSystemItemVMList;
         }
 
-        public async Task UpdateWorker(PerformContext hangfireContext, WorkerResponse spdResponse, string id)
+        public async Task UpdateSecurityClearance(PerformContext hangfireContext, WorkerResponse spdResponse, string id)
         {
             var filter = "adoxio_workerjobnumber eq '" + id + "'";
             List<string> expand = new List<string> { "adoxio_WorkerId" };
@@ -152,11 +169,16 @@ namespace SpdSync
                 hangfireContext.WriteLine(odee.Response.Content);
                 throw odee;
             }
+
             MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
             {
-                SecurityStatus = spdResponse.Result,
+                SecurityStatus = (int) Enum.Parse(typeof(SecurityStatusPicklist), spdResponse.Result, true),
                 SecurityCompletedOn = spdResponse.DateProcessed
-
+            };
+            MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchPHS = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary
+            {
+                AdoxioSecuritystatus = (int)Enum.Parse(typeof(SecurityStatusPicklist), spdResponse.Result, true),
+                AdoxioCompletedon = spdResponse.DateProcessed
             };
 
             if (patchWorker != null)
@@ -164,10 +186,11 @@ namespace SpdSync
                 try
                 {
                     await _dynamics.Workers.UpdateAsync(response._adoxioWorkeridValue, patchWorker);
+                    await _dynamics.Personalhistorysummaries.UpdateAsync(response.AdoxioPersonalhistorysummaryid, patchPHS);
                 }
                 catch (OdataerrorException odee)
                 {
-                    hangfireContext.WriteLine("Unable to patch worker.");
+                    hangfireContext.WriteLine("Unable to patch worker or personal history summary.");
                     hangfireContext.WriteLine("Request:");
                     hangfireContext.WriteLine(odee.Request.Content);
                     hangfireContext.WriteLine("Response:");
