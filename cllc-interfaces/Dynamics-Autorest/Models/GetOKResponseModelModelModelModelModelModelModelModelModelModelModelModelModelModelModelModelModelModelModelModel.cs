@@ -12,26 +12,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_previousaddresses
+    /// Collection of sharepointdocumentlocations
     /// </summary>
-    public partial class GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel
+    public partial class GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel
         /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel()
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel()
         {
             CustomInit();
         }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel
+        /// GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel
         /// class.
         /// </summary>
-        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMadoxioPreviousaddress> value = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>))
+        public GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel(IList<MicrosoftDynamicsCRMsharepointdocumentlocation> value = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>))
         {
             Value = value;
             CustomInit();
@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> Value { get; set; }
 
     }
 }
