@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using SpdSync;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Reflection;
@@ -164,7 +165,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             ILogger log = loggerFactory.CreateLogger(typeof(Startup));
-            log.LogInformation("Starting setup of Hangfire job ...");
+            log.LogInformation("Starting setup of Hangfire jobs ...");
 
             try
             {
@@ -185,9 +186,27 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
             }
+
+            try
+            {
+
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    log.LogInformation("Creating Hangfire job for Checking Sharepoint...");
+
+                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null), "*/3 * * * *");
+
+                    log.LogInformation("Hangfire Send Export job done.");
+
+                }
+            }
+            catch (Exception e)
+            {
+                StringBuilder msg = new StringBuilder();
+                msg.AppendLine("Failed to setup Hangfire job.");
+
+                log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
+            }
         }
-
-
-
     }
 }

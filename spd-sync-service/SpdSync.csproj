@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\SharePoint\SharePoint.csproj" />
   </ItemGroup>
 
   <ItemGroup>
