@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using SpdSync;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -45,6 +46,22 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         {
             // check the file drop for a file, and then process it.
             BackgroundJob.Enqueue(() => new SpdUtils(Configuration).ReceiveImportJob(null));
+            _logger.LogInformation("Started receive import job");
+            return Ok();
+
+        }
+
+        /// <summary>
+        /// GET api/apd/receive
+        /// Start a receive import job
+        /// </summary>
+        /// <returns>OK if successful</returns>
+        [HttpGet("update-worker")]
+        [AllowAnonymous]
+        public ActionResult UpdateWorker()
+        {
+            // check the file drop for a file, and then process it.
+             new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null);
             _logger.LogInformation("Started receive import job");
             return Ok();
 

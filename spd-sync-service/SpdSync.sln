@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpdSync", "SpdSync.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{309D775B-CF5B-4194-9E63-3410A95D20F4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{119DD60D-7160-4500-8BA1-E79FCEB40FFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{119DD60D-7160-4500-8BA1-E79FCEB40FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{119DD60D-7160-4500-8BA1-E79FCEB40FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{119DD60D-7160-4500-8BA1-E79FCEB40FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{119DD60D-7160-4500-8BA1-E79FCEB40FFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
