@@ -195,9 +195,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (location == null)
             {
+                var parentSite = _dynamicsClient.SharepointSites.Get().Value.FirstOrDefault();
+                var parentSiteRef = _dynamicsClient.GetEntityURI("sharepointsites", parentSite.Sharepointsiteid);
                 MicrosoftDynamicsCRMsharepointdocumentlocation newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation()
                 {
-                    Relativeurl = relativeUrl
+                    Relativeurl = relativeUrl,
+                    Name = "Application",
+                    ParentSiteODataBind = parentSiteRef
                 };
                 // create a new document location.
                 try
