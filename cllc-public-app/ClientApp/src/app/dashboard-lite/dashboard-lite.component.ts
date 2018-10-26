@@ -70,7 +70,9 @@ export class DashboardLiteComponent implements OnInit {
             return jsonUrl['url'];
           },
           err => {
-            console.log('Error occured');
+            if (err._body === 'Payment already made') {
+              this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            }
           }
         );
 
