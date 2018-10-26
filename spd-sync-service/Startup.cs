@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using SpdSync;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -192,8 +193,9 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    log.LogInformation("Creating Hangfire job for Checking Sharepoint...");
+                    log.LogInformation("Creating Hangfire job for Checking SharePoint...");
 
+                    Debug.Print("SharePoint");
                     RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null), Cron.Minutely);
 
                     log.LogInformation("Hangfire Send Export job done.");
