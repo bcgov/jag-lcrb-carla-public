@@ -41,6 +41,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
+        /// Gets the ISharepointSites.
+        /// </summary>
+        public virtual ISharepointSites SharepointSites { get; private set; }
+
+        /// <summary>
+        /// Gets the ISharepointSite.
+        /// </summary>
+        public virtual ISharepointSite SharepointSite { get; private set; }
+
+        /// <summary>
         /// Gets the IAccounts.
         /// </summary>
         public virtual IAccounts Accounts { get; private set; }
@@ -381,6 +391,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         private void Initialize()
         {
+            SharepointSites = new SharepointSites(this);
+            SharepointSite = new SharepointSite(this);
             Accounts = new Accounts(this);
             Aliases = new Aliases(this);
             Applications = new Applications(this);
