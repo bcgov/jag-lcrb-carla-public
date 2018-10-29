@@ -1,12 +1,11 @@
-﻿using Hangfire;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
@@ -89,6 +88,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                 });
             }
 
+            // determine if we wire up SharePoint.
+            if (!string.IsNullOrEmpty(Configuration["SHAREPOINT_ODATA_URI"]))
+            {
+                SetupSharePoint(services);
+            }
+
             services.AddHangfire(config =>
             {
                 // Change this line if you wish to have Hangfire use persistent storage.
@@ -103,6 +108,24 @@ namespace Gov.Lclb.Cllb.SpdSync
                 checks.AddValueTaskCheck("HTTP Endpoint", () => new
                     ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
             });
+        }
+
+        private void SetupSharePoint(IServiceCollection services)
+        {
+            string ssgUsername = Configuration["SSG_USERNAME"];
+            string ssgPassword = Configuration["SSG_PASSWORD"];
+
+            // add SharePoint.
+            string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
+            string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
+            string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
+            string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
+            string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
+            string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
+            string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
+            string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
+
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword, sharePointNativeBaseURI));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -137,11 +160,11 @@ namespace Gov.Lclb.Cllb.SpdSync
                 DashboardOptions dashboardOptions = new DashboardOptions
                 {
                     AppPath = null
-                };                
+                };
 
                 app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
-            
+
             if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, loggerFactory);
