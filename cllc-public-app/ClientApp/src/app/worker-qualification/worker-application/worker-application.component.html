@@ -83,7 +83,7 @@
                   </section>
                   <section>
                     <div [ngClass]="{'has-error': !alias.get('middlename').valid && alias.get('middlename').touched}">
-                      <label>Second Name</label>
+                      <label>Middle Name</label>
                       <br />
                       <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
                       <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched" class="alert alert-danger"
@@ -150,7 +150,7 @@
               <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BC Driver's Licence Number</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="number" formControlName="driverslicencenumber">
+                <input class="form-control" style="width: 250px;" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="7" formControlName="driverslicencenumber">
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="fas fa-chevron-left"></i>
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
@@ -161,7 +161,7 @@
               <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BCID Number</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="number" formControlName="bcidcardnumber">
+                <input class="form-control" style="width: 250px;" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="7" formControlName="bcidcardnumber">
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="fas fa-chevron-left"></i>
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
@@ -178,9 +178,9 @@
             <section>
               <div [ngClass]="{'has-error': !this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched}">
                 <label>Primary Phone Number</label>
-                <span>(incl. area code)</span>
+                <span style="padding-left: 10px;">(incl. area code) example: 1234567890</span>
                 <br />
-                <input class="form-control" style="width: 250px;" type="tel" pattern="^\d{10}$" formControlName="phonenumber">
+                <input class="form-control" style="width: 250px;" (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" maxlength="10" pattern="^\d{10}$" formControlName="phonenumber">
                 <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
                   class="fas fa-chevron-left"></i>
                 <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
