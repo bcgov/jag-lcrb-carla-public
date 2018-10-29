@@ -57,11 +57,10 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpGet("update-worker")]
-        [AllowAnonymous]
-        public ActionResult UpdateWorker()
+        public async System.Threading.Tasks.Task<ActionResult> UpdateWorkerAsync()
         {
             // check the file drop for a file, and then process it.
-             new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null);
+            await new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null);
             _logger.LogInformation("Started receive import job");
             return Ok();
 
