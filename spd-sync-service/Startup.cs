@@ -196,7 +196,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     log.LogInformation("Creating Hangfire job for Checking SharePoint...");
 
                     Debug.Print("SharePoint");
-                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null), Cron.Minutely);
+                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null), Cron.Hourly);
 
                     log.LogInformation("Hangfire Send Export job done.");
 
