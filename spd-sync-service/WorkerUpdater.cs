@@ -38,7 +38,6 @@ namespace SpdSync
         /// </summary>
         public async Task SendSharepointCheckerJob(PerformContext hangfireContext)
         {
-            Debug.Print("SendSharepointCheckerJob");
             hangfireContext.WriteLine("Starting Sharepoint Checker Job.");
 
             // If folder does not exist create folder.
