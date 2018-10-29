@@ -58,5 +58,38 @@ Using the above JWT Authentication method, here is the request to start the expo
 
 Using the OpenShift platform tool "oc", port forward port 8080 from the SPD Sync Microservice to your local machine, and then access /hangfire on that forwarded port.   Note that you will need at least Edit access to the environment in order to do this. 
 
+# Manual Worker Qualification Results Processing
 
-  
+This process was added October 26th, 2018.
+
+## Worker Updater
+
+There is a hangfire job that fires every 3 minutes. This job checks SharePoint for new files. The directory where job looks for files is as follows:
+
+```
+[SharePoint]/spd_worker/SPD WORKER FILES/
+```
+
+Files with the prefix of "processed_" will not be processed.
+
+The fields that will be updated by this process are as follows:
+
+```
+AdoxioWorker:
+    SecurityStatus
+    SecurityCompletedOn
+
+PersonalHistorySummary:
+    SecurityStatus
+    SecurityCompletedOn
+```
+
+### Enum for security status
+
+```
+PASS = 845280000
+FAIL = 845280001
+WITHDRAWN = 845280003
+```
+
+Once the fields are updated, the job will rename the file with the "processed_" prefix.
