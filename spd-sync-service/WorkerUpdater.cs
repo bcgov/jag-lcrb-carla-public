@@ -49,34 +49,68 @@ namespace SpdSync
                 await _sharePointFileManager.CreateDocumentLibrary(SharePointDocumentTitle);
                 await _sharePointFileManager.CreateFolder(SharePointDocumentTitle, SharePointFolderName);
                 hangfireContext.WriteLine("End of Sharepoint Checker Job.");
-                return;
             }
-
-            List<FileSystemItem> fileSystemItemVMList = await getFileDetailsListInFolder(hangfireContext);
-           
-            // Look for files with unprocessed name
-            hangfireContext.WriteLine("Looking for unprocessed files.");
-            var unprocessedFiles = fileSystemItemVMList.Where(f => !f.name.StartsWith("processed_")).ToList();
-            foreach (var file in unprocessedFiles)
+            else
             {
-                // Download file
-                hangfireContext.WriteLine("File found. Downloading file.");
-                byte[] fileContents = await _sharePointFileManager.DownloadFile(file.serverrelativeurl);
+                List<FileSystemItem> fileSystemItemVMList = await getFileDetailsListInFolder(hangfireContext);
 
-                // Update worker
-                hangfireContext.WriteLine("Updating worker.");
-                string data = System.Text.Encoding.Default.GetString(fileContents);
-                List<WorkerResponse> parsedData = WorkerResponseParser.ParseWorkerResponse(data);
-
-                foreach (var spdResponse in parsedData)
+                // Look for files with unprocessed name
+                hangfireContext.WriteLine("Looking for unprocessed files.");
+                var unprocessedFiles = fileSystemItemVMList.Where(f => !f.name.StartsWith("processed_")).ToList();
+                foreach (var file in unprocessedFiles)
                 {
+                    // Download file
+                    hangfireContext.WriteLine("File found. Downloading file.");
+                    byte[] fileContents = await _sharePointFileManager.DownloadFile(file.serverrelativeurl);
+
+                    // Update worker
+                    hangfireContext.WriteLine("Updating worker.");
+                    string data = System.Text.Encoding.Default.GetString(fileContents);
+                    List<WorkerResponse> parsedData = WorkerResponseParser.ParseWorkerResponse(data);
+
+                    foreach (var spdResponse in parsedData)
+                    {
+                        try
+                        {
+                            await UpdateSecurityClearance(hangfireContext, spdResponse, spdResponse.RecordIdentifier);
+                        }
+                        catch (SharePointRestException spre)
+                        {
+                            hangfireContext.WriteLine("Unable to update security clearance status due to SharePoint.");
+                            hangfireContext.WriteLine("Request:");
+                            hangfireContext.WriteLine(spre.Request.Content);
+                            hangfireContext.WriteLine("Response:");
+                            hangfireContext.WriteLine(spre.Response.Content);
+                            throw spre;
+                        }
+                        catch (Exception e)
+                        {
+                            hangfireContext.WriteLine("Unable to update security clearance status.");
+                            hangfireContext.WriteLine("Request:");
+                            hangfireContext.WriteLine(e.Message);
+                            hangfireContext.WriteLine("Response:");
+                            hangfireContext.WriteLine(e.Message);
+                            throw e;
+                        }
+                    }
+
+                    // Rename file
+                    hangfireContext.WriteLine("Finished processing file.");
+                    string newserverrelativeurl = "";
+                    int index = file.serverrelativeurl.LastIndexOf("/");
+                    if (index > 0)
+                    {
+                        newserverrelativeurl = file.serverrelativeurl.Substring(0, index);
+                        newserverrelativeurl += "/" + "processed_" + file.name;
+                    }
+
                     try
                     {
-                        await UpdateSecurityClearance(hangfireContext, spdResponse, spdResponse.RecordIdentifier);
+                        await _sharePointFileManager.RenameFile(file.serverrelativeurl, newserverrelativeurl);
                     }
                     catch (SharePointRestException spre)
                     {
-                        hangfireContext.WriteLine("Unable to get Sharepoint File List.");
+                        hangfireContext.WriteLine("Unable to rename file.");
                         hangfireContext.WriteLine("Request:");
                         hangfireContext.WriteLine(spre.Request.Content);
                         hangfireContext.WriteLine("Response:");
@@ -84,31 +118,9 @@ namespace SpdSync
                         throw spre;
                     }
                 }
-
-                // Rename file
-                hangfireContext.WriteLine("Finished processing file.");
-                string newserverrelativeurl = "";
-                int index = file.serverrelativeurl.LastIndexOf("/");
-                if (index > 0)
-                    newserverrelativeurl = file.serverrelativeurl.Substring(0, index);
-                newserverrelativeurl += "/" + "processed_" + file.name;
-
-                try
-                {
-                    await _sharePointFileManager.RenameFile(file.serverrelativeurl, newserverrelativeurl);
-                }
-                catch (SharePointRestException spre)
-                {
-                    hangfireContext.WriteLine("Unable to rename file.");
-                    hangfireContext.WriteLine("Request:");
-                    hangfireContext.WriteLine(spre.Request.Content);
-                    hangfireContext.WriteLine("Response:");
-                    hangfireContext.WriteLine(spre.Response.Content);
-                    throw spre;
-                }
             }
-
             hangfireContext.WriteLine("End of Sharepoint Checker Job.");
+
         }
 
         private async Task<List<FileSystemItem>> getFileDetailsListInFolder(PerformContext hangfireContext)
