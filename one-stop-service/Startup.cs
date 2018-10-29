@@ -14,6 +14,8 @@ using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SoapCore;
+using Splunk;
+using Splunk.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Linq;
@@ -132,10 +134,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                     {
                         context.Request.Headers["SOAPAction"] = "http://tempuri.org/IReceiveFromHubService/receiveFromHub";
                     }
-                }                
+                }
 
                 await next.Invoke();
-                
+
             });
 
             app.UseSoapEndpoint<IReceiveFromHubService>(path: "/receiveFromHub", binding: new BasicHttpBinding());
@@ -173,10 +175,10 @@ namespace Gov.Lclb.Cllb.OneStopService
                 app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
 
-           if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
-           {
+            if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
+            {
                 SetupHangfireJobs(app, loggerFactory);
-           }
+            }
 
             app.UseAuthentication();
             app.UseMvc();
@@ -185,14 +187,51 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
             });
+
+            // enable Splunk logger
+
+            var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
+
+            //Append Http Json logger
+            loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
+
         }
 
-        /// <summary>
-        /// Setup the Hangfire jobs.
-        /// </summary>
-        /// <param name="app"></param>
-        /// <param name="loggerFactory"></param>
-        private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
+        {
+            SplunkLoggerConfiguration result = null;
+            string splunkCollectorUrl = Configuration["SPLUNK_COLLECTOR_URL"];
+            if (!string.IsNullOrEmpty(splunkCollectorUrl))
+            {
+                string splunkToken = Configuration["SPLUNK_TOKEN"];
+                if (!string.IsNullOrEmpty(splunkToken))
+                {
+                    result = new SplunkLoggerConfiguration()
+                    {
+                        HecConfiguration = new HECConfiguration()
+                        {
+                            BatchIntervalInMilliseconds = 5000,
+                            BatchSizeCount = 10,
+                            ChannelIdType = HECConfiguration.ChannelIdOption.None,
+                            DefaultTimeoutInMilliseconds = 10000,
+
+                            SplunkCollectorUrl = splunkCollectorUrl,
+                            Token = splunkToken,
+                            UseAuthTokenAsQueryString = false
+                        }
+                    };
+                }
+            }
+            return result;
+        }        
+    
+
+/// <summary>
+/// Setup the Hangfire jobs.
+/// </summary>
+/// <param name="app"></param>
+/// <param name="loggerFactory"></param>
+private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             ILogger log = loggerFactory.CreateLogger(typeof(Startup));
             log.LogInformation("Starting setup of Hangfire job ...");
@@ -216,8 +255,6 @@ namespace Gov.Lclb.Cllb.OneStopService
                 log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
             }
         }
-
-
 
     }
 }
