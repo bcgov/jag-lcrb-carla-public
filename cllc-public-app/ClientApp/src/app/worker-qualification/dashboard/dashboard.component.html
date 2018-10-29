@@ -31,10 +31,14 @@
                 <ng-container matColumnDef="worker">
                   <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <a routerLink="/worker-qualification/application/{{element.id}}">{{element?.firstname}}
+                    <a *ngIf="element.status === 'Application Incomplete'" routerLink="/worker-qualification/application/{{element.id}}">{{element?.firstname}}
                       {{element?.middlename}}
                       {{element.lastname}}
                     </a>
+                    <span *ngIf="element.status !== 'Application Incomplete'">{{element?.firstname}}
+                      {{element?.middlename}}
+                      {{element.lastname}}
+                    </span>
                   </mat-cell>
                 </ng-container>
 
