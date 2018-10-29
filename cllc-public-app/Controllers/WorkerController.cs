@@ -125,6 +125,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
+            if(worker.Statuscode != (int)ViewModels.StatusCode.NotSubmitted)
+            {
+                return BadRequest("Applications with this status cannot be updated");
+            }
             MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
             patchWorker.CopyValues(item);
             try
