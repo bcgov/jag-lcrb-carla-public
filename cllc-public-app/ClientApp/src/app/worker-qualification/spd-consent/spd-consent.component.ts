@@ -29,6 +29,7 @@ export class SpdConsentComponent implements OnInit {
   saveFormData: any;
   showValidationMessages: boolean;
   validationMessages: string[];
+  workerStatus: string;
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +62,7 @@ export class SpdConsentComponent implements OnInit {
 
     this.busy = this.workerDataService.getWorker(this.workerId).subscribe(res => {
       this.form.patchValue(res);
+      this.workerStatus = res.status;
       this.saveFormData = this.form.value;
     });
   }
@@ -106,7 +108,8 @@ export class SpdConsentComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
+    if (this.workerStatus !== 'Application Incomplete' ||
+        JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
       return this.save();
