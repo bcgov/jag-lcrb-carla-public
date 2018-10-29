@@ -15,7 +15,6 @@ using Microsoft.IdentityModel.Tokens;
 using SpdSync;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +56,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 //                  .Build();
                 //     config.Filters.Add(new AuthorizeFilter(policy));
                 // }
-                
             });
 
             // Other ConfigureServices() code...
@@ -173,9 +171,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
-                    
                     RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration).SendExportJob(null), Cron.Daily);
-                    
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
@@ -184,7 +180,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 StringBuilder msg = new StringBuilder();
                 msg.AppendLine("Failed to setup Hangfire job.");
-
                 log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
             }
 
@@ -194,10 +189,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Creating Hangfire job for Checking SharePoint...");
-
-                    Debug.Print("SharePoint");
-                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null), Cron.Hourly);
-
+                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null), Cron.Minutely);
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
@@ -206,7 +198,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 StringBuilder msg = new StringBuilder();
                 msg.AppendLine("Failed to setup Hangfire job.");
-
                 log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
             }
         }
