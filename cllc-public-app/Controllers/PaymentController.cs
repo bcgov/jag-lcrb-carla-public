@@ -260,17 +260,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     invoice2.Statecode = (int?)Adoxio_invoicestates.Paid;
                     invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Paid;
                     invoice2.AdoxioReturnedtransactionid = response["trnId"];
+                    try
+                    {
+                        _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
-                    _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
+                        // set the Application payment status
+                        adoxioApplication2.AdoxioPaymentrecieved = (bool?)true;
+                        adoxioApplication2.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
+                        adoxioApplication2.AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes;
 
-                    // set the Application payment status
-                    adoxioApplication2.AdoxioPaymentrecieved = (bool?)true;
-                    adoxioApplication2.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
-                    adoxioApplication2.AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes;
-
-                    _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    adoxioApplication2 = await GetDynamicsApplication(id);
-
+                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
+                        adoxioApplication2 = await GetDynamicsApplication(id);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating application invoice");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
                 }
                 // if payment failed:
                 else
@@ -280,18 +289,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // set invoice status to Cancelled
                     invoice2.Statecode = (int?)Adoxio_invoicestates.Cancelled;
                     invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Cancelled;
+                    try
+                    {
+                        _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
-                    _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
+                        // set the Application invoice status back to No
+                        adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
+                        // don't clear the invoice, leave the previous "Cancelled" so we can report status
+                        //adoxioApplication2._adoxioInvoiceValue = null;
+                        //adoxioApplication2.AdoxioInvoice = null;
 
-                    // set the Application invoice status back to No
-                    adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
-                    // don't clear the invoice, leave the previous "Cancelled" so we can report status
-                    //adoxioApplication2._adoxioInvoiceValue = null;
-                    //adoxioApplication2.AdoxioInvoice = null;
-
-                    _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    adoxioApplication2 = await GetDynamicsApplication(id);
-
+                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
+                        adoxioApplication2 = await GetDynamicsApplication(id);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating application invoice");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
                 }
             }
             else
@@ -363,14 +381,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     invoice2.Statecode = (int?)Adoxio_invoicestates.Paid;
                     invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Paid;
                     invoice2.AdoxioReturnedtransactionid = response["trnId"];
+                    try
+                    {
 
-                    _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
-                    // set the Application payment status
-                    adoxioApplication2.AdoxioLicencefeeinvoicepaid = true;
+                        _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
-                    _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    adoxioApplication2 = await GetDynamicsApplication(id);
+                        // set the Application payment status
+                        adoxioApplication2.AdoxioLicencefeeinvoicepaid = true;
+
+                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
+                        adoxioApplication2 = await GetDynamicsApplication(id);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating licence fee invoice");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
 
                 }
                 // if payment failed:
@@ -381,13 +411,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // set invoice status to Cancelled
                     invoice2.Statecode = (int?)Adoxio_invoicestates.Cancelled;
                     invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Cancelled;
+                    try
+                    {
 
-                    _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
+                        _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
-                    // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
-                    patchApplication.AdoxioLicenceFeeInvoiceTrigger = (int?)ViewModels.GeneralYesNo.No;
-                    _dynamicsClient.Applications.Update(id, patchApplication);
+                        // set the Application invoice status back to No
+                        MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
+                        patchApplication.AdoxioLicenceFeeInvoiceTrigger = (int?)ViewModels.GeneralYesNo.No;
+                        _dynamicsClient.Applications.Update(id, patchApplication);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating licence fee invoice trigger");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
                 }
             }
             else
@@ -628,16 +669,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     invoice2.Statecode = (int?)Adoxio_invoicestates.Paid;
                     invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Paid;
                     invoice2.AdoxioReturnedtransactionid = response["trnId"];
+                    try
+                    {
+                        _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
-                    _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
+                        // set the Application payment status
+                        patchWorker.AdoxioPaymentreceived = 1;
+                        patchWorker.AdoxioPaymentreceiveddate = DateTime.UtcNow;
+                        //patchWorker.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
+                        //patchWorker.AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes;
 
-                    // set the Application payment status
-                    patchWorker.AdoxioPaymentreceived = 1;
-                    patchWorker.AdoxioPaymentreceiveddate = DateTime.UtcNow;
-                    //patchWorker.AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC;
-                    //patchWorker.AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes;
 
-                    _dynamicsClient.Workers.Update(workerId, patchWorker);
+
+                        _dynamicsClient.Workers.Update(workerId, patchWorker);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating worker payment");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
                     patchWorker = await GetDynamicsWorker(workerId);
 
                 }
@@ -649,16 +702,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // set invoice status to Cancelled
                     invoice2.Statecode = (int?)Adoxio_invoicestates.Cancelled;
                     invoice2.Statuscode = (int?)Adoxio_invoicestatuses.Cancelled;
+                    try
+                    {
+                        _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
 
-                    _dynamicsClient.Invoices.Update(invoice2.Invoiceid, invoice2);
+                        // set the Application invoice status back to No
+                        patchWorker.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
+                        // don't clear the invoice, leave the previous "Cancelled" so we can report status
+                        //adoxioApplication2._adoxioInvoiceValue = null;
+                        //adoxioApplication2.AdoxioInvoice = null;
 
-                    // set the Application invoice status back to No
-                    patchWorker.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No;
-                    // don't clear the invoice, leave the previous "Cancelled" so we can report status
-                    //adoxioApplication2._adoxioInvoiceValue = null;
-                    //adoxioApplication2.AdoxioInvoice = null;
-
-                    _dynamicsClient.Workers.Update(workerId, patchWorker);
+                        _dynamicsClient.Workers.Update(workerId, patchWorker);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating worker payment trigger");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
                     patchWorker = await GetDynamicsWorker(workerId);
 
                 }
