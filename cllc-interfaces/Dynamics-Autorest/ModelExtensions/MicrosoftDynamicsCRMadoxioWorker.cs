@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioWorkerSharePointDocumentLocations { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_securitystatus")]
-        public int SecurityStatus { get; set; }
+        public int? SecurityStatus { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_securitycompletedon")]
         public DateTimeOffset? SecurityCompletedOn { get; set; }
