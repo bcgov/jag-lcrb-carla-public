@@ -62,9 +62,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // set the application invoice trigger to create an invoice
-            ViewModels.AdoxioApplication vm = await adoxioApplication.ToViewModel(_dynamicsClient);
+            // no need to copy the whole record over as we are doing a Patch for a single field.
 			MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication();
-			adoxioApplication2.CopyValues(vm);
 			// this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
 			adoxioApplication2.AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes;
 			_dynamicsClient.Applications.Update(id, adoxioApplication2);
@@ -82,7 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 				System.Threading.Thread.Sleep(1000);
 				invoiceId = adoxioApplication2._adoxioInvoiceValue;
 			}
-			_logger.LogError("Created invoice for application = " + invoiceId);
+			_logger.LogInformation("Created invoice for application = " + invoiceId);
 
 			/*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -106,7 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 			redirectUrl = new Dictionary<string, string>();
 			redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
 
-			_logger.LogError(">>>>>" + redirectUrl["url"]);
+			_logger.LogInformation(">>>>>" + redirectUrl["url"]);
 
 			return Json(redirectUrl);
 		}
