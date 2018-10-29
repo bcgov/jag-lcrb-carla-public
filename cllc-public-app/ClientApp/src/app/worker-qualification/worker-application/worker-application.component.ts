@@ -138,6 +138,9 @@ export class WorkerApplicationComponent implements OnInit {
             });
 
             this.saveFormData = this.form.value;
+            if (worker.status !== 'Application Incomplete') {
+              this.form.disable();
+            }
           });
         }
       });
