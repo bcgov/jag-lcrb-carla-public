@@ -6,6 +6,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    public enum SecurityStatusPicklist
+    {
+        PASS = 845280000,
+        FAIL = 845280001,
+        WITHDRAWN = 845280003
+    }
+
     public partial class MicrosoftDynamicsCRMadoxioWorker
     {
         
@@ -18,7 +25,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioWorkerSharePointDocumentLocations { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_securitystatus")]
-        public string SecurityStatus { get; set; }
+        public int SecurityStatus { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_securitycompletedon")]
         public DateTimeOffset? SecurityCompletedOn { get; set; }
