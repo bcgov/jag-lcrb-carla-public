@@ -36,6 +36,7 @@ export class WorkerApplicationComponent implements OnInit {
   aliasesToDelete: Alias[] = [];
   workerId: string;
   saveFormData: any;
+  workerStatus: string;
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
@@ -138,6 +139,7 @@ export class WorkerApplicationComponent implements OnInit {
             });
 
             this.saveFormData = this.form.value;
+            this.workerStatus = worker.status;
             if (worker.status !== 'Application Incomplete') {
               this.form.disable();
             }
@@ -248,7 +250,8 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
+    if (this.workerStatus !== 'Application Incomplete' ||
+      JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
       return this.save();
@@ -422,8 +425,6 @@ export class WorkerApplicationComponent implements OnInit {
     const validDriver = !!(this.form.get('worker.driverslicencenumber').value
       && (this.form.get('worker.driverslicencenumber').value + '').length === 7);
     const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length === 7);
-    console.log(this.form.get('worker.driverslicencenumber').value);
-    console.log((this.form.get('worker.driverslicencenumber').value + '').length);
     return validDriver || validBceid;
   }
 
