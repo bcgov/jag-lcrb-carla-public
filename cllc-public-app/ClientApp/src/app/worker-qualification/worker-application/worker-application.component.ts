@@ -423,4 +423,12 @@ export class WorkerApplicationComponent implements OnInit {
     console.log((this.form.get('worker.driverslicencenumber').value + '').length);
     return validDriver || validBceid;
   }
+
+  rejectIfNotDigitOrBackSpace(event) {
+    const acceptedKeys = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Control',
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    if (acceptedKeys.indexOf(event.key) === -1) {
+      event.preventDefault();
+    }
+  }
 }
