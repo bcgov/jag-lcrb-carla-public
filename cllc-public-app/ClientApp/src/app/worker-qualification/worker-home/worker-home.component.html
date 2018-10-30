@@ -1,9 +1,9 @@
-<div class="dashboard-spacing">
+<div>
   <!-- <div [ngBusy]="busy"></div> -->
   <div class="row">
-    <div class="col-lg-7 col-sm-12">
+    <div class="col-lg-8 col-sm-12">
       <section style="margin-left: 15px;">
-        <app-policy-document [fullWidth]="false" #policyDocs (slugChange)="currentSlug = $event"></app-policy-document>
+        <app-policy-document [fullWidth]="true" #policyDocs (slugChange)="currentSlug = $event"></app-policy-document>
       </section>
       <section *ngIf="currentSlug !== 'worker-qualification-training'" class="row" style="padding-left: 27px;">
         <div class="col-md-8 offset-md-2">
@@ -24,7 +24,7 @@
         </div>
       </section>
     </div>
-    <div class="col-lg-4 col-sm-12" style="position: relative">
+    <div class="col-lg-3 col-sm-12" style="position: relative">
       <!-- <div [ngBusy]="busy"></div> -->
       <p></p>
       <section class="submit-container">
