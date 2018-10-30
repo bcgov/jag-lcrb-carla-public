@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using Pop3;
@@ -21,16 +22,17 @@ namespace Gov.Lclb.Cllb.SpdSync
 {
     public class SpdUtils
     {
-        private static readonly HttpClient Client = new HttpClient();
+        public ILogger _logger { get; }
 
         private IConfiguration Configuration { get; }
-
         private IDynamicsClient _dynamics;
+        private static readonly HttpClient Client = new HttpClient();
 
-        public SpdUtils(IConfiguration Configuration)
+        public SpdUtils(IConfiguration Configuration, ILogger logger)
         {
             this.Configuration = Configuration;
-            this._dynamics = SetupDynamics(Configuration);
+            _dynamics = SetupDynamics(Configuration);
+            _logger = logger;
         }
 
         /// <summary>
@@ -39,6 +41,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         public void SendExportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Export Job.");
+            _logger.LogError("Starting SPD Export Job.");
 
             Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
 
@@ -66,6 +69,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                 hangfireContext.WriteLine(odee.Request.Content);
                 hangfireContext.WriteLine("Response:");
                 hangfireContext.WriteLine(odee.Response.Content);
+
+                _logger.LogError("Error getting SPD data rows");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
                 // fail if we can't get results.
                 throw (odee);
             }
@@ -117,6 +126,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 if (SendSPDEmail(csv.ToString(), attachmentName))
                 {
                     hangfireContext.WriteLine("Sent SPD email. Now updating Dynamics...");
+                    _logger.LogError("Sent SPD email. Now updating Dynamics...");
                     //update exporteddate in dynamics
                     var exportDate = DateTime.Now;
                     result.ForEach(row =>
@@ -139,24 +149,34 @@ namespace Gov.Lclb.Cllb.SpdSync
                             hangfireContext.WriteLine(odee.Request.Content);
                             hangfireContext.WriteLine("Response:");
                             hangfireContext.WriteLine(odee.Response.Content);
+
+                            _logger.LogError("Error updating application");
+                            _logger.LogError("Request:");
+                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError("Response:");
+                            _logger.LogError(odee.Response.Content);
                             // fail if we can't create.
                             throw (odee);
                         }
                     });
                     hangfireContext.WriteLine("Dynamics update complete.");
+                    _logger.LogError("Dynamics update complete.");
                 }
                 else
                 {
                     hangfireContext.WriteLine("Error sending SPD email.");
+                    _logger.LogError("Error sending SPD email.");
                 }
             }
             else
             {
                 hangfireContext.WriteLine("No data to send, sending a null email.");
+                _logger.LogError("No data to send, sending a null email.");
                 SendSPDNoResultsEmail(batch);
             }
 
             hangfireContext.WriteLine("End of SPD Export Job.");
+            _logger.LogError("End of SPD Export Job.");
         }
 
         private long GetBatchNumber()
@@ -203,7 +223,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     string payload = Encoding.Default.GetString(attachments[0].GetData());
                     if (payload != null) // parse the payload
                     {
-                        List<WorkerResponse> responses = WorkerResponseParser.ParseWorkerResponse(payload);
+                        List<WorkerResponse> responses = WorkerResponseParser.ParseWorkerResponse(payload, _logger);
                         foreach (WorkerResponse workerResponse in responses)
                         {
                             // search for the Personal History Record.
@@ -229,6 +249,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                                     hangfireContext.WriteLine(odee.Request.Content);
                                     hangfireContext.WriteLine("Response:");
                                     hangfireContext.WriteLine(odee.Response.Content);
+
+                                    _logger.LogError("Error updating worker personal history");
+                                    _logger.LogError("Request:");
+                                    _logger.LogError(odee.Request.Content);
+                                    _logger.LogError("Response:");
+                                    _logger.LogError(odee.Response.Content);
                                 }
                             }
                         }
@@ -237,6 +263,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 await pop3Client.DeleteAsync(message);
                 hangfireContext.WriteLine("Deleted message:");
+                _logger.LogError("Deleted message:");
             }
         }
 
@@ -246,12 +273,14 @@ namespace Gov.Lclb.Cllb.SpdSync
         public void ReceiveImportJob(PerformContext hangfireContext)
         {
             hangfireContext.WriteLine("Starting SPD Import Job.");
+            _logger.LogError("Starting SPD Import Job.");
 
             var runner = CheckMailBoxForImport(hangfireContext);
 
             runner.Wait();
 
             hangfireContext.WriteLine("Done.");
+            _logger.LogError("Done.");
         }
 
         private bool SendSPDEmail(string attachmentContent, string attachmentName)
