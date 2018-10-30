@@ -194,7 +194,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
-                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration).SendExportJob(null), Cron.Daily);
+                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration, log).SendExportJob(null), Cron.Daily);
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
@@ -212,9 +212,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Creating Hangfire job for Checking SharePoint...");
-                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null), Cron.Hourly);
+                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, log, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null), Cron.Hourly);
                     log.LogInformation("Hangfire Send Export job done.");
-
                 }
             }
             catch (Exception e)
