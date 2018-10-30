@@ -163,6 +163,10 @@ const routes: Routes = [
     component: WorkerHomeComponent
   },
   {
+    path: 'policy-document/worker-qualification-home',
+    component: WorkerHomeComponent
+  },
+  {
     path: 'policy-document/:slug',
     component: PolicyDocumentComponent
   },
