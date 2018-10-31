@@ -205,7 +205,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 fileDetailsList.Add(searchResult);
             }
-
+            fileDetailsList = fileDetailsList.Where(f => string.IsNullOrEmpty(documentType) || f.DocumentType == documentType).ToList();
             return fileDetailsList;
         }
 
