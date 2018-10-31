@@ -12,7 +12,6 @@ namespace SpdSync
     {
         static public List<WorkerResponse> ParseWorkerResponse (string csvData, ILogger _logger)
         {
-            //
             CsvHelper.Configuration.Configuration config = new CsvHelper.Configuration.Configuration();
             config.SanitizeForInjection = true;
             config.IgnoreBlankLines = true;
