@@ -141,7 +141,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
         {
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle);
+            if (!string.IsNullOrEmpty(folderName))
+            {
+                serverRelativeUrl += "/" + Uri.EscapeUriString(folderName);
+            }
+
             string _responseContent = null;
             HttpRequestMessage _httpRequest =
                             new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/files");
@@ -170,7 +175,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             // parse the response
-            // parse the response
             JObject responseObject = null;
             try
             {
@@ -197,9 +201,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     if (fileDoctype == documentType)
                     {
                         searchResult.DocumentType = documentType;
-                        fileDetailsList.Add(searchResult);
                     }
                 }
+                fileDetailsList.Add(searchResult);
             }
 
             return fileDetailsList;
@@ -629,6 +633,47 @@ namespace Gov.Lclb.Cllb.Interfaces
             // We want to delete this file.
             endpointRequest.Headers.Add("IF-MATCH", "*");
             endpointRequest.Headers.Add("X-HTTP-Method", "DELETE");
+
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result = true;
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Rename a file
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public async Task<bool> RenameFile(string oldServerRelativeUrl, string newServerRelativeUrl)
+        {
+            bool result = false;
+            string url = $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{newServerRelativeUrl}', flags=1)";
+
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, url);
+
+            // We want to delete this file.
+            endpointRequest.Headers.Add("IF-MATCH", "*");
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
