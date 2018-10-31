@@ -26,7 +26,6 @@ namespace SpdSync
         private SharePointFileManager _sharePointFileManager;
         private IConfiguration Configuration { get; }
         private IDynamicsClient _dynamics;
-        private SharePointFileManager sharePointFileManager;
 
         public WorkerUpdater(IConfiguration Configuration, ILogger logger, SharePointFileManager sharePointFileManager)
         {
