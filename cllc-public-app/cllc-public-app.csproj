@@ -125,7 +125,7 @@
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" Condition="'$(UAT_BUILD)' == '' And '$(PROD_BUILD)' == ''" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" Condition="'$(UAT_BUILD)' == '' And '$(PROD_BUILD)' == ''" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run builduat -- --prod" Condition="'$(UAT_BUILD)' == '1'" />
 	<Exec WorkingDirectory="$(SpaRoot)" Command="npm run buildprod -- --prod" Condition="'$(PROD_BUILD)' == '1'" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
