@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{licenceId}/pdf")]
         public async Task<IActionResult> GetLicencePDF(string licenceId)
         {
-
+            
             var expand = new List<string> {
                 "adoxio_Licencee",
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
@@ -119,6 +119,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 throw new Exception("Error getting license.");
             }
+
+
 
             var effectiveDateParam = "";
             if (adoxioLicense.AdoxioEffectivedate.HasValue)
@@ -167,23 +169,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 storeHours = $@"
                 <tr>
                     <td>Open</td>
-                    <td>{application?.AdoxioServicehoursmondayopen}</td>
-                    <td>{application?.AdoxioServicehourstuesdayopen}</td>
-                    <td>{application?.AdoxioServicehourswednesdayopen}</td>
-                    <td>{application?.AdoxioServicehoursthursdayopen}</td>
-                    <td>{application?.AdoxioServicehoursfridayopen}</td>
-                    <td>{application?.AdoxioServicehourssaturdayopen}</td>
-                    <td>{application?.AdoxioServicehourssundayopen}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehoursmondayopen).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourstuesdayopen).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourswednesdayopen).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehoursthursdayopen).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehoursfridayopen).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourssaturdayopen).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourssundayopen).ToShortTimeString()}</td>
                 </tr>                
                 <tr>
                     <td>Close</td>
-                    <td>{application?.AdoxioServicehoursmondayclose}</td>
-                    <td>{application?.AdoxioServicehourstuesdayclose}</td>
-                    <td>{application?.AdoxioServicehourswednesdayclose}</td>
-                    <td>{application?.AdoxioServicehoursthursdayclose}</td>
-                    <td>{application?.AdoxioServicehoursfridayclose}</td>
-                    <td>{application?.AdoxioServicehourssaturdayclose}</td>
-                    <td>{application?.AdoxioServicehourssundayclose}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehoursmondayclose).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourstuesdayclose).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourswednesdayclose).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehoursthursdayclose).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehoursfridayclose).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourssaturdayclose).ToShortTimeString()}</td>
+                    <td>{new DateTime((long)application?.AdoxioServicehourssundayclose).ToShortTimeString()}</td>
                 </tr>";
             }
 
@@ -213,6 +215,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 basePath += "/dashboard-lite";
                 return Redirect(basePath);
             }
+        }
+        
+        /// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        private bool CurrentUserHasAccessToLicenseOwnedBy(string accountId)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
+            // TODO there may be some account relationships in the future
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return userSettings.AccountId == accountId;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
         }
     }
 }
