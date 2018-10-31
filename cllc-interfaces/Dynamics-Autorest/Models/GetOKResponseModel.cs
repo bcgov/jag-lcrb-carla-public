@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_aliases
+    /// Collection of accounts
     /// </summary>
     public partial class GetOKResponseModel
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the GetOKResponseModel class.
         /// </summary>
-        public GetOKResponseModel(IList<MicrosoftDynamicsCRMadoxioAlias> value = default(IList<MicrosoftDynamicsCRMadoxioAlias>))
+        public GetOKResponseModel(IList<MicrosoftDynamicsCRMaccount> value = default(IList<MicrosoftDynamicsCRMaccount>))
         {
             Value = value;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMaccount> Value { get; set; }
 
     }
 }
