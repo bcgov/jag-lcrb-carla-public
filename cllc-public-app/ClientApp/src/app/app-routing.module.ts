@@ -160,11 +160,13 @@ const routes: Routes = [
   },
   {
     path: 'policy-document/worker-qualification-training',
-    component: WorkerHomeComponent
+    component: WorkerHomeComponent,
+    data: {slug: 'worker-qualification-training'}
   },
   {
     path: 'policy-document/worker-qualification-home',
-    component: WorkerHomeComponent
+    component: WorkerHomeComponent,
+    data: {slug: 'worker-qualification-home'}
   },
   {
     path: 'policy-document/:slug',
