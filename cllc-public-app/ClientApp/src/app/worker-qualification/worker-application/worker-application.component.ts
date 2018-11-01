@@ -39,7 +39,7 @@ export class WorkerApplicationComponent implements OnInit {
   saveFormData: any;
   workerStatus: string;
 
-  bsConfig: any = { dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
+  bsConfig: any = { locale: 'en', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
