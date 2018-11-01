@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpGet("send")]
         public ActionResult Send()
         {
-            BackgroundJob.Enqueue(() => new SpdUtils(Configuration).SendExportJob(null));
+            BackgroundJob.Enqueue(() => new SpdUtils(Configuration, _logger).SendExportJob(null));
             _logger.LogInformation("Started send export job");
             return Ok();
         }
@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         public ActionResult Receive()
         {
             // check the file drop for a file, and then process it.
-            BackgroundJob.Enqueue(() => new SpdUtils(Configuration).ReceiveImportJob(null));
+            BackgroundJob.Enqueue(() => new SpdUtils(Configuration, _logger).ReceiveImportJob(null));
             _logger.LogInformation("Started receive import job");
             return Ok();
 
@@ -57,11 +57,10 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpGet("update-worker")]
-        [AllowAnonymous]
-        public ActionResult UpdateWorker()
+        public async System.Threading.Tasks.Task<ActionResult> UpdateWorkerAsync()
         {
             // check the file drop for a file, and then process it.
-             new WorkerUpdater(Configuration, SpdUtils.SetupSharepoint(Configuration)).SendSharepointCheckerJob(null);
+            await new WorkerUpdater(Configuration, _logger, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null);
             _logger.LogInformation("Started receive import job");
             return Ok();
 
