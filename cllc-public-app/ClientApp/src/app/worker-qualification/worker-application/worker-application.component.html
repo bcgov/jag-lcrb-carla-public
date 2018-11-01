@@ -136,7 +136,7 @@
                 <label>Date of Birth</label>
                 <br />
                 <input type="text" formControlName='dateofbirth' readonly style="width: 250px;" placeholder="yyyy-mm-dd"
-                  class="form-control" bsDatepicker [bsConfig]="bsConfig">
+                  class="form-control">
               </div>
             </section>
             <section>
@@ -462,8 +462,9 @@
               <div [ngClass]="{'has-error': !form.get('worker.fromdate').valid && form.get('worker.fromdate').touched}">
                 <label>Date: From</label>
                 <br />
-                <input type="text" formControlName='fromdate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                  bsDatepicker [bsConfig]="bsConfig">
+                <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" readonly class="form-control"
+                [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">                  
+                <mat-datepicker #picker></mat-datepicker>
                 <div *ngIf="form.get('worker.fromdate').touched && (!form.get('worker.fromdate').valid || form.get('worker.fromdate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="!form.get('worker.fromdate').valid">
