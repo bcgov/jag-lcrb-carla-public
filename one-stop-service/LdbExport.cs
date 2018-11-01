@@ -148,6 +148,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             var result = new List<KeyValuePair<string, string>>
             {                
                 new KeyValuePair<string, string>("AdoxioLicenceprintname", "Licence Type"),
+                new KeyValuePair<string, string>("licence.AdoxioLicencee.Name", "Legal Name"),
                 new KeyValuePair<string, string>("AdoxioLicencenumber", "Licence Number"),
                 new KeyValuePair<string, string>("AdoxioEffectivedate", "Effective Date"),
                 new KeyValuePair<string, string>("AdoxioExpirydate", "Expiry Date"),
