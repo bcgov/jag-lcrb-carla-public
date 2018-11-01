@@ -7,19 +7,20 @@
       <h2 style="padding-left: 0;">{{title}}</h2>
     </section>
     <p style="padding-left: 0; color: #fff;">{{description}}</p>
-    <div>
-
-      <input class="form-control" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email" tabindex="3">
-      <br>
-      <button type="submit" class="btn btn-primary" (click)="signup()" [disabled]="!emailFormControl.valid" tabindex="3">
-        SUBSCRIBE
-      </button>
+    <div style="display:flex;">
+        <input class="form-control" required placeholder="Email Address" [formControl]="emailFormControl" [(ngModel)]="email"
+          tabindex="3">
+        <br>
+        <button type="submit" class="btn btn-primary" (click)="signup()" [disabled]="!emailFormControl.valid" tabindex="3">
+          SUBSCRIBE
+        </button>
     </div>
   </form>
 
   <div *ngIf="signupSuccess==true">
     <h3>Confirm your subscription</h3>
-    <p>Thank you for subscribing to updates for cannabis retail licensing. A confirmation email has been sent from no-reply@gov.bc.ca</p>
+    <p>Thank you for subscribing to updates for cannabis retail licensing. A confirmation email has been sent from
+      no-reply@gov.bc.ca</p>
     <p>Click on the link in the email to activate your subscription.</p>
   </div>
 </div>
