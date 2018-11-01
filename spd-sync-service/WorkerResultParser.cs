@@ -1,23 +1,42 @@
 ﻿using CsvHelper;
+using Microsoft.Extensions.Logging;
 using SpdSync.models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SpdSync
 {
     public class WorkerResponseParser
     {
-        static public List<WorkerResponse> ParseWorkerResponse (string csvData)
+        static public List<WorkerResponse> ParseWorkerResponse (string csvData, ILogger _logger)
         {
-            TextReader textReader = new StringReader(csvData);
-            var csv = new CsvReader(textReader);
-            
-            List<WorkerResponse> result = csv.GetRecords<WorkerResponse>().ToList();
+            CsvHelper.Configuration.Configuration config = new CsvHelper.Configuration.Configuration();
+            config.SanitizeForInjection = true;
+            config.IgnoreBlankLines = true;
+            config.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
+            config.ShouldSkipRecord = record =>
+            {
+                return record.All(string.IsNullOrEmpty);
+            };
 
-            return result;
+
+            TextReader textReader = new StringReader(csvData);
+            var csv = new CsvReader(textReader, config);
+
+            try
+            {
+                List<WorkerResponse> result = csv.GetRecords<WorkerResponse>().ToList();
+                return result;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error parsing worker response.");
+                _logger.LogError("Message:");
+                _logger.LogError(e.Message);
+                throw e;
+            }
         }
     }
 }

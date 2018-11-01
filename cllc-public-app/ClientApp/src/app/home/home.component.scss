@@ -15,34 +15,32 @@ p {
     font-size: 16px;
 }
 
-.home-header {
-    max-width: 775px;
-}
-
 .home-header-wrapper {
     background-color: rgba(242, 242, 242, 1);
 }
 
 .home-body {
-    background-color: rgba(255, 255, 255, 1);
     padding-top: 60px;
+    padding-left: 10px;
+    padding-right: 50px;
     max-width: 775px;
     display: flex;
 }
 
 .jumbotron {
-    background-color: rgba(242, 242, 242, 1);
-    margin-top: 15px;
     h2 {
         font-weight: 400;
         font-size: 36px;
     }
+    margin-top: 15px;
+    margin-right: 40px;
+    background-color: rgba(242, 242, 242, 1);
+    max-width: 775px;
 }
 
 .side-box {
     max-width: 400px;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    margin: 40px 0px 40px -15px;
     padding: 45px;
     background-color: rgba(56, 89, 138, 1);
     border-bottom: 3px solid #fcba19 !important;
@@ -58,10 +56,6 @@ p {
     .btn {
         background-color: #003366;
     }
-}
-
-.side-box-wrapper {
-    // margin-left: 90px;
 }
 
 .fab-button {
@@ -84,5 +78,11 @@ p {
     }
     .side-box {
         padding: 25px;
+    }
+}
+
+@media (max-width: 767px) {
+    .side-box {
+        margin: auto;
     }
 }
