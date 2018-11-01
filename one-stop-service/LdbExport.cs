@@ -150,6 +150,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 new KeyValuePair<string, string>("AdoxioLicenceprintname", "Licence Type"),
                 new KeyValuePair<string, string>("licence.AdoxioLicencee.Name", "Legal Name"),
                 new KeyValuePair<string, string>("AdoxioLicencenumber", "Licence Number"),
+                new KeyValuePair<string, string>("AdoxioBusinessnumber", "Business Number"),
                 new KeyValuePair<string, string>("AdoxioEffectivedate", "Effective Date"),
                 new KeyValuePair<string, string>("AdoxioExpirydate", "Expiry Date"),
                 new KeyValuePair<string, string>("AdoxioEstablishment.AdoxioName", "Establishment Name"),
