@@ -136,7 +136,7 @@
                 <label>Date of Birth</label>
                 <br />
                 <input type="text" formControlName='dateofbirth' readonly style="width: 250px;" placeholder="yyyy-mm-dd"
-                  class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                  class="form-control" bsDatepicker [bsConfig]="bsConfig">
               </div>
             </section>
             <section>
@@ -463,7 +463,7 @@
                 <label>Date: From</label>
                 <br />
                 <input type="text" formControlName='fromdate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                  bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                  bsDatepicker [bsConfig]="bsConfig">
                 <div *ngIf="form.get('worker.fromdate').touched && (!form.get('worker.fromdate').valid || form.get('worker.fromdate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="!form.get('worker.fromdate').valid">
@@ -480,7 +480,7 @@
                 <label>Date: To</label>
                 <br />
                 <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                  bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                  bsDatepicker [bsConfig]="bsConfig">
                 <div *ngIf="form.get('worker.todate').touched && (form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)">
@@ -654,7 +654,7 @@
                     <label>Date: From</label>
                     <br />
                     <input type="text" formControlName='fromdate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                      bsDatepicker [bsConfig]="bsConfig">
                     <div *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
                       <div *ngIf="!address.get('fromdate').valid">
@@ -671,7 +671,7 @@
                     <label>Date: To</label>
                     <br />
                     <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                      bsDatepicker [bsConfig]="bsConfig">
                     <div *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
                       <div *ngIf="!address.get('todate').valid">
