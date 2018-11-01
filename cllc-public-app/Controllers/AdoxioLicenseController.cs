@@ -101,6 +101,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(adoxioLicenses);
         }
 
+        /// <summary>
+        /// Utility function to convert the unix timestamp to the time string.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private string ConvertOpenHoursToString(int? data)
+        {
+            string result = "";
+            if (data != null)
+            {
+                result = new DateTime((long)data).ToShortTimeString();
+            }
+            return result;
+        }
 
         /// GET a licence as PDF.
         [HttpGet("{licenceId}/pdf")]
@@ -166,26 +180,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 </tr>";
             if (application.AdoxioServicehoursstandardhours != true)
             {
+                
+
+
+
                 storeHours = $@"
                 <tr>
                     <td>Open</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehoursmondayopen).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourstuesdayopen).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourswednesdayopen).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehoursthursdayopen).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehoursfridayopen).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourssaturdayopen).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourssundayopen).ToShortTimeString()}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursmondayopen)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourstuesdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourswednesdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursthursdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursfridayopen)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssaturdayopen)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssundayopen)}</td>
                 </tr>                
                 <tr>
                     <td>Close</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehoursmondayclose).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourstuesdayclose).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourswednesdayclose).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehoursthursdayclose).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehoursfridayclose).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourssaturdayclose).ToShortTimeString()}</td>
-                    <td>{new DateTime((long)application?.AdoxioServicehourssundayclose).ToShortTimeString()}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursmondayclose)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourstuesdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourswednesdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursthursdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursfridayclose)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssaturdayclose)}</td>
+                    <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssundayclose)}</td>
                 </tr>";
             }
 
