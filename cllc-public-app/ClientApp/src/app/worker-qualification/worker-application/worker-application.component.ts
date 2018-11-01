@@ -16,10 +16,8 @@ import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { defineLocale } from 'ngx-bootstrap/chronos';
-import { enGbLocale } from 'ngx-bootstrap/locale';
-
-defineLocale('engb', enGbLocale);
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
 
 const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)';
 
@@ -41,7 +39,7 @@ export class WorkerApplicationComponent implements OnInit {
   saveFormData: any;
   workerStatus: string;
 
-  bsConfig: any = { locale: 'engb', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
+  bsConfig: any = { dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
@@ -59,11 +57,13 @@ export class WorkerApplicationComponent implements OnInit {
     private workerDataService: WorkerDataService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private localeService: BsLocaleService
   ) {
     this.route.params.subscribe(params => {
       this.workerId = params.id;
     });
+    this.localeService.use('en');
   }
 
   ngOnInit() {
