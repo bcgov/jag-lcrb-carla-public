@@ -16,7 +16,10 @@ import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { enGbLocale } from 'ngx-bootstrap/locale';
 
+defineLocale('engb', enGbLocale);
 
 const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)';
 
@@ -37,6 +40,8 @@ export class WorkerApplicationComponent implements OnInit {
   workerId: string;
   saveFormData: any;
   workerStatus: string;
+
+  bsConfig: any = { locale: 'engb', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
