@@ -48,9 +48,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? paymentRecievedDate { get; set; }
         public DateTimeOffset? modifiedOn { get; set; }
         public string workerId { get; set; }
-        public DateTimeOffset? fromdate { get; set; }   
-        
+        public DateTimeOffset? fromdate { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public StatusCode Status { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public StatusCode StateCode { get; set; }
     }
 }
