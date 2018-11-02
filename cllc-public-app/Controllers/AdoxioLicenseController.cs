@@ -407,7 +407,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{licenceId}/pdf")]
         public async Task<IActionResult> GetLicencePDF(string licenceId)
         {
-            
+
             var expand = new List<string> {
                 "adoxio_Licencee",
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
@@ -421,30 +421,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license.");
             }
 
-
-
-            var effectiveDateParam = "";
-            if (adoxioLicense.AdoxioEffectivedate.HasValue)
+            if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
             {
-                DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.Value.DateTime;
-                effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
-            }
+                var effectiveDateParam = "";
+                if (adoxioLicense.AdoxioEffectivedate.HasValue)
+                {
+                    DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.Value.DateTime;
+                    effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
+                }
 
-            var expiraryDateParam = "";
-            if (adoxioLicense.AdoxioExpirydate.HasValue)
-            {
-                DateTime expiryDate = adoxioLicense.AdoxioExpirydate.Value.DateTime;
-                expiraryDateParam = expiryDate.ToString("dd/MM/yyyy");
-            }
+                var expiraryDateParam = "";
+                if (adoxioLicense.AdoxioExpirydate.HasValue)
+                {
+                    DateTime expiryDate = adoxioLicense.AdoxioExpirydate.Value.DateTime;
+                    expiraryDateParam = expiryDate.ToString("dd/MM/yyyy");
+                }
 
-            var termsAndConditions = "";
-            foreach (var item in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
-            {
-                termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
-            }
+                var termsAndConditions = "";
+                foreach (var item in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+                {
+                    termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+                }
 
-            var application = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.FirstOrDefault();
-            var storeHours = $@"
+                var application = adoxioLicense?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence?.FirstOrDefault();
+                var storeHours = $@"
                 <tr>
                     <td>Open</td>
                     <td>9:00 am</td>
@@ -465,13 +465,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
                 </tr>";
-            if (application.AdoxioServicehoursstandardhours != true)
-            {
-                
-
-
-
-                storeHours = $@"
+                if (application.AdoxioServicehoursstandardhours != true)
+                {
+                    storeHours = $@"
                 <tr>
                     <td>Open</td>
                     <td>{ConvertOpenHoursToString(application?.AdoxioServicehoursmondayopen)}</td>
@@ -492,9 +488,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssaturdayclose)}</td>
                     <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssundayclose)}</td>
                 </tr>";
-            }
+                }
 
-            var parameters = new Dictionary<string, string>
+                var parameters = new Dictionary<string, string>
             {
                 { "title", "Canabis_License" },
                 { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
@@ -509,19 +505,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "storeHours", storeHours }
             };
 
-            try
-            {
-                byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
-                return File(data, "application/pdf");
+                try
+                {
+                    byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
+                    return File(data, "application/pdf");
+                }
+                catch
+                {
+                    string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+                    basePath += "/dashboard-lite";
+                    return Redirect(basePath);
+                }
             }
-            catch
+            else
             {
-                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-                basePath += "/dashboard-lite";
-                return Redirect(basePath);
+                return new NotFoundResult();
             }
         }
-        
+
         /// <summary>
         /// Verify whether currently logged in user has access to this account id
         /// </summary>
