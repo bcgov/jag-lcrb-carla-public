@@ -86,12 +86,11 @@ export class WorkerApplicationComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private localeService: BsLocaleService
+
   ) {
     this.route.params.subscribe(params => {
       this.workerId = params.id;
     });
-    this.localeService.use('en');
   }
 
   ngOnInit() {
