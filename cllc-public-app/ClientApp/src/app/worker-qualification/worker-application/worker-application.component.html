@@ -481,7 +481,7 @@
                 <label>Date: To</label>
                 <br />
                 <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                  bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                  bsDatepicker [bsConfig]="bsConfig">
                 <div *ngIf="form.get('worker.todate').touched && (form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)">
@@ -655,7 +655,7 @@
                     <label>Date: From</label>
                     <br />
                     <input type="text" formControlName='fromdate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                      bsDatepicker [bsConfig]="bsConfig">
                     <div *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
                       <div *ngIf="!address.get('fromdate').valid">
@@ -672,7 +672,7 @@
                     <label>Date: To</label>
                     <br />
                     <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                      bsDatepicker [bsConfig]="bsConfig">
                     <div *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
                       <div *ngIf="!address.get('todate').valid">
@@ -727,7 +727,14 @@
             correct
             it.
           </p>
-          <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary">LEARN MORE</button>
+          <ul>
+            <li>
+              <a href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/change-personal-information">BC
+                Service Card</a>
+              <a href="https://www.icbc.com/driver-licensing/getting-licensed/Pages/Change-your-address-or-name.aspx">ICBC</a>
+              <a href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a>
+            </li>
+          </ul>
         </div>
       </section>
       <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none;">
@@ -743,7 +750,7 @@
             collection, use, or disclosure of personal information, please contact the Senior Policy Analyst, Security
             Programs
             Division via mail to PO Box 9217 Stn Prov Govt Victoria, BC V8W 9J1; email to
-            cannabissecurityscreening@gov.bc.ca;
+            <a href="mailto:cannabissecurityscreening@gov.bc.ca">cannabissecurityscreening@gov.bc.ca</a>;
             or by telephone at 1-855-587-0185.</p>
         </div>
       </section>
