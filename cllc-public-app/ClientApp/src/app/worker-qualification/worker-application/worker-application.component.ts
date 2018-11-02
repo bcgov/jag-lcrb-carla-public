@@ -67,6 +67,8 @@ export class WorkerApplicationComponent implements OnInit {
   saveFormData: any;
   workerStatus: string;
 
+  bsConfig: any = { locale: 'en', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
+
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
   }
@@ -83,7 +85,8 @@ export class WorkerApplicationComponent implements OnInit {
     private workerDataService: WorkerDataService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
   ) {
     this.route.params.subscribe(params => {
       this.workerId = params.id;
