@@ -105,7 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal(10, ordernum.Length);
 
             string actual_url = "https://web.na.bambora.com/scripts/Payment/Payment.asp?merchant_id=336660000&trnType=P&trnOrderNumber=" + ordernum +
-                "&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&ref3=" + id +
+                $"&ref1={_factory.Configuration["BASE_URI"]}/cannabislicensing/payment-confirmation&ref3=" + id +
                 "&trnAmount=7500.00&hashExpiry=";
             Assert.True(values["url"].Length > actual_url.Length);
             Assert.Equal(actual_url, values["url"].Substring(0, actual_url.Length));
