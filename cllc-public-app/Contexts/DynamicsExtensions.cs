@@ -448,7 +448,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result = tokens[tokens.Length - 1];
                 }
             }
-            
+            result  = GuidUtility.SanitizeGuidString(result);
             return result;
         }
 
