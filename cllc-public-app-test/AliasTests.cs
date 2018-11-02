@@ -63,11 +63,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             contactVM = JsonConvert.DeserializeObject<ViewModels.Contact>(jsonString);
 
             // Get the worker
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/worker/{contactVM.id}");
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/worker/contact/{contactVM.id}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            var workerVM = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
+            var workerVM = JsonConvert.DeserializeObject<List<ViewModels.Worker>>(jsonString).FirstOrDefault();
 
             var aliasVM = new ViewModels.Alias()
             {
@@ -93,7 +93,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 
             // R - Read
-
             request = new HttpRequestMessage(HttpMethod.Get, "/api/alias/by-contactid/" + contactVM.id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
