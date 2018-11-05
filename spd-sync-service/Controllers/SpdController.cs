@@ -14,12 +14,14 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         private readonly string accessToken;
         private readonly string baseUri;
         private readonly ILogger _logger;
+        private readonly ILoggerFactory _loggerFactory;
 
         public SpdController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             accessToken = Configuration["ACCESS_TOKEN"];
             baseUri = Configuration["BASE_URI"];
+            _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger(typeof(SpdController));
         }
 
@@ -31,7 +33,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpGet("send")]
         public ActionResult Send()
         {
-            BackgroundJob.Enqueue(() => new SpdUtils(Configuration, _logger).SendExportJob(null));
+            BackgroundJob.Enqueue(() => new SpdUtils(Configuration, _loggerFactory).SendExportJob(null));
             _logger.LogInformation("Started send export job");
             return Ok();
         }
@@ -45,7 +47,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         public ActionResult Receive()
         {
             // check the file drop for a file, and then process it.
-            BackgroundJob.Enqueue(() => new SpdUtils(Configuration, _logger).ReceiveImportJob(null));
+            BackgroundJob.Enqueue(() => new SpdUtils(Configuration, _loggerFactory).ReceiveImportJob(null));
             _logger.LogInformation("Started receive import job");
             return Ok();
 
@@ -60,7 +62,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         public async System.Threading.Tasks.Task<ActionResult> UpdateWorkerAsync()
         {
             // check the file drop for a file, and then process it.
-            await new WorkerUpdater(Configuration, _logger, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null);
+            await new WorkerUpdater(Configuration, _loggerFactory, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null);
             _logger.LogInformation("Started receive import job");
             return Ok();
 

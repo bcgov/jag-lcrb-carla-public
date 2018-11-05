@@ -28,11 +28,12 @@ namespace Gov.Lclb.Cllb.SpdSync
         private IDynamicsClient _dynamics;
         private static readonly HttpClient Client = new HttpClient();
 
-        public SpdUtils(IConfiguration Configuration, ILogger logger)
+        public SpdUtils(IConfiguration Configuration, ILoggerFactory loggerFactory)
         {
             this.Configuration = Configuration;
+            _logger = loggerFactory.CreateLogger(typeof(SpdUtils));
             _dynamics = SetupDynamics(Configuration);
-            _logger = logger;
+            
         }
 
         /// <summary>
