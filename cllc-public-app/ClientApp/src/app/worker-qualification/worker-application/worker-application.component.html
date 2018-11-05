@@ -483,7 +483,7 @@
               <div [ngClass]="{'has-error': form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)}">
                 <label>Date: To</label>
                 <br />
-                <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
+                <input type="text" formControlName='todate' readonly style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
                   [value]="form.get('worker.todate').value | date: 'yyyy-MM-dd'">
                 <div *ngIf="form.get('worker.todate').touched && (form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
