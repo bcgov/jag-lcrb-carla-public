@@ -483,8 +483,8 @@
               <div [ngClass]="{'has-error': form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)}">
                 <label>Date: To</label>
                 <br />
-                <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                  [value]="form.get('worker.todate').value | date: 'yyyy-MM-dd'">
+                <input type="text" formControlName='todate' readonly style="width: 200px;" placeholder="yyyy-mm-dd"
+                  class="form-control" [value]="form.get('worker.todate').value | date: 'yyyy-MM-dd'">
                 <div *ngIf="form.get('worker.todate').touched && (form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)">
@@ -657,8 +657,9 @@
                   <div [ngClass]="{'has-error': !address.get('fromdate').valid && address.get('fromdate').touched}">
                     <label>Date: From</label>
                     <br />
-                    <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
-                      readonly [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
+                    <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;"
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [matDatepicker]="picker1" (focus)="picker1.open()"
+                      (click)="picker1.open()">
                     <mat-datepicker #picker1></mat-datepicker>
                     <div *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
@@ -675,8 +676,9 @@
                   <div [ngClass]="{'has-error': !address.get('todate').valid && address.get('todate').touched}">
                     <label>Date: To</label>
                     <br />
-                    <input type="text" formControlName='todate' style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
-                      readonly [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
+                    <input type="text" formControlName='todate' style="width: 200px; background-color: #fff;"
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [matDatepicker]="picker2" (focus)="picker2.open()"
+                      (click)="picker2.open()">
                     <mat-datepicker #picker2></mat-datepicker>
                     <div *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
@@ -734,10 +736,14 @@
           </p>
           <ul>
             <li>
-              <a href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/change-personal-information">BC
+              <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/change-personal-information">BC
                 Service Card</a>
-              <a href="https://www.icbc.com/driver-licensing/getting-licensed/Pages/Change-your-address-or-name.aspx">ICBC</a>
-              <a href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a>
+            </li>
+            <li>
+              <a style="color: #fff;" href="https://www.icbc.com/driver-licensing/getting-licensed/Pages/Change-your-address-or-name.aspx">ICBC</a>
+            </li>
+            <li>
+              <a style="color: #fff;" href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a>
             </li>
           </ul>
         </div>
