@@ -70,7 +70,7 @@ node('nodejs') {
                 // sh 'export DISPLAY=:1'
                 sh 'npm install -g @angular/cli'
                 sh 'npm install'
-                sh 'ng e2e --project=lclb-public-app-e2e --base-href=http://cannabis-licensing-dev.pathfinder.bcgov'
+                sh 'ng e2e --project=lclb-public-app-e2e --base-url=http://cannabis-licensing-dev.pathfinder.bcgov'
             } finally {
                 archiveArtifacts allowEmptyArchive: true, artifacts: 'e2e-reports/**/*'
                 junit 'junitresults.xml'
