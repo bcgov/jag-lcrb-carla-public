@@ -27,10 +27,10 @@ namespace SpdSync
         private IConfiguration Configuration { get; }
         private IDynamicsClient _dynamics;
 
-        public WorkerUpdater(IConfiguration Configuration, ILogger logger, SharePointFileManager sharePointFileManager)
+        public WorkerUpdater(IConfiguration Configuration, ILoggerFactory loggerFactory, SharePointFileManager sharePointFileManager)
         {
             this.Configuration = Configuration;
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger(typeof(WorkerUpdater));            
             _dynamics = SpdUtils.SetupDynamics(Configuration);
             _sharePointFileManager = sharePointFileManager;
         }
