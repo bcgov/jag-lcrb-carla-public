@@ -480,7 +480,7 @@ export class WorkerApplicationComponent implements OnInit {
         return null;
       }
       const valueMatchesPattern = pattern.test(control.value);
-      return valueMatchesPattern ? null : { 'forbiddenName': { value: control.value } };
+      return valueMatchesPattern ? null : { 'regex-missmatch': { value: control.value } };
     };
   }
 }
