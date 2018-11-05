@@ -202,7 +202,8 @@
               <div [ngClass]="{'has-error': !this.form.get('worker.email').valid && this.form.get('worker.email').touched}">
                 <label>Email Address</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="email" formControlName="email">
+                <input class="form-control" style="width: 250px;" type="email" formControlName="email" 
+                (change)="email1.value = email1.value.trim(); email1.updateValueAndValidity();" #email1>
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="fas fa-chevron-left"></i>
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" style="margin-left: -6px;"
                   class="fas fa-chevron-left"></i>
@@ -302,7 +303,8 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched}">
                 <label>Email Address</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1">
+                <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1"
+                (change)="email2.value = email2.value.trim(); email2.updateValueAndValidity();" #email2>
                 <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched ">
@@ -450,7 +452,13 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched}">
                 <label>Country</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country">
+                <!-- <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country"> -->
+                <select class="form-control" style="width: 250px;" formControlName="address1_country" (change)="form.get('contact.address1_postalcode').updateValueAndValidity()">
+                  <option value="Canada">Canada</option>
+                  <option value="United States of America">United States of America</option>
+                  <hr>
+                  <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                </select>
                 <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched ">
@@ -564,7 +572,13 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.address2_country').valid && this.form.get('contact.address2_country').touched}">
                 <label>Country</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="address2_country">
+                <select class="form-control" style="width: 250px;" formControlName="address2_country" 
+                (change)="form.get('contact.address2_postalcode').updateValueAndValidity()">
+                  <option value="Canada">Canada</option>
+                  <option value="United States of America">United States of America</option>
+                  <hr>
+                  <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                </select>
                 <div *ngIf="!this.form.get('contact.address2_country').valid && this.form.get('contact.address2_country').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.address2_country').valid && this.form.get('contact.address2_country').touched ">
@@ -644,7 +658,13 @@
                   <div [ngClass]="{'has-error': !address.get('country').valid && address.get('country').touched}">
                     <label>Country</label>
                     <br />
-                    <input class="form-control" style="width: 250px;" type="text" formControlName="country">
+                    <select class="form-control" style="width: 250px;" formControlName="country"
+                    (change)="address.get('postalcode').updateValueAndValidity()">
+                      <option value="Canada">Canada</option>
+                      <option value="United States of America">United States of America</option>
+                      <hr>
+                      <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                    </select>
                     <div *ngIf="!address.get('country').valid && address.get('country').touched" class="alert alert-danger"
                       style="width: 250px;">
                       <div *ngIf="!address.get('country').valid && address.get('country').touched ">
