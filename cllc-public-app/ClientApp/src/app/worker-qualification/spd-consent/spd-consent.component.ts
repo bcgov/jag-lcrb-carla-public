@@ -109,7 +109,7 @@ export class SpdConsentComponent implements OnInit {
 
   canDeactivate(): Observable<boolean> | boolean {
     if (this.workerStatus !== 'Application Incomplete' ||
-        JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
+      JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
       return this.save();
@@ -141,14 +141,16 @@ export class SpdConsentComponent implements OnInit {
 * Redirect to payment processing page (Express Pay / Bambora service)
 * */
   private submitPayment() {
-    this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
-      const jsonUrl = res.json();
-      window.location.href = jsonUrl['url'];
-      return jsonUrl['url'];
-    }, err => {
-      if (err._body === 'Payment already made') {
-        this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-      }
+    this.save().subscribe(r => {
+      this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
+        const jsonUrl = res.json();
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
     });
   }
 
