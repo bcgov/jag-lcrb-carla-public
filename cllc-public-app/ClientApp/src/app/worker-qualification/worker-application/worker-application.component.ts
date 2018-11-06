@@ -7,7 +7,7 @@ import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
 import { Observable, Subject, zip } from 'rxjs';
@@ -16,12 +16,13 @@ import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { COUNTRIES } from './country-list';
 
-import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import {defaultFormat as _rollupMoment} from 'moment';
+import { defaultFormat as _rollupMoment } from 'moment';
 const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
@@ -49,9 +50,9 @@ const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
     // our example generation script.
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
 export class WorkerApplicationComponent implements OnInit {
@@ -60,6 +61,7 @@ export class WorkerApplicationComponent implements OnInit {
   busy: Subscription;
   busy2: Promise<any>;
   form: FormGroup;
+  countryList = COUNTRIES;
 
   addressesToDelete: PreviousAddress[] = [];
   aliasesToDelete: Alias[] = [];
@@ -106,12 +108,12 @@ export class WorkerApplicationComponent implements OnInit {
         address1_city: ['', Validators.required],
         address1_stateorprovince: ['', Validators.required],
         address1_country: ['', Validators.required],
-        address1_postalcode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+        address1_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address1_country')]],
         address2_line1: ['', Validators.required],
         address2_city: ['', Validators.required],
         address2_stateorprovince: ['', Validators.required],
         address2_country: ['', Validators.required],
-        address2_postalcode: ['', [Validators.required, Validators.pattern(postalRegex)]]
+        address2_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address2_country')]]
       }),
       worker: this.fb.group({
         id: [],
@@ -213,7 +215,7 @@ export class WorkerApplicationComponent implements OnInit {
       city: [address.city, Validators.required],
       provstate: [address.provstate, Validators.required],
       country: [address.country, Validators.required],
-      postalcode: [address.postalcode, [Validators.required, Validators.pattern(postalRegex)]],
+      postalcode: [address.postalcode, [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'country')]],
       fromdate: [address.fromdate, Validators.required],
       todate: [address.todate, Validators.required]
     });
@@ -466,5 +468,19 @@ export class WorkerApplicationComponent implements OnInit {
     if (acceptedKeys.indexOf(event.key) === -1) {
       event.preventDefault();
     }
+  }
+
+  customZipCodeValidator(pattern: RegExp, countryField: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (!control.parent) {
+        return null;
+      }
+      const country = control.parent.get(countryField).value;
+      if (country !== 'Canada' && country !== 'United States of America') {
+        return null;
+      }
+      const valueMatchesPattern = pattern.test(control.value);
+      return valueMatchesPattern ? null : { 'regex-missmatch': { value: control.value } };
+    };
   }
 }
