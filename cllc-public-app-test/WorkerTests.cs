@@ -64,11 +64,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             contactVM = JsonConvert.DeserializeObject<ViewModels.Contact>(jsonString);
 
             // R -Read
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/worker/{contactVM.id}");
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/worker/contact/{contactVM.id}");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            var workerVM = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
+            var workerVM = JsonConvert.DeserializeObject<List<ViewModels.Worker>>(jsonString).FirstOrDefault();
             Assert.NotNull(workerVM?.id);
 
 
@@ -83,13 +83,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             // verify that the update persisted.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + contactVM.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + workerVM.id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
             var worker2 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
-            Assert.Equal(worker2.firstname, changedName);
+            Assert.Equal(changedName, worker2.firstname);
 
             // D - Delete
 
@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + contactVM.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + workerVM.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             var worker3 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);

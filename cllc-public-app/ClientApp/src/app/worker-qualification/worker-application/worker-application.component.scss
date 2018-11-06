@@ -101,4 +101,18 @@ hr {
   }
 }
 
+::ng-deep .mat-calendar-body-selected {
+  background-color: #337AB7;
+  color: #000 !important;
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+  color: #54708b;
+}
+
+::ng-deep .mat-calendar-header{
+  background-color: #337AB7;
+  color: #fff;
+}
+
 

@@ -5,6 +5,7 @@ describe('Accordion component test', () => {
     let page: AppHomePage;
 
   beforeAll(async() => {
+      browser.waitForAngularEnabled(false);
       page = new AppHomePage();
       await page.navigateTo();
   });
