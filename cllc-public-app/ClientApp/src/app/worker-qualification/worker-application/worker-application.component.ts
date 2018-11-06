@@ -107,12 +107,12 @@ export class WorkerApplicationComponent implements OnInit {
         address1_line1: ['', Validators.required],
         address1_city: ['', Validators.required],
         address1_stateorprovince: ['', Validators.required],
-        address1_country: ['Canada', Validators.required],
+        address1_country: ['', Validators.required],
         address1_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address1_country')]],
         address2_line1: ['', Validators.required],
         address2_city: ['', Validators.required],
         address2_stateorprovince: ['', Validators.required],
-        address2_country: ['Canada', Validators.required],
+        address2_country: ['', Validators.required],
         address2_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address2_country')]]
       }),
       worker: this.fb.group({
