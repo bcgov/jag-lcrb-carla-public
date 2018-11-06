@@ -204,7 +204,7 @@ export class WorkerApplicationComponent implements OnInit {
       streetaddress: '',
       city: '',
       provstate: '',
-      country: '',
+      country: 'Canada',
       postalcode: '',
       fromdate: '',
       todate: ''
