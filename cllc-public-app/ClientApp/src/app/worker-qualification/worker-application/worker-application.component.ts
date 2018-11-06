@@ -7,7 +7,7 @@ import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
 import { Observable, Subject, zip } from 'rxjs';
@@ -16,6 +16,28 @@ import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { COUNTRIES } from './country-list';
+
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { defaultFormat as _rollupMoment } from 'moment';
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'YYYY-MM-DD',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 
 const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)';
@@ -23,7 +45,15 @@ const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-
 @Component({
   selector: 'app-worker-application',
   templateUrl: './worker-application.component.html',
-  styleUrls: ['./worker-application.component.scss']
+  styleUrls: ['./worker-application.component.scss'],
+  providers: [
+    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+    // application's root module. We provide it at the component level here, due to limitations of
+    // our example generation script.
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class WorkerApplicationComponent implements OnInit {
   currentUser: User;
@@ -31,11 +61,15 @@ export class WorkerApplicationComponent implements OnInit {
   busy: Subscription;
   busy2: Promise<any>;
   form: FormGroup;
+  countryList = COUNTRIES;
 
   addressesToDelete: PreviousAddress[] = [];
   aliasesToDelete: Alias[] = [];
   workerId: string;
   saveFormData: any;
+  workerStatus: string;
+
+  bsConfig: any = { locale: 'en', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
@@ -53,7 +87,8 @@ export class WorkerApplicationComponent implements OnInit {
     private workerDataService: WorkerDataService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
   ) {
     this.route.params.subscribe(params => {
       this.workerId = params.id;
@@ -73,12 +108,12 @@ export class WorkerApplicationComponent implements OnInit {
         address1_city: ['', Validators.required],
         address1_stateorprovince: ['', Validators.required],
         address1_country: ['', Validators.required],
-        address1_postalcode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+        address1_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address1_country')]],
         address2_line1: ['', Validators.required],
         address2_city: ['', Validators.required],
         address2_stateorprovince: ['', Validators.required],
         address2_country: ['', Validators.required],
-        address2_postalcode: ['', [Validators.required, Validators.pattern(postalRegex)]]
+        address2_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address2_country')]]
       }),
       worker: this.fb.group({
         id: [],
@@ -138,6 +173,10 @@ export class WorkerApplicationComponent implements OnInit {
             });
 
             this.saveFormData = this.form.value;
+            this.workerStatus = worker.status;
+            if (worker.status !== 'Application Incomplete') {
+              this.form.disable();
+            }
           });
         }
       });
@@ -165,7 +204,7 @@ export class WorkerApplicationComponent implements OnInit {
       streetaddress: '',
       city: '',
       provstate: '',
-      country: '',
+      country: 'Canada',
       postalcode: '',
       fromdate: '',
       todate: ''
@@ -176,7 +215,7 @@ export class WorkerApplicationComponent implements OnInit {
       city: [address.city, Validators.required],
       provstate: [address.provstate, Validators.required],
       country: [address.country, Validators.required],
-      postalcode: [address.postalcode, [Validators.required, Validators.pattern(postalRegex)]],
+      postalcode: [address.postalcode, [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'country')]],
       fromdate: [address.fromdate, Validators.required],
       todate: [address.todate, Validators.required]
     });
@@ -245,7 +284,8 @@ export class WorkerApplicationComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
+    if (this.workerStatus !== 'Application Incomplete' ||
+      JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
       return this.save();
@@ -419,8 +459,28 @@ export class WorkerApplicationComponent implements OnInit {
     const validDriver = !!(this.form.get('worker.driverslicencenumber').value
       && (this.form.get('worker.driverslicencenumber').value + '').length === 7);
     const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length === 7);
-    console.log(this.form.get('worker.driverslicencenumber').value);
-    console.log((this.form.get('worker.driverslicencenumber').value + '').length);
     return validDriver || validBceid;
+  }
+
+  rejectIfNotDigitOrBackSpace(event) {
+    const acceptedKeys = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Control',
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    if (acceptedKeys.indexOf(event.key) === -1) {
+      event.preventDefault();
+    }
+  }
+
+  customZipCodeValidator(pattern: RegExp, countryField: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (!control.parent) {
+        return null;
+      }
+      const country = control.parent.get(countryField).value;
+      if (country !== 'Canada' && country !== 'United States of America') {
+        return null;
+      }
+      const valueMatchesPattern = pattern.test(control.value);
+      return valueMatchesPattern ? null : { 'regex-missmatch': { value: control.value } };
+    };
   }
 }
