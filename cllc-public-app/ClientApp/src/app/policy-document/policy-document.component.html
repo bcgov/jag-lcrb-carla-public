@@ -4,7 +4,7 @@
     <div class="col-md-2" *ngIf="category">
       <app-policy-document-sidebar *ngIf="policyDocument" (slugChange)="setSlug($event)" [category]="category"></app-policy-document-sidebar>
     </div>
-    <div [ngClass]="{'col-md-10': fullWidth, 'col-md-8': !fullWidth }" class="contentPolicy">
+    <div [ngClass]="{'col-md-9 offset-md-1': fullWidth, 'col-md-8': !fullWidth }" class="contentPolicy">
       <div id="title" [innerHTML]="title" class="h1"></div>
       <div id="body" [innerHTML]="body" class="body"></div>
     </div>
