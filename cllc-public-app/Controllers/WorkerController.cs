@@ -178,7 +178,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // create a new worker.
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
+            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker()
+            {
+                IsManual = 0 // 0 for false - is a portal user.
+            };
             worker.CopyValues(item);
             if (item?.contact?.id == null)
             {
