@@ -32,7 +32,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Running end-to-end tests against an arbitrary deployment
 
-Run `ng e2e --project=lclb-public-app-e2e --base-href=[URL]` where `[URL]` is the URL to your deployed instance of the app.
+Run `ng e2e --project=lclb-public-app-e2e --base-url=[URL]` where `[URL]` is the URL to your deployed instance of the app.
 
 ## Further help
 
