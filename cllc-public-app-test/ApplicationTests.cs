@@ -234,7 +234,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string accountId = user.accountid;
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"/api/file/{ id }/attachments/application");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
@@ -440,11 +440,11 @@ namespace Gov.Lclb.Cllb.Public.Test
                 };
                 formData.Add(fileContent);
                 formData.Add(new StringContent(documentType, Encoding.UTF8, "application/json"), "documentType");
-                response = _client.PostAsync($"/api/{service}/{id}/attachments", formData).Result;
+                response = _client.PostAsync($"/api/file/{id}/attachments/application", formData).Result;
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
                 // Get
-                request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/{id}/attachments/{documentType}");
+                request = new HttpRequestMessage(HttpMethod.Get, $"/api/file/{id}/attachments/application/{documentType}");
                 response = await _client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
 
@@ -453,7 +453,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 files.ForEach(async file =>
                 {
                     // Delete
-                    request = new HttpRequestMessage(HttpMethod.Delete, $"/api/{service}/{id}/attachments?serverRelativeUrl={Uri.EscapeDataString(file.serverrelativeurl)}");
+                    request = new HttpRequestMessage(HttpMethod.Delete, $"/api/file/{id}/attachments/application?serverRelativeUrl={Uri.EscapeDataString(file.serverrelativeurl)}&documentType={documentType}");
                     response = await _client.SendAsync(request);
                     response.EnsureSuccessStatusCode();
                 });
@@ -540,12 +540,12 @@ namespace Gov.Lclb.Cllb.Public.Test
                 };
                 formData.Add(fileContent);
                 formData.Add(new StringContent(documentType, Encoding.UTF8, "application/json"), "documentType");
-                response = _client.PostAsync($"/api/{service}/{id}/attachments", formData).Result;
+                response = _client.PostAsync($"/api/file/{id}/attachments/application", formData).Result;
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
 
             // Get
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/{id}/attachments/{documentType}");
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/file/{id}/attachments/application/{documentType}");
             response = await _client.SendAsync(request);
 
             response.EnsureSuccessStatusCode();
@@ -555,7 +555,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             files.ForEach(async file =>
             {
                 // Delete
-                request = new HttpRequestMessage(HttpMethod.Delete, $"/api/{service}/{id}/attachments?serverRelativeUrl={Uri.EscapeDataString(file.serverrelativeurl)}");
+                request = new HttpRequestMessage(HttpMethod.Delete, $"/api/file/{id}/attachments/application?serverRelativeUrl={Uri.EscapeDataString(file.serverrelativeurl)}&documentType={documentType}");
                 response = await _client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
             });

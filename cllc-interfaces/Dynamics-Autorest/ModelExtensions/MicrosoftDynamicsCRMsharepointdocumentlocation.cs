@@ -11,6 +11,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_application@odata.bind")]
         public string RegardingobjectidAdoxioApplicationODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "parentsiteorlocation_sharepointsite@odata.bind")]
+        public string ParentSiteODataBind { get; set; }
+
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_worker@odata.bind")]
         public string RegardingobjectidWorkerApplicationODataBind { get; set; }
 

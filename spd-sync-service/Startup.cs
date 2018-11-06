@@ -23,21 +23,9 @@ namespace Gov.Lclb.Cllb.SpdSync
     public class Startup
     {
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            if (!System.Diagnostics.Debugger.IsAttached)
-                builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-            builder.AddEnvironmentVariables();
-
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
-
-            Configuration = builder.Build();
+            Configuration = configuration;
             
         }
 
@@ -46,6 +34,8 @@ namespace Gov.Lclb.Cllb.SpdSync
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
             services.AddMvc(config =>
             {
                 // if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
@@ -194,7 +184,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
-                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration, log).SendExportJob(null), Cron.Daily);
+                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration, loggerFactory).SendExportJob(null), Cron.Daily);
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
@@ -212,7 +202,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Creating Hangfire job for Checking SharePoint...");
-                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, log, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null), Cron.Hourly);
+                    RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, loggerFactory, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null), Cron.Hourly);
                     log.LogInformation("Hangfire Send Export job done.");
                 }
             }

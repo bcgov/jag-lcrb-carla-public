@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         { }
 
         const string service = "adoxioestablishment";
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
             string id = "SomeRandomId";
@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string _discard = await response.Content.ReadAsStringAsync();
         }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
             string initialName = "InitialName";

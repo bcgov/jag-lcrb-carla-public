@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		  : base(factory)
 		{ }
 
-		[Fact]
+		//[Fact]
 		public async System.Threading.Tasks.Task UserCantAccessAnotherUsersAccount()
 		{
 			// verify (before we log in) that we are not logged in
@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await GetCurrentUserIsUnauthorized();
 		}
 
-		[Fact]
+		//[Fact]
 		public async System.Threading.Tasks.Task UserCantAccessAnotherUsersShareholders()
 		{
 			// verify (before we log in) that we are not logged in
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
 		}
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task UserCantAccessAnotherUsersBusinessProfiles()
         {
 			// verify (before we log in) that we are not logged in
@@ -235,7 +235,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
         }
 
-		[Fact]
+		//[Fact]
         public async System.Threading.Tasks.Task UserCantAccessAnotherUsersAccountAttachments()
         {
 			// verify (before we log in) that we are not logged in
@@ -305,7 +305,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
         }
 
-		[Fact]
+		//[Fact]
 		public async System.Threading.Tasks.Task UserCantAccessAnotherUsersChildBusinesProfileAttachments()
 		{
 			// verify (before we log in) that we are not logged in
@@ -400,7 +400,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
 		}
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task UserCantAccessAnotherUsersApplications()
         {
 			// verify (before we log in) that we are not logged in
@@ -468,7 +468,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
         }
 
-		[Fact]
+		//[Fact]
         public async System.Threading.Tasks.Task UserCantAccessAnotherUsersApplicationAttachments()
         {
 			// verify (before we log in) that we are not logged in
@@ -551,7 +551,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
         }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task UserCantAccessAnotherUsersInvoices()
         {
 			// verify (before we log in) that we are not logged in

@@ -107,7 +107,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       },
       err => {

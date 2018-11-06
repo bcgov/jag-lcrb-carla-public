@@ -1,29 +1,48 @@
-<div class="dashboard-spacing">
+<div>
   <!-- <div [ngBusy]="busy"></div> -->
   <div class="row">
-    <div class="col-lg-7 col-sm-12">
+    <div class="col-lg-8 col-sm-12">
       <section style="margin-left: 15px;">
-        <app-policy-document [fullWidth]="true" #policyDocs></app-policy-document>
+        <app-policy-document [fullWidth]="true" #policyDocs (slugChange)="currentSlug = $event"></app-policy-document>
       </section>
-      <p>Please select an option below:</p>
-
-      <p class="login-cont">
-        <strong style="margin-top: 10px">I’m a B.C. resident with a BC Services Card</strong>
-        <a  class="btn btn-primary" href="bcservice">Login</a>
-      </p>
-      <p class="login-cont">
-        <strong style="margin-top: 10px">I’m a B.C. resident but I don't have a BC Services Card</strong>
-        <a  class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/login-with-card">Get a BC Services Card</a>
-      </p>
-      <p class="login-cont">
-        <strong style="margin-top: 10px">I’m not a B.C. resident, send me a Cannabis Worker Qualification form.</strong>
-        <a  class="btn btn-primary" href="mailto:cannabis.worker@gov.bc.ca">Request Form</a>
-      </p>
-
+      <section *ngIf="currentSlug !== 'worker-qualification-training'" class="row" style="padding-left: 27px;">
+        <div class="col-md-8 offset-md-2">
+          <p>Please select an option below:</p>
+          <p class="login-cont">
+            <strong style="margin-top: 10px">I have a BC Services Card set-up to use online</strong>
+            <a class="btn btn-primary" href="bcservice">Login with a BC Services Card</a>
+          </p>
+          <p class="login-cont">
+            <strong style="margin-top: 10px">I don’t have a BC Services Card; send me a Worker Qualification
+              Application
+              form</strong>
+            <a class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/login-with-card">Request
+              Form</a>
+          </p>
+        </div>
+      </section>
     </div>
-    <div class="col-lg-4 col-sm-12" style="position: relative">
+    <div class="col-lg-3 col-sm-12" style="position: relative">
       <!-- <div [ngBusy]="busy"></div> -->
       <p></p>
+      <section class="submit-container">
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-info"></i></h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Qualify by November 30</h2>
+            </td>
+          </tr>
+        </table>
+        <div class="submit-content">
+          <p>Workers can begin working at licensed cannabis retail stores now but have until November 30 to apply for
+            and receive their qualification. Beginning December 1, all current and future workers must have their
+            qualification to be allowed to work in cannabis retail stores.
+          </p>
+        </div>
+      </section>
       <section class="submit-container">
         <table>
           <tr>
@@ -31,16 +50,21 @@
               <h2 class="round-icon-wrapper"><i class="fas fa-id-card"></i></h2>
             </td>
             <td style="padding-left: 10px">
-              <h2>Get a BC Services Card</h2>
+              <h2>Using the BC Services Card</h2>
             </td>
           </tr>
         </table>
         <div class="submit-content">
-          <p>B.C. residents who have lived in the province for at least six months must use a BC Services Card to log
-            in
-            to the Cannabis Worker Registry. Learn how to get a card.
+          <p>If you have a BC Services Card, you must use it to log in to the online qualification page.</p>
+          <p>
+            <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content?id=87EEAD6D19974459950AA7FF7F60AD54">Learn
+              more about the BC Services Card.</a>
           </p>
-          <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary">READ MORE</button>
+          <p>Eligibility for a BC Services Card is the same as for the Medical Services Plan (MSP).</p>
+          <p>
+            <a style="color: #fff; " href="https://www2.gov.bc.ca/gov/content?id=A24BB960F5234630BCB9DE847EEFD07B">Learn
+              more about BC Services Card eligibility.</a><br>
+          </p>
         </div>
       </section>
       <section class="submit-container">
@@ -55,9 +79,13 @@
           </tr>
         </table>
         <div class="submit-content">
-          <p>Applicants who haven’t lived in B.C. for at least six months or who live outside the province must email
-            the
-            Liquor and Cannabis Regulation Branch for a Worker Qualification Application Form.</p>
+          <p>Applicants who are not eligible for a BC Services Card must <a style="color:#fff" href="mailto:CannabisWorker@gov.bc.ca?subject=Worker Qualification Application">email</a>
+            the Liquor and Cannabis Regulation
+            Branch for a Worker Qualification Form. </p>
+          <p>
+            <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content?id=A24BB960F5234630BCB9DE847EEFD07B">Learn
+              more about BC Services Card eligibility.</a>
+          </p>
         </div>
       </section>
     </div>

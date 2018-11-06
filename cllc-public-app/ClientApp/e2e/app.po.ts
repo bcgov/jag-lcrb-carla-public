@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 export class AppHomePage {
     navigateTo() {
-      return browser.get('/cannabislicensing/');
+      return browser.get('/');
     }
 
     getMainHeading() {
