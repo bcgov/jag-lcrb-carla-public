@@ -30,5 +30,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_securitycompletedon")]
         public DateTimeOffset? SecurityCompletedOn { get; set; }
 
+
+        [JsonProperty(PropertyName = "adoxio_ismanual")]
+        public int? IsManual { get; set; }
     }
 }
