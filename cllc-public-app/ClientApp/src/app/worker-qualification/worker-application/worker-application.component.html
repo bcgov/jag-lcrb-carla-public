@@ -203,7 +203,7 @@
                 <label>Email Address</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="email" formControlName="email" 
-                (change)="email1.value = email1.value.trim(); form.get('worker.email').updateValueAndValidity();" #email1>
+                (blur)="trimValue(form.get('worker.email'))"> 
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="fas fa-chevron-left"></i>
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" style="margin-left: -6px;"
                   class="fas fa-chevron-left"></i>
@@ -304,7 +304,7 @@
                 <label>Email Address</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1"
-                (change)="email2.value = email2.value.trim(); this.form.get('contact.emailaddress1').updateValueAndValidity();" #email2>
+                (blur)="trimValue(this.form.get('contact.emailaddress1'));">
                 <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched ">
