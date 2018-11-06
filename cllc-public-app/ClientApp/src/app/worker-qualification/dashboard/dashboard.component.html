@@ -8,8 +8,8 @@
           <h1>Worker Qualification Dashboard</h1>
           <div>
             <p>
-              Your Worker Qualification Application and Consent for Cannabis Security Screening are incomplete. You can return to this page
-              and complete and submit them with payment at any time.
+              Your Worker Qualification Application is incomplete. You can return to this page and complete and submit
+              it with payment at any time.
             </p>
 
             <p>You’ll be informed of the results of your screening.</p>
@@ -31,9 +31,14 @@
                 <ng-container matColumnDef="worker">
                   <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <a routerLink="/worker-qualification/application/{{element.id}}">{{element?.firstname}} {{element?.middlename}}
+                    <a *ngIf="element.status === 'Application Incomplete'" routerLink="/worker-qualification/application/{{element.id}}">{{element?.firstname}}
+                      {{element?.middlename}}
                       {{element.lastname}}
                     </a>
+                    <span *ngIf="element.status !== 'Application Incomplete'">{{element?.firstname}}
+                      {{element?.middlename}}
+                      {{element.lastname}}
+                    </span>
                   </mat-cell>
                 </ng-container>
 
@@ -47,7 +52,7 @@
                 <!-- Column -->
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                  <mat-cell  *matCellDef="let element"> 
+                  <mat-cell *matCellDef="let element">
                     <a *ngIf="element?.status === 'Active'" class="btn btn-primary" [href]="'api/worker/' + element?.id + '/pdf'">
                       <i class="fas fa-download"></i>
                       Download Qualification Letter</a>
@@ -78,35 +83,11 @@
           </tr>
         </table>
         <div class="submit-content">
-          <p>If you find an error in your personal information, please contact Service BC, ICBC or AddressChangeBC to correct
+          <p>If you find an error in your personal information, please contact Service BC, ICBC or AddressChangeBC to
+            correct
             it.
           </p>
           <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary">LEARN MORE</button>
-        </div>
-      </section>
-      <section class="submit-container">
-        <table>
-          <tr>
-            <td>
-              <h2 class="round-icon-wrapper"><i class="fas fa-envelope"></i></h2>
-            </td>
-            <td style="padding-left: 10px">
-              <h2>Contact the Criminal Records Review Program</h2>
-            </td>
-          </tr>
-        </table>
-        <div class="submit-content">
-          <p>For questions about criminal record checks, contact the Criminal Records Review Program Monday to Friday, 8:30
-            a.m. - 4:30 p.m.</p>
-          <section>
-            <i class="fas fa-fax"></i>&nbsp; <strong>Fax</strong>: 250 356-1889
-          </section>
-          <section>
-            <i class="fas fa-phone"></i>&nbsp; <strong>Office</strong>: Toll free - 1 855 587-0185 (press option 2)
-          </section>
-          <section>
-            <i class="fas fa-envelope"></i>&nbsp; <strong>Email</strong>: criminalrecords@gov.bc.ca
-          </section>
         </div>
       </section>
     </div>
