@@ -6,7 +6,7 @@
         <app-policy-document [fullWidth]="true" #policyDocs (slugChange)="currentSlug = $event"></app-policy-document>
       </section>
       <section *ngIf="currentSlug !== 'worker-qualification-training'" class="row" style="padding-left: 27px;">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-9 offset-md-2" style="padding-left: 5px;">
           <p>Please select an option below:</p>
           <p class="login-cont">
             <strong style="margin-top: 10px">I have a BC Services Card set-up to use online</strong>
@@ -14,8 +14,7 @@
           </p>
           <p class="login-cont">
             <strong style="margin-top: 10px">I don’t have a BC Services Card; send me a Worker Qualification
-              Application
-              form</strong>
+              Application form</strong>
             <a class="btn btn-primary" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/login-with-card">Request
               Form</a>
           </p>
