@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { PolicyDocumentComponent } from '../../policy-document/policy-document.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-worker-home',
@@ -9,11 +10,18 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 })
 export class WorkerHomeComponent implements OnInit, AfterViewInit {
 
-  policySlug = 'worker-qualification-home';
+  policySlug = 'worker-qualification-training';
+  currentSlug = this.policySlug;
   @ViewChild('policyDocs') policyDocs: PolicyDocumentComponent;
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data
+    .filter(data => !!data && !!data.slug)
+    .subscribe((data: any) => {
+      this.policySlug = data.slug;
+    });
+
   }
 
   ngAfterViewInit(): void {
