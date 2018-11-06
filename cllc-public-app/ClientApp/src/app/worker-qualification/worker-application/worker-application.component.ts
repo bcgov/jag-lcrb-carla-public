@@ -7,7 +7,7 @@ import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
-import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
 import { Observable, Subject, zip } from 'rxjs';
@@ -382,24 +382,25 @@ export class WorkerApplicationComponent implements OnInit {
       return res;
     });
 
+    // The commented out code makes sure there are gaps in the address dates
     // verify there is no gap between dates
-    let isContinuous = true;
-    for (let i = 1; i < dateRanges.length; i++) {
-      const element = dateRanges[i];
-      if (element.fd >= dateRanges[i - 1].td && this.daysBetween(element.fd, dateRanges[i - 1].td) > 1) {
-        isContinuous = false;
-        valid = false;
-        break;
-      }
-    }
+    // let isContinuous = true;
+    // for (let i = 1; i < dateRanges.length; i++) {
+    //   const element = dateRanges[i];
+    //   if (element.fd >= dateRanges[i - 1].td && this.daysBetween(element.fd, dateRanges[i - 1].td) > 1) {
+    //     isContinuous = false;
+    //     valid = false;
+    //     break;
+    //   }
+    // }
 
-    if (isContinuous) {
-      const daysIn5years = 365 * 5 + 1;
-      // verify that the dates form a range >=  5 years
-      if (this.daysBetween(dateRanges[0].fd, dateRanges[dateRanges.length - 1].td) < daysIn5years) {
-        valid = false;
-      }
+    // if (isContinuous) {
+    const daysIn5years = 365 * 5 + 1;
+    // verify that the dates form a range >=  5 years
+    if (this.daysBetween(dateRanges[0].fd, dateRanges[dateRanges.length - 1].td) < daysIn5years) {
+      valid = false;
     }
+    // }
     return valid;
   }
 
@@ -482,5 +483,11 @@ export class WorkerApplicationComponent implements OnInit {
       const valueMatchesPattern = pattern.test(control.value);
       return valueMatchesPattern ? null : { 'regex-missmatch': { value: control.value } };
     };
+  }
+
+  trimValue(control: FormControl) {
+    const value = control.value;
+    control.setValue('');
+    control.setValue(value.trim());
   }
 }
