@@ -189,11 +189,13 @@ namespace Gov.Lclb.Cllb.OneStopService
             });
 
             // enable Splunk logger
+            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
+            {
+                var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
 
-            var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
-
-            //Append Http Json logger
-            loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
+                //Append Http Json logger
+                loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
+            }
 
         }
 
