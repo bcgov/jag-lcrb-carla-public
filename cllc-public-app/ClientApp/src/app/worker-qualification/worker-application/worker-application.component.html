@@ -83,7 +83,7 @@
                   </section>
                   <section>
                     <div [ngClass]="{'has-error': !alias.get('middlename').valid && alias.get('middlename').touched}">
-                      <label>Second Name</label>
+                      <label>Middle Name</label>
                       <br />
                       <input class="form-control" style="width: 250px;" type="text" formControlName="middlename">
                       <div *ngIf="!alias.get('middlename').valid && alias.get('middlename').touched" class="alert alert-danger"
@@ -136,7 +136,7 @@
                 <label>Date of Birth</label>
                 <br />
                 <input type="text" formControlName='dateofbirth' readonly style="width: 250px;" placeholder="yyyy-mm-dd"
-                  class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                  [value]="form.get('worker.dateofbirth').value | date: 'yyyy-MM-dd'" class="form-control">
               </div>
             </section>
             <section>
@@ -150,7 +150,8 @@
               <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BC Driver's Licence Number</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="number" formControlName="driverslicencenumber">
+                <input class="form-control" style="width: 250px;" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                  maxlength="7" formControlName="driverslicencenumber">
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="fas fa-chevron-left"></i>
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
@@ -161,7 +162,8 @@
               <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BCID Number</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="number" formControlName="bcidcardnumber">
+                <input class="form-control" style="width: 250px;" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                  maxlength="7" formControlName="bcidcardnumber">
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="fas fa-chevron-left"></i>
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
@@ -178,9 +180,10 @@
             <section>
               <div [ngClass]="{'has-error': !this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched}">
                 <label>Primary Phone Number</label>
-                <span>(incl. area code)</span>
+                <span style="padding-left: 10px;">(incl. area code) example: 1234567890</span>
                 <br />
-                <input class="form-control" style="width: 250px;" type="tel" pattern="^\d{10}$" formControlName="phonenumber">
+                <input class="form-control" style="width: 250px;" (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text"
+                  maxlength="10" pattern="^\d{10}$" formControlName="phonenumber">
                 <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
                   class="fas fa-chevron-left"></i>
                 <i *ngIf="!this.form.get('worker.phonenumber').valid && this.form.get('worker.phonenumber').touched"
@@ -199,7 +202,8 @@
               <div [ngClass]="{'has-error': !this.form.get('worker.email').valid && this.form.get('worker.email').touched}">
                 <label>Email Address</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="email" formControlName="email">
+                <input class="form-control" style="width: 250px;" type="email" formControlName="email" 
+                (change)="email1.value = email1.value.trim(); form.get('worker.email').updateValueAndValidity();" #email1>
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="fas fa-chevron-left"></i>
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" style="margin-left: -6px;"
                   class="fas fa-chevron-left"></i>
@@ -299,7 +303,8 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched}">
                 <label>Email Address</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1">
+                <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1"
+                (change)="email2.value = email2.value.trim(); this.form.get('contact.emailaddress1').updateValueAndValidity();" #email2>
                 <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched ">
@@ -447,7 +452,13 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched}">
                 <label>Country</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country">
+                <!-- <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country"> -->
+                <select class="form-control" style="width: 250px;" formControlName="address1_country" (change)="form.get('contact.address1_postalcode').updateValueAndValidity()">
+                  <option value="Canada">Canada</option>
+                  <option value="United States of America">United States of America</option>
+                  <hr>
+                  <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                </select>
                 <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched ">
@@ -462,8 +473,9 @@
               <div [ngClass]="{'has-error': !form.get('worker.fromdate').valid && form.get('worker.fromdate').touched}">
                 <label>Date: From</label>
                 <br />
-                <input type="text" formControlName='fromdate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                  bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd"
+                  readonly class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                <mat-datepicker #picker></mat-datepicker>
                 <div *ngIf="form.get('worker.fromdate').touched && (!form.get('worker.fromdate').valid || form.get('worker.fromdate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="!form.get('worker.fromdate').valid">
@@ -479,8 +491,8 @@
               <div [ngClass]="{'has-error': form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)}">
                 <label>Date: To</label>
                 <br />
-                <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                  bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                <input type="text" formControlName='todate' readonly style="width: 200px;" placeholder="yyyy-mm-dd"
+                  class="form-control" [value]="form.get('worker.todate').value | date: 'yyyy-MM-dd'">
                 <div *ngIf="form.get('worker.todate').touched && (form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)">
@@ -560,7 +572,13 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.address2_country').valid && this.form.get('contact.address2_country').touched}">
                 <label>Country</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="address2_country">
+                <select class="form-control" style="width: 250px;" formControlName="address2_country" 
+                (change)="form.get('contact.address2_postalcode').updateValueAndValidity()">
+                  <option value="Canada">Canada</option>
+                  <option value="United States of America">United States of America</option>
+                  <hr>
+                  <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                </select>
                 <div *ngIf="!this.form.get('contact.address2_country').valid && this.form.get('contact.address2_country').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.address2_country').valid && this.form.get('contact.address2_country').touched ">
@@ -640,7 +658,13 @@
                   <div [ngClass]="{'has-error': !address.get('country').valid && address.get('country').touched}">
                     <label>Country</label>
                     <br />
-                    <input class="form-control" style="width: 250px;" type="text" formControlName="country">
+                    <select class="form-control" style="width: 250px;" formControlName="country"
+                    (change)="address.get('postalcode').updateValueAndValidity()">
+                      <option value="Canada">Canada</option>
+                      <option value="United States of America">United States of America</option>
+                      <hr>
+                      <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
+                    </select>
                     <div *ngIf="!address.get('country').valid && address.get('country').touched" class="alert alert-danger"
                       style="width: 250px;">
                       <div *ngIf="!address.get('country').valid && address.get('country').touched ">
@@ -653,8 +677,10 @@
                   <div [ngClass]="{'has-error': !address.get('fromdate').valid && address.get('fromdate').touched}">
                     <label>Date: From</label>
                     <br />
-                    <input type="text" formControlName='fromdate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                    <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;"
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [matDatepicker]="picker1" (focus)="picker1.open()"
+                      (click)="picker1.open()">
+                    <mat-datepicker #picker1></mat-datepicker>
                     <div *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
                       <div *ngIf="!address.get('fromdate').valid">
@@ -670,15 +696,17 @@
                   <div [ngClass]="{'has-error': !address.get('todate').valid && address.get('todate').touched}">
                     <label>Date: To</label>
                     <br />
-                    <input type="text" formControlName='todate' style="width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }">
+                    <input type="text" formControlName='todate' style="width: 200px; background-color: #fff;"
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [matDatepicker]="picker2" (focus)="picker2.open()"
+                      (click)="picker2.open()">
+                    <mat-datepicker #picker2></mat-datepicker>
                     <div *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
                       <div *ngIf="!address.get('todate').valid">
                         This is required
                       </div>
                       <div *ngIf="address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)">
-                        To Date should be greater than From Date
+                        To Date should be greater than From Datep
                       </div>
                     </div>
                   </div>
@@ -728,10 +756,14 @@
           </p>
           <ul>
             <li>
-              <a href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/change-personal-information">BC
+              <a style="color: #fff;" href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card/change-personal-information">BC
                 Service Card</a>
-              <a href="https://www.icbc.com/driver-licensing/getting-licensed/Pages/Change-your-address-or-name.aspx">ICBC</a>
-              <a href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a>
+            </li>
+            <li>
+              <a style="color: #fff;" href="https://www.icbc.com/driver-licensing/getting-licensed/Pages/Change-your-address-or-name.aspx">ICBC</a>
+            </li>
+            <li>
+              <a style="color: #fff;" href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a>
             </li>
           </ul>
         </div>

@@ -1,6 +1,7 @@
 <app-worker-terms-and-conditions (termsAccepted)="termsAccepted=$event" *ngIf="!termsAccepted"></app-worker-terms-and-conditions>
 
-<section *ngIf="termsAccepted">
+<section *ngIf="termsAccepted" style="position: relative">
+  <div [ngBusy]="busy"></div>
     <h2>Please confirm the name belonging to the BC Services card you provided</h2>
     <div>
       <p>
@@ -11,10 +12,10 @@
       </p>
       <div class="row">
         <div class="col-md-12 text-left">
-          <button class="btn btn-primary" (click)="confirmContact(true)">
+          <button class="btn btn-primary" (click)="cb.disabled = true; confirmContact(true)" #cb>
             <strong>Yes</strong>
           </button>
-          <button class="btn btn-secondary" (click)="confirmContact(false)">
+          <button class="btn btn-secondary" (click)="confirmContact(false)" style="margin-left: 10px;">
             <strong>No</strong>
           </button>
           <br>

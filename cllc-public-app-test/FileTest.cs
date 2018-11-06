@@ -354,8 +354,8 @@ namespace Gov.Lclb.Cllb.Public.Test
 
         // To disable this test run:
         // dotnet test --filter Category!=StressTests
-        [Trait("Category", "StressTests")]
-        [Fact]
+        //[Trait("Category", "StressTests")]
+        //[Fact]
         public async System.Threading.Tasks.Task Test100UploadFile()
         {
             // Create application
@@ -564,7 +564,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             files.ForEach(async file =>
             {
                 // Delete
-                request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + applicationId + $"/attachments/application?serverRelativeUrl={files[0].serverrelativeurl}");
+                request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + applicationId + $"/attachments/application?serverRelativeUrl={System.Uri.EscapeDataString(files[0].serverrelativeurl)}&documentType={System.Uri.EscapeDataString(documentType)}");
                 response = await _client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
             });
