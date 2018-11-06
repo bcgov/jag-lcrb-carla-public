@@ -44,6 +44,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetWorkers(string contactId)
         {
             List<ViewModels.Worker> results = new List<ViewModels.Worker>();
+
+            if (!CurrentUserHasAccessToContactWorkerApplicationOwnedBy(contactId))
+            {
+                return NotFound("No access to contact");
+            }
+
             if (!string.IsNullOrEmpty(contactId))
             {
                 Guid id = Guid.Parse(contactId);
@@ -89,11 +95,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
                 if (worker != null)
                 {
+                    if (!CurrentUserHasAccessToContactWorkerApplicationOwnedBy(worker?.AdoxioContactId?.Contactid))
+                    {
+                        return NotFound("No access to worker");
+                    }
                     result = worker.ToViewModel();
                 }
                 else
                 {
-                    return new NotFoundResult();
+                    return NotFound();
                 }
             }
             else
@@ -119,11 +129,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the contact
             Guid workerId = Guid.Parse(id);
+            string filter = $"adoxio_workerid eq {id}";
+            var fields = new List<string> { "adoxio_ContactId" };
+            MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
 
-            MicrosoftDynamicsCRMadoxioWorker worker = await _dynamicsClient.GetWorkerById(Guid.Parse(item.id));
             if (worker == null)
             {
                 return new NotFoundResult();
+            }
+
+            if (!CurrentUserHasAccessToContactWorkerApplicationOwnedBy(worker?.AdoxioContactId?.Contactid))
+            {
+                return NotFound("No access to worker");
+            }
+
+            if (worker.Statuscode != (int)ViewModels.StatusCode.NotSubmitted)
+            {
+                return BadRequest("Applications with this status cannot be updated");
             }
             MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
             patchWorker.CopyValues(item);
@@ -138,6 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
+                throw odee;
             }
             worker = await _dynamicsClient.GetWorkerById(workerId);
             return Json(worker.ToViewModel());
@@ -155,7 +178,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // create a new worker.
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker();
+            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker()
+            {
+                IsManual = 0 // 0 for false - is a portal user.
+            };
             worker.CopyValues(item);
             if (item?.contact?.id == null)
             {
@@ -188,11 +214,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteWorker(string id)
         {
-            MicrosoftDynamicsCRMadoxioWorker worker = await _dynamicsClient.GetWorkerById(Guid.Parse(id));
+            string filter = $"adoxio_workerid eq {id}";
+            var fields = new List<string> { "adoxio_ContactId" };
+            MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
             if (worker == null)
             {
                 return new NotFoundResult();
             }
+
+            if (!CurrentUserHasAccessToContactWorkerApplicationOwnedBy(worker?.AdoxioContactId?.Contactid))
+            {
+                return NotFound("No access to worker");
+            }
+
             await _dynamicsClient.Workers.DeleteAsync(id);
             return NoContent(); // 204
         }
@@ -211,6 +245,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (adoxioWorker == null)
             {
                 throw new Exception("Error getting worker.");
+            }
+
+            if (!CurrentUserHasAccessToContactWorkerApplicationOwnedBy(adoxioWorker?.AdoxioContactId?.Contactid))
+            {
+                return NotFound("No access to worker");
             }
 
             var dateOfBirthParam = "";
@@ -263,6 +302,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 basePath += "/worker-qualification/dashboard";
                 return Redirect(basePath);
             }
+        }
+
+        /// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        private bool CurrentUserHasAccessToWorkerApplicationOwnedBy(string accountId)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
+            // TODO there may be some account relationships in the future
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return userSettings.AccountId == accountId;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
+        }
+
+        /// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        private bool CurrentUserHasAccessToContactWorkerApplicationOwnedBy(string contactid)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
+            // TODO there may be some account relationships in the future
+            if (userSettings.ContactId != null && userSettings.ContactId.Length > 0)
+            {
+                return userSettings.ContactId == contactid;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
         }
     }
 }

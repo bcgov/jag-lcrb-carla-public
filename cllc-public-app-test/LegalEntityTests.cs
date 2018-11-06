@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Test
           : base(factory)
         { }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
             string service = "adoxiolegalentity";
@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string _discard = await response.Content.ReadAsStringAsync();
         }
 
-		[Fact]
+		//[Fact]
 		public async System.Threading.Tasks.Task TestNewAccountHasNoShareholdersOrDirectors()
 		{
 			string service = "adoxiolegalentity";
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await LogoutAndCleanupTestUser(strId);
 		}
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
 			string changedName = randomNewUserName("LETest ChangedName", 6);
@@ -205,7 +205,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await LogoutAndCleanupTestUser(strId);
         }
 
-		[Fact]
+		//[Fact]
 		public async System.Threading.Tasks.Task TestAddShareholderAndDirector()
 		{
 			string service = "adoxiolegalentity";
@@ -346,7 +346,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await LogoutAndCleanupTestUser(strId);
 		}
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task TestFileUpload()
         {
             // First create a Legal Entity
@@ -440,7 +440,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
         }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task VerifyConsentCode__WithAGoodCode()
         {
             var loginUser = randomNewUserName("NewLoginUser", 6);
@@ -468,7 +468,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
         }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task VerifyConsentCode__WithABadCode()
         {
             var loginUser = randomNewUserName("NewLoginUser", 6);
@@ -498,7 +498,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
         }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task TestFileListing()
         {
             string initialName = randomNewUserName("First InitialName", 6);
@@ -586,7 +586,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
         }
 
-        [Fact]
+        //[Fact]
 		public async System.Threading.Tasks.Task TestGetDynamicsLegalEntitiesByPosition()
 		{
             var loginUser = randomNewUserName("LegalEntityByPosTest", 6);
@@ -631,7 +631,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
         }
 
-        [Fact]
+        //[Fact]
         public async System.Threading.Tasks.Task TestThreeTierShareholders()
         {
             string service = "adoxiolegalentity";
