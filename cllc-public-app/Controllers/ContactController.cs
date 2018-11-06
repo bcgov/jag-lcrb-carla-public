@@ -261,7 +261,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker() {
                 AdoxioFirstname = item.firstname,
                 AdoxioMiddlename = item.middlename,
-                AdoxioLastname = item.lastname
+                AdoxioLastname = item.lastname,
+                IsManual = 0 // 0 for false - is a portal user.
             };
             contact.CopyValues(item);
 
