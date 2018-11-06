@@ -382,7 +382,7 @@ export class WorkerApplicationComponent implements OnInit {
       return res;
     });
 
-    // The commented out code makes sure there are gaps in the address dates
+    // The commented out code makes sure there are no gaps in the address dates
     // verify there is no gap between dates
     // let isContinuous = true;
     // for (let i = 1; i < dateRanges.length; i++) {
