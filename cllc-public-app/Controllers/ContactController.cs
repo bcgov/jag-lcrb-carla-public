@@ -261,7 +261,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker() {
                 AdoxioFirstname = item.firstname,
                 AdoxioMiddlename = item.middlename,
-                AdoxioLastname = item.lastname
+                AdoxioLastname = item.lastname,
+                IsManual = 0 // 0 for false - is a portal user.
             };
             contact.CopyValues(item);
 
@@ -289,6 +290,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
+
+                //fail
+                throw odee;
             }
 
 
@@ -349,14 +353,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError($"FolderName is: {folderName}");
                     throw e;
                 }
-
             }
 
             // Create the SharePointDocumentLocation entity
             MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
             {
                 Relativeurl = folderName,
-                Description = "Worker Qualification Files",
+                Description = "Worker Qualification",
                 Name = name
             };
 
@@ -381,7 +384,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var patchSharePointDocumentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation();
                 patchSharePointDocumentLocation.RegardingobjectidWorkerApplicationODataBind = workerReference;
                 // set the parent document library.
-                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("adoxio_worker");
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL(SharePointFileManager.WorkertDocumentUrlTitle);
                 patchSharePointDocumentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference);
 
                 try
@@ -437,12 +440,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (location == null)
             {
                 //get parent location 
-                var parentLocation = _dynamicsClient.SharepointDocumentLocations
-                    .Get(filter: "relativeurl eq ''").Value.FirstOrDefault();
+                var parentSite = _dynamicsClient.SharepointSites.Get().Value.FirstOrDefault();
+                var parentSiteRef = _dynamicsClient.GetEntityURI("sharepointsites", parentSite.Sharepointsiteid);
                 MicrosoftDynamicsCRMsharepointdocumentlocation newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation()
                 {
                     Relativeurl = relativeUrl,
-                    Name = "Documents on Default Site 1"
+                    Name = "Worker Qualification",
+                    ParentSiteODataBind = parentSiteRef
                 };
                 // create a new document location.
                 try
