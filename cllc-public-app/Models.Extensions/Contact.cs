@@ -246,6 +246,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Firstname = from.firstname;
             to.Middlename = from.middlename;
             to.Lastname = from.lastname;
+            to.Emailaddress1 = from.emailaddress1;
             to.Address1City = from.address1_city;
             to.Address1Country = from.address1_country;
             to.Address1Line1 = from.address1_line1;

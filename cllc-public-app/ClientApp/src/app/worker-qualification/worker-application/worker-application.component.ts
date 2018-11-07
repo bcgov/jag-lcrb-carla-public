@@ -300,7 +300,9 @@ export class WorkerApplicationComponent implements OnInit {
 
   save(): Subject<boolean> {
     const subResult = new Subject<boolean>();
-    const value = this.form.value;
+    const value = {...this.form.value};
+    // Make sure the contact email is also updated
+    value.contact.emailaddress1 = value.worker.email;
     const saves = [
       this.contactDataService.updateContact(value.contact),
       this.workerDataService.updateWorker(value.worker, value.worker.id)
