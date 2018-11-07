@@ -522,13 +522,17 @@ namespace Gov.Lclb.Cllb.Interfaces
                         MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
                         MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                         patchContact.CopyValues(contactVM);
-                        patchWorker.CopyValuesNoEmailPhone(workerVm);
+                        patchWorker.CopyValues(workerVm);
                         try
                         {
                             string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
                             var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
                             foreach (var item in workers)
                             {
+                                //Do not overide the email
+                                patchWorker.AdoxioEmail = item.AdoxioEmail;
+                                //Do not overinde the phone
+                                patchWorker.AdoxioPhonenumber = item.AdoxioPhonenumber;
                                 _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
 
                             }

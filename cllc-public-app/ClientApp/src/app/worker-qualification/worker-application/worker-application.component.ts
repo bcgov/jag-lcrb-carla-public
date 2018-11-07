@@ -69,6 +69,8 @@ export class WorkerApplicationComponent implements OnInit {
   saveFormData: any;
   workerStatus: string;
 
+  currentDate: Date = new Date();
+  minDate: Date;
   bsConfig: any = { locale: 'en', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
 
   public get addresses(): FormArray {
@@ -90,6 +92,10 @@ export class WorkerApplicationComponent implements OnInit {
     private route: ActivatedRoute,
 
   ) {
+  // minDate is a 100 year ago
+  this.minDate = new Date();
+  this.minDate.setFullYear(this.minDate.getFullYear() - 100);
+
     this.route.params.subscribe(params => {
       this.workerId = params.id;
     });
