@@ -449,23 +449,9 @@
               </div>
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched}">
-                <label>Country</label>
+               <label>Country</label>
                 <br />
-                <!-- <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country"> -->
-                <select class="form-control" style="width: 250px;" formControlName="address1_country" (change)="form.get('contact.address1_postalcode').updateValueAndValidity()">
-                  <option value="Canada">Canada</option>
-                  <option value="United States of America">United States of America</option>
-                  <hr>
-                  <option *ngFor="let c of countryList" value="{{c}}">{{c}}</option>
-                </select>
-                <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched"
-                  class="alert alert-danger" style="width: 250px;">
-                  <div *ngIf="!this.form.get('contact.address1_country').valid && this.form.get('contact.address1_country').touched ">
-                    This is required
-                  </div>
-                </div>
-              </div>
+                <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country">                               
             </section>
           </div>
           <div formGroupName="worker">
