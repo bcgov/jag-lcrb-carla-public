@@ -474,7 +474,7 @@
                 <label>Date: From</label>
                 <br />
                 <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd"
-                  readonly class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                  readonly class="form-control" [min]="minDate" [max]="currentDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
                 <mat-datepicker #picker></mat-datepicker>
                 <div *ngIf="form.get('worker.fromdate').touched && (!form.get('worker.fromdate').valid || form.get('worker.fromdate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
@@ -678,7 +678,7 @@
                     <label>Date: From</label>
                     <br />
                     <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;"
-                      placeholder="yyyy-mm-dd" class="form-control" readonly [matDatepicker]="picker1" (focus)="picker1.open()"
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate" [matDatepicker]="picker1" (focus)="picker1.open()"
                       (click)="picker1.open()">
                     <mat-datepicker #picker1></mat-datepicker>
                     <div *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
@@ -697,7 +697,7 @@
                     <label>Date: To</label>
                     <br />
                     <input type="text" formControlName='todate' style="width: 200px; background-color: #fff;"
-                      placeholder="yyyy-mm-dd" class="form-control" readonly [matDatepicker]="picker2" (focus)="picker2.open()"
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate" [matDatepicker]="picker2" (focus)="picker2.open()"
                       (click)="picker2.open()">
                     <mat-datepicker #picker2></mat-datepicker>
                     <div *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
