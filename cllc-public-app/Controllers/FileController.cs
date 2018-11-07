@@ -128,7 +128,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Update modifiedon to current time
             UpdateEntityModifiedOnDate(entityName, entityId);
 
-            // Sanatize file name
+            // Sanitize file name
             Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
             string fileName = illegalInFileName.Replace(file.FileName, "");
             illegalInFileName = new Regex(@"[&:/\\]");
