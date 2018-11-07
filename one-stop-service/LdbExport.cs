@@ -41,8 +41,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             List<MicrosoftDynamicsCRMadoxioLicences> result = null;
             string filter = $"adoxio_businessprogramaccountreferencenumber eq null";
-            List<string> expand = new List<string>();
-            expand.Add("adoxio_establishment");
+            var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
             try
             {
                 result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.ToList();
@@ -150,7 +149,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 new KeyValuePair<string, string>("AdoxioLicenceprintname", "Licence Type"),
                 new KeyValuePair<string, string>("licence.AdoxioLicencee.Name", "Legal Name"),
                 new KeyValuePair<string, string>("AdoxioLicencenumber", "Licence Number"),
-                new KeyValuePair<string, string>("AdoxioBusinessnumber", "Business Number"),
+                new KeyValuePair<string, string>("licence.AdoxioLicencee.Accountnumber", "Business Number"),
                 new KeyValuePair<string, string>("AdoxioEffectivedate", "Effective Date"),
                 new KeyValuePair<string, string>("AdoxioExpirydate", "Expiry Date"),
                 new KeyValuePair<string, string>("AdoxioEstablishment.AdoxioName", "Establishment Name"),
