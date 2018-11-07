@@ -92,9 +92,9 @@ export class WorkerApplicationComponent implements OnInit {
     private route: ActivatedRoute,
 
   ) {
-  // minDate is a 100 year ago
-  this.minDate = new Date();
-  this.minDate.setFullYear(this.minDate.getFullYear() - 100);
+    // minDate is a 100 year ago
+    this.minDate = new Date();
+    this.minDate.setFullYear(this.minDate.getFullYear() - 100);
 
     this.route.params.subscribe(params => {
       this.workerId = params.id;
@@ -110,11 +110,11 @@ export class WorkerApplicationComponent implements OnInit {
         lastname: [''],
         emailaddress1: [''],
         telephone1: [''],
-        address1_line1: ['', Validators.required],
-        address1_city: ['', Validators.required],
-        address1_stateorprovince: ['', Validators.required],
-        address1_country: ['', Validators.required],
-        address1_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address1_country')]],
+        address1_line1: [{ value: '', disabled: true }],
+        address1_city: [{ value: '', disabled: true }],
+        address1_stateorprovince: [{ value: '', disabled: true }],
+        address1_country: [{ value: '', disabled: true }],
+        address1_postalcode: [{ value: '', disabled: true }],
         address2_line1: ['', Validators.required],
         address2_city: ['', Validators.required],
         address2_stateorprovince: ['', Validators.required],
@@ -307,7 +307,7 @@ export class WorkerApplicationComponent implements OnInit {
     ];
 
     this.addressesToDelete.forEach(a => {
-      const save = this.previousAddressDataService.deletePreviousAdderess(a.id);
+      const save = this.previousAddressDataService.deletePreviousAddress(a.id);
       saves.push(save);
     });
 
