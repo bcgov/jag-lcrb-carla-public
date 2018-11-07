@@ -1,5 +1,5 @@
 <div [ngClass]="{'extra-padding-left': !fullWidth }">
-  <div [ngBusy]="busy"></div>
+  <!-- <div [ngBusy]="busy"></div> -->
   <div class="row" *ngIf="policyDocument && dataLoaded">
     <div class="col-md-2" *ngIf="category">
       <app-policy-document-sidebar *ngIf="policyDocument" (slugChange)="setSlug($event)" [category]="category"></app-policy-document-sidebar>
