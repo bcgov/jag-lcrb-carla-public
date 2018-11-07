@@ -325,7 +325,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // Verify that the file can be downloaded and the contents match
             // {entityId}/download-file/{entityName}"
-            string serverrelativeurl = Uri.EscapeDataString( files[0].serverrelativeurl );
+            string serverrelativeurl = Uri.EscapeDataString(files[0].serverrelativeurl);
             string fileName = files[0].name;
 
             request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{contactId}/download-file/contact/{fileName}?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
@@ -347,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             files = JsonConvert.DeserializeObject<List<FileSystemItem>>(jsonString);
             Assert.True(files.Count == 0);
 
-           
+
 
             await LogoutAndCleanupTestUser(strId);
         }
@@ -571,6 +571,124 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             await LogoutAndCleanupTestUser(strId);
         }
-    }
 
+        [Fact]
+        public async System.Threading.Tasks.Task TestIllegalFileNames()
+        {
+            // First create a Legal Entity
+
+            string initialName = randomNewUserName("LETest InitialName", 6);
+            const string applicationService = "adoxioapplication";
+            const string fileService = "file";
+
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+            User user = await GetCurrentUser();
+
+            // C - Create
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + applicationService);
+            Account currentAccount1 = await GetAccountForCurrentUser();
+            AdoxioApplication viewmodel_application = new AdoxioApplication()
+            {
+                name = initialName,
+                applyingPerson = "Applying Person",
+                applicant = currentAccount1,
+                applicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
+                ,
+                jobNumber = "123",
+                licenseType = "Cannabis Retail Store",
+                establishmentName = "Private Retail Store",
+                establishmentAddress = "666 Any Street, Victoria, BC, V1X 1X1",
+                establishmentaddressstreet = "666 Any Street",
+                establishmentaddresscity = "Victoria, BC",
+                establishmentaddresspostalcode = "V1X 1X1",
+                applicationStatus = AdoxioApplicationStatusCodes.Active
+            };
+
+            var jsonString = JsonConvert.SerializeObject(viewmodel_application);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // parse as JSON.
+            jsonString = await response.Content.ReadAsStringAsync();
+            AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<AdoxioApplication>(jsonString);
+
+            string id = responseViewModel.id;
+
+            // Attach a file
+
+            string testData = "This is just a test.";
+            byte[] bytes = Encoding.ASCII.GetBytes(testData);
+            string documentType = "Test Document Type";
+
+            // Create bad file name
+            string fileName = "test#%&*:<>?\\/{|}~file.txt";
+            string cleanFileName = "test-----file.txt";
+
+            MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
+            var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = "File",
+                FileName = fileName
+            };
+            multiPartContent.Add(fileContent);
+            multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
+
+            string applicationId = responseViewModel.id;
+
+            // create a new request object for the upload, as we will be using multipart form submission.
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + fileService + "/" + applicationId + "/attachments/application");
+            requestMessage.Content = multiPartContent;
+
+            var uploadResponse = await _client.SendAsync(requestMessage);
+            uploadResponse.EnsureSuccessStatusCode();
+
+            // Verify that the file Meta Data matches
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/attachments/application/{Uri.EscapeDataString(documentType)}");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            var files = JsonConvert.DeserializeObject<List<FileSystemItem>>(jsonString);
+            Assert.True(files.Count > 0);
+
+            string serverrelativeurl = files[0].serverrelativeurl;
+            fileName = files[0].name;
+            Assert.Equal(fileName, cleanFileName);
+
+            // Verify that the file can be downloaded and the contents match
+            // {entityId}/download-file/{entityName}"
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/download-file/application/{fileName}?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // Cleanup the Application
+
+            request = new HttpRequestMessage(HttpMethod.Delete, "/api/" + fileService + "/" + id + $"/attachments/application/?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // should get a 404 if we try a get now.
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/attachments/application/{fileName}?serverRelativeUrl={serverrelativeurl}&documentType={documentType}");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+            files = JsonConvert.DeserializeObject<List<FileSystemItem>>(jsonString);
+            Assert.True(files.Count == 0);
+
+            // Cleanup the Application
+
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + applicationService + "/" + id + "/delete");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            await LogoutAndCleanupTestUser(strId);
+        }
+    }
 }
