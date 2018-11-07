@@ -531,7 +531,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                             {
                                 //Do not overide the email
                                 patchWorker.AdoxioEmail = item.AdoxioEmail;
-                                //Do not overinde the phone
+                                //Do not overide the phone
                                 patchWorker.AdoxioPhonenumber = item.AdoxioPhonenumber;
                                 _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
 
