@@ -38,6 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = "TestFirst";
             string changedName = "ChangedName";
+            string changedEmail = "newEmail@gov.bc.ca";
             string service = "contact";
 
             // register and login as our first user
@@ -51,7 +52,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Contact contactVM = new ViewModels.Contact() {
                 firstname  = initialName,
                 middlename = "TestMiddle",
-                lastname = "TestLst"
+                lastname = "TestLst",
+                emailaddress1 = "testEmail@gov.bc.ca"
             };
 
             string jsonString = JsonConvert.SerializeObject(contactVM);
@@ -70,11 +72,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             var workerVM = JsonConvert.DeserializeObject<List<ViewModels.Worker>>(jsonString).FirstOrDefault();
             Assert.NotNull(workerVM?.id);
-
-
-
+            
             // U - Update            
-           workerVM.firstname = changedName;
+            workerVM.firstname = changedName;
+            workerVM.email = changedEmail;
             request = new HttpRequestMessage(HttpMethod.Put, "/api/worker/" + workerVM.id)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(workerVM), Encoding.UTF8, "application/json")
@@ -90,6 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             var worker2 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
             Assert.Equal(changedName, worker2.firstname);
+            Assert.Equal(changedEmail, worker2.email);
 
             // D - Delete
 
