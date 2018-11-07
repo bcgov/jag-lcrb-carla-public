@@ -234,9 +234,15 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
+        {            
+            to.Emailaddress1 = from.emailaddress1;         
+            to.Telephone1 = from.telephone1;
+            to.CopyValuesNoEmailPhone(from);
+        }
+
+        public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
         {
-            to.Fullname = from.name;
-            to.Emailaddress1 = from.emailaddress1;
+            to.Fullname = from.name;            
             to.Firstname = from.firstname;
             to.Middlename = from.middlename;
             to.Lastname = from.lastname;
@@ -256,7 +262,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCansigngrocerystoreproofofsalesrevenue = from.adoxio_cansigngrocerystoreproofofsalesrevenue;
             to.AdoxioCansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
             to.AdoxioCansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
-            to.Telephone1 = from.telephone1;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
