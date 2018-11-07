@@ -3,9 +3,11 @@ using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
@@ -35,16 +37,15 @@ namespace Gov.Lclb.Cllb.SpdSync
         public void ConfigureServices(IServiceCollection services)
         {
             
-
             services.AddMvc(config =>
             {
-                // if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
-                // {
-                //     var policy = new AuthorizationPolicyBuilder()
-                //                  .RequireAuthenticatedUser()
-                //                  .Build();
-                //     config.Filters.Add(new AuthorizeFilter(policy));
-                // }
+                if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+                {
+                     var policy = new AuthorizationPolicyBuilder()
+                                  .RequireAuthenticatedUser()
+                                  .Build();
+                     config.Filters.Add(new AuthorizeFilter(policy));
+                }
             });
 
             // Other ConfigureServices() code...

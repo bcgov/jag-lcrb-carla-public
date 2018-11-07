@@ -92,7 +92,7 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "spd-sync"
+      "value": "spd-sync-service"
     },
     {
       "name": "GIT_REPO_URL",
@@ -106,7 +106,7 @@
       "displayName": "Git Reference",
       "description": "The git reference or branch.",
       "required": true,
-      "value": "spd-sync"
+      "value": "develop"
     },
     {
       "name": "SOURCE_CONTEXT_DIR",
@@ -120,14 +120,14 @@
       "displayName": "Source Image Kind",
       "description": "The 'kind' (type) of the  source image; typically ImageStreamTag, or DockerImage.",
       "required": true,
-      "value": "DockerImage"
+      "value": "ImageStreamTag"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "registry.access.redhat.com/dotnet/dotnet-21-rhel7"
+      "value": "dotnet-21-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
@@ -162,7 +162,7 @@
       "displayName": "Resources Memory Limit",
       "description": "The resources Memory limit (in Mi, Gi, etc) for this build.",
       "required": true,
-      "value": "6Gi"
+      "value": "4Gi"
     },   
     {
       "name": "CPU_REQUEST",
@@ -176,7 +176,7 @@
       "displayName": "Resources Memory Request",
       "description": "The resources Memory request (in Mi, Gi, etc) for this build.",
       "required": true,
-      "value": "4Gi"
+      "value": "3Gi"
     }
   ]
 }
