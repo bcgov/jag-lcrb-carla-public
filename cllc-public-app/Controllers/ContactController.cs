@@ -266,6 +266,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             };
             contact.CopyValues(item);
 
+            //Default the country to Canada
+            if (string.IsNullOrEmpty(contact.Address1Country))
+            {
+                contact.Address1Country = "Canada";
+            }
+            if (string.IsNullOrEmpty(contact.Address2Country))
+            {
+                contact.Address2Country = "Canada";
+            }
+
             if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null && !_env.IsDevelopment())
             {
                 // get additional information from the service card headers.

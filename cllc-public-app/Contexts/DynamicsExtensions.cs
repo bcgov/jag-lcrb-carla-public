@@ -482,7 +482,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         // Update the contact with info from Siteminder
                         var contactVM = new Public.ViewModels.Contact();
                         contactVM.CopyHeaderValues(Headers);
-                        _logger.LogInformation(">>>> After reading hearders: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
+                        _logger.LogInformation(">>>> After reading headers: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
                         MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
                         patchContact.CopyValues(contactVM);
                         try
@@ -529,6 +529,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                             var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
                             foreach (var item in workers)
                             {
+                                //Do not overide the email
+                                patchWorker.AdoxioEmail = item.AdoxioEmail;
+                                //Do not overinde the phone
+                                patchWorker.AdoxioPhonenumber = item.AdoxioPhonenumber;
                                 _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
 
                             }
