@@ -48,7 +48,7 @@ export class PreviousAddressDataService {
    * delete a  address in Dynamics
    * @param data - address data
    */
-  deletePreviousAdderess(id: string) {
+  deletePreviousAddress(id: string) {
     return this.http.post<PreviousAddress>(`api/previousaddress/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError('deletePreviousAddress', null)));
   }
