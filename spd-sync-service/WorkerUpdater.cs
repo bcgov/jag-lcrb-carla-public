@@ -30,7 +30,7 @@ namespace SpdSync
         public WorkerUpdater(IConfiguration Configuration, ILoggerFactory loggerFactory, SharePointFileManager sharePointFileManager)
         {
             this.Configuration = Configuration;
-            _logger = loggerFactory.CreateLogger(typeof(WorkerUpdater));            
+            _logger = loggerFactory.CreateLogger(typeof(WorkerUpdater));
             _dynamics = SpdUtils.SetupDynamics(Configuration);
             _sharePointFileManager = sharePointFileManager;
         }
@@ -65,7 +65,7 @@ namespace SpdSync
                 foreach (var file in unprocessedFiles)
                 {
                     // Skip if file is not .csv
-                    if(Path.GetExtension(file.name) != ".csv")
+                    if (Path.GetExtension(file.name) != ".csv")
                     {
                         continue;
                     }
@@ -94,7 +94,7 @@ namespace SpdSync
                             hangfireContext.WriteLine(spre.Request.Content);
                             hangfireContext.WriteLine("Response:");
                             hangfireContext.WriteLine(spre.Response.Content);
-                            
+
                             _logger.LogError("Unable to update security clearance status due to SharePoint.");
                             _logger.LogError("Request:");
                             _logger.LogError(spre.Request.Content);
@@ -204,7 +204,7 @@ namespace SpdSync
             MicrosoftDynamicsCRMadoxioPersonalhistorysummary response = null;
             try
             {
-               response =  _dynamics.Personalhistorysummaries.Get(filter: filter).Value.FirstOrDefault();
+                response = _dynamics.Personalhistorysummaries.Get(filter: filter).Value.FirstOrDefault();
             }
             catch (OdataerrorException odee)
             {
@@ -222,54 +222,30 @@ namespace SpdSync
                 throw odee;
             }
 
-            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-            {
-                SecurityStatus = (int) Enum.Parse(typeof(SecurityStatusPicklist), spdResponse.Result, true),
-                SecurityCompletedOn = spdResponse.DateProcessed
-            };
             MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchPHS = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary
             {
                 AdoxioSecuritystatus = (int)Enum.Parse(typeof(SecurityStatusPicklist), spdResponse.Result, true),
                 AdoxioCompletedon = spdResponse.DateProcessed
             };
 
-            if (patchWorker != null)
+            try
             {
-                try
-                {
-                    await _dynamics.Workers.UpdateAsync(response._adoxioWorkeridValue, patchWorker);
-                }
-                catch (Exception e)
-                {
-                    hangfireContext.WriteLine("Unable to patch worker.");
-                    hangfireContext.WriteLine("Message:");
-                    hangfireContext.WriteLine(e.Message);
+                await _dynamics.Personalhistorysummaries.UpdateAsync(response.AdoxioPersonalhistorysummaryid, patchPHS);
+            }
+            catch (OdataerrorException odee)
+            {
+                hangfireContext.WriteLine("Unable to patch personal history summary.");
+                hangfireContext.WriteLine("Request:");
+                hangfireContext.WriteLine(odee.Request.Content);
+                hangfireContext.WriteLine("Response:");
+                hangfireContext.WriteLine(odee.Response.Content);
 
-                    _logger.LogError("Unable to patch worker.");
-                    _logger.LogError("Message:");
-                    _logger.LogError(e.Message);
-                    throw e;
-                }
-
-                try
-                {
-                    await _dynamics.Personalhistorysummaries.UpdateAsync(response.AdoxioPersonalhistorysummaryid, patchPHS);
-                }
-                catch (OdataerrorException odee)
-                {
-                    hangfireContext.WriteLine("Unable to patch personal history summary.");
-                    hangfireContext.WriteLine("Request:");
-                    hangfireContext.WriteLine(odee.Request.Content);
-                    hangfireContext.WriteLine("Response:");
-                    hangfireContext.WriteLine(odee.Response.Content);
-
-                    _logger.LogError("Unable to patch personal history summary.");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Request.Content);
-                    throw odee;
-                }   
+                _logger.LogError("Unable to patch personal history summary.");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Request.Content);
+                throw odee;
             }
         }
     }
