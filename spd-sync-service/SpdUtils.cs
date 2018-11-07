@@ -91,23 +91,23 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                     foreach (var h in headerDefinition)
                     {
+                        string newValue = "\"\"";
                         try
                         {
                             object value = row[h.Key];
                             if (value != null)
                             {
-                                item.Add($"\"{value.ToString()}\"");
-                            }
-                            else
-                            {
-                                item.Add("\"\"");
-                            }
+                                newValue = $"\"{value.ToString()}\"";
+                            }                            
 
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
-                            item.Add("\"\""); ;
+                            _logger.LogError("Exception occured during SPD export.");
+                            _logger.LogError($"Field is {h.Key}");
+                            _logger.LogError(e.Message);
                         }
+                        item.Add(newValue);
                     }
                     csvList.Add(item);
 
@@ -441,7 +441,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 new KeyValuePair<string, string>("AdoxioPreviousstreetaddressx", "PREV STREET x"),
                 new KeyValuePair<string, string>("AdoxioPreviouscityx", "PREV CITY x"),
                 new KeyValuePair<string, string>("AdoxioPreviousprovstatex", "PREV PROVINCE x"),
-                new KeyValuePair<string, string>("AdoxioPreviouspostalcodex", "PREV POSTCODEx"),
+                new KeyValuePair<string, string>("AdoxioPreviouspostalcodex", "PREV POSTCODE x"),
                 new KeyValuePair<string, string>("AdoxioPreviouscountryx", "PREV COUNTRY x"),
             };
             return result;
