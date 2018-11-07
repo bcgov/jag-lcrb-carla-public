@@ -226,7 +226,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            // first check to see that a contact exists.
+            // first check to see that we have the correct inputs.
             string contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
@@ -264,7 +264,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 AdoxioLastname = item.lastname,
                 IsManual = 0 // 0 for false - is a portal user.
             };
+
+
             contact.CopyValues(item);
+            // set the type to Retail Worker.
+            contact.Customertypecode = 845280000;
 
             //Default the country to Canada
             if (string.IsNullOrEmpty(contact.Address1Country))
