@@ -222,35 +222,14 @@ namespace SpdSync
                 throw odee;
             }
 
-            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-            {
-                SecurityStatus = (int) Enum.Parse(typeof(SecurityStatusPicklist), spdResponse.Result, true),
-                SecurityCompletedOn = spdResponse.DateProcessed
-            };
             MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchPHS = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary
             {
                 AdoxioSecuritystatus = (int)Enum.Parse(typeof(SecurityStatusPicklist), spdResponse.Result, true),
                 AdoxioCompletedon = spdResponse.DateProcessed
             };
 
-            if (patchWorker != null)
+            if (patchPHS != null)
             {
-                try
-                {
-                    await _dynamics.Workers.UpdateAsync(response._adoxioWorkeridValue, patchWorker);
-                }
-                catch (Exception e)
-                {
-                    hangfireContext.WriteLine("Unable to patch worker.");
-                    hangfireContext.WriteLine("Message:");
-                    hangfireContext.WriteLine(e.Message);
-
-                    _logger.LogError("Unable to patch worker.");
-                    _logger.LogError("Message:");
-                    _logger.LogError(e.Message);
-                    throw e;
-                }
-
                 try
                 {
                     await _dynamics.Personalhistorysummaries.UpdateAsync(response.AdoxioPersonalhistorysummaryid, patchPHS);
