@@ -520,22 +520,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                         contactVM.CopyHeaderValues(Headers);
                         workerVm.CopyHeaderValues(Headers);
                         MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
-                        MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
-                        patchContact.CopyValues(contactVM);
-                        patchWorker.CopyValues(workerVm);
+                        
+                        patchContact.CopyValuesNoEmailPhone(contactVM);                        
                         try
-                        {
-                            string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
-                            var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
-                            foreach (var item in workers)
-                            {
-                                //Do not overide the email
-                                patchWorker.AdoxioEmail = item.AdoxioEmail;
-                                //Do not overinde the phone
-                                patchWorker.AdoxioPhonenumber = item.AdoxioPhonenumber;
-                                _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
-
-                            }
+                        {                            
                             _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
                         }
                         catch (OdataerrorException odee)
@@ -545,9 +533,31 @@ namespace Gov.Lclb.Cllb.Interfaces
                             _logger.LogError(odee.Request.Content);
                             _logger.LogError("Response:");
                             _logger.LogError(odee.Response.Content);
-                            // fail if we can't create.
+                            // fail if we can't update.
                             throw (odee);
                         }
+
+                        // update worker(s)
+                        try
+                        {
+                            string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
+                            var workers = _dynamicsClient.Workers.Get(filter: filter).Value;
+                            foreach (var item in workers)
+                            {
+                                MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
+                                patchWorker.CopyValuesNoEmailPhone(workerVm);
+                                _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
+                            }
+                        }
+                        catch (OdataerrorException odee)
+                        {
+                            _logger.LogError("Error updating Worker");
+                            _logger.LogError("Request:");
+                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError("Response:");
+                            _logger.LogError(odee.Response.Content);
+                        }
+
                     }
                 }
             }

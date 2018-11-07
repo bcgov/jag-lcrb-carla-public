@@ -665,41 +665,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        // public async Task<bool> RenameFile(string oldServerRelativeUrl, string newServerRelativeUrl)
-        // {
-        //     bool result = false;
-        //     string url = $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{newServerRelativeUrl}', flags=1)";
+        public async Task<bool> RenameFile(string oldServerRelativeUrl, string newServerRelativeUrl)
+        {
+            bool result = false;
+            string url = $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{newServerRelativeUrl}', flags=1)";
 
-        //     HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, url);
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, url);
 
-        //     // We want to delete this file.
-        //     endpointRequest.Headers.Add("IF-MATCH", "*");
+            // We want to delete this file.
+            endpointRequest.Headers.Add("IF-MATCH", "*");
 
-        //     // make the request.
-        //     var response = await client.SendAsync(endpointRequest);
+            // make the request.
+            var response = await client.SendAsync(endpointRequest);
 
-        //     if (response.StatusCode == HttpStatusCode.OK)
-        //     {
-        //         result = true;
-        //     }
-        //     else
-        //     {
-        //         string _responseContent = null;
-        //         var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
-        //         _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-        //         ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
-        //         ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result = true;
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
 
-        //         endpointRequest.Dispose();
-        //         if (response != null)
-        //         {
-        //             response.Dispose();
-        //         }
-        //         throw ex;
-        //     }
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
 
-        //     return result;
-        // }
+            return result;
+        }
     }
 
    class DocumentLibraryResponse
