@@ -131,7 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Sanitize file name
             Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
             string fileName = illegalInFileName.Replace(file.FileName, "");
-            illegalInFileName = new Regex(@"[&:/\\]");
+            illegalInFileName = new Regex(@"[&:/\\|]");
             fileName = illegalInFileName.Replace(fileName, "-");
 
             fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
