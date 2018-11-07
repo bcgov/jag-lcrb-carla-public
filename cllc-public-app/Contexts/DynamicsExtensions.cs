@@ -482,7 +482,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         // Update the contact with info from Siteminder
                         var contactVM = new Public.ViewModels.Contact();
                         contactVM.CopyHeaderValues(Headers);
-                        _logger.LogInformation(">>>> After reading hearders: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
+                        _logger.LogInformation(">>>> After reading headers: " + Newtonsoft.Json.JsonConvert.SerializeObject(contactVM));
                         MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
                         patchContact.CopyValues(contactVM);
                         try
@@ -522,7 +522,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
                         MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                         patchContact.CopyValues(contactVM);
-                        patchWorker.CopyValues(workerVm);
+                        patchWorker.CopyValuesNoEmailPhone(workerVm);
                         try
                         {
                             string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
