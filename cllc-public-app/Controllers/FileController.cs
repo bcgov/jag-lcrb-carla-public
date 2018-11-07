@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
@@ -127,7 +128,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Update modifiedon to current time
             UpdateEntityModifiedOnDate(entityName, entityId);
 
-            string fileName = FileSystemItemExtensions.CombineNameDocumentType(file.FileName, documentType);
+            // Sanitize file name
+            Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
+            string fileName = illegalInFileName.Replace(file.FileName, "");
+            illegalInFileName = new Regex(@"[&:/\\|]");
+            fileName = illegalInFileName.Replace(fileName, "-");
+
+            fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
             string folderName = await GetFolderName(entityName, entityId, _dynamicsClient);
             try
             {
