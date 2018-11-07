@@ -74,6 +74,15 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioWorker to, ViewModels.Worker from)
+        {            
+            to.AdoxioPhonenumber = from.phonenumber;
+            to.AdoxioEmail = from.email;
+            to.CopyValuesNoEmailPhone(from);
+        }
+    
+
+
+        public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMadoxioWorker to, ViewModels.Worker from)
         {
             if (from.isldbworker != null)
             {
@@ -86,14 +95,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (from.gender != 0)
             {
                 to.AdoxioGendercode = (int?)from.gender;
-            } else
+            }
+            else
             {
                 to.AdoxioGendercode = null;
             }
             if (from.Status != 0)
             {
                 to.Statuscode = (int?)from.Status;
-            } else
+            }
+            else
             {
                 to.Statuscode = null;
             }
@@ -108,9 +119,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             to.AdoxioBirthplace = from.birthplace;
             to.AdoxioDriverslicencenumber = from.driverslicencenumber;
-            to.AdoxioBcidcardnumber = from.bcidcardnumber;
-            to.AdoxioPhonenumber = from.phonenumber;
-            to.AdoxioEmail = from.email;
+            to.AdoxioBcidcardnumber = from.bcidcardnumber;       
             if (from.selfdisclosure != null)
             {
                 to.AdoxioSelfdisclosure = from.selfdisclosure == true ? 1 : 0;
@@ -129,3 +138,4 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
     }
 }
+
