@@ -8,19 +8,19 @@
     padding-right: 20px;
     padding-bottom: 10px;
     color: #fff !important;
-  }
-  
-  .submitted-header h2 {
+}
+
+.submitted-header h2 {
     color: #fff !important;
-  }
-  
-  .submitted-content {
+}
+
+.submitted-content {
     background-color: #eee;
     padding: 20px;
     margin-bottom: 20px;
-  }
-  
-  .submit-container {
+}
+
+.submit-container {
     background-color: #38598A;
     border-bottom: solid 4px #FFCC00;
     color: #fff;
@@ -30,26 +30,33 @@
     h2 {
         color: #fff;
     }
-  }
+}
 
-  .dashboard-spacing {
+.dashboard-spacing {
     padding-left: 50px;
     padding-right: 50px;
-  }
-  
-  @media (max-width: 575.98px) {
+}
+
+@media (max-width: 575.98px) {
     .dashboard-spacing {
         padding-left: 10px;
         padding-right: 10px;
     }
-  }
+}
 
-  .login-cont {
+@media (max-width: 767px) {
+    .mobile-spacing {
+      padding-left: 0px !important;
+      margin-left: 0px !important;
+    }
+}
+
+.login-cont {
     background-color: #EFF3FC;
     color: #003366;
-     border: 1px solid #4D90FE;
+    border: 1px solid #4D90FE;
     border-radius: 5px;
     padding: 15px;
     display: flex;
     justify-content: space-between;
-  }
+}
