@@ -110,11 +110,11 @@ export class WorkerApplicationComponent implements OnInit {
         lastname: [''],
         emailaddress1: [''],
         telephone1: [''],
-        address1_line1: [{ value: '', disabled: true }],
-        address1_city: [{ value: '', disabled: true }],
-        address1_stateorprovince: [{ value: '', disabled: true }],
-        address1_country: [{ value: '', disabled: true }],
-        address1_postalcode: [{ value: '', disabled: true }],
+        address1_line1: [''],
+        address1_city: [''],
+        address1_stateorprovince: [''],
+        address1_country: [''],
+        address1_postalcode: [''],
         address2_line1: ['', Validators.required],
         address2_city: ['', Validators.required],
         address2_stateorprovince: ['', Validators.required],
@@ -300,7 +300,9 @@ export class WorkerApplicationComponent implements OnInit {
 
   save(): Subject<boolean> {
     const subResult = new Subject<boolean>();
-    const value = this.form.value;
+    const value = {...this.form.value};
+    // Make sure the contact email is also updated
+    value.contact.emailaddress1 = value.worker.email;
     const saves = [
       this.contactDataService.updateContact(value.contact),
       this.workerDataService.updateWorker(value.worker, value.worker.id)
