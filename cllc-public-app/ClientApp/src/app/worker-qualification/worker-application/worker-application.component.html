@@ -202,8 +202,7 @@
               <div [ngClass]="{'has-error': !this.form.get('worker.email').valid && this.form.get('worker.email').touched}">
                 <label>Email Address</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="email" formControlName="email" 
-                (blur)="trimValue(form.get('worker.email'))"> 
+                <input class="form-control" style="width: 250px;" type="email" formControlName="email" (blur)="trimValue(form.get('worker.email'))">
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" class="fas fa-chevron-left"></i>
                 <i *ngIf="!this.form.get('worker.email').valid && this.form.get('worker.email').touched" style="margin-left: -6px;"
                   class="fas fa-chevron-left"></i>
@@ -303,8 +302,7 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched}">
                 <label>Email Address</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1"
-                (blur)="trimValue(this.form.get('contact.emailaddress1'));">
+                <input class="form-control" style="width: 250px;" type="text" formControlName="emailaddress1" (blur)="trimValue(this.form.get('contact.emailaddress1'));">
                 <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched"
                   class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="!this.form.get('contact.emailaddress1').valid && this.form.get('contact.emailaddress1').touched ">
@@ -392,66 +390,29 @@
           <div formGroupName="contact">
             <h3>CURRENT ADDRESS</h3>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched}">
-                <label>Street</label>
-                <br />
-                <input class="form-control" style="min-width: 250px; max-width: 450px;" type="text" formControlName="address1_line1">
-                <div *ngIf="!this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched"
-                  class="alert alert-danger" style="min-width: 250px; max-width: 450px;">
-                  <div *ngIf="!this.form.get('contact.address1_line1').valid && this.form.get('contact.address1_line1').touched ">
-                    This is required
-                  </div>
-                </div>
-              </div>
+              <label>Street</label>
+              <br />
+              <input class="form-control" style="min-width: 250px; max-width: 450px;" readonly type="text" formControlName="address1_line1">
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched}">
-                <label>City</label>
-                <br />
-                <input class="form-control" style="min-width: 250px; max-width: 350px;" type="text" formControlName="address1_city">
-                <div *ngIf="!this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched"
-                  class="alert alert-danger" style="min-width: 250px; max-width: 350px;">
-                  <div *ngIf="!this.form.get('contact.address1_city').valid && this.form.get('contact.address1_city').touched ">
-                    This is required
-                  </div>
-                </div>
-              </div>
+              <label>City</label>
+              <br />
+              <input class="form-control" style="min-width: 250px; max-width: 350px;" readonly type="text" formControlName="address1_city">
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched}">
-                <label>Province / State</label>
-                <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="address1_stateorprovince">
-                <div *ngIf="!this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched"
-                  class="alert alert-danger" style="width: 250px;">
-                  <div *ngIf="!this.form.get('contact.address1_stateorprovince').valid && this.form.get('contact.address1_stateorprovince').touched ">
-                    This is required
-                  </div>
-                </div>
-              </div>
+              <label>Province / State</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" readonly formControlName="address1_stateorprovince">
             </section>
             <section>
-              <div [ngClass]="{'has-error': !this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched}">
-                <label>Postal Code / Zip Code</label>
-                <br />
-                <input class="form-control" style="width: 200px;" type="text" formControlName="address1_postalcode">
-                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
-                  class="fas fa-chevron-left"></i>
-                <i *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
-                  style="margin-left: -6px;" class="fas fa-chevron-left"></i>
-                <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched"
-                  class="alert alert-danger" style="background: transparent; border: none;">
-                  <div *ngIf="!this.form.get('contact.address1_postalcode').valid && this.form.get('contact.address1_postalcode').touched ">
-                    This is required.<br>Your postal / zip code should be in one of the following formats:<br>X1X 1X1,
-                    12345, 12345-1234.
-                  </div>
-                </div>
-              </div>
+              <label>Postal Code / Zip Code</label>
+              <br />
+              <input class="form-control" style="width: 200px;" type="text" readonly formControlName="address1_postalcode">
             </section>
             <section>
-               <label>Country</label>
-                <br />
-                <input class="form-control" style="width: 250px;" type="text" formControlName="address1_country">                               
+              <label>Country</label>
+              <br />
+              <input class="form-control" style="width: 250px;" type="text" readonly formControlName="address1_country">
             </section>
           </div>
           <div formGroupName="worker">
@@ -460,7 +421,8 @@
                 <label>Date: From</label>
                 <br />
                 <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd"
-                  readonly class="form-control" [min]="minDate" [max]="currentDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                  readonly class="form-control" [min]="minDate" [max]="currentDate" [matDatepicker]="picker" (focus)="picker.open()"
+                  (click)="picker.open()">
                 <mat-datepicker #picker></mat-datepicker>
                 <div *ngIf="form.get('worker.fromdate').touched && (!form.get('worker.fromdate').valid || form.get('worker.fromdate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
@@ -558,8 +520,7 @@
               <div [ngClass]="{'has-error': !this.form.get('contact.address2_country').valid && this.form.get('contact.address2_country').touched}">
                 <label>Country</label>
                 <br />
-                <select class="form-control" style="width: 250px;" formControlName="address2_country" 
-                (change)="form.get('contact.address2_postalcode').updateValueAndValidity()">
+                <select class="form-control" style="width: 250px;" formControlName="address2_country" (change)="form.get('contact.address2_postalcode').updateValueAndValidity()">
                   <option value="Canada">Canada</option>
                   <option value="United States of America">United States of America</option>
                   <hr>
@@ -644,8 +605,7 @@
                   <div [ngClass]="{'has-error': !address.get('country').valid && address.get('country').touched}">
                     <label>Country</label>
                     <br />
-                    <select class="form-control" style="width: 250px;" formControlName="country"
-                    (change)="address.get('postalcode').updateValueAndValidity()">
+                    <select class="form-control" style="width: 250px;" formControlName="country" (change)="address.get('postalcode').updateValueAndValidity()">
                       <option value="Canada">Canada</option>
                       <option value="United States of America">United States of America</option>
                       <hr>
@@ -664,8 +624,8 @@
                     <label>Date: From</label>
                     <br />
                     <input type="text" formControlName='fromdate' style="width: 200px; background-color: #fff;"
-                      placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate" [matDatepicker]="picker1" (focus)="picker1.open()"
-                      (click)="picker1.open()">
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate"
+                      [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
                     <mat-datepicker #picker1></mat-datepicker>
                     <div *ngIf="address.get('fromdate').touched && (!address.get('fromdate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
@@ -683,8 +643,8 @@
                     <label>Date: To</label>
                     <br />
                     <input type="text" formControlName='todate' style="width: 200px; background-color: #fff;"
-                      placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate" [matDatepicker]="picker2" (focus)="picker2.open()"
-                      (click)="picker2.open()">
+                      placeholder="yyyy-mm-dd" class="form-control" readonly [min]="minDate" [max]="currentDate"
+                      [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
                     <mat-datepicker #picker2></mat-datepicker>
                     <div *ngIf="address.get('todate').touched && (!address.get('todate').valid || address.get('fromdate').valid && address.get('todate').valid  && !isAscending(address.get('fromdate').value, address.get('todate').value)) "
                       class="alert alert-danger" style="width: 200px;">
