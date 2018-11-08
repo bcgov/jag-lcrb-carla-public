@@ -82,6 +82,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             var batch = GetBatchNumber().ToString();
             Dictionary<string, string> countryCodeMap = GetCountryCodeMap();
+            Dictionary<string, string> provinceMap = GetProviceCodeMap();
             batch = AddZeroPadding(batch);
 
             if (result != null && result.Count > 0)
@@ -95,14 +96,21 @@ namespace Gov.Lclb.Cllb.SpdSync
                         string newValue = "\"\"";
                         try
                         {
-                            string value = row[header.Key].ToString();
+                            string value = row[header.Key]?.ToString();
                             if (value != null)
                             {
-                                // replace country code with Country name
-                                if (header.Key.ToLower().Contains("country") && countryCodeMap.ContainsKey(value))
+                                // replace country code with the country name
+                                if (header.Key.ToLower().Contains("country") && countryCodeMap.ContainsKey(value.ToUpper()))
                                 {
-                                    value = countryCodeMap[value];
+                                    value = countryCodeMap[value?.ToUpper()];
                                 }
+
+                                // replace province code with the province name
+                                if (header.Key.ToLower().Contains("provstate") && provinceMap.ContainsKey(value.ToUpper()))
+                                {
+                                    value = provinceMap[value.ToUpper()];
+                                }
+                                
                                 newValue = $"\"{value.ToString()}\"";
                             }
 
@@ -453,6 +461,24 @@ namespace Gov.Lclb.Cllb.SpdSync
             return result;
         }
 
+        private Dictionary<string, string> GetProviceCodeMap(){
+            var map = new Dictionary<string, string>{
+                { "AB",	"Alberta	Alberta" },
+                { "BC",	"British Columbia" },
+                { "MB",	"Manitoba" },
+                { "NB",	"New Brunswick" },
+                { "NL",	"Newfoundland and Labrador" },
+                { "NS",	"Nova Scotia" },
+                { "NT",	"Northwest Territories" },
+                { "NU",	"Nunavut" },
+                { "ON",	"Ontario" },
+                { "PE",	"Prince Edward Island" },
+                { "QC",	"Quebec" },
+                { "SK",	"Saskatchewan" },
+                { "YT",	"Yukon" }
+            };
+            return map;
+        }
         private Dictionary<string, string> GetCountryCodeMap()
         {
             var map = new Dictionary<string, string> {
