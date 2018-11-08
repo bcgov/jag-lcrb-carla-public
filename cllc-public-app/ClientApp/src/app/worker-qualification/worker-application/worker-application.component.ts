@@ -301,8 +301,10 @@ export class WorkerApplicationComponent implements OnInit {
   save(): Subject<boolean> {
     const subResult = new Subject<boolean>();
     const value = {...this.form.value};
-    // Make sure the contact email is also updated
+    // Make sure the contact email and phone number are in sync with worker
     value.contact.emailaddress1 = value.worker.email;
+    value.contact.telephone1 = value.worker.phonenumber;
+
     const saves = [
       this.contactDataService.updateContact(value.contact),
       this.workerDataService.updateWorker(value.worker, value.worker.id)
