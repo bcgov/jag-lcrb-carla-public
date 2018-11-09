@@ -136,7 +136,7 @@
                 <label>Date of Birth</label>
                 <br />
                 <input type="text" formControlName='dateofbirth' readonly style="width: 250px;" placeholder="yyyy-mm-dd"
-                  [value]="form.get('worker.dateofbirth').value | date: 'yyyy-MM-dd'" class="form-control">
+                  [value]="form.get('worker.dateofbirth').value | date: 'yyyy-MM-dd' : '+00:00'" class="form-control">
               </div>
             </section>
             <section>
@@ -440,7 +440,7 @@
                 <label>Date: To</label>
                 <br />
                 <input type="text" formControlName='todate' readonly style="width: 200px;" placeholder="yyyy-mm-dd"
-                  class="form-control" [value]="form.get('worker.todate').value | date: 'yyyy-MM-dd'">
+                  class="form-control" [value]="form.get('worker.todate').value | date: 'yyyy-MM-dd' : '+00:00'">
                 <div *ngIf="form.get('worker.todate').touched && (form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)) "
                   class="alert alert-danger" style="width: 200px;">
                   <div *ngIf="form.get('worker.fromdate').valid && form.get('worker.todate').valid  && !isAscending(form.get('worker.fromdate').value, form.get('worker.todate').value)">

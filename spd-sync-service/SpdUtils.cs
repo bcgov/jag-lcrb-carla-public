@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             this.Configuration = Configuration;
             _logger = loggerFactory.CreateLogger(typeof(SpdUtils));
             _dynamics = SetupDynamics(Configuration);
-            
+
         }
 
         /// <summary>
@@ -81,6 +81,8 @@ namespace Gov.Lclb.Cllb.SpdSync
             }
 
             var batch = GetBatchNumber().ToString();
+            Dictionary<string, string> countryCodeMap = GetCountryCodeMap();
+            Dictionary<string, string> provinceMap = GetProviceCodeMap();
             batch = AddZeroPadding(batch);
 
             if (result != null && result.Count > 0)
@@ -89,22 +91,34 @@ namespace Gov.Lclb.Cllb.SpdSync
                 {
                     var item = new List<string>();
 
-                    foreach (var h in headerDefinition)
+                    foreach (var header in headerDefinition)
                     {
                         string newValue = "\"\"";
                         try
                         {
-                            object value = row[h.Key];
+                            string value = row[header.Key]?.ToString();
                             if (value != null)
                             {
+                                // replace country code with the country name
+                                if (header.Key.ToLower().Contains("country") && countryCodeMap.ContainsKey(value.ToUpper()))
+                                {
+                                    value = countryCodeMap[value?.ToUpper()];
+                                }
+
+                                // replace province code with the province name
+                                if (header.Key.ToLower().Contains("provstate") && provinceMap.ContainsKey(value.ToUpper()))
+                                {
+                                    value = provinceMap[value.ToUpper()];
+                                }
+
                                 newValue = $"\"{value.ToString()}\"";
-                            }                            
+                            }
 
                         }
                         catch (Exception e)
                         {
                             _logger.LogError("Exception occured during SPD export.");
-                            _logger.LogError($"Field is {h.Key}");
+                            _logger.LogError($"Field is {header.Key}");
                             _logger.LogError(e.Message);
                         }
                         item.Add(newValue);
@@ -445,6 +459,274 @@ namespace Gov.Lclb.Cllb.SpdSync
                 new KeyValuePair<string, string>("AdoxioPreviouscountryx", "PREV COUNTRY x"),
             };
             return result;
+        }
+
+        private Dictionary<string, string> GetProviceCodeMap(){
+            var map = new Dictionary<string, string>{
+                { "AB",	"Alberta	Alberta" },
+                { "BC",	"British Columbia" },
+                { "MB",	"Manitoba" },
+                { "NB",	"New Brunswick" },
+                { "NL",	"Newfoundland and Labrador" },
+                { "NS",	"Nova Scotia" },
+                { "NT",	"Northwest Territories" },
+                { "NU",	"Nunavut" },
+                { "ON",	"Ontario" },
+                { "PE",	"Prince Edward Island" },
+                { "QC",	"Quebec" },
+                { "SK",	"Saskatchewan" },
+                { "YT",	"Yukon" }
+            };
+            return map;
+        }
+        private Dictionary<string, string> GetCountryCodeMap()
+        {
+            var map = new Dictionary<string, string> {
+                {"AD", "Andorra"},
+                {"AE", "United Arab Emirates"},
+                {"AF", "Afghanistan"},
+                {"AG", "Antigua and Barbuda"},
+                {"AI", "Anguilla"},
+                {"AL", "Albania"},
+                {"AM", "Armenia"},
+                {"AN", "Antilles - Netherlands"},
+                {"AO", "Angola"},
+                {"AQ", "Antarctica"},
+                {"AR", "Argentina"},
+                {"AS", "American Samoa"},
+                {"AT", "Austria"},
+                {"AU", "Australia"},
+                {"AW", "Aruba"},
+                {"AX", "Aland Islands"},
+                {"AZ", "Azerbaijan"},
+                {"BA", "Bosnia and Herzegovina"},
+                {"BB", "Barbados"},
+                {"BD", "Bangladesh"},
+                {"BE", "Belgium"},
+                {"BF", "Burkina Faso"},
+                {"BG", "Bulgaria"},
+                {"BH", "Bahrain"},
+                {"BI", "Burundi"},
+                {"BJ", "Benin"},
+                {"BM", "Bermuda"},
+                {"BN", "Brunei Darussalam"},
+                {"BO", "Bolivia"},
+                {"BR", "Brazil"},
+                {"BS", "Bahamas"},
+                {"BT", "Bhutan"},
+                {"BV", "Bouvet Island"},
+                {"BW", "Botswana"},
+                {"BZ", "Belize"},
+                {"CA", "Canada"},
+                {"CC", "Cocos (Keeling) Islands"},
+                {"CD", "Democratic Republic of the Congo"},
+                {"CF", "Central African Republic"},
+                {"CG", "Congo"},
+                {"CH", "Switzerland"},
+                {"CI", "Cote D'Ivoire (Ivory Coast)"},
+                {"CK", "Cook Islands"},
+                {"CL", "Chile"},
+                {"CM", "Cameroon"},
+                {"CN", "China"},
+                {"CO", "Colombia"},
+                {"CR", "Costa Rica"},
+                {"CS", "Serbia and Montenegro"},
+                {"CU", "Cuba"},
+                {"CV", "Cape Verde"},
+                {"CX", "Christmas Island"},
+                {"CY", "Cyprus"},
+                {"CZ", "Czech Republic"},
+                {"DE", "Germany"},
+                {"DJ", "Djibouti"},
+                {"DK", "Denmark"},
+                {"DM", "Dominica"},
+                {"DO", "Dominican Republic"},
+                {"DZ", "Algeria"},
+                {"EC", "Ecuador"},
+                {"EE", "Estonia"},
+                {"EG", "Egypt"},
+                {"EH", "Western Sahara"},
+                {"ER", "Eritrea"},
+                {"ES", "Spain"},
+                {"ET", "Ethiopia"},
+                {"FI", "Finland"},
+                {"FJ", "Fiji"},
+                {"FK", "Falkland Islands (Malvinas)"},
+                {"FM", "Federated States of Micronesia"},
+                {"FO", "Faroe Islands"},
+                {"FR", "France"},
+                {"FX", "France, Metropolitan"},
+                {"GA", "Gabon"},
+                {"GB", "Great Britain (UK)"},
+                {"GD", "Grenada"},
+                {"GE", "Georgia"},
+                {"GF", "French Guiana"},
+                {"GH", "Ghana"},
+                {"GI", "Gibraltar"},
+                {"GL", "Greenland"},
+                {"GM", "Gambia"},
+                {"GN", "Guinea"},
+                {"GP", "Guadeloupe"},
+                {"GQ", "Equatorial Guinea"},
+                {"GR", "Greece"},
+                {"GS", "S. Georgia and S. Sandwich Islands"},
+                {"GT", "Guatemala"},
+                {"GU", "Guam"},
+                {"GW", "Guinea-Bissau"},
+                {"GY", "Guyana"},
+                {"HK", "Hong Kong"},
+                {"HM", "Heard Island and McDonald Islands"},
+                {"HN", "Honduras"},
+                {"HR", "Croatia (Hrvatska)"},
+                {"HT", "Haiti"},
+                {"HU", "Hungary"},
+                {"ID", "Indonesia"},
+                {"IE", "Ireland"},
+                {"IL", "Israel"},
+                {"IN", "India"},
+                {"IO", "British Indian Ocean Territory"},
+                {"IQ", "Iraq"},
+                {"IR", "Iran"},
+                {"IT", "Italy"},
+                {"JM", "Jamaica"},
+                {"JO", "Jordan"},
+                {"JP", "Japan"},
+                {"KE", "Kenya"},
+                {"KG", "Kyrgyzstan"},
+                {"KH", "Cambodia"},
+                {"KI", "Kiribati"},
+                {"KM", "Comoros"},
+                {"KN", "Saint Kitts and Nevis"},
+                {"KP", "Korea (North)"},
+                {"KR", "Korea (South)"},
+                {"KW", "Kuwait"},
+                {"KY", "Cayman Islands"},
+                {"KZ", "Kazakhstan"},
+                {"LA", "Laos"},
+                {"LB", "Lebanon"},
+                {"LC", "Saint Lucia"},
+                {"LI", "Liechtenstein"},
+                {"LK", "Sri Lanka"},
+                {"LR", "Liberia"},
+                {"LS", "Lesotho"},
+                {"LT", "Lithuania"},
+                {"LU", "Luxembourg"},
+                {"LV", "Latvia"},
+                {"LY", "Libya"},
+                {"MA", "Morocco"},
+                {"MC", "Monaco"},
+                {"MD", "Moldova"},
+                {"MG", "Madagascar"},
+                {"MH", "Marshall Islands"},
+                {"MK", "Macedonia"},
+                {"ML", "Mali"},
+                {"MM", "Myanmar"},
+                {"MN", "Mongolia"},
+                {"MO", "Macao"},
+                {"MP", "Northern Mariana Islands"},
+                {"MQ", "Martinique"},
+                {"MR", "Mauritania"},
+                {"MS", "Montserrat"},
+                {"MT", "Malta"},
+                {"MU", "Mauritius"},
+                {"MV", "Maldives"},
+                {"MW", "Malawi"},
+                {"MX", "Mexico"},
+                {"MY", "Malaysia"},
+                {"MZ", "Mozambique"},
+                {"NA", "Namibia"},
+                {"NC", "New Caledonia"},
+                {"NE", "Niger"},
+                {"NF", "Norfolk Island"},
+                {"NG", "Nigeria"},
+                {"NI", "Nicaragua"},
+                {"NL", "Netherlands"},
+                {"NO", "Norway"},
+                {"NP", "Nepal"},
+                {"NR", "Nauru"},
+                {"NU", "Niue"},
+                {"NZ", "New Zealand (Aotearoa)"},
+                {"OM", "Oman"},
+                {"PA", "Panama"},
+                {"PE", "Peru"},
+                {"PF", "French Polynesia"},
+                {"PG", "Papua New Guinea"},
+                {"PH", "Philippines"},
+                {"PK", "Pakistan"},
+                {"PL", "Poland"},
+                {"PM", "Saint Pierre and Miquelon"},
+                {"PN", "Pitcairn"},
+                {"PR", "Puerto Rico"},
+                {"PS", "Palestinian Territory"},
+                {"PT", "Portugal"},
+                {"PW", "Palau"},
+                {"PY", "Paraguay"},
+                {"QA", "Qatar"},
+                {"RE", "Reunion"},
+                {"RO", "Romania"},
+                {"RU", "Russian Federation"},
+                {"RW", "Rwanda"},
+                {"SA", "Saudi Arabia"},
+                {"SB", "Solomon Islands"},
+                {"SC", "Seychelles"},
+                {"SD", "Sudan"},
+                {"SE", "Sweden"},
+                {"SG", "Singapore"},
+                {"SH", "Saint Helena"},
+                {"SI", "Slovenia"},
+                {"SJ", "Svalbard and Jan Mayen"},
+                {"SK", "Slovakia"},
+                {"SL", "Sierra Leone"},
+                {"SM", "San Marino"},
+                {"SN", "Senegal"},
+                {"SO", "Somalia"},
+                {"SR", "Suriname"},
+                {"ST", "Sao Tome and Principe"},
+                {"SU", "USSR (former)"},
+                {"SV", "El Salvador"},
+                {"SY", "Syria"},
+                {"SZ", "Swaziland"},
+                {"TC", "Turks and Caicos Islands"},
+                {"TD", "Chad"},
+                {"TG", "Togo"},
+                {"TH", "Thailand"},
+                {"TJ", "Tajikistan"},
+                {"TK", "Tokelau"},
+                {"TL", "Timor-Leste"},
+                {"TM", "Turkmenistan"},
+                {"TN", "Tunisia"},
+                {"TO", "Tonga"},
+                {"TP", "East Timor"},
+                {"TR", "Turkey"},
+                {"TT", "Trinidad and Tobago"},
+                {"TV", "Tuvalu"},
+                {"TW", "Taiwan"},
+                {"TZ", "Tanzania"},
+                {"UA", "Ukraine"},
+                {"UG", "Uganda"},
+                {"UK", "United Kingdom"},
+                {"UM", "United States Minor Outlying Islands"},
+                {"US", "United States"},
+                {"UY", "Uruguay"},
+                {"UZ", "Uzbekistan"},
+                {"VA", "Vatican City State"},
+                {"VC", "Saint Vincent and the Grenadines"},
+                {"VE", "Venezuela"},
+                {"VG", "Virgin Islands (British)"},
+                {"VI", "Virgin Islands (U.S.)"},
+                {"VN", "Viet Nam"},
+                {"VU", "Vanuatu"},
+                {"WF", "Wallis and Futuna"},
+                {"WS", "Samoa"},
+                {"YE", "Yemen"},
+                {"YT", "Mayotte"},
+                {"YU", "Yugoslavia (former)"},
+                {"ZA", "South Africa"},
+                {"ZM", "Zambia"},
+                {"ZR", "Zaire (former)"},
+                {"ZW", "Zimbabwe"},
+            };
+            return map;
         }
 
         public static IDynamicsClient SetupDynamics(IConfiguration Configuration)
