@@ -469,7 +469,7 @@ export class WorkerApplicationComponent implements OnInit {
   isBCIDValid(): boolean {
     const validDriver = !!(this.form.get('worker.driverslicencenumber').value
       && (this.form.get('worker.driverslicencenumber').value + '').length === 7);
-    const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length === 7);
+    const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length === 9);
     return validDriver || validBceid;
   }
 
