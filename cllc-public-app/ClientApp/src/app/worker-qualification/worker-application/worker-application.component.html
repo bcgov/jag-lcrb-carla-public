@@ -163,7 +163,7 @@
                 <label>BCID Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                  maxlength="7" formControlName="bcidcardnumber">
+                  maxlength="9" formControlName="bcidcardnumber">
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="fas fa-chevron-left"></i>
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
@@ -172,7 +172,7 @@
                   class="alert alert-danger" style="background: transparent; border: none;">
                   <div *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)">
                     You must enter either a BCID number or a driver’s licence number. <br>
-                    Format is 7 digits.
+                    Format is 9 digits for BCID and 9 digits for driver's licence number.
                   </div>
                 </div>
               </div>
