@@ -69,7 +69,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMSharepointSite GetByKey(this ISharepointSite operations, string sharepointsiteid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMsharepointsite GetByKey(this ISharepointSite operations, string sharepointsiteid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetByKeyAsync(sharepointsiteid, select, expand).GetAwaiter().GetResult();
             }
@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMSharepointSite> GetByKeyAsync(this ISharepointSite operations, string sharepointsiteid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMsharepointsite> GetByKeyAsync(this ISharepointSite operations, string sharepointsiteid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetByKeyWithHttpMessagesAsync(sharepointsiteid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -112,7 +112,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this ISharepointSite operations, string sharepointsiteid, MicrosoftDynamicsCRMSharepointSite body)
+            public static void Update(this ISharepointSite operations, string sharepointsiteid, MicrosoftDynamicsCRMsharepointsite body)
             {
                 operations.UpdateAsync(sharepointsiteid, body).GetAwaiter().GetResult();
             }
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this ISharepointSite operations, string sharepointsiteid, MicrosoftDynamicsCRMSharepointSite body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this ISharepointSite operations, string sharepointsiteid, MicrosoftDynamicsCRMsharepointsite body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.UpdateWithHttpMessagesAsync(sharepointsiteid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
