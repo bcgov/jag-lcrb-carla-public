@@ -173,7 +173,7 @@
               "properties": {
                 "value": {
                   "items": {
-                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+                    "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
                   },
                   "type": "array"
                 }
@@ -213,7 +213,7 @@
             "description": "New entity",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
             }
           },
           {
@@ -228,7 +228,7 @@
           "201": {
             "description": "Created entity",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
             }
           },
           "default": {
@@ -363,7 +363,7 @@
           "200": {
             "description": "Retrieved entity",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
             }
           },
           "default": {
@@ -397,7 +397,7 @@
             "description": "New property values",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
             }
           }
         ],
@@ -12330,6 +12330,523 @@
     "Microsoft.Dynamics.CRM.crmbaseentity": {
       "title": "crmbaseentity",
       "type": "object"
+    },  
+    "Microsoft.Dynamics.CRM.abs_scheduledprocess": {
+      "title": "abs_scheduledprocess",
+      "type": "object",
+      "properties": {
+        "abs_monday": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "abs_january": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_august": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_april": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_wednesday": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_september": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_minute": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "abs_tuesday": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_abs_processid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "abs_fetchxmlquery": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "abs_suspendonfailure": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "abs_march": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "abs_hour": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "abs_saturday": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "abs_ampm": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "abs_may": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_july": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_recurrencepattern": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "abs_scheduledprocessid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "abs_february": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "abs_thursday": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_interval": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "abs_october": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "abs_november": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_december": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_nextactivation": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "abs_sunday": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "abs_june": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "abs_dayofmonth": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "abs_friday": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "abs_scheduledprocess_ActivityPointers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activitypointer"
+          }
+        },
+        "abs_scheduledprocess_Appointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.appointment"
+          }
+        },
+        "abs_scheduledprocess_Emails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.email"
+          }
+        },
+        "abs_scheduledprocess_Faxes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.fax"
+          }
+        },
+        "abs_scheduledprocess_Letters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.letter"
+          }
+        },
+        "abs_scheduledprocess_PhoneCalls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
+          }
+        },
+        "abs_scheduledprocess_ServiceAppointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.serviceappointment"
+          }
+        },
+        "abs_scheduledprocess_Tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
+        },
+        "abs_scheduledprocess_RecurringAppointmentMasters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.recurringappointmentmaster"
+          }
+        },
+        "abs_scheduledprocess_SocialActivities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.socialactivity"
+          }
+        },
+        "abs_scheduledprocess_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "abs_scheduledprocess_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "abs_scheduledprocess_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "abs_scheduledprocess_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "abs_ProcessId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.abs_scheduledprocessexecution": {
+      "title": "abs_scheduledprocessexecution",
+      "type": "object",
+      "properties": {
+        "abs_recordsprocessed": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "regardingobjectid_new_interactionforemail_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.interactionforemail"
+        },
+        "regardingobjectid_entitlement_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.entitlement"
+        },
+        "regardingobjectid_entitlementtemplate_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.entitlementtemplate"
+        },
+        "regardingobjectid_bookableresourcebooking_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.bookableresourcebooking"
+        },
+        "regardingobjectid_bookableresourcebookingheader_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.bookableresourcebookingheader"
+        },
+        "regardingobjectid_knowledgebaserecord_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.knowledgebaserecord"
+        },
+        "regardingobjectid_account_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+        },
+        "regardingobjectid_contract_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.contract"
+        },
+        "createdby_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "regardingobjectid_contact_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+        },
+        "sendermailboxid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailbox"
+        },
+        "transactioncurrencyid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.transactioncurrency"
+        },
+        "regardingobjectid_salesorder_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.salesorder"
+        },
+        "regardingobjectid_adoxio_agencycommunication_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_agencycommunication"
+        },
+        "regardingobjectid_adoxio_application_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+        },
+        "regardingobjectid_adoxio_investigationstakeholder_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationstakeholder"
+        },
+        "regardingobjectid_adoxio_licences_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+        },
+        "regardingobjectid_adoxio_complaint_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
+        },
+        "regardingobjectid_abs_scheduledprocess_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
+        "regardingobjectid_adoxio_investigation_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "ownerid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "regardingobjectid_opportunity_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.opportunity"
+        },
+        "owninguser_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "sla_activitypointer_sla_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sla"
+        },
+        "regardingobjectid_invoice_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+        },
+        "owningbusinessunit_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "regardingobjectid_knowledgearticle_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.knowledgearticle"
+        },
+        "regardingobjectid_quote_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.quote"
+        },
+        "regardingobjectid_lead_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+        },
+        "modifiedonbehalfby_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfby_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedby_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "regardingobjectid_bulkoperation_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkoperation"
+        },
+        "serviceid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.service"
+        },
+        "regardingobjectid_incident_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
+        },
+        "regardingobjectid_campaign_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaign"
+        },
+        "owningteam_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "regardingobjectid_campaignactivity_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaignactivity"
+        },
+        "slainvokedid_activitypointer_sla_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sla"
+        },
+        "activityid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.activitypointer"
+        },
+        "abs_scheduledprocessexecution_activity_parties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activityparty"
+          }
+        },
+        "CampaignResponse_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaignresponse"
+          }
+        },
+        "abs_scheduledprocessexecution_ActionCards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.actioncard"
+          }
+        },
+        "abs_scheduledprocessexecution_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "abs_scheduledprocessexecution_connections1": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.connection"
+          }
+        },
+        "abs_scheduledprocessexecution_connections2": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.connection"
+          }
+        },
+        "abs_scheduledprocessexecution_QueueItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.queueitem"
+          }
+        },
+        "abs_scheduledprocessexecution_Annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.annotation"
+          }
+        },
+        "abs_scheduledprocessexecution_Feedback": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.feedback"
+          }
+        },
+        "abs_scheduledprocessexecution_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "abs_scheduledprocessexecution_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "regardingobjectid_adoxio_worker_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        }
+      }
     },
     "Microsoft.Dynamics.CRM.accountleads": {
       "title": "accountleads",
@@ -12666,6 +13183,10 @@
         "donotfax": {
           "type": "boolean",
           "x-nullable": true
+        },
+        "adoxio_capevaluationdate": {
+          "type": "string",
+          "format": "date-time"
         },
         "address2_telephone3": {
           "type": "string",
@@ -13457,18 +13978,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
           }
         },
-        "adoxio_account_adoxio_establishment_Municipality": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
-          }
-        },
-        "adoxio_account_adoxio_establishment_PoliceJurisdiction": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
-          }
-        },
         "adoxio_account_adoxio_legalentity_Account": {
           "type": "array",
           "items": {
@@ -13482,18 +13991,6 @@
           }
         },
         "adoxio_account_adoxio_licences_Licencee": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
-          }
-        },
-        "adoxio_account_adoxio_licences_Municipality": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
-          }
-        },
-        "adoxio_account_adoxio_licences_PoliceJurisdiction": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
@@ -13578,6 +14075,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+          }
+        },
+        "account_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         },
         "adoxio_account_adoxio_investigation_Licensee": {
@@ -13789,6 +14292,9 @@
         },
         "regardingobjectid_task_actioncard": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+        },
+        "regardingobjectid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
         }
       }
     },
@@ -14177,6 +14683,9 @@
         },
         "partyid_adoxio_investigationstakeholder": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigationstakeholder"
+        },
+        "activityid_abs_scheduledprocessexecution_activityparty": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
         }
       }
     },
@@ -14679,8 +15188,20 @@
         "regardingobjectid_adoxio_complaint": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
+        "activity_pointer_abs_scheduledprocessexecution": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "regardingobjectid_adoxio_investigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -14951,6 +15472,12 @@
         },
         "adoxio_LGorFNorPolicePrimaryContact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+        },
+        "adoxio_agencycommunication_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -15748,6 +16275,14 @@
       "title": "adoxio_application",
       "type": "object",
       "properties": {
+        "adoxio_initialcapassessmentdate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_finalcapassessment": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_establishmentotheroption2": {
           "type": "boolean",
           "x-nullable": true
@@ -15764,7 +16299,15 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_appchecklistverifybusinessprofile": {
+        "adoxio_appchecklistlicencecapfinal": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_appchecklistsentforfi": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_appchecklistverifypostalcode": {
           "type": "integer",
           "x-nullable": true
         },
@@ -15776,11 +16319,27 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "adoxio_datelicencecapassessed": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_establishmentotherbusinessname": {
           "type": "string",
           "x-nullable": true
         },
         "adoxio_email": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_appchecklistassociateformsreceived": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_dateaip": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_contactmiddlename": {
           "type": "string",
           "x-nullable": true
         },
@@ -15792,11 +16351,23 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_datefirstyearpaymentreceived": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_otherbusinessesatthesamelocation": {
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_applicanttype": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_appchecklistfinancialintegritysubmitted": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_appchecklistsentspd": {
           "type": "integer",
           "x-nullable": true
         },
@@ -15812,6 +16383,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_dateaipdecisionlettersent": {
+          "type": "string",
+          "format": "date-time"
+        },
         "createdon": {
           "type": "string",
           "format": "date-time"
@@ -15819,6 +16394,10 @@
         "adoxio_servicehourswednesdayopen": {
           "type": "integer",
           "x-nullable": true
+        },
+        "adoxio_datelicencecapassessedfinal": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_jobnumber": {
           "type": "string",
@@ -15832,7 +16411,7 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_appchecklistverifypostalcode": {
+        "adoxio_evaluatemarketsharetrigger": {
           "type": "integer",
           "x-nullable": true
         },
@@ -15848,9 +16427,17 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_initialcapassessment": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_adoxio_jurisdiction_value": {
           "type": "string",
           "x-nullable": true
+        },
+        "adoxio_datesentlgin": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_appchecklistlicencehistoryapproval": {
           "type": "integer",
@@ -15860,13 +16447,17 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_appchecklistverifybusinessprofile": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_appchecklistshareholdersverified": {
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_inspectiondate": {
+        "_adoxio_assignedlicence_value": {
           "type": "string",
-          "format": "date-time"
+          "x-nullable": true
         },
         "adoxio_sharepointanchorforcommunicationtab": {
           "type": "string",
@@ -15878,6 +16469,10 @@
         },
         "adoxio_addressprovince": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_appchecklistzoningaip": {
+          "type": "integer",
           "x-nullable": true
         },
         "adoxio_establishmentparcelid": {
@@ -16000,12 +16595,12 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_dateinspectioncomplete": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_appchecklistpaymentreceived": {
           "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursstandardhours": {
-          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_servicehourssundayopen": {
@@ -16018,6 +16613,10 @@
         },
         "onholdtime": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_dateaiplongdatestring": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_applicationid": {
@@ -16035,6 +16634,14 @@
         "traversedpath": {
           "type": "string",
           "x-nullable": true
+        },
+        "adoxio_dateassignedtosla": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_datesentspd": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_establishmentaddresscountry": {
           "type": "string",
@@ -16068,16 +16675,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_contactmiddlename": {
-          "type": "string",
-          "x-nullable": true
-        },
         "adoxio_appchecklisttermsconditionsdefined": {
           "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_fitandpropercomplete": {
-          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_appchecklistdocumentssubmitted": {
@@ -16160,12 +16759,20 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_dateaipexpiredlongdatestring": {
+          "type": "string",
+          "x-nullable": true
+        },
         "lastonholdtime": {
           "type": "string",
           "format": "date-time"
         },
         "_modifiedonbehalfby_value": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_paymentrecieved": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_appchecklistfinalreview": {
@@ -16216,6 +16823,14 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_initialcapassessmenttrigger": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursfridayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_appchecklistlicenceissued": {
           "type": "integer",
           "x-nullable": true
@@ -16227,6 +16842,10 @@
         "adoxio_appchecklistsecurityclearanceapproved": {
           "type": "integer",
           "x-nullable": true
+        },
+        "adoxio_datereceivedspd": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_appchecklistlicencehistorycheck": {
           "type": "integer",
@@ -16252,6 +16871,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_licencefeeinvoicetrigger": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "processid": {
           "type": "string",
           "x-nullable": true
@@ -16264,9 +16887,13 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_adoxio_assignedlicence_value": {
+        "adoxio_datereceivedlgin": {
           "type": "string",
-          "x-nullable": true
+          "format": "date-time"
+        },
+        "adoxio_securityclearancegenerateddate": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_phone": {
           "type": "string",
@@ -16296,12 +16923,20 @@
           "type": "integer",
           "x-nullable": true
         },
+        "_adoxio_casemanager_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_inspectorsnotes": {
           "type": "string",
           "x-nullable": true
         },
         "adoxio_establishmentphone": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursstandardhours": {
+          "type": "boolean",
           "x-nullable": true
         },
         "_adoxio_localgovindigenousnationid_value": {
@@ -16312,9 +16947,13 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_establishmentaddressstreet": {
+        "adoxio_dateaipexpired": {
           "type": "string",
-          "x-nullable": true
+          "format": "date-time"
+        },
+        "adoxio_datelicenceapproved": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_establishmentotherbusinessnature": {
           "type": "string",
@@ -16324,8 +16963,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_servicehoursfridayclose": {
-          "type": "integer",
+        "adoxio_establishmentaddressstreet": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_establishmentaddresscity": {
@@ -16356,6 +16995,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_finalcapassessmentdate": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_uploadeddriversabstract": {
           "type": "integer",
           "x-nullable": true
@@ -16385,12 +17028,20 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_applicanttype": {
-          "type": "integer",
+        "adoxio_inspectiondate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_fitandpropercomplete": {
+          "type": "boolean",
           "x-nullable": true
         },
         "_ownerid_value": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_onlinedocumentupload": {
+          "type": "integer",
           "x-nullable": true
         },
         "importsequencenumber": {
@@ -16465,6 +17116,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_progressstatus": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_licencefeeinvoicepaid": {
           "type": "boolean",
           "x-nullable": true
@@ -16485,6 +17140,10 @@
           "type": "string",
           "format": "date-time"
         },
+        "adoxio_datesentinvestigations": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_appchecklistphotossubmitted": {
           "type": "integer",
           "x-nullable": true
@@ -16499,6 +17158,10 @@
         },
         "adoxio_appchecklistfinaldecision": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_area_value": {
+          "type": "string",
           "x-nullable": true
         },
         "_adoxio_region_value": {
@@ -16521,8 +17184,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_paymentrecieved": {
-          "type": "boolean",
+        "adoxio_marketshareevaluation": {
+          "type": "string",
           "x-nullable": true
         },
         "_owningteam_value": {
@@ -16553,8 +17216,12 @@
           "type": "string",
           "x-nullable": true
         },
-        "_adoxio_casemanager_value": {
+        "adoxio_datereceivedinvestigations": {
           "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_triggertogeneratesecurityclearance": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_appchecklistinvestigationsapproved": {
@@ -16567,6 +17234,10 @@
         },
         "adoxio_addresscity": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_finalcapassessmenttrigger": {
+          "type": "integer",
           "x-nullable": true
         },
         "adoxio_registeredestablishment": {
@@ -16859,11 +17530,20 @@
         "adoxio_PoliceJurisdictionId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         },
+        "adoxio_application_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "adoxio_adoxio_application_adoxio_investigation_Application": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
           }
+        },
+        "adoxio_Area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
         },
         "adoxio_application_adoxio_applicationinvoicehistory_Application": {
           "type": "array",
@@ -17048,6 +17728,195 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_area": {
+      "title": "adoxio_area",
+      "type": "object",
+      "properties": {
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_description": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_region_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_areaid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_number": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_primaryinspector_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_area_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_area_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_area_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_area_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_area_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_PrimaryInspector": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "adoxio_Region": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_region"
+        },
+        "adoxio_area_adoxio_postalcode_Area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_postalcode"
+          }
+        },
+        "adoxio_area_incident_Area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
+          }
+        },
+        "adoxio_area_adoxio_citydistrict_AreaId": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+          }
+        },
+        "adoxio_area_adoxio_application_Area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+          }
+        },
+        "adoxio_area_adoxio_establishment_Area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_businessaccount": {
       "title": "adoxio_businessaccount",
       "type": "object",
@@ -17213,6 +18082,179 @@
         },
         "adoxio_AccountId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_citydistrict": {
+      "title": "adoxio_citydistrict",
+      "type": "object",
+      "properties": {
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_officephone": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_officeid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_areaid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_regionid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_cell": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_citydistrictid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_inspectorid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_citydistrict_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_citydistrict_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_citydistrict_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_citydistrict_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_citydistrict_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_AreaId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
+        "adoxio_InspectorId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "adoxio_OfficeId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
+        },
+        "adoxio_RegionId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_region"
         }
       }
     },
@@ -17919,6 +18961,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
+          }
+        },
+        "adoxio_complaint_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         },
         "stageid": {
@@ -18931,6 +19979,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "_adoxio_area_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_wednesdayclose": {
           "type": "integer",
           "x-nullable": true
@@ -18951,6 +20003,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_standardhours": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "adoxio_sundayopen": {
           "type": "integer",
           "x-nullable": true
@@ -18959,7 +20015,7 @@
           "type": "boolean",
           "x-nullable": true
         },
-        "_adoxio_policejurisdiction_value": {
+        "_adoxio_primaryinspectorid_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -18995,10 +20051,6 @@
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_patronparticipation": {
-          "type": "boolean",
-          "x-nullable": true
-        },
         "adoxio_parcelid": {
           "type": "string",
           "x-nullable": true
@@ -19032,11 +20084,15 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_standardhours": {
+        "_adoxio_lgin_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_patronparticipation": {
           "type": "boolean",
           "x-nullable": true
         },
-        "_adoxio_municipality_value": {
+        "_adoxio_pdjurisdiction_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -19065,10 +20121,6 @@
           "x-nullable": true
         },
         "_adoxio_licencetypeid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_primaryinspectorid_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -19197,12 +20249,6 @@
         "adoxio_Licencee": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         },
-        "adoxio_Municipality": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
-        },
-        "adoxio_PoliceJurisdiction": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
-        },
         "adoxio_adoxio_establishment_adoxio_application_Establishment": {
           "type": "array",
           "items": {
@@ -19235,6 +20281,15 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
           }
+        },
+        "adoxio_LGIN": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
+        },
+        "adoxio_PDJurisdiction": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
+        },
+        "adoxio_Area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
         },
         "adoxio_adoxio_establishment_adoxio_investigation_Establishment": {
           "type": "array",
@@ -19979,6 +21034,14 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "adoxio_approveddecisiondate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_owningteam_value": {
           "type": "string",
           "x-nullable": true
@@ -19997,10 +21060,6 @@
           "x-nullable": true
         },
         "_adoxio_investigator_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_createdby_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -20212,6 +21271,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "_adoxio_approveddecisionby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_manufacturingendorsement": {
           "type": "boolean",
           "x-nullable": true
@@ -20233,6 +21296,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
+          }
+        },
+        "adoxio_investigation_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         },
         "createdbyname": {
@@ -20429,6 +21498,9 @@
         },
         "adoxio_contactId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+        },
+        "adoxio_ApprovedDecisionBy": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         }
       }
     },
@@ -20673,6 +21745,12 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_witnessstatement"
           }
         },
+        "adoxio_investigationstakeholder_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "adoxio_RelatedInvestigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
         }
@@ -20686,7 +21764,7 @@
           "type": "boolean",
           "x-nullable": true
         },
-        "adoxio_middlename": {
+        "adoxio_instructionsoninsertform": {
           "type": "string",
           "x-nullable": true
         },
@@ -20714,6 +21792,10 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "adoxio_selfdeclaredlicencecapdate": {
+          "type": "string",
+          "format": "date-time"
+        },
         "createdon": {
           "type": "string",
           "format": "date-time"
@@ -20726,8 +21808,8 @@
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_isindividual": {
-          "type": "integer",
+        "adoxio_bcidcardnumber": {
+          "type": "string",
           "x-nullable": true
         },
         "importsequencenumber": {
@@ -20750,6 +21832,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_isseniormanagement": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "adoxio_legalentitytype": {
           "type": "integer",
           "x-nullable": true
@@ -20758,9 +21844,13 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_isseniormanagement": {
-          "type": "boolean",
+        "adoxio_isindividual": {
+          "type": "integer",
           "x-nullable": true
+        },
+        "adoxio_selfdeclaredtiedhousedate": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_sameastheapplyingperson": {
           "type": "boolean",
@@ -20827,16 +21917,12 @@
           "type": "boolean",
           "x-nullable": true
         },
-        "adoxio_bcidcardnumber": {
-          "type": "string",
-          "x-nullable": true
-        },
         "adoxio_commonnonvotingshares": {
           "type": "integer",
           "x-nullable": true
         },
-        "timezoneruleversionnumber": {
-          "type": "integer",
+        "adoxio_middlename": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_ispartner": {
@@ -20847,11 +21933,20 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_driverslicencenumber": {
-          "type": "string",
+        "adoxio_selfdeclaredtiedhouse": {
+          "type": "integer",
           "x-nullable": true
         },
-        "adoxio_interestpercentage": {
+        "adoxio_dateemailsent": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_selfdeclaredlicencecap": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_driverslicencenumber": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_position": {
@@ -20906,8 +22001,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "_adoxio_profilename_value": {
-          "type": "string",
+        "adoxio_interestpercentage": {
           "x-nullable": true
         },
         "adoxio_dateofbirth": {
@@ -20930,13 +22024,13 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_instructionsoninsertform": {
+        "_adoxio_profilename_value": {
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_dateemailsent": {
-          "type": "string",
-          "format": "date-time"
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
         },
         "_adoxio_correspondingpersonalhistorysummary_value": {
           "type": "string",
@@ -21059,19 +22153,167 @@
       "title": "adoxio_licences",
       "type": "object",
       "properties": {
-        "utcconversiontimezonecode": {
+        "adoxio_effectiveyeartext": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_licenceprintname": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_establishmentaddresscity": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_expiryyear": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_territory_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_effectiveyear": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_expirydayofmonth": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_pdjurisdiction_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_establishmentaddresspostalcode": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_establishmentphone": {
+          "type": "string",
           "x-nullable": true
         },
         "_modifiedonbehalfby_value": {
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_effectivedate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_expiryyeartext": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_licencenumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_effectivedayofmonth": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_expirydate": {
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_licenceprintname": {
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_licencetype_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_businessprogramaccountreferencenumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_adoxio_licencee_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_region_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_accountid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_establishmentaddressstreet": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_lgin_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_establishmentnametemp": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_establishment_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_effectivemonthname": {
           "type": "string",
           "x-nullable": true
         },
@@ -21080,23 +22322,7 @@
           "format": "int64",
           "x-nullable": true
         },
-        "modifiedon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "_adoxio_licencetype_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_createdonbehalfby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_licencee_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_ownerid_value": {
+        "adoxio_licencesid": {
           "type": "string",
           "x-nullable": true
         },
@@ -21104,108 +22330,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_licencenumber": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_establishment_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_effectivedate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "_createdby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_expirydayofmonth": {
+        "utcconversiontimezonecode": {
           "type": "integer",
-          "x-nullable": true
-        },
-        "_owningteam_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_territory_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "statuscode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_owninguser_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "overriddencreatedon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_licencesid": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_region_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_municipality_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_establishmentnametemp": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_expiryyear": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "statecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_name": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_owningbusinessunit_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_expiryyeartext": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_modifiedby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "importsequencenumber": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "timezoneruleversionnumber": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "createdon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "_adoxio_accountid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_businessprogramaccountreferencenumber": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_policejurisdiction_value": {
-          "type": "string",
           "x-nullable": true
         },
         "createdbyname": {
@@ -21334,12 +22460,6 @@
         "adoxio_Licencee": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         },
-        "adoxio_Municipality": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
-        },
-        "adoxio_PoliceJurisdiction": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
-        },
         "adoxio_establishment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
         },
@@ -21412,11 +22532,23 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
           }
         },
+        "adoxio_licences_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "adoxio_adoxio_licences_adoxio_investigation_Licence": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
           }
+        },
+        "adoxio_LGIN": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
+        },
+        "adoxio_PDJurisdiction": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -22342,8 +23474,8 @@
       "title": "adoxio_localgovindigenousnation",
       "type": "object",
       "properties": {
-        "timezoneruleversionnumber": {
-          "type": "integer",
+        "_createdby_value": {
+          "type": "string",
           "x-nullable": true
         },
         "createdon": {
@@ -22356,6 +23488,18 @@
         },
         "adoxio_email": {
           "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_isindigenousnation": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
           "x-nullable": true
         },
         "adoxio_position": {
@@ -22383,16 +23527,20 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_name": {
-          "type": "string",
+        "utcconversiontimezonecode": {
+          "type": "integer",
           "x-nullable": true
         },
         "overriddencreatedon": {
           "type": "string",
           "format": "date-time"
         },
-        "_modifiedby_value": {
+        "adoxio_name": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_communicationsregion": {
+          "type": "integer",
           "x-nullable": true
         },
         "importsequencenumber": {
@@ -22401,6 +23549,10 @@
         },
         "_modifiedonbehalfby_value": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_issuingcannabislicences": {
+          "type": "integer",
           "x-nullable": true
         },
         "_organizationid_value": {
@@ -22415,13 +23567,9 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_createdby_value": {
+        "adoxio_pendingdate": {
           "type": "string",
-          "x-nullable": true
-        },
-        "utcconversiontimezonecode": {
-          "type": "integer",
-          "x-nullable": true
+          "format": "date-time"
         },
         "adoxio_phonenumber": {
           "type": "string",
@@ -22476,6 +23624,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+          }
+        },
+        "adoxio_localgovindigenousnation_Annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.annotation"
+          }
+        },
+        "adoxio_localgovindigenousnation_adoxio_establishment_LGIN": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+          }
+        },
+        "adoxio_localgovindigenousnation_adoxio_licences_LGIN": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
           }
         }
       }
@@ -23169,6 +24335,18 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
           }
+        },
+        "adoxio_policejurisdiction_adoxio_establishment_PDJurisdiction": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+          }
+        },
+        "adoxio_policejurisdiction_adoxio_licences_PDJurisdiction": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+          }
         }
       }
     },
@@ -23361,10 +24539,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_modifiedby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
         "overriddencreatedon": {
           "type": "string",
           "format": "date-time"
@@ -23385,6 +24559,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "versionnumber": {
           "type": "integer",
           "format": "int64",
@@ -23398,11 +24576,15 @@
           "type": "integer",
           "x-nullable": true
         },
-        "statecode": {
-          "type": "integer",
+        "_adoxio_area_value": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -23484,6 +24666,9 @@
         },
         "adoxio_Territory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
+        },
+        "adoxio_Area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
         }
       }
     },
@@ -23669,10 +24854,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_name": {
-          "type": "string",
-          "x-nullable": true
-        },
         "_adoxio_regionalmanager_value": {
           "type": "string",
           "x-nullable": true
@@ -23697,13 +24878,17 @@
           "type": "string",
           "x-nullable": true
         },
-        "_owninguser_value": {
+        "adoxio_name": {
           "type": "string",
           "x-nullable": true
         },
         "createdon": {
           "type": "string",
           "format": "date-time"
+        },
+        "_adoxio_regionaladmin_value": {
+          "type": "string",
+          "x-nullable": true
         },
         "overriddencreatedon": {
           "type": "string",
@@ -23728,6 +24913,10 @@
         },
         "utcconversiontimezonecode": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_regionid": {
@@ -23831,6 +25020,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
+          }
+        },
+        "adoxio_region_adoxio_area_Region": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "adoxio_RegionalAdmin": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "adoxio_region_adoxio_citydistrict_RegionId": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
           }
         }
       }
@@ -25125,12 +26329,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_postalcode"
           }
         },
-        "adoxio_adoxio_territory_incident_Territory": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
-          }
-        },
         "adoxio_PrimaryInspector": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         },
@@ -25139,166 +26337,11 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
           }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.adoxio_testentity": {
-      "title": "adoxio_testentity",
-      "type": "object",
-      "properties": {
-        "overriddencreatedon": {
-          "type": "string",
-          "format": "date-time"
         },
-        "statecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_owningbusinessunit_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "modifiedon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "statuscode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_question4": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "_owningteam_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "versionnumber": {
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": true
-        },
-        "utcconversiontimezonecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_question6": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_createdby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "createdon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_name": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_testentityid": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_question3": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "timezoneruleversionnumber": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_createdonbehalfby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_owninguser_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_question2": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_modifiedby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_question1": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_question5": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_ownerid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "importsequencenumber": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "createdbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "createdonbehalfbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedonbehalfbyname": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owninguser": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owningteam": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
-        },
-        "ownerid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
-        },
-        "owningbusinessunit": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
-        },
-        "adoxio_testentity_SyncErrors": {
+        "adoxio_territory_adoxio_citydistrict_OfficeId": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
-          }
-        },
-        "adoxio_testentity_DuplicateMatchingRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "adoxio_testentity_DuplicateBaseRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "adoxio_testentity_AsyncOperations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
-          }
-        },
-        "adoxio_testentity_BulkDeleteFailures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
           }
         }
       }
@@ -26506,23 +27549,31 @@
       "title": "adoxio_worker",
       "type": "object",
       "properties": {
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_gendercode": {
           "type": "integer",
           "x-nullable": true
         },
-        "_adoxio_contactid_value": {
+        "adoxio_workerid": {
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_lastname": {
+        "adoxio_bcidcardnumber": {
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_email": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_driverslicencenumber": {
+        "_owningbusinessunit_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -26530,19 +27581,7 @@
           "type": "string",
           "x-nullable": true
         },
-        "_createdonbehalfby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_currentaddressdatefrom": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_isldbworker": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_createdby_value": {
+        "_owningteam_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -26550,7 +27589,67 @@
           "type": "string",
           "format": "date-time"
         },
-        "statuscode": {
+        "adoxio_paymentreceived": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_invoice_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_triggerphs": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_lastname": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_middlename": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_securitycompletedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_selfdisclosure": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_securitystatus": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_adoxio_contactid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
           "type": "integer",
           "x-nullable": true
         },
@@ -26559,55 +27658,15 @@
           "format": "int64",
           "x-nullable": true
         },
-        "adoxio_bcidcardnumber": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_invoice_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_middlename": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_name": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_invoicetrigger": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "importsequencenumber": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_paymentreceived": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_workerid": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_selfdisclosure": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "overriddencreatedon": {
+        "createdon": {
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_paymentreceiveddate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_birthplace": {
-          "type": "string",
+        "adoxio_ismanual": {
+          "type": "integer",
           "x-nullable": true
         },
-        "adoxio_firstname": {
+        "adoxio_effectivedatelongdatestring": {
           "type": "string",
           "x-nullable": true
         },
@@ -26615,19 +27674,15 @@
           "type": "string",
           "x-nullable": true
         },
-        "timezoneruleversionnumber": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "modifiedon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "_owningteam_value": {
+        "adoxio_birthplace": {
           "type": "string",
           "x-nullable": true
         },
-        "statecode": {
+        "adoxio_dateofbirthlongdatestring": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_consentvalidated": {
           "type": "integer",
           "x-nullable": true
         },
@@ -26635,29 +27690,57 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_triggerphs": {
+        "adoxio_expirydate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_driverslicencenumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_expirydatelongdatestring": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_firstname": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_invoicetrigger": {
           "type": "integer",
           "x-nullable": true
         },
-        "_owninguser_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_ownerid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_owningbusinessunit_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_modifiedby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "createdon": {
+        "adoxio_currentaddressdatefrom": {
           "type": "string",
           "format": "date-time"
+        },
+        "adoxio_paymentreceiveddate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_isldbworker": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_dateofbirthshortdatestring": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_email": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_islettersent": {
+          "type": "integer",
+          "x-nullable": true
         },
         "adoxio_Invoice": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
@@ -26666,6 +27749,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_workerinvoicehistory"
+          }
+        },
+        "adoxio_worker_QueueItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.queueitem"
+          }
+        },
+        "adoxio_worker_SharePointDocumentLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
           }
         },
         "createdbyname": {
@@ -26741,6 +27836,78 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_personalhistorysummary"
+          }
+        },
+        "adoxio_worker_ActivityPointers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activitypointer"
+          }
+        },
+        "adoxio_worker_Appointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.appointment"
+          }
+        },
+        "adoxio_worker_Emails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.email"
+          }
+        },
+        "adoxio_worker_Faxes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.fax"
+          }
+        },
+        "adoxio_worker_Letters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.letter"
+          }
+        },
+        "adoxio_worker_PhoneCalls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
+          }
+        },
+        "adoxio_worker_ServiceAppointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.serviceappointment"
+          }
+        },
+        "adoxio_worker_Tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
+        },
+        "adoxio_worker_RecurringAppointmentMasters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.recurringappointmentmaster"
+          }
+        },
+        "adoxio_worker_SocialActivities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.socialactivity"
+          }
+        },
+        "adoxio_worker_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "adoxio_worker_Annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.annotation"
           }
         }
       }
@@ -27063,8 +28230,17 @@
         "objectid_adoxio_complaint": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "objectid_adoxio_localgovindigenousnation": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_localgovindigenousnation"
+        },
+        "objectid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+        },
         "objectid_adoxio_investigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "objectid_adoxio_worker": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -27475,8 +28651,14 @@
         "regardingobjectid_adoxio_complaint_appointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_appointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_appointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_appointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -28013,7 +29195,7 @@
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.quote"
         },
         "regardingobjectid_sharepointsite": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
         },
         "regardingobjectid_salesliterature": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.salesliterature"
@@ -28177,9 +29359,6 @@
         "regardingobjectid_adoxio_territory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
         },
-        "regardingobjectid_adoxio_testentity": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-        },
         "regardingobjectid_adoxio_tiedhouseassociation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
         },
@@ -28222,6 +29401,15 @@
         "regardingobjectid_adoxio_policejurisdiction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         },
+        "regardingobjectid_adoxio_area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
+        "regardingobjectid_abs_scheduledprocess": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
+        "regardingobjectid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+        },
         "regardingobjectid_adoxio_complaintpublicbpf": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaintpublicbpf"
         },
@@ -28242,6 +29430,9 @@
         },
         "regardingobjectid_adoxio_policydocument": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+        },
+        "regardingobjectid_adoxio_citydistrict": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
         },
         "regardingobjectid_adoxio_applicationinvoicehistory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory"
@@ -28553,6 +29744,12 @@
         },
         "transactioncurrencyid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.transactioncurrency"
+        },
+        "bookableresourcebookingheader_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -28815,6 +30012,12 @@
         },
         "transactioncurrencyid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.transactioncurrency"
+        },
+        "bookableresourcebooking_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -30341,9 +31544,6 @@
         "regardingobjectid_adoxio_territory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
         },
-        "regardingobjectid_adoxio_testentity": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-        },
         "regardingobjectid_adoxio_tiedhouseassociation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
         },
@@ -30386,6 +31586,15 @@
         "regardingobjectid_adoxio_policejurisdiction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         },
+        "regardingobjectid_adoxio_area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
+        "regardingobjectid_abs_scheduledprocess": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
+        "regardingobjectid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+        },
         "regardingobjectid_adoxio_complaintpublicbpf": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaintpublicbpf"
         },
@@ -30406,6 +31615,9 @@
         },
         "regardingobjectid_adoxio_policydocument": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+        },
+        "regardingobjectid_adoxio_citydistrict": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
         },
         "regardingobjectid_adoxio_applicationinvoicehistory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory"
@@ -30787,6 +31999,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.queueitem"
+          }
+        },
+        "bulkoperation_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         }
       }
@@ -31613,7 +32831,7 @@
         "business_unit_sharepointsites": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "business_unit_emailserverprofile": {
@@ -31943,12 +33161,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
           }
         },
-        "business_unit_adoxio_testentity": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
         "business_unit_adoxio_tiedhouseassociation": {
           "type": "array",
           "items": {
@@ -32015,6 +33227,24 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_corporaterole"
           }
         },
+        "business_unit_adoxio_area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "business_unit_abs_scheduledprocess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "abs_scheduledprocessexecution_businessunit_owningbusinessunit": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "business_unit_adoxio_investigation": {
           "type": "array",
           "items": {
@@ -32049,6 +33279,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+          }
+        },
+        "business_unit_adoxio_citydistrict": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
           }
         },
         "business_unit_adoxio_applicationinvoicehistory": {
@@ -32611,6 +33847,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.recurringappointmentmaster"
           }
+        },
+        "campaignactivity_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -32881,6 +34123,9 @@
         },
         "modifiedby_campaignresponse": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "originatingactivityid_abs_scheduledprocessexecution_campaignresponse": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
         }
       }
     },
@@ -33287,6 +34532,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.quote"
+          }
+        },
+        "campaign_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         }
       }
@@ -34905,6 +36156,12 @@
         },
         "record1id_pricelevel": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.pricelevel"
+        },
+        "record1id_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+        },
+        "record2id_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
         }
       }
     },
@@ -35128,8 +36385,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "leadsourcecode": {
-          "type": "integer",
+        "adoxio_isworker": {
+          "type": "boolean",
           "x-nullable": true
         },
         "firstname": {
@@ -35229,8 +36486,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "emailaddress3": {
-          "type": "string",
+        "leadsourcecode": {
+          "type": "integer",
           "x-nullable": true
         },
         "address2_telephone1": {
@@ -35384,10 +36641,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_isstaffadmin": {
-          "type": "boolean",
-          "x-nullable": true
-        },
         "address2_city": {
           "type": "string",
           "x-nullable": true
@@ -35455,8 +36708,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "_createdonbehalfby_value": {
-          "type": "string",
+        "adoxio_isstaffadmin": {
+          "type": "boolean",
           "x-nullable": true
         },
         "address1_utcoffset": {
@@ -35480,6 +36733,10 @@
         },
         "callback": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_ismarketer": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_role": {
@@ -35600,6 +36857,10 @@
           "x-nullable": true
         },
         "address3_line2": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_scopeofthelicenseeinstructions": {
           "type": "string",
           "x-nullable": true
         },
@@ -35769,6 +37030,10 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "adoxio_isassociate": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "entityimage_timestamp": {
           "type": "integer",
           "format": "int64",
@@ -35837,6 +37102,10 @@
           "x-nullable": true
         },
         "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "emailaddress3": {
           "type": "string",
           "x-nullable": true
         },
@@ -35939,7 +37208,7 @@
           "type": "boolean",
           "x-nullable": true
         },
-        "adoxio_scopeofthelicenseeinstructions": {
+        "_createdonbehalfby_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -36465,6 +37734,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+          }
+        },
+        "contact_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         },
         "adoxio_contact_tiedhouseconnections": {
@@ -37164,6 +38439,12 @@
         },
         "ownerid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "contract_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -38546,7 +39827,7 @@
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.publisher"
         },
         "duplicaterecordid_sharepointsite": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
         },
         "duplicaterecordid_kbarticle": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.kbarticle"
@@ -38582,7 +39863,7 @@
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.goalrollupquery"
         },
         "baserecordid_sharepointsite": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
         },
         "baserecordid_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
@@ -38839,12 +40120,6 @@
         "baserecordid_adoxio_territory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
         },
-        "duplicaterecordid_adoxio_testentity": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-        },
-        "baserecordid_adoxio_testentity": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-        },
         "duplicaterecordid_adoxio_tiedhouseassociation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
         },
@@ -38917,6 +40192,12 @@
         "baserecordid_adoxio_policejurisdiction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         },
+        "duplicaterecordid_adoxio_area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
+        "baserecordid_adoxio_area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
         "duplicaterecordid_adoxio_investigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
         },
@@ -38934,6 +40215,12 @@
         },
         "baserecordid_adoxio_policydocument": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+        },
+        "duplicaterecordid_adoxio_citydistrict": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+        },
+        "baserecordid_adoxio_citydistrict": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
         },
         "duplicaterecordid_adoxio_applicationinvoicehistory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory"
@@ -40161,8 +41448,14 @@
         "regardingobjectid_adoxio_complaint_email": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_email": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_email": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_email": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -41050,6 +42343,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
           }
+        },
+        "entitlement_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -41414,6 +42713,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.entitlementtemplatechannel"
+          }
+        },
+        "entitlementtemplate_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         }
       }
@@ -42106,8 +43411,14 @@
         "regardingobjectid_adoxio_complaint_fax": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_fax": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_fax": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_fax": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -42296,6 +43607,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
           }
+        },
+        "regardingobjectid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
         }
       }
     },
@@ -44369,291 +45683,51 @@
       "title": "incident",
       "type": "object",
       "properties": {
-        "sentimentvalue": {
-          "type": "number",
-          "format": "double"
-        },
-        "onholdtime": {
+        "statuscode": {
           "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehourstuesdayopen": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "traversedpath": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursthursdayopen": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_alcoholsensematerial": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectionsminors": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_transactioncurrencyid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_establishmentaddress": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspectiondate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_externalinvestigationjobnumber": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "exchangerate": {
-          "x-nullable": true
-        },
-        "adoxio_minorsserved": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehourssundayclose": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectiontimeouthh": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehourstuesdayclose": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspchecklistdepictsaipfloorplannotes": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "incidentstagecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_createdby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspchecklisttakeandsendphotos": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectionservingitright": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "casetypecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "title": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "numberofchildincidents": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_owninguser_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_slainvokedid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspectionentertainment": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectionintoxication": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspchecklistphototakennotes": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "followuptaskcreated": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "adoxio_communitydisturbance": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "firstresponseslastatus": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehourssaturdayclose": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "modifiedon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_noeanarrative": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_investigation_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_contactid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursstandardhours": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "statecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "messagetypecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_disturbanceofpersonsinthevicinity": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "entityimage_timestamp": {
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": true
-        },
-        "merged": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "overriddencreatedon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "_createdbyexternalparty_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "customercontacted": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "adoxio_dateout": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "createdon": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "_resolvebykpiid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_territory_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspectioncompleteddate": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_adjudicator_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_owningteam_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_existingcase_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_adoxio_inspector_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "customersatisfactioncode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_contactedpolicereconcerns": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_firstresponsebykpiid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_operatingcontrarytolicence": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_primarycontactid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursmondayopen": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_kbarticleid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspectionliquorlicence": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_subjectid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "utcconversiontimezonecode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "isdecrementing": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursfridayopen": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "stageid": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_noeasection1penaltychoice": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "entityimage": {
           "x-nullable": true
         },
         "followupby": {
           "type": "string",
           "format": "date-time"
         },
-        "statuscode": {
+        "entityimage": {
+          "x-nullable": true
+        },
+        "adoxio_alcoholsensematerial": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "influencescore": {
+          "type": "number",
+          "format": "double"
+        },
+        "_kbarticleid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistproductnoselfservicenotes": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_servicehourssaturdayopen": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_contactid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_communitydisturbance": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklisttakeandsendphotos": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdbyexternalparty_value": {
+          "type": "string",
           "x-nullable": true
         },
         "_accountid_value": {
@@ -44664,131 +45738,16 @@
           "type": "integer",
           "x-nullable": true
         },
-        "escalatedon": {
+        "adoxio_dateout": {
           "type": "string",
           "format": "date-time"
         },
-        "checkemail": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "resolveby": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "_masterid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "incidentid": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_entitlementid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "importsequencenumber": {
+        "versionnumber": {
           "type": "integer",
+          "format": "int64",
           "x-nullable": true
         },
-        "servicestage": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehourssundayopen": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_adoxio_licence_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "decremententitlementterm": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "routecase": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "influencescore": {
-          "type": "number",
-          "format": "double"
-        },
-        "responseby": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_noeachoiceprocedure": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_modifiedbyexternalparty_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_modifiedby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursmondayclose": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_productid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_createdonbehalfby_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "caseorigincode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_datein": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_servicehourswednesdayopen": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_employeesconsumingliquor": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "timezoneruleversionnumber": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_mapagentid2": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "firstresponsesent": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "adoxio_inspchecklistdepictsaipfloorplan": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectionnumberofpatrons": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursfridayclose": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_mapagentid1": {
+        "entityimage_url": {
           "type": "string",
           "x-nullable": true
         },
@@ -44796,83 +45755,11 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_inspectiontimeoutmm": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "productserialnumber": {
+        "_firstresponsebykpiid_value": {
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_inspchecklistaccordancewithaipletter": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "entityimageid": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_contractid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "contractservicelevelcode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_adoxio_establishment_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspectionliquorregister": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectioncompletedate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_inspectionoutcome": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "isescalated": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "_adoxio_regionalmanager_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "severitycode": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_adoxio_region_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspectiontype": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "lastonholdtime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "ticketnumber": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_inspectionviolationticketsissued": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_servicehoursthursdayclose": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_adoxio_complaint_value": {
+        "_modifiedonbehalfby_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -44880,99 +45767,27 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_contractdetailid_value": {
+        "_masterid_value": {
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_inspectionredlinefloorplan": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_parentcaseid_value": {
+        "adoxio_inspchecklistphysicalsecuritynotes": {
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_inspchecklistfollowupinspectionrequired": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "blockedprofile": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "billedserviceunits": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectiontimeinmm": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "_socialprofileid_value": {
+        "createdon": {
           "type": "string",
-          "x-nullable": true
-        },
-        "_ownerid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_owningbusinessunit_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_drinksizesminpricing": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_externalinvestigationfilenumber": {
-          "type": "string",
-          "x-nullable": true
+          "format": "date-time"
         },
         "adoxio_comments": {
           "type": "string",
           "x-nullable": true
         },
-        "_adoxio_licensee_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_actualinspectiondate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_inspectiontimeinhh": {
+        "adoxio_servicehoursfridayopen": {
           "type": "integer",
           "x-nullable": true
         },
-        "description": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "_slaid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_servicehourswednesdayclose": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectionduedate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_inspectionliquorservice": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "activitiescomplete": {
-          "type": "boolean",
-          "x-nullable": true
-        },
-        "resolvebyslastatus": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_inspectionovercrowding": {
+        "billedserviceunits": {
           "type": "integer",
           "x-nullable": true
         },
@@ -44980,41 +45795,592 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_servicehourssaturdayopen": {
+        "adoxio_externalinvestigationfilenumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistproductnotvisible": {
           "type": "integer",
           "x-nullable": true
         },
-        "versionnumber": {
-          "type": "integer",
-          "format": "int64",
+        "decremententitlementterm": {
+          "type": "boolean",
           "x-nullable": true
         },
-        "adoxio_noeasentdate": {
+        "customercontacted": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_adoxio_licence_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedbyexternalparty_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_noeanarrative": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "caseorigincode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_servicehourstuesdayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectiontimeinmm": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "isescalated": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_establishmentpostalcode": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_regionalmanager_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_establishmentcity": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_datein": {
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_discussedmapprogram": {
+        "lastonholdtime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "merged": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistsignmeetsrequirementsnotes": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_primarycontactid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "servicestage": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "numberofchildincidents": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_establishmentaddress": {
+          "type": "string",
           "x-nullable": true
         },
         "_customerid_value": {
           "type": "string",
           "x-nullable": true
         },
-        "entityimage_url": {
+        "adoxio_minorsserved": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_drinksizesminpricing": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistnootherbusinessassociated": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_inspchecklistproductnoselfservice": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistdepictsaipfloorplan": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectiontimeouthh": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursthursdayopen": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "exchangerate": {
+          "x-nullable": true
+        },
+        "_createdby_value": {
           "type": "string",
           "x-nullable": true
         },
-        "prioritycode": {
+        "adoxio_disturbanceofpersonsinthevicinity": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectionentertainment": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "_contractdetailid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_entitlementid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_mapagentid1": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_parentcaseid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "stageid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistaccordancewithaipletter": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "sentimentvalue": {
+          "type": "number",
+          "format": "double"
+        },
+        "adoxio_inspectioncompletedate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_adoxio_adjudicator_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectionoutcome": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_complaint_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_actualinspectiondate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_noeasection1penaltychoice": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "checkemail": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "productserialnumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_transactioncurrencyid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "firstresponseslastatus": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectionsminors": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectionliquorlicence": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_inspector_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_productid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "onholdtime": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "routecase": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "isdecrementing": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_inspectionliquorservice": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_slaid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursmondayopen": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "activitiescomplete": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "messagetypecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_contractid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectionnumberofpatrons": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_servicehourswednesdayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_investigation_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_subjectid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_employeesconsumingliquor": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_licensee_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_noeachoiceprocedure": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "followuptaskcreated": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_operatingcontrarytolicence": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "contractservicelevelcode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "entityimageid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectionovercrowding": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "severitycode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_servicehourssaturdayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "incidentid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectiontimeoutmm": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectionservingitright": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "traversedpath": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectiontype": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectionduedate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_area_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_externalinvestigationjobnumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_contactedpolicereconcerns": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_servicehourswednesdayopen": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectionviolationticketsissued": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "customersatisfactioncode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_servicehourstuesdayopen": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistphysicalsecurityoperating": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectioncompleteddate": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_inspchecklistaccordancewithaipletternotes": {
           "type": "string",
           "x-nullable": true
         },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_adoxio_region_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectionactivitiesconcludeddate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_inspectionliquorregister": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "firstresponsesent": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "prioritycode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "ticketnumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspectionintoxication": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "casetypecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "incidentstagecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_existingcase_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_servicehourssundayopen": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_disorderlyorunlawfulactivities": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "resolveby": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_inspectiondate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_socialprofileid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_noeasentdate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_adoxio_establishment_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_mapagentid2": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistdepictsaipfloorplannotes": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "responseby": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_servicehourssundayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectionredlinefloorplan": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "escalatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "entityimage_timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "resolvebyslastatus": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistphototakennotes": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_discussedmapprogram": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspectiontimeinhh": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "blockedprofile": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursthursdayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursstandardhours": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursmondayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistsignmeetsrequirements": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistfollowupinspectionrequired": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_slainvokedid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistnootherbusinessnotes": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_servicehoursfridayclose": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_inspchecklistproductnotvisiblenotes": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_resolvebykpiid_value": {
+          "type": "string",
           "x-nullable": true
         },
         "incident_PostRegardings": {
@@ -45314,9 +46680,6 @@
         "adoxio_Region": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_region"
         },
-        "adoxio_Territory": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
-        },
         "adoxio_incident_adoxio_complaincemeeting_Inspection": {
           "type": "array",
           "items": {
@@ -45346,6 +46709,15 @@
         },
         "adoxio_Complaint": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
+        },
+        "adoxio_Area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
+        "incident_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         },
         "adoxio_Investigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
@@ -45514,6 +46886,12 @@
         },
         "transactioncurrencyid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.transactioncurrency"
+        },
+        "interactionforemail_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -45986,6 +47364,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_statuschangedate": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_transactionid": {
           "type": "string",
           "x-nullable": true
@@ -46098,6 +47480,7 @@
           "x-nullable": true
         },
         "totalamount": {
+          "format": "decimal",
           "x-nullable": true
         },
         "_owningteam_value": {
@@ -46168,6 +47551,10 @@
           "format": "date-time"
         },
         "billto_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_statuschangedatelongstring": {
           "type": "string",
           "x-nullable": true
         },
@@ -46422,6 +47809,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationnotification"
+          }
+        },
+        "invoice_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         },
         "adoxio_invoice_adoxio_applicationinvoicehistory_Invoice": {
@@ -47508,6 +48901,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
           }
+        },
+        "knowledgearticle_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -47843,6 +49242,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
+          }
+        },
+        "knowledgebaserecord_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         }
       }
@@ -48991,6 +50396,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkoperationlog"
           }
+        },
+        "lead_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -49356,8 +50767,14 @@
         "regardingobjectid_adoxio_complaint_letter": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_letter": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_letter": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_letter": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -50142,6 +51559,12 @@
         },
         "organizationid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.organization"
+        },
+        "abs_scheduledprocessexecution_mailbox_sendermailboxid": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -51738,6 +53161,7 @@
           "x-nullable": true
         },
         "totalamount": {
+          "format": "decimal",
           "x-nullable": true
         },
         "_slaid_value": {
@@ -52102,6 +53526,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.annotation"
+          }
+        },
+        "opportunity_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         }
       }
@@ -54550,7 +55980,7 @@
         "owner_sharepointsite": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "owner_sharepointdocumentlocation": {
@@ -55051,12 +56481,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
           }
         },
-        "owner_adoxio_testentity": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
         "owner_adoxio_tiedhouseassociation": {
           "type": "array",
           "items": {
@@ -55123,6 +56547,24 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_corporaterole"
           }
         },
+        "owner_adoxio_area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "owner_abs_scheduledprocess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "abs_scheduledprocessexecution_owner_ownerid": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "owner_adoxio_investigation": {
           "type": "array",
           "items": {
@@ -55157,6 +56599,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+          }
+        },
+        "owner_adoxio_citydistrict": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
           }
         },
         "owner_adoxio_applicationinvoicehistory": {
@@ -55520,8 +56968,14 @@
         "regardingobjectid_adoxio_complaint_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_phonecall": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_phonecall": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -59024,11 +60478,17 @@
         "createdonbehalfby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         },
+        "objectid_adoxio_worker": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
         "objectid_adoxio_application": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
         },
         "objectid_adoxio_investigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "objectid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
         }
       }
     },
@@ -59823,6 +61283,7 @@
           "x-nullable": true
         },
         "totalamount": {
+          "format": "decimal",
           "x-nullable": true
         },
         "_contactid_value": {
@@ -60276,6 +61737,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "quote_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         }
       }
@@ -61089,8 +62556,14 @@
         "regardingobjectid_adoxio_complaint_recurringappointmentmaster": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_recurringappointmentmaster": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_recurringappointmentmaster": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_recurringappointmentmaster": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -62961,6 +64434,7 @@
           "x-nullable": true
         },
         "totalamount": {
+          "format": "decimal",
           "x-nullable": true
         },
         "datefulfilled": {
@@ -63295,6 +64769,12 @@
         },
         "slainvokedid_salesorder_sla": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.sla"
+        },
+        "salesorder_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -64541,8 +66021,14 @@
         "regardingobjectid_adoxio_complaint_serviceappointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_serviceappointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_serviceappointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_serviceappointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -64981,6 +66467,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
           }
+        },
+        "abs_scheduledprocessexecution_service_serviceid": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -65166,7 +66658,7 @@
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.opportunity"
         },
         "parentsiteorlocation_sharepointsite": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
         },
         "modifiedonbehalfby": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -65219,6 +66711,9 @@
         "regardingobjectid_adoxio_investigation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
         },
+        "regardingobjectid_adoxio_worker": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
         "regardingobjectid_adoxio_spdexports": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_spdexports"
         },
@@ -65227,7 +66722,7 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.SharepointSite": {
+    "Microsoft.Dynamics.CRM.sharepointsite": {
       "title": "sharepointsite",
       "type": "object",
       "properties": {
@@ -65396,12 +66891,12 @@
           }
         },
         "parentsite": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
         },
         "sharepointsite_parentsite_sharepointsite": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "owningbusinessunit": {
@@ -66655,6 +68150,18 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
           }
+        },
+        "abs_scheduledprocessexecution_sla_slaid": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "abs_scheduledprocessexecution_sla_slainvokedid": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -66905,8 +68412,14 @@
         "regardingobjectid_adoxio_complaint_socialactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_socialactivity": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_socialactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_socialactivity": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -68081,7 +69594,7 @@
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incidentresolution"
         },
         "regardingobjectid_sharepointsite_syncerror": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
         },
         "ownerid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
@@ -68197,9 +69710,6 @@
         "regardingobjectid_adoxio_territory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
         },
-        "regardingobjectid_adoxio_testentity": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-        },
         "regardingobjectid_adoxio_tiedhouseassociation": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseassociation"
         },
@@ -68242,6 +69752,15 @@
         "regardingobjectid_adoxio_policejurisdiction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         },
+        "regardingobjectid_adoxio_area": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
+        "regardingobjectid_abs_scheduledprocess": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
+        "regardingobjectid_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+        },
         "regardingobjectid_adoxio_complaintpublicbpf": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaintpublicbpf"
         },
@@ -68262,6 +69781,9 @@
         },
         "regardingobjectid_adoxio_policydocument": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+        },
+        "regardingobjectid_adoxio_citydistrict": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
         },
         "regardingobjectid_adoxio_applicationinvoicehistory": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory"
@@ -69117,7 +70639,7 @@
         "user_sharepointsite": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "user_sharepointdocumentlocation": {
@@ -70455,7 +71977,7 @@
         "lk_sharepointsitebase_modifiedby": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "lk_DynamicPropertyAssociationattribute_ModifiedBy": {
@@ -71040,7 +72562,7 @@
         "lk_sharepointsitebase_createdby": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "lk_phonecall_modifiedonbehalfby": {
@@ -71517,7 +73039,7 @@
         "lk_sharepointsitebase_createdonbehalfby": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "lk_reportcategory_createdonbehalfby": {
@@ -72744,7 +74266,7 @@
         "lk_sharepointsitebase_modifiedonbehalfby": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "lk_opportunityproduct_modifiedonbehalfby": {
@@ -74826,36 +76348,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
           }
         },
-        "lk_adoxio_testentity_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
-        "lk_adoxio_testentity_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
-        "lk_adoxio_testentity_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
-        "lk_adoxio_testentity_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
-        "user_adoxio_testentity": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
         "lk_adoxio_tiedhouseassociation_createdby": {
           "type": "array",
           "items": {
@@ -75318,6 +76810,102 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
           }
         },
+        "lk_adoxio_area_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "lk_adoxio_area_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "lk_adoxio_area_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "lk_adoxio_area_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "user_adoxio_area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "adoxio_systemuser_adoxio_area_PrimaryInspector": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "lk_abs_scheduledprocess_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "lk_abs_scheduledprocess_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "lk_abs_scheduledprocess_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "lk_abs_scheduledprocess_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "user_abs_scheduledprocess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "abs_scheduledprocessexecution_systemuser_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "abs_scheduledprocessexecution_systemuser_owninguser": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "abs_scheduledprocessexecution_systemuser_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "abs_scheduledprocessexecution_systemuser_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "abs_scheduledprocessexecution_systemuser_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "lk_adoxio_complaintpublicbpf_createdby": {
           "type": "array",
           "items": {
@@ -75534,6 +77122,48 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
           }
         },
+        "lk_adoxio_citydistrict_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+          }
+        },
+        "lk_adoxio_citydistrict_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+          }
+        },
+        "lk_adoxio_citydistrict_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+          }
+        },
+        "lk_adoxio_citydistrict_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+          }
+        },
+        "user_adoxio_citydistrict": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+          }
+        },
+        "adoxio_systemuser_adoxio_region_RegionalAdmin": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_region"
+          }
+        },
+        "adoxio_systemuser_adoxio_citydistrict_InspectorId": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
+          }
+        },
         "adoxio_systemuser_adoxio_investigation_Adjudicator": {
           "type": "array",
           "items": {
@@ -75712,6 +77342,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_corporatehistorysummary"
+          }
+        },
+        "adoxio_systemuser_adoxio_investigation_ApprovedDecisionBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
           }
         }
       }
@@ -75960,8 +77596,14 @@
         "regardingobjectid_adoxio_complaint_task": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
         },
+        "regardingobjectid_abs_scheduledprocess_task": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+        },
         "regardingobjectid_adoxio_investigation_task": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
+        },
+        "regardingobjectid_adoxio_worker_task": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
         }
       }
     },
@@ -76180,7 +77822,7 @@
         "team_sharepointsite": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "team_sharepointdocumentlocation": {
@@ -76837,12 +78479,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_territory"
           }
         },
-        "team_adoxio_testentity": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_testentity"
-          }
-        },
         "team_adoxio_tiedhouseassociation": {
           "type": "array",
           "items": {
@@ -76909,6 +78545,24 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_corporaterole"
           }
         },
+        "team_adoxio_area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+          }
+        },
+        "team_abs_scheduledprocess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
+          }
+        },
+        "abs_scheduledprocessexecution_team_owningteam": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
         "team_adoxio_investigation": {
           "type": "array",
           "items": {
@@ -76943,6 +78597,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policydocument"
+          }
+        },
+        "team_adoxio_citydistrict": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_citydistrict"
           }
         },
         "team_adoxio_applicationinvoicehistory": {
@@ -78719,7 +80379,7 @@
         "TransactionCurrency_SharePointSite": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.SharepointSite"
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointsite"
           }
         },
         "TransactionCurrency_bookableresourcebooking": {
@@ -78873,6 +80533,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_interest"
+          }
+        },
+        "abs_scheduledprocessexecution_transactioncurrency_transactioncurrencyid": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
           }
         }
       }
@@ -80855,6 +82521,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2"
+          }
+        },
+        "abs_workflow_scheduledprocess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocess"
           }
         },
         "lk_adoxio_complaintpublicbpf_processid": {
