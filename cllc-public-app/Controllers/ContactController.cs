@@ -262,9 +262,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 AdoxioFirstname = item.firstname,
                 AdoxioMiddlename = item.middlename,
                 AdoxioLastname = item.lastname,
-                IsManual = 0 // 0 for false - is a portal user.
+                AdoxioIsmanual = 0 // 0 for false - is a portal user.
             };
-
+            
 
             contact.CopyValues(item);
             // set the type to Retail Worker.
