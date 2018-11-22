@@ -22,7 +22,9 @@
       <!-- Column -->
       <ng-container matColumnDef="establishmentName">
         <mat-header-cell mat-sort-header *matHeaderCellDef> ESTABLISHMENT NAME </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.establishmentName}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          <a href="javascript:void(0);" (click)="uploadMoreFiles(element)">{{element.establishmentName}} </a>
+        </mat-cell>
       </ng-container>
 
       <!-- Column -->
@@ -72,7 +74,7 @@
             <span>{{element.modifiedon | date:'mediumDate'}}</span>
             <p></p>
             <span>ESTABLISHMENT NAME: </span>
-            {{element.establishmentName}}
+            <a href="javascript:void(0);" (click)="uploadMoreFiles(element)">{{element.establishmentName}} </a>
             <p></p>
             <span>STATUS: </span>
             <i *ngIf="element.status == ACTIVE" class="fa fa-check-circle" style="color: #4b830d"></i>
