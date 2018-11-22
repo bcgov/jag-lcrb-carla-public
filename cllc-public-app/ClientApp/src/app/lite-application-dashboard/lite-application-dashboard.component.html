@@ -89,9 +89,11 @@
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{element.establishmentName}}
-              <br /> Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
-              <br /> Ref. {{element.name}}
+              <section>
+                <a href="javascript:void(0);" (click)="uploadMoreFiles(element)">{{element.establishmentName}}</a>
+                <br /> Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
+                <br /> Ref. {{element.name}}
+              </section>
             </mat-cell>
           </ng-container>
 
