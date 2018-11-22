@@ -48,13 +48,13 @@
           <ng-container matColumnDef="summary">
             <mat-cell *matCellDef="let element">
               <section>
-                <p></p>
-                <span>LAST UPDATED: </span>
-                <span>{{element.modifiedon | date:'mediumDate'}}</span>
-                <p></p>
-                <span>ESTABLISHMENT NAME: </span>
-                <a routerLink="/application-lite/{{element.id}}">{{element.establishmentName}} (Ref. {{element.name}})</a>
-                <p></p>
+                  <p></p>
+                  <span>LAST UPDATED: </span>
+                  <span>{{element.modifiedon | date:'mediumDate'}}</span>
+                  <p></p>
+                  <span>ESTABLISHMENT NAME: </span>
+                  <a routerLink="/application-lite/{{element.id}}">{{element.establishmentName}} (Ref. {{element.name}})</a>
+                  <p></p>
                 <span (click)="cancelApplication(element.id, element.establishmentName, element.name)">
                   <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
                   <a href="javascript: void(0)">Cancel Application</a>
@@ -90,7 +90,9 @@
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <section>
-                <a href="javascript:void(0);" (click)="uploadMoreFiles(element)">{{element.establishmentName}}</a>
+                <span>{{element.establishmentName}}</span>
+                <br>
+                <a href="javascript:void(0);" (click)="uploadMoreFiles(element)">Add Supporting Documents</a>
                 <br /> Submitted {{element.paymentreceiveddate | date:'mediumDate'}}
                 <br /> Ref. {{element.name}}
               </section>
