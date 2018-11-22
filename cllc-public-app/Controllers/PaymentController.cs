@@ -163,9 +163,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
                     {
                         // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
-                        AdoxioLicenceFeeInvoiceTrigger = (int?)ViewModels.GeneralYesNo.Yes
+                        AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
                     };
-
+                    
                     try
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
@@ -503,7 +503,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // set the Application invoice status back to No
                     MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
                     {
-                        AdoxioLicenceFeeInvoiceTrigger = (int?)ViewModels.GeneralYesNo.No
+                        AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
                     };
                     try
                     {
