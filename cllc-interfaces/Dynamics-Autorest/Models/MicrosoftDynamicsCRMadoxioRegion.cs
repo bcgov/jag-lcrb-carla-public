@@ -29,24 +29,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMadoxioRegion
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioRegion(int? timezoneruleversionnumber = default(int?), string adoxioName = default(string), string _adoxioRegionalmanagerValue = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), long? versionnumber = default(long?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string adoxioRegionid = default(string), int? statecode = default(int?), string _owneridValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioRegionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRegionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRegionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioRegionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioRegionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioRegionAdoxioApplicationRegion = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioRegionAdoxioLicencesRegion = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioTerritory> adoxioAdoxioRegionAdoxioTerritoryRegion = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioRegionIncidentRegion = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioAdoxioRegionAdoxioComplaintRegion = default(IList<MicrosoftDynamicsCRMadoxioComplaint>))
+        public MicrosoftDynamicsCRMadoxioRegion(int? timezoneruleversionnumber = default(int?), string _adoxioRegionalmanagerValue = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioRegionaladminValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), long? versionnumber = default(long?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), string adoxioRegionid = default(string), int? statecode = default(int?), string _owneridValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioRegionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRegionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRegionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioRegionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioRegionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioRegionAdoxioApplicationRegion = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioRegionAdoxioLicencesRegion = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioTerritory> adoxioAdoxioRegionAdoxioTerritoryRegion = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioRegionIncidentRegion = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioAdoxioRegionAdoxioComplaintRegion = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioArea> adoxioRegionAdoxioAreaRegion = default(IList<MicrosoftDynamicsCRMadoxioArea>), MicrosoftDynamicsCRMsystemuser adoxioRegionalAdmin = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioCitydistrict> adoxioRegionAdoxioCitydistrictRegionId = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>))
         {
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioName = adoxioName;
             this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
             this._owningteamValue = _owningteamValue;
             Statuscode = statuscode;
             this._modifiedbyValue = _modifiedbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owninguserValue = _owninguserValue;
+            AdoxioName = adoxioName;
             Createdon = createdon;
+            this._adoxioRegionaladminValue = _adoxioRegionaladminValue;
             Overriddencreatedon = overriddencreatedon;
             Modifiedon = modifiedon;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owninguserValue = _owninguserValue;
             AdoxioRegionid = adoxioRegionid;
             Statecode = statecode;
             this._owneridValue = _owneridValue;
@@ -70,6 +71,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAdoxioRegionIncidentRegion = adoxioAdoxioRegionIncidentRegion;
             AdoxioRegionalManager = adoxioRegionalManager;
             AdoxioAdoxioRegionAdoxioComplaintRegion = adoxioAdoxioRegionAdoxioComplaintRegion;
+            AdoxioRegionAdoxioAreaRegion = adoxioRegionAdoxioAreaRegion;
+            AdoxioRegionalAdmin = adoxioRegionalAdmin;
+            AdoxioRegionAdoxioCitydistrictRegionId = adoxioRegionAdoxioCitydistrictRegionId;
             CustomInit();
         }
 
@@ -82,11 +86,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,13 +119,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_regionaladmin_value")]
+        public string _adoxioRegionaladminValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,6 +161,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -272,6 +281,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_adoxio_region_adoxio_complaint_Region")]
         public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioAdoxioRegionAdoxioComplaintRegion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_region_adoxio_area_Region")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> AdoxioRegionAdoxioAreaRegion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_RegionalAdmin")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioRegionalAdmin { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_region_adoxio_citydistrict_RegionId")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> AdoxioRegionAdoxioCitydistrictRegionId { get; set; }
 
     }
 }

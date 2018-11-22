@@ -180,7 +180,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new worker.
             MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker()
             {
-                IsManual = 0 // 0 for false - is a portal user.
+                AdoxioIsmanual = 0 // 0 for false - is a portal user.
             };
             worker.CopyValues(item);
             if (item?.contact?.id == null)

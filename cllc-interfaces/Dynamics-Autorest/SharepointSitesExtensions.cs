@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMSharepointSite Create(this ISharepointSites operations, MicrosoftDynamicsCRMSharepointSite body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMsharepointsite Create(this ISharepointSites operations, MicrosoftDynamicsCRMsharepointsite body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMSharepointSite> CreateAsync(this ISharepointSites operations, MicrosoftDynamicsCRMSharepointSite body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMsharepointsite> CreateAsync(this ISharepointSites operations, MicrosoftDynamicsCRMsharepointsite body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {

@@ -286,7 +286,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMSharepointSite>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMSharepointSite body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMsharepointsite>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMsharepointsite body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -393,7 +393,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMSharepointSite>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMsharepointsite>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -402,7 +402,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMSharepointSite>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMsharepointsite>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
