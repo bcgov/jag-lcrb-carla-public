@@ -183,7 +183,7 @@
     <p>Upload the completed application form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'"
+        [multipleFiles]="false" [enableFileDeletion]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'"
         #mainForm></app-file-uploader>
     </section>
     <br>
@@ -195,7 +195,7 @@
     <p>Upload the completed Financial Integrity form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+        [multipleFiles]="false" [enableFileDeletion]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
         #financialIntegrityDocuments></app-file-uploader>
     </section>
     <br>
@@ -207,9 +207,8 @@
     <p>Upload all required documentation that will support the licence application.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
-        entityName="application" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
+        entityName="application" [enableFileDeletion]="false" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
         #supportingDocuments></app-file-uploader>
     </section>
-
   </div>
 </div>
