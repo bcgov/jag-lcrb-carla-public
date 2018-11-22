@@ -14,22 +14,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     /// <summary>
     /// sharepointsite
     /// </summary>
-    public partial class MicrosoftDynamicsCRMSharepointSite
+    public partial class MicrosoftDynamicsCRMsharepointsite
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// MicrosoftDynamicsCRMSharepointSite class.
+        /// MicrosoftDynamicsCRMsharepointsite class.
         /// </summary>
-        public MicrosoftDynamicsCRMSharepointSite()
+        public MicrosoftDynamicsCRMsharepointsite()
         {
             CustomInit();
         }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// MicrosoftDynamicsCRMSharepointSite class.
+        /// MicrosoftDynamicsCRMsharepointsite class.
         /// </summary>
-        public MicrosoftDynamicsCRMSharepointSite(string userid = default(string), int? statecode = default(int?), int? validationstatus = default(int?), string _modifiedonbehalfbyValue = default(string), string absoluteurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sitecollectionid = default(string), string _modifiedbyValue = default(string), object exchangerate = default(object), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), bool? isgridpresent = default(bool?), string _parentsiteValue = default(string), int? validationstatuserrorcode = default(int?), int? servicetype = default(int?), string _createdbyValue = default(string), string _owningteamValue = default(string), string _transactioncurrencyidValue = default(string), int? timezoneruleversionnumber = default(int?), string relativeurl = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string description = default(string), System.DateTimeOffset? lastvalidated = default(System.DateTimeOffset?), bool? isdefault = default(bool?), int? utcconversiontimezonecode = default(int?), bool? ispowerbisite = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string sharepointsiteid = default(string), int? importsequencenumber = default(int?), string folderstructureentity = default(string), string name = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMSharepointSite parentsite = default(MicrosoftDynamicsCRMSharepointSite), IList<MicrosoftDynamicsCRMSharepointSite> sharepointsiteParentsiteSharepointsite = default(IList<MicrosoftDynamicsCRMSharepointSite>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> sharePointSiteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointSiteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMsharepointsite(string userid = default(string), int? statecode = default(int?), int? validationstatus = default(int?), string _modifiedonbehalfbyValue = default(string), string absoluteurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sitecollectionid = default(string), string _modifiedbyValue = default(string), object exchangerate = default(object), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), bool? isgridpresent = default(bool?), string _parentsiteValue = default(string), int? validationstatuserrorcode = default(int?), int? servicetype = default(int?), string _createdbyValue = default(string), string _owningteamValue = default(string), string _transactioncurrencyidValue = default(string), int? timezoneruleversionnumber = default(int?), string relativeurl = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string description = default(string), System.DateTimeOffset? lastvalidated = default(System.DateTimeOffset?), bool? isdefault = default(bool?), int? utcconversiontimezonecode = default(int?), bool? ispowerbisite = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string sharepointsiteid = default(string), int? importsequencenumber = default(int?), string folderstructureentity = default(string), string name = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsharepointsite parentsite = default(MicrosoftDynamicsCRMsharepointsite), IList<MicrosoftDynamicsCRMsharepointsite> sharepointsiteParentsiteSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> sharePointSiteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointSiteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Userid = userid;
             Statecode = statecode;
@@ -303,12 +303,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "parentsite")]
-        public MicrosoftDynamicsCRMSharepointSite Parentsite { get; set; }
+        public MicrosoftDynamicsCRMsharepointsite Parentsite { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "sharepointsite_parentsite_sharepointsite")]
-        public IList<MicrosoftDynamicsCRMSharepointSite> SharepointsiteParentsiteSharepointsite { get; set; }
+        public IList<MicrosoftDynamicsCRMsharepointsite> SharepointsiteParentsiteSharepointsite { get; set; }
 
         /// <summary>
         /// </summary>
