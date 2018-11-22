@@ -6,6 +6,8 @@ import { LicenseApplicationSummary } from '../models/license-application-summary
 import { FileSystemItem } from '../models/file-system-item.model';
 import { saveAs } from 'file-saver';
 import { AdoxioApplication } from '../models/adoxio-application.model';
+import { Router } from '@angular/router';
+import { UPLOAD_FILES_MODE } from '../lite/application/application.component';
 
 
 
@@ -26,7 +28,9 @@ export class LiteApplicationDashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private adoxioApplicationDataService: AdoxioApplicationDataService, public dialog: MatDialog) { }
+  constructor(private adoxioApplicationDataService: AdoxioApplicationDataService,
+    private router: Router,
+     public dialog: MatDialog) { }
 
   ngOnInit() {
     this.displayApplications();
@@ -84,6 +88,10 @@ export class LiteApplicationDashboardComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       });
     });
+  }
+
+  uploadMoreFiles(application: AdoxioApplication) {
+    this.router.navigate([`/application-lite/${application.id}`, {mode: UPLOAD_FILES_MODE}]);
   }
 
   /**

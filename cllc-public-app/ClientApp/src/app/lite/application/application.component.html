@@ -1,163 +1,214 @@
-<div [formGroup]="form" style="padding-left: 45px; position: relative">
-  <div [ngBusy]="busy"></div>
+<div [ngClass]="{'upload-more-file-mode': mode === UPLOAD_FILES_MODE}">
+  <div [formGroup]="form" style="padding-left: 45px; position: relative">
+    <div [ngBusy]="busy"></div>
 
-  <h1>Submit the Cannabis Retail Store Licence Application</h1>
-</div>
-<div [formGroup]="form" class="application-wrapper">
+    <h1>Submit the Cannabis Retail Store Licence Application</h1>
+  </div>
+  <div [formGroup]="form" class="application-wrapper">
 
-  <p>
-    Please ensure that your application form, financial integrity form and supporting documentation for your
-    application are included. A $7,500.00 application fee will be required at the time of application submission. If
-    your application for a licence is approved, a $1,500.00 first year licensing fee will be required prior to the
-    licence being issued.
-  </p>
-  <br>
-
-  <p>
-    Please note that applications which are submitted without all required information or documents will
-    stop being processed. The LCRB will be assessing complete applications as a priority. Other applications
-    that are received before the applicant provides the branch with missing information will be prioritized.
-    The application checklist can assist in completing all the required documentation.
-  </p>
-  <br>
-
-  <p class="li-header">A proposed store must have:</p>
-  <ul>
-    <li>
-      If in the area of a local government, all required local government approvals, such as being a permitted
-      use under the zoning bylaw or meeting the requirements of business licensing bylaw, or
-    </li>
-    <li>
-      If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a
-      proposed store will be located, the zoning approval and a business permit or licence from the
-      Indigenous nation to sell cannabis.
-    </li>
-  </ul>
-  <hr>
-  <section>
-    <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
-      <div [ngBusy]="busy"></div>
-      <label for="">Establishment Name</label>
-      <br>
-
-      <p>Begin by entering the name of the proposed establishment.</p>
-      <br>
-
-      <p>
-        A name cannot mislead the public about what kind of business it operates. The name cannot imply a
-        licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
-        words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
-        or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
-        Scheduling Act. Store names cannot also use language that encourages intoxication.
-      </p>
-      <br>
-
-      <p>
-        Additionally, a name cannot imply an association with another business. This applies to signs,
-        trademarks and any type of branding.
-      </p>
-      <br>
-
-      <p>Establishment names will be reviewed for approval during the application process.</p>
-
-      <input class="form-control" style="max-width: 500px;" type="text" id="establishmentName" formControlName="establishmentName"
-        placeholder="Begin by entering the name of the proposed establishment.">
-      <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
-        <div *ngIf="form.controls['establishmentName'].hasError('required') ">
-          This is required
-        </div>
-      </div>
-    </div>
-  </section>
-  <p>&nbsp;</p>
-  <hr>
-  <p>&nbsp;</p>
-
-  <label for="">Application Form</label>
-  <br>
-  <p>Upload the completed application form below.</p>
-  <section>
-    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
-      [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm></app-file-uploader>
-  </section>
-  <br>
-  <hr>
-  <br>
-
-  <label for="">Financial Integrity Form</label>
-  <br>
-  <p>Upload the completed Financial Integrity form below.</p>
-  <section>
-    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" fileTypes="FILE MUST BE IN PDF FORMAT."
-      [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments></app-file-uploader>
-  </section>
-  <br>
-  <hr>
-  <br>
-
-  <label for="">Supporting Documents</label>
-  <br>
-  <p>Upload all required documentation that will support the licence application.</p>
-  <section>
-    <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
-      entityName="application" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
-      #supportingDocuments></app-file-uploader>
-  </section>
-  <br>
-  <hr>
-  <p>Proceed to pay online using a credit card through the secure web portal.</p>
-  <i>
     <p>
-      <b>Please note:</b> Applications which are submitted without all required information or documents will not be
-      processed.
-      Applicants will be contacted and provided the opportunity to submit missing information. Once applicants provide
-      all
-      required documents to the LCRB, the application will be submitted for processing.</p>
-  </i>
-  <br>
-
-  <section class="error" *ngIf="showValidationMessages">
-    <p *ngFor="let message of validationMessages">
-      <span class="app-cancel">
-        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-        {{message}}
-      </span>
-    </p>
-  </section>
-
-  <section style="position: relative;">
-    <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard-lite'])">
-      <span>
-        <i class="fa fa-save" style="color: #fff;"></i>
-        SAVE FOR LATER
-      </span>
-    </button>
-    <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
-    <span style="float: right; color: #1a5a96; padding-top: 10px;">
-      <span (click)="cancelApplication()">
-        <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-        <a href="javascript: void(0)">
-          Cancel Application
-        </a>
-      </span>
-    </span>
-    <p>&nbsp;</p>
-    <p>
-      The province does not know how many application for a cannabis retail store license will be recieved. Therefore,
-      it is difficult
-      to predict how long applications will take to process. To minimize delays in processing, applicants must make
-      sure
-      the application is complete before submitting it.
+      Please ensure that your application form, financial integrity form and supporting documentation for your
+      application are included. A $7,500.00 application fee will be required at the time of application submission. If
+      your application for a licence is approved, a $1,500.00 first year licensing fee will be required prior to the
+      licence being issued.
     </p>
     <br>
+
     <p>
-      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
-      once an application
-      is submitted you will be unable to upload additional documentation. For questions on the LCRB application process
-      please
-      contact:
-      <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+      Please note that applications which are submitted without all required information or documents will
+      stop being processed. The LCRB will be assessing complete applications as a priority. Other applications
+      that are received before the applicant provides the branch with missing information will be prioritized.
+      The application checklist can assist in completing all the required documentation.
     </p>
+    <br>
+
+    <p class="li-header">A proposed store must have:</p>
+    <ul>
+      <li>
+        If in the area of a local government, all required local government approvals, such as being a permitted
+        use under the zoning bylaw or meeting the requirements of business licensing bylaw, or
+      </li>
+      <li>
+        If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a
+        proposed store will be located, the zoning approval and a business permit or licence from the
+        Indigenous nation to sell cannabis.
+      </li>
+    </ul>
+    <hr>
+    <section>
+      <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
+        <div [ngBusy]="busy"></div>
+        <label for="">Establishment Name</label>
+        <br>
+
+        <p>Begin by entering the name of the proposed establishment.</p>
+        <br>
+
+        <p>
+          A name cannot mislead the public about what kind of business it operates. The name cannot imply a
+          licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
+          words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
+          or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
+          Scheduling Act. Store names cannot also use language that encourages intoxication.
+        </p>
+        <br>
+
+        <p>
+          Additionally, a name cannot imply an association with another business. This applies to signs,
+          trademarks and any type of branding.
+        </p>
+        <br>
+
+        <p>Establishment names will be reviewed for approval during the application process.</p>
+
+        <input class="form-control" style="max-width: 500px;" type="text" id="establishmentName" formControlName="establishmentName"
+          placeholder="Begin by entering the name of the proposed establishment.">
+        <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
+          <div *ngIf="form.controls['establishmentName'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </section>
+    <p>&nbsp;</p>
+    <hr>
+    <p>&nbsp;</p>
+
+    <label for="">Application Form</label>
+    <br>
+    <p>Upload the completed application form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+        [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'"
+        #mainForm></app-file-uploader>
+    </section>
+    <br>
+    <hr>
+    <br>
+
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <p>Upload the completed Financial Integrity form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" fileTypes="FILE MUST BE IN PDF FORMAT."
+        [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+        #financialIntegrityDocuments></app-file-uploader>
+    </section>
+    <br>
+    <hr>
+    <br>
+
+    <label for="">Supporting Documents</label>
+    <br>
+    <p>Upload all required documentation that will support the licence application.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
+        entityName="application" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
+        #supportingDocuments></app-file-uploader>
+    </section>
+    <br>
+    <hr>
+    <p>Proceed to pay online using a credit card through the secure web portal.</p>
+    <i>
+      <p>
+        <b>Please note:</b> Applications which are submitted without all required information or documents will not be
+        processed.
+        Applicants will be contacted and provided the opportunity to submit missing information. Once applicants
+        provide
+        all
+        required documents to the LCRB, the application will be submitted for processing.</p>
+    </i>
+    <br>
+
+    <section class="error" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+          {{message}}
+        </span>
+      </p>
+    </section>
+
+    <section style="position: relative;">
+      <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard-lite'])">
+        <span>
+          <i class="fa fa-save" style="color: #fff;"></i>
+          SAVE FOR LATER
+        </span>
+      </button>
+      <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+      <span style="float: right; color: #1a5a96; padding-top: 10px;">
+        <span (click)="cancelApplication()">
+          <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+          <a href="javascript: void(0)">
+            Cancel Application
+          </a>
+        </span>
+      </span>
+      <p>&nbsp;</p>
+      <p>
+        The province does not know how many application for a cannabis retail store license will be recieved.
+        Therefore,
+        it is difficult
+        to predict how long applications will take to process. To minimize delays in processing, applicants must make
+        sure
+        the application is complete before submitting it.
+      </p>
+      <br>
+      <p>
+        The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
+        once an application
+        is submitted you will be unable to upload additional documentation. For questions on the LCRB application
+        process
+        please
+        contact:
+        <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+      </p>
+      <div [ngBusy]="busy"></div>
+    </section>
+  </div>
+</div>
+
+<div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
+  <div [formGroup]="form" style="padding-left: 45px; position: relative">
     <div [ngBusy]="busy"></div>
-  </section>
+    <h1>Add More files to Cannabis Retail Store Licence Application</h1>
+  </div>
+  <div class="application-wrapper">
+    <label for="">Establishment Name</label>:
+    <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
+    <br>
+    <label for="">Application Form</label>
+    <br>
+    <p>Upload the completed application form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
+        [multipleFiles]="false" [enableFileDeletion]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'"
+        #mainForm></app-file-uploader>
+    </section>
+    <br>
+    <hr>
+    <br>
+
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <p>Upload the completed Financial Integrity form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" fileTypes="FILE MUST BE IN PDF FORMAT."
+        [multipleFiles]="false" [enableFileDeletion]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+        #financialIntegrityDocuments></app-file-uploader>
+    </section>
+    <br>
+    <hr>
+    <br>
+
+    <label for="">Supporting Documents</label>
+    <br>
+    <p>Upload all required documentation that will support the licence application.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
+        entityName="application" [enableFileDeletion]="false" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
+        #supportingDocuments></app-file-uploader>
+    </section>
+  </div>
 </div>

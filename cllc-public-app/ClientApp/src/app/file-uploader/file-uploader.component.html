@@ -23,7 +23,7 @@
     <a href="{{item.downloadUrl}}" >{{ item.name }}</a>
       <span>
         <span style="margin-right: 20px; color: #A9A9A9">{{item.size}} kb</span>
-        <a href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
+        <a *ngIf="enableFileDeletion" href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
       </span>
     </section>
   </div>
