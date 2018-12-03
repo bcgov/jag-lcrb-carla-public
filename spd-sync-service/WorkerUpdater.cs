@@ -117,7 +117,9 @@ namespace SpdSync
 
                     // Rename file
                     hangfireContext.WriteLine("Finished processing file.");
-                    _logger.LogError("Finished processing file.");
+                    _logger.LogError($"Finished processing file {file.serverrelativeurl}");
+                    _logger.LogError($"{parsedData.Count} records updated.");
+
                     string newserverrelativeurl = "";
                     int index = file.serverrelativeurl.LastIndexOf("/");
                     if (index > 0)
