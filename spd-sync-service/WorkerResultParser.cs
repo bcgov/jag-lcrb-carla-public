@@ -35,7 +35,8 @@ namespace SpdSync
                 _logger.LogError("Error parsing worker response.");
                 _logger.LogError("Message:");
                 _logger.LogError(e.Message);
-                throw e;
+                // return an empty list so we continue processing other files.
+               return new List<WorkerResponse>();
             }
         }
     }
