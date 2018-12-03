@@ -117,13 +117,26 @@ namespace SpdSync
 
                     // Rename file
                     hangfireContext.WriteLine("Finished processing file.");
-                    _logger.LogError("Finished processing file.");
+                    _logger.LogError($"Finished processing file {file.serverrelativeurl}");
+                    _logger.LogError($"{parsedData.Count} records updated.");
+
                     string newserverrelativeurl = "";
                     int index = file.serverrelativeurl.LastIndexOf("/");
                     if (index > 0)
                     {
                         newserverrelativeurl = file.serverrelativeurl.Substring(0, index);
-                        newserverrelativeurl += "/" + "processed_" + file.name;
+
+                        // tag cases where the files were empty.
+                        if (parsedData.Count == 0)
+                        {
+                            newserverrelativeurl += "/" + "processed_empty_" + file.name;
+                        }
+                        else
+                        {
+                            newserverrelativeurl += "/" + "processed_" + file.name;
+                        }
+
+                        
                     }
 
                     try
