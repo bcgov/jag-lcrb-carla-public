@@ -204,8 +204,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 result._licencee_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioLicenceeValue);
                 result._licencetypeid_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioLicencetypeidValue);
-                result._municipality_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioMunicipalityValue);
-                result._policejurisdiction_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioPolicejurisdictionValue);                
+                //result._municipality_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioMunicipalityValue);
+                result._policejurisdiction_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioPdjurisdictionValue);                
                 result._primaryinspectorid_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioPrimaryinspectoridValue);
                 result._territory_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioTerritoryValue);
                 result._createdby_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._createdbyValue);
@@ -282,8 +282,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.AdoxioEstablishmentid = from.id;
                 result._adoxioLicenceeValue = from._licencee_value.ToString();
                 result._adoxioLicencetypeidValue = from._licencetypeid_value.ToString();
-                result._adoxioMunicipalityValue = from._municipality_value.ToString();
-                result._adoxioPolicejurisdictionValue = from._policejurisdiction_value.ToString();
+                //result. = from._municipality_value.ToString();
+                result._adoxioPdjurisdictionValue = from._policejurisdiction_value.ToString();
                 result._adoxioPrimaryinspectoridValue = from._primaryinspectorid_value.ToString();
                 result._adoxioTerritoryValue = from._territory_value.ToString();
                 result._createdbyValue = from._createdby_value.ToString();

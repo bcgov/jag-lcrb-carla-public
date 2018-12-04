@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { AdoxioLicenseDataService } from '../services/adoxio-license-data.service';
@@ -8,6 +8,7 @@ import { AdoxioApplication } from '../models/adoxio-application.model';
 import { AdoxioLicense } from '../models/adoxio-license.model';
 import { Observable, Subscription } from 'rxjs';
 import { PaymentDataService } from '../services/payment-data.service';
+import { UPLOAD_FILES_MODE } from '../lite/application/application.component';
 
 const ACTIVE = 'Active';
 const PAYMENT_REQUIRED = 'Payment Required';
@@ -38,6 +39,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService,
     private adoxioLicenseDataService: AdoxioLicenseDataService,
     private paymentService: PaymentDataService,
+    private router: Router,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute) {
   }
@@ -85,6 +87,10 @@ export class LicenseApplicationSummaryComponent implements OnInit {
 
   downloadLicence(application) {
 
+  }
+
+  uploadMoreFiles(application: AdoxioApplication) {
+    this.router.navigate([`/application-lite/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
   }
 
   payLicenceFee(application) {

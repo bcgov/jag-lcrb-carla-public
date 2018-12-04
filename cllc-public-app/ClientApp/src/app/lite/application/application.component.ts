@@ -15,6 +15,8 @@ import { ConfirmationDialogComponent } from '../../lite-application-dashboard/li
 import { AdoxioApplication } from '../../models/adoxio-application.model';
 import { debug } from 'util';
 
+export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
@@ -36,6 +38,9 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   showValidationMessages: boolean;
   submittedApplications = 8;
 
+  UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
+  mode: string;
+
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
@@ -45,6 +50,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public dialog: MatDialog) {
     this.applicationId = this.route.snapshot.params.applicationId;
+    this.mode = this.route.snapshot.params.mode;
   }
 
   ngOnInit() {

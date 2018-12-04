@@ -45,6 +45,7 @@ import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-cons
 import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-home.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
+import { AssosiateWizardComponent } from './assosiate-wizard/assosiate-wizard.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
     component: DashboardLiteComponent,
     canActivate: [BCeidAuthGuard]
   },
+  // {
+  //   path: 'associate-wizard',
+  //   component: AssosiateWizardComponent,
+  // },
   {
     path: 'dashboard-lite',
     component: DashboardLiteComponent,
