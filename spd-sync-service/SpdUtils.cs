@@ -111,6 +111,20 @@ namespace Gov.Lclb.Cllb.SpdSync
                                     value = provinceMap[value.ToUpper()];
                                 }
 
+                                // Figaro can't parse TRUE / FALSE; Convert to YES / NO.
+                              
+                                if (header.Key.ToLower().Contains("self-disclosure"))
+                                {
+                                    if (row.AdoxioSelfdisclosure == true)
+                                    {
+                                        value = "YES";
+                                    }
+                                    else
+                                    {
+                                        value = "NO";
+                                    }
+                                }
+
                                 newValue = $"\"{value.ToString()}\"";
                             }
 
