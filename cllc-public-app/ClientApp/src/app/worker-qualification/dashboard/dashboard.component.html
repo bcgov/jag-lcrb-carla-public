@@ -5,16 +5,16 @@
       <div>
         <section>
           <!-- <div [ngBusy]="busy"></div> -->
-          <h1>Worker Qualification Dashboard</h1>
+          <h1>Worker Dashboard</h1>
           <div>
             <p>
-              Your Worker Qualification Application is incomplete. You can return to this page and complete and submit
-              it with payment at any time.
+              You can return to this page to complete and submit
+              your application with payment at any time.
             </p>
 
             <p>You’ll be informed of the results of your screening.</p>
 
-            <h2>Qualification Status</h2>
+            <h2>Security Verification Status</h2>
 
             <section>
               <mat-table class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
@@ -55,7 +55,7 @@
                   <mat-cell *matCellDef="let element">
                     <a *ngIf="element?.status === 'Active'" class="btn btn-primary" [href]="'api/worker/' + element?.id + '/pdf'">
                       <i class="fas fa-download"></i>
-                      Download Qualification Letter</a>
+                      Download Security Verification Letter</a>
                   </mat-cell>
                 </ng-container>
 
