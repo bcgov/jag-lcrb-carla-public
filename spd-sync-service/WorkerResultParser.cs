@@ -15,12 +15,16 @@ namespace SpdSync
             CsvHelper.Configuration.Configuration config = new CsvHelper.Configuration.Configuration();
             config.SanitizeForInjection = true;
             config.IgnoreBlankLines = true;
+            
             config.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
             config.ShouldSkipRecord = record =>
             {
                 return record.All(string.IsNullOrEmpty);
             };
 
+            // fix for unexpected spaces in header
+            config.PrepareHeaderForMatch =
+                header => header = header.Trim();
 
             TextReader textReader = new StringReader(csvData);
             var csv = new CsvReader(textReader, config);
@@ -35,7 +39,8 @@ namespace SpdSync
                 _logger.LogError("Error parsing worker response.");
                 _logger.LogError("Message:");
                 _logger.LogError(e.Message);
-                throw e;
+                // return an empty list so we continue processing other files.
+               return new List<WorkerResponse>();
             }
         }
     }
