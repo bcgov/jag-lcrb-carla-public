@@ -21,17 +21,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "_adoxio_contactid_value@odata.bind")]
         public string ContactIdAccountODataBind { get; set; }
 
-        [JsonProperty(PropertyName = "adoxio_worker_SharePointDocumentLocations")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioWorkerSharePointDocumentLocations { get; set; }
-
-        [JsonProperty(PropertyName = "adoxio_securitystatus")]
-        public int? SecurityStatus { get; set; }
-
-        [JsonProperty(PropertyName = "adoxio_securitycompletedon")]
-        public DateTimeOffset? SecurityCompletedOn { get; set; }
-
-
-        [JsonProperty(PropertyName = "adoxio_ismanual")]
-        public int? IsManual { get; set; }
+        
     }
 }
