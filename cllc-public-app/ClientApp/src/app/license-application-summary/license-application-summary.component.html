@@ -57,8 +57,6 @@
               LICENCE FEE</button>
             <button *ngIf="element.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(element)">RENEW
               LICENCE</button>
-            <br>
-            <a href="javascript:void(0);" (click)="uploadMoreFiles(element)">Add Supporting Documents</a>
           </section>
         </mat-cell>
       </ng-container>
@@ -95,8 +93,6 @@
             <button *ngIf="element.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(element)">RENEW
               LICENCE
             </button>
-            <br>
-            <a href="javascript:void(0);" (click)="uploadMoreFiles(element)">Add Supporting Documents</a>
 
             <p></p>
           </section>
