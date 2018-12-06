@@ -126,7 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Update modifiedon to current time
-            UpdateEntityModifiedOnDate(entityName, entityId);
+            UpdateEntityModifiedOnDate(entityName, entityId, true);
 
             // Sanitize file name
             Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
@@ -207,12 +207,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return folderName;
         }
 
-        private void UpdateEntityModifiedOnDate(string entityName, string entityId)
+        private void UpdateEntityModifiedOnDate(string entityName, string entityId, bool setUploadedFromPortal = false)
         {
             switch (entityName.ToLower())
             {
                 case "application":
                     var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
+                    if (setUploadedFromPortal)
+                    {
+                        patchApplication.AdoxioFileUploadedFromPortal = (int?)ViewModels.GeneralYesNo.Yes;
+                    }
+
                     try
                     {
                         _dynamicsClient.Applications.Update(entityId, patchApplication);
@@ -373,7 +378,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         timelastmodified = DateTime.Parse(fileDetails.TimeLastModified),
                         documenttype = fileDetails.DocumentType
                     };
-                    
+
                     fileSystemItemVMList.Add(fileSystemItemVM);
                 }
             }
