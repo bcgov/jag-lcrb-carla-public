@@ -57,10 +57,10 @@ const routes: Routes = [
     component: DashboardLiteComponent,
     canActivate: [BCeidAuthGuard]
   },
-  // {
-  //   path: 'associate-wizard',
-  //   component: AssosiateWizardComponent,
-  // },
+  {
+    path: 'associate-wizard',
+    component: AssosiateWizardComponent,
+  },
   {
     path: 'dashboard-lite',
     component: DashboardLiteComponent,
