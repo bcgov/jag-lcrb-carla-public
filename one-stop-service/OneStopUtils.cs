@@ -65,8 +65,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             OneStopHubService.receiveFromPartnerResponse output;
             var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
-            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
-            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
+            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_SSG_USERNAME"];
+            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_SSG_PASSWORD"];
             var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
             basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             serviceClient.Endpoint.Binding = basicHttpBinding;
@@ -174,8 +174,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             OneStopHubService.receiveFromPartnerResponse output;
             var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
-            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_USERNAME"];
-            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_PASSWORD"];
+            serviceClient.ClientCredentials.UserName.UserName = Configuration["ONESTOP_HUB_SSG_USERNAME"];
+            serviceClient.ClientCredentials.UserName.Password = Configuration["ONESTOP_HUB_SSG_PASSWORD"];
             var basicHttpBinding = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
             basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             serviceClient.Endpoint.Binding = basicHttpBinding;
