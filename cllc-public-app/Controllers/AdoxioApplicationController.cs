@@ -53,6 +53,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
                 var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
                 try
                 {
