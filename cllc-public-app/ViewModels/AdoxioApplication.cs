@@ -13,8 +13,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         Active = 1,
         [EnumMember(Value = "In Progress")]
+        Cancelled = 2,
         InProgress = 845280000,
-        Intake = 845280001,
+        Intake = 845280001,        
         [EnumMember(Value = "Pending for LG/FN/Police Feedback")]
         PendingForLGFNPFeedback = 845280006,
         [EnumMember(Value = "Under Review")]
@@ -25,7 +26,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Denied = 845280005,
         [EnumMember(Value = "Approved in Principle")]
         ApprovedInPrinciple = 845280008,
-        Terminated = 845280009
+        Terminated = 845280009,
+        [EnumMember(Value = "Terminated and refunded")]
+        TerminatedAndRefunded = 845280010
     }
 
     public enum AdoxioFinalDecisionCodes
