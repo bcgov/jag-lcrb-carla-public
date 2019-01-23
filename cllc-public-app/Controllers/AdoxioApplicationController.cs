@@ -91,6 +91,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!string.IsNullOrEmpty(applicantId))
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
                 try
                 {
                     result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
