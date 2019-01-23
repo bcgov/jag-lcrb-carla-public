@@ -71,7 +71,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
                     // hide terminated applications from view.
-                    if (dynamicsApplication.Statuscode == null || dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated)
+                    if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Denied
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
                     {
                         result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
                     }
