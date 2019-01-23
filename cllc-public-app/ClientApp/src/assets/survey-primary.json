@@ -1,5 +1,5 @@
 {
-  "title": "What does an applicant need to apply for a cannabis licence?",
+  "title": "What an applicant needs to apply for a cannabis licence.",
   "pages": [
     {
       "name": "p1",
@@ -144,7 +144,7 @@
         
       ],
       "visible": false,
-      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and ({registeredBusiness} = 'Yes' or {registeredBusiness} = 'No'"
+      "visibleIf": "{age19} = 'Yes' and {licensedProducer} = 'No' and {registeredBusiness} = 'Yes'"
     },
     {
       "name": "p5",
