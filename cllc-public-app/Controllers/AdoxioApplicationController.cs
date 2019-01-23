@@ -71,7 +71,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
                 {
                     // hide terminated applications from view.
-                    if (dynamicsApplication.Statuscode == null || dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated)
+                    if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Denied
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
                     {
                         result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
                     }
@@ -91,6 +94,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!string.IsNullOrEmpty(applicantId))
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and adoxio_paymentrecieved eq true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
                 try
                 {
                     result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
