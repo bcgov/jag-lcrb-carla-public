@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssosiateWizardComponent } from './assosiate-wizard.component';
+import { AssosiateWizardComponent } from './associate-wizard.component';
 
 describe('AssosiateWizardComponent', () => {
   let component: AssosiateWizardComponent;
