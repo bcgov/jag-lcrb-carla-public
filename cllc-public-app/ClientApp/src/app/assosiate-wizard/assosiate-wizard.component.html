@@ -106,7 +106,7 @@
     <input class="rd-btn" type="radio" name="q4b" value="No" [(ngModel)]="answerCollection.q4b"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q4b === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q4b === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
   <section *ngIf="currentQuestion === 'q5a'">
@@ -133,7 +133,7 @@
     <input class="rd-btn" type="radio" name="q5c" value="No" [(ngModel)]="answerCollection.q5c"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q5c === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q5c === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
   <section *ngIf="currentQuestion === 'q6a'">
@@ -161,7 +161,7 @@
     <input class="rd-btn" type="radio" name="q6c" value="No" [(ngModel)]="answerCollection.q6c"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q6c === 'Yes' ?'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q6c === 'Yes' ?'q10a' : 'qResults')">Next</button>
   </section>
 
 
@@ -180,7 +180,7 @@
     <input class="rd-btn" type="radio" name="q7b" value="No" [(ngModel)]="answerCollection.q7b"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q7b === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q7b === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
 
@@ -199,7 +199,7 @@
     <input class="rd-btn" type="radio" name="q8b" value="No" [(ngModel)]="answerCollection.q8b"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q8b === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q8b === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
 
@@ -209,7 +209,7 @@
     <input class="rd-btn" type="radio" name="q9a" value="No" [(ngModel)]="answerCollection.q9a"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q9a === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q9a === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
 
