@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-assosiate-wizard',
-  templateUrl: './assosiate-wizard.component.html',
-  styleUrls: ['./assosiate-wizard.component.scss']
+  selector: 'app-associate-wizard',
+  templateUrl: './associate-wizard.component.html',
+  styleUrls: ['./associate-wizard.component.scss']
 })
 export class AssosiateWizardComponent implements OnInit {
   currentQuestion = 'q1';
