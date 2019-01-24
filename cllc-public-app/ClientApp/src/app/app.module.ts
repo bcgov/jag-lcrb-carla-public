@@ -143,7 +143,8 @@ import { WorkerPaymentConfirmationComponent } from './worker-qualification/payme
 import { WorkerTermsAndConditionsComponent } from './worker-qualification/worker-terms-and-conditions/worker-terms-and-conditions.component';
 import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualification/worker-home/worker-home.component';
 import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
-import { AssosiateWizardComponent } from './assosiate-wizard/assosiate-wizard.component';
+import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
+import { WizardResultsComponent } from './associate-wizard/wizard-results/wizard-results.component';
 
 @NgModule({
   declarations: [
@@ -214,7 +215,8 @@ import { AssosiateWizardComponent } from './assosiate-wizard/assosiate-wizard.co
     WorkerHomeDialogComponent,
     LicenceFeePaymentConfirmationComponent,
     WorkerInformationComponent,
-    AssosiateWizardComponent
+    AssosiateWizardComponent,
+    WizardResultsComponent
   ],
   imports: [
     BrowserModule,
