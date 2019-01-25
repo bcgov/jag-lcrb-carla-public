@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WizardResultsComponent } from './wizard-results.component';
+import { SolePropResultsComponent } from './sole-prop-results.component';
 
-describe('WizardResultsComponent', () => {
-  let component: WizardResultsComponent;
-  let fixture: ComponentFixture<WizardResultsComponent>;
+describe('SolePropResultsComponent', () => {
+  let component: SolePropResultsComponent;
+  let fixture: ComponentFixture<SolePropResultsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WizardResultsComponent ]
+      declarations: [ SolePropResultsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WizardResultsComponent);
+    fixture = TestBed.createComponent(SolePropResultsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,5 @@
-<div style="padding: 30px 50px 0 50px;"> {{currentQuestion}}
+<div style="padding: 30px 50px 0 50px;"> 
+  <h1>Associate Forms Wizard</h1>
   <section *ngIf="currentQuestion === 'q1'">
     <p>Are you a sole proprietor who’s applying for a cannabis retail store licence?</p>
     <input class="rd-btn" type="radio" name="q1" value="Yes" [(ngModel)]="answerCollection.q1"> <span>Yes</span> <br>
@@ -233,14 +234,14 @@
     <button class="btn btn-primary" (click)="setNextQuestion('q10d')">Next</button>
 
     <div class="note">
-      Can we add a separate, nice-looking note under Question 10b that says “Eligibility for a BC Services Card is
+       Eligibility for a BC Services Card is
       the same as for the Medical Services Plan (MSP). Learn more about BC Services <a href="https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/are-you-eligible"
         target="blank">Card eligibility</a>.
     </div>
   </section>
 
   <section *ngIf="currentQuestion === 'q10c'">
-    <p>Are you eligible for a BC Services Card?</p>
+    <p>Are you a resident of a Canadian province or territory?</p>
     <input class="rd-btn" type="radio" name="q10c" value="Yes" [(ngModel)]="answerCollection.q10c"> <span>Yes</span>
     <br>
     <input class="rd-btn" type="radio" name="q10c" value="No" [(ngModel)]="answerCollection.q10c"> <span>No</span>
@@ -266,6 +267,9 @@
 
   <section *ngIf="currentQuestion === 'qResults'">
     <p>{{ answerCollection | json }}</p>
+    <app-sole-prop-results [answerCollection]="answerCollection" *ngIf="answerCollection.q1 === 'Yes'"></app-sole-prop-results>
+    <app-organization-results [answerCollection]="answerCollection" *ngIf="answerCollection.q3bPre === 'Corporation'  || answerCollection.q3bPre === 'Partnership' || answerCollection.q3b === 'Society'"></app-organization-results>
+    <app-individual-associates-results [answerCollection]="answerCollection" *ngIf="answerCollection.q2b === 'Yes' || answerCollection.q2c === 'Yes' || answerCollection.q2d === 'Yes'"></app-individual-associates-results>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
   </section>
 
