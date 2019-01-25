@@ -144,7 +144,9 @@ import { WorkerTermsAndConditionsComponent } from './worker-qualification/worker
 import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualification/worker-home/worker-home.component';
 import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
-import { WizardResultsComponent } from './associate-wizard/wizard-results/wizard-results.component';
+import { SolePropResultsComponent } from './associate-wizard/sole-prop-results/sole-prop-results.component';
+import { IndividualAssociatesResultsComponent } from './associate-wizard/individual-associates-results/individual-associates-results.component';
+import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
 
 @NgModule({
   declarations: [
@@ -216,7 +218,9 @@ import { WizardResultsComponent } from './associate-wizard/wizard-results/wizard
     LicenceFeePaymentConfirmationComponent,
     WorkerInformationComponent,
     AssosiateWizardComponent,
-    WizardResultsComponent
+    SolePropResultsComponent,
+    IndividualAssociatesResultsComponent,
+    OrganizationResultsComponent
   ],
   imports: [
     BrowserModule,
