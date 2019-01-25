@@ -1,0 +1,283 @@
+<div>,,
+  <!-- Private Corporations (no Shareholder Organizations) -->
+  <section *ngIf="answerCollection.q3b === 'Private Corporation' && answerCollection.q4a == 'No'">
+    <h3>Private Corporations (no Shareholder Organizations)</h3>
+
+    <p>Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms. Include your private corporation’s name in the subject line of the
+      email.</p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Corporation</li>
+    </ul>
+    <p></p>
+    <span class="sub-header">Forms for Individuals in the Private Corporation</span> <br>
+    <p>The following individuals in the private corporation must submit additional documentation:</p>
+    <ul>
+      <li>Directors</li>
+      <li>Officers</li>
+      <li>Shareholders with at least 10% or more of voting shares</li>
+    </ul>
+    <p>Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]</p>
+  </section>
+
+  <!-- Private Corporations (with a Shareholding Organization) -->
+  <section *ngIf="answerCollection.q3b === 'Private Corporation' && answerCollection.q4a == 'Yes'">
+    <h3>Private Corporations (with a Shareholding Organization)</h3>
+
+    <span class="sub-header">Forms for the Private Corporation</span> <br>
+    <p>Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms. Include your private corporation’s name in the subject line of the
+      email.</p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Corporation</li>
+    </ul>
+
+
+    <span class="sub-header">Forms for Individuals in the Private Corporation</span> <br>
+    <p>The following individuals in the private corporation must submit additional documentation:</p>
+    <ul>
+      <li>Directors</li>
+      <li>Officers</li>
+      <li>Shareholders with at least 10% or more of voting shares</li>
+    </ul>
+    <p>
+      Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]
+    </p>
+
+    <span class="sub-header">Forms for Shareholding Organizations</span> <br>
+    <p>Any corporation, partnership or society that holds shares in [TEXT FIELD 2] must submit additional
+      documentation. Instruct all shareholders who are corporations, partnerships or societies to complete this
+      questionnaire to get customized instructions for submitting their documentation. Provide the shareholding
+      organizations with this link: [link]</p>
+  </section>
+
+  <!-- Public Corporations (no Shareholder Organizations) -->
+  <section  *ngIf="answerCollection.q3b === 'Public Corporation' && answerCollection.q4a == 'No'">
+    <h3>Public Corporations (no Shareholder Organizations)</h3>
+
+    <span class="sub-header">Forms for the Public Corporation</span> <br>
+    <p>Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.</p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Corporation</li>
+    </ul>
+
+    <span class="sub-header">Forms for Individuals in the Public Corporation</span> <br>
+    <p>The following individuals in the public corporation must submit additional documentation:</p>
+    <ul>
+      <li>Directors</li>
+      <li>Officers</li>
+    </ul>
+    <p>
+      Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]
+    </p>
+  </section>
+
+  <!-- Public Corporations (with a Shareholding Organization) -->
+  <section  *ngIf="answerCollection.q3b === 'Public Corporation' && answerCollection.q4a == 'Yes'">
+    <h3>Public Corporations (with a Shareholding Organization)</h3>
+
+    <span class="sub-header">Forms for the Public Corporation</span> <br>
+    <p>
+      Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.
+    </p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Corporation</li>
+    </ul>
+
+    <span class="sub-header">Forms for Individuals in the Public Corporation</span> <br>
+    <p>The following individuals in the public corporation must submit additional documentation:</p>
+    <ul>
+      <li>Directors</li>
+      <li>Officers</li>
+    </ul>
+    <p>
+      Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]
+    </p>
+
+    <span class="sub-header">Forms for Individuals in the Public Corporation</span> <br>
+    <p>
+      Any corporation, partnership or society that holds shares in your public corporation must submit additional
+      documentation. Instruct all shareholders who are corporations, partnerships or societies to complete this
+      questionnaire to get customized instructions for submitting their documentation. Provide the shareholding
+      organizations with this link: [link]
+    </p>
+  </section>
+
+  <!-- Limited Partnerships (No Partner Organizations) -->
+  <section  *ngIf="answerCollection.q3b === 'Limited Partnership' && answerCollection.q4a == 'No'">
+    <h3>Limited Partnerships (No Partner Organizations)</h3>
+
+    <span class="sub-header">Forms for the Limited Partnership</span> <br>
+    <p>
+      Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.
+    </p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Partnership</li>
+    </ul>
+
+    <span class="sub-header">Forms for Individuals in the Limited Partnership</span> <br>
+    <p>The following individuals in the limited partnership must submit additional documentation:</p>
+    <ul>
+      <li>General partners</li>
+      <li>Limited partners holding at least a 10% interest in the partnership</li>
+    </ul>
+    <p>
+      Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]
+    </p>
+  </section>
+
+  <!-- Limited Partnerships (with Partner Organization) -->
+  <section *ngIf="answerCollection.q3b === 'Limited Partnership' && answerCollection.q4a == 'Yes'">
+    <h3>Limited Partnerships (with Partner Organization)</h3>
+
+    <span class="sub-header">Forms for the Limited Partnership</span> <br>
+    <p>
+      Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.
+    </p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Partnership</li>
+    </ul>
+
+    <span class="sub-header">Forms for Individuals in the Limited Partnership</span> <br>
+    <p>The following individuals in the limited partnership must submit additional documentation:</p>
+    <ul>
+      <li>General partners</li>
+      <li>Limited partners holding at least a 10% interest in the partnership</li>
+    </ul>
+    <p>
+      Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]
+    </p>
+
+    <span class="sub-header">Forms for Partner Organizations</span> <br>
+    <p>
+      Any corporation, partnership or society that is itself a partner in your limited partnership must submit
+      additional documentation. Instruct all partners who are corporations, partnerships or societies to complete this
+      questionnaire to get customized instructions for submitting their documentation. Provide the partner
+      organizations with this link: [link]
+    </p>
+  </section>
+
+  <!-- General Partnerships (No Partner Organizations) -->
+  <section *ngIf="answerCollection.q3b === 'General Partnership' && answerCollection.q4a == 'No'">
+    <h3>General Partnerships (No Partner Organizations)</h3>
+
+    <span class="sub-header">Forms for the General Partnership</span> <br>
+    <p>
+      Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.
+    </p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Partnership</li>
+    </ul>
+
+    <span class="sub-header">Forms for Individuals in the General Partnership</span> <br>
+    <p>The following individuals in the general partnership must submit additional documentation:</p>
+    <ul>
+      <li>All partners</li>
+    </ul>
+    <p>
+      Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]
+    </p>
+  </section>
+
+  <!-- General Partnerships (with Partner Organizations) -->
+  <section *ngIf="answerCollection.q3b === 'General Partnership' && answerCollection.q4a == 'Yes'">
+    <h3>General Partnerships (with Partner Organizations)</h3>
+
+    <span class="sub-header">Forms for the General Partnership</span> <br>
+    <p>
+      Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.
+    </p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Partnership</li>
+    </ul>
+
+    <span class="sub-header">Forms for Individuals in the General Partnership</span> <br>
+    <p>The following individuals in the general partnership must submit additional documentation:</p>
+    <ul>
+      <li>Partners who are individuals</li>
+      <li>Partners who are corporations</li>
+      <li>Partners who are themselves a partnership</li>
+      <li>Partners who are societies</li>
+    </ul>
+    <p>
+      Instruct all of the required partners to complete this questionnaire so they can get customized instructions for
+      submitting their documentation. Provide them with this link: [link]
+    </p>
+  </section>
+
+  <!-- Forms for Limited Liability Partnerships -->
+  <section *ngIf="answerCollection.q3b === 'Limited Liability Partnership'">
+    <h3>Forms for Limited Liability Partnerships</h3>
+
+    <span class="sub-header">Forms for the Limited Liability Partnership</span> <br>
+    <p>
+      Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.
+    </p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Partnership</li>
+    </ul>
+
+    <span class="sub-header">Forms for Partners</span> <br>
+    <p>The following partners in the limited liability partnership must submit additional documentation:</p>
+    <ul>
+      <li>Partners who are individuals</li>
+      <li>Partners who are corporations</li>
+      <li>Partners who are themselves a partnership</li>
+      <li>Partners who are societies</li>
+    </ul>
+    <p>
+      Instruct all of the required partners to complete this questionnaire so they can get customized instructions for
+      submitting their documentation. Provide them with this link: [link]
+    </p>
+  </section>
+
+  <!-- Societies -->
+  <section  *ngIf="answerCollection.q3b === 'Society'">
+    <h3>Societies</h3>
+
+    <span class="sub-header">Forms for the Society</span> <br>
+    <p>
+      Complete the following forms and email them, along with supporting documents, to Cannabis.Licensing@gov.bc.ca.
+      Supporting documents are listed in the forms.
+    </p>
+    <ul>
+      <li>Business Financial Integrity Form</li>
+      <li>Associate Organization Assessment Form: Society</li>
+    </ul>
+
+    <span class="sub-header">Forms for Individuals in the Society</span> <br>
+    <p>The following individuals in the society must submit additional documentation:</p>
+    <ul>
+      <li>Directors</li>
+      <li>Officers</li>
+      <li>Senior managers</li>
+    </ul>
+    <p>
+      Instruct all of the required individuals to complete this questionnaire so they can get customized instructions
+      for submitting their documentation. Provide them with this link: [link]
+    </p>
+  </section>
+</div>
