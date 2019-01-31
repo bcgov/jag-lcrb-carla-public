@@ -121,50 +121,50 @@ const routes: Routes = [
   //   children: [
   //   ]
   // },
-  {
-    path: 'business-profile/:accountId/:legalEntityId',
-    component: BusinessProfileComponent,
-    children: [
-      {
-        path: 'before-you-start',
-        component: BeforeYouStartComponent
-      },
-      {
-        path: 'corporate-details',
-        component: CorporateDetailsComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'organization-structure',
-        component: OrganizationStructureComponent
-      },
-      {
-        path: 'directors-and-officers',
-        component: DirectorsAndOfficersComponent
-      },
-      {
-        path: 'key-personnel',
-        component: KeyPersonnelComponent
-      },
-      {
-        path: 'shareholders',
-        component: EditShareholdersComponent
-      },
-      {
-        path: 'connections-to-producers',
-        component: ConnectionToProducersComponent,
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
-        path: 'finance-integrity',
-        component: FinancialInformationComponent
-      },
-      {
-        path: 'security-assessment',
-        component: SecurityAssessmentsComponent
-      },
-    ]
-  },
+  // {
+  //   path: 'business-profile/:accountId/:legalEntityId',
+  //   component: BusinessProfileComponent,
+  //   children: [
+  //     {
+  //       path: 'before-you-start',
+  //       component: BeforeYouStartComponent
+  //     },
+  //     {
+  //       path: 'corporate-details',
+  //       component: CorporateDetailsComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'organization-structure',
+  //       component: OrganizationStructureComponent
+  //     },
+  //     {
+  //       path: 'directors-and-officers',
+  //       component: DirectorsAndOfficersComponent
+  //     },
+  //     {
+  //       path: 'key-personnel',
+  //       component: KeyPersonnelComponent
+  //     },
+  //     {
+  //       path: 'shareholders',
+  //       component: EditShareholdersComponent
+  //     },
+  //     {
+  //       path: 'connections-to-producers',
+  //       component: ConnectionToProducersComponent,
+  //       canDeactivate: [CanDeactivateGuard]
+  //     },
+  //     {
+  //       path: 'finance-integrity',
+  //       component: FinancialInformationComponent
+  //     },
+  //     {
+  //       path: 'security-assessment',
+  //       component: SecurityAssessmentsComponent
+  //     },
+  //   ]
+  // },
   {
     path: 'form-viewer/:id',
     component: FormViewerComponent
