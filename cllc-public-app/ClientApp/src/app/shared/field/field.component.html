@@ -1,0 +1,23 @@
+<section class="app-field">
+  <span *ngIf="leadingText">{{leadingText}} <p></p> </span>
+  <label *ngIf="label">{{label}} <span *ngIf="required" class="error-states">*</span></label>
+  <br *ngIf="label">
+  <table style="width: 100%">
+    <tr>
+      <td>
+        <ng-content></ng-content>
+      </td>
+      <td *ngIf="!valid && showChevrons" style="width: 20px;"><span>
+          <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
+          <i class="fas fa-chevron-left error-states" style="margin-left: -5px"></i>
+        </span></td>
+    </tr>
+  </table>
+
+
+  <div *ngIf="!valid" class="error-states error-container">
+    <div *ngIf="!valid">
+      {{errorMessage}}
+    </div>
+  </div>
+</section>

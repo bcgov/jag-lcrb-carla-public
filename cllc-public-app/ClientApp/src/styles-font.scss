@@ -159,3 +159,44 @@ select.form-control:not([size]):not([multiple]) {
   .green-snackbar {
     background: #00ff21;
   }
+  .blue-header {
+    background-color: #38598A;
+    color: #fff;
+    padding: 10px 7px 7px 15px;
+    font-size: 16px;
+    font-weight: semi-bold;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.error-states {
+    color: #d8292f
+}
+
+.error-summary {
+    background-color: #F2F2F2;
+    border: solid 1px transparent;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #d8292f
+}
+  
+.form-wrapper {
+    padding-left: 50px;
+    padding-right: 30px;
+}
+
+@media (max-width: 575.98px) {
+    .form-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

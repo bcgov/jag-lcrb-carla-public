@@ -1,272 +1,202 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Controls Survey styles */
+
 @import '~@angular/material/theming';
-
 @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
-
 @include mat-core();
-
-$primary: mat-palette($mat-black, 400);
+$primary: mat-palette($mat-grey, 400);
 $accent: mat-palette($mat-indigo, 500, A200, A400);
 $warn: mat-palette($mat-red, 500);
-
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
+body {
+    color: #494949;
+    background: #f2f2f2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #494949;
+    font: MyriadWebPro, Calibri, Arial, "sans serif"
+}
 
+.btn.btn-primary {
+    background-color: #38598a;
+    border: #38598a 1px solid;
+    color: #ffffff;
+    min-width: 120px;
+    font-size: 16px;
+    border-radius: 5px;
+}
 
+.btn.btn-secondary {
+    background-color: #fff;
+    border: #ccc 1px solid;
+    color: #003366;
+    min-width: 120px;
+    font-size: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 6px 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+}
 
+.btn-primary:hover {
+    background-color: rgba(0, 51, 102, 1) !important;
+    color: #ffffff;
+    border-color: #204d74;
+    border-radius: 5px;
+}
 
+.btn-secondary:hover {
+    background-color: #F2F2F2;
+}
+
+.btn-secondary:focus {
+    border-color: #ccc;
+    box-shadow: 0 0 0 0.2rem #ccc;
+}
+
+.btn.btn-primary.sv_prev_btn {
+    background-color: #ccc;
+    border: #ccc 1px solid;
+    color: #000;
+    min-width: 120px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn.btn-primary.sv_prev_btn:hover {
+    background-color: #2f567b !important;
+    color: #ffffff;
+    border-color: #204d74;
+    border-radius: 5px;
+}
 
 .ctx-home {
-  background: #f2f2f2;
+    background: #f2f2f2
 }
 
+.panel-footer {
+    background-color: #fff;
+    border-top: none;
+}
+
+p {
+    font-weight: Regular;
+    font-size: 14px #494949
+}
 
 h1 {
-  font-size: 36px;
-  padding-top: 15px;
-  color: #494949;
-}
-h2 {
-  font-size: 28px;
-  color: #494949;
-}
-h3 {
-  font-size: 24px;
-  color: #494949;
-}
-
-.mrgn-tp-sm {
-  margin-top: 8px;
-}
-.mrgn-tp-md {
-  margin-top: 1.5rem;
-}
-.mrgn-tp-lg {
-  margin-top: 3rem;
-}
-
-.mrgn-bttm-sm {
-  margin-bottom: 8px;
-}
-.mrgn-bttm-md {
-  margin-bottom: 1.5rem;
-}
-.mrgn-bttm-lg {
-  margin-bottom: 3rem;
-}
-
-.title {
-  font-size: 2rem;
-  letter-spacing: 0.05em;
-}
-
-
-.btn-group > .btn {
-  // mygovbc CSS adds extra margin to buttons
-  margin-right: 0;
-}
-
-.btn-group-lg>.btn, .btn-lg {
-  font-size: 20px;
-}
-
-// needed for sidebar - override normal breakpoint-dependent container width
-.container {
-  width: auto;
-}
-
-// loading indicator
-@keyframes spin {
-	from {
-		transform: rotate(0);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-$indicator-color: #666;
-$indicator-size: 1em;
-$indicator-thickness: 0.2em;
-.loading-indicator {
-	&, &:after {
-		border-radius: 50%;
-		width: $indicator-size;
-		height: $indicator-size;
-	}
-	animation: spin 1.1s infinite linear;
-	border: $indicator-thickness solid transparent;
-	border-top-color: $indicator-color;
-	line-height: 1;
-	margin: 0 auto;
-	position: relative;
-	text-indent: -9999em;
-	transform: translateZ(0);
-	&:after {
-		position: absolute;
-		top: (- $indicator-thickness);
-		left: (- $indicator-thickness);
-		border: $indicator-thickness solid transparentize($indicator-color, 0.8);
-		content: ' ';
-	}
-}
-
-.page-load {
-  font-size: 2rem;
-}
-
-
-// survey styles
-
-.survey-container {
-  font-size: 16px;
-  .sv_page_description {
-    margin-bottom: 10px;
-  }
-  h3 {
-    font-size: 34px;
-    font-weight: 600;
-  }
-  h4 {
-    color: #556077;
-    font-size: 22px;
-    margin: 5px 0;
-  }
-  .sv_p_title {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 5px 0 8px;
-    padding-bottom: 3px;
-    border-bottom: 2px solid #e0e3ee;
-  }
-  .sv_row {
-    // border: 1px solid #ccf;
-    // padding: 10px;
-  }
-  .sv_page .sv_qstn {
-    padding-top: 0;
-    padding-bottom: 1em;
-  }
-  .sv_page > .sv_row {
-    margin: 1em 0;
-  }
-  .sv_page > .sv_row > .sv_qstn {
-
-    padding-top: 1em;
-  }
-  .sv_q_title {
+    font-weight: Semi-bold;
+    font-size: 42px;
     color: #494949;
+}
+
+h2 {
+    font-weight: Semi-bold;
     font-size: 24px;
-    margin-bottom: 0.5em;
-    margin-top: 5px;
-  }
-  .sv_q_description {
-    font-size: 16px;
-    margin-bottom: 0.8em;
-  }
-  .panel-footer {
-    background: none;
-    border: none;
-    padding: 0;
-  }
-  .form-control {
-    font-size: 16px;
-  }
-  .survey-address-line + .survey-address-line {
-    margin-top: 0.8em;
-  }
-  .survey-address-label {
-    font-size: 16px;
-    font-weight: normal;
-  }
+    color: #494949;
 }
 
-.sv_p_container {
-  // survey panel
-  background: #f8f8f8;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px;
-  padding: 1em 0.5em 0.5em;
-  margin: 0.5em 0;
-}
-
-.survey-helptext, .survey-infotext {
-  background: #f8faff;
-  border: 1px solid #d3d3d8;
-  border-radius: 4px;
-  margin: 0.5em 0 0 0;
-  .panel-heading {
-    color: #55555a;
-  }
-  .panel-title {
-    cursor: pointer;
-    display: block;
-    font-size: 18px;
-  }
-  .panel-body {
-    background: #fff;
-    border: 1px solid #e0e3e9;
-    border-radius: 2px;
-    display: none;
-    margin: 0 5px 5px 5px;
-    padding: 10px;
-  }
-  .heading-icon {
-    margin-right: 0.5em;
-  }
-  .heading-expand {
-    float: right;
-  }
-  &.expanded .panel-body {
-    display: block;
-  }
-}
-
-.survey-yesno {
-  position: relative;
-  input {
-    position: absolute;
-    visibility: hidden;
-  }
-  span {
-    background: #eee;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    color: #666;
-    cursor: pointer;
-    display: block;
+h3 {
+    font-weight: Semi-bold;
     font-size: 20px;
-    height: 60px;
-    line-height: 60px;
-    margin-top: 4px;
-    margin-right: 0.8em;
-    overflow: hidden;
-    text-align: center;
-    text-transform: uppercase;
-    width: 60px;
-    user-select: none;
-  }
-  input + span:hover {
-    border-color: #38598a;
-    box-shadow: 0 1px 2px 1px rgba(#000, 0.1);
-    color: #38598a;
-  }
-  input:checked + span {
-    background: #38598a;
-    border: 2px solid #ccc;
-    color: #fff;
-  }
+    color: #494949;
 }
 
-.survey-helptext {
-  background: #fff6f6;
-  border: 1px solid #d8d0d0;
-  .panel-heading {
-    color: #5a5555;
-  }
+h4 {
+    font-weight: Semi-bold;
+    font-size: 16px;
+    color: #494949;
+}
 
-  .panel-body {
-    background: #fff;
-    border: 1px solid #e9e0e0;
+h5 {
+    font-size: 21px;
+    color: #494949;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: auto;
+}
+
+.form-control {
+    // border-radius: 5px;
+    display: inline-block;
+}
+
+.extra-padding-left {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (max-width: 575.98px) {
+    .extra-padding-left {
+        margin-left: 0;
+    }
+}
+
+.alert {
+    padding: 3px 5px 3px;
+    margin-top: -9px;
+}
+
+.round-icon-wrapper {
+    height: 48px;
+    line-height: 55px;
+    width: 48px;
+    border-radius: 48px;
+    background-color: #7596C8;
+    text-align: center;
+    display: inline-block;
+}
+
+
+.red-snackbar {
+    background: #F44336;
   }
+  
+  .green-snackbar {
+    background: #00ff21;
+  }
+  .blue-header {
+    background-color: #38598A;
+    color: #fff;
+    padding: 10px 7px 7px 15px;
+    font-size: 16px;
+    font-weight: semi-bold;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.error-states {
+    color: #d8292f
+}
+
+.error-summary {
+    background-color: #F2F2F2;
+    border: solid 1px transparent;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #d8292f
+}
+  
+.form-wrapper {
+    padding-left: 50px;
+    padding-right: 30px;
+}
+
+@media (max-width: 575.98px) {
+    .form-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }

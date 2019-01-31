@@ -281,6 +281,27 @@
     </div>
     <div class="col-lg-4 col-sm-12" style="position: relative">
       <div [ngBusy]="busy"></div>
+      <section>
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">BUSINESS PROFILE</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <strong>{{account?.name}}</strong> <br>
+          <p></p>
+          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <p></p>
+          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <p></p>
+          <p>Click below to view your complete business profile, and to update your business address or contact
+            details.
+          </p>
+          <div>
+            <a routerLink="/business-profile" style="float: right;">
+              <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Business Profile</a>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </section>
+      <p></p>
       <section class="submit-container">
         <div>
           <h2>Submit Application</h2>
