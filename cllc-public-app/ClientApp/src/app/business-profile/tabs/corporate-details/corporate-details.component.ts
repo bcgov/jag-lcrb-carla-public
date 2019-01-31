@@ -94,7 +94,7 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
       mailingAddressCity: [''],
       mailingAddressCountry: [''],
       mailingAddressProvince: [''],
-      mailingAddresPostalCode: ['']
+      mailingAddressPostalCode: ['']
     });
   }
 

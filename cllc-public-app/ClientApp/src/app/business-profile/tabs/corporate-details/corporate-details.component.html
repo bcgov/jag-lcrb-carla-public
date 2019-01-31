@@ -191,12 +191,12 @@
         </section>
 
         <section>
-          <div [ngClass]="{'has-error': this.isFieldError('mailingAddresPostalCode')}">
+          <div [ngClass]="{'has-error': this.isFieldError('mailingAddressPostalCode')}">
             <label for="">Postal Code</label>
             <br>
-            <input required class="form-control" style="width: 80px;" type="text" id="mailingAddresPostalCode" formControlName="mailingAddresPostalCode">
-            <div *ngIf="this.isFieldError('mailingAddresPostalCode')" class="alert alert-danger" style="width: 80px;">
-              <div *ngIf="corporateDetailsForm.controls['mailingAddresPostalCode'].hasError('required') ">
+            <input required class="form-control" style="width: 80px;" type="text" id="mailingAddressPostalCode" formControlName="mailingAddressPostalCode">
+            <div *ngIf="this.isFieldError('mailingAddressPostalCode')" class="alert alert-danger" style="width: 80px;">
+              <div *ngIf="corporateDetailsForm.controls['mailingAddressPostalCode'].hasError('required') ">
                 This is required
               </div>
             </div>

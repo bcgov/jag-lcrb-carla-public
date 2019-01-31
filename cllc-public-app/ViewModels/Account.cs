@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string mailingAddressCity { get; set; } //dynamics = address1_city
         public string mailingAddressCountry { get; set; } //dynamics = address1_country
         public string mailingAddressProvince { get; set; } //dynamics = address1_stateorprovince
-        public string mailingAddresPostalCode { get; set; } //dynamics = address1_postalcode
+        public string mailingAddressPostalCode { get; set; } //dynamics = address1_postalcode
 
         public ViewModels.Contact primarycontact { get; set; }
 
@@ -83,7 +83,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         !string.IsNullOrEmpty(mailingAddressCity) &&
                         !string.IsNullOrEmpty(mailingAddressCountry) &&
                         (mailingAddressProvince != null) &&// TODO: This field should be a string(by Moffat)
-                        !string.IsNullOrEmpty(mailingAddresPostalCode) &&
+                        !string.IsNullOrEmpty(mailingAddressPostalCode) &&
                         corporateDetailsFilesExists;
 
                     break;
@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         !string.IsNullOrEmpty(mailingAddressCity) &&
                         !string.IsNullOrEmpty(mailingAddressCountry) &&
                         (mailingAddressProvince != null) &&
-                        !string.IsNullOrEmpty(mailingAddresPostalCode);
+                        !string.IsNullOrEmpty(mailingAddressPostalCode);
                     break;
                 case AdoxioApplicantTypeCodes.GeneralPartnership:
                 case AdoxioApplicantTypeCodes.LimitedLiabilityPartnership:
@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                         !string.IsNullOrEmpty(mailingAddressCity) &&
                         !string.IsNullOrEmpty(mailingAddressCountry) &&
                         (mailingAddressProvince != null) &&
-                        !string.IsNullOrEmpty(mailingAddresPostalCode) &&
+                        !string.IsNullOrEmpty(mailingAddressPostalCode) &&
                         corporateDetailsFilesExists;
                     break;
                 default:

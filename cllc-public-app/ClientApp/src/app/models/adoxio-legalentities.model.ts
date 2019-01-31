@@ -11,6 +11,7 @@ export class AdoxioLegalEntity {
   middlename: string;
   lastname: string;
   isOfficer: boolean;
+  isApplicant: boolean;
   isDirector: boolean;
   isSeniorManagement: boolean;
   isShareholder: boolean;

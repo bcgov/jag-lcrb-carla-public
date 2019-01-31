@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { ContactDataService } from '../services/contact-data.service';
@@ -21,6 +21,8 @@ import { zip } from 'rxjs/operators';
 import { AccountDataService } from '../services/account-data.service';
 import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBase } from '../shared/form-base';
+import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
+import { ConnectionToProducersComponent } from '../business-profile/tabs/connection-to-producers/connection-to-producers.component';
 const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
@@ -45,7 +47,7 @@ export const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[
   templateUrl: './business-profile-pp.component.html',
   styleUrls: ['./business-profile-pp.component.scss']
 })
-export class BusinessProfilePpComponent  extends FormBase implements OnInit {
+export class BusinessProfilePpComponent extends FormBase implements OnInit {
   currentUser: User;
   dataLoaded = false;
   busy: Promise<any>;
@@ -53,11 +55,14 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
   busy3: Promise<any>;
   form: FormGroup;
   countryList = COUNTRIES;
+  maxDate = new Date();
 
   accountId: string;
   saveFormData: any;
   _showAdditionalAddress: boolean;
   _showAdditionalContact: boolean;
+  legalEntityId: string;
+  @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
 
 
   public get contacts(): FormArray {
@@ -68,6 +73,7 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
     private contactDataService: ContactDataService,
+    private legalEntityDataService: AdoxioLegalEntityDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -80,25 +86,27 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
     this.form = this.fb.group({
       businessProfile: this.fb.group({
         id: [''],
-        _mailingSameAsPhysicalAddress: [],
+        // _mailingSameAsPhysicalAddress: [],
         name: [{ value: '', disabled: true }],
         businessDBAName: [{ value: '', disabled: true }],
-        businessNumber: ['', Validators.required],
+        bcIncorporationNumber: [''], // Validators.required
+        dateOfIncorporationInBC: [''],
+        businessNumber: [''],
         businessType: ['', Validators.required],
-        businessPhoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-        businessEmail: ['', [Validators.required, Validators.email]],
-        consentForEmailCommunication: [false, this.customRequiredCheckboxValidator()],
-        websiteAddress: [''],
-        physicalAddressLine1: ['', Validators.required],
-        physicalAddressLine2: [''],
-        physicalAddressCity: ['', Validators.required],
-        physicalAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
-        physicalAddressProvince: [{ value: 'British Columbia', disabled: true }],
-        physicalAddressCountry: [{ value: 'Canada', disabled: true }],
-        mailingAddressLine1: ['', this.requiredCheckboxChildValidator('_mailingSameAsPhysicalAddress')],
+        contactPhone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+        contactEmail: ['', [Validators.required, Validators.email]],
+        // consentForEmailCommunication: [false, this.customRequiredCheckboxValidator()],
+        // websiteAddress: [''],
+        // physicalAddressLine1: ['', Validators.required],
+        // physicalAddressLine2: [''],
+        // physicalAddressCity: ['', Validators.required],
+        // physicalAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+        // physicalAddressProvince: [{ value: 'British Columbia', disabled: true }],
+        // physicalAddressCountry: [{ value: 'Canada', disabled: true }],
+        mailingAddressStreet: ['', Validators.required],
         mailingAddressLine2: [''],
-        mailingAddressCity: ['', this.requiredCheckboxChildValidator('_mailingSameAsPhysicalAddress')],
-        mailingAddressPostalCode: ['', this.requiredCheckboxChildValidator('_mailingSameAsPhysicalAddress')],
+        mailingAddressCity: ['', Validators.required],
+        mailingAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
         mailingAddressProvince: [],
         mailingAddressCountry: ['Canada'],
       }),
@@ -108,78 +116,79 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
         lastname: ['', Validators.required],
         title: [''],
         telephone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-        phoneNumberAlt: [''],
+        // phoneNumberAlt: [''],
         emailaddress1: ['', [Validators.required, Validators.email]],
       }),
-      additionalContact: this.fb.group({
-        id: [],
-        firstName: [''],
-        lastName: [''],
-        title: [''],
-        telephone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-        // phoneNumberAlt: [''],
-        emailaddress1: [''],
-      })
+      // additionalContact: this.fb.group({
+      //   id: [],
+      //   firstName: [''],
+      //   lastName: [''],
+      //   title: [''],
+      //   telephone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      //   // phoneNumberAlt: [''],
+      //   emailaddress1: [''],
+      // })
     });
     this.reloadUser();
 
-    this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges
-      .filter(value => value === true)
-      .subscribe(value => {
-        this.copyPhysicalToMailingAddress();
-      });
+    // this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges
+    //   .filter(value => value === true)
+    //   .subscribe(value => {
+    //     this.copyPhysicalToMailingAddress();
+    //   });
 
-    this.form.get('businessProfile.physicalAddressLine1').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-      .subscribe(value => {
-        this.copyPhysicalToMailingAddress();
-      });
-    this.form.get('businessProfile.physicalAddressLine2').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-      .subscribe(value => {
-        this.copyPhysicalToMailingAddress();
-      });
-    this.form.get('businessProfile.physicalAddressCity').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-      .subscribe(value => {
-        this.copyPhysicalToMailingAddress();
-      });
-    this.form.get('businessProfile.physicalAddressPostalCode').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-      .subscribe(value => {
-        this.copyPhysicalToMailingAddress();
-      });
-    this.form.get('businessProfile.physicalAddressProvince').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-      .subscribe(value => {
-        this.copyPhysicalToMailingAddress();
-      });
-    this.form.get('businessProfile.physicalAddressCountry').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-      .subscribe(value => {
-        this.copyPhysicalToMailingAddress();
-      });
+    // this.form.get('businessProfile.physicalAddressLine1').valueChanges
+    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    //   .subscribe(value => {
+    //     this.copyPhysicalToMailingAddress();
+    //   });
+    // this.form.get('businessProfile.physicalAddressLine2').valueChanges
+    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    //   .subscribe(value => {
+    //     this.copyPhysicalToMailingAddress();
+    //   });
+    // this.form.get('businessProfile.physicalAddressCity').valueChanges
+    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    //   .subscribe(value => {
+    //     this.copyPhysicalToMailingAddress();
+    //   });
+    // this.form.get('businessProfile.physicalAddressPostalCode').valueChanges
+    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    //   .subscribe(value => {
+    //     this.copyPhysicalToMailingAddress();
+    //   });
+    // this.form.get('businessProfile.physicalAddressProvince').valueChanges
+    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    //   .subscribe(value => {
+    //     this.copyPhysicalToMailingAddress();
+    //   });
+    // this.form.get('businessProfile.physicalAddressCountry').valueChanges
+    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    //   .subscribe(value => {
+    //     this.copyPhysicalToMailingAddress();
+    //   });
 
   }
 
-  copyPhysicalToMailingAddress() {
-    this.form.get('businessProfile.mailingAddressLine1').patchValue(this.form.get('businessProfile.physicalAddressLine1').value);
-    this.form.get('businessProfile.mailingAddressLine2').patchValue(this.form.get('businessProfile.physicalAddressLine2').value);
-    this.form.get('businessProfile.mailingAddressCity').patchValue(this.form.get('businessProfile.physicalAddressCity').value);
-    this.form.get('businessProfile.mailingAddressPostalCode').patchValue(this.form.get('businessProfile.physicalAddressPostalCode').value);
-    this.form.get('businessProfile.mailingAddressProvince').patchValue(this.form.get('businessProfile.physicalAddressProvince').value);
-    this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
-  }
+  // copyPhysicalToMailingAddress() {
+  //   this.form.get('businessProfile.mailingAddressStreet').patchValue(this.form.get('businessProfile.physicalAddressLine1').value);
+  //   this.form.get('businessProfile.mailingAddressLine2').patchValue(this.form.get('businessProfile.physicalAddressLine2').value);
+  //   this.form.get('businessProfile.mailingAddressCity').patchValue(this.form.get('businessProfile.physicalAddressCity').value);
+  //   this.form.get('businessProfile.mailingAddressPostalCode')
+  // .patchValue(this.form.get('businessProfile.physicalAddressPostalCode').value);
+  //   this.form.get('businessProfile.mailingAddressProvince').patchValue(this.form.get('businessProfile.physicalAddressProvince').value);
+  //   this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
+  // }
 
-  hideAdditionalContact() {
-    this._showAdditionalContact = false;
-    const controls = (<FormGroup>this.form.get('additionalContact')).controls;
-    // tslint:disable-next-line:forin
-    for (const c in controls) {
-      controls[c].clearValidators();
-      controls[c].reset();
-    }
-  }
+  // hideAdditionalContact() {
+  //   this._showAdditionalContact = false;
+  //   const controls = (<FormGroup>this.form.get('additionalContact')).controls;
+  //   // tslint:disable-next-line:forin
+  //   for (const c in controls) {
+  //     controls[c].clearValidators();
+  //     controls[c].reset();
+  //   }
+  // }
 
   reloadUser() {
     this.busy = this.userDataService.getCurrentUser()
@@ -191,33 +200,19 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.accountid) {
           this.busy2 = forkJoin(
-            this.accountDataService.getAccount(this.currentUser.accountid)
+            this.accountDataService.getAccount(this.currentUser.accountid),
+            this.legalEntityDataService.getBusinessProfileSummary()
           ).toPromise().then(res => {
             const account: any = res[0];
 
-            this.form.patchValue({
-              businessProfile: account,
-              primarycontact: account.primarycontact || {},
-              additionalContact: account.additionalContact || {}
-            });
-
-
-
-            this.form.patchValue({
-              businessProfile: account,
-              primarycontact: account.primarycontact || {},
-              additionalContact: account.additionalContact || {}
-            });
-
-            if (account.additionalContact && (
-              account.additionalContact.email
-              || account.additionalContact.firstName
-              || account.additionalContact.lastName
-              || account.additionalContact.phoneNumber
-              || account.additionalContact.phoneNumberAlt
-              || account.additionalContact.title)) {
-              this._showAdditionalContact = true;
+            const legalEntities = res[1].filter(e => e.isApplicant === true);
+            if (legalEntities.length) {
+              this.legalEntityId = legalEntities[0].id;
             }
+            this.form.patchValue({
+              businessProfile: account,
+              primarycontact: account.primarycontact || {}
+            });
 
             this.saveFormData = this.form.value;
           });
@@ -254,12 +249,12 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
   save(): Subject<boolean> {
     const subResult = new Subject<boolean>();
     const value = <DynamicsAccount>{
-      ...this.form.get('businessProfile').value,
-      primarycontact: this.form.get('primarycontact').value,
-      additionalContact: this.form.get('additionalContact').value
+      ...this.form.get('businessProfile').value
     };
 
-    this.busy = this.accountDataService.updateAccount(value)
+    this.busy = forkJoin(this.accountDataService.updateAccount(value),
+      this.connectionsToProducers.prepareSaveData(),
+      this.contactDataService.updateContact(this.form.get('primarycontact').value))
       .toPromise()
       .then(res => {
         subResult.next(true);
@@ -269,11 +264,12 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
 
     return subResult;
   }
+  
 
   gotoReview() {
     if (this.form.valid) {
       this.save().subscribe(data => {
-        this.router.navigate(['/business-profile-review']);
+        // this.router.navigate(['/business-profile-review']);
       });
     } else {
       this.markAsTouched();
@@ -288,13 +284,6 @@ export class BusinessProfilePpComponent  extends FormBase implements OnInit {
     for (const c in businessProfileControls) {
       if (typeof (businessProfileControls[c].markAsTouched) === 'function') {
         businessProfileControls[c].markAsTouched();
-      }
-    }
-
-    const additionalContactControls = (<FormGroup>(this.form.get('additionalContact'))).controls;
-    for (const c in additionalContactControls) {
-      if (typeof (additionalContactControls[c].markAsTouched) === 'function') {
-        additionalContactControls[c].markAsTouched();
       }
     }
 
