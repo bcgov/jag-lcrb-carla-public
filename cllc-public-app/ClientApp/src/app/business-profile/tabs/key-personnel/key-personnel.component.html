@@ -1,5 +1,5 @@
 <div class="">
-  <h1 style="margin-top: 0">Key Personnel &amp; Senior Employees</h1>
+  <!-- <h1 style="margin-top: 0">Key Personnel &amp; Senior Employees</h1> -->
   <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
       Key personnel are those people having authority and responsibility for planning, directing, and controlling the activities of the corporation, either directly or indirectly.
       This designation typically includes the following positions:
@@ -32,7 +32,7 @@
     </label>
   </section>
   <p></p>
-  <section>
+  <section *ngIf="accountId">
     <app-file-uploader documentType="Key Personnel" entityName="account" [entityId]="accountId"></app-file-uploader>
   </section>
 </div>
