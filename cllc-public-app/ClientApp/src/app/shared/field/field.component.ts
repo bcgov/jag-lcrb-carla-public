@@ -11,6 +11,7 @@ export class FieldComponent implements OnInit {
   @Input() valid = true;
   @Input() label: string;
   @Input() leadingText: string;
+  @Input() afterLabelText: string;
   @Input() errorMessage: string;
 
   constructor() { }
