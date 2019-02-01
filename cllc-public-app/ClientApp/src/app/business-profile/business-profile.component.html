@@ -32,7 +32,7 @@
 
             <app-field label="Business Type" [required]="true" [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
               errorMessage="Please select a business type from the dropdown list">
-              <select class="form-control" style="width: 250px;" formControlName="businessType">
+              <select class="form-control" readonly style="width: 250px;" formControlName="businessType">
                 <option value="">Choose your organization type</option>
                 <option value="PrivateCorporation">Private Corporation</option>
                 <option value="PublicCorporation">Public Corporation</option>
@@ -135,28 +135,28 @@
               <div class="row">
                 <section class="col-md-6 col-xs-12">
                   <app-field label="PO Box or Street Address 1" [required]="true">
-                    <input type="text" formControlName="mailingAddressStreet" class="form-control">
+                    <input type="text"  style="width: 400px;" formControlName="mailingAddressStreet" class="form-control">
                   </app-field>
                   <app-field label="City" [required]="true">
-                    <input type="text" formControlName="mailingAddressCity" class="form-control">
+                    <input type="text" style="width: 350px;" formControlName="mailingAddressCity" class="form-control">
                   </app-field>
                   <app-field label="Country" [required]="true">
-                    <input type="text" formControlName="mailingAddressCountry" class="form-control">
+                    <input type="text"  style="width: 350px;" formControlName="mailingAddressCountry" class="form-control">
                   </app-field>
                 </section>
                 <section class="col-md-6 col-xs-12">
                   <app-field label="PO Box or Street Address 2" [required]="false">
-                    <input type="text" formControlName="mailingAddressStreet2" class="form-control">
+                    <input type="text"  style="width: 450px;" formControlName="mailingAddressStreet2" class="form-control">
                   </app-field>
                   <div class="row">
                     <section class="col-md-6 col-xs-12">
                       <app-field label="Province/State" [required]="false">
-                        <input type="text" formControlName="mailingAddressProvince" class="form-control">
+                        <input type="text"  style="width: 200px;" formControlName="mailingAddressProvince" class="form-control">
                       </app-field>
                     </section>
                     <section class="col-md-6 col-xs-12">
                       <app-field label="Postal /Zip Code" [required]="true">
-                        <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
+                        <input type="text"   style="width: 200px;" formControlName="mailingAddressPostalCode" class="form-control">
                       </app-field>
                     </section>
                   </div>
@@ -172,10 +172,7 @@
                 type="text" formControlName="contactPhone">
             </app-field>
             <app-field label="Business Email" [required]="true" [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
-              errorMessage="Please enter a valid email address">
-              <div>
-                By submitting your business email address, you agree that the Security Programs Division can use it to
-                communicate with you about your application.</div>
+              errorMessage="Please enter a valid email address" afterLabelText="By submitting your business email address, you agree that the Security Programs Division can use it to communicate with you about your application.">
               <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail" (blur)="trimValue(form.get('businessProfile.contactEmail'))">
             </app-field>
             <!-- <section>
@@ -210,7 +207,7 @@
               <input class="form-control" style="width: 350px;" type="text" formControlName="jobTitle">
             </app-field>
 
-            <app-field label="Phone Number (main)" [required]="true" [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"
+            <app-field label="Phone Number" [required]="true" [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"
               errorMessage="Please enter your business contact's 10-digit phone number">
               <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
                 type="text" formControlName="telephone1">
