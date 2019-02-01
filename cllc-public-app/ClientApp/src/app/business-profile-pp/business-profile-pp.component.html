@@ -33,9 +33,14 @@
             <app-field label="Business Type" [required]="true" [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
               errorMessage="Please select a business type from the dropdown list">
               <select class="form-control" style="width: 250px;" formControlName="businessType">
+                <option value="">Choose your organization type</option>
                 <option value="PrivateCorporation">Private Corporation</option>
                 <option value="PublicCorporation">Public Corporation</option>
-                <option value="Partnership">Partnership</option>
+                <option value="UnlimitedLiabilityCorporation">Unlimited Liability Corporation</option>
+                <option value="LimitedLiabilityCorporation">Limited Liability Corporation</option>
+                <option value="GeneralPartnership">General Partnership</option>
+                <option value="LimitedPartnership">Limited Partnership</option>
+                <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
                 <option value="SoleProprietor">Sole Proprietor</option>
                 <option value="Society">Society</option>
               </select>
@@ -84,13 +89,13 @@
 
           <h3 class="blue-header">BUSINESS ADDRESSES</h3>
           <div formGroupName="businessProfile" class="padded-section">
-            <!-- <p></p>
+            <p></p>
             <h3>Physical Address</h3>
             <div class="row">
               <section class="col-md-6 col-xs-12">
-                <app-field label="Street Address 1" [required]="true" [valid]="form.get('businessProfile.physicalAddressLine1').valid || !form.get('businessProfile.physicalAddressLine1').touched"
+                <app-field label="Street Address 1" [required]="true" [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
                   errorMessage="Please enter your street address">
-                  <input class="form-control" style="width: 400px;" type="text" formControlName="physicalAddressLine1">
+                  <input class="form-control" style="width: 400px;" type="text" formControlName="physicalAddressStreet">
                 </app-field>
                 <app-field label="City" [required]="true" [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
                   errorMessage="Please enter your city">
@@ -102,7 +107,7 @@
               </section>
               <section class="col-md-6 col-xs-12">
                 <app-field label="Street Address 2">
-                  <input class="form-control" style="width: 450px;" type="text" formControlName="physicalAddressLine2">
+                  <input class="form-control" style="width: 450px;" type="text" formControlName="physicalAddressStreet2">
                 </app-field>
                 <div class="row">
                   <section class="col-md-6 col-xs-12">
@@ -118,15 +123,15 @@
                   </section>
                 </div>
               </section>
-            </div> -->
+            </div>
             <p></p>
             <div>
-              <!-- <hr> -->
+              <hr>
               <h3>Mailing Address</h3>
-              <!-- <section>
+              <section>
                 <input type="checkbox" style="margin-right: 10px;" formControlName="_mailingSameAsPhysicalAddress">
                 <span>Same as physical address</span>
-              </section> -->
+              </section>
               <div class="row">
                 <section class="col-md-6 col-xs-12">
                   <app-field label="PO Box or Street Address 1" [required]="true">
@@ -141,7 +146,7 @@
                 </section>
                 <section class="col-md-6 col-xs-12">
                   <app-field label="PO Box or Street Address 2" [required]="false">
-                    <input type="text" formControlName="mailingAddressLine2" class="form-control">
+                    <input type="text" formControlName="mailingAddressStreet2" class="form-control">
                   </app-field>
                   <div class="row">
                     <section class="col-md-6 col-xs-12">
@@ -202,7 +207,7 @@
             </app-field>
 
             <app-field label="Title/ Position" [required]="false" [valid]="true">
-              <input class="form-control" style="width: 350px;" type="text" formControlName="title">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="jobTitle">
             </app-field>
 
             <app-field label="Phone Number (main)" [required]="true" [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"

@@ -86,7 +86,7 @@ export class BusinessProfilePpComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       businessProfile: this.fb.group({
         id: [''],
-        // _mailingSameAsPhysicalAddress: [],
+        _mailingSameAsPhysicalAddress: [],
         name: [{ value: '', disabled: true }],
         businessDBAName: [{ value: '', disabled: true }],
         bcIncorporationNumber: [''], // Validators.required
@@ -97,14 +97,14 @@ export class BusinessProfilePpComponent extends FormBase implements OnInit {
         contactEmail: ['', [Validators.required, Validators.email]],
         // consentForEmailCommunication: [false, this.customRequiredCheckboxValidator()],
         // websiteAddress: [''],
-        // physicalAddressLine1: ['', Validators.required],
-        // physicalAddressLine2: [''],
-        // physicalAddressCity: ['', Validators.required],
-        // physicalAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
-        // physicalAddressProvince: [{ value: 'British Columbia', disabled: true }],
-        // physicalAddressCountry: [{ value: 'Canada', disabled: true }],
+        physicalAddressStreet: ['', Validators.required],
+        physicalAddressStreet2: [''],
+        physicalAddressCity: ['', Validators.required],
+        physicalAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+        physicalAddressProvince: [{ value: 'British Columbia', disabled: true }],
+        physicalAddressCountry: [{ value: 'Canada', disabled: true }],
         mailingAddressStreet: ['', Validators.required],
-        mailingAddressLine2: [''],
+        mailingAddressStreet2: [''],
         mailingAddressCity: ['', Validators.required],
         mailingAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
         mailingAddressProvince: [],
@@ -114,7 +114,7 @@ export class BusinessProfilePpComponent extends FormBase implements OnInit {
         id: [],
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
-        title: [''],
+        jobTitle: [''],
         telephone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
         // phoneNumberAlt: [''],
         emailaddress1: ['', [Validators.required, Validators.email]],
@@ -131,54 +131,54 @@ export class BusinessProfilePpComponent extends FormBase implements OnInit {
     });
     this.reloadUser();
 
-    // this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges
-    //   .filter(value => value === true)
-    //   .subscribe(value => {
-    //     this.copyPhysicalToMailingAddress();
-    //   });
+    this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges
+      .filter(value => value === true)
+      .subscribe(value => {
+        this.copyPhysicalToMailingAddress();
+      });
 
-    // this.form.get('businessProfile.physicalAddressLine1').valueChanges
-    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-    //   .subscribe(value => {
-    //     this.copyPhysicalToMailingAddress();
-    //   });
-    // this.form.get('businessProfile.physicalAddressLine2').valueChanges
-    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-    //   .subscribe(value => {
-    //     this.copyPhysicalToMailingAddress();
-    //   });
-    // this.form.get('businessProfile.physicalAddressCity').valueChanges
-    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-    //   .subscribe(value => {
-    //     this.copyPhysicalToMailingAddress();
-    //   });
-    // this.form.get('businessProfile.physicalAddressPostalCode').valueChanges
-    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-    //   .subscribe(value => {
-    //     this.copyPhysicalToMailingAddress();
-    //   });
-    // this.form.get('businessProfile.physicalAddressProvince').valueChanges
-    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-    //   .subscribe(value => {
-    //     this.copyPhysicalToMailingAddress();
-    //   });
-    // this.form.get('businessProfile.physicalAddressCountry').valueChanges
-    //   .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
-    //   .subscribe(value => {
-    //     this.copyPhysicalToMailingAddress();
-    //   });
+    this.form.get('businessProfile.physicalAddressStreet').valueChanges
+      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+      .subscribe(value => {
+        this.copyPhysicalToMailingAddress();
+      });
+    this.form.get('businessProfile.physicalAddressStreet2').valueChanges
+      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+      .subscribe(value => {
+        this.copyPhysicalToMailingAddress();
+      });
+    this.form.get('businessProfile.physicalAddressCity').valueChanges
+      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+      .subscribe(value => {
+        this.copyPhysicalToMailingAddress();
+      });
+    this.form.get('businessProfile.physicalAddressPostalCode').valueChanges
+      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+      .subscribe(value => {
+        this.copyPhysicalToMailingAddress();
+      });
+    this.form.get('businessProfile.physicalAddressProvince').valueChanges
+      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+      .subscribe(value => {
+        this.copyPhysicalToMailingAddress();
+      });
+    this.form.get('businessProfile.physicalAddressCountry').valueChanges
+      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+      .subscribe(value => {
+        this.copyPhysicalToMailingAddress();
+      });
 
   }
 
-  // copyPhysicalToMailingAddress() {
-  //   this.form.get('businessProfile.mailingAddressStreet').patchValue(this.form.get('businessProfile.physicalAddressLine1').value);
-  //   this.form.get('businessProfile.mailingAddressLine2').patchValue(this.form.get('businessProfile.physicalAddressLine2').value);
-  //   this.form.get('businessProfile.mailingAddressCity').patchValue(this.form.get('businessProfile.physicalAddressCity').value);
-  //   this.form.get('businessProfile.mailingAddressPostalCode')
-  // .patchValue(this.form.get('businessProfile.physicalAddressPostalCode').value);
-  //   this.form.get('businessProfile.mailingAddressProvince').patchValue(this.form.get('businessProfile.physicalAddressProvince').value);
-  //   this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
-  // }
+  copyPhysicalToMailingAddress() {
+    this.form.get('businessProfile.mailingAddressStreet').patchValue(this.form.get('businessProfile.physicalAddressStreet').value);
+    this.form.get('businessProfile.mailingAddressStreet2').patchValue(this.form.get('businessProfile.physicalAddressStreet2').value);
+    this.form.get('businessProfile.mailingAddressCity').patchValue(this.form.get('businessProfile.physicalAddressCity').value);
+    this.form.get('businessProfile.mailingAddressPostalCode')
+  .patchValue(this.form.get('businessProfile.physicalAddressPostalCode').value);
+    this.form.get('businessProfile.mailingAddressProvince').patchValue(this.form.get('businessProfile.physicalAddressProvince').value);
+    this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
+  }
 
   // hideAdditionalContact() {
   //   this._showAdditionalContact = false;
@@ -205,10 +205,15 @@ export class BusinessProfilePpComponent extends FormBase implements OnInit {
           ).toPromise().then(res => {
             const account: any = res[0];
 
+            account.physicalAddressProvince = 'British Columbia';
+            account.physicalAddressCountry = 'Canada';
+
             const legalEntities = res[1].filter(e => e.isApplicant === true);
             if (legalEntities.length) {
               this.legalEntityId = legalEntities[0].id;
             }
+
+
             this.form.patchValue({
               businessProfile: account,
               primarycontact: account.primarycontact || {}
@@ -253,7 +258,7 @@ export class BusinessProfilePpComponent extends FormBase implements OnInit {
     };
 
     this.busy = forkJoin(this.accountDataService.updateAccount(value),
-      this.connectionsToProducers.prepareSaveData(),
+      // this.connectionsToProducers.prepareSaveData(),
       this.contactDataService.updateContact(this.form.get('primarycontact').value))
       .toPromise()
       .then(res => {
@@ -264,7 +269,6 @@ export class BusinessProfilePpComponent extends FormBase implements OnInit {
 
     return subResult;
   }
-  
 
   gotoReview() {
     if (this.form.valid) {
