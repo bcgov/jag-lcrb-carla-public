@@ -18,6 +18,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string emailaddress1 { get; set; }
 
+        public string jobTitle { get; set; }
+
         public string telephone1 { get; set; }
 
         public string address1_line1 { get; set; }
