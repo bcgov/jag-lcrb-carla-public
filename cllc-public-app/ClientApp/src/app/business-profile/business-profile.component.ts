@@ -107,8 +107,8 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
         mailingAddressStreet2: [''],
         mailingAddressCity: ['', Validators.required],
         mailingAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
-        mailingAddressProvince: [],
-        mailingAddressCountry: ['Canada'],
+        mailingAddressProvince: ['', Validators.required],
+        mailingAddressCountry: ['Canada', Validators.required],
       }),
       primarycontact: this.fb.group({
         id: [],
