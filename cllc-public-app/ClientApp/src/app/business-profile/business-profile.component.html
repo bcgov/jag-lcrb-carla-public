@@ -134,13 +134,13 @@
               </section>
               <div class="row">
                 <section class="col-md-6 col-xs-12">
-                  <app-field label="PO Box or Street Address 1" [required]="true">
+                  <app-field label="PO Box or Street Address 1"  [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched" [required]="true">
                     <input type="text"  style="width: 400px;" formControlName="mailingAddressStreet" class="form-control">
                   </app-field>
-                  <app-field label="City" [required]="true">
+                  <app-field label="City" [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched" [required]="true">
                     <input type="text" style="width: 350px;" formControlName="mailingAddressCity" class="form-control">
                   </app-field>
-                  <app-field label="Country" [required]="true">
+                  <app-field label="Country" [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched" [required]="true">
                     <input type="text"  style="width: 350px;" formControlName="mailingAddressCountry" class="form-control">
                   </app-field>
                 </section>
@@ -150,12 +150,12 @@
                   </app-field>
                   <div class="row">
                     <section class="col-md-6 col-xs-12">
-                      <app-field label="Province/State" [required]="false">
+                      <app-field label="Province/State"  [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched" [required]="true">
                         <input type="text"  style="width: 200px;" formControlName="mailingAddressProvince" class="form-control">
                       </app-field>
                     </section>
                     <section class="col-md-6 col-xs-12">
-                      <app-field label="Postal /Zip Code" [required]="true">
+                      <app-field label="Postal /Zip Code"  [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched" [required]="true">
                         <input type="text"   style="width: 200px;" formControlName="mailingAddressPostalCode" class="form-control">
                       </app-field>
                     </section>
