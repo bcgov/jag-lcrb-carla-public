@@ -1,6 +1,6 @@
-import { DynamicsContact } from "./dynamics-contact.model";
+import { DynamicsContact } from './dynamics-contact.model';
 
-export class DynamicsAccount {
+export interface DynamicsAccount {
   id: string;
   name: string;
   description: string;
@@ -15,11 +15,9 @@ export class DynamicsAccount {
   mailingAddressCity: string;
   mailingAddressProvince: string;
   mailingAddressCountry: string;
-  mailingAddresPostalCode: string;
+  mailingAddressPostalCode: string;
 
   primarycontact: DynamicsContact;
 
   businessType: string;
-  
-  constructor() { }
 }

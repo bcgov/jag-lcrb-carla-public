@@ -76,9 +76,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1Stateorprovince = fromVM.mailingAddressProvince;
             }
-            if (copyIfNull || (!copyIfNull && fromVM.mailingAddresPostalCode != null))
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressPostalCode != null))
             {
-                toDynamics.Address1Postalcode = fromVM.mailingAddresPostalCode;
+                toDynamics.Address1Postalcode = fromVM.mailingAddressPostalCode;
             }
 
             // business type must be set only during creation, not in update (removed from copyValues() )
@@ -128,14 +128,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.mailingAddressCity = account.Address1City;
                 accountVM.mailingAddressCountry = account.Address1County;
                 accountVM.mailingAddressProvince = account.Address1Stateorprovince;
-                accountVM.mailingAddresPostalCode = account.Address1Postalcode;
+                accountVM.mailingAddressPostalCode = account.Address1Postalcode;
 
                 if (account.Primarycontactid != null)
                 {
-                    // add the primary contact.
-                    accountVM.primarycontact = new ViewModels.Contact();
-                    accountVM.primarycontact.id = account.Primarycontactid.Contactid.ToString();
-                    // TODO - load other fields (if necessary)
+                    accountVM.primarycontact = account.Primarycontactid.ToViewModel();
                 }
 
                 if (account.AdoxioBusinesstype != null)

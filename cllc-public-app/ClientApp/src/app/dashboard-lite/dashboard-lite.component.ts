@@ -21,7 +21,7 @@ export class DashboardLiteComponent implements OnInit {
   submittedApplications = 8;
 
   contactId: string = null;
-  account: DynamicsAccount;
+  account: any;
   busy: Subscription;
   isPaid: Boolean;
   orgType = '';
