@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssosiateWizardComponent } from './assosiate-wizard.component';
+import { BusinessProfilePpComponent } from './business-profile-pp.component';
 
-describe('AssosiateWizardComponent', () => {
-  let component: AssosiateWizardComponent;
-  let fixture: ComponentFixture<AssosiateWizardComponent>;
+describe('BusinessProfilePpComponent', () => {
+  let component: BusinessProfilePpComponent;
+  let fixture: ComponentFixture<BusinessProfilePpComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssosiateWizardComponent ]
+      declarations: [ BusinessProfilePpComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssosiateWizardComponent);
+    fixture = TestBed.createComponent(BusinessProfilePpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
