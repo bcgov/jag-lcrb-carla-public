@@ -178,7 +178,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             List<LegalEntity> legalEntities;
 
-            var account = (await _dynamicsClient.GetAccountById(new Guid(accountId))).ToViewModel();
+            var expand = new List<string> { "primarycontactid" };
+            var account = ( _dynamicsClient.Accounts.Get(filter: "", expand: expand).Value.FirstOrDefault()).ToViewModel();
             _logger.LogDebug(LoggingEvents.HttpGet, "Account details: " + JsonConvert.SerializeObject(account));
 
             // get legal entities
