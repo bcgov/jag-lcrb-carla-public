@@ -47,5 +47,3 @@ chrome-test-report.html
 .DS_Store
 Thumbs.db
 
-# workstation lock files
-package-lock.json
