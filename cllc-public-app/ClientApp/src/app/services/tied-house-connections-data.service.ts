@@ -3,15 +3,14 @@ import { Http, Headers, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TiedHouseConnection } from '../models/tied-house-connection.model';
 import { catchError, retry } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
-export class TiedHouseConnectionsDataService {
+export class TiedHouseConnectionsDataService extends DataService {
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   /**
    * Get legal entities from Dynamics filtered by position
@@ -51,23 +50,4 @@ export class TiedHouseConnectionsDataService {
       .pipe(catchError(this.handleError));
   }
 
-
-
-
-  /**
-   * Handle error
-   * @param error
-   */
-  private handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Promise.reject(errMsg);
-  }
 }

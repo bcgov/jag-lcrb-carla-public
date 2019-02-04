@@ -4,15 +4,18 @@ import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { debounce, catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
-export class AdoxioLegalEntityDataService {
+export class AdoxioLegalEntityDataService extends DataService {
 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json'
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   /**
    * Get legal entities from Dynamics filtered by position
@@ -20,7 +23,8 @@ export class AdoxioLegalEntityDataService {
    */
   getLegalEntitiesbyPosition(parentLegalEntityId, positionType: string) {
     const apiPath = `api/adoxiolegalentity/position/${parentLegalEntityId}/${positionType}`;
-    return this.http.get<AdoxioLegalEntity[]>(apiPath, { headers: this.headers });
+    return this.http.get<AdoxioLegalEntity[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 
   getBusinessProfileSummary() {
@@ -53,7 +57,8 @@ export class AdoxioLegalEntityDataService {
    * @param data - legal entity data
    */
   deleteLegalEntity(id: string) {
-    return this.http.post<AdoxioLegalEntity>(`api/adoxiolegalentity/${id}/delete`, {}, { headers: this.headers });
+    return this.http.post<AdoxioLegalEntity>(`api/adoxiolegalentity/${id}/delete`, {}, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 
 
@@ -75,22 +80,5 @@ export class AdoxioLegalEntityDataService {
     const apiPath = 'api/adoxiolegalentity/' + legalEntityId + '/sendconsentrequests';
     return this.http.post(apiPath, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
-  }
-
-  /**
-   * Handle error
-   * @param error
-   */
-  private handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Promise.reject(errMsg);
   }
 }

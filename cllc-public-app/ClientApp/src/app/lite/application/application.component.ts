@@ -164,7 +164,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
    * */
   private submitPayment() {
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(res => {
-      const jsonUrl = res.json();
+      const jsonUrl = res;
       window.location.href = jsonUrl['url'];
       return jsonUrl['url'];
     }, err => {

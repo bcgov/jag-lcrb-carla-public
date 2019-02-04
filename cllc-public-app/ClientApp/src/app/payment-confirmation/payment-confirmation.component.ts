@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentDataService } from '../services/payment-data.service';
 import { Subscription } from 'rxjs';
 import { AlertModule } from 'ngx-bootstrap/alert';
@@ -11,7 +11,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
   styleUrls: ['./payment-confirmation.component.scss']
 })
 /** payment-confirmation component*/
-export class PaymentConfirmationComponent {
+export class PaymentConfirmationComponent implements OnInit {
   busy: Subscription;
   transactionId: string;
   applicationId: string;
@@ -28,11 +28,11 @@ export class PaymentConfirmationComponent {
   trnId: string;
   trnOrderNumber: string;
   invoice: string;
-  isApproved: boolean = false;
+  isApproved = false;
 
   paymentTransactionTitle: string;
   paymentTransactionMessage: string;
-  loaded: boolean = false;
+  loaded = false;
   @Input() inputApplicationId: string;
 
   /** payment-confirmation ctor */
@@ -59,23 +59,23 @@ export class PaymentConfirmationComponent {
   verify_payment() {
     this.busy = this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
       res => {
-        var verifyPayResponse = res.json();
-        //console.log(verifyPayResponse);
+        const verifyPayResponse = <any>res;
+        // console.log(verifyPayResponse);
         switch (verifyPayResponse.cardType) {
           case 'VI':
-            this.cardType = "Visa";
+            this.cardType = 'Visa';
             break;
           case 'PV':
-            this.cardType = "Visa Debit";
+            this.cardType = 'Visa Debit';
             break;
           case 'MC':
-            this.cardType = "MasterCard";
+            this.cardType = 'MasterCard';
             break;
           case 'AM':
-            this.cardType = "American Express";
+            this.cardType = 'American Express';
             break;
           case 'MD':
-            this.cardType = "Debit MasterCard";
+            this.cardType = 'Debit MasterCard';
             break;
           default:
             this.cardType = verifyPayResponse.cardType;
@@ -93,26 +93,26 @@ export class PaymentConfirmationComponent {
         this.trnOrderNumber = verifyPayResponse.trnOrderNumber;
         this.invoice = verifyPayResponse.invoice;
 
-        if (this.trnApproved == "1") {
+        if (this.trnApproved === '1') {
           this.isApproved = true;
         } else {
           this.isApproved = false;
-          if (this.messageId == "559") {
-            this.paymentTransactionTitle = "Cancelled";
-            this.paymentTransactionMessage = "Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>"
-          } else if (this.messageId == "7") {
-            this.paymentTransactionTitle = "Declined";
-            this.paymentTransactionMessage = "Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>"
+          if (this.messageId === '559') {
+            this.paymentTransactionTitle = 'Cancelled';
+            this.paymentTransactionMessage = 'Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+          } else if (this.messageId === '7') {
+            this.paymentTransactionTitle = 'Declined';
+            this.paymentTransactionMessage = 'Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
           } else {
-            this.paymentTransactionTitle = "Declined";
-            this.paymentTransactionMessage = "Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>"
+            this.paymentTransactionTitle = 'Declined';
+            this.paymentTransactionMessage = 'Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
           }
         }
 
         this.loaded = true;
       },
       err => {
-        console.log("Error occured");
+        console.log('Error occured');
       }
     );
   }
@@ -121,7 +121,7 @@ export class PaymentConfirmationComponent {
    * Return to dashboard
    * */
   return_to_application() {
-    if (this.trnApproved == "1") {
+    if (this.trnApproved === '1') {
       this.router.navigate(['./dashboard-lite']);
     } else {
       this.router.navigate(['./application-lite/' + this.applicationId]);

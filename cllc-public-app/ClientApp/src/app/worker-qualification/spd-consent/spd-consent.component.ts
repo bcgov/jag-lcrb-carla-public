@@ -141,7 +141,7 @@ export class SpdConsentComponent implements OnInit {
   private submitPayment() {
     this.save().subscribe(r => {
       this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
-        const jsonUrl = res.json();
+        const jsonUrl = res;
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, err => {
