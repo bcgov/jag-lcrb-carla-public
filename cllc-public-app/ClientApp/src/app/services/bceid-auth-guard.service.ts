@@ -16,10 +16,10 @@ export class BCeidAuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         console.log('BCeidAuthGuard#canActivate called');
-        var result = new Subject<boolean>();
+        const result = new Subject<boolean>();
         this.userService.getCurrentUser()
             .subscribe(user => {
-                var allowAccess = (user && user.userType == "Business");
+                const allowAccess = (user && user.userType === 'Business');
                 if (!allowAccess) {
                     this.router.navigate(['/']);
                 }

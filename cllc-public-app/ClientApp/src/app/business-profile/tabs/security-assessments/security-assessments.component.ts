@@ -37,7 +37,7 @@ export class SecurityAssessmentsComponent implements OnInit {
       this.parentLegalEntityId = p.legalEntityId;
       this.accountId = p.accountId;
       this.dynamicsDataService.getRecord('account', this.accountId)
-        .then((data) => {
+        .subscribe((data) => {
           this.businessType = data.businessType;
         });
       this.getDirectorsAndOfficersAndShareholders();
@@ -110,18 +110,6 @@ export class SecurityAssessmentsComponent implements OnInit {
         );
     }
 
-  }
-
-  private handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
   }
 
 }

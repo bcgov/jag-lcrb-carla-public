@@ -6,18 +6,18 @@ export class AppHomePage {
     }
 
     getMainHeading() {
-      return element(by.css('app-root h1')).getText();
+      return element(by.css('app-home .jumbotron h2')).getText();
     }
 
     inputEmail() {
-        return element(by.id("inputEmail"));
+        return element(by.css('app-newsletter-signup form input'));
     }
     inputEmailButton() {
-        return element(by.id("inputEmailButton"));
+        return element(by.css('app-newsletter-signup form button'));
     }
 
     inputVoteButton(slug, number) {
-      return element(by.id("vote_" + slug + "_" + number));
+      return element(by.id('vote_' + slug + '_' + number));
     }
 
     hasEmailRegistration() {
@@ -25,7 +25,7 @@ export class AppHomePage {
     }
 
     linkToSurvey() {
-        return element(by.id("surveyStartButton"));
+        return element(by.css('app-home .side-box button[routerLink="prv"]'));
     }
 
     hasLinkToSurvey() {
@@ -33,28 +33,28 @@ export class AppHomePage {
     }
 
     hasVotingWidgets() {
-        return element(by.id("showVoteResultsButton")).isPresent() || element(by.id("hideVoteResultsButton")).isPresent();
+        return element(by.id('showVoteResultsButton')).isPresent() || element(by.id('hideVoteResultsButton')).isPresent();
     }
 
-    isVotingButtonsPresent(slug) {            
-      return element(by.id("voteOptionButtons_" + slug)).isPresent();
+    isVotingButtonsPresent(slug) {
+      return element(by.id('voteOptionButtons_' + slug)).isPresent();
     }
 
-    //accordion functions
+    // accordion functions
     getAccordionHeading() {
         return element(by.id('accordion_heading')).getText();
     }
 
     expandAccordion() {
-        element(by.css(".e2e-accordion-show-all")).click();
+        element(by.css('.e2e-accordion-show-all')).click();
     }
 
     collapseAccordion() {
-        element(by.css(".e2e-accordion-hide-all")).click();
+        element(by.css('.e2e-accordion-hide-all')).click();
     }
 
     getFirstAccodionElement() {
-        return element(by.css(".e2e-accordion-first-child"));
+        return element(by.css('.e2e-accordion-first-child'));
     }
 
 }

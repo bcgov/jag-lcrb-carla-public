@@ -5,20 +5,21 @@ import { Http, Headers, Response } from '@angular/http';
 import { AdoxioLicense } from '../models/adoxio-license.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
-export class AdoxioLicenseDataService {
+export class AdoxioLicenseDataService extends DataService {
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getAdoxioLicenses(): Observable<AdoxioLicense[]> {
     return this.http.get<AdoxioLicense[]>('api/adoxiolicense/current', {
       headers: this.headers
-    });
+    })
+      .pipe(catchError(this.handleError));
   }
 
 }

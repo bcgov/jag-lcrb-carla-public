@@ -204,3 +204,7 @@ hr {
 .padded-section {
   padding-left: 15px;
 }
+app-newsletter-signup form button,
+app-newsletter-signup form input {
+    color: red !important;
+}

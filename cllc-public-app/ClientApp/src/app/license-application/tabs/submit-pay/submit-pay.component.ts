@@ -95,7 +95,7 @@ export class SubmitPayComponent implements OnInit {
         this.busy = zip(...fileList).subscribe(
           response => {
             response.forEach((resp, i) => {
-            const files = resp.json();
+            const files = resp;
             if (files && files.length < 1) {
               this.isApplicationValid = false;
               if (i === 0) {
@@ -134,8 +134,8 @@ export class SubmitPayComponent implements OnInit {
       if (isValid) {
         this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(
           res => {
-            // console.log("applicationVM: ", res.json());
-            const jsonUrl = res.json();
+            // console.log("applicationVM: ", res;
+            const jsonUrl = res;
             // window.alert(jsonUrl['url']);
             window.location.href = jsonUrl['url'];
             return jsonUrl['url'];

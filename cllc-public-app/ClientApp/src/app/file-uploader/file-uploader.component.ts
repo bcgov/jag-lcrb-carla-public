@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { Http, Headers, Response } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Subscription } from 'rxjs';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export interface DropdownOption {
   id: string;
@@ -32,7 +32,7 @@ export class FileUploaderComponent implements OnInit {
   public files: FileSystemItem[] = [];
 
   // TODO: move http call to a service
-  constructor(private http: Http, private adoxioApplicationDataService: AdoxioApplicationDataService) {
+  constructor(private http: HttpClient, private adoxioApplicationDataService: AdoxioApplicationDataService) {
   }
 
   ngOnInit(): void {
@@ -85,7 +85,9 @@ export class FileUploaderComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('documentType', this.documentType);
-    const headers = new Headers();
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
     // let url = "";
     // url = this.attachmentURL + this.applicationId + "/attachments";
     this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
@@ -95,12 +97,11 @@ export class FileUploaderComponent implements OnInit {
   }
 
   getUploadedFileData() {
-    const headers = new Headers({
-      // 'Content-Type': 'multipart/form-data'
+    const headers: HttpHeaders = new HttpHeaders({
+      // 'Content-Type': 'application/json'
     });
     const getFileURL = this.attachmentURL + '/' + this.documentType;
-    this.busy = this.http.get(getFileURL, { headers: headers })
-      .pipe(map((data: Response) => <FileSystemItem[]>data.json()))
+    this.busy = this.http.get<FileSystemItem[]>(getFileURL, { headers: headers })
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {
@@ -114,7 +115,7 @@ export class FileUploaderComponent implements OnInit {
   }
 
   deleteFile(relativeUrl: string) {
-    const headers = new Headers({
+    const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     });
     const queryParams = `?serverRelativeUrl=${encodeURIComponent(relativeUrl)}&documentType=${this.documentType}`;

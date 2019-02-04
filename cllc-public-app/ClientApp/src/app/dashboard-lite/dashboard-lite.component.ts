@@ -39,7 +39,7 @@ export class DashboardLiteComponent implements OnInit {
         if (this.currentUser.accountid != null) {
           // fetch the account to get the primary contact.
           this.dynamicsDataService.getRecord('account', this.currentUser.accountid)
-            .then((result) => {
+            .subscribe((result) => {
               this.account = result;
               if (result.primarycontact) {
                 this.contactId = result.primarycontact.id;
@@ -63,8 +63,8 @@ export class DashboardLiteComponent implements OnInit {
       data => {
         this.busy = this.paymentDataService.getPaymentSubmissionUrl(data.id).subscribe(
           res2 => {
-            // console.log("applicationVM: ", res.json());
-            const jsonUrl = res2.json();
+            // console.log("applicationVM: ", res);
+            const jsonUrl = res2;
             // window.alert(jsonUrl['url']);
             window.location.href = jsonUrl['url'];
             return jsonUrl['url'];

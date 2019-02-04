@@ -59,7 +59,7 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
   verify_payment() {
     this.busy = this.paymentDataService.verifyLicenceFeePaymentSubmission(this.applicationId).subscribe(
       res => {
-        const verifyPayResponse = res.json();
+        const verifyPayResponse = <any>res;
         // console.log(verifyPayResponse);
         switch (verifyPayResponse.cardType) {
           case 'VI':

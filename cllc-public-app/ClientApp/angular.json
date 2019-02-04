@@ -107,7 +107,6 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "configurations": {
             "noserve": {
-              "devServerTarget": ""
             }
           },
           "options": {

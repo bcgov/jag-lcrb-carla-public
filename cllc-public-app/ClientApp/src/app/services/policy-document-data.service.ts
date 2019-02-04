@@ -3,67 +3,27 @@ import { Http, Headers, Response } from '@angular/http';
 
 import { PolicyDocument } from '../models/policy-document.model';
 import { PolicyDocumentSummary } from '../models/policy-document-summary.model';
+import { HttpClient } from '@angular/common/http';
+import { DataService } from './data.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class PolicyDocumentDataService {
-   constructor(private http: Http) { }
+export class PolicyDocumentDataService extends DataService {
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-   getPolicyDocument(slug: any) {
-     const headers = new Headers();
-     headers.append('Content-Type', 'application/json');
+  getPolicyDocument(slug: any) {
 
-     return this.http.get('api/policydocument/' + slug, {
-       headers: headers
-     })
-       .toPromise()
-       .then((res: Response) => {
-         const data = res.json();
-         const policyDocument = new PolicyDocument();
-         policyDocument.id = data.id;
-         policyDocument.slug = data.slug;
-         policyDocument.title = data.title;
-         policyDocument.body = data.body;
-         policyDocument.category = data.category;
-         policyDocument.menuText = data.menuText;
-         policyDocument.displayOrder = data.displayOrder;
-         return policyDocument;
-       })
-       .catch(this.handleError);
-   }
+    return this.http.get<PolicyDocument>('api/policydocument/' + slug, {
+      headers: this.headers
+    }).pipe(catchError(this.handleError));
+  }
 
-   getPolicyDocuments(category: string) {
-       const headers = new Headers();
-       headers.append('Content-Type', 'application/json');
+  getPolicyDocuments(category: string) {
 
-       return this.http.get('api/policydocument?category=' + category, {
-         headers: headers
-       })
-         .toPromise()
-         .then((res: Response) => {
-           const data = res.json();
-           const allPolicyDocuments = [];
-
-           data.forEach((entry) => {
-             const policyDocumentSummary = new PolicyDocumentSummary();
-             policyDocumentSummary.slug = entry.slug;
-             policyDocumentSummary.menuText = entry.menuText;
-             allPolicyDocuments.push(policyDocumentSummary);
-           });
-           return allPolicyDocuments;
-         })
-         .catch(this.handleError);
-   }
-
-     private handleError(error: Response | any) {
-     let errMsg: string;
-     if (error instanceof Response) {
-       const body = error.json() || '';
-       const err = body.error || JSON.stringify(body);
-       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-     } else {
-       errMsg = error.message ? error.message : error.toString();
-     }
-     console.error(errMsg);
-     return Promise.reject(errMsg);
-   }
+    return this.http.get<PolicyDocumentSummary[]>('api/policydocument?category=' + category, {
+      headers: this.headers
+    }).pipe(catchError(this.handleError));
+  }
 }

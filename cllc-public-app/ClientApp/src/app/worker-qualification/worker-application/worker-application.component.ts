@@ -303,7 +303,7 @@ export class WorkerApplicationComponent implements OnInit {
     value.contact.emailaddress1 = value.worker.email;
     value.contact.telephone1 = value.worker.phonenumber;
 
-    const saves = [
+    const saves: Observable<any>[] = [
       this.contactDataService.updateContact(value.contact),
       this.workerDataService.updateWorker(value.worker, value.worker.id)
     ];
