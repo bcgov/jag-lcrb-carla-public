@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
 import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';

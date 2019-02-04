@@ -1,3 +1,5 @@
+
+import {filter} from 'rxjs/operators';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyDocument } from '../models/policy-document.model';
@@ -30,8 +32,8 @@ export class PolicyDocumentComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.route.params
-      .filter(data => !!data && !!data.slug)
+    this.route.params.pipe(
+      filter(data => !!data && !!data.slug))
       .subscribe((data: any) => {
         this.setSlug(data.slug);
       });

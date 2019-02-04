@@ -1,6 +1,8 @@
+
+import {filter} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import 'rxjs/add/operator/filter';
+
 
 @Component({
   selector: 'breadcrumb',
@@ -54,8 +56,8 @@ export class BreadcrumbComponent implements OnInit {
       return ret;
     }
 
-    this.router.events
-      .filter( event => event instanceof NavigationEnd)
+    this.router.events.pipe(
+      filter( event => event instanceof NavigationEnd))
       .subscribe( event => {
         this.breadcrumbs = resolveBreadcrumbs(this.route.root, '', '');
         this.visible = this.breadcrumbs.length > 0;

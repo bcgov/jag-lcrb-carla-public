@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
 import { LicenseApplicationSummary } from '../models/license-application-summary.model';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { AccountDataService } from '../services/account-data.service';

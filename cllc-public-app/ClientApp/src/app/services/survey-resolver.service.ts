@@ -1,9 +1,11 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable }  from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router, Resolve, RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
 import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class SurveyResolver implements Resolve<any> {
@@ -16,8 +18,8 @@ export class SurveyResolver implements Resolve<any> {
     }
 
     if(route.data.survey_path) {
-      return this.http.get(route.data.survey_path, {params: {t: new Date().getTime()}})
-            .map((x) => x.json())
+      return this.http.get(route.data.survey_path, {params: {t: new Date().getTime()}}).pipe(
+            map((x) => x.json()))
             ; //.catch(this.handleLoadError);
     }
 
