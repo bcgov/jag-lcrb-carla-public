@@ -161,7 +161,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error.json() || '';
+      const body = error || '';
       const err = body || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {

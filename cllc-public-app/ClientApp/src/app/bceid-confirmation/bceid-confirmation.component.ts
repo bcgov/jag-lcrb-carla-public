@@ -82,6 +82,7 @@ export class BceidConfirmationComponent {
     account.businessType = this.businessType;
     const payload = JSON.stringify(account);
     this.busy = this.dynamicsDataService.createRecord('account', payload)
+      .toPromise()
       .then((data) => {
         this.reloadUser.emit();
       });
