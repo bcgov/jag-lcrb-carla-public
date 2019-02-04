@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+
 
 import { AdoxioLicense } from '../models/adoxio-license.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

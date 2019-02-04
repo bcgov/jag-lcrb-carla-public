@@ -1,3 +1,5 @@
+
+import {filter,  zip } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
@@ -17,7 +19,6 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { defaultFormat as _rollupMoment } from 'moment';
-import { zip } from 'rxjs/operators';
 import { AccountDataService } from '../services/account-data.service';
 import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBase } from '../shared/form-base';
@@ -131,39 +132,39 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     });
     this.reloadUser();
 
-    this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges
-      .filter(value => value === true)
+    this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges.pipe(
+      filter(value => value === true))
       .subscribe(value => {
         this.copyPhysicalToMailingAddress();
       });
 
-    this.form.get('businessProfile.physicalAddressStreet').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    this.form.get('businessProfile.physicalAddressStreet').valueChanges.pipe(
+      filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
       .subscribe(value => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressStreet2').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    this.form.get('businessProfile.physicalAddressStreet2').valueChanges.pipe(
+      filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
       .subscribe(value => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressCity').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    this.form.get('businessProfile.physicalAddressCity').valueChanges.pipe(
+      filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
       .subscribe(value => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressPostalCode').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    this.form.get('businessProfile.physicalAddressPostalCode').valueChanges.pipe(
+      filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
       .subscribe(value => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressProvince').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    this.form.get('businessProfile.physicalAddressProvince').valueChanges.pipe(
+      filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
       .subscribe(value => {
         this.copyPhysicalToMailingAddress();
       });
-    this.form.get('businessProfile.physicalAddressCountry').valueChanges
-      .filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value)
+    this.form.get('businessProfile.physicalAddressCountry').valueChanges.pipe(
+      filter(v => this.form.get('businessProfile._mailingSameAsPhysicalAddress').value))
       .subscribe(value => {
         this.copyPhysicalToMailingAddress();
       });

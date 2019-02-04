@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from "@angular/http";
-import "rxjs/add/operator/toPromise";
+import { Http, Headers, Response } from '@angular/http';
 
-import { VoteOption } from "../models/vote-option.model";
-import { VoteQuestion } from "../models/vote-question.model";
+
+import { VoteOption } from '../models/vote-option.model';
+import { VoteQuestion } from '../models/vote-question.model';
 @Injectable()
 export class VoteDataService {
    constructor(private http: Http) { }
 
    getQuestion(slug: any) {
-     let headers = new Headers();
-     headers.append("Content-Type", "application/json");
+     const headers = new Headers();
+     headers.append('Content-Type', 'application/json');
 
-     return this.http.get("api/voteQuestion/" + slug, {
+     return this.http.get('api/voteQuestion/' + slug, {
        headers: headers
      })
        .toPromise()
        .then((res: Response) => {
-         let data = res.json();
-         let voteQuestion = new VoteQuestion();
+         const data = res.json();
+         const voteQuestion = new VoteQuestion();
          voteQuestion.id = data.id;
          voteQuestion.options = data.options;
          voteQuestion.question = data.question;
@@ -29,16 +29,16 @@ export class VoteDataService {
    }
 
    postVote(slug: any, option: any) {
-     let headers = new Headers();
-     headers.append("Content-Type", "application/json");
+     const headers = new Headers();
+     headers.append('Content-Type', 'application/json');
 
-     return this.http.post("api/voteQuestion/" + slug + "/vote?option=" + option, {
+     return this.http.post('api/voteQuestion/' + slug + '/vote?option=' + option, {
        headers: headers
      })
        .toPromise()
        .then((res: Response) => {
-         let data = res.json();
-         let voteQuestion = new VoteQuestion();
+         const data = res.json();
+         const voteQuestion = new VoteQuestion();
          voteQuestion.id = data.id;
          voteQuestion.options = data.options;
          voteQuestion.question = data.question;
@@ -51,9 +51,9 @@ export class VoteDataService {
      private handleError(error: Response | any) {
      let errMsg: string;
      if (error instanceof Response) {
-       const body = error.json() || "";
+       const body = error.json() || '';
        const err = body.error || JSON.stringify(body);
-       errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
      } else {
        errMsg = error.message ? error.message : error.toString();
      }

@@ -4,7 +4,7 @@ import { UserDataService } from './user-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app-state/models/app-state';
 import { User } from '../models/user.model';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class BCeidAuthGuard implements CanActivate {

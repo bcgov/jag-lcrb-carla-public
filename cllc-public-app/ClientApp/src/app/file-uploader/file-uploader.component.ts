@@ -4,6 +4,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Subscription } from 'rxjs';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
+import { map } from 'rxjs/operators';
 
 export interface DropdownOption {
   id: string;
@@ -66,7 +67,7 @@ export class FileUploaderComponent implements OnInit {
       this.uploadFile(file);
     }
 
-    input.value = "";
+    input.value = '';
   }
 
   private uploadFile(file) {
@@ -76,7 +77,7 @@ export class FileUploaderComponent implements OnInit {
       return;
     }
 
-    if(file && file.name && file.name.length > 128){
+    if (file && file.name && file.name.length > 128) {
       alert('File name must be 128 characters or less.');
       return;
     }
@@ -99,7 +100,7 @@ export class FileUploaderComponent implements OnInit {
     });
     const getFileURL = this.attachmentURL + '/' + this.documentType;
     this.busy = this.http.get(getFileURL, { headers: headers })
-      .map((data: Response) => <FileSystemItem[]>data.json())
+      .pipe(map((data: Response) => <FileSystemItem[]>data.json()))
       .subscribe((data) => {
         // convert bytes to KB
         data.forEach((entry) => {

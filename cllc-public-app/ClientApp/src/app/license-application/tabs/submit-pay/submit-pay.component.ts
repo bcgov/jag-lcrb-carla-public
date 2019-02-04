@@ -2,10 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../../services/payment-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription, Subject ,  Observable ,  zip } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { zip } from 'rxjs/observable/zip';
 import { AdoxioApplication } from '../../../models/adoxio-application.model';
 
 

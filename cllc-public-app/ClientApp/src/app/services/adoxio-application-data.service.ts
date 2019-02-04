@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Response, ResponseContentType } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+
 import { FileSystemItem } from '../models/file-system-item.model';
 import { AdoxioApplication } from '../models/adoxio-application.model';
 import { catchError } from 'rxjs/operators';
