@@ -1,8 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Http } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
@@ -234,8 +233,7 @@ import { FieldComponent } from './shared/field/field.component';
   BrowserModule,
   FormsModule,
   ReactiveFormsModule,
-  Http,
-  HttpClient,
+  HttpClientModule,
   AppRoutingModule,
   NgbModule.forRoot(),
   AdminModule,
@@ -283,8 +281,7 @@ import { FieldComponent } from './shared/field/field.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    Http,
-    HttpClient,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule,
     AdminModule,

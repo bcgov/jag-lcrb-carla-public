@@ -3,16 +3,15 @@ import { Response, Http } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Worker } from '../models/worker.model';
-import { Observable ,  of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { DataService } from './data.service';
 
 @Injectable()
-export class WorkerDataService {
+export class WorkerDataService extends DataService {
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   /**
    * Get legal entities from Dynamics filtered by position
@@ -21,7 +20,7 @@ export class WorkerDataService {
   getWorkerByContactId(accountId: string): Observable<Worker[]> {
     const apiPath = `api/worker/contact/${accountId}`;
     return this.http.get<Worker[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError('getWorker', null)));
+      .pipe(catchError(this.handleError));
   }
   /**
    * Get legal entities from Dynamics filtered by position
@@ -30,7 +29,7 @@ export class WorkerDataService {
   getWorker(id: string): Observable<Worker> {
     const apiPath = `api/worker/${id}`;
     return this.http.get<Worker>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError('getWorker', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -39,7 +38,7 @@ export class WorkerDataService {
    */
   createWorker(data: any) {
     return this.http.post<Worker>('api/worker/', data, { headers: this.headers })
-      .pipe(catchError(this.handleError('createWorker', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -48,7 +47,7 @@ export class WorkerDataService {
    */
   updateWorker(data: any, id: string) {
     return this.http.put<Worker>(`api/worker/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError('updateWorker', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -57,23 +56,6 @@ export class WorkerDataService {
    */
   deleteWorker(id: string) {
     return this.http.post<Worker>(`api/worker/${id}/delete`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError('deleteWorker', null)));
-  }
-
-  /**
-   * Handle error
-   * @param error
-   */
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(`${operation} failed: ${error.message}`); // log to console instead
-
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+      .pipe(catchError(this.handleError));
   }
 }
