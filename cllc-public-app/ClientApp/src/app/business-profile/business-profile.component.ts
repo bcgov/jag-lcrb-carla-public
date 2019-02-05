@@ -1,5 +1,5 @@
 
-import {filter,  zip } from 'rxjs/operators';
+import { filter, zip } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
@@ -176,7 +176,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     this.form.get('businessProfile.mailingAddressStreet2').patchValue(this.form.get('businessProfile.physicalAddressStreet2').value);
     this.form.get('businessProfile.mailingAddressCity').patchValue(this.form.get('businessProfile.physicalAddressCity').value);
     this.form.get('businessProfile.mailingAddressPostalCode')
-  .patchValue(this.form.get('businessProfile.physicalAddressPostalCode').value);
+      .patchValue(this.form.get('businessProfile.physicalAddressPostalCode').value);
     this.form.get('businessProfile.mailingAddressProvince').patchValue(this.form.get('businessProfile.physicalAddressProvince').value);
     this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
   }
@@ -259,7 +259,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     };
 
     this.busy = forkJoin(this.accountDataService.updateAccount(value),
-      // this.connectionsToProducers.prepareSaveData(),
+      this.connectionsToProducers.prepareSaveData(),
       this.contactDataService.updateContact(this.form.get('primarycontact').value))
       .toPromise()
       .then(res => {
@@ -274,7 +274,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   gotoReview() {
     if (this.form.valid) {
       this.save().subscribe(data => {
-        // this.router.navigate(['/business-profile-review']);
+        this.router.navigate(['/dashboard']);
       });
     } else {
       this.markAsTouched();
