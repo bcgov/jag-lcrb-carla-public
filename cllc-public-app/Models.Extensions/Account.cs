@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
             {
-                toDynamics.Address1County = fromVM.mailingAddressCountry;
+                toDynamics.Address1Country = fromVM.mailingAddressCountry;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
             {
@@ -104,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCountry != null))
             {
-                toDynamics.Address2County = fromVM.physicalAddressCountry;
+                toDynamics.Address2Country = fromVM.physicalAddressCountry;
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCountry != null))
             {
@@ -162,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.mailingAddressStreet = account.Address1Line1;
                 accountVM.mailingAddressStreet2 = account.Address1Line2;
                 accountVM.mailingAddressCity = account.Address1City;
-                accountVM.mailingAddressCountry = account.Address1County;
+                accountVM.mailingAddressCountry = account.Address1Country;
                 accountVM.mailingAddressProvince = account.Address1Stateorprovince;
                 accountVM.mailingAddressPostalCode = account.Address1Postalcode;
 
@@ -170,7 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.physicalAddressStreet = account.Address2Line1;
                 accountVM.physicalAddressStreet2 = account.Address2Line2;
                 accountVM.physicalAddressCity = account.Address2City;
-                accountVM.physicalAddressCountry = account.Address2County;
+                accountVM.physicalAddressCountry = account.Address2Country;
                 accountVM.physicalAddressProvince = account.Address2Stateorprovince;
                 accountVM.physicalAddressPostalCode = account.Address2Postalcode;
 

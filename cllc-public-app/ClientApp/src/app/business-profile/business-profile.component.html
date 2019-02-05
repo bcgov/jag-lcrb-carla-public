@@ -73,7 +73,7 @@
                   B.C.</label>
                 <br>
                 <input type="text" formControlName='dateOfIncorporationInBC' style="width: 200px; background-color: #fff;"
-                  placeholder="yyyy-mm-dd" readonly class="form-control" [max]="maxDate" [matDatepicker]="picker"
+                  placeholder="yyyy-mm-dd"  class="form-control" [max]="maxDate" [matDatepicker]="picker"
                   (focus)="picker.open()" (click)="picker.open()">
                 <mat-datepicker #picker></mat-datepicker>
                 <!-- <div *ngIf="this.isFieldError('businessProfile.dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
@@ -305,7 +305,7 @@
             <a routerLink="/dashboard">
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary">SAVE &
+              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">SAVE &
                 CONTINUE
                 <i class="fas fa-chevron-right"></i></button>
             </span>
