@@ -1,7 +1,7 @@
 import { browser, by, element, protractor } from 'protractor';
-import { AccountDataService } from '../src/app/services/account-data.service'
-import { HttpClient, HttpXhrBackend, XhrFactory } from '@angular/common/http'
-import { XMLHttpRequest } from 'xmlhttprequest'
+import { AccountDataService } from '../src/app/services/account-data.service';
+import { HttpClient, HttpXhrBackend, XhrFactory } from '@angular/common/http';
+import { XMLHttpRequest } from 'xmlhttprequest';
 
 export class BrowserXhr implements XhrFactory {
     constructor() {}
@@ -28,9 +28,9 @@ export class LoginPage {
     }
 
     logoutAndDelete() {
-        this.accountDataService.getCurrentAccount().subscribe(
+       return  this.accountDataService.getCurrentAccount().subscribe(
             res => {
-                let account = res;
+                const account = res;
                 this.accountDataService.deleteAccount(account).subscribe(
                     null,
                     err => {
@@ -49,11 +49,11 @@ export class LoginPage {
     }
 
     getCheckbox() {
-        return element(by.css("input"));
+        return element(by.css('input'));
     }
 
     getButton() {
-        return element(by.css("button"));
+        return element(by.css('button.termsAccept'));
     }
 
     getButtonByClass(css_class: string) {
@@ -61,18 +61,18 @@ export class LoginPage {
     }
 
     getPrivateCorpRadio() {
-        return element(by.css('[ng-reflect-value="PrivateCorporation"]'))
+        return element(by.css('[ng-reflect-value="PrivateCorporation"]'));
     }
 
     waitForDashboard() {
-        var elem = element(by.xpath('/html/body/app-root/div/div/main/div/app-dashboard-lite'));
-        var until = protractor.ExpectedConditions;
-        browser.wait(until.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
+        const elem = element(by.css('app-dashboard-lite'));
+        const until = protractor.ExpectedConditions;
+        browser.wait(until.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM1');
     }
 
     waitForWorkerDashboard() {
-        var elem = element(by.xpath('/html/body/app-root/div/div/main/div/app-associate-dashboard'));
-        var until = protractor.ExpectedConditions;
+        const elem = element(by.css('app-associate-dashboard'));
+        const until = protractor.ExpectedConditions;
         browser.wait(until.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
     }
 }

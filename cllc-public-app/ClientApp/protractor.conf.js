@@ -103,13 +103,14 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   suites: {
-    smokeTest: './e2e/app.e2e-spec.ts'
+    smokeTest: './e2e/app.e2e-spec.ts',
+    loginTest: './e2e/login.e2e-spec.ts',
   },
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-      args: ["--headless", "--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
-      //args: ["--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
+      // args: ["--headless", "--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
+      args: ["--disable-gpu", "--no-zygote", "--no-sandbox", "--window-size=1024x768"]
     }
   },
   directConnect: true,
