@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Response, Http } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Alias } from '../models/alias.model';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  of } from 'rxjs';
+import { DataService } from './data.service';
 
 @Injectable()
-export class AliasDataService {
+export class AliasDataService extends DataService {
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+   }
 
   /**
    * Get legal entities from Dynamics filtered by position
@@ -22,7 +19,7 @@ export class AliasDataService {
   getAliases(contactId: string): Observable<Alias[]> {
     const apiPath = `api/alias/by-contactid/${contactId}`;
     return this.http.get<Alias[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError('getAlias', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -31,7 +28,7 @@ export class AliasDataService {
    */
   createAlias(data: any) {
     return this.http.post<Alias>('api/alias/', data, { headers: this.headers })
-      .pipe(catchError(this.handleError('createAlias', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -40,7 +37,7 @@ export class AliasDataService {
    */
   updateAlias(data: any, id: string) {
     return this.http.put<Alias>(`api/alias/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError('updateAlias', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -49,22 +46,8 @@ export class AliasDataService {
    */
   deleteAlias(id: string) {
     return this.http.post<Alias>(`api/alias/${id}/delete`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError('deleteAlias', null)));
+      .pipe(catchError(this.handleError));
   }
 
-  /**
-   * Handle error
-   * @param error
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(`${operation} failed: ${error.message}`); // log to console instead
-
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
 }

@@ -9,25 +9,25 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class ServiceCardAuthGuard implements CanActivate {
 
-    constructor(private userService: UserDataService, 
+    constructor(private userService: UserDataService,
         private router: Router,
         private store: Store<AppState>) {
-         }
+    }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        var result = new Subject<boolean>();
+        const result = new Subject<boolean>();
         this.userService.getCurrentUser()
-        .subscribe(user=> {
-            console.log('ServiceCardAuthGuard#canActivate called');
-            var allowAccess = (user && user.userType == "VerifiedIndividual");
+            .subscribe(user => {
+                console.log('ServiceCardAuthGuard#canActivate called');
+                const allowAccess = (user && user.userType === 'VerifiedIndividual');
                 if (!allowAccess) {
                     this.router.navigate(['/']);
                 }
-            result.next(allowAccess);
-        }, error => {
-            this.router.navigate(['/']);
-            result.next(false);
-        });
+                result.next(allowAccess);
+            }, error => {
+                this.router.navigate(['/']);
+                result.next(false);
+            });
         return result;
     }
 }

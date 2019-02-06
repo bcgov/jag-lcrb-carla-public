@@ -1,63 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from "@angular/http";
-import "rxjs/add/operator/toPromise";
 
-import { VoteOption } from "../models/vote-option.model";
-import { VoteQuestion } from "../models/vote-question.model";
+
+import { VoteOption } from '../models/vote-option.model';
+import { VoteQuestion } from '../models/vote-question.model';
+import { HttpClient } from '@angular/common/http';
+import { DataService } from './data.service';
+import { catchError } from 'rxjs/operators';
 @Injectable()
-export class VoteDataService {
-   constructor(private http: Http) { }
+export class VoteDataService extends DataService {
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-   getQuestion(slug: any) {
-     let headers = new Headers();
-     headers.append("Content-Type", "application/json");
+  getQuestion(slug: any) {
+    return this.http.get<VoteQuestion>('api/voteQuestion/' + slug, {
+      headers: this.headers
+    }).pipe(catchError(this.handleError));
+  }
 
-     return this.http.get("api/voteQuestion/" + slug, {
-       headers: headers
-     })
-       .toPromise()
-       .then((res: Response) => {
-         let data = res.json();
-         let voteQuestion = new VoteQuestion();
-         voteQuestion.id = data.id;
-         voteQuestion.options = data.options;
-         voteQuestion.question = data.question;
-         voteQuestion.title = data.title;
-         return voteQuestion;
-       })
-       .catch(this.handleError);
-   }
+  postVote(slug: any, option: any) {
 
-   postVote(slug: any, option: any) {
-     let headers = new Headers();
-     headers.append("Content-Type", "application/json");
-
-     return this.http.post("api/voteQuestion/" + slug + "/vote?option=" + option, {
-       headers: headers
-     })
-       .toPromise()
-       .then((res: Response) => {
-         let data = res.json();
-         let voteQuestion = new VoteQuestion();
-         voteQuestion.id = data.id;
-         voteQuestion.options = data.options;
-         voteQuestion.question = data.question;
-         voteQuestion.title = data.title;
-         return voteQuestion;
-       })
-       .catch(this.handleError);
-   }
-
-     private handleError(error: Response | any) {
-     let errMsg: string;
-     if (error instanceof Response) {
-       const body = error.json() || "";
-       const err = body.error || JSON.stringify(body);
-       errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
-     } else {
-       errMsg = error.message ? error.message : error.toString();
-     }
-     console.error(errMsg);
-     return Promise.reject(errMsg);
-   }
+    return this.http.post<VoteQuestion>('api/voteQuestion/' + slug + '/vote?option=' + option, {
+      headers: this.headers
+    }).pipe(catchError(this.handleError));
+  }
 }

@@ -1,13 +1,13 @@
+
+import {filter,  auditTime } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription ,  Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { auditTime } from 'rxjs/operators';
 import { UserDataService } from '../../../services/user-data.service';
-import { Observable } from '../../../../../node_modules/rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
@@ -37,8 +37,8 @@ export class StoreInformationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.createForm();
 
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
-      .filter(state => !!state)
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
+      filter(state => !!state))
       .subscribe(currentApplication => {
         this.storeInformationForm.patchValue(currentApplication);
         if (currentApplication.isPaid) {

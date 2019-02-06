@@ -1,3 +1,5 @@
+
+import {filter,  auditTime } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { AccountDataService } from '../../../services/account-data.service';
@@ -7,7 +9,6 @@ import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angula
 import { MatSnackBar } from '@angular/material';
 import { Subscription, Subject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
-import { auditTime } from 'rxjs/operators';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -39,8 +40,8 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.createForm();
 
-    const sub = this.store.select(state => state.currentAccountState)
-      .filter(state => !!state)
+    const sub = this.store.select(state => state.currentAccountState).pipe(
+      filter(state => !!state))
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
@@ -94,7 +95,7 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
       mailingAddressCity: [''],
       mailingAddressCountry: [''],
       mailingAddressProvince: [''],
-      mailingAddresPostalCode: ['']
+      mailingAddressPostalCode: ['']
     });
   }
 

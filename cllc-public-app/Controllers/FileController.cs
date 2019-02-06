@@ -39,6 +39,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
 
+        private static string GetAccountFolderName(MicrosoftDynamicsCRMaccount account)
+        {
+            string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
+            string folderName = $"{account.Accountid}_{accountIdCleaned}";
+            return folderName;
+        }
+
         private static string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
         {
             string applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
@@ -156,6 +163,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var id = Guid.Parse(entityId);
             switch (entityName.ToLower())
             {
+                case "account":
+                    var account = await _dynamicsClient.GetAccountById(id);
+                    result = account != null && CurrentUserHasAccessToApplicationOwnedBy(account.Accountid);
+                    break;
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(id);
                     result = application != null && CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue);
@@ -189,6 +200,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var folderName = "";
             switch (entityName.ToLower())
             {
+                case "account":
+                    var account = await _dynamicsClient.GetAccountById(Guid.Parse(entityId));
+                    folderName = GetAccountFolderName(account);
+                    break;
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(Guid.Parse(entityId));
                     folderName = GetApplicationFolderName(application);
@@ -392,6 +407,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var listTitle = "";
             switch (entityName.ToLower())
             {
+                case "account":
+                    listTitle = SharePointFileManager.DefaultDocumentListTitle;
+                    break;
                 case "application":
                     listTitle = SharePointFileManager.ApplicationDocumentListTitle;
                     break;
@@ -412,6 +430,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var listTitle = "";
             switch (entityName.ToLower())
             {
+                case "account":
+                    listTitle = SharePointFileManager.DefaultDocumentListTitle;
+                    break;
                 case "application":
                     listTitle = "adoxio_application";
                     break;

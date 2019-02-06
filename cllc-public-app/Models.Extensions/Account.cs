@@ -56,6 +56,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Telephone1 = fromVM.contactPhone;
             }
+            
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressName != null))
             {
                 toDynamics.Address1Name = fromVM.mailingAddressName;
@@ -64,21 +65,54 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1Line1 = fromVM.mailingAddressStreet;
             }
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressStreet2 != null))
+            {
+                toDynamics.Address1Line2 = fromVM.mailingAddressStreet2;
+            }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCity != null))
             {
                 toDynamics.Address1City = fromVM.mailingAddressCity;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
             {
-                toDynamics.Address1County = fromVM.mailingAddressCountry;
+                toDynamics.Address1Country = fromVM.mailingAddressCountry;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
             {
                 toDynamics.Address1Stateorprovince = fromVM.mailingAddressProvince;
             }
-            if (copyIfNull || (!copyIfNull && fromVM.mailingAddresPostalCode != null))
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressPostalCode != null))
             {
-                toDynamics.Address1Postalcode = fromVM.mailingAddresPostalCode;
+                toDynamics.Address1Postalcode = fromVM.mailingAddressPostalCode;
+            }
+            
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressName != null))
+            {
+                toDynamics.Address2Name = fromVM.physicalAddressName;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressStreet != null))
+            {
+                toDynamics.Address2Line1 = fromVM.physicalAddressStreet;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressStreet2 != null))
+            {
+                toDynamics.Address2Line2 = fromVM.physicalAddressStreet2;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCity != null))
+            {
+                toDynamics.Address2City = fromVM.physicalAddressCity;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCountry != null))
+            {
+                toDynamics.Address2Country = fromVM.physicalAddressCountry;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCountry != null))
+            {
+                toDynamics.Address2Stateorprovince = fromVM.physicalAddressProvince;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressPostalCode != null))
+            {
+                toDynamics.Address2Postalcode = fromVM.physicalAddressPostalCode;
             }
 
             // business type must be set only during creation, not in update (removed from copyValues() )
@@ -123,19 +157,26 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.pstNumber = account.AdoxioPstnumber;
                 accountVM.contactEmail = account.Emailaddress1;
                 accountVM.contactPhone = account.Telephone1;
+                
                 accountVM.mailingAddressName = account.Address1Name;
                 accountVM.mailingAddressStreet = account.Address1Line1;
+                accountVM.mailingAddressStreet2 = account.Address1Line2;
                 accountVM.mailingAddressCity = account.Address1City;
-                accountVM.mailingAddressCountry = account.Address1County;
+                accountVM.mailingAddressCountry = account.Address1Country;
                 accountVM.mailingAddressProvince = account.Address1Stateorprovince;
-                accountVM.mailingAddresPostalCode = account.Address1Postalcode;
+                accountVM.mailingAddressPostalCode = account.Address1Postalcode;
+
+                accountVM.physicalAddressName = account.Address2Name;
+                accountVM.physicalAddressStreet = account.Address2Line1;
+                accountVM.physicalAddressStreet2 = account.Address2Line2;
+                accountVM.physicalAddressCity = account.Address2City;
+                accountVM.physicalAddressCountry = account.Address2Country;
+                accountVM.physicalAddressProvince = account.Address2Stateorprovince;
+                accountVM.physicalAddressPostalCode = account.Address2Postalcode;
 
                 if (account.Primarycontactid != null)
                 {
-                    // add the primary contact.
-                    accountVM.primarycontact = new ViewModels.Contact();
-                    accountVM.primarycontact.id = account.Primarycontactid.Contactid.ToString();
-                    // TODO - load other fields (if necessary)
+                    accountVM.primarycontact = account.Primarycontactid.ToViewModel();
                 }
 
                 if (account.AdoxioBusinesstype != null)
