@@ -46,7 +46,7 @@ ngOnInit(): void {
         if (this.accountId != null && !this.isAssociate) {
           // fetch the account to get the primary contact.
           this.dynamicsDataService.getRecord('account', this.accountId)
-            .then((result) => {
+            .subscribe((result) => {
               this.account = result;
               if (result.primarycontact) {
                 this.contactId = result.primarycontact.id;

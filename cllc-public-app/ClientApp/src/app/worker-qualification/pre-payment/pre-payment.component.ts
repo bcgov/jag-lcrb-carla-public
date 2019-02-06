@@ -66,7 +66,7 @@ export class PrePaymentComponent implements OnInit {
    * */
   private submitPayment() {
     this.paymentDataService.getWorkerPaymentSubmissionUrl(this.worker.id).subscribe(res => {
-      const jsonUrl = res.json();
+      const jsonUrl = res;
       window.location.href = jsonUrl['url'];
       return jsonUrl['url'];
     }, err => {

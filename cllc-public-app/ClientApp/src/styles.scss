@@ -151,15 +151,15 @@ select.form-control:not([size]):not([multiple]) {
     display: inline-block;
 }
 
-
 .red-snackbar {
     background: #F44336;
-  }
-  
-  .green-snackbar {
+}
+
+.green-snackbar {
     background: #00ff21;
-  }
-  .blue-header {
+}
+
+.blue-header {
     background-color: #38598A;
     color: #fff;
     padding: 10px 7px 7px 15px;
@@ -188,7 +188,7 @@ hr {
     margin-bottom: 10px;
     color: #d8292f
 }
-  
+
 .form-wrapper {
     padding-left: 50px;
     padding-right: 30px;
@@ -202,5 +202,5 @@ hr {
 }
 
 .padded-section {
-  padding-left: 15px;
+    padding-left: 15px;
 }

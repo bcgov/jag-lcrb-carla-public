@@ -30,6 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.address1_city = contact.Address1City;
                 result.address1_country = contact.Address1Country;
                 result.address1_line1 = contact.Address1Line1;
+                result.jobTitle = contact.Jobtitle;
                 result.address1_postalcode = contact.Address1Postalcode;
                 result.address1_stateorprovince = contact.Address1Stateorprovince;
                 result.address2_city = contact.Address2City;
@@ -246,6 +247,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Firstname = from.firstname;
             to.Middlename = from.middlename;
             to.Lastname = from.lastname;
+            to.Jobtitle = from.jobTitle;
             to.Emailaddress1 = from.emailaddress1;
             to.Address1City = from.address1_city;
             to.Address1Country = from.address1_country;
@@ -280,6 +282,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Firstname = contact.firstname;
                 result.Lastname = contact.lastname;
                 result.Middlename = contact.middlename;
+                result.Jobtitle = contact.jobTitle;
 
                 result.Address1City = contact.address1_city;
                 result.Address1Country = contact.address1_country;

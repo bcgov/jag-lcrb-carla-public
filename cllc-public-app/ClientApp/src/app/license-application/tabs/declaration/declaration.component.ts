@@ -1,8 +1,8 @@
+
+import {filter} from 'rxjs/operators';
 import { Component, OnInit, Input } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Subscription ,  Observable ,  Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -33,8 +33,8 @@ export class DeclarationComponent implements OnInit {
   }
 
   ngOnInit() {
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
-      .filter(state => !!state)
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
+      filter(state => !!state))
       .subscribe(currentApplication => {
         this.signatureagreement = currentApplication.signatureagreement;
         this.authorizedtosubmit = currentApplication.authorizedtosubmit;

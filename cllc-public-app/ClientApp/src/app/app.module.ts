@@ -1,7 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
@@ -87,7 +86,6 @@ import { NewsletterDataService } from './services/newsletter-data.service';
 import { UserDataService } from './services/user-data.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
-import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileDropModule } from 'ngx-file-drop';
@@ -153,7 +151,7 @@ import {
   IndividualAssociatesResultsComponent
 } from './associate-wizard/individual-associates-results/individual-associates-results.component';
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
-import { BusinessProfilePpComponent } from './business-profile-pp/business-profile-pp.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { FieldComponent } from './shared/field/field.component';
 
 @NgModule({
@@ -162,7 +160,6 @@ import { FieldComponent } from './shared/field/field.component';
     AppComponent,
     ApplicationsListComponent,
     BceidConfirmationComponent,
-    BusinessProfileComponent,
     BreadcrumbComponent,
     DynamicsFormComponent,
     EditShareholdersComponent,
@@ -230,13 +227,12 @@ import { FieldComponent } from './shared/field/field.component';
     SolePropResultsComponent,
     IndividualAssociatesResultsComponent,
     OrganizationResultsComponent,
-    BusinessProfilePpComponent
+    BusinessProfileComponent
   ],
   imports: [
   BrowserModule,
   FormsModule,
   ReactiveFormsModule,
-  HttpModule,
   HttpClientModule,
   AppRoutingModule,
   NgbModule.forRoot(),
@@ -285,7 +281,6 @@ import { FieldComponent } from './shared/field/field.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
