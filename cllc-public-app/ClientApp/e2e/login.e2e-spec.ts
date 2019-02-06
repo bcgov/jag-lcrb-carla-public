@@ -11,30 +11,28 @@ describe('Login component test', () => {
     });
 
     afterEach(async () => {
-        await page.logoutAndDelete();
-        await browser.get('/logout');
     });
 
-    it('should finish login process and redirect to dashboard', async () => {
-        await page.navigateToBusinessLogin('protractorBusinessTestUser');
-        expect(page.getHeading('h1')).toEqual('Terms of Use');
-        page.getCheckbox().click();
-        page.getButton().click();
+    // it('should finish login process and redirect to dashboard', async () => {
+    //     await page.navigateToBusinessLogin('protractorBusinessTestUser');
+    //     expect(page.getHeading('h1')).toEqual('Terms of Use');
+    //     page.getCheckbox().click();
+    //     page.getButton().click();
 
-        expect(page.getHeading('h2')).toEqual('Please confirm the business or organization name associated to the Business BCeID.');
+    //     expect(page.getHeading('h2')).toEqual('Please confirm the business or organization name associated to the Business BCeID.');
 
 
-        element(by.css('.btn-primary.confirmYes')).click();
-        expect(page.getHeading('h2')).toEqual('Please confirm the organization type associated with the Business BCeID:');
-        page.getPrivateCorpRadio().click();
-        page.getButtonByClass('btn-primary').click();
-        page.getButtonByClass('btn-primary').click();
+    //     element(by.css('.btn-primary.confirmYes')).click();
+    //     expect(page.getHeading('h2')).toEqual('Please confirm the organization type associated with the Business BCeID:');
+    //     page.getPrivateCorpRadio().click();
+    //     page.getButtonByClass('btn-primary').click();
+    //     page.getButtonByClass('btn-primary').click();
 
-        const until = protractor.ExpectedConditions;
-        const elem = element(by.css('h1'));
-        browser.wait(until.presenceOf(elem), 5000, 'Could not reach the business profile');
-        expect(elem.getText()).toEqual('Business Profile');
-    });
+    //     const until = protractor.ExpectedConditions;
+    //     const elem = element(by.css('h1'));
+    //     browser.wait(until.presenceOf(elem), 5000, 'Could not reach the business profile');
+    //     expect(elem.getText()).toEqual('Business Profile');
+    // });
 
 
     it('should login and populate the business profile', async () => {
@@ -62,7 +60,6 @@ describe('Login component test', () => {
         element(by.css('[formcontrolname="bcIncorporationNumber"]')).sendKeys('INC 11111');
         element(by.css('[formcontrolname="dateOfIncorporationInBC"]')).click();
 
-        // browser.wait(until.presenceOf(element(by.css('h10'))), 15000, 'Could not reach the business profile');
         element(by.css('.mat-calendar-body-cell-content.mat-calendar-body-today')).click();
 
         // populate business addresses
@@ -106,6 +103,15 @@ describe('Login component test', () => {
 
         element(by.css('.btn.btn-primary.save-cont')).click();
         page.waitForDashboard();
+
+        page.logoutAndDelete().subscribe(
+            null,
+            err => {
+                console.log('Error occured while getting account:' + err);
+            }
+        );
+
+        browser.sleep(10000);
 
     });
 

@@ -272,13 +272,14 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   }
 
   gotoReview() {
-    if (this.form.valid) {
+    // debugger;
+    // if (this.form.valid) {
       this.save().subscribe(data => {
         this.router.navigate(['/dashboard']);
       });
-    } else {
-      this.markAsTouched();
-    }
+    // } else {
+    //   this.markAsTouched();
+    // }
   }
 
   // marking the form as touched makes the validation messages show

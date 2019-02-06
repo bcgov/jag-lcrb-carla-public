@@ -46,4 +46,9 @@ export class AccountDataService extends DataService {
     .pipe(catchError(this.handleError));
   }
 
+  public deleteCurrentAccount() {
+    return this.http.post(this.apiPath + 'delete/current', {}, { headers: this.headers })
+    .pipe(catchError(this.handleError));
+  }
+
 }
