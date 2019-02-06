@@ -6,16 +6,14 @@ import { DynamicsContact } from '../../models/dynamics-contact.model';
 import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription ,  Observable, Subject, zip ,  forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
-import { Observable, Subject, zip } from 'rxjs';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import { COUNTRIES } from './country-list';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -305,7 +303,7 @@ export class WorkerApplicationComponent implements OnInit {
     value.contact.emailaddress1 = value.worker.email;
     value.contact.telephone1 = value.worker.phonenumber;
 
-    const saves = [
+    const saves: Observable<any>[] = [
       this.contactDataService.updateContact(value.contact),
       this.workerDataService.updateWorker(value.worker, value.worker.id)
     ];

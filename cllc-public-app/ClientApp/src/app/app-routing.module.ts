@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { HomeComponent } from './home/home.component';
 import { PolicyDocumentComponent } from './policy-document/policy-document.component';
 import { ResultComponent } from './result/result.component';
@@ -45,12 +44,18 @@ import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-cons
 import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-home.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
-import { AssosiateWizardComponent } from './assosiate-wizard/assosiate-wizard.component';
+import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'business-profile',
+    component: BusinessProfileComponent,
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'dashboard',

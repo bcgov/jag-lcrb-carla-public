@@ -1,4 +1,5 @@
-<div style="padding: 30px 50px 0 50px;"> {{currentQuestion}}
+<div style="padding: 30px 50px 0 50px;"> 
+  <h1>Associate Forms Wizard</h1>
   <section *ngIf="currentQuestion === 'q1'">
     <p>Are you a sole proprietor who’s applying for a cannabis retail store licence?</p>
     <input class="rd-btn" type="radio" name="q1" value="Yes" [(ngModel)]="answerCollection.q1"> <span>Yes</span> <br>
@@ -8,7 +9,7 @@
   </section>
 
   <section *ngIf="currentQuestion === 'q2a'">
-    <p>What’s the name of the company that asked you to fill out this questionnaire?</p>
+    <p>What’s the name of the organization that asked you to fill out this questionnaire?</p>
     <input type="text" [(ngModel)]="answerCollection.q2a">
     <p></p>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
@@ -48,8 +49,10 @@
     <input class="rd-btn" type="radio" name="q3a" value="Yes" [(ngModel)]="answerCollection.q3a"> <span>Yes</span> <br>
     <input class="rd-btn" type="radio" name="q3a" value="No" [(ngModel)]="answerCollection.q3a"> <span>No</span>
     <br>
-    <span>What is the name of the organization?</span> <br>
-    <input type="text" [(ngModel)]="answerCollection.q3aOrgName">
+    <div *ngIf="answerCollection.q3a == 'Yes'">
+      <span>What is the name of the organization?</span> <br>
+      <input type="text" [(ngModel)]="answerCollection.q3aOrgName">
+    </div>
     <p></p>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
     <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q3a === 'Yes' ? 'q3b' : 'qError')">Next</button>
@@ -57,16 +60,34 @@
 
   <section *ngIf="currentQuestion === 'q3b'">
     <p>What type of organization is {{ answerCollection.q3aOrgName }}?</p>
-    <input class="rd-btn" type="radio" name="q3b" value="Public Corporation" [(ngModel)]="answerCollection.q3b">
-    <span>Public Corporation</span> <br>
-    <input class="rd-btn" type="radio" name="q3b" value="Private Corporation" [(ngModel)]="answerCollection.q3b">
-    <span>Private Corporation</span><br>
-    <input class="rd-btn" type="radio" name="q3b" value="Limited Partnership" [(ngModel)]="answerCollection.q3b">
-    <span>Limited Partnership</span> <br>
-    <input class="rd-btn" type="radio" name="q3b" value="General Partnership" [(ngModel)]="answerCollection.q3b">
-    <span>General Partnership</span><br>
-    <input class="rd-btn" type="radio" name="q3b" value="Society" [(ngModel)]="answerCollection.q3b"> <span>Society</span>
-    <br>
+
+    <input class="rd-btn" type="radio" name="q3bPre" value="Corporation" [(ngModel)]="answerCollection.q3bPre">
+    <span>Corporation</span> <br>
+
+    <section *ngIf="answerCollection.q3bPre === 'Corporation'" class="padded-section">
+      <input class="rd-btn" type="radio" name="q3b" value="Public Corporation" [(ngModel)]="answerCollection.q3b">
+      <span>Public Corporation</span> <br>
+      <input class="rd-btn" type="radio" name="q3b" value="Private Corporation" [(ngModel)]="answerCollection.q3b">
+      <span>Private Corporation</span><br>
+    </section>
+
+    <input class="rd-btn" type="radio" name="q3bPre" value="Partnership" [(ngModel)]="answerCollection.q3bPre">
+    <span>Partnership</span> <br>
+
+    <section *ngIf="answerCollection.q3bPre === 'Partnership'" class="padded-section">
+      <input class="rd-btn" type="radio" name="q3b" value="Limited Partnership" [(ngModel)]="answerCollection.q3b">
+      <span>Limited Partnership</span> <br>
+      <input class="rd-btn" type="radio" name="q3b" value="Limited Liability Partnership" [(ngModel)]="answerCollection.q3b">
+      <span>Limited Liability Partnership</span> <br>
+      <input class="rd-btn" type="radio" name="q3b" value="General Partnership" [(ngModel)]="answerCollection.q3b">
+      <span>General Partnership</span><br>
+    </section>
+
+    <section class="padded-section">
+      <input class="rd-btn" type="radio" name="q3b" value="Society" (click)="answerCollection.q3bPre = null;"
+        [(ngModel)]="answerCollection.q3b"> <span>Society</span>
+      <br>
+    </section>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
     <button class="btn btn-primary" (click)="setNextQuestion(getOrganizationSection(answerCollection.q3b))">Next</button>
   </section>
@@ -77,7 +98,7 @@
     <input class="rd-btn" type="radio" name="q4a" value="No" [(ngModel)]="answerCollection.q4a"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q4a === 'Yes' ? 'q10a' : 'q4b')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion('q4b')">Next</button>
   </section>
 
   <section *ngIf="currentQuestion === 'q4b'">
@@ -86,7 +107,7 @@
     <input class="rd-btn" type="radio" name="q4b" value="No" [(ngModel)]="answerCollection.q4b"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q4b === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q4b === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
   <section *ngIf="currentQuestion === 'q5a'">
@@ -113,7 +134,7 @@
     <input class="rd-btn" type="radio" name="q5c" value="No" [(ngModel)]="answerCollection.q5c"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q5c === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q5c === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
   <section *ngIf="currentQuestion === 'q6a'">
@@ -141,7 +162,7 @@
     <input class="rd-btn" type="radio" name="q6c" value="No" [(ngModel)]="answerCollection.q6c"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q6c === 'Yes' ?'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q6c === 'Yes' ?'q10a' : 'qResults')">Next</button>
   </section>
 
 
@@ -160,7 +181,7 @@
     <input class="rd-btn" type="radio" name="q7b" value="No" [(ngModel)]="answerCollection.q7b"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q7b === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q7b === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
 
@@ -179,23 +200,24 @@
     <input class="rd-btn" type="radio" name="q8b" value="No" [(ngModel)]="answerCollection.q8b"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q8b === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q8b === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
 
   <section *ngIf="currentQuestion === 'q9a'">
-    <p>Do you hold a position as a director, officer or senior manager {{ answerCollection.q3aOrgName }}?</p>
+    <p>Do you hold a position as a director, officer or senior manager at {{ answerCollection.q3aOrgName }}?</p>
     <input class="rd-btn" type="radio" name="q9a" value="Yes" [(ngModel)]="answerCollection.q9a"> <span>Yes</span> <br>
     <input class="rd-btn" type="radio" name="q9a" value="No" [(ngModel)]="answerCollection.q9a"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
-    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q9a === 'Yes' ? 'q10a' : 'qError')">Next</button>
+    <button class="btn btn-primary" (click)="setNextQuestion(answerCollection.q9a === 'Yes' ? 'q10a' : 'qResults')">Next</button>
   </section>
 
 
   <section *ngIf="currentQuestion === 'q10a'">
     <p>Are you a resident of British Columbia?</p>
-    <input class="rd-btn" type="radio" name="q10a" value="Yes" [(ngModel)]="answerCollection.q10a"> <span>Yes</span> <br>
+    <input class="rd-btn" type="radio" name="q10a" value="Yes" [(ngModel)]="answerCollection.q10a"> <span>Yes</span>
+    <br>
     <input class="rd-btn" type="radio" name="q10a" value="No" [(ngModel)]="answerCollection.q10a"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
@@ -204,16 +226,24 @@
 
   <section *ngIf="currentQuestion === 'q10b'">
     <p>Are you eligible for a BC Services Card?</p>
-    <input class="rd-btn" type="radio" name="q10b" value="Yes" [(ngModel)]="answerCollection.q10b"> <span>Yes</span> <br>
+    <input class="rd-btn" type="radio" name="q10b" value="Yes" [(ngModel)]="answerCollection.q10b"> <span>Yes</span>
+    <br>
     <input class="rd-btn" type="radio" name="q10b" value="No" [(ngModel)]="answerCollection.q10b"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
     <button class="btn btn-primary" (click)="setNextQuestion('q10d')">Next</button>
+
+    <div class="note">
+       Eligibility for a BC Services Card is
+      the same as for the Medical Services Plan (MSP). Learn more about BC Services <a href="https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/are-you-eligible"
+        target="blank">Card eligibility</a>.
+    </div>
   </section>
 
   <section *ngIf="currentQuestion === 'q10c'">
-    <p>Are you eligible for a BC Services Card?</p>
-    <input class="rd-btn" type="radio" name="q10c" value="Yes" [(ngModel)]="answerCollection.q10c"> <span>Yes</span> <br>
+    <p>Are you a resident of a Canadian province or territory?</p>
+    <input class="rd-btn" type="radio" name="q10c" value="Yes" [(ngModel)]="answerCollection.q10c"> <span>Yes</span>
+    <br>
     <input class="rd-btn" type="radio" name="q10c" value="No" [(ngModel)]="answerCollection.q10c"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
@@ -222,7 +252,8 @@
 
   <section *ngIf="currentQuestion === 'q10d'">
     <p>Are you currently in British Columbia?</p>
-    <input class="rd-btn" type="radio" name="q10d" value="Yes" [(ngModel)]="answerCollection.q10d"> <span>Yes</span> <br>
+    <input class="rd-btn" type="radio" name="q10d" value="Yes" [(ngModel)]="answerCollection.q10d"> <span>Yes</span>
+    <br>
     <input class="rd-btn" type="radio" name="q10d" value="No" [(ngModel)]="answerCollection.q10d"> <span>No</span>
     <br>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
@@ -236,6 +267,9 @@
 
   <section *ngIf="currentQuestion === 'qResults'">
     <p>{{ answerCollection | json }}</p>
+    <app-sole-prop-results [answerCollection]="answerCollection" *ngIf="answerCollection.q1 === 'Yes'"></app-sole-prop-results>
+    <app-organization-results [answerCollection]="answerCollection" *ngIf="answerCollection.q3bPre === 'Corporation'  || answerCollection.q3bPre === 'Partnership' || answerCollection.q3b === 'Society'"></app-organization-results>
+    <app-individual-associates-results [answerCollection]="answerCollection" *ngIf="answerCollection.q2b === 'Yes' || answerCollection.q2c === 'Yes' || answerCollection.q2d === 'Yes'"></app-individual-associates-results>
     <button class="btn btn-secondary btn-margin" (click)="goToPrevious()">Back</button>
   </section>
 
