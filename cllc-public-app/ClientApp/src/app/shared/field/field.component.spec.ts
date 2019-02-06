@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssosiateWizardComponent } from './assosiate-wizard.component';
+import { FieldComponent } from './field.component';
 
-describe('AssosiateWizardComponent', () => {
-  let component: AssosiateWizardComponent;
-  let fixture: ComponentFixture<AssosiateWizardComponent>;
+describe('FieldComponent', () => {
+  let component: FieldComponent;
+  let fixture: ComponentFixture<FieldComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssosiateWizardComponent ]
+      declarations: [ FieldComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssosiateWizardComponent);
+    fixture = TestBed.createComponent(FieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

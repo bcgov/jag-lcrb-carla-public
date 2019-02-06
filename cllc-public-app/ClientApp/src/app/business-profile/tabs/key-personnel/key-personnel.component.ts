@@ -18,12 +18,12 @@ export class KeyPersonnelComponent implements OnInit {
     private dynamicsDataService: DynamicsDataService) { }
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState)
-    .filter(state => !!state)
-    .subscribe(state => {
-      this.accountId = state.currentAccount.id;
-      this.businessType = state.currentAccount.businessType;
-    });
+    // this.store.select(state => state.currentAccountState)
+    // .filter(state => !!state)
+    // .subscribe(state => {
+    //   this.accountId = state.currentAccount.id;
+    //   this.businessType = state.currentAccount.businessType;
+    // });
   }
 
 }

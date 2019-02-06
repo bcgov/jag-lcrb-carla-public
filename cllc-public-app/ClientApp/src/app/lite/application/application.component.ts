@@ -1,19 +1,19 @@
+
+import {filter} from 'rxjs/operators';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app-state/models/app-state';
-import { Subscription } from 'rxjs/Subscription';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Subscription ,  Subject ,  Observable } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '../../app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdoxioApplicationDataService } from '../../services/adoxio-application-data.service';
 import { PaymentDataService } from '../../services/payment-data.service';
 import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
-import { ConfirmationDialogComponent } from '../../lite-application-dashboard/lite-application-dashboard.component';
 import { AdoxioApplication } from '../../models/adoxio-application.model';
 import { debug } from 'util';
+import { ConfirmationDialogComponent } from '../../lite-application-dashboard/lite-application-dashboard.component';
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 
@@ -76,8 +76,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       }
     );
 
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
-      .filter(state => !!state)
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
+      filter(state => !!state))
       .subscribe(currentApplication => {
         this.form.patchValue(currentApplication);
         if (currentApplication.isPaid) {
@@ -164,7 +164,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
    * */
   private submitPayment() {
     this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(res => {
-      const jsonUrl = res.json();
+      const jsonUrl = res;
       window.location.href = jsonUrl['url'];
       return jsonUrl['url'];
     }, err => {
@@ -184,7 +184,7 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     }
     if (!this.financialIntegrityDocuments || !this.financialIntegrityDocuments.files || this.financialIntegrityDocuments.files.length < 1) {
       valid = false;
-      this.validationMessages.push("Financial Integrity form is required.")
+      this.validationMessages.push('Financial Integrity form is required.');
     }
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;

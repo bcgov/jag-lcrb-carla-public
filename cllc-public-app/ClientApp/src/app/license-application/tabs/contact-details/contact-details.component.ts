@@ -1,12 +1,11 @@
+
+import {filter,  auditTime } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
-import { auditTime } from 'rxjs/operators';
+import { Subscription ,  Observable ,  Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
@@ -35,8 +34,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     // create entry form and set retrieved values
     this.createForm();
 
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
-      .filter(state => !!state)
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
+      filter(state => !!state))
       .subscribe(currentApplication => {
         this.contactDetailsForm.patchValue(currentApplication);
         if (currentApplication.isPaid) {
