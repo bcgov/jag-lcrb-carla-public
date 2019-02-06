@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
-import { NewsletterDataService } from "../services/newsletter-data.service"
+import { NewsletterDataService } from '../services/newsletter-data.service';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material';
@@ -26,13 +26,13 @@ export class NewsletterSignupComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   /** newsletter-signup ctor */
-  constructor(private newsletterDataService: NewsletterDataService, vcr: ViewContainerRef, public snackBar: MatSnackBar,) {
+  constructor(private newsletterDataService: NewsletterDataService, vcr: ViewContainerRef, public snackBar: MatSnackBar, ) {
   }
 
   ngOnInit(): void {
     if (this.slug != null) {
       this.newsletterDataService.getNewsletter(this.slug)
-        .then((newsletter) => {
+        .subscribe((newsletter) => {
           this.description = newsletter.description;
           this.title = newsletter.title;
         });
@@ -41,7 +41,8 @@ export class NewsletterSignupComponent implements OnInit {
 
   signup() {
     // subscribe to the newsletter.
-    this.newsletterDataService.signup(this.slug, this.email).then((results) => {
+    this.newsletterDataService.signup(this.slug, this.email)
+    .subscribe((results) => {
       this.snackBar.open('Thanks for signing up!', 'Success!', { duration: 3500, panelClass: ['green-snackbar'] });
       this.signupSuccess = true;
     });

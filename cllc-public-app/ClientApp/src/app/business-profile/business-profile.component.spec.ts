@@ -1,25 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { BrowserModule, By } from "@angular/platform-browser";
 import { BusinessProfileComponent } from './business-profile.component';
 
-let component: BusinessProfileComponent;
-let fixture: ComponentFixture<BusinessProfileComponent>;
+describe('BusinessProfileComponent', () => {
+  let component: BusinessProfileComponent;
+  let fixture: ComponentFixture<BusinessProfileComponent>;
 
-describe('BusinessProfile component', () => {
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [ BusinessProfileComponent ],
-            imports: [ BrowserModule ],
-            providers: [
-                { provide: ComponentFixtureAutoDetect, useValue: true }
-            ]
-        });
-        fixture = TestBed.createComponent(BusinessProfileComponent);
-        component = fixture.componentInstance;
-    }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ BusinessProfileComponent ]
+    })
+    .compileComponents();
+  }));
 
-    it('should do something', async(() => {
-        expect(true).toEqual(true);
-    }));
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BusinessProfileComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

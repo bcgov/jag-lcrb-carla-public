@@ -30,7 +30,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
 
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService,
     private router: Router,
-     public dialog: MatDialog) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.displayApplications();
@@ -91,7 +91,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
   }
 
   uploadMoreFiles(application: AdoxioApplication) {
-    this.router.navigate([`/application-lite/${application.id}`, {mode: UPLOAD_FILES_MODE}]);
+    this.router.navigate([`/application-lite/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
   }
 
   /**
