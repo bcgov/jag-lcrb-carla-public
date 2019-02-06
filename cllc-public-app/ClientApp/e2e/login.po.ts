@@ -2,9 +2,10 @@ import { browser, by, element, protractor } from 'protractor';
 import { AccountDataService } from '../src/app/services/account-data.service';
 import { HttpClient, HttpXhrBackend, XhrFactory } from '@angular/common/http';
 import { XMLHttpRequest } from 'xmlhttprequest';
+import { Subject } from 'rxjs';
 
 export class BrowserXhr implements XhrFactory {
-    constructor() {}
+    constructor() { }
     build(): any { return <any>(new XMLHttpRequest()); }
 }
 
@@ -28,20 +29,7 @@ export class LoginPage {
     }
 
     logoutAndDelete() {
-       return  this.accountDataService.getCurrentAccount().subscribe(
-            res => {
-                const account = res;
-                this.accountDataService.deleteAccount(account).subscribe(
-                    null,
-                    err => {
-                        console.log('Error occured while deleting:' + err);
-                    }
-                );
-            },
-            err => {
-                console.log('Error occured while getting account:' + err);
-            }
-        );
+        return this.accountDataService.deleteCurrentAccount();
     }
 
     getHeading(header: string) {
