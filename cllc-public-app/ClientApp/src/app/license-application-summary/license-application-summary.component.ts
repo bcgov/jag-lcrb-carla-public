@@ -95,7 +95,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
 
   payLicenceFee(application) {
     this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
-      const data = res.json();
+      const data = <any>res;
       window.location.href = data.url;
     }, err => {
       if (err._body === 'Payment already made') {
