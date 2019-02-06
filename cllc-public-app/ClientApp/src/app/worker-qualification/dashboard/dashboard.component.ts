@@ -4,7 +4,7 @@ import { UserDataService } from '../../services/user-data.service';
 import { User } from '../../models/user.model';
 import { Worker } from '../../models/worker.model';
 import { WorkerDataService } from '../../services/worker-data.service.';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 
 @Component({

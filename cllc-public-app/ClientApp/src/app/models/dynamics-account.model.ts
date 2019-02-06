@@ -10,12 +10,22 @@ export interface DynamicsAccount {
   pstNumber: string;
   contactEmail: string;
   contactPhone: string;
+
   mailingAddressName: string;
   mailingAddressStreet: string;
+  mailingAddressStreet2: string;
   mailingAddressCity: string;
   mailingAddressProvince: string;
   mailingAddressCountry: string;
   mailingAddressPostalCode: string;
+
+  physicalAddressName: string;
+  physicalAddressStreet: string;
+  physicalAddressStreet2: string;
+  physicalAddressCity: string;
+  physicalAddressProvince: string;
+  physicalAddressCountry: string;
+  physicalAddressPostalCode: string;
 
   primarycontact: DynamicsContact;
 
