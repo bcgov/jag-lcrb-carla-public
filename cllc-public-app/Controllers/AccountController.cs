@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the BCeID API to get the business record.
             var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
-             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(business?.businessNumber);
+            var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(business?.businessNumber);
             if (cleanNumber != null)
             {
                 business.businessNumber = cleanNumber;
@@ -178,7 +178,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             List<LegalEntity> legalEntities;
 
-            var account = (await _dynamicsClient.GetAccountById(new Guid(accountId))).ToViewModel();
+            var expand = new List<string> { "primarycontactid" };
+            var account = (_dynamicsClient.Accounts.Get(filter: "", expand: expand).Value.FirstOrDefault()).ToViewModel();
             _logger.LogDebug(LoggingEvents.HttpGet, "Account details: " + JsonConvert.SerializeObject(account));
 
             // get legal entities
@@ -345,12 +346,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
+            var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
             if (cleanNumber != null)
             {
                 bceidBusiness.businessNumber = cleanNumber;
             }
-            
+
             _logger.LogDebug(LoggingEvents.HttpGet, "BCeId business: " + JsonConvert.SerializeObject(bceidBusiness));
 
             // get the contact record.
@@ -500,7 +501,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
                     throw new OdataerrorException("Error creating Tied house connection.");
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     _logger.LogError(e.Message);
                 }
@@ -711,6 +713,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpDelete, "No content returned.");
             return NoContent(); // 204 
+        }
+
+
+        [HttpPost("delete/current")]
+        public async Task<IActionResult> DeleteCurrentAccount()
+        {
+            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+
+            // get the current user.
+            string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(sessionSettings);
+            _logger.LogDebug(LoggingEvents.HttpGet, "UserSettings: " + JsonConvert.SerializeObject(userSettings));
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return await DeleteDynamicsAccount(userSettings.AccountId);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

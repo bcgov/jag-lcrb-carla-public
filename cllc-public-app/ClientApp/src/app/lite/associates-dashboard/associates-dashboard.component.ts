@@ -6,7 +6,7 @@ import { DynamicsContact } from '../../models/dynamics-contact.model';
 import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-associate-dashboard',

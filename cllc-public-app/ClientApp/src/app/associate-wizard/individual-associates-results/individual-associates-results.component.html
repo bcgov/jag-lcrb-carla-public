@@ -1,0 +1,353 @@
+<!-- Instructions for Associates (Individuals) -->
+<div>
+    <!-- BC resident + is in B.C. + eligible for a BC Services Card -->
+    <section *ngIf="answerCollection.q10a === 'Yes' && answerCollection.q10b === 'Yes' && answerCollection.q10d === 'Yes'">
+      <h3>BC resident + is in B.C. + eligible for a BC Services Card</h3>
+  
+      <span class="sub-header">You will need:</span> <br>
+      <ul>
+        <li>A Photo BC Services Card</li>
+        <li>Associate Financial Integrity Form</li>
+        <li>Witness of Signature Attestation Form</li>
+        <li>Identity Verification Attestation Form</li>
+        <li>Consent for Cannabis Security Screening Form</li>
+      </ul>
+  
+      <span class="sub-header">#1: Get a Photo BC Services Card</span> <br>
+      <ul>
+        <li>If you don’t have a card, see [URL] for instructions on getting one</li>
+      </ul>
+  
+      <span class="sub-header">#2: Submit your financial form and supporting documents</span> <br>
+      <ul>
+        <li>Print and complete the Associate Financial Integrity Form</li>
+        <li>Gather the supporting documents listed in the form</li>
+        <li>Email the Associate Financial Integrity Form and supporting documents to Cannabis.Licensing@gov.bc.ca.
+          Include your name in the subject line.</li>
+      </ul>
+  
+      <span class="sub-header">#3: Prepare your remaining forms</span> <br>
+      <ul>
+        <li>Print the Witness of Signature Attestation Form and the Identity Verification Attestation Form. Do not
+          complete either form. They must be completed by a Service BC representative.</li>
+        <li>Complete all fields on the Consent for Cannabis Security Screening Form except the signature and the date,
+          then print the form. A Service BC representative must witness you completing the signature and date fields.
+        </li>
+      </ul>
+  
+      <span class="sub-header">#4: Visit a Service BC location</span> <br>
+      <ul>
+        <li>Bring your forms and Photo BC Services Card</li>
+        <li>A Service BC representative will process your documents and send them to the Liquor and Cannabis Regulation
+          Branch</li>
+      </ul>
+    </section>
+  
+    <!--BC resident + is in B.C. + isn’t eligible for a BC Services Card-->
+    <section  *ngIf="answerCollection.q10a === 'Yes' && answerCollection.q10b === 'No' && answerCollection.q10d === 'Yes'">
+      <h3>BC resident + is in B.C. + isn’t eligible for a BC Services Card</h3>
+  
+      <span class="sub-header">You will need:</span> <br>
+      <ul>
+        <li>Associate Financial Integrity Form</li>
+        <li>Witness of Signature Attestation Form</li>
+        <li>Identity Verification Attestation Form</li>
+        <li>Consent for Cannabis Security Screening</li>
+        <li>A piece of government-issued ID that contains your name, photo, date of birth and signature</li>
+        <li>A piece of secondary ID that contains your name and signature. The name must be imprinted and exactly match
+          the name on your government-issued ID</li>
+      </ul>
+  
+  
+      <span class="sub-header">#1: Submit your financial form and supporting documents</span> <br>
+      <ul>
+        <li>Print and complete the Associate Financial Integrity Form</li>
+        <li>Gather the supporting documents listed in the form</li>
+        <li>Email the Associate Financial Integrity Form and supporting documents to Cannabis.Licensing@gov.bc.ca.
+          Include your name in the subject line.</li>
+      </ul>
+  
+      <span class="sub-header">#2: Prepare your remaining forms:</span> <br>
+      <ul>
+        <li>Print the Witness of Signature Attestation Form and the Identity Verification Attestation Form. Do not
+          complete either form. They must be completed by a Service BC representative.</li>
+        <li>Complete all fields on the Consent for Cannabis Security Screening Form except the signature and the date,
+          then print the form. A Service BC representative must witness you completing the signature and date fields.
+        </li>
+      </ul>
+  
+      <span class="sub-header">#3: Visit a Service BC location</span> <br>
+      <ul>
+        <li>Bring your forms and Photo BC Services Card</li>
+        <li>A Service BC representative will process your documents and send them to the Liquor and Cannabis Regulation
+          Branch</li>
+      </ul>
+    </section>
+  
+    <!--Canadian resident (non-B.C.) + is in B.C. -->
+    <section *ngIf="answerCollection.q10c === 'Yes' && answerCollection.q10d === 'Yes'">
+      <h3>Canadian resident (non-B.C.) + is in B.C. </h3>
+  
+      <span class="sub-header">You will need:</span> <br>
+      <ul>
+        <li>Associate Financial Integrity Form</li>
+        <li>Witness of Signature Attestation Form</li>
+        <li>Identity Verification Attestation Form</li>
+        <li>Consent for Cannabis Security Screening</li>
+        <li>A piece of government-issued ID that contains your name, photo, date of birth and signature</li>
+        <li>A piece of secondary ID that contains your name and signature. The name must be imprinted and exactly match
+          the name on your government-issued ID</li>
+      </ul>
+  
+  
+      <span class="sub-header">#1: Submit your financial form and supporting documents</span> <br>
+      <ul>
+        <li>Print and complete the Associate Financial Integrity Form</li>
+        <li>Gather the supporting documents listed in the form</li>
+        <li>Email the Associate Financial Integrity Form and supporting documents to Cannabis.Licensing@gov.bc.ca.
+          Include your name in the subject line.</li>
+      </ul>
+  
+      <span class="sub-header">#2: Prepare your remaining forms:</span> <br>
+      <ul>
+        <li>Print the Witness of Signature Attestation Form and the Identity Verification Attestation Form. Do not
+          complete either form. They must be completed by a Service BC representative.</li>
+        <li>Complete all fields on the Consent for Cannabis Security Screening Form except the signature and the date,
+          then print the form. A Service BC representative must witness you completing the signature and date fields.
+        </li>
+      </ul>
+  
+      <span class="sub-header">#3: Visit a Service BC location</span> <br>
+      <ul>
+        <li>Bring your forms, government-issued ID and secondary piece of ID</li>
+        <li>A Service BC representative will process your documents and send them to the Liquor and Cannabis Regulation
+          Branch</li>
+      </ul>
+    </section>
+  
+    <!--Canadian resident (non-BC) + isn’t in B.C. -->
+    <section  *ngIf="(answerCollection.q10d === 'No') && (answerCollection.q10c === 'Yes' || answerCollection.q10a === 'Yes')">
+      <h3>Canadian resident (non-BC) + isn’t in B.C. </h3>
+  
+      <span class="sub-header">You will need:</span> <br>
+      <ul>
+        <li>Associate Financial Integrity Form</li>
+        <li>Witness of Signature Attestation Form</li>
+        <li>Identity Verification Attestation Form</li>
+        <li>Consent for Cannabis Security Screening Form</li>
+        <li>A piece of government-issued ID that contains your name, photo, date of birth and signature</li>
+        <li>A piece of secondary ID that contains your name and signature. The name must be imprinted and exactly match
+          the name on your government-issued ID</li>
+      </ul>
+  
+  
+      <span class="sub-header">#1: Prepare your forms and ID</span> <br>
+      <ul>
+        <li>Print the Witness of Signature Attestation Form and the Identity Verification Attestation Form. Do not
+          complete either form. They must be completed by a police station clerk.</li>
+        <li>Complete all fields on the Consent for Cannabis Security Screening Form except the signature and the date,
+          then print the form. A police station clerk must witness you completing the signature and date fields. </li>
+        <li>Scan the front and back of your government-issued and secondary pieces of ID. Print the scans.</li>
+        <li>Complete the Associate Financial Integrity Form and gather the supporting documents listed in the form.</li>
+      </ul>
+  
+      <span class="sub-header">#2: Visit a local police station</span> <br>
+      <ul>
+        <li>Bring your forms and your original two pieces of ID.</li>
+        <li>Ask a police station clerk to: <br>
+          <ul>
+            <li>Conduct a verification of both pieces of ID</li>
+            <li>Make sure your information on the Consent for Cannabis Security Screening Form matches your ID</li>
+            <li>Witness you sign and date the Consent for Cannabis Security Screening Form</li>
+            <li>Complete the Identity Verification Attestation Form</li>
+            <li>Complete the Witness of Signature Attestation Form</li>
+          </ul>
+        </li>
+        <li>Request a Police Information Check (PIC). Don’t open your PIC when you receive it.</li>
+      </ul>
+  
+      <span class="sub-header">#3: Submit your documents</span> <br>
+      <ul>
+        <li>Email your forms, supporting financial documents and scans of your ID to Cannabis.Licensing@gov.bc.ca.
+          Include your name in the subject line.</li>
+        <li>Mail your unopened Police Information Check to the Liquor and Cannabis Regulation Branch <br>
+          <ul>
+            <li>Include a note indicating the reference number of the cannabis retail store licence application (6-digit
+              number found on the payment receipt and in an email sent to the applicant)</li>
+            <li>Mailing address: <br>
+              Attn: Licensing Department <br>
+              Liquor and Cannabis Regulation Branch <br>
+              PO Box 9292 Stn Provincial Govt. <br>
+              Victoria, BC V8W 9J8 <br>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  
+    <!--International Resident + is in B.C. -->
+    <section  *ngIf="answerCollection.q10a === 'No' && answerCollection.q10c === 'No' && answerCollection.q10d === 'Yes'">
+      <h3>International Resident + is in B.C. </h3>
+  
+      <span class="sub-header">You will need:</span> <br>
+      <ul>
+        <li>Associate Financial Integrity Form</li>
+        <li>Witness of Signature Attestation Form</li>
+        <li>Identity Verification Attestation Form</li>
+        <li>Consent for Cannabis Security Screening form</li>
+        <li>Your passport</li>
+        <li>Another piece of government-issued ID that contains your name and signature. The name must be imprinted and
+          exactly match the name on your passport.</li>
+      </ul>
+  
+      <span class="sub-header">#1: Submit your financial form and supporting documents</span> <br>
+      <ul>
+        <li>Print and complete the Associate Financial Integrity Form</li>
+        <li>Gather the supporting documents listed in the form</li>
+        <li>Email the Associate Financial Integrity Form and supporting documents to Cannabis.Licensing@gov.bc.ca.
+          Include your name in the subject line.</li>
+      </ul>
+  
+      <span class="sub-header">#2: Prepare your remaining forms</span> <br>
+      <ul>
+        <li>Print the Witness of Signature Attestation Form and the Identity Verification Attestation Form. Do not
+          complete either form. They must be completed by a Service BC representative.</li>
+        <li>Complete all fields on the Consent for Cannabis Security Screening Form except the signature and the date,
+          then print the form. A Service BC representative must witness you completing the signature and date fields.
+        </li>
+      </ul>
+  
+      <span class="sub-header">#3: Visit a Service BC location</span> <br>
+      <ul>
+        <li>Request a Criminal Record Check from your country of residency. If the Criminal Record Check isn’t going to
+          be in English, request two copies. </li>
+        <li>When you receive your Criminal Record Check, don’t open it. If you’ve asked for two copies, leave one of them
+          unopened. You’ll need to open the other one so it can be translated.</li>
+        <li>If your Criminal Record Check isn’t in English, have the opened copy translated into English. The translator
+          must be admitted to a professional association. Do not open the translated copy when you receive it.</li>
+      </ul>
+  
+      <span class="sub-header">#4: Get a Criminal Record Check</span> <br>
+      <ul>
+        <li>Bring your forms, passport and government-issued ID</li>
+        <li>A Service BC representative will process your documents and send them to the Liquor and Cannabis Regulation
+          Branch</li>
+      </ul>
+  
+      <span class="sub-header">#5: Mail the original unopened copy of your Criminal Record Check and the unopened
+        translated copy to the Liquor and Cannabis Regulation Branch</span> <br>
+      <ul>
+        <li>Include a note indicating the Reference Number of the cannabis retail store licence application </li>
+        <li>Mail your unopened Police Information Check to the Liquor and Cannabis Regulation Branch </li>
+        <li>Mailing address: <br>
+          Attn: Licensing Department <br>
+          Liquor and Cannabis Regulation Branch <br>
+          PO Box 9292 Stn Provincial Govt. <br>
+          Victoria, BC V8W 9J8 <br>
+        </li>
+      </ul>
+    </section>
+  
+    <!--International Resident + isn’t in B.C.-->
+    <section  *ngIf="answerCollection.q10a === 'No' && answerCollection.q10c === 'No' && answerCollection.q10d === 'No'">
+      <h3>International Resident + isn’t in B.C.</h3>
+  
+      <span class="sub-header">You will need:</span> <br>
+      <ul>
+        <li>Associate Financial Integrity Form</li>
+        <li>Witness of Signature Attestation Form</li>
+        <li>Identity Verification Attestation Form</li>
+        <li>Consent for Cannabis Security Screening Form</li>
+        <li>Your passport</li>
+        <li>Another piece of government-issued ID that contains your name and signature. The name must be imprinted and
+          exactly match the name on your passport.</li>
+        <li>The Reference Number of the cannabis retail store licence application (a 6-digit number found on the
+          application payment receipt and in an email sent to the applicant) </li>
+      </ul>
+  
+      <span class="sub-header">#1: Prepare your forms and ID</span> <br>
+      <ul>
+        <li>Scan the front and back of the ID page in your passport. Print the scan.</li>
+        <li>Scan the front and back of your government-issued ID. Print the scan.</li>
+        <li>Complete the Associate Financial Integrity Form and gather the supporting documents listed in the form.</li>
+        <li>Print the Identity Verification Form. Do not complete the form. It must be completed by a police station
+          clerk.</li>
+        <li>Print the Witness of Signature Attestation Form. Do not complete the form. It must be completed by a police
+          station clerk, a lawyer or notary.</li>
+        <li>Complete all fields on the Consent for Cannabis Security Screening Form except the signature and the date,
+          then print the form. A police station clerk, lawyer or notary must witness you completing the signature and
+          date fields. </li>
+      </ul>
+  
+      <span class="sub-header">#2: Have your identity verified</span> <br>
+      <ul>
+        <li>Visit a local police station with the Identity Verification Attestation Form, your passport and your
+          government-issued ID</li>
+        <li>Ask a police station clerk to: <br>
+          <ul>
+            <li>Conduct an in-person verification of your passport and government-issued ID</li>
+            <li>Complete the Identity Verification Attestation Form</li>
+          </ul>
+        </li>
+      </ul>
+  
+      <span class="sub-header">#3: Have your signature witnessed</span> <br>
+      <ul>
+        <li>Visit a local police station, lawyer or notary with: <br>
+          <ul>
+            <li>Your passport</li>
+            <li>Your government-issued ID</li>
+            <li>Witness of Signature Attestation Form</li>
+            <li>Consent for Cannabis Security Screening Form</li>
+          </ul>
+        </li>
+        <li>Ask the police station clerk, lawyer or notary to: <br>
+          <ul>
+            <li>Verify that the information on your Cannabis Security Screening Form matches the information on your
+              passport and government-issued ID</li>
+            <li>Witness you sign and date the Consent for Cannabis Security Screening Form</li>
+            <li>Complete the Witness of Signature Attestation Form</li>
+          </ul>
+        </li>
+      </ul>
+  
+      <span class="sub-header">#4: Get a Criminal Record Check</span> <br>
+      <ul>
+        <li>Request a Criminal Record Check from your country of residency. If the Criminal Record Check isn’t going to
+          be in English, request two copies. </li>
+        <li>When you receive your Criminal Record Check, don’t open it. If you’ve asked for two copies, leave one of them
+          unopened. You’ll need to open the other one so it can be translated.</li>
+        <li>If your Criminal Record Check isn’t in English, have the opened copy translated into English. The translator
+          must be admitted to a professional association. Do not open the translated copy when you receive it.</li>
+      </ul>
+  
+      <span class="sub-header">#5: Submit your documents</span> <br>
+      <ul>
+        <li>Email the following documents to Cannabis.Licensing@gov.bc.ca. Include your name in the subject line.
+          <br>
+          <ul>
+            <li>Identity Verification Attestation Form</li>
+            <li>Witness of Signature Attestation Form</li>
+            <li>Consent for Cannabis Security Screening Form</li>
+            <li>The scan of your passport’s ID page</li>
+            <li>The scan of the front and back of your government-issued ID </li>
+            <li>Associate Financial Integrity Form</li>
+            <li>Supporting documents listed in the Associate Financial Integrity Form</li>
+          </ul>
+        </li>
+        <li>Mail your original, unopened Criminal Record Check and unopened translated copy to the Liquor and Cannabis
+          Regulation Branch <br>
+          <ul>
+            <li>Include a note indicating the Reference Number of the cannabis retail store licence application </li>
+            <li>Mailing address: <br>
+              Attn: Licensing Department <br>
+              Liquor and Cannabis Regulation Branch <br>
+              PO Box 9292 Stn Provincial Govt. <br>
+              Victoria, BC V8W 9J8 <br>
+            </li>
+          </ul>
+  
+        </li>
+      </ul>
+    </section>
+  </div>

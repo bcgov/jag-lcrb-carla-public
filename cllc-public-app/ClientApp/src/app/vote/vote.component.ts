@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Validators, FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
-import { VoteDataService } from "../services/vote-data.service"
+import { VoteDataService } from '../services/vote-data.service';
 
 // simple voting feature, based on https://github.com/cjsheets/angular-voting-app
 
 @Component({
-    selector: 'app-vote',
-    templateUrl: './vote.component.html',
-    styleUrls: ['./vote.component.scss']
+  selector: 'app-vote',
+  templateUrl: './vote.component.html',
+  styleUrls: ['./vote.component.scss']
 })
 /** vote component*/
 export class VoteComponent implements OnInit {
@@ -21,42 +21,43 @@ export class VoteComponent implements OnInit {
   public question: string;
   public title: string;
   private id: string;
-  public alreadyVoted: boolean = false;
-  public showVoteResults: boolean = false;
+  public alreadyVoted = false;
+  public showVoteResults = false;
 
-    /** vote constructor */
-  constructor(private cookieService: CookieService, private voteDataService: VoteDataService) {     
-  } 
+  /** vote constructor */
+  constructor(private cookieService: CookieService, private voteDataService: VoteDataService) {
+  }
 
-  ngOnInit(): void {    
-    
+  ngOnInit(): void {
+
     if (this.slug != null) {
       this.voteDataService.getQuestion(this.slug)
-        .then((voteQuestion) => {
+        .subscribe((voteQuestion) => {
           this.question = voteQuestion.question;
           this.options = voteQuestion.options;
           this.title = voteQuestion.title;
           this.id = voteQuestion.id;
 
-          var cookieValue = this.cookieService.get('HasVoted' + this.id);
-          if (cookieValue != null && cookieValue == 'Y') {
+          const cookieValue = this.cookieService.get('HasVoted' + this.id);
+          if (cookieValue != null && cookieValue === 'Y') {
             this.alreadyVoted = true;
             this.showVoteResults = true;
           }
-        });      
-    }        
+        });
+    }
   }
 
   setShowVoteResults(value) {
     this.showVoteResults = value;
   }
   sendVote(option) {
-    this.cookieService.set('HasVoted' + this.id, "Y");
-      this.alreadyVoted = true;
-      // send the vote in.
-      this.voteDataService.postVote(this.slug, option).then((voteQuestion) => {
-        console.log (voteQuestion.options);
-        this.options = voteQuestion.options;
-      });
-    }
+    this.cookieService.set('HasVoted' + this.id, 'Y');
+    this.alreadyVoted = true;
+    // send the vote in.
+    this.voteDataService.postVote(this.slug, option)
+    .subscribe((voteQuestion) => {
+      console.log(voteQuestion.options);
+      this.options = voteQuestion.options;
+    });
+  }
 }
