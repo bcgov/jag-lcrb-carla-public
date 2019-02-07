@@ -25,8 +25,8 @@
             </app-field>
 
             <app-field label="Business Number (BC Corporate Registry Number)" [required]="true" [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
-              errorMessage="Please enter your business number">
-              <input class="form-control" style="width: 150px;" type="text" maxlength="9" formControlName="businessNumber"
+              errorMessage="Please enter your business number (9 digits)">
+              <input class="form-control" style="width: 150px;" maxlength="9" type="text" formControlName="businessNumber"
                 (keydown)="rejectIfNotDigitOrBackSpace($event)">
             </app-field>
 
