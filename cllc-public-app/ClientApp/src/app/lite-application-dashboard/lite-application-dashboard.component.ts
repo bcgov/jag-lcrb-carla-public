@@ -7,9 +7,9 @@ import { FileSystemItem } from '../models/file-system-item.model';
 import { saveAs } from 'file-saver';
 import { AdoxioApplication } from '../models/adoxio-application.model';
 import { Router } from '@angular/router';
-import { UPLOAD_FILES_MODE } from '../lite/application/application.component';
 
 
+export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 
 @Component({
   selector: 'app-lite-application-dashboard',

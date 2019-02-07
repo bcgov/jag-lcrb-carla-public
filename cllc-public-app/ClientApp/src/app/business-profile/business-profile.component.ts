@@ -92,7 +92,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
         businessDBAName: [{ value: '', disabled: true }],
         bcIncorporationNumber: [''], // Validators.required
         dateOfIncorporationInBC: [''],
-        businessNumber: [''],
+        businessNumber: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
         businessType: ['', Validators.required],
         contactPhone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
         contactEmail: ['', [Validators.required, Validators.email]],
@@ -102,8 +102,8 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
         physicalAddressStreet2: [''],
         physicalAddressCity: ['', Validators.required],
         physicalAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
-        physicalAddressProvince: [{ value: 'British Columbia', disabled: true }],
-        physicalAddressCountry: [{ value: 'Canada', disabled: true }],
+        physicalAddressProvince: [{ value: 'British Columbia' }],
+        physicalAddressCountry: [{ value: 'Canada'}],
         mailingAddressStreet: ['', Validators.required],
         mailingAddressStreet2: [''],
         mailingAddressCity: ['', Validators.required],
@@ -254,6 +254,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
 
   save(): Subject<boolean> {
     const subResult = new Subject<boolean>();
+    this.form.get('businessProfile').patchValue({physicalAddressCountry: 'Canada'});
     const value = <DynamicsAccount>{
       ...this.form.get('businessProfile').value
     };
