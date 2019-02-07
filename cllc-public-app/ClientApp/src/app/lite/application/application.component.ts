@@ -12,10 +12,9 @@ import { AdoxioApplicationDataService } from '../../services/adoxio-application-
 import { PaymentDataService } from '../../services/payment-data.service';
 import { FileUploaderComponent } from '../../file-uploader/file-uploader.component';
 import { AdoxioApplication } from '../../models/adoxio-application.model';
-import { debug } from 'util';
-import { ConfirmationDialogComponent } from '../../lite-application-dashboard/lite-application-dashboard.component';
+import { ConfirmationDialogComponent, UPLOAD_FILES_MODE } from '../../lite-application-dashboard/lite-application-dashboard.component';
 
-export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+
 
 @Component({
   selector: 'app-application',
