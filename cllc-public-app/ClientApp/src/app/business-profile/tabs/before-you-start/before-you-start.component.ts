@@ -1,3 +1,5 @@
+
+import {filter} from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { User } from '../../../models/user.model';
@@ -5,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-before-you-start',
@@ -20,8 +22,8 @@ export class BeforeYouStartComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const sub = this.store.select(state => state.currentAccountState)
-      .filter(account => !!account)
+    const sub = this.store.select(state => state.currentAccountState).pipe(
+      filter(account => !!account))
       .subscribe(account => {
         this.businessType = account.currentAccount.businessType;
       });

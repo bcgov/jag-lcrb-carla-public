@@ -1,3 +1,5 @@
+
+import {filter} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { PolicyDocumentComponent } from '../../policy-document/policy-document.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
@@ -16,8 +18,8 @@ export class WorkerHomeComponent implements OnInit, AfterViewInit {
   constructor(public dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data
-    .filter(data => !!data && !!data.slug)
+    this.route.data.pipe(
+    filter(data => !!data && !!data.slug))
     .subscribe((data: any) => {
       this.policySlug = data.slug;
     });
