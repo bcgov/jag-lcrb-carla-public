@@ -32,7 +32,7 @@
 
             <app-field label="Business Type" [required]="true" [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
               errorMessage="Please select a business type from the dropdown list">
-              <select class="form-control" readonly style="width: 250px;" formControlName="businessType">
+              <select class="form-control" disabled readonly style="width: 250px;" formControlName="businessType">
                 <option value="">Choose your organization type</option>
                 <option value="PrivateCorporation">Private Corporation</option>
                 <option value="PublicCorporation">Public Corporation</option>
