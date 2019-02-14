@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class FieldComponent implements OnInit {
   @Input() required = false;
   @Input() showChevrons = true;
+  @Input() isFullWidth = false;
   @Input() valid = true;
   @Input() label: string;
   @Input() leadingText: string;
