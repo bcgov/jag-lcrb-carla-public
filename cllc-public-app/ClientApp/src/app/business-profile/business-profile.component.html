@@ -54,7 +54,7 @@
                 <label *ngIf="form.get('businessProfile.businessType').value == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
                 <br />
-                <input class="form-control" required style="width: 250px;" type="text" id="bcIncorporationNumber"
+                <input class="form-control"  style="width: 250px;" type="text" id="bcIncorporationNumber"
                   formControlName="bcIncorporationNumber">
                 <div *ngIf="false" class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="form.controls['bcIncorporationNumber'].hasError('required') ">
