@@ -35,7 +35,8 @@
       </li>
     </ul>
     <hr>
-    <section>
+    <h3 class="blue-header">PROPERTY DETAILS</h3>
+    <section class="padded-section">
       <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
         <div [ngBusy]="busy"></div>
         <label for="">Establishment Name</label>
@@ -69,8 +70,75 @@
           </div>
         </div>
       </div>
+      <div>
+          <p></p>
+          <div class="row">
+            <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
+              [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
+              errorMessage="Please enter your street address">
+              <input class="form-control" type="text" formControlName="establishmentaddressstreet">
+            </app-field>
+            <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+              [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
+              errorMessage="Please enter your city">
+              <input class="form-control"  type="text" formControlName="establishmentaddresscity">
+            </app-field>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Province" [isFullWidth]="true" >
+                  <input class="form-control"  readonly type="text"
+                    value="British Columbia">
+                </app-field>
+              </section>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
+                  [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
+                  errorMessage="Please enter your postal code">
+                  <input class="form-control" type="text"
+                    formControlName="establishmentaddresspostalcode">
+                </app-field>
+              </section>
+            <app-field class="col-md-6 col-xs-12" label="Country">
+              <input class="form-control" style="width: 350px;" readonly type="text"
+                value="Canada">
+            </app-field>
+          </div>
+        </div>
     </section>
     <p>&nbsp;</p>
+    <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+    <div class="padded-section">
+
+      <app-field label="First Name" [required]="true" [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
+        errorMessage="Please enter your business contact's first name">
+        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonfirstname">
+      </app-field>
+
+      <app-field label="Last Name" [required]="true" [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
+        errorMessage="Please enter your business contact's last name">
+        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonfirstname">
+      </app-field>
+
+      <app-field label="Title/ Position" [required]="false" [valid]="true">
+        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonrole">
+      </app-field>
+
+      <app-field label="Phone Number (main)" [required]="true" [valid]="form.get('contactpersonphone').valid || !form.get('contactpersonphone').touched"
+        errorMessage="Please enter your business contact's 10-digit phone number">
+        <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+          type="text" formControlName="contactpersonphone">
+      </app-field>
+
+      <!-- <app-field label="Phone Number (alternate)" [required]="false">
+        <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+          type="text" formControlName="phoneNumberAlt">
+      </app-field> -->
+
+      <app-field label="Email" [required]="true" [valid]="form.get('contactpersonemail').valid || !form.get('contactpersonemail').touched"
+        errorMessage="Please enter your business contact's email address">
+        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonemail" (blur)="trimValue(form.get('contactpersonemail'))">
+      </app-field>
+    </div>
+
     <hr>
     <p>&nbsp;</p>
 
