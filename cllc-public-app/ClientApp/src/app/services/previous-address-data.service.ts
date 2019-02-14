@@ -3,18 +3,16 @@ import { Response, Http } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { PreviousAddress } from '../models/previous-address.model';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs/observable/of';
+import { Observable, of } from 'rxjs';
+import { DataService } from './data.service';
 
 
 @Injectable()
-export class PreviousAddressDataService {
+export class PreviousAddressDataService extends DataService {
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   /**
    * Get legal entities from Dynamics filtered by position
@@ -23,7 +21,7 @@ export class PreviousAddressDataService {
   getPreviousAdderesses(contactId: string): Observable<PreviousAddress[]> {
     const apiPath = `api/previousaddress/by-contactid/${contactId}`;
     return this.http.get<PreviousAddress[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError('getPreviousAddress', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -32,7 +30,7 @@ export class PreviousAddressDataService {
    */
   createPreviousAdderess(data: any) {
     return this.http.post<PreviousAddress>('api/previousaddress/', data, { headers: this.headers })
-      .pipe(catchError(this.handleError('createPreviousAddress', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -41,7 +39,7 @@ export class PreviousAddressDataService {
    */
   updatePreviousAdderess(data: any, id: string) {
     return this.http.put<PreviousAddress>(`api/previousaddress/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError('updatePreviousAddress', null)));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -50,23 +48,6 @@ export class PreviousAddressDataService {
    */
   deletePreviousAddress(id: string) {
     return this.http.post<PreviousAddress>(`api/previousaddress/${id}/delete`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError('deletePreviousAddress', null)));
-  }
-
-  /**
-   * Handle error
-   * @param error
-   */
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(`${operation} failed: ${error.message}`); // log to console instead
-
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+      .pipe(catchError(this.handleError));
   }
 }

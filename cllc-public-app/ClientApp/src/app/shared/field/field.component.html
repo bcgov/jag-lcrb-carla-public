@@ -1,0 +1,23 @@
+<section class="app-field">
+  <span *ngIf="leadingText">{{leadingText}} <p></p> </span>
+  <label *ngIf="label">{{label}} <span *ngIf="required" class="error-states">*</span></label>
+  
+  <div *ngIf="afterLabelText">{{afterLabelText}}</div>
+  <br *ngIf="label && !afterLabelText">
+
+  <div style="display: flex; align-items: center;">
+    <section>
+      <ng-content></ng-content>
+    </section>
+    <div *ngIf="!valid && showChevrons" style="flex: 0 0 25px;">
+      <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
+      <i class="fas fa-chevron-left error-states" style="margin-left: -5px"></i>
+    </div>
+  </div>
+
+  <div *ngIf="!valid" class="error-states error-container">
+    <div *ngIf="!valid">
+      {{errorMessage}}
+    </div>
+  </div>
+</section>

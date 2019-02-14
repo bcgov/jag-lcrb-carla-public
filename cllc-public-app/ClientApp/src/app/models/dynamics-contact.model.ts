@@ -10,5 +10,5 @@ export class DynamicsContact {
   address1_stateorprovince: string;
   address1_country: string;
   address1_postalcode: string;
-  constructor() { }
+  jobTitle: string;
 }

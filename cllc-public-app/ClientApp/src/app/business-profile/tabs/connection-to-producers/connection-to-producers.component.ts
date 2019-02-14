@@ -50,26 +50,38 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
     });
 
 
-
-    const sub = this.store.select(state => state.currentAccountState)
-      .filter(state => !!state)
-      .subscribe(state => {
-        this.accountId = state.currentAccount.id;
-        this.businessType = state.currentAccount.businessType;
-        this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
-          .subscribe(tiedHouse => {
-            this._tiedHouseData = tiedHouse;
-            this.form.patchValue(this._tiedHouseData);
-            this.savedFormData = this.form.value;
-            // this.form.valueChanges
-            //   .pipe(auditTime(10000)).subscribe(formData => {
-            //     if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
-            //       this.save();
-            //     }
-            //   });
-          });
+    this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
+      .subscribe(tiedHouse => {
+        this._tiedHouseData = tiedHouse;
+        this.form.patchValue(this._tiedHouseData);
+        this.savedFormData = this.form.value;
+        // this.form.valueChanges
+        //   .pipe(auditTime(10000)).subscribe(formData => {
+        //     if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
+        //       this.save();
+        //     }
+        //   });
       });
-    this.subscriptions.push(sub);
+
+    // const sub = this.store.select(state => state.currentAccountState)
+    //   .filter(state => !!state)
+    //   .subscribe(state => {
+    //     this.accountId = state.currentAccount.id;
+    //     this.businessType = state.currentAccount.businessType;
+    //     this.busy = this.tiedHouseService.getTiedHouse(this.accountId)
+    //       .subscribe(tiedHouse => {
+    //         this._tiedHouseData = tiedHouse;
+    //         this.form.patchValue(this._tiedHouseData);
+    //         this.savedFormData = this.form.value;
+    //         // this.form.valueChanges
+    //         //   .pipe(auditTime(10000)).subscribe(formData => {
+    //         //     if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
+    //         //       this.save();
+    //         //     }
+    //         //   });
+    //       });
+    //   });
+    // this.subscriptions.push(sub);
 
   }
 
@@ -106,6 +118,13 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
       this.busy = subscription;
     }
     return saveObservable;
+  }
+
+  prepareSaveData() {
+    const data = (<any>Object).assign(this._tiedHouseData, this.form.value);
+    const saveData = this.form.value;
+    const saveObservable = new Subject<boolean>();
+    return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
 
 }

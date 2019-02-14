@@ -56,7 +56,7 @@ export class WorkerPaymentConfirmationComponent implements OnInit {
   verify_payment() {
     this.busy = this.paymentDataService.verifyWorkerPaymentSubmission(this.workerId).subscribe(
       res => {
-        const verifyPayResponse = res.json();
+        const verifyPayResponse = <any>res;
         // console.log(verifyPayResponse);
         switch (verifyPayResponse.cardType) {
           case 'VI':

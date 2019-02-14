@@ -24,7 +24,7 @@
               "node_modules/ng-busy/src/style/busy.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "src/styles-font.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -77,7 +77,7 @@
               "node_modules/ng-busy/src/style/busy.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "src/styles-font.scss"
+              "src/styles.scss"
             ],
             "assets": [
               "src/assets"
@@ -107,7 +107,6 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "configurations": {
             "noserve": {
-              "devServerTarget": ""
             }
           },
           "options": {
@@ -133,7 +132,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "css"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

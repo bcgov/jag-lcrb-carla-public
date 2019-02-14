@@ -7,9 +7,9 @@ import { FileSystemItem } from '../models/file-system-item.model';
 import { saveAs } from 'file-saver';
 import { AdoxioApplication } from '../models/adoxio-application.model';
 import { Router } from '@angular/router';
-import { UPLOAD_FILES_MODE } from '../lite/application/application.component';
 
 
+export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 
 @Component({
   selector: 'app-lite-application-dashboard',
@@ -30,7 +30,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
 
   constructor(private adoxioApplicationDataService: AdoxioApplicationDataService,
     private router: Router,
-     public dialog: MatDialog) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.displayApplications();
@@ -91,7 +91,7 @@ export class LiteApplicationDashboardComponent implements OnInit {
   }
 
   uploadMoreFiles(application: AdoxioApplication) {
-    this.router.navigate([`/application-lite/${application.id}`, {mode: UPLOAD_FILES_MODE}]);
+    this.router.navigate([`/application-lite/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
   }
 
   /**

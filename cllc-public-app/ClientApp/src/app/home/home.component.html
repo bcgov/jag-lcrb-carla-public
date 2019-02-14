@@ -28,42 +28,7 @@
             </div>
           </div>
         </div>
-        <div class="side-box col-md-4 col-sm-12">
-          <section style="display: flex">
-            <table>
-              <tr>
-                <td>
-                  <button mat-fab class="fab-button mat-elevation-z0">
-                    <mat-icon class="icon" aria-label="description icon">description</mat-icon>
-                  </button>
-                </td>
-                <td>
-                  <h2 style="margin: 0px;">Application Statistics</h2>
-                </td>
-              </tr>
-            </table>
-          </section>
-          <p style="padding-top: 30px;">
-            The number of applications received and where they are in the process. Updated weekly.
-          </p>
-          <div style="display: flex; justify-content: flex-end">
-            <button class="btn btn-primary" routerLink="/policy-document/application-stats" tabindex="3">See
-              Application Statistics
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="home-margins">
-    <div class="row">
-      <div class="col-md-8 col-sm-12">
-        <div class="home-body">
-          <app-accordion></app-accordion>
-        </div>
-      </div>
-      <div style="padding-left:0px;" class="col-md-4 col-sm-12">
-        <div class="side-box-wrapper">
+        <div class="col-md-4 col-sm-12">
           <section class="side-box" style="margin-top: 65px;">
             <section style="display: flex;">
               <button mat-fab class="fab-button mat-elevation-z0">
@@ -77,8 +42,46 @@
               <button class="btn btn-primary" routerLink="prv" tabindex="3">START</button>
             </div>
           </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home-margins">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="home-body">
+          <app-accordion></app-accordion>
+        </div>
+      </div>
+      <div style="padding-left:0px;" class="col-md-4 col-sm-12">
+        <div class="side-box-wrapper">
           <section class="side-box">
             <app-newsletter-signup [slug]="'signupForUpdates'"></app-newsletter-signup>
+          </section>
+          <section class="side-box">
+            <section style="display: flex">
+              <table>
+                <tr>
+                  <td>
+                    <button mat-fab class="fab-button mat-elevation-z0">
+                      <mat-icon class="icon" aria-label="description icon">description</mat-icon>
+                    </button>
+                  </td>
+                  <td>
+                    <h2 style="margin: 0px;">Application Statistics</h2>
+                  </td>
+                </tr>
+              </table>
+            </section>
+            <p style="padding-top: 30px;">
+              The number of applications received and where they are in the process. Updated weekly.
+            </p>
+            <div style="display: flex; justify-content: flex-end">
+              <button class="btn btn-primary" routerLink="/policy-document/application-stats" tabindex="3">See
+                Application Statistics
+              </button>
+            </div>
+
           </section>
         </div>
       </div>

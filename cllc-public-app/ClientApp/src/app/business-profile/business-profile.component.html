@@ -1,117 +1,403 @@
-<div class="col-md-12" *ngIf="componentLoaded && businessType">
-  <h1>Business Profile</h1>
-  <h2>{{ businessName }}</h2>
-  <section *ngIf="['Coop', 'Estate', 'Trust'].indexOf(businessType) == -1">
-    <div class="col-sm-3 col-md-2" style="padding-left: 0">
-      <!-- required for floating -->
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs">
-        <li *ngIf="tabStructure.indexOf('before-you-start') !== -1" [ngClass]="{'active': view_tab == 'before-you-start'}">
-          <a (click)="changeTab('before-you-start')">Before You Start</a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('corporate-details') !== -1" [ngClass]="{'active': view_tab == 'corporate-details'}">
-          <a (click)="changeTab('corporate-details')">
-            <span *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</span>
-            <span *ngIf="businessType == 'Society'">Society Details</span>
-            <span *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partnership Details</span>
-            <span *ngIf="businessType == 'SoleProprietor'">Sole Proprietorship Details</span>
-          </a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('organization-structure') !== -1" [ngClass]="{'active': view_tab == 'organization-structure'}">
-          <a (click)="changeTab('organization-structure')">
-            <span>Organization Structure</span>
-          </a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('directors-and-officers') !== -1" [ngClass]="{'active': view_tab == 'directors-and-officers'}">
-          <a (click)="changeTab('directors-and-officers')">
-            <span *ngIf="['Society', 'SoleProprietor'].indexOf(businessType) == -1">Directors &amp; Officers</span>
-            <span *ngIf="['Society'].indexOf(businessType) !== -1">Directors &amp; Senior Managers</span>
-            <span *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">Owner</span>
-          </a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('key-personnel') !== -1" [ngClass]="{'active': view_tab == 'key-personnel'}">
-          <a (click)="changeTab('key-personnel')">
-            <span>Key Personnel</span>
-          </a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('shareholders') !== -1" [ngClass]="{'active': view_tab == 'shareholders'}">
-          <a (click)="changeTab('shareholders')">
-            <span *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Shareholders</span>
-            <span *ngIf="['GeneralPartnership','LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">Partners</span>
-          </a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('connections-to-producers') !== -1" [ngClass]="{'active': view_tab == 'connections-to-producers'}">
-          <a (click)="changeTab('connections-to-producers')">
-            <span>Connections to Producers</span>
-          </a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('finance-integrity') !== -1" [ngClass]="{'active': view_tab == 'finance-integrity'}">
-          <a (click)="changeTab('finance-integrity')">
-            <span>Financial Information</span>
-          </a>
-        </li>
-        <li *ngIf="tabStructure.indexOf('security-assessment') !== -1" [ngClass]="{'active': view_tab == 'security-assessment'}">
-          <a (click)="changeTab('security-assessment')">
-            <span>Authorizations</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-9 col-sm-9">
-      <!-- 
-      <select name="" id="" [(ngModel)]="businessType">
-        <option value="PrivateCorporation">PrivateCorporation</option>
-        <option value="GeneralPartnership">GeneralPartnership</option>
-        <option value="Society">Society</option>
-        <option value="SoleProprietor">SoleProprietor</option>
-        <option value="UnlimitedLiabilityCorporation">UnlimitedLiabilityCorporation</option>
-        <option value="LimitedLiabilityCorporation">LimitedLiabilityCorporation</option>
-        <option value="PublicCorporation">PublicCorporation</option>
-        <option value="LimitedPartnership">LimitedPartnership</option>
-        <option value="LimitedLiabilityPartnership">LimitedLiabilityPartnershipy</option>
-      </select> 
-      <br>
-    -->
+<div class="form-wrapper" style="position: relative;">
+  <div [ngBusy]="[busy, busy2]"></div>
+  <div class="row" [formGroup]="form">
+    <div class="col-lg-8 col-sm-12">
+      <div [formGroup]="form">
+        <div *ngIf="dataLoaded || true">
+          <section>
+            <h1>
+              Business Profile
+            </h1>
+            <p>
+              Please complete your business profile below. Your information will only be saved once you click the Save
+              button at the end of the page.
+            </p>
+          </section>
 
-      <!-- Tab panes -->
-      <div>
-        <router-outlet></router-outlet>
-      </div>
-      <p>&nbsp;</p>
-      <div class="col-md-10 row">
-        <a class="globalButton" *ngIf="view_tab != 'before-you-start'" class="btn btn-secondary" tabindex="1" (click)="back()">
-          <strong>Back</strong>
-          <br>
-        </a>
-        &nbsp;
-        <a *ngIf="!isOnLastTab()" class="globalButton" class="btn btn-primary" tabindex="2" (click)="next()">
-          <strong *ngIf="view_tab != 'before-you-start'">Save and Continue</strong>
-          <strong *ngIf="view_tab == 'before-you-start'">Start</strong>
-          <strong *ngIf="view_tab == 'Authorizations'">Done</strong>
-          <br>
-        </a>
-        <a *ngIf="isOnLastTab()" class="globalButton" class="btn btn-primary" tabindex="2" routerLink="/dashboard">
-          <strong>Go To Dashboard</strong>
-          <br>
-        </a>
+          <h3 class="blue-header">BUSINESS INFORMATION</h3>
+          <div formGroupName="businessProfile" class="padded-section">
+            <app-field label="Business - Legal Name">
+              <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
+                formControlName="name">
+            </app-field>
+
+            <app-field label="Business - Doing Business As (DBA) Name">
+              <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
+                formControlName="businessDBAName">
+            </app-field>
+
+            <app-field label="Business Number (BC Corporate Registry Number)" [required]="true"
+              [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
+              errorMessage="Please enter your business number (9 digits)">
+              <input class="form-control" style="width: 150px;" maxlength="9" type="text"
+                formControlName="businessNumber" (keydown)="rejectIfNotDigitOrBackSpace($event)">
+            </app-field>
+
+            <app-field label="Business Type" [required]="true"
+              [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
+              errorMessage="Please select a business type from the dropdown list">
+              <select class="form-control" disabled readonly style="width: 250px;" formControlName="businessType">
+                <option value="">Choose your organization type</option>
+                <option value="PrivateCorporation">Private Corporation</option>
+                <option value="PublicCorporation">Public Corporation</option>
+                <option value="UnlimitedLiabilityCorporation">Unlimited Liability Corporation</option>
+                <option value="LimitedLiabilityCorporation">Limited Liability Corporation</option>
+                <option value="GeneralPartnership">General Partnership</option>
+                <option value="LimitedPartnership">Limited Partnership</option>
+                <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
+                <option value="SoleProprietor">Sole Proprietor</option>
+                <option value="Society">Society</option>
+              </select>
+            </app-field>
+
+
+            <section
+              *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietor'].indexOf(form.get('businessProfile.businessType').value) == -1">
+              <div [ngClass]="{'has-error': false}">
+                <label
+                  *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1"
+                  for="">B.C. Incorporation Number</label>
+                <label *ngIf="form.get('businessProfile.businessType').value == 'Society'" for="">B.C. Society
+                  Incorporation Number</label>
+                <br />
+                <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
+                  formControlName="bcIncorporationNumber">
+                <div *ngIf="false" class="alert alert-danger" style="width: 250px;">
+                  <div *ngIf="form.controls['bcIncorporationNumber'].hasError('required') ">
+                    This is required
+                  </div>
+                </div>
+              </div>
+            </section>
+            <p></p>
+
+            <section
+              *ngIf="['GeneralPartnership', 'Partnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietor'].indexOf(form.get('businessProfile.businessType').value) == -1">
+              <div [ngClass]="{'has-error': false}">
+                <label
+                  *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1">Date
+                  of Incorporation in B.C.</label>
+                <label *ngIf="form.get('businessProfile.businessType').value == 'Society'">Date of Incorporation in
+                  B.C.</label>
+                <br>
+                <input type="text" formControlName='dateOfIncorporationInBC'
+                  style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+                  [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                <mat-datepicker #picker></mat-datepicker>
+                <!-- <div *ngIf="this.isFieldError('businessProfile.dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
+                  <div *ngIf="form.controls['businessProfile.dateOfIncorporationInBC'].hasError('required') ">
+                    This is required
+                  </div>
+                </div> -->
+              </div>
+            </section>
+          </div>
+
+
+
+          <h3 class="blue-header">BUSINESS ADDRESSES</h3>
+          <div formGroupName="businessProfile" class="padded-section">
+            <p></p>
+            <h3>Physical Address</h3>
+            <div class="row">
+              <app-field class="col-md-6 col-xs-12" label="Street Address 1" [required]="true"
+                [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
+                errorMessage="Please enter your street address">
+                <input class="form-control" style="width: 400px;" type="text" formControlName="physicalAddressStreet">
+              </app-field>
+              <app-field label="Street Address 2">
+                <input class="form-control" style="width: 450px;" type="text" formControlName="physicalAddressStreet2">
+              </app-field>
+              <app-field class="col-md-6 col-xs-12" label="City" [required]="true"
+                [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
+                errorMessage="Please enter your city">
+                <input class="form-control" style="width: 350px;" type="text" formControlName="physicalAddressCity">
+              </app-field>
+              <div class="col-md-6 col-xs-12 row" style="padding: 0;">
+                <section class="col-md-6 col-xs-12">
+                  <app-field label="Province">
+                    <input class="form-control" style="width: 200px;" readonly type="text"
+                      formControlName="physicalAddressProvince">
+                  </app-field>
+                </section>
+                <section class="col-md-6 col-xs-12">
+                  <app-field label="Postal Code" [required]="true"
+                    [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
+                    errorMessage="Please enter your postal code">
+                    <input class="form-control" style="width: 200px;" type="text"
+                      formControlName="physicalAddressPostalCode">
+                  </app-field>
+                </section>
+              </div>
+              <app-field class="col-md-6 col-xs-12" label="Country">
+                <input class="form-control" style="width: 350px;" readonly type="text"
+                  formControlName="physicalAddressCountry">
+              </app-field>
+            </div>
+            <p></p>
+            <div>
+              <hr>
+              <h3>Mailing Address</h3>
+              <section>
+                <input type="checkbox" style="margin-right: 10px;" formControlName="_mailingSameAsPhysicalAddress">
+                <span>Same as physical address</span>
+              </section>
+              <div class="row">
+                <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
+                  [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
+                  [required]="true">
+                  <input type="text" style="width: 400px;" formControlName="mailingAddressStreet" class="form-control">
+                </app-field>
+                <app-field label="PO Box or Street Address 2" [required]="false">
+                  <input type="text" style="width: 450px;" formControlName="mailingAddressStreet2" class="form-control">
+                </app-field>
+                <app-field class="col-md-6 col-xs-12" label="City"
+                  [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched"
+                  [required]="true">
+                  <input type="text" style="width: 350px;" formControlName="mailingAddressCity" class="form-control">
+                </app-field>
+                <div class="col-md-6 col-xs-12 row" style="padding: 0;">
+                  <section class="col-md-6 col-xs-12">
+                    <app-field label="Province/State"
+                      [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
+                      [required]="true">
+                      <input type="text" style="width: 200px;" formControlName="mailingAddressProvince"
+                        class="form-control">
+                    </app-field>
+                  </section>
+                  <section class="col-md-6 col-xs-12">
+                    <app-field label="Postal /Zip Code"
+                      [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
+                      [required]="true">
+                      <input type="text" style="width: 200px;" formControlName="mailingAddressPostalCode"
+                        class="form-control">
+                    </app-field>
+                  </section>
+                </div>
+                <app-field class="col-md-6 col-xs-12" label="Country"
+                  [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
+                  [required]="true">
+                  <input type="text" style="width: 350px;" formControlName="mailingAddressCountry" class="form-control">
+                </app-field>
+              </div>
+            </div>
+
+            <hr>
+
+            <app-field label="Business Phone Number" [required]="true"
+              [valid]="form.get('businessProfile.contactPhone').valid || !form.get('businessProfile.contactPhone').touched"
+              errorMessage="Please enter your 10-digit business phone number, without including any spaces">
+              <input class="form-control" style="width: 250px;" maxlength="10"
+                (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPhone">
+            </app-field>
+            <app-field label="Business Email" [required]="true"
+              [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
+              errorMessage="Please enter a valid email address"
+              afterLabelText="By submitting your business email address, you agree that the Security Programs Division can use it to communicate with you about your application.">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail"
+                (blur)="trimValue(form.get('businessProfile.contactEmail'))">
+            </app-field>
+            <!-- <section>
+              <input type="checkbox" [required]="true" formControlName="consentForEmailCommunication" #emailConsent>
+              <strong class="error-states"> *</strong>
+              <span> I authorize the Security Programs Division to use my email address to communicate with me. </span>
+              <p class="error-states" *ngIf="form.get('businessProfile.consentForEmailCommunication').touched && !form.get('businessProfile.consentForEmailCommunication').valid">
+                Please confirm consent for SPD to contact you at the provided email address
+              </p>
+              <p></p>
+            </section>
+            <app-field label="Website Address">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="websiteAddress">
+            </app-field> -->
+          </div>
+
+          <h3 class="blue-header">BUSINESS CONTACT</h3>
+          <div formGroupName="primarycontact" class="padded-section">
+            <h2>Primary Contact</h2>
+
+            <app-field label="First Name" [required]="true"
+              [valid]="form.get('primarycontact.firstname').valid || !form.get('primarycontact.firstname').touched"
+              errorMessage="Please enter your business contact's first name">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="firstname">
+            </app-field>
+
+            <app-field label="Last Name" [required]="true"
+              [valid]="form.get('primarycontact.lastname').valid || !form.get('primarycontact.lastname').touched"
+              errorMessage="Please enter your business contact's last name">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="lastname">
+            </app-field>
+
+            <app-field label="Title/ Position" [required]="false" [valid]="true">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="jobTitle">
+            </app-field>
+
+            <app-field label="Phone Number" [required]="true"
+              [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"
+              errorMessage="Please enter your business contact's 10-digit phone number">
+              <input class="form-control" style="width: 250px;" maxlength="10"
+                (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="telephone1">
+            </app-field>
+
+            <!-- <app-field label="Phone Number (alternate)" [required]="false">
+              <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                type="text" formControlName="phoneNumberAlt">
+            </app-field> -->
+
+            <app-field label="Email" [required]="true"
+              [valid]="form.get('primarycontact.emailaddress1').valid || !form.get('primarycontact.emailaddress1').touched"
+              errorMessage="Please enter your business contact's emailaddress1 address">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="emailaddress1"
+                (blur)="trimValue(form.get('primarycontact.emailaddress1'))">
+            </app-field>
+          </div>
+
+          <!-- <h3 class="blue-header">KEY PERSONNEL & SENIOR EMPLOYEES</h3>
+          <div class="padded-section">
+            <app-key-personnel [accountId]="saveFormData?.businessProfile?.id" [businessType]="saveFormData?.businessProfile?.businessType"></app-key-personnel>
+          </div>
+
+          <h3 class="blue-header">DIRECTORS AND OFFICERS</h3>
+          <div class="padded-section"  *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType && legalEntityId">
+            <app-directors-and-officers  [accountId]="saveFormData?.businessProfile?.id" [businessType]="saveFormData?.businessProfile?.businessType" [parentLegalEntityId]="legalEntityId"></app-directors-and-officers>
+          </div>
+
+          <h3 class="blue-header">SHAREHOLDERS</h3>
+          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType && legalEntityId">
+            <app-edit-shareholders [accountId]="saveFormData?.businessProfile?.id" [businessType]="saveFormData?.businessProfile?.businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
+          </div> -->
+
+          <h3 class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNBIS</h3>
+          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
+            <app-connection-to-producers [accountId]="saveFormData?.businessProfile?.id"
+              [businessType]="saveFormData?.businessProfile?.businessType"></app-connection-to-producers>
+          </div>
+
+
+          <!-- <section>
+            If you have more than one contact, please
+            <a href="javascript:void(0);" (click)="_showAdditionalContact = true"> click here to add them</a>.
+          </section> -->
+
+          <!-- <div *ngIf="_showAdditionalContact" formGroupName="additionalContact">
+            <hr>
+            <h2>Additional Contact</h2>
+
+            <app-field label="First Name" [required]="true" [valid]="form.get('additionalContact.firstName').valid || !form.get('additionalContact.firstName').touched"
+              errorMessage="Please enter your business contact's first name">
+              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
+                formControlName="firstName">
+            </app-field>
+
+            <app-field label="Last Name" [required]="true" [valid]="form.get('additionalContact.lastname').valid || !form.get('additionalContact.lastname').touched"
+              errorMessage="Please enter your business contact's last name">
+              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
+                formControlName="lastname">
+            </app-field>
+
+            <app-field label="Title/ Position" [required]="false" [valid]="true">
+              <input class="form-control" style="width: 350px;" type="text" formControlName="title">
+            </app-field>
+
+            <app-field label="Phone Number (main)" [required]="true" [valid]="form.get('additionalContact.telephone1').valid || !form.get('additionalContact.telephone1').touched"
+              errorMessage="Please enter your business contact's 10-digit phone number">
+              <input class="form-control" [required]="_showAdditionalContact" style="width: 250px;" maxlength="10"
+                (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="phoneNumber">
+            </app-field>
+
+            <app-field label="Phone Number (alternate)" [required]="false">
+              <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                type="text" formControlName="phoneNumberAlt">
+            </app-field>
+
+            <app-field label="Email" [required]="true" [valid]="form.get('additionalContact.email').valid || !form.get('additionalContact.email').touched"
+              errorMessage="Please enter your business contact's email address">
+              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
+                formControlName="email" (blur)="trimValue(form.get('additionalContact.email'))">
+            </app-field>
+
+            <section>
+              <a style="float: right;" href="javascript:void(0);" (click)="hideAdditionalContact()">
+                <i class="fas fa-trash-alt"></i>
+                Delete Contact</a>
+            </section>
+          </div>
+          <div style="clear: both;"></div>
+          <p></p> -->
+
+          <div *ngIf="!form.valid && form.touched && false" class="error-summary">
+            <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+            <span>Some required fields have not been completed</span>
+          </div>
+          <section style="position: relative;">
+            <div [ngBusy]="[busy3]"></div>
+            <a routerLink="/dashboard">
+              <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
+            <span style="float: right;">
+              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">SAVE &
+                CONTINUE
+                <i class="fas fa-chevron-right"></i></button>
+            </span>
+          </section>
+        </div>
       </div>
     </div>
-  </section>
-  <section class="container" *ngIf="['Coop', 'Estate', 'Trust'].indexOf(businessType) !== -1">
-    <h2>Before You Start</h2>
-    <p>
-      This organization type is not available on the beta version of the Cannabis Licensing application.
-      <br> Please contact the Liquor Control and Licensing Branch for assistance in completing this business profile
-    </p>
-    <br>
-    <span>Contact Phone #:</span>
-    <br>
-    <span>Victoria 250 952-5787</span>
-    <br>
-    <span>Toll Free 1 866 209-2111</span>
-    <br>
-    <br>
-    <span>Email:</span>
-    <span class="email">LCLBHelpDesk@gov.bc.ca</span>
-  </section>
+    <div class="col-lg-4 col-sm-12" style="position: relative; padding-left: 50px;">
+      <!-- <div [ngBusy]="busy"></div> -->
+      <p></p>
+      <section class="submit-container">
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper"><i class="fas fa-address-card"></i></h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Update your BCeID information</h2>
+            </td>
+          </tr>
+        </table>
+        <div class="submit-content">
+          <p>
+            Your Legal Business Name and Business Number are imported from BCeID. If there is an error or change in
+            this information, you must contact BCeID to correct it.
+          </p>
+          <div>
+            <i class="fas fa-phone" style="margin-right: 10px"></i>
+            <strong>Phone</strong>
+            <br>
+            <span>1 888 356-2741 (Canada and USA toll free)</span>
+            <br>
+            <span>604 660-2355 (Within lower mainland or outside Canada and USA)</span>
+          </div>
+          <div>
+            <i class="fas fa-envelope" style="margin-right: 10px"></i>
+            <strong>Email</strong>
+            <br>
+            <span>Contact us using our <a href="https://www.bceid.ca/help_request/default.aspx?referrer=AB%2f2"
+                style="color:white">online
+                form</a> or at
+              <a href="mailto:BCeIDREgistrationDesk@gov.bc.ca"
+                style="color:white">BCeIDRegistrationDesk@gov.bc.ca</a></span>
+          </div>
+          <p>
+            All other information can be changed on this Business Profile page.
+          </p>
+
+        </div>
+      </section>
+      <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none;">
+        <h2 style="color: #000">Collection Notice:</h2>
+        <div class="submit-content">
+          <p>
+            The Security Programs Division will collect your personal information for the purpose of fulfilling the
+            requirements of the Pill Press and Related Equipment Control Act and associated regulations in Pill Press
+            registration, compliance and enforcement matters in accordance with Sections 26 (a) and (c) of the Freedom
+            of Information and Protection of Privacy Act. Should you have any questions about the collection, use, or
+            disclosure of personal information, please contact the Senior Policy Analyst, Security Programs Division
+            via mail to PO Box 9217 Stn Prov Govt Victoria, BC V8W 9J1; email to PillPressLicensing@gov.bc.ca; or by
+            telephone at 1-855-587-0185.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
 </div>

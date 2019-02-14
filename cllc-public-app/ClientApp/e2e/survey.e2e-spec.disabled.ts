@@ -36,12 +36,12 @@ describe('App Survey Page', () => {
       await page.navigateTo();
       let heading = await page.getMainHeading();
       console.log("Survey title is: " + heading);
-      expect(heading).toEqual('What does an applicant need to apply for a cannabis licence?');
+      expect(heading).toEqual('What an applicant needs to apply for a cannabis licence.');
     });
 
     it('should load the survey configuration file', async () => {
         console.log('surveyConfig title is ' + surveyConfig.title);
-        expect(surveyConfig.title).toEqual('What does an applicant need to apply for a cannabis licence?');
+        expect(surveyConfig.title).toEqual('What an applicant needs to apply for a cannabis licence.');
         expect(page.getMainHeading()).toEqual(surveyConfig.title);
         expect(surveyConfig.pages[0].name).toEqual('p1');
         expect(surveyConfig.pages[0].elements[0].type).toEqual('radiogroup');

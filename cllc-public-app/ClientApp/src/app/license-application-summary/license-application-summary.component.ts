@@ -8,7 +8,7 @@ import { AdoxioApplication } from '../models/adoxio-application.model';
 import { AdoxioLicense } from '../models/adoxio-license.model';
 import { Observable, Subscription } from 'rxjs';
 import { PaymentDataService } from '../services/payment-data.service';
-import { UPLOAD_FILES_MODE } from '../lite/application/application.component';
+import { UPLOAD_FILES_MODE } from '../lite-application-dashboard/lite-application-dashboard.component';
 
 const ACTIVE = 'Active';
 const PAYMENT_REQUIRED = 'Payment Required';
@@ -95,7 +95,7 @@ export class LicenseApplicationSummaryComponent implements OnInit {
 
   payLicenceFee(application) {
     this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
-      const data = res.json();
+      const data = <any>res;
       window.location.href = data.url;
     }, err => {
       if (err._body === 'Payment already made') {
