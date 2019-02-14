@@ -38,21 +38,26 @@ export class DirectorsAndOfficersComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    const sub = this.store.select(state => state.currentAccountState)
-      .filter(state => !!state)
-      .subscribe(state => {
-        this.accountId = state.currentAccount.id;
-        this.businessType = state.currentAccount.businessType;
-        if (this.businessType === 'SoleProprietor') {
-          this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
-        }
-        const sub2 = this.route.parent.params.subscribe(p => {
-          this.parentLegalEntityId = p.legalEntityId;
-          this.getDirectorsAndOfficers();
-        });
-        this.subscriptions.push(sub2);
-      });
-    this.subscriptions.push(sub);
+
+    if (this.businessType === 'SoleProprietor') {
+      this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
+    }
+    this.getDirectorsAndOfficers();
+    // const sub = this.store.select(state => state.currentAccountState)
+    //   .filter(state => !!state)
+    //   .subscribe(state => {
+    //     this.accountId = state.currentAccount.id;
+    //     this.businessType = state.currentAccount.businessType;
+    //     if (this.businessType === 'SoleProprietor') {
+    //       this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
+    //     }
+    //     const sub2 = this.route.parent.params.subscribe(p => {
+    //       this.parentLegalEntityId = p.legalEntityId;
+    //       this.getDirectorsAndOfficers();
+    //     });
+    //     this.subscriptions.push(sub2);
+    //   });
+    // this.subscriptions.push(sub);
   }
 
   getDirectorsAndOfficers() {
@@ -99,7 +104,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     }
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = new DynamicsAccount();
+      adoxioLegalEntity.account = <DynamicsAccount>{};
       adoxioLegalEntity.account.id = this.accountId;
     }
     // adoxioLegalEntity.relatedentities = [];
@@ -156,7 +161,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error.json() || '';
+      const body = error || '';
       const err = body || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {

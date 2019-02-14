@@ -41,17 +41,20 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState)
-      .filter(state => !!state)
-      .subscribe(state => {
-        this.accountId = state.currentAccount.id;
-        this.businessType = state.currentAccount.businessType;
-        this.route.parent.params.subscribe(p => {
-          this.parentLegalEntityId = p.legalEntityId;
-          this.getShareholders();
-          this.updateDisplayedColumns();
-        });
-      });
+    this.getShareholders();
+    this.updateDisplayedColumns();
+
+    // this.store.select(state => state.currentAccountState)
+    //   .filter(state => !!state)
+    //   .subscribe(state => {
+    //     this.accountId = state.currentAccount.id;
+    //     this.businessType = state.currentAccount.businessType;
+    //     this.route.parent.params.subscribe(p => {
+    //       this.parentLegalEntityId = p.legalEntityId;
+    //       this.getShareholders();
+    //       this.updateDisplayedColumns();
+    //     });
+    //   });
   }
 
   updateDisplayedColumns() {
@@ -161,7 +164,7 @@ export class EditShareholdersComponent implements OnInit {
     // adoxioLegalEntity.relatedentities = [];
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = new DynamicsAccount();
+      adoxioLegalEntity.account = <DynamicsAccount>{};
       adoxioLegalEntity.account.id = this.accountId;
     }
     return adoxioLegalEntity;
@@ -270,7 +273,7 @@ export class EditShareholdersComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error.json() || '';
+      const body = error || '';
       const err = body || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
