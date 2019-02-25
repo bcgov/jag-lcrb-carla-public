@@ -62,8 +62,8 @@
 
         <p>Establishment names will be reviewed for approval during the application process.</p>
 
-        <input class="form-control" style="max-width: 500px;" type="text" id="establishmentName" formControlName="establishmentName"
-          placeholder="Begin by entering the name of the proposed establishment.">
+        <input class="form-control" style="max-width: 500px;" type="text" id="establishmentName"
+          formControlName="establishmentName" placeholder="Begin by entering the name of the proposed establishment.">
         <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
           <div *ngIf="form.controls['establishmentName'].hasError('required') ">
             This is required
@@ -71,49 +71,48 @@
         </div>
       </div>
       <div>
-          <p></p>
-          <div class="row">
-            <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
-              [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
-              errorMessage="Please enter your street address">
-              <input class="form-control" type="text" formControlName="establishmentaddressstreet">
+        <p></p>
+        <div class="row">
+          <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
+            [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
+            errorMessage="Please enter your street address">
+            <input class="form-control" type="text" formControlName="establishmentaddressstreet">
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+            [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
+            errorMessage="Please enter your city">
+            <input class="form-control" type="text" formControlName="establishmentaddresscity">
+          </app-field>
+          <section class="col-md-4 col-xs-12">
+            <app-field label="Province" [isFullWidth]="true">
+              <input class="form-control" readonly type="text" value="British Columbia">
             </app-field>
-            <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
-              [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
-              errorMessage="Please enter your city">
-              <input class="form-control"  type="text" formControlName="establishmentaddresscity">
+          </section>
+          <section class="col-md-4 col-xs-12">
+            <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
+              [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
+              errorMessage="Please enter your postal code">
+              <input class="form-control" type="text" formControlName="establishmentaddresspostalcode">
             </app-field>
-              <section class="col-md-4 col-xs-12">
-                <app-field label="Province" [isFullWidth]="true" >
-                  <input class="form-control"  readonly type="text"
-                    value="British Columbia">
-                </app-field>
-              </section>
-              <section class="col-md-4 col-xs-12">
-                <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
-                  [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
-                  errorMessage="Please enter your postal code">
-                  <input class="form-control" type="text"
-                    formControlName="establishmentaddresspostalcode">
-                </app-field>
-              </section>
-            <app-field class="col-md-6 col-xs-12" label="Country">
-              <input class="form-control" style="width: 350px;" readonly type="text"
-                value="Canada">
-            </app-field>
-          </div>
+          </section>
+          <app-field class="col-md-6 col-xs-12" label="Country">
+            <input class="form-control" style="width: 350px;" readonly type="text" value="Canada">
+          </app-field>
         </div>
+      </div>
     </section>
     <p>&nbsp;</p>
     <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
     <div class="padded-section">
 
-      <app-field label="First Name" [required]="true" [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
+      <app-field label="First Name" [required]="true"
+        [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
         errorMessage="Please enter your business contact's first name">
         <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonfirstname">
       </app-field>
 
-      <app-field label="Last Name" [required]="true" [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
+      <app-field label="Last Name" [required]="true"
+        [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
         errorMessage="Please enter your business contact's last name">
         <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonfirstname">
       </app-field>
@@ -122,7 +121,8 @@
         <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonrole">
       </app-field>
 
-      <app-field label="Phone Number (main)" [required]="true" [valid]="form.get('contactpersonphone').valid || !form.get('contactpersonphone').touched"
+      <app-field label="Phone Number (main)" [required]="true"
+        [valid]="form.get('contactpersonphone').valid || !form.get('contactpersonphone').touched"
         errorMessage="Please enter your business contact's 10-digit phone number">
         <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
           type="text" formControlName="contactpersonphone">
@@ -133,12 +133,118 @@
           type="text" formControlName="phoneNumberAlt">
       </app-field> -->
 
-      <app-field label="Email" [required]="true" [valid]="form.get('contactpersonemail').valid || !form.get('contactpersonemail').touched"
+      <app-field label="Email" [required]="true"
+        [valid]="form.get('contactpersonemail').valid || !form.get('contactpersonemail').touched"
         errorMessage="Please enter your business contact's email address">
-        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonemail" (blur)="trimValue(form.get('contactpersonemail'))">
+        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonemail"
+          (blur)="trimValue(form.get('contactpersonemail'))">
       </app-field>
     </div>
-
+    <h3 class="blue-header">HOURS OF SALE</h3>
+    <div class="padded-section">
+      <table>
+        <tr>
+          <th></th>
+          <th>Sunday</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+        </tr>
+        <tr>
+          <td>Open</td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursSundayOpen">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursMondayOpen">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursTuesdayOpen">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursWednesdayOpen">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursThursdayOpen">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursFridayOpen">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursSaturdayOpen">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Close</td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursSundayClose">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursMondayClose">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursTuesdayClose">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursWednesdayClose">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursThursdayClose">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursFridayClose">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control" formControlName="serviceHoursSaturdayClose">
+              <option value="">Please Select</option>
+              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
     <hr>
     <p>&nbsp;</p>
 
@@ -146,9 +252,10 @@
     <br>
     <p>Upload the completed application form below.</p>
     <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'"
-        #mainForm></app-file-uploader>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm>
+      </app-file-uploader>
     </section>
     <br>
     <hr>
@@ -158,8 +265,9 @@
     <br>
     <p>Upload the completed Financial Integrity form below.</p>
     <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [multipleFiles]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
         #financialIntegrityDocuments></app-file-uploader>
     </section>
     <br>
@@ -170,9 +278,9 @@
     <br>
     <p>Upload all required documentation that will support the licence application.</p>
     <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
-        entityName="application" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
-        #supportingDocuments></app-file-uploader>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
+        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments></app-file-uploader>
     </section>
     <br>
     <hr>
@@ -250,9 +358,10 @@
     <br>
     <p>Upload the completed application form below.</p>
     <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [multipleFiles]="false" [enableFileDeletion]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'"
-        #mainForm></app-file-uploader>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" [enableFileDeletion]="false"
+        entityName="application" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm></app-file-uploader>
     </section>
     <br>
     <hr>
@@ -262,9 +371,11 @@
     <br>
     <p>Upload the completed Financial Integrity form below.</p>
     <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity" fileTypes="FILE MUST BE IN PDF FORMAT."
-        [multipleFiles]="false" [enableFileDeletion]="false" entityName="application" [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
-        #financialIntegrityDocuments></app-file-uploader>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" [enableFileDeletion]="false"
+        entityName="application" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
     </section>
     <br>
     <hr>
@@ -274,9 +385,10 @@
     <br>
     <p>Upload all required documentation that will support the licence application.</p>
     <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting" fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
-        entityName="application" [enableFileDeletion]="false" [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
-        #supportingDocuments></app-file-uploader>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
+        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [enableFileDeletion]="false"
+        [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
+      </app-file-uploader>
     </section>
   </div>
 </div>
