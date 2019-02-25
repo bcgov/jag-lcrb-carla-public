@@ -46,6 +46,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   validationMessages: any[];
   showValidationMessages: boolean;
   submittedApplications = 8;
+  ServiceHours = ServiceHours;
 
   UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   mode: string;
@@ -79,19 +80,20 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
       servicehHoursStandardHours: [''],
       serviceHoursSundayOpen: [''],
-      serviceHoursSundayClose: [''],
       serviceHoursMondayOpen: [''],
-      serviceHoursMondayClose: [''],
       serviceHoursTuesdayOpen: [''],
-      serviceHoursTuesdayClose: [''],
       serviceHoursWednesdayOpen: [''],
-      serviceHoursWednesdayClose: [''],
       serviceHoursThursdayOpen: [''],
-      serviceHoursThursdayClose: [''],
       serviceHoursFridayOpen: [''],
-      serviceHoursFridayClose: [''],
       serviceHoursSaturdayOpen: [''],
+      serviceHoursSundayClose: [''],
+      serviceHoursMondayClose: [''],
+      serviceHoursTuesdayClose: [''],
+      serviceHoursWednesdayClose: [''],
+      serviceHoursThursdayClose: [''],
+      serviceHoursFridayClose: [''],
       serviceHoursSaturdayClose: [''],
+
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
