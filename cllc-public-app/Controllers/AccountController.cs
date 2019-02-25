@@ -460,12 +460,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError(LoggingEvents.Error, "Error creating legal entity.");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    throw new OdataerrorException("Error creating legal entity");
+                    string legalEntityId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    if (!string.IsNullOrEmpty(legalEntityId) && Guid.TryParse(legalEntityId, out Guid legalEntityIdGuid))
+                    {
+                        legalEntity = await _dynamicsClient.GetLegalEntityById(legalEntityIdGuid);
+                    }
+                    else
+                    {
+                        _logger.LogError(LoggingEvents.Error, "Error creating legal entity.");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        throw new OdataerrorException("Error creating legal entity");
+                    }
+
                 }
 
                 account.Accountid = legalEntity._adoxioAccountValue;
@@ -517,13 +526,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError(LoggingEvents.Error, "Error creating user contact.");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    throw new OdataerrorException("Error creating user contact.");
-                }
+                    
+                    string contactId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    if (!string.IsNullOrEmpty(contactId) && Guid.TryParse(contactId, out Guid contactGuid))
+                    {
+                        userContact = await _dynamicsClient.GetContactById(contactGuid);
+                    }
+                    else
+                    {
+                        _logger.LogError(LoggingEvents.Error, "Error creating contact");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        throw new OdataerrorException("Error creating contact");
+                    }                        
+                }                
             }
 
             // always patch the userContact so it relates to the account.

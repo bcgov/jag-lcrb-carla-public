@@ -977,7 +977,7 @@ namespace DemoTool
             {
                 "adoxio_Account"
             };
-            var data = _dynamicsClient.Adoxiolegalentities.Get();// expand: expand);
+            var data = _dynamicsClient.Establishments.Get();// expand: expand);
             return (List<MicrosoftDynamicsCRMadoxioEstablishment>)data.Value;
         }
 
