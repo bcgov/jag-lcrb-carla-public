@@ -220,7 +220,22 @@ namespace Gov.Lclb.Cllb.Public
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
             string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
 
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword, sharePointNativeBaseURI));
+            // SharePoint could be using a different username / password.
+
+            string sharePointSsgUsername = ssgUsername;
+            string sharePointSsgPassword = ssgPassword;
+
+            if (!string.IsNullOrEmpty(Configuration["SHAREPOINT_SSG_USERNAME"]))
+            {
+                sharePointSsgUsername = Configuration["SHAREPOINT_SSG_USERNAME"];
+            }
+
+            if (!string.IsNullOrEmpty(Configuration["SHAREPOINT_SSG_PASSWORD"]))
+            {
+                sharePointSsgPassword = Configuration["SHAREPOINT_SSG_PASSWORD"];
+            }
+
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, sharePointSsgUsername, sharePointSsgPassword, sharePointNativeBaseURI));
 
             // add BCeID Web Services
 

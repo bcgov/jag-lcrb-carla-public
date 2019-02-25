@@ -17,12 +17,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static class DynamicsExtensions
     {
 
-        public static string GetEntityURI(this IDynamicsClient client, string entityType, string id)
-        {
-            string result = "";
-            result = client.NativeBaseUri + entityType + "(" + id.Trim() + ")";
-            return result;
-        }
+        
 
 
 
