@@ -47,6 +47,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioServicehoursfridayclose = (int?)from.ServiceHoursFridayClose;
             to.AdoxioServicehourssaturdayopen = (int?)from.ServiceHoursSaturdayOpen;
             to.AdoxioServicehourssaturdayclose = (int?)from.ServiceHoursSaturdayClose;
+            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
+             to.AdoxioSignatureagreement = from.SignatureAgreement;
 
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
@@ -132,6 +134,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioApplicationVM.ServiceHoursFridayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayclose;
             adoxioApplicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayopen;
             adoxioApplicationVM.ServiceHoursSaturdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayclose;
+
+            adoxioApplicationVM.AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
+            adoxioApplicationVM.SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement;
 
             adoxioApplicationVM.licenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid == true);
 
