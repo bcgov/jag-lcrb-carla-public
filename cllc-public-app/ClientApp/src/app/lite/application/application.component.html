@@ -3,6 +3,7 @@
     <div [ngBusy]="busy"></div>
 
     <h1>Submit the Cannabis Retail Store Licence Application</h1>
+    {{form.value | json}}
   </div>
   <div [formGroup]="form" class="application-wrapper">
 
@@ -72,49 +73,58 @@
       </div>
       <div>
         <p></p>
-        <div class="row">
+        <address class="row">
           <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
             [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
             errorMessage="Please enter your street address">
-            <input class="form-control" type="text" formControlName="establishmentaddressstreet">
+            <input class="form-control" type="text" autocomplete="address-line1"
+              formControlName="establishmentaddressstreet">
           </app-field>
           <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
             [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
             errorMessage="Please enter your city">
-            <input class="form-control" type="text" formControlName="establishmentaddresscity">
+            <input class="form-control" type="text" autocomplete="address-level2"
+              formControlName="establishmentaddresscity">
           </app-field>
           <section class="col-md-4 col-xs-12">
             <app-field label="Province" [isFullWidth]="true">
-              <input class="form-control" readonly type="text" value="British Columbia">
+              <input class="form-control" autocomplete="address-level1" readonly type="text" value="British Columbia">
             </app-field>
           </section>
           <section class="col-md-4 col-xs-12">
             <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
               [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
               errorMessage="Please enter your postal code">
-              <input class="form-control" type="text" formControlName="establishmentaddresspostalcode">
+              <input class="form-control" type="text" autocomplete="postal-code"
+                formControlName="establishmentaddresspostalcode">
             </app-field>
           </section>
           <app-field class="col-md-6 col-xs-12" label="Country">
-            <input class="form-control" style="width: 350px;" readonly type="text" value="Canada">
+            <input class="form-control" autocomplete="country-name" style="width: 350px;" readonly type="text"
+              value="Canada">
           </app-field>
-        </div>
+        </address>
+        <app-field label="Parcel Identifier" [required]="true">
+          <input type="text" class="form-control" style="width: 200px;" formControlName="establishmentparcelid">
+        </app-field>
       </div>
     </section>
     <p>&nbsp;</p>
     <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-    <div class="padded-section">
+    <address class="padded-section">
 
       <app-field label="First Name" [required]="true"
         [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
         errorMessage="Please enter your business contact's first name">
-        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonfirstname">
+        <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+          formControlName="contactpersonfirstname">
       </app-field>
 
       <app-field label="Last Name" [required]="true"
         [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
         errorMessage="Please enter your business contact's last name">
-        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonfirstname">
+        <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+          formControlName="contactpersonlastname">
       </app-field>
 
       <app-field label="Title/ Position" [required]="false" [valid]="true">
@@ -124,8 +134,8 @@
       <app-field label="Phone Number (main)" [required]="true"
         [valid]="form.get('contactpersonphone').valid || !form.get('contactpersonphone').touched"
         errorMessage="Please enter your business contact's 10-digit phone number">
-        <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-          type="text" formControlName="contactpersonphone">
+        <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+          (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactpersonphone">
       </app-field>
 
       <!-- <app-field label="Phone Number (alternate)" [required]="false">
@@ -136,15 +146,20 @@
       <app-field label="Email" [required]="true"
         [valid]="form.get('contactpersonemail').valid || !form.get('contactpersonemail').touched"
         errorMessage="Please enter your business contact's email address">
-        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonemail"
-          (blur)="trimValue(form.get('contactpersonemail'))">
+        <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+          formControlName="contactpersonemail" (blur)="trimValue(form.get('contactpersonemail'))">
       </app-field>
-    </div>
+    </address>
+
     <h3 class="blue-header">HOURS OF SALE</h3>
     <div class="padded-section">
-      <table>
+      <p>Indicate the store's proposed hours for cannabis sales below. Proposed hours must fall between 9 a.m. and 11
+        p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed at
+        times they are licenced to be open.
+      </p>
+      <table class="store-hours">
         <tr>
-          <th></th>
+          <th class="lead"></th>
           <th>Sunday</th>
           <th>Monday</th>
           <th>Tuesday</th>
@@ -154,96 +169,127 @@
           <th>Saturday</th>
         </tr>
         <tr>
-          <td>Open</td>
+          <th>Open</th>
           <td>
             <select class="form-control" formControlName="serviceHoursSundayOpen">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursMondayOpen">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursTuesdayOpen">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursWednesdayOpen">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursThursdayOpen">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursFridayOpen">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursSaturdayOpen">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
         </tr>
         <tr>
-          <td>Close</td>
+          <th>Close</th>
           <td>
             <select class="form-control" formControlName="serviceHoursSundayClose">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursMondayClose">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursTuesdayClose">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursWednesdayClose">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursThursdayClose">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursFridayClose">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
           <td>
             <select class="form-control" formControlName="serviceHoursSaturdayClose">
-              <option value="">Please Select</option>
+              <option value=""> -- </option>
               <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
             </select>
           </td>
         </tr>
       </table>
+    </div>
+    <h3 class="blue-header">DECLARATIONS</h3>
+    <div class="padded-section">
+      <p>This application should be submitted by an individual with the authority to bind the applicant. The branch
+        relies on the applicant to ensure that the individual who submits this application is authorized to do so.
+        Typically, an appropriate individual in a corporation will be a duty authorized signatory who will usually be an
+        officer or, in some cases, a director.
+      </p>
+      <p>Note: An agent, lawuer, licensee representative or third party operator may NOT submit this application on
+        behalf ot the applicant.</p>
+      <section style="display: flex">
+        <input type="checkbox" formControlName="authorizedToSubmit">
+        <span class="error-states">*</span>
+        <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application</div>
+      </section>
+      <p>
+        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general manager
+        an application, or
+        information or a record included as part of the application, that contains false or misleading information, or
+        fails to disclose a material fact”
+      </p>
+      <section style="display: flex">
+        <input type="checkbox" formControlName="signatureAgreement">
+        <span class="error-states">*</span>
+        <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+          application is true and complete</div>
+      </section>
+      <app-field label="Name of Authorized Individual" style="margin-top: 10px;" [isFullWidth]="true" [required]="true">
+        <input type="text" autocomplete="name" class="form-control">
+      </app-field>
+
     </div>
     <hr>
     <p>&nbsp;</p>

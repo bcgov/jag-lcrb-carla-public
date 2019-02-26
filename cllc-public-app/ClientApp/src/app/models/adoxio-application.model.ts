@@ -49,4 +49,7 @@ export class AdoxioApplication {
   serviceHoursFridayClose: string;
   serviceHoursSaturdayOpen: string;
   serviceHoursSaturdayClose: string;
+
+  authorizedToSubmit: boolean;
+  signatureAgreement: boolean;
 }
