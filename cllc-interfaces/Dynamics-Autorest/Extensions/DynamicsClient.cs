@@ -28,6 +28,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        /// <summary>
+        /// Get 
+        /// </summary>
+        /// <param name="odee">the source exception</param>
+        /// <param name="errorMessage">The error message to present if no entity was created, or null if no error should be shown.</param>
+        /// <returns>The ID of a new record, or null of no record was created</returns>
         public string GetCreatedRecord(OdataerrorException odee, string errorMessage)
         {
             string result = null;
@@ -42,10 +48,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                Console.WriteLine(errorMessage);
-                Console.WriteLine(odee.Message);
-                Console.WriteLine(odee.Request.Content);
-                Console.WriteLine(odee.Response.Content);
+                if (errorMessage != null)
+                {
+                    Console.WriteLine(errorMessage);
+                    Console.WriteLine(odee.Message);
+                    Console.WriteLine(odee.Request.Content);
+                    Console.WriteLine(odee.Response.Content);
+                }                
             }
             return result;
         }
