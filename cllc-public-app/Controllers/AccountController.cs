@@ -320,8 +320,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + JsonConvert.SerializeObject(item));
 
             ViewModels.Account result = null;
-            Boolean updateIfNull = true;
+            bool updateIfNull = true;
             Guid tryParseOutGuid;
+
+            bool createContact = true;
 
             // get UserSettings from the session
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -361,6 +363,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
+                createContact = false;
             }
             catch (OdataerrorException odee)
             {
@@ -459,13 +462,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
                 }
                 catch (OdataerrorException odee)
-                {
-                    _logger.LogError(LoggingEvents.Error, "Error creating legal entity.");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    throw new OdataerrorException("Error creating legal entity");
+                {                    
+                    string legalEntityId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    if (!string.IsNullOrEmpty(legalEntityId) && Guid.TryParse(legalEntityId, out Guid legalEntityGuid))
+                    {
+                        legalEntity = await _dynamicsClient.GetLegalEntityById(legalEntityGuid);
+                    }
+                    else
+                    {
+                        _logger.LogError(LoggingEvents.Error, "Error creating legal entity.");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        throw new OdataerrorException("Error creating legal entitiy");
+                    }
                 }
 
                 account.Accountid = legalEntity._adoxioAccountValue;
@@ -489,40 +500,55 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection() { };
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
 
+                
                 try
                 {
-                    var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
+                    tiedHouse = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError(LoggingEvents.Error, "Error creating Tied house connection.");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    throw new OdataerrorException("Error creating Tied house connection.");
+                    string tiedHouseId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    if (string.IsNullOrEmpty(tiedHouseId))
+                    {                   
+                        _logger.LogError(LoggingEvents.Error, "Error creating Tied house connection.");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        throw new OdataerrorException("Error creating Tied house connection.");
+                    }                    
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e.Message);
                 }
-
             }
             else // it is a new user only.
             {
-                _logger.LogDebug(LoggingEvents.HttpGet, "Account is NOT null. Only a new user.");
-                try
+                if (createContact)
                 {
-                    userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
-                }
-                catch (OdataerrorException odee)
-                {
-                    _logger.LogError(LoggingEvents.Error, "Error creating user contact.");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    throw new OdataerrorException("Error creating user contact.");
+                    _logger.LogDebug(LoggingEvents.HttpGet, "Account is NOT null. Only a new user.");
+                    try
+                    {
+                        userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        string contactId = _dynamicsClient.GetCreatedRecord(odee, null);
+                        if (!string.IsNullOrEmpty(contactId) && Guid.TryParse(contactId, out Guid contactGuid))
+                        {
+                            userContact = await _dynamicsClient.GetContactById(contactGuid);
+                        }
+                        else
+                        {
+                            _logger.LogError(LoggingEvents.Error, "Error creating contact");
+                            _logger.LogError("Request:");
+                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError("Response:");
+                            _logger.LogError(odee.Response.Content);
+                            throw new OdataerrorException("Error creating contact");
+                        }
+                    }
                 }
             }
 
