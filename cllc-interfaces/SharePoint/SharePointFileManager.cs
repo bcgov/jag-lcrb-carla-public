@@ -95,6 +95,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             client.DefaultRequestHeaders.Add("X-RequestDigest", digest);
 
         }
+
+        public bool IsValid()
+        {
+            bool result = false;
+            if (! string.IsNullOrEmpty (OdataUri))
+            {
+                result = true;
+            }
+            return result;
+        }
         
         /// <summary>
         /// Escape the apostrophe character.  Since we use it to enclose the filename it must be escaped.
@@ -141,6 +151,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
         {
+            // return early if SharePoint is disabled.
+            if (! IsValid())
+            {
+                return null;
+            }
+
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle);
             if (!string.IsNullOrEmpty(folderName))
             {
@@ -216,6 +232,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<Object> CreateFolder(string listTitle, string folderName)
         {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/folders");
 
@@ -261,6 +283,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<Object> CreateDocumentLibrary(string listTitle, string documentTemplateUrlTitle = null)
         {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/Lists");
 
@@ -327,6 +355,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<Object> UpdateDocumentLibrary(string listTitle)
         {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Put, $"{ApiEndpoint}web/Lists");
 
@@ -386,6 +420,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<bool> DeleteFolder(string listTitle, string folderName)
         {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return false;
+            }
+
             bool result = false;
             // Delete is very similar to a GET.
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
@@ -461,6 +501,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<Object> GetDocumentLibrary(string listTitle)
         {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
             Object result = null;
             string title = Uri.EscapeUriString(listTitle);
             string query = $"web/lists/GetByTitle('{title}')";
@@ -489,7 +535,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         public async Task AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
-        {
+        {            
 
             bool folderExists = await this.FolderExists(documentLibrary, folderName);
             if (!folderExists)
@@ -588,10 +634,16 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<string> GetDigest(HttpClient client)
         {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
             string result = null;
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "contextinfo");
-
+            
             // make the request.
             var response = await client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
