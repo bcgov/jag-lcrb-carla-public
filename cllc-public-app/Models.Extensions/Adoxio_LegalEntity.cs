@@ -90,7 +90,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
                 result.dateofbirth = adoxio_legalentity.AdoxioDateofbirth;
                 result.firstname = adoxio_legalentity.AdoxioFirstname;
-                result.interestpercentage = (decimal?)adoxio_legalentity.AdoxioInterestpercentage;
+                if (adoxio_legalentity.AdoxioInterestpercentage != null)
+                {
+                    result.interestpercentage = Convert.ToDecimal(adoxio_legalentity.AdoxioInterestpercentage);
+                }
+                
                 // convert from int to bool.
                 result.isindividual = (adoxio_legalentity.AdoxioIsindividual != null && adoxio_legalentity.AdoxioIsindividual != 0);
                 result.lastname = adoxio_legalentity.AdoxioLastname;

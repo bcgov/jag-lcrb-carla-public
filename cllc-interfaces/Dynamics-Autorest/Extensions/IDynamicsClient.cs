@@ -16,5 +16,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         string GetEntityURI(string entityType, string id);
 
+        string GetCreatedRecord(OdataerrorException odee, string errorMessage);
     }
 }
