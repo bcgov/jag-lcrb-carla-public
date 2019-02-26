@@ -356,6 +356,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public GeneralYesNo adoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
 
+        public bool? AuthorizedToSubmit { get; set; }
+        public bool? SignatureAgreement { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioFinalDecisionCodes AppChecklistFinalDecision { get; set; } //adoxioFinaldecision
         public string adoxioInvoiceId;
