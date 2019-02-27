@@ -6,7 +6,7 @@
   <br *ngIf="label && !afterLabelText">
 
   <div style="display: flex; align-items: center;">
-    <section>
+    <section [ngClass]="{'fullWidth': isFullWidth}">
       <ng-content></ng-content>
     </section>
     <div *ngIf="!valid && showChevrons" style="flex: 0 0 25px;">
