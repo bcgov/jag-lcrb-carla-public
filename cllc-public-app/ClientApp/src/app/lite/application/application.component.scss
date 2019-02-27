@@ -15,24 +15,22 @@
     margin-bottom: 20px;
 }
 
-ul {
+ul.square {
     list-style-type: none;
-}
-
-li::before {
-    color: #1E4176;
-    content: "\25AA";
-    display: inline-block;
-    font-size: 34px;
-    line-height: 0;
-    vertical-align: middle;
-    width: 0.5em;
-    margin-left: -16px;
-}
-
-li {
-    margin: 10px 0;
-    margin-left: -26px;
+    li::before {
+        color: #1E4176;
+        content: "\25AA";
+        display: inline-block;
+        font-size: 34px;
+        line-height: 0;
+        vertical-align: middle;
+        width: 0.5em;
+        margin-left: -16px;
+    }
+    li {
+        margin: 10px 0;
+        margin-left: -26px;
+    }
 }
 
 .application-wrapper {
@@ -58,13 +56,21 @@ li {
 .store-hours {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 3px;
+    border-spacing: 2px;
+    th {
+        text-align: center;
+    }
     td,
     th {
         padding: 5px;
         background-color: #E1E8F2;
     }
-    th.lead{
+    th.lead {
         background-color: transparent;
     }
+}
+
+.light-blue-bg {
+    background-color: #E1E8F2;
+    padding: 5px;
 }
