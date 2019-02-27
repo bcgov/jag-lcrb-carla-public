@@ -70,7 +70,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.form = this.fb.group({
       id: [''],
       establishmentName: ['', Validators.required],
-      establishmentparcelid: ['', Validators.required],
+      establishmentparcelid: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
       contactpersonfirstname: ['', Validators.required],
       contactpersonlastname: ['', Validators.required],
       contactpersonrole: [''],

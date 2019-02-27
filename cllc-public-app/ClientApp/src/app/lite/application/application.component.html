@@ -3,7 +3,6 @@
     <div [ngBusy]="busy"></div>
 
     <h1>Submit the Cannabis Retail Store Licence Application</h1>
-    {{form.value | json}}
   </div>
   <div [formGroup]="form" class="application-wrapper">
 
@@ -24,7 +23,7 @@
     <br>
 
     <p class="li-header">A proposed store must have:</p>
-    <ul>
+    <ul class="square">
       <li>
         If in the area of a local government, all required local government approvals, such as being a permitted
         use under the zoning bylaw or meeting the requirements of business licensing bylaw, or
@@ -36,6 +35,27 @@
       </li>
     </ul>
     <hr>
+    <h3 class="blue-header">BEFORE STARTING THE APPLICATION</h3>
+    <section class="padded-section">
+      <div>
+        <p>Before starting the application, ensure that:</p>
+        <section class="padded-section">
+          <ul>
+            <li>The corporation has a registered business number issued by the Canada Revenue Agency</li>
+            <li>The corporation is not a federally licensed producer of cannabis</li>
+            <li>The person filling out and submitting the application is at least 19 years old</li>
+          </ul>
+        </section>
+
+        <p>
+          The Province is not placing a cap on the number of non-medical cannabis stores that can operate in B.C.
+          However, a licensee can only hold
+          or have an interest in a maximum of eight cannabis retail store licences. For the purposes of the retail store
+          licence cap, generally a franchisor
+          cannot have more than 8 franchisees. This limit will be reviewed on January 1, 2021.
+        </p>
+      </div>
+    </section>
     <h3 class="blue-header">PROPERTY DETAILS</h3>
     <section class="padded-section">
       <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
@@ -99,14 +119,39 @@
                 formControlName="establishmentaddresspostalcode">
             </app-field>
           </section>
-          <app-field class="col-md-6 col-xs-12" label="Country">
-            <input class="form-control" autocomplete="country-name" style="width: 350px;" readonly type="text"
-              value="Canada">
+          <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+            <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
           </app-field>
         </address>
-        <app-field label="Parcel Identifier" [required]="true">
-          <input type="text" class="form-control" style="width: 200px;" formControlName="establishmentparcelid">
-        </app-field>
+
+        <div class="light-blue-bg" style="display: flex;">
+          <div style="flex: 0 0 210px;">
+            <app-field label="Parcel Identifier"
+              [valid]="!form.get('establishmentparcelid').touched || form.get('establishmentparcelid').valid"
+              errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+              <input type="text" class="form-control" style="width: 200px;" maxlength=9
+                formControlName="establishmentparcelid">
+            </app-field>
+          </div>
+          <div style="flex: 1; font-size: 11px;">
+            <span>
+
+              <span><i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be found
+                on</span> <br>
+              <ul style="display: inline-block">
+                <li>The title to the property</li>
+                <li>Through the B.C. Land Title and Survey Authority</li>
+                <li>The tax assessment notice from BC Assessment</li>
+              </ul>
+            </span>
+
+            <ul style="display: inline-block">
+              <li>BC Assessment’s e-valueBC website </li>
+              <li>The municipal tax notice</li>
+              <li>The property lease</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
     <p>&nbsp;</p>
@@ -286,10 +331,6 @@
         <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
           application is true and complete</div>
       </section>
-      <app-field label="Name of Authorized Individual" style="margin-top: 10px;" [isFullWidth]="true" [required]="true">
-        <input type="text" autocomplete="name" class="form-control">
-      </app-field>
-
     </div>
     <hr>
     <p>&nbsp;</p>
