@@ -63,7 +63,9 @@
         </ul>
       </section>
 
-      <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1" class="padded-section">
+      <section
+        *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
+        class="padded-section">
         <ul>
           <li>The partnership has a registered business number issued by the Canada Revenue Agency</li>
           <li>The partnership is not a federally licensed producer of cannabis</li>
@@ -383,6 +385,23 @@
     <br>
     <hr>
     <br>
+
+    <label for="">Proof of ownership, lease or sub-lease of a location</label>
+    <br>
+    <p>
+      A licence cannot be issued unless the applicant
+      provides evidence of the purchase or lease. Leases or other arrangements must not expire for at least 12 months
+      from the date a licence is
+      issued.
+    </p>
+    <p>Upload a copy of the proof or offfer of ownership, lease or sub-lease.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Proof of Location"
+        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #locationDocuments></app-file-uploader>
+    </section>
+    <br>
+    <hr>
 
     <label for="">Supporting Documents</label>
     <br>
