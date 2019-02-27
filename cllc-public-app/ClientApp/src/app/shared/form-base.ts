@@ -82,7 +82,7 @@ export class FormBase {
         };
     }
 
-    public trimValue(control: FormControl) {
+    public trimValue(control: AbstractControl) {
         const value = control.value;
         control.setValue('');
         control.setValue(value.trim());
