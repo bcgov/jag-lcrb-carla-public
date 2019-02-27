@@ -14,6 +14,8 @@ import { FileUploaderComponent } from '@app/file-uploader/file-uploader.componen
 import { AdoxioApplication } from '@models/adoxio-application.model';
 import { ConfirmationDialogComponent, UPLOAD_FILES_MODE } from '@app/lite-application-dashboard/lite-application-dashboard.component';
 import { FormBase } from '@shared/form-base';
+import { UserDataService } from '@appservices/user-data.service';
+import { DynamicsDataService } from '@appservices/dynamics-data.service';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -52,12 +54,15 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
   UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   mode: string;
+  account: any;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
     private applicationDataService: AdoxioApplicationDataService,
+    private userDataService: UserDataService,
+    private dynamicsDataService: DynamicsDataService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog) {
@@ -95,15 +100,30 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       serviceHoursThursdayClose: ['', Validators.required],
       serviceHoursFridayClose: ['', Validators.required],
       serviceHoursSaturdayClose: ['', Validators.required],
-      authorizedToSubmit: [''],
-      signatureAgreement: [''],
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
       .subscribe(value => this.submittedApplications = value);
 
+    this.userDataService.getCurrentUser()
+      .subscribe((user) => {
+        if (user.accountid != null) {
+          // fetch the account to get the primary contact.
+          this.dynamicsDataService.getRecord('account', user.accountid)
+            .subscribe((result) => {
+              this.account = result;
+            });
+        }
+
+      });
+
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       (data: AdoxioApplication) => {
+        if (data.establishmentparcelid) {
+          data.establishmentparcelid = data.establishmentparcelid.replace(/-/g, '');
+        }
         this.application = data;
         this.form.patchValue(data);
         if (data.isPaid) {
