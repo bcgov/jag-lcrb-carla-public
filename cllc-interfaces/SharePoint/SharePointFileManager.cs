@@ -480,11 +480,16 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<Object> GetFolder(string listTitle, string folderName)
         {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
             Object result = null;
             string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
-
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
