@@ -40,6 +40,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
+  @ViewChild('locationDocuments') locationDocuments: FileUploaderComponent;
   form: FormGroup;
   savedFormData: any;
   subscriptions: Subscription[] = [];
@@ -249,6 +250,10 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
+    }
+    if (!this.locationDocuments || !this.locationDocuments.files || this.locationDocuments.files.length < 1) {
+      valid = false;
+      this.validationMessages.push('Proof of lease, sub-lease or purchase of location is required.');
     }
     if (!this.form.get('establishmentName').value) {
       valid = false;
