@@ -1,4 +1,4 @@
-<div [ngClass]="{'upload-more-file-mode': mode === UPLOAD_FILES_MODE}">
+<div *ngIf="account?.businessType" [ngClass]="{'upload-more-file-mode': mode === UPLOAD_FILES_MODE}">
   <div [formGroup]="form" style="padding-left: 45px; position: relative">
     <div [ngBusy]="busy"></div>
 
@@ -37,24 +37,47 @@
     <hr>
     <h3 class="blue-header">BEFORE STARTING THE APPLICATION</h3>
     <section class="padded-section">
-      <div>
-        <p>Before starting the application, ensure that:</p>
-        <section class="padded-section">
-          <ul>
-            <li>The corporation has a registered business number issued by the Canada Revenue Agency</li>
-            <li>The corporation is not a federally licensed producer of cannabis</li>
-            <li>The person filling out and submitting the application is at least 19 years old</li>
-          </ul>
-        </section>
+      <p>Before starting the application, ensure that:</p>
+      <section *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
+        class="padded-section">
+        <ul>
+          <li>The corporation has a registered business number issued by the Canada Revenue Agency</li>
+          <li>The corporation is not a federally licensed producer of cannabis</li>
+          <li>The person filling out and submitting the application is at least 19 years old</li>
+        </ul>
+      </section>
 
-        <p>
-          The Province is not placing a cap on the number of non-medical cannabis stores that can operate in B.C.
-          However, a licensee can only hold
-          or have an interest in a maximum of eight cannabis retail store licences. For the purposes of the retail store
-          licence cap, generally a franchisor
-          cannot have more than 8 franchisees. This limit will be reviewed on January 1, 2021.
-        </p>
-      </div>
+      <section *ngIf="account?.businessType === 'SoleProprietor'" class="padded-section">
+        <ul>
+          <li>The sole-proprietorship has a registered business number issued by the Canada Revenue Agency</li>
+          <li>The sole-proprietorship is not a federally licensed producer of cannabis</li>
+          <li>The person filling out and submitting the application is at least 19 years old</li>
+        </ul>
+      </section>
+
+      <section *ngIf="account?.businessType === 'Society'" class="padded-section">
+        <ul>
+          <li>The society has a registered business number issued by the Canada Revenue Agency</li>
+          <li>The society is not a federally licensed producer of cannabis</li>
+          <li>The person filling out and submitting the application is at least 19 years old</li>
+        </ul>
+      </section>
+
+      <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1" class="padded-section">
+        <ul>
+          <li>The partnership has a registered business number issued by the Canada Revenue Agency</li>
+          <li>The partnership is not a federally licensed producer of cannabis</li>
+          <li>The person filling out and submitting the application is at least 19 years old</li>
+        </ul>
+      </section>
+
+      <p>
+        The Province is not placing a cap on the number of non-medical cannabis stores that can operate in B.C.
+        However, a licensee can only hold
+        or have an interest in a maximum of eight cannabis retail store licences. For the purposes of the retail store
+        licence cap, generally a franchisor
+        cannot have more than 8 franchisees. This limit will be reviewed on January 1, 2021.
+      </p>
     </section>
     <h3 class="blue-header">PROPERTY DETAILS</h3>
     <section class="padded-section">
