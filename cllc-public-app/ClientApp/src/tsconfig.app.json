@@ -22,10 +22,10 @@
       "dom"
     ],
     "paths": {
-      "@app": ["src/app/*"],
-      "@models": ["src/app/models/*"],
-      "@services": ["src/app/services/*"],
-      "@shared": ["src/app/shared/*"]
+      "@app*": ["app/*"],
+      "@models*": ["app/models*"],
+      "@services*": ["app/services*"],
+      "@shared*": ["app/shared*"]
     }
   },
   "exclude": [
