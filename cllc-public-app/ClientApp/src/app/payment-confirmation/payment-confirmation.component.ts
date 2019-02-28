@@ -122,7 +122,7 @@ export class PaymentConfirmationComponent implements OnInit {
    * */
   return_to_application() {
     if (this.trnApproved === '1') {
-      this.router.navigate(['./dashboard-lite']);
+      this.router.navigate(['./dashboard']);
     } else {
       this.router.navigate(['./application-lite/' + this.applicationId]);
     }
