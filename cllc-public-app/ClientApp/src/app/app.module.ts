@@ -152,6 +152,7 @@ import {
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { FieldComponent } from './shared/field/field.component';
+import { ApplicationsAndLicencesComponent } from './applications-and-licences/applications-and-licences.component';
 
 @NgModule({
   declarations: [
@@ -225,7 +226,8 @@ import { FieldComponent } from './shared/field/field.component';
     SolePropResultsComponent,
     IndividualAssociatesResultsComponent,
     OrganizationResultsComponent,
-    BusinessProfileComponent
+    BusinessProfileComponent,
+    ApplicationsAndLicencesComponent
   ],
   imports: [
   BrowserModule,
