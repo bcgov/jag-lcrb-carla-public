@@ -24,64 +24,15 @@
         provide
         all required documents to the LCRB, the application will be submitted for processing.</p>
       <p>Inquires related to your application can be directed to <a href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
-
-      <h2>Application Form</h2>
-      <p>
-        Please select the applicable organization type below to download the application form. A corresponding
-        checklist is included in the application form. Please refer to this checklist when completing the
-        application.
-      </p>
-
-      <select class="form-control" style="max-width: 300px;" [(ngModel)]="orgType">
-        <option value="">Choose your organization type</option>
-        <option value="Private Corporation">Private Corporation</option>
-        <option value="Public Corporation">Public Corporation</option>
-        <!-- <option value="Unlimited Liability Corporation">Unlimited Liability Corporation</option>
-    <option value="Limited Liability Corporation">Limited Liability Corporation</option> -->
-        <option value="Partnership">Partnership</option>
-        <option value="Sole Proprietorship">Sole Proprietorship</option>
-        <option value="Society">Society</option>
-      </select>
       <p></p>
 
-      <section *ngIf="orgType">
-        <br>
-        <a *ngIf="orgType === 'Sole Proprietorship'" href="https://www2.gov.bc.ca/assets/download/5A4BABAFCEF6481AB318949BA12CF842"
-          download class="btn btn-primary" target="_blank">
-          1. CANNABIS RETAIL STORE LICENCE APPLICATION
-        </a>
-        <a *ngIf="orgType === 'Society'" href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2"
-          download class="btn btn-primary" target="_blank">
-          1. CANNABIS RETAIL STORE LICENCE APPLICATION
-        </a>
-        <a *ngIf="orgType === 'Partnership'" href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76"
-          download class="btn btn-primary" target="_blank">
-          1. CANNABIS RETAIL STORE LICENCE APPLICATION
-        </a>
-        <a *ngIf="orgType === 'Private Corporation' || orgType === 'Public Corporation'" href="https://www2.gov.bc.ca/assets/download/B8A522CB3E8D4595A970F6331F4667A8"
-          download class="btn btn-primary" target="_blank">
-          1. CANNABIS RETAIL STORE LICENCE APPLICATION
-        </a>
-        <br>
-        <p></p>
-        <h2>Financial Integrity Form (Required)</h2>
-        <p>
-          An applicant that is a <i>{{orgType}}</i> must submit a completed business financial integrity form.
-          Please download and submit the business financial integrity form with the completed application for a
-          non-medical cannabis retail store licence.
-        </p>
-        <br>
-        <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download class="btn btn-primary"
-          target="_blank">
-          2. BUSINESS FINANCIAL INTEGRITY FORM
-        </a>
-        <p></p>
+      <section *ngIf="account?.businessType">
         <br>
 
-        <label *ngIf="orgType !== 'Sole Proprietorship'" for="">ASSOCIATES</label>
-        <label *ngIf="orgType === 'Sole Proprietorship'" for="">SECURITY SCREENING</label>
+        <label *ngIf="account?.businessType !== 'SoleProprietor'" for="">ASSOCIATES</label>
+        <label *ngIf="account?.businessType === 'SoleProprietor'" for="">SECURITY SCREENING</label>
         <br>
-        <section *ngIf="orgType === 'Private Corporation'">
+        <section *ngIf="account?.businessType === 'PrivateCorporation'">
           <p>An applicant that is a <i>Private Corporation</i> may have associates that are required to consent to
             security
             screening and financial integrity assessments as part of the application for a non-medical cannabis retail
@@ -121,7 +72,7 @@
             considered
             associates of the Applicant and are required to submit an associate organization assessment form.</p>
         </section>
-        <section *ngIf="orgType === 'Public Corporation'">
+        <section *ngIf="account?.businessType === 'PublicCorporation'">
           <p>An applicant that is a <i>Public Corporation</i> may have associates that are required to consent to
             security
             screening and financial integrity assessments as part of the application for a non-medical cannabis retail
@@ -161,7 +112,7 @@
             of the Applicant and are required to submit an associate organization assessment form.
           </p>
         </section>
-        <section *ngIf="orgType === 'Partnership'">
+        <section *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1">
           <p>An applicant that is a <i>Partnership</i> may have associates that are required to consent to security
             screening
             and financial integrity assessments as part of the application for a non-medical cannabis retail store
@@ -202,7 +153,7 @@
             associates
             of the Applicant and are required to submit an associate organization assessment form.</p>
         </section>
-        <section *ngIf="orgType === 'Sole Proprietorship'">
+        <section *ngIf="account?.businessType === 'SoleProprietor'">
           <p>An applicant that is a <i>Sole Proprietorship</i> must consent to a security screening as part of the
             application
             for a non-medical cannabis retail store licence.
@@ -212,7 +163,7 @@
               target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
             for submitting documentation for the security screening directly to the LCRB.</p>
         </section>
-        <section *ngIf="orgType === 'Society'">
+        <section *ngIf="account?.businessType === 'Society'">
           <p>An applicant that is a <i>Society</i> may have associates that are required to consent to security
             screening
             and financial integrity assessments as part of the application for a non-medical cannabis retail store
