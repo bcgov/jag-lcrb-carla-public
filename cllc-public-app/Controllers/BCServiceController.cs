@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,17 +25,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly AppDbContext db;
         private readonly IHostingEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
+        private readonly string _encryptionKey;
 
         public BCServiceController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
             _env = env;
             this.db = db;
+            _encryptionKey = Configuration["ENCRYPTION_KEY"];
         }
 
         [HttpGet]
         [Authorize] 
-        public ActionResult BCServiceLogin(string path)
+        public ActionResult BCServiceLogin(string path, string code)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
             if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
@@ -62,10 +66,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-                // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
-                basePath += "/worker-qualification/dashboard";
-                return Redirect(basePath);
+                if (string.IsNullOrEmpty(Configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
+                {
+                    string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+                    // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
+                    basePath += "/worker-qualification/dashboard";
+                    return Redirect(basePath);
+                }
+                else
+                {
+                    string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
+                    if (decrypted == null)
+                    {
+                        decrypted = "";
+                    }
+
+                    return new ContentResult
+                    {
+                        ContentType = "text/html",
+                        StatusCode = (int)HttpStatusCode.OK,
+                        Content = $"<html><body><h1>Token Parse Test</h1><p>Decrypted text is: {decrypted}</body></html>"
+                    };
+                }
             }
         }
     
@@ -125,6 +147,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     Expires = DateTime.UtcNow.AddDays(-1)
                 }
             );
+
+
+
+
+
+
+
+
+
+
+
+
+
             // create new "dev" user cookie
             Response.Cookies.Append(
                 _options.DevBCSCAuthenticationTokenKey,

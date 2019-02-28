@@ -263,18 +263,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set license type relationship 
                 adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
                 adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
-
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error creating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                // fail if we can't create.
-                throw (odee);
+                string applicationId = _dynamicsClient.GetCreatedRecord(odee, null);
+                if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
+                {
+                    adoxioApplication = await _dynamicsClient.GetApplicationById(applicationGuid);
+                }
+                else
+                {
+
+                    _logger.LogError("Error creating application");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    // fail if we can't create.
+                    throw (odee);
+                }
+                
             }
 
             // in case the job number is not there, try getting the record from the server.
@@ -328,12 +337,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error creating SharepointDocumentLocation");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                mdcsdl = null;
+                string mdcsdlId = _dynamicsClient.GetCreatedRecord(odee, null);
+                if (!string.IsNullOrEmpty(mdcsdlId))
+                {
+                    mdcsdl.Sharepointdocumentlocationid = mdcsdlId;
+                }
+                else
+                {
+                    _logger.LogError("Error creating SharepointDocumentLocation");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    mdcsdl = null;
+                }
+                    
             }
             if (mdcsdl != null)
             {
