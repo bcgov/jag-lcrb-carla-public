@@ -87,7 +87,6 @@ import { UserDataService } from './services/user-data.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
 import { LicenseApplicationSummaryComponent } from './license-application-summary/license-application-summary.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
@@ -122,7 +121,7 @@ import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule } from '@ngrx/store';
-import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './lite/application/application.component';
 import {
   LiteApplicationDashboardComponent,
@@ -184,7 +183,6 @@ import { FieldComponent } from './shared/field/field.component';
     SurveyTestComponent,
     VoteComponent,
     LicenseApplicationSummaryComponent,
-    DashboardComponent,
     FileUploaderComponent,
     CorporateDetailsComponent,
     OrganizationStructureComponent,
@@ -205,7 +203,7 @@ import { FieldComponent } from './shared/field/field.component';
     SiteMapComponent,
     DeclarationComponent,
     SubmitPayComponent,
-    DashboardLiteComponent,
+    DashboardComponent,
     ApplicationComponent,
     LiteApplicationDashboardComponent,
     ConfirmationDialogComponent,
