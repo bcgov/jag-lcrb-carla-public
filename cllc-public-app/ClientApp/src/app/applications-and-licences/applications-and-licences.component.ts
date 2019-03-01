@@ -144,8 +144,8 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-application-cancelationl-dialog',
-  templateUrl: 'application-cancelationl-dialog.html',
+  selector: 'app-application-cancellation-dialog',
+  templateUrl: 'application-cancellation-dialog.html',
 })
 export class ConfirmationDialogComponent {
 
