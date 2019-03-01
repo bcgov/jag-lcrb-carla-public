@@ -94,7 +94,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     };
 
     // open dialog, get reference and process returned data from dialog
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       cancelApplication => {
         if (cancelApplication) {
@@ -147,13 +147,13 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   selector: 'app-application-cancellation-dialog',
   templateUrl: 'application-cancellation-dialog.html',
 })
-export class ConfirmationDialogComponent {
+export class ApplicationCancellationDialogComponent {
 
   establishmentName: string;
   applicationName: string;
 
   constructor(
-    public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
+    public dialogRef: MatDialogRef<ApplicationCancellationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.applicationName = data.applicationName;
     this.establishmentName = data.establishmentName;
