@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicsDataService } from '../services/dynamics-data.service';
-import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
+import { User } from '../models/user.model';
+import { Router } from '@angular/router';
+import { AdoxioApplication } from '../models/adoxio-application.model';
+import { DynamicsDataService } from '../services/dynamics-data.service';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
-import { AdoxioApplication } from '../models/adoxio-application.model';
-import { DynamicsAccount } from '../models/dynamics-account.model';
-import { Router } from '@angular/router';
+import { PaymentDataService } from '../services/payment-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,51 +15,76 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  user: User;
-  isApplicant = false;
-  isAssociate = false;
-  accountId: string = null;
+  public currentUser: User;
+  applicationId: string;
+  submittedApplications = 8;
+
   contactId: string = null;
-  account: DynamicsAccount;
+  account: any;
   busy: Subscription;
+  isPaid: Boolean;
+  orgType = '';
 
-  constructor(private userDataService: UserDataService, private dynamicsDataService: DynamicsDataService,
-    private applicationDataService: AdoxioApplicationDataService, public snackBar: MatSnackBar,
-    private router: Router) {
-}
+  constructor(private paymentDataService: PaymentDataService,
+    private userDataService: UserDataService, private router: Router,
+    private dynamicsDataService: DynamicsDataService,
+    private applicationDataService: AdoxioApplicationDataService,
+    public snackBar: MatSnackBar) { }
 
-ngOnInit(): void {
-  // TODO - pass currentUser in as router data rather than doing another call to getCurrentUser.
-  if (!this.user) {
+  ngOnInit(): void {
     this.userDataService.getCurrentUser()
-      .subscribe((data: User) => {
-        this.user = data;
-
-        this.isApplicant = (this.user.businessname != null);
-        this.isAssociate = (this.user.businessname == null);
-        // console.log("isApplicant = " + this.isApplicant);
-        // console.log("isAssociate = " + this.isAssociate);
-
-        if (!this.accountId && this.user) {
-          this.accountId = this.user.accountid;
-        }
-        if (this.accountId != null && !this.isAssociate) {
+      .subscribe((data) => {
+        this.currentUser = data;
+        if (this.currentUser.accountid != null) {
           // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('account', this.accountId)
+          this.dynamicsDataService.getRecord('account', this.currentUser.accountid)
             .subscribe((result) => {
               this.account = result;
               if (result.primarycontact) {
                 this.contactId = result.primarycontact.id;
               }
             });
-         }
+        }
+
       });
-    }
+
+    this.applicationDataService.getSubmittedApplicationCount()
+      .subscribe(value => this.submittedApplications = value);
   }
 
-  /**
-   * Start a new Dynamics License Application
-   * */
+  verify_payment() {
+    const newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
+    newLicenceApplicationData.licenseType = 'Cannabis Retail Store';
+    newLicenceApplicationData.applicantType = this.account.businessType;
+    newLicenceApplicationData.account = this.account;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.busy = this.paymentDataService.getPaymentSubmissionUrl(data.id).subscribe(
+          res2 => {
+            // console.log("applicationVM: ", res);
+            const jsonUrl = res2;
+            // window.alert(jsonUrl['url']);
+            window.location.href = jsonUrl['url'];
+            return jsonUrl['url'];
+          },
+          err => {
+            if (err._body === 'Payment already made') {
+              this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            }
+          }
+        );
+
+        // this.router.navigate(['./payment-confirmation'], { queryParams: { trnId: '0', SessionKey: data.id } });
+      },
+      () => {
+        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a New Licence Application');
+      }
+    );
+
+  }
+
   startNewLicenceApplication() {
     const newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
     newLicenceApplicationData.licenseType = 'Cannabis Retail Store';
@@ -67,14 +92,13 @@ ngOnInit(): void {
     newLicenceApplicationData.account = this.account;
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
-      (data: AdoxioApplication) => {
-        this.router.navigateByUrl(`/license-application/${data.id}/contact-details`);
+      data => {
+        this.router.navigateByUrl(`/application-lite/${data.id}`);
       },
-      err => {
+      () => {
         this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.log('Error starting a New Licence Application');
       }
     );
   }
-
 }
