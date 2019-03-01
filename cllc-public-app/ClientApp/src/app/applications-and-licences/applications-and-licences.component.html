@@ -1,0 +1,106 @@
+<div>
+  <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS AND LICENSES</h3>
+  <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
+    <section *ngIf="inProgressApplications?.length === 0 && licencedApplications?.length === 0">
+      <div style="padding: 10px;">
+        <p>You have not submitted any Controlled Equipment yet.</p>
+      </div>
+      <p></p>
+      <div class="notes" style="display: flex;">
+        <span>
+          Once your owner application is approved, please ensure you register your Controlled Equipment within 10
+          days. <a
+            href="https://www2.gov.bc.ca/gov/content/employment-business/business/pill-press/pill-press-controlled-equipment#Equipment%20Notification%20Process"
+            target="_blank">
+            Find out how to start your equipment notification.</a></span>
+      </div>
+    </section>
+    <section *ngIf="inProgressApplications?.length > 0 || licencedApplications?.length > 0">
+      <div class="space-between" style="padding: 10px;">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. .</p>
+      </div>
+      <mat-tab-group
+        [selectedIndex]="(inProgressApplications?.length > 0 || licencedApplications?.length == 0) ? 0 : 1">
+        <mat-tab label="In Progress Applications">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. </p>
+          <table class="eq-table">
+            <tr>
+              <th colspan=2>Application</th>
+              <th style="width: 95px">Last Updated</th>
+              <th style="width: 235px">Status</th>
+              <th>Actions</th>
+            </tr>
+            <tr *ngFor="let item of inProgressApplications; let i = index;" style="border: 1px solid #ccc; ">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+              <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                <span>{{item.establishmentName}}</span> <br>
+                <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
+                <span>Reference #: {{item.name}} </span> <span></span> <br>
+              </td>
+              <td style="padding: 10px; width: 110px;">
+                {{item.modifiedon | date:'mediumDate'}}
+              </td>
+              <td style="background-color: #E1E8F2; padding: 10px;">
+                {{item.applicationStatus}}
+              </td>
+              <td style="background-color: #E1E8F2; padding: 10px;">
+                <a routerLink="/application-lite/{{item.id}}">Complete Application</a> <br>
+                <span style="margin-top: 5px;" (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+                  <a href="javascript: void(0)">
+                    Cancel Application</a>
+                </span>
+                <br>
+                <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">Add Supporting
+                  Documents</a>
+              </td>
+            </tr>
+          </table>
+          <p></p>
+          <div class="notes" style="display: flex;">
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. </span>
+          </div>
+        </mat-tab>
+        <mat-tab label="Licensed Stores">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. </p>
+          <table class="eq-table">
+            <tr>
+              <th colspan=2>License</th>
+              <th>Location</th>
+              <th style="width: 335px">Actions</th>
+            </tr>
+            <tr *ngFor="let item of licencedApplications; let i = index;" style="border: 1px solid #ccc; ">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+              <td style="padding: 10px;">
+                <span>{{item.establishmentName}}</span> <br>
+                <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
+                <span>Reference #: {{item.name}} </span> <span></span> <br>
+                <a *ngIf="item.status == ACTIVE" class="btn btn-primary" style="min-width: 10px;" [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf'">
+                  <span><i class="fas fa-download"></i> DOWNLOAD LICENCE</span>
+                </a>
+              </td>
+              <td style="padding: 10px;">
+                {{item?.establishmentaddressstreet}} <br>
+                {{item?.establishmentaddresscity}} <br>
+                British Columbia <br>
+                {{item?.establishmentaddresspostalcode}} <br>
+                Canada <br>
+              </td>
+              <td style="background-color: #E1E8F2; padding: 10px;">
+                <button *ngIf="item.status == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(item)">PAY
+                  LICENCE FEE</button>
+                <button *ngIf="item.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(item)">RENEW
+                  LICENCE</button>
+              </td>
+            </tr>
+          </table>
+        </mat-tab>
+      </mat-tab-group>
+    </section>
+
+  </section>
+</div>
