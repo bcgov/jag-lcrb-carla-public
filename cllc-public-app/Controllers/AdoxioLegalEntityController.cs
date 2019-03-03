@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
             _logger.LogError("Account filter = " + accountfilter);
 
-            legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountfilter).Value;
+            legalEntities = _dynamicsClient.Legalentities.Get(filter: accountfilter).Value;
 
             foreach (var legalEntity in legalEntities)
             {
@@ -104,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var filter = "_adoxio_account_value eq " + accountId;
             filter += " and adoxio_isindividual eq 0";
 
-            var response = _dynamicsClient.Adoxiolegalentities.Get(filter: filter);
+            var response = _dynamicsClient.Legalentities.Get(filter: filter);
 
             if (response != null && response.Value != null)
             {
@@ -170,7 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 _logger.LogError("Account filter = " + filter);
-                legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value;
+                legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value;
 
             }
             catch (Exception e)
@@ -291,7 +291,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioLegalEntity.CopyValues(item);
             try
             {
-                adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
+                adoxioLegalEntity = await _dynamicsClient.Legalentities.CreateAsync(adoxioLegalEntity);
             }
             catch (OdataerrorException odee)
             {
@@ -312,7 +312,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // patch the record.
             try
             {
-                await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+                await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
             }
             catch (OdataerrorException odee)
             {
@@ -338,7 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // patch the record.
                 try
                 {
-                    await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+                    await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
                 catch (OdataerrorException odee)
                 {
@@ -393,14 +393,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
                 adoxioLegalEntity.AdoxioShareholderAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
 
-                var res = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
+                var res = await _dynamicsClient.Tiedhouseconnections.CreateAsync(tiedHouse);
             }
             adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
 
 
             adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", item.parentLegalEntityId);
 
-            adoxioLegalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(adoxioLegalEntity);
+            adoxioLegalEntity = await _dynamicsClient.Legalentities.CreateAsync(adoxioLegalEntity);
 
             return Json(adoxioLegalEntity.ToViewModel());
         }
@@ -434,7 +434,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // copy values over from the data provided
             adoxioLegalEntity.CopyValues(item);
 
-            await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxio_legalentityid.ToString(), adoxioLegalEntity);
+            await _dynamicsClient.Legalentities.UpdateAsync(adoxio_legalentityid.ToString(), adoxioLegalEntity);
 
             adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
 
@@ -459,7 +459,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                await _dynamicsClient.Adoxiolegalentities.DeleteAsync(adoxio_legalentityid.ToString());
+                await _dynamicsClient.Legalentities.DeleteAsync(adoxio_legalentityid.ToString());
             }
             catch (OdataerrorException odee)
             {
@@ -619,7 +619,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // patch the record.
                 try
                 {
-                    await _dynamicsClient.Adoxiolegalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
+                    await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
                 catch (OdataerrorException odee)
                 {

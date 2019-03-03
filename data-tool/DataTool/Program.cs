@@ -514,6 +514,7 @@ namespace DemoTool
 
         static void CreateApplication(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioApplication application)
         {
+            MicrosoftDynamicsCRMadoxioApplication createdItem = null;
             application.AdoxioApplicationid = null;
             MicrosoftDynamicsCRMadoxioApplication newItem = new MicrosoftDynamicsCRMadoxioApplication()
             {
@@ -545,20 +546,52 @@ namespace DemoTool
                 AdoxioContactpersonphone = application.AdoxioContactpersonphone,
                 AdoxioAuthorizedtosubmit = application.AdoxioAuthorizedtosubmit,
                 AdoxioSignatureagreement = application.AdoxioSignatureagreement,
-                AdoxioAdditionalpropertyinformation = application.AdoxioAdditionalpropertyinformation                
+                AdoxioAdditionalpropertyinformation = application.AdoxioAdditionalpropertyinformation,
+
+                AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", application.AdoxioLicenceType.AdoxioLicencetypeid),
+                AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", application.AdoxioApplicant.Accountid)
+
+                
             };
+
+            
 
             try
             {
-                application = _dynamicsClient.Applications.Create(newItem);
+                newItem = _dynamicsClient.Applications.Create(newItem);
                 Console.Out.WriteLine("created application " + newItem.AdoxioName);
             }
             catch (OdataerrorException odee)
             {
-                application.AdoxioApplicationid = _dynamicsClient.GetCreatedRecord(odee, "Error creating application");
+                newItem.AdoxioApplicationid = _dynamicsClient.GetCreatedRecord(odee, "Error creating application");
             }
 
             // TODO add licence and invoice links.
+
+            if (application._adoxioInvoiceValue != null)
+            {
+                MicrosoftDynamicsCRMadoxioApplication invoiceLinkItem = new MicrosoftDynamicsCRMadoxioApplication()
+                {
+                    AdoxioInvoiceODataBind = _dynamicsClient.GetEntityURI("invoices", application.AdoxioLicenceType.AdoxioLicencetypeid)
+                }
+            }
+
+            if (application.AdoxioLicenceFeeInvoice != null)
+            {
+                newItem.AdoxioLicenceFeeInvoice = new MicrosoftDynamicsCRMinvoice()
+                {
+                    Invoiceid = InvoiceMap[application._adoxioInvoiceValue]
+                };
+            }
+
+            if (application._adoxioAssignedlicenceValue != null && LicenceMap.ContainsKey(application._adoxioAssignedlicenceValue))
+            {
+                newItem.AdoxioAssignedLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    AdoxioLicencesid = LicenceMap[application._adoxioAssignedlicenceValue]
+                };
+
+            }
 
         }
 

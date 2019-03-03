@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string result = null;
             string sanitized = relativeUrl.Replace("'", "''");
             // first see if one exists.
-            var locations = _dynamicsClient.SharepointDocumentLocations.Get(filter: "relativeurl eq '" + sanitized + "'");
+            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
 
             var location = locations.Value.FirstOrDefault();
 
@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create a new document location.
                 try
                 {
-                    location = _dynamicsClient.SharepointDocumentLocations.Create(newRecord);
+                    location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
                 }
                 catch (OdataerrorException odee)
                 {
