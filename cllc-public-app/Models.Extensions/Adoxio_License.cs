@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             if (adoxio_licencetypeId != null)
             {
-                var adoxio_licencetype = dynamicsClient.AdoxioLicencetypes.GetByKey(adoxio_licencetypeId.ToString());
+                var adoxio_licencetype = dynamicsClient.Licencetypes.GetByKey(adoxio_licencetypeId.ToString());
                 if (adoxio_licencetype != null)
                 {
                     adoxioLicenseVM.licenseType = adoxio_licencetype.AdoxioName;
