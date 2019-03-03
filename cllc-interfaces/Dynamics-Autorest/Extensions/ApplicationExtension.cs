@@ -452,6 +452,157 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return _result;
         }
+
+        /// <summary>
+        /// Change reference to adoxio_applications
+        /// </summary>
+        /// <param name='adoxioApplicationid'>
+        /// key: adoxio_applicationid
+        /// </param>
+        /// <param name='fieldname'>
+        /// key: fieldname
+        /// </param>
+        /// <param name='odataid'>
+        /// reference value
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="OdataerrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<StatsResultResponse>> GetSavedQueryWithHttpMessagesAsync(string savedQueryid, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (savedQueryid == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "savedQueryid");
+            }
+            
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("savedQueryid", savedQueryid);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "GetSavedQueryWithHttpMessagesAsync", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "adoxio_applications?savedQuery={savedQueryid}").ToString();
+            _url = _url.Replace("{savedQueryid}", System.Uri.EscapeDataString(savedQueryid));
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+
+
+            if (customHeaders != null)
+            {
+                foreach (var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            // Set Credentials
+            if (Client.Credentials != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            }
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null; if ((int)_statusCode != 200)
+            {
+                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Odataerror _errorBody = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
+                    if (_errorBody != null)
+                    {
+                        ex.Body = _errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<StatsResultResponse>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StatsResultResponse>(_responseContent, Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
     }
 
     public partial interface IApplications
@@ -528,6 +679,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse> ChangeReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        Task<HttpOperationResponse<StatsResultResponse>> GetSavedQueryWithHttpMessagesAsync(string savedQueryid, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+
     }
 
     public static partial class ApplicationsExtensions
@@ -654,6 +809,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static async Task ChangeReferenceAsync(this IApplications operations, string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), CancellationToken cancellationToken = default(CancellationToken))
         {
             (await operations.ChangeReferenceWithHttpMessagesAsync(adoxioApplicationid, fieldname, odataid, null, cancellationToken).ConfigureAwait(false)).Dispose();
+        }
+
+        public static StatsResultResponse GetSavedQuery(this IApplications operations, string adoxioSavedQueryid)
+        {
+            return operations.GetSavedQueryAsync(adoxioSavedQueryid).GetAwaiter().GetResult();
+        }
+
+        public static async Task<StatsResultResponse> GetSavedQueryAsync(this IApplications operations, string adoxioSavedQueryid, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await operations.GetSavedQueryWithHttpMessagesAsync(adoxioSavedQueryid, null, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }            
         }
     }
 }
