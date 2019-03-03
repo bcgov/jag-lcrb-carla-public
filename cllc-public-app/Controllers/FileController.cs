@@ -230,7 +230,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
                     if (setUploadedFromPortal)
                     {
-                        patchApplication.AdoxioFileUploadedFromPortal = (int?)ViewModels.GeneralYesNo.Yes;
+                        patchApplication.AdoxioFileuploadedfromportal = (int?)ViewModels.GeneralYesNo.Yes;
                     }
 
                     try
