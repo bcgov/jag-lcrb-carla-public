@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<AdoxioLicenseType> adoxioLiceseVMList = new List<AdoxioLicenseType>();
             // get all licence types in Dynamics
-            var adoxioLicenceTypes = await _dynamicsClient.AdoxioLicencetypes.GetAsync();
+            var adoxioLicenceTypes = await _dynamicsClient.Licencetypes.GetAsync();
 
             foreach (var licenceType in adoxioLicenceTypes.Value)
             {

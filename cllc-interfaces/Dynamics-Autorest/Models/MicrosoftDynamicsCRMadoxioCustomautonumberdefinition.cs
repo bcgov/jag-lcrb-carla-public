@@ -29,30 +29,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioCustomautonumberdefinition class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioCustomautonumberdefinition(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string adoxioFormat = default(string), long? versionnumber = default(long?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), int? importsequencenumber = default(int?), int? adoxioLastnumberissued = default(int?), string adoxioLockverification = default(string), System.DateTimeOffset? adoxioLocktimestamp = default(System.DateTimeOffset?), string adoxioName = default(string), string adoxioLockvalue = default(string), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioCustomautonumberdefinitionid = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), int? adoxioDigits = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioCustomautonumberdefinitionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCustomautonumberdefinitionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCustomautonumberdefinitionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        public MicrosoftDynamicsCRMadoxioCustomautonumberdefinition(int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), string adoxioCustomautonumberdefinitionid = default(string), System.DateTimeOffset? adoxioLocktimestamp = default(System.DateTimeOffset?), int? adoxioLastnumberissued = default(int?), string adoxioFormat = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioLockverification = default(string), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioLockvalue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string adoxioName = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? adoxioDigits = default(int?), long? versionnumber = default(long?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioCustomautonumberdefinitionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCustomautonumberdefinitionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCustomautonumberdefinitionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
-            Modifiedon = modifiedon;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioFormat = adoxioFormat;
-            Versionnumber = versionnumber;
-            Createdon = createdon;
-            this._modifiedbyValue = _modifiedbyValue;
             Statuscode = statuscode;
-            Statecode = statecode;
-            Importsequencenumber = importsequencenumber;
-            AdoxioLastnumberissued = adoxioLastnumberissued;
-            AdoxioLockverification = adoxioLockverification;
-            AdoxioLocktimestamp = adoxioLocktimestamp;
-            AdoxioName = adoxioName;
-            AdoxioLockvalue = adoxioLockvalue;
-            this._organizationidValue = _organizationidValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Overriddencreatedon = overriddencreatedon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioCustomautonumberdefinitionid = adoxioCustomautonumberdefinitionid;
-            this._createdbyValue = _createdbyValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioLocktimestamp = adoxioLocktimestamp;
+            AdoxioLastnumberissued = adoxioLastnumberissued;
+            AdoxioFormat = adoxioFormat;
+            this._organizationidValue = _organizationidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioLockverification = adoxioLockverification;
+            Importsequencenumber = importsequencenumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            Modifiedon = modifiedon;
+            AdoxioLockvalue = adoxioLockvalue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Statecode = statecode;
+            AdoxioName = adoxioName;
+            this._createdbyValue = _createdbyValue;
+            Createdon = createdon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioDigits = adoxioDigits;
+            Versionnumber = versionnumber;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -71,8 +71,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -81,48 +81,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_format")]
-        public string AdoxioFormat { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lastnumberissued")]
-        public int? AdoxioLastnumberissued { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lockverification")]
-        public string AdoxioLockverification { get; set; }
+        [JsonProperty(PropertyName = "adoxio_customautonumberdefinitionid")]
+        public string AdoxioCustomautonumberdefinitionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -131,13 +91,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "adoxio_lastnumberissued")]
+        public int? AdoxioLastnumberissued { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lockvalue")]
-        public string AdoxioLockvalue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_format")]
+        public string AdoxioFormat { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,8 +106,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -156,13 +116,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_customautonumberdefinitionid")]
-        public string AdoxioCustomautonumberdefinitionid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_lockverification")]
+        public string AdoxioLockverification { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lockvalue")]
+        public string AdoxioLockvalue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -171,13 +146,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_digits")]
         public int? AdoxioDigits { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

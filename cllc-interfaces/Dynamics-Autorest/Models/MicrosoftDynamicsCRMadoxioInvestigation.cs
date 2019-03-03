@@ -29,90 +29,91 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioInvestigation class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioInvestigation(int? importsequencenumber = default(int?), string adoxioEstablishmentaddresspostalcode = default(string), string adoxioContraventionnoticenumber = default(string), int? adoxioInvestigationcomplaintsource = default(int?), string adoxioNotapprovedreason = default(string), string _modifiedonbehalfbyValue = default(string), string _adoxioRegionalmanagerValue = default(string), bool? adoxioNosirrbs = default(bool?), string adoxioOtherinvestigationcomplaintsource = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioRegionalmanagercomments = default(string), string adoxioOtherinvestigationcomplainttypetext = default(string), int? statecode = default(int?), string adoxioInvestigationid = default(string), bool? adoxioIntoxicatedpatrons = default(bool?), bool? adoxioLicensingcontravention = default(bool?), System.DateTimeOffset? adoxioApproveddecisiondate = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _owningteamValue = default(string), System.DateTimeOffset? adoxioDateinvestigationassigned = default(System.DateTimeOffset?), long? versionnumber = default(long?), bool? adoxioWeapons = default(bool?), string _adoxioInvestigatorValue = default(string), string _adoxioContactidValue = default(string), string _createdonbehalfbyValue = default(string), bool? adoxioUbrewuvin = default(bool?), string adoxioEstablishmentaddresscity = default(string), string _owneridValue = default(string), bool? adoxioEmployeeconsumeliquorwhileworking = default(bool?), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), string _owningbusinessunitValue = default(string), string adoxioName = default(string), string _adoxioAdjudicatorValue = default(string), string adoxioNumber = default(string), string adoxioEnforcementactiontaken = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioInvestigationconclusion = default(string), string adoxioAlternatecontraventiontext = default(string), bool? adoxioEntertainment = default(bool?), bool? adoxioLiquorservice = default(bool?), int? statuscode = default(int?), string _adoxioApplicationValue = default(string), string adoxioAlternatecontraventionnumber = default(string), string _adoxioEstablishmentValue = default(string), bool? adoxioOvercrowding = default(bool?), string adoxioEstablishmentproposedname = default(string), string adoxioInvestigatornameforsignature = default(string), string adoxioInvestigatorbadgenumber = default(string), string adoxioRegionalmanagernameforsignature = default(string), string adoxioEstablishmentaddressstreet = default(string), int? adoxioInvestigationtype = default(int?), System.DateTimeOffset? adoxioInvestigationdatereviewed = default(System.DateTimeOffset?), bool? adoxioOtherinvestigationcomplainttype = default(bool?), string _adoxioLicenseeValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? adoxioTiedhousesandinducements = default(bool?), int? timezoneruleversionnumber = default(int?), string _adoxioLicenceValue = default(string), int? adoxioIsapproved = default(int?), bool? adoxioOperatingoutsideofprimarypurpose = default(bool?), bool? adoxioDisturbanceofpersonsinthevicinity = default(bool?), bool? adoxioUnlawfulsaleorpurchaseofliquor = default(bool?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioDateinvestigationconcluded = default(System.DateTimeOffset?), string adoxioDismissalreasonstext = default(string), bool? adoxioAdvertising = default(bool?), string adoxioInvestigationbackground = default(string), int? adoxioInvestigationresult = default(int?), string _adoxioSecondaryinvestigatoridValue = default(string), string adoxioAlternatecontraventiontitle = default(string), int? adoxioInvestigationentity = default(int?), bool? adoxioAllowingdisorderlyorunlawfulconduct = default(bool?), bool? adoxioServicetominors = default(bool?), string _adoxioComplaintValue = default(string), string _adoxioApproveddecisionbyValue = default(string), bool? adoxioManufacturingendorsement = default(bool?), bool? adoxioProductionofrecords = default(bool?), MicrosoftDynamicsCRMsystemuser adoxioSecondaryInvestigatorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> adoxioInvestigationQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioInvestigationSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioInvestigationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioInvestigationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioInvestigationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioInvestigationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioInvestigationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioInvestigationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioInvestigationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioInvestigationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioInvestigationTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioInvestigationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioInvestigationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> adoxioInvestigationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> adoxioInvestigationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioInvestigationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioInvestigationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser adoxioInvestigator = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioAdoxioLicencetypeAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> adoxioAdoxioInvestigationAdoxioComplaintsubjectInvestigation = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> adoxioAdoxioInvestigationAdoxioInvestigationstakeholderRelatedInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioAdoxioInvestigationAdoxioContraventionInvestigation = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> adoxioAdoxioInvestigationAdoxioInvestigationdetailInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> adoxioAdoxioInvestigationAdoxioWitnessstatementInvestigation = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioExhibit> adoxioAdoxioInvestigationAdoxioExhibitInvestigation = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioInvestigationIncidentInvestigation = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMsystemuser adoxioAdjudicator = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMaccount adoxioLicensee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser adoxioApprovedDecisionBy = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMadoxioInvestigation(System.DateTimeOffset? adoxioApproveddecisiondate = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioProgressstatus = default(int?), string adoxioNumber = default(string), bool? adoxioNosirrbs = default(bool?), int? adoxioPercentcomplete = default(int?), string _owningbusinessunitValue = default(string), string _adoxioRegionalmanagerValue = default(string), bool? adoxioTiedhousesandinducements = default(bool?), string _adoxioEstablishmentValue = default(string), string _createdbyValue = default(string), string adoxioOtherinvestigationcomplaintsource = default(string), bool? adoxioEntertainment = default(bool?), bool? adoxioAllowingdisorderlyorunlawfulconduct = default(bool?), bool? adoxioServicetominors = default(bool?), string adoxioAlternatecontraventiontext = default(string), string adoxioAlternatecontraventionnumber = default(string), int? adoxioInvestigationcomplaintsource = default(int?), int? adoxioInvestigationentity = default(int?), string adoxioInvestigatornameforsignature = default(string), int? statecode = default(int?), string adoxioContraventionnoticenumber = default(string), System.DateTimeOffset? adoxioDatefileuploadfromportalnotified = default(System.DateTimeOffset?), string _adoxioContactidValue = default(string), string _adoxioApplicationValue = default(string), bool? adoxioOperatingoutsideofprimarypurpose = default(bool?), int? timezoneruleversionnumber = default(int?), bool? adoxioWeapons = default(bool?), string adoxioInvestigationbackground = default(string), string _adoxioLicenseeValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? adoxioDateinvestigationassigned = default(System.DateTimeOffset?), string adoxioAlternatecontraventiontitle = default(string), string adoxioEstablishmentaddresscity = default(string), string _owneridValue = default(string), string adoxioInvestigationconclusion = default(string), string _adoxioApproveddecisionbyValue = default(string), bool? adoxioAdvertising = default(bool?), string adoxioDismissalreasonstext = default(string), string _adoxioAdjudicatorValue = default(string), bool? adoxioIntoxicatedpatrons = default(bool?), bool? adoxioLicensingcontravention = default(bool?), System.DateTimeOffset? adoxioDateinvestigationconcluded = default(System.DateTimeOffset?), bool? adoxioOtherinvestigationcomplainttype = default(bool?), string adoxioInvestigationsummary = default(string), bool? adoxioUnlawfulsaleorpurchaseofliquor = default(bool?), bool? adoxioDisturbanceofpersonsinthevicinity = default(bool?), int? adoxioIsapproved = default(int?), bool? adoxioUbrewuvin = default(bool?), string _adoxioSecondaryinvestigatoridValue = default(string), bool? adoxioProductionofrecords = default(bool?), string adoxioEstablishmentaddressstreet = default(string), int? statuscode = default(int?), int? importsequencenumber = default(int?), string adoxioEstablishmentaddresspostalcode = default(string), string adoxioOtherinvestigationcomplainttypetext = default(string), string adoxioNotapprovedreason = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioRegionalmanagercomments = default(string), string _adoxioInvestigatorValue = default(string), string _owninguserValue = default(string), int? adoxioFileuploadedfromportal = default(int?), System.DateTimeOffset? adoxioInvestigationdatereviewed = default(System.DateTimeOffset?), string adoxioRegionalmanagernameforsignature = default(string), long? versionnumber = default(long?), bool? adoxioEmployeeconsumeliquorwhileworking = default(bool?), string adoxioName = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), bool? adoxioManufacturingendorsement = default(bool?), bool? adoxioOvercrowding = default(bool?), int? adoxioInvestigationresult = default(int?), string adoxioInvestigationid = default(string), string adoxioInvestigatorbadgenumber = default(string), string _owningteamValue = default(string), string _modifiedbyValue = default(string), int? adoxioOnlinedocumentupload = default(int?), string adoxioEstablishmentproposedname = default(string), string adoxioEnforcementactiontaken = default(string), string _adoxioLicenceValue = default(string), bool? adoxioLiquorservice = default(bool?), int? adoxioInvestigationtype = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioInvestigationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioInvestigationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioInvestigationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioInvestigationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioInvestigationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioInvestigationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioInvestigationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioInvestigationTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioInvestigationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioInvestigationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioInvestigationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioInvestigationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioInvestigationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioInvestigationSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> adoxioInvestigationQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioInvestigationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioInvestigationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioInvestigationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioLicensee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioInvestigationIncidentInvestigation = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioAdoxioLicencetypeAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser adoxioAdjudicator = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioApprovedDecisionBy = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioInvestigator = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioSecondaryInvestigatorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioInvestigationDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>))
         {
-            Importsequencenumber = importsequencenumber;
-            AdoxioEstablishmentaddresspostalcode = adoxioEstablishmentaddresspostalcode;
-            AdoxioContraventionnoticenumber = adoxioContraventionnoticenumber;
-            AdoxioInvestigationcomplaintsource = adoxioInvestigationcomplaintsource;
-            AdoxioNotapprovedreason = adoxioNotapprovedreason;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
-            AdoxioNosirrbs = adoxioNosirrbs;
-            AdoxioOtherinvestigationcomplaintsource = adoxioOtherinvestigationcomplaintsource;
-            Modifiedon = modifiedon;
-            AdoxioRegionalmanagercomments = adoxioRegionalmanagercomments;
-            AdoxioOtherinvestigationcomplainttypetext = adoxioOtherinvestigationcomplainttypetext;
-            Statecode = statecode;
-            AdoxioInvestigationid = adoxioInvestigationid;
-            AdoxioIntoxicatedpatrons = adoxioIntoxicatedpatrons;
-            AdoxioLicensingcontravention = adoxioLicensingcontravention;
             AdoxioApproveddecisiondate = adoxioApproveddecisiondate;
-            this._createdbyValue = _createdbyValue;
-            this._owningteamValue = _owningteamValue;
-            AdoxioDateinvestigationassigned = adoxioDateinvestigationassigned;
-            Versionnumber = versionnumber;
-            AdoxioWeapons = adoxioWeapons;
-            this._adoxioInvestigatorValue = _adoxioInvestigatorValue;
-            this._adoxioContactidValue = _adoxioContactidValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioUbrewuvin = adoxioUbrewuvin;
-            AdoxioEstablishmentaddresscity = adoxioEstablishmentaddresscity;
-            this._owneridValue = _owneridValue;
-            AdoxioEmployeeconsumeliquorwhileworking = adoxioEmployeeconsumeliquorwhileworking;
-            this._owninguserValue = _owninguserValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioName = adoxioName;
-            this._adoxioAdjudicatorValue = _adoxioAdjudicatorValue;
-            AdoxioNumber = adoxioNumber;
-            AdoxioEnforcementactiontaken = adoxioEnforcementactiontaken;
             Overriddencreatedon = overriddencreatedon;
-            AdoxioInvestigationconclusion = adoxioInvestigationconclusion;
-            AdoxioAlternatecontraventiontext = adoxioAlternatecontraventiontext;
-            AdoxioEntertainment = adoxioEntertainment;
-            AdoxioLiquorservice = adoxioLiquorservice;
-            Statuscode = statuscode;
-            this._adoxioApplicationValue = _adoxioApplicationValue;
-            AdoxioAlternatecontraventionnumber = adoxioAlternatecontraventionnumber;
-            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
-            AdoxioOvercrowding = adoxioOvercrowding;
-            AdoxioEstablishmentproposedname = adoxioEstablishmentproposedname;
-            AdoxioInvestigatornameforsignature = adoxioInvestigatornameforsignature;
-            AdoxioInvestigatorbadgenumber = adoxioInvestigatorbadgenumber;
-            AdoxioRegionalmanagernameforsignature = adoxioRegionalmanagernameforsignature;
-            AdoxioEstablishmentaddressstreet = adoxioEstablishmentaddressstreet;
-            AdoxioInvestigationtype = adoxioInvestigationtype;
-            AdoxioInvestigationdatereviewed = adoxioInvestigationdatereviewed;
-            AdoxioOtherinvestigationcomplainttype = adoxioOtherinvestigationcomplainttype;
-            this._adoxioLicenseeValue = _adoxioLicenseeValue;
-            Createdon = createdon;
+            AdoxioProgressstatus = adoxioProgressstatus;
+            AdoxioNumber = adoxioNumber;
+            AdoxioNosirrbs = adoxioNosirrbs;
+            AdoxioPercentcomplete = adoxioPercentcomplete;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
             AdoxioTiedhousesandinducements = adoxioTiedhousesandinducements;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._adoxioLicenceValue = _adoxioLicenceValue;
-            AdoxioIsapproved = adoxioIsapproved;
-            AdoxioOperatingoutsideofprimarypurpose = adoxioOperatingoutsideofprimarypurpose;
-            AdoxioDisturbanceofpersonsinthevicinity = adoxioDisturbanceofpersonsinthevicinity;
-            AdoxioUnlawfulsaleorpurchaseofliquor = adoxioUnlawfulsaleorpurchaseofliquor;
-            this._modifiedbyValue = _modifiedbyValue;
-            AdoxioDateinvestigationconcluded = adoxioDateinvestigationconcluded;
-            AdoxioDismissalreasonstext = adoxioDismissalreasonstext;
-            AdoxioAdvertising = adoxioAdvertising;
-            AdoxioInvestigationbackground = adoxioInvestigationbackground;
-            AdoxioInvestigationresult = adoxioInvestigationresult;
-            this._adoxioSecondaryinvestigatoridValue = _adoxioSecondaryinvestigatoridValue;
-            AdoxioAlternatecontraventiontitle = adoxioAlternatecontraventiontitle;
-            AdoxioInvestigationentity = adoxioInvestigationentity;
+            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
+            this._createdbyValue = _createdbyValue;
+            AdoxioOtherinvestigationcomplaintsource = adoxioOtherinvestigationcomplaintsource;
+            AdoxioEntertainment = adoxioEntertainment;
             AdoxioAllowingdisorderlyorunlawfulconduct = adoxioAllowingdisorderlyorunlawfulconduct;
             AdoxioServicetominors = adoxioServicetominors;
-            this._adoxioComplaintValue = _adoxioComplaintValue;
+            AdoxioAlternatecontraventiontext = adoxioAlternatecontraventiontext;
+            AdoxioAlternatecontraventionnumber = adoxioAlternatecontraventionnumber;
+            AdoxioInvestigationcomplaintsource = adoxioInvestigationcomplaintsource;
+            AdoxioInvestigationentity = adoxioInvestigationentity;
+            AdoxioInvestigatornameforsignature = adoxioInvestigatornameforsignature;
+            Statecode = statecode;
+            AdoxioContraventionnoticenumber = adoxioContraventionnoticenumber;
+            AdoxioDatefileuploadfromportalnotified = adoxioDatefileuploadfromportalnotified;
+            this._adoxioContactidValue = _adoxioContactidValue;
+            this._adoxioApplicationValue = _adoxioApplicationValue;
+            AdoxioOperatingoutsideofprimarypurpose = adoxioOperatingoutsideofprimarypurpose;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioWeapons = adoxioWeapons;
+            AdoxioInvestigationbackground = adoxioInvestigationbackground;
+            this._adoxioLicenseeValue = _adoxioLicenseeValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioDateinvestigationassigned = adoxioDateinvestigationassigned;
+            AdoxioAlternatecontraventiontitle = adoxioAlternatecontraventiontitle;
+            AdoxioEstablishmentaddresscity = adoxioEstablishmentaddresscity;
+            this._owneridValue = _owneridValue;
+            AdoxioInvestigationconclusion = adoxioInvestigationconclusion;
             this._adoxioApproveddecisionbyValue = _adoxioApproveddecisionbyValue;
-            AdoxioManufacturingendorsement = adoxioManufacturingendorsement;
+            AdoxioAdvertising = adoxioAdvertising;
+            AdoxioDismissalreasonstext = adoxioDismissalreasonstext;
+            this._adoxioAdjudicatorValue = _adoxioAdjudicatorValue;
+            AdoxioIntoxicatedpatrons = adoxioIntoxicatedpatrons;
+            AdoxioLicensingcontravention = adoxioLicensingcontravention;
+            AdoxioDateinvestigationconcluded = adoxioDateinvestigationconcluded;
+            AdoxioOtherinvestigationcomplainttype = adoxioOtherinvestigationcomplainttype;
+            AdoxioInvestigationsummary = adoxioInvestigationsummary;
+            AdoxioUnlawfulsaleorpurchaseofliquor = adoxioUnlawfulsaleorpurchaseofliquor;
+            AdoxioDisturbanceofpersonsinthevicinity = adoxioDisturbanceofpersonsinthevicinity;
+            AdoxioIsapproved = adoxioIsapproved;
+            AdoxioUbrewuvin = adoxioUbrewuvin;
+            this._adoxioSecondaryinvestigatoridValue = _adoxioSecondaryinvestigatoridValue;
             AdoxioProductionofrecords = adoxioProductionofrecords;
-            AdoxioSecondaryInvestigatorId = adoxioSecondaryInvestigatorId;
-            AdoxioInvestigationQueueItems = adoxioInvestigationQueueItems;
-            AdoxioInvestigationSharePointDocumentLocations = adoxioInvestigationSharePointDocumentLocations;
-            AdoxioInvestigationAbsScheduledprocessexecutions = adoxioInvestigationAbsScheduledprocessexecutions;
+            AdoxioEstablishmentaddressstreet = adoxioEstablishmentaddressstreet;
+            Statuscode = statuscode;
+            Importsequencenumber = importsequencenumber;
+            AdoxioEstablishmentaddresspostalcode = adoxioEstablishmentaddresspostalcode;
+            AdoxioOtherinvestigationcomplainttypetext = adoxioOtherinvestigationcomplainttypetext;
+            AdoxioNotapprovedreason = adoxioNotapprovedreason;
+            Modifiedon = modifiedon;
+            Createdon = createdon;
+            AdoxioRegionalmanagercomments = adoxioRegionalmanagercomments;
+            this._adoxioInvestigatorValue = _adoxioInvestigatorValue;
+            this._owninguserValue = _owninguserValue;
+            AdoxioFileuploadedfromportal = adoxioFileuploadedfromportal;
+            AdoxioInvestigationdatereviewed = adoxioInvestigationdatereviewed;
+            AdoxioRegionalmanagernameforsignature = adoxioRegionalmanagernameforsignature;
+            Versionnumber = versionnumber;
+            AdoxioEmployeeconsumeliquorwhileworking = adoxioEmployeeconsumeliquorwhileworking;
+            AdoxioName = adoxioName;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioManufacturingendorsement = adoxioManufacturingendorsement;
+            AdoxioOvercrowding = adoxioOvercrowding;
+            AdoxioInvestigationresult = adoxioInvestigationresult;
+            AdoxioInvestigationid = adoxioInvestigationid;
+            AdoxioInvestigatorbadgenumber = adoxioInvestigatorbadgenumber;
+            this._owningteamValue = _owningteamValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioOnlinedocumentupload = adoxioOnlinedocumentupload;
+            AdoxioEstablishmentproposedname = adoxioEstablishmentproposedname;
+            AdoxioEnforcementactiontaken = adoxioEnforcementactiontaken;
+            this._adoxioLicenceValue = _adoxioLicenceValue;
+            AdoxioLiquorservice = adoxioLiquorservice;
+            AdoxioInvestigationtype = adoxioInvestigationtype;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -131,30 +132,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioInvestigationTasks = adoxioInvestigationTasks;
             AdoxioInvestigationRecurringAppointmentMasters = adoxioInvestigationRecurringAppointmentMasters;
             AdoxioInvestigationSocialActivities = adoxioInvestigationSocialActivities;
+            AdoxioInvestigationAbsScheduledprocessexecutions = adoxioInvestigationAbsScheduledprocessexecutions;
             AdoxioInvestigationSyncErrors = adoxioInvestigationSyncErrors;
             AdoxioInvestigationDuplicateMatchingRecord = adoxioInvestigationDuplicateMatchingRecord;
             AdoxioInvestigationDuplicateBaseRecord = adoxioInvestigationDuplicateBaseRecord;
+            AdoxioInvestigationSharePointDocumentLocations = adoxioInvestigationSharePointDocumentLocations;
+            AdoxioInvestigationQueueItems = adoxioInvestigationQueueItems;
             AdoxioInvestigationAnnotations = adoxioInvestigationAnnotations;
             AdoxioInvestigationAsyncOperations = adoxioInvestigationAsyncOperations;
             AdoxioInvestigationBulkDeleteFailures = adoxioInvestigationBulkDeleteFailures;
+            AdoxioLicensee = adoxioLicensee;
+            AdoxioApplication = adoxioApplication;
+            AdoxioEstablishment = adoxioEstablishment;
+            AdoxioAdoxioInvestigationIncidentInvestigation = adoxioAdoxioInvestigationIncidentInvestigation;
+            AdoxioLicence = adoxioLicence;
+            AdoxioAdoxioLicencetypeAdoxioInvestigation = adoxioAdoxioLicencetypeAdoxioInvestigation;
+            AdoxioContactId = adoxioContactId;
+            AdoxioAdjudicator = adoxioAdjudicator;
+            AdoxioApprovedDecisionBy = adoxioApprovedDecisionBy;
             AdoxioInvestigator = adoxioInvestigator;
             AdoxioRegionalManager = adoxioRegionalManager;
-            AdoxioLicence = adoxioLicence;
-            AdoxioApplication = adoxioApplication;
-            AdoxioAdoxioLicencetypeAdoxioInvestigation = adoxioAdoxioLicencetypeAdoxioInvestigation;
-            AdoxioAdoxioInvestigationAdoxioComplaintsubjectInvestigation = adoxioAdoxioInvestigationAdoxioComplaintsubjectInvestigation;
-            AdoxioAdoxioInvestigationAdoxioInvestigationstakeholderRelatedInvestigation = adoxioAdoxioInvestigationAdoxioInvestigationstakeholderRelatedInvestigation;
-            AdoxioAdoxioInvestigationAdoxioContraventionInvestigation = adoxioAdoxioInvestigationAdoxioContraventionInvestigation;
-            AdoxioAdoxioInvestigationAdoxioInvestigationdetailInvestigation = adoxioAdoxioInvestigationAdoxioInvestigationdetailInvestigation;
-            AdoxioAdoxioInvestigationAdoxioWitnessstatementInvestigation = adoxioAdoxioInvestigationAdoxioWitnessstatementInvestigation;
-            AdoxioAdoxioInvestigationAdoxioExhibitInvestigation = adoxioAdoxioInvestigationAdoxioExhibitInvestigation;
-            AdoxioAdoxioInvestigationIncidentInvestigation = adoxioAdoxioInvestigationIncidentInvestigation;
-            AdoxioAdjudicator = adoxioAdjudicator;
-            AdoxioComplaint = adoxioComplaint;
-            AdoxioEstablishment = adoxioEstablishment;
-            AdoxioLicensee = adoxioLicensee;
-            AdoxioContactId = adoxioContactId;
-            AdoxioApprovedDecisionBy = adoxioApprovedDecisionBy;
+            AdoxioSecondaryInvestigatorId = adoxioSecondaryInvestigatorId;
+            AdoxioInvestigationDocuments = adoxioInvestigationDocuments;
             CustomInit();
         }
 
@@ -165,183 +164,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentaddresspostalcode")]
-        public string AdoxioEstablishmentaddresspostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionnoticenumber")]
-        public string AdoxioContraventionnoticenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationcomplaintsource")]
-        public int? AdoxioInvestigationcomplaintsource { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_notapprovedreason")]
-        public string AdoxioNotapprovedreason { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_regionalmanager_value")]
-        public string _adoxioRegionalmanagerValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_nosirrbs")]
-        public bool? AdoxioNosirrbs { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_otherinvestigationcomplaintsource")]
-        public string AdoxioOtherinvestigationcomplaintsource { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_regionalmanagercomments")]
-        public string AdoxioRegionalmanagercomments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_otherinvestigationcomplainttypetext")]
-        public string AdoxioOtherinvestigationcomplainttypetext { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationid")]
-        public string AdoxioInvestigationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_intoxicatedpatrons")]
-        public bool? AdoxioIntoxicatedpatrons { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licensingcontravention")]
-        public bool? AdoxioLicensingcontravention { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_approveddecisiondate")]
         public System.DateTimeOffset? AdoxioApproveddecisiondate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateinvestigationassigned")]
-        public System.DateTimeOffset? AdoxioDateinvestigationassigned { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_weapons")]
-        public bool? AdoxioWeapons { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_investigator_value")]
-        public string _adoxioInvestigatorValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_contactid_value")]
-        public string _adoxioContactidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ubrewuvin")]
-        public bool? AdoxioUbrewuvin { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentaddresscity")]
-        public string AdoxioEstablishmentaddresscity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_employeeconsumeliquorwhileworking")]
-        public bool? AdoxioEmployeeconsumeliquorwhileworking { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_adjudicator_value")]
-        public string _adoxioAdjudicatorValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_number")]
-        public string AdoxioNumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_enforcementactiontaken")]
-        public string AdoxioEnforcementactiontaken { get; set; }
 
         /// <summary>
         /// </summary>
@@ -350,98 +174,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationconclusion")]
-        public string AdoxioInvestigationconclusion { get; set; }
+        [JsonProperty(PropertyName = "adoxio_progressstatus")]
+        public int? AdoxioProgressstatus { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_alternatecontraventiontext")]
-        public string AdoxioAlternatecontraventiontext { get; set; }
+        [JsonProperty(PropertyName = "adoxio_number")]
+        public string AdoxioNumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_entertainment")]
-        public bool? AdoxioEntertainment { get; set; }
+        [JsonProperty(PropertyName = "adoxio_nosirrbs")]
+        public bool? AdoxioNosirrbs { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_liquorservice")]
-        public bool? AdoxioLiquorservice { get; set; }
+        [JsonProperty(PropertyName = "adoxio_percentcomplete")]
+        public int? AdoxioPercentcomplete { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_application_value")]
-        public string _adoxioApplicationValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_alternatecontraventionnumber")]
-        public string AdoxioAlternatecontraventionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
-        public string _adoxioEstablishmentValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_overcrowding")]
-        public bool? AdoxioOvercrowding { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentproposedname")]
-        public string AdoxioEstablishmentproposedname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigatornameforsignature")]
-        public string AdoxioInvestigatornameforsignature { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigatorbadgenumber")]
-        public string AdoxioInvestigatorbadgenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_regionalmanagernameforsignature")]
-        public string AdoxioRegionalmanagernameforsignature { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentaddressstreet")]
-        public string AdoxioEstablishmentaddressstreet { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationtype")]
-        public int? AdoxioInvestigationtype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationdatereviewed")]
-        public System.DateTimeOffset? AdoxioInvestigationdatereviewed { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_otherinvestigationcomplainttype")]
-        public bool? AdoxioOtherinvestigationcomplainttype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licensee_value")]
-        public string _adoxioLicenseeValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_regionalmanager_value")]
+        public string _adoxioRegionalmanagerValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -450,78 +209,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
+        public string _adoxioEstablishmentValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licence_value")]
-        public string _adoxioLicenceValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isapproved")]
-        public int? AdoxioIsapproved { get; set; }
+        [JsonProperty(PropertyName = "adoxio_otherinvestigationcomplaintsource")]
+        public string AdoxioOtherinvestigationcomplaintsource { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_operatingoutsideofprimarypurpose")]
-        public bool? AdoxioOperatingoutsideofprimarypurpose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_disturbanceofpersonsinthevicinity")]
-        public bool? AdoxioDisturbanceofpersonsinthevicinity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_unlawfulsaleorpurchaseofliquor")]
-        public bool? AdoxioUnlawfulsaleorpurchaseofliquor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateinvestigationconcluded")]
-        public System.DateTimeOffset? AdoxioDateinvestigationconcluded { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dismissalreasonstext")]
-        public string AdoxioDismissalreasonstext { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_advertising")]
-        public bool? AdoxioAdvertising { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationbackground")]
-        public string AdoxioInvestigationbackground { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationresult")]
-        public int? AdoxioInvestigationresult { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_secondaryinvestigatorid_value")]
-        public string _adoxioSecondaryinvestigatoridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_alternatecontraventiontitle")]
-        public string AdoxioAlternatecontraventiontitle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationentity")]
-        public int? AdoxioInvestigationentity { get; set; }
+        [JsonProperty(PropertyName = "adoxio_entertainment")]
+        public bool? AdoxioEntertainment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -535,8 +239,108 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_complaint_value")]
-        public string _adoxioComplaintValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_alternatecontraventiontext")]
+        public string AdoxioAlternatecontraventiontext { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_alternatecontraventionnumber")]
+        public string AdoxioAlternatecontraventionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationcomplaintsource")]
+        public int? AdoxioInvestigationcomplaintsource { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationentity")]
+        public int? AdoxioInvestigationentity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigatornameforsignature")]
+        public string AdoxioInvestigatornameforsignature { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contraventionnoticenumber")]
+        public string AdoxioContraventionnoticenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_datefileuploadfromportalnotified")]
+        public System.DateTimeOffset? AdoxioDatefileuploadfromportalnotified { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_contactid_value")]
+        public string _adoxioContactidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_application_value")]
+        public string _adoxioApplicationValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_operatingoutsideofprimarypurpose")]
+        public bool? AdoxioOperatingoutsideofprimarypurpose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_weapons")]
+        public bool? AdoxioWeapons { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationbackground")]
+        public string AdoxioInvestigationbackground { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licensee_value")]
+        public string _adoxioLicenseeValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dateinvestigationassigned")]
+        public System.DateTimeOffset? AdoxioDateinvestigationassigned { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_alternatecontraventiontitle")]
+        public string AdoxioAlternatecontraventiontitle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_establishmentaddresscity")]
+        public string AdoxioEstablishmentaddresscity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationconclusion")]
+        public string AdoxioInvestigationconclusion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -545,8 +349,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_manufacturingendorsement")]
-        public bool? AdoxioManufacturingendorsement { get; set; }
+        [JsonProperty(PropertyName = "adoxio_advertising")]
+        public bool? AdoxioAdvertising { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dismissalreasonstext")]
+        public string AdoxioDismissalreasonstext { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_adjudicator_value")]
+        public string _adoxioAdjudicatorValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_intoxicatedpatrons")]
+        public bool? AdoxioIntoxicatedpatrons { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licensingcontravention")]
+        public bool? AdoxioLicensingcontravention { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dateinvestigationconcluded")]
+        public System.DateTimeOffset? AdoxioDateinvestigationconcluded { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_otherinvestigationcomplainttype")]
+        public bool? AdoxioOtherinvestigationcomplainttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationsummary")]
+        public string AdoxioInvestigationsummary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_unlawfulsaleorpurchaseofliquor")]
+        public bool? AdoxioUnlawfulsaleorpurchaseofliquor { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_disturbanceofpersonsinthevicinity")]
+        public bool? AdoxioDisturbanceofpersonsinthevicinity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isapproved")]
+        public int? AdoxioIsapproved { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ubrewuvin")]
+        public bool? AdoxioUbrewuvin { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_secondaryinvestigatorid_value")]
+        public string _adoxioSecondaryinvestigatoridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -555,23 +419,163 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_SecondaryInvestigatorId")]
-        public MicrosoftDynamicsCRMsystemuser AdoxioSecondaryInvestigatorId { get; set; }
+        [JsonProperty(PropertyName = "adoxio_establishmentaddressstreet")]
+        public string AdoxioEstablishmentaddressstreet { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigation_QueueItems")]
-        public IList<MicrosoftDynamicsCRMqueueitem> AdoxioInvestigationQueueItems { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigation_SharePointDocumentLocations")]
-        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioInvestigationSharePointDocumentLocations { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigation_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AdoxioInvestigationAbsScheduledprocessexecutions { get; set; }
+        [JsonProperty(PropertyName = "adoxio_establishmentaddresspostalcode")]
+        public string AdoxioEstablishmentaddresspostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_otherinvestigationcomplainttypetext")]
+        public string AdoxioOtherinvestigationcomplainttypetext { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_notapprovedreason")]
+        public string AdoxioNotapprovedreason { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_regionalmanagercomments")]
+        public string AdoxioRegionalmanagercomments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_investigator_value")]
+        public string _adoxioInvestigatorValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fileuploadedfromportal")]
+        public int? AdoxioFileuploadedfromportal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationdatereviewed")]
+        public System.DateTimeOffset? AdoxioInvestigationdatereviewed { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_regionalmanagernameforsignature")]
+        public string AdoxioRegionalmanagernameforsignature { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_employeeconsumeliquorwhileworking")]
+        public bool? AdoxioEmployeeconsumeliquorwhileworking { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_manufacturingendorsement")]
+        public bool? AdoxioManufacturingendorsement { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_overcrowding")]
+        public bool? AdoxioOvercrowding { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationresult")]
+        public int? AdoxioInvestigationresult { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationid")]
+        public string AdoxioInvestigationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigatorbadgenumber")]
+        public string AdoxioInvestigatorbadgenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_onlinedocumentupload")]
+        public int? AdoxioOnlinedocumentupload { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_establishmentproposedname")]
+        public string AdoxioEstablishmentproposedname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_enforcementactiontaken")]
+        public string AdoxioEnforcementactiontaken { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licence_value")]
+        public string _adoxioLicenceValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_liquorservice")]
+        public bool? AdoxioLiquorservice { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationtype")]
+        public int? AdoxioInvestigationtype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -665,6 +669,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigation_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AdoxioInvestigationAbsScheduledprocessexecutions { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_investigation_SyncErrors")]
         public IList<MicrosoftDynamicsCRMsyncerror> AdoxioInvestigationSyncErrors { get; set; }
 
@@ -677,6 +686,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_investigation_DuplicateBaseRecord")]
         public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioInvestigationDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigation_SharePointDocumentLocations")]
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> AdoxioInvestigationSharePointDocumentLocations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigation_QueueItems")]
+        public IList<MicrosoftDynamicsCRMqueueitem> AdoxioInvestigationQueueItems { get; set; }
 
         /// <summary>
         /// </summary>
@@ -695,6 +714,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Licensee")]
+        public MicrosoftDynamicsCRMaccount AdoxioLicensee { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Application")]
+        public MicrosoftDynamicsCRMadoxioApplication AdoxioApplication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Establishment")]
+        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_incident_Investigation")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioAdoxioInvestigationIncidentInvestigation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Licence")]
+        public MicrosoftDynamicsCRMadoxioLicences AdoxioLicence { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_adoxio_licencetype_adoxio_investigation")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetype> AdoxioAdoxioLicencetypeAdoxioInvestigation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contactId")]
+        public MicrosoftDynamicsCRMcontact AdoxioContactId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_Adjudicator")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioAdjudicator { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ApprovedDecisionBy")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioApprovedDecisionBy { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_Investigator")]
         public MicrosoftDynamicsCRMsystemuser AdoxioInvestigator { get; set; }
 
@@ -705,83 +769,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Licence")]
-        public MicrosoftDynamicsCRMadoxioLicences AdoxioLicence { get; set; }
+        [JsonProperty(PropertyName = "adoxio_SecondaryInvestigatorId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioSecondaryInvestigatorId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Application")]
-        public MicrosoftDynamicsCRMadoxioApplication AdoxioApplication { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_licencetype_adoxio_investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioLicencetype> AdoxioAdoxioLicencetypeAdoxioInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_adoxio_complaintsubject_Investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> AdoxioAdoxioInvestigationAdoxioComplaintsubjectInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_adoxio_investigationstakeholder_RelatedInvestigation")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> AdoxioAdoxioInvestigationAdoxioInvestigationstakeholderRelatedInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_adoxio_contravention_Investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioAdoxioInvestigationAdoxioContraventionInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_adoxio_investigationdetail_Investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> AdoxioAdoxioInvestigationAdoxioInvestigationdetailInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_adoxio_witnessstatement_Investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> AdoxioAdoxioInvestigationAdoxioWitnessstatementInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_adoxio_exhibit_Investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> AdoxioAdoxioInvestigationAdoxioExhibitInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_investigation_incident_Investigation")]
-        public IList<MicrosoftDynamicsCRMincident> AdoxioAdoxioInvestigationIncidentInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Adjudicator")]
-        public MicrosoftDynamicsCRMsystemuser AdoxioAdjudicator { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Complaint")]
-        public MicrosoftDynamicsCRMadoxioComplaint AdoxioComplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Establishment")]
-        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Licensee")]
-        public MicrosoftDynamicsCRMaccount AdoxioLicensee { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contactId")]
-        public MicrosoftDynamicsCRMcontact AdoxioContactId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ApprovedDecisionBy")]
-        public MicrosoftDynamicsCRMsystemuser AdoxioApprovedDecisionBy { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigation_documents")]
+        public IList<MicrosoftDynamicsCRMadoxioDocument> AdoxioInvestigationDocuments { get; set; }
 
     }
 }

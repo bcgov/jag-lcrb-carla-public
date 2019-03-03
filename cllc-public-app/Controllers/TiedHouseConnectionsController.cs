@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             accountfilter = "_adoxio_accountid_value eq " + accountId;
             _logger.LogError("Account filter = " + accountfilter);
 
-            tiedHouseConnections = _dynamicsClient.AdoxioTiedhouseconnections.Get(filter: accountfilter).Value;
+            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
 
             foreach (var tiedHouse in tiedHouseConnections)
             {
@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                await _dynamicsClient.AdoxioTiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
+                await _dynamicsClient.Tiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
             }
             catch (OdataerrorException odee)
             {

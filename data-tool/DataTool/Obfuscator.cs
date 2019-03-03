@@ -394,7 +394,7 @@ namespace DataTool
 
 
 
-        public List<MicrosoftDynamicsCRMadoxioApplication> ObfuscateApplications(List<MicrosoftDynamicsCRMadoxioApplication> applications)
+        public List<MicrosoftDynamicsCRMadoxioApplication>  ObfuscateApplications(List<MicrosoftDynamicsCRMadoxioApplication> applications)
         {
             List<MicrosoftDynamicsCRMadoxioApplication> result = new List<MicrosoftDynamicsCRMadoxioApplication>();
 
@@ -410,6 +410,7 @@ namespace DataTool
 
                 var newItem = new MicrosoftDynamicsCRMadoxioApplication()
                 {
+                    AdoxioApplicanttype = application.AdoxioApplicanttype,
                     AdoxioAddresscity = RandomCity(),
                     AdoxioAddresscountry = application.AdoxioAddresscountry,
                     AdoxioAddresspostalcode = application.AdoxioAddresspostalcode,
@@ -423,13 +424,13 @@ namespace DataTool
                     // get establishment name and address
                     AdoxioEstablishmentpropsedname = RandomCompanyName(application.AdoxioEstablishmentpropsedname),
                     AdoxioEstablishmentaddressstreet = RandomCompanyName(application.AdoxioEstablishmentaddressstreet),
-                    AdoxioEstablishmentaddresscity = RandomCity(),
+                    AdoxioEstablishmentaddresscity = application.AdoxioEstablishmentaddresscity,
 
                     AdoxioEstablishmentaddresscountry = application.AdoxioEstablishmentaddresscountry,
 
                     AdoxioEstablishmentaddresspostalcode = application.AdoxioEstablishmentaddresspostalcode,
                     AdoxioEstablishmentparcelid = RandomPid(),
-                AdoxioLicencefeeinvoicepaid = application.AdoxioLicencefeeinvoicepaid,
+                    AdoxioLicencefeeinvoicepaid = application.AdoxioLicencefeeinvoicepaid,
                     Statuscode = application.Statuscode,
                     AdoxioAppchecklistfinaldecision = application.AdoxioAppchecklistfinaldecision,
                     AdoxioPaymentrecieved = application.AdoxioPaymentrecieved,
@@ -476,7 +477,6 @@ namespace DataTool
                 }
 
                 
-
                 if (application._adoxioInvoiceValue != null)
                 {
                     newItem.AdoxioInvoice = new MicrosoftDynamicsCRMinvoice()
