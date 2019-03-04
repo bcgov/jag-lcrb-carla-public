@@ -107,10 +107,10 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   transformStatus(application: AdoxioApplication): string {
     const status = application.applicationStatus;
     let shownStatus = status;
-    if (!application.isPaid) {
-      if (status === 'Intake') {
+    if (!application.assignedLicence) {
+      if (status === 'Intake' && !application.isPaid) {
         shownStatus = 'Not Submitted';
-      } else if (status === 'In Progress' || status === 'Under Review') {
+      } else if (status === 'In Progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
         shownStatus = 'Application Under Review';
       } else if (status === 'Incomplete') {
         shownStatus = 'Application Incomplete';
