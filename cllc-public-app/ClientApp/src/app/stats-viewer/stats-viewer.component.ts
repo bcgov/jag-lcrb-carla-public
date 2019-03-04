@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { StatsDataService } from '@app/services/stats-data.service';
+import { Subscription } from 'rxjs';
+import { Stat } from '../models/stat.model';
 
 @Component({
   selector: 'app-stats-viewer',
@@ -6,11 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stats-viewer.component.scss']
 })
 export class StatsViewerComponent implements OnInit {
-  public statsData: any;
+  public statsData: any[] = [];
   dataLoaded: boolean;
-  constructor() { }
+
+  busy: Subscription;
+  constructor(
+    private statsDataService: StatsDataService
+  ) { }
 
   ngOnInit() {
+    this.busy = this.statsDataService.getStats().subscribe((stats: Stat[]) => {
+      stats.forEach((stat: Stat | any) => {        
+        this.statsData.push(stat);        
+      });
+    });
   }
+
+
 
 }

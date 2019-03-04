@@ -205,6 +205,7 @@ import {
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
+    StatsViewerComponent,
     StatusBadgeComponent,
     StoreInformationComponent,
     SubmitPayComponent,

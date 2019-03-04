@@ -1,4 +1,4 @@
-export class Stats {  
+export class Stat {  
   adoxio_name: string;
   adoxio_establishmentpropsedname: string;
   adoxio_establishmentaddressstreet: string;

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';
+import { Stat } from '../models/stat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class StatsDataService extends DataService {
     super();
   }
 
-  public getStats(): Observable<DynamicsAccount> {
-    return this.http.get<DynamicsAccount>(this.apiPath, { headers: this.headers })
+  public getStats(): Observable<Stat[]> {
+    return this.http.get<Stat[]>(this.apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
