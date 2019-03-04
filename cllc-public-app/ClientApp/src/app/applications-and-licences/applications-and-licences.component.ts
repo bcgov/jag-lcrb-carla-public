@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MatTableDataSource, MatPaginator, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { LicenseApplicationSummary } from '@appmodels/license-application-summary.model';
-import { AdoxioApplicationDataService } from '@appservices/adoxio-application-data.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { AdoxioApplicationDataService } from '@app/services/adoxio-application-data.service';
 import { Router } from '@angular/router';
-import { AdoxioApplication } from '@appmodels/adoxio-application.model';
-import { FileSystemItem } from '@appmodels/file-system-item.model';
-import { UPLOAD_FILES_MODE } from '@applite-application-dashboard/lite-application-dashboard.component';
-import { PaymentDataService } from '@appservices/payment-data.service';
+import { AdoxioApplication } from '@app/models/adoxio-application.model';
+import { FileSystemItem } from '@app/models/file-system-item.model';
+import { PaymentDataService } from '@services/payment-data.service';
+
+
+const UPLOAD_FILES_MODE = 'UploadFilesMode';
 
 const ACTIVE = 'Active';
 const PAYMENT_REQUIRED = 'Payment Required';
@@ -47,23 +48,21 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   private displayApplications() {
     this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
 
-      adoxioApplications.forEach((entry) => {
-        const licAppSum: any = entry;
-
-
-        if (!licAppSum.isPaid) {
-          this.inProgressApplications.push(licAppSum);
-          this.licencedApplications.push(licAppSum);
-        } else {
-          if (!entry.assignedLicence) {
-            this.busy = this.adoxioApplicationDataService.getFileListAttachedToApplication(entry.id, 'Licence Application Main')
-              .subscribe((files: FileSystemItem[]) => {
-                if (files && files.length) {
-                  licAppSum.applicationFormFileUrl = files[0].serverrelativeurl;
-                  licAppSum.fileName = files[0].name;
-                }
-              });
+      adoxioApplications.forEach((licAppSum: AdoxioApplication | any) => {
+        if (!licAppSum.assignedLicence) {
+          if (licAppSum.isPaid) {
+            licAppSum.applicationStatus = 'Submitted';
           }
+          this.inProgressApplications.push(licAppSum);
+        } else {
+          licAppSum.applicationStatus = this.getLicenceStatus(licAppSum);
+          this.busy = this.adoxioApplicationDataService.getFileListAttachedToApplication(licAppSum.id, 'Licence Application Main')
+            .subscribe((files: FileSystemItem[]) => {
+              if (files && files.length) {
+                licAppSum.applicationFormFileUrl = files[0].serverrelativeurl;
+                licAppSum.fileName = files[0].name;
+              }
+            });
           this.licencedApplications.push(licAppSum);
         }
       });
@@ -71,7 +70,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   }
 
   uploadMoreFiles(application: AdoxioApplication) {
-    this.router.navigate([`/application-lite/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
+    this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
   }
 
   /**
@@ -100,7 +99,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
         if (cancelApplication) {
           // delete the application.
           this.busy = this.adoxioApplicationDataService.cancelApplication(applicationId).subscribe(
-            res => {
+            () => {
               this.displayApplications();
             });
         }
@@ -121,7 +120,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     return status;
   }
 
-  downloadLicence(application) {
+  downloadLicence() {
 
   }
 
@@ -137,7 +136,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     });
   }
 
-  renewLicence(application) {
+  renewLicence() {
 
   }
 

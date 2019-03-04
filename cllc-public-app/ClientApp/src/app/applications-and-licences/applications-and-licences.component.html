@@ -35,7 +35,7 @@
             <tr *ngFor="let item of inProgressApplications; let i = index;" style="border: 1px solid #ccc; ">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
               <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
-                <span>{{item.establishmentName}}</span> <br>
+                <span style="color: #1a5a96;">{{item.establishmentName}}</span> <br>
                 <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
                 <span>Reference #: {{item.name}} </span> <span></span> <br>
               </td>
@@ -46,7 +46,7 @@
                 {{item.applicationStatus}}
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <a routerLink="/application-lite/{{item.id}}">Complete Application</a> <br>
+                <a routerLink="/application/{{item.id}}">Complete Application</a> <br>
                 <span style="margin-top: 5px;" (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
                   <a href="javascript: void(0)">
@@ -76,10 +76,10 @@
             <tr *ngFor="let item of licencedApplications; let i = index;" style="border: 1px solid #ccc; ">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
               <td style="padding: 10px;">
-                <span>{{item.establishmentName}}</span> <br>
+                <span style="color: #1a5a96;">{{item.establishmentName}}</span> <br>
                 <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
                 <span>Reference #: {{item.name}} </span> <span></span> <br>
-                <a *ngIf="item.status == ACTIVE" class="btn btn-primary" style="min-width: 10px;" [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf'">
+                <a *ngIf="item.applicationStatus == ACTIVE" class="btn btn-primary" style="min-width: 10px;" [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf'">
                   <span><i class="fas fa-download"></i> DOWNLOAD LICENCE</span>
                 </a>
               </td>
@@ -90,10 +90,10 @@
                 {{item?.establishmentaddresspostalcode}} <br>
                 Canada <br>
               </td>
-              <td style="background-color: #E1E8F2; padding: 10px;">
-                <button *ngIf="item.status == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(item)">PAY
+              <td style="background-color: #E1E8F2; padding: 10px; text-align: center;">
+                <button *ngIf="item.applicationStatus == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(item)">PAY
                   LICENCE FEE</button>
-                <button *ngIf="item.status == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(item)">RENEW
+                <button *ngIf="item.applicationStatus == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(item)">RENEW
                   LICENCE</button>
               </td>
             </tr>
