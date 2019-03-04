@@ -12,19 +12,21 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public enum AdoxioApplicationStatusCodes
     {
         Active = 1,
-        [EnumMember(Value = "In Progress")]
         Cancelled = 2,
+        [EnumMember(Value = "In progress")]
         InProgress = 845280000,
         Intake = 845280001,
-        [EnumMember(Value = "Pending for LG/FN/Police Feedback")]
-        PendingForLGFNPFeedback = 845280006,
+        Incomplete = 845280002,
         [EnumMember(Value = "Under Review")]
         UnderReview = 845280003,
+        Approved = 845280004,
+        [EnumMember(Value = "Pending for LG/FN/Police Feedback")]
+        PendingForLGFNPFeedback = 845280006,
+        Refused = 845280005,
         [EnumMember(Value = "Pending for Licence Fee")]
         PendingForLicenceFee = 845280007,
-        Approved = 845280004,
         Denied = 845280005,
-        [EnumMember(Value = "Approved in Principle")]
+        [EnumMember(Value = "Approved In Principle")]
         ApprovedInPrinciple = 845280008,
         Terminated = 845280009,
         [EnumMember(Value = "Terminated and refunded")]

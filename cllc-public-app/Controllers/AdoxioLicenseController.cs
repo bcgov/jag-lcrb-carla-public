@@ -513,7 +513,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 catch
                 {
                     string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-                    basePath += "/dashboard-lite";
+                    basePath += "/dashboard";
                     return Redirect(basePath);
                 }
             }
