@@ -208,15 +208,10 @@
 
       <br />
 
-      <!-- <h2>Approved Applications</h2>
-      <app-license-application-summary></app-license-application-summary>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <h2>Applications In Progress</h2>
-      <app-lite-application-dashboard [applicationInProgress]="true"></app-lite-application-dashboard>
-      <p></p> -->
-
-      <app-applications-and-licences></app-applications-and-licences>
+      <app-applications-and-licences>
+        <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary" [disabled]="submittedApplications >= 8"
+          (click)="startNewLicenceApplication()">Submit an Application</button>
+      </app-applications-and-licences>
 
 
       <section>
@@ -256,7 +251,7 @@
         </div>
       </section>
       <p></p>
-      <section class="submit-container">
+      <!-- <section class="submit-container">
         <div>
           <h2>Submit Application</h2>
         </div>
@@ -267,7 +262,7 @@
             (click)="startNewLicenceApplication()">READY TO SUBMIT</button>
         </div>
       </section>
-      <!-- <section>
+      <section>
         <div class="submitted-header">
           <h2>Submitted Applications</h2>
         </div>

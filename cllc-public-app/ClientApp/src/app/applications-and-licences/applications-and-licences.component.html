@@ -18,7 +18,10 @@
     <section *ngIf="inProgressApplications?.length > 0 || licencedApplications?.length > 0">
       <div class="space-between" style="padding: 10px;">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. .</p>
+          magna aliqua.</p>
+          <section style="padding-left: 20px;">
+            <ng-content></ng-content>
+          </section>
       </div>
       <mat-tab-group
         [selectedIndex]="(inProgressApplications?.length > 0 || licencedApplications?.length == 0) ? 0 : 1">

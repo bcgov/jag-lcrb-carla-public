@@ -204,3 +204,8 @@ hr {
 .padded-section {
     padding-left: 15px;
 }
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}

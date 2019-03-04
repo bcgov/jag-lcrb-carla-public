@@ -47,15 +47,11 @@ export class ApplicationsAndLicencesComponent implements OnInit {
    * */
   private displayApplications() {
     this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
-
       adoxioApplications.forEach((licAppSum: AdoxioApplication | any) => {
+        licAppSum.applicationStatus = this.transformStatus(licAppSum);
         if (!licAppSum.assignedLicence) {
-          if (licAppSum.isPaid) {
-            licAppSum.applicationStatus = 'Submitted';
-          }
           this.inProgressApplications.push(licAppSum);
         } else {
-          licAppSum.applicationStatus = this.getLicenceStatus(licAppSum);
           this.busy = this.adoxioApplicationDataService.getFileListAttachedToApplication(licAppSum.id, 'Licence Application Main')
             .subscribe((files: FileSystemItem[]) => {
               if (files && files.length) {
@@ -108,15 +104,28 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
   }
 
-  getLicenceStatus(application: AdoxioApplication): string {
-    let status = ACTIVE;
-    if (application.licenceFeeInvoicePaid !== true) {
-      status = PAYMENT_REQUIRED;
+  transformStatus(application: AdoxioApplication): string {
+    const status = application.applicationStatus;
+    let shownStatus = status;
+    if (!application.isPaid) {
+      if (status === 'Intake') {
+        shownStatus = 'Not Submitted';
+      } else if (status === 'In Progress' || status === 'Under Review') {
+        shownStatus = 'Application Under Review';
+      } else if (status === 'Incomplete') {
+        shownStatus = 'Application Incomplete';
+      } else if (status === 'PendingForLGFNPFeedback') {
+        shownStatus = 'Pending External Review';
+      }
+    } else {
+      shownStatus = ACTIVE;
+      if (application.licenceFeeInvoicePaid !== true) {
+        shownStatus = PAYMENT_REQUIRED;
+      }
+      if (application.assignedLicence && (new Date() > new Date(application.assignedLicence.expiryDate))) {
+        shownStatus = RENEWAL_DUE;
+      }
     }
-    if (application.assignedLicence && (new Date() > new Date(application.assignedLicence.expiryDate))) {
-      status = RENEWAL_DUE;
-    }
-
     return status;
   }
 
