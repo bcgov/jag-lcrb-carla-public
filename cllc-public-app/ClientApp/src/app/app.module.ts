@@ -153,6 +153,7 @@ import {
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { FieldComponent } from './shared/field/field.component';
+import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 
 @NgModule({
   declarations: [
@@ -227,7 +228,8 @@ import { FieldComponent } from './shared/field/field.component';
     SolePropResultsComponent,
     IndividualAssociatesResultsComponent,
     OrganizationResultsComponent,
-    BusinessProfileComponent
+    BusinessProfileComponent,
+    StatsViewerComponent
   ],
   imports: [
   BrowserModule,
