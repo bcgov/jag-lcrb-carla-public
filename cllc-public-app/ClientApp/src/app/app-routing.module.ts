@@ -9,41 +9,21 @@ import { SurveyTestComponent } from './survey/test.component';
 import { SurveyResolver } from './services/survey-resolver.service';
 import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
-import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
-import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
-import { DirectorsAndOfficersComponent } from './business-profile/tabs/directors-and-officers/directors-and-officers.component';
-import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key-personnel.component';
-import { EditShareholdersComponent } from './business-profile/tabs/edit-shareholders/edit-shareholders.component';
-import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
-import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
-import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
-import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
-import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
-import { FloorPlanComponent } from './license-application/tabs/floor-plan/floor-plan.component';
-import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
-import { SiteMapComponent } from './license-application/tabs/site-map/site-map.component';
-import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
-import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
-import { DashboardLiteComponent } from './dashboard-lite/dashboard-lite.component';
-import { ApplicationComponent } from './lite/application/application.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ApplicationComponent } from './application/application.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
 import { UserConfirmationComponent } from './worker-qualification/user-confirmation/user-confirmation.component';
-import { PrePaymentComponent } from './worker-qualification/pre-payment/pre-payment.component';
 import { WorkerPaymentConfirmationComponent } from './worker-qualification/payment-confirmation/payment-confirmation.component';
 import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-consent.component';
 import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-home.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
-import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
@@ -61,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardLiteComponent,
+    component: DashboardComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
@@ -70,7 +50,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard-lite',
-    component: DashboardLiteComponent,
+    component: DashboardComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
@@ -79,7 +59,7 @@ const routes: Routes = [
     canActivate: [ServiceCardAuthGuard]
   },
   {
-    path: 'application-lite/:applicationId',
+    path: 'application/:applicationId',
     component: ApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]

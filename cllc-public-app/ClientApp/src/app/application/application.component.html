@@ -360,9 +360,29 @@
     <hr>
     <p>&nbsp;</p>
 
-    <label for="">Application Form</label>
+    <label for="">Associates Form</label>
     <br>
-    <p>Upload the completed application form below.</p>
+    <i>
+      Please download the
+      <a *ngIf="account?.businessType === 'SoleProprietor'"
+        href="https://www2.gov.bc.ca/assets/download/5A4BABAFCEF6481AB318949BA12CF842" download target="_blank">
+        associate form
+      </a>
+      <a *ngIf="account?.businessType === 'Society'"
+        href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
+        associate form
+      </a>
+      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
+        href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download target="_blank">
+        associate form
+      </a>
+      <a *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
+        href="https://www2.gov.bc.ca/assets/download/B8A522CB3E8D4595A970F6331F4667A8" download target="_blank">
+        associate form
+      </a>
+      &nbsp;and fill it.
+    </i>
+    <p>Upload the completed associate form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
@@ -375,6 +395,8 @@
 
     <label for="">Financial Integrity Form</label>
     <br>
+    <i>Please download the <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank">business financial integrity form</a> and fill it</i>
     <p>Upload the completed Financial Integrity form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
@@ -435,7 +457,7 @@
     </section>
 
     <section style="position: relative;">
-      <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard-lite'])">
+      <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
         <span>
           <i class="fa fa-save" style="color: #fff;"></i>
           SAVE FOR LATER
@@ -483,14 +505,35 @@
     <label for="">Establishment Name</label>:
     <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
     <br>
-    <label for="">Application Form</label>
+
+    <label for="">Associates Form</label>
     <br>
-    <p>Upload the completed application form below.</p>
+    <i>
+      Please download the
+      <a *ngIf="account?.businessType === 'SoleProprietor'"
+        href="https://www2.gov.bc.ca/assets/download/5A4BABAFCEF6481AB318949BA12CF842" download target="_blank">
+        associate form
+      </a>
+      <a *ngIf="account?.businessType === 'Society'"
+        href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
+        associate form
+      </a>
+      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
+        href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download target="_blank">
+        associate form
+      </a>
+      <a *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
+        href="https://www2.gov.bc.ca/assets/download/B8A522CB3E8D4595A970F6331F4667A8" download target="_blank">
+        associate form
+      </a>
+      &nbsp;and fill it.
+    </i>
+    <p>Upload the completed associate form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" [enableFileDeletion]="false"
-        entityName="application" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm></app-file-uploader>
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm>
+      </app-file-uploader>
     </section>
     <br>
     <hr>
@@ -498,26 +541,43 @@
 
     <label for="">Financial Integrity Form</label>
     <br>
+    <i>Please download the <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank">business financial integrity form</a> and fill it</i>
     <p>Upload the completed Financial Integrity form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" [enableFileDeletion]="false"
-        entityName="application" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+        #financialIntegrityDocuments></app-file-uploader>
     </section>
     <br>
     <hr>
     <br>
+
+    <label for="">Proof of ownership, lease or sub-lease of a location</label>
+    <br>
+    <p>
+      A licence cannot be issued unless the applicant
+      provides evidence of the purchase or lease. Leases or other arrangements must not expire for at least 12 months
+      from the date a licence is
+      issued.
+    </p>
+    <p>Upload a copy of the proof or offfer of ownership, lease or sub-lease.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Proof of Location"
+        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #locationDocuments></app-file-uploader>
+    </section>
+    <br>
+    <hr>
 
     <label for="">Supporting Documents</label>
     <br>
     <p>Upload all required documentation that will support the licence application.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [enableFileDeletion]="false"
-        [entityId]="applicationId" [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
-      </app-file-uploader>
+        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments></app-file-uploader>
     </section>
   </div>
 </div>
