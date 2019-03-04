@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of SharepointSites
+    /// Collection of accounts
     /// </summary>
     public partial class GetOKResponse
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the GetOKResponse class.
         /// </summary>
-        public GetOKResponse(IList<MicrosoftDynamicsCRMsharepointsite> value = default(IList<MicrosoftDynamicsCRMsharepointsite>))
+        public GetOKResponse(IList<MicrosoftDynamicsCRMaccount> value = default(IList<MicrosoftDynamicsCRMaccount>))
         {
             Value = value;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMsharepointsite> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMaccount> Value { get; set; }
 
     }
 }

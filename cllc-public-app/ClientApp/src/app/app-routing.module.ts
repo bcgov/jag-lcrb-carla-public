@@ -26,6 +26,8 @@ import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-h
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
+
 
 const routes: Routes = [
   {
@@ -244,6 +246,13 @@ const routes: Routes = [
   {
     path: 'survey-test',
     component: SurveyTestComponent,
+    data: {
+      breadcrumb: 'Survey Test'
+    }
+  },
+  {
+    path: 'stats-viewer',
+    component: StatsViewerComponent,
     data: {
       breadcrumb: 'Survey Test'
     }

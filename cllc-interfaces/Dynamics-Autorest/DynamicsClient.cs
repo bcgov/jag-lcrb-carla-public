@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Net.Http;
 
     /// <summary>
-    /// Auto Generated
+    /// This OData service is located at https://localhost:8888/dynamics
     /// </summary>
     public partial class DynamicsClient : ServiceClient<DynamicsClient>, IDynamicsClient
     {
@@ -41,19 +41,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
-        /// Gets the ISharepointSites.
-        /// </summary>
-        public virtual ISharepointSites SharepointSites { get; private set; }
-
-        /// <summary>
-        /// Gets the ISharepointSite.
-        /// </summary>
-        public virtual ISharepointSite SharepointSite { get; private set; }
-
-        /// <summary>
         /// Gets the IAccounts.
         /// </summary>
         public virtual IAccounts Accounts { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypeinvestigationset.
+        /// </summary>
+        public virtual ILicencetypeinvestigationset Licencetypeinvestigationset { get; private set; }
+
+        /// <summary>
+        /// Gets the IAgencycommunications.
+        /// </summary>
+        public virtual IAgencycommunications Agencycommunications { get; private set; }
 
         /// <summary>
         /// Gets the IAliases.
@@ -61,9 +61,74 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAliases Aliases { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicantsteps.
+        /// </summary>
+        public virtual IApplicantsteps Applicantsteps { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationbpfmvpv2s.
+        /// </summary>
+        public virtual IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationinvoicehistories.
+        /// </summary>
+        public virtual IApplicationinvoicehistories Applicationinvoicehistories { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationmodules.
+        /// </summary>
+        public virtual IApplicationmodules Applicationmodules { get; private set; }
+
+        /// <summary>
         /// Gets the IApplications.
         /// </summary>
         public virtual IApplications Applications { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtermsconditionslimitations.
+        /// </summary>
+        public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
+
+        /// <summary>
+        /// Gets the IAreas.
+        /// </summary>
+        public virtual IAreas Areas { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessaccounts.
+        /// </summary>
+        public virtual IBusinessaccounts Businessaccounts { get; private set; }
+
+        /// <summary>
+        /// Gets the ICitydistricts.
+        /// </summary>
+        public virtual ICitydistricts Citydistricts { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplaintpublicbpfs.
+        /// </summary>
+        public virtual IComplaintpublicbpfs Complaintpublicbpfs { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplaints.
+        /// </summary>
+        public virtual IComplaints Complaints { get; private set; }
+
+        /// <summary>
+        /// Gets the ICompliancemeetings.
+        /// </summary>
+        public virtual ICompliancemeetings Compliancemeetings { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventionadmins.
+        /// </summary>
+        public virtual IContraventionadmins Contraventionadmins { get; private set; }
+
+        /// <summary>
+        /// Gets the IContraventions.
+        /// </summary>
+        public virtual IContraventions Contraventions { get; private set; }
 
         /// <summary>
         /// Gets the ICorporatehistorysummaries.
@@ -76,24 +141,99 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICorporateroles Corporateroles { get; private set; }
 
         /// <summary>
+        /// Gets the ICustomautonumberdefinitions.
+        /// </summary>
+        public virtual ICustomautonumberdefinitions Customautonumberdefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the ICustomautonumberrequests.
+        /// </summary>
+        public virtual ICustomautonumberrequests Customautonumberrequests { get; private set; }
+
+        /// <summary>
+        /// Gets the IDocumentadmins.
+        /// </summary>
+        public virtual IDocumentadmins Documentadmins { get; private set; }
+
+        /// <summary>
+        /// Gets the IDocuments.
+        /// </summary>
+        public virtual IDocuments Documents { get; private set; }
+
+        /// <summary>
         /// Gets the IEstablishments.
         /// </summary>
         public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
-        /// Gets the IAdoxiolegalentities.
+        /// Gets the IFundingsources.
         /// </summary>
-        public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
+        public virtual IFundingsources Fundingsources { get; private set; }
 
         /// <summary>
-        /// Gets the IAdoxioLicencetypes.
+        /// Gets the IIncidentlicencetypeset.
         /// </summary>
-        public virtual IAdoxioLicencetypes AdoxioLicencetypes { get; private set; }
+        public virtual IIncidentlicencetypeset Incidentlicencetypeset { get; private set; }
 
         /// <summary>
-        /// Gets the ILicenses.
+        /// Gets the IInspectioninspectorsset.
         /// </summary>
-        public virtual ILicenses Licenses { get; private set; }
+        public virtual IInspectioninspectorsset Inspectioninspectorsset { get; private set; }
+
+        /// <summary>
+        /// Gets the IInterests.
+        /// </summary>
+        public virtual IInterests Interests { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationactivities.
+        /// </summary>
+        public virtual IInvestigationactivities Investigationactivities { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigations.
+        /// </summary>
+        public virtual IInvestigations Investigations { get; private set; }
+
+        /// <summary>
+        /// Gets the ILegalentities.
+        /// </summary>
+        public virtual ILegalentities Legalentities { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenceses.
+        /// </summary>
+        public virtual ILicenceses Licenceses { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypeprerequisites.
+        /// </summary>
+        public virtual ILicencetypeprerequisites Licencetypeprerequisites { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypes.
+        /// </summary>
+        public virtual ILicencetypes Licencetypes { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypestepprerequisites.
+        /// </summary>
+        public virtual ILicencetypestepprerequisites Licencetypestepprerequisites { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypesteps.
+        /// </summary>
+        public virtual ILicencetypesteps Licencetypesteps { get; private set; }
+
+        /// <summary>
+        /// Gets the ILoans.
+        /// </summary>
+        public virtual ILoans Loans { get; private set; }
+
+        /// <summary>
+        /// Gets the ILocalgovindigenousnations.
+        /// </summary>
+        public virtual ILocalgovindigenousnations Localgovindigenousnations { get; private set; }
 
         /// <summary>
         /// Gets the IPersonalhistorysummaries.
@@ -101,14 +241,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IPersonalhistorysummaries Personalhistorysummaries { get; private set; }
 
         /// <summary>
+        /// Gets the IPolicejurisdictions.
+        /// </summary>
+        public virtual IPolicejurisdictions Policejurisdictions { get; private set; }
+
+        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         public virtual IPolicydocuments Policydocuments { get; private set; }
 
         /// <summary>
+        /// Gets the IPostalcodes.
+        /// </summary>
+        public virtual IPostalcodes Postalcodes { get; private set; }
+
+        /// <summary>
         /// Gets the IPreviousaddresses.
         /// </summary>
         public virtual IPreviousaddresses Previousaddresses { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegions.
+        /// </summary>
+        public virtual IRegions Regions { get; private set; }
+
+        /// <summary>
+        /// Gets the ISettings.
+        /// </summary>
+        public virtual ISettings Settings { get; private set; }
 
         /// <summary>
         /// Gets the ISpddatarows.
@@ -121,14 +281,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpdexportses Spdexportses { get; private set; }
 
         /// <summary>
-        /// Gets the IAdoxioTiedhouseassociations.
+        /// Gets the ITaxandaccountings.
         /// </summary>
-        public virtual IAdoxioTiedhouseassociations AdoxioTiedhouseassociations { get; private set; }
+        public virtual ITaxandaccountings Taxandaccountings { get; private set; }
 
         /// <summary>
-        /// Gets the IAdoxioTiedhouseconnections.
+        /// Gets the ITermsconditionslimitationspresets.
         /// </summary>
-        public virtual IAdoxioTiedhouseconnections AdoxioTiedhouseconnections { get; private set; }
+        public virtual ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; private set; }
+
+        /// <summary>
+        /// Gets the ITerritories.
+        /// </summary>
+        public virtual ITerritories Territories { get; private set; }
+
+        /// <summary>
+        /// Gets the ITiedhouseassociations.
+        /// </summary>
+        public virtual ITiedhouseassociations Tiedhouseassociations { get; private set; }
+
+        /// <summary>
+        /// Gets the ITiedhouseconnections.
+        /// </summary>
+        public virtual ITiedhouseconnections Tiedhouseconnections { get; private set; }
+
+        /// <summary>
+        /// Gets the IWorkerinvoicehistories.
+        /// </summary>
+        public virtual IWorkerinvoicehistories Workerinvoicehistories { get; private set; }
 
         /// <summary>
         /// Gets the IWorkers.
@@ -146,9 +326,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvoices Invoices { get; private set; }
 
         /// <summary>
-        /// Gets the ISharepointDocumentLocations.
+        /// Gets the IMsdynapplicationknowledgearticleset.
         /// </summary>
-        public virtual ISharepointDocumentLocations SharepointDocumentLocations { get; private set; }
+        public virtual IMsdynapplicationknowledgearticleset Msdynapplicationknowledgearticleset { get; private set; }
+
+        /// <summary>
+        /// Gets the IMsdynapplicationknowledgebaserecset.
+        /// </summary>
+        public virtual IMsdynapplicationknowledgebaserecset Msdynapplicationknowledgebaserecset { get; private set; }
+
+        /// <summary>
+        /// Gets the IMsdynlicencetypeknowledgearticleset.
+        /// </summary>
+        public virtual IMsdynlicencetypeknowledgearticleset Msdynlicencetypeknowledgearticleset { get; private set; }
+
+        /// <summary>
+        /// Gets the IMsdynlicencetypeknowledgebaserecset.
+        /// </summary>
+        public virtual IMsdynlicencetypeknowledgebaserecset Msdynlicencetypeknowledgebaserecset { get; private set; }
+
+        /// <summary>
+        /// Gets the ISavedqueries.
+        /// </summary>
+        public virtual ISavedqueries Savedqueries { get; private set; }
+
+        /// <summary>
+        /// Gets the ISharepointdocumentlocations.
+        /// </summary>
+        public virtual ISharepointdocumentlocations Sharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISharepointsites.
+        /// </summary>
+        public virtual ISharepointsites Sharepointsites { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -391,29 +601,71 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         private void Initialize()
         {
-            SharepointSites = new SharepointSites(this);
-            SharepointSite = new SharepointSite(this);
             Accounts = new Accounts(this);
+            Licencetypeinvestigationset = new Licencetypeinvestigationset(this);
+            Agencycommunications = new Agencycommunications(this);
             Aliases = new Aliases(this);
+            Applicantsteps = new Applicantsteps(this);
+            Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
+            Applicationinvoicehistories = new Applicationinvoicehistories(this);
+            Applicationmodules = new Applicationmodules(this);
             Applications = new Applications(this);
+            Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
+            Areas = new Areas(this);
+            Businessaccounts = new Businessaccounts(this);
+            Citydistricts = new Citydistricts(this);
+            Complaintpublicbpfs = new Complaintpublicbpfs(this);
+            Complaints = new Complaints(this);
+            Compliancemeetings = new Compliancemeetings(this);
+            Contraventionadmins = new Contraventionadmins(this);
+            Contraventions = new Contraventions(this);
             Corporatehistorysummaries = new Corporatehistorysummaries(this);
             Corporateroles = new Corporateroles(this);
+            Customautonumberdefinitions = new Customautonumberdefinitions(this);
+            Customautonumberrequests = new Customautonumberrequests(this);
+            Documentadmins = new Documentadmins(this);
+            Documents = new Documents(this);
             Establishments = new Establishments(this);
-            Adoxiolegalentities = new Adoxiolegalentities(this);
-            AdoxioLicencetypes = new AdoxioLicencetypes(this);
-            Licenses = new Licenses(this);
+            Fundingsources = new Fundingsources(this);
+            Incidentlicencetypeset = new Incidentlicencetypeset(this);
+            Inspectioninspectorsset = new Inspectioninspectorsset(this);
+            Interests = new Interests(this);
+            Investigationactivities = new Investigationactivities(this);
+            Investigations = new Investigations(this);
+            Legalentities = new Legalentities(this);
+            Licenceses = new Licenceses(this);
+            Licencetypeprerequisites = new Licencetypeprerequisites(this);
+            Licencetypes = new Licencetypes(this);
+            Licencetypestepprerequisites = new Licencetypestepprerequisites(this);
+            Licencetypesteps = new Licencetypesteps(this);
+            Loans = new Loans(this);
+            Localgovindigenousnations = new Localgovindigenousnations(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
+            Policejurisdictions = new Policejurisdictions(this);
             Policydocuments = new Policydocuments(this);
+            Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
+            Regions = new Regions(this);
+            Settings = new Settings(this);
             Spddatarows = new Spddatarows(this);
             Spdexportses = new Spdexportses(this);
-            AdoxioTiedhouseassociations = new AdoxioTiedhouseassociations(this);
-            AdoxioTiedhouseconnections = new AdoxioTiedhouseconnections(this);
+            Taxandaccountings = new Taxandaccountings(this);
+            Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
+            Territories = new Territories(this);
+            Tiedhouseassociations = new Tiedhouseassociations(this);
+            Tiedhouseconnections = new Tiedhouseconnections(this);
+            Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
             Contacts = new Contacts(this);
             Invoices = new Invoices(this);
-            SharepointDocumentLocations = new SharepointDocumentLocations(this);
-            BaseUri = new System.Uri("http://localhost");
+            Msdynapplicationknowledgearticleset = new Msdynapplicationknowledgearticleset(this);
+            Msdynapplicationknowledgebaserecset = new Msdynapplicationknowledgebaserecset(this);
+            Msdynlicencetypeknowledgearticleset = new Msdynlicencetypeknowledgearticleset(this);
+            Msdynlicencetypeknowledgebaserecset = new Msdynlicencetypeknowledgebaserecset(this);
+            Savedqueries = new Savedqueries(this);
+            Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
+            Sharepointsites = new Sharepointsites(this);
+            BaseUri = new System.Uri("https://localhost:8888/dynamics");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
