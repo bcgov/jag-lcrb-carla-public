@@ -1,0 +1,8 @@
+<div [ngClass]="{'extra-padding-left': !fullWidth }">
+  <!-- <div [ngBusy]="busy"></div> -->
+  <div class="row" *ngIf="statsData && dataLoaded">    
+  </div>
+  <section *ngIf="!dataLoaded" class="h1">
+    Loading stats...
+  </section>
+</div>
