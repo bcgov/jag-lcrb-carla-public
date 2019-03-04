@@ -13,9 +13,9 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for SharepointDocumentLocations.
+    /// Extension methods for Sharepointdocumentlocations.
     /// </summary>
-    public static partial class SharepointDocumentLocationsExtensions
+    public static partial class SharepointdocumentlocationsExtensions
     {
             /// <summary>
             /// Get entities from sharepointdocumentlocations
@@ -24,19 +24,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -47,7 +42,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel Get(this ISharepointDocumentLocations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static SharepointdocumentlocationsGetResponseModel Get(this ISharepointdocumentlocations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
@@ -59,19 +54,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -85,7 +75,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel> GetAsync(this ISharepointDocumentLocations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SharepointdocumentlocationsGetResponseModel> GetAsync(this ISharepointdocumentlocations operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -106,7 +96,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMsharepointdocumentlocation Create(this ISharepointDocumentLocations operations, MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMsharepointdocumentlocation Create(this ISharepointdocumentlocations operations, MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
@@ -127,49 +117,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMsharepointdocumentlocation> CreateAsync(this ISharepointDocumentLocations operations, MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMsharepointdocumentlocation> CreateAsync(this ISharepointdocumentlocations operations, MicrosoftDynamicsCRMsharepointdocumentlocation body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
-            }
-
-            /// <summary>
-            /// Delete entity from sharepointdocumentlocations
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='sharepointdocumentlocationid'>
-            /// key: sharepointdocumentlocationid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            public static void Delete(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, string ifMatch = default(string))
-            {
-                operations.DeleteAsync(sharepointdocumentlocationid, ifMatch).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Delete entity from sharepointdocumentlocations
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='sharepointdocumentlocationid'>
-            /// key: sharepointdocumentlocationid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task DeleteAsync(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.DeleteWithHttpMessagesAsync(sharepointdocumentlocationid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -187,7 +140,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMsharepointdocumentlocation GetByKey(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMsharepointdocumentlocation GetByKey(this ISharepointdocumentlocations operations, string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetByKeyAsync(sharepointdocumentlocationid, select, expand).GetAwaiter().GetResult();
             }
@@ -210,12 +163,49 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMsharepointdocumentlocation> GetByKeyAsync(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMsharepointdocumentlocation> GetByKeyAsync(this ISharepointdocumentlocations operations, string sharepointdocumentlocationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetByKeyWithHttpMessagesAsync(sharepointdocumentlocationid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
+            }
+
+            /// <summary>
+            /// Delete entity from sharepointdocumentlocations
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            public static void Delete(this ISharepointdocumentlocations operations, string sharepointdocumentlocationid, string ifMatch = default(string))
+            {
+                operations.DeleteAsync(sharepointdocumentlocationid, ifMatch).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from sharepointdocumentlocations
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sharepointdocumentlocationid'>
+            /// key: sharepointdocumentlocationid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAsync(this ISharepointdocumentlocations operations, string sharepointdocumentlocationid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteWithHttpMessagesAsync(sharepointdocumentlocationid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -230,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body)
+            public static void Update(this ISharepointdocumentlocations operations, string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body)
             {
                 operations.UpdateAsync(sharepointdocumentlocationid, body).GetAwaiter().GetResult();
             }
@@ -250,41 +240,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this ISharepointDocumentLocations operations, string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this ISharepointdocumentlocations operations, string sharepointdocumentlocationid, MicrosoftDynamicsCRMsharepointdocumentlocation body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.UpdateWithHttpMessagesAsync(sharepointdocumentlocationid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Invoke function RetrieveAbsoluteAndSiteCollectionUrl
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='entity'>
-            /// </param>
-            public static MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse RetrieveAbsoluteAndSiteCollectionUrl(this ISharepointDocumentLocations operations, string entity)
-            {
-                return operations.RetrieveAbsoluteAndSiteCollectionUrlAsync(entity).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Invoke function RetrieveAbsoluteAndSiteCollectionUrl
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='entity'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<MicrosoftDynamicsCRMRetrieveAbsoluteAndSiteCollectionUrlResponse> RetrieveAbsoluteAndSiteCollectionUrlAsync(this ISharepointDocumentLocations operations, string entity, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.RetrieveAbsoluteAndSiteCollectionUrlWithHttpMessagesAsync(entity, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
             }
 
     }

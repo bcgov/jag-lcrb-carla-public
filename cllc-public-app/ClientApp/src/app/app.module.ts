@@ -146,6 +146,7 @@ import {
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { FieldComponent } from './shared/field/field.component';
+import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import {
   ApplicationsAndLicencesComponent,
   ApplicationCancellationDialogComponent
@@ -204,6 +205,7 @@ import {
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
+    StatsViewerComponent,
     StatusBadgeComponent,
     StoreInformationComponent,
     SubmitPayComponent,
@@ -222,6 +224,11 @@ import {
     WorkerPaymentConfirmationComponent,
     WorkerQualificationComponent,
     WorkerTermsAndConditionsComponent,
+    AssosiateWizardComponent,
+    SolePropResultsComponent,
+    IndividualAssociatesResultsComponent,
+    OrganizationResultsComponent,
+    BusinessProfileComponent
   ],
   imports: [
     AdminModule,

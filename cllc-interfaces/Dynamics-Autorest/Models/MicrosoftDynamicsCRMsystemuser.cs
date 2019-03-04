@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsystemuser
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemuser(string _queueidValue = default(string), string _createdbyValue = default(string), int? preferredaddresscode = default(int?), string nickname = default(string), string azureactivedirectoryobjectid = default(string), bool? isemailaddressapprovedbyo365admin = default(bool?), string address2Stateorprovince = default(string), string applicationiduri = default(string), string address1County = default(string), long? versionnumber = default(long?), string address2Country = default(string), string address2Postofficebox = default(string), int? preferredphonecode = default(int?), string yammeruserid = default(string), string title = default(string), bool? setupuser = default(bool?), string firstname = default(string), string employeeid = default(string), string _territoryidValue = default(string), string jobtitle = default(string), string skills = default(string), string internalemailaddress = default(string), bool? isintegrationuser = default(bool?), string address2Composite = default(string), string address1Postalcode = default(string), object entityimage = default(object), string address2Addressid = default(string), string windowsliveid = default(string), string address1Line3 = default(string), string disabledreason = default(string), int? address2Utcoffset = default(int?), string address1Line2 = default(string), string address1City = default(string), string personalemailaddress = default(string), int? userlicensetype = default(int?), string address1Telephone2 = default(string), string _createdonbehalfbyValue = default(string), string _businessunitidValue = default(string), double? address1Longitude = default(double?), string sharepointemailaddress = default(string), string organizationid = default(string), string yomifirstname = default(string), object exchangerate = default(object), int? address1Shippingmethodcode = default(int?), string yomimiddlename = default(string), string address2Line2 = default(string), bool? defaultfilterspopulated = default(bool?), string address1Line1 = default(string), string address1Telephone1 = default(string), string defaultodbfoldername = default(string), string systemuserid = default(string), string traversedpath = default(string), string address1Country = default(string), int? caltype = default(int?), string yomilastname = default(string), double? address2Latitude = default(double?), string mobilephone = default(string), string address2Fax = default(string), string lastname = default(string), string address1Composite = default(string), double? address1Latitude = default(double?), int? accessmode = default(int?), long? entityimageTimestamp = default(long?), string yomifullname = default(string), string photourl = default(string), string _siteidValue = default(string), string _transactioncurrencyidValue = default(string), bool? isdisabled = default(bool?), string domainname = default(string), int? passportlo = default(int?), string _mobileofflineprofileidValue = default(string), string address1Name = default(string), string address2Telephone2 = default(string), int? emailrouteraccessapproval = default(int?), string _parentsystemuseridValue = default(string), string stageid = default(string), string fullname = default(string), double? address2Longitude = default(double?), string salutation = default(string), string yammeremailaddress = default(string), string address2City = default(string), string middlename = default(string), string entityimageid = default(string), int? address1Addresstypecode = default(int?), string address2County = default(string), string address2Line1 = default(string), string address2Upszone = default(string), int? address1Utcoffset = default(int?), string _positionidValue = default(string), int? address2Shippingmethodcode = default(int?), int? passporthi = default(int?), int? invitestatuscode = default(int?), string address1Telephone3 = default(string), string address2Postalcode = default(string), string address2Telephone1 = default(string), string entityimageUrl = default(string), bool? islicensed = default(bool?), string processid = default(string), string governmentid = default(string), string _modifiedonbehalfbyValue = default(string), string address2Line3 = default(string), bool? issyncwithdirectory = default(bool?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string homephone = default(string), int? preferredemailcode = default(int?), string address2Name = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address1Upszone = default(string), int? importsequencenumber = default(int?), string address1Addressid = default(string), int? outgoingemaildeliverymethod = default(int?), string mobilealertemail = default(string), string _calendaridValue = default(string), int? address2Addresstypecode = default(int?), string address1Fax = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address2Telephone3 = default(string), string address1Postofficebox = default(string), int? incomingemaildeliverymethod = default(int?), string _defaultmailboxValue = default(string), string address1Stateorprovince = default(string), bool? displayinserviceviews = default(bool?), int? timezoneruleversionnumber = default(int?), string applicationid = default(string), IList<MicrosoftDynamicsCRMrole> systemuserrolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMteam> teammembershipAssociation = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMexchangesyncidmapping> userExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMtheme> lkThemeCreatedby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMtheme> lkThemeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMtheme> lkThemeModifiedby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMtheme> lkThemeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailCreatedby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailModifiedby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> userNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteCreatedby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteModifiedby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleCreatedby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleModifiedby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> userKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMsharepointsite> userSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> userSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementCreatedby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementModifiedby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> userEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelCreatedby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelModifiedby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateCreatedby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateModifiedby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMgoal> lkGoalCreatedby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> lkGoalCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> lkGoalModifiedby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> lkGoalModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> userGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> userGoalGoalowner = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMmetric> lkMetricCreatedby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMmetric> lkMetricCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMmetric> lkMetricModifiedby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMmetric> lkMetricModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryCreatedby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryModifiedby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxCreatedby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxModifiedby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> userMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> mailboxRegardingSystemuser = default(IList<MicrosoftDynamicsCRMmailbox>), MicrosoftDynamicsCRMmailbox defaultmailbox = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMpost> lkPostCreatedby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpost> lkPostCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpost> lkPostModifiedby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpost> lkPostModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMposition> lkPositionCreatedby = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMposition> lkPositionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMposition> lkPositionModifiedby = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMposition> lkPositionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMposition>), MicrosoftDynamicsCRMposition positionid = default(MicrosoftDynamicsCRMposition), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceCreatedby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceModifiedby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> userBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> userBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> userBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> userBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> userBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> userBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> userBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusCreatedby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusModifiedby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> userBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicCreatedby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicModifiedby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> userCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelCreatedby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelModifiedby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> userRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueCreatedby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueModifiedby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> userRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMbookableresource> systemuserBookableresourceUserId = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMsolution> lkSolutionCreatedby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMsolution> lkSolutionModifiedby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherCreatedby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherModifiedby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMofficegraphdocument> lkOfficegraphdocumentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMofficegraphdocument>), IList<MicrosoftDynamicsCRMofficegraphdocument> lkOfficegraphdocumentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMofficegraphdocument>), IList<MicrosoftDynamicsCRMsimilarityrule> lkSimilarityruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsimilarityrule>), IList<MicrosoftDynamicsCRMsimilarityrule> lkSimilarityruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsimilarityrule>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentCreatedby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentModifiedby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordCreatedby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordModifiedby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileofflineprofileitemassocaitionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentModifiedby = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMcampaign> systemUserCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsyncerror> systemUserSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMimportdata> systemUserImportData = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderbaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMimport> lkImportbaseCreatedby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMsdkmessage> createdbySdkmessage = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicateruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMquote> systemUserQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMterritory> lkTerritoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedquerybaseModifiedby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateCreatedby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseCreatedby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitembaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductbaseCreatedby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypebaseCreatedby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMpluginassembly> createdbyPluginassembly = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMuserform> userUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMcontract> systemUserServiceContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMsolution> lkSolutionbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationCreatedby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleCreatedby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMconnection> modifiedbyConnection = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> systemuserConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMreport> lkReportModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMtracelog> lkTracelogCreatedby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerCreatedby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitembaseCreatedby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMlead> lkLeadModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseCreatedby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMrole> lkRoleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivitybaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> userRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitbaseModifiedby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMplugintype> modifiedbyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> lkSdkmessageprocessingstepimageCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMconnection> createdbyConnection = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMimportdata> lkImportdatabaseModifiedby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMworkflow> workflowCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMsla> lkSlabaseCreatedby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMconnection> systemuserConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> modifiedbyConnectionRole = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorbaseModifiedby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMserviceendpoint> lkServiceendpointbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMinvoice> lkInvoicebaseModifiedby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> modifiedbySdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingModifiedby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorbaseCreatedby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMsla> lkSlabaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMsite> lkSitebaseCreatedby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseModifiedby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMpostfollow> lkPostFollowCreatedby = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostfollow> systemuserPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> systemuserPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostcomment> lkPostcommentCreatedby = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostfollow> userOwnerPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostfollow> lkPostfollowCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostcomment> lkPostcommentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> lkPostlikeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpostlike>), IList<MicrosoftDynamicsCRMpostlike> lkPostlikeCreatedby = default(IList<MicrosoftDynamicsCRMpostlike>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarModifiedby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsyncerror> systemUserSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionModifiedby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMsite> lkSiteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMplugintracelog> lkPlugintracelogbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMplugintracelog>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationbaseModifiedby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelCreatedby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseModifiedby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeModifiedBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMreport> lkReportCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMplugintracelog> createdbyPlugintracelog = default(IList<MicrosoftDynamicsCRMplugintracelog>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMtracelog> lkTracelogModifiedby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicateruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedqueryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileofflineprofileitemassocaitionModifiedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitembaseModifiedby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMrole> lkRolebaseModifiedby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> lkSdkmessageprocessingstepCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMuom> lkUombaseCreatedby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMinvoicedetail> systemUserInvoicedetail = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessCreatedby = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> createdbySdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMsalesorder> systemUserOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMserviceendpoint> createdbyServiceendpoint = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivitybaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMletter> lkLetterModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> dynamicpropertyinsatanceCreatedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMuomschedule> lkUomschedulebaseModifiedby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessCreatedby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemModifiedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMimportlog> systemUserImportLogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateModifiedby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessCreatedby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMwebresource> webresourceModifiedby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategorybaseCreatedby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelModifiedby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryModifiedby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMlist> lkListCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolCreatedby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMquote> lkQuoteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMresourcespec>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMimportlog> lkImportlogbaseCreatedby = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserbaseCreatedby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseModifiedby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitembaseWorkerid = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMsolutioncomponent> lkSolutioncomponentbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), IList<MicrosoftDynamicsCRMproduct> lkProductbaseCreatedby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessModifiedby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupCreatedby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMimportlog> lkImportlogCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> lkDynamicpropertyinsatanceattributeModifiedBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMimportdata> lkImportdataCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMterritory> systemUserTerritories = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMletter> lkLetterCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMopportunity> opportunityOwningUser = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityCreatedby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMserviceendpoint> modifiedbyServiceendpoint = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMimportmap> lkImportmapCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentCreatedby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseCreatedby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberModifiedby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMplugintype> lkPlugintypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMlead> lkLeadCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignCreatedby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMconnectionrole> createdbyConnectionRole = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionCreatedby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyCreatedby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMduplicaterecord> systemUserDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterCreatedby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsite> lkSitebaseModifiedby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMserviceappointment> systemUserServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseCreatedby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentbaseCreatedby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsolutioncomponent> lkSolutioncomponentbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), IList<MicrosoftDynamicsCRMrole> lkRoleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMterritory> lkTerritorybaseCreatedby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicaterulebaseModifiedby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMsubject> lkSubjectbaseCreatedby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMcontact> lkContactCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMsocialprofile> lkSocialProfileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserbaseModifiedby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMresource> systemuserResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMuomschedule> lkUomschedulebaseCreatedby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMterritory> lkTerritoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingCreatedby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMteam> lkTeamModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMfax> lkFaxCreatedby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductbaseModifiedby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMactivitypointer> userActivity = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMfax> lkFaxCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemUserBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleModifiedby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMaccount> systemUserAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseCreatedby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMconnection> lkConnectionbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> impersonatinguseridSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunityModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationModifiedby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMconnectionrole> lkConnectionrolebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarCreatedby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMlist> userList = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMlead> leadOwningUser = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMterritory> lkTerritorybaseModifiedby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMannotation> annotationOwningUser = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignModifiedby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessModifiedby = default(IList<MicrosoftDynamicsCRMnewprocess>), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMtracelog> lkTracelogCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMcategory> lkCategoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationCreatedby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMservice> lkServiceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMimport> systemUserImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMinvoice> systemUserInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencyCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMactivityparty> systemUserActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileCreatedby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticlebaseCreatedby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMpluginassembly> lkPluginassemblyModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMcontact> lkContactModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlist> lkListModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMsubject> lkSubjectbaseModifiedby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallCreatedby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeModifiedOnBehalfBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMtracelog> lkTracelogModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMsubject> lkSubjectModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceCreatedby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsdkmessagefilter> modifiedbySdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMservice> lkServiceModifiedby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteraturebaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMemail> userEmail = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> userFax = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackModifiedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMcontact> lkContactbaseCreatedby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMemail> lkEmailModifiedby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMlead> lkLeadbaseModifiedby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitbaseCreatedby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> constraintbasedgroupSystemuser = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMsalesliterature> systemUserSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMcategory> lkCategoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseModifiedby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMqueue> queuePrimaryUser = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMasyncoperation> systemUserAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseCreatedby = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseModifiedby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMuomschedule> lkUomscheduleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMimportfile> systemUserImportFiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMsocialprofile> socialProfileOwningUser = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMinvoice> lkInvoiceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> lkSdkmessageprocessingstepimageModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> lkSdkmessageprocessingstepModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseModifiedby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMuomschedule> lkUomscheduleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMreport> lkReportbaseCreatedby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMsubject> lkSubjectCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberCreatedby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMreport> lkReportbaseModifiedby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMincidentresolution> userIncidentresolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMuserform> lkUserformbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationbaseCreatedby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMquote> lkQuotebaseCreatedby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMsla> lkSlabaseModifiedby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivityCreatedby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecCreatedby = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMfax> lkFaxModifiedby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMproduct> lkProductCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMuserform> lkUserformbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> modifiedbySdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMplugintype> createdbyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMsdkmessage> lkSdkmessageCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMpluginassembly> lkPluginassemblyCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMsdkmessagefilter> createdbySdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsModifiedby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMconnectionrole> lkConnectionrolebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackClosedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeCreatedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseCreatedby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsbaseModifiedby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseCreatedby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMlist> lkListModifiedby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMfax> lkFaxModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMopportunityclose> userOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationModifiedby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedqueryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogModifiedby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemCreatedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecModifiedby = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentModifiedby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationbaseCreatedby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameModifiedby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMinvoice> lkInvoiceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMequipment> equipmentSystemuser = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMbulkoperation> userBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMservice> lkServiceCreatedby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMimportdata> lkImportdataModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteraturebaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMcontract> lkContractModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMconnection> lkConnectionbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileCreatedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseCreatedby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMtask> lkTaskModifiedby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticlebaseCreatedby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMtask> lkTaskCreatedby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessModifiedby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMcontract> lkContractbaseModifiedby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMuom> lkUomCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> userCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerModifiedby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMqueue> lkQueuebaseCreatedby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMusersettings> userSettings = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelbaseCreatedby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessCreatedby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessCreatedby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameCreatedby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMimport> lkImportCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigModifiedby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileModifiedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMplugintype> lkPlugintypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMuom> lkUomModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessCreatedby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMcampaignactivity> userCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> lkDynamicpropertyinsatanceattributeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite), IList<MicrosoftDynamicsCRMrole> lkRolebaseCreatedby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMlead> lkLeadbaseCreatedby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsCreatedby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMquote> lkQuotebaseModifiedby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMemail> lkEmailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMcontract> lkContractCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountbaseCreatedby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMcategory> lkCategoryModifiedby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMorderclose> userOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseCreatedby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelbaseModifiedby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociateCreatedby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunitybaseModifiedby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsdkmessagefilter> lkSdkmessagefilterCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseModifiedby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMqueue> lkQueueModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteratureModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivityModifiedby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMcontact> systemUserContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMwebresource> lkWebresourcebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackCreatedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeCreatedOnBehalfBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> createdbySdkmessageprocessingstepsecureconfig = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardModifiedby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMteam> lkTeambaseModifiedby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMservice> lkServiceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunitybaseCreatedby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMincident> systemUserIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigCreatedby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunityCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMqueue> queuemembershipAssociation = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMsolution> lkSolutionbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupModifiedby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceModifiedby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMpluginassembly> modifiedbyPluginassembly = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticlePrimaryauthorid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencybaseModifiedby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMcontact> contactOwningUser = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileOfflineProfileItemAssociationCreatedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseCreatedby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionModifiedby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMsalesorderdetail> systemUserSalesorderdetail = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMimportlog> lkImportlogbaseModifiedby = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseCreatedby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticlebaseModifiedby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMuom> lkUombaseModifiedby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseCreatedby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationModifiedby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMimportmap> lkImportmapModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> modifiedbySdkmessageprocessingstepsecureconfig = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMcategory> lkCategoryCreatedby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategorybaseModifiedby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMtask> lkTaskCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMletter> userLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentCreatedby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMteam> lkTeambaseCreatedby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMsla> lkSlabaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociationModifiedby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleCreatedby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> owningUserDynamicpropertyinsatance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemModifiedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), MicrosoftDynamicsCRMsystemuser parentsystemuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> userParentUser = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMimportfile> importFileSystemUser = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedquerybaseCreatedby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMduplicaterecord> systemUserDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMemail> lkEmailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMsocialactivity> userSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallModifiedby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationbaseModifiedby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> createdbySdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMquoteclose> userQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteratureCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentCreatedby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> lkSdkmessageprocessingstepsecureconfigModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMcontract> lkContractbaseCreatedby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseModifiedby = default(IList<MicrosoftDynamicsCRMimportjob>), MicrosoftDynamicsCRMmobileofflineprofile mobileofflineprofileid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMimport> lkImportModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMsite> lkSiteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMuserqueryvisualization> userUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMuserform> lkUserformCreatedby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypebaseModifiedby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMtask> userTask = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardCreatedby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMemail> lkEmailCreatedby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMqueue> lkQueueCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryCreatedby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMqueue> lkQueuebaseModifiedby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMsdkmessage> modifiedbySdkmessage = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelbaseModifiedby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileModifiedby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseModifiedby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseModifiedby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMemail> systemUserEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterModifiedby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentModifiedby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMimportmap> systemUserImportMaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMworkflow> workflowModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentModifiedby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseModifiedby = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileofflineprofileitemassociationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileModifiedby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionbaseModifiedby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMtemplate> systemUserEmailTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityModifiedby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMletter> lkLetterModifiedby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMworkflow> workflowCreatedby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMtask> lkTaskModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMuserform> lkUserformModifiedby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMinvoice> lkInvoicebaseCreatedby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMimportdata> lkImportdatabaseCreatedby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMsla> userSlabase = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseModifiedby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMteam> lkTeamCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMquote> lkQuoteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseCreatedby = default(IList<MicrosoftDynamicsCRMslaitem>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMimportmap> lkImportmapbaseModifiedby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsbaseCreatedby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMwebresource> lkWebresourcebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMwebresource> webresourceCreatedby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMquotedetail> systemUserQuotedetail = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMaccount> userAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyModifiedby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticlebaseModifiedby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentCreatedby = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogCreatedby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseCreatedby = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMproduct> lkProductbaseModifiedby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationCreatedby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseCreatedby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMcontact> lkContactbaseModifiedby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseModifiedby = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileOfflineProfileItemCreatedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), IList<MicrosoftDynamicsCRMworkflow> workflowModifiedby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMsdkmessagefilter> lkSdkmessagefilterModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMduplicaterule> systemUserDuplicateRules = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseModifiedby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessModifiedby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseModifiedby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMletter> lkLetterCreatedby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountbaseModifiedby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMlist> lkListCreatedby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleModifiedby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMserviceendpoint> lkServiceendpointbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderbaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsocialprofile> lkSocialProfileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMworkflow> systemUserWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMimport> lkImportbaseModifiedby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitembaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMteam> lkTeambaseAdministratorid = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileCreatedby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> lkSdkmessageprocessingstepsecureconfigCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionCreatedby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMimportmap> lkImportmapbaseCreatedby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencyModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessModifiedby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessModifiedby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMuserquery> userUserquery = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMasyncoperation> systemUserAsyncoperation = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseModifiedby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMequipment>), MicrosoftDynamicsCRMterritory territoryid = default(MicrosoftDynamicsCRMterritory), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionbaseCreatedby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelbaseCreatedby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> lkDynamicpropertyinsatanceattributeModifiedOnBehalfBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolModifiedby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicaterulebaseCreatedby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencybaseCreatedby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMimportlog> lkImportlogModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMsdkmessage> lkSdkmessageModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentbaseModifiedby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMphonecall> userPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMproduct> lkProductModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMappointment> userAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> userAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> userAdoxioWorkerinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserSecondaryinvestigator = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> userAdoxioAgencycommunication = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> userAdoxioApplicantstep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> userAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> userAdoxioApplicationmodule = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> userAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> lkAdoxioComplaincemeetingCreatedby = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> lkAdoxioComplaincemeetingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> lkAdoxioComplaincemeetingModifiedby = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> lkAdoxioComplaincemeetingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> userAdoxioComplaincemeeting = default(IList<MicrosoftDynamicsCRMadoxioComplaincemeeting>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> lkAdoxioComplaintsubjectCreatedby = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> lkAdoxioComplaintsubjectCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> lkAdoxioComplaintsubjectModifiedby = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> lkAdoxioComplaintsubjectModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioComplaintsubject> userAdoxioComplaintsubject = default(IList<MicrosoftDynamicsCRMadoxioComplaintsubject>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> userAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentCreatedby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentModifiedby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> userAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioExhibit> lkAdoxioExhibitCreatedby = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioExhibit> lkAdoxioExhibitCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioExhibit> lkAdoxioExhibitModifiedby = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioExhibit> lkAdoxioExhibitModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioExhibit> userAdoxioExhibit = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> lkAdoxioInvestigationdetailCreatedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> lkAdoxioInvestigationdetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> lkAdoxioInvestigationdetailModifiedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> lkAdoxioInvestigationdetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> userAdoxioInvestigationdetail = default(IList<MicrosoftDynamicsCRMadoxioInvestigationdetail>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> lkAdoxioInvestigationstakeholderCreatedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> lkAdoxioInvestigationstakeholderCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> lkAdoxioInvestigationstakeholderModifiedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> lkAdoxioInvestigationstakeholderModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> userAdoxioInvestigationstakeholder = default(IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> userAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> userAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> userAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> userAdoxioLicencetypeprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> userAdoxioLicencetypestep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> userAdoxioLicencetypestepprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> lkAdoxioPenaltysubtypeCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPenaltysubtype>), IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> lkAdoxioPenaltysubtypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPenaltysubtype>), IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> lkAdoxioPenaltysubtypeModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPenaltysubtype>), IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> lkAdoxioPenaltysubtypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPenaltysubtype>), IList<MicrosoftDynamicsCRMadoxioPenaltytype> lkAdoxioPenaltytypeCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPenaltytype>), IList<MicrosoftDynamicsCRMadoxioPenaltytype> lkAdoxioPenaltytypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPenaltytype>), IList<MicrosoftDynamicsCRMadoxioPenaltytype> lkAdoxioPenaltytypeModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPenaltytype>), IList<MicrosoftDynamicsCRMadoxioPenaltytype> lkAdoxioPenaltytypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPenaltytype>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> userAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> userAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> userAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> userAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> userAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> userAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> lkAdoxioViolationnotificationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> lkAdoxioViolationnotificationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> lkAdoxioViolationnotificationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> lkAdoxioViolationnotificationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationnotification> userAdoxioViolationnotification = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), IList<MicrosoftDynamicsCRMadoxioViolationtype> lkAdoxioViolationtypeCreatedby = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioViolationtype> lkAdoxioViolationtypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioViolationtype> lkAdoxioViolationtypeModifiedby = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioViolationtype> lkAdoxioViolationtypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioViolationtype> userAdoxioViolationtype = default(IList<MicrosoftDynamicsCRMadoxioViolationtype>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> lkAdoxioWitnessstatementCreatedby = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> lkAdoxioWitnessstatementCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> lkAdoxioWitnessstatementModifiedby = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> lkAdoxioWitnessstatementModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioWitnessstatement> userAdoxioWitnessstatement = default(IList<MicrosoftDynamicsCRMadoxioWitnessstatement>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSystemuserAdoxioApplicationCaseManager = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSystemuserAdoxioApplicationCaseManagerSupervisor = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSystemuserAdoxioApplicationInspector = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioRegion> adoxioSystemuserAdoxioRegionRegionalManager = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioTerritory> adoxioSystemuserAdoxioTerritoryPrimaryInspector = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMincident> adoxioSystemuserIncidentAdjudicator = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMincident> adoxioSystemuserIncidentInspector = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMincident> adoxioSystemuserIncidentRegionalManager = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintCreatedby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintModifiedby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> userAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioSystemuserAdoxioComplaintRegionalManager = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioSystemuserAdoxioComplaintInspector = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Createdby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Createdonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Modifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Modifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceCreatedby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceModifiedby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> userAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> userAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountCreatedby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountModifiedby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> userAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> userAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestCreatedby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestModifiedby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> userAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> userAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaCreatedby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaModifiedby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> userAdoxioArea = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> adoxioSystemuserAdoxioAreaPrimaryInspector = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessCreatedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessModifiedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> userAbsScheduledprocess = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserCreatedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserOwninguser = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserModifiedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfCreatedby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfModifiedby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> userAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationInvestigator = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationRegionalManager = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingCreatedby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingModifiedby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> userAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsCreatedby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsModifiedby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> userAdoxioSpdexports = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> userAdoxioPreviousaddress = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowCreatedby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowModifiedby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> userAdoxioSpddatarow = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> userAdoxioPolicydocument = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> userAdoxioCitydistrict = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioRegion> adoxioSystemuserAdoxioRegionRegionalAdmin = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> adoxioSystemuserAdoxioCitydistrictInspectorId = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationAdjudicator = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioSystemuserEstablishmentPrimaryinspector = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> userAdoxioApplicationinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerCreatedby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerModifiedby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> userAdoxioWorker = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasCreatedby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasModifiedby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> userAdoxioAlias = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> userAdoxioCorporatehistorysummary = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationApprovedDecisionBy = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>))
+        public MicrosoftDynamicsCRMsystemuser(string _queueidValue = default(string), string _createdbyValue = default(string), int? preferredaddresscode = default(int?), string nickname = default(string), string azureactivedirectoryobjectid = default(string), bool? isemailaddressapprovedbyo365admin = default(bool?), string address2Stateorprovince = default(string), string applicationiduri = default(string), string address1County = default(string), long? versionnumber = default(long?), string address2Country = default(string), string address2Postofficebox = default(string), int? preferredphonecode = default(int?), string yammeruserid = default(string), string title = default(string), bool? setupuser = default(bool?), string firstname = default(string), string employeeid = default(string), string _territoryidValue = default(string), string jobtitle = default(string), string skills = default(string), string internalemailaddress = default(string), bool? isintegrationuser = default(bool?), string address2Composite = default(string), string address1Postalcode = default(string), object entityimage = default(object), string address2Addressid = default(string), string windowsliveid = default(string), string address1Line3 = default(string), string disabledreason = default(string), int? address2Utcoffset = default(int?), string address1Line2 = default(string), string address1City = default(string), string personalemailaddress = default(string), int? userlicensetype = default(int?), string address1Telephone2 = default(string), string _createdonbehalfbyValue = default(string), string _businessunitidValue = default(string), double? address1Longitude = default(double?), string sharepointemailaddress = default(string), string organizationid = default(string), string yomifirstname = default(string), object exchangerate = default(object), int? address1Shippingmethodcode = default(int?), string yomimiddlename = default(string), string address2Line2 = default(string), bool? defaultfilterspopulated = default(bool?), string address1Line1 = default(string), string address1Telephone1 = default(string), string defaultodbfoldername = default(string), string systemuserid = default(string), string traversedpath = default(string), string address1Country = default(string), int? caltype = default(int?), string yomilastname = default(string), double? address2Latitude = default(double?), string mobilephone = default(string), string address2Fax = default(string), string lastname = default(string), string address1Composite = default(string), double? address1Latitude = default(double?), int? accessmode = default(int?), long? entityimageTimestamp = default(long?), string yomifullname = default(string), string photourl = default(string), string _siteidValue = default(string), string _transactioncurrencyidValue = default(string), bool? isdisabled = default(bool?), string domainname = default(string), int? passportlo = default(int?), string _mobileofflineprofileidValue = default(string), string address1Name = default(string), string address2Telephone2 = default(string), int? emailrouteraccessapproval = default(int?), string _parentsystemuseridValue = default(string), string stageid = default(string), string fullname = default(string), double? address2Longitude = default(double?), string salutation = default(string), string yammeremailaddress = default(string), string address2City = default(string), string middlename = default(string), string entityimageid = default(string), int? address1Addresstypecode = default(int?), string address2County = default(string), string address2Line1 = default(string), string address2Upszone = default(string), int? address1Utcoffset = default(int?), string _positionidValue = default(string), int? address2Shippingmethodcode = default(int?), int? passporthi = default(int?), int? invitestatuscode = default(int?), string address1Telephone3 = default(string), string address2Postalcode = default(string), string address2Telephone1 = default(string), string entityimageUrl = default(string), bool? islicensed = default(bool?), string processid = default(string), string governmentid = default(string), string _modifiedonbehalfbyValue = default(string), string address2Line3 = default(string), bool? issyncwithdirectory = default(bool?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string homephone = default(string), int? preferredemailcode = default(int?), string address2Name = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address1Upszone = default(string), int? importsequencenumber = default(int?), string address1Addressid = default(string), int? outgoingemaildeliverymethod = default(int?), string mobilealertemail = default(string), string _calendaridValue = default(string), int? address2Addresstypecode = default(int?), string address1Fax = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address2Telephone3 = default(string), string address1Postofficebox = default(string), int? incomingemaildeliverymethod = default(int?), string _defaultmailboxValue = default(string), string address1Stateorprovince = default(string), bool? displayinserviceviews = default(bool?), int? timezoneruleversionnumber = default(int?), string applicationid = default(string), IList<MicrosoftDynamicsCRMrole> systemuserrolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMteam> teammembershipAssociation = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMexchangesyncidmapping> userExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMtheme> lkThemeCreatedby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMtheme> lkThemeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMtheme> lkThemeModifiedby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMtheme> lkThemeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailCreatedby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailModifiedby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> lkNewInteractionforemailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMinteractionforemail> userNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteCreatedby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteModifiedby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMproductsubstitute> lkProductSubstituteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleCreatedby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleModifiedby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> lkKnowledgearticleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMknowledgearticle> userKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMsharepointsite> userSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> userSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementCreatedby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementModifiedby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> lkEntitlementModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlement> userEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelCreatedby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelModifiedby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementchannel> lkEntitlementchannelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateCreatedby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateModifiedby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> lkEntitlementtemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMgoal> lkGoalCreatedby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> lkGoalCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> lkGoalModifiedby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> lkGoalModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> userGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoal> userGoalGoalowner = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMmetric> lkMetricCreatedby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMmetric> lkMetricCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMmetric> lkMetricModifiedby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMmetric> lkMetricModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryCreatedby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryModifiedby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMgoalrollupquery> lkGoalrollupqueryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxCreatedby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxModifiedby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> lkMailboxModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> userMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMmailbox> mailboxRegardingSystemuser = default(IList<MicrosoftDynamicsCRMmailbox>), MicrosoftDynamicsCRMmailbox defaultmailbox = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMpost> lkPostCreatedby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpost> lkPostCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpost> lkPostModifiedby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpost> lkPostModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMposition> lkPositionCreatedby = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMposition> lkPositionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMposition> lkPositionModifiedby = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMposition> lkPositionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMposition>), MicrosoftDynamicsCRMposition positionid = default(MicrosoftDynamicsCRMposition), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceCreatedby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceModifiedby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> lkBookableresourceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresource> userBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> lkBookableresourcebookingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebooking> userBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> lkBookableresourcebookingheaderModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> userBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> lkBookableresourcecategoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategory> userBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> lkBookableresourcecategoryassnModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> userBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> lkBookableresourcecharacteristicModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> userBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupCreatedby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupModifiedby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> lkBookableresourcegroupModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookableresourcegroup> userBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusCreatedby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusModifiedby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> lkBookingstatusModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMbookingstatus> userBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicCreatedby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicModifiedby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> lkCharacteristicModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMcharacteristic> userCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelCreatedby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelModifiedby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> lkRatingmodelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingmodel> userRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueCreatedby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueModifiedby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> lkRatingvalueModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMratingvalue> userRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMbookableresource> systemuserBookableresourceUserId = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMsolution> lkSolutionCreatedby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMsolution> lkSolutionModifiedby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherCreatedby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherModifiedby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMofficegraphdocument> lkOfficegraphdocumentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMofficegraphdocument>), IList<MicrosoftDynamicsCRMofficegraphdocument> lkOfficegraphdocumentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMofficegraphdocument>), IList<MicrosoftDynamicsCRMsimilarityrule> lkSimilarityruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsimilarityrule>), IList<MicrosoftDynamicsCRMsimilarityrule> lkSimilarityruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsimilarityrule>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentCreatedby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentModifiedby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> lkRecommendeddocumentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordCreatedby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordModifiedby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgebaserecord> lkKnowledgeBaseRecordModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileofflineprofileitemassocaitionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentModifiedby = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMcampaign> systemUserCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsyncerror> systemUserSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMimportdata> systemUserImportData = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderbaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMimport> lkImportbaseCreatedby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMsdkmessage> createdbySdkmessage = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicateruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMquote> systemUserQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMterritory> lkTerritoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedquerybaseModifiedby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateCreatedby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseCreatedby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitembaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductbaseCreatedby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypebaseCreatedby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMpluginassembly> createdbyPluginassembly = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMuserform> userUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMcontract> systemUserServiceContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMsolution> lkSolutionbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationCreatedby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleCreatedby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMconnection> modifiedbyConnection = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> systemuserConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMreport> lkReportModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMtracelog> lkTracelogCreatedby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerCreatedby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitembaseCreatedby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMlead> lkLeadModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseCreatedby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMrole> lkRoleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivitybaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> userRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitbaseModifiedby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMplugintype> modifiedbyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> lkSdkmessageprocessingstepimageCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMconnection> createdbyConnection = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMimportdata> lkImportdatabaseModifiedby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMworkflow> workflowCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMsla> lkSlabaseCreatedby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMconnection> systemuserConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> modifiedbyConnectionRole = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorbaseModifiedby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMserviceendpoint> lkServiceendpointbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMinvoice> lkInvoicebaseModifiedby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> modifiedbySdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingModifiedby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorbaseCreatedby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMsla> lkSlabaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMsite> lkSitebaseCreatedby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseModifiedby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMpostfollow> lkPostFollowCreatedby = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostfollow> systemuserPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> systemuserPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostcomment> lkPostcommentCreatedby = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostfollow> userOwnerPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostfollow> lkPostfollowCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostcomment> lkPostcommentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> lkPostlikeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpostlike>), IList<MicrosoftDynamicsCRMpostlike> lkPostlikeCreatedby = default(IList<MicrosoftDynamicsCRMpostlike>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarModifiedby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsyncerror> systemUserSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionModifiedby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMsite> lkSiteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMplugintracelog> lkPlugintracelogbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMplugintracelog>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationbaseModifiedby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelCreatedby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseModifiedby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeModifiedBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMreport> lkReportCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMplugintracelog> createdbyPlugintracelog = default(IList<MicrosoftDynamicsCRMplugintracelog>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMtracelog> lkTracelogModifiedby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicateruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedqueryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileofflineprofileitemassocaitionModifiedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitembaseModifiedby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMrole> lkRolebaseModifiedby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> lkSdkmessageprocessingstepCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMuom> lkUombaseCreatedby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMinvoicedetail> systemUserInvoicedetail = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessCreatedby = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> createdbySdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMsalesorder> systemUserOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMserviceendpoint> createdbyServiceendpoint = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivitybaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMletter> lkLetterModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> dynamicpropertyinsatanceCreatedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMuomschedule> lkUomschedulebaseModifiedby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessCreatedby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemModifiedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMimportlog> systemUserImportLogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateModifiedby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessCreatedby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMwebresource> webresourceModifiedby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategorybaseCreatedby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelModifiedby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryModifiedby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMlist> lkListCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolCreatedby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMquote> lkQuoteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMresourcespec>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMimportlog> lkImportlogbaseCreatedby = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserbaseCreatedby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseModifiedby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitembaseWorkerid = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMsolutioncomponent> lkSolutioncomponentbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), IList<MicrosoftDynamicsCRMproduct> lkProductbaseCreatedby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessModifiedby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupCreatedby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMimportlog> lkImportlogCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> lkDynamicpropertyinsatanceattributeModifiedBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMimportdata> lkImportdataCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMterritory> systemUserTerritories = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMletter> lkLetterCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMopportunity> opportunityOwningUser = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityCreatedby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMserviceendpoint> modifiedbyServiceendpoint = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMimportmap> lkImportmapCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentCreatedby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseCreatedby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberModifiedby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMplugintype> lkPlugintypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMlead> lkLeadCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignCreatedby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMconnectionrole> createdbyConnectionRole = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionCreatedby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyCreatedby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMduplicaterecord> systemUserDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterCreatedby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsite> lkSitebaseModifiedby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMserviceappointment> systemUserServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseCreatedby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentbaseCreatedby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsolutioncomponent> lkSolutioncomponentbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), IList<MicrosoftDynamicsCRMrole> lkRoleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMterritory> lkTerritorybaseCreatedby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicaterulebaseModifiedby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMsubject> lkSubjectbaseCreatedby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMcontact> lkContactCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMsocialprofile> lkSocialProfileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserbaseModifiedby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMresource> systemuserResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMuomschedule> lkUomschedulebaseCreatedby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMterritory> lkTerritoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingCreatedby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMteam> lkTeamModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMteamtemplate> lkTeamtemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMteamtemplate>), IList<MicrosoftDynamicsCRMfax> lkFaxCreatedby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductbaseModifiedby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMactivitypointer> userActivity = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMfax> lkFaxCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemUserBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleModifiedby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMaccount> systemUserAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseCreatedby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMconnection> lkConnectionbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> impersonatinguseridSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunityModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationModifiedby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMconnectionrole> lkConnectionrolebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarCreatedby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMlist> userList = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMlead> leadOwningUser = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMterritory> lkTerritorybaseModifiedby = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMannotation> annotationOwningUser = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignModifiedby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessModifiedby = default(IList<MicrosoftDynamicsCRMnewprocess>), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMtracelog> lkTracelogCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMcategory> lkCategoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationCreatedby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMservice> lkServiceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMimport> systemUserImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMinvoice> systemUserInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencyCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMactivityparty> systemUserActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileCreatedby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticlebaseCreatedby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMpluginassembly> lkPluginassemblyModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMcontact> lkContactModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlist> lkListModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMsubject> lkSubjectbaseModifiedby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallCreatedby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeModifiedOnBehalfBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMtracelog> lkTracelogModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMsubject> lkSubjectModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceCreatedby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsdkmessagefilter> modifiedbySdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMservice> lkServiceModifiedby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteraturebaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMemail> userEmail = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> userFax = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackModifiedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMcontact> lkContactbaseCreatedby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMemail> lkEmailModifiedby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMlead> lkLeadbaseModifiedby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitbaseCreatedby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> constraintbasedgroupSystemuser = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMsalesliterature> systemUserSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMcategory> lkCategoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseModifiedby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMqueue> queuePrimaryUser = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMasyncoperation> systemUserAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseCreatedby = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseModifiedby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMuomschedule> lkUomscheduleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMimportfile> systemUserImportFiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMsocialprofile> socialProfileOwningUser = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMinvoice> lkInvoiceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMbusinessunit> lkBusinessunitModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> lkSdkmessageprocessingstepimageModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> lkSdkmessageprocessingstepModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseModifiedby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMuomschedule> lkUomscheduleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMreport> lkReportbaseCreatedby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMsubject> lkSubjectCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMlistmember> lkListmemberCreatedby = default(IList<MicrosoftDynamicsCRMlistmember>), IList<MicrosoftDynamicsCRMreport> lkReportbaseModifiedby = default(IList<MicrosoftDynamicsCRMreport>), IList<MicrosoftDynamicsCRMincidentresolution> userIncidentresolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMuserform> lkUserformbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationbaseCreatedby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMquote> lkQuotebaseCreatedby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMsla> lkSlabaseModifiedby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivityCreatedby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecCreatedby = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMfax> lkFaxModifiedby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMproduct> lkProductCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMuserform> lkUserformbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> modifiedbySdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMplugintype> createdbyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMsdkmessage> lkSdkmessageCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMpluginassembly> lkPluginassemblyCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMsdkmessagefilter> createdbySdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsModifiedby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMconnectionrole> lkConnectionrolebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackClosedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeCreatedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMorderclose> lkOrdercloseCreatedby = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsbaseModifiedby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseCreatedby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMlist> lkListModifiedby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMfax> lkFaxModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMopportunityclose> userOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationModifiedby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedqueryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogModifiedby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemCreatedby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMresourcespec> lkResourcespecModifiedby = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentModifiedby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationbaseCreatedby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameModifiedby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMinvoice> lkInvoiceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMequipment> equipmentSystemuser = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMbulkoperation> userBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMservice> lkServiceCreatedby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplateCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMimportdata> lkImportdataModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteraturebaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMcontract> lkContractModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMconnection> lkConnectionbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileCreatedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseCreatedby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMtask> lkTaskModifiedby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticlebaseCreatedby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMtask> lkTaskCreatedby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMtimezonedefinition> lkTimezonedefinitionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonedefinition>), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessModifiedby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMcontract> lkContractbaseModifiedby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMuom> lkUomCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> userCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMcompetitoraddress> lkCompetitoraddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), IList<MicrosoftDynamicsCRMactivitypointer> lkActivitypointerModifiedby = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMqueue> lkQueuebaseCreatedby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMusersettings> userSettings = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelbaseCreatedby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessCreatedby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessCreatedby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMcampaign> lkCampaignCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameCreatedby = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), IList<MicrosoftDynamicsCRMimport> lkImportCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigModifiedby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileModifiedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMplugintype> lkPlugintypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMuom> lkUomModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> lkLeadtoopportunitysalesprocessCreatedby = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMcampaignactivity> userCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> lkDynamicpropertyinsatanceattributeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite), IList<MicrosoftDynamicsCRMrole> lkRolebaseCreatedby = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMlead> lkLeadbaseCreatedby = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMknowledgearticleviews> lkKnowledgearticleviewsCreatedby = default(IList<MicrosoftDynamicsCRMknowledgearticleviews>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcustomeraddress> lkCustomeraddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMcustomeraddress>), IList<MicrosoftDynamicsCRMtranslationprocess> lkTranslationprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMquote> lkQuotebaseModifiedby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMemail> lkEmailCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMcontract> lkContractCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountbaseCreatedby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMcategory> lkCategoryModifiedby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMorderclose> userOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseCreatedby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMpricelevel> lkPricelevelbaseModifiedby = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociateCreatedby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> lkDynamicPropertyOptionSetItemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunitybaseModifiedby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsdkmessagefilter> lkSdkmessagefilterCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMannotation> lkAnnotationbaseModifiedby = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMqueue> lkQueueModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> lkSharepointdocumentlocationbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteratureModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMsocialactivity> lkSocialactivityModifiedby = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMcalendar> lkCalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMcontact> systemUserContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMwebresource> lkWebresourcebaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMfeedback> lkFeedbackCreatedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> lkDynamicPropertyAssociationattributeCreatedOnBehalfBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> createdbySdkmessageprocessingstepsecureconfig = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardModifiedby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMteam> lkTeambaseModifiedby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMservice> lkServiceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarCreatedby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunitybaseCreatedby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMincident> systemUserIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigCreatedby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMopportunity> lkOpportunityCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMqueue> queuemembershipAssociation = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMsolution> lkSolutionbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMsharepointsite> lkSharepointsitebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupModifiedby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceModifiedby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMpluginassembly> modifiedbyPluginassembly = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticlePrimaryauthorid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencybaseModifiedby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMcontact> contactOwningUser = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileOfflineProfileItemAssociationCreatedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseCreatedby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar> lkQuarterlyfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMquarterlyfiscalcalendar>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionModifiedby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMsalesorderdetail> systemUserSalesorderdetail = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> lkConstraintbasedgroupCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMimportlog> lkImportlogbaseModifiedby = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseCreatedby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticlebaseModifiedby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMopportunityproduct> lkOpportunityproductCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMuom> lkUombaseModifiedby = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseCreatedby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationModifiedby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMimportmap> lkImportmapModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> modifiedbySdkmessageprocessingstepsecureconfig = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMcategory> lkCategoryCreatedby = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMreportcategory> lkReportcategorybaseModifiedby = default(IList<MicrosoftDynamicsCRMreportcategory>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMtask> lkTaskCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> lkEntitlementtemplatechannelModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMletter> userLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentCreatedby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMteam> lkTeambaseCreatedby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMsla> lkSlabaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociationModifiedby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleCreatedby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> owningUserDynamicpropertyinsatance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMcontracttemplate> lkContracttemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMcustomcontrolresource> lkCustomcontrolresourceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemModifiedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), MicrosoftDynamicsCRMsystemuser parentsystemuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> userParentUser = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMpersonaldocumenttemplate> lkPersonaldocumenttemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMpersonaldocumenttemplate>), IList<MicrosoftDynamicsCRMimportfile> importFileSystemUser = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMsavedquery> lkSavedquerybaseCreatedby = default(IList<MicrosoftDynamicsCRMsavedquery>), IList<MicrosoftDynamicsCRMduplicaterecord> systemUserDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMemail> lkEmailModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMsocialactivity> userSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMphonecall> lkPhonecallModifiedby = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplateModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMorganization> lkOrganizationbaseModifiedby = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> createdbySdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMquoteclose> userQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMsyncerror> lkSyncerrorbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsalesliterature> lkSalesliteratureCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMappointment> lkAppointmentCreatedby = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> lkSdkmessageprocessingstepsecureconfigModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMcontract> lkContractbaseCreatedby = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMimportjob> lkImportjobbaseModifiedby = default(IList<MicrosoftDynamicsCRMimportjob>), MicrosoftDynamicsCRMmobileofflineprofile mobileofflineprofileid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMimport> lkImportModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressbaseCreatedby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar> lkMonthlyfiscalcalendarCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmonthlyfiscalcalendar>), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMsite> lkSiteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMcontractdetail> lkContractdetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMuserqueryvisualization> userUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMuserform> lkUserformCreatedby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMdiscounttype> lkDiscounttypebaseModifiedby = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMtask> userTask = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMinvoicedetail> lkInvoicedetailbaseCreatedby = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMquotedetail> lkQuotedetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMmobileofflineprofile> lkMobileOfflineProfileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), IList<MicrosoftDynamicsCRMwebwizard> lkWebwizardCreatedby = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMmailmergetemplate> lkMailmergetemplatebaseCreatedby = default(IList<MicrosoftDynamicsCRMmailmergetemplate>), IList<MicrosoftDynamicsCRMcalendarrule> lkCalendarruleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMemail> lkEmailCreatedby = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMqueue> lkQueueCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMuserquery> lkUserqueryCreatedby = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMqueue> lkQueuebaseModifiedby = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMsdkmessage> modifiedbySdkmessage = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelbaseModifiedby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileModifiedby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMincident> lkIncidentbaseModifiedby = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> lkCustomcontroldefaultconfigModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseModifiedby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMpublisher> lkPublisherbaseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMemail> systemUserEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> lkRecurringappointmentmasterModifiedby = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMknowledgearticleincident> lkKnowledgearticleincidentModifiedby = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMimportmap> systemUserImportMaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMworkflow> workflowModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentModifiedby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseModifiedby = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> lkMobileofflineprofileitemassociationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMannualfiscalcalendar> lkAnnualfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMannualfiscalcalendar>), IList<MicrosoftDynamicsCRMserviceappointment> lkServiceappointmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> lkOpportunitycloseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMemailserverprofile> lkEmailserverprofileModifiedby = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMslakpiinstance> lkSlakpiinstancebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionbaseModifiedby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMtemplate> systemUserEmailTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMcampaignactivity> lkCampaignactivityModifiedby = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMletter> lkLetterModifiedby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMworkflow> workflowCreatedby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMpublisheraddress> lkPublisheraddressbaseModifiedby = default(IList<MicrosoftDynamicsCRMpublisheraddress>), IList<MicrosoftDynamicsCRMtask> lkTaskModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMuserform> lkUserformModifiedby = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMinvoice> lkInvoicebaseCreatedby = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMimportdata> lkImportdatabaseCreatedby = default(IList<MicrosoftDynamicsCRMimportdata>), IList<MicrosoftDynamicsCRMsla> userSlabase = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseModifiedby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMteam> lkTeamCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMquote> lkQuoteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMleadaddress> lkLeadaddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMtemplate> lkTemplatebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMslaitem> lkSlaitembaseCreatedby = default(IList<MicrosoftDynamicsCRMslaitem>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMimportmap> lkImportmapbaseModifiedby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMnewprocess> lkNewprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMusersettings> lkUsersettingsbaseCreatedby = default(IList<MicrosoftDynamicsCRMusersettings>), IList<MicrosoftDynamicsCRMsalesorderdetail> lkSalesorderdetailbaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMwebresource> lkWebresourcebaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMwebresource> webresourceCreatedby = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMquotedetail> systemUserQuotedetail = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMaccount> userAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMdynamicproperty> lkDynamicPropertyModifiedby = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticlebaseModifiedby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentCreatedby = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMworkflowlog> lkWorkflowlogCreatedby = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMbulkdeleteoperation> lkBulkdeleteoperationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkdeleteoperation>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseCreatedby = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMproduct> lkProductbaseModifiedby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMuserqueryvisualization> lkUserqueryvisualizationCreatedby = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMimportfile> lkImportfilebaseCreatedby = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMcontact> lkContactbaseModifiedby = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMquoteclose> lkQuotecloseModifiedby = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileOfflineProfileItemCreatedby = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), IList<MicrosoftDynamicsCRMworkflow> workflowModifiedby = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMsdkmessagefilter> lkSdkmessagefilterModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMduplicaterule> systemUserDuplicateRules = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarSalespersonid = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMactioncard> lkActioncardbaseModifiedby = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMproductassociation> lkProductAssociationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMbulkoperation> lkBulkOperationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMphonetocaseprocess> lkPhonetocaseprocessModifiedby = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMkbarticletemplate> lkKbarticletemplatebaseModifiedby = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> lkSavedqueryvisualizationbaseModifiedby = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar> lkSemiannualfiscalcalendarModifiedby = default(IList<MicrosoftDynamicsCRMsemiannualfiscalcalendar>), IList<MicrosoftDynamicsCRMletter> lkLetterCreatedby = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> lkBusinessunitnewsarticleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMdiscount> lkDiscountbaseModifiedby = default(IList<MicrosoftDynamicsCRMdiscount>), IList<MicrosoftDynamicsCRMlist> lkListCreatedby = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleModifiedby = default(IList<MicrosoftDynamicsCRMtimezonerule>), IList<MicrosoftDynamicsCRMserviceendpoint> lkServiceendpointbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMkbarticle> lkKbarticleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMsalesorder> lkSalesorderbaseCreatedby = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> lkSystemuserCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsocialprofile> lkSocialProfileCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMworkflow> systemUserWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMimport> lkImportbaseModifiedby = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMsalesliteratureitem> lkSalesliteratureitembaseModifiedby = default(IList<MicrosoftDynamicsCRMsalesliteratureitem>), IList<MicrosoftDynamicsCRMteam> lkTeambaseAdministratorid = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileCreatedby = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar> lkFixedmonthlyfiscalcalendarModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> lkSdkmessageprocessingstepsecureconfigCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMcompetitor> lkCompetitorCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMincidentresolution> lkIncidentresolutionCreatedby = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMimportmap> lkImportmapbaseCreatedby = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencyModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessModifiedby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessModifiedby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMuserquery> userUserquery = default(IList<MicrosoftDynamicsCRMuserquery>), IList<MicrosoftDynamicsCRMasyncoperation> systemUserAsyncoperation = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> lkCampaignresponseModifiedby = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMequipment> lkEquipmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMequipment>), MicrosoftDynamicsCRMterritory territoryid = default(MicrosoftDynamicsCRMterritory), IList<MicrosoftDynamicsCRMduplicaterulecondition> lkDuplicateruleconditionbaseCreatedby = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), IList<MicrosoftDynamicsCRMproductpricelevel> lkProductpricelevelbaseCreatedby = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMimportentitymapping> lkImportentitymappingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> lkDynamicpropertyinsatanceattributeModifiedOnBehalfBy = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMaccount> lkAccountbaseModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMcustomcontrol> lkCustomcontrolModifiedby = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMduplicaterule> lkDuplicaterulebaseCreatedby = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMqueueitem> lkQueueitemCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMtransactioncurrency> lkTransactioncurrencybaseCreatedby = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), IList<MicrosoftDynamicsCRMimportlog> lkImportlogModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMsdkmessage> lkSdkmessageModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMkbarticlecomment> lkKbarticlecommentbaseModifiedby = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMphonecall> userPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMproduct> lkProductModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMappointment> userAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMexpiredprocess> lkExpiredprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> lkOpportunitysalesprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessCreatedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessModifiedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> lkAbsScheduledprocessModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocess> userAbsScheduledprocess = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserCreatedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserOwninguser = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionSystemuserModifiedby = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> lkAdoxioAgencycommunicationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> userAdoxioAgencycommunication = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasCreatedby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasModifiedby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> lkAdoxioAliasModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioAlias> userAdoxioAlias = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> lkAdoxioApplicantstepModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplicantstep> userAdoxioApplicantstep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> lkAdoxioApplicationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> userAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Createdby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Createdonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Modifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Modifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> lkAdoxioApplicationinvoicehistoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> userAdoxioApplicationinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> lkAdoxioApplicationmoduleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationmodule> userAdoxioApplicationmodule = default(IList<MicrosoftDynamicsCRMadoxioApplicationmodule>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> lkAdoxioApplicationtermsconditionslimitationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> userAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaCreatedby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaModifiedby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> lkAdoxioAreaModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioArea> userAdoxioArea = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountCreatedby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountModifiedby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> lkAdoxioBusinessaccountModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> userAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> lkAdoxioCitydistrictModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> userAdoxioCitydistrict = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintCreatedby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintModifiedby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> lkAdoxioComplaintModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> userAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfCreatedby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfModifiedby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> lkAdoxioContraventionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioContravention> userAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> lkAdoxioCorporatehistorysummaryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> userAdoxioCorporatehistorysummary = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> lkAdoxioCorporateroleModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> userAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> lkAdoxioCustomautonumberdefinitionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> lkAdoxioCustomautonumberrequestModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentCreatedby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentModifiedby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> lkAdoxioEstablishmentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioEstablishment> userAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceCreatedby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceModifiedby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> lkAdoxioFundingsourceModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioFundingsource> userAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestCreatedby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestModifiedby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> lkAdoxioInterestModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInterest> userAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> lkAdoxioInvestigationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> userAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> lkAdoxioLegalentityModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> userAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> lkAdoxioLicencesModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicences> userAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> lkAdoxioLicencetypeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetype> userAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> lkAdoxioLicencetypeprerequisiteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite> userAdoxioLicencetypeprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypeprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> lkAdoxioLicencetypestepModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestep> userAdoxioLicencetypestep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestep>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> lkAdoxioLicencetypestepprerequisiteModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> userAdoxioLicencetypestepprerequisite = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> lkAdoxioLoanModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLoan> userAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> lkAdoxioLocalgovindigenousnationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> lkAdoxioPersonalhistorysummaryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> userAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> lkAdoxioPolicejurisdictionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> lkAdoxioPolicydocumentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> userAdoxioPolicydocument = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> lkAdoxioPostalcodeModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPostalcode> userAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressCreatedby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressModifiedby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> lkAdoxioPreviousaddressModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> userAdoxioPreviousaddress = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> lkAdoxioRegionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> userAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingCreatedby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingModifiedby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> lkAdoxioSettingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSetting> userAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowCreatedby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowModifiedby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> lkAdoxioSpddatarowModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> userAdoxioSpddatarow = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsCreatedby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsModifiedby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> lkAdoxioSpdexportsModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioSpdexports> userAdoxioSpdexports = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> lkAdoxioTaxandaccountingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> userAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> lkAdoxioTermsconditionslimitationspresetModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> userAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> lkAdoxioTerritoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTerritory> userAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> lkAdoxioTiedhouseassociationModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> userAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionCreatedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionModifiedby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> lkAdoxioTiedhouseconnectionModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> userAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerCreatedby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerModifiedby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> lkAdoxioWorkerModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorker> userAdoxioWorker = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryCreatedby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryModifiedby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> lkAdoxioWorkerinvoicehistoryModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> userAdoxioWorkerinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMincident> adoxioInspectionInspectors = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSystemuserAdoxioApplicationCaseManager = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSystemuserAdoxioApplicationCaseManagerSupervisor = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSystemuserAdoxioApplicationInspector = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioArea> adoxioSystemuserAdoxioAreaPrimaryInspector = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> adoxioSystemuserAdoxioCitydistrictInspectorId = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioSystemuserAdoxioComplaintInspector = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioSystemuserAdoxioComplaintRegionalManager = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationAdjudicator = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationApprovedDecisionBy = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationInvestigator = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserAdoxioInvestigationRegionalManager = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioRegion> adoxioSystemuserAdoxioRegionRegionalAdmin = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioRegion> adoxioSystemuserAdoxioRegionRegionalManager = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioTerritory> adoxioSystemuserAdoxioTerritoryPrimaryInspector = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioSystemuserEstablishmentPrimaryinspector = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMincident> adoxioSystemuserIncidentAdjudicator = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMincident> adoxioSystemuserIncidentInspector = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMincident> adoxioSystemuserIncidentRegionalManager = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioSystemuserSecondaryinvestigator = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioDocument> lkAdoxioDocumentCreatedby = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioDocument> lkAdoxioDocumentCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioDocument> lkAdoxioDocumentModifiedby = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioDocument> lkAdoxioDocumentModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioDocument> userAdoxioDocument = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioDocumentadmin> lkAdoxioDocumentadminCreatedby = default(IList<MicrosoftDynamicsCRMadoxioDocumentadmin>), IList<MicrosoftDynamicsCRMadoxioDocumentadmin> lkAdoxioDocumentadminCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioDocumentadmin>), IList<MicrosoftDynamicsCRMadoxioDocumentadmin> lkAdoxioDocumentadminModifiedby = default(IList<MicrosoftDynamicsCRMadoxioDocumentadmin>), IList<MicrosoftDynamicsCRMadoxioDocumentadmin> lkAdoxioDocumentadminModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioDocumentadmin>), IList<MicrosoftDynamicsCRMadoxioDocumentadmin> userAdoxioDocumentadmin = default(IList<MicrosoftDynamicsCRMadoxioDocumentadmin>), IList<MicrosoftDynamicsCRMadoxioContraventionadmin> lkAdoxioContraventionadminCreatedby = default(IList<MicrosoftDynamicsCRMadoxioContraventionadmin>), IList<MicrosoftDynamicsCRMadoxioContraventionadmin> lkAdoxioContraventionadminCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioContraventionadmin>), IList<MicrosoftDynamicsCRMadoxioContraventionadmin> lkAdoxioContraventionadminModifiedby = default(IList<MicrosoftDynamicsCRMadoxioContraventionadmin>), IList<MicrosoftDynamicsCRMadoxioContraventionadmin> lkAdoxioContraventionadminModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioContraventionadmin>), IList<MicrosoftDynamicsCRMadoxioContraventionadmin> userAdoxioContraventionadmin = default(IList<MicrosoftDynamicsCRMadoxioContraventionadmin>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioRegionalmanagerContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> lkAdoxioCompliancemeetingCreatedby = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> lkAdoxioCompliancemeetingCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> lkAdoxioCompliancemeetingModifiedby = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> lkAdoxioCompliancemeetingModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> userAdoxioCompliancemeeting = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> lkAdoxioInvestigationactivityCreatedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> lkAdoxioInvestigationactivityCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> lkAdoxioInvestigationactivityModifiedby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> lkAdoxioInvestigationactivityModifiedonbehalfby = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> userAdoxioInvestigationactivity = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>))
         {
             this._queueidValue = _queueidValue;
             this._createdbyValue = _createdbyValue;
@@ -1004,22 +1004,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             UserAppointment = userAppointment;
             LkExpiredprocessCreatedonbehalfby = lkExpiredprocessCreatedonbehalfby;
             LkOpportunitysalesprocessCreatedonbehalfby = lkOpportunitysalesprocessCreatedonbehalfby;
-            LkAdoxioTiedhouseconnectionCreatedby = lkAdoxioTiedhouseconnectionCreatedby;
-            LkAdoxioTiedhouseconnectionCreatedonbehalfby = lkAdoxioTiedhouseconnectionCreatedonbehalfby;
-            LkAdoxioTiedhouseconnectionModifiedby = lkAdoxioTiedhouseconnectionModifiedby;
-            LkAdoxioTiedhouseconnectionModifiedonbehalfby = lkAdoxioTiedhouseconnectionModifiedonbehalfby;
-            UserAdoxioTiedhouseconnection = userAdoxioTiedhouseconnection;
-            LkAdoxioWorkerinvoicehistoryCreatedby = lkAdoxioWorkerinvoicehistoryCreatedby;
-            LkAdoxioWorkerinvoicehistoryCreatedonbehalfby = lkAdoxioWorkerinvoicehistoryCreatedonbehalfby;
-            LkAdoxioWorkerinvoicehistoryModifiedby = lkAdoxioWorkerinvoicehistoryModifiedby;
-            LkAdoxioWorkerinvoicehistoryModifiedonbehalfby = lkAdoxioWorkerinvoicehistoryModifiedonbehalfby;
-            UserAdoxioWorkerinvoicehistory = userAdoxioWorkerinvoicehistory;
-            AdoxioSystemuserSecondaryinvestigator = adoxioSystemuserSecondaryinvestigator;
+            LkAbsScheduledprocessCreatedby = lkAbsScheduledprocessCreatedby;
+            LkAbsScheduledprocessCreatedonbehalfby = lkAbsScheduledprocessCreatedonbehalfby;
+            LkAbsScheduledprocessModifiedby = lkAbsScheduledprocessModifiedby;
+            LkAbsScheduledprocessModifiedonbehalfby = lkAbsScheduledprocessModifiedonbehalfby;
+            UserAbsScheduledprocess = userAbsScheduledprocess;
+            AbsScheduledprocessexecutionSystemuserCreatedby = absScheduledprocessexecutionSystemuserCreatedby;
+            AbsScheduledprocessexecutionSystemuserOwninguser = absScheduledprocessexecutionSystemuserOwninguser;
+            AbsScheduledprocessexecutionSystemuserModifiedonbehalfby = absScheduledprocessexecutionSystemuserModifiedonbehalfby;
+            AbsScheduledprocessexecutionSystemuserCreatedonbehalfby = absScheduledprocessexecutionSystemuserCreatedonbehalfby;
+            AbsScheduledprocessexecutionSystemuserModifiedby = absScheduledprocessexecutionSystemuserModifiedby;
             LkAdoxioAgencycommunicationCreatedby = lkAdoxioAgencycommunicationCreatedby;
             LkAdoxioAgencycommunicationCreatedonbehalfby = lkAdoxioAgencycommunicationCreatedonbehalfby;
             LkAdoxioAgencycommunicationModifiedby = lkAdoxioAgencycommunicationModifiedby;
             LkAdoxioAgencycommunicationModifiedonbehalfby = lkAdoxioAgencycommunicationModifiedonbehalfby;
             UserAdoxioAgencycommunication = userAdoxioAgencycommunication;
+            LkAdoxioAliasCreatedby = lkAdoxioAliasCreatedby;
+            LkAdoxioAliasCreatedonbehalfby = lkAdoxioAliasCreatedonbehalfby;
+            LkAdoxioAliasModifiedby = lkAdoxioAliasModifiedby;
+            LkAdoxioAliasModifiedonbehalfby = lkAdoxioAliasModifiedonbehalfby;
+            UserAdoxioAlias = userAdoxioAlias;
             LkAdoxioApplicantstepCreatedby = lkAdoxioApplicantstepCreatedby;
             LkAdoxioApplicantstepCreatedonbehalfby = lkAdoxioApplicantstepCreatedonbehalfby;
             LkAdoxioApplicantstepModifiedby = lkAdoxioApplicantstepModifiedby;
@@ -1030,6 +1034,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LkAdoxioApplicationModifiedby = lkAdoxioApplicationModifiedby;
             LkAdoxioApplicationModifiedonbehalfby = lkAdoxioApplicationModifiedonbehalfby;
             UserAdoxioApplication = userAdoxioApplication;
+            LkAdoxioApplicationbpfmvpv2Createdby = lkAdoxioApplicationbpfmvpv2Createdby;
+            LkAdoxioApplicationbpfmvpv2Createdonbehalfby = lkAdoxioApplicationbpfmvpv2Createdonbehalfby;
+            LkAdoxioApplicationbpfmvpv2Modifiedby = lkAdoxioApplicationbpfmvpv2Modifiedby;
+            LkAdoxioApplicationbpfmvpv2Modifiedonbehalfby = lkAdoxioApplicationbpfmvpv2Modifiedonbehalfby;
+            LkAdoxioApplicationinvoicehistoryCreatedby = lkAdoxioApplicationinvoicehistoryCreatedby;
+            LkAdoxioApplicationinvoicehistoryCreatedonbehalfby = lkAdoxioApplicationinvoicehistoryCreatedonbehalfby;
+            LkAdoxioApplicationinvoicehistoryModifiedby = lkAdoxioApplicationinvoicehistoryModifiedby;
+            LkAdoxioApplicationinvoicehistoryModifiedonbehalfby = lkAdoxioApplicationinvoicehistoryModifiedonbehalfby;
+            UserAdoxioApplicationinvoicehistory = userAdoxioApplicationinvoicehistory;
             LkAdoxioApplicationmoduleCreatedby = lkAdoxioApplicationmoduleCreatedby;
             LkAdoxioApplicationmoduleCreatedonbehalfby = lkAdoxioApplicationmoduleCreatedonbehalfby;
             LkAdoxioApplicationmoduleModifiedby = lkAdoxioApplicationmoduleModifiedby;
@@ -1040,41 +1053,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LkAdoxioApplicationtermsconditionslimitationModifiedby = lkAdoxioApplicationtermsconditionslimitationModifiedby;
             LkAdoxioApplicationtermsconditionslimitationModifiedonbehalfby = lkAdoxioApplicationtermsconditionslimitationModifiedonbehalfby;
             UserAdoxioApplicationtermsconditionslimitation = userAdoxioApplicationtermsconditionslimitation;
-            LkAdoxioComplaincemeetingCreatedby = lkAdoxioComplaincemeetingCreatedby;
-            LkAdoxioComplaincemeetingCreatedonbehalfby = lkAdoxioComplaincemeetingCreatedonbehalfby;
-            LkAdoxioComplaincemeetingModifiedby = lkAdoxioComplaincemeetingModifiedby;
-            LkAdoxioComplaincemeetingModifiedonbehalfby = lkAdoxioComplaincemeetingModifiedonbehalfby;
-            UserAdoxioComplaincemeeting = userAdoxioComplaincemeeting;
-            LkAdoxioComplaintsubjectCreatedby = lkAdoxioComplaintsubjectCreatedby;
-            LkAdoxioComplaintsubjectCreatedonbehalfby = lkAdoxioComplaintsubjectCreatedonbehalfby;
-            LkAdoxioComplaintsubjectModifiedby = lkAdoxioComplaintsubjectModifiedby;
-            LkAdoxioComplaintsubjectModifiedonbehalfby = lkAdoxioComplaintsubjectModifiedonbehalfby;
-            UserAdoxioComplaintsubject = userAdoxioComplaintsubject;
+            LkAdoxioAreaCreatedby = lkAdoxioAreaCreatedby;
+            LkAdoxioAreaCreatedonbehalfby = lkAdoxioAreaCreatedonbehalfby;
+            LkAdoxioAreaModifiedby = lkAdoxioAreaModifiedby;
+            LkAdoxioAreaModifiedonbehalfby = lkAdoxioAreaModifiedonbehalfby;
+            UserAdoxioArea = userAdoxioArea;
+            LkAdoxioBusinessaccountCreatedby = lkAdoxioBusinessaccountCreatedby;
+            LkAdoxioBusinessaccountCreatedonbehalfby = lkAdoxioBusinessaccountCreatedonbehalfby;
+            LkAdoxioBusinessaccountModifiedby = lkAdoxioBusinessaccountModifiedby;
+            LkAdoxioBusinessaccountModifiedonbehalfby = lkAdoxioBusinessaccountModifiedonbehalfby;
+            UserAdoxioBusinessaccount = userAdoxioBusinessaccount;
+            LkAdoxioCitydistrictCreatedby = lkAdoxioCitydistrictCreatedby;
+            LkAdoxioCitydistrictCreatedonbehalfby = lkAdoxioCitydistrictCreatedonbehalfby;
+            LkAdoxioCitydistrictModifiedby = lkAdoxioCitydistrictModifiedby;
+            LkAdoxioCitydistrictModifiedonbehalfby = lkAdoxioCitydistrictModifiedonbehalfby;
+            UserAdoxioCitydistrict = userAdoxioCitydistrict;
+            LkAdoxioComplaintCreatedby = lkAdoxioComplaintCreatedby;
+            LkAdoxioComplaintCreatedonbehalfby = lkAdoxioComplaintCreatedonbehalfby;
+            LkAdoxioComplaintModifiedby = lkAdoxioComplaintModifiedby;
+            LkAdoxioComplaintModifiedonbehalfby = lkAdoxioComplaintModifiedonbehalfby;
+            UserAdoxioComplaint = userAdoxioComplaint;
+            LkAdoxioComplaintpublicbpfCreatedby = lkAdoxioComplaintpublicbpfCreatedby;
+            LkAdoxioComplaintpublicbpfCreatedonbehalfby = lkAdoxioComplaintpublicbpfCreatedonbehalfby;
+            LkAdoxioComplaintpublicbpfModifiedby = lkAdoxioComplaintpublicbpfModifiedby;
+            LkAdoxioComplaintpublicbpfModifiedonbehalfby = lkAdoxioComplaintpublicbpfModifiedonbehalfby;
             LkAdoxioContraventionCreatedby = lkAdoxioContraventionCreatedby;
             LkAdoxioContraventionCreatedonbehalfby = lkAdoxioContraventionCreatedonbehalfby;
             LkAdoxioContraventionModifiedby = lkAdoxioContraventionModifiedby;
             LkAdoxioContraventionModifiedonbehalfby = lkAdoxioContraventionModifiedonbehalfby;
             UserAdoxioContravention = userAdoxioContravention;
+            LkAdoxioCorporatehistorysummaryCreatedby = lkAdoxioCorporatehistorysummaryCreatedby;
+            LkAdoxioCorporatehistorysummaryCreatedonbehalfby = lkAdoxioCorporatehistorysummaryCreatedonbehalfby;
+            LkAdoxioCorporatehistorysummaryModifiedby = lkAdoxioCorporatehistorysummaryModifiedby;
+            LkAdoxioCorporatehistorysummaryModifiedonbehalfby = lkAdoxioCorporatehistorysummaryModifiedonbehalfby;
+            UserAdoxioCorporatehistorysummary = userAdoxioCorporatehistorysummary;
+            LkAdoxioCorporateroleCreatedby = lkAdoxioCorporateroleCreatedby;
+            LkAdoxioCorporateroleCreatedonbehalfby = lkAdoxioCorporateroleCreatedonbehalfby;
+            LkAdoxioCorporateroleModifiedby = lkAdoxioCorporateroleModifiedby;
+            LkAdoxioCorporateroleModifiedonbehalfby = lkAdoxioCorporateroleModifiedonbehalfby;
+            UserAdoxioCorporaterole = userAdoxioCorporaterole;
+            LkAdoxioCustomautonumberdefinitionCreatedby = lkAdoxioCustomautonumberdefinitionCreatedby;
+            LkAdoxioCustomautonumberdefinitionCreatedonbehalfby = lkAdoxioCustomautonumberdefinitionCreatedonbehalfby;
+            LkAdoxioCustomautonumberdefinitionModifiedby = lkAdoxioCustomautonumberdefinitionModifiedby;
+            LkAdoxioCustomautonumberdefinitionModifiedonbehalfby = lkAdoxioCustomautonumberdefinitionModifiedonbehalfby;
+            LkAdoxioCustomautonumberrequestCreatedby = lkAdoxioCustomautonumberrequestCreatedby;
+            LkAdoxioCustomautonumberrequestCreatedonbehalfby = lkAdoxioCustomautonumberrequestCreatedonbehalfby;
+            LkAdoxioCustomautonumberrequestModifiedby = lkAdoxioCustomautonumberrequestModifiedby;
+            LkAdoxioCustomautonumberrequestModifiedonbehalfby = lkAdoxioCustomautonumberrequestModifiedonbehalfby;
             LkAdoxioEstablishmentCreatedby = lkAdoxioEstablishmentCreatedby;
             LkAdoxioEstablishmentCreatedonbehalfby = lkAdoxioEstablishmentCreatedonbehalfby;
             LkAdoxioEstablishmentModifiedby = lkAdoxioEstablishmentModifiedby;
             LkAdoxioEstablishmentModifiedonbehalfby = lkAdoxioEstablishmentModifiedonbehalfby;
             UserAdoxioEstablishment = userAdoxioEstablishment;
-            LkAdoxioExhibitCreatedby = lkAdoxioExhibitCreatedby;
-            LkAdoxioExhibitCreatedonbehalfby = lkAdoxioExhibitCreatedonbehalfby;
-            LkAdoxioExhibitModifiedby = lkAdoxioExhibitModifiedby;
-            LkAdoxioExhibitModifiedonbehalfby = lkAdoxioExhibitModifiedonbehalfby;
-            UserAdoxioExhibit = userAdoxioExhibit;
-            LkAdoxioInvestigationdetailCreatedby = lkAdoxioInvestigationdetailCreatedby;
-            LkAdoxioInvestigationdetailCreatedonbehalfby = lkAdoxioInvestigationdetailCreatedonbehalfby;
-            LkAdoxioInvestigationdetailModifiedby = lkAdoxioInvestigationdetailModifiedby;
-            LkAdoxioInvestigationdetailModifiedonbehalfby = lkAdoxioInvestigationdetailModifiedonbehalfby;
-            UserAdoxioInvestigationdetail = userAdoxioInvestigationdetail;
-            LkAdoxioInvestigationstakeholderCreatedby = lkAdoxioInvestigationstakeholderCreatedby;
-            LkAdoxioInvestigationstakeholderCreatedonbehalfby = lkAdoxioInvestigationstakeholderCreatedonbehalfby;
-            LkAdoxioInvestigationstakeholderModifiedby = lkAdoxioInvestigationstakeholderModifiedby;
-            LkAdoxioInvestigationstakeholderModifiedonbehalfby = lkAdoxioInvestigationstakeholderModifiedonbehalfby;
-            UserAdoxioInvestigationstakeholder = userAdoxioInvestigationstakeholder;
+            LkAdoxioFundingsourceCreatedby = lkAdoxioFundingsourceCreatedby;
+            LkAdoxioFundingsourceCreatedonbehalfby = lkAdoxioFundingsourceCreatedonbehalfby;
+            LkAdoxioFundingsourceModifiedby = lkAdoxioFundingsourceModifiedby;
+            LkAdoxioFundingsourceModifiedonbehalfby = lkAdoxioFundingsourceModifiedonbehalfby;
+            UserAdoxioFundingsource = userAdoxioFundingsource;
+            LkAdoxioInterestCreatedby = lkAdoxioInterestCreatedby;
+            LkAdoxioInterestCreatedonbehalfby = lkAdoxioInterestCreatedonbehalfby;
+            LkAdoxioInterestModifiedby = lkAdoxioInterestModifiedby;
+            LkAdoxioInterestModifiedonbehalfby = lkAdoxioInterestModifiedonbehalfby;
+            UserAdoxioInterest = userAdoxioInterest;
+            LkAdoxioInvestigationCreatedby = lkAdoxioInvestigationCreatedby;
+            LkAdoxioInvestigationCreatedonbehalfby = lkAdoxioInvestigationCreatedonbehalfby;
+            LkAdoxioInvestigationModifiedby = lkAdoxioInvestigationModifiedby;
+            LkAdoxioInvestigationModifiedonbehalfby = lkAdoxioInvestigationModifiedonbehalfby;
+            UserAdoxioInvestigation = userAdoxioInvestigation;
             LkAdoxioLegalentityCreatedby = lkAdoxioLegalentityCreatedby;
             LkAdoxioLegalentityCreatedonbehalfby = lkAdoxioLegalentityCreatedonbehalfby;
             LkAdoxioLegalentityModifiedby = lkAdoxioLegalentityModifiedby;
@@ -1105,29 +1150,64 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LkAdoxioLicencetypestepprerequisiteModifiedby = lkAdoxioLicencetypestepprerequisiteModifiedby;
             LkAdoxioLicencetypestepprerequisiteModifiedonbehalfby = lkAdoxioLicencetypestepprerequisiteModifiedonbehalfby;
             UserAdoxioLicencetypestepprerequisite = userAdoxioLicencetypestepprerequisite;
-            LkAdoxioPenaltysubtypeCreatedby = lkAdoxioPenaltysubtypeCreatedby;
-            LkAdoxioPenaltysubtypeCreatedonbehalfby = lkAdoxioPenaltysubtypeCreatedonbehalfby;
-            LkAdoxioPenaltysubtypeModifiedby = lkAdoxioPenaltysubtypeModifiedby;
-            LkAdoxioPenaltysubtypeModifiedonbehalfby = lkAdoxioPenaltysubtypeModifiedonbehalfby;
-            LkAdoxioPenaltytypeCreatedby = lkAdoxioPenaltytypeCreatedby;
-            LkAdoxioPenaltytypeCreatedonbehalfby = lkAdoxioPenaltytypeCreatedonbehalfby;
-            LkAdoxioPenaltytypeModifiedby = lkAdoxioPenaltytypeModifiedby;
-            LkAdoxioPenaltytypeModifiedonbehalfby = lkAdoxioPenaltytypeModifiedonbehalfby;
+            LkAdoxioLoanCreatedby = lkAdoxioLoanCreatedby;
+            LkAdoxioLoanCreatedonbehalfby = lkAdoxioLoanCreatedonbehalfby;
+            LkAdoxioLoanModifiedby = lkAdoxioLoanModifiedby;
+            LkAdoxioLoanModifiedonbehalfby = lkAdoxioLoanModifiedonbehalfby;
+            UserAdoxioLoan = userAdoxioLoan;
+            LkAdoxioLocalgovindigenousnationCreatedby = lkAdoxioLocalgovindigenousnationCreatedby;
+            LkAdoxioLocalgovindigenousnationCreatedonbehalfby = lkAdoxioLocalgovindigenousnationCreatedonbehalfby;
+            LkAdoxioLocalgovindigenousnationModifiedby = lkAdoxioLocalgovindigenousnationModifiedby;
+            LkAdoxioLocalgovindigenousnationModifiedonbehalfby = lkAdoxioLocalgovindigenousnationModifiedonbehalfby;
             LkAdoxioPersonalhistorysummaryCreatedby = lkAdoxioPersonalhistorysummaryCreatedby;
             LkAdoxioPersonalhistorysummaryCreatedonbehalfby = lkAdoxioPersonalhistorysummaryCreatedonbehalfby;
             LkAdoxioPersonalhistorysummaryModifiedby = lkAdoxioPersonalhistorysummaryModifiedby;
             LkAdoxioPersonalhistorysummaryModifiedonbehalfby = lkAdoxioPersonalhistorysummaryModifiedonbehalfby;
             UserAdoxioPersonalhistorysummary = userAdoxioPersonalhistorysummary;
+            LkAdoxioPolicejurisdictionCreatedby = lkAdoxioPolicejurisdictionCreatedby;
+            LkAdoxioPolicejurisdictionCreatedonbehalfby = lkAdoxioPolicejurisdictionCreatedonbehalfby;
+            LkAdoxioPolicejurisdictionModifiedby = lkAdoxioPolicejurisdictionModifiedby;
+            LkAdoxioPolicejurisdictionModifiedonbehalfby = lkAdoxioPolicejurisdictionModifiedonbehalfby;
+            LkAdoxioPolicydocumentCreatedby = lkAdoxioPolicydocumentCreatedby;
+            LkAdoxioPolicydocumentCreatedonbehalfby = lkAdoxioPolicydocumentCreatedonbehalfby;
+            LkAdoxioPolicydocumentModifiedby = lkAdoxioPolicydocumentModifiedby;
+            LkAdoxioPolicydocumentModifiedonbehalfby = lkAdoxioPolicydocumentModifiedonbehalfby;
+            UserAdoxioPolicydocument = userAdoxioPolicydocument;
             LkAdoxioPostalcodeCreatedby = lkAdoxioPostalcodeCreatedby;
             LkAdoxioPostalcodeCreatedonbehalfby = lkAdoxioPostalcodeCreatedonbehalfby;
             LkAdoxioPostalcodeModifiedby = lkAdoxioPostalcodeModifiedby;
             LkAdoxioPostalcodeModifiedonbehalfby = lkAdoxioPostalcodeModifiedonbehalfby;
             UserAdoxioPostalcode = userAdoxioPostalcode;
+            LkAdoxioPreviousaddressCreatedby = lkAdoxioPreviousaddressCreatedby;
+            LkAdoxioPreviousaddressCreatedonbehalfby = lkAdoxioPreviousaddressCreatedonbehalfby;
+            LkAdoxioPreviousaddressModifiedby = lkAdoxioPreviousaddressModifiedby;
+            LkAdoxioPreviousaddressModifiedonbehalfby = lkAdoxioPreviousaddressModifiedonbehalfby;
+            UserAdoxioPreviousaddress = userAdoxioPreviousaddress;
             LkAdoxioRegionCreatedby = lkAdoxioRegionCreatedby;
             LkAdoxioRegionCreatedonbehalfby = lkAdoxioRegionCreatedonbehalfby;
             LkAdoxioRegionModifiedby = lkAdoxioRegionModifiedby;
             LkAdoxioRegionModifiedonbehalfby = lkAdoxioRegionModifiedonbehalfby;
             UserAdoxioRegion = userAdoxioRegion;
+            LkAdoxioSettingCreatedby = lkAdoxioSettingCreatedby;
+            LkAdoxioSettingCreatedonbehalfby = lkAdoxioSettingCreatedonbehalfby;
+            LkAdoxioSettingModifiedby = lkAdoxioSettingModifiedby;
+            LkAdoxioSettingModifiedonbehalfby = lkAdoxioSettingModifiedonbehalfby;
+            UserAdoxioSetting = userAdoxioSetting;
+            LkAdoxioSpddatarowCreatedby = lkAdoxioSpddatarowCreatedby;
+            LkAdoxioSpddatarowCreatedonbehalfby = lkAdoxioSpddatarowCreatedonbehalfby;
+            LkAdoxioSpddatarowModifiedby = lkAdoxioSpddatarowModifiedby;
+            LkAdoxioSpddatarowModifiedonbehalfby = lkAdoxioSpddatarowModifiedonbehalfby;
+            UserAdoxioSpddatarow = userAdoxioSpddatarow;
+            LkAdoxioSpdexportsCreatedby = lkAdoxioSpdexportsCreatedby;
+            LkAdoxioSpdexportsCreatedonbehalfby = lkAdoxioSpdexportsCreatedonbehalfby;
+            LkAdoxioSpdexportsModifiedby = lkAdoxioSpdexportsModifiedby;
+            LkAdoxioSpdexportsModifiedonbehalfby = lkAdoxioSpdexportsModifiedonbehalfby;
+            UserAdoxioSpdexports = userAdoxioSpdexports;
+            LkAdoxioTaxandaccountingCreatedby = lkAdoxioTaxandaccountingCreatedby;
+            LkAdoxioTaxandaccountingCreatedonbehalfby = lkAdoxioTaxandaccountingCreatedonbehalfby;
+            LkAdoxioTaxandaccountingModifiedby = lkAdoxioTaxandaccountingModifiedby;
+            LkAdoxioTaxandaccountingModifiedonbehalfby = lkAdoxioTaxandaccountingModifiedonbehalfby;
+            UserAdoxioTaxandaccounting = userAdoxioTaxandaccounting;
             LkAdoxioTermsconditionslimitationspresetCreatedby = lkAdoxioTermsconditionslimitationspresetCreatedby;
             LkAdoxioTermsconditionslimitationspresetCreatedonbehalfby = lkAdoxioTermsconditionslimitationspresetCreatedonbehalfby;
             LkAdoxioTermsconditionslimitationspresetModifiedby = lkAdoxioTermsconditionslimitationspresetModifiedby;
@@ -1143,168 +1223,67 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LkAdoxioTiedhouseassociationModifiedby = lkAdoxioTiedhouseassociationModifiedby;
             LkAdoxioTiedhouseassociationModifiedonbehalfby = lkAdoxioTiedhouseassociationModifiedonbehalfby;
             UserAdoxioTiedhouseassociation = userAdoxioTiedhouseassociation;
-            LkAdoxioViolationnotificationCreatedby = lkAdoxioViolationnotificationCreatedby;
-            LkAdoxioViolationnotificationCreatedonbehalfby = lkAdoxioViolationnotificationCreatedonbehalfby;
-            LkAdoxioViolationnotificationModifiedby = lkAdoxioViolationnotificationModifiedby;
-            LkAdoxioViolationnotificationModifiedonbehalfby = lkAdoxioViolationnotificationModifiedonbehalfby;
-            UserAdoxioViolationnotification = userAdoxioViolationnotification;
-            LkAdoxioViolationtypeCreatedby = lkAdoxioViolationtypeCreatedby;
-            LkAdoxioViolationtypeCreatedonbehalfby = lkAdoxioViolationtypeCreatedonbehalfby;
-            LkAdoxioViolationtypeModifiedby = lkAdoxioViolationtypeModifiedby;
-            LkAdoxioViolationtypeModifiedonbehalfby = lkAdoxioViolationtypeModifiedonbehalfby;
-            UserAdoxioViolationtype = userAdoxioViolationtype;
-            LkAdoxioWitnessstatementCreatedby = lkAdoxioWitnessstatementCreatedby;
-            LkAdoxioWitnessstatementCreatedonbehalfby = lkAdoxioWitnessstatementCreatedonbehalfby;
-            LkAdoxioWitnessstatementModifiedby = lkAdoxioWitnessstatementModifiedby;
-            LkAdoxioWitnessstatementModifiedonbehalfby = lkAdoxioWitnessstatementModifiedonbehalfby;
-            UserAdoxioWitnessstatement = userAdoxioWitnessstatement;
-            AdoxioSystemuserAdoxioApplicationCaseManager = adoxioSystemuserAdoxioApplicationCaseManager;
-            AdoxioSystemuserAdoxioApplicationCaseManagerSupervisor = adoxioSystemuserAdoxioApplicationCaseManagerSupervisor;
-            AdoxioSystemuserAdoxioApplicationInspector = adoxioSystemuserAdoxioApplicationInspector;
-            AdoxioSystemuserAdoxioRegionRegionalManager = adoxioSystemuserAdoxioRegionRegionalManager;
-            AdoxioSystemuserAdoxioTerritoryPrimaryInspector = adoxioSystemuserAdoxioTerritoryPrimaryInspector;
-            AdoxioSystemuserIncidentAdjudicator = adoxioSystemuserIncidentAdjudicator;
-            AdoxioSystemuserIncidentInspector = adoxioSystemuserIncidentInspector;
-            AdoxioSystemuserIncidentRegionalManager = adoxioSystemuserIncidentRegionalManager;
-            LkAdoxioComplaintCreatedby = lkAdoxioComplaintCreatedby;
-            LkAdoxioComplaintCreatedonbehalfby = lkAdoxioComplaintCreatedonbehalfby;
-            LkAdoxioComplaintModifiedby = lkAdoxioComplaintModifiedby;
-            LkAdoxioComplaintModifiedonbehalfby = lkAdoxioComplaintModifiedonbehalfby;
-            UserAdoxioComplaint = userAdoxioComplaint;
-            AdoxioSystemuserAdoxioComplaintRegionalManager = adoxioSystemuserAdoxioComplaintRegionalManager;
-            AdoxioSystemuserAdoxioComplaintInspector = adoxioSystemuserAdoxioComplaintInspector;
-            LkAdoxioApplicationbpfmvpv2Createdby = lkAdoxioApplicationbpfmvpv2Createdby;
-            LkAdoxioApplicationbpfmvpv2Createdonbehalfby = lkAdoxioApplicationbpfmvpv2Createdonbehalfby;
-            LkAdoxioApplicationbpfmvpv2Modifiedby = lkAdoxioApplicationbpfmvpv2Modifiedby;
-            LkAdoxioApplicationbpfmvpv2Modifiedonbehalfby = lkAdoxioApplicationbpfmvpv2Modifiedonbehalfby;
-            LkAdoxioFundingsourceCreatedby = lkAdoxioFundingsourceCreatedby;
-            LkAdoxioFundingsourceCreatedonbehalfby = lkAdoxioFundingsourceCreatedonbehalfby;
-            LkAdoxioFundingsourceModifiedby = lkAdoxioFundingsourceModifiedby;
-            LkAdoxioFundingsourceModifiedonbehalfby = lkAdoxioFundingsourceModifiedonbehalfby;
-            UserAdoxioFundingsource = userAdoxioFundingsource;
-            LkAdoxioTaxandaccountingCreatedby = lkAdoxioTaxandaccountingCreatedby;
-            LkAdoxioTaxandaccountingCreatedonbehalfby = lkAdoxioTaxandaccountingCreatedonbehalfby;
-            LkAdoxioTaxandaccountingModifiedby = lkAdoxioTaxandaccountingModifiedby;
-            LkAdoxioTaxandaccountingModifiedonbehalfby = lkAdoxioTaxandaccountingModifiedonbehalfby;
-            UserAdoxioTaxandaccounting = userAdoxioTaxandaccounting;
-            LkAdoxioBusinessaccountCreatedby = lkAdoxioBusinessaccountCreatedby;
-            LkAdoxioBusinessaccountCreatedonbehalfby = lkAdoxioBusinessaccountCreatedonbehalfby;
-            LkAdoxioBusinessaccountModifiedby = lkAdoxioBusinessaccountModifiedby;
-            LkAdoxioBusinessaccountModifiedonbehalfby = lkAdoxioBusinessaccountModifiedonbehalfby;
-            UserAdoxioBusinessaccount = userAdoxioBusinessaccount;
-            LkAdoxioLoanCreatedby = lkAdoxioLoanCreatedby;
-            LkAdoxioLoanCreatedonbehalfby = lkAdoxioLoanCreatedonbehalfby;
-            LkAdoxioLoanModifiedby = lkAdoxioLoanModifiedby;
-            LkAdoxioLoanModifiedonbehalfby = lkAdoxioLoanModifiedonbehalfby;
-            UserAdoxioLoan = userAdoxioLoan;
-            LkAdoxioInterestCreatedby = lkAdoxioInterestCreatedby;
-            LkAdoxioInterestCreatedonbehalfby = lkAdoxioInterestCreatedonbehalfby;
-            LkAdoxioInterestModifiedby = lkAdoxioInterestModifiedby;
-            LkAdoxioInterestModifiedonbehalfby = lkAdoxioInterestModifiedonbehalfby;
-            UserAdoxioInterest = userAdoxioInterest;
-            LkAdoxioCorporateroleCreatedby = lkAdoxioCorporateroleCreatedby;
-            LkAdoxioCorporateroleCreatedonbehalfby = lkAdoxioCorporateroleCreatedonbehalfby;
-            LkAdoxioCorporateroleModifiedby = lkAdoxioCorporateroleModifiedby;
-            LkAdoxioCorporateroleModifiedonbehalfby = lkAdoxioCorporateroleModifiedonbehalfby;
-            UserAdoxioCorporaterole = userAdoxioCorporaterole;
-            LkAdoxioLocalgovindigenousnationCreatedby = lkAdoxioLocalgovindigenousnationCreatedby;
-            LkAdoxioLocalgovindigenousnationCreatedonbehalfby = lkAdoxioLocalgovindigenousnationCreatedonbehalfby;
-            LkAdoxioLocalgovindigenousnationModifiedby = lkAdoxioLocalgovindigenousnationModifiedby;
-            LkAdoxioLocalgovindigenousnationModifiedonbehalfby = lkAdoxioLocalgovindigenousnationModifiedonbehalfby;
-            LkAdoxioPolicejurisdictionCreatedby = lkAdoxioPolicejurisdictionCreatedby;
-            LkAdoxioPolicejurisdictionCreatedonbehalfby = lkAdoxioPolicejurisdictionCreatedonbehalfby;
-            LkAdoxioPolicejurisdictionModifiedby = lkAdoxioPolicejurisdictionModifiedby;
-            LkAdoxioPolicejurisdictionModifiedonbehalfby = lkAdoxioPolicejurisdictionModifiedonbehalfby;
-            LkAdoxioAreaCreatedby = lkAdoxioAreaCreatedby;
-            LkAdoxioAreaCreatedonbehalfby = lkAdoxioAreaCreatedonbehalfby;
-            LkAdoxioAreaModifiedby = lkAdoxioAreaModifiedby;
-            LkAdoxioAreaModifiedonbehalfby = lkAdoxioAreaModifiedonbehalfby;
-            UserAdoxioArea = userAdoxioArea;
-            AdoxioSystemuserAdoxioAreaPrimaryInspector = adoxioSystemuserAdoxioAreaPrimaryInspector;
-            LkAbsScheduledprocessCreatedby = lkAbsScheduledprocessCreatedby;
-            LkAbsScheduledprocessCreatedonbehalfby = lkAbsScheduledprocessCreatedonbehalfby;
-            LkAbsScheduledprocessModifiedby = lkAbsScheduledprocessModifiedby;
-            LkAbsScheduledprocessModifiedonbehalfby = lkAbsScheduledprocessModifiedonbehalfby;
-            UserAbsScheduledprocess = userAbsScheduledprocess;
-            AbsScheduledprocessexecutionSystemuserCreatedby = absScheduledprocessexecutionSystemuserCreatedby;
-            AbsScheduledprocessexecutionSystemuserOwninguser = absScheduledprocessexecutionSystemuserOwninguser;
-            AbsScheduledprocessexecutionSystemuserModifiedonbehalfby = absScheduledprocessexecutionSystemuserModifiedonbehalfby;
-            AbsScheduledprocessexecutionSystemuserCreatedonbehalfby = absScheduledprocessexecutionSystemuserCreatedonbehalfby;
-            AbsScheduledprocessexecutionSystemuserModifiedby = absScheduledprocessexecutionSystemuserModifiedby;
-            LkAdoxioComplaintpublicbpfCreatedby = lkAdoxioComplaintpublicbpfCreatedby;
-            LkAdoxioComplaintpublicbpfCreatedonbehalfby = lkAdoxioComplaintpublicbpfCreatedonbehalfby;
-            LkAdoxioComplaintpublicbpfModifiedby = lkAdoxioComplaintpublicbpfModifiedby;
-            LkAdoxioComplaintpublicbpfModifiedonbehalfby = lkAdoxioComplaintpublicbpfModifiedonbehalfby;
-            LkAdoxioInvestigationCreatedby = lkAdoxioInvestigationCreatedby;
-            LkAdoxioInvestigationCreatedonbehalfby = lkAdoxioInvestigationCreatedonbehalfby;
-            LkAdoxioInvestigationModifiedby = lkAdoxioInvestigationModifiedby;
-            LkAdoxioInvestigationModifiedonbehalfby = lkAdoxioInvestigationModifiedonbehalfby;
-            UserAdoxioInvestigation = userAdoxioInvestigation;
-            AdoxioSystemuserAdoxioInvestigationInvestigator = adoxioSystemuserAdoxioInvestigationInvestigator;
-            AdoxioSystemuserAdoxioInvestigationRegionalManager = adoxioSystemuserAdoxioInvestigationRegionalManager;
-            LkAdoxioSettingCreatedby = lkAdoxioSettingCreatedby;
-            LkAdoxioSettingCreatedonbehalfby = lkAdoxioSettingCreatedonbehalfby;
-            LkAdoxioSettingModifiedby = lkAdoxioSettingModifiedby;
-            LkAdoxioSettingModifiedonbehalfby = lkAdoxioSettingModifiedonbehalfby;
-            UserAdoxioSetting = userAdoxioSetting;
-            LkAdoxioSpdexportsCreatedby = lkAdoxioSpdexportsCreatedby;
-            LkAdoxioSpdexportsCreatedonbehalfby = lkAdoxioSpdexportsCreatedonbehalfby;
-            LkAdoxioSpdexportsModifiedby = lkAdoxioSpdexportsModifiedby;
-            LkAdoxioSpdexportsModifiedonbehalfby = lkAdoxioSpdexportsModifiedonbehalfby;
-            UserAdoxioSpdexports = userAdoxioSpdexports;
-            LkAdoxioPreviousaddressCreatedby = lkAdoxioPreviousaddressCreatedby;
-            LkAdoxioPreviousaddressCreatedonbehalfby = lkAdoxioPreviousaddressCreatedonbehalfby;
-            LkAdoxioPreviousaddressModifiedby = lkAdoxioPreviousaddressModifiedby;
-            LkAdoxioPreviousaddressModifiedonbehalfby = lkAdoxioPreviousaddressModifiedonbehalfby;
-            UserAdoxioPreviousaddress = userAdoxioPreviousaddress;
-            LkAdoxioSpddatarowCreatedby = lkAdoxioSpddatarowCreatedby;
-            LkAdoxioSpddatarowCreatedonbehalfby = lkAdoxioSpddatarowCreatedonbehalfby;
-            LkAdoxioSpddatarowModifiedby = lkAdoxioSpddatarowModifiedby;
-            LkAdoxioSpddatarowModifiedonbehalfby = lkAdoxioSpddatarowModifiedonbehalfby;
-            UserAdoxioSpddatarow = userAdoxioSpddatarow;
-            LkAdoxioPolicydocumentCreatedby = lkAdoxioPolicydocumentCreatedby;
-            LkAdoxioPolicydocumentCreatedonbehalfby = lkAdoxioPolicydocumentCreatedonbehalfby;
-            LkAdoxioPolicydocumentModifiedby = lkAdoxioPolicydocumentModifiedby;
-            LkAdoxioPolicydocumentModifiedonbehalfby = lkAdoxioPolicydocumentModifiedonbehalfby;
-            UserAdoxioPolicydocument = userAdoxioPolicydocument;
-            LkAdoxioCitydistrictCreatedby = lkAdoxioCitydistrictCreatedby;
-            LkAdoxioCitydistrictCreatedonbehalfby = lkAdoxioCitydistrictCreatedonbehalfby;
-            LkAdoxioCitydistrictModifiedby = lkAdoxioCitydistrictModifiedby;
-            LkAdoxioCitydistrictModifiedonbehalfby = lkAdoxioCitydistrictModifiedonbehalfby;
-            UserAdoxioCitydistrict = userAdoxioCitydistrict;
-            AdoxioSystemuserAdoxioRegionRegionalAdmin = adoxioSystemuserAdoxioRegionRegionalAdmin;
-            AdoxioSystemuserAdoxioCitydistrictInspectorId = adoxioSystemuserAdoxioCitydistrictInspectorId;
-            AdoxioSystemuserAdoxioInvestigationAdjudicator = adoxioSystemuserAdoxioInvestigationAdjudicator;
-            AdoxioSystemuserEstablishmentPrimaryinspector = adoxioSystemuserEstablishmentPrimaryinspector;
-            LkAdoxioApplicationinvoicehistoryCreatedby = lkAdoxioApplicationinvoicehistoryCreatedby;
-            LkAdoxioApplicationinvoicehistoryCreatedonbehalfby = lkAdoxioApplicationinvoicehistoryCreatedonbehalfby;
-            LkAdoxioApplicationinvoicehistoryModifiedby = lkAdoxioApplicationinvoicehistoryModifiedby;
-            LkAdoxioApplicationinvoicehistoryModifiedonbehalfby = lkAdoxioApplicationinvoicehistoryModifiedonbehalfby;
-            UserAdoxioApplicationinvoicehistory = userAdoxioApplicationinvoicehistory;
-            LkAdoxioCustomautonumberrequestCreatedby = lkAdoxioCustomautonumberrequestCreatedby;
-            LkAdoxioCustomautonumberrequestCreatedonbehalfby = lkAdoxioCustomautonumberrequestCreatedonbehalfby;
-            LkAdoxioCustomautonumberrequestModifiedby = lkAdoxioCustomautonumberrequestModifiedby;
-            LkAdoxioCustomautonumberrequestModifiedonbehalfby = lkAdoxioCustomautonumberrequestModifiedonbehalfby;
-            LkAdoxioCustomautonumberdefinitionCreatedby = lkAdoxioCustomautonumberdefinitionCreatedby;
-            LkAdoxioCustomautonumberdefinitionCreatedonbehalfby = lkAdoxioCustomautonumberdefinitionCreatedonbehalfby;
-            LkAdoxioCustomautonumberdefinitionModifiedby = lkAdoxioCustomautonumberdefinitionModifiedby;
-            LkAdoxioCustomautonumberdefinitionModifiedonbehalfby = lkAdoxioCustomautonumberdefinitionModifiedonbehalfby;
+            LkAdoxioTiedhouseconnectionCreatedby = lkAdoxioTiedhouseconnectionCreatedby;
+            LkAdoxioTiedhouseconnectionCreatedonbehalfby = lkAdoxioTiedhouseconnectionCreatedonbehalfby;
+            LkAdoxioTiedhouseconnectionModifiedby = lkAdoxioTiedhouseconnectionModifiedby;
+            LkAdoxioTiedhouseconnectionModifiedonbehalfby = lkAdoxioTiedhouseconnectionModifiedonbehalfby;
+            UserAdoxioTiedhouseconnection = userAdoxioTiedhouseconnection;
             LkAdoxioWorkerCreatedby = lkAdoxioWorkerCreatedby;
             LkAdoxioWorkerCreatedonbehalfby = lkAdoxioWorkerCreatedonbehalfby;
             LkAdoxioWorkerModifiedby = lkAdoxioWorkerModifiedby;
             LkAdoxioWorkerModifiedonbehalfby = lkAdoxioWorkerModifiedonbehalfby;
             UserAdoxioWorker = userAdoxioWorker;
-            LkAdoxioAliasCreatedby = lkAdoxioAliasCreatedby;
-            LkAdoxioAliasCreatedonbehalfby = lkAdoxioAliasCreatedonbehalfby;
-            LkAdoxioAliasModifiedby = lkAdoxioAliasModifiedby;
-            LkAdoxioAliasModifiedonbehalfby = lkAdoxioAliasModifiedonbehalfby;
-            UserAdoxioAlias = userAdoxioAlias;
-            LkAdoxioCorporatehistorysummaryCreatedby = lkAdoxioCorporatehistorysummaryCreatedby;
-            LkAdoxioCorporatehistorysummaryCreatedonbehalfby = lkAdoxioCorporatehistorysummaryCreatedonbehalfby;
-            LkAdoxioCorporatehistorysummaryModifiedby = lkAdoxioCorporatehistorysummaryModifiedby;
-            LkAdoxioCorporatehistorysummaryModifiedonbehalfby = lkAdoxioCorporatehistorysummaryModifiedonbehalfby;
-            UserAdoxioCorporatehistorysummary = userAdoxioCorporatehistorysummary;
+            LkAdoxioWorkerinvoicehistoryCreatedby = lkAdoxioWorkerinvoicehistoryCreatedby;
+            LkAdoxioWorkerinvoicehistoryCreatedonbehalfby = lkAdoxioWorkerinvoicehistoryCreatedonbehalfby;
+            LkAdoxioWorkerinvoicehistoryModifiedby = lkAdoxioWorkerinvoicehistoryModifiedby;
+            LkAdoxioWorkerinvoicehistoryModifiedonbehalfby = lkAdoxioWorkerinvoicehistoryModifiedonbehalfby;
+            UserAdoxioWorkerinvoicehistory = userAdoxioWorkerinvoicehistory;
+            AdoxioInspectionInspectors = adoxioInspectionInspectors;
+            AdoxioSystemuserAdoxioApplicationCaseManager = adoxioSystemuserAdoxioApplicationCaseManager;
+            AdoxioSystemuserAdoxioApplicationCaseManagerSupervisor = adoxioSystemuserAdoxioApplicationCaseManagerSupervisor;
+            AdoxioSystemuserAdoxioApplicationInspector = adoxioSystemuserAdoxioApplicationInspector;
+            AdoxioSystemuserAdoxioAreaPrimaryInspector = adoxioSystemuserAdoxioAreaPrimaryInspector;
+            AdoxioSystemuserAdoxioCitydistrictInspectorId = adoxioSystemuserAdoxioCitydistrictInspectorId;
+            AdoxioSystemuserAdoxioComplaintInspector = adoxioSystemuserAdoxioComplaintInspector;
+            AdoxioSystemuserAdoxioComplaintRegionalManager = adoxioSystemuserAdoxioComplaintRegionalManager;
+            AdoxioSystemuserAdoxioInvestigationAdjudicator = adoxioSystemuserAdoxioInvestigationAdjudicator;
             AdoxioSystemuserAdoxioInvestigationApprovedDecisionBy = adoxioSystemuserAdoxioInvestigationApprovedDecisionBy;
+            AdoxioSystemuserAdoxioInvestigationInvestigator = adoxioSystemuserAdoxioInvestigationInvestigator;
+            AdoxioSystemuserAdoxioInvestigationRegionalManager = adoxioSystemuserAdoxioInvestigationRegionalManager;
+            AdoxioSystemuserAdoxioRegionRegionalAdmin = adoxioSystemuserAdoxioRegionRegionalAdmin;
+            AdoxioSystemuserAdoxioRegionRegionalManager = adoxioSystemuserAdoxioRegionRegionalManager;
+            AdoxioSystemuserAdoxioTerritoryPrimaryInspector = adoxioSystemuserAdoxioTerritoryPrimaryInspector;
+            AdoxioSystemuserEstablishmentPrimaryinspector = adoxioSystemuserEstablishmentPrimaryinspector;
+            AdoxioSystemuserIncidentAdjudicator = adoxioSystemuserIncidentAdjudicator;
+            AdoxioSystemuserIncidentInspector = adoxioSystemuserIncidentInspector;
+            AdoxioSystemuserIncidentRegionalManager = adoxioSystemuserIncidentRegionalManager;
+            AdoxioSystemuserSecondaryinvestigator = adoxioSystemuserSecondaryinvestigator;
+            LkAdoxioDocumentCreatedby = lkAdoxioDocumentCreatedby;
+            LkAdoxioDocumentCreatedonbehalfby = lkAdoxioDocumentCreatedonbehalfby;
+            LkAdoxioDocumentModifiedby = lkAdoxioDocumentModifiedby;
+            LkAdoxioDocumentModifiedonbehalfby = lkAdoxioDocumentModifiedonbehalfby;
+            UserAdoxioDocument = userAdoxioDocument;
+            LkAdoxioDocumentadminCreatedby = lkAdoxioDocumentadminCreatedby;
+            LkAdoxioDocumentadminCreatedonbehalfby = lkAdoxioDocumentadminCreatedonbehalfby;
+            LkAdoxioDocumentadminModifiedby = lkAdoxioDocumentadminModifiedby;
+            LkAdoxioDocumentadminModifiedonbehalfby = lkAdoxioDocumentadminModifiedonbehalfby;
+            UserAdoxioDocumentadmin = userAdoxioDocumentadmin;
+            LkAdoxioContraventionadminCreatedby = lkAdoxioContraventionadminCreatedby;
+            LkAdoxioContraventionadminCreatedonbehalfby = lkAdoxioContraventionadminCreatedonbehalfby;
+            LkAdoxioContraventionadminModifiedby = lkAdoxioContraventionadminModifiedby;
+            LkAdoxioContraventionadminModifiedonbehalfby = lkAdoxioContraventionadminModifiedonbehalfby;
+            UserAdoxioContraventionadmin = userAdoxioContraventionadmin;
+            AdoxioRegionalmanagerContraventions = adoxioRegionalmanagerContraventions;
+            LkAdoxioCompliancemeetingCreatedby = lkAdoxioCompliancemeetingCreatedby;
+            LkAdoxioCompliancemeetingCreatedonbehalfby = lkAdoxioCompliancemeetingCreatedonbehalfby;
+            LkAdoxioCompliancemeetingModifiedby = lkAdoxioCompliancemeetingModifiedby;
+            LkAdoxioCompliancemeetingModifiedonbehalfby = lkAdoxioCompliancemeetingModifiedonbehalfby;
+            UserAdoxioCompliancemeeting = userAdoxioCompliancemeeting;
+            LkAdoxioInvestigationactivityCreatedby = lkAdoxioInvestigationactivityCreatedby;
+            LkAdoxioInvestigationactivityCreatedonbehalfby = lkAdoxioInvestigationactivityCreatedonbehalfby;
+            LkAdoxioInvestigationactivityModifiedby = lkAdoxioInvestigationactivityModifiedby;
+            LkAdoxioInvestigationactivityModifiedonbehalfby = lkAdoxioInvestigationactivityModifiedonbehalfby;
+            UserAdoxioInvestigationactivity = userAdoxioInvestigationactivity;
             CustomInit();
         }
 
@@ -6180,58 +6159,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_createdby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_modifiedby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_tiedhouseconnection")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> UserAdoxioTiedhouseconnection { get; set; }
+        [JsonProperty(PropertyName = "user_abs_scheduledprocess")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocess> UserAbsScheduledprocess { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryCreatedby { get; set; }
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_createdby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_owninguser")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserOwninguser { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryModifiedby { get; set; }
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_workerinvoicehistory")]
-        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> UserAdoxioWorkerinvoicehistory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_secondaryinvestigator")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserSecondaryinvestigator { get; set; }
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_modifiedby")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -6257,6 +6231,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "user_adoxio_agencycommunication")]
         public IList<MicrosoftDynamicsCRMadoxioAgencycommunication> UserAdoxioAgencycommunication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_alias_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_alias_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_alias_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_alias_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_alias")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> UserAdoxioAlias { get; set; }
 
         /// <summary>
         /// </summary>
@@ -6310,6 +6309,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_applicationinvoicehistory")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> UserAdoxioApplicationinvoicehistory { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "lk_adoxio_applicationmodule_createdby")]
         public IList<MicrosoftDynamicsCRMadoxioApplicationmodule> LkAdoxioApplicationmoduleCreatedby { get; set; }
 
@@ -6360,53 +6404,123 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaincemeeting_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> LkAdoxioComplaincemeetingCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_area_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaincemeeting_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> LkAdoxioComplaincemeetingCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_area_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaincemeeting_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> LkAdoxioComplaincemeetingModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_area_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaincemeeting_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> LkAdoxioComplaincemeetingModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_area_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_complaincemeeting")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaincemeeting> UserAdoxioComplaincemeeting { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_area")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> UserAdoxioArea { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintsubject_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> LkAdoxioComplaintsubjectCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintsubject_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> LkAdoxioComplaintsubjectCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintsubject_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> LkAdoxioComplaintsubjectModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintsubject_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> LkAdoxioComplaintsubjectModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_complaintsubject")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintsubject> UserAdoxioComplaintsubject { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_businessaccount")]
+        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> UserAdoxioBusinessaccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_citydistrict")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> UserAdoxioCitydistrict { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaint_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaint_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaint_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaint_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_complaint")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> UserAdoxioComplaint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -6435,6 +6549,96 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_corporatehistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> UserAdoxioCorporatehistorysummary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_corporaterole")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> UserAdoxioCorporaterole { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "lk_adoxio_establishment_createdby")]
         public IList<MicrosoftDynamicsCRMadoxioEstablishment> LkAdoxioEstablishmentCreatedby { get; set; }
 
@@ -6460,78 +6664,78 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_exhibit_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> LkAdoxioExhibitCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_exhibit_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> LkAdoxioExhibitCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_exhibit_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> LkAdoxioExhibitModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_exhibit_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> LkAdoxioExhibitModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_exhibit")]
-        public IList<MicrosoftDynamicsCRMadoxioExhibit> UserAdoxioExhibit { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_fundingsource")]
+        public IList<MicrosoftDynamicsCRMadoxioFundingsource> UserAdoxioFundingsource { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationdetail_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> LkAdoxioInvestigationdetailCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_interest_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationdetail_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> LkAdoxioInvestigationdetailCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_interest_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationdetail_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> LkAdoxioInvestigationdetailModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_interest_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationdetail_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> LkAdoxioInvestigationdetailModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_interest_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_investigationdetail")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationdetail> UserAdoxioInvestigationdetail { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_interest")]
+        public IList<MicrosoftDynamicsCRMadoxioInterest> UserAdoxioInterest { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationstakeholder_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> LkAdoxioInvestigationstakeholderCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_investigation_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationstakeholder_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> LkAdoxioInvestigationstakeholderCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_investigation_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationstakeholder_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> LkAdoxioInvestigationstakeholderModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_investigation_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigationstakeholder_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> LkAdoxioInvestigationstakeholderModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_investigation_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_investigationstakeholder")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationstakeholder> UserAdoxioInvestigationstakeholder { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_investigation")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> UserAdoxioInvestigation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -6685,43 +6889,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltysubtype_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> LkAdoxioPenaltysubtypeCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_loan_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltysubtype_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> LkAdoxioPenaltysubtypeCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_loan_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltysubtype_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> LkAdoxioPenaltysubtypeModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_loan_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltysubtype_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltysubtype> LkAdoxioPenaltysubtypeModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_loan_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltytype_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltytype> LkAdoxioPenaltytypeCreatedby { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_loan")]
+        public IList<MicrosoftDynamicsCRMadoxioLoan> UserAdoxioLoan { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltytype_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltytype> LkAdoxioPenaltytypeCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltytype_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltytype> LkAdoxioPenaltytypeModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_penaltytype_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPenaltytype> LkAdoxioPenaltytypeModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -6750,6 +6959,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policydocument_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policydocument_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policydocument_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_policydocument_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_policydocument")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> UserAdoxioPolicydocument { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "lk_adoxio_postalcode_createdby")]
         public IList<MicrosoftDynamicsCRMadoxioPostalcode> LkAdoxioPostalcodeCreatedby { get; set; }
 
@@ -6775,6 +7029,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_previousaddress")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> UserAdoxioPreviousaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "lk_adoxio_region_createdby")]
         public IList<MicrosoftDynamicsCRMadoxioRegion> LkAdoxioRegionCreatedby { get; set; }
 
@@ -6797,6 +7076,106 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "user_adoxio_region")]
         public IList<MicrosoftDynamicsCRMadoxioRegion> UserAdoxioRegion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_setting_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_setting_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_setting_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_setting_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_setting")]
+        public IList<MicrosoftDynamicsCRMadoxioSetting> UserAdoxioSetting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_spddatarow")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> UserAdoxioSpddatarow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spdexports_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spdexports_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spdexports_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_spdexports_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_spdexports")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> UserAdoxioSpdexports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_taxandaccounting")]
+        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> UserAdoxioTaxandaccounting { get; set; }
 
         /// <summary>
         /// </summary>
@@ -6875,733 +7254,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationnotification_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> LkAdoxioViolationnotificationCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationnotification_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> LkAdoxioViolationnotificationCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationnotification_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> LkAdoxioViolationnotificationModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationnotification_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> LkAdoxioViolationnotificationModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_tiedhouseconnection_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> LkAdoxioTiedhouseconnectionModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_violationnotification")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> UserAdoxioViolationnotification { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationtype_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> LkAdoxioViolationtypeCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationtype_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> LkAdoxioViolationtypeCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationtype_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> LkAdoxioViolationtypeModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_violationtype_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> LkAdoxioViolationtypeModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_violationtype")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationtype> UserAdoxioViolationtype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_witnessstatement_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> LkAdoxioWitnessstatementCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_witnessstatement_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> LkAdoxioWitnessstatementCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_witnessstatement_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> LkAdoxioWitnessstatementModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_witnessstatement_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> LkAdoxioWitnessstatementModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_witnessstatement")]
-        public IList<MicrosoftDynamicsCRMadoxioWitnessstatement> UserAdoxioWitnessstatement { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_application_CaseManager")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioSystemuserAdoxioApplicationCaseManager { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_application_CaseManagerSupervisor")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioSystemuserAdoxioApplicationCaseManagerSupervisor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_application_Inspector")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioSystemuserAdoxioApplicationInspector { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_region_RegionalManager")]
-        public IList<MicrosoftDynamicsCRMadoxioRegion> AdoxioSystemuserAdoxioRegionRegionalManager { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_territory_PrimaryInspector")]
-        public IList<MicrosoftDynamicsCRMadoxioTerritory> AdoxioSystemuserAdoxioTerritoryPrimaryInspector { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_incident_Adjudicator")]
-        public IList<MicrosoftDynamicsCRMincident> AdoxioSystemuserIncidentAdjudicator { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_incident_Inspector")]
-        public IList<MicrosoftDynamicsCRMincident> AdoxioSystemuserIncidentInspector { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_incident_RegionalManager")]
-        public IList<MicrosoftDynamicsCRMincident> AdoxioSystemuserIncidentRegionalManager { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaint_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaint_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaint_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaint_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> LkAdoxioComplaintModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_complaint")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> UserAdoxioComplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_complaint_RegionalManager")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioSystemuserAdoxioComplaintRegionalManager { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_complaint_Inspector")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioSystemuserAdoxioComplaintInspector { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Createdonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Modifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationbpfmvpv2_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> LkAdoxioApplicationbpfmvpv2Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_fundingsource_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioFundingsource> LkAdoxioFundingsourceModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_fundingsource")]
-        public IList<MicrosoftDynamicsCRMadoxioFundingsource> UserAdoxioFundingsource { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_taxandaccounting_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> LkAdoxioTaxandaccountingModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_taxandaccounting")]
-        public IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> UserAdoxioTaxandaccounting { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_businessaccount_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> LkAdoxioBusinessaccountModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_businessaccount")]
-        public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> UserAdoxioBusinessaccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_loan_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_loan_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_loan_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_loan_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioLoan> LkAdoxioLoanModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_loan")]
-        public IList<MicrosoftDynamicsCRMadoxioLoan> UserAdoxioLoan { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_interest_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_interest_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_interest_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_interest_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInterest> LkAdoxioInterestModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_interest")]
-        public IList<MicrosoftDynamicsCRMadoxioInterest> UserAdoxioInterest { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporaterole_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> LkAdoxioCorporateroleModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_corporaterole")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> UserAdoxioCorporaterole { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_localgovindigenousnation_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LkAdoxioLocalgovindigenousnationModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policejurisdiction_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> LkAdoxioPolicejurisdictionModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_area_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_area_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_area_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_area_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioArea> LkAdoxioAreaModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_area")]
-        public IList<MicrosoftDynamicsCRMadoxioArea> UserAdoxioArea { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_area_PrimaryInspector")]
-        public IList<MicrosoftDynamicsCRMadoxioArea> AdoxioSystemuserAdoxioAreaPrimaryInspector { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_createdby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_modifiedby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_abs_scheduledprocess_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocess> LkAbsScheduledprocessModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_abs_scheduledprocess")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocess> UserAbsScheduledprocess { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_createdby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_owninguser")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserOwninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_systemuser_modifiedby")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionSystemuserModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_complaintpublicbpf_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> LkAdoxioComplaintpublicbpfModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigation_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigation_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigation_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_investigation_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> LkAdoxioInvestigationModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> UserAdoxioInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_investigation_Investigator")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserAdoxioInvestigationInvestigator { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_investigation_RegionalManager")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserAdoxioInvestigationRegionalManager { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_setting_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_setting_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_setting_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_setting_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioSetting> LkAdoxioSettingModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_setting")]
-        public IList<MicrosoftDynamicsCRMadoxioSetting> UserAdoxioSetting { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spdexports_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spdexports_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spdexports_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spdexports_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> LkAdoxioSpdexportsModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_spdexports")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> UserAdoxioSpdexports { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_previousaddress_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> LkAdoxioPreviousaddressModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_previousaddress")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> UserAdoxioPreviousaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_spddatarow_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> LkAdoxioSpddatarowModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_spddatarow")]
-        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> UserAdoxioSpddatarow { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policydocument_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policydocument_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policydocument_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_policydocument_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> LkAdoxioPolicydocumentModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_policydocument")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> UserAdoxioPolicydocument { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_citydistrict_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> LkAdoxioCitydistrictModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_citydistrict")]
-        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> UserAdoxioCitydistrict { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_region_RegionalAdmin")]
-        public IList<MicrosoftDynamicsCRMadoxioRegion> AdoxioSystemuserAdoxioRegionRegionalAdmin { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_citydistrict_InspectorId")]
-        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> AdoxioSystemuserAdoxioCitydistrictInspectorId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_investigation_Adjudicator")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserAdoxioInvestigationAdjudicator { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_systemuser_establishment_primaryinspector")]
-        public IList<MicrosoftDynamicsCRMadoxioEstablishment> AdoxioSystemuserEstablishmentPrimaryinspector { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_applicationinvoicehistory_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> LkAdoxioApplicationinvoicehistoryModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_applicationinvoicehistory")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> UserAdoxioApplicationinvoicehistory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberrequest_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> LkAdoxioCustomautonumberrequestModifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionCreatedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionCreatedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionModifiedby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_customautonumberdefinition_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> LkAdoxioCustomautonumberdefinitionModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_tiedhouseconnection")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> UserAdoxioTiedhouseconnection { get; set; }
 
         /// <summary>
         /// </summary>
@@ -7630,58 +7304,258 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_alias_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasCreatedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryCreatedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_alias_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryCreatedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_alias_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasModifiedby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryModifiedby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_alias_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> LkAdoxioAliasModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_workerinvoicehistory_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> LkAdoxioWorkerinvoicehistoryModifiedonbehalfby { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_alias")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> UserAdoxioAlias { get; set; }
+        [JsonProperty(PropertyName = "user_adoxio_workerinvoicehistory")]
+        public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> UserAdoxioWorkerinvoicehistory { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_createdby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryCreatedby { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspection_inspectors")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioInspectionInspectors { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_createdonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryCreatedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_application_CaseManager")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioSystemuserAdoxioApplicationCaseManager { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_modifiedby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryModifiedby { get; set; }
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_application_CaseManagerSupervisor")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioSystemuserAdoxioApplicationCaseManagerSupervisor { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lk_adoxio_corporatehistorysummary_modifiedonbehalfby")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> LkAdoxioCorporatehistorysummaryModifiedonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_application_Inspector")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioSystemuserAdoxioApplicationInspector { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "user_adoxio_corporatehistorysummary")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> UserAdoxioCorporatehistorysummary { get; set; }
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_area_PrimaryInspector")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> AdoxioSystemuserAdoxioAreaPrimaryInspector { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_citydistrict_InspectorId")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> AdoxioSystemuserAdoxioCitydistrictInspectorId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_complaint_Inspector")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioSystemuserAdoxioComplaintInspector { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_complaint_RegionalManager")]
+        public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioSystemuserAdoxioComplaintRegionalManager { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_investigation_Adjudicator")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserAdoxioInvestigationAdjudicator { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_investigation_ApprovedDecisionBy")]
         public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserAdoxioInvestigationApprovedDecisionBy { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_investigation_Investigator")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserAdoxioInvestigationInvestigator { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_investigation_RegionalManager")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserAdoxioInvestigationRegionalManager { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_region_RegionalAdmin")]
+        public IList<MicrosoftDynamicsCRMadoxioRegion> AdoxioSystemuserAdoxioRegionRegionalAdmin { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_region_RegionalManager")]
+        public IList<MicrosoftDynamicsCRMadoxioRegion> AdoxioSystemuserAdoxioRegionRegionalManager { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_adoxio_territory_PrimaryInspector")]
+        public IList<MicrosoftDynamicsCRMadoxioTerritory> AdoxioSystemuserAdoxioTerritoryPrimaryInspector { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_establishment_primaryinspector")]
+        public IList<MicrosoftDynamicsCRMadoxioEstablishment> AdoxioSystemuserEstablishmentPrimaryinspector { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_incident_Adjudicator")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioSystemuserIncidentAdjudicator { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_incident_Inspector")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioSystemuserIncidentInspector { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_incident_RegionalManager")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioSystemuserIncidentRegionalManager { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_systemuser_secondaryinvestigator")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioSystemuserSecondaryinvestigator { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_document_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocument> LkAdoxioDocumentCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_document_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocument> LkAdoxioDocumentCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_document_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocument> LkAdoxioDocumentModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_document_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocument> LkAdoxioDocumentModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_document")]
+        public IList<MicrosoftDynamicsCRMadoxioDocument> UserAdoxioDocument { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_documentadmin_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocumentadmin> LkAdoxioDocumentadminCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_documentadmin_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocumentadmin> LkAdoxioDocumentadminCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_documentadmin_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocumentadmin> LkAdoxioDocumentadminModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_documentadmin_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioDocumentadmin> LkAdoxioDocumentadminModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_documentadmin")]
+        public IList<MicrosoftDynamicsCRMadoxioDocumentadmin> UserAdoxioDocumentadmin { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_contraventionadmin_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioContraventionadmin> LkAdoxioContraventionadminCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_contraventionadmin_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioContraventionadmin> LkAdoxioContraventionadminCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_contraventionadmin_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioContraventionadmin> LkAdoxioContraventionadminModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_contraventionadmin_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioContraventionadmin> LkAdoxioContraventionadminModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_contraventionadmin")]
+        public IList<MicrosoftDynamicsCRMadoxioContraventionadmin> UserAdoxioContraventionadmin { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_regionalmanager_contraventions")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioRegionalmanagerContraventions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_compliancemeeting_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> LkAdoxioCompliancemeetingCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_compliancemeeting_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> LkAdoxioCompliancemeetingCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_compliancemeeting_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> LkAdoxioCompliancemeetingModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_compliancemeeting_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> LkAdoxioCompliancemeetingModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_compliancemeeting")]
+        public IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> UserAdoxioCompliancemeeting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_investigationactivity_createdby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> LkAdoxioInvestigationactivityCreatedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_investigationactivity_createdonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> LkAdoxioInvestigationactivityCreatedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_investigationactivity_modifiedby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> LkAdoxioInvestigationactivityModifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lk_adoxio_investigationactivity_modifiedonbehalfby")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> LkAdoxioInvestigationactivityModifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "user_adoxio_investigationactivity")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> UserAdoxioInvestigationactivity { get; set; }
 
     }
 }

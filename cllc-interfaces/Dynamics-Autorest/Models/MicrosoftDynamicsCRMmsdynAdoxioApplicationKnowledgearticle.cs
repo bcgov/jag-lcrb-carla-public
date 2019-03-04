@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle(string msdynAdoxioApplicationKnowledgearticleid = default(string), string adoxioApplicationid = default(string), string knowledgearticleid = default(string), long? versionnumber = default(long?))
+        public MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle(long? versionnumber = default(long?), string adoxioApplicationid = default(string), string knowledgearticleid = default(string), string msdynAdoxioApplicationKnowledgearticleid = default(string))
         {
-            MsdynAdoxioApplicationKnowledgearticleid = msdynAdoxioApplicationKnowledgearticleid;
+            Versionnumber = versionnumber;
             AdoxioApplicationid = adoxioApplicationid;
             Knowledgearticleid = knowledgearticleid;
-            Versionnumber = versionnumber;
+            MsdynAdoxioApplicationKnowledgearticleid = msdynAdoxioApplicationKnowledgearticleid;
             CustomInit();
         }
 
@@ -43,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_adoxio_application_knowledgearticleid")]
-        public string MsdynAdoxioApplicationKnowledgearticleid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -58,8 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "msdyn_adoxio_application_knowledgearticleid")]
+        public string MsdynAdoxioApplicationKnowledgearticleid { get; set; }
 
     }
 }

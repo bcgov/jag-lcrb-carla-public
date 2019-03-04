@@ -187,7 +187,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var expandList = new List<string> { "adoxio_ShareholderAccountID" };
             try
             {
-                legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: entityFilter, expand: expandList).Value
+                legalEntities = _dynamicsClient.Legalentities.Get(filter: entityFilter, expand: expandList).Value
                         .Select(le =>
                         {
                             var legalEntity = le.ToViewModel();
@@ -201,7 +201,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result;
                             entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result;
                             entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result;
-                            var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
+                            var tiedHouse = _dynamicsClient.Tiedhouseconnections
                                 .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
                                 .Value.FirstOrDefault();
                             if (tiedHouse != null)
@@ -255,7 +255,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                children = _dynamicsClient.Adoxiolegalentities
+                children = _dynamicsClient.Legalentities
                         .Get(filter: childEntitiesFilter, expand: expandList).Value
                         .Select(le =>
                         {
@@ -265,7 +265,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 AdoxioLegalEntity = legalEntity,
                                 Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
                             };
-                            var tiedHouse = _dynamicsClient.AdoxioTiedhouseconnections
+                            var tiedHouse = _dynamicsClient.Tiedhouseconnections
                                 .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
                                 .Value.FirstOrDefault();
                             if (tiedHouse != null)
@@ -459,7 +459,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    legalEntity = await _dynamicsClient.Adoxiolegalentities.CreateAsync(legalEntity);
+                    legalEntity = await _dynamicsClient.Legalentities.CreateAsync(legalEntity);
                 }
                 catch (OdataerrorException odee)
                 {                    
@@ -503,7 +503,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 
                 try
                 {
-                    tiedHouse = await _dynamicsClient.AdoxioTiedhouseconnections.CreateAsync(tiedHouse);
+                    tiedHouse = await _dynamicsClient.Tiedhouseconnections.CreateAsync(tiedHouse);
                 }
                 catch (OdataerrorException odee)
                 {
@@ -703,12 +703,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // delete the associated LegalEntity
             string accountFilter = "_adoxio_account_value eq " + id.ToString();
-            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value.ToList();
+            var legalEntities = _dynamicsClient.Legalentities.Get(filter: accountFilter).Value.ToList();
             legalEntities.ForEach(le =>
             {
                 try
                 {
-                    _dynamicsClient.Adoxiolegalentities.Delete(le.AdoxioLegalentityid);
+                    _dynamicsClient.Legalentities.Delete(le.AdoxioLegalentityid);
                     _logger.LogDebug(LoggingEvents.HttpDelete, "Legal Entity deleted: " + le.AdoxioLegalentityid);
                 }
                 catch (OdataerrorException odee)

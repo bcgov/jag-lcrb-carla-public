@@ -11,7 +11,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Auto Generated
+    /// This OData service is located at https://localhost:8888/dynamics
     /// </summary>
     public partial interface IDynamicsClient : System.IDisposable
     {
@@ -38,19 +38,19 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         /// <summary>
-        /// Gets the ISharepointSites.
-        /// </summary>
-        ISharepointSites SharepointSites { get; }
-
-        /// <summary>
-        /// Gets the ISharepointSite.
-        /// </summary>
-        ISharepointSite SharepointSite { get; }
-
-        /// <summary>
         /// Gets the IAccounts.
         /// </summary>
         IAccounts Accounts { get; }
+
+        /// <summary>
+        /// Gets the ILicencetypeinvestigationset.
+        /// </summary>
+        ILicencetypeinvestigationset Licencetypeinvestigationset { get; }
+
+        /// <summary>
+        /// Gets the IAgencycommunications.
+        /// </summary>
+        IAgencycommunications Agencycommunications { get; }
 
         /// <summary>
         /// Gets the IAliases.
@@ -58,9 +58,74 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAliases Aliases { get; }
 
         /// <summary>
+        /// Gets the IApplicantsteps.
+        /// </summary>
+        IApplicantsteps Applicantsteps { get; }
+
+        /// <summary>
+        /// Gets the IApplicationbpfmvpv2s.
+        /// </summary>
+        IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; }
+
+        /// <summary>
+        /// Gets the IApplicationinvoicehistories.
+        /// </summary>
+        IApplicationinvoicehistories Applicationinvoicehistories { get; }
+
+        /// <summary>
+        /// Gets the IApplicationmodules.
+        /// </summary>
+        IApplicationmodules Applicationmodules { get; }
+
+        /// <summary>
         /// Gets the IApplications.
         /// </summary>
         IApplications Applications { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtermsconditionslimitations.
+        /// </summary>
+        IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
+
+        /// <summary>
+        /// Gets the IAreas.
+        /// </summary>
+        IAreas Areas { get; }
+
+        /// <summary>
+        /// Gets the IBusinessaccounts.
+        /// </summary>
+        IBusinessaccounts Businessaccounts { get; }
+
+        /// <summary>
+        /// Gets the ICitydistricts.
+        /// </summary>
+        ICitydistricts Citydistricts { get; }
+
+        /// <summary>
+        /// Gets the IComplaintpublicbpfs.
+        /// </summary>
+        IComplaintpublicbpfs Complaintpublicbpfs { get; }
+
+        /// <summary>
+        /// Gets the IComplaints.
+        /// </summary>
+        IComplaints Complaints { get; }
+
+        /// <summary>
+        /// Gets the ICompliancemeetings.
+        /// </summary>
+        ICompliancemeetings Compliancemeetings { get; }
+
+        /// <summary>
+        /// Gets the IContraventionadmins.
+        /// </summary>
+        IContraventionadmins Contraventionadmins { get; }
+
+        /// <summary>
+        /// Gets the IContraventions.
+        /// </summary>
+        IContraventions Contraventions { get; }
 
         /// <summary>
         /// Gets the ICorporatehistorysummaries.
@@ -73,24 +138,99 @@ namespace Gov.Lclb.Cllb.Interfaces
         ICorporateroles Corporateroles { get; }
 
         /// <summary>
+        /// Gets the ICustomautonumberdefinitions.
+        /// </summary>
+        ICustomautonumberdefinitions Customautonumberdefinitions { get; }
+
+        /// <summary>
+        /// Gets the ICustomautonumberrequests.
+        /// </summary>
+        ICustomautonumberrequests Customautonumberrequests { get; }
+
+        /// <summary>
+        /// Gets the IDocumentadmins.
+        /// </summary>
+        IDocumentadmins Documentadmins { get; }
+
+        /// <summary>
+        /// Gets the IDocuments.
+        /// </summary>
+        IDocuments Documents { get; }
+
+        /// <summary>
         /// Gets the IEstablishments.
         /// </summary>
         IEstablishments Establishments { get; }
 
         /// <summary>
-        /// Gets the IAdoxiolegalentities.
+        /// Gets the IFundingsources.
         /// </summary>
-        IAdoxiolegalentities Adoxiolegalentities { get; }
+        IFundingsources Fundingsources { get; }
 
         /// <summary>
-        /// Gets the IAdoxioLicencetypes.
+        /// Gets the IIncidentlicencetypeset.
         /// </summary>
-        IAdoxioLicencetypes AdoxioLicencetypes { get; }
+        IIncidentlicencetypeset Incidentlicencetypeset { get; }
 
         /// <summary>
-        /// Gets the ILicenses.
+        /// Gets the IInspectioninspectorsset.
         /// </summary>
-        ILicenses Licenses { get; }
+        IInspectioninspectorsset Inspectioninspectorsset { get; }
+
+        /// <summary>
+        /// Gets the IInterests.
+        /// </summary>
+        IInterests Interests { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationactivities.
+        /// </summary>
+        IInvestigationactivities Investigationactivities { get; }
+
+        /// <summary>
+        /// Gets the IInvestigations.
+        /// </summary>
+        IInvestigations Investigations { get; }
+
+        /// <summary>
+        /// Gets the ILegalentities.
+        /// </summary>
+        ILegalentities Legalentities { get; }
+
+        /// <summary>
+        /// Gets the ILicenceses.
+        /// </summary>
+        ILicenceses Licenceses { get; }
+
+        /// <summary>
+        /// Gets the ILicencetypeprerequisites.
+        /// </summary>
+        ILicencetypeprerequisites Licencetypeprerequisites { get; }
+
+        /// <summary>
+        /// Gets the ILicencetypes.
+        /// </summary>
+        ILicencetypes Licencetypes { get; }
+
+        /// <summary>
+        /// Gets the ILicencetypestepprerequisites.
+        /// </summary>
+        ILicencetypestepprerequisites Licencetypestepprerequisites { get; }
+
+        /// <summary>
+        /// Gets the ILicencetypesteps.
+        /// </summary>
+        ILicencetypesteps Licencetypesteps { get; }
+
+        /// <summary>
+        /// Gets the ILoans.
+        /// </summary>
+        ILoans Loans { get; }
+
+        /// <summary>
+        /// Gets the ILocalgovindigenousnations.
+        /// </summary>
+        ILocalgovindigenousnations Localgovindigenousnations { get; }
 
         /// <summary>
         /// Gets the IPersonalhistorysummaries.
@@ -98,14 +238,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         IPersonalhistorysummaries Personalhistorysummaries { get; }
 
         /// <summary>
+        /// Gets the IPolicejurisdictions.
+        /// </summary>
+        IPolicejurisdictions Policejurisdictions { get; }
+
+        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         IPolicydocuments Policydocuments { get; }
 
         /// <summary>
+        /// Gets the IPostalcodes.
+        /// </summary>
+        IPostalcodes Postalcodes { get; }
+
+        /// <summary>
         /// Gets the IPreviousaddresses.
         /// </summary>
         IPreviousaddresses Previousaddresses { get; }
+
+        /// <summary>
+        /// Gets the IRegions.
+        /// </summary>
+        IRegions Regions { get; }
+
+        /// <summary>
+        /// Gets the ISettings.
+        /// </summary>
+        ISettings Settings { get; }
 
         /// <summary>
         /// Gets the ISpddatarows.
@@ -118,14 +278,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISpdexportses Spdexportses { get; }
 
         /// <summary>
-        /// Gets the IAdoxioTiedhouseassociations.
+        /// Gets the ITaxandaccountings.
         /// </summary>
-        IAdoxioTiedhouseassociations AdoxioTiedhouseassociations { get; }
+        ITaxandaccountings Taxandaccountings { get; }
 
         /// <summary>
-        /// Gets the IAdoxioTiedhouseconnections.
+        /// Gets the ITermsconditionslimitationspresets.
         /// </summary>
-        IAdoxioTiedhouseconnections AdoxioTiedhouseconnections { get; }
+        ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; }
+
+        /// <summary>
+        /// Gets the ITerritories.
+        /// </summary>
+        ITerritories Territories { get; }
+
+        /// <summary>
+        /// Gets the ITiedhouseassociations.
+        /// </summary>
+        ITiedhouseassociations Tiedhouseassociations { get; }
+
+        /// <summary>
+        /// Gets the ITiedhouseconnections.
+        /// </summary>
+        ITiedhouseconnections Tiedhouseconnections { get; }
+
+        /// <summary>
+        /// Gets the IWorkerinvoicehistories.
+        /// </summary>
+        IWorkerinvoicehistories Workerinvoicehistories { get; }
 
         /// <summary>
         /// Gets the IWorkers.
@@ -143,9 +323,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvoices Invoices { get; }
 
         /// <summary>
-        /// Gets the ISharepointDocumentLocations.
+        /// Gets the IMsdynapplicationknowledgearticleset.
         /// </summary>
-        ISharepointDocumentLocations SharepointDocumentLocations { get; }
+        IMsdynapplicationknowledgearticleset Msdynapplicationknowledgearticleset { get; }
+
+        /// <summary>
+        /// Gets the IMsdynapplicationknowledgebaserecset.
+        /// </summary>
+        IMsdynapplicationknowledgebaserecset Msdynapplicationknowledgebaserecset { get; }
+
+        /// <summary>
+        /// Gets the IMsdynlicencetypeknowledgearticleset.
+        /// </summary>
+        IMsdynlicencetypeknowledgearticleset Msdynlicencetypeknowledgearticleset { get; }
+
+        /// <summary>
+        /// Gets the IMsdynlicencetypeknowledgebaserecset.
+        /// </summary>
+        IMsdynlicencetypeknowledgebaserecset Msdynlicencetypeknowledgebaserecset { get; }
+
+        /// <summary>
+        /// Gets the ISavedqueries.
+        /// </summary>
+        ISavedqueries Savedqueries { get; }
+
+        /// <summary>
+        /// Gets the ISharepointdocumentlocations.
+        /// </summary>
+        ISharepointdocumentlocations Sharepointdocumentlocations { get; }
+
+        /// <summary>
+        /// Gets the ISharepointsites.
+        /// </summary>
+        ISharepointsites Sharepointsites { get; }
 
     }
 }
