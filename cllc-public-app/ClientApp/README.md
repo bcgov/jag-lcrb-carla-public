@@ -141,7 +141,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'application-lite/:applicationId', //applicationId is a route parameter
+    path: 'application/:applicationId', //applicationId is a route parameter
     component: ApplicationComponent,
     canDeactivate: [CanDeactivateGuard]
   }
