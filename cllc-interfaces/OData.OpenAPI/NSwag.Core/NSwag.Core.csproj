@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Description>NSwag: The Swagger API toolchain for .NET and TypeScript</Description>
+    <Version>11.18.7</Version>
+    <PackageTags>Swagger Documentation WebApi AspNet TypeScript CodeGen</PackageTags>
+    <Copyright>Copyright © Rico Suter, 2017</Copyright>
+    <PackageLicenseUrl>https://github.com/NSwag/NSwag/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>http://NSwag.org</PackageProjectUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <SignAssembly>True</SignAssembly>
+    <!-- <AssemblyOriginatorKeyFile>../NSwag.snk</AssemblyOriginatorKeyFile> -->
+    <Authors>Rico Suter</Authors>
+    <PackageIconUrl>https://raw.githubusercontent.com/NSwag/NSwag/master/assets/NuGetIcon.png</PackageIconUrl>
+    <Company />
+    <RootNamespace>NSwag</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="NJsonSchema" Version="9.10.70" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+</Project>
