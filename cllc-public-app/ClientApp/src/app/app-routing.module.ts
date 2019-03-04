@@ -14,7 +14,7 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ApplicationComponent } from './lite/application/application.component';
+import { ApplicationComponent } from './application/application.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
@@ -57,7 +57,7 @@ const routes: Routes = [
     canActivate: [ServiceCardAuthGuard]
   },
   {
-    path: 'application-lite/:applicationId',
+    path: 'application/:applicationId',
     component: ApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]

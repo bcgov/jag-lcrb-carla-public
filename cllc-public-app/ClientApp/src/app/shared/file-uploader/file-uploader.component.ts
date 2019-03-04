@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { FileSystemItem } from '../models/file-system-item.model';
+import { FileSystemItem } from '@models/file-system-item.model';
 import { Subscription } from 'rxjs';
-import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
+import { AdoxioApplicationDataService } from '@services/adoxio-application-data.service';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
