@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// Collection of adoxio_aliases
+    /// Collection of adoxio_agencycommunications
     /// </summary>
     public partial class GetOKResponseModelModel
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the GetOKResponseModelModel class.
         /// </summary>
-        public GetOKResponseModelModel(IList<MicrosoftDynamicsCRMadoxioAlias> value = default(IList<MicrosoftDynamicsCRMadoxioAlias>))
+        public GetOKResponseModelModel(IList<MicrosoftDynamicsCRMadoxioAgencycommunication> value = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>))
         {
             Value = value;
             CustomInit();
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> Value { get; set; }
+        public IList<MicrosoftDynamicsCRMadoxioAgencycommunication> Value { get; set; }
 
     }
 }
