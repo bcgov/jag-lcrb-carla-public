@@ -69,7 +69,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (string.IsNullOrEmpty(Configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
                 {
                     string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-                    // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
                     basePath += "/worker-qualification/dashboard";
                     return Redirect(basePath);
                 }
@@ -173,7 +172,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             );
 
             string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-            // basePath += !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
             basePath += "/worker-qualification/dashboard";
             return Redirect(basePath);
         }
