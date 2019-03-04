@@ -12,6 +12,9 @@ export class StatsViewerComponent implements OnInit {
   public statsData: any[] = [];
   dataLoaded: boolean;
 
+  public summaryData: object = {};
+  public summaryKeys: string[];
+
   busy: Subscription;
   constructor(
     private statsDataService: StatsDataService
@@ -20,11 +23,30 @@ export class StatsViewerComponent implements OnInit {
   ngOnInit() {
     this.busy = this.statsDataService.getStats().subscribe((stats: Stat[]) => {
       stats.forEach((stat: Stat | any) => {        
-        this.statsData.push(stat);        
+        this.statsData.push(stat);
+
+        var current = this.summaryData[stat.adoxio_establishmentaddresscity];
+        if (!current) {
+          current = 0;
+        }
+        current++;
+        this.summaryData[stat.adoxio_establishmentaddresscity] = current;
+
       });
+      this.summaryKeys = Object.keys(this.summaryData).sort((n1, n2) => {
+          if (n1 > n2) {
+            return 1;
+          }
+
+          if (n1 < n2) {
+            return -1;
+          }
+
+          return 0;
+        });
+      this.dataLoaded = true;
     });
   }
-
 
 
 }
