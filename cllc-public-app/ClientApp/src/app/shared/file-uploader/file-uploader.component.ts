@@ -85,11 +85,8 @@ export class FileUploaderComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('documentType', this.documentType);
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    // let url = "";
-    // url = this.attachmentURL + this.applicationId + "/attachments";
+    const headers: HttpHeaders = new HttpHeaders();
+
     this.busy = this.http.post(this.attachmentURL, formData, { headers: headers }).subscribe(result => {
       this.getUploadedFileData();
     },
