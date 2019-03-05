@@ -126,7 +126,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
         shownStatus = RENEWAL_DUE;
       }
     }
-    return status;
+    return shownStatus;
   }
 
   downloadLicence() {
