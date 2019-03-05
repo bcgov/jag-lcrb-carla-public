@@ -227,6 +227,7 @@ namespace DemoTool
             MicrosoftDynamicsCRMaccount newItem = new MicrosoftDynamicsCRMaccount()
             {
                 Name = account.Name,
+                AdoxioBusinesstype = account.AdoxioBusinesstype,
                 Description = account.Description,
                 AdoxioAccounttype = account.AdoxioAccounttype,
                 AdoxioExternalid = account.AdoxioExternalid,
@@ -313,8 +314,8 @@ namespace DemoTool
             {
                 if (item != null)
                 {
-                    if (item.AdoxioName == worker.AdoxioName
-                        && item.AdoxioLastname == worker.AdoxioLastname
+                    if (
+                         item.AdoxioLastname == worker.AdoxioLastname
                         && item.AdoxioFirstname == worker.AdoxioFirstname
                         && item.AdoxioEmail == worker.AdoxioEmail
                         )
@@ -332,10 +333,31 @@ namespace DemoTool
         static void CreateWorker(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioWorker worker)
         {
             worker.AdoxioWorkerid = null;
+            MicrosoftDynamicsCRMadoxioWorker newItem = new MicrosoftDynamicsCRMadoxioWorker()
+            {
+                AdoxioIsldbworker = worker.AdoxioIsldbworker,
+                AdoxioFirstname = worker.AdoxioFirstname,
+                AdoxioMiddlename = worker.AdoxioMiddlename,
+                AdoxioLastname = worker.AdoxioLastname,
+                AdoxioDateofbirth = worker.AdoxioDateofbirth,
+                AdoxioGendercode = worker.AdoxioGendercode,
+                Statuscode = worker.Statuscode,
+                AdoxioBirthplace = worker.AdoxioBirthplace,
+                AdoxioDriverslicencenumber = worker.AdoxioDriverslicencenumber,
+                AdoxioBcidcardnumber = worker.AdoxioBcidcardnumber,
+                AdoxioSelfdisclosure = worker.AdoxioSelfdisclosure,
+                AdoxioPaymentreceived = worker.AdoxioPaymentreceived,
+                AdoxioPaymentreceiveddate = worker.AdoxioPaymentreceiveddate,
+                AdoxioWorkerid = worker.AdoxioWorkerid,
+                AdoxioCurrentaddressdatefrom = worker.AdoxioCurrentaddressdatefrom
+            };
+
+            
+
             try
             {
-                worker = _dynamicsClient.Workers.Create(worker);
-                Console.Out.WriteLine("created worker " + worker.AdoxioName);
+                worker = _dynamicsClient.Workers.Create(newItem);
+                Console.Out.WriteLine("created worker " + newItem.AdoxioFirstname + " " + newItem.AdoxioLastname);
             }                        
             catch (OdataerrorException odee)
             {
@@ -548,13 +570,18 @@ namespace DemoTool
                 AdoxioSignatureagreement = application.AdoxioSignatureagreement,
                 AdoxioAdditionalpropertyinformation = application.AdoxioAdditionalpropertyinformation,
 
-                AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", application.AdoxioLicenceType.AdoxioLicencetypeid),
-                AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", application.AdoxioApplicant.Accountid)
-
+                
                 
             };
 
-            
+            if (application.AdoxioLicenceType != null)
+            {
+                newItem.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", application.AdoxioLicenceType.AdoxioLicencetypeid);                
+            }
+            if (application.AdoxioApplicant != null && AccountMap.ContainsKey(application.AdoxioApplicant.Accountid))
+            {
+                newItem.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", AccountMap[application.AdoxioApplicant.Accountid]);
+            }
 
             try
             {
@@ -572,24 +599,61 @@ namespace DemoTool
             {
                 MicrosoftDynamicsCRMadoxioApplication invoiceLinkItem = new MicrosoftDynamicsCRMadoxioApplication()
                 {
-                    AdoxioInvoiceODataBind = _dynamicsClient.GetEntityURI("invoices", application.AdoxioLicenceType.AdoxioLicencetypeid)
+                    AdoxioInvoiceODataBind = _dynamicsClient.GetEntityURI("invoices", InvoiceMap[application.AdoxioInvoice.Invoiceid])
+                };
+
+                try
+                {
+                    _dynamicsClient.Applications.Update(newItem.AdoxioApplicationid, invoiceLinkItem);
+                }
+                catch (OdataerrorException odee)
+                {
+                    Console.WriteLine("Error updating invoice for application");
+                    Console.WriteLine(odee.Message);
+                    Console.WriteLine(odee.Request.Content);
+                    Console.WriteLine(odee.Response.Content);
                 }
             }
 
             if (application.AdoxioLicenceFeeInvoice != null)
             {
-                newItem.AdoxioLicenceFeeInvoice = new MicrosoftDynamicsCRMinvoice()
-                {
-                    Invoiceid = InvoiceMap[application._adoxioInvoiceValue]
-                };
-            }
 
-            if (application._adoxioAssignedlicenceValue != null && LicenceMap.ContainsKey(application._adoxioAssignedlicenceValue))
-            {
-                newItem.AdoxioAssignedLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                MicrosoftDynamicsCRMadoxioApplication invoiceLinkItem = new MicrosoftDynamicsCRMadoxioApplication()
                 {
-                    AdoxioLicencesid = LicenceMap[application._adoxioAssignedlicenceValue]
+                    AdoxioLicenceFeeInvoiceODataBind = _dynamicsClient.GetEntityURI("invoices", InvoiceMap[application.AdoxioLicenceFeeInvoice.Invoiceid])
                 };
+
+                try
+                {
+                    _dynamicsClient.Applications.Update(newItem.AdoxioApplicationid, invoiceLinkItem);
+                }
+                catch (OdataerrorException odee)
+                {
+                    Console.WriteLine("Error updating licence invoice for application");
+                    Console.WriteLine(odee.Message);
+                    Console.WriteLine(odee.Request.Content);
+                    Console.WriteLine(odee.Response.Content);
+                }
+            }
+            
+            if (application.AdoxioAssignedLicence != null && LicenceMap.ContainsKey(application.AdoxioAssignedLicence.AdoxioLicencesid))
+            {
+                MicrosoftDynamicsCRMadoxioApplication invoiceLinkItem = new MicrosoftDynamicsCRMadoxioApplication()
+                {
+                    AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", LicenceMap[application.AdoxioAssignedLicence.AdoxioLicencesid])
+                };
+
+                try
+                {
+                    _dynamicsClient.Applications.Update(newItem.AdoxioApplicationid, invoiceLinkItem);
+                }
+                catch (OdataerrorException odee)
+                {
+                    Console.WriteLine("Error updating assigned licence for application");
+                    Console.WriteLine(odee.Message);
+                    Console.WriteLine(odee.Request.Content);
+                    Console.WriteLine(odee.Response.Content);
+                }
 
             }
 
@@ -676,7 +740,7 @@ namespace DemoTool
 
             try
             {
-                licence = _dynamicsClient.Licenses.Create(newLicence);
+                licence = _dynamicsClient.Licenceses.Create(newLicence);
                 Console.Out.WriteLine("Created licence " + licence.AdoxioName);
             }
             catch (OdataerrorException odee)
@@ -692,7 +756,7 @@ namespace DemoTool
 
                 try
                 {
-                    _dynamicsClient.Licenses.Update(licence.AdoxioLicencesid, patchLicence);
+                    _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, patchLicence);
                     Console.Out.WriteLine("Updated licence " + licence.AdoxioName);
                 }
                 catch (OdataerrorException odee)
@@ -711,7 +775,7 @@ namespace DemoTool
             {
                 "adoxio_AccountId"
             };
-            var data = _dynamicsClient.Licenses.Get(expand: expand);
+            var data = _dynamicsClient.Licenceses.Get(expand: expand);
             return (List<MicrosoftDynamicsCRMadoxioLicences>)data.Value;
         }
 
@@ -822,7 +886,7 @@ namespace DemoTool
 
             try
             {
-                legalEntity = _dynamicsClient.Adoxiolegalentities.Create(newLegalEntity);
+                legalEntity = _dynamicsClient.Legalentities.Create(newLegalEntity);
                 Console.Out.WriteLine("Created legalEntity " + legalEntity.AdoxioName);
             }
             catch (OdataerrorException odee)
@@ -839,7 +903,7 @@ namespace DemoTool
 
                 try
                 {
-                    _dynamicsClient.Adoxiolegalentities.Update(legalEntity.AdoxioLegalentityid, patchLegalEntity);
+                    _dynamicsClient.Legalentities.Update(legalEntity.AdoxioLegalentityid, patchLegalEntity);
                     Console.Out.WriteLine("Updated legalentities " + legalEntity.AdoxioName);
                 }
                 catch (OdataerrorException odee)
@@ -859,7 +923,7 @@ namespace DemoTool
             {
                 "adoxio_Account"
             };
-            var data = _dynamicsClient.Adoxiolegalentities.Get(expand: expand);
+            var data = _dynamicsClient.Legalentities.Get(expand: expand);
             return (List<MicrosoftDynamicsCRMadoxioLegalentity>)data.Value;
         }
 
@@ -869,7 +933,9 @@ namespace DemoTool
 
             foreach (var legalEntity in legalEntities)
             {
-                if (legalEntity.AdoxioLegalentityid != null && legalEntity.AdoxioAccount != null)
+                if (legalEntity.AdoxioAccount != null && legalEntity.AdoxioAccount.Accountid != null
+                    && AccountMap.ContainsKey(legalEntity.AdoxioAccount.Accountid)
+                    )
                 {
                     legalEntity.AdoxioAccount.Accountid = AccountMap[legalEntity.AdoxioAccount.Accountid];
                 }

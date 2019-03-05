@@ -226,6 +226,7 @@ namespace DataTool
                 var newItem = new MicrosoftDynamicsCRMaccount()
                 {
                     Name = RandomCompanyName(account.Name),
+                    AdoxioBusinesstype = account.AdoxioBusinesstype,
                     AdoxioBcincorporationnumber = RandomStringNumber(account.AdoxioBcincorporationnumber),
                     AdoxioDateofincorporationinbc = RandomDateInPast(),
                     Accountnumber = RandomStringNumber(account.Accountnumber),
@@ -238,7 +239,6 @@ namespace DataTool
                     Address1Stateorprovince = account.Address1Stateorprovince,
                     Address1Country = account.Address1Country,
                     Address1Postalcode = account.Address1Postalcode,
-                    AdoxioBusinesstype = account.AdoxioBusinesstype,
                     AdoxioAccounttype = account.AdoxioAccounttype,                    
                 };
 
@@ -347,7 +347,7 @@ namespace DataTool
                 {                    
                     AdoxioEstablishmentid = Guid.NewGuid().ToString(),
                     AdoxioName = RandomCompanyName(establishment.AdoxioName),
-                    AdoxioAddresscity = RandomCity(),
+                    AdoxioAddresscity = establishment.AdoxioAddresscity,
                     AdoxioAddresspostalcode = establishment.AdoxioAddresspostalcode,
                     AdoxioAddressstreet = RandomCompanyName(establishment.AdoxioAddressstreet),
                     AdoxioAlreadyopen = establishment.AdoxioAlreadyopen,
