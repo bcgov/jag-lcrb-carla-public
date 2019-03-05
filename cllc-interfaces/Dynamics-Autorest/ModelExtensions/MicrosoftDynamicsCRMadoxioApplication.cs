@@ -27,6 +27,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioInvoiceODataBind { get; set; }
 
         
+        [JsonProperty(PropertyName = "adoxio_AssignedLicence@odata.bind")]
+        public string AdoxioAssignedLicenceODataBind { get; set; }
+
 
         [JsonProperty(PropertyName = "adoxio_application_SharePointDocumentLocations@odata.bind")]
         public string[] AdoxioApplicationSharePointDocumentLocationsODataBind { get; set; }
