@@ -1,27 +1,13 @@
 <div>
   <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS AND LICENSES</h3>
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
-    <section *ngIf="inProgressApplications?.length === 0 && licencedApplications?.length === 0">
-      <div style="padding: 10px;">
-        <p>You have not submitted any Controlled Equipment yet.</p>
-      </div>
-      <p></p>
-      <div class="notes" style="display: flex;">
-        <span>
-          Once your owner application is approved, please ensure you register your Controlled Equipment within 10
-          days. <a
-            href="https://www2.gov.bc.ca/gov/content/employment-business/business/pill-press/pill-press-controlled-equipment#Equipment%20Notification%20Process"
-            target="_blank">
-            Find out how to start your equipment notification.</a></span>
-      </div>
-    </section>
-    <section *ngIf="inProgressApplications?.length > 0 || licencedApplications?.length > 0">
+    <section>
       <div class="space-between" style="padding: 10px;">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua.</p>
-          <section style="padding-left: 20px;">
-            <ng-content></ng-content>
-          </section>
+        <section style="padding-left: 20px;">
+          <ng-content></ng-content>
+        </section>
       </div>
       <mat-tab-group
         [selectedIndex]="(inProgressApplications?.length > 0 || licencedApplications?.length == 0) ? 0 : 1">
@@ -49,15 +35,26 @@
                 {{item.applicationStatus}}
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <a routerLink="/application/{{item.id}}">Complete Application</a> <br>
-                <span style="margin-top: 5px;" (click)="cancelApplication(item.id, item.establishmentName, item.name)">
-                  <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+                <div *ngIf="item.applicationStatus === 'Not Submitted'">
+                  <a routerLink="/application/{{item.id}}">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>Complete Application
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
-                    Cancel Application</a>
-                </span>
-                <br>
-                <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">Add Supporting
-                  Documents</a>
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>Cancel Application</a>
+                </div>
+                <div *ngIf="['Application Under Review','Pending External Review', 'Approved In Principle'].indexOf(item.applicationStatus) !==                                                                                                                                                                                                                                                                                                                                                                                          -1">
+                  <a routerLink="/application/{{item.id}}">
+                    <i class="fas fa-eye-alt" style="color: #1a5a96; margin-right: 10px;"></i>Review Submitted
+                    Application
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Application Under Review' || item.applicationStatus === 'Pending External Review'">
+                  <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">Add Supporting
+                    Documents</a>
+                </div>
               </td>
             </tr>
           </table>
@@ -82,7 +79,8 @@
                 <span style="color: #1a5a96;">{{item.establishmentName}}</span> <br>
                 <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
                 <span>Reference #: {{item.name}} </span> <span></span> <br>
-                <a *ngIf="item.applicationStatus == ACTIVE" class="btn btn-primary" style="min-width: 10px;" [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf'">
+                <a *ngIf="item.assignedLicence" class="btn btn-primary" style="min-width: 10px;"
+                  [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf'" download>
                   <span><i class="fas fa-download"></i> DOWNLOAD LICENCE</span>
                 </a>
               </td>
@@ -94,9 +92,11 @@
                 Canada <br>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px; text-align: center;">
-                <button *ngIf="item.applicationStatus == PAYMENT_REQUIRED" class="btn btn-primary" (click)="payLicenceFee(item)">PAY
+                <button *ngIf="item.applicationStatus == PAYMENT_REQUIRED" class="btn btn-primary"
+                  (click)="payLicenceFee(item)">PAY
                   LICENCE FEE</button>
-                <button *ngIf="item.applicationStatus == RENEWAL_DUE" class="btn btn-primary" (click)="renewLicence(item)">RENEW
+                <button *ngIf="item.applicationStatus == RENEWAL_DUE" class="btn btn-primary"
+                  (click)="renewLicence(item)">RENEW
                   LICENCE</button>
               </td>
             </tr>
