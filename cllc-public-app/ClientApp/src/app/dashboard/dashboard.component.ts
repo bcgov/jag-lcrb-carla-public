@@ -86,10 +86,25 @@ export class DashboardComponent implements OnInit {
   }
 
   startNewLicenceApplication() {
-    const newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
-    newLicenceApplicationData.licenseType = 'Cannabis Retail Store';
-    newLicenceApplicationData.applicantType = this.account.businessType;
-    newLicenceApplicationData.account = this.account;
+    const newLicenceApplicationData: AdoxioApplication = <AdoxioApplication>{
+      licenseType: 'Cannabis Retail Store',
+      applicantType: this.account.businessType,
+      account: this.account,
+      serviceHoursSundayOpen: '09:00',
+      serviceHoursMondayOpen: '09:00',
+      serviceHoursTuesdayOpen: '09:00',
+      serviceHoursWednesdayOpen: '09:00',
+      serviceHoursThursdayOpen: '09:00',
+      serviceHoursFridayOpen: '09:00',
+      serviceHoursSaturdayOpen: '09:00',
+      serviceHoursSundayClose: '23:00',
+      serviceHoursMondayClose: '23:00',
+      serviceHoursTuesdayClose: '23:00',
+      serviceHoursWednesdayClose: '23:00',
+      serviceHoursThursdayClose: '23:00',
+      serviceHoursFridayClose: '23:00',
+      serviceHoursSaturdayClose: '23:00',
+    };
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {

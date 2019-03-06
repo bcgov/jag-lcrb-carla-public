@@ -45,7 +45,9 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   /**
    *
    * */
-  private displayApplications() {
+  private  displayApplications() {
+    this.inProgressApplications = [];
+    this.licencedApplications = [];
     this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
       adoxioApplications.forEach((licAppSum: AdoxioApplication | any) => {
         licAppSum.applicationStatus = this.transformStatus(licAppSum);
