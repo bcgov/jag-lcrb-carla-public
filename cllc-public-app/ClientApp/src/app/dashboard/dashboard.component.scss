@@ -61,9 +61,25 @@ li {
     padding-right: 50px;
 }
 
+.small-screen-only {
+    display: none;
+}
+.large-screen-only {
+    display: block;
+}
+
 @media (max-width: 575.98px) {
     .dashboard-spacing {
         padding-left: 10px;
         padding-right: 10px;
     }
 }
+
+@media (max-width: 991.98px) {
+    .small-screen-only {
+        display: block;
+    }
+    .large-screen-only {
+        display: none;
+    }
+}  

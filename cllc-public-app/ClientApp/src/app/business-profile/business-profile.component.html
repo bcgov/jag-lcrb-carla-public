@@ -334,8 +334,9 @@
             <a routerLink="/dashboard">
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">SAVE &
-                CONTINUE
+              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">
+               <span *ngIf="!applicationId">SAVE & CONTINUE</span>
+               <span *ngIf="applicationId">CONTINUE TO APPLICATION</span>
                 <i class="fas fa-chevron-right"></i></button>
             </span>
           </section>
