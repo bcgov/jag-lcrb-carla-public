@@ -20,19 +20,30 @@ export class StatsViewerComponent implements OnInit {
     private statsDataService: StatsDataService
   ) { }
 
+  /*
+   * saved Queries are:
+   *  zLicences Issued (Reporting)
+   *  zApplications Approved with Conditions (Reporting)
+   *  zApplications Referred to Local Government or Indigenous Nation (Reporting)
+   *  zPaid, But Incomplete Applications (Reporting)
+   *  zApplications Where Fee Has Been Paid (Reporting)
+   */ 
+
   ngOnInit() {
-    this.busy = this.statsDataService.getStats().subscribe((stats: Stat[]) => {
+    this.busy = this.statsDataService.getStats("zLicences Issued (Reporting)").subscribe((stats: Stat[]) => {
       stats.forEach((stat: Stat | any) => {        
         this.statsData.push(stat);
 
-        var current = this.summaryData[stat.adoxio_establishmentaddresscity];
+        var current = this.summaryData[stat.commregion];
         if (!current) {
           current = 0;
         }
         current++;
-        this.summaryData[stat.adoxio_establishmentaddresscity] = current;
+        this.summaryData[stat.commregion] = current;
 
       });
+
+
       this.summaryKeys = Object.keys(this.summaryData).sort((n1, n2) => {
           if (n1 > n2) {
             return 1;

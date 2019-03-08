@@ -350,6 +350,31 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Applications.GetByKeyAsync(id.ToString());
+
+                if (result._adoxioLicencetypeValue != null)
+                {
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
+                }
+
+                if (result._adoxioApplicantValue != null)
+                {
+                    result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                }
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Get a contact by their Siteminder ID
         /// </summary>
