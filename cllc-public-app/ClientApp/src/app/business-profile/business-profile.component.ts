@@ -64,6 +64,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   _showAdditionalContact: boolean;
   legalEntityId: string;
   @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
+  applicationId: any;
 
 
   public get contacts(): FormArray {
@@ -81,6 +82,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
 
   ) {
     super();
+    this.applicationId = this.route.snapshot.params.applicationId;
   }
 
   ngOnInit() {
@@ -103,7 +105,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
         physicalAddressCity: ['', Validators.required],
         physicalAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
         physicalAddressProvince: [{ value: 'British Columbia' }],
-        physicalAddressCountry: [{ value: 'Canada'}],
+        physicalAddressCountry: [{ value: 'Canada' }],
         mailingAddressStreet: ['', Validators.required],
         mailingAddressStreet2: [''],
         mailingAddressCity: ['', Validators.required],
@@ -254,7 +256,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
 
   save(): Subject<boolean> {
     const subResult = new Subject<boolean>();
-    this.form.get('businessProfile').patchValue({physicalAddressCountry: 'Canada'});
+    this.form.get('businessProfile').patchValue({ physicalAddressCountry: 'Canada' });
     const value = <DynamicsAccount>{
       ...this.form.get('businessProfile').value
     };
@@ -275,7 +277,11 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   gotoReview() {
     if (this.form.valid && this.connectionsToProducers.form.valid) {
       this.save().subscribe(data => {
-        this.router.navigate(['/dashboard']);
+        if (this.applicationId) {
+          this.router.navigate([`/application/${this.applicationId}`]);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       });
     } else {
       this.markAsTouched();
