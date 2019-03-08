@@ -3,8 +3,7 @@
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
     <section>
       <div class="space-between" style="padding: 10px;">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.</p>
+        <p>Submit an Cannabis Retail Store Application and track the status below.</p>
         <section style="padding-left: 20px;">
           <ng-content></ng-content>
         </section>
@@ -12,12 +11,22 @@
       <mat-tab-group
         [selectedIndex]="(inProgressApplications?.length > 0 || licencedApplications?.length == 0) ? 0 : 1">
         <mat-tab label="In Progress Applications">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. </p>
+          <section *ngIf="inProgressApplications?.length > 0">
+            <label>Please note:</label> <br>
+            <p>Due to the high volume of applications, we ask that you limit questions about the status of your
+              application
+              as much as possible. Answering fewer questions provides us more capacity to process applications.
+            </p>
+            <p>We will contact you regarding your application as soon as we have an update to communicate, have
+              information
+              that you will need to know, or are requesting additional information from you.
+            </p>
+            <p>Thank you for your patience.</p>
+          </section>
           <p *ngIf="inProgressApplications?.length == 0 ">
             You do not have any In Progress Applications.
           </p>
-          <table *ngIf="inProgressApplications?.length > 0 " class="eq-table">
+          <table *ngIf="inProgressApplications?.length > 0" class="eq-table">
             <tr>
               <th colspan=2>Application</th>
               <th style="width: 95px">Last Updated</th>
@@ -35,11 +44,28 @@
                 {{item.modifiedon | date:'mediumDate'}}
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                {{item.applicationStatus}}
+                <div>{{item.applicationStatus}}</div>
+                <p *ngIf="item.applicationStatus === 'Not Submitted'">
+                  This application has not yet been submitted.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Application Under Review'">
+                  Your application has been received and is being reviewed by the LCRB.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Application Incomplete'">
+                  Your application is incomplete. You must provide additional information for it to be processed.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Pending External Review'">
+                  Your application has been sent for local government, financial integrity, and security screening
+                  reviews.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Approved In Principle'">
+                  Your application has been approved in principle. An inspector will be contacting you to organize a
+                  final inspection.
+                </p>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div *ngIf="item.applicationStatus === 'Not Submitted'">
-                  <a routerLink="/application/{{item.id}}">
+                  <a routerLink="/business-profile/{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>Complete Application
                   </a>
                 </div>
@@ -64,14 +90,14 @@
             </tr>
           </table>
           <p></p>
-          <div class="notes" style="display: flex;">
+          <!-- <div class="notes" style="display: flex;">
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua. </span>
-          </div>
+          </div> -->
         </mat-tab>
         <mat-tab label="Licensed Stores">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. </p>
+          <p *ngIf="licencedApplications?.length > 0">Here are your current approved Cannabis Retail Store Licences.
+          </p>
           <p *ngIf="licencedApplications?.length == 0">
             You do not have any Licenced Stores.
           </p>
@@ -87,9 +113,9 @@
                 <span style="color: #1a5a96;">{{item.establishmentName}}</span> <br>
                 <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
                 <span>Reference #: {{item.name}} </span> <span></span> <br>
-                <a *ngIf="item.assignedLicence" class="btn btn-primary" style="min-width: 10px;"
+                <a *ngIf="item.assignedLicence" style="min-width: 10px;"
                   [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf'" download>
-                  <span><i class="fas fa-download"></i> DOWNLOAD LICENCE</span>
+                  <span><i class="fas fa-download" style="margin-right: 10px;"></i> DOWNLOAD LICENCE</span>
                 </a>
               </td>
               <td style="padding: 10px;">
@@ -99,13 +125,15 @@
                 {{item?.establishmentaddresspostalcode}} <br>
                 Canada <br>
               </td>
-              <td style="background-color: #E1E8F2; padding: 10px; text-align: center;">
-                <button *ngIf="item.applicationStatus == PAYMENT_REQUIRED" class="btn btn-primary"
-                  (click)="payLicenceFee(item)">PAY
-                  LICENCE FEE</button>
-                <button *ngIf="item.applicationStatus == RENEWAL_DUE" class="btn btn-primary"
-                  (click)="renewLicence(item)">RENEW
-                  LICENCE</button>
+              <td style="background-color: #E1E8F2; padding: 10px;">
+                <a *ngIf="item.applicationStatus == PAYMENT_REQUIRED" href="javascript:void(0);"
+                  (click)="payLicenceFee(item)">
+                  <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>PAY LICENCE FEE</span>
+                </a>
+                <a *ngIf="item.applicationStatus == RENEWAL_DUE" href="javascript:void(0);"
+                  (click)="renewLicence(item)">
+                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>RENEW LICENCE</span>
+                </a>
               </td>
             </tr>
           </table>
