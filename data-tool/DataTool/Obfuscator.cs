@@ -19,6 +19,10 @@ namespace DataTool
         private readonly Dictionary<string, string> ApplicationMap = new Dictionary<string, string>();
         private readonly Dictionary<string, string> EstablishmentMap = new Dictionary<string, string>();
         private readonly Dictionary<string, string> LegalEntityMap = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> LocalgovindigenousnationMap = new Dictionary<string, string>();
+
+        
+
 
         public Obfuscator(Dictionary<string, string> contactMap,
             Dictionary<string, string> accountMap,
@@ -28,7 +32,9 @@ namespace DataTool
             Dictionary<string, string> licenceMap,
             Dictionary<string, string> applicationMap,
             Dictionary<string, string> establishmentMap,
-            Dictionary<string, string> legalEntityMap)
+            Dictionary<string, string> legalEntityMap,
+            Dictionary<string, string> localgovindigenousnation
+            )
         {
             ContactMap = contactMap;
             AccountMap = accountMap;
@@ -39,6 +45,7 @@ namespace DataTool
             ApplicationMap = applicationMap;
             EstablishmentMap = establishmentMap;
             LegalEntityMap = legalEntityMap;
+            LocalgovindigenousnationMap = localgovindigenousnation;
 
         }
         int CountParagraphs(string inputString)
@@ -132,7 +139,7 @@ namespace DataTool
 
             var randomizerEmail = RandomizerFactory.GetRandomizer(new FieldOptionsEmailAddress());
 
-            string result = randomizerEmail.Generate();
+            string result = randomizerEmail.Generate() + ".xom";
 
             return result;
         }
@@ -447,6 +454,7 @@ namespace DataTool
                     AdoxioContactpersonphone = RandomStringNumber(application.AdoxioContactpersonphone),
                     Modifiedon = application.Modifiedon,
                     Createdon = application.Createdon
+                    
                 };
 
 
@@ -501,6 +509,15 @@ namespace DataTool
                     };
 
                 }
+
+                if (application._adoxioLocalgovindigenousnationidValue != null)
+                {
+                    newItem.AdoxioLocalgovindigenousnationid = new MicrosoftDynamicsCRMadoxioLocalgovindigenousnation()
+                    {
+                        AdoxioLocalgovindigenousnationid = application._adoxioLocalgovindigenousnationidValue
+                    };
+                }
+
                 ApplicationMap.Add(application.AdoxioApplicationid, newItem.AdoxioApplicationid);
                 result.Add(newItem);
 
