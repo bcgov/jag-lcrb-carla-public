@@ -35,6 +35,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string[] AdoxioApplicationSharePointDocumentLocationsODataBind { get; set; }
 
         
-
+        [JsonProperty(PropertyName = "adoxio_localgovindigenousnationid@odata.bind")]
+        public string AdoxioLocalgovindigenousnationidODataBind { get; set; }
     }
 }

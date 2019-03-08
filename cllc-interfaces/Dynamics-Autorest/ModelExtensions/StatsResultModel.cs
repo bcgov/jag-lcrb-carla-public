@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string adoxio_establishmentaddresspostalcode { get; set; }
         public string adoxio_establishmentaddresscity { get; set; }
         public string adoxio_applicationid { get; set; }
-
+        public string commregion { get; set; }
     }
 
 
@@ -62,6 +62,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public List<StatsResultModel> Value { get; set; }
+        public List<Dictionary<string, string>> Value { get; set; }
     }
 }
