@@ -118,13 +118,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             ViewModels.FileSystemItem result = null;
             ValidateSession();
-
-            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
-
+            
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
                 return BadRequest();
             }
+
+            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
 
             var hasAccess = await CanAccessEntity(entityName, entityId);
             if (!hasAccess)
@@ -355,48 +355,60 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             ValidateSession();
 
-            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
-
+            
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
                 return fileSystemItemVMList;
             }
 
-            string folderName = await GetFolderName(entityName, entityId, _dynamicsClient); ;
-            // Get the file details list in folder
-            List<FileDetailsList> fileDetailsList = null;
             try
             {
-                fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(entityName), folderName, documentType);
-            }
-            catch (SharePointRestException spre)
-            {
-                _logger.LogError("Error getting SharePoint File List");
-                _logger.LogError("Request URI:");
-                _logger.LogError(spre.Request.RequestUri.ToString());
-                _logger.LogError("Response:");
-                _logger.LogError(spre.Response.Content);
-                throw new Exception("Unable to get Sharepoint File List.");
-            }
+                CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
 
-            if (fileDetailsList != null)
-            {
-                foreach (FileDetailsList fileDetails in fileDetailsList)
+                string folderName = await GetFolderName(entityName, entityId, _dynamicsClient); ;
+                // Get the file details list in folder
+                List<FileDetailsList> fileDetailsList = null;
+                try
                 {
-                    ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem()
-                    {
-                        // remove the document type text from file name
-                        name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2),
-                        // convert size from bytes (original) to KB
-                        size = int.Parse(fileDetails.Length),
-                        serverrelativeurl = fileDetails.ServerRelativeUrl,
-                        timelastmodified = DateTime.Parse(fileDetails.TimeLastModified),
-                        documenttype = fileDetails.DocumentType
-                    };
+                    fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(entityName), folderName, documentType);
+                }
+                catch (SharePointRestException spre)
+                {
+                    _logger.LogError("Error getting SharePoint File List");
+                    _logger.LogError("Request URI:");
+                    _logger.LogError(spre.Request.RequestUri.ToString());
+                    _logger.LogError("Response:");
+                    _logger.LogError(spre.Response.Content);
+                    throw new Exception("Unable to get Sharepoint File List.");
+                }
 
-                    fileSystemItemVMList.Add(fileSystemItemVM);
+                if (fileDetailsList != null)
+                {
+                    foreach (FileDetailsList fileDetails in fileDetailsList)
+                    {
+                        ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem()
+                        {
+                            // remove the document type text from file name
+                            name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2),
+                            // convert size from bytes (original) to KB
+                            size = int.Parse(fileDetails.Length),
+                            serverrelativeurl = fileDetails.ServerRelativeUrl,
+                            timelastmodified = DateTime.Parse(fileDetails.TimeLastModified),
+                            documenttype = fileDetails.DocumentType
+                        };
+
+                        fileSystemItemVMList.Add(fileSystemItemVM);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                _logger.LogError("Error getting SharePoint File List");
+                
+                _logger.LogError(e.Message);
+            }
+
+
 
             return fileSystemItemVMList;
         }
