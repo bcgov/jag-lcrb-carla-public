@@ -11,14 +11,14 @@ import { Stat } from '../models/stat.model';
 })
 export class StatsDataService extends DataService {
 
-  apiPath = 'api/stats';
+  apiPath = 'api/stats/';
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  public getStats(): Observable<Stat[]> {
-    return this.http.get<Stat[]>(this.apiPath, { headers: this.headers })
+  public getStats(savedQueryName: string): Observable<Stat[]> {
+    return this.http.get<Stat[]>(this.apiPath + encodeURIComponent(savedQueryName), { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
