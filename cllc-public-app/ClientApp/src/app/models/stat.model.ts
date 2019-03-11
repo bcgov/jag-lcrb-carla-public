@@ -5,5 +5,6 @@ export class Stat {
   adoxio_establishmentaddresspostalcode: string;
   adoxio_establishmentaddresscity: string;
   adoxio_applicationid: string;
+  commregion: string;
   constructor() { }
 }
