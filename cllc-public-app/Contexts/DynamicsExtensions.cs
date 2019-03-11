@@ -355,8 +355,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
+                string[] expand = { "adoxio_localgovindigenousnationid" };
+
                 // fetch from Dynamics.
-                result = await system.Applications.GetByKeyAsync(id.ToString());
+                result = await system.Applications.GetByKeyAsync(id.ToString(), expand: expand);
 
                 if (result._adoxioLicencetypeValue != null)
                 {

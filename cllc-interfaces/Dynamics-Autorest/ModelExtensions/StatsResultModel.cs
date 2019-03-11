@@ -7,13 +7,30 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Collection of abs_scheduledprocesses
     /// </summary>
+    /// 
+    public enum CommRegions
+    {
+        [EnumMember(Value = "Vancouver Island / Powell River / Gulf Islands")]
+        VIPG = 845280001,
+        [EnumMember(Value = "Greater Vancouver/Sunshine Coast")]
+        Vancouver = 845280002,
+        [EnumMember(Value = "Surrey /Fraser Valley")]
+        Surrey = 845280003,
+        [EnumMember(Value = "Interior and the North")]
+        North = 845280004,
+        [EnumMember(Value = "Location Not Yet Specified")]
+        Unknown = 845280005
+    }
+
     public partial class StatsResultModel
     {
         /// <summary>
@@ -31,14 +48,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         partial void CustomInit();
 
-
         public string adoxio_name { get; set; }
         public string adoxio_establishmentpropsedname { get; set; }
         public string adoxio_establishmentaddressstreet { get; set; }
         public string adoxio_establishmentaddresspostalcode { get; set; }
         public string adoxio_establishmentaddresscity { get; set; }
         public string adoxio_applicationid { get; set; }
-        public string commregion { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CommRegions commregion { get; set; }
     }
 
 
