@@ -114,7 +114,7 @@
                 <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
                 <span>Reference #: {{item.name}} </span> <span></span> <br>
                 <a *ngIf="item.assignedLicence" style="min-width: 10px;"
-                  [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf'" download>
+                  [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/' + item?.assignedLicence?.licenseNumber + '.pdf'" download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i> DOWNLOAD LICENCE</span>
                 </a>
               </td>
