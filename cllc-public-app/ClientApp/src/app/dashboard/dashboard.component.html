@@ -77,7 +77,7 @@
         </div>
       </section>
       <p></p>
-      <section *ngIf="false && account?.businessType">
+      <section *ngIf="account?.businessType">
         <h3 *ngIf="account?.businessType !== 'SoleProprietor'"  class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
         <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">SECURITY SCREENING</h3>
 
@@ -171,7 +171,7 @@
               </p>
             </section>
             <section
-              *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1">
+              *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">
               <p>An applicant that is a <i>Partnership</i> may have associates that are required to consent to security
                 screening
                 and financial integrity assessments as part of the application for a non-medical cannabis retail store
