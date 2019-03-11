@@ -5,9 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
-
+import { ChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
+import { 
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -231,6 +231,7 @@ import {
     BusinessProfileComponent
   ],
   imports: [
+    ChartsModule,
     AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
