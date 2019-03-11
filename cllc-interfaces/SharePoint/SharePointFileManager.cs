@@ -92,8 +92,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             var digestTask = GetDigest(client);
             digestTask.Wait();
             string digest = digestTask.Result;
-            client.DefaultRequestHeaders.Add("X-RequestDigest", digest);
-
+            if (digest != null)
+            {
+                client.DefaultRequestHeaders.Add("X-RequestDigest", digest);
+            }
         }
 
         public bool IsValid()
@@ -653,11 +655,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK && jsonString.Length > 1)
             {
-
-                JToken t = JToken.Parse(jsonString);
-                result = t["d"]["GetContextWebInformation"]["FormDigestValue"].ToString();
+                if (jsonString[0] == '{')
+                {
+                    JToken t = JToken.Parse(jsonString);
+                    result = t["d"]["GetContextWebInformation"]["FormDigestValue"].ToString();
+                }
+                
             }
 
             return result;

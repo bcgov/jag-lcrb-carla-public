@@ -35,17 +35,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(StatsController));
         }
 
+        
+
         /// <summary>
         /// Get a list of all policy documents for a given category
         /// </summary>
         /// <param name="category">The policy document category</param>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet("{name}")]
         [AllowAnonymous]
-        public JsonResult GetStats()
+        public async Task<JsonResult> GetStats(string name)
         {
+
             // first get a named saved query.
-            string filter = "name eq 'zApproved Applications (Reporting)'";
+            string filter = $"name eq '{name}'";//zApproved Applications (Reporting)
 
             var savedQuerySearchResults = _dynamicsClient.Savedqueries.Get(filter: filter);
 
@@ -57,7 +60,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var results = _dynamicsClient.Applications.GetSavedQuery(savedQueryId);
 
-            return Json(results.Value);
+            var result = new List<StatsResultModel>();
+
+            foreach (var item in results.Value)
+            {
+                var keys = item.Keys.ToArray();
+                // last item in the object is the commregion.
+                string commregion = item[keys[keys.Length - 1]];
+                var newItem = new StatsResultModel()
+                {
+                    adoxio_name = item["adoxio_name"],
+                    adoxio_establishmentpropsedname = item["adoxio_establishmentpropsedname"],
+                    adoxio_establishmentaddressstreet = item["adoxio_establishmentaddressstreet"],
+                    //adoxio_establishmentaddresspostalcode = item["adoxio_establishmentaddresspostalcode"],
+                    //adoxio_establishmentaddresscity = item["adoxio_establishmentaddresscity"],
+                    adoxio_applicationid = item["adoxio_applicationid"],
+                    
+                };
+
+                var application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
+                if (application.AdoxioLocalgovindigenousnationid != null)
+                {
+                    newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
+                }
+                else
+                {
+                    newItem.commregion = CommRegions.Unknown;
+                }
+                result.Add(newItem);
+            }
+
+            return Json(result);
         }
 
         

@@ -19,6 +19,10 @@ namespace DataTool
         private readonly Dictionary<string, string> ApplicationMap = new Dictionary<string, string>();
         private readonly Dictionary<string, string> EstablishmentMap = new Dictionary<string, string>();
         private readonly Dictionary<string, string> LegalEntityMap = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> LocalgovindigenousnationMap = new Dictionary<string, string>();
+
+        
+
 
         public Obfuscator(Dictionary<string, string> contactMap,
             Dictionary<string, string> accountMap,
@@ -28,7 +32,9 @@ namespace DataTool
             Dictionary<string, string> licenceMap,
             Dictionary<string, string> applicationMap,
             Dictionary<string, string> establishmentMap,
-            Dictionary<string, string> legalEntityMap)
+            Dictionary<string, string> legalEntityMap,
+            Dictionary<string, string> localgovindigenousnation
+            )
         {
             ContactMap = contactMap;
             AccountMap = accountMap;
@@ -39,6 +45,7 @@ namespace DataTool
             ApplicationMap = applicationMap;
             EstablishmentMap = establishmentMap;
             LegalEntityMap = legalEntityMap;
+            LocalgovindigenousnationMap = localgovindigenousnation;
 
         }
         int CountParagraphs(string inputString)
@@ -132,7 +139,7 @@ namespace DataTool
 
             var randomizerEmail = RandomizerFactory.GetRandomizer(new FieldOptionsEmailAddress());
 
-            string result = randomizerEmail.Generate();
+            string result = randomizerEmail.Generate() + ".xom";
 
             return result;
         }
@@ -226,6 +233,7 @@ namespace DataTool
                 var newItem = new MicrosoftDynamicsCRMaccount()
                 {
                     Name = RandomCompanyName(account.Name),
+                    AdoxioBusinesstype = account.AdoxioBusinesstype,
                     AdoxioBcincorporationnumber = RandomStringNumber(account.AdoxioBcincorporationnumber),
                     AdoxioDateofincorporationinbc = RandomDateInPast(),
                     Accountnumber = RandomStringNumber(account.Accountnumber),
@@ -238,7 +246,6 @@ namespace DataTool
                     Address1Stateorprovince = account.Address1Stateorprovince,
                     Address1Country = account.Address1Country,
                     Address1Postalcode = account.Address1Postalcode,
-                    AdoxioBusinesstype = account.AdoxioBusinesstype,
                     AdoxioAccounttype = account.AdoxioAccounttype,                    
                 };
 
@@ -347,7 +354,7 @@ namespace DataTool
                 {                    
                     AdoxioEstablishmentid = Guid.NewGuid().ToString(),
                     AdoxioName = RandomCompanyName(establishment.AdoxioName),
-                    AdoxioAddresscity = RandomCity(),
+                    AdoxioAddresscity = establishment.AdoxioAddresscity,
                     AdoxioAddresspostalcode = establishment.AdoxioAddresspostalcode,
                     AdoxioAddressstreet = RandomCompanyName(establishment.AdoxioAddressstreet),
                     AdoxioAlreadyopen = establishment.AdoxioAlreadyopen,
@@ -432,6 +439,84 @@ namespace DataTool
                     AdoxioEstablishmentparcelid = RandomPid(),
                     AdoxioLicencefeeinvoicepaid = application.AdoxioLicencefeeinvoicepaid,
                     Statuscode = application.Statuscode,
+                    AdoxioAppchecklistapplicantsentemail = application.AdoxioAppchecklistapplicantsentemail,
+                    AdoxioAppchecklistlgfnapproved = application.AdoxioAppchecklistlgfnapproved,
+                    AdoxioAppchecklistlicenceissued = application.AdoxioAppchecklistlicenceissued,
+                    AdoxioAppchecklistlicencehistoryapproval = application.AdoxioAppchecklistlicencehistoryapproval,
+                    AdoxioHoldsotherlicencesoptionset = application.AdoxioHoldsotherlicencesoptionset,
+                    AdoxioAppchecklistlgfnnotified = application.AdoxioAppchecklistlgfnnotified,
+                    AdoxioAppchecklistcasemanageraipdecision = application.AdoxioAppchecklistcasemanageraipdecision,
+                    AdoxioAreyouthemaincontactforapplication = application.AdoxioAreyouthemaincontactforapplication,
+                    AdoxioAppchecklistlicencefeecollected = application.AdoxioAppchecklistlicencefeecollected,
+                    AdoxioIsapplicationcomplete = application.AdoxioIsapplicationcomplete,
+                    AdoxioChecklistassociateformreceived = application.AdoxioChecklistassociateformreceived,
+                    AdoxioAppchecklistvalidinterestsubmitted = application.AdoxioAppchecklistvalidinterestsubmitted,
+                    AdoxioAppchecklisttermsconditionsapplied = application.AdoxioAppchecklisttermsconditionsapplied,
+                    AdoxioAppchecklistdocumentssubmitted = application.AdoxioAppchecklistdocumentssubmitted,
+                    AdoxioAppchecklistfinalreview = application.AdoxioAppchecklistfinalreview,
+                    AdoxioAppchecklistinspectionresults = application.AdoxioAppchecklistinspectionresults,
+                    AdoxioDatefirstyearpaymentreceived = application.AdoxioDatefirstyearpaymentreceived,
+                    AdoxioPolicedecision = application.AdoxioPolicedecision,
+                    AdoxioAppchecklistlicencehistorycheck = application.AdoxioAppchecklistlicencehistorycheck,
+                    AdoxioAppchecklistinvestigationsapproved = application.AdoxioAppchecklistinvestigationsapproved,
+                    AdoxioEstablishmentotherbusinessname = application.AdoxioEstablishmentotherbusinessname,
+                    AdoxioAppchecklistfinaldecisionlettersent = application.AdoxioAppchecklistfinaldecisionlettersent,
+                    AdoxioUploadedfloorplans = application.AdoxioUploadedfloorplans,
+                    AdoxioChecklistvalidinterest = application.AdoxioChecklistvalidinterest,
+                    AdoxioAppchecklistfinancialintegrityapproved = application.AdoxioAppchecklistfinancialintegrityapproved,
+                    AdoxioSignaturedate = application.AdoxioSignaturedate,
+                    AdoxioChecklisttiedhouseassessed = application.AdoxioChecklisttiedhouseassessed,
+                    AdoxioChecklistspdconsentreceived = application.AdoxioChecklistspdconsentreceived,
+                    AdoxioAreyouthemaincontactafterlicensing = application.AdoxioAreyouthemaincontactafterlicensing,
+                    AdoxioAppchecklistcasesupervisorapproved = application.AdoxioAppchecklistcasesupervisorapproved,
+                    AdoxioAppchecklistzoningconfirmed = application.AdoxioAppchecklistzoningconfirmed,
+                    AdoxioAppchecklistspdapproved = application.AdoxioAppchecklistspdapproved,
+                    AdoxioAppchecklisttermsconditionsdefined = application.AdoxioAppchecklisttermsconditionsdefined,
+                    AdoxioAppchecklistinspectionnotesreviewed = application.AdoxioAppchecklistinspectionnotesreviewed,
+                    AdoxioAppchecklistvalidinterestreceivedfinal = application.AdoxioAppchecklistvalidinterestreceivedfinal,
+                    AdoxioAppchecklistsentforfi = application.AdoxioAppchecklistsentforfi,
+                    AdoxioDateaip = application.AdoxioDateaip,
+                    AdoxioChecklistverifypostalcode = application.AdoxioChecklistverifypostalcode,
+                    AdoxioAppchecklistspdconsentsubmitted = application.AdoxioAppchecklistspdconsentsubmitted,
+                    AdoxioChecklistfloorplanapproved = application.AdoxioChecklistfloorplanapproved,
+                    AdoxioTerminatereason = application.AdoxioTerminatereason,
+                    AdoxioChecklistfloorplanassessed = application.AdoxioChecklistfloorplanassessed,
+                    AdoxioAppchecklistapplicationcomplete = application.AdoxioAppchecklistapplicationcomplete,
+                    AdoxioDatereceivedinvestigations = application.AdoxioDatereceivedinvestigations,
+                    AdoxioEstablishmentlocatedatwinery = application.AdoxioEstablishmentlocatedatwinery,
+                    AdoxioAppchecklistsitemapsubmitted = application.AdoxioAppchecklistsitemapsubmitted,
+                    AdoxioChecklistsitemapreceived = application.AdoxioChecklistsitemapreceived,
+                    AdoxioAppchecklistsitemapapproved = application.AdoxioAppchecklistsitemapapproved,
+                    AdoxioDateaipexpired = application.AdoxioDateaipexpired,
+                    AdoxioAppchecklistfinalreviewcomplete = application.AdoxioAppchecklistfinalreviewcomplete,
+                    AdoxioDatereceivedlgin = application.AdoxioDatereceivedlgin,
+                    AdoxioChecklistbrandingassessed = application.AdoxioChecklistbrandingassessed,
+                    AdoxioAppchecklistshareholdersverified = application.AdoxioAppchecklistshareholdersverified,
+                    AdoxioAppchecklistverifyapplication = application.AdoxioAppchecklistverifyapplication,
+                    AdoxioLicenceexpiry = application.AdoxioLicenceexpiry,
+                    AdoxioAppchecklistlginapproval = application.AdoxioAppchecklistlginapproval,
+                    AdoxioMarketshareevaluation = application.AdoxioMarketshareevaluation,
+                    AdoxioAppchecklistverifybusinessprofile = application.AdoxioAppchecklistverifybusinessprofile,
+                    AdoxioChecklistlicencefeepaid = application.AdoxioChecklistlicencefeepaid,
+                    AdoxioOtherbusinessesatthesamelocation = application.AdoxioOtherbusinessesatthesamelocation,
+                    AdoxioDateassignedtosla = application.AdoxioDateassignedtosla,
+                    AdoxioAppchecklistfinalfloorplan = application.AdoxioAppchecklistfinalfloorplan,
+                    AdoxioEstablishmentlayoutapplyingforpatio = application.AdoxioEstablishmentlayoutapplyingforpatio,
+                    AdoxioAppchecklistbusinessproposal = application.AdoxioAppchecklistbusinessproposal,
+                    AdoxioEstablishmentlocatedatfirstnationland = application.AdoxioEstablishmentlocatedatfirstnationland,
+                    AdoxioChecklisttermsconditionsadded = application.AdoxioChecklisttermsconditionsadded,
+                    AdoxioAppchecklistinspectionreviewcomplete = application.AdoxioAppchecklistinspectionreviewcomplete,
+                    AdoxioAppchecklistzoningaip = application.AdoxioAppchecklistzoningaip,
+                    AdoxioAppchecklistfinancialintegritysubmitted = application.AdoxioAppchecklistfinancialintegritysubmitted,
+                    AdoxioEstablishmentdeclarationoption1 = application.AdoxioEstablishmentdeclarationoption1,
+                    AdoxioAppchecklistmarketcapacity = application.AdoxioAppchecklistmarketcapacity,
+                    AdoxioChecklistsenttolgin = application.AdoxioChecklistsenttolgin,
+                    AdoxioHastiedhouseassociations = application.AdoxioHastiedhouseassociations,
+                    AdoxioEstablishmentcomplytoallbylaws = application.AdoxioEstablishmentcomplytoallbylaws,
+                    AdoxioChecklistvalidinterestassessed = application.AdoxioChecklistvalidinterestassessed,
+                    AdoxioCasemanagerassigned = application.AdoxioCasemanagerassigned,
+                    AdoxioAppchecklistinspectionchangesneeded = application.AdoxioAppchecklistinspectionchangesneeded,
+
                     AdoxioAppchecklistfinaldecision = application.AdoxioAppchecklistfinaldecision,
                     AdoxioPaymentrecieved = application.AdoxioPaymentrecieved,
                     AdoxioAdditionalpropertyinformation = adoxioAdditionalpropertyinformation,
@@ -446,7 +531,8 @@ namespace DataTool
                     AdoxioEmail = RandomEmail(),
                     AdoxioContactpersonphone = RandomStringNumber(application.AdoxioContactpersonphone),
                     Modifiedon = application.Modifiedon,
-                    Createdon = application.Createdon
+                    Createdon = application.Createdon,
+                    AdoxioProgressstatus = application.AdoxioProgressstatus
                 };
 
 
@@ -501,6 +587,15 @@ namespace DataTool
                     };
 
                 }
+
+                if (application._adoxioLocalgovindigenousnationidValue != null)
+                {
+                    newItem.AdoxioLocalgovindigenousnationid = new MicrosoftDynamicsCRMadoxioLocalgovindigenousnation()
+                    {
+                        AdoxioLocalgovindigenousnationid = application._adoxioLocalgovindigenousnationidValue
+                    };
+                }
+
                 ApplicationMap.Add(application.AdoxioApplicationid, newItem.AdoxioApplicationid);
                 result.Add(newItem);
 
