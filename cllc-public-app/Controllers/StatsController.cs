@@ -35,6 +35,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(StatsController));
         }
 
+        
+
         /// <summary>
         /// Get a list of all policy documents for a given category
         /// </summary>
@@ -70,12 +72,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxio_name = item["adoxio_name"],
                     adoxio_establishmentpropsedname = item["adoxio_establishmentpropsedname"],
                     adoxio_establishmentaddressstreet = item["adoxio_establishmentaddressstreet"],
-                    adoxio_establishmentaddresspostalcode = item["adoxio_establishmentaddresspostalcode"],
-                    adoxio_establishmentaddresscity = item["adoxio_establishmentaddresscity"],
+                    //adoxio_establishmentaddresspostalcode = item["adoxio_establishmentaddresspostalcode"],
+                    //adoxio_establishmentaddresscity = item["adoxio_establishmentaddresscity"],
                     adoxio_applicationid = item["adoxio_applicationid"],
-                    commregion = commregion
+                    
                 };
 
+                var application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
+                if (application.AdoxioLocalgovindigenousnationid != null)
+                {
+                    newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
+                }
+                else
+                {
+                    newItem.commregion = CommRegions.Unknown;
+                }
                 result.Add(newItem);
             }
 

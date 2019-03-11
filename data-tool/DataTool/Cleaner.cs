@@ -21,7 +21,7 @@ namespace DataTool
                 try
                 {
                     _dynamicsClient.Licenceses.Delete(licence.AdoxioLicencesid);
-                    Console.Out.WriteLine("Deleted Incident " + licence.AdoxioLicencesid);
+                    Console.Out.WriteLine("Deleted Licence " + licence.AdoxioLicencesid);
                 }
                 catch (OdataerrorException odee)
                 {
