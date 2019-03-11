@@ -13,5 +13,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "customerid_account@odata.bind")]
         public string CustomerIdAccountODataBind { get; set; }
 
+
+
     }
 }
