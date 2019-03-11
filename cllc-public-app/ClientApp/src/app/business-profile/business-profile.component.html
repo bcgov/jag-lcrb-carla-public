@@ -103,36 +103,32 @@
             <div class="row">
               <app-field class="col-md-6 col-xs-12" label="Street Address 1" [required]="true"
                 [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
-                errorMessage="Please enter your street address">
-                <input class="form-control" style="width: 400px;" type="text" formControlName="physicalAddressStreet">
+                errorMessage="Please enter your street address" [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressStreet">
               </app-field>
-              <app-field label="Street Address 2">
-                <input class="form-control" style="width: 450px;" type="text" formControlName="physicalAddressStreet2">
+              <app-field class="col-md-6 col-xs-12" label="Street Address 2" [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressStreet2">
               </app-field>
               <app-field class="col-md-6 col-xs-12" label="City" [required]="true"
                 [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
-                errorMessage="Please enter your city">
-                <input class="form-control" style="width: 350px;" type="text" formControlName="physicalAddressCity">
+                errorMessage="Please enter your city" [isFullWidth]="true">
+                <input class="form-control"
+                 type="text" formControlName="physicalAddressCity">
               </app-field>
-              <div class="col-md-6 col-xs-12 row" style="padding: 0;">
-                <section class="col-md-6 col-xs-12">
-                  <app-field label="Province">
-                    <input class="form-control" style="width: 200px;" readonly type="text"
-                      formControlName="physicalAddressProvince">
-                  </app-field>
-                </section>
-                <section class="col-md-6 col-xs-12">
-                  <app-field label="Postal Code" [required]="true"
-                    [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                    errorMessage="Please enter your postal code">
-                    <input class="form-control" style="width: 200px;" type="text"
-                      formControlName="physicalAddressPostalCode">
-                  </app-field>
-                </section>
-              </div>
-              <app-field class="col-md-6 col-xs-12" label="Country">
-                <input class="form-control" style="width: 350px;" readonly type="text"
-                  formControlName="physicalAddressCountry">
+              <section class="col-md-3 col-xs-12">
+                <app-field label="Province" [isFullWidth]="true">
+                  <input class="form-control" readonly type="text" formControlName="physicalAddressProvince">
+                </app-field>
+              </section>
+              <section class="col-md-3 col-xs-12">
+                <app-field label="Postal Code" [required]="true"
+                  [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
+                  errorMessage="Please enter your postal code" [isFullWidth]="true">
+                  <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
+                </app-field>
+              </section>
+              <app-field class="col-md-6 col-xs-12" [isFullWidth]="true" label="Country">
+                <input class="form-control" readonly type="text" formControlName="physicalAddressCountry">
               </app-field>
             </div>
             <p></p>
@@ -146,39 +142,36 @@
               <div class="row">
                 <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
                   [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
-                  [required]="true">
-                  <input type="text" style="width: 400px;" formControlName="mailingAddressStreet" class="form-control">
+                  [required]="true" [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressStreet" class="form-control">
                 </app-field>
-                <app-field label="PO Box or Street Address 2" [required]="false">
-                  <input type="text" style="width: 450px;" formControlName="mailingAddressStreet2" class="form-control">
+                <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 2" [required]="false"
+                  [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressStreet2" class="form-control">
                 </app-field>
                 <app-field class="col-md-6 col-xs-12" label="City"
                   [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched"
-                  [required]="true">
-                  <input type="text" style="width: 350px;" formControlName="mailingAddressCity" class="form-control">
+                  [required]="true" [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressCity" class="form-control">
                 </app-field>
-                <div class="col-md-6 col-xs-12 row" style="padding: 0;">
-                  <section class="col-md-6 col-xs-12">
-                    <app-field label="Province/State"
-                      [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
-                      [required]="true">
-                      <input type="text" style="width: 200px;" formControlName="mailingAddressProvince"
-                        class="form-control">
-                    </app-field>
-                  </section>
-                  <section class="col-md-6 col-xs-12">
-                    <app-field label="Postal /Zip Code"
-                      [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
-                      [required]="true">
-                      <input type="text" style="width: 200px;" formControlName="mailingAddressPostalCode"
-                        class="form-control">
-                    </app-field>
-                  </section>
-                </div>
+                <section class="col-md-3 col-xs-12">
+                  <app-field label="Province/State"
+                    [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
+                    [required]="true" [isFullWidth]="true">
+                    <input type="text" formControlName="mailingAddressProvince" class="form-control">
+                  </app-field>
+                </section>
+                <section class="col-md-3 col-xs-12">
+                  <app-field label="Postal /Zip Code"
+                    [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
+                    [required]="true" [isFullWidth]="true">
+                    <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
+                  </app-field>
+                </section>
                 <app-field class="col-md-6 col-xs-12" label="Country"
                   [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
-                  [required]="true">
-                  <input type="text" style="width: 350px;" formControlName="mailingAddressCountry" class="form-control">
+                  [required]="true" [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressCountry" class="form-control">
                 </app-field>
               </div>
             </div>
@@ -267,63 +260,12 @@
             <app-edit-shareholders [accountId]="saveFormData?.businessProfile?.id" [businessType]="saveFormData?.businessProfile?.businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
           </div> -->
 
-          <h3 class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNBIS</h3>
-          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
+          <h3 *ngIf="saveFormData?.businessProfile?.businessType !== 'SoleProprietor'"  class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNBIS</h3>
+          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType !== 'SoleProprietor'">
             <app-connection-to-producers [accountId]="saveFormData?.businessProfile?.id"
               [businessType]="saveFormData?.businessProfile?.businessType"></app-connection-to-producers>
           </div>
 
-
-          <!-- <section>
-            If you have more than one contact, please
-            <a href="javascript:void(0);" (click)="_showAdditionalContact = true"> click here to add them</a>.
-          </section> -->
-
-          <!-- <div *ngIf="_showAdditionalContact" formGroupName="additionalContact">
-            <hr>
-            <h2>Additional Contact</h2>
-
-            <app-field label="First Name" [required]="true" [valid]="form.get('additionalContact.firstName').valid || !form.get('additionalContact.firstName').touched"
-              errorMessage="Please enter your business contact's first name">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
-                formControlName="firstName">
-            </app-field>
-
-            <app-field label="Last Name" [required]="true" [valid]="form.get('additionalContact.lastname').valid || !form.get('additionalContact.lastname').touched"
-              errorMessage="Please enter your business contact's last name">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
-                formControlName="lastname">
-            </app-field>
-
-            <app-field label="Title/ Position" [required]="false" [valid]="true">
-              <input class="form-control" style="width: 350px;" type="text" formControlName="title">
-            </app-field>
-
-            <app-field label="Phone Number (main)" [required]="true" [valid]="form.get('additionalContact.telephone1').valid || !form.get('additionalContact.telephone1').touched"
-              errorMessage="Please enter your business contact's 10-digit phone number">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 250px;" maxlength="10"
-                (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="phoneNumber">
-            </app-field>
-
-            <app-field label="Phone Number (alternate)" [required]="false">
-              <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                type="text" formControlName="phoneNumberAlt">
-            </app-field>
-
-            <app-field label="Email" [required]="true" [valid]="form.get('additionalContact.email').valid || !form.get('additionalContact.email').touched"
-              errorMessage="Please enter your business contact's email address">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
-                formControlName="email" (blur)="trimValue(form.get('additionalContact.email'))">
-            </app-field>
-
-            <section>
-              <a style="float: right;" href="javascript:void(0);" (click)="hideAdditionalContact()">
-                <i class="fas fa-trash-alt"></i>
-                Delete Contact</a>
-            </section>
-          </div>
-          <div style="clear: both;"></div>
-          <p></p> -->
 
           <div *ngIf="!form.valid && form.touched && false" class="error-summary">
             <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
@@ -335,8 +277,8 @@
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
             <span style="float: right;">
               <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">
-               <span *ngIf="!applicationId">SAVE & CONTINUE</span>
-               <span *ngIf="applicationId">CONTINUE TO APPLICATION</span>
+                <span *ngIf="!applicationId">SAVE & CONTINUE</span>
+                <span *ngIf="applicationId">CONTINUE TO APPLICATION</span>
                 <i class="fas fa-chevron-right"></i></button>
             </span>
           </section>
