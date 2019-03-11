@@ -112,8 +112,7 @@
               <app-field class="col-md-6 col-xs-12" label="City" [required]="true"
                 [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
                 errorMessage="Please enter your city" [isFullWidth]="true">
-                <input class="form-control"
-                 type="text" formControlName="physicalAddressCity">
+                <input class="form-control" type="text" formControlName="physicalAddressCity">
               </app-field>
               <section class="col-md-3 col-xs-12">
                 <app-field label="Province" [isFullWidth]="true">
@@ -187,22 +186,10 @@
             <app-field label="Business Email" [required]="true"
               [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
               errorMessage="Please enter a valid email address"
-              afterLabelText="By submitting your business email address, you agree that the Security Programs Division can use it to communicate with you about your application.">
+              afterLabelText="By submitting your business email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
               <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail"
                 (blur)="trimValue(form.get('businessProfile.contactEmail'))">
             </app-field>
-            <!-- <section>
-              <input type="checkbox" [required]="true" formControlName="consentForEmailCommunication" #emailConsent>
-              <strong class="error-states"> *</strong>
-              <span> I authorize the Security Programs Division to use my email address to communicate with me. </span>
-              <p class="error-states" *ngIf="form.get('businessProfile.consentForEmailCommunication').touched && !form.get('businessProfile.consentForEmailCommunication').valid">
-                Please confirm consent for SPD to contact you at the provided email address
-              </p>
-              <p></p>
-            </section>
-            <app-field label="Website Address">
-              <input class="form-control" style="width: 350px;" type="text" formControlName="websiteAddress">
-            </app-field> -->
           </div>
 
           <h3 class="blue-header">BUSINESS CONTACT</h3>
@@ -260,8 +247,10 @@
             <app-edit-shareholders [accountId]="saveFormData?.businessProfile?.id" [businessType]="saveFormData?.businessProfile?.businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
           </div> -->
 
-          <h3 *ngIf="saveFormData?.businessProfile?.businessType !== 'SoleProprietor'"  class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNBIS</h3>
-          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType !== 'SoleProprietor'">
+          <h3 *ngIf="saveFormData?.businessProfile?.businessType !== 'SoleProprietor'" class="blue-header">CONNECTIONS
+            TO FEDERAL PRODUCERS OF CANNBIS</h3>
+          <div class="padded-section"
+            *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType !== 'SoleProprietor'">
             <app-connection-to-producers [accountId]="saveFormData?.businessProfile?.id"
               [businessType]="saveFormData?.businessProfile?.businessType"></app-connection-to-producers>
           </div>
@@ -301,7 +290,7 @@
         </table>
         <div class="submit-content">
           <p>
-            Your Legal Business Name and Business Number are imported from BCeID. If there is an error or change in
+            Your Legal Business Name is imported from BCeID. If there is an error or change in
             this information, you must contact BCeID to correct it.
           </p>
           <div>
@@ -332,13 +321,17 @@
         <h2 style="color: #000">Collection Notice:</h2>
         <div class="submit-content">
           <p>
-            The Security Programs Division will collect your personal information for the purpose of fulfilling the
-            requirements of the Pill Press and Related Equipment Control Act and associated regulations in Pill Press
-            registration, compliance and enforcement matters in accordance with Sections 26 (a) and (c) of the Freedom
-            of Information and Protection of Privacy Act. Should you have any questions about the collection, use, or
-            disclosure of personal information, please contact the Senior Policy Analyst, Security Programs Division
-            via mail to PO Box 9217 Stn Prov Govt Victoria, BC V8W 9J1; email to PillPressLicensing@gov.bc.ca; or by
-            telephone at 1-855-587-0185.
+            The Security Programs Division (SPD) will collect your personal information for the purpose of fulfilling
+            the
+            requirements of the Cannabis Control and Licensing Act (CCLA) and associated regulations in cannabis
+            licensing,
+            compliance and enforcement matters in accordance with Sections 26 (a) and (c) of the Freedom of Information
+            and
+            Protection of Privacy Act. Should you have any questions about the collection, use, or disclosure of
+            personal
+            information, please contact the Liquor and Cannabis Regulation Branch via mail to PO Box 9292 Stn Prov Govt
+            Victoria B.C. V8W 9J8; email to <a
+              href="mailto:CannabisWorker@gov.bc.ca?Subject=Collection Notice">CannabisWorker@gov.bc.ca;</a>.
           </p>
         </div>
       </section>
