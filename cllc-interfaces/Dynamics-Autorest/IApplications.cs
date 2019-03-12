@@ -22,19 +22,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Get entities from adoxio_applications
         /// </summary>
         /// <param name='top'>
-        /// Show only the first n items
         /// </param>
         /// <param name='skip'>
-        /// Skip only the first n items
         /// </param>
         /// <param name='search'>
-        /// Search items by search phrases
         /// </param>
         /// <param name='filter'>
-        /// Filter items by property values
         /// </param>
         /// <param name='count'>
-        /// Include count of items
         /// </param>
         /// <param name='orderby'>
         /// Order items by property values
@@ -57,7 +52,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<GetOKResponseModelModelModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ApplicationsGetResponseModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Add new entity to adoxio_applications
         /// </summary>
@@ -84,28 +79,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioApplication body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Delete entity from adoxio_applications
-        /// </summary>
-        /// <param name='adoxioApplicationid'>
-        /// key: adoxio_applicationid
-        /// </param>
-        /// <param name='ifMatch'>
-        /// ETag
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioApplicationid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get entity from adoxio_applications by key
         /// </summary>
@@ -135,6 +108,28 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </exception>
         Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication>> GetByKeyWithHttpMessagesAsync(string adoxioApplicationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Delete entity from adoxio_applications
+        /// </summary>
+        /// <param name='adoxioApplicationid'>
+        /// key: adoxio_applicationid
+        /// </param>
+        /// <param name='ifMatch'>
+        /// ETag
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="OdataerrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioApplicationid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Update entity in adoxio_applications
         /// </summary>
         /// <param name='adoxioApplicationid'>
@@ -156,77 +151,5 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioApplicationid, MicrosoftDynamicsCRMadoxioApplication body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Delete entity from adoxio_applications
-        /// </summary>
-        /// <param name='adoxioApplicationid'>
-        /// key: adoxio_applicationid
-        /// </param>
-        /// <param name='fieldname'>
-        /// key: fieldname
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Add reference to adoxio_applications
-        /// </summary>
-        /// <param name='adoxioApplicationid'>
-        /// key: adoxio_applicationid
-        /// </param>
-        /// <param name='fieldname'>
-        /// key: fieldname
-        /// </param>
-        /// <param name='odataid'>
-        /// reference value
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Change reference to adoxio_applications
-        /// </summary>
-        /// <param name='adoxioApplicationid'>
-        /// key: adoxio_applicationid
-        /// </param>
-        /// <param name='fieldname'>
-        /// key: fieldname
-        /// </param>
-        /// <param name='odataid'>
-        /// reference value
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="OdataerrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> ChangeReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default(Odataid), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

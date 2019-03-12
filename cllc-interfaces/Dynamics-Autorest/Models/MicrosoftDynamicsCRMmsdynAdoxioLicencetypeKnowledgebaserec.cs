@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec(string knowledgebaserecordid = default(string), string msdynAdoxioLicencetypeKnowledgebaserecid = default(string), long? versionnumber = default(long?), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec(string adoxioLicencetypeid = default(string), string knowledgebaserecordid = default(string), string msdynAdoxioLicencetypeKnowledgebaserecid = default(string), long? versionnumber = default(long?))
         {
+            AdoxioLicencetypeid = adoxioLicencetypeid;
             Knowledgebaserecordid = knowledgebaserecordid;
             MsdynAdoxioLicencetypeKnowledgebaserecid = msdynAdoxioLicencetypeKnowledgebaserecid;
             Versionnumber = versionnumber;
-            AdoxioLicencetypeid = adoxioLicencetypeid;
             CustomInit();
         }
 
@@ -40,6 +40,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,11 +60,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public long? Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
 
     }
 }

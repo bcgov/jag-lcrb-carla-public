@@ -53,7 +53,7 @@ export class LoginPage {
     }
 
     waitForDashboard() {
-        const elem = element(by.css('app-dashboard-lite'));
+        const elem = element(by.css('app-dashboard'));
         const until = protractor.ExpectedConditions;
         browser.wait(until.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM1');
     }
