@@ -369,7 +369,7 @@ namespace DataTool
                 {
                     Console.WriteLine("Worker found " + worker.AdoxioName);
                 }
-                ApplicationMap.Add(originalKey, worker.AdoxioWorkerid);
+                WorkerMap.Add(originalKey, worker.AdoxioWorkerid);
                 Console.Out.Write(".");
             }
             Console.Out.WriteLine();
@@ -394,8 +394,8 @@ namespace DataTool
                 {
                     if (
                             item.AdoxioName == alias.AdoxioName
-                            && (item.AdoxioContactId == null || (item.AdoxioContactId != null && alias.AdoxioContactId != null && item.AdoxioContactId.Contactid == alias.AdoxioContactId.Contactid))
-                            && (item.AdoxioWorkerId == null || (item.AdoxioWorkerId != null && alias.AdoxioWorkerId != null && item.AdoxioWorkerId.AdoxioWorkerid == alias.AdoxioWorkerId.AdoxioWorkerid))
+                            && (item.AdoxioContactId == null || (item.AdoxioContactId != null && alias.AdoxioContactId.Contactid != null && item.AdoxioContactId.Contactid == ContactMap[alias.AdoxioContactId.Contactid]))
+                            && (item.AdoxioWorkerId == null || (item.AdoxioWorkerId != null && alias.AdoxioWorkerId.AdoxioWorkerid != null && item.AdoxioWorkerId.AdoxioWorkerid == WorkerMap[alias.AdoxioWorkerId.AdoxioWorkerid]))
                        )
                     {
                         notFound = false;
@@ -451,7 +451,7 @@ namespace DataTool
                 }
                 catch (OdataerrorException odee)
                 {
-                    Console.WriteLine("Error updating invoice for application");
+                    Console.WriteLine("Error updating alias");
                     Console.WriteLine(odee.Message);
                     Console.WriteLine(odee.Request.Content);
                     Console.WriteLine(odee.Response.Content);
@@ -762,7 +762,7 @@ namespace DataTool
 
             // TODO add licence and invoice links.
 
-            if (application._adoxioInvoiceValue != null)
+            if (application.AdoxioInvoice != null)
             {
                 MicrosoftDynamicsCRMadoxioApplication invoiceLinkItem = new MicrosoftDynamicsCRMadoxioApplication()
                 {
@@ -971,7 +971,7 @@ namespace DataTool
             {
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
-                    AdoxioEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", EstablishmentMap[accountId])
+                    AdoxioEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", EstablishmentMap[establishmentId])
                 };
 
                 try
@@ -1321,7 +1321,7 @@ namespace DataTool
                 {
                     Console.WriteLine("Establishment found " + establishment.AdoxioName);
                 }
-                LegalEntityMap.Add(originalKey, establishment.AdoxioEstablishmentid);
+                EstablishmentMap.Add(originalKey, establishment.AdoxioEstablishmentid);
                 Console.Out.Write(".");
             }
             Console.Out.WriteLine();
