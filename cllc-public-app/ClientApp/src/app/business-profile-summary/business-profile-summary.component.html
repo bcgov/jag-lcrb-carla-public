@@ -30,7 +30,7 @@
           <ng-container matColumnDef="organization">
             <mat-header-cell mat-sort-header *matHeaderCellDef> Organization </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <a routerLink="/business-profile/{{ element.shareholderAccountId || element.accountId}}/{{element.legalEntityId}}/before-you-start">{{element.name}}</a>
+              <a routerLink="/account-profile/{{ element.shareholderAccountId || element.accountId}}/{{element.legalEntityId}}/before-you-start">{{element.name}}</a>
             </mat-cell> 
           </ng-container>
 
