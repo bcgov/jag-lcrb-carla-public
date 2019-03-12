@@ -310,7 +310,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 try
                 {
-                    var folder = await _sharePointFileManager.CreateFolder(ApplicationDocumentUrlTitle, folderName);
+                    await _sharePointFileManager.CreateFolder(ApplicationDocumentUrlTitle, folderName);
                 }
                 catch (Exception e)
                 {
