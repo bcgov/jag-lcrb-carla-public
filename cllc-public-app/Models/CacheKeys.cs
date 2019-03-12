@@ -9,5 +9,6 @@ namespace Gov.Lclb.Cllb.Public.Models
     {
         public static string PolicyDocumentPrefix { get { return "_PD_"; } }
         public static string PolicyDocumentCategoryPrefix { get { return "_PDC_"; } }
+        public static string ApplicationPrefix { get { return "_APP_"; } }
     }
 }

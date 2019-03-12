@@ -96,7 +96,7 @@
             <div class="collapse navbar-collapse" id="loggedInMenu">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/dashboard-lite">Dashboard</a>
+                  <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/dashboard">Dashboard</a>
                   <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
                 </li>
               </ul>

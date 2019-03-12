@@ -24,19 +24,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -47,7 +42,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel Get(this IInvoices operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static InvoicesGetResponseModel Get(this IInvoices operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
@@ -59,19 +54,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -85,7 +75,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModelModel> GetAsync(this IInvoices operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<InvoicesGetResponseModel> GetAsync(this IInvoices operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -136,43 +126,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from invoices
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='invoiceid'>
-            /// key: invoiceid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            public static void Delete(this IInvoices operations, string invoiceid, string ifMatch = default(string))
-            {
-                operations.DeleteAsync(invoiceid, ifMatch).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Delete entity from invoices
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='invoiceid'>
-            /// key: invoiceid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task DeleteAsync(this IInvoices operations, string invoiceid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.DeleteWithHttpMessagesAsync(invoiceid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
             /// Get entity from invoices by key
             /// </summary>
             /// <param name='operations'>
@@ -219,6 +172,43 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
+            /// Delete entity from invoices
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='invoiceid'>
+            /// key: invoiceid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            public static void Delete(this IInvoices operations, string invoiceid, string ifMatch = default(string))
+            {
+                operations.DeleteAsync(invoiceid, ifMatch).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from invoices
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='invoiceid'>
+            /// key: invoiceid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAsync(this IInvoices operations, string invoiceid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteWithHttpMessagesAsync(invoiceid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Update entity in invoices
             /// </summary>
             /// <param name='operations'>
@@ -253,75 +243,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             public static async Task UpdateAsync(this IInvoices operations, string invoiceid, MicrosoftDynamicsCRMinvoice body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.UpdateWithHttpMessagesAsync(invoiceid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Invoke function GetQuantityDecimal
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='entity'>
-            /// </param>
-            /// <param name='product'>
-            /// </param>
-            /// <param name='uoM'>
-            /// </param>
-            public static MicrosoftDynamicsCRMGetQuantityDecimalResponse GetQuantityDecimal(this IInvoices operations, string entity, string product, string uoM)
-            {
-                return operations.GetQuantityDecimalAsync(entity, product, uoM).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Invoke function GetQuantityDecimal
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='entity'>
-            /// </param>
-            /// <param name='product'>
-            /// </param>
-            /// <param name='uoM'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<MicrosoftDynamicsCRMGetQuantityDecimalResponse> GetQuantityDecimalAsync(this IInvoices operations, string entity, string product, string uoM, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetQuantityDecimalWithHttpMessagesAsync(entity, product, uoM, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Invoke action LockInvoicePricing
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='invoiceid'>
-            /// </param>
-            public static void LockInvoicePricing(this IInvoices operations, string invoiceid)
-            {
-                operations.LockInvoicePricingAsync(invoiceid).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Invoke action LockInvoicePricing
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='invoiceid'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task LockInvoicePricingAsync(this IInvoices operations, string invoiceid, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.LockInvoicePricingWithHttpMessagesAsync(invoiceid, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

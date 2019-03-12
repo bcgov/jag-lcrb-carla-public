@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(long? versionnumber = default(long?), string incidentid = default(string), string adoxioIncidentAdoxioLicencetypeid = default(string), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(string adoxioIncidentAdoxioLicencetypeid = default(string), string adoxioLicencetypeid = default(string), string incidentid = default(string), long? versionnumber = default(long?))
         {
-            Versionnumber = versionnumber;
-            Incidentid = incidentid;
             AdoxioIncidentAdoxioLicencetypeid = adoxioIncidentAdoxioLicencetypeid;
             AdoxioLicencetypeid = adoxioLicencetypeid;
+            Incidentid = incidentid;
+            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -43,8 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_incident_adoxio_licencetypeid")]
+        public string AdoxioIncidentAdoxioLicencetypeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,13 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_incident_adoxio_licencetypeid")]
-        public string AdoxioIncidentAdoxioLicencetypeid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
     }
 }

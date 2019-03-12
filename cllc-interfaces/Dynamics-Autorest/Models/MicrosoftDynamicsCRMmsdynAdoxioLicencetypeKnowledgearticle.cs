@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle(long? versionnumber = default(long?), string msdynAdoxioLicencetypeKnowledgearticleid = default(string), string knowledgearticleid = default(string), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgearticle(string msdynAdoxioLicencetypeKnowledgearticleid = default(string), string knowledgearticleid = default(string), string adoxioLicencetypeid = default(string), long? versionnumber = default(long?))
         {
-            Versionnumber = versionnumber;
             MsdynAdoxioLicencetypeKnowledgearticleid = msdynAdoxioLicencetypeKnowledgearticleid;
             Knowledgearticleid = knowledgearticleid;
             AdoxioLicencetypeid = adoxioLicencetypeid;
+            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -40,11 +40,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -60,6 +55,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licencetypeid")]
         public string AdoxioLicencetypeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
     }
 }

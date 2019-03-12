@@ -4,13 +4,21 @@
     <div class="col-lg-8 col-sm-12">
       <div [formGroup]="form">
         <div *ngIf="dataLoaded || true">
-          <section>
+          <section *ngIf="!applicationId">
             <h1>
-              Business Profile
+              Account Profile
             </h1>
             <p>
-              Please complete your business profile below. Your information will only be saved once you click the Save
+              Please complete your account profile below. Your information will only be saved once you click the Save
               button at the end of the page.
+            </p>
+          </section>
+          <section *ngIf="applicationId">
+            <h1>
+              Please Review your Account Profile
+            </h1>
+            <p>
+              Please review your account profile below before starting your retail cannabis application.
             </p>
           </section>
 
@@ -43,6 +51,7 @@
                 <option value="UnlimitedLiabilityCorporation">Unlimited Liability Corporation</option>
                 <option value="LimitedLiabilityCorporation">Limited Liability Corporation</option>
                 <option value="GeneralPartnership">General Partnership</option>
+                <option value="Partnership">Partnership</option>
                 <option value="LimitedPartnership">Limited Partnership</option>
                 <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
                 <option value="SoleProprietor">Sole Proprietor</option>
@@ -102,36 +111,31 @@
             <div class="row">
               <app-field class="col-md-6 col-xs-12" label="Street Address 1" [required]="true"
                 [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
-                errorMessage="Please enter your street address">
-                <input class="form-control" style="width: 400px;" type="text" formControlName="physicalAddressStreet">
+                errorMessage="Please enter your street address" [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressStreet">
               </app-field>
-              <app-field label="Street Address 2">
-                <input class="form-control" style="width: 450px;" type="text" formControlName="physicalAddressStreet2">
+              <app-field class="col-md-6 col-xs-12" label="Street Address 2" [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressStreet2">
               </app-field>
               <app-field class="col-md-6 col-xs-12" label="City" [required]="true"
                 [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
-                errorMessage="Please enter your city">
-                <input class="form-control" style="width: 350px;" type="text" formControlName="physicalAddressCity">
+                errorMessage="Please enter your city" [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressCity">
               </app-field>
-              <div class="col-md-6 col-xs-12 row" style="padding: 0;">
-                <section class="col-md-6 col-xs-12">
-                  <app-field label="Province">
-                    <input class="form-control" style="width: 200px;" readonly type="text"
-                      formControlName="physicalAddressProvince">
-                  </app-field>
-                </section>
-                <section class="col-md-6 col-xs-12">
-                  <app-field label="Postal Code" [required]="true"
-                    [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                    errorMessage="Please enter your postal code">
-                    <input class="form-control" style="width: 200px;" type="text"
-                      formControlName="physicalAddressPostalCode">
-                  </app-field>
-                </section>
-              </div>
-              <app-field class="col-md-6 col-xs-12" label="Country">
-                <input class="form-control" style="width: 350px;" readonly type="text"
-                  formControlName="physicalAddressCountry">
+              <section class="col-md-3 col-xs-12">
+                <app-field label="Province" [isFullWidth]="true">
+                  <input class="form-control" readonly type="text" formControlName="physicalAddressProvince">
+                </app-field>
+              </section>
+              <section class="col-md-3 col-xs-12">
+                <app-field label="Postal Code" [required]="true"
+                  [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
+                  errorMessage="Please enter your postal code" [isFullWidth]="true">
+                  <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
+                </app-field>
+              </section>
+              <app-field class="col-md-6 col-xs-12" [isFullWidth]="true" label="Country">
+                <input class="form-control" readonly type="text" formControlName="physicalAddressCountry">
               </app-field>
             </div>
             <p></p>
@@ -145,39 +149,36 @@
               <div class="row">
                 <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
                   [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
-                  [required]="true">
-                  <input type="text" style="width: 400px;" formControlName="mailingAddressStreet" class="form-control">
+                  [required]="true" [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressStreet" class="form-control">
                 </app-field>
-                <app-field label="PO Box or Street Address 2" [required]="false">
-                  <input type="text" style="width: 450px;" formControlName="mailingAddressStreet2" class="form-control">
+                <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 2" [required]="false"
+                  [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressStreet2" class="form-control">
                 </app-field>
                 <app-field class="col-md-6 col-xs-12" label="City"
                   [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched"
-                  [required]="true">
-                  <input type="text" style="width: 350px;" formControlName="mailingAddressCity" class="form-control">
+                  [required]="true" [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressCity" class="form-control">
                 </app-field>
-                <div class="col-md-6 col-xs-12 row" style="padding: 0;">
-                  <section class="col-md-6 col-xs-12">
-                    <app-field label="Province/State"
-                      [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
-                      [required]="true">
-                      <input type="text" style="width: 200px;" formControlName="mailingAddressProvince"
-                        class="form-control">
-                    </app-field>
-                  </section>
-                  <section class="col-md-6 col-xs-12">
-                    <app-field label="Postal /Zip Code"
-                      [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
-                      [required]="true">
-                      <input type="text" style="width: 200px;" formControlName="mailingAddressPostalCode"
-                        class="form-control">
-                    </app-field>
-                  </section>
-                </div>
+                <section class="col-md-3 col-xs-12">
+                  <app-field label="Province/State"
+                    [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
+                    [required]="true" [isFullWidth]="true">
+                    <input type="text" formControlName="mailingAddressProvince" class="form-control">
+                  </app-field>
+                </section>
+                <section class="col-md-3 col-xs-12">
+                  <app-field label="Postal /Zip Code"
+                    [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
+                    [required]="true" [isFullWidth]="true">
+                    <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
+                  </app-field>
+                </section>
                 <app-field class="col-md-6 col-xs-12" label="Country"
                   [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
-                  [required]="true">
-                  <input type="text" style="width: 350px;" formControlName="mailingAddressCountry" class="form-control">
+                  [required]="true" [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressCountry" class="form-control">
                 </app-field>
               </div>
             </div>
@@ -193,22 +194,10 @@
             <app-field label="Business Email" [required]="true"
               [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
               errorMessage="Please enter a valid email address"
-              afterLabelText="By submitting your business email address, you agree that the Security Programs Division can use it to communicate with you about your application.">
+              afterLabelText="By submitting your business email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
               <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail"
                 (blur)="trimValue(form.get('businessProfile.contactEmail'))">
             </app-field>
-            <!-- <section>
-              <input type="checkbox" [required]="true" formControlName="consentForEmailCommunication" #emailConsent>
-              <strong class="error-states"> *</strong>
-              <span> I authorize the Security Programs Division to use my email address to communicate with me. </span>
-              <p class="error-states" *ngIf="form.get('businessProfile.consentForEmailCommunication').touched && !form.get('businessProfile.consentForEmailCommunication').valid">
-                Please confirm consent for SPD to contact you at the provided email address
-              </p>
-              <p></p>
-            </section>
-            <app-field label="Website Address">
-              <input class="form-control" style="width: 350px;" type="text" formControlName="websiteAddress">
-            </app-field> -->
           </div>
 
           <h3 class="blue-header">BUSINESS CONTACT</h3>
@@ -266,63 +255,14 @@
             <app-edit-shareholders [accountId]="saveFormData?.businessProfile?.id" [businessType]="saveFormData?.businessProfile?.businessType" [parentLegalEntityId]="legalEntityId"></app-edit-shareholders>
           </div> -->
 
-          <h3 class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNBIS</h3>
-          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
+          <h3 *ngIf="saveFormData?.businessProfile?.businessType !== 'SoleProprietor'" class="blue-header">CONNECTIONS
+            TO FEDERAL PRODUCERS OF CANNBIS</h3>
+          <div class="padded-section"
+            *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType !== 'SoleProprietor'">
             <app-connection-to-producers [accountId]="saveFormData?.businessProfile?.id"
               [businessType]="saveFormData?.businessProfile?.businessType"></app-connection-to-producers>
           </div>
 
-
-          <!-- <section>
-            If you have more than one contact, please
-            <a href="javascript:void(0);" (click)="_showAdditionalContact = true"> click here to add them</a>.
-          </section> -->
-
-          <!-- <div *ngIf="_showAdditionalContact" formGroupName="additionalContact">
-            <hr>
-            <h2>Additional Contact</h2>
-
-            <app-field label="First Name" [required]="true" [valid]="form.get('additionalContact.firstName').valid || !form.get('additionalContact.firstName').touched"
-              errorMessage="Please enter your business contact's first name">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
-                formControlName="firstName">
-            </app-field>
-
-            <app-field label="Last Name" [required]="true" [valid]="form.get('additionalContact.lastname').valid || !form.get('additionalContact.lastname').touched"
-              errorMessage="Please enter your business contact's last name">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
-                formControlName="lastname">
-            </app-field>
-
-            <app-field label="Title/ Position" [required]="false" [valid]="true">
-              <input class="form-control" style="width: 350px;" type="text" formControlName="title">
-            </app-field>
-
-            <app-field label="Phone Number (main)" [required]="true" [valid]="form.get('additionalContact.telephone1').valid || !form.get('additionalContact.telephone1').touched"
-              errorMessage="Please enter your business contact's 10-digit phone number">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 250px;" maxlength="10"
-                (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="phoneNumber">
-            </app-field>
-
-            <app-field label="Phone Number (alternate)" [required]="false">
-              <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                type="text" formControlName="phoneNumberAlt">
-            </app-field>
-
-            <app-field label="Email" [required]="true" [valid]="form.get('additionalContact.email').valid || !form.get('additionalContact.email').touched"
-              errorMessage="Please enter your business contact's email address">
-              <input class="form-control" [required]="_showAdditionalContact" style="width: 350px;" type="text"
-                formControlName="email" (blur)="trimValue(form.get('additionalContact.email'))">
-            </app-field>
-
-            <section>
-              <a style="float: right;" href="javascript:void(0);" (click)="hideAdditionalContact()">
-                <i class="fas fa-trash-alt"></i>
-                Delete Contact</a>
-            </section>
-          </div>
-          <div style="clear: both;"></div>
-          <p></p> -->
 
           <div *ngIf="!form.valid && form.touched && false" class="error-summary">
             <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
@@ -333,8 +273,9 @@
             <a routerLink="/dashboard">
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">SAVE &
-                CONTINUE
+              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">
+                <span *ngIf="!applicationId">SAVE & CONTINUE</span>
+                <span *ngIf="applicationId">CONTINUE TO APPLICATION</span>
                 <i class="fas fa-chevron-right"></i></button>
             </span>
           </section>
@@ -357,7 +298,7 @@
         </table>
         <div class="submit-content">
           <p>
-            Your Legal Business Name and Business Number are imported from BCeID. If there is an error or change in
+            Your Legal Business Name is imported from BCeID. If there is an error or change in
             this information, you must contact BCeID to correct it.
           </p>
           <div>
@@ -379,7 +320,7 @@
                 style="color:white">BCeIDRegistrationDesk@gov.bc.ca</a></span>
           </div>
           <p>
-            All other information can be changed on this Business Profile page.
+            All other information can be changed on this Account Profile page.
           </p>
 
         </div>
@@ -388,13 +329,17 @@
         <h2 style="color: #000">Collection Notice:</h2>
         <div class="submit-content">
           <p>
-            The Security Programs Division will collect your personal information for the purpose of fulfilling the
-            requirements of the Pill Press and Related Equipment Control Act and associated regulations in Pill Press
-            registration, compliance and enforcement matters in accordance with Sections 26 (a) and (c) of the Freedom
-            of Information and Protection of Privacy Act. Should you have any questions about the collection, use, or
-            disclosure of personal information, please contact the Senior Policy Analyst, Security Programs Division
-            via mail to PO Box 9217 Stn Prov Govt Victoria, BC V8W 9J1; email to PillPressLicensing@gov.bc.ca; or by
-            telephone at 1-855-587-0185.
+            The Security Programs Division (SPD) will collect your personal information for the purpose of fulfilling
+            the
+            requirements of the Cannabis Control and Licensing Act (CCLA) and associated regulations in cannabis
+            licensing,
+            compliance and enforcement matters in accordance with Sections 26 (a) and (c) of the Freedom of Information
+            and
+            Protection of Privacy Act. Should you have any questions about the collection, use, or disclosure of
+            personal
+            information, please contact the Liquor and Cannabis Regulation Branch via mail to PO Box 9292 Stn Prov Govt
+            Victoria B.C. V8W 9J8; email to <a
+              href="mailto:CannabisWorker@gov.bc.ca?Subject=Collection Notice">CannabisWorker@gov.bc.ca;</a>.
           </p>
         </div>
       </section>

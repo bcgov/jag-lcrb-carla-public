@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactioncarduserstate class.
         /// </summary>
-        public MicrosoftDynamicsCRMactioncarduserstate(object exchangerate = default(object), int? state = default(int?), string _owneridValue = default(string), string actioncarduserstateid = default(string), string _actioncardidValue = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMactioncarduserstate(object exchangerate = default(object), int? state = default(int?), string _owneridValue = default(string), string actioncarduserstateid = default(string), string _actioncardidValue = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Exchangerate = exchangerate;
             State = state;
@@ -40,7 +40,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Startdate = startdate;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Ownerid = ownerid;
             Actioncardid = actioncardid;
             Transactioncurrencyid = transactioncurrencyid;
             CustomInit();
@@ -105,11 +104,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

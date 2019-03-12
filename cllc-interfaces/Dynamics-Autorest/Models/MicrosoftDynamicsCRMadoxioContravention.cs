@@ -29,49 +29,61 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioContravention class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioContravention(string _adoxioViolationtypeValue = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string adoxioName = default(string), string _createdonbehalfbyValue = default(string), string adoxioManagerpenaltytext = default(string), string adoxioPenaltyexecuted = default(string), object adoxioMonetarypenaltyBase = default(object), string adoxioGmrational = default(string), string _owningteamValue = default(string), string adoxioContraventionid = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioViolationproductValue = default(string), string _adoxioComplaintValue = default(string), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), int? statuscode = default(int?), string _adoxioInvestigationValue = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), int? adoxioSuspensionpenalty = default(int?), object adoxioMonetarypenalty = default(object), string _owneridValue = default(string), int? adoxioIsalternative = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioContraventionoutcome = default(int?), string _adoxioInspectionValue = default(string), object exchangerate = default(object), bool? adoxioOutcome = default(bool?), string _transactioncurrencyidValue = default(string), string adoxioWipenaltyreason = default(string), string adoxioContraventionnoticenumber = default(string), System.DateTimeOffset? adoxioContraventiondatetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string adoxioOtherfactors = default(string), long? versionnumber = default(long?), string adoxioSection = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _adoxioLicenceValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMadoxioViolationnotification> adoxioAdoxioContraventionAdoxioViolationnotificationRelatedContravention = default(IList<MicrosoftDynamicsCRMadoxioViolationnotification>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioViolationtype adoxioViolationType = default(MicrosoftDynamicsCRMadoxioViolationtype), MicrosoftDynamicsCRMincident adoxioInspection = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMproduct adoxioViolationProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation))
+        public MicrosoftDynamicsCRMadoxioContravention(int? adoxioMinperiod = default(int?), object exchangerate = default(object), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _adoxioAreaidValue = default(string), string _adoxioLicenseeidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDatetime = default(System.DateTimeOffset?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? adoxioOutcomedecisiondate = default(System.DateTimeOffset?), string _createdbyValue = default(string), object adoxioMaxpenalty = default(object), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioName = default(string), int? importsequencenumber = default(int?), int? adoxioMaxperiod = default(int?), string _adoxioLicenceidValue = default(string), string adoxioInspectorsummary = default(string), object adoxioRecommendedmonetarypenalty = default(object), int? adoxioCategory = default(int?), string _adoxioInspectionidValue = default(string), string _transactioncurrencyidValue = default(string), long? versionnumber = default(long?), int? adoxioRecommendedclosureperiod = default(int?), string _adoxioRegionalmanageridValue = default(string), System.DateTimeOffset? adoxioRmapprovaldecisiondate = default(System.DateTimeOffset?), int? adoxioNumberofoffence = default(int?), int? adoxioIswaivedbylicensee = default(int?), object adoxioMaxpenaltyBase = default(object), int? adoxioItemnumber = default(int?), int? adoxioOutcome = default(int?), int? adoxioRmapprovaldecision = default(int?), int? statecode = default(int?), string adoxioRmsummary = default(string), string _owningbusinessunitValue = default(string), object adoxioMinpenalty = default(object), object adoxioMinpenaltyBase = default(object), string adoxioContraventionid = default(string), int? adoxioIscontraventionconfirmed = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioReference = default(string), object adoxioRecommendedmonetarypenaltyBase = default(object), string adoxioInterpretation = default(string), string _owningteamValue = default(string), string _adoxioContraventiontitleidValue = default(string), string _adoxioEstablishmentidValue = default(string), string _owneridValue = default(string), string _adoxioCompliantidValue = default(string), int? adoxioRecommendedaction = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioContraventionadmin adoxioContraventionTitleID = default(MicrosoftDynamicsCRMadoxioContraventionadmin), MicrosoftDynamicsCRMadoxioComplaint adoxioCompliantId = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMsystemuser adoxioRegionalManagerId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount))
         {
-            this._adoxioViolationtypeValue = _adoxioViolationtypeValue;
-            Importsequencenumber = importsequencenumber;
-            this._owninguserValue = _owninguserValue;
-            AdoxioName = adoxioName;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioManagerpenaltytext = adoxioManagerpenaltytext;
-            AdoxioPenaltyexecuted = adoxioPenaltyexecuted;
-            AdoxioMonetarypenaltyBase = adoxioMonetarypenaltyBase;
-            AdoxioGmrational = adoxioGmrational;
-            this._owningteamValue = _owningteamValue;
-            AdoxioContraventionid = adoxioContraventionid;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Createdon = createdon;
-            this._adoxioViolationproductValue = _adoxioViolationproductValue;
-            this._adoxioComplaintValue = _adoxioComplaintValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Statecode = statecode;
-            Statuscode = statuscode;
-            this._adoxioInvestigationValue = _adoxioInvestigationValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._createdbyValue = _createdbyValue;
-            AdoxioSuspensionpenalty = adoxioSuspensionpenalty;
-            AdoxioMonetarypenalty = adoxioMonetarypenalty;
-            this._owneridValue = _owneridValue;
-            AdoxioIsalternative = adoxioIsalternative;
-            Overriddencreatedon = overriddencreatedon;
-            AdoxioContraventionoutcome = adoxioContraventionoutcome;
-            this._adoxioInspectionValue = _adoxioInspectionValue;
+            AdoxioMinperiod = adoxioMinperiod;
             Exchangerate = exchangerate;
-            AdoxioOutcome = adoxioOutcome;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            AdoxioWipenaltyreason = adoxioWipenaltyreason;
-            AdoxioContraventionnoticenumber = adoxioContraventionnoticenumber;
-            AdoxioContraventiondatetime = adoxioContraventiondatetime;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioOtherfactors = adoxioOtherfactors;
-            Versionnumber = versionnumber;
-            AdoxioSection = adoxioSection;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._modifiedbyValue = _modifiedbyValue;
+            this._adoxioAreaidValue = _adoxioAreaidValue;
+            this._adoxioLicenseeidValue = _adoxioLicenseeidValue;
+            Createdon = createdon;
+            AdoxioDatetime = adoxioDatetime;
+            Statuscode = statuscode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioOutcomedecisiondate = adoxioOutcomedecisiondate;
+            this._createdbyValue = _createdbyValue;
+            AdoxioMaxpenalty = adoxioMaxpenalty;
+            this._owninguserValue = _owninguserValue;
             Modifiedon = modifiedon;
-            this._adoxioLicenceValue = _adoxioLicenceValue;
+            AdoxioName = adoxioName;
+            Importsequencenumber = importsequencenumber;
+            AdoxioMaxperiod = adoxioMaxperiod;
+            this._adoxioLicenceidValue = _adoxioLicenceidValue;
+            AdoxioInspectorsummary = adoxioInspectorsummary;
+            AdoxioRecommendedmonetarypenalty = adoxioRecommendedmonetarypenalty;
+            AdoxioCategory = adoxioCategory;
+            this._adoxioInspectionidValue = _adoxioInspectionidValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Versionnumber = versionnumber;
+            AdoxioRecommendedclosureperiod = adoxioRecommendedclosureperiod;
+            this._adoxioRegionalmanageridValue = _adoxioRegionalmanageridValue;
+            AdoxioRmapprovaldecisiondate = adoxioRmapprovaldecisiondate;
+            AdoxioNumberofoffence = adoxioNumberofoffence;
+            AdoxioIswaivedbylicensee = adoxioIswaivedbylicensee;
+            AdoxioMaxpenaltyBase = adoxioMaxpenaltyBase;
+            AdoxioItemnumber = adoxioItemnumber;
+            AdoxioOutcome = adoxioOutcome;
+            AdoxioRmapprovaldecision = adoxioRmapprovaldecision;
+            Statecode = statecode;
+            AdoxioRmsummary = adoxioRmsummary;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioMinpenalty = adoxioMinpenalty;
+            AdoxioMinpenaltyBase = adoxioMinpenaltyBase;
+            AdoxioContraventionid = adoxioContraventionid;
+            AdoxioIscontraventionconfirmed = adoxioIscontraventionconfirmed;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioReference = adoxioReference;
+            AdoxioRecommendedmonetarypenaltyBase = adoxioRecommendedmonetarypenaltyBase;
+            AdoxioInterpretation = adoxioInterpretation;
+            this._owningteamValue = _owningteamValue;
+            this._adoxioContraventiontitleidValue = _adoxioContraventiontitleidValue;
+            this._adoxioEstablishmentidValue = _adoxioEstablishmentidValue;
+            this._owneridValue = _owneridValue;
+            this._adoxioCompliantidValue = _adoxioCompliantidValue;
+            AdoxioRecommendedaction = adoxioRecommendedaction;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -86,13 +98,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioContraventionAsyncOperations = adoxioContraventionAsyncOperations;
             AdoxioContraventionBulkDeleteFailures = adoxioContraventionBulkDeleteFailures;
             Transactioncurrencyid = transactioncurrencyid;
-            AdoxioAdoxioContraventionAdoxioViolationnotificationRelatedContravention = adoxioAdoxioContraventionAdoxioViolationnotificationRelatedContravention;
-            AdoxioLicence = adoxioLicence;
-            AdoxioViolationType = adoxioViolationType;
-            AdoxioInspection = adoxioInspection;
-            AdoxioViolationProduct = adoxioViolationProduct;
-            AdoxioComplaint = adoxioComplaint;
-            AdoxioInvestigation = adoxioInvestigation;
+            AdoxioContraventionTitleID = adoxioContraventionTitleID;
+            AdoxioCompliantId = adoxioCompliantId;
+            AdoxioInspectionId = adoxioInspectionId;
+            AdoxioEstablishmentId = adoxioEstablishmentId;
+            AdoxioAreaId = adoxioAreaId;
+            AdoxioLicenceId = adoxioLicenceId;
+            AdoxioRegionalManagerId = adoxioRegionalManagerId;
+            AdoxioLicenseeId = adoxioLicenseeId;
             CustomInit();
         }
 
@@ -103,143 +116,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_violationtype_value")]
-        public string _adoxioViolationtypeValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_managerpenaltytext")]
-        public string AdoxioManagerpenaltytext { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_penaltyexecuted")]
-        public string AdoxioPenaltyexecuted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_monetarypenalty_base")]
-        public object AdoxioMonetarypenaltyBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_gmrational")]
-        public string AdoxioGmrational { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionid")]
-        public string AdoxioContraventionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_violationproduct_value")]
-        public string _adoxioViolationproductValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_complaint_value")]
-        public string _adoxioComplaintValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_investigation_value")]
-        public string _adoxioInvestigationValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suspensionpenalty")]
-        public int? AdoxioSuspensionpenalty { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_monetarypenalty")]
-        public object AdoxioMonetarypenalty { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isalternative")]
-        public int? AdoxioIsalternative { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionoutcome")]
-        public int? AdoxioContraventionoutcome { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_inspection_value")]
-        public string _adoxioInspectionValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_minperiod")]
+        public int? AdoxioMinperiod { get; set; }
 
         /// <summary>
         /// </summary>
@@ -248,48 +126,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_outcome")]
-        public bool? AdoxioOutcome { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_wipenaltyreason")]
-        public string AdoxioWipenaltyreason { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionnoticenumber")]
-        public string AdoxioContraventionnoticenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventiondatetime")]
-        public System.DateTimeOffset? AdoxioContraventiondatetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_otherfactors")]
-        public string AdoxioOtherfactors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_section")]
-        public string AdoxioSection { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -298,13 +136,248 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_areaid_value")]
+        public string _adoxioAreaidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licenseeid_value")]
+        public string _adoxioLicenseeidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_datetime")]
+        public System.DateTimeOffset? AdoxioDatetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_outcomedecisiondate")]
+        public System.DateTimeOffset? AdoxioOutcomedecisiondate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_maxpenalty")]
+        public object AdoxioMaxpenalty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licence_value")]
-        public string _adoxioLicenceValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_maxperiod")]
+        public int? AdoxioMaxperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licenceid_value")]
+        public string _adoxioLicenceidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_inspectorsummary")]
+        public string AdoxioInspectorsummary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_recommendedmonetarypenalty")]
+        public object AdoxioRecommendedmonetarypenalty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_category")]
+        public int? AdoxioCategory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_inspectionid_value")]
+        public string _adoxioInspectionidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_recommendedclosureperiod")]
+        public int? AdoxioRecommendedclosureperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_regionalmanagerid_value")]
+        public string _adoxioRegionalmanageridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_rmapprovaldecisiondate")]
+        public System.DateTimeOffset? AdoxioRmapprovaldecisiondate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_numberofoffence")]
+        public int? AdoxioNumberofoffence { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_iswaivedbylicensee")]
+        public int? AdoxioIswaivedbylicensee { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_maxpenalty_base")]
+        public object AdoxioMaxpenaltyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_itemnumber")]
+        public int? AdoxioItemnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_outcome")]
+        public int? AdoxioOutcome { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_rmapprovaldecision")]
+        public int? AdoxioRmapprovaldecision { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_rmsummary")]
+        public string AdoxioRmsummary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_minpenalty")]
+        public object AdoxioMinpenalty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_minpenalty_base")]
+        public object AdoxioMinpenaltyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contraventionid")]
+        public string AdoxioContraventionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_iscontraventionconfirmed")]
+        public int? AdoxioIscontraventionconfirmed { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_reference")]
+        public string AdoxioReference { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_recommendedmonetarypenalty_base")]
+        public object AdoxioRecommendedmonetarypenaltyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_interpretation")]
+        public string AdoxioInterpretation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_contraventiontitleid_value")]
+        public string _adoxioContraventiontitleidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_establishmentid_value")]
+        public string _adoxioEstablishmentidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_compliantid_value")]
+        public string _adoxioCompliantidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_recommendedaction")]
+        public int? AdoxioRecommendedaction { get; set; }
 
         /// <summary>
         /// </summary>
@@ -378,38 +451,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_adoxio_contravention_adoxio_violationnotification_RelatedContravention")]
-        public IList<MicrosoftDynamicsCRMadoxioViolationnotification> AdoxioAdoxioContraventionAdoxioViolationnotificationRelatedContravention { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ContraventionTitleID")]
+        public MicrosoftDynamicsCRMadoxioContraventionadmin AdoxioContraventionTitleID { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Licence")]
-        public MicrosoftDynamicsCRMadoxioLicences AdoxioLicence { get; set; }
+        [JsonProperty(PropertyName = "adoxio_CompliantId")]
+        public MicrosoftDynamicsCRMadoxioComplaint AdoxioCompliantId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ViolationType")]
-        public MicrosoftDynamicsCRMadoxioViolationtype AdoxioViolationType { get; set; }
+        [JsonProperty(PropertyName = "adoxio_InspectionId")]
+        public MicrosoftDynamicsCRMincident AdoxioInspectionId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Inspection")]
-        public MicrosoftDynamicsCRMincident AdoxioInspection { get; set; }
+        [JsonProperty(PropertyName = "adoxio_EstablishmentId")]
+        public MicrosoftDynamicsCRMadoxioEstablishment AdoxioEstablishmentId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ViolationProduct")]
-        public MicrosoftDynamicsCRMproduct AdoxioViolationProduct { get; set; }
+        [JsonProperty(PropertyName = "adoxio_AreaId")]
+        public MicrosoftDynamicsCRMadoxioArea AdoxioAreaId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Complaint")]
-        public MicrosoftDynamicsCRMadoxioComplaint AdoxioComplaint { get; set; }
+        [JsonProperty(PropertyName = "adoxio_LicenceId")]
+        public MicrosoftDynamicsCRMadoxioLicences AdoxioLicenceId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_Investigation")]
-        public MicrosoftDynamicsCRMadoxioInvestigation AdoxioInvestigation { get; set; }
+        [JsonProperty(PropertyName = "adoxio_RegionalManagerId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioRegionalManagerId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_LicenseeId")]
+        public MicrosoftDynamicsCRMaccount AdoxioLicenseeId { get; set; }
 
     }
 }

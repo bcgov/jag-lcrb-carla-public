@@ -1,0 +1,49 @@
+<div class="container">
+<!-- <div [ngBusy]="busy"></div> -->
+  <div *ngIf="dataLoaded">
+    <div>
+      <table class="eq-table">
+        <tr>
+          <th>Region</th>
+          <th>Applications Where Fee Has Been Paid</th>
+          <th>Paid, But Incomplete Applications</th>
+          <th>Applications Referred to Local Government or Indigenous Nation</th>
+          <th>Applications Approved with Conditions</th>
+          <th>Licences Issued</th>
+        </tr>
+        <tr *ngFor="let item of summaryKeys ; let i = index;" style="border: 1px solid #ccc; ">
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{item}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{summaryData[item].paid}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{summaryData[item].incomplete}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{summaryData[item].referred}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{summaryData[item].approvedWithConditions}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{summaryData[item].licencesIssued}}</td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{totalData[0]}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{totalData[1]}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{totalData[2]}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{totalData[3]}}</td>
+          <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">{{totalData[4]}}</td>
+
+        </tr>
+      </table>
+    </div>
+    <div>
+      
+        <canvas id="chart" baseChart style="height:1000px; width:1000px"
+                [colors]="bubbleChartColors"
+                [datasets]="bubbleChartData"
+                [legend]="bubbleChartLegend"
+                [chartType]="chartType"
+                [options]="bubbleChartOptions"></canvas>
+      </div>
+      
+    
+   
+  </div>
+<section *ngIf="!dataLoaded" class="h1">
+  Loading stats...
+</section>
+</div>

@@ -64,8 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
                 // we want to redirect to the dashboard.
-                // string dashboard = !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"]) ? "dashboard" : "dashboard-lite";
-                string url = "business-profile";
+                string url = "dashboard";
 
                 return Redirect(basePath + "/" + url);
             }
@@ -140,8 +139,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
 
-            // string dashboard = !String.IsNullOrEmpty(Configuration["IS_LITE_VERSION"])? "dashboard" : "dashboard-lite";
-            string url = "business-profile";
+            string url = "dashboard";
 
             basePath += "/" + url;
 

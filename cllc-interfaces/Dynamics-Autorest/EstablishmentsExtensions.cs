@@ -24,19 +24,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -47,7 +42,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static GetOKResponseModelModelModelModelModelModel Get(this IEstablishments operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static EstablishmentsGetResponseModel Get(this IEstablishments operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
@@ -59,19 +54,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// Show only the first n items
             /// </param>
             /// <param name='skip'>
-            /// Skip only the first n items
             /// </param>
             /// <param name='search'>
-            /// Search items by search phrases
             /// </param>
             /// <param name='filter'>
-            /// Filter items by property values
             /// </param>
             /// <param name='count'>
-            /// Include count of items
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -85,7 +75,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<GetOKResponseModelModelModelModelModelModel> GetAsync(this IEstablishments operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<EstablishmentsGetResponseModel> GetAsync(this IEstablishments operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -136,43 +126,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from adoxio_establishments
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEstablishmentid'>
-            /// key: adoxio_establishmentid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            public static void Delete(this IEstablishments operations, string adoxioEstablishmentid, string ifMatch = default(string))
-            {
-                operations.DeleteAsync(adoxioEstablishmentid, ifMatch).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Delete entity from adoxio_establishments
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioEstablishmentid'>
-            /// key: adoxio_establishmentid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task DeleteAsync(this IEstablishments operations, string adoxioEstablishmentid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.DeleteWithHttpMessagesAsync(adoxioEstablishmentid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
             /// Get entity from adoxio_establishments by key
             /// </summary>
             /// <param name='operations'>
@@ -216,6 +169,43 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     return _result.Body;
                 }
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_establishments
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioEstablishmentid'>
+            /// key: adoxio_establishmentid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            public static void Delete(this IEstablishments operations, string adoxioEstablishmentid, string ifMatch = default(string))
+            {
+                operations.DeleteAsync(adoxioEstablishmentid, ifMatch).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_establishments
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioEstablishmentid'>
+            /// key: adoxio_establishmentid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAsync(this IEstablishments operations, string adoxioEstablishmentid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteWithHttpMessagesAsync(adoxioEstablishmentid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

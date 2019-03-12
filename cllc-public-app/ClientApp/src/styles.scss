@@ -156,7 +156,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .green-snackbar {
-    background: #00ff21;
+    background: #009624;
 }
 
 .blue-header {
@@ -203,4 +203,9 @@ hr {
 
 .padded-section {
     padding-left: 15px;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
 }

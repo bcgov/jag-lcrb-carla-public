@@ -11,6 +11,39 @@ namespace Gov.Lclb.Cllb.Public.Contexts
     public static class PolicyDocumentExtensions
     {
 
+        /************************************************
+         * 
+         * Process a template, substituting dynamic data.
+         * 
+         ***********************************************/
+
+        const string REPEATER_START_TAG = "<custom:repeater";
+        const string REPEATER_END_TAG = "</custom:repeater>";
+
+        public static void ProcessTemplate (this IDynamicsClient dynamicsClient, MicrosoftDynamicsCRMadoxioPolicydocument document)
+        {
+            
+            string body = document.AdoxioBody;
+
+            if (body != null)
+            {
+                // start by scanning the document for blocks.
+
+                int startRepeaterPos = body.IndexOf("<custom:repeater");
+                if (startRepeaterPos > -1)
+                {
+                    int endRepeaterStartTagPos = body.IndexOf(">", startRepeaterPos);
+                    if (endRepeaterStartTagPos > -1)
+                    {
+                        int endRepeaterPos = body.IndexOf(REPEATER_END_TAG);
+                    }
+                }
+
+            }
+            document.AdoxioBody = body;
+
+        }
+
         public static MicrosoftDynamicsCRMadoxioPolicydocument GetPolicyDocumentBySlug(this IDynamicsClient dynamicsClient, string slug)
         {
 

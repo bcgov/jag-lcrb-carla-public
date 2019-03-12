@@ -1,51 +1,286 @@
-<div class="row extra-padding" *ngIf="isApplicant">
-  <section class="col-md-9">
-    <app-business-profile-summary></app-business-profile-summary>
-    <app-license-application-summary></app-license-application-summary>
-    <mat-card class="mat-elevation-z0">
-      <div [ngBusy]="busy">
-        <button class="btn btn-primary" (click)="startNewLicenceApplication()">Start New Licence Application</button>
-      </div>
-    </mat-card>
-    <br>
-  </section>
+<div class="dashboard-spacing">
+  <div [ngBusy]="busy"></div>
+  <h1>Welcome to Cannabis Retail Store Licensing</h1>
+  <div class="row">
+    <div class="col-lg-7 col-sm-12">
+      <section class="small-screen-only">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">BUSINESS PROFILE</h3>
 
-  <section class="col-md-3">
-    <div class="help-container">
-      <h1 class="blue-heading-bar">Need help?</h1>
-      <section class="container">
-        <span>Contact us for help with your application:</span>
-        <br>
-        <br>
-        <span>Contact Phone #:</span>
-        <br>
-        <span>Victoria 250 952-5787</span>
-        <br>
-        <span>Toll Free 1 866 209-2111</span>
-        <br>
-        <br>
-        <span>Email:</span>
-        <span class="email">LCLBHelpDesk@gov.bc.ca</span>
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <strong>{{account?.name}}</strong> <br>
+          <p></p>
+          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <p></p>
+          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <p></p>
+          <p>Click below to view your complete business profile, and to update your business address or contact
+            details.
+          </p>
+          <div>
+            <a routerLink="/business-profile" style="float: right;">
+              <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Business Profile</a>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
       </section>
+      <p></p>
+      <p>
+        A non-medical cannabis retail store licence allows licensees to sell non-medical cannabis and cannabis
+        accessories in British
+        Columbia.
+      </p>
+
+      <p>
+        To apply for a non-medical cannabis retail store licence, applicants must submit a completed
+        application form and completed business financial integrity form. A separate application and business financial
+        integrity form is required for each proposed establishment.
+      </p>
+
+      <p>The Liquor and Cannabis Regulation Branch (LCRB) will only process complete applications. The checklist
+        accompanying
+        the application form can assist in completing all required documentation.</p>
+      <p>Please note that applications which are submitted without all required information or documents will not be
+        processed.
+        Applicants will be contacted and provided the opportunity to submit missing information. Once applicants
+        provide
+        all required documents to the LCRB, the application will be submitted for processing.</p>
+      <p>Inquires related to your application can be directed to <a
+          href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
+      <p></p>
+
+      <app-applications-and-licences>
+        <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary"
+          [disabled]="submittedApplications >= 8" (click)="startNewLicenceApplication()">Submit an Application</button>
+      </app-applications-and-licences>
+
     </div>
-  </section>
-</div>
-<div class="row extra-padding" *ngIf="isAssociate">
-  <section class="col-md-3">
-      <div class="help-container">
-          <h1 class="blue-heading-bar">Hello Associate</h1>
-          <section class="container">
-            <br>
-            <span>Contact Phone #:</span>
-            <br>
-            <span>Victoria 250 952-5787</span>
-            <br>
-            <span>Toll Free 1 866 209-2111</span>
-            <br>
-            <br>
-            <span>Email:</span>
-            <span class="email">LCLBHelpDesk@gov.bc.ca</span>
+    <div class="col-lg-4 col-sm-12" style="position: relative">
+      <div [ngBusy]="busy"></div>
+      <section class="large-screen-only">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ACCOUNT PROFILE</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <strong>{{account?.name}}</strong> <br>
+          <p></p>
+          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <p></p>
+          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <p></p>
+          <p>Click below to view your complete business profile, and to update your business address or contact
+            details.
+          </p>
+          <div>
+            <a routerLink="/business-profile" style="float: right;">
+              <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Account Profile</a>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </section>
+      <p></p>
+      <section *ngIf="account?.businessType">
+        <h3 *ngIf="account?.businessType !== 'SoleProprietor'"  class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+        <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">SECURITY SCREENING</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <section>
+            <section *ngIf="account?.businessType === 'PrivateCorporation'">
+              <p>An applicant that is a <i>Private Corporation</i> may have associates that are required to consent to
+                security
+                screening and financial integrity assessments as part of the application for a non-medical cannabis
+                retail
+                store
+                licence. Applicants are required to provide associates with the Parcel Identifier (PID) or proposed
+                retail
+                store
+                location address.
+              </p>
+              <span style="font-style: italic;" class="li-header"><i>Parcel Identifier (PID):</i></span>
+              <br>
+              <ul>
+                <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+                <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment
+                  documents,
+                  on the lease, or obtained from the landlord.</li>
+              </ul>
+              <p>Applicants should direct associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+                for submitting documentation.</p>
+              <p>Associates will submit documentation for security screening and financial integrity assessments
+                directly
+                to
+                the LCRB. Applicants should not delay submitting a completed application form and business financial
+                integrity
+                form. It is the applicant's responsibility to direct all associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">link provided</a>.</p>
+              <span class="li-header">Associates of <i>Private Corporation</i> include:</span>
+              <br>
+              <ul>
+                <li>Directors and officers</li>
+                <li>Generally, shareholders holding at least 10% or more of voting shares (the Liquor and Cannabis
+                  Regulation
+                  Branch has the discretion to screen shareholders holding less than 10%)</li>
+              </ul>
+              <p>Corporations, societies and/or partnerships that are shareholders in the Private Corporation are
+                considered
+                associates of the Applicant and are required to submit an associate organization assessment form.</p>
+            </section>
+            <section *ngIf="account?.businessType === 'PublicCorporation'">
+              <p>An applicant that is a <i>Public Corporation</i> may have associates that are required to consent to
+                security
+                screening and financial integrity assessments as part of the application for a non-medical cannabis
+                retail
+                store
+                licence. Applicants are required to provide associates with the Parcel Identifier (PID) or proposed
+                retail
+                store
+                location address.
+              </p>
+              <span style="font-style: italic;" class="li-header"><i>Parcel Identifier (PID):</i></span>
+              <br>
+              <ul>
+                <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+                <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment
+                  documents,
+                  on the lease, or obtained from the landlord.</li>
+              </ul>
+
+              <p>Applicants should direct associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+                for submitting documentation.</p>
+
+              <p>Associates will submit documentation for security screening and financial integrity assessments
+                directly
+                to
+                the LCRB. Applicants should not delay submitting a completed application form and business financial
+                integrity
+                form. It is the applicant's responsibility to direct all associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">link provided</a>.</p>
+              <span class="li-header">Associates of <i>Public Corporation</i> include:</span>
+              <br>
+              <ul>
+                <li>Directors and officers</li>
+              </ul>
+              <p>Corporations, societies and/or partnerships that are shareholders in the Public Corporation are
+                considered
+                associates
+                of the Applicant and are required to submit an associate organization assessment form.
+              </p>
+            </section>
+            <section
+              *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">
+              <p>An applicant that is a <i>Partnership</i> may have associates that are required to consent to security
+                screening
+                and financial integrity assessments as part of the application for a non-medical cannabis retail store
+                licence.
+                Applicants are required to provide associates with the Parcel Identifier (PID) or proposed retail store
+                location
+                address.
+              </p>
+              <span style="font-style: italic;" class="li-header"><i>Parcel Identifier (PID):</i></span>
+              <br>
+              <ul>
+                <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+                <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment
+                  documents,
+                  on the lease, or obtained from the landlord.</li>
+              </ul>
+              <p>Applicants should direct associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+                for submitting documentation.</p>
+
+              <p>Associates will submit documentation for security screening and financial integrity assessments
+                directly
+                to
+                the LCRB. Applicants should not delay submitting a completed application form and business financial
+                integrity
+                form. It is the applicant's responsibility to direct all associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">link provided</a>.</p>
+              <span class="li-header">Associates of Partnership include:</span>
+              <br>
+              <ul>
+                <li>All partners</li>
+                <li>If limited partnership, limited partners holding at least a 10% interest in the partnership (the
+                  Liquor
+                  and
+                  Cannabis Regulation Branch has the discretion to screen partners holding less than 10%)</li>
+              </ul>
+              <p>Corporations, societies and/or partnerships that are themselves partners in the Partnership are
+                considered
+                associates
+                of the Applicant and are required to submit an associate organization assessment form.</p>
+            </section>
+            <section *ngIf="account?.businessType === 'SoleProprietor'">
+              <p>An applicant that is a <i>Sole Proprietorship</i> must consent to a security screening as part of the
+                application
+                for a non-medical cannabis retail store licence.
+              </p>
+              <p>Please visit the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+                for submitting documentation for the security screening directly to the LCRB.</p>
+            </section>
+            <section *ngIf="account?.businessType === 'Society'">
+              <p>An applicant that is a <i>Society</i> may have associates that are required to consent to security
+                screening
+                and financial integrity assessments as part of the application for a non-medical cannabis retail store
+                licence.
+                Applicants are required to provide associates with the Parcel Identifier (PID) or proposed retail store
+                location
+                address.
+              </p>
+              <span style="font-style: italic;" class="li-header"><i>Parcel Identifier (PID):</i></span>
+              <br>
+              <ul>
+                <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+                <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment
+                  documents,
+                  on the lease, or obtained from the landlord.</li>
+              </ul>
+              <p>Applicants should direct associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+                for submitting documentation.</p>
+
+              <p>Associates will submit documentation for security screening and financial integrity assessments
+                directly
+                to
+                the LCRB. Applicants should not delay submitting a completed application form and business financial
+                integrity
+                form. It is the applicant's responsibility to direct all associates to the
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  target="_blank">link provided</a>.</p>
+              <span class="li-header">Associates of <i>Society</i> include:</span>
+              <br>
+              <ul>
+                <li>Directors and officers</li>
+                <li>Senior management</li>
+              </ul>
+              <br>
+              <p>Please note: While they are not normally required as part of the licence application process, the
+                Liquor
+                and
+                Cannabis Regulation Branch reserves the right to ask for a society’s membership lists.
+              </p>
+            </section>
           </section>
         </div>
+      </section>
+      <p></p>
+    </div>
+  </div>
+  <section style="margin-top: 20px;">
+    <p>All cannabis retail store licence holders must follow the terms and conditions of their licence as set out in
+      the
+      <a href="https://www2.gov.bc.ca/assets/download/B459B70AC1F246E4A4D58C103A94C6C8">Retail Store Licence Terms and
+        Conditions
+        Handbook
+      </a>.
+    </p>
   </section>
 </div>

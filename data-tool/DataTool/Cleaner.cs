@@ -14,14 +14,14 @@ namespace DataTool
         public void Clean(DynamicsClient _dynamicsClient)
         {
             // remove all incidents (waiver applications etc)
-            var licences = _dynamicsClient.Licenses.Get().Value;
+            var licences = _dynamicsClient.Licenceses.Get().Value;
 
             foreach (var licence in licences)
             {
                 try
                 {
-                    _dynamicsClient.Licenses.Delete(licence.AdoxioLicencesid);
-                    Console.Out.WriteLine("Deleted Incident " + licence.AdoxioLicencesid);
+                    _dynamicsClient.Licenceses.Delete(licence.AdoxioLicencesid);
+                    Console.Out.WriteLine("Deleted Licence " + licence.AdoxioLicencesid);
                 }
                 catch (OdataerrorException odee)
                 {
@@ -54,13 +54,13 @@ namespace DataTool
             }
 
             // remove all BusinessContacts.
-            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get().Value;
+            var legalEntities = _dynamicsClient.Legalentities.Get().Value;
 
             foreach (var legalEntity in legalEntities)
             {
                 try
                 {
-                    _dynamicsClient.Adoxiolegalentities.Delete(legalEntity.AdoxioLegalentityid);
+                    _dynamicsClient.Legalentities.Delete(legalEntity.AdoxioLegalentityid);
                     Console.Out.WriteLine("Deleted LegalEntity " + legalEntity.AdoxioLegalentityid);
                 }
                 catch (OdataerrorException odee)
