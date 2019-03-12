@@ -35,12 +35,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'business-profile',
+    path: 'account-profile',
     component: BusinessProfileComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'business-profile/:applicationId',
+    path: 'account-profile/:applicationId',
     component: BusinessProfileComponent,
     canActivate: [BCeidAuthGuard]
   },
