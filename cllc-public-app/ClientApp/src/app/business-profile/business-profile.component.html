@@ -4,13 +4,21 @@
     <div class="col-lg-8 col-sm-12">
       <div [formGroup]="form">
         <div *ngIf="dataLoaded || true">
-          <section>
+          <section *ngIf="!applicationId">
             <h1>
-              Business Profile
+              Account Profile
             </h1>
             <p>
-              Please complete your business profile below. Your information will only be saved once you click the Save
+              Please complete your account profile below. Your information will only be saved once you click the Save
               button at the end of the page.
+            </p>
+          </section>
+          <section *ngIf="applicationId">
+            <h1>
+              Please Review your Account Profile
+            </h1>
+            <p>
+              Please review your account profile below before starting your retail cannabis application.
             </p>
           </section>
 
@@ -312,7 +320,7 @@
                 style="color:white">BCeIDRegistrationDesk@gov.bc.ca</a></span>
           </div>
           <p>
-            All other information can be changed on this Business Profile page.
+            All other information can be changed on this Account Profile page.
           </p>
 
         </div>
