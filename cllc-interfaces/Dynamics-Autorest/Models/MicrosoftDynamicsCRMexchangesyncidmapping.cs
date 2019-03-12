@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMexchangesyncidmapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMexchangesyncidmapping(int? objecttypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), string objectid = default(string), string _owninguserValue = default(string), int? tocrmchangetype = default(int?), int? retries = default(int?), string itemsubject = default(string), bool? isdeletedinexchange = default(bool?), long? versionnumber = default(long?), int? lastsyncerrorcode = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? isunlinkedincrm = default(bool?), string _owningteamValue = default(string), string exchangesyncidmappingid = default(string), int? fromcrmchangetype = default(int?), int? userdecision = default(int?), string exchangeentryid = default(string), string lastsyncerror = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMexchangesyncidmapping(int? objecttypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), string objectid = default(string), string _owninguserValue = default(string), int? tocrmchangetype = default(int?), int? retries = default(int?), bool? isdeletedinexchange = default(bool?), long? versionnumber = default(long?), int? lastsyncerrorcode = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? isunlinkedincrm = default(bool?), string _owningteamValue = default(string), string exchangesyncidmappingid = default(string), int? fromcrmchangetype = default(int?), int? userdecision = default(int?), string exchangeentryid = default(string), string lastsyncerror = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
             Objecttypecode = objecttypecode;
             Modifiedon = modifiedon;
@@ -36,7 +36,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owninguserValue = _owninguserValue;
             Tocrmchangetype = tocrmchangetype;
             Retries = retries;
-            Itemsubject = itemsubject;
             Isdeletedinexchange = isdeletedinexchange;
             Versionnumber = versionnumber;
             Lastsyncerrorcode = lastsyncerrorcode;
@@ -96,11 +95,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "retries")]
         public int? Retries { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "itemsubject")]
-        public string Itemsubject { get; set; }
 
         /// <summary>
         /// </summary>

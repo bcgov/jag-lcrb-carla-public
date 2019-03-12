@@ -42,14 +42,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IEnumerable<MicrosoftDynamicsCRMadoxioLicences> dynamicsLicenseList = null;
             if (string.IsNullOrEmpty(licenceeId))
             {
-                var response = await _dynamicsClient.Licenses.GetAsync();
+                var response = await _dynamicsClient.Licenceses.GetAsync();
                 dynamicsLicenseList = response.Value;
             }
             else
             {
                 // get all licenses in Dynamics filtered by the GUID of the licencee
                 var filter = "_adoxio_licencee_value eq " + licenceeId;
-                var response = await _dynamicsClient.Licenses.GetAsync(filter: filter);
+                var response = await _dynamicsClient.Licenceses.GetAsync(filter: filter);
                 dynamicsLicenseList = response.Value;
             }
 
@@ -415,7 +415,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_establishment"
             };
 
-            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenses.GetByKey(licenceId, expand: expand);
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
             if (adoxioLicense == null)
             {
                 throw new Exception("Error getting license.");
@@ -513,7 +513,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 catch
                 {
                     string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-                    basePath += "/dashboard-lite";
+                    basePath += "/dashboard";
                     return Redirect(basePath);
                 }
             }
