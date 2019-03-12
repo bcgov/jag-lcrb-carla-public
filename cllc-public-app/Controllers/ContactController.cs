@@ -358,7 +358,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 try
                 {
-                    var folder = await _sharePointFileManager.CreateFolder(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
+                    await _sharePointFileManager.CreateFolder(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
                 }
                 catch (Exception e)
                 {
