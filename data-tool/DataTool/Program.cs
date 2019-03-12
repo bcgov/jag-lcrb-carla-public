@@ -79,10 +79,11 @@ namespace DemoTool
             bool isObfuscate = false;
 
             bool isClean = false;
+            bool isApplicationClean = true;
 
             bool isImport = true;
 
-            bool isMove = true;
+            bool isMove = false;
             
 
             // start by getting secrets.
@@ -241,6 +242,15 @@ namespace DemoTool
                 Cleaner cleaner = new Cleaner();
                 cleaner.Clean(conn);
             }
+
+            if (isApplicationClean)
+            {
+                var conn = GetDynamicsConnection(Configuration);
+                ApplicationCleaner cleaner = new ApplicationCleaner();
+                cleaner.Clean(conn);
+            }
+
+
 
             if (isImport)
             {
