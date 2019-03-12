@@ -358,7 +358,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 try
                 {
-                    var folder = await _sharePointFileManager.CreateFolder(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
+                    await _sharePointFileManager.CreateFolder(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
                 }
                 catch (Exception e)
                 {
@@ -380,7 +380,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                mdcsdl = _dynamicsClient.SharepointDocumentLocations.Create(mdcsdl);
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
             }
             catch (OdataerrorException odee)
             {
@@ -403,7 +403,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    _dynamicsClient.SharepointDocumentLocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
                 }
                 catch (OdataerrorException odee)
                 {
@@ -448,13 +448,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string result = null;
             string sanitized = relativeUrl.Replace("'", "''");
             // first see if one exists.
-            var locations = _dynamicsClient.SharepointDocumentLocations.Get(filter: "relativeurl eq '" + sanitized + "'");
+            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
             var location = locations.Value.FirstOrDefault();
 
             if (location == null)
             {
                 //get parent location 
-                var parentSite = _dynamicsClient.SharepointSites.Get().Value.FirstOrDefault();
+                var parentSite = _dynamicsClient.Sharepointsites.Get().Value.FirstOrDefault();
                 var parentSiteRef = _dynamicsClient.GetEntityURI("sharepointsites", parentSite.Sharepointsiteid);
                 MicrosoftDynamicsCRMsharepointdocumentlocation newRecord = new MicrosoftDynamicsCRMsharepointdocumentlocation()
                 {
@@ -465,7 +465,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create a new document location.
                 try
                 {
-                    location = _dynamicsClient.SharepointDocumentLocations.Create(newRecord);
+                    location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
                 }
                 catch (OdataerrorException odee)
                 {

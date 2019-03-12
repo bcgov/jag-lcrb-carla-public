@@ -255,7 +255,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 // fetch from Dynamics.
-                result = await system.Adoxiolegalentities.GetByKeyAsync(id.ToString());
+                result = await system.Legalentities.GetByKeyAsync(id.ToString());
             }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
@@ -270,7 +270,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 // fetch from Dynamics.
-                result = await system.AdoxioTiedhouseconnections.GetByKeyAsync(id.ToString());
+                result = await system.Tiedhouseconnections.GetByKeyAsync(id.ToString());
             }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
@@ -350,6 +350,33 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result;
+            try
+            {
+                string[] expand = { "adoxio_localgovindigenousnationid" };
+
+                // fetch from Dynamics.
+                result = await system.Applications.GetByKeyAsync(id.ToString(), expand: expand);
+
+                if (result._adoxioLicencetypeValue != null)
+                {
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
+                }
+
+                if (result._adoxioApplicantValue != null)
+                {
+                    result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                }
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Get a contact by their Siteminder ID
         /// </summary>
@@ -369,7 +396,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             MicrosoftDynamicsCRMadoxioLegalentity result = null;
             string accountFilter = "_adoxio_account_value eq " + id.ToString();
-            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: accountFilter).Value;
+            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Legalentities.Get(filter: accountFilter).Value;
             result = legalEntities.FirstOrDefault();
             return result;
         }
@@ -381,7 +408,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             try
             {
-                result = _dynamicsClient.AdoxioLicencetypes.GetByKey(id.ToString());
+                result = _dynamicsClient.Licencetypes.GetByKey(id.ToString());
             }
             catch (OdataerrorException)
             {
@@ -414,7 +441,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioLicencetype result = null;
             string typeFilter = "adoxio_name eq '" + name + "'";
 
-            IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.AdoxioLicencetypes.Get(filter: typeFilter).Value;
+            IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.Licencetypes.Get(filter: typeFilter).Value;
 
             result = licenceTypes.FirstOrDefault();
 
@@ -682,7 +709,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             var filter = $"_adoxio_account_value eq {parentAccountId}";
             var result = false;
 
-            var legalEntities = _dynamicsClient.Adoxiolegalentities.Get(filter: filter).Value.ToList();
+            var legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value.ToList();
             if (legalEntities.Any(e => e._adoxioShareholderaccountidValue == childAccountId))
             {
                 result = true;
