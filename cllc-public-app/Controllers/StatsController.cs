@@ -78,7 +78,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     
                 };
 
-                var application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
+                string cacheKey = CacheKeys.ApplicationPrefix + newItem.adoxio_applicationid;
+                
+                MicrosoftDynamicsCRMadoxioApplication application = null;
+                if (!_cache.TryGetValue(cacheKey, out application))
+                {
+                    application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
+                    // Set cache options.
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        // Keep in cache for this time
+                        .SetAbsoluteExpiration(TimeSpan.FromHours(24));
+
+                    // Save data in cache.
+                    _cache.Set(cacheKey, application, cacheEntryOptions);
+                }
                 if (application.AdoxioLocalgovindigenousnationid != null)
                 {
                     newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
