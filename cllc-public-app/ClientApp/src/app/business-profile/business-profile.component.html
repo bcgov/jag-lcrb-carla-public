@@ -9,16 +9,16 @@
               Account Profile
             </h1>
             <p>
-              Please complete your account profile below. Your information will only be saved once you click the Save
+              Please complete the account profile below. The information will only be saved once you click the Save
               button at the end of the page.
             </p>
           </section>
           <section *ngIf="applicationId">
             <h1>
-              Please Review your Account Profile
+              Please Review the Account Profile
             </h1>
             <p>
-              Please review your account profile below before starting your retail cannabis application.
+              Please review the account profile below before starting the retail cannabis application.
             </p>
           </section>
 
@@ -36,7 +36,7 @@
 
             <app-field label="Business Number (BC Corporate Registry Number)" [required]="true"
               [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
-              errorMessage="Please enter your business number (9 digits)">
+              errorMessage="Please enter the business number (9 digits)">
               <input class="form-control" style="width: 150px;" maxlength="9" type="text"
                 formControlName="businessNumber" (keydown)="rejectIfNotDigitOrBackSpace($event)">
             </app-field>
@@ -45,7 +45,7 @@
               [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
               errorMessage="Please select a business type from the dropdown list">
               <select class="form-control" disabled readonly style="width: 250px;" formControlName="businessType">
-                <option value="">Choose your organization type</option>
+                <option value="">Choose the organization type</option>
                 <option value="PrivateCorporation">Private Corporation</option>
                 <option value="PublicCorporation">Public Corporation</option>
                 <option value="UnlimitedLiabilityCorporation">Unlimited Liability Corporation</option>
@@ -111,7 +111,7 @@
             <div class="row">
               <app-field class="col-md-6 col-xs-12" label="Street Address 1" [required]="true"
                 [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
-                errorMessage="Please enter your street address" [isFullWidth]="true">
+                errorMessage="Please enter the street address" [isFullWidth]="true">
                 <input class="form-control" type="text" formControlName="physicalAddressStreet">
               </app-field>
               <app-field class="col-md-6 col-xs-12" label="Street Address 2" [isFullWidth]="true">
@@ -119,7 +119,7 @@
               </app-field>
               <app-field class="col-md-6 col-xs-12" label="City" [required]="true"
                 [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
-                errorMessage="Please enter your city" [isFullWidth]="true">
+                errorMessage="Please enter the city" [isFullWidth]="true">
                 <input class="form-control" type="text" formControlName="physicalAddressCity">
               </app-field>
               <section class="col-md-3 col-xs-12">
@@ -130,7 +130,7 @@
               <section class="col-md-3 col-xs-12">
                 <app-field label="Postal Code" [required]="true"
                   [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                  errorMessage="Please enter your postal code" [isFullWidth]="true">
+                  errorMessage="Please enter the postal code" [isFullWidth]="true">
                   <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
                 </app-field>
               </section>
@@ -187,14 +187,14 @@
 
             <app-field label="Business Phone Number" [required]="true"
               [valid]="form.get('businessProfile.contactPhone').valid || !form.get('businessProfile.contactPhone').touched"
-              errorMessage="Please enter your 10-digit business phone number, without including any spaces">
+              errorMessage="Please enter the 10-digit business phone number, without including any spaces">
               <input class="form-control" style="width: 250px;" maxlength="10"
                 (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPhone">
             </app-field>
             <app-field label="Business Email" [required]="true"
               [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
               errorMessage="Please enter a valid email address"
-              afterLabelText="By submitting your business email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
+              afterLabelText="By submitting the business email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
               <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail"
                 (blur)="trimValue(form.get('businessProfile.contactEmail'))">
             </app-field>
@@ -206,13 +206,13 @@
 
             <app-field label="First Name" [required]="true"
               [valid]="form.get('primarycontact.firstname').valid || !form.get('primarycontact.firstname').touched"
-              errorMessage="Please enter your business contact's first name">
+              errorMessage="Please enter the business contact's first name">
               <input class="form-control" style="width: 350px;" type="text" formControlName="firstname">
             </app-field>
 
             <app-field label="Last Name" [required]="true"
               [valid]="form.get('primarycontact.lastname').valid || !form.get('primarycontact.lastname').touched"
-              errorMessage="Please enter your business contact's last name">
+              errorMessage="Please enter the business contact's last name">
               <input class="form-control" style="width: 350px;" type="text" formControlName="lastname">
             </app-field>
 
@@ -222,7 +222,7 @@
 
             <app-field label="Phone Number" [required]="true"
               [valid]="form.get('primarycontact.telephone1').valid || !form.get('primarycontact.telephone1').touched"
-              errorMessage="Please enter your business contact's 10-digit phone number">
+              errorMessage="Please enter the business contact's 10-digit phone number">
               <input class="form-control" style="width: 250px;" maxlength="10"
                 (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="telephone1">
             </app-field>
@@ -234,7 +234,7 @@
 
             <app-field label="Email" [required]="true"
               [valid]="form.get('primarycontact.emailaddress1').valid || !form.get('primarycontact.emailaddress1').touched"
-              errorMessage="Please enter your business contact's emailaddress1 address">
+              errorMessage="Please enter the business contact's emailaddress1 address">
               <input class="form-control" style="width: 350px;" type="text" formControlName="emailaddress1"
                 (blur)="trimValue(form.get('primarycontact.emailaddress1'))">
             </app-field>
@@ -256,7 +256,7 @@
           </div> -->
 
           <h3 *ngIf="saveFormData?.businessProfile?.businessType !== 'SoleProprietor'" class="blue-header">CONNECTIONS
-            TO FEDERAL PRODUCERS OF CANNBIS</h3>
+            TO FEDERAL PRODUCERS OF CANNABIS</h3>
           <div class="padded-section"
             *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType !== 'SoleProprietor'">
             <app-connection-to-producers [accountId]="saveFormData?.businessProfile?.id"
@@ -298,7 +298,7 @@
         </table>
         <div class="submit-content">
           <p>
-            Your Legal Business Name is imported from BCeID. If there is an error or change in
+            The Legal Business Name is imported from BCeID. If there is an error or change in
             this information, you must contact BCeID to correct it.
           </p>
           <div>
