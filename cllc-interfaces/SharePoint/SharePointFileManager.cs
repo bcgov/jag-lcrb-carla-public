@@ -159,7 +159,14 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return null;
             }
 
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle);
+            string serverRelativeUrl = "";
+            // ensure the webname has a slash.
+            if (!string.IsNullOrEmpty(WebName))
+            {
+                serverRelativeUrl += $"{WebName}/";
+            }
+
+            serverRelativeUrl += Uri.EscapeUriString(listTitle);
             if (!string.IsNullOrEmpty(folderName))
             {
                 serverRelativeUrl += "/" + Uri.EscapeUriString(folderName);
@@ -232,22 +239,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<Object> CreateFolder(string listTitle, string folderName)
+        public async Task CreateFolder(string listTitle, string folderName)
         {
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
-                return null;
+                return;
             }
 
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/folders");
 
+            string relativeUrl = "";
 
-            var folder = CreateNewFolderRequest($"{WebName}/{listTitle}/{folderName}");
+            if (! string.IsNullOrEmpty(WebName))
+            {
+                relativeUrl = "${WebName}/";
+            }
+            relativeUrl += $"{listTitle}/{folderName}";
 
-
-            string jsonString = JsonConvert.SerializeObject(folder);
+            string jsonString = JsonConvert.SerializeObject(relativeUrl);
             StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
             strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
             endpointRequest.Content = strContent;
@@ -276,7 +287,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 jsonString = await response.Content.ReadAsStringAsync();
             }
 
-            return folder;
+            
         }
         /// <summary>
         /// Create Folder
@@ -430,7 +441,13 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            string serverRelativeUrl = "";
+            if (!string.IsNullOrEmpty(WebName))
+            {
+                serverRelativeUrl += $"{WebName}/";
+            }
+
+            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             HttpRequestMessage endpointRequest =
     new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
@@ -489,7 +506,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             Object result = null;
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            string serverRelativeUrl = "";
+            if (!string.IsNullOrEmpty(WebName))
+            {
+                serverRelativeUrl += $"{WebName}/";
+            }
+
+            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
 
@@ -547,7 +571,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             bool folderExists = await this.FolderExists(documentLibrary, folderName);
             if (!folderExists)
             {
-                var folder = await this.CreateFolder(documentLibrary, folderName);
+                await this.CreateFolder(documentLibrary, folderName);
             }
 
             // now add the file to the folder.
@@ -558,7 +582,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public string GetServerRelativeURL(string listTitle, string folderName)
         {
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            string serverRelativeUrl = "";
+            if (!string.IsNullOrEmpty(WebName))
+            {
+                serverRelativeUrl += $"{WebName}/";
+            }
+
+            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            
             return serverRelativeUrl;
         }
 
@@ -677,7 +708,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = $"{WebName}/" + Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName) + "/" + Uri.EscapeUriString(fileName);
+            string serverRelativeUrl = "";
+            if (!string.IsNullOrEmpty(WebName))
+            {
+                serverRelativeUrl += $"{WebName}/";
+            }
+
+            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName) + "/" + Uri.EscapeUriString(fileName);
 
             result = await DeleteFile(serverRelativeUrl);
 
