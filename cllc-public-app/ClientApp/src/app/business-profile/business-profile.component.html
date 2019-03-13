@@ -27,17 +27,17 @@
           <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
           <h3 *ngIf="['PublicCorporation', 'PrivateCorporation'].indexOf(saveFormData?.businessProfile?.businessType) !== -1" class="blue-header"> CORPORATION DETAILS</h3>
           <div formGroupName="businessProfile" class="padded-section">
-            <app-field label="Business - Legal Name">
+            <app-field label="{{getBusinessTypeName()}} - Legal Name">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
                 formControlName="name">
             </app-field>
 
-            <app-field label="Business - Doing Business As (DBA) Name">
+            <app-field label="Doing Business As (DBA) Name">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
                 formControlName="businessDBAName">
             </app-field>
 
-            <app-field label="Business Number (BC Corporate Registry Number)" [required]="true"
+            <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
               [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
               errorMessage="Please enter the business number (9 digits)">
               <input class="form-control" style="width: 150px;" maxlength="9" type="text"
@@ -64,10 +64,10 @@
 
 
             <section
-              *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietor'].indexOf(form.get('businessProfile.businessType').value) == -1">
+              *ngIf="['Partnership', 'SoleProprietorship'].indexOf(form.get('businessProfile.businessType').value) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label
-                  *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1"
+                  *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1"
                   for="">B.C. Incorporation Number</label>
                 <label *ngIf="form.get('businessProfile.businessType').value == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
@@ -84,10 +84,10 @@
             <p></p>
 
             <section
-              *ngIf="['GeneralPartnership', 'Partnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'SoleProprietor'].indexOf(form.get('businessProfile.businessType').value) == -1">
+              *ngIf="['Partnership', 'SoleProprietor'].indexOf(form.get('businessProfile.businessType').value) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label
-                  *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1">Date
+                  *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1">Date
                   of Incorporation in B.C.</label>
                 <label *ngIf="form.get('businessProfile.businessType').value == 'Society'">Date of Incorporation in
                   B.C.</label>
@@ -107,7 +107,7 @@
 
 
 
-          <h3 class="blue-header">BUSINESS ADDRESSES</h3>
+          <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES</h3>
           <div formGroupName="businessProfile" class="padded-section">
             <p></p>
             <h3>Physical Address</h3>
@@ -131,7 +131,7 @@
                 </app-field>
               </section>
               <section class="col-md-3 col-xs-12">
-                <app-field label="Postal Code" [required]="true"
+                <app-field label="Postal Code" [required]="true" (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
                   [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
                   errorMessage="Please enter the postal code" [isFullWidth]="true">
                   <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
@@ -150,7 +150,7 @@
                 <span>Same as physical address</span>
               </section>
               <div class="row">
-                <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
+                <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1" errorMessage="Please enter the street address"
                   [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
                   [required]="true" [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressStreet" class="form-control">
@@ -159,7 +159,7 @@
                   [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressStreet2" class="form-control">
                 </app-field>
-                <app-field class="col-md-6 col-xs-12" label="City"
+                <app-field class="col-md-6 col-xs-12" label="City" errorMessage="Please enter the city"
                   [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched"
                   [required]="true" [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressCity" class="form-control">
@@ -172,13 +172,14 @@
                   </app-field>
                 </section>
                 <section class="col-md-3 col-xs-12">
-                  <app-field label="Postal /Zip Code"
+                  <app-field label="Postal /Zip Code" errorMessage="Please enter the postal code"
+                  (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
                     [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
                     [required]="true" [isFullWidth]="true">
                     <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
                   </app-field>
                 </section>
-                <app-field class="col-md-6 col-xs-12" label="Country"
+                <app-field class="col-md-6 col-xs-12" label="Country" errorMessage="Please enter country"
                   [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
                   [required]="true" [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressCountry" class="form-control">
@@ -203,7 +204,7 @@
             </app-field>
           </div>
 
-          <h3 class="blue-header">BUSINESS CONTACT</h3>
+          <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}}  CONTACT</h3>
           <div formGroupName="primarycontact" class="padded-section">
             <i>The name and contact information of the person LCRB should contact for ongoing communication.</i><br>
 
