@@ -268,7 +268,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             var response = await client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
 
-            if (_statusCode != HttpStatusCode.Created)
+            if (_statusCode != HttpStatusCode.OK && _statusCode != HttpStatusCode.Created)
             {
                 string _responseContent = null;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
