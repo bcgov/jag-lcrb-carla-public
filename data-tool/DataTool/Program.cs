@@ -79,7 +79,7 @@ namespace DemoTool
             bool isObfuscate = false;
 
             bool isClean = false;
-            bool isApplicationClean = true;
+            bool isApplicationClean = false;
 
             bool isImport = true;
 
