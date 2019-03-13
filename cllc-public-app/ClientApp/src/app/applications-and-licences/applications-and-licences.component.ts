@@ -112,7 +112,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     if (!application.assignedLicence) {
       if (status === 'Intake' && !application.isPaid) {
         shownStatus = 'Not Submitted';
-      } else if (status === 'In Progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
+      } else if (status === 'In progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
         shownStatus = 'Application Under Review';
       } else if (status === 'Incomplete') {
         shownStatus = 'Application Incomplete';
