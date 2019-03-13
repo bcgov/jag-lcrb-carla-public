@@ -4,7 +4,6 @@ BC Liquor and Cannabis Regulation Branch - Cannabis Retail Licence Application
 Technology Stack
 -----------------
 
-|         |            |
 | Layer   | Technology | 
 | ------- | ------------ |
 | Presentation | Angular 5 |
@@ -48,6 +47,22 @@ Developer Prerequisites
 - Docker
 - A familiarity with Jenkins
 
+DevOps Process
+-------------
+
+### Jenkins
+
+If any pipeline steps do not start, a common root cause is problems with Jenkins.  Restart the Jenkins service by scaling it down to 0 pods, then back up to 1 pod.
+
+## DEV builds
+Dev builds are triggered by source code being committed to the repository.  This process triggers a webhook which initiates the DEV build pipeline.
+
+## Promotion to TEST
+Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to Builds->Pipelines.  Click  Start Pipeline on the Test Pipeline.
+
+## Promotion to PROD
+Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to Builds->Pipelines.  Click  Start Pipeline on the Prod Pipeline.
+
 Other
 -----------
 
@@ -72,7 +87,7 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 License
 -------
 
-    Copyright 2018 Province of British Columbia
+    Copyright 2019 Province of British Columbia
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
