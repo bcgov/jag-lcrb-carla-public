@@ -22,7 +22,10 @@
             </p>
           </section>
 
-          <h3 class="blue-header">BUSINESS INFORMATION</h3>
+          <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Partnership'" class="blue-header">DETAILS OF THE PARTNERSHIP</h3>
+          <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'SolePropriator'" class="blue-header">DETAILS OF THE SOLE PROPRIETORSHIP</h3>
+          <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
+          <h3 *ngIf="['PublicCorporation', 'PrivateCorporation'].indexOf(saveFormData?.businessProfile?.businessType) !== -1" class="blue-header"> CORPORATION DETAILS</h3>
           <div formGroupName="businessProfile" class="padded-section">
             <app-field label="Business - Legal Name">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
@@ -202,7 +205,7 @@
 
           <h3 class="blue-header">BUSINESS CONTACT</h3>
           <div formGroupName="primarycontact" class="padded-section">
-            <h2>Primary Contact</h2>
+            <i>The name and contact information of the person LCRB should contact for ongoing communication.</i><br>
 
             <app-field label="First Name" [required]="true"
               [valid]="form.get('primarycontact.firstname').valid || !form.get('primarycontact.firstname').touched"
