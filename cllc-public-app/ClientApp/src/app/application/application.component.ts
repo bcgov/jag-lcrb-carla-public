@@ -12,7 +12,7 @@ import { AdoxioApplicationDataService } from '@services/adoxio-application-data.
 import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { AdoxioApplication } from '@models/adoxio-application.model';
-import { FormBase } from '@shared/form-base';
+import { FormBase, postalRegex } from '@shared/form-base';
 import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
 import { ApplicationCancellationDialogComponent } from '@appapplications-and-licences/applications-and-licences.component';
@@ -42,7 +42,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
-  @ViewChild('locationDocuments') locationDocuments: FileUploaderComponent;
   form: FormGroup;
   savedFormData: any;
   subscriptions: Subscription[] = [];
@@ -86,7 +85,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       contactpersonphone: ['', Validators.required],
       establishmentaddressstreet: ['', Validators.required],
       establishmentaddresscity: ['', Validators.required],
-      establishmentaddresspostalcode: ['', Validators.required],
+      establishmentaddresspostalcode: ['', [Validators.required, Validators.pattern(postalRegex)]],
 
       servicehHoursStandardHours: ['', Validators.required],
       serviceHoursSundayOpen: ['', Validators.required],
@@ -252,10 +251,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
-    }
-    if (!this.locationDocuments || !this.locationDocuments.files || this.locationDocuments.files.length < 1) {
-      valid = false;
-      this.validationMessages.push('Proof of lease, sub-lease or purchase of location is required.');
     }
     if (!this.form.get('establishmentName').value) {
       valid = false;
