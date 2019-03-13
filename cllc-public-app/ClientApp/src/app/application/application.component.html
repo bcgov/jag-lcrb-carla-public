@@ -104,15 +104,14 @@
           please see the <a routerLink="/policy-document/store-name">Non-Medical Cannabis Retail Store Name Approval
             Process</a>.</p>
 
-        <app-field class="col-md-12 col-xs-12" label="Name of the Proposed Establishment" [required]="true"
-          [isFullWidth]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+        <app-field label="Name of the Proposed Establishment" [required]="true"
+           [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
           errorMessage="Please enter the name of the proposed establishment">
-          <input class="form-control" style="max-width: 500px;" type="text" formControlName="establishmentName">
+          <input class="form-control" style="width: 500px;" type="text" formControlName="establishmentName">
         </app-field>
 
       </div>
       <div>&nbsp;
-        <p></p>
         <address class="row">
           <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
             [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
