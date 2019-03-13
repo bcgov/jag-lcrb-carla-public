@@ -21,7 +21,7 @@ import * as _moment from 'moment';
 import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '../services/account-data.service';
 import { DynamicsAccount } from '../models/dynamics-account.model';
-import { FormBase } from '../shared/form-base';
+import { FormBase, postalRegex } from '../shared/form-base';
 import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 const moment = _rollupMoment || _moment;
@@ -39,9 +39,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
-
-export const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)';
 
 @Component({
   selector: 'app-business-profile',
@@ -183,6 +180,32 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
   }
 
+  getBusinessTypeName() {
+    if (!(this.saveFormData && this.saveFormData.businessProfile)) {
+      return '';
+    }
+    let name = '';
+    switch (this.saveFormData.businessProfile.businessType) {
+      case 'General Partnership':
+      case 'Limited Partnership"':
+      case 'Limited Liability Partnership':
+        name = 'Sole Partnership';
+        break;
+      case 'SoleProprietorship':
+        name = 'Sole Proprietor';
+        break;
+      case 'Public Corporation':
+      case 'Private Corporation':
+      case 'Unlimited Liability Corporation':
+      case 'Limited Liability Corporation':
+        name = 'Corporation';
+        break;
+      default:
+        name = this.saveFormData.businessProfile.businessType;
+        break;
+    }
+    return name;
+  }
   // hideAdditionalContact() {
   //   this._showAdditionalContact = false;
   //   const controls = (<FormGroup>this.form.get('additionalContact')).controls;
