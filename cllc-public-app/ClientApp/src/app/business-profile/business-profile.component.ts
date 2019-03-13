@@ -180,6 +180,25 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     this.form.get('businessProfile.mailingAddressCountry').patchValue(this.form.get('businessProfile.physicalAddressCountry').value);
   }
 
+  getBusinessTypeName() {
+    if (!(this.saveFormData && this.saveFormData.businessProfile)) {
+      return '';
+    }
+    let name = '';
+    switch (this.saveFormData.businessProfile.businessType) {
+      case 'SoleProprietorship':
+        name = 'Sole Proprietor';
+        break;
+      case 'PublicCorporation':
+      case 'PrivateCorporation':
+        name = 'Corporation';
+        break;
+      default:
+        name = this.saveFormData.businessProfile.businessType;
+        break;
+    }
+    return name;
+  }
   // hideAdditionalContact() {
   //   this._showAdditionalContact = false;
   //   const controls = (<FormGroup>this.form.get('additionalContact')).controls;
