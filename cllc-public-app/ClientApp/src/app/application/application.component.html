@@ -7,8 +7,7 @@
   <div [formGroup]="form" class="application-wrapper">
 
     <p>
-      Please ensure that your application form, financial integrity form and supporting documentation for your
-      application are included. A $7,500.00 application fee will be required at the time of application submission. If
+      A $7,500.00 application fee will be required at the time of application submission. If
       your application for a licence is approved, a $1,500.00 first year licensing fee will be required prior to the
       licence being issued.
     </p>
@@ -88,9 +87,6 @@
         <label for="">Establishment Name</label>
         <br>
 
-        <p>Begin by entering the name of the proposed establishment.</p>
-        <br>
-
         <p>
           A name cannot mislead the public about what kind of business it operates. The name cannot imply a
           licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
@@ -98,36 +94,35 @@
           or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
           Scheduling Act. Store names cannot also use language that encourages intoxication.
         </p>
-        <br>
 
         <p>
           Additionally, a name cannot imply an association with another business. This applies to signs,
           trademarks and any type of branding.
         </p>
-        <br>
 
-        <p>Establishment names will be reviewed for approval during the application process.</p>
+        <p>Establishment names will be reviewed for approval during the application process. For more information,
+          please see the <a routerLink="/policy-document/store-name">Non-Medical Cannabis Retail Store Name Approval
+            Process</a>.</p>
 
-        <input class="form-control" style="max-width: 500px;" type="text" id="establishmentName"
-          formControlName="establishmentName" placeholder="Begin by entering the name of the proposed establishment.">
-        <div *ngIf="this.isFieldError('establishmentName')" class="alert alert-danger" style="width: 250px;">
-          <div *ngIf="form.controls['establishmentName'].hasError('required') ">
-            This is required
-          </div>
-        </div>
+        <app-field class="col-md-12 col-xs-12" label="Name of the Proposed Establishment" [required]="true"
+          [isFullWidth]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+          errorMessage="Please enter the name of the proposed establishment">
+          <input class="form-control" style="max-width: 500px;" type="text" formControlName="establishmentName">
+        </app-field>
+
       </div>
-      <div>
+      <div>&nbsp;
         <p></p>
         <address class="row">
           <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
             [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
-            errorMessage="Please enter your street address">
+            errorMessage="Please enter the street address">
             <input class="form-control" type="text" autocomplete="address-line1"
               formControlName="establishmentaddressstreet">
           </app-field>
           <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
             [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
-            errorMessage="Please enter your city">
+            errorMessage="Please enter the city">
             <input class="form-control" type="text" autocomplete="address-level2"
               formControlName="establishmentaddresscity">
           </app-field>
@@ -139,7 +134,7 @@
           <section class="col-md-4 col-xs-12">
             <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
               [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
-              errorMessage="Please enter your postal code">
+              errorMessage="Please enter the postal code">
               <input class="form-control" type="text" autocomplete="postal-code"
                 formControlName="establishmentaddresspostalcode">
             </app-field>
@@ -151,7 +146,7 @@
 
         <div class="light-blue-bg" style="display: flex;">
           <div style="flex: 0 0 210px;">
-            <app-field label="Parcel Identifier"
+            <app-field label="Parcel Identifier (PID)"
               [valid]="!form.get('establishmentparcelid').touched || form.get('establishmentparcelid').valid"
               errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
               <input type="text" class="form-control" style="width: 200px;" maxlength=9
@@ -180,52 +175,13 @@
       </div>
     </section>
     <p>&nbsp;</p>
-    <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-    <address class="padded-section">
 
-      <app-field label="First Name" [required]="true"
-        [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
-        errorMessage="Please enter your business contact's first name">
-        <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-          formControlName="contactpersonfirstname">
-      </app-field>
-
-      <app-field label="Last Name" [required]="true"
-        [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
-        errorMessage="Please enter your business contact's last name">
-        <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-          formControlName="contactpersonlastname">
-      </app-field>
-
-      <app-field label="Title/ Position" [required]="false" [valid]="true">
-        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonrole">
-      </app-field>
-
-      <app-field label="Phone Number (main)" [required]="true"
-        [valid]="form.get('contactpersonphone').valid || !form.get('contactpersonphone').touched"
-        errorMessage="Please enter your business contact's 10-digit phone number">
-        <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-          (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactpersonphone">
-      </app-field>
-
-      <!-- <app-field label="Phone Number (alternate)" [required]="false">
-        <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-          type="text" formControlName="phoneNumberAlt">
-      </app-field> -->
-
-      <app-field label="Email" [required]="true"
-        [valid]="form.get('contactpersonemail').valid || !form.get('contactpersonemail').touched"
-        errorMessage="Please enter your business contact's email address">
-        <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-          formControlName="contactpersonemail" (blur)="trimValue(form.get('contactpersonemail'))">
-      </app-field>
-    </address>
 
     <h3 class="blue-header">HOURS OF SALE</h3>
     <div class="padded-section">
       <p>Indicate the store's proposed hours for cannabis sales below. Proposed hours must fall between 9 a.m. and 11
         p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed at
-        times they are licenced to be open.
+        times they are licensed to be open.
       </p>
       <table class="store-hours">
         <tr>
@@ -330,63 +286,73 @@
         </tr>
       </table>
     </div>
-    <h3 class="blue-header">DECLARATIONS</h3>
-    <div class="padded-section">
-      <p>This application should be submitted by an individual with the authority to bind the applicant. The branch
-        relies on the applicant to ensure that the individual who submits this application is authorized to do so.
-        Typically, an appropriate individual in a corporation will be a duty authorized signatory who will usually be an
-        officer or, in some cases, a director.
-      </p>
-      <p>Note: An agent, lawuer, licensee representative or third party operator may NOT submit this application on
-        behalf ot the applicant.</p>
-      <section style="display: flex">
-        <input type="checkbox" formControlName="authorizedToSubmit">
-        <span class="error-states">*</span>
-        <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application</div>
-      </section>
-      <p>
-        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general manager
-        an application, or
-        information or a record included as part of the application, that contains false or misleading information, or
-        fails to disclose a material fact”
-      </p>
-      <section style="display: flex">
-        <input type="checkbox" formControlName="signatureAgreement">
-        <span class="error-states">*</span>
-        <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
-          application is true and complete</div>
-      </section>
-    </div>
+
+    <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+    <address class="padded-section">
+
+      <app-field label="First Name" [required]="true"
+        [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
+        errorMessage="Please enter the business contact's first name">
+        <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+          formControlName="contactpersonfirstname">
+      </app-field>
+
+      <app-field label="Last Name" [required]="true"
+        [valid]="form.get('contactpersonlastname').valid || !form.get('contactpersonlastname').touched"
+        errorMessage="Please enter the business contact's last name">
+        <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+          formControlName="contactpersonlastname">
+      </app-field>
+
+      <app-field label="Title/ Position" [required]="false" [valid]="true">
+        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonrole">
+      </app-field>
+
+      <app-field label="Phone Number (main)" [required]="true"
+        [valid]="form.get('contactpersonphone').valid || !form.get('contactpersonphone').touched"
+        errorMessage="Please enter the business contact's 10-digit phone number">
+        <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+          (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactpersonphone">
+      </app-field>
+
+      <app-field label="Email" [required]="true"
+        [valid]="form.get('contactpersonemail').valid || !form.get('contactpersonemail').touched"
+        errorMessage="Please enter the business contact's email address">
+        <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+          formControlName="contactpersonemail" (blur)="trimValue(form.get('contactpersonemail'))">
+      </app-field>
+    </address>
+
     <hr>
     <p>&nbsp;</p>
 
     <label for="">Associates Form</label>
     <br>
     <i>
-      Please download the
+      Please download
       <a *ngIf="account?.businessType === 'SoleProprietor'"
         href="https://www2.gov.bc.ca/assets/download/5A4BABAFCEF6481AB318949BA12CF842" download target="_blank">
-        associate form
+        and complete
       </a>
       <a *ngIf="account?.businessType === 'Society'"
         href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
-        associate form
+        and complete
       </a>
       <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
         href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download target="_blank">
-        associate form
+        and complete
       </a>
       <a *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
         href="https://www2.gov.bc.ca/assets/download/B8A522CB3E8D4595A970F6331F4667A8" download target="_blank">
-        associate form
+        and complete
       </a>
-      &nbsp;and fill it.
+      &nbsp;the Associate Form..
     </i>
-    <p>Upload the completed associate form below.</p>
+    <p>Upload the completed form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm>
+        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
       </app-file-uploader>
     </section>
     <br>
@@ -395,9 +361,9 @@
 
     <label for="">Financial Integrity Form</label>
     <br>
-    <i>Please download the <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank">business financial integrity form</a> and fill it</i>
-    <p>Upload the completed Financial Integrity form below.</p>
+    <i>Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank">and complete</a> the financial integrity form.</i>
+    <p>Upload the completed form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
@@ -406,28 +372,10 @@
     </section>
     <br>
     <hr>
-    <br>
-
-    <label for="">Proof of ownership, lease or sub-lease of a location</label>
-    <br>
-    <p>
-      A licence cannot be issued unless the applicant
-      provides evidence of the purchase or lease. Leases or other arrangements must not expire for at least 12 months
-      from the date a licence is
-      issued.
-    </p>
-    <p>Upload a copy of the proof or offfer of ownership, lease or sub-lease.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Proof of Location"
-        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
-        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #locationDocuments></app-file-uploader>
-    </section>
-    <br>
-    <hr>
 
     <label for="">Supporting Documents</label>
     <br>
-    <p>Upload all required documentation that will support the licence application.</p>
+    <p>Please download the Document Checklist and assemble all required documents.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
         fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
@@ -447,6 +395,61 @@
     </i>
     <br>
 
+    <h3 class="blue-header">DECLARATIONS</h3>
+    <div class="padded-section">
+      <p>This application should be submitted by an individual with the authority to bind the applicant. The branch
+        relies on the applicant to ensure that the individual who submits this application is authorized to do so.
+        <span *ngIf="account?.businessType === 'SoleProprietor'">
+          Typically, an appropriate individual for a sole proprietorship will be
+          the sole proprietor.
+        </span>
+        <span *ngIf="account?.businessType === 'Society'"
+          href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
+          Typically, an appropriate individual for a society will be a director or a
+          senior manager (as defi ned in the Societies Act).
+        </span>
+        <span *ngIf="account?.businessType === 'Partnership'">
+          Typically, an appropriate individual will be as follows:
+          <ul>
+            <li>If the applicant is a general partnership, one of the partners</li>
+            <li>If the applicant is a limited partnership, the general partner of the partnership</li>
+          </ul>
+        </span>
+        <span *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1">
+          Typically, an appropriate individual in a corporation will be a duty authorized signatory who will usually be
+          an
+          officer or, in some cases, a director.
+        </span>
+
+      </p>
+      <p>Note: An agent, lawyer, licensee representative or third party operator may NOT submit this application on
+        behalf of the applicant.</p>
+      <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+        errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+        <section style="display: flex">
+          <input type="checkbox" formControlName="authorizedToSubmit">
+          <span class="error-states">*</span>
+          <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application</div>
+        </section>
+      </app-field>
+      <p>
+        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general manager
+        an application, or
+        information or a record included as part of the application, that contains false or misleading information, or
+        fails to disclose a material fact”.
+      </p>
+      <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+        errorMessage="Please affirm that all of the information provided for this application is true and complete."
+        [showChevrons]="false">
+        <section style="display: flex">
+          <input type="checkbox" formControlName="signatureAgreement">
+          <span class="error-states">*</span>
+          <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+            application is true and complete</div>
+        </section>
+      </app-field>
+    </div>
+
     <section class="error" *ngIf="showValidationMessages">
       <p *ngFor="let message of validationMessages">
         <span class="app-cancel">
@@ -455,6 +458,19 @@
         </span>
       </p>
     </section>
+
+    <p>&nbsp;</p>
+    <p>
+      The Province does not know how many application for a cannabis retail store license will be received. Therefore,
+      it is difficult to predict how long applications will take to process. To minimize delays in processing,
+      applicants must make sure the application is complete before submitting it.
+    </p>
+    <br>
+    <p>
+      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
+      once an application is submitted you will be unable to upload additional documentation. For questions on the LCRB
+      application process please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+    </p>
 
     <section style="position: relative;">
       <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
@@ -472,25 +488,7 @@
           </a>
         </span>
       </span>
-      <p>&nbsp;</p>
-      <p>
-        The province does not know how many application for a cannabis retail store license will be recieved.
-        Therefore,
-        it is difficult
-        to predict how long applications will take to process. To minimize delays in processing, applicants must make
-        sure
-        the application is complete before submitting it.
-      </p>
-      <br>
-      <p>
-        The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
-        once an application
-        is submitted you will be unable to upload additional documentation. For questions on the LCRB application
-        process
-        please
-        contact:
-        <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
-      </p>
+
       <div [ngBusy]="busy"></div>
     </section>
   </div>
@@ -509,30 +507,30 @@
     <label for="">Associates Form</label>
     <br>
     <i>
-      Please download the
+      Please download
       <a *ngIf="account?.businessType === 'SoleProprietor'"
         href="https://www2.gov.bc.ca/assets/download/5A4BABAFCEF6481AB318949BA12CF842" download target="_blank">
-        associate form
+        and complete
       </a>
       <a *ngIf="account?.businessType === 'Society'"
         href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
-        associate form
+        and complete
       </a>
-      <a *ngIf="['Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
+      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
         href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download target="_blank">
-        associate form
+        and complete
       </a>
       <a *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
         href="https://www2.gov.bc.ca/assets/download/B8A522CB3E8D4595A970F6331F4667A8" download target="_blank">
-        associate form
+        and complete
       </a>
-      &nbsp;and fill it.
+      &nbsp;the Associate Form..
     </i>
-    <p>Upload the completed associate form below.</p>
+    <p>Upload the completed form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD APPLICATION FORM, DRAG FILE HERE OR'" #mainForm>
+        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
       </app-file-uploader>
     </section>
     <br>
@@ -541,9 +539,9 @@
 
     <label for="">Financial Integrity Form</label>
     <br>
-    <i>Please download the <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank">business financial integrity form</a> and fill it</i>
-    <p>Upload the completed Financial Integrity form below.</p>
+    <i>Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank">and complete</a> the financial integrity form.</i>
+    <p>Upload the completed form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
@@ -552,32 +550,16 @@
     </section>
     <br>
     <hr>
-    <br>
-
-    <label for="">Proof of ownership, lease or sub-lease of a location</label>
-    <br>
-    <p>
-      A licence cannot be issued unless the applicant
-      provides evidence of the purchase or lease. Leases or other arrangements must not expire for at least 12 months
-      from the date a licence is
-      issued.
-    </p>
-    <p>Upload a copy of the proof or offer of ownership, lease or sub-lease.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Proof of Location"
-        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
-        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #locationDocuments></app-file-uploader>
-    </section>
-    <br>
-    <hr>
 
     <label for="">Supporting Documents</label>
     <br>
-    <p>Upload all required documentation that will support the licence application.</p>
+    <p>Please download the Document Checklist and assemble all required documents.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
         fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
         [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments></app-file-uploader>
     </section>
+    <br>
+    <hr>
   </div>
 </div>
