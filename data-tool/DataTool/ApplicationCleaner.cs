@@ -33,7 +33,26 @@ namespace DataTool
                     Console.Out.WriteLine(odee.Response.Content);
                 }
             }
-            
+
+            // remove all lgin
+            var lgins = _dynamicsClient.Localgovindigenousnations.Get().Value;
+
+            foreach (var lgin in lgins)
+            {
+                try
+                {
+                    _dynamicsClient.Localgovindigenousnations.Delete(lgin.AdoxioLocalgovindigenousnationid);
+                    Console.Out.WriteLine("Deleted LGIN " + lgin.AdoxioLocalgovindigenousnationid);
+                }
+                catch (OdataerrorException odee)
+                {
+                    Console.Out.WriteLine("Error deleting LGIN");
+                    Console.Out.WriteLine("Request:");
+                    Console.Out.WriteLine(odee.Request.Content);
+                    Console.Out.WriteLine("Response:");
+                    Console.Out.WriteLine(odee.Response.Content);
+                }
+            }
 
         }
 

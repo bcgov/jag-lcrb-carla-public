@@ -518,8 +518,7 @@ namespace DataTool
                 if (item != null)
                 {
                     if (
-                            item.AdoxioName == localGovIndigenousNation.AdoxioName
-                            && item.AdoxioPhonenumber == localGovIndigenousNation.AdoxioPhonenumber
+                            item.AdoxioName == localGovIndigenousNation.AdoxioName                            
                        )
                     {
                         notFound = false;
@@ -531,27 +530,27 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateLocalGovIndigenousNation(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation LocalGovIndigenousNation)
+        void CreateLocalGovIndigenousNation(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation localGovIndigenousNation)
         {
             string contactId = null;
             string workerId = null;
 
             MicrosoftDynamicsCRMadoxioLocalgovindigenousnation newLocalGovIndigenousNation = new MicrosoftDynamicsCRMadoxioLocalgovindigenousnation()
             {
-                AdoxioName = LocalGovIndigenousNation.AdoxioName,
-                AdoxioCommunicationsregion = LocalGovIndigenousNation.AdoxioCommunicationsregion,
-                AdoxioIssuingcannabislicences = LocalGovIndigenousNation.AdoxioIssuingcannabislicences
+                AdoxioName = localGovIndigenousNation.AdoxioName,
+                AdoxioCommunicationsregion = localGovIndigenousNation.AdoxioCommunicationsregion,
+                AdoxioIssuingcannabislicences = localGovIndigenousNation.AdoxioIssuingcannabislicences
             };
 
-            LocalGovIndigenousNation.AdoxioLocalgovindigenousnationid = null;
+            localGovIndigenousNation.AdoxioLocalgovindigenousnationid = null;
             try
             {
-                LocalGovIndigenousNation = _dynamicsClient.Localgovindigenousnations.Create(newLocalGovIndigenousNation);
-                Console.Out.WriteLine("created LocalGovIndigenousNation " + LocalGovIndigenousNation.AdoxioName);
+                localGovIndigenousNation = _dynamicsClient.Localgovindigenousnations.Create(newLocalGovIndigenousNation);
+                Console.Out.WriteLine("created LocalGovIndigenousNation " + localGovIndigenousNation.AdoxioName);
             }
             catch (OdataerrorException odee)
             {
-                LocalGovIndigenousNation.AdoxioLocalgovindigenousnationid = _dynamicsClient.GetCreatedRecord(odee, "Error creating contact");
+                localGovIndigenousNation.AdoxioLocalgovindigenousnationid = _dynamicsClient.GetCreatedRecord(odee, "Error creating lgin record");
             }
 
         }
@@ -824,11 +823,11 @@ namespace DataTool
 
             }
 
-            if (application.AdoxioLocalgovindigenousnationid != null && LocalgovindigenousnationMap.ContainsKey(application.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid))
+            if (application.AdoxioLocalgovindigenousnationid != null && application.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid != null && LocalgovindigenousnationMap.ContainsKey(application.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid))
             {
                 MicrosoftDynamicsCRMadoxioApplication localGovLinkItem = new MicrosoftDynamicsCRMadoxioApplication()
                 {
-                    AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnation", LocalgovindigenousnationMap[application.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid])
+                    AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", LocalgovindigenousnationMap[application.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid])
                 };
 
                 try

@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -33,6 +34,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public string NativeBaseUri { get; set; }
         string Authorization { get; set; }
         private HttpClient client;
+        private string digest;
 
         public SharePointFileManager(string serverAppIdUri,
                                      string odataUri,
@@ -91,7 +93,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             client.DefaultRequestHeaders.Add("Authorization", Authorization);
             var digestTask = GetDigest(client);
             digestTask.Wait();
-            string digest = digestTask.Result;
+            digest = digestTask.Result;
             if (digest != null)
             {
                 client.DefaultRequestHeaders.Add("X-RequestDigest", digest);
@@ -247,27 +249,26 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return;
             }
 
+            string relativeUrl = $"{listTitle}/{folderName}";
+
             HttpRequestMessage endpointRequest =
-                new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/folders");
+                new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + $"web/folders/add('{relativeUrl}')");
 
-            string relativeUrl = "";
+             relativeUrl = "";
 
-            if (! string.IsNullOrEmpty(WebName))
-            {
-                relativeUrl = "${WebName}/";
-            }
-            relativeUrl += $"{listTitle}/{folderName}";
+            
+            //string jsonString = "{ '__metadata': { 'type': 'SP.Folder' }, 'ServerRelativeUrl': '" + relativeUrl + "'}";
 
-            string jsonString = JsonConvert.SerializeObject(relativeUrl);
-            StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
-            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
-            endpointRequest.Content = strContent;
+            //StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
+            //strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+            //endpointRequest.Content = strContent;
 
             // make the request.
             var response = await client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
 
-            if (_statusCode != HttpStatusCode.Created)
+            if (_statusCode != HttpStatusCode.OK && _statusCode != HttpStatusCode.Created)
             {
                 string _responseContent = null;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
@@ -284,7 +285,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                jsonString = await response.Content.ReadAsStringAsync();
+                string jsonString = await response.Content.ReadAsStringAsync();
             }
 
             
@@ -516,7 +517,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
-
+                        
             // make the request.
             var response = await client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
@@ -692,6 +693,16 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     JToken t = JToken.Parse(jsonString);
                     result = t["d"]["GetContextWebInformation"]["FormDigestValue"].ToString();
+                }
+                else
+                {
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(jsonString);
+                    var digests = doc.GetElementsByTagName("d:FormDigestValue");
+                    if (digests.Count > 0)
+                    {
+                        result = digests[0].InnerText;
+                    }
                 }
                 
             }
