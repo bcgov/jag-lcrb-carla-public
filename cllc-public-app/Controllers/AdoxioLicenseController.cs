@@ -508,7 +508,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
-                    return File(data, "application/pdf");
+                    Response.Headers.Add("Content-Disposition", $"inline; filename={adoxioLicense.AdoxioLicencenumber}.pdf");
+                    return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch
                 {
