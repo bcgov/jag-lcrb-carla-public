@@ -21,7 +21,7 @@ import * as _moment from 'moment';
 import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '../services/account-data.service';
 import { DynamicsAccount } from '../models/dynamics-account.model';
-import { FormBase } from '../shared/form-base';
+import { FormBase, postalRegex } from '../shared/form-base';
 import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 const moment = _rollupMoment || _moment;
@@ -39,9 +39,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
-
-export const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)';
 
 @Component({
   selector: 'app-business-profile',
