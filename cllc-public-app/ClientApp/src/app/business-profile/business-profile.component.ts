@@ -191,7 +191,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
       case 'LimitedLiabilityPartnership':
         name = 'Partnership';
         break;
-      case 'SoleProprietorship':
+      case 'SoleProprietor':
         name = 'Sole Proprietor';
         break;
       case 'PublicCorporation':
