@@ -98,23 +98,6 @@
     </section>
     <p></p>
 
-    <section>
-      <label for="">Does a federal producer have any financial or business connection in the corporation? </label>
-      <br>
-      <span>This includes:</span>
-      <ul>
-        <li>Directly holding 20% or more voting shares in the corporation</li>
-        <li>Indirectly holding 20% or more voting shares in the corporation. For example, through a subsidiary</li>
-        <li>Having a beneficial interest in the corporation. For example, through a trust</li>
-      </ul>
-      <input type="radio" group="federalProducerConnectionToCorp" [value]='1'
-        formControlName="federalProducerConnectionToCorp"> Yes
-      <br>
-      <input type="radio" group="federalProducerConnectionToCorp" [value]='0'
-        formControlName="federalProducerConnectionToCorp"> No
-    </section>
-    <p></p>
-
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
       <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details
         about
@@ -168,8 +151,6 @@
           <li>A contractual business arrangement of any sort.</li>
         </ul>
         <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</i><br>
-      <span>Immediate family members include spouses, parents, siblings, children, sons-in-law and
-        daughters-in-law</span>
       <br>
       <input type="radio" group="share20PlusFamilyConnectionProducer" [value]='1'
         formControlName="share20PlusFamilyConnectionProducer"> Yes

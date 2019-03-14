@@ -67,7 +67,7 @@
             </app-field>
 
             <section
-              *ngIf="['Partnership', 'SoleProprietor'].indexOf(getBusinessTypeName()) == -1">
+              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label
                   *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"
@@ -87,7 +87,7 @@
             <p></p>
 
             <section
-              *ngIf="['Partnership', 'SoleProprietor'].indexOf(getBusinessTypeName()) == -1">
+              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label
                   *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
@@ -267,13 +267,13 @@
           <h3 class="blue-header">CONNECTIONS
             TO FEDERAL PRODUCERS OF CANNABIS</h3>
           <div class="padded-section"
-            *ngIf="saveFormData?.businessProfile?.id && saveFormData?.businessProfile?.businessType !== 'SoleProprietor'">
+            *ngIf="saveFormData?.businessProfile?.id">
             <app-connection-to-producers [accountId]="saveFormData?.businessProfile?.id"
               [businessType]="saveFormData?.businessProfile?.businessType"></app-connection-to-producers>
           </div>
 
 
-          <div *ngIf="!form.valid && form.touched && false" class="error-summary">
+          <div *ngIf="!form.valid && form.touched" class="error-summary">
             <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
             <span>Some required fields have not been completed</span>
           </div>

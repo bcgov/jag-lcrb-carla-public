@@ -548,7 +548,7 @@
     <p>Upload the completed form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [enableFileDeletion]="false"
         [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
       </app-file-uploader>
     </section>
@@ -563,7 +563,7 @@
     <p>Upload the completed form below.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [enableFileDeletion]="false"
         [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
         #financialIntegrityDocuments></app-file-uploader>
     </section>
@@ -576,7 +576,7 @@
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
         fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
-        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments></app-file-uploader>
+        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments></app-file-uploader>
     </section>
     <br>
     <hr>
