@@ -63,7 +63,7 @@
       </section>
 
       <section
-        *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
+        *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
         class="padded-section">
         <ul>
           <li>The partnership has a registered business number issued by the Canada Revenue Agency</li>
@@ -338,7 +338,7 @@
         href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
         and complete
       </a>
-      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
+      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
         href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download target="_blank">
         and complete
       </a>
@@ -375,7 +375,24 @@
 
     <label for="">Supporting Documents</label>
     <br>
-    <p>Please download the Document Checklist and assemble all required documents.</p>
+    <p>Please download the 
+        <a *ngIf="account?.businessType === 'SoleProprietor'"
+        href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
+        Document Checklist
+      </a>
+      <a *ngIf="account?.businessType === 'Society'"
+        href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
+        Document Checklist
+      </a>
+      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+        href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
+        Document Checklist
+      </a>
+      <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+        href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
+        Document Checklist
+      </a>
+       and assemble all required documents.</p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
         fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
@@ -408,7 +425,7 @@
           Typically, an appropriate individual for a society will be a director or a
           senior manager (as defi ned in the Societies Act).
         </span>
-        <span *ngIf="account?.businessType === 'Partnership'">
+        <span *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">
           Typically, an appropriate individual will be as follows:
           <ul>
             <li>If the applicant is a general partnership, one of the partners</li>
@@ -518,7 +535,7 @@
         href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
         and complete
       </a>
-      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(account?.businessType) !== -1"
+      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
         href="https://www2.gov.bc.ca/assets/download/3039EF4EF87646D8916A48F2806DEB76" download target="_blank">
         and complete
       </a>
