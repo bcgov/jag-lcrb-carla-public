@@ -242,7 +242,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.validationMessages = [];
     if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
       valid = false;
-      this.validationMessages.push('Application form is required.');
+      this.validationMessages.push('Associate form is required.');
     }
     if (!this.financialIntegrityDocuments || !this.financialIntegrityDocuments.files || this.financialIntegrityDocuments.files.length < 1) {
       valid = false;

@@ -105,7 +105,7 @@
             Process</a>.</p>
 
         <app-field label="Name of the Proposed Establishment" [required]="true"
-           [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+          [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
           errorMessage="Please enter the name of the proposed establishment">
           <input class="form-control" style="width: 500px;" type="text" formControlName="establishmentName">
         </app-field>
@@ -287,6 +287,7 @@
     </div>
 
     <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+    <i>The contact the LCRB should communicate with regarding the application</i>
     <address class="padded-section">
 
       <app-field label="First Name" [required]="true"
@@ -415,7 +416,7 @@
           </ul>
         </span>
         <span *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1">
-          Typically, an appropriate individual in a corporation will be a duty authorized signatory who will usually be
+          Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be
           an
           officer or, in some cases, a director.
         </span>
@@ -458,20 +459,22 @@
       </p>
     </section>
 
-    <p>&nbsp;</p>
-    <p>
-      The Province does not know how many application for a cannabis retail store license will be received. Therefore,
-      it is difficult to predict how long applications will take to process. To minimize delays in processing,
-      applicants must make sure the application is complete before submitting it.
-    </p>
-    <br>
-    <p>
-      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
-      once an application is submitted you will be unable to upload additional documentation. For questions on the LCRB
-      application process please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
-    </p>
+    <div class="light-blue-bg">
+      <p>
+        The Province does not know how many application for a cannabis retail store license will be received. Therefore,
+        it is difficult to predict how long applications will take to process. To minimize delays in processing,
+        applicants must make sure the application is complete before submitting it.
+      </p>
+      <br>
+      <p>
+        The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
+        once an application is submitted you will be unable to upload additional documentation. For questions on the
+        LCRB
+        application process please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+      </p>
+    </div>
 
-    <section style="position: relative;">
+    <section style="position: relative; margin-top: 20px;">
       <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
         <span>
           <i class="fa fa-save" style="color: #fff;"></i>
