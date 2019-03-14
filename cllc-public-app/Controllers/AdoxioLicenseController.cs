@@ -15,6 +15,7 @@ using System;
 using System.Linq;
 using System.Net;
 using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -27,13 +28,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly PdfClient _pdfClient;
+        private readonly ILogger _logger;
 
-        public AdoxioLicenseController(IDynamicsClient dynamicsClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, PdfClient pdfClient)
+        public AdoxioLicenseController(IDynamicsClient dynamicsClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, PdfClient pdfClient, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _pdfClient = pdfClient;
+            _logger = loggerFactory.CreateLogger(typeof(AdoxioApplicationController));
         }
 
         private async Task<List<AdoxioLicense>> GetLicensesByLicencee(string licenceeId)
@@ -507,15 +510,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
-                    Response.Headers.Add("Content-Disposition", $"inline; filename={adoxioLicense.AdoxioLicencenumber}.pdf");
+                    byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");                    
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
-                catch
+                catch (Exception e)
                 {
-                    string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
-                    basePath += "/dashboard";
-                    return Redirect(basePath);
+                    _logger.LogError("Error returning PDF response");
+                    _logger.LogError(e.Message);
+
+                    return new NotFoundResult();
                 }
             }
             else
