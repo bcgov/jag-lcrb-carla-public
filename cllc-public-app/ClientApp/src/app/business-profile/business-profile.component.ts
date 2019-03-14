@@ -206,15 +206,6 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     }
     return name;
   }
-  // hideAdditionalContact() {
-  //   this._showAdditionalContact = false;
-  //   const controls = (<FormGroup>this.form.get('additionalContact')).controls;
-  //   // tslint:disable-next-line:forin
-  //   for (const c in controls) {
-  //     controls[c].clearValidators();
-  //     controls[c].reset();
-  //   }
-  // }
 
   reloadUser() {
     this.busy = this.userDataService.getCurrentUser()
