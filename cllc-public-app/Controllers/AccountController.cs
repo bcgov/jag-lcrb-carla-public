@@ -363,7 +363,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 userContact = _dynamicsClient.GetContactByExternalId(contactSiteminderGuid);
-                createContact = false;
+                if (userContact != null)
+                {
+                    createContact = false;
+                }
+                
             }
             catch (OdataerrorException odee)
             {
