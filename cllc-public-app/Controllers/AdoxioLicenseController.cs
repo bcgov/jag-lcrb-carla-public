@@ -407,8 +407,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// GET a licence as PDF.
-        [HttpGet("{licenceId}/pdf")]
-        public async Task<IActionResult> GetLicencePDF(string licenceId)
+        [HttpGet("{licenceId}/pdf/{filename}")]
+        public async Task<IActionResult> GetLicencePDF(string licenceId, string filename)
         {
 
             var expand = new List<string> {
