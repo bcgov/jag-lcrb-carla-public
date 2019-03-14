@@ -22,10 +22,14 @@
             </p>
           </section>
 
-          <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Partnership'" class="blue-header">DETAILS OF THE PARTNERSHIP</h3>
-          <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'SolePropriator'" class="blue-header">DETAILS OF THE SOLE PROPRIETORSHIP</h3>
+          <h3 *ngIf="getBusinessTypeName() === 'Partnership'" class="blue-header">DETAILS OF THE
+            PARTNERSHIP</h3>
+          <h3 *ngIf="getBusinessTypeName() === 'SolePropriator'" class="blue-header">DETAILS OF
+            THE SOLE PROPRIETORSHIP</h3>
           <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
-          <h3 *ngIf="['PublicCorporation', 'PrivateCorporation'].indexOf(saveFormData?.businessProfile?.businessType) !== -1" class="blue-header"> CORPORATION DETAILS</h3>
+          <h3
+            *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"
+            class="blue-header"> CORPORATION DETAILS</h3>
           <div formGroupName="businessProfile" class="padded-section">
             <app-field label="{{getBusinessTypeName()}} - Legal Name">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
@@ -62,14 +66,13 @@
               </select>
             </app-field>
 
-
             <section
-              *ngIf="['Partnership', 'SoleProprietorship'].indexOf(form.get('businessProfile.businessType').value) == -1">
+              *ngIf="['Partnership', 'SoleProprietorship'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label
-                  *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1"
+                  *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"
                   for="">B.C. Incorporation Number</label>
-                <label *ngIf="form.get('businessProfile.businessType').value == 'Society'" for="">B.C. Society
+                <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
@@ -84,12 +87,12 @@
             <p></p>
 
             <section
-              *ngIf="['Partnership', 'SoleProprietor'].indexOf(form.get('businessProfile.businessType').value) == -1">
+              *ngIf="['Partnership', 'SoleProprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label
-                  *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(form.get('businessProfile.businessType').value) !== -1">Date
+                  *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
-                <label *ngIf="form.get('businessProfile.businessType').value == 'Society'">Date of Incorporation in
+                <label *ngIf="getBusinessTypeName() == 'Society'">Date of Incorporation in
                   B.C.</label>
                 <br>
                 <input type="text" formControlName='dateOfIncorporationInBC'
@@ -131,7 +134,8 @@
                 </app-field>
               </section>
               <section class="col-md-3 col-xs-12">
-                <app-field label="Postal Code" [required]="true" (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
+                <app-field label="Postal Code" [required]="true"
+                  (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
                   [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
                   errorMessage="Please enter the postal code" [isFullWidth]="true">
                   <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
@@ -150,7 +154,8 @@
                 <span>Same as physical address</span>
               </section>
               <div class="row">
-                <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1" errorMessage="Please enter the street address"
+                <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
+                  errorMessage="Please enter the street address"
                   [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
                   [required]="true" [isFullWidth]="true">
                   <input type="text" formControlName="mailingAddressStreet" class="form-control">
@@ -173,7 +178,7 @@
                 </section>
                 <section class="col-md-3 col-xs-12">
                   <app-field label="Postal /Zip Code" errorMessage="Please enter the postal code"
-                  (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
+                    (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
                     [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
                     [required]="true" [isFullWidth]="true">
                     <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
@@ -204,7 +209,7 @@
             </app-field>
           </div>
 
-          <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}}  CONTACT</h3>
+          <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
           <div formGroupName="primarycontact" class="padded-section">
             <i>The name and contact information of the person LCRB should contact for ongoing communication.</i><br>
 
@@ -333,17 +338,12 @@
         <h2 style="color: #000">Collection Notice:</h2>
         <div class="submit-content">
           <p>
-            The Security Programs Division (SPD) will collect your personal information for the purpose of fulfilling
-            the
-            requirements of the Cannabis Control and Licensing Act (CCLA) and associated regulations in cannabis
-            licensing,
-            compliance and enforcement matters in accordance with Sections 26 (a) and (c) of the Freedom of Information
-            and
-            Protection of Privacy Act. Should you have any questions about the collection, use, or disclosure of
-            personal
-            information, please contact the Liquor and Cannabis Regulation Branch via mail to PO Box 9292 Stn Prov Govt
-            Victoria B.C. V8W 9J8; email to <a
-              href="mailto:CannabisWorker@gov.bc.ca?Subject=Collection Notice">CannabisWorker@gov.bc.ca;</a>.
+            The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
+            Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act
+            for the purpose of cannabis licensing, compliance and enforcement matters in accordance with the Cannabis
+            Control and Licensing Act. Should you have any questions about the collection,
+            use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292
+            STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
           </p>
         </div>
       </section>
