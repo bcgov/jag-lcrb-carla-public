@@ -186,18 +186,18 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     }
     let name = '';
     switch (this.saveFormData.businessProfile.businessType) {
-      case 'General Partnership':
-      case 'Limited Partnership"':
-      case 'Limited Liability Partnership':
-        name = 'Sole Partnership';
+      case 'GeneralPartnership':
+      case 'LimitedPartnership"':
+      case 'LimitedLiabilityPartnership':
+        name = 'Partnership';
         break;
       case 'SoleProprietorship':
         name = 'Sole Proprietor';
         break;
-      case 'Public Corporation':
-      case 'Private Corporation':
-      case 'Unlimited Liability Corporation':
-      case 'Limited Liability Corporation':
+      case 'PublicCorporation':
+      case 'PrivateCorporation':
+      case 'UnlimitedLiabilityCorporation':
+      case 'LimitedLiabilityCorporation':
         name = 'Corporation';
         break;
       default:
