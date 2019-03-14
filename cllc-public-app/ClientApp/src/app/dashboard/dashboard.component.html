@@ -83,7 +83,7 @@
 
         <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
           <section>
-            <section *ngIf="account?.businessType === 'PrivateCorporation'">
+            <section *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation' ,'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1">
               <p>An applicant that is a <i>Private Corporation</i> may have associates that are required to consent to
                 security
                 screening and financial integrity assessments as part of the application for a non-medical cannabis

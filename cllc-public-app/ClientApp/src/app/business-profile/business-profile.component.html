@@ -67,7 +67,7 @@
             </app-field>
 
             <section
-              *ngIf="['Partnership', 'SoleProprietorship'].indexOf(getBusinessTypeName()) == -1">
+              *ngIf="['Partnership', 'SoleProprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label
                   *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"

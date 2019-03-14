@@ -283,10 +283,16 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     const value = <DynamicsAccount>{
       ...this.form.get('businessProfile').value
     };
+    const saves = [
+      this.accountDataService.updateAccount(value),
+      this.contactDataService.updateContact(this.form.get('primarycontact').value)
+    ];
 
-    this.busy = forkJoin(this.accountDataService.updateAccount(value),
-      this.connectionsToProducers.prepareSaveData(),
-      this.contactDataService.updateContact(this.form.get('primarycontact').value))
+    if (this.connectionsToProducers) {
+      saves.push(this.connectionsToProducers.prepareSaveData());
+    }
+
+    this.busy = forkJoin(...saves)
       .toPromise()
       .then(res => {
         subResult.next(true);
@@ -298,7 +304,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   }
 
   gotoReview() {
-    if (this.form.valid && this.connectionsToProducers.form.valid) {
+    if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
       this.save().subscribe(data => {
         if (this.applicationId) {
           this.router.navigate([`/application/${this.applicationId}`]);
