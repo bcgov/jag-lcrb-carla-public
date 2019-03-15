@@ -64,52 +64,57 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string savedQueryId = savedQuery.Savedqueryid;
 
                 // now get application data.
-
-                var results = _dynamicsClient.Applications.GetSavedQuery(savedQueryId);
-
-                var result = new List<StatsResultModel>();
-
-                foreach (var item in results.Value)
+                try
                 {
-                    var keys = item.Keys.ToArray();
-                    // last item in the object is the commregion.
-                    string commregion = item[keys[keys.Length - 1]];
-                    var newItem = new StatsResultModel()
+                    var results = _dynamicsClient.Applications.GetSavedQuery(savedQueryId);
+
+                    var result = new List<StatsResultModel>();
+
+                    foreach (var item in results.Value)
                     {
-                        adoxio_name = item["adoxio_name"],
-                        adoxio_establishmentpropsedname = item["adoxio_establishmentpropsedname"],
-                        adoxio_establishmentaddressstreet = item["adoxio_establishmentaddressstreet"],
-                        //adoxio_establishmentaddresspostalcode = item["adoxio_establishmentaddresspostalcode"],
-                        //adoxio_establishmentaddresscity = item["adoxio_establishmentaddresscity"],
-                        adoxio_applicationid = item["adoxio_applicationid"],
+                        var newItem = new StatsResultModel()
+                        {
+                            adoxio_name = item["adoxio_name"],
+                            adoxio_establishmentpropsedname = item["adoxio_establishmentpropsedname"],
+                            adoxio_establishmentaddressstreet = item["adoxio_establishmentaddressstreet"],
+                            adoxio_applicationid = item["adoxio_applicationid"],
 
-                    };
+                        };
 
-                    string cacheKey = CacheKeys.ApplicationPrefix + newItem.adoxio_applicationid;
+                        string cacheKey = CacheKeys.ApplicationPrefix + newItem.adoxio_applicationid;
 
-                    MicrosoftDynamicsCRMadoxioApplication application = null;
-                    if (!_cache.TryGetValue(cacheKey, out application))
-                    {
-                        application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
-                        // Set cache options.
-                        var cacheEntryOptions = new MemoryCacheEntryOptions()
-                            // Keep in cache for this time
-                            .SetAbsoluteExpiration(TimeSpan.FromHours(24));
+                        MicrosoftDynamicsCRMadoxioApplication application = null;
+                        if (!_cache.TryGetValue(cacheKey, out application))
+                        {
+                            application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
+                            // Set cache options.
+                            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                                // Keep in cache for this time
+                                .SetAbsoluteExpiration(TimeSpan.FromHours(24));
 
-                        // Save data in cache.
-                        _cache.Set(cacheKey, application, cacheEntryOptions);
+                            // Save data in cache.
+                            _cache.Set(cacheKey, application, cacheEntryOptions);
+                        }
+                        if (application.AdoxioLocalgovindigenousnationid != null)
+                        {
+                            newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
+                        }
+                        else
+                        {
+                            newItem.commregion = CommRegions.Unknown;
+                        }
+                        result.Add(newItem);
                     }
-                    if (application.AdoxioLocalgovindigenousnationid != null)
-                    {
-                        newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
-                    }
-                    else
-                    {
-                        newItem.commregion = CommRegions.Unknown;
-                    }
-                    result.Add(newItem);
+                    return Json(result);
                 }
-                return Json(result);
+                catch (Exception e)
+                {
+                    _logger.LogError($"Error reading from saved query {name}.");
+                    _logger.LogError(e.Message);
+
+                    return new NotFoundObjectResult(new { Name = name, error = $"Unable to retrieve saved query with a name of {name}.  Error is {e.Message}" });
+                }
+                
             }
             
         }
