@@ -109,6 +109,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (Exception e)
                 {
+                    _logger.LogError($"Error reading from saved query {name}.");
+                    _logger.LogError(e.Message);
+
                     return new NotFoundObjectResult(new { Name = name, error = $"Unable to retrieve saved query with a name of {name}.  Error is {e.Message}" });
                 }
                 
