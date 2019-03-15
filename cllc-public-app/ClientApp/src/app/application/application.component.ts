@@ -15,7 +15,11 @@ import { AdoxioApplication } from '@models/adoxio-application.model';
 import { FormBase, postalRegex } from '@shared/form-base';
 import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
-import { ApplicationCancellationDialogComponent } from '@appapplications-and-licences/applications-and-licences.component';
+import {
+  ApplicationCancellationDialogComponent,
+  TRANSFER_LICENCE_MODE,
+  UPLOAD_FILES_MODE
+} from '@appapplications-and-licences/applications-and-licences.component';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -30,7 +34,6 @@ const ServiceHours = [
   // , '23:15', '23:30', '23:45'
 ];
 
-const UPLOAD_FILES_MODE = 'UploadFilesMode';
 
 @Component({
   selector: 'app-application',
@@ -105,6 +108,30 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
+
+    if (this.mode === TRANSFER_LICENCE_MODE) {
+      this.form.get('establishmentaddressstreet').disable();
+      this.form.get('establishmentaddresscity').disable();
+      this.form.get('establishmentaddresspostalcode').disable();
+
+      this.form.get('establishmentparcelid').disable();
+
+      this.form.get('servicehHoursStandardHours').disable();
+      this.form.get('serviceHoursSundayOpen').disable();
+      this.form.get('serviceHoursMondayOpen').disable();
+      this.form.get('serviceHoursTuesdayOpen').disable();
+      this.form.get('serviceHoursWednesdayOpen').disable();
+      this.form.get('serviceHoursThursdayOpen').disable();
+      this.form.get('serviceHoursFridayOpen').disable();
+      this.form.get('serviceHoursSaturdayOpen').disable();
+      this.form.get('serviceHoursSundayClose').disable();
+      this.form.get('serviceHoursMondayClose').disable();
+      this.form.get('serviceHoursTuesdayClose').disable();
+      this.form.get('serviceHoursWednesdayClose').disable();
+      this.form.get('serviceHoursThursdayClose').disable();
+      this.form.get('serviceHoursFridayClose').disable();
+      this.form.get('serviceHoursSaturdayClose').disable();
+    }
 
     this.applicationDataService.getSubmittedApplicationCount()
       .subscribe(value => this.submittedApplications = value);
