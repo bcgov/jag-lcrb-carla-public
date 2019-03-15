@@ -87,7 +87,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       establishmentaddresscity: ['', Validators.required],
       establishmentaddresspostalcode: ['', [Validators.required, Validators.pattern(postalRegex)]],
 
-      servicehHoursStandardHours: ['', Validators.required],
+      // servicehHoursStandardHours: ['', Validators.required],
       serviceHoursSundayOpen: ['', Validators.required],
       serviceHoursMondayOpen: ['', Validators.required],
       serviceHoursTuesdayOpen: ['', Validators.required],
