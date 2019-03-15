@@ -90,6 +90,7 @@ export class DashboardComponent implements OnInit {
       licenseType: 'Cannabis Retail Store',
       applicantType: this.account.businessType,
       account: this.account,
+      servicehHoursStandardHours: false,
       serviceHoursSundayOpen: '09:00',
       serviceHoursMondayOpen: '09:00',
       serviceHoursTuesdayOpen: '09:00',
