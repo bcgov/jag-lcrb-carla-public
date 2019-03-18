@@ -605,6 +605,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<bool> UploadFile(string name, string listTitle, string folderName, Stream fileData, string contentType)
         {
+            if (!IsValid())
+            {
+                return false;
+            }
             bool result = false;
             
             // Delete is very similar to a GET.
