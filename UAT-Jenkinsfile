@@ -1,0 +1,167 @@
+APP_NAME = "cllc-public-uat"
+PROJECT_NAMESPACE = "lclb-cllc"
+
+class AppEnvironment {
+  String name
+  String tag
+  String previousTag
+}
+
+// EDIT LINE BELOW (Edit your environment TAG names)
+environments = [
+  dev:new AppEnvironment(name:"Development",tag:"dev",previousTag:"dev-previous"),
+  test:new AppEnvironment(name:"Test",tag:"test",previousTag:"test-previous"),
+  prod:new AppEnvironment(name:"Prod",tag:"prod",previousTag:"prod-previous")
+]
+
+// You shouldn't have to edit these if you're following the conventions
+ARTIFACT_BUILD = APP_NAME
+RUNTIME_CHAINED_BUILD = "${APP_NAME}"
+
+IMAGESTREAM_NAME = "${APP_NAME}"
+
+PATHFINDER_URL = "pathfinder.bcgov"
+
+
+// Gets the container hash for the latest image in an image stream
+def getLatestHash(imageStreamName) {
+  return sh (
+    script: """oc get istag ${imageStreamName}:latest -o=jsonpath='{@.image.metadata.name}' | sed -e 's/sha256://g'""",
+    returnStdout: true
+  ).trim()
+}
+
+// Gets all tags already applied to this ImageStream (as a single string); e.g., 'dev test dev-previous my-other-tag ...'
+def getAllTags(imageStreamName) {
+  return sh (
+    script: """oc get is ${imageStreamName} -o template --template='{{range .status.tags}}{{" "}}{{.tag}}{{end}}'""",
+    returnStdout: true
+  ).trim()
+}
+
+// Checks whether we are running this pipeline for the first time by looking at what tags are available on the application's ImageStream
+def tagExists(tagName, imageStream) {
+  def tags = getAllTags(imageStream)
+  def entries = tags.split(" ")
+  for (entry in entries) {
+    if (entry == tagName) {
+      return true
+    }
+  }
+  return false
+}
+
+def buildAndVerify(buildConfigName) {
+  echo "Building: ${buildConfigName}"
+  openshiftBuild(
+    bldCfg: buildConfigName,
+    showBuildLogs: 'true',
+    waitTime: '900000'
+  )
+  openshiftVerifyBuild(
+    bldCfg: buildConfigName,
+    showBuildLogs: 'true',
+    waitTime: '900000'
+  )
+}
+
+def tagImage(srcHash, destination, imageStream) {
+  openshiftTag(
+    destStream: imageStream,
+    verbose: 'true',
+    destTag: destination,
+    srcStream: imageStream,
+    srcTag: srcHash,
+    waitTime: '900000'
+  )
+}
+
+// Keeps a copy of last good known configuration for a deployment (just in case)
+def tagLatestStable(environment, backupTag, imageStream) {
+  // skip this on the first run... there's nothing to backup!
+  if (tagExists(environment, imageStream)) {
+    tagImage(environment, backupTag, imageStream)
+  }
+}
+
+def deployAndVerify(srcHash, environment, imageStream) {
+  echo "Deploying ${APP_NAME} to ${environment}"
+  tagImage(srcHash, environment, imageStream)
+  // verify deployment to an environment; e.g. [your-project-name]-dev
+  openshiftVerifyDeployment(
+    deploymentConfig: APP_NAME,
+    namespace: "${PROJECT_NAMESPACE}-${environment}",
+    waitTime: '900000'
+  )
+}
+
+// Generates a string representation of the current code changes that triggered a build
+def getChangeString() {
+  def MAX_MSG_LEN = 512
+  def changeString = ""
+  def changeLogSets = currentBuild.changeSets
+  for (int i = 0; i < changeLogSets.size(); i++) {
+     def entries = changeLogSets[i].items
+     for (int j = 0; j < entries.length; j++) {
+         def entry = entries[j]
+         truncated_msg = entry.msg.take(MAX_MSG_LEN)
+         changeString += " - ${truncated_msg} [${entry.author}]\n"
+     }
+  }
+  if (!changeString) {
+     changeString = "No changes"
+  }
+  return changeString
+}
+
+def notifyGood(title, description) {
+  // TODO: Send notifications to Slack
+  echo title
+  if (description) {
+    echo description
+  }
+}
+
+def notifyError(title, description) {
+  // TODO: Send notifications to Slack
+  echo title
+  if (description) {
+    echo description
+  }
+}
+
+node('master') {
+	stage('Build') {        
+		echo "Building Application image..."
+		buildAndVerify(ARTIFACT_BUILD)
+		
+		IMAGE_HASH = getLatestHash(IMAGESTREAM_NAME)
+		echo ">> IMAGE_HASH: ${IMAGE_HASH}"
+	  	  
+    }
+    stage("Deploy to ${environments.test.name}") {
+	  def environment = environments.test.tag
+	  def stableTag = environments.test.previousTag
+	  node {
+		try {
+		  // hold on to a copy of the last stable TEST environment (in case the upcoming deployment fails...)
+		  tagLatestStable(environment, stableTag, IMAGESTREAM_NAME)
+		  IMAGE_HASH = getLatestHash(IMAGESTREAM_NAME)
+		  deployAndVerify(IMAGE_HASH, environment, IMAGESTREAM_NAME)
+		  // all is good!
+		  notifyGood(
+			"New ${APP_NAME} in ${environment} :)",
+			"Changes: ${getChangeString()}"
+		  )
+		} catch(error) {
+		  notifyError(
+			"Couldn't deploy ${APP_NAME} to ${environment} :(",
+			"Error: '${error.message}'"
+		  )
+		  throw error
+		}
+	  }
+   }
+}
+
+
