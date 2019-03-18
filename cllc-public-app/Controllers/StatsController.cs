@@ -73,12 +73,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var item in results.Value)
                     {
                         var newItem = new StatsResultModel()
-                        {
-                            adoxio_name = item["adoxio_name"],
-                            adoxio_establishmentpropsedname = item["adoxio_establishmentpropsedname"],
-                            adoxio_establishmentaddressstreet = item["adoxio_establishmentaddressstreet"],
-                            adoxio_applicationid = item["adoxio_applicationid"],
-
+                        {                            
+                            adoxio_applicationid = item["adoxio_applicationid"]
                         };
 
                         string cacheKey = CacheKeys.ApplicationPrefix + newItem.adoxio_applicationid;
@@ -95,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             // Save data in cache.
                             _cache.Set(cacheKey, application, cacheEntryOptions);
                         }
-                        if (application.AdoxioLocalgovindigenousnationid != null)
+                        if (application.AdoxioLocalgovindigenousnationid != null && application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion != null)
                         {
                             newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
                         }
@@ -111,6 +107,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError($"Error reading from saved query {name}.");
                     _logger.LogError(e.Message);
+                    _logger.LogError(e.StackTrace);
 
                     return new NotFoundObjectResult(new { Name = name, error = $"Unable to retrieve saved query with a name of {name}.  Error is {e.Message}" });
                 }
