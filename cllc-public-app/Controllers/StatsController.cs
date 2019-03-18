@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpGet("{name}")]
         [AllowAnonymous]
-        public async Task<JsonResult> GetStats(string name)
+        public async Task<ActionResult> GetStats(string name)
         {
 
             // first get a named saved query.
@@ -54,58 +54,70 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var savedQuery = savedQuerySearchResults.Value.FirstOrDefault();
 
-            string savedQueryId = savedQuery.Savedqueryid;
-
-            // now get application data.
-
-            var results = _dynamicsClient.Applications.GetSavedQuery(savedQueryId);
-
-            var result = new List<StatsResultModel>();
-
-            foreach (var item in results.Value)
+            if (savedQuery == null)
             {
-                var keys = item.Keys.ToArray();
-                // last item in the object is the commregion.
-                string commregion = item[keys[keys.Length - 1]];
-                var newItem = new StatsResultModel()
-                {
-                    adoxio_name = item["adoxio_name"],
-                    adoxio_establishmentpropsedname = item["adoxio_establishmentpropsedname"],
-                    adoxio_establishmentaddressstreet = item["adoxio_establishmentaddressstreet"],
-                    //adoxio_establishmentaddresspostalcode = item["adoxio_establishmentaddresspostalcode"],
-                    //adoxio_establishmentaddresscity = item["adoxio_establishmentaddresscity"],
-                    adoxio_applicationid = item["adoxio_applicationid"],
-                    
-                };
-
-                string cacheKey = CacheKeys.ApplicationPrefix + newItem.adoxio_applicationid;
-                
-                MicrosoftDynamicsCRMadoxioApplication application = null;
-                if (!_cache.TryGetValue(cacheKey, out application))
-                {
-                    application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
-                    // Set cache options.
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        // Keep in cache for this time
-                        .SetAbsoluteExpiration(TimeSpan.FromHours(24));
-
-                    // Save data in cache.
-                    _cache.Set(cacheKey, application, cacheEntryOptions);
-                }
-                if (application.AdoxioLocalgovindigenousnationid != null)
-                {
-                    newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
-                }
-                else
-                {
-                    newItem.commregion = CommRegions.Unknown;
-                }
-                result.Add(newItem);
+                return new NotFoundObjectResult(new { Name = name, error = $"There was no saved query with a name of {name}" });
             }
+            else
+            {
 
-            return Json(result);
+                string savedQueryId = savedQuery.Savedqueryid;
+
+                // now get application data.
+                try
+                {
+                    var results = _dynamicsClient.Applications.GetSavedQuery(savedQueryId);
+
+                    var result = new List<StatsResultModel>();
+
+                    foreach (var item in results.Value)
+                    {
+                        var newItem = new StatsResultModel()
+                        {
+                            adoxio_name = item["adoxio_name"],
+                            adoxio_establishmentpropsedname = item["adoxio_establishmentpropsedname"],
+                            adoxio_establishmentaddressstreet = item["adoxio_establishmentaddressstreet"],
+                            adoxio_applicationid = item["adoxio_applicationid"],
+
+                        };
+
+                        string cacheKey = CacheKeys.ApplicationPrefix + newItem.adoxio_applicationid;
+
+                        MicrosoftDynamicsCRMadoxioApplication application = null;
+                        if (!_cache.TryGetValue(cacheKey, out application))
+                        {
+                            application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(newItem.adoxio_applicationid));
+                            // Set cache options.
+                            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                                // Keep in cache for this time
+                                .SetAbsoluteExpiration(TimeSpan.FromHours(24));
+
+                            // Save data in cache.
+                            _cache.Set(cacheKey, application, cacheEntryOptions);
+                        }
+                        if (application.AdoxioLocalgovindigenousnationid != null)
+                        {
+                            newItem.commregion = (CommRegions)application.AdoxioLocalgovindigenousnationid.AdoxioCommunicationsregion;
+                        }
+                        else
+                        {
+                            newItem.commregion = CommRegions.Unknown;
+                        }
+                        result.Add(newItem);
+                    }
+                    return Json(result);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"Error reading from saved query {name}.");
+                    _logger.LogError(e.Message);
+
+                    return new NotFoundObjectResult(new { Name = name, error = $"Unable to retrieve saved query with a name of {name}.  Error is {e.Message}" });
+                }
+                
+            }
+            
         }
-
         
     }
 }

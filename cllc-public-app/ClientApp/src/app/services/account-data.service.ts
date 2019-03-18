@@ -6,6 +6,7 @@ import { ProfileValidation } from '../models/profile-validation.model';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
 
 @Injectable()
 export class AccountDataService extends DataService {
@@ -38,6 +39,11 @@ export class AccountDataService extends DataService {
 
   public updateAccount(accountModel: DynamicsAccount) {
     return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: this.headers })
+    .pipe(catchError(this.handleError));
+  }
+
+  public createTiedHouseConnection(tiedHouse: TiedHouseConnection, accountId: string) {
+    return this.http.post(this.apiPath + accountId + '/tiedhouseconnection', tiedHouse, { headers: this.headers })
     .pipe(catchError(this.handleError));
   }
 
