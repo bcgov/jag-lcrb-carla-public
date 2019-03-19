@@ -49,8 +49,14 @@
                 <p *ngIf="item.applicationStatus === 'Not Submitted'">
                   This application has not yet been submitted.
                 </p>
+                <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                  This transfer application has not yet been submitted
+                </p>
                 <p *ngIf="item.applicationStatus === 'Application Under Review'">
-                  Your application has been received and is being reviewed by the LCRB.
+                    Your application has been received and is being reviewed by the LCRB.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Transfer Application Under Review'">
+                    Your transfer application has been received and is being reviewed by the LCRB.
                 </p>
                 <p *ngIf="item.applicationStatus === 'Application Incomplete'">
                   Your application is incomplete. You must provide additional information for it to be processed.
@@ -67,13 +73,29 @@
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div *ngIf="item.applicationStatus === 'Not Submitted'">
                   <a routerLink="/account-profile/{{item.id}}">
-                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>Complete Application
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Application</span> 
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                  <a routerLink="/account-profile/{{item.id}}">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Transfer</span> 
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
                   (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
-                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>Cancel Application</a>
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Application</span> 
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Transfer</span> 
+                  </a>
                 </div>
                 <!-- <div
                   *ngIf="['Application Under Review','Pending External Review', 'Approved In Principle'].indexOf(item.applicationStatus) !==                                                                                                                                                                                                                                                                                                                                                                                          -1">
@@ -83,7 +105,7 @@
                   </a>
                 </div> -->
                 <div
-                  *ngIf="item.applicationStatus === 'Application Under Review' || item.applicationStatus === 'Pending External Review'">
+                  *ngIf="['Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">Add Supporting
                     Documents</a>
                 </div>
