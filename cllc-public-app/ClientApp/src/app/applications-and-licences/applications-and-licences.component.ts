@@ -52,20 +52,13 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     this.inProgressApplications = [];
     this.licencedApplications = [];
     this.busy = this.applicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
-      adoxioApplications.forEach((licAppSum: AdoxioApplication | any) => {
-        licAppSum.applicationStatus = this.transformStatus(licAppSum);
-        if (!licAppSum.assignedLicence) {
-          this.inProgressApplications.push(licAppSum);
+      adoxioApplications.forEach((application: AdoxioApplication | any) => {
+        if (application.assignedLicence && application.applicationStatus === 'Approved') {
+        this.licencedApplications.push(application);
         } else {
-          this.busy = this.applicationDataService.getFileListAttachedToApplication(licAppSum.id, 'Licence Application Main')
-            .subscribe((files: FileSystemItem[]) => {
-              if (files && files.length) {
-                licAppSum.applicationFormFileUrl = files[0].serverrelativeurl;
-                licAppSum.fileName = files[0].name;
-              }
-            });
-          this.licencedApplications.push(licAppSum);
+          this.inProgressApplications.push(application);
         }
+        application.applicationStatus = this.transformStatus(application);
       });
     });
   }
@@ -153,23 +146,32 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   transformStatus(application: AdoxioApplication): string {
     const status = application.applicationStatus;
     let shownStatus = status;
-    if (!application.assignedLicence) {
-      if (status === 'Intake' && !application.isPaid) {
-        shownStatus = 'Not Submitted';
-      } else if (status === 'In progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
-        shownStatus = 'Application Under Review';
-      } else if (status === 'Incomplete') {
-        shownStatus = 'Application Incomplete';
-      } else if (status === 'PendingForLGFNPFeedback') {
-        shownStatus = 'Pending External Review';
-      }
-    } else {
+
+    if (application.assignedLicence && application.applicationStatus === 'Approved') {
       shownStatus = ACTIVE;
-      if (application.licenceFeeInvoicePaid !== true) {
+      if (application.licenceFeeInvoicePaid !== true && application.licenseType === 'Cannabis Retail Store') {
         shownStatus = PAYMENT_REQUIRED;
       }
       if (application.assignedLicence && (new Date() > new Date(application.assignedLicence.expiryDate))) {
         shownStatus = RENEWAL_DUE;
+      }
+    } else {
+      if (status === 'Intake' && !application.isPaid) {
+        if (application.licenseType === 'CRS Transfer of Ownership') {
+          shownStatus = 'Transfer Initiated';
+        } else {
+          shownStatus = 'Not Submitted';
+        }
+      } else if (status === 'In progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
+        if (application.licenseType === 'CRS Transfer of Ownership') {
+          shownStatus = 'Transfer Application Under Review';
+        } else {
+          shownStatus = 'Application Under Review';
+        }
+      } else if (status === 'Incomplete') {
+        shownStatus = 'Application Incomplete';
+      } else if (status === 'PendingForLGFNPFeedback') {
+        shownStatus = 'Pending External Review';
       }
     }
     return shownStatus;
