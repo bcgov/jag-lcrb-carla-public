@@ -48,7 +48,7 @@
           href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
       <p></p>
 
-      <app-applications-and-licences>
+      <app-applications-and-licences [account]="account">
         <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary"
           [disabled]="submittedApplications >= 8" (click)="startNewLicenceApplication()">Submit an Application</button>
       </app-applications-and-licences>
