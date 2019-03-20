@@ -28,6 +28,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
+  readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
@@ -64,7 +65,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   }
 
   uploadMoreFiles(application: AdoxioApplication) {
-    this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
+    this.router.navigate([`/application/${application.id}`, { mode: TRANSFER_LICENCE_MODE }]);
   }
 
   transferLicence(application: AdoxioApplication) {
