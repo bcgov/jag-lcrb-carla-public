@@ -61,7 +61,8 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   _showAdditionalContact: boolean;
   legalEntityId: string;
   @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
-  applicationId: any;
+  applicationId: string;
+  applicationMode: string;
 
 
   public get contacts(): FormArray {
@@ -80,6 +81,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   ) {
     super();
     this.applicationId = this.route.snapshot.params.applicationId;
+    this.applicationMode = this.route.snapshot.params.mode;
   }
 
   ngOnInit() {
@@ -106,7 +108,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
         mailingAddressStreet: ['', Validators.required],
         mailingAddressStreet2: [''],
         mailingAddressCity: ['', Validators.required],
-        mailingAddressPostalCode: ['', [Validators.required, /* Validators.pattern(postalRegex)*/] ],
+        mailingAddressPostalCode: ['', [Validators.required, /* Validators.pattern(postalRegex)*/]],
         mailingAddressProvince: ['', Validators.required],
         mailingAddressCountry: ['Canada', Validators.required],
       }),
@@ -298,7 +300,11 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
       this.save().subscribe(data => {
         if (this.applicationId) {
-          this.router.navigate([`/application/${this.applicationId}`]);
+          const route: any[] = [`/application/${this.applicationId}`];
+          if (this.applicationMode) {
+            route.push({ mode: this.applicationMode });
+          }
+          this.router.navigate(route);
         } else {
           this.router.navigate(['/dashboard']);
         }
