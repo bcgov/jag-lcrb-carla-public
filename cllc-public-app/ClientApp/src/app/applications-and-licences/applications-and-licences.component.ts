@@ -6,9 +6,11 @@ import { Router } from '@angular/router';
 import { AdoxioApplication } from '@app/models/adoxio-application.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
+import { DynamicsAccount } from './../models/dynamics-account.model';
 
 
-const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
 
 const ACTIVE = 'Active';
 const PAYMENT_REQUIRED = 'Payment Required';
@@ -26,13 +28,15 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
+  readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
+  @Input() account: DynamicsAccount;
   dataLoaded = false;
 
   constructor(
-    private adoxioApplicationDataService: AdoxioApplicationDataService,
+    private applicationDataService: AdoxioApplicationDataService,
     private router: Router,
     private paymentService: PaymentDataService,
     private snackBar: MatSnackBar,
@@ -48,16 +52,9 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   private displayApplications() {
     this.inProgressApplications = [];
     this.licencedApplications = [];
-    this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
+    this.busy = this.applicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
       adoxioApplications.forEach((application: AdoxioApplication | any) => {
         if (application.assignedLicence && application.applicationStatus === 'Approved') {
-          // this.busy = this.adoxioApplicationDataService.getFileListAttachedToApplication(application.id, 'Licence Application Main')
-          // .subscribe((files: FileSystemItem[]) => {
-          //   if (files && files.length) {
-          //     application.applicationFormFileUrl = files[0].serverrelativeurl;
-          //     application.fileName = files[0].name;
-          //   }
-          // });
         this.licencedApplications.push(application);
         } else {
           this.inProgressApplications.push(application);
@@ -68,7 +65,48 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   }
 
   uploadMoreFiles(application: AdoxioApplication) {
-    this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
+    this.router.navigate([`/application/${application.id}`, { mode: TRANSFER_LICENCE_MODE }]);
+  }
+
+  transferLicence(application: AdoxioApplication) {
+    const newLicenceApplicationData: AdoxioApplication = <AdoxioApplication>{
+      licenseType: 'Cannabis Retail Store',
+      applicantType: this.account.businessType,
+      account: this.account,
+
+      establishmentName: application.establishmentName,
+      establishmentparcelid: application.establishmentparcelid,
+
+      establishmentaddressstreet: application.establishmentaddressstreet,
+      establishmentaddresscity: application.establishmentaddresscity,
+      establishmentaddresspostalcode: application.establishmentaddresspostalcode,
+
+      serviceHoursSundayOpen: application.serviceHoursSundayOpen,
+      serviceHoursMondayOpen: application.serviceHoursMondayOpen,
+      serviceHoursTuesdayOpen: application.serviceHoursTuesdayOpen,
+      serviceHoursWednesdayOpen: application.serviceHoursWednesdayOpen,
+      serviceHoursThursdayOpen: application.serviceHoursThursdayOpen,
+      serviceHoursFridayOpen: application.serviceHoursFridayOpen,
+      serviceHoursSaturdayOpen: application.serviceHoursSaturdayOpen,
+      serviceHoursSundayClose: application.serviceHoursSundayClose,
+      serviceHoursMondayClose: application.serviceHoursMondayClose,
+      serviceHoursTuesdayClose: application.serviceHoursTuesdayClose,
+      serviceHoursWednesdayClose: application.serviceHoursWednesdayClose,
+      serviceHoursThursdayClose: application.serviceHoursThursdayClose,
+      serviceHoursFridayClose: application.serviceHoursFridayClose,
+      serviceHoursSaturdayClose: application.serviceHoursSaturdayClose,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigate([`/application/${application.id}`, { mode: TRANSFER_LICENCE_MODE }]);
+      },
+      () => {
+        this.snackBar.open('Error starting a Licence Transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Licence Transfer');
+      }
+    );
+
   }
 
   /**
@@ -96,7 +134,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
       cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.adoxioApplicationDataService.cancelApplication(applicationId).subscribe(
+          this.busy = this.applicationDataService.cancelApplication(applicationId).subscribe(
             () => {
               this.displayApplications();
             });
