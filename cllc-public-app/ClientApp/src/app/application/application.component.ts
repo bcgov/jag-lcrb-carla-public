@@ -57,7 +57,8 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   submittedApplications = 8;
   ServiceHours = ServiceHours;
 
-  UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
+  readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
+  readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
   mode: string;
   account: any;
 
@@ -90,7 +91,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       establishmentaddresscity: ['', Validators.required],
       establishmentaddresspostalcode: ['', [Validators.required, Validators.pattern(postalRegex)]],
 
-      // servicehHoursStandardHours: ['', Validators.required],
       serviceHoursSundayOpen: ['', Validators.required],
       serviceHoursMondayOpen: ['', Validators.required],
       serviceHoursTuesdayOpen: ['', Validators.required],
@@ -116,7 +116,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
       this.form.get('establishmentparcelid').disable();
 
-      this.form.get('servicehHoursStandardHours').disable();
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
       this.form.get('serviceHoursTuesdayOpen').disable();
