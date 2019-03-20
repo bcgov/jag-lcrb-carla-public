@@ -162,7 +162,7 @@
               <div [ngClass]="{'has-error': !isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)}">
                 <label>BCID Number</label>
                 <br />
-                <input class="form-control" style="width: 250px;" type="text" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                <input class="form-control" style="width: 250px;" type="text"
                   maxlength="9" formControlName="bcidcardnumber">
                 <i *ngIf="!isBCIDValid() && (this.form.get('worker.bcidcardnumber').touched || this.form.get('worker.driverslicencenumber').touched)"
                   class="fas fa-chevron-left"></i>
