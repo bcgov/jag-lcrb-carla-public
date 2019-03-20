@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
             try
             {
-                result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.ToList();
+                result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value.ToList();
             }
             catch (OdataerrorException odee)
             {
@@ -233,7 +233,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 string filter = $"adoxio_licencesid eq {guid}";
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
-                result = _dynamics.Licenses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
+                result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             }
             catch (OdataerrorException odee)
             {
