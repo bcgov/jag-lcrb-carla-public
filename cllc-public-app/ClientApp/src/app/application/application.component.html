@@ -1,41 +1,43 @@
-<div *ngIf="account?.businessType" [ngClass]="{'upload-more-file-mode': mode === UPLOAD_FILES_MODE}">
+<div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
   <div [formGroup]="form" style="padding-left: 45px; position: relative">
     <div [ngBusy]="busy"></div>
 
-    <h1>Submit the Cannabis Retail Store Licence Application</h1>
+    <h1 *ngIf="mode !== TRANSFER_LICENCE_MODE">Submit the Cannabis Retail Store Licence Application</h1>
+    <h1 *ngIf="mode === TRANSFER_LICENCE_MODE">Submit the Cannabis Retail Store Transfer of Ownership Application</h1>
   </div>
   <div [formGroup]="form" class="application-wrapper">
+    <section *ngIf="mode !== TRANSFER_LICENCE_MODE">
+      <p>
+        A $7,500.00 application fee will be required at the time of application submission. If
+        your application for a licence is approved, a $1,500.00 first year licensing fee will be required prior to the
+        licence being issued.
+      </p>
+      <br>
 
-    <p>
-      A $7,500.00 application fee will be required at the time of application submission. If
-      your application for a licence is approved, a $1,500.00 first year licensing fee will be required prior to the
-      licence being issued.
-    </p>
-    <br>
+      <p>
+        Please note that applications which are submitted without all required information or documents will
+        stop being processed. The LCRB will be assessing complete applications as a priority. Other applications
+        that are received before the applicant provides the branch with missing information will be prioritized.
+        The application checklist can assist in completing all the required documentation.
+      </p>
+      <br>
 
-    <p>
-      Please note that applications which are submitted without all required information or documents will
-      stop being processed. The LCRB will be assessing complete applications as a priority. Other applications
-      that are received before the applicant provides the branch with missing information will be prioritized.
-      The application checklist can assist in completing all the required documentation.
-    </p>
-    <br>
-
-    <p class="li-header">A proposed store must have:</p>
-    <ul class="square">
-      <li>
-        If in the area of a local government, all required local government approvals, such as being a permitted
-        use under the zoning bylaw or meeting the requirements of business licensing bylaw, or
-      </li>
-      <li>
-        If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a
-        proposed store will be located, the zoning approval and a business permit or licence from the
-        Indigenous nation to sell cannabis.
-      </li>
-    </ul>
-    <hr>
-    <h3 class="blue-header">BEFORE STARTING THE APPLICATION</h3>
-    <section class="padded-section">
+      <p class="li-header">A proposed store must have:</p>
+      <ul class="square">
+        <li>
+          If in the area of a local government, all required local government approvals, such as being a permitted
+          use under the zoning bylaw or meeting the requirements of business licensing bylaw, or
+        </li>
+        <li>
+          If in the area of an Indigenous nation on whose reserve, Nisga'a Land or treaty settlement land a
+          proposed store will be located, the zoning approval and a business permit or licence from the
+          Indigenous nation to sell cannabis.
+        </li>
+      </ul>
+      <hr>
+    </section>
+    <h3 *ngIf="mode !== TRANSFER_LICENCE_MODE" class="blue-header">BEFORE STARTING THE APPLICATION</h3>
+    <section *ngIf="mode !== TRANSFER_LICENCE_MODE" class="padded-section">
       <p>Before starting the application, ensure that:</p>
       <section *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
         class="padded-section">
@@ -84,27 +86,29 @@
     <section class="padded-section">
       <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
         <div [ngBusy]="busy"></div>
-        <label for="">Establishment Name</label>
-        <br>
+        <section *ngIf="mode !== TRANSFER_LICENCE_MODE">
+          <label for="">Establishment Name</label>
+          <br>
 
-        <p>
-          A name cannot mislead the public about what kind of business it operates. The name cannot imply a
-          licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
-          words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
-          or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
-          Scheduling Act. Store names cannot also use language that encourages intoxication.
-        </p>
+          <p>
+            A name cannot mislead the public about what kind of business it operates. The name cannot imply a
+            licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
+            words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
+            or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
+            Scheduling Act. Store names cannot also use language that encourages intoxication.
+          </p>
 
-        <p>
-          Additionally, a name cannot imply an association with another business. This applies to signs,
-          trademarks and any type of branding.
-        </p>
+          <p>
+            Additionally, a name cannot imply an association with another business. This applies to signs,
+            trademarks and any type of branding.
+          </p>
 
-        <p>Establishment names will be reviewed for approval during the application process. For more information,
-          please see the <a routerLink="/policy-document/store-name">Non-Medical Cannabis Retail Store Name Approval
-            Process</a>.</p>
+          <p>Establishment names will be reviewed for approval during the application process. For more information,
+            please see the <a routerLink="/policy-document/store-name">Non-Medical Cannabis Retail Store Name Approval
+              Process</a>.</p>
+        </section>
 
-        <app-field label="Name of the Proposed Establishment" [required]="true"
+        <app-field [label]="mode === TRANSFER_LICENCE_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'" [required]="true"
           [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
           errorMessage="Please enter the name of the proposed establishment">
           <input class="form-control" style="width: 500px;" type="text" formControlName="establishmentName">
@@ -178,7 +182,7 @@
 
     <h3 class="blue-header">HOURS OF SALE</h3>
     <div class="padded-section">
-      <p>Indicate the store's proposed hours for cannabis sales below. Proposed hours must fall between 9 a.m. and 11
+      <p *ngIf="mode !== TRANSFER_LICENCE_MODE">Indicate the store's proposed hours for cannabis sales below. Proposed hours must fall between 9 a.m. and 11
         p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed at
         times they are licensed to be open.
       </p>
