@@ -355,7 +355,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid" };
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations" };
 
                 // fetch from Dynamics.
                 result = await system.Applications.GetByKeyAsync(id.ToString(), expand: expand);
