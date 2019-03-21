@@ -179,7 +179,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (dynamicsApplication.AdoxioApplicationSharePointDocumentLocations.Count == 0)
             {
-                initializeSharepoint(dynamicsApplication);
+                await initializeSharepoint(dynamicsApplication);
             }
 
             return Json(result);
@@ -305,13 +305,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error creating Licence Application.");
             }
 
-            initializeSharepoint(adoxioApplication);
+            await initializeSharepoint(adoxioApplication);
 
             return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
 
         }
 
-        private async void initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
+        private async Task initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
         {
             // create a SharePointDocumentLocation link
             string folderName = GetApplicationFolderName(adoxioApplication);
