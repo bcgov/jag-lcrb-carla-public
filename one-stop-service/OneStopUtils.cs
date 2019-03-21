@@ -297,7 +297,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             try
             {
                 string filter = $"adoxio_businessprogramaccountreferencenumber eq null";
-                result = _dynamics.Licenses.Get(filter: filter).Value;                
+                result = _dynamics.Licenceses.Get(filter: filter).Value;                
             }
             catch (OdataerrorException odee)
             {
@@ -345,7 +345,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 // adoxio_Licencee,adoxio_establishment
                 // Note that adoxio_Licencee is the Account linked to the licence
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
-                result = _dynamics.Licenses.GetByKey(licenceGuid, expand: expand);
+                result = _dynamics.Licenceses.GetByKey(licenceGuid, expand: expand);
             }
             catch (OdataerrorException odee)
             {
